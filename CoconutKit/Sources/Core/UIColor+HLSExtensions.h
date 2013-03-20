@@ -20,29 +20,38 @@
 
 /**
  * Return a color by name. By convention, all class methods ending with 'Color' and returning a UIColor
- * object are assumed to be colors and can be instantiated by name (i.e. if you want to instantiate blue,
- * calling [UIColor colorWithName:@"blue"] is equivalent to calling [UIColor blueColor]. If the color 
- * does not exist or if the given name does not correspond to a valid color, the method returns nil
+ * object are assumed to be colors and can be instantiated by name. Valid names are obtained by removing 
+ * the 'Color' suffix from those method names.
+ *
+ * For example, you usually instantiate the blue color by calling [UIColor blueColor]. This class method
+ * conforms to the above requirements, you can therefore call [UIColor colorWithName:@"blue"] instead.
  *
  * When looking up a color, the class onto which -colorWithName: is called, as well as all its superclasses
- * and categories, are considered.
+ * and categories, are considered. If the color does not exist or if the given name does not correspond to a 
+ * valid color, the method returns nil.
  *
- * For convenience, colors can be set by name directly in Interface Builder. This lets you define a custom
- * set of colors in code (e.g. corporate colors), which you can then conveniently and consistently use in Interface
- * Builder. The actual result cannot be directly seen on screen, of course, but this helps you skin your
- * applications in such a way that skinning is consistent and easy to update. 
+ * For convenience, colors can also be set by name directly in Interface Builder via user-defined runtime
+ * attributes. This lets you define a custom set of colors in code (e.g. corporate colors), which you can 
+ * then conveniently and consistently retrieve in Interface Builder. The actual result cannot be directly 
+ * seen within Interface Builder, of course, but this helps you skin your applications consistently. Moreover, 
+ * changing a color in all xibs is made easy, without the need to bind a single outlet.
  *
- * This mechanism is implemented for the whole UIView class hierarchy, as follows: For any UIView subclass, 
- * all writable KVC-compliant color property someColor has been added a corresponding hlsSomeColor property
- * you can set as user-defined runtime string attribute. Set the color to use by assigning a value of the
- * form 'colorClassName:colorName', where colorClassName is the name of the class on which the color is
- * defined, and colorName is the color name. The shorter syntax 'colorName' can also be used, in which case
- * lookup will be performed on UIColor.
+ * This mechanism is implemented for the whole UIView class hierarchy as follows: For all UIView subclasses, 
+ * each writable KVC-compliant color setter of the form -setSomeNameColor: is associated with a corresponding
+ * setter -setHlsSomeNameColor:, which can be set through user-defined runtime attributes. In other words, 
+ * anywhere you set someNameColor, you can set an hlsSomeColorName attribute instead. For example, the 
+ * backgroundColor property has an associated hlsBackgroundColor attribute, textColor has a corresponding 
+ * hlsTextColor attribute, and so on.
+ *
+ * The values of these user-defined runtime attributes must be strings of the form 'colorClassName:colorName', 
+ * where 'colorClassName' is the name of the class on which the color is defined, and 'colorName' is the color 
+ * name. The shorter syntax 'colorName' can also be used, in which case lookup will be performed on UIColor
+ * (and associated categories)
  *
  * For example, if you have defined a color +[UIColor(SomeCategory) corporateColor], you can set the text
  * color of a UILabel by adding a user-defined runtime attribute called 'hlsTextColor', setting its value
- * to 'corporate'. If the color is defined on a UIColor subclass, say +[SomeColor corporate] color, then
- * set the 'hlsTextColor' value to 'SomeColor:corporate'
+ * to 'corporate'. If the color is defined on a UIColor subclass, say +[SomeColor corporateColor] color, 
+ * then set the 'hlsTextColor' value to 'SomeColor:corporate'
  */
 + (UIColor *)colorWithName:(NSString *)name;
 
