@@ -82,7 +82,7 @@
 {
     NSMutableArray *objects = [NSMutableArray array];
     for (NSValue *objectKey in self.objectKeys) {
-        id object = [objectKey pointerValue];
+        id object = [objectKey nonretainedObjectValue];
         [objects addObject:object];
     }
     return [NSArray arrayWithArray:objects];
