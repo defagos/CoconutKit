@@ -9,17 +9,22 @@
 @interface UIColor (HLSExtensions)
 
 /**
+ * Create a color from non-normalized RGB components (i.e. from 0 to 255)
+ */
++ (UIColor *)colorWithNonNormalizedeRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
+
+/**
  * Return a random color
  */
 + (UIColor *)randomColor;
 
 /**
- * Return the ivert color corresponding to the receiver
+ * Return the invert color corresponding to the receiver
  */
 - (UIColor *)invertedColor;
 
 /**
- * Return color components (0 - 255)
+ * Return non-normalized color components (0 - 255)
  */
 - (NSUInteger)redComponent;
 - (NSUInteger)greenComponent;

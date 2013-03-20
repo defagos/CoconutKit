@@ -8,7 +8,28 @@
 
 #import "UIColor+HLSExtensions.h"
 
+#import "HLSLogger.h"
+
 @implementation UIColor (HLSExtensions)
+
+#pragma mark Class methods
+
++ (UIColor *)colorWithNonNormalizedeRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha
+{
+    if (red > 255) {
+        HLSLoggerWarn(@"Incorrect R component, larger than 255. Fixed to 255");
+        red = 255;
+    }
+    if (green > 255) {
+        HLSLoggerWarn(@"Incorrect G component, larger than 255. Fixed to 255");
+        green = 255;
+    }
+    if (blue > 255) {
+        HLSLoggerWarn(@"Incorrect B component, larger than 255. Fixed to 255");
+        blue = 255;
+    }
+    return [self colorWithRed:red / 255.f green:green / 255.f blue:blue / 255.f alpha:alpha];
+}
 
 + (UIColor *)randomColor
 {
