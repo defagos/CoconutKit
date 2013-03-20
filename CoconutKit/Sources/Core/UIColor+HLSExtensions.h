@@ -43,7 +43,8 @@
  * setter -setHlsSomeNameColor:, which can be set through user-defined runtime attributes. In other words, 
  * anywhere you set someNameColor, you can set an hlsSomeColorName attribute instead. For example, the 
  * backgroundColor property has an associated hlsBackgroundColor attribute, textColor has a corresponding 
- * hlsTextColor attribute, and so on.
+ * hlsTextColor attribute, and so on. The color set using attributes will replace the one defined in the
+ * nib (except if the color is not found, in which case the original color is kept).
  *
  * The values of these user-defined runtime attributes must be strings of the form 'colorClassName:colorName', 
  * where 'colorClassName' is the name of the class on which the color is defined, and 'colorName' is the color 

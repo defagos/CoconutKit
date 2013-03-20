@@ -68,7 +68,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
 
 #pragma mark Helper functions
 
-// TODO: Should avoid ObjC code in this method (called from +load)
+// TODO: Should avoid ObjC code in this method (called from +load). SHould not be a problem here, though
 static void injectColorNameMethods(Class cls)
 {
     // No identity test here. We want to perform color method lookup for each class in the UIView class hierarchy

@@ -12,6 +12,8 @@
 #import "NSObject+HLSExtensions.h"
 #import <objc/runtime.h>
 
+// Remark: Colors via user-defined runtime attributes are implemented in UIView+HLSRuntimeAttributes.m
+
 @implementation UIColor (HLSExtensions)
 
 #pragma mark Class methods
