@@ -35,42 +35,44 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUILabel" id="115039135">
+					<object class="IBUILabel" id="375984480">
 						<reference key="NSNextResponder" ref="692319440"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 190}, {728, 35}}</string>
+						<string key="NSFrame">{{20, 151}, {728, 74}}</string>
 						<reference key="NSSuperview" ref="692319440"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="569385310"/>
+						<reference key="NSNextKeyView" ref="969989820"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Colors defined via user-defined runtime attributes, color from UIColor category</string>
-						<object class="NSColor" key="IBUITextColor" id="239733836">
+						<string key="IBUIText">LS/Colors defined via user-defined runtime attributes, colors from UIColor category</string>
+						<object class="NSColor" key="IBUITextColor" id="31255832">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
 							<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="287868560">
+						<int key="IBUINumberOfLines">2</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="930807313">
 							<int key="type">1</int>
 							<double key="pointSize">17</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="195745435">
+						<object class="NSFont" key="IBUIFont" id="510519667">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+						<double key="preferredMaxLayoutWidth">728</double>
 					</object>
-					<object class="IBUILabel" id="569385310">
+					<object class="IBUILabel" id="969989820">
 						<reference key="NSNextResponder" ref="692319440"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{20, 259}, {728, 35}}</string>
+						<string key="NSFrame">{{20, 259}, {728, 74}}</string>
 						<reference key="NSSuperview" ref="692319440"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -80,19 +82,21 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Colors defined via user-defined runtime attributes, color from UIColor subclass</string>
-						<reference key="IBUITextColor" ref="239733836"/>
+						<string key="IBUIText">LS/Colors defined via user-defined runtime attributes, colors from UIColor subclass</string>
+						<reference key="IBUITextColor" ref="31255832"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<reference key="IBUIFontDescription" ref="287868560"/>
-						<reference key="IBUIFont" ref="195745435"/>
+						<int key="IBUINumberOfLines">2</int>
+						<reference key="IBUIFontDescription" ref="930807313"/>
+						<reference key="IBUIFont" ref="510519667"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+						<double key="preferredMaxLayoutWidth">728</double>
 					</object>
 				</array>
 				<string key="NSFrameSize">{768, 1004}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="115039135"/>
+				<reference key="NSNextKeyView" ref="375984480"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -134,19 +138,19 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="692319440"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="115039135"/>
-							<reference ref="569385310"/>
+							<reference ref="375984480"/>
+							<reference ref="969989820"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">7</int>
-						<reference key="object" ref="115039135"/>
+						<reference key="object" ref="375984480"/>
 						<reference key="parent" ref="692319440"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">8</int>
-						<reference key="object" ref="569385310"/>
+						<reference key="object" ref="969989820"/>
 						<reference key="parent" ref="692319440"/>
 					</object>
 				</array>
@@ -161,7 +165,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="115039135"/>
+						<reference key="object" ref="375984480"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.string</string>
@@ -181,7 +185,7 @@
 					<string key="NS.key.0">IBUserDefinedRuntimeAttributesPlaceholderName</string>
 					<object class="IBUIUserDefinedRuntimeAttributesPlaceholder" key="NS.object.0">
 						<string key="name">IBUserDefinedRuntimeAttributesPlaceholderName</string>
-						<reference key="object" ref="569385310"/>
+						<reference key="object" ref="969989820"/>
 						<array key="userDefinedRuntimeAttributes">
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.string</string>
