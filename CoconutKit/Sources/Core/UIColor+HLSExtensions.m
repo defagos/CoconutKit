@@ -9,6 +9,7 @@
 #import "UIColor+HLSExtensions.h"
 
 #import "HLSLogger.h"
+#import "NSObject+HLSExtensions.h"
 #import <objc/runtime.h>
 
 @implementation UIColor (HLSExtensions)

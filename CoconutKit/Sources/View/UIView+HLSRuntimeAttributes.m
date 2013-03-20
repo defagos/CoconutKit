@@ -8,24 +8,21 @@
 
 #import "UIView+HLSRuntimeAttributes.h"
 
+#import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "NSArray+HLSExtensions.h"
+#import "NSString+HLSExtensions.h"
+#import "UIColor+HLSExtensions.h"
 
 // Keys for associated objects
 static void *s_localizationTableNameKey = &s_localizationTableNameKey;
 static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
-// Original implementations of the methods we swizzle
-static void (*s_UIView__awakeFromNib_Imp)(id, SEL) = NULL;
-
 // Helper functions
 static void injectColorNameMethods(Class cls);
 
-// Swizzled method implementations
-static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
-
 // Method implementations
-static NSString * UIView__colorName_Imp(UIView *self, SEL _cmd);
-static void UIView__setColorName_Imp(UIView *self, SEL _cmd, NSString *colorName);
+static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFormat);
 
 @implementation UIView (HLSRuntimeAttributes)
 
@@ -33,8 +30,6 @@ static void UIView__setColorName_Imp(UIView *self, SEL _cmd, NSString *colorName
 
 + (void)load
 {
-    s_UIView__awakeFromNib_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self, @selector(awakeFromNib), (IMP)swizzled_UIView__awakeFromNib_Imp);
-    
     // Inject color name methods on all UIView subclasses
     unsigned int numberOfClasses = 0;
     Class *classes = objc_copyClassList(&numberOfClasses);
@@ -84,48 +79,71 @@ static void injectColorNameMethods(Class cls)
     for (unsigned int i = 0; i < numberOfMethods; ++i) {
         Method method = methods[i];
         
+        // Find setters with proper encoding and ending in "...Color:"
+        if (method_getNumberOfArguments(method) != 3) {
+            continue;
+        }
+        
         // Look for methods ending in "Color"
         NSString *methodName = [NSString stringWithCString:sel_getName(method_getName(method)) encoding:NSUTF8StringEncoding];
-        if (! [methodName hasSuffix:@"Color"]) {
+        if (! [methodName hasSuffix:@"Color:"] || ! [methodName hasPrefix:@"set"]) {
             continue;
         }
         
-        // The method must have a corresponding setter
-        NSString *capitalizedMethodName = [methodName stringByReplacingCharactersInRange:NSMakeRange(0,1)
-                                                                              withString:[[methodName substringToIndex:1] capitalizedString]];
-        SEL setterSelector = NSSelectorFromString([NSString stringWithFormat:@"set%@:", capitalizedMethodName]);
-        Method setterMethod = class_getInstanceMethod(cls, setterSelector);
-        if (! setterMethod) {
-            continue;
-        }
-        
-        // Add methods to get and set the corresponding color name as user-defined runtime attribute
-        SEL colorGetterSelector = NSSelectorFromString([NSString stringWithFormat:@"hls%@", capitalizedMethodName]);
-        class_addMethod(cls, colorGetterSelector, (IMP)UIView__colorName_Imp, "@@:");
-        
-        SEL colorSetterSelector = NSSelectorFromString([NSString stringWithFormat:@"setHls%@:", capitalizedMethodName]);
-        class_addMethod(cls, colorSetterSelector, (IMP)UIView__setColorName_Imp, "v@:@");
+        SEL colorSetterSelector = NSSelectorFromString([methodName stringByReplacingCharactersInRange:NSMakeRange(0, 3) withString:@"setHls"]);
+        class_addMethod(cls, colorSetterSelector, (IMP)UIView__setColorFormat_Imp, "v@:@");
     }
     free(methods);
 }
 
-#pragma mark Swizzled method implementations
-
-static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
-{
-    // TODO: Loop over attributes and set them
-    
-    (*s_UIView__awakeFromNib_Imp)(self, _cmd);
-}
-
 #pragma mark Method implementations
 
-static NSString *UIView__colorName_Imp(UIView *self, SEL _cmd)
+static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFormat)
 {
-    return nil;
-}
-
-static void UIView__setColorName_Imp(UIView *self, SEL _cmd, NSString *colorName)
-{
-    NSLog(@"----> set color to %@", colorName);
+    if (! [colorFormat isFilled]) {
+        HLSLoggerWarn(@"No value has been set for attribute %s of %@. Skipped", sel_getName(_cmd), self);
+        return;
+    }
+    
+    NSArray *colorFormatComponents = [colorFormat componentsSeparatedByString:@":"];
+    if ([colorFormatComponents count] > 2) {
+        HLSLoggerWarn(@"Invalid syntax for attribute %s of %@ (expect className:colorName). Skipped", sel_getName(_cmd), self);
+        return;
+    }
+    
+    NSString *className = nil;
+    NSString *colorName = nil;
+    if ([colorFormatComponents count] == 2) {
+        className = [colorFormatComponents firstObject_hls];
+        colorName = [colorFormatComponents lastObject];
+    }
+    else {
+        colorName = [colorFormatComponents firstObject_hls];
+    }
+    
+    Class colorClass = Nil;
+    if (className) {
+        colorClass = NSClassFromString(className);
+        if (! colorClass) {
+            HLSLoggerWarn(@"The class %@ does not exist. Skipped", className);
+            return;
+        }
+        
+        if (! HLSIsSubclassOfClass(colorClass, [UIColor class])) {
+            HLSLoggerWarn(@"The class %@ is not a subclass of UIColor. Skipped", className);
+            return;
+        }
+    }
+    else {
+        colorClass = [UIColor class];
+    }
+    
+    UIColor *color = [colorClass colorWithName:colorName];
+    if (! color) {
+        return;
+    }
+    
+    NSString *colorSetterSelectorName = [NSString stringWithCString:sel_getName(_cmd) encoding:NSUTF8StringEncoding];
+    SEL colorSelector = NSSelectorFromString([colorSetterSelectorName stringByReplacingOccurrencesOfString:@"setHls" withString:@"set"]);
+    [self performSelector:colorSelector withObject:color];
 }
