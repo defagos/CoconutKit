@@ -17,12 +17,6 @@ Pod::Spec.new do |s|
   s.requires_arc = false
   s.preserve_paths = 'CoconutKit-resources', 'CoconutKit/publicHeaders.txt'
   
-  s.prefix_header_contents = <<-EOS
-#ifdef __OBJC__
-  #import "CoconutKit.h"
-#endif
-EOS
-  
   def s.pre_install(pod, target_installer)
     public_headers = (pod.root + 'CoconutKit/publicHeaders.txt').read.split("\n")
     File.open(pod.root + 'CoconutKit/CoconutKit.h', 'w') do |file|
