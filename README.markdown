@@ -34,7 +34,7 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 ### Where can I download CoconutKit?
 
-You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms. [A companion repository](https://github.com/defagos/CoconutKit-CocoaPods) exists for easy installation using CocoaPods, but you do not need to check it out directly.
+You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms.
 
 You can also directly checkout the git repository. Note that there are submodules you must update using the `git submodules update --init` command.
 
@@ -80,17 +80,10 @@ If your project targets iOS 4 as well as iOS 5 and above, you might encounter _s
 
 #### Adding source files using CocoaPods
 
-Since CoconutKit 2.0, the easiest way to add CoconutKit to a project is using [CocoaPods](https://github.com/CocoaPods/CocoaPods). The CoconutKit specification file should be available from the official CocoaPods [specification repository](https://github.com/CocoaPods/Specs). If this is the case, simply edit your project `Podfile` file to add an entry for CoconutKit:
+Since CoconutKit 2.0, the easiest way to add CoconutKit to a project is using [CocoaPods](https://github.com/CocoaPods/CocoaPods). The CoconutKit specification file is available from the official CocoaPods [specification repository](https://github.com/CocoaPods/Specs). Simply edit your project `Podfile` file to add an entry for CoconutKit:
 
     platform :ios
     pod 'CoconutKit', '~> <version>'
-
-If the specification file is not available from the official CocoaPods specification repository, use the specification file available in the `Tools/CocoaPods` directory. Either add it to your `~/.cocoapods` local specification repository (creating the dedicated folder structure), or edit your project `Podfile` to tell CocoaPods to use the file directly:
-
-    platform :ios
-    pod 'CoconutKit', :podspec => '/absolute/path/to/CoconutKit/Tools/CocoaPods/CoconutKit.podspec'
-    
-The specification file has successfully been tested with CocoaPods 0.15.2.
 
 #### Enabling logging
 
