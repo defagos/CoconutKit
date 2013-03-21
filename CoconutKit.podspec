@@ -17,13 +17,22 @@ Pod::Spec.new do |s|
   s.requires_arc = false
   s.preserve_paths = 'CoconutKit-resources', 'CoconutKit/publicHeaders.txt'
   
+  s.prefix_header_contents = <<-EOS
+#ifdef __OBJC__
+  #import "CoconutKit.h"
+#endif
+EOS
+  
   def s.pre_install(pod, target_installer)
-    public_headers = (pod.root + 'CoconutKit/publicHeaders.txt').read.split("\n")
-    File.open(pod.root + 'CoconutKit/CoconutKit.h', 'w') do |file|
-      public_headers.each { |h| file.puts "#import <CoconutKit/#{h}>" }
+    Dir.chdir File.join(pod.root, 'CoconutKit') do
+      public_headers = File.read('publicHeaders.txt').split("\n")
+      File.open('CoconutKit.h', 'w') do |file|
+        file.puts File.read('CoconutKit-Prefix.pch')
+        public_headers.each { |h| file.puts "#import <CoconutKit/#{h}>" }
+      end
+      public_headers << 'CoconutKit.h'
+      self.public_header_files = public_headers.map { |f| File.join('**', f) }
     end
-    public_headers << 'CoconutKit.h'
-    self.public_header_files = public_headers.map { |f| File.join('CoconutKit/**', f) }
   end
   
   def s.post_install(target_installer)
