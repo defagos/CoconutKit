@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
       script_path = File.join(config.project_pods_root, target_installer.target_definition.copy_resources_script_name)
     end
     File.open(script_path, 'a') do |file|
-      file.puts "install_resource 'Resources/CoconutKit.bundle'"
+      file.puts "install_resource 'Resources/CoconutKit-resources.bundle'"
     end
   end
   
