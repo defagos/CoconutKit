@@ -10,15 +10,16 @@ Pod::Spec.new do |s|
   
   s.description = 'CoconutKit is a library of high-quality iOS components written at hortis le studio and in my spare time. It includes several tools for dealing with view controllers, multi-threading, view animations, as well as some new controls and various utility classes. These components are meant to make the life of an iOS programmer easier by reducing the boilerplate code written every day, improving code quality and enforcing solid application architecture.'
   
-  public_headers_file = File.expand_path('../CoconutKit/publicHeaders.txt', __FILE__)
-  public_headers = File.read(public_headers_file).split("\n")
-  
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
-  s.public_header_files = public_headers.map { |f| File.join('CoconutKit/Sources/**/', f) }
   s.prefix_header_file = 'CoconutKit/CoconutKit-Prefix.pch'
   
   s.frameworks = 'CoreData', 'MessageUI', 'QuartzCore'
   s.requires_arc = false
+  
+  s.pre_install do |pod, _|
+    public_headers = (pod.root + 'CoconutKit/publicHeaders.txt').read.split("\n")
+    s.public_header_files = public_headers.map { |f| File.join('CoconutKit/**', f) }
+  end
   
   def s.post_install(target_installer)
     puts "\nGenerating CoconutKit resources bundle\n".yellow if config.verbose?
