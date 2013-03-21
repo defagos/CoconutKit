@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   
   s.frameworks = 'CoreData', 'CoreText', 'MessageUI', 'MobileCoreServices', 'QuartzCore'
   s.requires_arc = false
-  s.preserve_paths = 'CoconutKit-resources'
+  s.preserve_paths = 'CoconutKit-resources', 'CoconutKit/publicHeaders.txt'
   
   def s.pre_install(pod, target_installer)
     public_headers = (pod.root + 'CoconutKit/publicHeaders.txt').read.split("\n")
