@@ -26,7 +26,7 @@ EOS
   def s.pre_install(pod, target_installer)
     Dir.chdir File.join(pod.root, 'CoconutKit') do
       public_headers = File.read('publicHeaders.txt').split("\n")
-      File.open('CoconutKit.h', 'w') do |file|
+      File.open('Sources/CoconutKit.h', 'w') do |file|
         file.puts File.read('CoconutKit-Prefix.pch')
         public_headers.each { |h| file.puts "#import <CoconutKit/#{h}>" }
       end
