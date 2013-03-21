@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   
   def s.pre_install(pod, target_installer)
     public_headers = (pod.root + 'CoconutKit/publicHeaders.txt').read.split("\n")
-    s.public_header_files = public_headers.map { |f| File.join('CoconutKit/**', f) }
+    self.public_header_files = public_headers.map { |f| File.join('CoconutKit/**', f) }
   end
   
   def s.post_install(target_installer)
