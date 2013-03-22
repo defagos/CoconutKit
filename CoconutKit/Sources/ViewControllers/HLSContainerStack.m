@@ -258,6 +258,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // the pop animation if desired)
     NSUInteger i = [self.containerContents count] - firstRemovedIndex - 1;
     while (i > 0) {
+        // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
+        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:firstRemovedIndex];
+        [containerContent.viewController willMoveToParentViewController:nil];
+        
         [self.containerContents removeObjectAtIndex:firstRemovedIndex];
         --i;
     }
@@ -309,12 +314,18 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return;
     }
     
-    if (_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
-        HLSLoggerError(@"The root view controller is fixed and cannot be changed anymore once set or after the container "
-                       "has been displayed once");
-        return;
+    if (index == 0) {
+        if (_behavior == HLSContainerStackBehaviorFixedRoot && index == 0 && [self rootViewController]) {
+            HLSLoggerError(@"The root view controller is fixed and cannot be changed anymore once set or after the container "
+                           "has been displayed once");
+            return;
+        }
+        else if (_behavior == HLSContainerStackBehaviorRemoving && [self.containerContents count] == self.capacity) {
+            HLSLoggerError(@"No view controller can be inserted at index 0 since the container is already full and would remove it");
+            return;
+        }
     }
-    
+        
     if ([self.containerViewController isViewDisplayed]) {
         // Notify the delegate before the view controller is actually installed on top of the stack and associated with the
         // container (see HLSContainerStackDelegate interface contract)
@@ -327,7 +338,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
     }
-        
+    
+    // If the container removes view controllers and has reached its capacity, inform the bottommost view controller that it
+    // will get removed
+    if (_behavior == HLSContainerStackBehaviorRemoving && [self.containerContents count] == self.capacity) {
+        // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
+        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+        [[self rootViewController] willMoveToParentViewController:nil];
+    }
+    
     // Associate the new view controller with its container (this increases [container count])
     HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController
                                                                          containerViewController:self.containerViewController
@@ -426,6 +445,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+    
+    // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
+    // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+    [containerContent.viewController willMoveToParentViewController:nil];
+    
     if (containerContent.addedToContainerView) {
         // Load the view controller's view below so that the capacity criterium can be fulfilled (if needed). If we are popping a
         // view controller, we will have capacity + 1 view controller's views loaded during the animation. This ensures that no
@@ -1007,7 +1031,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
-        [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
+        
+        // Containment relationship removal in general occurs during pop animations, but can also happen when a push forces a destructive
+        // container with capacity = 1 to remove the disappearing view controller
+        BOOL movingFromParentViewController = [animation.tag isEqualToString:@"pop_animation"]
+            || (_behavior == HLSContainerStackBehaviorRemoving && self.capacity == 1 && [self.containerContents count] == 2);
+        [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:movingFromParentViewController];
         
         // Forward events (willShow is sent to the delegate before willAppear is sent to the view controller)
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
@@ -1035,8 +1064,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             disappearingContainerContent = [self topContainerContent];
         }
         
-        // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate)
-        [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
+        // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate). For an explanation of
+        // movingFromParentViewController value, see -animationWillStart:animated:
+        BOOL movingFromParentViewController = [animation.tag isEqualToString:@"pop_animation"]
+            || (_behavior == HLSContainerStackBehaviorRemoving && self.capacity == 1 && [self.containerContents count] == 2);
+        [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:movingFromParentViewController];
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
