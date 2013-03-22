@@ -426,6 +426,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+    
+    // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
+    // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+    [containerContent.viewController willMoveToParentViewController:nil];
+    
     if (containerContent.addedToContainerView) {
         // Load the view controller's view below so that the capacity criterium can be fulfilled (if needed). If we are popping a
         // view controller, we will have capacity + 1 view controller's views loaded during the animation. This ensures that no
