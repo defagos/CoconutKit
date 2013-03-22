@@ -1031,7 +1031,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
-        [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
+        
+        // Containment relationship removal in general occurs during pop animations, but can also happen when a push forces a destructive
+        // container with capacity = 1 to remove the disappearing view controller
+        BOOL movingFromParentViewController = [animation.tag isEqualToString:@"pop_animation"]
+            || (_behavior == HLSContainerStackBehaviorRemoving && self.capacity == 1 && [self.containerContents count] == 2);
+        [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:movingFromParentViewController];
         
         // Forward events (willShow is sent to the delegate before willAppear is sent to the view controller)
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
@@ -1059,8 +1064,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             disappearingContainerContent = [self topContainerContent];
         }
         
-        // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate)
-        [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
+        // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate). For an explanation of
+        // movingFromParentViewController value, see -animationWillStart:animated:
+        BOOL movingFromParentViewController = [animation.tag isEqualToString:@"pop_animation"]
+            || (_behavior == HLSContainerStackBehaviorRemoving && self.capacity == 1 && [self.containerContents count] == 2);
+        [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:movingFromParentViewController];
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
         }
