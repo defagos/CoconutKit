@@ -226,11 +226,11 @@ static UIScrollView *s_scrollView = nil;
 + (void)offsetScrollForTextField:(HLSTextField *)textField animated:(BOOL)animated
 {
     // Locate the bottommost scroll view containing the text field
-    UIScrollView *bottomMostscrollView = nil;
+    UIScrollView *bottomMostScrollView = nil;
     UIView *parentView = [textField superview];
     while (parentView) {
         if ([parentView isKindOfClass:[UIScrollView class]]) {    
-            bottomMostscrollView = (UIScrollView *)parentView;
+            bottomMostScrollView = (UIScrollView *)parentView;
         }
         parentView = [parentView superview];
     }
@@ -238,19 +238,19 @@ static UIScrollView *s_scrollView = nil;
     // If a different scroll view was already assigned an offset, reset it. We must offset at most one scroll 
     // view at a time, and we are done with the old one since the field we are now tracking is wrapped in 
     // another scroll view    
-    if (s_scrollView != bottomMostscrollView) {
+    if (s_scrollView != bottomMostScrollView) {
         [HLSTextField restoreScrollAnimated:YES];
         
         // Changing scroll view (or set to nil). Save the original offset to be able to restore it later
-        if (bottomMostscrollView) {
-            s_originalYOffset = bottomMostscrollView.contentOffset.y;
+        if (bottomMostScrollView) {
+            s_originalYOffset = bottomMostScrollView.contentOffset.y;
         }
         else {
             s_originalYOffset = 0.f;
         }
     }
     
-    s_scrollView = bottomMostscrollView;
+    s_scrollView = bottomMostScrollView;
     
     // If no scroll view found, we are done
     if (! s_scrollView) {
