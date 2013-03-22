@@ -258,6 +258,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // the pop animation if desired)
     NSUInteger i = [self.containerContents count] - firstRemovedIndex - 1;
     while (i > 0) {
+        // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
+        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
+        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:firstRemovedIndex];
+        [containerContent.viewController willMoveToParentViewController:nil];
+        
         [self.containerContents removeObjectAtIndex:firstRemovedIndex];
         --i;
     }
@@ -1012,6 +1017,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willHideViewController:animated:)]) {
             [self.delegate containerStack:self willHideViewController:disappearingContainerContent.viewController animated:animated];
         }
+        // FIXME: Here
         [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
         
         // Forward events (willShow is sent to the delegate before willAppear is sent to the view controller)
@@ -1041,6 +1047,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate)
+        // FIXME: Here
         [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:[animation.tag isEqualToString:@"pop_animation"]];
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
             [self.delegate containerStack:self didHideViewController:disappearingContainerContent.viewController animated:animated];
