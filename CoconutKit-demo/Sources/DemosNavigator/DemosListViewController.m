@@ -568,7 +568,7 @@ typedef enum {
                 }
                 
                 case ViewControllersDemoIndexWebViewController: {
-                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://lestudio.hortis.ch"]];
+                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.hortis.ch"]];
                     demoViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
                     break;
                 }
