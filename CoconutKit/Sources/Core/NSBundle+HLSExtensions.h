@@ -21,10 +21,10 @@
 + (NSBundle *)coconutKitBundle;
 
 /**
- * Return the first bundle contained either in the main bundle or the library folder (in this order) and having a 
- * given name. The extension can be omitted, in which case another attempt with the .bundle extension will be made.
- * If no matching bundle is found, nil is returned. Note that bundles are searched recursively, and that results 
- * are cached for faster lookup. If name is nil, the main bundle is returned
+ * Return the first bundle contained either in the main bundle, the documents or the library folder (in this order) 
+ * and having a given name. The extension can be omitted, in which case another attempt with the .bundle extension 
+ * will be made. If no matching bundle is found, nil is returned. Note that bundles are searched recursively, and 
+ * that results are cached for faster lookup. If name is nil, the main bundle is returned
  */
 + (NSBundle *)bundleWithName:(NSString *)name;
 

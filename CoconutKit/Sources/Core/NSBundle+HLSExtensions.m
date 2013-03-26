@@ -64,6 +64,14 @@
         return bundle;
     }
     
+    // TODO: Use CoconutKit method returning the documents folder (available on a branch)
+    NSString *documentDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    bundle = [self bundleWithName:name inDirectory:documentDirectoryPath];
+    if (bundle) {
+        [s_nameToBundleMap setObject:bundle forKey:name];
+        return bundle;
+    }
+    
     // Search again, but with the .bundle extension appended
     if (! [[name pathExtension] isEqualToString:@"bundle"]) {
         bundle = [self bundleWithName:nameDotBundle];
