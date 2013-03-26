@@ -35,8 +35,24 @@
         return [NSBundle mainBundle];
     }
     
-    NSBundle *bundle = [self bundleWithName:name inDirectory:[[NSBundle mainBundle] bundlePath]];
+    static NSMutableDictionary *s_nameToBundleMap = nil;
+    if (! s_nameToBundleMap) {
+        s_nameToBundleMap = [[NSMutableDictionary alloc] init];
+    }
+    
+    NSBundle *bundle = [s_nameToBundleMap objectForKey:name];
     if (bundle) {
+        return bundle;
+    }
+    NSString *nameDotBundle = [name stringByAppendingPathExtension:@"bundle"];
+    bundle = [s_nameToBundleMap objectForKey:nameDotBundle];
+    if (bundle) {
+        return bundle;
+    }
+    
+    bundle = [self bundleWithName:name inDirectory:[[NSBundle mainBundle] bundlePath]];
+    if (bundle) {
+        [s_nameToBundleMap setObject:bundle forKey:name];
         return bundle;
     }
     
@@ -44,14 +60,19 @@
     NSString *libraryDirectoryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
     bundle = [self bundleWithName:name inDirectory:libraryDirectoryPath];
     if (bundle) {
+        [s_nameToBundleMap setObject:bundle forKey:name];
         return bundle;
     }
     
     // Search again, but with the .bundle extension appended
     if (! [[name pathExtension] isEqualToString:@"bundle"]) {
-        NSString *nameDotBundle = [name stringByAppendingPathExtension:@"bundle"];
         bundle = [self bundleWithName:nameDotBundle];
     }
+    
+    if (! bundle) {
+        HLSLoggerWarn(@"No bundle name %@ was found in the main bundle or the Library directory", name);
+    }
+    
     return bundle;
 }
 
@@ -61,29 +82,19 @@
         directoryPath = [[NSBundle mainBundle] bundlePath];
     }
     
-    static NSMutableDictionary *s_nameToBundleMap = nil;
-    if (! s_nameToBundleMap) {
-        s_nameToBundleMap = [[NSMutableDictionary alloc] init];
-    }
-    
-    NSBundle *bundle = [s_nameToBundleMap objectForKey:name];
-    if (! bundle) {
-        NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:directoryPath error:NULL];
-        for (NSString *contentPath in contentPaths) {
-            NSString *lastPathComponent = [contentPath lastPathComponent];
-            if (! [lastPathComponent isEqualToString:name]) {
-                continue;
-            }
-            
-            NSString *bundlePath = [directoryPath stringByAppendingPathComponent:contentPath];
-            bundle = [NSBundle bundleWithPath:bundlePath];
-            if (! bundle) {
-                continue;
-            }
-            
-            [s_nameToBundleMap setObject:bundle forKey:name];
+    NSBundle *bundle = nil;
+    NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:directoryPath error:NULL];
+    for (NSString *contentPath in contentPaths) {
+        NSString *lastPathComponent = [contentPath lastPathComponent];
+        if (! [lastPathComponent isEqualToString:name]) {
+            continue;
+        }
+        
+        NSString *bundlePath = [directoryPath stringByAppendingPathComponent:contentPath];
+        bundle = [NSBundle bundleWithPath:bundlePath];
+        if (bundle) {
             break;
-        }        
+        }
     }
     return bundle;
 }
