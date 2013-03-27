@@ -78,6 +78,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)dealloc
 {
     self.containerViewController = nil;
+    
+    for (HLSContainerContent *containerContent in self.containerContents) {
+        [containerContent.viewController willMoveToParentViewController:nil];
+    }
     self.containerContents = nil;
     self.containerView = nil;
     self.delegate = nil;
