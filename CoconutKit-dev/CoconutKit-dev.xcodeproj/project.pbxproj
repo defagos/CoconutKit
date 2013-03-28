@@ -317,8 +317,8 @@
 		6FA5BDCA15E34AF100E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */; };
 		6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
 		6FAB921E16DA70AB00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
-		6FAB923216DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; };
-		6FAB923316DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; };
+		6FAB923216DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAB923316DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB923416DA7FA300599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923116DA7FA300599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB923516DA7FA300599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923116DA7FA300599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };

@@ -68,7 +68,7 @@
 		6FA5BDC115E34A8F00E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */; };
 		6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */; };
 		6FAB922916DA7F9100599256 /* HLSMockDiskConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAB922516DA7F9100599256 /* HLSMockDiskConnection.h */; };
-		6FAB922A16DA7F9100599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922616DA7F9100599256 /* HLSMockDiskConnection.m */; };
+		6FAB922A16DA7F9100599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922616DA7F9100599256 /* HLSMockDiskConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB922B16DA7F9100599256 /* HLSURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAB922716DA7F9100599256 /* HLSURLConnection.h */; };
 		6FAB922C16DA7F9100599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922816DA7F9100599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; };
