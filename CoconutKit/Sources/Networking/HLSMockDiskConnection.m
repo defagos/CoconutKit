@@ -85,7 +85,7 @@
         HLSError *error =[HLSError errorWithDomain:NSCocoaErrorDomain
                                               code:NSURLErrorNetworkConnectionLost
                               localizedDescription:NSLocalizedString(@"Connection error", nil)];
-        self.completionBlock(nil, error);
+        self.completionBlock ? self.completionBlock(nil, error) : nil;
         return;
     }
     
@@ -93,7 +93,7 @@
         HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
                                                code:NSURLErrorResourceUnavailable
                                localizedDescription:NSLocalizedString(@"Not found", nil)];
-        self.completionBlock(nil, error);
+        self.completionBlock ? self.completionBlock(nil, error) : nil;
         return;
     }
     
@@ -111,7 +111,7 @@
     else {
         contents = [NSArray arrayWithObject:[NSURL fileURLWithPath:filePath]];
     }
-    self.completionBlock(contents, nil);    
+    self.completionBlock ? self.completionBlock(contents, nil) : nil;
 }
 
 @end
