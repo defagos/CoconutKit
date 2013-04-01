@@ -292,7 +292,7 @@ typedef enum {
         case DemoCategoryIndexNetworking: {
             switch (indexPath.row) {
                 case NetworkingDemoIndexConnection: {
-                    cell.textLabel.text = NSLocalizedString(@"Networking", nil);
+                    cell.textLabel.text = NSLocalizedString(@"Connection", nil);
                     break;
                 }
                     
