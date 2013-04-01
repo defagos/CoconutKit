@@ -24,7 +24,7 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
  * If your concrete implementation cannot take into account one or several of these parameters, you should override
  * the corresponding setters to provide some feedback to the programmer (e.g. a log)
  */
-- (void)startWithRunLoopModes:(NSSet *)runLoopModes;
+- (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes;
 
 /**
  * Cancel the connection
@@ -54,9 +54,19 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 - (void)start;
 
 /**
+ * Start the connection, scheduling it with a given set of run loop modes
+ */
+- (void)startWithRunLoopModes:(NSSet *)runLoopModes;
+
+/**
  * Cancel the connection and all associated connections
  */
 - (void)cancel;
+
+/**
+ * Return YES while the connection is running
+ */
+@property (nonatomic, assign, readonly, getter=isRunning) BOOL running;
 
 /**
  * Connection immutable properties
@@ -77,8 +87,11 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 
 /**
  * Create a parent - child relationship between the receiver and another connection. When cancelling the receiver,
- * all associated child connections will be cancelled as well. When a connection is added as child connection, it
- * is automatically started for you
+ * all associated child connections will be cancelled as well. Note that a connection can at most have one parent.
+ * If the parent - child relationship is established when the parent connection is not running, both the parent
+ * and child connections will be started when the parent connection is started. If the parent connection is already
+ * running when the parent - child relationship is established, the child connection will be automatically started
+ * (with the same run loop modes as the parent connection)
  *
  * Child connections can be useful to implement cascading requests. Take for example an object which must be filled using 
  * two requests. You want the process to happen as if only one connection is actually running. This can be easily achieved
