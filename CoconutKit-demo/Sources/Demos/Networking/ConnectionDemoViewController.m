@@ -54,11 +54,15 @@
     
     if ([self isMovingFromParentViewController]) {
         [self.singleWeakRefConnection cancel];
+        
         [self.singleStrongRefConnection cancel];
+        self.singleStrongRefConnection = nil;
         
         // Only need to cancel parent connections. Child connections will be cancelled as well
         [self.severalWeakRefParentConnection cancel];
+        
         [self.severalStrongRefParentConnection cancel];
+        self.severalStrongRefParentConnection = nil;
     }
 }
 
@@ -120,28 +124,44 @@
     HLSURLConnection *severalWeakRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(id responseObject, NSError *error) {
         NSLog(@"---> Parent done! %@", self);
     }];
+    
     NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
     HLSURLConnection *severalWeakRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(id responseObject, NSError *error) {
         NSLog(@"---> Child done! %@", self);
     }];
     [severalWeakRefParentConnection addChildConnection:severalWeakRefChildConnection];
+    
     self.severalWeakRefParentConnection = severalWeakRefParentConnection;
     [self.severalWeakRefParentConnection start];
 }
 
 - (IBAction)cancelSeveralWeakRef:(id)sender
 {
-
+    [self.severalWeakRefParentConnection cancel];
 }
 
 - (IBAction)downloadSeveralStrongRef:(id)sender
 {
-
+    NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
+    self.severalStrongRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(id responseObject, NSError *error) {
+        NSLog(@"---> Parent done! %@", self);
+        
+        // The strong ref must be released
+        self.severalStrongRefParentConnection = nil;
+    }];
+    
+    NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
+    HLSURLConnection *severalStrongRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(id responseObject, NSError *error) {
+        NSLog(@"---> Child done! %@", self);
+    }];
+    [self.severalStrongRefParentConnection addChildConnection:severalStrongRefChildConnection];
+    
+    [self.severalStrongRefParentConnection start];
 }
 
 - (IBAction)cancelSeveralStrongRef:(id)sender
 {
-
+    [self.severalStrongRefParentConnection cancel];
 }
 
 - (IBAction)downloadSeveralNoRef:(id)sender
