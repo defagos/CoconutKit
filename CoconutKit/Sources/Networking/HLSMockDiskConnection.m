@@ -42,7 +42,7 @@
 
 #pragma mark HLSURLConnectionAbstract protocol methods
 
-- (void)startWithRunLoopModes:(NSSet *)runLoopModes
+- (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
 {
     // A latency can be added using environment variables
     // TODO: Cache

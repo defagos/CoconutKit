@@ -69,9 +69,13 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 @property (nonatomic, assign, readonly, getter=isRunning) BOOL running;
 
 /**
- * Connection immutable properties
+ * The request attached to the connection
  */
 @property (nonatomic, readonly, strong) NSURLRequest *request;
+
+/**
+ * The completion block to be called when the connection completes (either normally or on failure)
+ */
 @property (nonatomic, readonly, copy) HLSURLConnectionCompletionBlock completionBlock;
 
 /**

@@ -13,6 +13,9 @@
 @property (nonatomic, weak) HLSURLConnection *singleWeakRefConnection;
 @property (nonatomic, strong) HLSURLConnection *singleStrongRefConnection;
 
+@property (nonatomic, weak) HLSURLConnection *severalWeakRefParentConnection;
+@property (nonatomic, strong) HLSURLConnection *severalStrongRefParentConnection;
+
 @end
 
 @implementation ConnectionDemoViewController
@@ -30,14 +33,6 @@
 }
 
 #pragma mark Object creation and destruction
-
-- (id)init
-{
-    if ((self = [super init])) {
-        // Code
-    }
-    return self;
-}
 
 - (void)dealloc
 {
@@ -60,6 +55,10 @@
     if ([self isMovingFromParentViewController]) {
         [self.singleWeakRefConnection cancel];
         [self.singleStrongRefConnection cancel];
+        
+        // Only need to cancel parent connections. Child connections will be cancelled as well
+        [self.severalWeakRefParentConnection cancel];
+        [self.severalStrongRefParentConnection cancel];
     }
 }
 
@@ -117,7 +116,17 @@
 
 - (IBAction)downloadSeveralWeakRef:(id)sender
 {
-
+    NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
+    HLSURLConnection *severalWeakRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(id responseObject, NSError *error) {
+        NSLog(@"---> Parent done! %@", self);
+    }];
+    NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
+    HLSURLConnection *severalWeakRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(id responseObject, NSError *error) {
+        NSLog(@"---> Child done! %@", self);
+    }];
+    [severalWeakRefParentConnection addChildConnection:severalWeakRefChildConnection];
+    self.severalWeakRefParentConnection = severalWeakRefParentConnection;
+    [self.severalWeakRefParentConnection start];
 }
 
 - (IBAction)cancelSeveralWeakRef:(id)sender

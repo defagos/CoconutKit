@@ -17,7 +17,10 @@
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, copy) HLSURLConnectionCompletionBlock userCompletionBlock;
 @property (nonatomic, copy) HLSURLConnectionCompletionBlock wrapperCompletionBlock;
-@property (nonatomic, weak) HLSURLConnection *parentConnection;
+@property (nonatomic, strong) HLSURLConnection *parentConnection;   // not a weak ref. No retain cycle (the implementation ensures that no cycle
+                                                                    // is createad. This makes the parent live until all child connections are
+                                                                    // over (so that child connections can still be cancelled by cancelling their
+                                                                    // parent, even if it ended first)
 
 @property (nonatomic, strong) NSMutableArray *childConnections;     // contains HLSURLConnection objects
 
@@ -68,7 +71,7 @@
 
 - (HLSURLConnectionCompletionBlock)completionBlock
 {
-    return self.userCompletionBlock;
+    return self.wrapperCompletionBlock;
 }
 
 #pragma mark Connection management
@@ -99,7 +102,9 @@
 
 - (void)cancel
 {
-    [self cancelConnection];
+    if (self.running) {
+        [self cancelConnection];
+    }
     
     for (HLSURLConnection *childConnection in self.childConnections) {
         [childConnection cancel];
