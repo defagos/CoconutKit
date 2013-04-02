@@ -43,14 +43,8 @@
         }
         
         self.request = request;
-        self.userCompletionBlock = completionBlock;
+        self.completionBlock = completionBlock;
         
-         __weak __typeof(&*self) weakSelf = self;
-        self.wrapperCompletionBlock = ^(id responseObject, NSError *error){
-            weakSelf.userCompletionBlock ? weakSelf.userCompletionBlock(responseObject, error) : nil;
-            [weakSelf.parentConnection.childConnections removeObject:weakSelf];
-            weakSelf.running = YES;
-        };;
         self.childConnections = [NSMutableArray array];
     }
     return self;
@@ -68,6 +62,16 @@
 }
 
 #pragma mark Accessors and mutators
+
+- (void)setCompletionBlock:(HLSURLConnectionCompletionBlock)completionBlock
+{
+    self.wrapperCompletionBlock = ^(HLSURLConnection *connection, id responseObject, NSError *error) {
+        connection.userCompletionBlock ? connection.userCompletionBlock(connection, responseObject, error) : nil;
+        [connection.parentConnection.childConnections removeObject:connection];
+        connection.running = YES;
+    };
+    self.userCompletionBlock = completionBlock;
+}
 
 - (HLSURLConnectionCompletionBlock)completionBlock
 {

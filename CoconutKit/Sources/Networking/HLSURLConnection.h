@@ -6,8 +6,11 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
+// Forward declarations
+@class HLSURLConnection;
+
 // Completion block signature
-typedef void (^HLSURLConnectionCompletionBlock)(id responseObject, NSError *error);
+typedef void (^HLSURLConnectionCompletionBlock)(HLSURLConnection *connection, id responseObject, NSError *error);
 typedef void (^HLSURLConnectionProgressBlock)(long long bytesTransferred, long long bytesTotal);
 typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *connection, NSURLProtectionSpace *protectionSpace);
 

@@ -82,10 +82,10 @@
     }
     double rating = (arc4random() % 1001) / 1000.;
     if (! doublege(rating, failureRate)) {
-        HLSError *error =[HLSError errorWithDomain:NSCocoaErrorDomain
-                                              code:NSURLErrorNetworkConnectionLost
-                              localizedDescription:NSLocalizedString(@"Connection error", nil)];
-        self.completionBlock ? self.completionBlock(nil, error) : nil;
+        HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                               code:NSURLErrorNetworkConnectionLost
+                               localizedDescription:NSLocalizedString(@"Connection error", nil)];
+        self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }
     
@@ -93,7 +93,7 @@
         HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
                                                code:NSURLErrorResourceUnavailable
                                localizedDescription:NSLocalizedString(@"Not found", nil)];
-        self.completionBlock ? self.completionBlock(nil, error) : nil;
+        self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }
     
@@ -111,7 +111,7 @@
     else {
         contents = [NSArray arrayWithObject:[NSURL fileURLWithPath:filePath]];
     }
-    self.completionBlock ? self.completionBlock(contents, nil) : nil;
+    self.completionBlock ? self.completionBlock(self, contents, nil) : nil;
 }
 
 @end
