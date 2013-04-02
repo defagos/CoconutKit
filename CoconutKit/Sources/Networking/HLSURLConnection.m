@@ -56,11 +56,6 @@
     return nil;
 }
 
-- (void)dealloc
-{
-    NSLog(@"Connection dealloced");
-}
-
 #pragma mark Accessors and mutators
 
 - (void)setCompletionBlock:(HLSURLConnectionCompletionBlock)completionBlock
