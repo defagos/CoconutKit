@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
   s.prefix_header_file = 'CoconutKit/CoconutKit-Prefix.pch'
   
-  s.frameworks = 'CoreData', 'CoreText', 'MessageUI', 'MobileCoreServices', 'QuartzCore'
+  s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'UIKit'
   s.requires_arc = false
   s.preserve_paths = 'CoconutKit-resources', 'CoconutKit/publicHeaders.txt'
   
