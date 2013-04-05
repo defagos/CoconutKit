@@ -66,6 +66,10 @@
 
 - (void)addChildConnection:(HLSURLConnection *)connection
 {
+    if (! connection) {
+        return;
+    }
+    
     [self.childConnections addObject:connection];
     [connection start];
 }
