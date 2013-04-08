@@ -81,7 +81,7 @@
 - (IBAction)downloadSingleWeakRef:(id)sender
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    HLSURLConnection *singleWeakRefConnection = [[HLSMockDiskConnection alloc] initWithRequest:request completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *singleWeakRefConnection = [[HLSFileURLConnection alloc] initWithRequest:request completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Done! %@", self);
     }];
     [singleWeakRefConnection start];
@@ -96,7 +96,7 @@
 - (IBAction)downloadSingleStrongRef:(id)sender
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    self.singleStrongRefConnection = [[HLSMockDiskConnection alloc] initWithRequest:request completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    self.singleStrongRefConnection = [[HLSFileURLConnection alloc] initWithRequest:request completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Done! %@", self);
         
         // The strong ref must be released
@@ -114,7 +114,7 @@
 - (IBAction)downloadSingleNoRef:(id)sender
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    HLSURLConnection *singleNoRefConnection = [[HLSMockDiskConnection alloc] initWithRequest:request completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *singleNoRefConnection = [[HLSFileURLConnection alloc] initWithRequest:request completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Done! %@, connection = %@", self, singleNoRefConnection);
     }];
     [singleNoRefConnection start];    
@@ -123,12 +123,12 @@
 - (IBAction)downloadSeveralWeakRef:(id)sender
 {
     NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    HLSURLConnection *severalWeakRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *severalWeakRefParentConnection = [[HLSFileURLConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Parent done! %@", self);
     }];
     
     NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
-    HLSURLConnection *severalWeakRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *severalWeakRefChildConnection = [[HLSFileURLConnection alloc] initWithRequest:childRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Child done! %@", self);
     }];
     [severalWeakRefParentConnection addChildConnection:severalWeakRefChildConnection];
@@ -145,7 +145,7 @@
 - (IBAction)downloadSeveralStrongRef:(id)sender
 {
     NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    self.severalStrongRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    self.severalStrongRefParentConnection = [[HLSFileURLConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Parent done! %@", self);
         
         // The strong ref must be released
@@ -153,7 +153,7 @@
     }];
     
     NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
-    HLSURLConnection *severalStrongRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *severalStrongRefChildConnection = [[HLSFileURLConnection alloc] initWithRequest:childRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Child done! %@", self);
     }];
     [self.severalStrongRefParentConnection addChildConnection:severalStrongRefChildConnection];
@@ -170,12 +170,12 @@
 - (IBAction)downloadSeveralNoRef:(id)sender
 {
     NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    HLSURLConnection *severalStrongRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *severalStrongRefParentConnection = [[HLSFileURLConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Parent done! %@", self);
     }];
     
     NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
-    HLSURLConnection *severalStrongRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *severalStrongRefChildConnection = [[HLSFileURLConnection alloc] initWithRequest:childRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Child done! %@", self);
     }];
     [severalStrongRefParentConnection addChildConnection:severalStrongRefChildConnection];
@@ -186,11 +186,11 @@
 - (IBAction)downloadCascadingWeakRef:(id)sender
 {
     NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    HLSURLConnection *cascadeWeakRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *cascadeWeakRefParentConnection = [[HLSFileURLConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Parent done! %@", self);
         
         NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
-        HLSURLConnection *cascadeWeakRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+        HLSURLConnection *cascadeWeakRefChildConnection = [[HLSFileURLConnection alloc] initWithRequest:childRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
             NSLog(@"---> Child done! %@", self);
         }];
         // works, but not optimal IMHO: [self.cascadeWeakRefParentConnection addChildConnection:cascadeWeakRefChildConnection];
@@ -209,12 +209,13 @@
 - (IBAction)downloadCascadingStrongRef:(id)sender
 {
     NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    self.cascadeStrongRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    self.cascadeStrongRefParentConnection = [[HLSFileURLConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Parent done! %@", self);
         
         NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
-        HLSURLConnection *cascadeStrongRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+        HLSURLConnection *cascadeStrongRefChildConnection = [[HLSFileURLConnection alloc] initWithRequest:childRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
             NSLog(@"---> Child done! %@", self);
+            self.cascadeStrongRefParentConnection = nil;
         }];
         [connection addChildConnection:cascadeStrongRefChildConnection];
     }];
@@ -231,11 +232,11 @@
 - (IBAction)downloadCascadingNoRef:(id)sender
 {
     NSURLRequest *parentRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
-    HLSURLConnection *cascadeNoRefParentConnection = [[HLSMockDiskConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+    HLSURLConnection *cascadeNoRefParentConnection = [[HLSFileURLConnection alloc] initWithRequest:parentRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
         NSLog(@"---> Parent done! %@", self);
         
         NSURLRequest *childRequest = [NSURLRequest requestWithURL:[ConnectionDemoViewController image2URL]];
-        HLSURLConnection *cascadeNoRefChildConnection = [[HLSMockDiskConnection alloc] initWithRequest:childRequest completionBlock:^(HLSURLConnection *connection, id responseObject, NSError *error) {
+        HLSURLConnection *cascadeNoRefChildConnection = [[HLSFileURLConnection alloc] initWithRequest:childRequest completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
             NSLog(@"---> Child done! %@", self);
         }];
         [connection addChildConnection:cascadeNoRefChildConnection];

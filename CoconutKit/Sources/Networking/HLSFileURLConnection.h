@@ -1,5 +1,5 @@
 //
-//  HLSMockDiskConnection.h
+//  HLSFileURLConnection.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/6/12.
@@ -18,8 +18,8 @@
  * The duration of the connection is random between 0 and 1 second
  *
  * Two environment variables can be set to simulate connection issues:
- *   - HLSMockDiskConnectionLatency: A latency duration which gets added to each connection, in seconds
- *   - HLSMockDiskConnectionFailureRate: A failure rate (between 0 and 1)
+ *   - HLSFileURLConnectionLatency: A latency duration which gets added to each connection, in seconds
+ *   - HLSFileURLConnectionFailureRate: A failure rate (between 0 and 1)
  */
-@interface HLSMockDiskConnection : HLSURLConnection
+@interface HLSFileURLConnection : HLSURLConnection
 @end

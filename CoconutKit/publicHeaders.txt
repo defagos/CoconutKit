@@ -6,12 +6,15 @@ HLSAnimationStep.h
 HLSApplicationPreloader.h
 HLSAssert.h
 HLSAutorotation.h
+HLSConnection.h
 HLSContainerStack.h
 HLSConverters.h
 HLSCursor.h
 HLSError.h
 HLSExpandingSearchBar.h
+HLSFakeConnection.h
 HLSFileManager.h
+HLSFileURLConnection.h
 HLSFloat.h
 HLSKeyboardInformation.h
 HLSLabel.h
@@ -19,7 +22,6 @@ HLSLayerAnimation.h
 HLSLayerAnimationStep.h
 HLSLogger.h
 HLSManagedObjectCopying.h
-HLSMockDiskConnection.h
 HLSModelManager.h
 HLSNibView.h
 HLSNotifications.h
