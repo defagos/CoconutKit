@@ -36,8 +36,8 @@ typedef void (^HLSConnectionProgressBlock)(long long bytesTransferred, long long
 @end
 
 /**
- * Abstract class for connections. Subclass and implement methods from the HLSConnectionAbstract protocol
- * to create your own concrete connection classes
+ * Abstract class for connections. Subclass and implement methods from the HLSConnectionAbstract protocol to create 
+ * your own concrete connection classes
  *
  * Designated initializer: -initWithCompletionBlock:
  */

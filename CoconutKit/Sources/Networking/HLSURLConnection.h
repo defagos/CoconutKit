@@ -21,7 +21,7 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 
 /**
  * Create the connection. Success or failure is notified through a single completion block. Other blocks are used
- * to report download, resp. upload progress
+ * to report download, resp. upload progress (see HLSURLConnection.h)
  */
 - (id)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock;
 
