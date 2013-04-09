@@ -1,52 +1,50 @@
 //
-//  HLSMockDiskConnection.m
+//  HLSFileURLConnection.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/6/12.
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSMockDiskConnection.h"
+#import "HLSFileURLConnection.h"
 
 #import "HLSError.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 
-@implementation HLSMockDiskConnection
+@implementation HLSFileURLConnection
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request
-      completionBlock:(HLSURLConnectionCompletionBlock)completionBlock
+- (id)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
-    if ((self = [super initWithRequest:request completionBlock:completionBlock])) {
-        if (! [[request URL] isFileURL]) {
-            HLSLoggerError(@"The request is not a file request");
-            return nil;
-        }
+    if (! [[request URL] isFileURL]) {
+        HLSLoggerError(@"The request is not a file request");
+        return nil;
     }
-    return self;
+    
+    return [super initWithRequest:request completionBlock:completionBlock];
 }
 
 #pragma mark Accessors and mutators
 
-- (void)setDownloadProgressBlock:(HLSURLConnectionProgressBlock)downloadProgressBlock
+- (void)setDownloadProgressBlock:(HLSConnectionProgressBlock)downloadProgressBlock
 {
     HLSLoggerInfo(@"Progress block have not been implemented for mocked disk connections");
 }
 
-- (void)setUploadProgressBlock:(HLSURLConnectionProgressBlock)uploadProgressBlock
+- (void)setUploadProgressBlock:(HLSConnectionProgressBlock)uploadProgressBlock
 {
     HLSLoggerInfo(@"Progress block have not been implemented for mocked disk connections");
 }
 
-#pragma mark HLSURLConnectionAbstract protocol methods
+#pragma mark HLSConnectionAbstract protocol methods
 
-- (void)startWithRunLoopModes:(NSSet *)runLoopModes
+- (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
 {
     // A latency can be added using environment variables
     // TODO: Cache
-    NSTimeInterval delay = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSMockDiskConnectionLatency"] doubleValue]
+    NSTimeInterval delay = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSFileURLConnectionLatency"] doubleValue]
         + (arc4random() % 1001) / 1000.;
     if (doublelt(delay, 0.)) {
         HLSLoggerWarn(@"The connection latency must be >= 0. Fixed to 0");
@@ -71,7 +69,7 @@
     // If the corresponding environment variable has been set, the connection can be set to be unreliable, in which
     // case it will have the corresponding failure probability
     // TODO: Cache
-    double failureRate = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSMockDiskConnectionFailureRate"] doubleValue];
+    double failureRate = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSFileURLConnectionFailureRate"] doubleValue];
     if (doublelt(failureRate, 0.)) {
         HLSLoggerWarn(@"The failure rate must be >= 0. Fixed to 0");
         failureRate = 0.;
@@ -82,10 +80,10 @@
     }
     double rating = (arc4random() % 1001) / 1000.;
     if (! doublege(rating, failureRate)) {
-        HLSError *error =[HLSError errorWithDomain:NSCocoaErrorDomain
-                                              code:NSURLErrorNetworkConnectionLost
-                              localizedDescription:NSLocalizedString(@"Connection error", nil)];
-        self.completionBlock(nil, error);
+        HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                               code:NSURLErrorNetworkConnectionLost
+                               localizedDescription:NSLocalizedString(@"Connection error", nil)];
+        self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }
     
@@ -93,7 +91,7 @@
         HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
                                                code:NSURLErrorResourceUnavailable
                                localizedDescription:NSLocalizedString(@"Not found", nil)];
-        self.completionBlock(nil, error);
+        self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }
     
@@ -111,7 +109,7 @@
     else {
         contents = [NSArray arrayWithObject:[NSURL fileURLWithPath:filePath]];
     }
-    self.completionBlock(contents, nil);    
+    self.completionBlock ? self.completionBlock(self, contents, nil) : nil;
 }
 
 @end

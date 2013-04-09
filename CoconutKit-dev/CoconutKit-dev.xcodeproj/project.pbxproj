@@ -269,6 +269,10 @@
 		6F22C77D16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */; };
 		6F22C78916A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */; };
 		6F22C78A16A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */; };
+		6F255E451712C44B007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E441712C44B007BFC96 /* HLSConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F255E461712C44B007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E441712C44B007BFC96 /* HLSConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F255E571712E86C007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E561712E86C007BFC96 /* HLSFakeConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F255E581712E86C007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E561712E86C007BFC96 /* HLSFakeConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
@@ -317,8 +321,8 @@
 		6FA5BDCA15E34AF100E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */; };
 		6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
 		6FAB921E16DA70AB00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
-		6FAB923216DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6FAB923316DA7FA300599256 /* HLSMockDiskConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAB923216DA7FA300599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAB923316DA7FA300599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB923416DA7FA300599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923116DA7FA300599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB923516DA7FA300599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923116DA7FA300599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
@@ -447,6 +451,10 @@
 		6FAF24F4162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */; };
 		6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */; };
 		6FAF24F6162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */; };
+		6FB500521705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500501705ABC400779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB500531705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500501705ABC400779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB500541705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500511705ABC400779DB3 /* ConnectionDemoViewController.xib */; };
+		6FB500551705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500511705ABC400779DB3 /* ConnectionDemoViewController.xib */; };
 		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
 		6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA4215F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
@@ -607,6 +615,10 @@
 		6F22C77816A942D90081A9A7 /* FontsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontsDemoViewController.m; sourceTree = "<group>"; };
 		6F22C77B16A942E60081A9A7 /* FontsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontsDemoViewController.xib; sourceTree = "<group>"; };
 		6F22C78816A946D20081A9A7 /* sample_text_with_custom_font.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample_text_with_custom_font.html; sourceTree = "<group>"; };
+		6F255E431712C44B007BFC96 /* HLSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConnection.h; sourceTree = "<group>"; };
+		6F255E441712C44B007BFC96 /* HLSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConnection.m; sourceTree = "<group>"; };
+		6F255E551712E86B007BFC96 /* HLSFakeConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFakeConnection.h; sourceTree = "<group>"; };
+		6F255E561712E86C007BFC96 /* HLSFakeConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFakeConnection.m; sourceTree = "<group>"; };
 		6F2D46FF15761B7400EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -671,8 +683,8 @@
 		6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
 		6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
 		6FAB921C16DA709600599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		6FAB922E16DA7FA300599256 /* HLSMockDiskConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMockDiskConnection.h; sourceTree = "<group>"; };
-		6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMockDiskConnection.m; sourceTree = "<group>"; };
+		6FAB922E16DA7FA300599256 /* HLSFileURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileURLConnection.h; sourceTree = "<group>"; };
+		6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileURLConnection.m; sourceTree = "<group>"; };
 		6FAB923016DA7FA300599256 /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
 		6FAB923116DA7FA300599256 /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
 		6FADE62D14BA04A6007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
@@ -904,6 +916,9 @@
 		6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FAF24F1162DE58000F93DA2 /* UITabBarController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FB5004F1705ABC400779DB3 /* ConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionDemoViewController.h; sourceTree = "<group>"; };
+		6FB500501705ABC400779DB3 /* ConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionDemoViewController.m; sourceTree = "<group>"; };
+		6FB500511705ABC400779DB3 /* ConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionDemoViewController.xib; sourceTree = "<group>"; };
 		6FB8E66E15F3D93600CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67315F3EDB000CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
@@ -1258,8 +1273,7 @@
 				6F718CA316CF825B001498D6 /* ViewEffectsDemoViewController.m */,
 				6F718CA916CF8315001498D6 /* ViewEffectsDemoViewController.xib */,
 			);
-			name = Effects;
-			path = View/Effects;
+			path = Effects;
 			sourceTree = "<group>";
 		};
 		6F89149615790DCA009FCC78 /* Label */ = {
@@ -1275,8 +1289,12 @@
 		6FAB922D16DA7FA300599256 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				6FAB922E16DA7FA300599256 /* HLSMockDiskConnection.h */,
-				6FAB922F16DA7FA300599256 /* HLSMockDiskConnection.m */,
+				6F255E431712C44B007BFC96 /* HLSConnection.h */,
+				6F255E441712C44B007BFC96 /* HLSConnection.m */,
+				6F255E551712E86B007BFC96 /* HLSFakeConnection.h */,
+				6F255E561712E86C007BFC96 /* HLSFakeConnection.m */,
+				6FAB922E16DA7FA300599256 /* HLSFileURLConnection.h */,
+				6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */,
 				6FAB923016DA7FA300599256 /* HLSURLConnection.h */,
 				6FAB923116DA7FA300599256 /* HLSURLConnection.m */,
 			);
@@ -1595,7 +1613,7 @@
 				6FADE7F014BA04C8007EE121 /* Animation */,
 				6FADE7F914BA04C8007EE121 /* Common */,
 				6F4169EB14BB67D5006020E6 /* Core */,
-				6F718CA116CF8236001498D6 /* Effects */,
+				6FB5004E1705ABC400779DB3 /* Networking */,
 				6FADE82714BA04C8007EE121 /* Task */,
 				6FADE83014BA04C8007EE121 /* View */,
 				6FADE85D14BA04C9007EE121 /* ViewControllers */,
@@ -1735,6 +1753,7 @@
 			children = (
 				6FADE83114BA04C8007EE121 /* ActionSheet */,
 				6FADE83514BA04C8007EE121 /* Cursor */,
+				6F718CA116CF8236001498D6 /* Effects */,
 				6F5007F81585E90100391A6C /* ExpandingSearchBar */,
 				6F89149615790DCA009FCC78 /* Label */,
 				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
@@ -1922,6 +1941,16 @@
 				6FADE88314BA04C9007EE121 /* _Person.m */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		6FB5004E1705ABC400779DB3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6FB5004F1705ABC400779DB3 /* ConnectionDemoViewController.h */,
+				6FB500501705ABC400779DB3 /* ConnectionDemoViewController.m */,
+				6FB500511705ABC400779DB3 /* ConnectionDemoViewController.xib */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		6FB9EA3E15F0C3580061D807 /* LayerPropertiesTestViewController */ = {
@@ -2199,6 +2228,7 @@
 				6F22C78916A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9916B3DAB5006B718F /* InnerFolder in Resources */,
 				6F718CAA16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
+				6FB500541705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2278,6 +2308,7 @@
 				6F22C78A16A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9A16B3DAB5006B718F /* InnerFolder in Resources */,
 				6F718CAB16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
+				6FB500551705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2475,9 +2506,12 @@
 				6F22C77916A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F66181B16C14B7400303628 /* UIView+HLSRuntimeAttributes.m in Sources */,
 				6F718CA516CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */,
-				6FAB923216DA7FA300599256 /* HLSMockDiskConnection.m in Sources */,
+				6FAB923216DA7FA300599256 /* HLSFileURLConnection.m in Sources */,
 				6FAB923416DA7FA300599256 /* HLSURLConnection.m in Sources */,
 				6F53B63916FA321F00E01781 /* DemoColors.m in Sources */,
+				6FB500521705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */,
+				6F255E451712C44B007BFC96 /* HLSConnection.m in Sources */,
+				6F255E571712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2642,9 +2676,12 @@
 				6F22C77A16A942D90081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F66181C16C14B7400303628 /* UIView+HLSRuntimeAttributes.m in Sources */,
 				6F718CA616CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */,
-				6FAB923316DA7FA300599256 /* HLSMockDiskConnection.m in Sources */,
+				6FAB923316DA7FA300599256 /* HLSFileURLConnection.m in Sources */,
 				6FAB923516DA7FA300599256 /* HLSURLConnection.m in Sources */,
 				6F53B63A16FA321F00E01781 /* DemoColors.m in Sources */,
+				6FB500531705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */,
+				6F255E461712C44B007BFC96 /* HLSConnection.m in Sources */,
+				6F255E581712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,9 +14,6 @@
 @interface HLSURLConnection ()
 
 @property (nonatomic, strong) NSURLRequest *request;
-@property (nonatomic, copy) HLSURLConnectionCompletionBlock completionBlock;
-
-@property (nonatomic, strong) NSMutableArray *childConnections;     // contains HLSURLConnection objects
 
 @end
 
@@ -24,18 +21,15 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request
-      completionBlock:(HLSURLConnectionCompletionBlock)completionBlock
+- (id)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
-    if ((self = [super init])) {
+    if ((self = [super initWithCompletionBlock:completionBlock])) {
         if (! request) {
             HLSLoggerError(@"Missing request");
             return nil;
         }
         
         self.request = request;
-        self.completionBlock = completionBlock;
-        self.childConnections = [NSMutableArray array];
     }
     return self;
 }
@@ -44,34 +38,6 @@
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-#pragma mark Connection management
-
-- (void)start
-{
-    [self startWithRunLoopModes:[NSSet setWithObject:NSRunLoopCommonModes]];
-}
-
-- (void)cancel
-{
-    [self cancelConnection];
-    
-    for (HLSURLConnection *childConnection in self.childConnections) {
-        [childConnection cancel];
-    }
-}
-
-#pragma mark Child connections
-
-- (void)addChildConnection:(HLSURLConnection *)connection
-{
-    if (! connection) {
-        return;
-    }
-    
-    [self.childConnections addObject:connection];
-    [connection start];
 }
 
 @end

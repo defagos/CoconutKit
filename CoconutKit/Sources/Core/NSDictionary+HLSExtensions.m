@@ -35,9 +35,8 @@
 
 - (NSDictionary *)dictionaryOverriddenWithEnvironment
 {
-    NSArray *keys = [self allKeys];
-    HLSAssertObjectsInEnumerationAreKindOfClass(keys, NSString);
-    
+    HLSAssertObjectsInEnumerationAreKindOfClass([self allKeys], NSString);
+
     NSMutableDictionary *overriddenDictionary = [NSMutableDictionary dictionaryWithDictionary:self];
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
     for (NSString *key in [environment allKeys]) {

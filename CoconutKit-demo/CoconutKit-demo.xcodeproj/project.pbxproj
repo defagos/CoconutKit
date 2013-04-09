@@ -264,6 +264,10 @@
 		6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6FAB922016DA70BE00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
 		6FAB922116DA70C500599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
+		6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB5004B1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
+		6FB5004D1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
 		6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA5115F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4F15F0DA4D0061D807 /* LayerPropertiesTestViewController.xib */; };
@@ -511,6 +515,9 @@
 		6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple3.jpg; sourceTree = "<group>"; };
 		6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple4.jpg; sourceTree = "<group>"; };
 		6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6FB500471705A60900779DB3 /* ConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionDemoViewController.h; sourceTree = "<group>"; };
+		6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionDemoViewController.m; sourceTree = "<group>"; };
+		6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionDemoViewController.xib; sourceTree = "<group>"; };
 		6FB9EA4D15F0DA4D0061D807 /* LayerPropertiesTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPropertiesTestViewController.h; sourceTree = "<group>"; };
 		6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPropertiesTestViewController.m; sourceTree = "<group>"; };
 		6FB9EA4F15F0DA4D0061D807 /* LayerPropertiesTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayerPropertiesTestViewController.xib; sourceTree = "<group>"; };
@@ -797,6 +804,7 @@
 				6F9C459B14C5C30B00824AB2 /* Animation */,
 				6F9C45A414C5C30B00824AB2 /* Common */,
 				6F9C45D214C5C30B00824AB2 /* Core */,
+				6FB500451705A59C00779DB3 /* Networking */,
 				6F9C45D714C5C30B00824AB2 /* Task */,
 				6F9C45E014C5C30B00824AB2 /* View */,
 				6F9C461514C5C30B00824AB2 /* ViewControllers */,
@@ -1219,6 +1227,16 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		6FB500451705A59C00779DB3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6FB500471705A60900779DB3 /* ConnectionDemoViewController.h */,
+				6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */,
+				6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		6FB9EA4C15F0DA4D0061D807 /* LayerPropertiesTestViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1468,6 +1486,7 @@
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */,
 				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
+				6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1544,6 +1563,7 @@
 				6F22C78716A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9D16B3DACF006B718F /* InnerFolder in Resources */,
 				6F718CB316CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
+				6FB5004D1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1647,6 +1667,7 @@
 				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
+				6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1716,6 +1737,7 @@
 				6F22C78216A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB116CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 				6F53B63616FA321000E01781 /* DemoColors.m in Sources */,
+				6FB5004B1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

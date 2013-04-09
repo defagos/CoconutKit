@@ -9,6 +9,7 @@
 #import "DemosListViewController.h"
 
 #import "ActionSheetDemoViewController.h"
+#import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "ExpandingSearchBarDemoViewController.h"
@@ -35,6 +36,7 @@ typedef enum {
     DemoCategoryIndexEnumBegin = 0,
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
     DemoCategoryIndexCore,
+    DemoCategoryIndexNetworking,
     DemoCategoryIndexTask,
     DemoCategoryIndexView,
     DemoCategoryIndexViewControllers,
@@ -59,6 +61,14 @@ typedef enum {
     CoreDemoIndexEnumEnd,
     CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
 } CoreDemoIndex;
+
+// Demos for networking
+typedef enum {
+    NetworkingDemoIndexEnumBegin = 0,
+    NetworkingDemoIndexConnection = NetworkingDemoIndexEnumBegin,
+    NetworkingDemoIndexEnumEnd,
+    NetworkingDemoIndexEnumSize = NetworkingDemoIndexEnumEnd - NetworkingDemoIndexEnumBegin
+} NetworkingDemoIndex;
 
 // Demos for tasks
 typedef enum {
@@ -167,6 +177,11 @@ typedef enum {
             break;
         }
             
+        case DemoCategoryIndexNetworking: {
+            return NSLocalizedString(@"Networking", nil);
+            break;
+        }
+            
         case DemoCategoryIndexTask: {
             return NSLocalizedString(@"Tasks", nil);
             break;
@@ -199,6 +214,11 @@ typedef enum {
             
         case DemoCategoryIndexCore: {
             return CoreDemoIndexEnumSize;
+            break;
+        }
+            
+        case DemoCategoryIndexNetworking: {
+            return NetworkingDemoIndexEnumSize;
             break;
         }
             
@@ -258,6 +278,21 @@ typedef enum {
                     
                 case CoreDemoIndexFonts: {
                     cell.textLabel.text = NSLocalizedString(@"Fonts", nil);
+                    break;
+                }
+                    
+                default: {
+                    return nil;
+                    break;
+                }
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexNetworking: {
+            switch (indexPath.row) {
+                case NetworkingDemoIndexConnection: {
+                    cell.textLabel.text = NSLocalizedString(@"Connection", nil);
                     break;
                 }
                     
@@ -451,6 +486,21 @@ typedef enum {
                     
                 case CoreDemoIndexFonts: {
                     demoViewController = [[[FontsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexNetworking: {
+            switch (indexPath.row) {
+                case NetworkingDemoIndexConnection: {
+                    demoViewController = [[[ConnectionDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
