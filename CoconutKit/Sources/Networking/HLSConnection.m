@@ -53,6 +53,7 @@
     self.wrapperCompletionBlock = ^(HLSConnection *connection, id responseObject, NSError *error) {
         connection.userCompletionBlock ? connection.userCompletionBlock(connection, responseObject, error) : nil;
         [connection.parentConnection.childConnections removeObject:connection];
+        connection.parentConnection = nil;
         connection.running = NO;
     };
     self.userCompletionBlock = completionBlock;
