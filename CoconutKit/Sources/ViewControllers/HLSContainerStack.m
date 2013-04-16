@@ -273,13 +273,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Resurrect view controller's views below the view controller we pop to so that the capacity criterium
     // is satisfied
-    for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-        NSUInteger index = firstRemovedIndex - 1 - i;
-        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-        [self addViewForContainerContent:containerContent inserting:NO animated:NO];
-        
-        if (index == 0) {
-            break;
+    if (firstRemovedIndex != 0) {
+        for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
+            NSUInteger index = firstRemovedIndex - 1 - i;
+            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            [self addViewForContainerContent:containerContent inserting:NO animated:NO];
+            
+            if (index == 0) {
+                break;
+            }
         }
     }
     
