@@ -136,7 +136,7 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
         // controller appropriately)
         if (! [viewController isOrientationCompatibleWithViewController:containerViewController]) {
             HLSLoggerError(@"The view controller has no compatible orientation with the container");
-            return NO;
+            return nil;
         }
         
         // Associate the view controller with its container content object        
