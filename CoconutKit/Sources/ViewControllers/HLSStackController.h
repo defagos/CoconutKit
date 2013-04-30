@@ -121,7 +121,7 @@
 - (NSArray *)viewControllers;
 
 /**
- * Return the number of view controllers loaded into the stack
+ * Return the number of view controllers within the stack
  */
 - (NSUInteger)count;
 
