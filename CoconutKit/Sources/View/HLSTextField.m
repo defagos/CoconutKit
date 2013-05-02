@@ -77,11 +77,12 @@ static UIScrollView *s_scrollView = nil;
     return self;
 }
 
-- (void)awakeFromNib
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    [super awakeFromNib];
-    
-    [self hlsTextFieldInit];
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self hlsTextFieldInit];
+    }
+    return self;
 }
 
 // Common initialization code
