@@ -36,7 +36,7 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms.
 
-You can also directly checkout the git repository. Note that there are submodules you must update using the `git submodules update --init` command.
+You can also directly checkout the git repository. Note that there are submodules you must update using the `git submodule update --init` command.
 
 ### Supporting development
 
