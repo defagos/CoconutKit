@@ -98,7 +98,7 @@
     }
     
     if (! object) {
-        HLSLoggerDebug(@"No object to animated");
+        HLSLoggerDebug(@"No object to animate");
         return;
     }
     
