@@ -35,7 +35,7 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
     }
     
     // We use an explicit constant string for missing localizations since otherwise the localization key itself would 
-    // be returned by the localizedStringForKey:value:table method
+    // be returned by the -localizedStringForKey:value:table: method
     static NSString * const kMissingLocalizedString = @"NSBundle_HLSDynamicLocalization_missing";
     NSString *localizedString = [bundle localizedStringForKey:key
                                                         value:kMissingLocalizedString
