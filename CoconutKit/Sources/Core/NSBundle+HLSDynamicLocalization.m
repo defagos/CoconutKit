@@ -88,10 +88,9 @@ static void setDefaultLocalization(void)
 {
     initialize();
     
-    NSArray *mainBundleLocalizations = [[NSBundle mainBundle] localizations];
     NSString *previousLocalization = [currentLocalization copy];
     
-    if (localization == nil || ![mainBundleLocalizations containsObject:localization]) {
+    if (!localization) {
         setDefaultLocalization();
     }
     else {
@@ -116,6 +115,13 @@ static void setDefaultLocalization(void)
 
 - (NSString *)dynamic_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
 {
+    // See -localizedStringForKey:value:table: return value documentation
+    NSString *notFoundValue = [value length] > 0 ? value : key;
+    
+    if (!currentLocalization || !key) {    
+        return notFoundValue;
+    }
+    
     NSString *localizationName = currentLocalization;
     BOOL lprojFound = YES;
     NSString *lprojPath = [[[self bundlePath] stringByAppendingPathComponent:currentLocalization] stringByAppendingPathExtension:@"lproj"];
@@ -135,12 +141,8 @@ static void setDefaultLocalization(void)
         }
     }
     
-    if (!currentLocalization || !lprojFound) {
-        return [self dynamic_localizedStringForKey:key value:value table:tableName];
-    }
-    
-    if (!key) {
-        return value;
+    if (!lprojFound) {
+        return notFoundValue;
     }
     
     if ([tableName length] == 0) {
@@ -157,7 +159,7 @@ static void setDefaultLocalization(void)
             HLSLoggerWarn(@"Localizable string \"%@\" not found in strings table \"%@\" of bundle %@", key, tableName, self);
             return [key uppercaseString];
         }
-        return [value length] > 0 ? value : key;
+        return notFoundValue;
     }
     
     return localizedString;
