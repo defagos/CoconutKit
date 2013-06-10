@@ -11,6 +11,7 @@
 #import "HLSError.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "NSBundle+HLSExtensions.h"
 
 @implementation HLSFileURLConnection
 
@@ -90,7 +91,7 @@
     if (! [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDirectory]) {
         HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
                                                code:NSURLErrorResourceUnavailable
-                               localizedDescription:NSLocalizedString(@"Not found", nil)];
+                               localizedDescription:CoconutKitLocalizedString(@"Not found", nil)];
         self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }

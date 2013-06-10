@@ -6,6 +6,9 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#define CoconutKitLocalizedString(key, comment) \
+    [[NSBundle coconutKitBundle] localizedStringForKey:(key) value:@"" table:nil]
+
 @interface NSBundle (HLSExtensions)
 
 /**

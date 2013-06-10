@@ -150,7 +150,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
 {
     if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
-        return NSLocalizedStringFromTableInBundle(@"No remaining time estimate available", @"Localizable", [NSBundle coconutKitBundle], nil);
+        return CoconutKitLocalizedString(@"No remaining time estimate available", nil);
     }
     
     NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
@@ -161,16 +161,16 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     NSUInteger minutes = timeInterval / 60;
     
     if (days != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dd %dh remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], nil), days, hours];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%dd %dh remaining (estimate)", nil), days, hours];
     }
     else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dh %dm remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], nil), hours, minutes];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%dh %dm remaining (estimate)", nil), hours, minutes];
     }
     else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%d min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], nil), minutes];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%d min remaining (estimate)", nil), minutes];
     }
     else {
-        return NSLocalizedStringFromTableInBundle(@"< 1 min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], nil);
+        return CoconutKitLocalizedString(@"< 1 min remaining (estimate)", nil);
     }
 }
 

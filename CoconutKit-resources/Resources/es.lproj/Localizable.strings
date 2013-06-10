@@ -6,8 +6,5 @@
    Copyright 2010 Hortis. All rights reserved.
  */
 
- /* HLSWebViewController 'Mail Link' action */
- "Mail Link"="Mandar enlace";
-
-/* HLSWebViewController 'Open in Safari' action */
+"Mail Link"="Mandar enlace";
 "Open in Safari"="Abre en Safari";
