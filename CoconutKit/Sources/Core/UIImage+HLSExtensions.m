@@ -8,7 +8,34 @@
 
 #import "UIImage+HLSExtensions.h"
 
+#import "NSBundle+HLSExtensions.h"
+
 @implementation UIImage (HLSExtensions)
+
++ (UIImage *)coconutKitImageNamed:(NSString *)imageName
+{
+    static NSString *s_relativeBundlePath = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
+        NSString *coconutKitBundlePath = [[NSBundle coconutKitBundle] bundlePath];
+        if ([coconutKitBundlePath hasPrefix:mainBundlePath]) {
+            s_relativeBundlePath = [coconutKitBundlePath stringByReplacingCharactersInRange:NSMakeRange(0, [mainBundlePath length] + 1) withString:@""];
+        }
+    });
+    
+    // The CoconutKit bundle is located within the main bundle. Can use -[UIImage imageNamed:] and its caching
+    // mechanism
+    if (s_relativeBundlePath) {
+        NSString *imagePath = [s_relativeBundlePath stringByAppendingPathComponent:imageName];
+        return [UIImage imageNamed:imagePath];
+    }
+    // The CoconutKit bundle is located outside the main bundle. -[UIImage imageNamed:] cannot be used
+    else {
+        NSString *imagePath = [[[NSBundle coconutKitBundle] bundlePath] stringByAppendingPathComponent:imageName];
+        return [UIImage imageWithContentsOfFile:imagePath];
+    }
+}
 
 + (UIImage *)imageWithColor:(UIColor *)color
 {

@@ -9,6 +9,11 @@
 @interface UIImage (HLSExtensions)
 
 /**
+ * Return an image from the CoconutKit-resources bundle
+ */
++ (UIImage *)coconutKitImageNamed:(NSString *)imageName;
+
+/**
  * Return a 1x1 px image having a given color
  */
 + (UIImage *)imageWithColor:(UIColor *)color;

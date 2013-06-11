@@ -14,6 +14,7 @@
 #import "HLSViewAnimationStep.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
+#import "UIImage+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
 
 @interface HLSCursor ()
@@ -168,7 +169,7 @@
     if (! _viewsCreated) {
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
-            UIImage *pointerImage = [UIImage imageNamed:@"CoconutKit-resources.bundle/CursorDefaultPointer.png"];
+            UIImage *pointerImage = [UIImage coconutKitImageNamed:@"CursorDefaultPointer.png"];
             UIImageView *imageView = [[[UIImageView alloc] initWithImage:pointerImage] autorelease];
             imageView.contentStretch = CGRectMake(0.5f,
                                                   0.5f,

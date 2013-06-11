@@ -13,6 +13,7 @@
 #import "HLSLogger.h"
 #import "HLSViewAnimationStep.h"
 #import "NSBundle+HLSExtensions.h"
+#import "UIImage+HLSExtensions.h"
 
 static const CGFloat kSearchBarStandardHeight = 44.f;
 
@@ -83,7 +84,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     
     self.searchButton = [[[UIButton alloc] initWithFrame:CGRectMake(0.f, 0.f, kSearchBarStandardHeight, kSearchBarStandardHeight)] autorelease];
     self.searchButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-    [self.searchButton setImage:[UIImage imageNamed:@"CoconutKit-resources.bundle/SearchFieldIcon.png"] forState:UIControlStateNormal];
+    [self.searchButton setImage:[UIImage coconutKitImageNamed:@"SearchFieldIcon.png"] forState:UIControlStateNormal];
     [self.searchButton addTarget:self 
                           action:@selector(toggleSearchBar:)
                 forControlEvents:UIControlEventTouchUpInside];
