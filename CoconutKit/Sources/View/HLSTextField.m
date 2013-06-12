@@ -186,10 +186,6 @@ static UIScrollView *s_scrollView = nil;
                                              selector:@selector(keyboardWillHide:) 
                                                  name:UIKeyboardWillHideNotification 
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidChangeFrame:)
-                                                 name:UIKeyboardDidChangeFrameNotification
-                                               object:nil];    
     return YES;
 }
 
@@ -210,9 +206,6 @@ static UIScrollView *s_scrollView = nil;
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardDidChangeFrameNotification
                                                   object:nil];
     
     // Calling the super method first; two cases can lead to resignFirstResponder being called:
@@ -390,6 +383,9 @@ static UIScrollView *s_scrollView = nil;
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
+    HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
+    s_keyboardFrameInScrollView = [s_scrollView convertRect:keyboardInformation.endFrame fromView:nil];
+    
     s_scrollView.frame = CGRectMake(CGRectGetMinX(s_scrollView.frame),
                                     CGRectGetMinY(s_scrollView.frame),
                                     CGRectGetWidth(s_scrollView.frame),
@@ -403,15 +399,6 @@ static UIScrollView *s_scrollView = nil;
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     [HLSTextField restoreScrollAnimated:NO];
-}
-
-/**
- * Called when the keyboard appears, disappears, rotates, or gets undocked
- */
-- (void)keyboardDidChangeFrame:(NSNotification *)notification
-{
-    HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
-    s_keyboardFrameInScrollView = [s_scrollView convertRect:keyboardInformation.endFrame fromView:nil];
 }
 
 @end
