@@ -52,13 +52,6 @@
     self.textField2.resigningFirstResponderOnTap = NO;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    NSLog(@"Orig frame = %@", NSStringFromCGRect(self.scrollView.frame));
-}
-
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
