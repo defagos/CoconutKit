@@ -42,6 +42,7 @@ const CGFloat kTextFieldMinVisibilityDistance = 20.f;           // Corresponds t
  */
 static HLSTextField *s_currentTextField = nil;
 static CGFloat s_originalYOffset = 0.f;
+static CGRect s_keyboardFrameInScrollView;
 
 /**
  * When a text field must be made visible, we climb up the view hierarchy to find the bottommost scroll view (i.e. the 
@@ -91,12 +92,14 @@ static UIScrollView *s_scrollView = nil;
     self.minVisibilityDistance = kTextFieldMinVisibilityDistance;
     
     self.touchDetector = [[[HLSTextFieldTouchDetector alloc] initWithTextField:self] autorelease];
-    super.delegate = self.touchDetector;
+    super.delegate = self.touchDetector;    
 }
 
 - (void)dealloc
 {
     self.touchDetector = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super dealloc];
 }
@@ -171,15 +174,22 @@ static UIScrollView *s_scrollView = nil;
     
     // Register for keyboard notifications so that the new responder can answer to keyboard events (the registration
     // is here carefully made so that those events always correspond to device rotation)
-    [[NSNotificationCenter defaultCenter] addObserver:self 
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:) 
                                                  name:UIKeyboardWillShowNotification 
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(keyboardWillHide:) 
                                                  name:UIKeyboardWillHideNotification 
-                                               object:nil]; 
-    
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidChangeFrame:)
+                                                 name:UIKeyboardDidChangeFrameNotification
+                                               object:nil];    
     return YES;
 }
 
@@ -196,8 +206,14 @@ static UIScrollView *s_scrollView = nil;
                                                     name:UIKeyboardWillShowNotification
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
-                                                  object:nil];    
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardDidChangeFrameNotification
+                                                  object:nil];
     
     // Calling the super method first; two cases can lead to resignFirstResponder being called:
     //   - we are exiting input mode. The keyboard disappears, which fires a UIKeyboardWillHideNotification during
@@ -345,6 +361,11 @@ static UIScrollView *s_scrollView = nil;
         return;
     }
     
+    s_scrollView.frame = CGRectMake(CGRectGetMinX(s_scrollView.frame),
+                                    CGRectGetMinY(s_scrollView.frame),
+                                    CGRectGetWidth(s_scrollView.frame),
+                                    CGRectGetHeight(s_scrollView.frame) + CGRectGetHeight(s_keyboardFrameInScrollView));
+    
     // Restore original offset
     CGPoint scrollViewOffset = s_scrollView.contentOffset;
     [s_scrollView setContentOffset:CGPointMake(scrollViewOffset.x, 
@@ -367,6 +388,14 @@ static UIScrollView *s_scrollView = nil;
     [HLSTextField offsetScrollForTextField:self animated:NO];
 }
 
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    s_scrollView.frame = CGRectMake(CGRectGetMinX(s_scrollView.frame),
+                                    CGRectGetMinY(s_scrollView.frame),
+                                    CGRectGetWidth(s_scrollView.frame),
+                                    floatmax(CGRectGetHeight(s_scrollView.frame) - CGRectGetHeight(s_keyboardFrameInScrollView), 0.f));
+}
+
 /**
  * Extremely important: When rotating the interface with the keyboard enabled, the willHide event is fired before the new
  * orientation has been installed, i.e. coordinates are relative to the old orientation
@@ -374,6 +403,15 @@ static UIScrollView *s_scrollView = nil;
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     [HLSTextField restoreScrollAnimated:NO];
+}
+
+/**
+ * Called when the keyboard appears, disappears, rotates, or gets undocked
+ */
+- (void)keyboardDidChangeFrame:(NSNotification *)notification
+{
+    HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
+    s_keyboardFrameInScrollView = [s_scrollView convertRect:keyboardInformation.endFrame fromView:nil];
 }
 
 @end

@@ -10,6 +10,9 @@
 
 @interface TextFieldsDemoViewController ()
 
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet UIView *backgroundView;
+
 @property (nonatomic, retain) IBOutlet HLSTextField *textField1;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField2;
 @property (nonatomic, retain) IBOutlet HLSTextField *textField3;
@@ -37,12 +40,23 @@
 {
     [super viewDidLoad];
     
+    // Wrapping the text field background view into a scroll view allows us to test that the behavior stays correct
+    // in all cases
+    self.scrollView.contentSize = self.backgroundView.frame.size;
+    
     self.textField1.delegate = self;
     self.textField2.delegate = self;
     self.textField3.delegate = self;
     self.textField4.delegate = self;
     
     self.textField2.resigningFirstResponderOnTap = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"Orig frame = %@", NSStringFromCGRect(self.scrollView.frame));
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
