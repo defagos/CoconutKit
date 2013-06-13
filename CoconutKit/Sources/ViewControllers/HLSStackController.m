@@ -73,6 +73,7 @@
                                                                              behavior:HLSContainerStackBehaviorFixedRoot
                                                                              capacity:self.capacity] autorelease];
     self.containerStack.autorotationMode = self.autorotationMode;
+    self.containerStack.delegate = self;
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
     @try {
