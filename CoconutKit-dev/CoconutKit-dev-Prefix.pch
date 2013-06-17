@@ -82,6 +82,7 @@
     #import "NSManagedObject+HLSExtensions.h"
     #import "NSManagedObject+HLSValidation.h"
     #import "NSMutableArray+HLSExtensions.h"
+    #import "NSNumber+HLSExtensions.h"
     #import "NSObject+HLSExtensions.h"
     #import "NSSet+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"

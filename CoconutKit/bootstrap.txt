@@ -21,6 +21,7 @@ NSError+HLSExtensions.m
 NSManagedObject+HLSExtensions.m
 NSManagedObject+HLSValidation.m
 NSMutableArray+HLSExtensions.m
+NSNumber+HLSExtensions.m
 NSObject+HLSExtensions.m
 NSSet+HLSExtensions.m
 NSString+HLSExtensions.m

@@ -469,6 +469,8 @@
 		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */; };
+		6FC8EDB7176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8EDB6176EC87F000B3BE7 /* NSNumber+HLSExtensions.m */; };
+		6FC8EDB8176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8EDB6176EC87F000B3BE7 /* NSNumber+HLSExtensions.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
 		6FCA2DDE1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DDB1679E3EB0011CFDA /* HLSStandardFileManager.m */; };
 		6FCA2DDF1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DDB1679E3EB0011CFDA /* HLSStandardFileManager.m */; };
@@ -936,6 +938,8 @@
 		6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
 		6FC8CB8D1574BFF10014B37B /* NSURLRequest+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FC8EDB5176EC87E000B3BE7 /* NSNumber+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FC8EDB6176EC87F000B3BE7 /* NSNumber+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC900F413D4661100834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCA2DDA1679E3EB0011CFDA /* HLSStandardFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardFileManager.h; sourceTree = "<group>"; };
 		6FCA2DDB1679E3EB0011CFDA /* HLSStandardFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManager.m; sourceTree = "<group>"; };
@@ -1400,6 +1404,8 @@
 				6FADE65B14BA04A6007EE121 /* NSError+HLSExtensions.m */,
 				6F2D46FF15761B7400EF5E4F /* NSMutableArray+HLSExtensions.h */,
 				6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */,
+				6FC8EDB5176EC87E000B3BE7 /* NSNumber+HLSExtensions.h */,
+				6FC8EDB6176EC87F000B3BE7 /* NSNumber+HLSExtensions.m */,
 				6FADE65C14BA04A6007EE121 /* NSObject+HLSExtensions.h */,
 				6FADE65D14BA04A6007EE121 /* NSObject+HLSExtensions.m */,
 				6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */,
@@ -2512,6 +2518,7 @@
 				6FB500521705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */,
 				6F255E451712C44B007BFC96 /* HLSConnection.m in Sources */,
 				6F255E571712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
+				6FC8EDB7176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2682,6 +2689,7 @@
 				6FB500531705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */,
 				6F255E461712C44B007BFC96 /* HLSConnection.m in Sources */,
 				6F255E581712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
+				6FC8EDB8176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
