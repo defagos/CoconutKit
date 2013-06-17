@@ -172,7 +172,7 @@
 + (HLSModelManager *)rootModelManagerForThread:(NSThread *)thread
 {
     NSMutableArray *modelManagerStack = [self modelManagerStackForThread:thread];
-    return [modelManagerStack firstObject_hls];
+    return [modelManagerStack firstObject];
 }
 
 + (NSManagedObjectContext *)currentModelContext
@@ -345,7 +345,7 @@
 
 - (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError **)pError
 {
-    NSPersistentStore *persistentStore = [[self.persistentStoreCoordinator persistentStores] firstObject_hls];
+    NSPersistentStore *persistentStore = [[self.persistentStoreCoordinator persistentStores] firstObject];
     return [self.persistentStoreCoordinator migratePersistentStore:persistentStore toURL:url options:nil withType:storeType error:pError] != nil;
 }
 

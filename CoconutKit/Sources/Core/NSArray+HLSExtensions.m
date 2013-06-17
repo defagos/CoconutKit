@@ -10,15 +10,6 @@
 
 @implementation NSArray (HLSExtensions)
 
-- (id)firstObject_hls
-{
-    if ([self count] == 0) {
-        return nil;
-    }
-    
-    return [self objectAtIndex:0];
-}
-
 - (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfObjects
 {
     if (numberOfObjects == 0) {

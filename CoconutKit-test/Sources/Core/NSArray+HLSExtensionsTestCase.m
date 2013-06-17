@@ -12,15 +12,6 @@
 
 #pragma mark Tests
 
-- (void)testFirstObject
-{
-    NSArray *emptyArray = [NSArray array];
-    GHAssertNil([emptyArray firstObject_hls], nil);
-    
-    NSArray *array = [NSArray arrayWithObjects:@"1", @"2", @"3", nil];
-    GHAssertEqualStrings([array firstObject_hls], @"1", nil);
-}
-
 - (void)testRotation
 {
     NSArray *array = [NSArray arrayWithObjects:@"1", @"2", @"3", nil];

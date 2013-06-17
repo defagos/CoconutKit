@@ -123,7 +123,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (HLSContainerStackView *)containerStackView
 {
-    return [self.containerView.subviews firstObject_hls];
+    return [self.containerView.subviews firstObject];
 }
 
 - (void)setCapacity:(NSUInteger)capacity
@@ -151,7 +151,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (UIViewController *)rootViewController
 {
-    HLSContainerContent *rootContainerContent = [self.containerContents firstObject_hls];
+    HLSContainerContent *rootContainerContent = [self.containerContents firstObject];
     return rootContainerContent.viewController;
 }
 

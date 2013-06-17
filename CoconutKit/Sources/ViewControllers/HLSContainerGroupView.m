@@ -70,7 +70,7 @@
 
 - (UIView *)frontContentView
 {
-    return [self.frontView.subviews firstObject_hls];
+    return [self.frontView.subviews firstObject];
 }
 
 - (UIView *)frontView
@@ -80,7 +80,7 @@
 
 - (UIView *)backContentView
 {
-    return [self.backView.subviews firstObject_hls];
+    return [self.backView.subviews firstObject];
 }
 
 - (void)setBackContentView:(UIView *)backContentView
@@ -108,7 +108,7 @@
 - (UIView *)backView
 {
     if ([self.subviews count] == 2) {
-        return [self.subviews firstObject_hls];
+        return [self.subviews firstObject];
     }
     else {
         return nil;

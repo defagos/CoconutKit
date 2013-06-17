@@ -50,13 +50,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             }
             
             // Get the first object and check that it is what we expect
-            id firstObject_hls = [bundleContents firstObject_hls];
-            if (! [firstObject_hls isKindOfClass:self]) {
+            id firstObject = [bundleContents firstObject];
+            if (! [firstObject isKindOfClass:self]) {
                 HLSLoggerError(@"The cell object must be the first one in the xib file, and must be of type %@", [self className]);
                 return nil;
             }
             
-            cell = (UITableViewCell *)firstObject_hls;
+            cell = (UITableViewCell *)firstObject;
             
             // Check that the reuse identifier defined in the xib is correct
             if (! [[cell reuseIdentifier] isEqualToString:[self identifier]]) {

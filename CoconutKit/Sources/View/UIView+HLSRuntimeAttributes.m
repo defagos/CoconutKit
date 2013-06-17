@@ -106,11 +106,11 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
     NSString *className = nil;
     NSString *colorName = nil;
     if ([colorFormatComponents count] == 2) {
-        className = [colorFormatComponents firstObject_hls];
+        className = [colorFormatComponents firstObject];
         colorName = [colorFormatComponents lastObject];
     }
     else {
-        colorName = [colorFormatComponents firstObject_hls];
+        colorName = [colorFormatComponents firstObject];
     }
     
     Class colorClass = Nil;

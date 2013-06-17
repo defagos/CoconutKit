@@ -391,7 +391,7 @@
     }
     
     // No match found; return leftmost or rightmost element view
-    UIView *firstElementWrapperView = [self.elementWrapperViews firstObject_hls];
+    UIView *firstElementWrapperView = [self.elementWrapperViews firstObject];
     if (floatlt(xPos, CGRectGetMinX(firstElementWrapperView.frame) - _spacing / 2.f)) {
         return 0;
     }
@@ -421,7 +421,7 @@
     // Too far on the left; cursor around the first view
     CGRect pointerRect;
     if (index == 0) {
-        UIView *firstElementWrapperView = [self.elementWrapperViews firstObject_hls];
+        UIView *firstElementWrapperView = [self.elementWrapperViews firstObject];
         pointerRect = firstElementWrapperView.frame;
     }
     // Too far on the right; cursor around the last view

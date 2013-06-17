@@ -6,14 +6,20 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-@interface NSArray (HLSExtensions)
+@protocol NSArray_HLSExtensions <NSObject>
 
+@optional
 /**
  * Returns the first object in the array, or nil if the array is empty
  *
- * Remark: A private -firstObject method exists since iOS 4
+ * Remark: This method has been made public with the iOS 7 SDK, and for iOS 4 and above (in fact, the method
+ *         existed privately since iOS 4)
  */
-- (id)firstObject_hls;
+- (id)firstObject;
+
+@end
+
+@interface NSArray (HLSExtensions) <NSArray_HLSExtensions>
 
 /**
  * Rotate array elements left or right (elements disappearing at an end are moved to the other end)

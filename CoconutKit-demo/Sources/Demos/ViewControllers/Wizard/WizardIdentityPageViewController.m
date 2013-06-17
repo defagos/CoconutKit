@@ -37,7 +37,7 @@
 {
     if ((self = [super init])) {
         // Only one person in the DB. If does not exist yet, create it
-        Person *person = [[Person allObjects] firstObject_hls];
+        Person *person = [[Person allObjects] firstObject];
         if (! person) {
             person = [Person insert];
         }

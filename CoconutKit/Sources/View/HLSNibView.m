@@ -47,13 +47,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         }
         
         // Get the first object and check that it is what we expect
-        id firstObject_hls = [bundleContents firstObject_hls];
-        if (! [firstObject_hls isKindOfClass:self]) {
+        id firstObject = [bundleContents firstObject];
+        if (! [firstObject isKindOfClass:self]) {
             HLSLoggerError(@"The view object must be the first one in the xib file, and must be of type %@", [self className]);
             return nil;
         }
         
-        return firstObject_hls;
+        return firstObject;
     }
     else {
         HLSLoggerError(@"xib file not found");
