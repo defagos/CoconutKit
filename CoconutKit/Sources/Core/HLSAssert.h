@@ -7,6 +7,18 @@
 //
 
 /**
+ * Macro annotation to generate compiler warnings when a subclass method implementation fails to call its
+ * superclass counterpart
+ */
+#ifndef NS_REQUIRES_SUPER
+    #if __has_attribute(objc_requires_super)
+        #define NS_REQUIRES_SUPER __attribute((objc_requires_super))
+    #else
+        #define NS_REQUIRES_SUPER
+    #endif
+#endif
+
+/**
  * The following macros are only active if NS_BLOCK_ASSERTIONS is disabled for the project configuration you use
  * (usually -DNS_BLOCK_ASSERTIONS=1)
  */

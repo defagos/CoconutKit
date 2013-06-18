@@ -6,6 +6,7 @@
 //  Copyright 2010 Hortis. All rights reserved.
 //
 
+#import "HLSAssert.h"
 #import "HLSTask.h"
 #import "HLSTaskManager.h"
 
@@ -29,7 +30,7 @@
  */
 @interface HLSTaskOperation : NSOperation
 
-- (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task;
+- (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task NS_REQUIRES_SUPER;
 
 @property (nonatomic, readonly, assign) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
 

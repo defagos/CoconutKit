@@ -6,6 +6,8 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
+#import "HLSAssert.h"
+
 /**
  * Lightweight view controller subclass adding useful stuff to UIViewController, and which should be always used as 
  * base class when creating view controller subclasses in projects using CoconutKit (provided you do not have to 
@@ -52,7 +54,7 @@
  * Instantiate a view controller, looking for a nib bearing the same name as the class in the given bundle. If the
  * specified bundle is nil, lookup is performed in the main bundle
  */
-- (id)initWithBundle:(NSBundle *)bundle;
+- (id)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
 
 /**
  * Override this method in your subclass and release all views retained by the view controller in its implementation. This method 
@@ -65,7 +67,7 @@
  *   - in -dealloc: Release all other resources owned by the view controller (model objects, other view controllers, views
  *     existing before the view is loaded, etc.)
  */
-- (void)releaseViews;
+- (void)releaseViews NS_REQUIRES_SUPER;
 
 /**
  * In your subclass, use this method to collect your localization code. You must not call this method directly, it is automatically
@@ -80,7 +82,7 @@
  * You do not need to bind outlets just for the purpose of label or button localization in nib files. Refer to UILabel+HLSDynamicLocalization
  * for more information
  */
-- (void)localize;
+- (void)localize NS_REQUIRES_SUPER;
 
 /**
  * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set whether the view controller should
@@ -89,7 +91,7 @@
  * Do not override -shouldAutorotateToInterfaceOrientation: when subclassing HLSViewController, otherwise the behavior 
  * is undefined
  */
-- (BOOL)shouldAutorotate;
+- (BOOL)shouldAutorotate NS_REQUIRES_SUPER;
 
 /**
  * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set the orientations which a view
@@ -98,6 +100,23 @@
  * Do not override -shouldAutorotateToInterfaceOrientation: when subclassing HLSViewController, otherwise the behavior
  * is undefined
  */
-- (NSUInteger)supportedInterfaceOrientations;
+- (NSUInteger)supportedInterfaceOrientations NS_REQUIRES_SUPER;
+
+@end
+
+@interface HLSViewController (HLSRequiresSuper)
+
+- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+- (id)initWithCoder:(NSCoder *)aDecoder NS_REQUIRES_SUPER;
+- (void)viewDidLoad NS_REQUIRES_SUPER;
+- (void)viewWillAppear:(BOOL)animated NS_REQUIRES_SUPER;
+- (void)viewDidAppear:(BOOL)animated NS_REQUIRES_SUPER;
+- (void)viewWillDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+- (void)viewDidDisappear:(BOOL)animated NS_REQUIRES_SUPER;
+- (void)viewWillUnload NS_REQUIRES_SUPER;
+- (void)viewDidUnload NS_REQUIRES_SUPER;
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration NS_REQUIRES_SUPER;
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation NS_REQUIRES_SUPER;
+- (void)didReceiveMemoryWarning NS_REQUIRES_SUPER;
 
 @end
