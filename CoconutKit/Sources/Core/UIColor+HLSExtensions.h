@@ -11,7 +11,7 @@
 /**
  * Create a color from non-normalized RGB components (i.e. from 0 to 255)
  */
-+ (UIColor *)colorWithNonNormalizedeRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
++ (UIColor *)colorWithNonNormalizedRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
 
 /**
  * Return a random color

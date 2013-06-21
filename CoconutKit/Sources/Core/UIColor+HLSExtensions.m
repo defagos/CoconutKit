@@ -18,7 +18,7 @@
 
 #pragma mark Class methods
 
-+ (UIColor *)colorWithNonNormalizedeRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha
++ (UIColor *)colorWithNonNormalizedRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha
 {
     if (red > 255) {
         HLSLoggerWarn(@"Incorrect R component, larger than 255. Fixed to 255");
