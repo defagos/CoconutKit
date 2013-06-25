@@ -11,7 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "HLSViewObjectBindingContext.h"
-#import "UIView+HLSExtensions2.h"
+#import "UIView+HLSExtensions.h"
 
 // TODO: Rename ViewBindings -> ViewBinding
 

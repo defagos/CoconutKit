@@ -13,6 +13,16 @@
 @interface UIView (HLSExtensions)
 
 /**
+ * Return the view controller from which the receiver is the view, nil otherwise
+ */
+@property (nonatomic, readonly, weak) UIViewController *viewController;
+
+/**
+ * Return the nearest view controller which displays the view, nil if none
+ */
+@property (nonatomic, readonly, weak) UIViewController *nearestViewController;
+
+/**
  * Use this property if you want to tag your view with a string instead of an integer
  */
 @property (nonatomic, retain) NSString *tag_hls;

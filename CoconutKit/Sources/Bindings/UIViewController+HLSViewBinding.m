@@ -10,7 +10,7 @@
 
 #import "HLSRuntime.h"
 #import "UIView+HLSViewBinding.h"
-#import "UIView+HLSExtensions2.h"
+#import "UIView+HLSExtensions.h"
 
 // Keys for associated objects
 static void *s_boundObjectKey = &s_boundObjectKey;
