@@ -96,7 +96,10 @@
         [self cancelConnection];
     }
     
-    for (HLSConnection *childConnection in self.childConnections) {
+    // Connections are removed from the array when terminated. We must avoid iterating the collection while this
+    // might happen
+    NSArray *childConnections = [NSArray arrayWithArray:self.childConnections];
+    for (HLSConnection *childConnection in childConnections) {
         [childConnection cancel];
     }
 }
