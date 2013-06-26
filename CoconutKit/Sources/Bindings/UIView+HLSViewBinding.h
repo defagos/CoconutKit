@@ -43,9 +43,4 @@
 - (void)bindToObject:(id)object;
 - (void)unbind;
 
-// TODO: Move to a private which can be accessed from implementation files, but not from outside the framework
-- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController;
-- (void)refreshBindingsInViewController:(UIViewController *)viewController;
-- (void)updateText;
-
 @end

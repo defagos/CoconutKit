@@ -10,10 +10,9 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "HLSViewObjectBindingContext.h"
+#import "HLSViewBindingInformation.h"
 #import "UIView+HLSExtensions.h"
-
-// TODO: Rename ViewBindings -> ViewBinding
+#import "UIView+HLSViewBindingFriend.h"
 
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
@@ -34,8 +33,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) NSString *bindKeyPath;
 @property (nonatomic, strong) NSString *bindFormatter;
 
-// Once we have found which object provides the value, store it for further efficient use
-@property (nonatomic, strong) HLSViewObjectBindingContext *bindingContext;
+@property (nonatomic, strong) HLSViewBindingInformation *bindingContext;
+
+- (BOOL)bindsRecursively;
 
 @end
 
@@ -57,76 +57,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     [self bindToObject:object inViewController:[self nearestViewController]];
 }
 
-- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController
-{
-    if (! object) {
-        HLSLoggerError(@"An object must be provided");
-        return;
-    }
-    
-    // Stop at view controller boundaries. Also work when viewController = nil
-    if (self.viewController && self.viewController != viewController) {
-        return;
-    }
-    
-    if (self.bindKeyPath) {
-        if ([self respondsToSelector:@selector(updateViewWithText:)]) {
-            self.bindingContext = [[HLSViewObjectBindingContext alloc] initWithObject:object
-                                                                              keyPath:self.bindKeyPath
-                                                                        formatterName:self.bindFormatter
-                                                                                 view:self];
-            [self updateText];
-        }
-        else {
-            HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
-        }
-    }
-    
-    if ([self bindsRecursively]) {
-        for (UIView *subview in self.subviews) {
-            [subview bindToObject:object inViewController:viewController];
-        }
-    }
-}
-
-- (BOOL)bindsRecursively
-{
-    if ([self respondsToSelector:@selector(updatesSubviewsRecursively)]) {
-        return [self updatesSubviewsRecursively];
-    }
-    else {
-        return YES;
-    }
-}
-
 - (void)unbind
 {
     // TODO:
-}
-
-- (void)refreshBindingsInViewController:(UIViewController *)viewController
-{
-    if (self.viewController && self.viewController != viewController) {
-        return;
-    }
-    
-    [self updateText];
-    
-    if ([self bindsRecursively]) {
-        for (UIView *subview in self.subviews) {
-            [subview refreshBindingsInViewController:viewController];
-        }
-    }
-}
-
-- (void)updateText
-{
-    if (! self.bindingContext) {
-        return;
-    }
-    
-    NSString *text = [self.bindingContext text];
-    [self updateViewWithText:text];
 }
 
 @end
@@ -165,6 +98,81 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     objc_setAssociatedObject(self, s_bindingContextKey, bindingContext, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+#pragma mark Bindings
+
+- (BOOL)bindsRecursively
+{
+    if ([self respondsToSelector:@selector(updatesSubviewsRecursively)]) {
+        return [self updatesSubviewsRecursively];
+    }
+    else {
+        return YES;
+    }
+}
+
+@end
+
+@implementation UIView (HLSViewBindingFriend)
+
+#pragma mark Bindings
+
+- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController
+{
+    if (! object) {
+        HLSLoggerError(@"An object must be provided");
+        return;
+    }
+    
+    // Stop at view controller boundaries. Deals correclty with viewController = nil
+    if (self.viewController && self.viewController != viewController) {
+        return;
+    }
+    
+    if (self.bindKeyPath) {
+        if ([self respondsToSelector:@selector(updateViewWithText:)]) {
+            self.bindingContext = [[HLSViewBindingInformation alloc] initWithObject:object
+                                                                            keyPath:self.bindKeyPath
+                                                                      formatterName:self.bindFormatter
+                                                                               view:self];
+            [self updateText];
+        }
+        else {
+            HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
+        }
+    }
+    
+    if ([self bindsRecursively]) {
+        for (UIView *subview in self.subviews) {
+            [subview bindToObject:object inViewController:viewController];
+        }
+    }
+}
+
+- (void)refreshBindingsInViewController:(UIViewController *)viewController
+{
+    if (self.viewController && self.viewController != viewController) {
+        return;
+    }
+    
+    [self updateText];
+    
+    if ([self bindsRecursively]) {
+        for (UIView *subview in self.subviews) {
+            [subview refreshBindingsInViewController:viewController];
+        }
+    }
+}
+
+- (void)updateText
+{
+    if (! self.bindingContext) {
+        return;
+    }
+    
+    NSString *text = [self.bindingContext text];
+    [self updateViewWithText:text];
+}
+
 @end
 
 #pragma mark Swizzled method implementations
@@ -183,7 +191,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
             return;
         }
         
-        self.bindingContext = [[HLSViewObjectBindingContext alloc] initWithObject:nil keyPath:self.bindKeyPath formatterName:self.bindFormatter view:self];
+        self.bindingContext = [[HLSViewBindingInformation alloc] initWithObject:nil keyPath:self.bindKeyPath formatterName:self.bindFormatter view:self];
         [self updateText];
     }
 }

@@ -9,8 +9,9 @@
 #import "UIViewController+HLSViewBinding.h"
 
 #import "HLSRuntime.h"
-#import "UIView+HLSViewBinding.h"
 #import "UIView+HLSExtensions.h"
+#import "UIView+HLSViewBinding.h"
+#import "UIView+HLSViewBindingFriend.h"
 
 // Keys for associated objects
 static void *s_boundObjectKey = &s_boundObjectKey;

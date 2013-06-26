@@ -1,23 +1,22 @@
 //
-//  HLSViewObjectBindingContext.m
+//  HLSViewBindingInformation.m
 //  mBanking
 //
 //  Created by Samuel Défago on 18.06.13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "HLSViewObjectBindingContext.h"
+#import "HLSViewBindingInformation.h"
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
-// TODO: Replace with private header
-#import "UIView+HLSViewBinding.h"
+#import "UIView+HLSViewBindingFriend.h"
 
 #import <objc/runtime.h>
 
-@interface HLSViewObjectBindingContext ()
+@interface HLSViewBindingInformation ()
 
 @property (nonatomic, strong) id object;
 @property (nonatomic, strong) NSString *keyPath;
@@ -31,7 +30,7 @@
 
 @end
 
-@implementation HLSViewObjectBindingContext
+@implementation HLSViewBindingInformation
 
 #pragma mark Object creation and destruction
 
@@ -54,7 +53,7 @@
             }
         }
         else {
-            object = [HLSViewObjectBindingContext bindingTargetForKeyPath:keyPath view:view];
+            object = [HLSViewBindingInformation bindingTargetForKeyPath:keyPath view:view];
             if (! object) {
                 HLSLoggerError(@"No responder was found for keypath %@", keyPath);
                 return nil;
@@ -178,7 +177,7 @@
         }
         
         // Look along the responder chain first (most specific)
-        formattingTarget = [HLSViewObjectBindingContext bindingTargetForSelector:formattingSelector view:self.view];
+        formattingTarget = [HLSViewBindingInformation bindingTargetForSelector:formattingSelector view:self.view];
         if (! formattingTarget) {
             // Look on the object itself (most generic)
             if (! [self.object respondsToSelector:formattingSelector]) {

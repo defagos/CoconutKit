@@ -36,6 +36,7 @@ UIControl+HLSExclusiveTouch.m
 UIFont+HLSExtensions.m
 UIImage+HLSExtensions.m
 UILabel+HLSDynamicLocalization.m
+UILabel+HLSViewBinding.m
 UINavigationBar+HLSExtensions.m
 UINavigationController+HLSActionSheet.m
 UINavigationController+HLSExtensions.m
@@ -48,6 +49,8 @@ UITextField+HLSValidation.m
 UITextView+HLSExtensions.m
 UIToolbar+HLSExtensions.m
 UIView+HLSExtensions.m
+UIView+HLSViewBinding.m
 UIView+HLSRuntimeAttributes.m
 UIViewController+HLSExtensions.m
+UIViewController+HLSViewBinding.m
 UIWebView+HLSExtensions.m
