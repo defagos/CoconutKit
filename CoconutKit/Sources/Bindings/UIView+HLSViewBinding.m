@@ -57,11 +57,6 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     [self bindToObject:object inViewController:[self nearestViewController]];
 }
 
-- (void)unbind
-{
-    // TODO:
-}
-
 @end
 
 @implementation UIView (HLSViewBindingPrivate)
@@ -123,7 +118,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    // Stop at view controller boundaries. Deals correclty with viewController = nil
+    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     if (self.viewController && self.viewController != viewController) {
         return;
     }
@@ -144,21 +139,6 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     if ([self bindsRecursively]) {
         for (UIView *subview in self.subviews) {
             [subview bindToObject:object inViewController:viewController];
-        }
-    }
-}
-
-- (void)refreshBindingsInViewController:(UIViewController *)viewController
-{
-    if (self.viewController && self.viewController != viewController) {
-        return;
-    }
-    
-    [self updateText];
-    
-    if ([self bindsRecursively]) {
-        for (UIView *subview in self.subviews) {
-            [subview refreshBindingsInViewController:viewController];
         }
     }
 }

@@ -13,7 +13,4 @@
 
 - (void)bindToObject:(id)object;
 
-// Manual refresh for non-KVO bound fields
-- (void)refreshBindings;
-
 @end

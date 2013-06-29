@@ -6,10 +6,6 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-// TOOD: Make this header private. Bindings must be defined at the controller level (where both view and model are
-//       involved). It is impossible to know where binding must start and stop in the view hierarchy: This follows
-//       from the view controller hierarchy
-
 // TODO: Create CoconutKit examples with all cases. Also with @min, @max, etc. keypath operators! Document!
 
 @protocol HLSViewBinding <NSObject>
@@ -41,6 +37,5 @@
  * are automatically reflected using KVO. Binds recursively (if enabled) and stops at view controller boundaries
  */
 - (void)bindToObject:(id)object;
-- (void)unbind;
 
 @end

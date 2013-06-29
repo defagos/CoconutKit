@@ -51,11 +51,6 @@ static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, S
     }
 }
 
-- (void)refreshBindings
-{
-    [self.view refreshBindingsInViewController:self];
-}
-
 @end
 
 @implementation UIViewController (HLSViewBindingPrivate)

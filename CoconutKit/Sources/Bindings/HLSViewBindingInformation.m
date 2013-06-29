@@ -23,7 +23,7 @@
 @property (nonatomic, strong) NSString *formatterName;
 @property (nonatomic, weak) UIView *view;                   // weak ref
 
-@property (nonatomic, weak) id formattingTarget;     // weak ref
+@property (nonatomic, weak) id formattingTarget;            // weak ref
 @property (nonatomic, assign) SEL formattingSelector;
 
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
