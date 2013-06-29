@@ -15,6 +15,7 @@
 "Autorotation"="Autorotation";
 "Baseline adjustment"="Ajustement de la ligne de base";
 "Baselines"="Lignes";
+"Bindings"="Bindings";
 "Birthdate"="Date de naissance";
 "Blocking"="Bloquant";
 "Bottom"="Bas";
@@ -77,6 +78,7 @@
 "Insertion index: %d"="Index d'insertion: %d";
 "Invalid email address"="Adresse e-mail invalide";
 "Label"="Libellé";
+"Labels"="Libellés";
 "Landscape left"="Paysage gauche";
 "Landscape only"="Uniquement paysage";
 "Landscape right"="Paysage droite";

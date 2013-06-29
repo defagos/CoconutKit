@@ -15,6 +15,7 @@
 "Apples & Coconut"="Apples & Coconut";
 "Baseline adjustment"="Baseline adjustment";
 "Baselines"="Baselines";
+"Bindings"="Bindings";
 "Birthdate"="Birthdate";
 "Blocking"="Blocking";
 "Bottom"="Bottom";
@@ -77,6 +78,7 @@
 "Insertion index: %d"="Insertion index: %d";
 "Invalid email address"="Invalid email address";
 "Label"="Label";
+"Labels"="Labels";
 "Label with some missing translation"="Label with some missing translation";
 "Landscape left"="Landscape left";
 "Landscape only"="Landscape only";

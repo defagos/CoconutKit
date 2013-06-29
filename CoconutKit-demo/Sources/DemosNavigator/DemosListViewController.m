@@ -17,6 +17,7 @@
 #import "FontsDemoViewController.h"
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
 #import "LabelDemoViewController.h"
+#import "LabelBindingsDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
@@ -36,6 +37,7 @@
 typedef enum {
     DemoCategoryIndexEnumBegin = 0,
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
+    DemoCategoryIndexBindings,
     DemoCategoryIndexCore,
     DemoCategoryIndexNetworking,
     DemoCategoryIndexTask,
@@ -53,6 +55,14 @@ typedef enum {
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 } AnimationDemoIndex;
+
+// Demos for bindings
+typedef enum {
+    BindingsDemoIndexEnumBegin = 0,
+    BindingsDemoIndexLabels = BindingsDemoIndexEnumBegin,
+    BindingsDemoIndexEnumEnd,
+    BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
+} BindingsDemoIndex;
 
 // Demos for core
 typedef enum {
@@ -174,6 +184,11 @@ typedef enum {
             break;
         }
             
+        case DemoCategoryIndexBindings: {
+            return NSLocalizedString(@"Bindings", nil);
+            break;
+        }
+            
         case DemoCategoryIndexCore: {
             return NSLocalizedString(@"Core", nil);
             break;
@@ -211,6 +226,11 @@ typedef enum {
     switch (section) {
         case DemoCategoryIndexAnimation: {
             return AnimationDemoIndexEnumSize;
+            break;
+        }
+            
+        case DemoCategoryIndexBindings: {
+            return BindingsDemoIndexEnumSize;
             break;
         }
             
@@ -267,6 +287,21 @@ typedef enum {
                     return nil;
                     break;
                 }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexBindings: {
+            switch (indexPath.row) {
+                case BindingsDemoIndexLabels: {
+                    cell.textLabel.text = NSLocalizedString(@"Labels", nil);
+                    break;
+                }
+                    
+                default: {
+                    return nil;
+                    break;
+                }
             }
             break;
         }
@@ -482,6 +517,21 @@ typedef enum {
                 }            
             }
             break;
+        }
+            
+        case DemoCategoryIndexBindings: {
+            switch (indexPath.row) {
+                case BindingsDemoIndexLabels: {
+                    demoViewController = [[[LabelBindingsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }
+            }
+            break;        
         }
             
         case DemoCategoryIndexCore: {
