@@ -8,6 +8,13 @@
 
 #import "LabelBindingsDemoViewController.h"
 
+#import "DemoFormatter.h"
+
 @implementation LabelBindingsDemoViewController
+
+- (NSString *)currentDate
+{
+    return [DemoFormatter stringFromDate:[NSDate date]];
+}
 
 @end
