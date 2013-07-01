@@ -20,7 +20,7 @@
         NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
         NSString *coconutKitBundlePath = [[NSBundle coconutKitBundle] bundlePath];
         if ([coconutKitBundlePath hasPrefix:mainBundlePath]) {
-            s_relativeBundlePath = [coconutKitBundlePath stringByReplacingCharactersInRange:NSMakeRange(0, [mainBundlePath length] + 1) withString:@""];
+            s_relativeBundlePath = [[coconutKitBundlePath stringByReplacingCharactersInRange:NSMakeRange(0, [mainBundlePath length] + 1) withString:@""] retain];
         }
     });
     
