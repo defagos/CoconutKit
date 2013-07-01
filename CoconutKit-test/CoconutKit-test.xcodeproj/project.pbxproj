@@ -38,7 +38,6 @@
 		6F33351813FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */; };
 		6F33351913FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */; };
 		6F3B060C14BC4C2D0026F512 /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B060B14BC4C2D0026F512 /* HLSValidatorsTestCase.m */; };
-		6F3B063E14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063D14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064214BC7D300026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064114BC7D300026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3D1D90179572400056FF4E /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D8F179572400056FF4E /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F3E3E8C15A227A7007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */; };
@@ -130,7 +129,6 @@
 		6FADE7C414BA04B6007EE121 /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE76E14BA04B6007EE121 /* HLSTableViewCell.m */; };
 		6FADE7C814BA04B7007EE121 /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77614BA04B6007EE121 /* HLSValue1TableViewCell.m */; };
 		6FADE7C914BA04B7007EE121 /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77814BA04B6007EE121 /* HLSValue2TableViewCell.m */; };
-		6FADE7CA14BA04B7007EE121 /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77A14BA04B6007EE121 /* UINavigationBar+HLSExtensions.m */; };
 		6FADE7CB14BA04B7007EE121 /* UITextField+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77C14BA04B6007EE121 /* UITextField+HLSValidation.m */; };
 		6FADE7CC14BA04B7007EE121 /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77E14BA04B6007EE121 /* UIView+HLSExtensions.m */; };
 		6FADE7CE14BA04B7007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE78214BA04B6007EE121 /* HLSContainerContent.m */; };
@@ -246,8 +244,6 @@
 		6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F3B060A14BC4C2D0026F512 /* HLSValidatorsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidatorsTestCase.h; sourceTree = "<group>"; };
 		6F3B060B14BC4C2D0026F512 /* HLSValidatorsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidatorsTestCase.m; sourceTree = "<group>"; };
-		6F3B063C14BC7BBB0026F512 /* UIToolbar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+HLSExtensions.h"; sourceTree = "<group>"; };
-		6F3B063D14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064014BC7D300026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064114BC7D300026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3D1D8E179572400056FF4E /* HLSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextView.h; sourceTree = "<group>"; };
@@ -437,8 +433,6 @@
 		6FADE77614BA04B6007EE121 /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
 		6FADE77714BA04B6007EE121 /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
 		6FADE77814BA04B6007EE121 /* HLSValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue2TableViewCell.m; sourceTree = "<group>"; };
-		6FADE77914BA04B6007EE121 /* UINavigationBar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+HLSExtensions.h"; sourceTree = "<group>"; };
-		6FADE77A14BA04B6007EE121 /* UINavigationBar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE77B14BA04B6007EE121 /* UITextField+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSValidation.h"; sourceTree = "<group>"; };
 		6FADE77C14BA04B6007EE121 /* UITextField+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSValidation.m"; sourceTree = "<group>"; };
 		6FADE77D14BA04B6007EE121 /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -978,8 +972,6 @@
 				6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */,
 				6FADE9F314BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.h */,
 				6FADE9F414BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m */,
-				6FADE77914BA04B6007EE121 /* UINavigationBar+HLSExtensions.h */,
-				6FADE77A14BA04B6007EE121 /* UINavigationBar+HLSExtensions.m */,
 				6F948C2E14D6E844003BF765 /* UINavigationController+HLSActionSheet.h */,
 				6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */,
 				6FEEF86614F297F7001585A6 /* UIScrollView+HLSExtensions.h */,
@@ -990,8 +982,6 @@
 				6FADE77C14BA04B6007EE121 /* UITextField+HLSValidation.m */,
 				6FDDEC231529782500CED462 /* UITextView+HLSExtensions.h */,
 				6FDDEC241529782500CED462 /* UITextView+HLSExtensions.m */,
-				6F3B063C14BC7BBB0026F512 /* UIToolbar+HLSExtensions.h */,
-				6F3B063D14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m */,
 				6FADE77D14BA04B6007EE121 /* UIView+HLSExtensions.h */,
 				6FADE77E14BA04B6007EE121 /* UIView+HLSExtensions.m */,
 				6F66181616C14B5E00303628 /* UIView+HLSRuntimeAttributes.h */,
@@ -1254,7 +1244,6 @@
 				6FADE7C414BA04B6007EE121 /* HLSTableViewCell.m in Sources */,
 				6FADE7C814BA04B7007EE121 /* HLSValue1TableViewCell.m in Sources */,
 				6FADE7C914BA04B7007EE121 /* HLSValue2TableViewCell.m in Sources */,
-				6FADE7CA14BA04B7007EE121 /* UINavigationBar+HLSExtensions.m in Sources */,
 				6FADE7CB14BA04B7007EE121 /* UITextField+HLSValidation.m in Sources */,
 				6FADE7CC14BA04B7007EE121 /* UIView+HLSExtensions.m in Sources */,
 				6FADE7CE14BA04B7007EE121 /* HLSContainerContent.m in Sources */,
@@ -1266,7 +1255,6 @@
 				6FADE7D614BA04B7007EE121 /* HLSWizardViewController.m in Sources */,
 				6FADE9F514BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
 				6F3B060C14BC4C2D0026F512 /* HLSValidatorsTestCase.m in Sources */,
-				6F3B063E14BC7BBB0026F512 /* UIToolbar+HLSExtensions.m in Sources */,
 				6F3B064214BC7D300026F512 /* UIWebView+HLSExtensions.m in Sources */,
 				6FDE694D14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m in Sources */,
 				6F91452A14CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */,
