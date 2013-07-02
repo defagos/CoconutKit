@@ -63,7 +63,7 @@ typedef enum {
         // To be able to test modal presentation contexts, we here make the stack controller display those modal view controllers
         // with the UIModalPresentationCurrentContext presentation style. The definesPresentationContext property is only available
         // since iOS 5
-        if ([stackController respondsToSelector:@selector(definesPresentationContext)]) {
+        if ([stackController respondsToSelector:@selector(setDefinesPresentationContext:)]) {
             stackController.definesPresentationContext = YES;
         }
         

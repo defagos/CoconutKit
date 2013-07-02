@@ -47,6 +47,13 @@ typedef enum {
 - (id)init
 {
     if ((self = [super init])) {
+        // To be able to test modal presentation contexts, we here make the placeholder view controller display those modal view controllers
+        // with the UIModalPresentationCurrentContext presentation style. The definesPresentationContext property is only available
+        // since iOS 5
+        if ([self respondsToSelector:@selector(setDefinesPresentationContext:)]) {
+            self.definesPresentationContext = YES;
+        }
+        
         // Preload view controllers before display. Yep, this is possible (not all placeholders have to be preloaded)!
         LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
         [self setInsetViewController:lifeCycleTestViewController atIndex:0];
