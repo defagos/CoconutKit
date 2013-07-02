@@ -43,6 +43,7 @@
     // Wrapping the text field background view into a scroll view allows us to test that the behavior stays correct
     // in all cases
     self.scrollView.contentSize = self.backgroundView.frame.size;
+    [self.scrollView addSubview:self.backgroundView];
     
     self.textField1.delegate = self;
     self.textField2.delegate = self;
