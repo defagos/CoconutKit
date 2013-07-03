@@ -9,7 +9,6 @@
 #import "HLSTextField.h"
 
 #import "HLSFloat.h"
-#import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
 #import "HLSTextFieldTouchDetector.h"
 
@@ -127,7 +126,7 @@ const CGFloat kTextFieldMinVisibilityDistance = 20.f;           // Corresponds t
 
 @end
 
-__attribute__ ((constructor)) static void HLSTextFieldInitialization(void)
+__attribute__ ((constructor)) static void HLSTextFieldInit(void)
 {
     // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
     // willShow and didShow in sequence
