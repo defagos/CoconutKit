@@ -178,6 +178,10 @@ static NSArray *s_adjustedScrollViews = nil;
     NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:mainView];
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:keyboardAnimationDuration];
     
     // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
     // screen)
@@ -196,6 +200,8 @@ static NSArray *s_adjustedScrollViews = nil;
         [adjustedScrollViews addObject:scrollView];
     }
     s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
+    
+    [UIView commitAnimations];
 }
 
 + (void)keyboardDidShow:(NSNotification *)notification
