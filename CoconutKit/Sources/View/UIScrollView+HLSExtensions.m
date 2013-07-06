@@ -36,6 +36,7 @@ static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
 static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
 
 static NSArray *s_adjustedScrollViews = nil;
+static NSArray *s_keyboardHeightAdjustments = nil;
 
 @interface UIScrollView (HLSExtensionsPrivate)
 
@@ -180,43 +181,64 @@ static NSArray *s_adjustedScrollViews = nil;
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
+    NSMutableArray *adjustedScrollViews = [NSMutableArray array];
+    NSMutableArray *keyboardHeightAdjustments = [NSMutableArray array];
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:keyboardAnimationDuration];
     
     // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
     // screen)
-    NSMutableArray *adjustedScrollViews = [NSMutableArray array];
     for (UIScrollView *scrollView in keyboardAvoidingScrollViews) {
         CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardEndFrameInWindow fromView:nil];
         if (! CGRectIntersectsRect(keyboardEndFrameInScrollView, scrollView.bounds)) {
             continue;
         }
         
+        // Find whether a meaningful adjustment is required (other cases, the keyboard either does not cover the scroll
+        // view, or covers it entirely)
+        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView);
+        if (floatle(keyboardHeightAdjustment, 0.f) || floatge(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame))) {
+            continue;
+        }
+        
         scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
                                       CGRectGetMinY(scrollView.frame),
                                       CGRectGetWidth(scrollView.frame),
-                                      CGRectGetMinY(keyboardEndFrameInScrollView));
+                                      CGRectGetHeight(scrollView.frame) - keyboardHeightAdjustment);
         
         [adjustedScrollViews addObject:scrollView];
+        [keyboardHeightAdjustments addObject:@(keyboardHeightAdjustment)];
     }
-    s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
     
     [UIView commitAnimations];
-}
-
-+ (void)keyboardDidShow:(NSNotification *)notification
-{
-    NSLog(@"Did show");
+    
+    s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
+    s_keyboardHeightAdjustments = [NSArray arrayWithArray:keyboardHeightAdjustments];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
-    NSLog(@"Will hide");
-}
-
-+ (void)keyboardDidHide:(NSNotification *)notification
-{
-    NSLog(@"Did hide");
+    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:keyboardAnimationDuration];
+    
+    NSUInteger i = 0;
+    for (UIScrollView *scrollView in s_adjustedScrollViews) {
+        CGFloat keyboardHeightAdjustment = [[s_keyboardHeightAdjustments objectAtIndex:i] floatValue];
+        
+        scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
+                                      CGRectGetMinY(scrollView.frame),
+                                      CGRectGetWidth(scrollView.frame),
+                                      CGRectGetHeight(scrollView.frame) + keyboardHeightAdjustment);
+        ++i;
+    }
+    
+    [UIView commitAnimations];
+    
+    s_adjustedScrollViews = nil;
+    s_keyboardHeightAdjustments = nil;
 }
 
 @end
@@ -232,16 +254,8 @@ __attribute__ ((constructor)) static void HLSTextFieldInit(void)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
-                                             selector:@selector(keyboardDidHide:)
-                                                 name:UIKeyboardDidHideNotification
                                                object:nil];
 }
 
