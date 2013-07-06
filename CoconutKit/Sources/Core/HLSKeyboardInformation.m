@@ -36,21 +36,10 @@ static HLSKeyboardInformation *s_instance = nil;
 - (id)initWithUserInfo:(NSDictionary *)userInfo
 {
     if ((self = [super init])) {
-        NSValue *beginFrameValue = [userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey];
-        CGRect beginFrame = CGRectZero;
-        [beginFrameValue getValue:&beginFrame];
-        self.beginFrame = beginFrame;
-        
-        NSValue *endFrameValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-        CGRect endFrame = CGRectZero;
-        [endFrameValue getValue:&endFrame];
-        self.endFrame = endFrame;
-        
-        NSNumber *animationDurationNumber = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-        self.animationDuration = [animationDurationNumber doubleValue];
-        
-        NSNumber *animationCurveNumber = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
-        self.animationCurve = [animationCurveNumber unsignedIntValue];
+        self.beginFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        self.endFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        self.animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        self.animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntValue];
     }
     return self;
 }
