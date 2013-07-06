@@ -173,19 +173,15 @@ static NSArray *s_keyboardHeightAdjustments = nil;
 
 #pragma mark Notification callbacks
 
-+ (void)keyboardWillShow:(NSNotification *)notification
++ (void)keyboardDidShow:(NSNotification *)notification
 {
     UIView *mainView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
     NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:mainView];
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     NSMutableArray *adjustedScrollViews = [NSMutableArray array];
     NSMutableArray *keyboardHeightAdjustments = [NSMutableArray array];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:keyboardAnimationDuration];
     
     // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
     // screen)
@@ -211,19 +207,12 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         [keyboardHeightAdjustments addObject:@(keyboardHeightAdjustment)];
     }
     
-    [UIView commitAnimations];
-    
     s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
     s_keyboardHeightAdjustments = [NSArray arrayWithArray:keyboardHeightAdjustments];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
-{
-    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:keyboardAnimationDuration];
-    
+{    
     NSUInteger i = 0;
     for (UIScrollView *scrollView in s_adjustedScrollViews) {
         CGFloat keyboardHeightAdjustment = [[s_keyboardHeightAdjustments objectAtIndex:i] floatValue];
@@ -234,8 +223,6 @@ static NSArray *s_keyboardHeightAdjustments = nil;
                                       CGRectGetHeight(scrollView.frame) + keyboardHeightAdjustment);
         ++i;
     }
-    
-    [UIView commitAnimations];
     
     s_adjustedScrollViews = nil;
     s_keyboardHeightAdjustments = nil;
@@ -250,8 +237,8 @@ __attribute__ ((constructor)) static void HLSTextFieldInit(void)
     // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
     // willShow and didShow in sequence
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
                                              selector:@selector(keyboardWillHide:)
