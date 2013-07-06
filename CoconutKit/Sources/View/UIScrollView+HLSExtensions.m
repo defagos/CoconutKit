@@ -35,6 +35,8 @@ static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
 // Swizzled method implementations
 static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
 
+static NSArray *s_adjustedScrollViews = nil;
+
 @interface UIScrollView (HLSExtensionsPrivate)
 
 - (void)synchronizeScrolling;
@@ -147,11 +149,34 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     }
 }
 
+#pragma mark Collecting scroll views which must be adjusted
+
++ (NSArray *)adjustedScrollViewsInView:(UIView *)view
+{
+    if ([view isKindOfClass:[UIScrollView class]]) {
+        UIScrollView *scrollView = (UIScrollView *)view;
+        
+        // Do not go further when we have found a scroll view which avoids the keyboard. Any scroll view within
+        // it with the same property does not need to be adjusted
+        if (scrollView.avoidingKeyboard) {
+            return @[scrollView];
+        }
+    }
+    
+    NSMutableArray *adjustedScrollViews = [NSMutableArray array];
+    for (UIView *subview in view.subviews) {
+        [adjustedScrollViews addObjectsFromArray:[self adjustedScrollViewsInView:subview]];
+    }
+    return [NSArray arrayWithArray:adjustedScrollViews];
+}
+
 #pragma mark Notification callbacks
 
 + (void)keyboardWillShow:(NSNotification *)notification
 {
-    NSLog(@"Will show");
+    UIView *mainView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+    s_adjustedScrollViews = [UIScrollView adjustedScrollViewsInView:mainView];
+    
 }
 
 + (void)keyboardDidShow:(NSNotification *)notification
