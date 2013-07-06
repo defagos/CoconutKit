@@ -149,9 +149,9 @@ static NSArray *s_adjustedScrollViews = nil;
     }
 }
 
-#pragma mark Collecting scroll views which must be adjusted
+#pragma mark Collecting scroll views which avoid the keyboard
 
-+ (NSArray *)adjustedScrollViewsInView:(UIView *)view
++ (NSArray *)keyboardAvoidingScrollViewsInView:(UIView *)view
 {
     if ([view isKindOfClass:[UIScrollView class]]) {
         UIScrollView *scrollView = (UIScrollView *)view;
@@ -163,11 +163,11 @@ static NSArray *s_adjustedScrollViews = nil;
         }
     }
     
-    NSMutableArray *adjustedScrollViews = [NSMutableArray array];
+    NSMutableArray *keyboardAvoidingScrollViews = [NSMutableArray array];
     for (UIView *subview in view.subviews) {
-        [adjustedScrollViews addObjectsFromArray:[self adjustedScrollViewsInView:subview]];
+        [keyboardAvoidingScrollViews addObjectsFromArray:[self keyboardAvoidingScrollViewsInView:subview]];
     }
-    return [NSArray arrayWithArray:adjustedScrollViews];
+    return [NSArray arrayWithArray:keyboardAvoidingScrollViews];
 }
 
 #pragma mark Notification callbacks
@@ -175,8 +175,27 @@ static NSArray *s_adjustedScrollViews = nil;
 + (void)keyboardWillShow:(NSNotification *)notification
 {
     UIView *mainView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
-    s_adjustedScrollViews = [UIScrollView adjustedScrollViewsInView:mainView];
+    NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:mainView];
     
+    CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
+    // screen)
+    NSMutableArray *adjustedScrollViews = [NSMutableArray array];
+    for (UIScrollView *scrollView in keyboardAvoidingScrollViews) {
+        CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardEndFrameInWindow fromView:nil];
+        if (! CGRectIntersectsRect(keyboardEndFrameInScrollView, scrollView.bounds)) {
+            continue;
+        }
+        
+        scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
+                                      CGRectGetMinY(scrollView.frame),
+                                      CGRectGetWidth(scrollView.frame),
+                                      CGRectGetMinY(keyboardEndFrameInScrollView));
+        
+        [adjustedScrollViews addObject:scrollView];
+    }
+    s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
 }
 
 + (void)keyboardDidShow:(NSNotification *)notification
