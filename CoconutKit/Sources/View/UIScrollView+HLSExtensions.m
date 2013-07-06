@@ -43,6 +43,18 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
 
 @implementation UIScrollView (HLSExtensions)
 
+#pragma mark Accessors and mutators
+
+- (BOOL)isAvoidingKeyboard
+{
+    return objc_getAssociatedObject(self, s_avoidingKeyboardKey);
+}
+
+- (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
+{
+    objc_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 #pragma mark Synchronizing scroll views
 
 - (void)synchronizeWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces
@@ -80,18 +92,6 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector(self, 
                                                                                           @selector(setContentOffset:), 
                                                                                           (IMP)swizzled_UIScrollView__setContentOffset_Imp);
-}
-
-#pragma mark Accessors and mutators
-
-- (BOOL)isAvoidingKeyboard
-{
-    return objc_getAssociatedObject(self, s_avoidingKeyboardKey);
-}
-
-- (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
-{
-    objc_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Scrolling synchronization
@@ -147,7 +147,53 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     }
 }
 
+#pragma mark Notification callbacks
+
++ (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSLog(@"Will show");
+}
+
++ (void)keyboardDidShow:(NSNotification *)notification
+{
+    NSLog(@"Did show");
+}
+
++ (void)keyboardWillHide:(NSNotification *)notification
+{
+    NSLog(@"Will hide");
+}
+
++ (void)keyboardDidHide:(NSNotification *)notification
+{
+    NSLog(@"Did hide");
+}
+
 @end
+
+#pragma mark Global notification registration
+
+__attribute__ ((constructor)) static void HLSTextFieldInit(void)
+{
+    // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
+    // willShow and didShow in sequence
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+}
 
 #pragma mark Swizzled method implementations
 
