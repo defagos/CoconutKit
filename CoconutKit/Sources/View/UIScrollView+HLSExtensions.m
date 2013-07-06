@@ -27,6 +27,7 @@
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
+static void *s_avoidingKeyboardKey = &s_avoidingKeyboardKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
@@ -79,6 +80,18 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector(self, 
                                                                                           @selector(setContentOffset:), 
                                                                                           (IMP)swizzled_UIScrollView__setContentOffset_Imp);
+}
+
+#pragma mark Accessors and mutators
+
+- (BOOL)isAvoidingKeyboard
+{
+    return objc_getAssociatedObject(self, s_avoidingKeyboardKey);
+}
+
+- (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
+{
+    objc_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Scrolling synchronization
