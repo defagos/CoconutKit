@@ -9,6 +9,7 @@
 #import "UIResponder+HLSExtensions.h"
 
 #import "HLSRuntime.h"
+#import "UIScrollView+HLSExtensions.h"
 
 // Original implementation of the methods we swizzle
 static BOOL (*s_UIResponder_becomeFirstResponder)(id, SEL) = NULL;
@@ -34,7 +35,32 @@ static BOOL swizzled_UIResponder__resignFirstResponder_Imp(UIResponder *self, SE
 
 static BOOL swizzled_UIResponder__becomeFirstResponder_Imp(UIResponder *self, SEL _cmd)
 {
-    return (*s_UIResponder_becomeFirstResponder)(self, _cmd);
+    BOOL result = (*s_UIResponder_becomeFirstResponder)(self, _cmd);
+    
+    if (! [self isKindOfClass:[UIView class]]) {
+        return result;
+    }
+    UIView *view = (UIView *)self;
+    
+    UIView *topParentAvoidingKeyboardingScrollView = nil;
+    UIView *parentView = view.superview;
+    while (parentView) {
+        if ([parentView isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *scrollParentView = (UIScrollView *)parentView;
+            if (scrollParentView.avoidingKeyboard) {
+                topParentAvoidingKeyboardingScrollView = scrollParentView;
+            }
+        }
+        parentView = parentView.superview;
+    }
+    
+    if (! topParentAvoidingKeyboardingScrollView) {
+        return result;
+    }
+    
+    // TODO: Scroll to make visible
+    
+    return result;
 }
 
 static BOOL swizzled_UIResponder__resignFirstResponder_Imp(UIResponder *self, SEL _cmd)
