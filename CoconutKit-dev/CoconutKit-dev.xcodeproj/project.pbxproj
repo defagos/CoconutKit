@@ -38,8 +38,6 @@
 		6F00014B156BD17F0055CED7 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */; };
 		6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */; };
 		6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6F000132156BD17F0055CED7 /* skyscraper.jpg */; };
-		6F02A4791789AAE7007B1267 /* UIResponder+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02A4781789AAE7007B1267 /* UIResponder+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6F02A47A1789AAE7007B1267 /* UIResponder+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02A4781789AAE7007B1267 /* UIResponder+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F0BFE21163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE17163EF00B00420A5F /* RootNavigationDemoViewController.m */; };
 		6F0BFE22163EF00B00420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE17163EF00B00420A5F /* RootNavigationDemoViewController.m */; };
 		6F0BFE23163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE18163EF00B00420A5F /* RootNavigationDemoViewController.xib */; };
@@ -584,8 +582,6 @@
 		6F000130156BD17F0055CED7 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6F000131156BD17F0055CED7 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
 		6F000132156BD17F0055CED7 /* skyscraper.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = skyscraper.jpg; sourceTree = "<group>"; };
-		6F02A4771789AAE7007B1267 /* UIResponder+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+HLSExtensions.h"; sourceTree = "<group>"; };
-		6F02A4781789AAE7007B1267 /* UIResponder+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F0BFE16163EF00B00420A5F /* RootNavigationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationDemoViewController.h; sourceTree = "<group>"; };
 		6F0BFE17163EF00B00420A5F /* RootNavigationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationDemoViewController.m; sourceTree = "<group>"; };
 		6F0BFE18163EF00B00420A5F /* RootNavigationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootNavigationDemoViewController.xib; sourceTree = "<group>"; };
@@ -1434,8 +1430,6 @@
 				6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */,
 				6FADE66614BA04A6007EE121 /* UIImage+HLSExtensions.h */,
 				6FADE66714BA04A6007EE121 /* UIImage+HLSExtensions.m */,
-				6F02A4771789AAE7007B1267 /* UIResponder+HLSExtensions.h */,
-				6F02A4781789AAE7007B1267 /* UIResponder+HLSExtensions.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2532,7 +2526,6 @@
 				6F255E571712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
 				6FC8EDB7176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */,
 				6FF74C78177D46B300BD846D /* HLSApplicationInformation.m in Sources */,
-				6F02A4791789AAE7007B1267 /* UIResponder+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2705,7 +2698,6 @@
 				6F255E581712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
 				6FC8EDB8176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */,
 				6FF74C79177D46B300BD846D /* HLSApplicationInformation.m in Sources */,
-				6F02A47A1789AAE7007B1267 /* UIResponder+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

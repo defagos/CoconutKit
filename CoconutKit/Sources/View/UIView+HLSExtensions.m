@@ -46,6 +46,22 @@ static void *s_userInfoKey = &s_userInfoKey;
     return [self.layer flattenedImage];
 }
 
+- (UIView *)firstResponderView
+{
+    if ([self isFirstResponder]) {
+        return self;
+    }
+    
+    for (UIView *subview in self.subviews) {
+        UIView *firstResponderSubview = [subview firstResponderView];
+        if (firstResponderSubview) {
+            return firstResponderSubview;
+        }
+    }
+    
+    return nil;
+}
+
 #pragma mark View fading
 
 - (void)fadeLeft:(CGFloat)left right:(CGFloat)right

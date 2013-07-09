@@ -12,6 +12,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "UIView+HLSExtensions.h"
 #import <objc/runtime.h>
 
 /**
@@ -205,6 +206,12 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         
         [adjustedScrollViews addObject:scrollView];
         [keyboardHeightAdjustments addObject:@(keyboardHeightAdjustment)];
+
+        
+        // TODO: Find first responder (if in one of these subviews) and if a UIView then scroll to make its frame fully visible
+        // (if possible)
+        UIView *firstResponderView = [scrollView firstResponderView];
+        NSLog(@"First responder view = %@, scroll view = %@", firstResponderView, scrollView);
     }
     
     s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];

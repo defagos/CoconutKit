@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6F000182156BF3320055CED7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F000181156BF3320055CED7 /* CoconutKit-resources.bundle */; };
-		6F02A47D1789AB10007B1267 /* UIResponder+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F02A47C1789AB10007B1267 /* UIResponder+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F0F4DE4159CB7C600277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DE3159CB7C600277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F22C74A16A859260081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C74916A859260081A9A7 /* UIFont+HLSExtensions.m */; };
 		6F22C75616A93DE60081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75516A93DE60081A9A7 /* CoreText.framework */; };
@@ -176,8 +175,6 @@
 /* Begin PBXFileReference section */
 		6F000181156BF3320055CED7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CoconutKit-resources.bundle"; path = "../CoconutKit/CoconutKit-resources.bundle"; sourceTree = "<group>"; };
 		6F000184156BF3520055CED7 /* CoconutKit-resources.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CoconutKit-resources.xcodeproj"; path = "../CoconutKit-resources/CoconutKit-resources.xcodeproj"; sourceTree = "<group>"; };
-		6F02A47B1789AB10007B1267 /* UIResponder+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+HLSExtensions.h"; sourceTree = "<group>"; };
-		6F02A47C1789AB10007B1267 /* UIResponder+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F0C7CFF163A7A6200C6C381 /* HLSAutorotationCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotationCompatibility.h; sourceTree = "<group>"; };
 		6F0F4DE2159CB7C600277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DE3159CB7C600277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
@@ -828,8 +825,6 @@
 				6F22C74916A859260081A9A7 /* UIFont+HLSExtensions.m */,
 				6FADE74514BA04B6007EE121 /* UIImage+HLSExtensions.h */,
 				6FADE74614BA04B6007EE121 /* UIImage+HLSExtensions.m */,
-				6F02A47B1789AB10007B1267 /* UIResponder+HLSExtensions.h */,
-				6F02A47C1789AB10007B1267 /* UIResponder+HLSExtensions.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1252,7 +1247,6 @@
 				6FC8EDBB176EC89E000B3BE7 /* NSNumber+HLSExtensions.m in Sources */,
 				6FC8EDBE176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.m in Sources */,
 				6FF74C7C177D46C800BD846D /* HLSApplicationInformation.m in Sources */,
-				6F02A47D1789AB10007B1267 /* UIResponder+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
