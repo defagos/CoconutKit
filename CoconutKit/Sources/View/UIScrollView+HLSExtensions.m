@@ -182,9 +182,15 @@ static NSArray *s_keyboardHeightAdjustments = nil;
     NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:mainView];
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     NSMutableArray *adjustedScrollViews = [NSMutableArray array];
     NSMutableArray *keyboardHeightAdjustments = [NSMutableArray array];
+    
+    // We manually animate content offset changes (this property is animatable, though not documented as such). The standard
+    // -setContentOffset:animated: method has a duration different from the one of the keyboard animation
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:keyboardAnimationDuration];
     
     // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
     // screen). Frames will be adjusted after the keyboard has been displayed for a perfect result, but we
@@ -217,9 +223,11 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         CGFloat responderYOffset = CGRectGetMaxY(firstResponderViewFrameInScrollView) + HLSMinimalYOffset
             - CGRectGetMaxY(scrollView.frame) + keyboardHeightAdjustment;
         if (floatgt(responderYOffset, 0.f)) {
-            [scrollView setContentOffset:CGPointMake(0.f, scrollView.contentOffset.y + responderYOffset) animated:YES];
+            scrollView.contentOffset = CGPointMake(0.f, scrollView.contentOffset.y + responderYOffset);
         }
     }
+    
+    [UIView commitAnimations];
     
     s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
     s_keyboardHeightAdjustments = [NSArray arrayWithArray:keyboardHeightAdjustments];
