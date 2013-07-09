@@ -25,6 +25,8 @@
  *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
  */
 
+static const CGFloat HLSMinimalYOffset = 20.f;
+
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
@@ -207,11 +209,21 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         [adjustedScrollViews addObject:scrollView];
         [keyboardHeightAdjustments addObject:@(keyboardHeightAdjustment)];
 
-        
-        // TODO: Find first responder (if in one of these subviews) and if a UIView then scroll to make its frame fully visible
-        // (if possible)
+        // Find if the first responder is contained within the scroll view
         UIView *firstResponderView = [scrollView firstResponderView];
-        NSLog(@"First responder view = %@, scroll view = %@", firstResponderView, scrollView);
+        if (! firstResponderView) {
+            continue;
+        }
+        
+        // If the first responder is not visible, change the offset to make it visible
+        // TODO: Call [UIView setAnimationsEnabled:NO] first to short-circuit a previous animation??
+        CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
+        CGFloat responderYOffset = CGRectGetMaxY(firstResponderViewFrameInScrollView) + HLSMinimalYOffset - CGRectGetMaxY(scrollView.frame);
+        if (floatgt(responderYOffset, 0.f)) {
+            [scrollView setContentOffset:CGPointMake(0.f, scrollView.contentOffset.y + responderYOffset) animated:YES];
+        }
+        
+        NSLog(@"First responder view = %@, scroll view = %@, frame in scroll view = %@", firstResponderView, scrollView, NSStringFromCGRect(firstResponderViewFrameInScrollView));
     }
     
     s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
