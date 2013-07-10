@@ -17,7 +17,20 @@
 static void *s_tagKey = &s_tagKey;
 static void *s_userInfoKey = &s_userInfoKey;
 
+// Original implementation of the methods we swizzle
+static BOOL (*s_UIView_becomeFirstResponder)(id, SEL) = NULL;
+
+// Swizzled method implementations
+static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
+
 @implementation UIView (HLSExtensions)
+
+#pragma mark Class methods
+
++ (void)load
+{
+    s_UIView_becomeFirstResponder = (BOOL (*)(id, SEL))HLSSwizzleSelector(self, @selector(becomeFirstResponder), (IMP)swizzled_UIView__becomeFirstResponder_Imp);
+}
 
 #pragma mark Accessors and mutators
 
@@ -108,3 +121,10 @@ static void *s_userInfoKey = &s_userInfoKey;
 }
 
 @end
+
+static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd)
+{
+    NSLog(@"---> Become first responder!");
+    return (*s_UIView_becomeFirstResponder)(self, _cmd);
+}
+
