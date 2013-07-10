@@ -25,6 +25,12 @@
  *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
  */
 
+// TODO: Must also avoid fields disappearing at the top. Keep min y-offset
+// TODO: Document: No content offset animation when disappearing. Maybe not possible to get right, and does
+//       not behave well with keyboard undocking (which has an animation duration, but should not)
+// TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
+//       might be VERY interesting!
+
 static const CGFloat HLSMinimalYOffset = 20.f;
 
 // Associated object keys

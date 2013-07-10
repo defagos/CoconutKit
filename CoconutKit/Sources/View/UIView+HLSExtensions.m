@@ -124,7 +124,13 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd)
 {
+    // TODO: Use keyboard information here, before call to original implementation (which triggers the keyboard). If
+    //       available, then the keyboard is already displayed, and we must only adjust the content offset in the
+    //       topmost scroll view
+    
     NSLog(@"---> Become first responder!");
+    
+    
     return (*s_UIView_becomeFirstResponder)(self, _cmd);
 }
 
