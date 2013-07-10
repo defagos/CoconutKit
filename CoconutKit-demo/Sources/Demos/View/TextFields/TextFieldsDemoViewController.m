@@ -13,10 +13,7 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIView *backgroundView;
 
-@property (nonatomic, retain) IBOutlet HLSTextField *textField1;
-@property (nonatomic, retain) IBOutlet HLSTextField *textField2;
-@property (nonatomic, retain) IBOutlet HLSTextField *textField3;
-@property (nonatomic, retain) IBOutlet HLSTextField *textField4;
+@property (nonatomic, retain) IBOutletCollection(HLSTextField) NSArray *textFields;
 
 @end
 
@@ -28,10 +25,7 @@
 {
     [super releaseViews];
     
-    self.textField1 = nil;
-    self.textField2 = nil;
-    self.textField3 = nil;
-    self.textField4 = nil;
+    self.textFields = nil;
 }
 
 #pragma mark View lifecycle
@@ -42,23 +36,28 @@
     
     // Wrapping the text field background view into a scroll view allows us to test that the behavior stays correct
     // in all cases
-    self.scrollView.contentSize = self.backgroundView.frame.size;
     [self.scrollView addSubview:self.backgroundView];
     
-    self.textField1.delegate = self;
-    self.textField2.delegate = self;
-    self.textField3.delegate = self;
-    self.textField4.delegate = self;
+    for (HLSTextField *textField in self.textFields) {
+        textField.delegate = self;
+    }
     
-    self.textField2.resigningFirstResponderOnTap = NO;
+    HLSTextField *textField2 = [self.textFields objectAtIndex:1];
+    textField2.resigningFirstResponderOnTap = NO;
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
-    
+    NSUInteger index = [self.textFields indexOfObject:textField];
+    if (index < [self.textFields count] - 1) {
+        HLSTextField *nextTextField = [self.textFields objectAtIndex:index + 1];
+        [nextTextField becomeFirstResponder];
+    }
+    else {
+        [textField resignFirstResponder];
+    }
     return YES;
 }
 
