@@ -26,14 +26,9 @@
  *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
  */
 
-// TODO: Must also avoid fields disappearing at the top. Keep min y-offset
-// TODO: Document: No content offset animation when disappearing. Maybe not possible to get right, and does
-//       not behave well with keyboard undocking (which has an animation duration, but should not)
 // TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
 //       might be VERY interesting!
 // TODO: Test memory warning behavior
-// TODO: The rotation animation is ugly (play in slomo; horizontal resizing works but is ugly). Probably
-//       because of the contentOffset changes (no problem if commented out!)
 
 static const CGFloat HLSMinimalYOffset = 20.f;
 
@@ -210,22 +205,16 @@ static NSArray *s_keyboardHeightAdjustments = nil;
 
 #pragma mark Notification callbacks
 
-+ (void)keyboardWillShow:(NSNotification *)notification
++ (void)keyboardDidShow:(NSNotification *)notification
 {
     UIView *mainView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
     NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:mainView];
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     NSMutableArray *adjustedScrollViews = [NSMutableArray array];
     NSMutableArray *keyboardHeightAdjustments = [NSMutableArray array];
-    
-    // We manually animate content offset changes (this property is animatable, though not documented as such). The standard
-    // -setContentOffset:animated: method has a duration different from the one of the keyboard animation
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:keyboardAnimationDuration];
-    
+        
     // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
     // screen). Frames will be adjusted after the keyboard has been displayed for a perfect result, but we
     // need to trigger content offset animation earler (this is why we need to calculate adjustments earlier)
@@ -242,6 +231,11 @@ static NSArray *s_keyboardHeightAdjustments = nil;
             continue;
         }
         
+        scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
+                                      CGRectGetMinY(scrollView.frame),
+                                      CGRectGetWidth(scrollView.frame),
+                                      CGRectGetHeight(scrollView.frame) - keyboardHeightAdjustment);
+        
         [adjustedScrollViews addObject:scrollView];
         [keyboardHeightAdjustments addObject:@(keyboardHeightAdjustment)];
         
@@ -254,39 +248,18 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         // If the first responder is not visible, change the offset to make it visible
         CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
         CGFloat responderYOffset = CGRectGetMaxY(firstResponderViewFrameInScrollView) + HLSMinimalYOffset
-            - CGRectGetMaxY(scrollView.frame) + keyboardHeightAdjustment;
+            - CGRectGetMaxY(scrollView.frame);
         if (floatgt(responderYOffset, 0.f)) {
-            scrollView.contentOffset = CGPointMake(0.f, scrollView.contentOffset.y + responderYOffset);
+            [scrollView setContentOffset:CGPointMake(0.f, scrollView.contentOffset.y + responderYOffset) animated:YES];
         }
     }
-    
-    [UIView commitAnimations];
     
     s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
     s_keyboardHeightAdjustments = [NSArray arrayWithArray:keyboardHeightAdjustments];
 }
 
-+ (void)keyboardDidShow:(NSNotification *)notification
-{
-    // Now that the keyboard has been displayed, we can immediately adjust the scroll view frame
-    NSUInteger i = 0;
-    for (UIScrollView *scrollView in s_adjustedScrollViews) {
-        // Adjusting the scroll view frame moves the content offset. Save it and restore it immediately
-        CGPoint previousContentOffset = scrollView.contentOffset;
-        
-        CGFloat keyboardHeightAdjustment = [[s_keyboardHeightAdjustments objectAtIndex:i] floatValue];
-        scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
-                                      CGRectGetMinY(scrollView.frame),
-                                      CGRectGetWidth(scrollView.frame),
-                                      CGRectGetHeight(scrollView.frame) - keyboardHeightAdjustment);
-        scrollView.contentOffset = previousContentOffset;
-        
-        ++i;
-    }
-}
-
 + (void)keyboardWillHide:(NSNotification *)notification
-{    
+{
     NSUInteger i = 0;
     for (UIScrollView *scrollView in s_adjustedScrollViews) {
         CGFloat keyboardHeightAdjustment = [[s_keyboardHeightAdjustments objectAtIndex:i] floatValue];
@@ -309,10 +282,6 @@ __attribute__ ((constructor)) static void HLSTextFieldInit(void)
 {
     // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
     // willShow and didShow in sequence
-    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
                                              selector:@selector(keyboardDidShow:)
                                                  name:UIKeyboardDidShowNotification
