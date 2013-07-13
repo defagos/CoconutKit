@@ -10,8 +10,11 @@
 
 #import "CALayer+HLSExtensions.h"
 #import "HLSFloat.h"
+#import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "UIScrollView+HLSExtensions.h"
+#import "UIScrollView+HLSExtensionsFriend.h"
 
 // Keys for associated objects
 static void *s_tagKey = &s_tagKey;
@@ -124,12 +127,27 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd)
 {
-    // TODO: Use keyboard information here, before call to original implementation (which triggers the keyboard). If
-    //       available, then the keyboard is already displayed, and we must only adjust the content offset in the
-    //       topmost scroll view
-    
-    NSLog(@"---> Become first responder!");
-    
+    // The keyboard is visible (and thus keyboard information is available) only -becomeFirstResponder original implementation
+    // has been called. If a keyboard is available before, this means we are setting the focus on another responder while
+    // the keyboard was already visible. In such cases, find the topmost scroll view which is set to avoid the keyboard,
+    // and ensure the responder view is visible
+    if ([HLSKeyboardInformation keyboardInformation]) {
+        UIScrollView *topMostAvoidingKeyboardScrollView = nil;
+        UIView *view = self;
+        while (view) {
+            if ([view isKindOfClass:[UIScrollView class]]) {
+                UIScrollView *scrollView = (UIScrollView *)view;
+                if (scrollView.avoidingKeyboard) {
+                    topMostAvoidingKeyboardScrollView = scrollView;
+                }
+            }
+            view = view.superview;
+        }
+        
+        if (topMostAvoidingKeyboardScrollView) {
+            [topMostAvoidingKeyboardScrollView scrollViewToVisible:self animated:YES];
+        }
+    }
     
     return (*s_UIView_becomeFirstResponder)(self, _cmd);
 }

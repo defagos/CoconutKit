@@ -648,6 +648,7 @@
 		6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
+		6F5D67881791494E0080D3BC /* UIScrollView+HLSExtensionsFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensionsFriend.h"; sourceTree = "<group>"; };
 		6F6010EE15ABEC8C00A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
 		6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStack.m; sourceTree = "<group>"; };
 		6F66181916C14B7300303628 /* UIView+HLSRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSRuntimeAttributes.h"; sourceTree = "<group>"; };
@@ -1523,6 +1524,7 @@
 				6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */,
 				6FEEF86314F297DB001585A6 /* UIScrollView+HLSExtensions.h */,
 				6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */,
+				6F5D67881791494E0080D3BC /* UIScrollView+HLSExtensionsFriend.h */,
 				6FDDEC141529777500CED462 /* UITextField+HLSExtensions.h */,
 				6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */,
 				6FADE69C14BA04A6007EE121 /* UITextField+HLSValidation.h */,

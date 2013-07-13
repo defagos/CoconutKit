@@ -12,6 +12,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "UIScrollView+HLSExtensionsFriend.h"
 #import "UIView+HLSExtensions.h"
 #import <objc/runtime.h>
 
@@ -30,6 +31,7 @@
 //       not behave well with keyboard undocking (which has an animation duration, but should not)
 // TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
 //       might be VERY interesting!
+// TODO: Test memory warning behavior
 
 static const CGFloat HLSMinimalYOffset = 20.f;
 
@@ -178,6 +180,19 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         [keyboardAvoidingScrollViews addObjectsFromArray:[self keyboardAvoidingScrollViewsInView:subview]];
     }
     return [NSArray arrayWithArray:keyboardAvoidingScrollViews];
+}
+
+#pragma mark Making views visible
+
+- (void)scrollViewToVisible:(UIView *)view animated:(BOOL)animated
+{
+    CGRect viewFrameInScrollView = [self convertRect:view.bounds fromView:view];
+    CGFloat keyboardHeightAdjustment = CGRectGetMaxY(viewFrameInScrollView) - CGRectGetMaxY(self.bounds) + HLSMinimalYOffset;
+    if (floatgt(keyboardHeightAdjustment, 0.f)) {
+        [self setContentOffset:CGPointMake(self.contentOffset.x,
+                                           self.contentOffset.y + keyboardHeightAdjustment)
+                      animated:animated];
+    }
 }
 
 #pragma mark Notification callbacks
