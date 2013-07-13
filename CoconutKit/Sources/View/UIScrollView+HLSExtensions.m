@@ -32,6 +32,8 @@
 // TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
 //       might be VERY interesting!
 // TODO: Test memory warning behavior
+// TODO: The rotation animation is ugly when a field has the focus (down in the scroll view) and we are going
+//       back from landscape to portrait
 
 static const CGFloat HLSMinimalYOffset = 20.f;
 
@@ -187,10 +189,21 @@ static NSArray *s_keyboardHeightAdjustments = nil;
 - (void)scrollViewToVisible:(UIView *)view animated:(BOOL)animated
 {
     CGRect viewFrameInScrollView = [self convertRect:view.bounds fromView:view];
-    CGFloat keyboardHeightAdjustment = CGRectGetMaxY(viewFrameInScrollView) - CGRectGetMaxY(self.bounds) + HLSMinimalYOffset;
-    if (floatgt(keyboardHeightAdjustment, 0.f)) {
+    
+    // Ensure that the top of the view is visible
+    CGFloat viewTopYOffset = CGRectGetMinX(viewFrameInScrollView) - HLSMinimalYOffset - self.contentOffset.y;
+    if (floatlt(viewTopYOffset, 0.f)) {
         [self setContentOffset:CGPointMake(self.contentOffset.x,
-                                           self.contentOffset.y + keyboardHeightAdjustment)
+                                           self.contentOffset.y + viewTopYOffset)
+                      animated:animated];
+        return;
+    }
+    
+    // ... or that its bottom is
+    CGFloat viewBottomYOffset = CGRectGetMaxY(viewFrameInScrollView) - CGRectGetMaxY(self.bounds) + HLSMinimalYOffset;
+    if (floatgt(viewBottomYOffset, 0.f)) {
+        [self setContentOffset:CGPointMake(self.contentOffset.x,
+                                           self.contentOffset.y + viewBottomYOffset)
                       animated:animated];
     }
 }
@@ -239,7 +252,6 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         }
         
         // If the first responder is not visible, change the offset to make it visible
-        // TODO: Call [UIView setAnimationsEnabled:NO] first to short-circuit a previous animation??
         CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
         CGFloat responderYOffset = CGRectGetMaxY(firstResponderViewFrameInScrollView) + HLSMinimalYOffset
             - CGRectGetMaxY(scrollView.frame) + keyboardHeightAdjustment;
