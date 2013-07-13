@@ -32,8 +32,8 @@
 // TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
 //       might be VERY interesting!
 // TODO: Test memory warning behavior
-// TODO: The rotation animation is ugly when a field has the focus (down in the scroll view) and we are going
-//       back from landscape to portrait
+// TODO: The rotation animation is ugly (play in slomo; horizontal resizing works but is ugly). Probably
+//       because of the contentOffset changes (no problem if commented out!)
 
 static const CGFloat HLSMinimalYOffset = 20.f;
 
