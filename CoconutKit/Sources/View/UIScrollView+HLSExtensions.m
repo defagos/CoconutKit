@@ -200,7 +200,7 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         
         // Find whether a meaningful adjustment is required (other cases, the keyboard either does not cover the scroll
         // view, or covers it entirely)
-        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView);
+        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView) + scrollView.contentOffset.y;
         if (floatle(keyboardHeightAdjustment, 0.f) || floatge(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame))) {
             continue;
         }
@@ -222,7 +222,7 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         // If the first responder is not visible, change the offset to make it visible
         CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
         CGFloat responderYOffset = CGRectGetMaxY(firstResponderViewFrameInScrollView) + HLSMinimalYOffset
-            - CGRectGetMaxY(scrollView.frame);
+            - CGRectGetMaxY(scrollView.frame) - scrollView.contentOffset.y;
         if (floatgt(responderYOffset, 0.f)) {
             [scrollView setContentOffset:CGPointMake(0.f, scrollView.contentOffset.y + responderYOffset) animated:YES];
         }
