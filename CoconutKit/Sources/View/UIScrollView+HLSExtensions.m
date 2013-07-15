@@ -25,9 +25,6 @@
  *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
  */
 
-// TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
-//       might be VERY interesting!
-
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
