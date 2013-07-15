@@ -12,7 +12,6 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "UIScrollView+HLSExtensionsFriend.h"
 #import "UIView+HLSExtensions.h"
 #import <objc/runtime.h>
 
@@ -29,7 +28,7 @@
 // TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
 //       might be VERY interesting!
 
-static const CGFloat HLSMinimalYOffset = 20.f;
+static const CGFloat HLSMinimalYOffset = 0.f;
 
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
@@ -176,30 +175,6 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         [keyboardAvoidingScrollViews addObjectsFromArray:[self keyboardAvoidingScrollViewsInView:subview]];
     }
     return [NSArray arrayWithArray:keyboardAvoidingScrollViews];
-}
-
-#pragma mark Making views visible
-
-- (void)scrollViewToVisible:(UIView *)view animated:(BOOL)animated
-{
-    CGRect viewFrameInScrollView = [self convertRect:view.bounds fromView:view];
-    
-    // Ensure that the top of the view is visible
-    CGFloat viewTopYOffset = CGRectGetMinX(viewFrameInScrollView) - HLSMinimalYOffset - self.contentOffset.y;
-    if (floatlt(viewTopYOffset, 0.f)) {
-        [self setContentOffset:CGPointMake(self.contentOffset.x,
-                                           self.contentOffset.y + viewTopYOffset)
-                      animated:animated];
-        return;
-    }
-    
-    // ... or that its bottom is
-    CGFloat viewBottomYOffset = CGRectGetMaxY(viewFrameInScrollView) - CGRectGetMaxY(self.bounds) + HLSMinimalYOffset;
-    if (floatgt(viewBottomYOffset, 0.f)) {
-        [self setContentOffset:CGPointMake(self.contentOffset.x,
-                                           self.contentOffset.y + viewBottomYOffset)
-                      animated:animated];
-    }
 }
 
 #pragma mark Notification callbacks

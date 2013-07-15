@@ -35,7 +35,6 @@
 		6F41D24015E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23E15E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.m */; };
 		6F5007EB1585E16300391A6C /* HLSExpandingSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5007E91585E16300391A6C /* HLSExpandingSearchBar.h */; };
 		6F5007EC1585E16300391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007EA1585E16300391A6C /* HLSExpandingSearchBar.m */; };
-		6F5D6786179147D40080D3BC /* UIScrollView+HLSExtensionsFriend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5D6784179147D40080D3BC /* UIScrollView+HLSExtensionsFriend.h */; };
 		6F6010EB15AB1E2B00A9FEC5 /* HLSContainerStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */; };
 		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; };
 		6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */; };
@@ -286,7 +285,6 @@
 		6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		6F5007E91585E16300391A6C /* HLSExpandingSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSExpandingSearchBar.h; sourceTree = "<group>"; };
 		6F5007EA1585E16300391A6C /* HLSExpandingSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSExpandingSearchBar.m; sourceTree = "<group>"; };
-		6F5D6784179147D40080D3BC /* UIScrollView+HLSExtensionsFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensionsFriend.h"; sourceTree = "<group>"; };
 		6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
 		6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStack.m; sourceTree = "<group>"; };
 		6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
@@ -800,7 +798,6 @@
 				6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */,
 				6FEEF85A14F29057001585A6 /* UIScrollView+HLSExtensions.h */,
 				6FEEF85B14F29057001585A6 /* UIScrollView+HLSExtensions.m */,
-				6F5D6784179147D40080D3BC /* UIScrollView+HLSExtensionsFriend.h */,
 				6FDDEC181529778E00CED462 /* UITextField+HLSExtensions.h */,
 				6FDDEC191529778E00CED462 /* UITextField+HLSExtensions.m */,
 				6FADE58114BA0494007EE121 /* UITextField+HLSValidation.h */,
@@ -988,7 +985,6 @@
 				6F255E531712E85F007BFC96 /* HLSFakeConnection.h in Headers */,
 				6FC8EDB3176EC866000B3BE7 /* NSNumber+HLSExtensions.h in Headers */,
 				6FF74C74177D469B00BD846D /* HLSApplicationInformation.h in Headers */,
-				6F5D6786179147D40080D3BC /* UIScrollView+HLSExtensionsFriend.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

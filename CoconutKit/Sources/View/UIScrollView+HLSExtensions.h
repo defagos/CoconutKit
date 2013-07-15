@@ -40,6 +40,6 @@
  * When set to YES, the scroll view adjusts automatically so that it does not get covered by the keyboard. Text
  * fields and text views are moved automatically so that they stay visible
  */
-@property (nonatomic, readonly, assign, getter=isAvoidingKeyboard) BOOL avoidingKeyboard;
+@property (nonatomic, assign, getter=isAvoidingKeyboard) BOOL avoidingKeyboard;
 
 @end

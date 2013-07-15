@@ -34,6 +34,8 @@
 {
     [super viewDidLoad];
     
+    self.scrollView.avoidingKeyboard = YES;
+    
     // Wrapping the text field background view into a scroll view allows us to test that the behavior stays correct
     // in all cases
     [self.scrollView addSubview:self.backgroundView];
