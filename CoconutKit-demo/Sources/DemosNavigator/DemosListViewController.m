@@ -15,6 +15,7 @@
 #import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "FontsDemoViewController.h"
+#import "KeyboardAvoidingScrollViewDemoViewController.h"
 #import "LabelDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
@@ -26,7 +27,6 @@
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
-#import "TextFieldsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
 #import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
@@ -82,7 +82,7 @@ typedef enum {
 typedef enum {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
-    ViewDemoIndexTextFields,
+    ViewDemoIndexKeyboardAvoidingScrollView,
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
     ViewDemoIndexExpandingSearchBar,
@@ -326,8 +326,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexTextFields: {
-                    cell.textLabel.text = NSLocalizedString(@"Text fields", nil);
+                case ViewDemoIndexKeyboardAvoidingScrollView: {
+                    cell.textLabel.text = NSLocalizedString(@"Scroll view avoiding the keyboard", nil);
                     break;
                 }
                     
@@ -534,8 +534,8 @@ typedef enum {
                     break;
                 }
                     
-                case ViewDemoIndexTextFields: {
-                    demoViewController = [[[TextFieldsDemoViewController alloc] init] autorelease];
+                case ViewDemoIndexKeyboardAvoidingScrollView: {
+                    demoViewController = [[[KeyboardAvoidingScrollViewDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

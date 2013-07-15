@@ -1,23 +1,25 @@
 //
-//  TextFieldsDemoViewController.m
+//  KeyboardAvoidingScrollViewDemoViewController.m
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/12/11.
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import "TextFieldsDemoViewController.h"
+#import "KeyboardAvoidingScrollViewDemoViewController.h"
 
-@interface TextFieldsDemoViewController ()
+@interface KeyboardAvoidingScrollViewDemoViewController ()
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIView *backgroundView;
 
 @property (nonatomic, retain) IBOutletCollection(HLSTextField) NSArray *textFields;
 
+@property (nonatomic, retain) IBOutlet UITextView *textView;
+
 @end
 
-@implementation TextFieldsDemoViewController
+@implementation KeyboardAvoidingScrollViewDemoViewController
 
 #pragma mark Object creation and destruction
 
@@ -34,7 +36,9 @@
 {
     [super viewDidLoad];
     
+    // This property could also be conveniently set via user-defined runtime attributes
     self.scrollView.avoidingKeyboard = YES;
+    self.textView.avoidingKeyboard = YES;
     
     // Wrapping the text field background view into a scroll view allows us to test that the behavior stays correct
     // in all cases
@@ -70,7 +74,7 @@
 {
     [super localize];
 
-    self.title = NSLocalizedString(@"Text fields", nil);
+    self.title = NSLocalizedString(@"Scroll view avoiding the keyboard", nil);
 }
 
 @end

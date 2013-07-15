@@ -70,7 +70,6 @@
 		6F159A8515A554250020AFAC /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE84D14BA04C8007EE121 /* FooterView.xib */; };
 		6F159A8615A554250020AFAC /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85014BA04C8007EE121 /* HeaderView.xib */; };
 		6F159A8715A554250020AFAC /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85714BA04C9007EE121 /* XibTableViewCell.xib */; };
-		6F159A8815A554250020AFAC /* TextFieldsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */; };
 		6F159A8915A554250020AFAC /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86114BA04C9007EE121 /* PlaceholderDemoViewController.xib */; };
 		6F159A8A15A554250020AFAC /* RootStackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86514BA04C9007EE121 /* RootStackDemoViewController.xib */; };
 		6F159A8B15A554250020AFAC /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86914BA04C9007EE121 /* StackDemoViewController.xib */; };
@@ -193,7 +192,6 @@
 		6F159B0915A554250020AFAC /* ProgrammaticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85214BA04C8007EE121 /* ProgrammaticTableViewCell.m */; };
 		6F159B0A15A554250020AFAC /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85414BA04C8007EE121 /* TableViewCellsDemoViewController.m */; };
 		6F159B0B15A554250020AFAC /* XibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85614BA04C9007EE121 /* XibTableViewCell.m */; };
-		6F159B0C15A554250020AFAC /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */; };
 		6F159B0D15A554250020AFAC /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86014BA04C9007EE121 /* PlaceholderDemoViewController.m */; };
 		6F159B0E15A554250020AFAC /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86414BA04C9007EE121 /* RootStackDemoViewController.m */; };
 		6F159B0F15A554250020AFAC /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86814BA04C9007EE121 /* StackDemoViewController.m */; };
@@ -287,6 +285,10 @@
 		6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F53B63916FA321F00E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63816FA321F00E01781 /* DemoColors.m */; };
 		6F53B63A16FA321F00E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63816FA321F00E01781 /* DemoColors.m */; };
+		6F58C53217944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53017944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
+		6F58C53317944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53017944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
+		6F58C53417944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53117944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
+		6F58C53517944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53117944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F6010F015ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */; };
@@ -425,8 +427,6 @@
 		6FADE8C814BA04C9007EE121 /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85414BA04C8007EE121 /* TableViewCellsDemoViewController.m */; };
 		6FADE8C914BA04C9007EE121 /* XibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85614BA04C9007EE121 /* XibTableViewCell.m */; };
 		6FADE8CA14BA04C9007EE121 /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85714BA04C9007EE121 /* XibTableViewCell.xib */; };
-		6FADE8CB14BA04C9007EE121 /* TextFieldsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */; };
-		6FADE8CC14BA04C9007EE121 /* TextFieldsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */; };
 		6FADE8CE14BA04C9007EE121 /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86014BA04C9007EE121 /* PlaceholderDemoViewController.m */; };
 		6FADE8CF14BA04C9007EE121 /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE86114BA04C9007EE121 /* PlaceholderDemoViewController.xib */; };
 		6FADE8D014BA04C9007EE121 /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE86414BA04C9007EE121 /* RootStackDemoViewController.m */; };
@@ -645,6 +645,9 @@
 		6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandingSearchBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F53B63716FA321F00E01781 /* DemoColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColors.h; sourceTree = "<group>"; };
 		6F53B63816FA321F00E01781 /* DemoColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoColors.m; sourceTree = "<group>"; };
+		6F58C52F17944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingScrollViewDemoViewController.h; sourceTree = "<group>"; };
+		6F58C53017944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingScrollViewDemoViewController.m; sourceTree = "<group>"; };
+		6F58C53117944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAvoidingScrollViewDemoViewController.xib; sourceTree = "<group>"; };
 		6F5A0BAB1509D17B00A20DFF /* SlideshowDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowDemoViewController.h; sourceTree = "<group>"; };
 		6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowDemoViewController.m; sourceTree = "<group>"; };
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
@@ -879,9 +882,6 @@
 		6FADE85514BA04C9007EE121 /* XibTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibTableViewCell.h; sourceTree = "<group>"; };
 		6FADE85614BA04C9007EE121 /* XibTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibTableViewCell.m; sourceTree = "<group>"; };
 		6FADE85714BA04C9007EE121 /* XibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XibTableViewCell.xib; sourceTree = "<group>"; };
-		6FADE85914BA04C9007EE121 /* TextFieldsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldsDemoViewController.h; sourceTree = "<group>"; };
-		6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldsDemoViewController.m; sourceTree = "<group>"; };
-		6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldsDemoViewController.xib; sourceTree = "<group>"; };
 		6FADE85F14BA04C9007EE121 /* PlaceholderDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderDemoViewController.h; sourceTree = "<group>"; };
 		6FADE86014BA04C9007EE121 /* PlaceholderDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderDemoViewController.m; sourceTree = "<group>"; };
 		6FADE86114BA04C9007EE121 /* PlaceholderDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceholderDemoViewController.xib; sourceTree = "<group>"; };
@@ -1254,6 +1254,16 @@
 				6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */,
 			);
 			path = ExpandingSearchBar;
+			sourceTree = "<group>";
+		};
+		6F58C52E17944DCC0092590C /* KeyboardAvoidingScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				6F58C52F17944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.h */,
+				6F58C53017944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m */,
+				6F58C53117944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */,
+			);
+			path = KeyboardAvoidingScrollView;
 			sourceTree = "<group>";
 		};
 		6F5A0BAA1509D17B00A20DFF /* Slideshow */ = {
@@ -1767,12 +1777,12 @@
 				6FADE83514BA04C8007EE121 /* Cursor */,
 				6F718CA116CF8236001498D6 /* Effects */,
 				6F5007F81585E90100391A6C /* ExpandingSearchBar */,
+				6F58C52E17944DCC0092590C /* KeyboardAvoidingScrollView */,
 				6F89149615790DCA009FCC78 /* Label */,
 				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
 				6FDE68A314BD61F400F8CD3A /* Skinning */,
 				6F5A0BAA1509D17B00A20DFF /* Slideshow */,
 				6FADE84A14BA04C8007EE121 /* TableViewCells */,
-				6FADE85814BA04C9007EE121 /* TextFields */,
 				6FDE688014BC8E9300F8CD3A /* WebView */,
 			);
 			path = View;
@@ -1828,16 +1838,6 @@
 				6FADE85714BA04C9007EE121 /* XibTableViewCell.xib */,
 			);
 			path = TableViewCells;
-			sourceTree = "<group>";
-		};
-		6FADE85814BA04C9007EE121 /* TextFields */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE85914BA04C9007EE121 /* TextFieldsDemoViewController.h */,
-				6FADE85A14BA04C9007EE121 /* TextFieldsDemoViewController.m */,
-				6FADE85B14BA04C9007EE121 /* TextFieldsDemoViewController.xib */,
-			);
-			path = TextFields;
 			sourceTree = "<group>";
 		};
 		6FADE85D14BA04C9007EE121 /* ViewControllers */ = {
@@ -2186,7 +2186,6 @@
 				6FADE8C414BA04C9007EE121 /* FooterView.xib in Resources */,
 				6FADE8C614BA04C9007EE121 /* HeaderView.xib in Resources */,
 				6FADE8CA14BA04C9007EE121 /* XibTableViewCell.xib in Resources */,
-				6FADE8CC14BA04C9007EE121 /* TextFieldsDemoViewController.xib in Resources */,
 				6FADE8CF14BA04C9007EE121 /* PlaceholderDemoViewController.xib in Resources */,
 				6FADE8D114BA04C9007EE121 /* RootStackDemoViewController.xib in Resources */,
 				6FADE8D314BA04C9007EE121 /* StackDemoViewController.xib in Resources */,
@@ -2241,6 +2240,7 @@
 				6F6B0C9916B3DAB5006B718F /* InnerFolder in Resources */,
 				6F718CAA16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FB500541705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */,
+				6F58C53417944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2267,7 +2267,6 @@
 				6F159A8515A554250020AFAC /* FooterView.xib in Resources */,
 				6F159A8615A554250020AFAC /* HeaderView.xib in Resources */,
 				6F159A8715A554250020AFAC /* XibTableViewCell.xib in Resources */,
-				6F159A8815A554250020AFAC /* TextFieldsDemoViewController.xib in Resources */,
 				6F159A8915A554250020AFAC /* PlaceholderDemoViewController.xib in Resources */,
 				6F159A8A15A554250020AFAC /* RootStackDemoViewController.xib in Resources */,
 				6F159A8B15A554250020AFAC /* StackDemoViewController.xib in Resources */,
@@ -2321,6 +2320,7 @@
 				6F6B0C9A16B3DAB5006B718F /* InnerFolder in Resources */,
 				6F718CAB16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FB500551705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */,
+				6F58C53517944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2443,7 +2443,6 @@
 				6FADE8C714BA04C9007EE121 /* ProgrammaticTableViewCell.m in Sources */,
 				6FADE8C814BA04C9007EE121 /* TableViewCellsDemoViewController.m in Sources */,
 				6FADE8C914BA04C9007EE121 /* XibTableViewCell.m in Sources */,
-				6FADE8CB14BA04C9007EE121 /* TextFieldsDemoViewController.m in Sources */,
 				6FADE8CE14BA04C9007EE121 /* PlaceholderDemoViewController.m in Sources */,
 				6FADE8D014BA04C9007EE121 /* RootStackDemoViewController.m in Sources */,
 				6FADE8D214BA04C9007EE121 /* StackDemoViewController.m in Sources */,
@@ -2526,6 +2525,7 @@
 				6F255E571712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
 				6FC8EDB7176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */,
 				6FF74C78177D46B300BD846D /* HLSApplicationInformation.m in Sources */,
+				6F58C53217944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2616,7 +2616,6 @@
 				6F159B0915A554250020AFAC /* ProgrammaticTableViewCell.m in Sources */,
 				6F159B0A15A554250020AFAC /* TableViewCellsDemoViewController.m in Sources */,
 				6F159B0B15A554250020AFAC /* XibTableViewCell.m in Sources */,
-				6F159B0C15A554250020AFAC /* TextFieldsDemoViewController.m in Sources */,
 				6F159B0D15A554250020AFAC /* PlaceholderDemoViewController.m in Sources */,
 				6F159B0E15A554250020AFAC /* RootStackDemoViewController.m in Sources */,
 				6F159B0F15A554250020AFAC /* StackDemoViewController.m in Sources */,
@@ -2698,6 +2697,7 @@
 				6F255E581712E86C007BFC96 /* HLSFakeConnection.m in Sources */,
 				6FC8EDB8176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */,
 				6FF74C79177D46B300BD846D /* HLSApplicationInformation.m in Sources */,
+				6F58C53317944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

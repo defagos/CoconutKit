@@ -12,9 +12,8 @@
 #import "HLSFloat.h"
 #import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
+#import "HLSRuntime.h"
 #import "UIScrollView+HLSExtensions.h"
-
-#import <objc/runtime.h>
 
 // Keys for associated objects
 static void *s_tagKey = &s_tagKey;
