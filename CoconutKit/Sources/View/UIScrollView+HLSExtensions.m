@@ -28,7 +28,6 @@
 
 // TODO: Test frame auto adjustment (& document!) for UITextView, which is a subclass of UIScrollView. This
 //       might be VERY interesting!
-// TODO: Test memory warning behavior
 
 static const CGFloat HLSMinimalYOffset = 20.f;
 

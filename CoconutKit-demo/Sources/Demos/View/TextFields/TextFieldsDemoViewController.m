@@ -37,6 +37,7 @@
     // Wrapping the text field background view into a scroll view allows us to test that the behavior stays correct
     // in all cases
     [self.scrollView addSubview:self.backgroundView];
+    self.scrollView.contentSize = self.backgroundView.bounds.size;
     
     for (HLSTextField *textField in self.textFields) {
         textField.delegate = self;

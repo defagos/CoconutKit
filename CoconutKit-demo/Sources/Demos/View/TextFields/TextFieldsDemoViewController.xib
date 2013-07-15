@@ -104,7 +104,6 @@
 						<string key="NSFrame">{{173, 906}, {412, 31}}</string>
 						<reference key="NSSuperview" ref="769532343"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -353,7 +352,6 @@
 						<string key="NSFrameSize">{768, 960}</string>
 						<reference key="NSSuperview" ref="126881938"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDEAA</bytes>
