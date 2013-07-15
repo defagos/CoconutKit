@@ -45,6 +45,8 @@
  *
  * Designated initializer: -initWithFrame:
  */
+// TODO: Remove scroll view behavior (now moved elsewhere). Move resigningFirstResponderOnTap to a UITextField
+//       category, and disable by default
 @interface HLSTextField : UITextField
 
 /**

@@ -26,21 +26,6 @@ static HLSKeyboardInformation *s_instance = nil;
 
 #pragma mark Class methods
 
-+ (void)load
-{
-    // Register for keyboard notifications. Note that when the keyboard is visible and the device is rotated,
-    // we get a hide and a show notifications (keyboard with first orientation is dismissed, keyboard with
-    // new orientation is displayed again)
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(keyboardWillShow:) 
-                                                 name:UIKeyboardWillShowNotification 
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(keyboardWillHide:) 
-                                                 name:UIKeyboardWillHideNotification 
-                                               object:nil];
-}
-
 + (HLSKeyboardInformation *)keyboardInformation
 {
     return s_instance;
@@ -51,21 +36,10 @@ static HLSKeyboardInformation *s_instance = nil;
 - (id)initWithUserInfo:(NSDictionary *)userInfo
 {
     if ((self = [super init])) {
-        NSValue *beginFrameValue = [userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey];
-        CGRect beginFrame = CGRectZero;
-        [beginFrameValue getValue:&beginFrame];
-        self.beginFrame = beginFrame;
-        
-        NSValue *endFrameValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-        CGRect endFrame = CGRectZero;
-        [endFrameValue getValue:&endFrame];
-        self.endFrame = endFrame;
-        
-        NSNumber *animationDurationNumber = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-        self.animationDuration = [animationDurationNumber doubleValue];
-        
-        NSNumber *animationCurveNumber = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
-        self.animationCurve = [animationCurveNumber unsignedIntValue];
+        self.beginFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        self.endFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        self.animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        self.animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntValue];
     }
     return self;
 }
@@ -91,4 +65,31 @@ static HLSKeyboardInformation *s_instance = nil;
     s_instance = nil;
 }
 
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; beginFrame: %@; endFrame: %@; animationDuration: %f>",
+            [self class],
+            self,
+            NSStringFromCGRect(self.beginFrame),
+            NSStringFromCGRect(self.endFrame),
+            self.animationDuration];
+}
+
 @end
+
+__attribute__ ((constructor)) static void HLSKeyboardInformationInit(void)
+{
+    // Register for keyboard notifications. Note that when the keyboard is visible and the device is rotated,
+    // we get a hide and a show notifications (keyboard with first orientation is dismissed, keyboard with
+    // new orientation is displayed again)
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}

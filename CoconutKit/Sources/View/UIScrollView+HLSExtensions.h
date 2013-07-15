@@ -36,4 +36,13 @@
  */
 - (void)removeSynchronization;
 
+/**
+ * When set to YES, the scroll view adjusts automatically so that it does not get covered by the keyboard (this works
+ * for UIScrollView subclasses as well, e.g. UITextField). The scroll view content offset is also changed so that
+ * responder views located within the scroll view (e.g. text fields, text views) stay visible
+ *
+ * The default value is NO
+ */
+@property (nonatomic, assign, getter=isAvoidingKeyboard) BOOL avoidingKeyboard;
+
 @end

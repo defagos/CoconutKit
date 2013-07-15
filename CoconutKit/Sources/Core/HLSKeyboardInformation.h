@@ -11,6 +11,10 @@
  * method. If the returned object is not nil, then the keyboard is docked and visible (or soon will) and you can check its 
  * properties. The object is nil if the keyboard is floating (iPad) or invisible.
  *
+ * You should avoid accessing HLSKeyboardInformation from within keyboard notification callbacks (since keyboard notifications
+ * are used to fill HLSKeyboardInformation, the information might be unreliable depending on the order in which notifications
+ * callbacks are called)
+ *
  * Not meant to be instantiated directly. Simply use the +keyboardInformation class method.
  */
 @interface HLSKeyboardInformation : NSObject
