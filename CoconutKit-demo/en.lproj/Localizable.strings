@@ -169,6 +169,7 @@
 "Test responder chain"="Test responder chain";
 "Text"="Text";
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
+"Text views"="Text views";
 "The behavior above can be disabled"="The behavior above can be disabled";
 "The view controller is not compatible with the container (most probably its orientation)"="The view controller is not compatible with the container (most probably its orientation)";
 "This value cannot be negative"="This value cannot be negative";
@@ -186,4 +187,5 @@
 "Wrapped into UINavigationController"="Wrapped into UINavigationController";
 "Wrapped into UITabBarController"="Wrapped into UITabBarController";
 "Year"="Year";
+"Your text here"="Your text here";
 "yyyy/MM/dd"="yyyy/MM/dd";

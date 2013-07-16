@@ -158,6 +158,10 @@
 		6F22C78416A942F10081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */; };
 		6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
 		6F22C78716A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
+		6F3D1D8A1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F3D1D8B1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F3D1D8C1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */; };
+		6F3D1D8D1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
@@ -369,6 +373,9 @@
 		6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontsDemoViewController.m; sourceTree = "<group>"; };
 		6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontsDemoViewController.xib; sourceTree = "<group>"; };
 		6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample_text_with_custom_font.html; sourceTree = "<group>"; };
+		6F3D1D871795721F0056FF4E /* TextViewsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewsDemoViewController.h; sourceTree = "<group>"; };
+		6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewsDemoViewController.m; sourceTree = "<group>"; };
+		6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewsDemoViewController.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
 		6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingSearchBarDemoViewController.m; sourceTree = "<group>"; };
@@ -710,6 +717,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		6F3D1D861795721F0056FF4E /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				6F3D1D871795721F0056FF4E /* TextViewsDemoViewController.h */,
+				6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */,
+				6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */,
+			);
+			path = TextViews;
+			sourceTree = "<group>";
+		};
 		6F5007FE1585EA5600391A6C /* ExpandingSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,6 +988,7 @@
 				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
+				6F3D1D861795721F0056FF4E /* TextViews */,
 				6F9C461114C5C30B00824AB2 /* WebView */,
 			);
 			path = View;
@@ -1487,6 +1505,7 @@
 				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 				6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
+				6F3D1D8C1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1564,6 +1583,7 @@
 				6F718CB316CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FB5004D1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 				6F58C53D17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
+				6F3D1D8D1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1668,6 +1688,7 @@
 				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
 				6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
 				6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
+				6F3D1D8A1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1738,6 +1759,7 @@
 				6F53B63616FA321000E01781 /* DemoColors.m in Sources */,
 				6FB5004B1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
 				6F58C53B17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
+				6F3D1D8B1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
