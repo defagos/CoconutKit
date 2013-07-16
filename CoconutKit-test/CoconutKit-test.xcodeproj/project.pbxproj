@@ -136,7 +136,7 @@
 		6FCFEA5615E37E4F002CAF9E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA5415E37E4E002CAF9E /* HLSLayerAnimationStep.m */; };
 		6FDDEC131529776000CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC121529776000CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC251529782500CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC241529782500CED462 /* UITextView+HLSExtensions.m */; };
-		6FDE588016A66FC000419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587E16A66FC000419631 /* HLSTextView.m */; };
+		6FDE588016A66FC000419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587E16A66FC000419631 /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */; };
 		6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68FB147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m */; };
 		6FDE694D14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694C14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.m */; };

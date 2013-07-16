@@ -207,7 +207,7 @@
 		6FDDEC1B1529778E00CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC191529778E00CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC1E1529780200CED462 /* UITextView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDDEC1C1529780200CED462 /* UITextView+HLSExtensions.h */; };
 		6FDDEC1F1529780200CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC1D1529780200CED462 /* UITextView+HLSExtensions.m */; };
-		6FDE587816A66F9900419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587616A66F9900419631 /* HLSTextView.m */; };
+		6FDE587816A66F9900419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587616A66F9900419631 /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FDE587916A66F9900419631 /* HLSTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE587716A66F9900419631 /* HLSTextView.h */; };
 		6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */; };
 		6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */; };

@@ -267,8 +267,8 @@
 		6FD0025015D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
 		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FD0025215D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
-		6FDE588816A670C000419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588616A670C000419631 /* TextViewsDemoViewController.m */; };
-		6FDE588916A670C000419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588616A670C000419631 /* TextViewsDemoViewController.m */; };
+		6FDE588816A670C000419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588616A670C000419631 /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FDE588916A670C000419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588616A670C000419631 /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FDE588A16A670C000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE588716A670C000419631 /* TextViewsDemoViewController.xib */; };
 		6FDE588B16A670C000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE588716A670C000419631 /* TextViewsDemoViewController.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };

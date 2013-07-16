@@ -14,13 +14,7 @@
 
 @interface HLSTextView ()
 
-- (void)hlsTextViewInit;
-
-@property (nonatomic, retain) HLSLabel *placeholderLabel;
-
-- (void)updatePlaceholderLabelVisibility;
-
-- (void)textChanged:(NSNotification *)notification;
+@property (nonatomic, strong) HLSLabel *placeholderLabel;
 
 @end
 
@@ -52,7 +46,7 @@
                                kMargin,
                                floatmax(CGRectGetWidth(self.bounds) - 2 * kMargin, 0.f),
                                floatmax(CGRectGetHeight(self.bounds) - 2 * kMargin, 0.f));
-    self.placeholderLabel = [[[HLSLabel alloc] initWithFrame:bounds] autorelease];
+    self.placeholderLabel = [[HLSLabel alloc] initWithFrame:bounds];
     self.placeholderLabel.textColor = [UIColor lightGrayColor];
     self.placeholderLabel.font = self.font;
     self.placeholderLabel.verticalAlignment = HLSLabelVerticalAlignmentTop;
@@ -68,15 +62,9 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    self.placeholderLabel = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize placeholderLabel = _placeholderLabel;
 
 - (void)setText:(NSString *)text
 {

@@ -276,6 +276,7 @@
 		6F6010F015ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */; };
 		6F6010F115ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */; };
 		6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
+		6F702BC617955041006B6C55 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588E16A670D700419631 /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F7A871516522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7A871616522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
@@ -451,9 +452,9 @@
 		6FD0025A15D5463C00375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0025615D5463C00375240 /* ContainmentTestViewController.xib */; };
 		6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC151529777500CED462 /* UITextField+HLSExtensions.m */; };
 		6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */; };
-		6FDE587D16A66FAB00419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587B16A66FAB00419631 /* HLSTextView.m */; };
-		6FDE588416A670A000419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587B16A66FAB00419631 /* HLSTextView.m */; };
-		6FDE589016A670D700419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588E16A670D700419631 /* TextViewsDemoViewController.m */; };
+		6FDE587D16A66FAB00419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587B16A66FAB00419631 /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FDE588416A670A000419631 /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE587B16A66FAB00419631 /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FDE589016A670D700419631 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE588E16A670D700419631 /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FDE589316A6714000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE589216A6714000419631 /* TextViewsDemoViewController.xib */; };
 		6FDE589416A6714000419631 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE589216A6714000419631 /* TextViewsDemoViewController.xib */; };
 		6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
@@ -2518,6 +2519,7 @@
 				6FCA2DDF1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */,
 				6FCA2DE11679E3EB0011CFDA /* HLSFileManager.m in Sources */,
 				6FDE588416A670A000419631 /* HLSTextView.m in Sources */,
+				6F702BC617955041006B6C55 /* TextViewsDemoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

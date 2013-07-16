@@ -14,11 +14,11 @@
 /**
  * The text to be displayed when the text view is empty. Default is nil
  */
-@property (nonatomic, retain) NSString *placeholderText;
+@property (nonatomic, strong) NSString *placeholderText;
 
 /**
  * The color of the placeholder text. Default is light gray
  */
-@property (nonatomic, retain) UIColor *placeholderTextColor;
+@property (nonatomic, strong) UIColor *placeholderTextColor;
 
 @end

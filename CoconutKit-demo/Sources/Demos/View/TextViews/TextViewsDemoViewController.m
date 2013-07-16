@@ -8,26 +8,15 @@
 
 #import "TextViewsDemoViewController.h"
 
+@interface TextViewsDemoViewController ()
+
+@property (nonatomic, weak) IBOutlet HLSTextView *textView1;
+@property (nonatomic, weak) IBOutlet HLSTextView *textView2;
+@property (nonatomic, weak) IBOutlet HLSTextView *textView3;
+
+@end
+
 @implementation TextViewsDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.textView1 = nil;
-    self.textView2 = nil;
-    self.textView3 = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize textView1 = m_textView1;
-
-@synthesize textView2 = m_textView2;
-
-@synthesize textView3 = m_textView3;
 
 #pragma mark View lifecycle
 
