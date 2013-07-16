@@ -6,9 +6,9 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-// TODO: - move automatically with the keyboard
-//       - dismiss when tapping outside
-
+/**
+ * Lightweight UITextView subclass providing more functionalities
+ */
 @interface HLSTextView : UITextView
 
 /**
