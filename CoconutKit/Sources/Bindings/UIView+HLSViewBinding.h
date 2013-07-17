@@ -30,6 +30,8 @@
 //       Core Data bindings a special case)
 - (BOOL)updateBoundObjectWithText:(NSString *)text;
 
+// TODO: Optional validation (see Key-Value coding programming guide, -validate<field>:error:)
+
 @end
 
 @interface UIView (HLSViewBinding) <HLSViewBinding>

@@ -85,6 +85,7 @@
 
 - (NSString *)text
 {
+    // Lazily check and fill binding information
     if (! [self verifyBindingInformation]) {
         return nil;
     }
@@ -107,7 +108,7 @@
 // Return YES iff the binding information could be verified (keypath is valid, and any required formatting
 // method could be located). Having the method return NO either means the binding information is incorrect,
 // or that it could not be verified yet (because the keypath is valid but returns nil). Once binding
-// information has been verified it is stored for efficient access
+// information has been verified once it is stored for later efficient access
 - (BOOL)verifyBindingInformation
 {
     // Already verified and cached. Nothing to do
