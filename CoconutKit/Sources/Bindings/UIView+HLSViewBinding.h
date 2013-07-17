@@ -9,6 +9,7 @@
 // TODO: Create CoconutKit examples with all cases. Also with @min, @max, etc. keypath operators! Document!
 // TODO: Test and document limitations (e.g. if a view controller is bound to an object, can be bind a subview
 //       to another object? Should we?)
+// TODO: Document: KVO and availability (not available for keypaths containing operators)
 
 @protocol HLSViewBinding <NSObject>
 

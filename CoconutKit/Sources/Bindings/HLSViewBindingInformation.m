@@ -16,9 +16,11 @@
 
 #import <objc/runtime.h>
 
+// TODO: Fix remaining retain cycle due to KVO registration (-dealloc never called here)
+
 @interface HLSViewBindingInformation ()
 
-@property (nonatomic, strong) id object;
+@property (nonatomic, weak) id object;                      // weak ref
 @property (nonatomic, strong) NSString *keyPath;
 @property (nonatomic, strong) NSString *formatterName;
 @property (nonatomic, weak) UIView *view;                   // weak ref
@@ -65,7 +67,12 @@
         self.formatterName = formatterName;
         self.view = view;
         
-        [self.object addObserver:self forKeyPath:self.keyPath options:NSKeyValueObservingOptionNew context:NULL];
+        @try {
+            [self.object addObserver:self forKeyPath:self.keyPath options:NSKeyValueObservingOptionNew context:NULL];
+        }
+        @catch (NSException *exception) {
+            HLSLoggerInfo(@"KVO is not available for binding keypath %@", keyPath);
+        }
     }
     return self;
 }
@@ -78,7 +85,10 @@
 
 - (void)dealloc
 {
-    [self.object removeObserver:self forKeyPath:self.keyPath];
+    @try {
+        [self.object removeObserver:self forKeyPath:self.keyPath];
+    }
+    @catch (NSException *exception) {}
 }
 
 #pragma mark Accessors and mutators
