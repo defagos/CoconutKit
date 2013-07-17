@@ -17,7 +17,7 @@
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindFormatterKey = &s_bindFormatterKey;
-static void *s_bindingContextKey = &s_bindingContextKey;
+static void *s_bindingInformationKey = &s_bindingInformationKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UIView__awakeFromNib_Imp)(id, SEL) = NULL;
@@ -33,7 +33,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) NSString *bindKeyPath;
 @property (nonatomic, strong) NSString *bindFormatter;
 
-@property (nonatomic, strong) HLSViewBindingInformation *bindingContext;
+@property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (BOOL)bindsRecursively;
 
@@ -83,14 +83,14 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     objc_setAssociatedObject(self, s_bindFormatterKey, bindFormatter, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id)bindingContext
+- (HLSViewBindingInformation *)bindingInformation
 {
-    return objc_getAssociatedObject(self, s_bindingContextKey);
+    return objc_getAssociatedObject(self, s_bindingInformationKey);
 }
 
-- (void)setBindingContext:(id)bindingContext
+- (void)setBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
-    objc_setAssociatedObject(self, s_bindingContextKey, bindingContext, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Bindings
@@ -125,10 +125,10 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     
     if (self.bindKeyPath) {
         if ([self respondsToSelector:@selector(updateViewWithText:)]) {
-            self.bindingContext = [[HLSViewBindingInformation alloc] initWithObject:object
-                                                                            keyPath:self.bindKeyPath
-                                                                      formatterName:self.bindFormatter
-                                                                               view:self];
+            self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
+                                                                                keyPath:self.bindKeyPath
+                                                                          formatterName:self.bindFormatter
+                                                                                   view:self];
             [self updateText];
         }
         else {
@@ -145,11 +145,11 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 - (void)updateText
 {
-    if (! self.bindingContext) {
+    if (! self.bindingInformation) {
         return;
     }
     
-    NSString *text = [self.bindingContext text];
+    NSString *text = [self.bindingInformation text];
     [self updateViewWithText:text];
 }
 
@@ -161,7 +161,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
 {
     (*s_UIView__awakeFromNib_Imp)(self, _cmd);
     
-    if (! self.bindingContext) {
+    if (! self.bindingInformation) {
         if (! self.bindKeyPath) {
             return;
         }
@@ -171,7 +171,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
             return;
         }
         
-        self.bindingContext = [[HLSViewBindingInformation alloc] initWithObject:nil keyPath:self.bindKeyPath formatterName:self.bindFormatter view:self];
+        self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:nil keyPath:self.bindKeyPath formatterName:self.bindFormatter view:self];
         [self updateText];
     }
 }
