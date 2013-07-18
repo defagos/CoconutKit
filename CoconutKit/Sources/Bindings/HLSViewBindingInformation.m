@@ -69,15 +69,6 @@
         self.keyPath = keyPath;
         self.formatterName = formatterName;
         self.view = view;
-        
-        @try {
-            // Warning: NOT self.object here. The result is not the same if an exception is thrown (with self.object,
-            // self would not be properly released)
-            [object addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:NULL];
-        }
-        @catch (NSException *exception) {
-            HLSLoggerInfo(@"KVO is not available for binding keypath %@", keyPath);
-        }
     }
     return self;
 }
@@ -86,14 +77,6 @@
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-- (void)dealloc
-{
-    @try {
-        [self.object removeObserver:self forKeyPath:self.keyPath];
-    }
-    @catch (NSException *exception) {}
 }
 
 #pragma mark Accessors and mutators
@@ -262,13 +245,6 @@
         }
     }
     return nil;
-}
-
-#pragma mark KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    [self.view updateText];
 }
 
 @end
