@@ -31,7 +31,7 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIView_becomeFirstResponder = (BOOL (*)(id, SEL))HLSSwizzleSelector(self, @selector(becomeFirstResponder), (IMP)swizzled_UIView__becomeFirstResponder_Imp);
+    s_UIView_becomeFirstResponder = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self, @selector(becomeFirstResponder), (IMP)swizzled_UIView__becomeFirstResponder_Imp);
 }
 
 #pragma mark Accessors and mutators

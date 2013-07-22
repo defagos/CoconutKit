@@ -32,7 +32,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
     Class *classes = objc_copyClassList(&numberOfClasses);
     for (unsigned int i = 0; i < numberOfClasses; ++i) {
         Class class = classes[i];
-        if (! HLSIsSubclassOfClass(class, objc_getClass("UIView"))) {
+        if (! hls_class_isSubclassOfClass(class, objc_getClass("UIView"))) {
             continue;
         }
         
@@ -121,7 +121,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
             return;
         }
         
-        if (! HLSIsSubclassOfClass(colorClass, [UIColor class])) {
+        if (! hls_class_isSubclassOfClass(colorClass, [UIColor class])) {
             HLSLoggerWarn(@"The class %@ is not a subclass of UIColor. Skipped", className);
             return;
         }

@@ -464,9 +464,9 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any), and inject
     //        implementations for isMovingTo/FromParentViewController and willMoveTo/FromParentViewController
     if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
-        s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                           @selector(parentViewController),
-                                                                                           (IMP)swizzled_UIViewController__parentViewController_Imp);
+        s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                                  @selector(parentViewController),
+                                                                                                  (IMP)swizzled_UIViewController__parentViewController_Imp);
         class_addMethod(self,
                         @selector(willMoveToParentViewController:),
                         (IMP)iOS4_UIViewController__willMoveToParentViewController_Imp,
@@ -487,12 +487,12 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
     // iOS 5: Swizzle the new methods introduced by the containment API so that view controllers can get a correct information even
     //        when inserted into a custom container
     else {
-        s_UIViewController__isMovingToParentViewController_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                                       @selector(isMovingToParentViewController),
-                                                                                                       (IMP)swizzled_UIViewController__isMovingToParentViewController_Imp);
-        s_UIViewController__isMovingFromParentViewController_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                                         @selector(isMovingFromParentViewController),
-                                                                                                         (IMP)swizzled_UIViewController__isMovingFromParentViewController_Imp);
+        s_UIViewController__isMovingToParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                                              @selector(isMovingToParentViewController),
+                                                                                                              (IMP)swizzled_UIViewController__isMovingToParentViewController_Imp);
+        s_UIViewController__isMovingFromParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                                                @selector(isMovingFromParentViewController),
+                                                                                                                (IMP)swizzled_UIViewController__isMovingFromParentViewController_Imp);
     }
 }
 

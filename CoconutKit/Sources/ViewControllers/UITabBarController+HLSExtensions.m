@@ -31,17 +31,17 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
 + (void)load
 {
     // No swizzling occurs on iOS < 6 since those two methods do not exist
-    s_UITabBarController__shouldAutorotate_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                       @selector(shouldAutorotate),
-                                                                                       (IMP)swizzled_UITabBarController__shouldAutorotate_Imp);
-    s_UITabBarController__supportedInterfaceOrientations_Imp = (NSUInteger (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                                           @selector(supportedInterfaceOrientations),
-                                                                                                           (IMP)swizzled_UITabBarController__supportedInterfaceOrientations_Imp);
+    s_UITabBarController__shouldAutorotate_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                              @selector(shouldAutorotate),
+                                                                                              (IMP)swizzled_UITabBarController__shouldAutorotate_Imp);
+    s_UITabBarController__supportedInterfaceOrientations_Imp = (NSUInteger (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                                                  @selector(supportedInterfaceOrientations),
+                                                                                                                  (IMP)swizzled_UITabBarController__supportedInterfaceOrientations_Imp);
     
     // Swizzled both on iOS < 6 and iOS 6
-    s_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp = (BOOL (*)(id, SEL, NSInteger))HLSSwizzleSelector(self,
-                                                                                                                        @selector(shouldAutorotateToInterfaceOrientation:),
-                                                                                                                        (IMP)swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp);
+    s_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp = (BOOL (*)(id, SEL, NSInteger))hls_class_swizzleSelector(self,
+                                                                                                                               @selector(shouldAutorotateToInterfaceOrientation:),
+                                                                                                                               (IMP)swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_Imp);
 }
 
 #pragma mark Accessors and mutators

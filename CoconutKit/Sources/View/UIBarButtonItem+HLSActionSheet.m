@@ -26,12 +26,12 @@ static id swizzled_UIBarButtonItem__target_Imp(UIBarButtonItem *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIBarButtonItem__action_Imp = (SEL (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                         @selector(action), 
-                                                                         (IMP)swizzled_UIBarButtonItem__action_Imp);
-    s_UIBarButtonItem__target_Imp = (id (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                        @selector(target), 
-                                                                        (IMP)swizzled_UIBarButtonItem__target_Imp);
+    s_UIBarButtonItem__action_Imp = (SEL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                @selector(action),
+                                                                                (IMP)swizzled_UIBarButtonItem__action_Imp);
+    s_UIBarButtonItem__target_Imp = (id (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                               @selector(target),
+                                                                               (IMP)swizzled_UIBarButtonItem__target_Imp);
 }
 
 #pragma mark Current action sheet dismissal

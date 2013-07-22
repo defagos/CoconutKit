@@ -38,15 +38,15 @@ static void swizzled_UINavigationBar__sendSubviewToBack_Imp(UINavigationBar *sel
 
 + (void)load
 {
-    s_UINavigationBar__insertSubview_atIndex_Imp = (void (*)(id, SEL, id, NSInteger))HLSSwizzleSelector(self, 
-                                                                                                        @selector(insertSubview:atIndex:), 
-                                                                                                        (IMP)swizzled_UINavigationBar__insertSubview_atIndex_Imp);
-    s_UINavigationBar__insertSubview_belowSubview_Imp = (void (*)(id, SEL, id, id))HLSSwizzleSelector(self, 
-                                                                                                      @selector(insertSubview:belowSubview:), 
-                                                                                                      (IMP)swizzled_UINavigationBar__insertSubview_belowSubview_Imp);
-    s_UINavigationBar__sendSubviewToBack_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                         @selector(sendSubviewToBack:), 
-                                                                                         (IMP)swizzled_UINavigationBar__sendSubviewToBack_Imp);
+    s_UINavigationBar__insertSubview_atIndex_Imp = (void (*)(id, SEL, id, NSInteger))hls_class_swizzleSelector(self,
+                                                                                                               @selector(insertSubview:atIndex:),
+                                                                                                               (IMP)swizzled_UINavigationBar__insertSubview_atIndex_Imp);
+    s_UINavigationBar__insertSubview_belowSubview_Imp = (void (*)(id, SEL, id, id))hls_class_swizzleSelector(self,
+                                                                                                             @selector(insertSubview:belowSubview:),
+                                                                                                             (IMP)swizzled_UINavigationBar__insertSubview_belowSubview_Imp);
+    s_UINavigationBar__sendSubviewToBack_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
+                                                                                                @selector(sendSubviewToBack:),
+                                                                                                (IMP)swizzled_UINavigationBar__sendSubviewToBack_Imp);
 }
 
 #pragma mark Accessors and mutators

@@ -37,12 +37,12 @@ static BOOL swizzled_UITextView__resignFirstResponder_Imp(UITextView *self, SEL 
 
 + (void)load
 {
-    s_UITextView__becomeFirstResponder_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                   @selector(becomeFirstResponder), 
-                                                                                   (IMP)swizzled_UITextView__becomeFirstResponder_Imp);
-    s_UITextView__resignFirstResponder_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self, 
-                                                                                   @selector(resignFirstResponder), 
-                                                                                   (IMP)swizzled_UITextView__resignFirstResponder_Imp);
+    s_UITextView__becomeFirstResponder_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                          @selector(becomeFirstResponder),
+                                                                                          (IMP)swizzled_UITextView__becomeFirstResponder_Imp);
+    s_UITextView__resignFirstResponder_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                          @selector(resignFirstResponder),
+                                                                                          (IMP)swizzled_UITextView__resignFirstResponder_Imp);
 }
 
 @end
