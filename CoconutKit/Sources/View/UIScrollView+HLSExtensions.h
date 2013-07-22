@@ -40,9 +40,14 @@
  * When set to YES, the scroll view adjusts automatically so that it does not get covered by the keyboard (this works
  * for UIScrollView subclasses as well, e.g. UITextField). The scroll view content offset is also changed so that
  * responder views located within the scroll view (e.g. text fields, text views, search bars) stay visible when they
- * get the focus. Note that you need to set a scroll view contentSize so that the scroll view can actually scroll.
- * Moreover, the scroll view frame is changed when the keyboard is displayed, so be sure that the subview autoresizing 
- * masks are appropriately set (most notably fixed top view margin)
+ * get the focus.
+ *
+ * Note that you MUST set a scroll view contentSize so that the scroll view can actually scroll. Moreover, the scroll 
+ * view frame is changed when the keyboard is displayed, so be sure that the subview autoresizing masks are appropriately 
+ * set (most notably fixed top view margin)
+ *
+ * Nested scroll views are supported. If several scroll views avoiding the keyboard are nested, the top parent will
+ * be the only only one to avoid the keyboard
  *
  * The default value is NO
  */
