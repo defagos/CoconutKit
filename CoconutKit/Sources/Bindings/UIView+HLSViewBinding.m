@@ -45,9 +45,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIView__awakeFromNib_Imp  = (void (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                        @selector(awakeFromNib),
-                                                                        (IMP)swizzled_UIView__awakeFromNib_Imp);
+    s_UIView__awakeFromNib_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                       @selector(awakeFromNib),
+                                                                       (IMP)swizzled_UIView__awakeFromNib_Imp);
 }
 
 #pragma mark Bindings
