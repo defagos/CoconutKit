@@ -174,16 +174,23 @@ static NSArray *s_keyboardHeightAdjustments = nil;
 
 #pragma mark Notification callbacks
 
-+ (void)keyboardDidShow:(NSNotification *)notification
++ (void)keyboardWillShow:(NSNotification *)notification
 {
     UIView *mainView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
     NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:mainView];
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
     NSMutableArray *adjustedScrollViews = [NSMutableArray array];
     NSMutableArray *keyboardHeightAdjustments = [NSMutableArray array];
-        
+    
+    // We animate the transition when showing the keyboard (but not when hiding it: Hiding it can occur by docking the keyboard,
+    // which is can occur instantaneously, but with a reported animation duration of 0.25)
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.4];
+    [UIView setAnimationDelay:keyboardAnimationDuration];
+    
     // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
     // screen). Frames will be adjusted after the keyboard has been displayed for a perfect result, but we
     // need to trigger content offset animation earler (this is why we need to calculate adjustments earlier)
@@ -208,20 +215,28 @@ static NSArray *s_keyboardHeightAdjustments = nil;
         
         [adjustedScrollViews addObject:scrollView];
         [keyboardHeightAdjustments addObject:@(keyboardHeightAdjustment)];
-        
+    }
+    
+    [UIView commitAnimations];
+    
+    s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
+    s_keyboardHeightAdjustments = [NSArray arrayWithArray:keyboardHeightAdjustments];
+}
+
++ (void)keyboardDidShow:(NSNotification *)notification
+{
+    for (UIScrollView *scrollView in s_adjustedScrollViews) {
         // Find if the first responder is contained within the scroll view
         UIView *firstResponderView = [scrollView firstResponderView];
         if (! firstResponderView) {
             continue;
         }
         
-        // If the first responder is not visible, change the offset to make it visible
+        // If the first responder is not visible, change the offset to make it visible. Not made in -willShow since result not convincing
+        // enough if frame and content offset are changed at the same time
         CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
         [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:YES];
     }
-    
-    s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
-    s_keyboardHeightAdjustments = [NSArray arrayWithArray:keyboardHeightAdjustments];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
@@ -248,6 +263,10 @@ __attribute__ ((constructor)) static void HLSTextFieldInit(void)
 {
     // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
     // willShow and didShow in sequence
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
                                              selector:@selector(keyboardDidShow:)
                                                  name:UIKeyboardDidShowNotification
