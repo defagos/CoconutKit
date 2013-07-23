@@ -49,7 +49,7 @@
     
     if (target) {
         // Consider the official class identity, not the real one which could be discovered by using runtime
-        // functions (-class can be faked by dynamic subclasses, e.g.)
+        // functions (-class can be e.g. faked by dynamic subclasses)
         Class targetClass = [target class];
         if (! hls_class_conformsToInformalProtocol(targetClass, protocol)) {
             HLSLoggerError(@"The class %@ must implement the protocol %s (at least informally)", targetClass, protocol_getName(protocol));
@@ -96,10 +96,10 @@
 - (BOOL)protocolDeclaresSelector:(SEL)selector
 {
     // Search in required methods first (should be the most common case for protocols defining an interface subset)
-    struct objc_method_description methodDescription = protocol_getMethodDescription(_protocol, selector, YES, YES);
+    struct objc_method_description methodDescription = hls_protocol_getMethodDescription(_protocol, selector, YES, YES);
     if (! methodDescription.name) {
         // Search in optional methods
-        methodDescription = protocol_getMethodDescription(_protocol, selector, NO, YES);
+        methodDescription = hls_protocol_getMethodDescription(_protocol, selector, NO, YES);
         if (! methodDescription.name) {
             return NO;
         }

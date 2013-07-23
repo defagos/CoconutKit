@@ -19,7 +19,7 @@
  * A typical use case is a mutable object which you want to make immutable, without having to implement a
  * dedicated immutable class. This is easily achieved by defining a readonly proxy interface protocol
  * (i.e. exposing accessor methods only) and returning the proxy object, instead of the underlying mutable
- * object, where mutability must be prevented.
+ * object, for which mutability must be prevented.
  *
  * Proxy objects can therefore be useful when carefully designing immutable classes, namely by having public
  * methods return only immutable objects or readonly proxies to immutable internal objects.
@@ -30,8 +30,9 @@
  * to @optional selectors before calling them.
  *
  * The proxy object introduces an additionaly safety indirection layer in comparison to the brute-force approach
- * of C-casting to id<RestrictedProtocol>. This approach works but makes it easy to cast the object back to its
- * original identity (either by mistake or on purpose), allowing access to the unrestricted interface.
+ * of C-casting to id<RestrictedProtocol>. The later approach would namely lead to compile-time errors, but it 
+ * is still easy to cast the object back to its original identity (either by mistake or on purpose), allowing 
+ * access to the unrestricted interface.
  *
  * The proxy object does not retain the object it is created from, and if the object gets deallocated, all 
  * associated proxy objects are automatically set to nil.
@@ -48,7 +49,7 @@
  * conforms to the protocol given as parameter, you should therefore store the result as id<protocol> for 
  * further compiler-friendly use
  *
- * Currently the target cannot be another proxy object
+ * Currently the target cannot be another NSProxy object
  */
 - (id)initWithTarget:(id)target protocol:(Protocol *)protocol;
 
@@ -56,6 +57,9 @@
 
 @interface NSObject (HLSRestrictedInterfaceProxy)
 
+/**
+ * Convenient proxy creation
+ */
 - (id)proxyWithRestrictedInterface:(Protocol *)protocol;
 
 @end

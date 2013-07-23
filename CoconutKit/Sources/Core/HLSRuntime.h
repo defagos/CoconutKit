@@ -38,6 +38,17 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
                                                                        BOOL isRequiredMethod,
                                                                        BOOL isInstanceMethod,
                                                                        unsigned int *pCount);
+
+/**
+ * Return the method description for a method implemented by a given protocol or one of its
+ * parent protocols (unlike protocol_getMethodDescription which does not look at parent
+ * protocols)
+ */
+struct objc_method_description hls_protocol_getMethodDescription(Protocol *protocol,
+                                                                 SEL selector,
+                                                                 BOOL isRequiredMethod,
+                                                                 BOOL isInstanceMethod);
+
 /**
  * Return YES iff the class or one of its superclasses conforms to the given protocol. This
  * is similar to class_conformsToProtocol, but taking superclasses into account. As for

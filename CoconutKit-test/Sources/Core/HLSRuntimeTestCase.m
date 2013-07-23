@@ -348,6 +348,75 @@
     free(RuntimeTestCompositeProtocol_optionalInstanceMethodDescriptions);
 }
 
+- (void)test_protocol_getMethodDescription
+{
+    struct objc_method_description methodDescription1 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          YES,
+                                                                                          NO);
+    GHAssertNotNULL(methodDescription1.name, nil);
+
+    struct objc_method_description methodDescription2 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          NO,
+                                                                                          NO);
+    GHAssertNULL(methodDescription2.name, nil);
+    
+    struct objc_method_description methodDescription3 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          NO,
+                                                                                          YES);
+    GHAssertNULL(methodDescription3.name, nil);
+    
+    struct objc_method_description methodDescription4 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          YES,
+                                                                                          YES);
+    GHAssertNULL(methodDescription4.name, nil);
+    
+    struct objc_method_description methodDescription5 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalSubProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          YES,
+                                                                                          NO);
+    GHAssertNotNULL(methodDescription5.name, nil);
+    
+    struct objc_method_description methodDescription6 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalSubProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          NO,
+                                                                                          NO);
+    GHAssertNULL(methodDescription6.name, nil);
+    
+    struct objc_method_description methodDescription7 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalSubProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          NO,
+                                                                                          YES);
+    GHAssertNULL(methodDescription7.name, nil);
+    
+    struct objc_method_description methodDescription8 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalSubProtocolA),
+                                                                                          @selector(classMethodA1),
+                                                                                          YES,
+                                                                                          YES);
+    GHAssertNULL(methodDescription8.name, nil);
+    
+    struct objc_method_description methodDescription9 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalSubProtocolA),
+                                                                                          @selector(classMethodA2),
+                                                                                          NO,
+                                                                                          NO);
+    GHAssertNotNULL(methodDescription9.name, nil);
+    
+    struct objc_method_description methodDescription10 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalSubProtocolA),
+                                                                                           @selector(methodA1),
+                                                                                           YES,
+                                                                                           YES);
+    GHAssertNotNULL(methodDescription10.name, nil);
+
+    struct objc_method_description methodDescription11 = hls_protocol_getMethodDescription(@protocol(RuntimeTestFormalSubProtocolA),
+                                                                                           @selector(methodA2),
+                                                                                           NO,
+                                                                                           YES);
+    GHAssertNotNULL(methodDescription11.name, nil);
+}
+
 - (void)test_class_conformsToProtocol
 {
     GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass1 class], @protocol(NSObject)), nil);

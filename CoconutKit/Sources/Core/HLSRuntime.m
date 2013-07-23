@@ -93,6 +93,34 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
     return methodDescriptions;
 }
 
+struct objc_method_description hls_protocol_getMethodDescription(Protocol *protocol,
+                                                                 SEL selector,
+                                                                 BOOL isRequiredMethod,
+                                                                 BOOL isInstanceMethod)
+{
+    struct objc_method_description methodDescription = protocol_getMethodDescription(protocol, selector, isRequiredMethod, isInstanceMethod);
+    if (methodDescription.name) {
+        return methodDescription;
+    }
+        
+    // Climb up the protocol inheritance hierarchy
+    struct objc_method_description matchingMethodDescription;
+    memset(&matchingMethodDescription, 0, sizeof(struct objc_method_description));
+    
+    unsigned int numberOfParentProtocols = 0;
+    Protocol **parentProtocols = protocol_copyProtocolList(protocol, &numberOfParentProtocols);
+    for (unsigned int i = 0; i < numberOfParentProtocols; ++i) {
+        Protocol *parentProtocol = parentProtocols[i];
+        struct objc_method_description parentMethodDescription = hls_protocol_getMethodDescription(parentProtocol, selector, isRequiredMethod, isInstanceMethod);
+        if (parentMethodDescription.name) {
+            matchingMethodDescription = parentMethodDescription;
+            break;
+        }
+    }
+    free(parentProtocols);
+    return matchingMethodDescription;
+}
+
 BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol)
 {
     Class class = cls;
