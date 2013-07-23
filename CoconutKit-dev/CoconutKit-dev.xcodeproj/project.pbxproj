@@ -327,6 +327,8 @@
 		6FA5BDC815E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */; };
 		6FA5BDC915E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */; };
 		6FA5BDCA15E34AF100E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */; };
+		6FA89142179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA89141179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m */; };
+		6FA89143179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA89141179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m */; };
 		6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
 		6FAB921E16DA70AB00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
 		6FAB923216DA7FA300599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -700,6 +702,8 @@
 		6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
 		6FA5BDC715E34AD500E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
+		6FA89140179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxy.h; sourceTree = "<group>"; };
+		6FA89141179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxy.m; sourceTree = "<group>"; };
 		6FAB921C16DA709600599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6FAB922E16DA7FA300599256 /* HLSFileURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileURLConnection.h; sourceTree = "<group>"; };
 		6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileURLConnection.m; sourceTree = "<group>"; };
@@ -1408,6 +1412,8 @@
 				6FADE63F14BA04A6007EE121 /* HLSNotifications.h */,
 				6FADE64014BA04A6007EE121 /* HLSNotifications.m */,
 				6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */,
+				6FA89140179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.h */,
+				6FA89141179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m */,
 				6FADE64314BA04A6007EE121 /* HLSRuntime.h */,
 				6FADE64414BA04A6007EE121 /* HLSRuntime.m */,
 				6FCA2DDA1679E3EB0011CFDA /* HLSStandardFileManager.h */,
@@ -2554,6 +2560,7 @@
 				6F58C53217944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
 				6F3D1D7C1795712E0056FF4E /* HLSTextView.m in Sources */,
 				6F3D1D82179571440056FF4E /* TextViewsDemoViewController.m in Sources */,
+				6FA89142179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2728,6 +2735,7 @@
 				6F58C53317944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
 				6F3D1D7D1795712E0056FF4E /* HLSTextView.m in Sources */,
 				6F3D1D83179571440056FF4E /* TextViewsDemoViewController.m in Sources */,
+				6FA89143179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

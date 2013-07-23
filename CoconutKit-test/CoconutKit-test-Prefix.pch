@@ -46,6 +46,7 @@
     #import "HLSOptionalFeatures.h"
     #import "HLSPlaceholderInsetSegue.h"
     #import "HLSPlaceholderViewController.h"
+    #import "HLSRestrictedInterfaceProxy.h"
     #import "HLSRuntime.h"
     #import "HLSSlideshow.h"
     #import "HLSStackController.h"
