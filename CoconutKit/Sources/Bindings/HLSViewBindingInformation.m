@@ -94,7 +94,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         return [self.formattingTarget performSelector:self.formattingSelector withObject:value];
-#pragma clang diagnostic push
+#pragma clang diagnostic pop
     }
     else {
         return value;
