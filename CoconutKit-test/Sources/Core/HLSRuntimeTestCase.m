@@ -201,7 +201,10 @@
 
 @end
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-root-class"
 @interface RuntimeTestClass9   // No NSObject superclass, no protocol
+#pragma clang diagnostic pop
 
 @end
 
