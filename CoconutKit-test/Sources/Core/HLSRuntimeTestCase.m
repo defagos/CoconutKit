@@ -13,9 +13,11 @@
 @protocol RuntimeTestFormalProtocolA <NSObject>
 
 @required
++ (void)classMethodA1;
 - (void)methodA1;
 
 @optional
++ (void)classMethodA2;
 - (void)methodA2;
 
 @end
@@ -24,9 +26,11 @@
 
 @required
 - (void)methodA3;
++ (void)classMethodA3;
 
 @optional
 - (void)methodA4;
++ (void)classMethodA4;
 
 @end
 
@@ -34,9 +38,11 @@
 
 @optional
 - (void)methodA2;
++ (void)classMethodA2;
 
 @required
 - (void)methodA3;
++ (void)classMethodA3;
 
 @end
 
@@ -44,16 +50,27 @@
 
 @required
 - (void)methodB1;
++ (void)classMethodB1;
 
 @optional
 - (void)methodB2;
++ (void)classMethodB2;
 
 @end
 
-@interface RuntimeTestClass1 : NSObject <RuntimeTestFormalProtocolA> {
-@private
+@protocol RuntimeTestCompositeProtocol <RuntimeTestFormalProtocolA, RuntimeTestInformalProtocolA, RuntimeTestFormalProtocolB>
 
-}
+@required
+- (void)methodC1;
++ (void)classMethodC1;
+
+@optional
+- (void)methodC2;
++ (void)classMethodC2;
+
+@end
+
+@interface RuntimeTestClass1 : NSObject <RuntimeTestFormalProtocolA>
 
 @end
 
@@ -62,7 +79,13 @@
 - (void)methodA1
 {}
 
++ (void)classMethodA1
+{}
+
 - (void)methodA2
+{}
+
++ (void)classMethodA2
 {}
 
 @end
@@ -76,7 +99,13 @@
 - (void)methodB1
 {}
 
++ (void)classMethodB1
+{}
+
 - (void)methodB2
+{}
+
++ (void)classMethodB2
 {}
 
 @end
@@ -90,6 +119,9 @@
 - (void)methodB1
 {}
 
++ (void)classMethodB1
+{}
+
 @end
 
 @interface RuntimeTestClass2 : NSObject <RuntimeTestFormalProtocolA>
@@ -99,6 +131,9 @@
 @implementation RuntimeTestClass2
 
 - (void)methodA1
+{}
+
++ (void)classMethodA1
 {}
 
 @end
@@ -112,7 +147,13 @@
 - (void)methodA2
 {}
 
++ (void)classMethodA2
+{}
+
 - (void)methodA3
+{}
+
++ (void)classMethodA3
 {}
 
 @end
@@ -126,6 +167,9 @@
 - (void)methodA3
 {}
 
++ (void)classMethodA3
+{}
+
 @end
 
 @interface RuntimeTestClass5 : NSObject <RuntimeTestFormalSubProtocolA>
@@ -137,13 +181,25 @@
 - (void)methodA1
 {}
 
++ (void)classMethodA1
+{}
+
 - (void)methodA2
+{}
+
++ (void)classMethodA2
 {}
 
 - (void)methodA3
 {}
 
++ (void)classMethodA3
+{}
+
 - (void)methodA4
+{}
+
++ (void)classMethodA4
 {}
 
 @end
@@ -157,8 +213,13 @@
 - (void)methodA1
 {}
 
++ (void)classMethodA1
+{}
 
 - (void)methodA3
+{}
+
++ (void)classMethodA3
 {}
 
 @end
@@ -179,7 +240,13 @@
 - (void)methodA1
 {}
 
++ (void)classMethodA1
+{}
+
 - (void)methodA3
+{}
+
++ (void)classMethodA3
 {}
 
 @end
@@ -217,6 +284,69 @@
 @implementation HLSRuntimeTestCase
 
 #pragma mark Tests
+
+- (void)test_protocol_copyMethodDescriptionList
+{
+    unsigned int NSObject_numberOfRequiredClassMethods = 0;
+    struct objc_method_description *NSObject_requiredClassMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), YES, NO, &NSObject_numberOfRequiredClassMethods);
+    GHAssertNULL(NSObject_requiredClassMethodDescriptions, nil);
+    GHAssertEquals(NSObject_numberOfRequiredClassMethods, 0U, nil);
+    free(NSObject_requiredClassMethodDescriptions);
+    
+    unsigned int NSObject_numberOfRequiredInstanceMethods = 0;
+    struct objc_method_description *NSObject_requiredInstanceMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), YES, YES, &NSObject_numberOfRequiredInstanceMethods);
+    GHAssertNotNULL(NSObject_requiredInstanceMethodDescriptions, nil);
+    GHAssertEquals(NSObject_numberOfRequiredInstanceMethods, 20U, nil);     // -debugDescription, even though marked as @optional, is @required
+    free(NSObject_requiredInstanceMethodDescriptions);
+
+    unsigned int NSObject_numberOfOptionalClassMethods = 0;
+    struct objc_method_description *NSObject_optionalClassMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), NO, NO, &NSObject_numberOfOptionalClassMethods);
+    GHAssertNULL(NSObject_requiredClassMethodDescriptions, nil);
+    GHAssertEquals(NSObject_numberOfOptionalClassMethods, 0U, nil);
+    free(NSObject_optionalClassMethodDescriptions);
+    
+    unsigned int NSObject_numberOfOptionalInstanceMethods = 0;
+    struct objc_method_description *NSObject_optionalInstanceMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), NO, YES, &NSObject_numberOfOptionalInstanceMethods);
+    GHAssertNotNULL(NSObject_requiredInstanceMethodDescriptions, nil);
+    GHAssertEquals(NSObject_numberOfOptionalInstanceMethods, 0U, nil);
+    free(NSObject_optionalInstanceMethodDescriptions);
+    
+    unsigned int RuntimeTestCompositeProtocol_numberOfRequiredClassMethods = 0;
+    struct objc_method_description *RuntimeTestCompositeProtocol_requiredClassMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(RuntimeTestCompositeProtocol),
+                                                                                                                                          YES,
+                                                                                                                                          NO,
+                                                                                                                                          &RuntimeTestCompositeProtocol_numberOfRequiredClassMethods);
+    GHAssertNotNULL(RuntimeTestCompositeProtocol_requiredClassMethodDescriptions, nil);
+    GHAssertEquals(RuntimeTestCompositeProtocol_numberOfRequiredClassMethods - NSObject_numberOfRequiredClassMethods, 4U, nil);
+    free(RuntimeTestCompositeProtocol_requiredClassMethodDescriptions);
+    
+    unsigned int RuntimeTestCompositeProtocol_numberOfRequiredInstanceMethods = 0;
+    struct objc_method_description *RuntimeTestCompositeProtocol_requiredInstanceMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(RuntimeTestCompositeProtocol),
+                                                                                                                                             YES,
+                                                                                                                                             YES,
+                                                                                                                                             &RuntimeTestCompositeProtocol_numberOfRequiredInstanceMethods);
+    GHAssertNotNULL(RuntimeTestCompositeProtocol_requiredInstanceMethodDescriptions, nil);
+    GHAssertEquals(RuntimeTestCompositeProtocol_numberOfRequiredInstanceMethods - NSObject_numberOfRequiredInstanceMethods, 4U, nil);
+    free(RuntimeTestCompositeProtocol_requiredInstanceMethodDescriptions);
+    
+    unsigned int RuntimeTestCompositeProtocol_numberOfOptionalClassMethods = 0;
+    struct objc_method_description *RuntimeTestCompositeProtocol_optionalClassMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(RuntimeTestCompositeProtocol),
+                                                                                                                                          NO,
+                                                                                                                                          NO,
+                                                                                                                                          &RuntimeTestCompositeProtocol_numberOfOptionalClassMethods);
+    GHAssertNotNULL(RuntimeTestCompositeProtocol_optionalClassMethodDescriptions, nil);
+    GHAssertEquals(RuntimeTestCompositeProtocol_numberOfOptionalClassMethods - NSObject_numberOfOptionalClassMethods, 3U, nil);                 // +classMethodA2 appears twice, counted once
+    free(RuntimeTestCompositeProtocol_optionalClassMethodDescriptions);
+    
+    unsigned int RuntimeTestCompositeProtocol_numberOfOptionalInstanceMethods = 0;
+    struct objc_method_description *RuntimeTestCompositeProtocol_optionalInstanceMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(RuntimeTestCompositeProtocol),
+                                                                                                                                             NO,
+                                                                                                                                             YES,
+                                                                                                                                             &RuntimeTestCompositeProtocol_numberOfOptionalInstanceMethods);
+    GHAssertNotNULL(RuntimeTestCompositeProtocol_optionalInstanceMethodDescriptions, nil);
+    GHAssertEquals(RuntimeTestCompositeProtocol_numberOfOptionalInstanceMethods - NSObject_numberOfOptionalInstanceMethods, 3U, nil);           // -methodA2 appears twice, counted once
+    free(RuntimeTestCompositeProtocol_optionalInstanceMethodDescriptions);
+}
 
 - (void)test_class_conformsToProtocol
 {

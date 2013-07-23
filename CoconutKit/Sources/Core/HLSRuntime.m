@@ -71,7 +71,7 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
                         continue;
                     }
                     
-                    methodDescriptions[numberOfMethodDescriptions + numberOfNonDuplicateMethodDescriptions] = parentProtocolMethodDescriptions[j];
+                    methodDescriptions[numberOfMethodDescriptions + numberOfNonDuplicateMethodDescriptions] = parentProtocolMethodDescription;
                     ++numberOfNonDuplicateMethodDescriptions;
                 }
                 free(parentProtocolMethodDescriptions);
@@ -86,8 +86,6 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
         }
     }
     free(parentProtocols);
-    
-    // TODO: Remove duplicates; warn on conflict
     
     if (pCount) {
         *pCount = numberOfMethodDescriptions;
@@ -137,7 +135,7 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
         SEL selector = methodDescription.name;
         
         // This searches in superclasses as well
-        Method method = class_getInstanceMethod(cls, selector);
+        Method method = isInstanceMethod ? class_getInstanceMethod(cls, selector) : class_getClassMethod(cls, selector);
         if (! method) {
             result = NO;
             break;
