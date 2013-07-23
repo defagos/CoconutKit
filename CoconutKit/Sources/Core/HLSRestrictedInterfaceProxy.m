@@ -96,10 +96,11 @@
 - (BOOL)protocolDeclaresSelector:(SEL)selector
 {
     // Search in required methods first (should be the most common case for protocols defining an interface subset)
-    struct objc_method_description methodDescription = hls_protocol_getMethodDescription(_protocol, selector, YES, YES);
+    // Remark: Unlike the documentation says, protocol_getMethodDescription takes into account parent protocols as well
+    struct objc_method_description methodDescription = protocol_getMethodDescription(_protocol, selector, YES, YES);
     if (! methodDescription.name) {
         // Search in optional methods
-        methodDescription = hls_protocol_getMethodDescription(_protocol, selector, NO, YES);
+        methodDescription = protocol_getMethodDescription(_protocol, selector, NO, YES);
         if (! methodDescription.name) {
             return NO;
         }

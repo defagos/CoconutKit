@@ -10,6 +10,10 @@
 
 /**
  * The following methods can be safely used in pure C code
+ *
+ * Remark: Unlike the documentation says, protocol_getMethodDescription also takes into account parent protocols
+ *         (see http://www.opensource.apple.com/source/objc4/objc4-532.2/runtime/objc-runtime-new.mm). There is
+ *         therefore no need for an hls_protocol_getMethodDescription function
  */
 
 /**
@@ -38,16 +42,6 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
                                                                        BOOL isRequiredMethod,
                                                                        BOOL isInstanceMethod,
                                                                        unsigned int *pCount);
-
-/**
- * Return the method description for a method implemented by a given protocol or one of its
- * parent protocols (unlike protocol_getMethodDescription which does not look at parent
- * protocols)
- */
-struct objc_method_description hls_protocol_getMethodDescription(Protocol *protocol,
-                                                                 SEL selector,
-                                                                 BOOL isRequiredMethod,
-                                                                 BOOL isInstanceMethod);
 
 /**
  * Return YES iff the class or one of its superclasses conforms to the given protocol. This
