@@ -8,9 +8,10 @@
 
 #import "HLSRestrictedInterfaceProxyTestCase.h"
 
-// TODO: Test class methods
-
 @protocol CompatibleRestrictedInterfaceA <NSObject>
+
++ (NSInteger)classMethod2;
++ (NSInteger)classMethod3;
 
 - (NSInteger)method2;
 - (NSInteger)method3;
@@ -19,6 +20,9 @@
 
 @protocol CompatibleRestrictedInterfaceB <NSObject>
 
++ (NSInteger)classMethod3;
++ (NSInteger)classMethod4;
+
 - (NSInteger)method3;
 - (NSInteger)method4;
 
@@ -26,10 +30,16 @@
 
 @protocol CompatibleRestrictedInterfaceC <NSObject>
 
++ (NSInteger)classMethod2;
++ (NSInteger)classMethod3;
+
 - (NSInteger)method2;
 - (NSInteger)method3;
 
 @optional
++ (NSInteger)classMethod5;
++ (NSInteger)classMethod6;
+
 - (NSInteger)method5;
 - (NSInteger)method6;
 
@@ -37,11 +47,16 @@
 
 @protocol CompatibleRestrictedInterfaceBSubset <NSObject>
 
++ (NSInteger)classMethod3;
+
 - (NSInteger)method3;
 
 @end
 
 @protocol IncompatibleRestrictedInterfaceA <NSObject>
+
++ (NSInteger)classMethod3;
++ (NSInteger)classMethod6;
 
 - (NSInteger)method3;
 - (NSInteger)method6;
@@ -52,6 +67,9 @@
 // they aren't
 @protocol IncompatibleRestrictedSubInterfaceA <IncompatibleRestrictedInterfaceA>
 
++ (NSInteger)classMethod3;
++ (NSInteger)classMethod4;
+
 - (NSInteger)method3;
 - (NSInteger)method4;
 
@@ -60,11 +78,19 @@
 // Incompatible method prototype
 @protocol IncompatibleRestrictedInterfaceB <NSObject>
 
++ (void)classMethod2;
+
 - (void)method2;
 
 @end
 
 @interface FullInterfaceTestClass : NSObject
+
++ (NSInteger)classMethod1;
++ (NSInteger)classMethod2;
++ (NSInteger)classMethod3;
++ (NSInteger)classMethod4;
++ (NSInteger)classMethod5;
 
 - (NSInteger)method1;
 - (NSInteger)method2;
@@ -75,6 +101,31 @@
 @end
 
 @implementation FullInterfaceTestClass
+
++ (NSInteger)classMethod1
+{
+    return 1;
+}
+
++ (NSInteger)classMethod2
+{
+    return 2;
+}
+
++ (NSInteger)classMethod3
+{
+    return 3;
+}
+
++ (NSInteger)classMethod4
+{
+    return 4;
+}
+
++ (NSInteger)classMethod5
+{
+    return 5;
+}
 
 - (NSInteger)method1
 {
@@ -111,33 +162,31 @@
 {
     FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
     
-    GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceA)], nil);
-    GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)], nil);
-    GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)], nil);
-    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceA)], nil);
-    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)], nil);
-    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)], nil);
+    id<CompatibleRestrictedInterfaceA> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
+    GHAssertNil([[[HLSRestrictedInterfaceProxy alloc] initWithTarget:proxyB protocol:@protocol(CompatibleRestrictedInterfaceBSubset)] autorelease], nil);
+    GHAssertFalse([target isProxy], nil);
+    GHAssertTrue([proxyB isProxy], nil);
     
-    id<CompatibleRestrictedInterfaceA> proxy = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
-    GHAssertNil([[[HLSRestrictedInterfaceProxy alloc] initWithTarget:proxy protocol:@protocol(CompatibleRestrictedInterfaceBSubset)] autorelease], nil);
-}
-
-- (void)testMethodCalls
-{
-    FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
-    
-    id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
-    
-    // According to the -[NSObject isProxy] documentation: isKindOfClass: and isMemberOfClass:, these methods test the target
+    // According to the -[NSObject isProxy] documentation of -isKindOfClass: and -isMemberOfClass:, these methods test the target
     // identity, not the proxy
     GHAssertTrue([proxyB isKindOfClass:[FullInterfaceTestClass class]], nil);
     GHAssertTrue([proxyB isMemberOfClass:[FullInterfaceTestClass class]], nil);
     GHAssertFalse([proxyB isKindOfClass:[HLSRestrictedInterfaceProxy class]], nil);
     GHAssertFalse([proxyB isKindOfClass:[HLSRestrictedInterfaceProxy class]], nil);
     
-    GHAssertFalse([target isProxy], nil);
-    GHAssertTrue([proxyB isProxy], nil);
+    GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceA)], nil);
+    GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)], nil);
+    GHAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)], nil);
+    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceA)], nil);
+    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)], nil);
+    GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)], nil);
+}
+
+- (void)testInstanceMethodCalls
+{
+    FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
     
+    id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
     GHAssertEquals([proxyB method3], 3, nil);
     GHAssertEquals([proxyB method4], 4, nil);
     
