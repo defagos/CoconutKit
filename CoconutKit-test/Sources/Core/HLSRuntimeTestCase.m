@@ -167,9 +167,9 @@
 
 @end
 
-// Protocols on class categories (BAD IDEA!). The class is NOT considered to conform to 
-// the protocol at runtime
-@interface RuntimeTestClass7 () <RuntimeTestFormalProtocolA>
+// Protocols on class categories (bad idea in general, this hides important information for
+// subclassers)
+@interface RuntimeTestClass7 () <RuntimeTestFormalSubProtocolA>
 
 @end
 
@@ -179,15 +179,19 @@
 - (void)methodA1
 {}
 
+- (void)methodA3
+{}
+
 @end
 
 @interface RuntimeTestClass8 : NSObject
 
 @end
 
-// Protocols on class extensions (BAD IDEA!). The class is NOT considered to conform to 
-// the protocol at runtime
-@interface RuntimeTestClass8 (Category) <RuntimeTestFormalProtocolA>
+// Protocols on class extensions (bad idea in general, this decreases interface locality,
+// and bypasses compiler checks, most). Moreover, the class is NOT considered conforming
+// to the protocol
+@interface RuntimeTestClass8 (Category) <RuntimeTestFormalSubProtocolA>
 
 // Method body not even mandatory for @required methods! Bad!
 
@@ -262,8 +266,8 @@
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestFormalProtocolB)), nil);
     
     GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(NSObject)), nil);
-    GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalProtocolA)), nil);
-    GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
+    GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalProtocolA)), nil);
+    GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalSubProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestFormalProtocolB)), nil);
     
@@ -290,7 +294,7 @@
     GHAssertTrue(hls_class_conformsToInformalProtocol([RuntimeTestClass4 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertTrue(hls_class_conformsToInformalProtocol([RuntimeTestClass5 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertTrue(hls_class_conformsToInformalProtocol([RuntimeTestClass6 class], @protocol(RuntimeTestInformalProtocolA)), nil);
-    GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestInformalProtocolA)), nil);
+    GHAssertTrue(hls_class_conformsToInformalProtocol([RuntimeTestClass7 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass8 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToInformalProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestInformalProtocolA)), nil);
 }
