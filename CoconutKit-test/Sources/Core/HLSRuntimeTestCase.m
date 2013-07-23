@@ -432,6 +432,7 @@
     GHAssertFalse(hls_class_conformsToInformalProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestInformalProtocolA)), nil);
 }
 
+// This tests hls_class_implementsProtocolMethods as well
 - (void)test_class_implementsProtocol
 {
     GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(NSObject)), nil);
@@ -499,6 +500,14 @@
     GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalSubProtocolA)), nil);
     GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)), nil);
+}
+
+- (void)test_class_isSubclassOfClass
+{
+    GHAssertTrue(hls_class_isSubclassOfClass([UIView class], [NSObject class]), nil);
+    GHAssertTrue(hls_class_isSubclassOfClass([UIView class], [UIView class]), nil);
+    GHAssertFalse(hls_class_isSubclassOfClass([NSObject class], [UIView class]), nil);
+    GHAssertFalse(hls_class_isSubclassOfClass([UIView class], [UIViewController class]), nil);
 }
 
 @end

@@ -89,6 +89,6 @@ IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
 
 /**
  * Return YES iff subclass is a subclass of superclass, or if subclass == superclass (in agreement with
- * the behavior of +[NSObject isSubclassOfClass:]
+ * the behavior of +[NSObject isSubclassOfClass:])
  */
 BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass);
