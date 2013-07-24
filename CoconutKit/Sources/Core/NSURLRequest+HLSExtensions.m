@@ -21,9 +21,9 @@ static id swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp(NSU
 
 + (void)load
 {
-    s_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp = (id (*)(id, SEL, id, NSURLRequestCachePolicy, NSTimeInterval))HLSSwizzleSelector(self, 
-                                                                                                                                                   @selector(initWithURL:cachePolicy:timeoutInterval:),
-                                                                                                                                                   (IMP)swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp);
+    s_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp = (id (*)(id, SEL, id, NSURLRequestCachePolicy, NSTimeInterval))hls_class_swizzleSelector(self,
+                                                                                                                                                          @selector(initWithURL:cachePolicy:timeoutInterval:),
+                                                                                                                                                          (IMP)swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp);
 }
 
 @end

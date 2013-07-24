@@ -52,9 +52,9 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
         // TODO: Use hls_class_conformsToProtocol after merge with feature/url-connection
         if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate))) {
             NSString *className = [NSString stringWithCString:class_getName(class) encoding:NSUTF8StringEncoding];
-            IMP UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp = HLSSwizzleSelector(class, 
-                                                                                                          @selector(application:didFinishLaunchingWithOptions:), 
-                                                                                                          (IMP)swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions);
+            IMP UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp = hls_class_swizzleSelector(class,
+                                                                                                                 @selector(application:didFinishLaunchingWithOptions:),
+                                                                                                                 (IMP)swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOptions);
             
             // If not implemented (which might happen if the application is initialized using a nib only, i.e. if the root view controller is set in
             // the application nib), inject a method

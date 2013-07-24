@@ -36,15 +36,15 @@ static void swizzled_UIPopoverController__setContentViewController_animated_Imp(
 {
     // initWithContentViewController: sadly does not rely on setContentViewController:animated: to set its content view controller. Must
     // swizzle it as well
-    s_UIPopoverController__initWithContentViewController_Imp = (id (*)(id, SEL, id))HLSSwizzleSelector(self,
-                                                                                                       @selector(initWithContentViewController:),
-                                                                                                       (IMP)swizzled_UIPopoverController__initWithContentViewController_Imp);
-    s_UIPopoverController__dealloc_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                               @selector(dealloc),
-                                                                               (IMP)swizzled_UIPopoverController__dealloc_Imp);
-    s_UIPopoverController__setContentViewController_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self,
-                                                                                                                   @selector(setContentViewController:animated:),
-                                                                                                                   (IMP)swizzled_UIPopoverController__setContentViewController_animated_Imp);
+    s_UIPopoverController__initWithContentViewController_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
+                                                                                                              @selector(initWithContentViewController:),
+                                                                                                              (IMP)swizzled_UIPopoverController__initWithContentViewController_Imp);
+    s_UIPopoverController__dealloc_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                      @selector(dealloc),
+                                                                                      (IMP)swizzled_UIPopoverController__dealloc_Imp);
+    s_UIPopoverController__setContentViewController_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzleSelector(self,
+                                                                                                                          @selector(setContentViewController:animated:),
+                                                                                                                          (IMP)swizzled_UIPopoverController__setContentViewController_animated_Imp);
 }
 
 @end

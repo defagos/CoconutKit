@@ -66,6 +66,9 @@
 		6F97E17D15E60C8700EF6F62 /* HLSObjectAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F97E17C15E60C8400EF6F62 /* HLSObjectAnimation.m */; };
 		6FA5BDA215E2923900E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDA115E2923900E5182E /* HLSLayerAnimation.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
+		6FA8913B179D94F800AB7BD4 /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8913A179D94F800AB7BD4 /* HLSRuntimeTestCase.m */; };
+		6FA89146179D965700AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA89145179D965700AB7BD4 /* HLSRestrictedInterfaceProxy.m */; };
+		6FA89149179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA89148179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.m */; };
 		6FAB922316DA70D700599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB922216DA70D700599256 /* MobileCoreServices.framework */; };
 		6FAB923B16DA7FB100599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923816DA7FB100599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB923C16DA7FB100599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923A16DA7FB100599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -291,6 +294,12 @@
 		6FA5BDA115E2923900E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA74D41140500CC0043693E /* UIView+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FA89139179D94F700AB7BD4 /* HLSRuntimeTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntimeTestCase.h; sourceTree = "<group>"; };
+		6FA8913A179D94F800AB7BD4 /* HLSRuntimeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntimeTestCase.m; sourceTree = "<group>"; };
+		6FA89144179D965700AB7BD4 /* HLSRestrictedInterfaceProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxy.h; sourceTree = "<group>"; };
+		6FA89145179D965700AB7BD4 /* HLSRestrictedInterfaceProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxy.m; sourceTree = "<group>"; };
+		6FA89147179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxyTestCase.h; sourceTree = "<group>"; };
+		6FA89148179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxyTestCase.m; sourceTree = "<group>"; };
 		6FAB922216DA70D700599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6FAB923716DA7FB100599256 /* HLSFileURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileURLConnection.h; sourceTree = "<group>"; };
 		6FAB923816DA7FB100599256 /* HLSFileURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileURLConnection.m; sourceTree = "<group>"; };
@@ -655,6 +664,10 @@
 				6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */,
 				6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */,
 				6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */,
+				6FA89147179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.h */,
+				6FA89148179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.m */,
+				6FA89139179D94F700AB7BD4 /* HLSRuntimeTestCase.h */,
+				6FA8913A179D94F800AB7BD4 /* HLSRuntimeTestCase.m */,
 				6F3B060A14BC4C2D0026F512 /* HLSValidatorsTestCase.h */,
 				6F3B060B14BC4C2D0026F512 /* HLSValidatorsTestCase.m */,
 				6F897871152B505D006C8231 /* HLSZeroingWeakRefTestCase.h */,
@@ -775,6 +788,8 @@
 				6FADE71E14BA04B6007EE121 /* HLSNotifications.h */,
 				6FADE71F14BA04B6007EE121 /* HLSNotifications.m */,
 				6F159BE715A5747A0020AFAC /* HLSOptionalFeatures.h */,
+				6FA89144179D965700AB7BD4 /* HLSRestrictedInterfaceProxy.h */,
+				6FA89145179D965700AB7BD4 /* HLSRestrictedInterfaceProxy.m */,
 				6FADE72214BA04B6007EE121 /* HLSRuntime.h */,
 				6FADE72314BA04B6007EE121 /* HLSRuntime.m */,
 				6FCA2DE21679E41F0011CFDA /* HLSStandardFileManager.h */,
@@ -1042,7 +1057,7 @@
 		6F33347A13FAF9E0000FC9FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Hortis;
 			};
 			buildConfigurationList = 6F33347D13FAF9E0000FC9FD /* Build configuration list for PBXProject "CoconutKit-test" */;
@@ -1253,6 +1268,9 @@
 				6FC8EDBE176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.m in Sources */,
 				6FF74C7C177D46C800BD846D /* HLSApplicationInformation.m in Sources */,
 				6F3D1D90179572400056FF4E /* HLSTextView.m in Sources */,
+				6FA8913B179D94F800AB7BD4 /* HLSRuntimeTestCase.m in Sources */,
+				6FA89146179D965700AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */,
+				6FA89149179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,6 +1303,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -1309,6 +1328,7 @@
 				);
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -1332,6 +1352,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-test-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1348,6 +1369,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-test-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
