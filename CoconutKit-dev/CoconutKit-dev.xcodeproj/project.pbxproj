@@ -51,6 +51,8 @@
 		6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F0BFE2C163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
+		6F10E38C17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */; };
+		6F10E38D17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */; };
 		6F159A6C15A554250020AFAC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7EB14BA04C8007EE121 /* MainWindow.xib */; };
 		6F159A7115A554250020AFAC /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80214BA04C8007EE121 /* FixedSizeViewController.xib */; };
 		6F159A7215A554250020AFAC /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80614BA04C8007EE121 /* HeavyViewController.xib */; };
@@ -153,8 +155,6 @@
 		6F159ADD15A554250020AFAC /* HLSNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68A14BA04A6007EE121 /* HLSNibView.m */; };
 		6F159ADE15A554250020AFAC /* HLSSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68C14BA04A6007EE121 /* HLSSubtitleTableViewCell.m */; };
 		6F159ADF15A554250020AFAC /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68F14BA04A6007EE121 /* HLSTableViewCell.m */; };
-		6F159AE015A554250020AFAC /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69114BA04A6007EE121 /* HLSTextField.m */; };
-		6F159AE215A554250020AFAC /* HLSTextFieldTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69514BA04A6007EE121 /* HLSTextFieldTouchDetector.m */; };
 		6F159AE315A554250020AFAC /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */; };
 		6F159AE415A554250020AFAC /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69914BA04A6007EE121 /* HLSValue2TableViewCell.m */; };
 		6F159AE515A554250020AFAC /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */; };
@@ -376,8 +376,6 @@
 		6FADE6E314BA04A7007EE121 /* HLSNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68A14BA04A6007EE121 /* HLSNibView.m */; };
 		6FADE6E414BA04A7007EE121 /* HLSSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68C14BA04A6007EE121 /* HLSSubtitleTableViewCell.m */; };
 		6FADE6E514BA04A7007EE121 /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68F14BA04A6007EE121 /* HLSTableViewCell.m */; };
-		6FADE6E614BA04A7007EE121 /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69114BA04A6007EE121 /* HLSTextField.m */; };
-		6FADE6E814BA04A7007EE121 /* HLSTextFieldTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69514BA04A6007EE121 /* HLSTextFieldTouchDetector.m */; };
 		6FADE6E914BA04A7007EE121 /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */; };
 		6FADE6EA14BA04A7007EE121 /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69914BA04A6007EE121 /* HLSValue2TableViewCell.m */; };
 		6FADE6EB14BA04A7007EE121 /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */; };
@@ -600,6 +598,8 @@
 		6F0C7D01163A7B7500C6C381 /* HLSAutorotationCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotationCompatibility.h; sourceTree = "<group>"; };
 		6F0F4DDE159CB7A700277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
+		6F10E38A17A0015100BFEF42 /* HLSViewTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewTouchDetector.h; sourceTree = "<group>"; };
+		6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewTouchDetector.m; sourceTree = "<group>"; };
 		6F159B4715A554250020AFAC /* CoconutKit-dev-ios4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev-ios4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
 		6F1F4DF915A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
@@ -798,10 +798,6 @@
 		6FADE68D14BA04A6007EE121 /* HLSTableViewCell+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTableViewCell+Protected.h"; sourceTree = "<group>"; };
 		6FADE68E14BA04A6007EE121 /* HLSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableViewCell.h; sourceTree = "<group>"; };
 		6FADE68F14BA04A6007EE121 /* HLSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableViewCell.m; sourceTree = "<group>"; };
-		6FADE69014BA04A6007EE121 /* HLSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextField.h; sourceTree = "<group>"; };
-		6FADE69114BA04A6007EE121 /* HLSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextField.m; sourceTree = "<group>"; };
-		6FADE69414BA04A6007EE121 /* HLSTextFieldTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextFieldTouchDetector.h; sourceTree = "<group>"; };
-		6FADE69514BA04A6007EE121 /* HLSTextFieldTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextFieldTouchDetector.m; sourceTree = "<group>"; };
 		6FADE69614BA04A6007EE121 /* HLSValue1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue1TableViewCell.h; sourceTree = "<group>"; };
 		6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
 		6FADE69814BA04A6007EE121 /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
@@ -1534,16 +1530,14 @@
 				6FADE68D14BA04A6007EE121 /* HLSTableViewCell+Protected.h */,
 				6FADE68E14BA04A6007EE121 /* HLSTableViewCell.h */,
 				6FADE68F14BA04A6007EE121 /* HLSTableViewCell.m */,
-				6FADE69014BA04A6007EE121 /* HLSTextField.h */,
-				6FADE69114BA04A6007EE121 /* HLSTextField.m */,
-				6FADE69414BA04A6007EE121 /* HLSTextFieldTouchDetector.h */,
-				6FADE69514BA04A6007EE121 /* HLSTextFieldTouchDetector.m */,
 				6F3D1D7A1795712E0056FF4E /* HLSTextView.h */,
 				6F3D1D7B1795712E0056FF4E /* HLSTextView.m */,
 				6FADE69614BA04A6007EE121 /* HLSValue1TableViewCell.h */,
 				6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */,
 				6FADE69814BA04A6007EE121 /* HLSValue2TableViewCell.h */,
 				6FADE69914BA04A6007EE121 /* HLSValue2TableViewCell.m */,
+				6F10E38A17A0015100BFEF42 /* HLSViewTouchDetector.h */,
+				6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */,
 				6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */,
 				6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */,
 				6F91452114CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.h */,
@@ -2430,8 +2424,6 @@
 				6FADE6E314BA04A7007EE121 /* HLSNibView.m in Sources */,
 				6FADE6E414BA04A7007EE121 /* HLSSubtitleTableViewCell.m in Sources */,
 				6FADE6E514BA04A7007EE121 /* HLSTableViewCell.m in Sources */,
-				6FADE6E614BA04A7007EE121 /* HLSTextField.m in Sources */,
-				6FADE6E814BA04A7007EE121 /* HLSTextFieldTouchDetector.m in Sources */,
 				6FADE6E914BA04A7007EE121 /* HLSValue1TableViewCell.m in Sources */,
 				6FADE6EA14BA04A7007EE121 /* HLSValue2TableViewCell.m in Sources */,
 				6FADE6EB14BA04A7007EE121 /* UINavigationBar+HLSExtensions.m in Sources */,
@@ -2554,6 +2546,7 @@
 				6F3D1D7C1795712E0056FF4E /* HLSTextView.m in Sources */,
 				6F3D1D82179571440056FF4E /* TextViewsDemoViewController.m in Sources */,
 				6FA89142179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */,
+				6F10E38C17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2605,8 +2598,6 @@
 				6F159ADD15A554250020AFAC /* HLSNibView.m in Sources */,
 				6F159ADE15A554250020AFAC /* HLSSubtitleTableViewCell.m in Sources */,
 				6F159ADF15A554250020AFAC /* HLSTableViewCell.m in Sources */,
-				6F159AE015A554250020AFAC /* HLSTextField.m in Sources */,
-				6F159AE215A554250020AFAC /* HLSTextFieldTouchDetector.m in Sources */,
 				6F159AE315A554250020AFAC /* HLSValue1TableViewCell.m in Sources */,
 				6F159AE415A554250020AFAC /* HLSValue2TableViewCell.m in Sources */,
 				6F159AE515A554250020AFAC /* UINavigationBar+HLSExtensions.m in Sources */,
@@ -2728,6 +2719,7 @@
 				6F3D1D7D1795712E0056FF4E /* HLSTextView.m in Sources */,
 				6F3D1D83179571440056FF4E /* TextViewsDemoViewController.m in Sources */,
 				6FA89143179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */,
+				6F10E38D17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

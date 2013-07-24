@@ -1,28 +1,30 @@
 //
-//  HLSTextFieldTouchDetector.m
+//  HLSViewTouchDetector.m
 //  CoconutKit
 //
-//  Created by Samuel Défago on 04.12.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Created by Samuel Défago on 24.07.13.
+//  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "HLSTextFieldTouchDetector.h"
+#import "HLSViewTouchDetector.h"
 
-@interface HLSTextFieldTouchDetector ()
+@interface HLSViewTouchDetector ()
 
-@property (nonatomic, assign) UITextField *textField;               // weak ref. Detector lifetime is managed by the text field
+@property (nonatomic, assign) UIView *view;               // weak ref. Detector lifetime is managed by the text field
 @property (nonatomic, retain) UIGestureRecognizer *gestureRecognizer;
 
 @end
 
-@implementation HLSTextFieldTouchDetector
+@implementation HLSViewTouchDetector
 
 #pragma mark Object creation and destruction
 
-- (id)initWithTextField:(UITextField *)textField
+- (id)initWithView:(UIView *)view beginNotificationName:(NSString *)beginNotificationName endNotificationName:(NSString *)endNotificationName
 {
+    NSAssert(beginNotificationName && endNotificationName, @"Notifications required");
+    
     if ((self = [super init])) {
-        self.textField = textField;
+        self.view = view;
         
         // Create a gesture recognizer capturing taps on the whole window
         self.gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self
@@ -33,20 +35,20 @@
         self.resigningFirstResponderOnTap = YES;
         
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(textFieldDidBeginEditing:)
-                                                     name:UITextFieldTextDidBeginEditingNotification
-                                                   object:textField];
+                                                 selector:@selector(viewDidBeginEditing:)
+                                                     name:beginNotificationName
+                                                   object:view];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(textFieldDidEndEditing:)
-                                                     name:UITextFieldTextDidEndEditingNotification
-                                                   object:textField];
+                                                 selector:@selector(viewDidEndEditing:)
+                                                     name:endNotificationName
+                                                   object:view];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.textField = nil;
+    self.view = nil;
     self.gestureRecognizer = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -57,17 +59,17 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-	return ! [touch.view isDescendantOfView:self.textField];
+	return ! [touch.view isDescendantOfView:self.view];
 }
 
 #pragma mark Notification callbacks
 
-- (void)textFieldDidBeginEditing:(NSNotification *)notification
+- (void)viewDidBeginEditing:(NSNotification *)notification
 {
     [[[UIApplication sharedApplication] keyWindow] addGestureRecognizer:self.gestureRecognizer];
 }
 
-- (void)textFieldDidEndEditing:(NSNotification *)notification
+- (void)viewDidEndEditing:(NSNotification *)notification
 {
     [[[UIApplication sharedApplication] keyWindow] removeGestureRecognizer:self.gestureRecognizer];
 }
@@ -77,8 +79,7 @@
 - (void)dismissKeyboard:(UIGestureRecognizer *)gestureRecognizer
 {
     if (self.resigningFirstResponderOnTap) {
-        // Dismiss the keyboard
-        [self.textField resignFirstResponder];        
+        [self.view resignFirstResponder];
     }
 }
 
