@@ -10,18 +10,12 @@
 
 @protocol CompatibleRestrictedInterfaceA <NSObject>
 
-+ (NSInteger)classMethod2;
-+ (NSInteger)classMethod3;
-
 - (NSInteger)method2;
 - (NSInteger)method3;
 
 @end
 
 @protocol CompatibleRestrictedInterfaceB <NSObject>
-
-+ (NSInteger)classMethod3;
-+ (NSInteger)classMethod4;
 
 - (NSInteger)method3;
 - (NSInteger)method4;
@@ -30,15 +24,10 @@
 
 @protocol CompatibleRestrictedInterfaceC <NSObject>
 
-+ (NSInteger)classMethod2;
-+ (NSInteger)classMethod3;
-
 - (NSInteger)method2;
 - (NSInteger)method3;
 
 @optional
-+ (NSInteger)classMethod5;
-+ (NSInteger)classMethod6;
 
 - (NSInteger)method5;
 - (NSInteger)method6;
@@ -47,16 +36,11 @@
 
 @protocol CompatibleRestrictedInterfaceBSubset <NSObject>
 
-+ (NSInteger)classMethod3;
-
 - (NSInteger)method3;
 
 @end
 
 @protocol IncompatibleRestrictedInterfaceA <NSObject>
-
-+ (NSInteger)classMethod3;
-+ (NSInteger)classMethod6;
 
 - (NSInteger)method3;
 - (NSInteger)method6;
@@ -67,9 +51,6 @@
 // they aren't
 @protocol IncompatibleRestrictedSubInterfaceA <IncompatibleRestrictedInterfaceA>
 
-+ (NSInteger)classMethod3;
-+ (NSInteger)classMethod4;
-
 - (NSInteger)method3;
 - (NSInteger)method4;
 
@@ -78,19 +59,11 @@
 // Incompatible method prototype
 @protocol IncompatibleRestrictedInterfaceB <NSObject>
 
-+ (void)classMethod2;
-
 - (void)method2;
 
 @end
 
 @interface FullInterfaceTestClass : NSObject
-
-+ (NSInteger)classMethod1;
-+ (NSInteger)classMethod2;
-+ (NSInteger)classMethod3;
-+ (NSInteger)classMethod4;
-+ (NSInteger)classMethod5;
 
 - (NSInteger)method1;
 - (NSInteger)method2;
@@ -101,31 +74,6 @@
 @end
 
 @implementation FullInterfaceTestClass
-
-+ (NSInteger)classMethod1
-{
-    return 1;
-}
-
-+ (NSInteger)classMethod2
-{
-    return 2;
-}
-
-+ (NSInteger)classMethod3
-{
-    return 3;
-}
-
-+ (NSInteger)classMethod4
-{
-    return 4;
-}
-
-+ (NSInteger)classMethod5
-{
-    return 5;
-}
 
 - (NSInteger)method1
 {
@@ -182,24 +130,13 @@
     GHAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)], nil);
 }
 
-- (void)testInstanceMethodCalls
+- (void)testConformance
 {
     FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
     
     id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
-    GHAssertEquals([proxyB method3], 3, nil);
-    GHAssertEquals([proxyB method4], 4, nil);
-    
     id<CompatibleRestrictedInterfaceC> proxyC = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
-    GHAssertEquals([proxyC method2], 2, nil);
-    GHAssertEquals([proxyC method3], 3, nil);
-    GHAssertEquals([proxyC method5], 5, nil);
-    GHAssertThrows([proxyC method6], nil);
     
-    // Cannot access the underlying interface, even when casting by mistake
-    FullInterfaceTestClass *hackerCastProxyB = (FullInterfaceTestClass *)proxyB;
-    GHAssertThrows([hackerCastProxyB method1], nil);
-        
     // Test respondsToSelector: on proxy
     GHAssertFalse([proxyB respondsToSelector:@selector(method1)], nil);
     GHAssertFalse([proxyB respondsToSelector:@selector(method2)], nil);
@@ -220,6 +157,25 @@
     GHAssertFalse([proxyB conformsToProtocol:@protocol(CompatibleRestrictedInterfaceC)], nil);
     GHAssertFalse([proxyC conformsToProtocol:@protocol(CompatibleRestrictedInterfaceB)], nil);
     GHAssertTrue([proxyC conformsToProtocol:@protocol(CompatibleRestrictedInterfaceC)], nil);
+}
+
+- (void)testInstanceMethodCalls
+{
+    FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
+    
+    id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
+    GHAssertEquals([proxyB method3], 3, nil);
+    GHAssertEquals([proxyB method4], 4, nil);
+    
+    id<CompatibleRestrictedInterfaceC> proxyC = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
+    GHAssertEquals([proxyC method2], 2, nil);
+    GHAssertEquals([proxyC method3], 3, nil);
+    GHAssertEquals([proxyC method5], 5, nil);
+    GHAssertThrows([proxyC method6], nil);
+    
+    // Cannot access the underlying interface, even when casting by mistake
+    FullInterfaceTestClass *hackerCastProxyB = (FullInterfaceTestClass *)proxyB;
+    GHAssertThrows([hackerCastProxyB method1], nil);
 }
 
 @end
