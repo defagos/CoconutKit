@@ -11,22 +11,16 @@
 #import "HLSRuntime.h"
 #import "HLSViewTouchDetector.h"
 
-static UITextField *s_currentTextField = nil;           // weak ref to the current first responder
-
 // Associated object keys
 static void *s_touchDetectorKey = &s_touchDetectorKey;
 
 // Original implementation of the methods we swizzle
 static id (*s_UITextField__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
 static id (*s_UITextField__initWithCoder_Imp)(id, SEL, id) = NULL;
-static BOOL (*s_UITextField__becomeFirstResponder_Imp)(id, SEL) = NULL;
-static BOOL (*s_UITextField__resignFirstResponder_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
 static id swizzled_UITextField__initWithFrame_Imp(UITextField *self, SEL _cmd, CGRect frame);
 static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, NSCoder *aDecoder);
-static BOOL swizzled_UITextField__becomeFirstResponder_Imp(UITextField *self, SEL _cmd);
-static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SEL _cmd);
 
 @interface UITextField (HLSExtensionsPrivate)
 
@@ -46,17 +40,6 @@ static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SE
     s_UITextField__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
                                                                                       @selector(initWithCoder:),
                                                                                       (IMP)swizzled_UITextField__initWithCoder_Imp);
-    s_UITextField__becomeFirstResponder_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                           @selector(becomeFirstResponder),
-                                                                                           (IMP)swizzled_UITextField__becomeFirstResponder_Imp);
-    s_UITextField__resignFirstResponder_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                           @selector(resignFirstResponder),
-                                                                                           (IMP)swizzled_UITextField__resignFirstResponder_Imp);
-}
-
-+ (UITextField *)currentTextField
-{
-    return s_currentTextField;
 }
 
 #pragma mark Accessors and mutators
@@ -114,19 +97,4 @@ static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, N
         commonInit(self);
     }
     return self;
-}
-
-static BOOL swizzled_UITextField__becomeFirstResponder_Imp(UITextField *self, SEL _cmd)
-{
-    s_currentTextField = self;
-    return (*s_UITextField__becomeFirstResponder_Imp)(self, _cmd);
-}
-
-static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SEL _cmd)
-{
-    BOOL result = (*s_UITextField__resignFirstResponder_Imp)(self, _cmd);
-    if (self == s_currentTextField) {
-        s_currentTextField = nil;
-    }
-    return result;
 }

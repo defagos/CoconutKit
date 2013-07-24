@@ -14,6 +14,7 @@
 #import "HLSRuntime.h"
 #import "UITextField+HLSExtensions.h"
 #import "UITextView+HLSExtensions.h"
+#import "UIView+HLSExtensions.h"
 
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
@@ -416,15 +417,8 @@ static void swizzled_UIViewController__viewWillDisappear_Imp(UIViewController *s
     // Automatic keyboard dismissal when the view disappears. We test that the view has been loaded to account for the possibility 
     // that the view lifecycle has been incorrectly implemented
     if ([self isViewLoaded]) {
-        UITextField *currentTextField = [UITextField currentTextField];
-        if ([currentTextField isDescendantOfView:self.view]) {
-            [currentTextField resignFirstResponder];                
-        }
-        
-        UITextView *currentTextView = [UITextView currentTextView];
-        if ([currentTextView isDescendantOfView:self.view]) {
-            [currentTextView resignFirstResponder];                
-        }
+        UIView *firstResponderView = [self.view firstResponderView];
+        [firstResponderView resignFirstResponder];
     }
 }
 

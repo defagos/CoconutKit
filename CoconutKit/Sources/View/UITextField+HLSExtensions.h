@@ -9,11 +9,6 @@
 @interface UITextField (HLSExtensions)
 
 /**
- * Return the text field which is the current first responder, otherwise nil
- */
-+ (UITextField *)currentTextField;
-
-/**
  * If set to YES, the text field resigns its first responder status when the user taps outside it 
  *
  * The default value is NO
