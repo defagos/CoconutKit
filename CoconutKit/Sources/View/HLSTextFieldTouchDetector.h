@@ -6,20 +6,22 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-#import "HLSTextFieldInternalDelegate.h"
-
 /**
- * Private class for implementation purposes. This internal delegate traps when a text field enters or exits
- * edit mode, enabling tap detection during edit mode. This allows us to dismiss the keyboard if the user
- * taps outside a text field when it is in edit mode (this feature can be disabled)
+ * Private class for implementation purposes. Traps when a text field enters or exits edit mode, enabling tap detection
+ * during edit mode. This allows us to dismiss the keyboard if the user taps outside a text field when it is in edit 
+ * mode (this feature can be disabled)
  *
  * Designated initializer: -initWithTextField:
  */
-@interface HLSTextFieldTouchDetector : HLSTextFieldInternalDelegate <UIGestureRecognizerDelegate>
+@interface HLSTextFieldTouchDetector : NSObject <UIGestureRecognizerDelegate>
 
 /**
- * If set to YES, the text field which the detector is the delegate of is asked to relinquish its first responder status 
- * (if it is the first responder)
+ * Create a touch detector for the specified text field (not retained)
+ */
+- (id)initWithTextField:(UITextField *)textField;
+
+/**
+ * If set to YES, the text field is asked to relinquish its first responder status (if it is the first responder)
  * Default value is YES
  */
 @property (nonatomic, assign, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;

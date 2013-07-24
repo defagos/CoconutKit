@@ -172,8 +172,6 @@
 		6FADE5F614BA0494007EE121 /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE57414BA0494007EE121 /* HLSTableViewCell.m */; };
 		6FADE5F714BA0494007EE121 /* HLSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE57514BA0494007EE121 /* HLSTextField.h */; };
 		6FADE5F814BA0494007EE121 /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE57614BA0494007EE121 /* HLSTextField.m */; };
-		6FADE5F914BA0494007EE121 /* HLSTextFieldInternalDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE57714BA0494007EE121 /* HLSTextFieldInternalDelegate.h */; };
-		6FADE5FA14BA0494007EE121 /* HLSTextFieldInternalDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE57814BA0494007EE121 /* HLSTextFieldInternalDelegate.m */; };
 		6FADE5FB14BA0494007EE121 /* HLSTextFieldTouchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE57914BA0494007EE121 /* HLSTextFieldTouchDetector.h */; };
 		6FADE5FC14BA0494007EE121 /* HLSTextFieldTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE57A14BA0494007EE121 /* HLSTextFieldTouchDetector.m */; };
 		6FADE5FD14BA0494007EE121 /* HLSValue1TableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE57B14BA0494007EE121 /* HLSValue1TableViewCell.h */; };
@@ -427,8 +425,6 @@
 		6FADE57414BA0494007EE121 /* HLSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableViewCell.m; sourceTree = "<group>"; };
 		6FADE57514BA0494007EE121 /* HLSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextField.h; sourceTree = "<group>"; };
 		6FADE57614BA0494007EE121 /* HLSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextField.m; sourceTree = "<group>"; };
-		6FADE57714BA0494007EE121 /* HLSTextFieldInternalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextFieldInternalDelegate.h; sourceTree = "<group>"; };
-		6FADE57814BA0494007EE121 /* HLSTextFieldInternalDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextFieldInternalDelegate.m; sourceTree = "<group>"; };
 		6FADE57914BA0494007EE121 /* HLSTextFieldTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextFieldTouchDetector.h; sourceTree = "<group>"; };
 		6FADE57A14BA0494007EE121 /* HLSTextFieldTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextFieldTouchDetector.m; sourceTree = "<group>"; };
 		6FADE57B14BA0494007EE121 /* HLSValue1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue1TableViewCell.h; sourceTree = "<group>"; };
@@ -788,8 +784,6 @@
 				6FADE57414BA0494007EE121 /* HLSTableViewCell.m */,
 				6FADE57514BA0494007EE121 /* HLSTextField.h */,
 				6FADE57614BA0494007EE121 /* HLSTextField.m */,
-				6FADE57714BA0494007EE121 /* HLSTextFieldInternalDelegate.h */,
-				6FADE57814BA0494007EE121 /* HLSTextFieldInternalDelegate.m */,
 				6FADE57914BA0494007EE121 /* HLSTextFieldTouchDetector.h */,
 				6FADE57A14BA0494007EE121 /* HLSTextFieldTouchDetector.m */,
 				6F3D1D761795710C0056FF4E /* HLSTextView.h */,
@@ -931,7 +925,6 @@
 				6FADE5F414BA0494007EE121 /* HLSTableViewCell+Protected.h in Headers */,
 				6FADE5F514BA0494007EE121 /* HLSTableViewCell.h in Headers */,
 				6FADE5F714BA0494007EE121 /* HLSTextField.h in Headers */,
-				6FADE5F914BA0494007EE121 /* HLSTextFieldInternalDelegate.h in Headers */,
 				6FADE5FB14BA0494007EE121 /* HLSTextFieldTouchDetector.h in Headers */,
 				6FADE5FD14BA0494007EE121 /* HLSValue1TableViewCell.h in Headers */,
 				6FADE5FF14BA0494007EE121 /* HLSValue2TableViewCell.h in Headers */,
@@ -1142,7 +1135,6 @@
 				6FADE5F314BA0494007EE121 /* HLSSubtitleTableViewCell.m in Sources */,
 				6FADE5F614BA0494007EE121 /* HLSTableViewCell.m in Sources */,
 				6FADE5F814BA0494007EE121 /* HLSTextField.m in Sources */,
-				6FADE5FA14BA0494007EE121 /* HLSTextFieldInternalDelegate.m in Sources */,
 				6FADE5FC14BA0494007EE121 /* HLSTextFieldTouchDetector.m in Sources */,
 				6FADE5FE14BA0494007EE121 /* HLSValue1TableViewCell.m in Sources */,
 				6FADE60014BA0494007EE121 /* HLSValue2TableViewCell.m in Sources */,

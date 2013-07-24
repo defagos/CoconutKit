@@ -40,7 +40,6 @@
 - (void)hlsTextFieldInit
 {
     self.touchDetector = [[[HLSTextFieldTouchDetector alloc] initWithTextField:self] autorelease];
-    super.delegate = self.touchDetector;
 }
 
 - (void)dealloc
@@ -54,26 +53,12 @@
 
 - (BOOL)resigningFirstResponderOnTap
 {
-    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
-    return touchDetector.resigningFirstResponderOnTap;
+    return self.touchDetector.resigningFirstResponderOnTap;
 }
 
 - (void)setResigningFirstResponderOnTap:(BOOL)resigningFirstResponderOnTap
 {
-    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
-    touchDetector.resigningFirstResponderOnTap = resigningFirstResponderOnTap;
-}
-
-- (void)setDelegate:(id<UITextFieldDelegate>)delegate
-{
-    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
-    touchDetector.delegate = delegate;
-}
-
-- (id<UITextFieldDelegate>)delegate
-{
-    HLSTextFieldTouchDetector *touchDetector = (HLSTextFieldTouchDetector *)super.delegate;
-    return touchDetector.delegate;
+    self.touchDetector.resigningFirstResponderOnTap = resigningFirstResponderOnTap;
 }
 
 @end

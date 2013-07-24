@@ -121,7 +121,6 @@
 		6FADE7C314BA04B6007EE121 /* HLSSubtitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE76B14BA04B6007EE121 /* HLSSubtitleTableViewCell.m */; };
 		6FADE7C414BA04B6007EE121 /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE76E14BA04B6007EE121 /* HLSTableViewCell.m */; };
 		6FADE7C514BA04B6007EE121 /* HLSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77014BA04B6007EE121 /* HLSTextField.m */; };
-		6FADE7C614BA04B7007EE121 /* HLSTextFieldInternalDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77214BA04B6007EE121 /* HLSTextFieldInternalDelegate.m */; };
 		6FADE7C714BA04B7007EE121 /* HLSTextFieldTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77414BA04B6007EE121 /* HLSTextFieldTouchDetector.m */; };
 		6FADE7C814BA04B7007EE121 /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77614BA04B6007EE121 /* HLSValue1TableViewCell.m */; };
 		6FADE7C914BA04B7007EE121 /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE77814BA04B6007EE121 /* HLSValue2TableViewCell.m */; };
@@ -410,8 +409,6 @@
 		6FADE76E14BA04B6007EE121 /* HLSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableViewCell.m; sourceTree = "<group>"; };
 		6FADE76F14BA04B6007EE121 /* HLSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextField.h; sourceTree = "<group>"; };
 		6FADE77014BA04B6007EE121 /* HLSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextField.m; sourceTree = "<group>"; };
-		6FADE77114BA04B6007EE121 /* HLSTextFieldInternalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextFieldInternalDelegate.h; sourceTree = "<group>"; };
-		6FADE77214BA04B6007EE121 /* HLSTextFieldInternalDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextFieldInternalDelegate.m; sourceTree = "<group>"; };
 		6FADE77314BA04B6007EE121 /* HLSTextFieldTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextFieldTouchDetector.h; sourceTree = "<group>"; };
 		6FADE77414BA04B6007EE121 /* HLSTextFieldTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTextFieldTouchDetector.m; sourceTree = "<group>"; };
 		6FADE77514BA04B6007EE121 /* HLSValue1TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue1TableViewCell.h; sourceTree = "<group>"; };
@@ -916,8 +913,6 @@
 				6FADE76E14BA04B6007EE121 /* HLSTableViewCell.m */,
 				6FADE76F14BA04B6007EE121 /* HLSTextField.h */,
 				6FADE77014BA04B6007EE121 /* HLSTextField.m */,
-				6FADE77114BA04B6007EE121 /* HLSTextFieldInternalDelegate.h */,
-				6FADE77214BA04B6007EE121 /* HLSTextFieldInternalDelegate.m */,
 				6FADE77314BA04B6007EE121 /* HLSTextFieldTouchDetector.h */,
 				6FADE77414BA04B6007EE121 /* HLSTextFieldTouchDetector.m */,
 				6F3D1D8E179572400056FF4E /* HLSTextView.h */,
@@ -1203,7 +1198,6 @@
 				6FADE7C314BA04B6007EE121 /* HLSSubtitleTableViewCell.m in Sources */,
 				6FADE7C414BA04B6007EE121 /* HLSTableViewCell.m in Sources */,
 				6FADE7C514BA04B6007EE121 /* HLSTextField.m in Sources */,
-				6FADE7C614BA04B7007EE121 /* HLSTextFieldInternalDelegate.m in Sources */,
 				6FADE7C714BA04B7007EE121 /* HLSTextFieldTouchDetector.m in Sources */,
 				6FADE7C814BA04B7007EE121 /* HLSValue1TableViewCell.m in Sources */,
 				6FADE7C914BA04B7007EE121 /* HLSValue2TableViewCell.m in Sources */,

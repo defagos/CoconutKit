@@ -10,6 +10,7 @@
 
 @interface HLSTextFieldTouchDetector ()
 
+@property (nonatomic, assign) UITextField *textField;               // weak ref. Detector lifetime is managed by the text field
 @property (nonatomic, retain) UIGestureRecognizer *gestureRecognizer;
 
 @end
@@ -20,7 +21,9 @@
 
 - (id)initWithTextField:(UITextField *)textField
 {
-    if ((self = [super initWithTextField:textField])) {
+    if ((self = [super init])) {
+        self.textField = textField;
+        
         // Create a gesture recognizer capturing taps on the whole window
         self.gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                           action:@selector(dismissKeyboard:)] autorelease];
@@ -28,31 +31,26 @@
         self.gestureRecognizer.delegate = self;
         
         self.resigningFirstResponderOnTap = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(textFieldDidBeginEditing:)
+                                                     name:UITextFieldTextDidBeginEditingNotification
+                                                   object:textField];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(textFieldDidEndEditing:)
+                                                     name:UITextFieldTextDidEndEditingNotification
+                                                   object:textField];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    self.textField = nil;
     self.gestureRecognizer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super dealloc];
-}
-
-#pragma mark UITextFieldDelegate protocol implementation
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    [super textFieldDidBeginEditing:textField];
-    
-    [[[UIApplication sharedApplication] keyWindow] addGestureRecognizer:self.gestureRecognizer];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [super textFieldDidEndEditing:textField];
-    
-    [[[UIApplication sharedApplication] keyWindow] removeGestureRecognizer:self.gestureRecognizer]; 
 }
 
 #pragma mark UIGestureRecognizerDelegate protocol implementation
@@ -60,6 +58,18 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
 	return ! [touch.view isDescendantOfView:self.textField];
+}
+
+#pragma mark Notification callbacks
+
+- (void)textFieldDidBeginEditing:(NSNotification *)notification
+{
+    [[[UIApplication sharedApplication] keyWindow] addGestureRecognizer:self.gestureRecognizer];
+}
+
+- (void)textFieldDidEndEditing:(NSNotification *)notification
+{
+    [[[UIApplication sharedApplication] keyWindow] removeGestureRecognizer:self.gestureRecognizer];
 }
 
 #pragma mark Event callbacks
