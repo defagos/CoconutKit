@@ -20,6 +20,8 @@
 /**
  * If set to YES, and between the time the begin and end notifications are received, taps outside the view frame
  * make the view resign its responder status
+ *
+ * The default value is NO
  */
 @property (nonatomic, assign, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;
 

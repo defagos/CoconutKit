@@ -61,7 +61,7 @@ static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SE
 
 #pragma mark Accessors and mutators
 
-- (BOOL)resigningFirstResponderOnTap
+- (BOOL)isResigningFirstResponderOnTap
 {
     return self.touchDetector.resigningFirstResponderOnTap;
 }
@@ -89,7 +89,7 @@ static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SE
 
 @end
 
-#pragma mark Common initializer
+#pragma mark Common initialization
 
 static void commonInit(UITextField *self)
 {

@@ -49,8 +49,10 @@
         textField.delegate = self;
     }
     
-    UITextField *textField2 = [self.textFields objectAtIndex:1];
-    textField2.resigningFirstResponderOnTap = NO;
+    UITextField *textField1 = [self.textFields firstObject];
+    textField1.resigningFirstResponderOnTap = YES;
+    
+    self.textView.resigningFirstResponderOnTap = YES;
 }
 
 #pragma mark UITextFieldDelegate protocol implementation

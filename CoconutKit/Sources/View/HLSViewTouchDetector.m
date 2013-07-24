@@ -32,8 +32,6 @@
         self.gestureRecognizer.cancelsTouchesInView = NO;       // Let the taps go through
         self.gestureRecognizer.delegate = self;
         
-        self.resigningFirstResponderOnTap = YES;
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(viewDidBeginEditing:)
                                                      name:beginNotificationName
