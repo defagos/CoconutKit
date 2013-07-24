@@ -14,6 +14,11 @@
 #import "UIView+HLSExtensions.h"
 #import "UIView+HLSViewBindingFriend.h"
 
+// TODO:
+//  - for all demos: Add refresh bindings button (will update the date, suffices)
+//  - demo with table view
+//  - demo with embedded view controller (via placeholder view controller) to test boundaries
+
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindFormatterKey = &s_bindFormatterKey;
@@ -36,6 +41,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (BOOL)bindsRecursively;
+- (void)updateText;
 
 @end
 
@@ -55,6 +61,11 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 - (void)bindToObject:(id)object
 {
     [self bindToObject:object inViewController:[self nearestViewController]];
+}
+
+- (void)refreshBindings
+{
+    [self refreshBindingsInViewController:[self nearestViewController]];
 }
 
 @end
@@ -105,6 +116,16 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     }
 }
 
+- (void)updateText
+{
+    if (! self.bindingInformation) {
+        return;
+    }
+    
+    NSString *text = [self.bindingInformation text];
+    [self updateViewWithText:text];
+}
+
 @end
 
 @implementation UIView (HLSViewBindingFriend)
@@ -143,14 +164,20 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     }
 }
 
-- (void)updateText
+- (void)refreshBindingsInViewController:(UIViewController *)viewController
 {
-    if (! self.bindingInformation) {
+    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
+    if (self.viewController && self.viewController != viewController) {
         return;
     }
     
-    NSString *text = [self.bindingInformation text];
-    [self updateViewWithText:text];
+    [self updateText];
+    
+    if ([self bindsRecursively]) {
+        for (UIView *subview in self.subviews) {
+            [subview refreshBindings];
+        }
+    }
 }
 
 @end

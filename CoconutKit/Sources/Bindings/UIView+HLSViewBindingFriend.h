@@ -9,5 +9,6 @@
 @interface UIView (HLSViewBindingFriend)
 
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController;
+- (void)refreshBindingsInViewController:(UIViewController *)viewController;
 
 @end

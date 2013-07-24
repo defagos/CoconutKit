@@ -16,11 +16,6 @@
 
 #import <objc/runtime.h>
 
-// TODO: Fix remaining retain cycle due to KVO registration (-dealloc never called here). Only ARC? Maybe use ZeroingWeakRef
-//       hook to solve this issue. Interesting fact: If an exception is raised when testing the keypath in -init (e.g. keypath
-//       containing an operator), then the receiver is retained. Even more interesting: if using [self.object addObserver..]
-//       there is a retain, with [object addObserver..] there isn't!!!! ARC? MRC? Because of dymamic subclassing?
-
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;                      // weak ref

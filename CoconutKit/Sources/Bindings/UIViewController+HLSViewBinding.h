@@ -13,4 +13,6 @@
 
 - (void)bindToObject:(id)object;
 
+- (void)refreshBindings;
+
 @end

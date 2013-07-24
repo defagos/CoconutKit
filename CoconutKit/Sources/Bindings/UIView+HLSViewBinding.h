@@ -9,7 +9,6 @@
 // TODO: Create CoconutKit examples with all cases. Also with @min, @max, etc. keypath operators! Document!
 // TODO: Test and document limitations (e.g. if a view controller is bound to an object, can be bind a subview
 //       to another object? Should we?)
-// TODO: Document: KVO and availability (not available for keypaths containing operators)
 
 @protocol HLSViewBinding <NSObject>
 
@@ -39,8 +38,15 @@
 
 /**
  * Bind an object to the specified bind path. This bind path must be a KVC-compliant keypath. Object updates
- * are automatically reflected using KVO. Binds recursively (if enabled) and stops at view controller boundaries
+ * are not automatically reflected, call -refreshBindings when appropriate. Subviews are bound recursively 
+ * (if enabled, see HLSViewBinding protocol), stopping at view controller boundaries
  */
 - (void)bindToObject:(id)object;
+
+/**
+ * Refresh bound values, recursively if enabled (see HLSViewBinding protocol). Stops at view controller
+ * boundaries
+ */
+- (void)refreshBindings;
 
 @end
