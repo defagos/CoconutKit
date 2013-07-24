@@ -13,8 +13,9 @@
  * HLSRestrictedInterfaceProxy allows the easy creation of lightweight proxy objects through which interaction 
  * with the underlying object only happens through a restricted subset of its class interface. The restricted
  * interface subset is defined using a protocol. Such protocols in general only contain @required methods, but
- * @optional methods can appear as well. In such cases the caller is responsible of checking whether the proxy
- * object responds to the method before calling it.
+ * @optional methods can appear as well (in the latter case, the caller is must check whether the proxy object 
+ * responds to the method before calling it). Note that restriction only makes sense for instance methods. Your
+ * protocols can contain class methods, but they will be meaningless in the context of the proxy object.
  *
  * A typical use case is a mutable object which you want to make immutable, without having to implement a
  * dedicated immutable class. This is easily achieved by defining a readonly proxy interface protocol
@@ -45,9 +46,9 @@
 + (id)proxyWithTarget:(id)target protocol:(Protocol *)protocol;
 
 /**
- * Create a proxy object. On success a proxy object is returned, otherwise nil. The created proxy object 
- * conforms to the protocol given as parameter, you should therefore store the result as id<protocol> for 
- * further compiler-friendly use
+ * Create a proxy object. On success a proxy object is returned, otherwise nil (most notably if the target fails to 
+ * implement the restriction protocol. The created proxy object conforms to the protocol given as parameter, you should 
+ * therefore store the result as id<protocol> for further compiler-friendly use
  *
  * Currently the target cannot be another NSProxy object
  */
