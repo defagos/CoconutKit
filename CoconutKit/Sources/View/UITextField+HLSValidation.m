@@ -17,13 +17,9 @@
 static void *s_validatorKey = &s_validatorKey;
 
 // Original implementation of the methods we swizzle
-static id<UITextFieldDelegate> (*s_UITextField__delegate_Imp)(id, SEL) = NULL;
-static void (*s_UITextField__setDelegate_Imp)(id, SEL, id) = NULL;
 void (*UITextField__setText_Imp)(id, SEL, id) = NULL;      // external linkage
 
 // Swizzled method implementations
-static id<UITextFieldDelegate> swizzled_UITextField__delegate_Imp(UITextField *self, SEL _cmd);
-static void swizzled_UITextField__setDelegate_Imp(UITextField *self, SEL _cmd, id<UITextFieldDelegate> delegate);
 static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSString *text);
 
 // Extern declarations
@@ -38,12 +34,6 @@ extern BOOL injectedManagedObjectValidation(void);
 
 + (void)load
 {
-    s_UITextField__delegate_Imp = (id<UITextFieldDelegate> (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                  @selector(delegate),
-                                                                                                  (IMP)swizzled_UITextField__delegate_Imp);
-    s_UITextField__setDelegate_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                      @selector(setDelegate:),
-                                                                                      (IMP)swizzled_UITextField__setDelegate_Imp);
     UITextField__setText_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
                                                                                 @selector(setText:),
                                                                                 (IMP)swizzled_UITextField__setText_Imp);
@@ -77,13 +67,7 @@ extern BOOL injectedManagedObjectValidation(void);
         return;
     }
     
-    validator.delegate = (*s_UITextField__delegate_Imp)(self, @selector(delegate));
-    objc_setAssociatedObject(self, s_validatorKey, validator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
-    // Set the validator as text field delegate to catch events and perform validation. We need an intermediate object 
-    // because trying to set self as delegate does not work for a UITextField (this conflicts with the text field
-    // implementation and leads to infinite recursion)
-    (*s_UITextField__setDelegate_Imp)(self, @selector(setDelegate:), validator);
+    objc_setAssociatedObject(self, s_validatorKey, validator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);    
 }
 
 - (void)unbind
@@ -94,10 +78,6 @@ extern BOOL injectedManagedObjectValidation(void);
     if (! objc_getAssociatedObject(self, s_validatorKey)) {
         return;
     }
-    
-    // Restore the original delegate
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    (*s_UITextField__setDelegate_Imp)(self, @selector(setDelegate:), validator.delegate);
     
     // Remove the validator
     objc_setAssociatedObject(self, s_validatorKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);    
@@ -181,28 +161,6 @@ extern BOOL injectedManagedObjectValidation(void);
 
 #pragma mark -
 #pragma mark Swizzled method implementations
-
-static id<UITextFieldDelegate> swizzled_UITextField__delegate_Imp(UITextField *self, SEL _cmd)
-{
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    if (validator) {
-        return validator.delegate;
-    }
-    else {
-        return (*s_UITextField__delegate_Imp)(self, _cmd);
-    }
-}
-
-static void swizzled_UITextField__setDelegate_Imp(UITextField *self, SEL _cmd, id<UITextFieldDelegate> delegate)
-{
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    if (validator) {
-        validator.delegate = delegate;
-    }
-    else {
-        (*s_UITextField__setDelegate_Imp)(self, _cmd, delegate);
-    }
-}
 
 // Swizzled so that changes made to the text field (either programmatically or interactively) are trapped
 static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSString *text)

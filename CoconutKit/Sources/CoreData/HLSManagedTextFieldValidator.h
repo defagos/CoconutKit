@@ -6,16 +6,15 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-#import "HLSTextFieldInternalDelegate.h"
 #import "UITextField+HLSValidation.h"
 
 /**
- * Private class for implementation purposes. This internal delegate synchronizes the text field
- * value with a managed field object and performs automatic validation when appropriate
+ * Private class for implementation purposes. Synchronizes the text field value with a managed field object and performs 
+ * automatic validation when appropriate
  *
  * Designated initializer: -initWithTextField:managedObject:fieldName:formatter:validationDelegate:
  */
-@interface HLSManagedTextFieldValidator : HLSTextFieldInternalDelegate
+@interface HLSManagedTextFieldValidator : NSObject
 
 /**
  * Initialize with a managed object and the field we want to validate, as well as a delegate which must receive

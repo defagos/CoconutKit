@@ -16,7 +16,6 @@
 "Baseline adjustment"="Ajustement de la ligne de base";
 "Baselines"="Lignes";
 "Birthdate"="Date de naissance";
-"By default, an HLSTextField exits edit mode when the user taps outside it"="Par défaut, un HLSTextField perd le focus lorsque l'utilisateur clique à côté";
 "Blocking"="Bloquant";
 "Bottom"="Bas";
 "Bounces"="Rebond";
@@ -169,8 +168,8 @@
 "Text"="Texte";
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
 "Text views"="Zones textuelles";
-"The behavior above can be disabled"="Le comportement ci-dessus peut être désactivé";
 "The view controller is not compatible with the container (most probably its orientation)"="Le view controller n'est pas compatible avec le conteneur (probablement au niveau de son orientation)";
+"This field exits edit mode when the user taps outside it"="Ce champ perd le focus lorsque l'utilisateur tape à côté";
 "This value cannot be negative"="Cette valeur ne peut être négative";
 "Top"="Haut";
 "Transition"="Transition";

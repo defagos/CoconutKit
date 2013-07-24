@@ -14,13 +14,13 @@
 
 @property (nonatomic, retain) Person *person;
 
-@property (nonatomic, retain) IBOutlet HLSTextField *streetTextField;
+@property (nonatomic, retain) IBOutlet UITextField *streetTextField;
 @property (nonatomic, retain) IBOutlet UILabel *streetErrorLabel;
-@property (nonatomic, retain) IBOutlet HLSTextField *cityTextField;
+@property (nonatomic, retain) IBOutlet UITextField *cityTextField;
 @property (nonatomic, retain) IBOutlet UILabel *cityErrorLabel;
-@property (nonatomic, retain) IBOutlet HLSTextField *stateTextField;
+@property (nonatomic, retain) IBOutlet UITextField *stateTextField;
 @property (nonatomic, retain) IBOutlet UILabel *stateErrorLabel;
-@property (nonatomic, retain) IBOutlet HLSTextField *countryTextField;
+@property (nonatomic, retain) IBOutlet UITextField *countryTextField;
 @property (nonatomic, retain) IBOutlet UILabel *countryErrorLabel;
 
 @end

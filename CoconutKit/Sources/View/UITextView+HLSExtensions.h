@@ -9,8 +9,10 @@
 @interface UITextView (HLSExtensions)
 
 /**
- * Return the text view which is the current first responder, otherwise nil
+ * If set to YES, the text view resigns its first responder status when the user taps outside it
+ *
+ * The default value is NO
  */
-+ (UITextView *)currentTextView;
+@property (nonatomic, assign, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;
 
 @end

@@ -13,7 +13,7 @@
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIView *backgroundView;
 
-@property (nonatomic, retain) IBOutletCollection(HLSTextField) NSArray *textFields;
+@property (nonatomic, retain) IBOutletCollection(UITextField) NSArray *textFields;
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 
@@ -45,12 +45,14 @@
     [self.scrollView addSubview:self.backgroundView];
     self.scrollView.contentSize = self.backgroundView.bounds.size;
     
-    for (HLSTextField *textField in self.textFields) {
+    for (UITextField *textField in self.textFields) {
         textField.delegate = self;
     }
     
-    HLSTextField *textField2 = [self.textFields objectAtIndex:1];
-    textField2.resigningFirstResponderOnTap = NO;
+    UITextField *textField1 = [self.textFields firstObject];
+    textField1.resigningFirstResponderOnTap = YES;
+    
+    self.textView.resigningFirstResponderOnTap = YES;
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
@@ -59,7 +61,7 @@
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
     if (index < [self.textFields count] - 1) {
-        HLSTextField *nextTextField = [self.textFields objectAtIndex:index + 1];
+        UITextField *nextTextField = [self.textFields objectAtIndex:index + 1];
         [nextTextField becomeFirstResponder];
     }
     else {

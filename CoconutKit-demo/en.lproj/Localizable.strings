@@ -21,7 +21,6 @@
 "Bounces"="Bounces";
 "Button label, default"="Button label, default";
 "Button label, highlighted"="Button label, highlighted";
-"By default, an HLSTextField exits edit mode when the user taps outside it"="By default, an HLSTextField exits edit mode when the user taps outside it";
 "Cancel"="Cancel";
 "Capitalized string in Localizable.strings"="Capitalized string in Localizable.strings";
 "Centers"="Centers";
@@ -172,6 +171,7 @@
 "Text views"="Text views";
 "The behavior above can be disabled"="The behavior above can be disabled";
 "The view controller is not compatible with the container (most probably its orientation)"="The view controller is not compatible with the container (most probably its orientation)";
+"This field exits edit mode when the user taps outside it"="This field exits edit mode when the user taps outside it";
 "This value cannot be negative"="This value cannot be negative";
 "Top"="Top";
 "Transition"="Transition";
