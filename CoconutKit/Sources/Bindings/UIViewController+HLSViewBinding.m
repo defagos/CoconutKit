@@ -1,6 +1,6 @@
 //
 //  UIViewController+HLSViewBinding.m
-//  mBanking
+//  CoconutKit
 //
 //  Created by Samuel Défago on 18.06.13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
@@ -8,19 +8,14 @@
 
 #import "UIViewController+HLSViewBinding.h"
 
-#import "HLSRuntime.h"
 #import "UIView+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIView+HLSViewBindingFriend.h"
 
+#import <objc/runtime.h>
+
 // Keys for associated objects
 static void *s_boundObjectKey = &s_boundObjectKey;
-
-// Original implementation of the methods we swizzle
-static void (*s_UIViewController__viewDidLoad_Imp)(id, SEL) = NULL;
-
-// Swizzled method implementations
-static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, SEL _cmd);
 
 @interface UIViewController (HLSViewBindingPrivate)
 
@@ -29,15 +24,6 @@ static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, S
 @end
 
 @implementation UIViewController (HLSViewBinding)
-
-#pragma mark Class methods
-
-+ (void)load
-{
-    s_UIViewController__viewDidLoad_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                @selector(viewDidLoad),
-                                                                                (IMP)swizzled_UIViewController__viewDidLoad_Imp);
-}
 
 #pragma mark Bindings
 
@@ -75,14 +61,3 @@ static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, S
 }
 
 @end
-
-#pragma mark Swizzled method implementations
-
-static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, SEL _cmd)
-{
-    (*s_UIViewController__viewDidLoad_Imp)(self, _cmd);
-    
-    if (self.boundObject) {
-        [self.view bindToObject:self.boundObject inViewController:self];
-    }
-}

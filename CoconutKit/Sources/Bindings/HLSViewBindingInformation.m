@@ -1,6 +1,6 @@
 //
 //  HLSViewBindingInformation.m
-//  mBanking
+//  CoconutKit
 //
 //  Created by Samuel Défago on 18.06.13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
@@ -173,14 +173,15 @@
         // Look along the responder chain first (most specific)
         formattingTarget = [HLSViewBindingInformation bindingTargetForSelector:formattingSelector view:self.view];
         if (! formattingTarget) {
-            // Look on the object itself (most generic)
-            if (! [self.object respondsToSelector:formattingSelector]) {
-                HLSLoggerError(@"No formatter method %@ is available on the view / view controller hiearchy, nor on the "
-                               "object class %@ itself", self.formatterName, [self.object className]);
+            // Look for a class method on the object class itself (most generic)
+            Class objectClass = [self.object class];
+            if (! [objectClass respondsToSelector:formattingSelector]) {
+                HLSLoggerError(@"No formatter method %@ is available on the view / view controller hiearchy, nor as a class "
+                               "method on the object class %@ itself", self.formatterName, [self.object className]);
                 return NO;
             }
             
-            formattingTarget = self.object;
+            formattingTarget = objectClass;
         }
     }
     

@@ -8,6 +8,15 @@
 
 #import "Employee.h"
 
+#import "DemoFormatter.h"
+
 @implementation Employee
+
+#pragma mark Class methods
+
++ (NSString *)stringFromNumber:(NSNumber *)number
+{
+    return [DemoFormatter stringFromNumber:number];
+}
 
 @end

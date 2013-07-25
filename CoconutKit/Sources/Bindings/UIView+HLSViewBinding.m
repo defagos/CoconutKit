@@ -1,6 +1,6 @@
 //
 //  UIView+HLSViewBinding.m
-//  mBanking
+//  CoconutKit
 //
 //  Created by Samuel Défago on 18.06.13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
@@ -25,7 +25,9 @@
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindFormatterKey = &s_bindFormatterKey;
+static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
+static void *s_awokenFromNibKey = &s_awokenFromNibKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UIView__awakeFromNib_Imp)(id, SEL) = NULL;
@@ -41,7 +43,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) NSString *bindKeyPath;
 @property (nonatomic, strong) NSString *bindFormatter;
 
+@property (nonatomic, strong) id boundObject;
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
+@property (nonatomic, assign, getter=isAwokenFromNib) BOOL awokenFromNib;
 
 - (BOOL)bindsRecursively;
 - (void)updateText;
@@ -97,6 +101,16 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     objc_setAssociatedObject(self, s_bindFormatterKey, bindFormatter, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (id)boundObject
+{
+    return objc_getAssociatedObject(self, s_boundObjectKey);
+}
+
+- (void)setBoundObject:(id)boundObject
+{
+    objc_setAssociatedObject(self, s_boundObjectKey, boundObject, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (HLSViewBindingInformation *)bindingInformation
 {
     return objc_getAssociatedObject(self, s_bindingInformationKey);
@@ -105,6 +119,16 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 - (void)setBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
     objc_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isAwokenFromNib
+{
+    return [objc_getAssociatedObject(self, s_awokenFromNibKey) boolValue];
+}
+
+- (void)setAwokenFromNib:(BOOL)awokenFromNib
+{
+    objc_setAssociatedObject(self, s_awokenFromNibKey, @(awokenFromNib), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Bindings
@@ -142,27 +166,31 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
         return;
     }
     
+    self.boundObject = object;
+    
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     if (self.viewController && self.viewController != viewController) {
         return;
     }
     
-    if (self.bindKeyPath) {
-        if ([self respondsToSelector:@selector(updateViewWithText:)]) {
-            self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
-                                                                                keyPath:self.bindKeyPath
-                                                                          formatterName:self.bindFormatter
-                                                                                   view:self];
-            [self updateText];
+    if (self.awokenFromNib) {
+        if (self.bindKeyPath) {
+            if ([self respondsToSelector:@selector(updateViewWithText:)]) {
+                self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
+                                                                                    keyPath:self.bindKeyPath
+                                                                              formatterName:self.bindFormatter
+                                                                                       view:self];
+                [self updateText];
+            }
+            else {
+                HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
+            }
         }
-        else {
-            HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
-        }
-    }
-    
-    if ([self bindsRecursively]) {
-        for (UIView *subview in self.subviews) {
-            [subview bindToObject:object inViewController:viewController];
+        
+        if ([self bindsRecursively]) {
+            for (UIView *subview in self.subviews) {
+                [subview bindToObject:object inViewController:viewController];
+            }
         }
     }
 }
@@ -191,6 +219,8 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
 {
     (*s_UIView__awakeFromNib_Imp)(self, _cmd);
     
+    self.awokenFromNib = YES;
+    
     if (! self.bindingInformation) {
         if (! self.bindKeyPath) {
             return;
@@ -201,7 +231,13 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
             return;
         }
         
-        self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:nil keyPath:self.bindKeyPath formatterName:self.bindFormatter view:self];
+        // TODO: Part of a friend interface
+        id object = self.boundObject ?: [(id)self.nearestViewController boundObject];
+        
+        self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
+                                                                            keyPath:self.bindKeyPath
+                                                                      formatterName:self.bindFormatter
+                                                                               view:self];
         [self updateText];
     }
 }

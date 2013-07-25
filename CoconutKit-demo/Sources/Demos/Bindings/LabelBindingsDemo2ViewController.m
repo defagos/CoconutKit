@@ -8,6 +8,20 @@
 
 #import "LabelBindingsDemo2ViewController.h"
 
+#import "Employee.h"
+
 @implementation LabelBindingsDemo2ViewController
+
+- (id)init
+{
+    if (self = [super init]) {
+        Employee *employee = [[Employee alloc] init];
+        employee.fullName = @"Jessie Pinkman";
+        employee.age = @22;
+        
+        [self bindToObject:employee];
+    }
+    return self;
+}
 
 @end

@@ -25,6 +25,7 @@
 {
     [super viewDidLoad];
     
+    _currentPageIndex = 1;
     [self displayPageAtIndex:_currentPageIndex animated:NO];
 }
 
