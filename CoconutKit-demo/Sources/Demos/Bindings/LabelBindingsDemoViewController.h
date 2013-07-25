@@ -6,5 +6,5 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-@interface LabelBindingsDemoViewController : HLSViewController
+@interface LabelBindingsDemoViewController : HLSPlaceholderViewController
 @end

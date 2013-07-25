@@ -8,6 +8,7 @@
 
 // TODO: Document difference between bindings on views or VCs (views: recursive, unless disabled; view controllers: stop at
 //       view controller boundaries)
+// TODO: Make it possible to bind in -init
 
 @interface UIViewController (HLSViewBinding)
 

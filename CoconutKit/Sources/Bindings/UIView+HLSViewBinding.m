@@ -18,6 +18,9 @@
 //  - for all demos: Add refresh bindings button (will update the date, suffices)
 //  - demo with table view
 //  - demo with embedded view controller (via placeholder view controller) to test boundaries
+//  - demo bound to an object
+//  - demo with binding to an object and normal binding
+//  - demo with two subview hierarchies bound to different objects
 
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;

@@ -8,62 +8,61 @@
 
 #import "LabelBindingsDemoViewController.h"
 
-#import "DemoFormatter.h"
-#import "Employee.h"
-
 @interface LabelBindingsDemoViewController ()
 
-@property (nonatomic, strong) NSArray *employees;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *segmentedControl;
 
 @end
 
-@implementation LabelBindingsDemoViewController
-
-- (id)init
-{
-    if (self = [super init]) {
-        Employee *employee1 = [[Employee alloc] init];
-        employee1.fullName = @"Jack Bauer";
-        employee1.age = @40;
-        
-        Employee *employee2 = [[Employee alloc] init];
-        employee2.fullName = @"Tony Soprano";
-        employee2.age = @46;
-        
-        Employee *employee3 = [[Employee alloc] init];
-        employee3.fullName = @"Walter White";
-        employee3.age = @52;
-        
-        self.employees = @[employee1, employee2, employee3];
-    }
-    return self;
+@implementation LabelBindingsDemoViewController {
+@private
+    NSUInteger _currentPageIndex;
 }
 
-- (NSString *)currentDateString
+#pragma mark View lifecycle
+
+- (void)viewDidLoad
 {
-    return [DemoFormatter stringFromDate:[NSDate date]];
+    [super viewDidLoad];
+    
+    [self displayPageAtIndex:_currentPageIndex animated:NO];
 }
 
-- (NSDate *)currentDate
-{
-    return [NSDate date];
-}
-
-- (NSString *)stringFromDate:(NSDate *)date
-{
-    return [DemoFormatter stringFromDate:date];
-}
-
-- (Employee *)firstEmployee
-{
-    return [self.employees firstObject];
-}
+#pragma mark Localization
 
 - (void)localize
 {
     [super localize];
     
     self.title = NSLocalizedString(@"Labels", nil);
+}
+
+#pragma mark Pages
+
+- (void)displayPageAtIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    NSString *viewControllerClassName = [NSString stringWithFormat:@"LabelBindingsDemo%dViewController", index + 1];
+    Class viewControllerClass = NSClassFromString(viewControllerClassName);
+    if (! viewControllerClass) {
+        HLSLoggerError(@"Unknown class %@", viewControllerClassName);
+        return;
+    }
+    
+    _currentPageIndex = index;
+    
+    self.segmentedControl.selectedSegmentIndex = index;
+    
+    UIViewController *viewController = [[viewControllerClass alloc] init];
+    
+    Class transitionClass = animated ? [HLSTransitionCrossDissolve class] : [HLSTransitionNone class];
+    [self setInsetViewController:viewController atIndex:0 withTransitionClass:transitionClass];
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)changePage:(id)sender
+{
+    [self displayPageAtIndex:self.segmentedControl.selectedSegmentIndex animated:YES];
 }
 
 @end
