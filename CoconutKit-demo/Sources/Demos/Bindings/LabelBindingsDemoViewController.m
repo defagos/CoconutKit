@@ -36,6 +36,7 @@
     
     [self.segmentedControl setTitle:NSLocalizedString(@"Keypaths & formatters", nil) forSegmentAtIndex:0];
     [self.segmentedControl setTitle:NSLocalizedString(@"Objects & hierarchies", nil) forSegmentAtIndex:1];
+    [self.segmentedControl setTitle:NSLocalizedString(@"VC hiearchies", nil) forSegmentAtIndex:2];
     
     self.title = NSLocalizedString(@"Labels", nil);
 }
