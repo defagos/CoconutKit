@@ -34,7 +34,17 @@
 {
     [super localize];
     
+    [self.segmentedControl setTitle:NSLocalizedString(@"Keypaths & formatters", nil) forSegmentAtIndex:0];
+    [self.segmentedControl setTitle:NSLocalizedString(@"Objects & hierarchies", nil) forSegmentAtIndex:1];
+    
     self.title = NSLocalizedString(@"Labels", nil);
+}
+
+#pragma mark Orientation management
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark Pages

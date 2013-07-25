@@ -10,19 +10,58 @@
 
 #import "Employee.h"
 
+@interface LabelBindingsDemo2ViewController ()
+
+@property (nonatomic, weak) IBOutlet UIView *firstSubview;
+@property (nonatomic, weak) IBOutlet UIView *secondSubview;
+@property (nonatomic, weak) IBOutlet UIView *subviewInSecondSubview;
+
+@end
+
 @implementation LabelBindingsDemo2ViewController
+
+#pragma mark Object creation and destruction
 
 - (id)init
 {
     if (self = [super init]) {
-        Employee *employee = [[Employee alloc] init];
-        employee.fullName = @"Jessie Pinkman";
-        employee.age = @22;
+        Employee *employee1 = [[Employee alloc] init];
+        employee1.fullName = @"Jessie Pinkman";
+        employee1.age = @22;
         
         // Can be bound early. The object is retained
-        [self bindToObject:employee];
+        [self bindToObject:employee1];
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // If you want to nest views with bound objects, be sure to bind them in the proper order (bottommost view first),
+    // otherwise values will be overridden in subviews when binding a view. In general, though, you should try to keep
+    // view hierarchies distinct if you intend to bind distinct objects. Alternatively, you can use embedded view
+    // controllers if this makes sense (binding namely stops at view controller boundaries)
+    Employee *employee2 = [[Employee alloc] init];
+    employee2.fullName = @"Sykler White";
+    employee2.age = @47;
+    [self.firstSubview bindToObject:employee2];
+    
+    Employee *employee3 = [[Employee alloc] init];
+    employee3.fullName = @"Walther White Jr.";
+    employee3.age = @17;
+    [self.secondSubview bindToObject:employee3];
+    
+    Employee *employee4 = [[Employee alloc] init];
+    employee4.fullName = @"Hank Schrader";
+    employee4.age = @45;
+    [self.subviewInSecondSubview bindToObject:employee4];
+}
+
+- (IBAction)refresh:(id)sender
+{
+    [self refreshBindings];
 }
 
 @end
