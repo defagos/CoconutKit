@@ -21,8 +21,8 @@
 //    unrecognized selectors to the bound table view delegate)
 //  - demo with table view
 //  - demo with embedded view controller (via placeholder view controller) to test boundaries
-//  - document: Bindings stop at VC boundaries, but formatter method resolving inspects the whole
-//    responder chain
+//  - document: Bindings stop at VC boundaries, and formatter selector resolving as well. A view controller (when
+//    available) namely defines a binding context
 
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
@@ -192,6 +192,10 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 - (void)updateText
 {
     if (! self.bindingInformation) {
+        // If an invalid keypath has been set and bindings are supported, then set the text to nil
+        if (self.bindKeyPath && [self respondsToSelector:@selector(updateViewWithText:)]) {
+            [self updateViewWithText:nil];
+        }
         return;
     }
     

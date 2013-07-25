@@ -202,7 +202,7 @@
 
 #pragma mark Context binding lookup
 
-// Locate the first responder which implements the specified method
+// Locate the first responder which implements the specified method. Stops at view controller boundaries
 + (id)bindingTargetForSelector:(SEL)selector view:(UIView *)view
 {
     UIResponder *responder = view;
