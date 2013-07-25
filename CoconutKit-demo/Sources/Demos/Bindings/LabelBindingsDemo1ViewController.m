@@ -19,6 +19,8 @@
 
 @implementation LabelBindingsDemo1ViewController
 
+#pragma mark Object creation and destruction
+
 - (id)init
 {
     if (self = [super init]) {
@@ -39,6 +41,8 @@
     return self;
 }
 
+#pragma mark Accessors and mutators
+
 - (NSString *)currentDateString
 {
     return [DemoFormatter stringFromDate:[NSDate date]];
@@ -49,14 +53,28 @@
     return [NSDate date];
 }
 
+- (Employee *)randomEmployee
+{
+    return [self.employees objectAtIndex:arc4random() % [self.employees count]];
+}
+
+#pragma mark Formatters
+
 - (NSString *)stringFromDate:(NSDate *)date
 {
     return [DemoFormatter stringFromDate:date];
 }
 
-- (Employee *)firstEmployee
+- (NSString *)stringFromArray:(NSArray *)array
 {
-    return [self.employees firstObject];
+    return [array componentsJoinedByString:@", "];
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)refresh:(id)sender
+{
+    [self refreshBindings];
 }
 
 @end

@@ -19,6 +19,7 @@
         employee.fullName = @"Jessie Pinkman";
         employee.age = @22;
         
+        // Can be bound early. The object is retained
         [self bindToObject:employee];
     }
     return self;

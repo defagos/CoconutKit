@@ -242,4 +242,17 @@
     return nil;
 }
 
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; object: %@; keyPath: %@; formatterName: %@; formattingTarget: %@>",
+            [self class],
+            self,
+            self.object,
+            self.keyPath,
+            self.formatterName,
+            self.formattingTarget];
+}
+
 @end
