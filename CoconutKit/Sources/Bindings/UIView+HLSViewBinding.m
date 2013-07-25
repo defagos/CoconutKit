@@ -12,7 +12,6 @@
 #import "HLSRuntime.h"
 #import "HLSViewBindingInformation.h"
 #import "UIView+HLSExtensions.h"
-#import "UIView+HLSViewBindingFriend.h"
 
 // TODO:
 //  - for all demos: Add refresh bindings button (will update the date, suffices)
@@ -46,6 +45,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) id boundObject;
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 @property (nonatomic, assign, getter=isAwokenFromNib) BOOL awokenFromNib;
+
+- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController;
+- (void)refreshBindingsInViewController:(UIViewController *)viewController;
 
 - (BOOL)bindsRecursively;
 - (void)updateText;
@@ -133,32 +135,6 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 #pragma mark Bindings
 
-- (BOOL)bindsRecursively
-{
-    if ([self respondsToSelector:@selector(updatesSubviewsRecursively)]) {
-        return [self updatesSubviewsRecursively];
-    }
-    else {
-        return YES;
-    }
-}
-
-- (void)updateText
-{
-    if (! self.bindingInformation) {
-        return;
-    }
-    
-    NSString *text = [self.bindingInformation text];
-    [self updateViewWithText:text];
-}
-
-@end
-
-@implementation UIView (HLSViewBindingFriend)
-
-#pragma mark Bindings
-
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController
 {
     if (! object) {
@@ -209,6 +185,26 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
             [subview refreshBindings];
         }
     }
+}
+
+- (BOOL)bindsRecursively
+{
+    if ([self respondsToSelector:@selector(updatesSubviewsRecursively)]) {
+        return [self updatesSubviewsRecursively];
+    }
+    else {
+        return YES;
+    }
+}
+
+- (void)updateText
+{
+    if (! self.bindingInformation) {
+        return;
+    }
+    
+    NSString *text = [self.bindingInformation text];
+    [self updateViewWithText:text];
 }
 
 @end

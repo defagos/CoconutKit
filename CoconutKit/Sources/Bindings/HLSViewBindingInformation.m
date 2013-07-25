@@ -12,7 +12,6 @@
 #import "HLSLogger.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
-#import "UIView+HLSViewBindingFriend.h"
 
 #import <objc/runtime.h>
 

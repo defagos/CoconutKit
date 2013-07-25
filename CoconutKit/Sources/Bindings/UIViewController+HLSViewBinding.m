@@ -10,7 +10,6 @@
 
 #import "UIView+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
-#import "UIView+HLSViewBindingFriend.h"
 
 #import <objc/runtime.h>
 
@@ -31,16 +30,15 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 {
     self.boundObject = object;
     
-    // If the view has not deserialized when the object is bound, will do it in -awakeFromNib via swizzling
     if ([self isViewLoaded]) {
-        [self.view bindToObject:object inViewController:self];
+        [self.view bindToObject:object];
     }
 }
 
 - (void)refreshBindings
 {
     if ([self isViewLoaded]) {
-        [self.view refreshBindingsInViewController:self];
+        [self.view refreshBindings];
     }
 }
 
