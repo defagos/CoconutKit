@@ -12,6 +12,7 @@
 #import "HLSRuntime.h"
 #import "HLSViewBindingInformation.h"
 #import "UIView+HLSExtensions.h"
+#import "UIViewController+HLSViewBindingFriend.h"
 
 // TODO:
 //  - for all demos: Add refresh bindings button (will update the date, suffices)
@@ -26,7 +27,6 @@ static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindFormatterKey = &s_bindFormatterKey;
 static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
-static void *s_awokenFromNibKey = &s_awokenFromNibKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UIView__awakeFromNib_Imp)(id, SEL) = NULL;
@@ -44,13 +44,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 @property (nonatomic, strong) id boundObject;
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
-@property (nonatomic, assign, getter=isAwokenFromNib) BOOL awokenFromNib;
 
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController;
 - (void)refreshBindingsInViewController:(UIViewController *)viewController;
-
-- (BOOL)bindsRecursively;
-- (void)updateText;
 
 @end
 
@@ -123,18 +119,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     objc_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (BOOL)isAwokenFromNib
-{
-    return [objc_getAssociatedObject(self, s_awokenFromNibKey) boolValue];
-}
-
-- (void)setAwokenFromNib:(BOOL)awokenFromNib
-{
-    objc_setAssociatedObject(self, s_awokenFromNibKey, @(awokenFromNib), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 #pragma mark Bindings
 
+// Bind to an object in the context of a view controller (might be nil). Stops at view controller boundaries
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController
 {
     if (! object) {
@@ -142,31 +129,30 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    self.boundObject = object;
-    
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
-    if (self.viewController && self.viewController != viewController) {
+    UIViewController *nearestViewController = self.nearestViewController;
+    if (nearestViewController && nearestViewController != viewController) {
         return;
     }
     
-    if (self.awokenFromNib) {
-        if (self.bindKeyPath) {
-            if ([self respondsToSelector:@selector(updateViewWithText:)]) {
-                self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
-                                                                                    keyPath:self.bindKeyPath
-                                                                              formatterName:self.bindFormatter
-                                                                                       view:self];
-                [self updateText];
-            }
-            else {
-                HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
-            }
+    self.boundObject = object;
+    
+    if (self.bindKeyPath) {
+        if ([self respondsToSelector:@selector(updateViewWithText:)]) {
+            self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
+                                                                                keyPath:self.bindKeyPath
+                                                                          formatterName:self.bindFormatter
+                                                                                   view:self];
+            [self updateText];
         }
-        
-        if ([self bindsRecursively]) {
-            for (UIView *subview in self.subviews) {
-                [subview bindToObject:object inViewController:viewController];
-            }
+        else {
+            HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
+        }
+    }
+    
+    if ([self bindsRecursively]) {
+        for (UIView *subview in self.subviews) {
+            [subview bindToObject:object inViewController:viewController];
         }
     }
 }
@@ -174,7 +160,8 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 - (void)refreshBindingsInViewController:(UIViewController *)viewController
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
-    if (self.viewController && self.viewController != viewController) {
+    UIViewController *nearestViewController = self.nearestViewController;
+    if (nearestViewController && nearestViewController != viewController) {
         return;
     }
     
@@ -215,8 +202,6 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
 {
     (*s_UIView__awakeFromNib_Imp)(self, _cmd);
     
-    self.awokenFromNib = YES;
-    
     if (! self.bindingInformation) {
         if (! self.bindKeyPath) {
             return;
@@ -227,9 +212,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
             return;
         }
         
-        // TODO: Part of a friend interface
-        id object = self.boundObject ?: [(id)self.nearestViewController boundObject];
-        
+        id object = self.boundObject ?: self.nearestViewController.boundObject;
         self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
                                                                             keyPath:self.bindKeyPath
                                                                       formatterName:self.bindFormatter
