@@ -21,6 +21,7 @@
 //  - demo bound to an object
 //  - demo with binding to an object and normal binding
 //  - demo with two subview hierarchies bound to different objects
+//  - demo with complex subview hierarchies
 
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
@@ -45,8 +46,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) id boundObject;
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
-- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController;
-- (void)refreshBindingsInViewController:(UIViewController *)viewController;
+- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
+- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
+- (BOOL)bindsRecursively;
 
 @end
 
@@ -65,12 +67,17 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 - (void)bindToObject:(id)object
 {
-    [self bindToObject:object inViewController:[self nearestViewController]];
+    if (! object) {
+        HLSLoggerError(@"An object must be provided");
+        return;
+    }
+    
+    [self bindToObject:object inViewController:[self nearestViewController] recursive:[self bindsRecursively]];
 }
 
 - (void)refreshBindings
 {
-    [self refreshBindingsInViewController:[self nearestViewController]];
+    [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively]];
 }
 
 @end
@@ -122,13 +129,8 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 #pragma mark Bindings
 
 // Bind to an object in the context of a view controller (might be nil). Stops at view controller boundaries
-- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController
-{
-    if (! object) {
-        HLSLoggerError(@"An object must be provided");
-        return;
-    }
-    
+- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive
+{   
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
     if (nearestViewController && nearestViewController != viewController) {
@@ -139,6 +141,8 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     
     if (self.bindKeyPath) {
         if ([self respondsToSelector:@selector(updateViewWithText:)]) {
+            HLSLoggerDebug(@"Bind object %@ to view %@ with keyPath %@", object, self, self.bindKeyPath);
+            
             self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
                                                                                 keyPath:self.bindKeyPath
                                                                           formatterName:self.bindFormatter
@@ -150,14 +154,14 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
         }
     }
     
-    if ([self bindsRecursively]) {
+    if (recursive) {
         for (UIView *subview in self.subviews) {
-            [subview bindToObject:object inViewController:viewController];
+            [subview bindToObject:object inViewController:viewController recursive:recursive];
         }
     }
 }
 
-- (void)refreshBindingsInViewController:(UIViewController *)viewController
+- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -167,9 +171,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     
     [self updateText];
     
-    if ([self bindsRecursively]) {
+    if (recursive) {
         for (UIView *subview in self.subviews) {
-            [subview refreshBindings];
+            [subview refreshBindingsInViewController:viewController recursive:recursive];
         }
     }
 }
@@ -202,21 +206,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
 {
     (*s_UIView__awakeFromNib_Imp)(self, _cmd);
     
-    if (! self.bindingInformation) {
-        if (! self.bindKeyPath) {
-            return;
-        }
-        
-        if (! [self respondsToSelector:@selector(updateViewWithText:)]) {
-            HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
-            return;
-        }
-        
-        id object = self.boundObject ?: self.nearestViewController.boundObject;
-        self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
-                                                                            keyPath:self.bindKeyPath
-                                                                      formatterName:self.bindFormatter
-                                                                               view:self];
-        [self updateText];
+    if (self.bindKeyPath && ! self.bindingInformation) {
+        UIViewController *nearestViewController = self.nearestViewController;
+        id boundObject = self.boundObject ?: nearestViewController.boundObject;
+        [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
     }
 }
