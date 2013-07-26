@@ -79,7 +79,7 @@
 {
     // Lazily check and fill binding information
     if (! [self verifyBindingInformation]) {
-        return nil;
+        return @"NaB";
     }
         
     id value = [self.object valueForKeyPath:self.keyPath];

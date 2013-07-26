@@ -194,7 +194,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     if (! self.bindingInformation) {
         // If an invalid keypath has been set and bindings are supported, then set the text to nil
         if (self.bindKeyPath && [self respondsToSelector:@selector(updateViewWithText:)]) {
-            [self updateViewWithText:nil];
+            [self updateViewWithText:@"NaB"];
         }
         return;
     }
