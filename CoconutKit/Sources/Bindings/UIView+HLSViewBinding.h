@@ -71,7 +71,7 @@
 
 /**
  * UIView subclasses can implement this method to return YES if subviews must be updated recursively when the
- * receiver is updated. If not implemented, the default behavior is YES
+ * receiver is updated. When not implemented, the default behavior is YES
  */
 - (BOOL)bindsSubviewsRecursively;
 
@@ -83,18 +83,22 @@
 
 @end
 
+/**
+ * View binding interface. All methods can be called whether a view implements binding support or not. When calling
+ * one of those methods on a view, the view hierarchy rooted at it is traversed, until views which do not support
+ * recursion are found (see HLSViewBinding protocol), or until a view controller boundary is reached
+ */
 @interface UIView (HLSViewBinding)
 
 /**
- * Bind an object to the specified bind path. This bind path must be a KVC-compliant keypath. Object updates
- * are not automatically reflected, call -refreshBindings when appropriate. Subviews are bound recursively 
- * (if enabled, see HLSViewBinding protocol), stopping at view controller boundaries
+ * Bind the view (and recursively the view hierarchy rooted at it) to a given object (must not be nil). During
+ * view hierarchy traversal, keypaths and formatters set via user-defined runtime attributes will be used
+ * to automatically update those views which implement binding support. 
  */
 - (void)bindToObject:(id)object;
 
 /**
- * Refresh bound values, recursively if enabled (see HLSViewBinding protocol). Stops at view controller
- * boundaries
+ * Refresh values displayed by the view, recursively traversing the view hierarchy rooted at it
  */
 - (void)refreshBindings;
 
