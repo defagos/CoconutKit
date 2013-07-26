@@ -69,7 +69,12 @@
  *
  * Bindings have currently been implemented for the following UIView subclasses:
  *   - UILabel
- * You can implement bindings for other classes by having them implement the HLSViewBinding protocol.
+ * You can customize the binding behavior for other UIView subclasses (even your own) by implementing the
+ * HLSViewBinding protocol
+ */
+
+/**
+ * This protocol can be implemented by UIView subclasses to customize binding behavior 
  */
 @protocol HLSViewBinding <NSObject>
 
@@ -80,7 +85,7 @@
  * view according to the text which is received as parameter. For UIView classes which do not implement this method, 
  * bindings will not be available.
  *
- * You can call -bindToObject: or -refreshBindings: on any view, whether it actually implement -updateViewWithText:
+ * You can call -bindToObject:,  -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithText:
  * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively)
  */
 - (void)updateViewWithText:(NSString *)text;
@@ -91,16 +96,19 @@
  */
 - (BOOL)bindsSubviewsRecursively;
 
+// TODO: Implement and document
+#if 0
 // TODO: This can be implemented to sync from view to model. Do it for UITextField (implement validation too? Make
 //       Core Data bindings a special case)
 - (BOOL)updateObjectWithText:(NSString *)text;
 
 // TODO: Optional validation (see Key-Value coding programming guide, -validate<field>:error:)
+#endif
 
 @end
 
 /**
- * View binding interface. All methods can be called whether a view implements binding support or not. When calling
+ * View binding additions. All methods can be called whether a view implements binding support or not. When calling
  * one of those methods on a view, the view hierarchy rooted at it is traversed, until views which do not support
  * recursion are found (see HLSViewBinding protocol), or until a view controller boundary is reached
  */
