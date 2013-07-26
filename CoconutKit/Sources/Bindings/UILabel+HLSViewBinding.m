@@ -17,7 +17,7 @@
     self.text = text;
 }
 
-- (BOOL)updatesSubviewsRecursively
+- (BOOL)bindsSubviewsRecursively
 {
     return NO;
 }

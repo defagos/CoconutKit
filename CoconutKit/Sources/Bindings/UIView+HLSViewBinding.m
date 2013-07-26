@@ -181,8 +181,8 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 - (BOOL)bindsRecursively
 {
-    if ([self respondsToSelector:@selector(updatesSubviewsRecursively)]) {
-        return [self updatesSubviewsRecursively];
+    if ([self respondsToSelector:@selector(bindsSubviewsRecursively)]) {
+        return [self performSelector:@selector(bindsSubviewsRecursively)];
     }
     else {
         return YES;
@@ -194,9 +194,11 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     if (! self.bindingInformation) {
         return;
     }
-        
+    
+    NSAssert([self respondsToSelector:@selector(updateViewWithText:)], @"Binding could only be made it -updateWithText: is implemented");
+    
     NSString *text = [self.bindingInformation text];
-    [self updateViewWithText:text];
+    [self performSelector:@selector(updateViewWithText:) withObject:text];
 }
 
 @end

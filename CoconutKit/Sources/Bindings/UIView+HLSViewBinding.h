@@ -35,15 +35,19 @@
  *
  * The binding information is resolved once when views are unarchived, and stored for efficient later use. Values
  * are not updated automatically. You can call -bindToObject: to set a new object, or if you want to update
- * the bound views with the most recent values available, simply call -refreshBindings. Each view decides
- * whether bindings, and therefore refreshes, are recursively made or not (see HLSViewBinding protocol).
+ * the bound views with the most recent values available, simply call -refreshBindings.
+ *
+ * It would be painful to call -bindToObject: or -refreshBindings: on all views belonging to a view hierarchy.
+ * For this reason, such calls are made recursively for you. Simply call the methods at the top of the view
+ * controller hierarchy (or even on the view controller itself, see UIViewController+HLSViewBinding) to bind
+ * all subviews. Note that each view class decides whether it recursively binds its subviews or not (see
+ * HLSViewBinding protocol)
  *
  * In most common cases, you want to bind a single view hierarchy to a single object. You can of course have
  * separate view hierarchies within the same view controller context, each one bound to a different object.
  * Nesting can be more subtle and depends on the order in which -bindToObject: is called. Though you should
  * in general avoid such designs, you can still bind objects by calling -bindToObject: from the topmost parent
- * view to the bottommost child view. Since bindings are often made for the root view of a view controller,
- * convenience binding methods have been provided on UIViewController as well (see UIViewController+HLSViewBinding)
+ * view to the bottommost child view.
  *
  * TODO: Document validation and sync in the other direction (when available)
  *
@@ -56,8 +60,12 @@
 @optional
 
 /**
- * UIView subclasses can implement this method to perform the logic necessary to update the view using the new 
- * value corresponding to an identified biding. If this method is not implemented, bindings will not be available
+ * UIView subclasses which want to provide bindings MUST implement this method. Its implementation should update the 
+ * view according to the text which is received as parameter. For UIView classes which do not implement this method, 
+ * bindings will not be available.
+ *
+ * You can call -bindToObject: or -refreshBindings: on any view, whether it actually implement -updateViewWithText:
+ * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively)
  */
 - (void)updateViewWithText:(NSString *)text;
 
@@ -65,17 +73,17 @@
  * UIView subclasses can implement this method to return YES if subviews must be updated recursively when the
  * receiver is updated. If not implemented, the default behavior is YES
  */
-- (BOOL)updatesSubviewsRecursively;
+- (BOOL)bindsSubviewsRecursively;
 
 // TODO: This can be implemented to sync from view to model. Do it for UITextField (implement validation too? Make
 //       Core Data bindings a special case)
-- (BOOL)updateBoundObjectWithText:(NSString *)text;
+- (BOOL)updateObjectWithText:(NSString *)text;
 
 // TODO: Optional validation (see Key-Value coding programming guide, -validate<field>:error:)
 
 @end
 
-@interface UIView (HLSViewBinding) <HLSViewBinding>
+@interface UIView (HLSViewBinding)
 
 /**
  * Bind an object to the specified bind path. This bind path must be a KVC-compliant keypath. Object updates
