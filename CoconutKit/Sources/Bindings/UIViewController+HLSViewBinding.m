@@ -10,6 +10,7 @@
 
 #import "UIView+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
+#import "UIViewController+HLSExtensions.h"
 
 #import <objc/runtime.h>
 
@@ -30,16 +31,17 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 {
     self.boundObject = object;
     
-    if ([self isViewLoaded]) {
-        [self.view bindToObject:object];
-    }
+    [[self viewIfLoaded] bindToObject:object];
 }
 
 - (void)refreshBindings
 {
-    if ([self isViewLoaded]) {
-        [self.view refreshBindings];
-    }
+    [[self viewIfLoaded] refreshBindings];
+}
+
+- (void)recalculateBindings
+{
+    [[self viewIfLoaded] recalculateBindings];
 }
 
 @end

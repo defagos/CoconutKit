@@ -16,4 +16,6 @@
 
 - (void)refreshBindings;
 
+- (void)recalculateBindings;
+
 @end

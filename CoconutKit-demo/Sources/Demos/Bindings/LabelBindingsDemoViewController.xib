@@ -69,15 +69,17 @@
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBSegmentControlStyle">2</int>
-								<int key="IBNumberOfSegments">4</int>
+								<int key="IBNumberOfSegments">5</int>
 								<int key="IBSelectedSegmentIndex">0</int>
 								<array key="IBSegmentTitles">
 									<string>First</string>
 									<string>Second</string>
 									<string>Third</string>
 									<string>Fourth</string>
+									<string>Fifth</string>
 								</array>
 								<array class="NSMutableArray" key="IBSegmentWidths">
+									<real value="0.0"/>
 									<real value="0.0"/>
 									<real value="0.0"/>
 									<real value="0.0"/>
@@ -88,8 +90,10 @@
 									<boolean value="YES"/>
 									<boolean value="YES"/>
 									<boolean value="YES"/>
+									<boolean value="YES"/>
 								</array>
 								<array class="NSMutableArray" key="IBSegmentContentOffsets">
+									<string>{0, 0}</string>
 									<string>{0, 0}</string>
 									<string>{0, 0}</string>
 									<string>{0, 0}</string>
@@ -97,6 +101,7 @@
 								</array>
 								<array class="NSMutableArray" key="IBSegmentImages">
 									<object class="NSNull" id="4"/>
+									<reference ref="4"/>
 									<reference ref="4"/>
 									<reference ref="4"/>
 									<reference ref="4"/>
@@ -239,7 +244,7 @@
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="55.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<integer value="3" key="57.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
+				<integer value="4" key="57.IUISegmentedControlInspectorSelectedSegmentMetadataKey"/>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>

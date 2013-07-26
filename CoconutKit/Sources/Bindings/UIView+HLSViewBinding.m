@@ -20,9 +20,6 @@
 //    belongs to a protocol, and use it as a criterium to know whether the delegate must forward
 //    unrecognized selectors to the bound table view delegate)
 //  - demo with table view
-//  - demo with embedded view controller (via placeholder view controller) to test boundaries
-//  - document: Bindings stop at VC boundaries, and formatter selector resolving as well. A view controller (when
-//    available) namely defines a binding context
 
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
@@ -49,6 +46,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
 - (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
+- (void)recalculateBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
 - (BOOL)bindsRecursively;
 
 @end
@@ -79,6 +77,11 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 - (void)refreshBindings
 {
     [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively]];
+}
+
+- (void)recalculateBindings
+{
+    [self recalculateBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively]];
 }
 
 @end
@@ -129,15 +132,17 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 #pragma mark Bindings
 
-// Bind to an object in the context of a view controller (might be nil). Stops at view controller boundaries
+// Bind to an object in the context of a view controller (might be nil). Stops at view controller boundaries. Correctly
+// deals with viewController = nil as well
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive
 {   
-    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
+    // Stop at view controller boundaries (correctly deals with viewController = nil)
     UIViewController *nearestViewController = self.nearestViewController;
     if (nearestViewController && nearestViewController != viewController) {
         return;
     }
     
+    // Retains the object, so that view hierarchies can be bound to locally created objects assigned to them
     self.boundObject = object;
     
     if (self.bindKeyPath) {
@@ -175,6 +180,23 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     if (recursive) {
         for (UIView *subview in self.subviews) {
             [subview refreshBindingsInViewController:viewController recursive:recursive];
+        }
+    }
+}
+
+- (void)recalculateBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive
+{
+    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
+    UIViewController *nearestViewController = self.nearestViewController;
+    if (nearestViewController && nearestViewController != viewController) {
+        return;
+    }
+    
+    [self bindToObject:self.boundObject inViewController:viewController recursive:NO];
+    
+    if (recursive) {
+        for (UIView *subview in self.subviews) {
+            [subview recalculateBindingsInViewController:viewController recursive:recursive];
         }
     }
 }

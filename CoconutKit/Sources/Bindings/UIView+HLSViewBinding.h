@@ -50,6 +50,7 @@
  * view to the bottommost child view.
  *
  * TODO: Document validation and sync in the other direction (when available)
+ * TODO: Formatter resolving: Instance method first, then class method (along responder chain, then on object)
  *
  * Bindings have been implemented for the following UIView subclasses:
  *   - UILabel
@@ -101,5 +102,7 @@
  * Refresh values displayed by the view, recursively traversing the view hierarchy rooted at it
  */
 - (void)refreshBindings;
+
+- (void)recalculateBindings;
 
 @end
