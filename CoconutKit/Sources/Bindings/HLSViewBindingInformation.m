@@ -16,13 +16,13 @@
 #import <objc/runtime.h>
 
 typedef enum {
-    ViewBindingInformationStatusEnumBegin = 0,
-    ViewBindingInformationStatusUnchecked = ViewBindingInformationStatusEnumBegin,
-    ViewBindingInformationStatusValid,
-    ViewBindingInformationStatusInvalid,
-    ViewBindingInformationStatusEnumEnd,
-    ViewBindingInformationStatusEnumSize = ViewBindingInformationStatusEnumEnd - ViewBindingInformationStatusEnumBegin
-} ViewBindingInformationStatus;
+    HLSViewBindingInformationStatusEnumBegin = 0,
+    HLSViewBindingInformationStatusUnchecked = HLSViewBindingInformationStatusEnumBegin,
+    HLSViewBindingInformationStatusValid,
+    HLSViewBindingInformationStatusInvalid,
+    HLSViewBindingInformationStatusEnumEnd,
+    HLSViewBindingInformationStatusEnumSize = HLSViewBindingInformationStatusEnumEnd - HLSViewBindingInformationStatusEnumBegin
+} HLSViewBindingInformationStatus;
 
 @interface HLSViewBindingInformation ()
 
@@ -34,7 +34,7 @@ typedef enum {
 @property (nonatomic, weak) id formattingTarget;            // weak ref
 @property (nonatomic, assign) SEL formattingSelector;
 
-@property (nonatomic, assign) ViewBindingInformationStatus status;
+@property (nonatomic, assign) HLSViewBindingInformationStatus status;
 
 @end
 
@@ -44,7 +44,12 @@ typedef enum {
 
 - (id)initWithObject:(id)object keyPath:(NSString *)keyPath formatterName:(NSString *)formatterName view:(UIView *)view
 {
-    if (self = [super init]) {        
+    if (self = [super init]) {
+        if (! [keyPath isFilled] || ! view) {
+            HLSLoggerError(@"Binding requires at least a keypath and a view");
+            return nil;
+        }
+        
         self.object = object;
         self.keyPath = keyPath;
         self.formatterName = formatterName;
@@ -64,12 +69,15 @@ typedef enum {
 - (NSString *)text
 {
     // Lazily check and fill binding information
-    if (! [self verifyBindingInformation]) {
+    if (self.status == HLSViewBindingInformationStatusUnchecked) {
+        self.status = [self verifyBindingInformation];
+    }
+    
+    if (self.status == HLSViewBindingInformationStatusInvalid) {
         return @"NaB";
     }
         
     id value = [self.object valueForKeyPath:self.keyPath];
-    
     if (self.formattingTarget) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -83,41 +91,27 @@ typedef enum {
 
 #pragma mark Binding
 
-// Return YES iff the binding information could be verified (keypath is valid, and any required formatting
-// method could be located). Having the method return NO either means the binding information is incorrect,
-// or that it could not be verified yet (because the keypath is valid but returns nil). Once binding
-// information has been verified once it is stored for later efficient access
-- (BOOL)verifyBindingInformation
+// Return 'valid' if the binding information can be verified (keypath is valid, and any required formatting
+// method could be located). If the information is valid but cannot not be fully checked (the keypath is
+// correct, but returns nil), returns 'unchecked'. Otherwise returns 'invalid'
+- (HLSViewBindingInformationStatus)verifyBindingInformation
 {
-    // Already cached
-    if (self.status != ViewBindingInformationStatusUnchecked) {
-        return self.status == ViewBindingInformationStatusValid;
-    }
-    
-    if (! [self.keyPath isFilled] || ! self.view) {
-        HLSLoggerError(@"Binding requires at least a keypath and a view");
-        self.status = ViewBindingInformationStatusInvalid;
-        return NO;
-    }
-    
     // An object has been provided. Check that the keypath is valid for it
     if (self.object) {
         @try {
             [self.object valueForKeyPath:self.keyPath];
         }
         @catch (NSException *exception) {
-            HLSLoggerError(@"Invalid keypath %@ for object %@", self.keyPath, self.object);
-            self.status = ViewBindingInformationStatusInvalid;
-            return NO;
+            HLSLoggerError(@"Invalid keypath '%@' for object %@", self.keyPath, self.object);
+            return HLSViewBindingInformationStatusInvalid;
         }
     }
-    // No object provided. Walk along the responder chain to find an object matching the keypath
+    // No object provided. Walk along the responder chain to find a responder matching the keypath
     else {
         self.object = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
         if (! self.object) {
-            HLSLoggerError(@"No responder was found for keypath %@", self.keyPath);
-            self.status = ViewBindingInformationStatusInvalid;
-            return NO;
+            HLSLoggerError(@"No responder was found for keypath '%@'", self.keyPath);
+            return HLSViewBindingInformationStatusInvalid;
         }
     }
     
@@ -127,21 +121,19 @@ typedef enum {
     // The keypath is valid, but we cannot check its type (to guess if formatting is needed) since there is no
     // value. Does not change the status, another check is required
     if (! value) {
-        return YES;
+        return HLSViewBindingInformationStatusUnchecked;
     }
     
     // No formatting required. We are done, the binding is correct
     if ([value isKindOfClass:[NSString class]]) {
-        self.status = ViewBindingInformationStatusValid;
-        return YES;
+        return HLSViewBindingInformationStatusValid;
     }
     
     // Formatting required. Check that a formatter is available
     if (! self.formatterName) {
-        HLSLoggerError(@"The value returned by the binding path %@ is of class %@, you must provide a "
-                       "formatterName user-defined runtime attribute to format it as an NSString", self.keyPath, [value className]);
-        self.status = ViewBindingInformationStatusInvalid;
-        return NO;
+        HLSLoggerError(@"The value returned by the binding keypath '%@' is of class %@, you must provide a formatterName "
+                       "user-defined runtime attribute to format it as an NSString", self.keyPath, [value className]);
+        return HLSViewBindingInformationStatusInvalid;
     }
     
     __block id formattingTarget = nil;
@@ -162,13 +154,13 @@ typedef enum {
         // Check
         Class class = NSClassFromString(className);
         if (! class) {
-            HLSLoggerError(@"Invalid class name");
+            HLSLoggerError(@"Invalid formatter class name %@ for keypath '%@'", className, self.keyPath);
             return;
         }
         
         SEL selector = NSSelectorFromString(methodName);
         if (! class_getClassMethod(class, selector)) {
-            HLSLoggerError(@"Invalid method name");
+            HLSLoggerError(@"Invalid formatter method name '%@' for keypath '%@'", methodName, self.keyPath);
             return;
         }
         
@@ -176,13 +168,13 @@ typedef enum {
         formattingSelector = selector;
     }];
     
+    // No class method formatter found
     if (! formattingTarget) {
         // Perform instance method lookup
         formattingSelector = NSSelectorFromString(self.formatterName);
         if (! formattingSelector) {
-            HLSLoggerError(@"Invalid formatter name %@", self.formatterName);
-            self.status = ViewBindingInformationStatusInvalid;
-            return NO;
+            HLSLoggerError(@"Invalid formatter name '%@' for keypath '%@'", self.formatterName, self.keyPath);
+            return HLSViewBindingInformationStatusInvalid;
         }
         
         // Look along the responder chain first (most specific)
@@ -191,10 +183,10 @@ typedef enum {
             // Look for a class method on the object class itself (most generic)
             Class objectClass = [self.object class];
             if (! [objectClass respondsToSelector:formattingSelector]) {
-                HLSLoggerError(@"No formatter method %@ is available on the view / view controller hiearchy, nor as a class "
-                               "method on the object class %@ itself", self.formatterName, [self.object className]);
-                self.status = self.status = ViewBindingInformationStatusInvalid;
-                return NO;
+                HLSLoggerError(@"No formatter method '%@' is available on the view / view controller hiearchy, nor as a class "
+                               "method on the object class %@ itself, for the keypath '%@'", self.formatterName, [self.object className],
+                               self.keyPath);
+                return HLSViewBindingInformationStatusInvalid;
             }
             
             formattingTarget = objectClass;
@@ -206,16 +198,15 @@ typedef enum {
     id formattedValue = [formattingTarget performSelector:formattingSelector withObject:value];
 #pragma clang diagnostic pop
     if (! [formattedValue isKindOfClass:[NSString class]]) {
-        HLSLoggerError(@"The formatter method %@ must return an NSString", self.formatterName);
-        self.status = self.status = ViewBindingInformationStatusInvalid;
-        return NO;
+        HLSLoggerError(@"The formatter method '%@' associated with the keypath '%@' must return an NSString", self.formatterName, self.keyPath);
+        return HLSViewBindingInformationStatusInvalid;
     }
     
     // Cache the binding information we just verified
     self.formattingTarget = formattingTarget;
     self.formattingSelector = formattingSelector;
-    self.status = ViewBindingInformationStatusValid;
-    return YES;
+    
+    return HLSViewBindingInformationStatusValid;
 }
 
 #pragma mark Context binding lookup
