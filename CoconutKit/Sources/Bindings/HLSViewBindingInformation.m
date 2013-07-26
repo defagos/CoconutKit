@@ -15,6 +15,15 @@
 
 #import <objc/runtime.h>
 
+typedef enum {
+    ViewBindingInformationStatusEnumBegin = 0,
+    ViewBindingInformationStatusUnchecked = ViewBindingInformationStatusEnumBegin,
+    ViewBindingInformationStatusValid,
+    ViewBindingInformationStatusInvalid,
+    ViewBindingInformationStatusEnumEnd,
+    ViewBindingInformationStatusEnumSize = ViewBindingInformationStatusEnumEnd - ViewBindingInformationStatusEnumBegin
+} ViewBindingInformationStatus;
+
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;                      // weak ref
@@ -25,7 +34,7 @@
 @property (nonatomic, weak) id formattingTarget;            // weak ref
 @property (nonatomic, assign) SEL formattingSelector;
 
-@property (nonatomic, assign, getter=isVerified) BOOL verified;
+@property (nonatomic, assign) ViewBindingInformationStatus status;
 
 @end
 
@@ -35,30 +44,7 @@
 
 - (id)initWithObject:(id)object keyPath:(NSString *)keyPath formatterName:(NSString *)formatterName view:(UIView *)view
 {
-    if (self = [super init]) {
-        if (! [keyPath isFilled] || ! view) {
-            HLSLoggerError(@"Binding requires at least a keypath and a view");
-            return nil;
-        }
-        
-        if (object) {
-            // Check that the keypath is valid
-            @try {
-                [object valueForKeyPath:keyPath];
-            }
-            @catch (NSException *exception) {
-                HLSLoggerError(@"Invalid keypath %@ for object %@", keyPath, object);
-                return nil;
-            }
-        }
-        else {
-            object = [HLSViewBindingInformation bindingTargetForKeyPath:keyPath view:view];
-            if (! object) {
-                HLSLoggerError(@"No responder was found for keypath %@", keyPath);
-                return nil;
-            }
-        }
-        
+    if (self = [super init]) {        
         self.object = object;
         self.keyPath = keyPath;
         self.formatterName = formatterName;
@@ -103,22 +89,50 @@
 // information has been verified once it is stored for later efficient access
 - (BOOL)verifyBindingInformation
 {
-    // Already verified and cached. Nothing to do
-    if (self.verified) {
-        return YES;
+    // Already cached
+    if (self.status != ViewBindingInformationStatusUnchecked) {
+        return self.status == ViewBindingInformationStatusValid;
     }
     
-    // No need to check for exceptions here, this has been done by the initializer
+    if (! [self.keyPath isFilled] || ! self.view) {
+        HLSLoggerError(@"Binding requires at least a keypath and a view");
+        self.status = ViewBindingInformationStatusInvalid;
+        return NO;
+    }
+    
+    // An object has been provided. Check that the keypath is valid for it
+    if (self.object) {
+        @try {
+            [self.object valueForKeyPath:self.keyPath];
+        }
+        @catch (NSException *exception) {
+            HLSLoggerError(@"Invalid keypath %@ for object %@", self.keyPath, self.object);
+            self.status = ViewBindingInformationStatusInvalid;
+            return NO;
+        }
+    }
+    // No object provided. Walk along the responder chain to find an object matching the keypath
+    else {
+        self.object = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
+        if (! self.object) {
+            HLSLoggerError(@"No responder was found for keypath %@", self.keyPath);
+            self.status = ViewBindingInformationStatusInvalid;
+            return NO;
+        }
+    }
+    
+    // No need to check for exceptions here, the keypath is here guaranteed to be valid the object
     id value = [self.object valueForKeyPath:self.keyPath];
     
-    // The keypath is valid, but we cannot check its type (to guess if formatting is needed)
+    // The keypath is valid, but we cannot check its type (to guess if formatting is needed) since there is no
+    // value. Does not change the status, another check is required
     if (! value) {
-        return NO;
+        return YES;
     }
     
     // No formatting required. We are done, the binding is correct
     if ([value isKindOfClass:[NSString class]]) {
-        self.verified = YES;
+        self.status = ViewBindingInformationStatusValid;
         return YES;
     }
     
@@ -126,6 +140,7 @@
     if (! self.formatterName) {
         HLSLoggerError(@"The value returned by the binding path %@ is of class %@, you must provide a "
                        "formatterName user-defined runtime attribute to format it as an NSString", self.keyPath, [value className]);
+        self.status = ViewBindingInformationStatusInvalid;
         return NO;
     }
     
@@ -166,6 +181,7 @@
         formattingSelector = NSSelectorFromString(self.formatterName);
         if (! formattingSelector) {
             HLSLoggerError(@"Invalid formatter name %@", self.formatterName);
+            self.status = ViewBindingInformationStatusInvalid;
             return NO;
         }
         
@@ -177,6 +193,7 @@
             if (! [objectClass respondsToSelector:formattingSelector]) {
                 HLSLoggerError(@"No formatter method %@ is available on the view / view controller hiearchy, nor as a class "
                                "method on the object class %@ itself", self.formatterName, [self.object className]);
+                self.status = self.status = ViewBindingInformationStatusInvalid;
                 return NO;
             }
             
@@ -190,13 +207,14 @@
 #pragma clang diagnostic pop
     if (! [formattedValue isKindOfClass:[NSString class]]) {
         HLSLoggerError(@"The formatter method %@ must return an NSString", self.formatterName);
+        self.status = self.status = ViewBindingInformationStatusInvalid;
         return NO;
     }
     
     // Cache the binding information we just verified
     self.formattingTarget = formattingTarget;
     self.formattingSelector = formattingSelector;
-    self.verified = YES;
+    self.status = ViewBindingInformationStatusValid;
     return YES;
 }
 
