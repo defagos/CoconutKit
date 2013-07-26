@@ -7,52 +7,67 @@
 //
 
 /**
- * Usually, when you have to display some value on screen, and if you are using Interface Builder to design your
- * interface, you have to create and bind an outlet. Though this process is completely straightforward, this 
- * tends to clutter you code and becomes increasingly boring, especially when the number of values to display
- * is large.
+ * Usually, when you have to display some value on screen, and if you are using Interface Builder to design 
+ * your interface, you have to create and bind an outlet. Though this process is completely straightforward, 
+ * this tends to clutter you code and becomes increasingly boring, especially when the number of values to 
+ * display is large.
  *
  * CoconutKit view bindings allow you to bind values to views directly in Interface Builder, via user-defined
- * runtime attributes instead of outlets. Two attributes are available:
+ * runtime attributes instead of outlets. Two attributes are available to this purpose:
  *   - bindKeyPath: The keypath to which the view will be bound. This can be any kind of keypath, even one
  *                  containing keypath operators
  *   - bindFormatter: Values to be displayed must be strings. If bindKeyPath returns another kind of object,
- *                    you must provide the name of a formatter method with prototype
- *                       - (NSString *)methodName:(<Class>)object
- *                    turning it into a string. In this case, bindFormatter must be set to 'methodName:' (how
- *                    method lookup is performed is explained below). Alternatively, you can provide a
- *                    global class formatter method '+[<Class> methodName:]'
+ *                    you must provide the name of an instance formatter method 'methodName:' which can 
+ *                    either be an instance method with prototype
+ *                      - (NSString *)methodName:(SomeClass *)object
+ *                    or a class method with prototype
+ *                      + (NSString *)classMethodName:(SomeClass *)object
+ *                    transforming the value into a string. Alternatively, you can provide a global class 
+ *                    formatter method '+[SomeClass methodName:]'
  *
  * With no additional measure, keypath lookup is performed along the responder chain, starting with the view
  * bindKeyPath has been set on, and stopping at the first encountered view controller (if any is found). View
  * controllers namely define a local context, and it does not make sense to proceed further along the responder
- * chain. The same is true for formatter selector lookup.
+ * chain. The same is true for formatter selector lookup (at each step along the responder chain, instance
+ * method existence is tested first, then class method existence).
  *
- * Often, though, values to be bound stem from a model object, not from the responder chain. In this case,
- * call -bindToObject:, passing it the object bindings must be made against. In this case, the keypath must
- * be valid for this object. Formatter lookup is first made on the object class itself, then along the responder
- * chain (again stopping at view controller boundaries). Global formatters can of course still be used as well.
+ * Often, though, values to be bound stem from a model object, not from the responder chain. In such cases,
+ * you must call -bindToObject:, passing it the object to be bind against. The keypath you set must be be 
+ * valid for this object. Formatter lookup is first made on the object class itself (instance, then class
+ * method), then along the responder chain (instance, then class method, again stopping at view controller 
+ * boundaries), except if a global class formatter is used
  *
- * The binding information is resolved once when views are unarchived, and stored for efficient later use. Values
- * are not updated automatically. You can call -bindToObject: to set a new object, or if you want to update
- * the bound views with the most recent values available, simply call -refreshBindings.
+ * To summarize, formatter lookup for a method named 'methodName:' is performed from the most specific to 
+ * the most generic context, within the boundaries of a view controller (if any), as follows:
+ *   - instance method -methodName: on bound object (if -bindToObject: has been used)
+ *   - class method +methodName: on bound object (if -bindToObject: has been used)
+ *   - for each responder along the responder chain starting with the bound view:
+ *       - instance method -methodName: on the responder object
+ *       - class method +methodName: on the responder object
+ * In addition, global formatter names can also point to class methods '+[SomeClass methodName:]'
  *
- * It would be painful to call -bindToObject: or -refreshBindings: on all views belonging to a view hierarchy.
- * For this reason, such calls are made recursively for you. Simply call the methods at the top of the view
- * controller hierarchy (or even on the view controller itself, see UIViewController+HLSViewBinding) to bind
- * all subviews. Note that each view class decides whether it recursively binds its subviews or not (see
- * HLSViewBinding protocol)
+ * The binding information is resolved once when views are unarchived, and stored for efficient later use. 
+ * Values are not updated automatically when the underlying bound objects changes, this has to be done
+ * manually:
+ *   - if the object is not the same, call -bindToObject: to set bindings with the new object
+ *   - if the object is the same but has different values for its bounds properties, simply call -refreshBindings 
+ *     to reflect the new values which are available
  *
- * In most common cases, you want to bind a single view hierarchy to a single object. You can of course have
- * separate view hierarchies within the same view controller context, each one bound to a different object.
- * Nesting can be more subtle and depends on the order in which -bindToObject: is called. Though you should
- * in general avoid such designs, you can still bind objects by calling -bindToObject: from the topmost parent
- * view to the bottommost child view.
+ * It would be painful to call -bindToObject:, -refreshBindings:, etc. on all views belonging to a view hierarchy
+ * when bindings must be established or refreshed. For this reason, those calls have been made recursive. This 
+ * means you can simply call one of those methods at the top of the view hierarchy (or even on the view controller 
+ * itself, see UIViewController+HLSViewBinding) to bind or refresh all associated view hierarchy. Note that each 
+ * view class decides whether it recursively binds or refreshes its subviews (see HLSViewBinding protocol)
+ *
+ * In most cases, you want to bind a single view hierarchy to a single object. But you can also have separate 
+ * view hierarchies within the same view controller context if you want, each one bound to a different object.
+ * Nesting is possible as well, but can be more subtle and depends on the order in which -bindToObject: is 
+ * called. Though you should in general avoid such designs, you can still bind nested views correctly by 
+ * calling -bindToObject: on parent views first.
  *
  * TODO: Document validation and sync in the other direction (when available)
- * TODO: Formatter resolving: Instance method first, then class method (along responder chain, then on object)
  *
- * Bindings have been implemented for the following UIView subclasses:
+ * Bindings have currently been implemented for the following UIView subclasses:
  *   - UILabel
  * You can implement bindings for other classes by having them implement the HLSViewBinding protocol.
  */

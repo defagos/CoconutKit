@@ -180,14 +180,18 @@ typedef enum {
         // Look along the responder chain first (most specific)
         formattingTarget = [HLSViewBindingInformation bindingTargetForSelector:formattingSelector view:self.view];
         if (! formattingTarget) {
+            // Look for an instance method on the object
+            if ([self.object respondsToSelector:formattingSelector]) {
+                formattingTarget = self.object;
+            }
             // Look for a class method on the object class itself (most generic)
-            Class objectClass = [self.object class];
-            if (! [objectClass respondsToSelector:formattingSelector]) {
+            else if ([[self.object class] respondsToSelector:formattingSelector]) {
+                formattingTarget = [self.object class];
+            }
+            else {
                 HLSLoggerError(@"No formatter method '%@' could be found for keypath '%@'", self.formatterName, self.keyPath);
                 return HLSViewBindingInformationStatusInvalid;
             }
-            
-            formattingTarget = objectClass;
         }
     }
     
@@ -214,8 +218,15 @@ typedef enum {
 {
     UIResponder *responder = view;
     while (responder) {
+        // Instance formatter lookup first
         if ([responder respondsToSelector:selector]) {
             return responder;
+        }
+        
+        // Class formatter lookup
+        Class responderClass = [responder class];
+        if ([responderClass respondsToSelector:selector]) {
+            return responderClass;
         }
         
         // Does not get higher than the receiver parent view controller, which defines the binding context
