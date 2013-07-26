@@ -27,21 +27,28 @@
 + (BOOL)loadFontWithData:(NSData *)data
 {
     // See http://www.marco.org/2012/12/21/ios-dynamic-font-loading
-    BOOL success = YES;
-    CFErrorRef error = NULL;
-    CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)data);
-    CGFontRef font = CGFontCreateWithDataProvider(provider);
-    if (! CTFontManagerRegisterGraphicsFont(font, &error)) {
-        CFStringRef errorDescription = CFErrorCopyDescription(error);
-        HLSLoggerError(@"Failed to register font, reason: %@", errorDescription);
-        CFRelease(errorDescription);
-        CFRelease(error);
-        success = NO;
+    CGDataProviderRef providerRef = CGDataProviderCreateWithCFData((CFDataRef)data);
+    CGFontRef fontRef = CGFontCreateWithDataProvider(providerRef);
+    if (! fontRef) {
+        HLSLoggerError(@"Could not create font");
+        CFRelease(providerRef);
+        return NO;
     }
-    CFRelease(font);
-    CFRelease(provider);
     
-    return success;
+    BOOL result = YES;
+    
+    CFErrorRef errorRef = NULL;
+    if (! CTFontManagerRegisterGraphicsFont(fontRef, &errorRef)) {
+        CFStringRef errorDescriptionStringRef = CFErrorCopyDescription(errorRef);
+        HLSLoggerError(@"Failed to register font, reason: %@", errorDescriptionStringRef);
+        CFRelease(errorDescriptionStringRef);
+        CFRelease(errorRef);
+        result = NO;
+    }
+    
+    CFRelease(fontRef);
+    CFRelease(providerRef);
+    return result;
 }
 
 @end
