@@ -96,8 +96,12 @@ typedef enum {
 // correct, but returns nil), returns 'unchecked'. Otherwise returns 'invalid'
 - (HLSViewBindingInformationStatus)verifyBindingInformation
 {
+    if ([self.object isEqual:HLSViewBindingInformationEmptyObject]) {
+        self.object = nil;
+        return HLSViewBindingInformationStatusValid;
+    }
     // An object has been provided. Check that the keypath is valid for it
-    if (self.object) {
+    else if (self.object) {
         @try {
             [self.object valueForKeyPath:self.keyPath];
         }

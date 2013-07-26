@@ -59,12 +59,12 @@
 
 - (IBAction)refresh:(id)sender
 {
-    [self refreshBindings];
+    [self refreshBindingsForced:NO];
 }
 
 - (IBAction)recalculate:(id)sender
 {
-    [self recalculateBindings];
+    [self refreshBindingsForced:YES];
 }
 
 @end

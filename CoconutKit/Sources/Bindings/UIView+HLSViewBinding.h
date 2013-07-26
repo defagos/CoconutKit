@@ -115,17 +115,18 @@
 @interface UIView (HLSViewBinding)
 
 /**
- * Bind the view (and recursively the view hierarchy rooted at it) to a given object (must not be nil). During
- * view hierarchy traversal, keypaths and formatters set via user-defined runtime attributes will be used
- * to automatically update those views which implement binding support. 
+ * Bind the view (and recursively the view hierarchy rooted at it) to a given object (can be nil). During view 
+ * hierarchy traversal, keypaths and formatters set via user-defined runtime attributes will be used to automatically 
+ * fill those views which implement binding support
  */
 - (void)bindToObject:(id)object;
 
 /**
- * Refresh values displayed by the view, recursively traversing the view hierarchy rooted at it
+ * Refresh the value displayed by the view, recursively traversing the view hierarchy rooted at it. If forced is set
+ * to YES, bindings are not checked again (i.e. formatters are not resolved again), values are only updated using
+ * information which has been cached the first time bindings were successfully checked. If you want to force bindings
+ * to be checked again first (i.e. formatters to be resolved again), set forced to YES
  */
-- (void)refreshBindings;
-
-- (void)recalculateBindings;
+- (void)refreshBindingsForced:(BOOL)forced;
 
 @end

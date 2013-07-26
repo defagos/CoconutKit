@@ -14,8 +14,6 @@
 // Document: The object is retained
 - (void)bindToObject:(id)object;
 
-- (void)refreshBindings;
-
-- (void)recalculateBindings;
+- (void)refreshBindingsForced:(BOOL)forced;
 
 @end

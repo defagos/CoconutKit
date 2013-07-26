@@ -16,7 +16,7 @@
 {
     _employee = employee;
     
-    [self bindToObject:employee];
+    [self bindToObject:nil];
 }
 
 @end

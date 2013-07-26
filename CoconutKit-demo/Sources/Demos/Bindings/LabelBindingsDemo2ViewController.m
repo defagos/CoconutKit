@@ -61,7 +61,7 @@
 
 - (IBAction)refresh:(id)sender
 {
-    [self refreshBindings];
+    [self refreshBindingsForced:NO];
 }
 
 - (IBAction)change:(id)sender

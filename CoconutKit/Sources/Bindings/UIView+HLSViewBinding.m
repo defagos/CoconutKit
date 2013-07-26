@@ -45,8 +45,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
-- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
-- (void)recalculateBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
+- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced;
 - (BOOL)bindsRecursively;
 
 @end
@@ -66,22 +65,17 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 - (void)bindToObject:(id)object
 {
+    // Binding to an empty object
     if (! object) {
-        HLSLoggerError(@"An object must be provided");
-        return;
+        object = HLSViewBindingInformationEmptyObject;
     }
     
     [self bindToObject:object inViewController:[self nearestViewController] recursive:[self bindsRecursively]];
 }
 
-- (void)refreshBindings
+- (void)refreshBindingsForced:(BOOL)forced
 {
-    [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively]];
-}
-
-- (void)recalculateBindings
-{
-    [self recalculateBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively]];
+    [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively] forced:forced];
 }
 
 @end
@@ -167,7 +161,7 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
     }
 }
 
-- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive
+- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -175,28 +169,17 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    [self updateText];
+    if (forced) {
+        // Not recursive here. Recursion is made below
+        [self bindToObject:self.boundObject inViewController:viewController recursive:NO];
+    }
+    else {
+        [self updateText];
+    }
     
     if (recursive) {
         for (UIView *subview in self.subviews) {
-            [subview refreshBindingsInViewController:viewController recursive:recursive];
-        }
-    }
-}
-
-- (void)recalculateBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive
-{
-    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
-    UIViewController *nearestViewController = self.nearestViewController;
-    if (nearestViewController && nearestViewController != viewController) {
-        return;
-    }
-    
-    [self bindToObject:self.boundObject inViewController:viewController recursive:NO];
-    
-    if (recursive) {
-        for (UIView *subview in self.subviews) {
-            [subview recalculateBindingsInViewController:viewController recursive:recursive];
+            [subview refreshBindingsInViewController:viewController recursive:recursive forced:forced];
         }
     }
 }

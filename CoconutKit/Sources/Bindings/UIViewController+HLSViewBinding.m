@@ -34,14 +34,9 @@ static void *s_boundObjectKey = &s_boundObjectKey;
     [[self viewIfLoaded] bindToObject:object];
 }
 
-- (void)refreshBindings
+- (void)refreshBindingsForced:(BOOL)forced
 {
-    [[self viewIfLoaded] refreshBindings];
-}
-
-- (void)recalculateBindings
-{
-    [[self viewIfLoaded] recalculateBindings];
+    [[self viewIfLoaded] refreshBindingsForced:forced];
 }
 
 @end
