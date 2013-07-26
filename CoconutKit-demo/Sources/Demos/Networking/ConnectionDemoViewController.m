@@ -115,7 +115,7 @@
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[ConnectionDemoViewController image1URL]];
     HLSURLConnection *singleNoRefConnection = [[HLSFileURLConnection alloc] initWithRequest:request completionBlock:^(HLSConnection *connection, id responseObject, NSError *error) {
-        NSLog(@"---> Done! %@, connection = %@", self, singleNoRefConnection);
+        NSLog(@"---> Done! %@, connection = %@", self, connection);
     }];
     [singleNoRefConnection start];    
 }
