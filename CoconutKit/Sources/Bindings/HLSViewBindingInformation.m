@@ -26,12 +26,12 @@ typedef enum {
 
 @interface HLSViewBindingInformation ()
 
-@property (nonatomic, weak) id object;                      // weak ref
+@property (nonatomic, weak) id object;
 @property (nonatomic, strong) NSString *keyPath;
 @property (nonatomic, strong) NSString *formatterName;
-@property (nonatomic, weak) UIView *view;                   // weak ref
+@property (nonatomic, weak) UIView *view;
 
-@property (nonatomic, weak) id formattingTarget;            // weak ref
+@property (nonatomic, weak) id formattingTarget;
 @property (nonatomic, assign) SEL formattingSelector;
 
 @property (nonatomic, assign) HLSViewBindingInformationStatus status;
@@ -183,9 +183,7 @@ typedef enum {
             // Look for a class method on the object class itself (most generic)
             Class objectClass = [self.object class];
             if (! [objectClass respondsToSelector:formattingSelector]) {
-                HLSLoggerError(@"No formatter method '%@' is available on the view / view controller hiearchy, nor as a class "
-                               "method on the object class %@ itself, for the keypath '%@'", self.formatterName, [self.object className],
-                               self.keyPath);
+                HLSLoggerError(@"No formatter method '%@' could be found for keypath '%@'", self.formatterName, self.keyPath);
                 return HLSViewBindingInformationStatusInvalid;
             }
             
