@@ -64,4 +64,13 @@
     [self refreshBindings];
 }
 
+- (IBAction)change:(id)sender
+{
+    // Since there is no view controller boundary here, this will override the bindings in subviewInSecondSubview
+    Employee *employee5 = [[Employee alloc] init];
+    employee5.fullName = @"Marie Schrader";
+    employee5.age = @52;
+    [self.secondSubview bindToObject:employee5];
+}
+
 @end
