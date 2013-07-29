@@ -67,8 +67,13 @@
  *
  * TODO: Document validation and sync in the other direction (when available)
  *
- * Bindings have currently been implemented for the following UIView subclasses:
- *   - UILabel
+ * Here is how UIKit view classes play with bindings:
+ *   - UILabel: The label displays the value which the keypath points at. Recursive bindings have been disabled
+ *   - UITextField: <explain>
+ *   - UITextView: <explain>
+ *   - UITableView: No direct binding is available, and recursive bindings haven been disabeld. You can still
+ *                  bind table view cells and headers created from nibs
+ *
  * You can customize the binding behavior for other UIView subclasses (even your own) by implementing the
  * HLSViewBinding protocol
  */

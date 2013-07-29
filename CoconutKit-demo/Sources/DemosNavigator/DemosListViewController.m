@@ -26,6 +26,7 @@
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
+#import "TableViewBindingsDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "TextViewsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
@@ -59,6 +60,7 @@ typedef enum {
 typedef enum {
     BindingsDemoIndexEnumBegin = 0,
     BindingsDemoIndexLabels = BindingsDemoIndexEnumBegin,
+    BindingsDemoIndexTableView,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -296,6 +298,11 @@ typedef enum {
                     break;
                 }
                     
+                case BindingsDemoIndexTableView: {
+                    cell.textLabel.text = NSLocalizedString(@"Table view", nil);
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -516,6 +523,11 @@ typedef enum {
             switch (indexPath.row) {
                 case BindingsDemoIndexLabels: {
                     demoViewController = [[[LabelBindingsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case BindingsDemoIndexTableView: {
+                    demoViewController = [[[TableViewBindingsDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
