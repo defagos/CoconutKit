@@ -28,10 +28,10 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
 // Original implementation of the methods we swizzle
-static void (*s_UIView__awakeFromNib_Imp)(id, SEL) = NULL;
+static void (*s_UIView__didMoveToWindow_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
+static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @interface UIView (HLSViewBindingPrivate)
 
@@ -56,9 +56,9 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIView__awakeFromNib_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                       @selector(awakeFromNib),
-                                                                       (IMP)swizzled_UIView__awakeFromNib_Imp);
+    s_UIView__didMoveToWindow_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
+                                                                          @selector(didMoveToWindow),
+                                                                          (IMP)swizzled_UIView__didMoveToWindow_Imp);
 }
 
 #pragma mark Bindings
@@ -210,9 +210,11 @@ static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd);
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UIView__awakeFromNib_Imp(UIView *self, SEL _cmd)
+// By swizzling -didMoveToWindow, we know that the view has been added to its view hierarchy. The responder chain is therefore
+// complete
+static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
 {
-    (*s_UIView__awakeFromNib_Imp)(self, _cmd);
+    (*s_UIView__didMoveToWindow_Imp)(self, _cmd);
     
     if (self.bindKeyPath && ! self.bindingInformation) {
         UIViewController *nearestViewController = self.nearestViewController;
