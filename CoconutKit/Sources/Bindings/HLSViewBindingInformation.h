@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#define HLSViewBindingInformationEmptyObject [NSNull null]
-
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
  */

@@ -74,7 +74,7 @@ typedef enum {
     }
     
     if (self.status == HLSViewBindingInformationStatusInvalid) {
-        return @"NaB";
+        return nil;
     }
         
     id value = [self.object valueForKeyPath:self.keyPath];
@@ -96,12 +96,8 @@ typedef enum {
 // correct, but returns nil), returns 'unchecked'. Otherwise returns 'invalid'
 - (HLSViewBindingInformationStatus)verifyBindingInformation
 {
-    if ([self.object isEqual:HLSViewBindingInformationEmptyObject]) {
-        self.object = nil;
-        return HLSViewBindingInformationStatusValid;
-    }
     // An object has been provided. Check that the keypath is valid for it
-    else if (self.object) {
+    if (self.object) {
         @try {
             [self.object valueForKeyPath:self.keyPath];
         }
@@ -110,13 +106,9 @@ typedef enum {
             return HLSViewBindingInformationStatusInvalid;
         }
     }
-    // No object provided. Walk along the responder chain to find a responder matching the keypath
+    // No object provided. Walk along the responder chain to find a responder matching the keypath (might be nil)
     else {
         self.object = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
-        if (! self.object) {
-            HLSLoggerError(@"No responder was found for keypath '%@'", self.keyPath);
-            return HLSViewBindingInformationStatusInvalid;
-        }
     }
     
     // No need to check for exceptions here, the keypath is here guaranteed to be valid the object

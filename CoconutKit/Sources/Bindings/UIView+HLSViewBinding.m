@@ -65,11 +65,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 - (void)bindToObject:(id)object
 {
-    // Binding to an empty object
-    if (! object) {
-        object = HLSViewBindingInformationEmptyObject;
-    }
-    
     [self bindToObject:object inViewController:[self nearestViewController] recursive:[self bindsRecursively]];
 }
 

@@ -90,6 +90,7 @@
 {
     EmployeeTableViewCell *employeeCell = (EmployeeTableViewCell *)cell;
     employeeCell.employee = [self.employees objectAtIndex:indexPath.row];
+    employeeCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
