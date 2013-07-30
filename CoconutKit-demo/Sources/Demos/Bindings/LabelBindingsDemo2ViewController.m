@@ -29,7 +29,7 @@
         employee1.fullName = @"Jessie Pinkman";
         employee1.age = @22;
         
-        // Can be bound early. The object is retained
+        // Objects can be bound early (they are retained)
         [self bindToObject:employee1];
     }
     return self;
@@ -39,12 +39,12 @@
 {
     [super viewDidLoad];
     
-    // If you want to nest views with bound objects, be sure to bind them in the proper order (bottommost view first),
+    // If you want to nest views with bound objects, be sure to bind them in the proper order (ancestor views first),
     // otherwise values will be overridden in subviews when binding a view. In general, though, you should try to keep
     // view hierarchies distinct if you intend to bind distinct objects. Alternatively, you can use embedded view
     // controllers if this makes sense (binding namely stops at view controller boundaries)
     Employee *employee2 = [[Employee alloc] init];
-    employee2.fullName = @"Sykler White";
+    employee2.fullName = @"Skyler White";
     employee2.age = @47;
     [self.firstSubview bindToObject:employee2];
     

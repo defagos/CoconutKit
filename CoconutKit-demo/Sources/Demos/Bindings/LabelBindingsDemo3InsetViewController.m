@@ -8,6 +8,18 @@
 
 #import "LabelBindingsDemo3InsetViewController.h"
 
+#import "Employee.h"
+
 @implementation LabelBindingsDemo3InsetViewController
+
+#pragma mark Actions
+
+- (IBAction)change:(id)sender
+{
+    Employee *employee = [[Employee alloc] init];
+    employee.fullName = @"David Fisher";
+    employee.age = @35;
+    [self bindToObject:employee];
+}
 
 @end
