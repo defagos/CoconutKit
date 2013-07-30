@@ -35,9 +35,9 @@
     [super localize];
     
     [self.segmentedControl setTitle:NSLocalizedString(@"Keypaths & formatters", nil) forSegmentAtIndex:0];
-    [self.segmentedControl setTitle:NSLocalizedString(@"Objects & view hierarchies", nil) forSegmentAtIndex:1];
-    [self.segmentedControl setTitle:NSLocalizedString(@"Objects & VC hierarchies", nil) forSegmentAtIndex:2];
-    [self.segmentedControl setTitle:NSLocalizedString(@"View hiearchies", nil) forSegmentAtIndex:3];
+    [self.segmentedControl setTitle:NSLocalizedString(@"View hierarchies", nil) forSegmentAtIndex:1];
+    [self.segmentedControl setTitle:NSLocalizedString(@"VC hierarchies", nil) forSegmentAtIndex:2];
+    [self.segmentedControl setTitle:NSLocalizedString(@"Lookup failures", nil) forSegmentAtIndex:3];
     [self.segmentedControl setTitle:NSLocalizedString(@"Dangling views", nil) forSegmentAtIndex:4];
     
     self.title = NSLocalizedString(@"Labels", nil);

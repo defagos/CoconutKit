@@ -38,17 +38,17 @@
 					<object class="IBUILabel" id="890860671">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{9, 519}, {728, 69}}</string>
+						<string key="NSFrame">{{9, 57}, {728, 106}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="156447731"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Binding and formatter selector lookup inspect the whole responder chain, stopping at view controller boundaries</string>
+						<string key="IBUIText">LS/Binding and formatter selector lookup inspect the whole responder chain, stopping at view controller boundaries. In the first case, -currentDate has been defined on the parent view controller and cannot be resolved. In the second case, -tomorrowDate has been defined on the child view controller, but formatter lookup fails (since the formatter has been defined on the parent view controller)</string>
 						<object class="NSColor" key="IBUITextColor" id="1033147163">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -56,7 +56,7 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<int key="IBUINumberOfLines">2</int>
+						<int key="IBUINumberOfLines">4</int>
 						<int key="IBUITextAlignment">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="937624995">
 							<int key="type">3</int>
@@ -73,7 +73,7 @@
 					<object class="IBUILabel" id="156447731">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{9, 95}, {360, 21}}</string>
+						<string key="NSFrame">{{9, 275}, {360, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="536207774"/>
@@ -101,7 +101,7 @@
 					<object class="IBUILabel" id="536207774">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{376, 95}, {360, 20}}</string>
+						<string key="NSFrame">{{376, 275}, {360, 20}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="317299630"/>
@@ -122,7 +122,7 @@
 					<object class="IBUILabel" id="317299630">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{9, 131}, {728, 21}}</string>
+						<string key="NSFrame">{{9, 311}, {728, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="665782543"/>
@@ -144,7 +144,7 @@
 					<object class="IBUILabel" id="665782543">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{9, 259}, {360, 21}}</string>
+						<string key="NSFrame">{{9, 439}, {360, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="423581156"/>
@@ -165,7 +165,7 @@
 					<object class="IBUILabel" id="423581156">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{376, 259}, {360, 21}}</string>
+						<string key="NSFrame">{{376, 439}, {360, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="977163452"/>
@@ -186,10 +186,10 @@
 					<object class="IBUILabel" id="977163452">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{9, 295}, {728, 21}}</string>
+						<string key="NSFrame">{{9, 475}, {728, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="890860671"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -209,7 +209,7 @@
 				<string key="NSFrameSize">{746, 622}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="156447731"/>
+				<reference key="NSNextKeyView" ref="890860671"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
@@ -252,13 +252,13 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="890860671"/>
 							<reference ref="156447731"/>
 							<reference ref="536207774"/>
 							<reference ref="317299630"/>
 							<reference ref="665782543"/>
 							<reference ref="423581156"/>
 							<reference ref="977163452"/>
+							<reference ref="890860671"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
