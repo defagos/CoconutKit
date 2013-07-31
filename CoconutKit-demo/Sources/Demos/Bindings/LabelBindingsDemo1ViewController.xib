@@ -42,7 +42,7 @@
 						<string key="NSFrame">{{644, 20}, {104, 44}}</string>
 						<reference key="NSSuperview" ref="1002670155"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="131097394"/>
+						<reference key="NSNextKeyView" ref="565448226"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -72,7 +72,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUILabel" id="131097394">
+					<object class="IBUILabel" id="565448226">
 						<reference key="NSNextResponder" ref="1002670155"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 78}, {727, 82}}</string>
@@ -85,7 +85,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/These examples show the various ways binding and formatting can be made without any explicit object (the responder chain is inspected)</string>
+						<string key="IBUIText">LS/These examples show the various ways binding and formatting can be made without calling -bindToObject: (in which case the responder chain is inspected)</string>
 						<object class="NSColor" key="IBUITextColor" id="93114433">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -489,6 +489,7 @@
 						<string key="NSFrame">{{20, 875}, {728, 21}}</string>
 						<reference key="NSSuperview" ref="1002670155"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -575,7 +576,7 @@
 							<reference ref="732572967"/>
 							<reference ref="366149498"/>
 							<reference ref="310575317"/>
-							<reference ref="131097394"/>
+							<reference ref="565448226"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -671,7 +672,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">69</int>
-						<reference key="object" ref="131097394"/>
+						<reference key="object" ref="565448226"/>
 						<reference key="parent" ref="1002670155"/>
 					</object>
 					<object class="IBObjectRecord">
