@@ -26,7 +26,7 @@
 {
     if (self = [super init]) {
         Employee *employee1 = [[Employee alloc] init];
-        employee1.fullName = @"Jessie Pinkman";
+        employee1.fullName = @"Jesse Pinkman";
         employee1.age = @22;
         
         // Objects can be bound early (they are retained)
@@ -49,7 +49,7 @@
     [self.firstSubview bindToObject:employee2];
     
     Employee *employee3 = [[Employee alloc] init];
-    employee3.fullName = @"Walther White Jr.";
+    employee3.fullName = @"Walter White Jr.";
     employee3.age = @17;
     [self.secondSubview bindToObject:employee3];
     
