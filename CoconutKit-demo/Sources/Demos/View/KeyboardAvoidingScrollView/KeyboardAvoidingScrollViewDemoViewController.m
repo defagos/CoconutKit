@@ -17,6 +17,9 @@
 
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 
+@property (nonatomic, retain) IBOutlet UIView *smallCustomInputView;
+@property (nonatomic, retain) IBOutlet UIView *largeCustomInputView;
+
 @end
 
 @implementation KeyboardAvoidingScrollViewDemoViewController
@@ -51,6 +54,12 @@
     
     UITextField *textField1 = [self.textFields firstObject];
     textField1.resigningFirstResponderOnTap = YES;
+    
+    UITextField *textField3 = [self.textFields objectAtIndex:2];
+    
+    // Custom input views
+    textField1.inputView = self.smallCustomInputView;
+    textField3.inputView = self.largeCustomInputView;
     
     self.textView.resigningFirstResponderOnTap = YES;
 }

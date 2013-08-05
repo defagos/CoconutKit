@@ -176,11 +176,12 @@ static NSArray *s_keyboardHeightAdjustments = nil;
 
 + (void)keyboardWillShow:(NSNotification *)notification
 {
-    UIView *mainView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
-    NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:mainView];
+    UIView *rootView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+    NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:rootView];
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    BOOL animated = ! doubleeq(keyboardAnimationDuration, 0.);
     
     NSMutableArray *adjustedScrollViews = [NSMutableArray array];
     NSMutableArray *keyboardHeightAdjustments = [NSMutableArray array];
@@ -188,7 +189,7 @@ static NSArray *s_keyboardHeightAdjustments = nil;
     // We animate the transition when showing the keyboard (but not when hiding it: Hiding it can occur by docking the keyboard,
     // which is can occur instantaneously, but with a reported animation duration of 0.25)
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4];
+    [UIView setAnimationDuration:animated ? 0.4 : 0.];
     [UIView setAnimationDelay:keyboardAnimationDuration];
     
     // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
@@ -196,16 +197,27 @@ static NSArray *s_keyboardHeightAdjustments = nil;
     // need to trigger content offset animation earler (this is why we need to calculate adjustments earlier)
     for (UIScrollView *scrollView in keyboardAvoidingScrollViews) {
         CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardEndFrameInWindow fromView:nil];
-        if (! CGRectIntersectsRect(keyboardEndFrameInScrollView, scrollView.bounds)) {
+        
+        // Calculate the required vertical adjustment
+        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView)
+            + scrollView.contentOffset.y;
+        
+        // No adjustment is required if the keyboard covers the scroll view entirely
+        if (floatge(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame))) {
+            continue;
+        }
+        // No adjustment is required if the scroll view has been adjusted yet and is not covered by the keyboard
+        // (if the scroll view is not covered by the keyboard but has been adjusted, a correction is needed: A
+        // larger input view is being displayed)
+        else if (! [s_adjustedScrollViews containsObject:scrollView] && floatlt(keyboardHeightAdjustment, 0.f)) {
             continue;
         }
         
-        // Find whether a meaningful adjustment is required (other cases, the keyboard either does not cover the scroll
-        // view, or covers it entirely)
-        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView)
-            + scrollView.contentOffset.y;
-        if (floatle(keyboardHeightAdjustment, 0.f) || floatge(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame))) {
-            continue;
+        // Store total adjustment (this takes into account height changes which might occur because of varying inputViews)
+        CGFloat keyboardPreviousScrollAdjustment = 0.f;
+        NSUInteger index = [s_adjustedScrollViews indexOfObject:scrollView];
+        if (index != NSNotFound) {
+            keyboardPreviousScrollAdjustment = [[s_keyboardHeightAdjustments objectAtIndex:index] floatValue];
         }
         
         scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
@@ -214,7 +226,7 @@ static NSArray *s_keyboardHeightAdjustments = nil;
                                       CGRectGetHeight(scrollView.frame) - keyboardHeightAdjustment);
         
         [adjustedScrollViews addObject:scrollView];
-        [keyboardHeightAdjustments addObject:@(keyboardHeightAdjustment)];
+        [keyboardHeightAdjustments addObject:@(keyboardPreviousScrollAdjustment + keyboardHeightAdjustment)];
     }
     
     [UIView commitAnimations];
@@ -262,7 +274,8 @@ static NSArray *s_keyboardHeightAdjustments = nil;
 __attribute__ ((constructor)) static void HLSTextFieldInit(void)
 {
     // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
-    // willShow and didShow in sequence
+    // willShow and didShow in sequence. When an inpuView has been set (replacing the keyboard), the willShow and didShow
+    // events are also received when the input view associated with the responder getting the focus must be changed
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
