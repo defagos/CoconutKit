@@ -8,6 +8,9 @@
 
 #import "UIView+HLSViewBinding.h"
 
+/**
+ * Private category implementing binding behavior for UITableView
+ */
 @interface UITableView (HLSViewBinding) <HLSViewBinding>
 
 @end

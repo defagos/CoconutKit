@@ -9,7 +9,7 @@
 #import "UIView+HLSViewBinding.h"
 
 /**
- * Private implementing bindings for UILabel
+ * Private category implementing binding behavior for UILabel
  */
 @interface UILabel (HLSViewBinding) <HLSViewBinding>
 

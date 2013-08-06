@@ -43,6 +43,7 @@ UIPopoverController+HLSExtensions.m
 UIScrollView+HLSExtensions.m
 UISplitViewController+HLSExtensions.m
 UITabBarController+HLSExtensions.m
+UITableView+HLSViewBinding.m
 UITextField+HLSExtensions.m
 UITextField+HLSValidation.m
 UITextView+HLSExtensions.m
@@ -52,3 +53,4 @@ UIView+HLSRuntimeAttributes.m
 UIViewController+HLSExtensions.m
 UIViewController+HLSViewBinding.m
 UIWebView+HLSExtensions.m
+UIWebView+HLSViewBinding.m
