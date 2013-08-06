@@ -109,7 +109,7 @@
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // The date formatter is also localized!
-    // TODO: Does not work yet. Try to switch languages!
+    // TODO: Does not work yet. Try to switch languages! Should probably rebind!
     self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
