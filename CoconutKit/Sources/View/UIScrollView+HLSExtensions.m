@@ -187,7 +187,8 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
     NSMutableDictionary *scrollViewOriginalHeights = [NSMutableDictionary dictionary];
     
     // We animate the transition when showing the keyboard (but not when hiding it: Hiding it can occur by docking the keyboard,
-    // which is can occur instantaneously, but with a reported animation duration of 0.25)
+    // which is can occur instantaneously, but with a reported animation duration of 0.25). The animation is made at the end of
+    // the keyboard animation to get a perfect behavior in all cases
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:animated ? 0.4 : 0.];
     [UIView setAnimationDelay:keyboardAnimationDuration];
@@ -198,22 +199,26 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
     for (UIScrollView *scrollView in keyboardAvoidingScrollViews) {
         CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardEndFrameInWindow fromView:nil];
         
-        // Ignore scroll views which do not get covered by the keyboard
-        if (! [s_adjustedScrollViews containsObject:scrollView] && ! CGRectIntersectsRect(keyboardEndFrameInScrollView, scrollView.bounds)) {
+        // Calculate the required vertical adjustment
+        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView)
+            + scrollView.contentOffset.y;
+        
+        // For scroll views which have not been adjusted yet, first check that the scroll view is neither completely
+        // covered by the keyboard, nor completely visible (in which case no adjustment is required)
+        if (! [s_adjustedScrollViews containsObject:scrollView]
+                && (floatlt(keyboardHeightAdjustment, 0.f) || floatgt(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame)))) {
             continue;
         }
-        
-        // TODO: Should also ignore scroll views which get covered by the keyboard
         
         // Store the original scroll view height once, namely when a scroll view first needs to be resized
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         NSNumber *scrollViewOriginalHeight = [s_scrollViewOriginalHeights objectForKey:pointerKey] ?: @(CGRectGetHeight(scrollView.frame));
         [scrollViewOriginalHeights setObject:scrollViewOriginalHeight forKey:pointerKey];
         
-        // Calculate the required vertical adjustment (avoids the scroll view to grow larger than its original size)
-        CGFloat keyboardHeightAdjustment = floatmax(CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView)
-            + scrollView.contentOffset.y, CGRectGetHeight(scrollView.frame) - [scrollViewOriginalHeight floatValue]);
-        
+        // Prevent the scroll view from growing larger than its original size, or smaller than zero
+        keyboardHeightAdjustment = floatmin(floatmax(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame) - [scrollViewOriginalHeight floatValue]),
+                                            CGRectGetHeight(scrollView.frame));
+                
         // Adjust the scroll view frame so that it does not get covered by the keyboard
         scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
                                       CGRectGetMinY(scrollView.frame),
