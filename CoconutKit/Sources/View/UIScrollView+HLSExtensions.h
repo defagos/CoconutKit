@@ -38,9 +38,9 @@
 
 /**
  * When set to YES, the scroll view adjusts automatically so that it does not get covered by the keyboard (this works
- * for UIScrollView subclasses as well, e.g. UITextField). The scroll view content offset is also changed so that
+ * for UIScrollView subclasses as well, e.g. UITextView). The scroll view content offset is also changed so that
  * responder views located within the scroll view (e.g. text fields, text views, search bars) stay visible when they
- * get the focus.
+ * get the focus. Custom input views (even with non-standard sizes) are supported as well.
  *
  * Note that you MUST set a scroll view contentSize so that the scroll view can actually scroll. Moreover, the scroll 
  * view frame is changed when the keyboard is displayed, so be sure that the subview autoresizing masks are appropriately 
