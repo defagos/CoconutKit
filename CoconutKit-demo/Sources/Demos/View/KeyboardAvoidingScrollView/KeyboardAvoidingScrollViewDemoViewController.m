@@ -88,4 +88,11 @@
     self.title = NSLocalizedString(@"Scroll view avoiding the keyboard", nil);
 }
 
+#pragma mark Action callbacks
+
+- (IBAction)closeInput:(id)sender
+{
+    [[[UIApplication sharedApplication] keyWindow].rootViewController.view endEditing:NO];
+}
+
 @end
