@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'UIKit'
   s.requires_arc = false
-  s.preserve_paths = 'CoconutKit-resources', 'CoconutKit/publicHeaders.txt'
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/Resources/{Images,Nibs}/*', 'CoconutKit-resources/Resources/*.lproj'] }
   
   s.prefix_header_contents = <<-EOS
 #ifdef __OBJC__
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 #endif
 EOS
   
-  def s.pre_install(pod, target_installer)
+  s.pre_install do |pod, target_definition|
     Dir.chdir File.join(pod.root, 'CoconutKit') do
       public_headers = File.read('publicHeaders.txt').split("\n")
       File.open('Sources/CoconutKit.h', 'w') do |file|
@@ -31,27 +31,7 @@ EOS
         public_headers.each { |h| file.puts "#import <CoconutKit/#{h}>" }
       end
       public_headers << 'CoconutKit.h'
-      self.public_header_files = public_headers.map { |f| File.join('**', f) }
+      s.public_header_files = public_headers.map { |f| File.join('**', f) }
     end
   end
-  
-  def s.post_install(target_installer)
-    puts "\nGenerating CoconutKit resources bundle\n".yellow if config.verbose?
-    Dir.chdir File.join(config.project_pods_root, 'CoconutKit') do
-      command = "xcodebuild -project CoconutKit-resources/CoconutKit-resources.xcodeproj -target CoconutKit-resources CONFIGURATION_BUILD_DIR=../../Resources"
-      command << " 2>&1 > /dev/null" unless config.verbose?
-      unless system(command)
-        raise ::Pod::Informative, "Failed to generate CoconutKit resources bundle"
-      end
-    end
-    if Version.new(Pod::VERSION) >= Version.new('0.16.999')
-      script_path = target_installer.target_definition.copy_resources_script_name
-    else
-      script_path = File.join(config.project_pods_root, target_installer.target_definition.copy_resources_script_name)
-    end
-    File.open(script_path, 'a') do |file|
-      file.puts "install_resource 'Resources/CoconutKit-resources.bundle'"
-    end
-  end
-  
 end
