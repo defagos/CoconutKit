@@ -23,7 +23,7 @@
 
 /**
  * Return the current text corresponding to the stored binding information. If keypath information is invalid,
- * this method returns 'NaB' (Not a Binding)
+ * this method returns nil
  */
 - (NSString *)text;
 
