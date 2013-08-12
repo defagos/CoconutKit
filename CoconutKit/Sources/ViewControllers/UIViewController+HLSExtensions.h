@@ -117,4 +117,12 @@ typedef enum {
 - (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations;
 - (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController;
 
+/**
+ * Set this property to YES if the view controller orientation must be ignored by its parent container
+ * when determining which orientations it supports
+ *
+ * Default value is NO
+ */
+@property (nonatomic, assign, getter=isIgnoredDuringAutorotation) BOOL ignoredDuringAutorotation;
+
 @end

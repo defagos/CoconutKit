@@ -19,6 +19,7 @@
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
 static void *s_createdViewSizeKey = &s_createdViewSizeKey;
+static void *s_ignoredDuringAutorotationKey = &s_ignoredDuringAutorotationKey;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIViewController__initWithNibName_bundle_Imp)(id, SEL, id, id) = NULL;
@@ -282,6 +283,16 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     }
     
     return [self compatibleOrientationWithOrientations:[viewController supportedInterfaceOrientations]];
+}
+
+- (BOOL)isIgnoredDuringAutorotation
+{
+    return [objc_getAssociatedObject(self, s_ignoredDuringAutorotationKey) boolValue];
+}
+
+- (void)setIgnoredDuringAutorotation:(BOOL)ignoredDuringAutorotation
+{
+    objc_setAssociatedObject(self, s_ignoredDuringAutorotationKey, @(ignoredDuringAutorotation), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
