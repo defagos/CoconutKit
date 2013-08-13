@@ -99,12 +99,12 @@ typedef enum {
     self.inNavigationControllerSwitch.on = NO;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
-    
-    if (self.autorotationMode == HLSAutorotationModeContainerAndTopChildren || self.autorotationMode == HLSAutorotationModeContainerAndAllChildren) {
-        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexAllChildren;
+        
+    if (self.autorotationMode == HLSAutorotationModeContainerAndNoChildren) {
+        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexNoChildren;
     }
     else {
-        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexNoChildren;
+        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexAllChildren;
     }
     
     self.transitionPickerView.delegate = self;
