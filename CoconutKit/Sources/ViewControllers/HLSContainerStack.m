@@ -675,7 +675,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             if ([containerContent viewIfLoaded]) {
                 // To avoid issues when pushing - rotating - popping view controllers (which can lead to blurry views depending
                 // on the animation style, most notably when scaling is involved), we negate each animation here, with the old
-                // frame. We replay the animation just afterwards in willAnimateRotationToInterfaceOrientation:duration:,
+                // frame. We replay the animation just afterwards in -willAnimateRotationToInterfaceOrientation:duration:,
                 // where the frame is the final one obtained after rotation. This trick is invisible to the user and avoids
                 // having issues because of view rotation (this can lead to small floating-point imprecisions, leading to
                 // non-integral frames, and thus to blurry views)
@@ -736,9 +736,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
             
             if ([containerContent viewIfLoaded]) {
-                // See comments in -willRotateToInterfaceOrientation:duration:
                 HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
                 if (! groupView) {
                     continue;
@@ -787,20 +787,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    if ([self.containerContents count] != 0) {
-        // Rotate the loaded child view controller's views to an orientation they support (if needed)
-        for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-            NSUInteger index = [self.containerContents count] - 1 - i;
-            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-            
-            // Called in -didRotate. Two reasons:
-            //   - the result looks better (children incompatible with the current orientation snap at the end of the animation,
-            //     which looks quite the same as what happens when popping view controllers with different orientations from a
-            //     navigation controller
-            //   - if called early in -willRotate, the views get slightly blurry when rotated
-            [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
-        }
-        
+    if ([self.containerContents count] != 0) {        
         switch (self.autorotationMode) {
             case HLSAutorotationModeContainerAndAllChildren: {
                 for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
