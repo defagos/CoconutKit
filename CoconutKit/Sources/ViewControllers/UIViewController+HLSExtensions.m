@@ -247,7 +247,7 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     }
 }
 
-- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations
+- (UIInterfaceOrientation)compatibleInterfaceOrientationWithOrientations:(UIInterfaceOrientationMask)orientations
 {
     if (orientations & UIInterfaceOrientationMaskPortrait) {
         if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait))
@@ -276,13 +276,18 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     return 0;
 }
 
-- (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController
+- (UIInterfaceOrientation)compatibleInterfaceOrientationWithViewController:(UIViewController *)viewController
 {
     if (! viewController) {
         return 0;
     }
     
-    return [self compatibleOrientationWithOrientations:[viewController supportedInterfaceOrientations]];
+    return [self compatibleInterfaceOrientationWithOrientations:[viewController supportedInterfaceOrientations]];
+}
+
+- (UIInterfaceOrientation)firstAvailableInterfaceOrientation
+{
+    return [self compatibleInterfaceOrientationWithOrientations:UIInterfaceOrientationMaskAll];
 }
 
 - (BOOL)isIgnoredDuringAutorotation

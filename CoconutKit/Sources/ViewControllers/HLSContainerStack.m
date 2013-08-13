@@ -360,7 +360,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                         duration:duration] autorelease];
     if (! containerContent) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"The view controller to insert is incompatible with the container it is inserted into"
+                                       reason:@"The view controller could not be correctly registered with the containers"
                                      userInfo:nil];
     }
     
@@ -947,11 +947,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     groupView.frontContentView.transform = CGAffineTransformIdentity;
     groupView.frontContentView.bounds = groupView.bounds;
     if (! [containerContent shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
-        // Find an orientation compatible with the container
-        UIInterfaceOrientation compatibleInterfaceOrientation = [containerContent.viewController compatibleOrientationWithViewController:self.containerViewController];
-        if (compatibleInterfaceOrientation == 0) {
-            HLSLoggerError(@"No compatible orientation found. The set of supported orientations of the container has probably been changed after the child "
-                           "has been added");
+        // Find the first orientation the child view controller supports
+        UIInterfaceOrientation availableInterfaceOrientation = [containerContent.viewController firstAvailableInterfaceOrientation];
+        if (availableInterfaceOrientation == 0) {
+            HLSLoggerError(@"No orientation was found for the view controller %@", containerContent.viewController);
             return;
         }
         
@@ -959,7 +958,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         CGFloat angle = 0.f;
         switch (interfaceOrientation) {
             case UIInterfaceOrientationPortrait: {
-                switch (compatibleInterfaceOrientation) {
+                switch (availableInterfaceOrientation) {
                     case UIInterfaceOrientationPortraitUpsideDown:      angle = M_PI; break;
                     case UIInterfaceOrientationLandscapeRight:          angle = M_PI_2; break;
                     case UIInterfaceOrientationLandscapeLeft:           angle = -M_PI_2; break;
@@ -969,7 +968,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
                 
             case UIInterfaceOrientationPortraitUpsideDown: {
-                switch (compatibleInterfaceOrientation) {
+                switch (availableInterfaceOrientation) {
                     case UIInterfaceOrientationPortrait:                angle = M_PI; break;
                     case UIInterfaceOrientationLandscapeRight:          angle = -M_PI_2; break;
                     case UIInterfaceOrientationLandscapeLeft:           angle = M_PI_2; break;
@@ -979,7 +978,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
 
             case UIInterfaceOrientationLandscapeRight: {
-                switch (compatibleInterfaceOrientation) {
+                switch (availableInterfaceOrientation) {
                     case UIInterfaceOrientationPortrait:                angle = -M_PI_2; break;
                     case UIInterfaceOrientationPortraitUpsideDown:      angle = M_PI_2; break;
                     case UIInterfaceOrientationLandscapeLeft:           angle = M_PI; break;
@@ -989,7 +988,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
                 
             case UIInterfaceOrientationLandscapeLeft: {
-                switch (compatibleInterfaceOrientation) {
+                switch (availableInterfaceOrientation) {
                     case UIInterfaceOrientationPortrait:                angle = M_PI_2; break;
                     case UIInterfaceOrientationPortraitUpsideDown:      angle = -M_PI_2; break;
                     case UIInterfaceOrientationLandscapeRight:          angle = M_PI; break;
@@ -1006,8 +1005,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         groupView.frontContentView.transform = CGAffineTransformMakeRotation(angle);
         
         // If the format is different, must exchange width and height
-        if ((UIInterfaceOrientationIsPortrait(interfaceOrientation) && UIInterfaceOrientationIsLandscape(compatibleInterfaceOrientation))
-                || (UIInterfaceOrientationIsLandscape(interfaceOrientation) && UIInterfaceOrientationIsPortrait(compatibleInterfaceOrientation))) {
+        if ((UIInterfaceOrientationIsPortrait(interfaceOrientation) && UIInterfaceOrientationIsLandscape(availableInterfaceOrientation))
+                || (UIInterfaceOrientationIsLandscape(interfaceOrientation) && UIInterfaceOrientationIsPortrait(availableInterfaceOrientation))) {
             groupView.frontContentView.bounds = CGRectMake(0.f, 0.f, CGRectGetHeight(groupView.frame), CGRectGetWidth(groupView.frame));
         }
     }
@@ -1225,7 +1224,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return containerViewController.interfaceOrientation;
         }
         else {
-            return [self compatibleOrientationWithViewController:containerViewController];
+            return [self compatibleInterfaceOrientationWithViewController:containerViewController];
         }
     }
     else {

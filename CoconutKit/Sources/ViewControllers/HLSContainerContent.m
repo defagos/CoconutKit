@@ -130,15 +130,6 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
             return nil;
         }
         
-        // To be able to insert a view controller into a container view controller, their supported interface orientations must be compatible
-        // (if the current container orientation is not supported, we will rotate the child view controller appropriately)
-        if (! viewController.ignoredDuringAutorotation) {
-            if (! [viewController isOrientationCompatibleWithViewController:containerViewController]) {
-                HLSLoggerError(@"The view controller has no compatible orientation with the container");
-                return nil;
-            }            
-        }
-        
         // Associate the view controller with its container content object        
         if (objc_getAssociatedObject(viewController, s_containerContentKey)) {
             HLSLoggerError(@"A view controller can only be associated with one container");

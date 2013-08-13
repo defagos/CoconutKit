@@ -153,18 +153,7 @@ typedef enum {
         
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    
-    @try {
-        [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
-    }
-    @catch (NSException *exception) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
-                                                            delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                                   otherButtonTitles:nil] autorelease];
-        [alertView show];
-    }
+    [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
 }
 
 #pragma mark HLSPlaceholderViewControllerDelegate protocol implementation

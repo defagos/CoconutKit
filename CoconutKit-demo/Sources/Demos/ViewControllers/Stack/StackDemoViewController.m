@@ -233,24 +233,11 @@ typedef enum {
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
-    
-    @try {
-        [stackController insertViewController:pushedViewController
-                                      atIndex:[self insertionIndex]
-                          withTransitionClass:NSClassFromString(transitionName)
-                                     duration:kAnimationTransitionDefaultDuration
-                                     animated:self.animatedSwitch.on];
-    }
-    @catch (NSException *exception) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
-                                                            delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                                   otherButtonTitles:nil] autorelease];
-        [alertView show];
-        return;
-    }
-    
+    [stackController insertViewController:pushedViewController
+                                  atIndex:[self insertionIndex]
+                      withTransitionClass:NSClassFromString(transitionName)
+                                 duration:kAnimationTransitionDefaultDuration
+                                 animated:self.animatedSwitch.on];
     [self updateIndexInfo];
 }
 

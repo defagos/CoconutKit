@@ -114,8 +114,16 @@ typedef enum {
  *
  * Return 0 if no compatible orientation is found, or if viewController is nil
  */
-- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations;
-- (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController;
+- (UIInterfaceOrientation)compatibleInterfaceOrientationWithOrientations:(UIInterfaceOrientationMask)orientations;
+- (UIInterfaceOrientation)compatibleInterfaceOrientationWithViewController:(UIViewController *)viewController;
+
+/**
+ * Return the first orientation supported by the receiver. The order in which orientations are considered
+ * is documented for -compatibleInterfaceOrientationWithOrientations:. If no orientation is found (which most
+ * probably indicates an error, since view controllers should at least support one orientation), the method 
+ * returns 0
+ */
+- (UIInterfaceOrientation)firstAvailableInterfaceOrientation;
 
 /**
  * Set this property to YES if the view controller orientation must be ignored by its parent container
