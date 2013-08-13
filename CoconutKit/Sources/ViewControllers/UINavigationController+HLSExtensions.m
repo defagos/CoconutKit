@@ -10,7 +10,6 @@
 
 #import "HLSAutorotationCompatibility.h"
 #import "HLSRuntime.h"
-#import "UIViewController+HLSExtensions.h"
 
 // Associated object keys
 static void *s_autorotationModeKey = &s_autorotationModeKey;
@@ -76,7 +75,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in [self.viewControllers reverseObjectEnumerator]) {
-                if (! viewController.ignoredDuringAutorotation && ! [viewController shouldAutorotate]) {
+                if (! [viewController shouldAutorotate]) {
                     return NO;
                 }
             }
@@ -85,7 +84,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
             
         case HLSAutorotationModeContainerAndTopChildren: {
             UIViewController<HLSAutorotationCompatibility> *topViewController = (UIViewController<HLSAutorotationCompatibility> *)self.topViewController;
-            if (topViewController && ! topViewController.ignoredDuringAutorotation && ! [topViewController shouldAutorotate]) {
+            if (topViewController && ! [topViewController shouldAutorotate]) {
                 return NO;
             }
             break;
@@ -110,16 +109,14 @@ static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientation
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in [self.viewControllers reverseObjectEnumerator]) {
-                if (! viewController.ignoredDuringAutorotation) {
-                    containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
-                }
+                containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
             break;
         }
             
         case HLSAutorotationModeContainerAndTopChildren: {
             UIViewController<HLSAutorotationCompatibility> *topViewController = (UIViewController<HLSAutorotationCompatibility> *)self.topViewController;
-            if (topViewController && ! topViewController.ignoredDuringAutorotation) {
+            if (topViewController) {
                 containerSupportedInterfaceOrientations &= [topViewController supportedInterfaceOrientations];
             }
             break;
@@ -141,7 +138,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientat
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
-                if (! viewController.ignoredDuringAutorotation && ! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+                if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
                     return NO;
                 }
             }
@@ -149,7 +146,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientat
         }
             
         case HLSAutorotationModeContainerAndTopChildren: {
-            if (self.topViewController && ! self.topViewController.ignoredDuringAutorotation && ! [self.topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+            if (self.topViewController && ! [self.topViewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
                 return NO;
             }
             break;

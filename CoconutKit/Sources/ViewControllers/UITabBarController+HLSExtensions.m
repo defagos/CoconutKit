@@ -10,7 +10,6 @@
 
 #import "HLSAutorotationCompatibility.h"
 #import "HLSRuntime.h"
-#import "UIViewController+HLSExtensions.h"
 
 // Associated object keys
 static void *s_autorotationModeKey = &s_autorotationModeKey;
@@ -77,7 +76,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
         case HLSAutorotationModeContainerAndAllChildren:
         case HLSAutorotationModeContainerAndTopChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
-                if (! viewController.ignoredDuringAutorotation && ! [viewController shouldAutorotate]) {
+                if (! [viewController shouldAutorotate]) {
                     return NO;
                 }
             }
@@ -104,9 +103,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
         case HLSAutorotationModeContainerAndAllChildren:
         case HLSAutorotationModeContainerAndTopChildren: {
             for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
-                if (! viewController.ignoredDuringAutorotation) {
-                    containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
-                }
+                containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
             break;
         }
@@ -128,7 +125,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotateToInterfaceOrientation_
         case HLSAutorotationModeContainerAndAllChildren:
         case HLSAutorotationModeContainerAndTopChildren: {
             for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
-                if (! viewController.ignoredDuringAutorotation && ! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+                if (! [viewController shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
                     return NO;
                 }
             }

@@ -368,19 +368,11 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    if (self.viewController.ignoredDuringAutorotation) {
-        return YES;
-    }
-    
     return [self.viewController autorotatesToInterfaceOrientation:toInterfaceOrientation];
 }
 
 - (BOOL)shouldAutorotate
-{
-    if (self.viewController.ignoredDuringAutorotation) {
-        return YES;
-    }
-    
+{    
     if ([self.viewController respondsToSelector:@selector(shouldAutorotate)]) {
         return [self.viewController shouldAutorotate];
     }
@@ -394,10 +386,6 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    if (self.viewController.ignoredDuringAutorotation) {
-        return UIInterfaceOrientationMaskAll;
-    }
-    
     if ([self.viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
         return [self.viewController supportedInterfaceOrientations];
     }

@@ -125,13 +125,4 @@ typedef enum {
  */
 - (UIInterfaceOrientation)firstAvailableInterfaceOrientation;
 
-/**
- * Set this property to YES if the view controller orientation must be ignored by its parent container
- * when determining which orientations the container supports. Note that this does NOT inhibit rotations 
- * events received by the child view controller
- *
- * Default value is NO
- */
-@property (nonatomic, assign, getter=isIgnoredDuringAutorotation) BOOL ignoredDuringAutorotation;
-
 @end

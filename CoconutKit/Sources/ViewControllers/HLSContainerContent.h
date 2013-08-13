@@ -154,9 +154,7 @@
 - (void)viewDidDisappear:(BOOL)animated movingFromParentViewController:(BOOL)movingFromParentViewController;
 
 /**
- * Forward the corresponding view rotation events to the view controller. Since HLSContainerContent inherently
- * implies that the associated view controller is embedded into a container, the values returned by these properties 
- * take into account the -ignoredDuringAutorotation view controller status
+ * Forward the corresponding view rotation events to the view controller
  *
  * Remark: No methods have been provided for the deprecated 2-step rotation methods
  */
