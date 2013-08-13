@@ -159,7 +159,6 @@ static BOOL swizzled_UINavigationController__shouldAutorotateToInterfaceOrientat
             break;
         }
             
-            
         case HLSAutorotationModeContainer:
         default: {
             return (*s_UINavigationController__shouldAutorotateToInterfaceOrientation_Imp)(self, _cmd, toInterfaceOrientation);

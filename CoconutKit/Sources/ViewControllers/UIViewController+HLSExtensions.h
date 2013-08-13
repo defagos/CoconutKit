@@ -25,8 +25,8 @@ typedef enum {
 
 /**
  * Various useful additions to UIViewController, most notably the ability get more information about the view lifecycle.
- * This category also provide automatic keyboard dismissal when a view controller disappears while a text field was
- * active.
+ * This category also provide automatic keyboard dismissal when a view controller disappears while a first responder
+ * was active
  *
  * Remark:
  * -------
@@ -119,7 +119,8 @@ typedef enum {
 
 /**
  * Set this property to YES if the view controller orientation must be ignored by its parent container
- * when determining which orientations the container supports
+ * when determining which orientations the container supports. Note that this does NOT inhibit rotations 
+ * events received by the child view controller
  *
  * Default value is NO
  */
