@@ -157,10 +157,10 @@
 /**
  * Set how the placeholder view controller decides whether it must rotate or not
  *
- * HLSAutorotationModeContainer
- * HLSAutorotationModeContainerAndTopChildren
- * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive
+ * HLSAutorotationModeContainer: All child view controllers decide whether rotation can occur, and receive
  *                                             the related events
+ * HLSAutorotationModeContainerAndTopChildren: Identical to HLSAutorotationModeContainer
+ * HLSAutorotationModeContainerAndAllChildren: Identical to HLSAutorotationModeContainer
  * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
  *                                            related events
  *

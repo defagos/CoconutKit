@@ -17,9 +17,9 @@
  *                               none on iOS 6)
  * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
  *                                            related events
- * HLSAutorotationModeContainerAndTopChildren
- * HLSAutorotationModeContainerAndAllChildren: The child view controllers decide whether rotation can occur, and receive
+ * HLSAutorotationModeContainerAndTopChildren: The child view controllers decide whether rotation can occur, and receive
  *                                             the related events
+ * HLSAutorotationModeContainerAndAllChildren: Identical to HLSAutorotationModeContainerAndTopChildren
  *
  * The default value is HLSAutorotationModeContainer
  */
