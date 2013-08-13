@@ -130,13 +130,13 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
             return nil;
         }
         
-        // Even when pre-loading view controllers into a container which has not been displayed yet, the -interfaceOrientation property
-        // returns a correct value. To be able to insert a view controller into a container view controller, their supported interface
-        // orientations must be compatible (if the current container orientation is not supported, we will rotate the child view
-        // controller appropriately)
-        if (! [viewController isOrientationCompatibleWithViewController:containerViewController]) {
-            HLSLoggerError(@"The view controller has no compatible orientation with the container");
-            return nil;
+        // To be able to insert a view controller into a container view controller, their supported interface orientations must be compatible
+        // (if the current container orientation is not supported, we will rotate the child view controller appropriately)
+        if (! viewController.ignoredDuringAutorotation) {
+            if (! [viewController isOrientationCompatibleWithViewController:containerViewController]) {
+                HLSLoggerError(@"The view controller has no compatible orientation with the container");
+                return nil;
+            }            
         }
         
         // Associate the view controller with its container content object        
@@ -377,11 +377,19 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
+    if (self.viewController.ignoredDuringAutorotation) {
+        return YES;
+    }
+    
     return [self.viewController autorotatesToInterfaceOrientation:toInterfaceOrientation];
 }
 
 - (BOOL)shouldAutorotate
 {
+    if (self.viewController.ignoredDuringAutorotation) {
+        return YES;
+    }
+    
     if ([self.viewController respondsToSelector:@selector(shouldAutorotate)]) {
         return [self.viewController shouldAutorotate];
     }
@@ -395,6 +403,10 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 - (NSUInteger)supportedInterfaceOrientations
 {
+    if (self.viewController.ignoredDuringAutorotation) {
+        return UIInterfaceOrientationMaskAll;
+    }
+    
     if ([self.viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
         return [self.viewController supportedInterfaceOrientations];
     }

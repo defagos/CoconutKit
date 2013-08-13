@@ -119,7 +119,7 @@ typedef enum {
 
 /**
  * Set this property to YES if the view controller orientation must be ignored by its parent container
- * when determining which orientations it supports
+ * when determining which orientations the container supports
  *
  * Default value is NO
  */

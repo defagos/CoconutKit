@@ -257,19 +257,19 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
     }
     if (orientations & UIInterfaceOrientationMaskLandscapeRight) {
         if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeRight))
-            || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
+                || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
             return UIInterfaceOrientationLandscapeRight;
         }
     }
     if (orientations & UIInterfaceOrientationMaskLandscapeLeft) {
         if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeLeft))
-            || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
+                || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
             return UIInterfaceOrientationLandscapeLeft;
         }
     }
     if (orientations & UIInterfaceOrientationMaskPortraitUpsideDown) {
         if (([self implementsNewAutorotationMethods] && ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortraitUpsideDown))
-            || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
+                || [self shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
             return UIInterfaceOrientationPortraitUpsideDown;
         }
     }
