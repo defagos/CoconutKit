@@ -442,6 +442,12 @@ willHideViewController:(UIViewController *)viewController
  * matching the status bar orientation. For view controllers embedded into CoconutKit containers, this is the 
  * orientation of the view controller, compatible with the container, which has been used for display (this might
  * not necessarily match the status bar orientation)
+ *
+ * Remark: If called from within one of UIViewController rotation methods:
+ *           - in -willRotateToInterfaceOrientation:duration:, the orientation is final (like the frame), and thus
+ *             the method returns the previous displayed orientation
+ *           - after -willAnimateRotationToInterfaceOrientation:duration:, the orientation is final (like the frame),
+ *             and the method returns the final displayed orientation
  */
 @property (nonatomic, readonly, assign) UIInterfaceOrientation displayedInterfaceOrientation;
 

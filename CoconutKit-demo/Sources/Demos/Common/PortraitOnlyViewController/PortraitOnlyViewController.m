@@ -33,9 +33,9 @@
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
     HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
