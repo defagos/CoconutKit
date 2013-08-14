@@ -51,7 +51,7 @@
 						<string key="NSFrameSize">{768, 44}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1041203929"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:372</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -76,19 +76,6 @@
 								<reference key="IBUIToolbar" ref="604077133"/>
 							</object>
 						</object>
-					</object>
-					<object class="IBUIView" id="172327201">
-						<reference key="NSNextResponder" ref="589436624"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{0, 44}, {768, 20}}</string>
-						<reference key="NSSuperview" ref="589436624"/>
-						<reference key="NSWindow"/>
-						<string key="NSReuseIdentifierKey">_NS:195</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="978806935">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAwIDAAA</bytes>
-						</object>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUIButton" id="747078023">
 						<reference key="NSNextResponder" ref="589436624"/>
@@ -197,8 +184,12 @@
 						<string key="NSFrame">{{0, 960}, {768, 20}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:195</string>
-						<reference key="IBUIBackgroundColor" ref="978806935"/>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAwIDAAA</bytes>
+						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 					<object class="IBUITextField" id="670698016">
@@ -497,7 +488,7 @@
 						<string key="NSFrame">{{656, 836}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="589436624"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="54487450"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -708,7 +699,6 @@
 							<reference ref="1036720476"/>
 							<reference ref="767061239"/>
 							<reference ref="166350652"/>
-							<reference ref="172327201"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -838,11 +828,6 @@
 						<reference key="object" ref="166350652"/>
 						<reference key="parent" ref="589436624"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">71</int>
-						<reference key="object" ref="172327201"/>
-						<reference key="parent" ref="589436624"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -876,7 +861,6 @@
 					<string>62.IBPluginDependency</string>
 					<string>63.IBPluginDependency</string>
 					<string>64.IBPluginDependency</string>
-					<string>71.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 				</object>
@@ -885,7 +869,6 @@
 					<string>RootStackDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
