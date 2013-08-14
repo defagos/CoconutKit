@@ -33,7 +33,6 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UISegmentedControl *resizeMethodSegmentedControl;
 @property (nonatomic, retain) IBOutlet UIButton *popoverButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 @property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
@@ -66,11 +65,6 @@ typedef enum {
         if ([stackController respondsToSelector:@selector(setDefinesPresentationContext:)]) {
             stackController.definesPresentationContext = YES;
         }
-        
-        // We want to be able to test the stack controller autorotation behavior. Starting with iOS 6, all containers
-        // allow rotation by default. Disable it for the placeholder so that we can observe the embedded stack controller
-        // behavior
-        self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
         
         // Pre-load other view controllers before display. Yep, this is possible!
         UIViewController *firstViewController = [[[TransparentViewController alloc] init] autorelease];
@@ -122,7 +116,6 @@ typedef enum {
     self.resizeMethodSegmentedControl = nil;
     self.popoverButton = nil;
     self.transitionPickerView = nil;
-    self.autorotationModeSegmentedControl = nil;
     self.inTabBarControllerSwitch = nil;
     self.inNavigationControllerSwitch = nil;
     self.animatedSwitch = nil;
@@ -139,9 +132,6 @@ typedef enum {
         
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
-    
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    self.autorotationModeSegmentedControl.selectedSegmentIndex = stackController.autorotationMode;
     
     self.inTabBarControllerSwitch.on = NO;
     self.inNavigationControllerSwitch.on = NO;
@@ -203,11 +193,6 @@ typedef enum {
     [super localize];
     
     self.title = @"HLSStackController";
-    
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", nil) forSegmentAtIndex:2];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:3];
 }
 
 #pragma mark Displaying a view controller according to the user settings
@@ -492,12 +477,6 @@ typedef enum {
                                                cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
                                                otherButtonTitles:nil] autorelease];
     [alertView show];
-}
-
-- (IBAction)changeAutorotationMode:(id)sender
-{
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction)indexChanged:(id)sender

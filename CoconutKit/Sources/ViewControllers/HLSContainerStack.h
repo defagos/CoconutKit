@@ -160,23 +160,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 @property (nonatomic, retain) UIView *containerView;
 
 /**
- * Set how a container decides whether it must rotate or not. Your containers should in general exhibit a similar 
- * property, whose implementation must be forwarded to this HLSContainerContent property
- *
- * HLSAutorotationModeContainer: All child view controllers loaded according to the capacity decide whether rotation
- *                               can occur, and receive the related events
- * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
- *                                            related events
- * HLSAutorotationModeContainerAndTopChildren: The top child view controller decide whether rotation can occur,
- *                                             and receive the related events
- * HLSAutorotationModeContainerAndAllChildren: All child view controllers decide whether rotation can occur, and receive 
- *                                             the related events
- *
- * The default value is HLSAutorotationModeContainer
- */
-@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
-
-/**
  * The stack delegate (usually the container view controller you are implementing)
  */
 @property (nonatomic, assign) id<HLSContainerStackDelegate> delegate;
@@ -332,13 +315,14 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)viewDidDisappear:(BOOL)animated;
 
 /**
- * Call this method from your container view controller -shouldAutorotate: method, otherwise the behavior is undefined
+ * You should call this method from your container view controller -shouldAutorotate: method. If your container displays
+ * several stacks at the same time, though, this might not make sense
  */
 - (BOOL)shouldAutorotate;
 
 /**
- * Call this method from your container view controller -supportedInterfaceOrientations method, otherwise the behavior
- * is undefined
+ * You should call this method from your container view controller -supportedInterfaceOrientations method. If your 
+ * container displays several stacks at the same time, though, this might not make sense
  */
 - (NSUInteger)supportedInterfaceOrientations;
 

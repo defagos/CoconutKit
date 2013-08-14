@@ -22,7 +22,6 @@
 @property (nonatomic, retain) IBOutlet UISwitch *landscapeRightSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *landscapeLeftSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *portraitUpsideDownSwitch;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
 @end
 
@@ -45,7 +44,6 @@
     
     self.transitionPickerView = nil;
     self.animatedSwitch = nil;
-    self.autorotationModeSegmentedControl = nil;
     self.portraitSwitch = nil;
     self.landscapeRightSwitch = nil;
     self.landscapeLeftSwitch = nil;
@@ -67,8 +65,6 @@
     self.landscapeRightSwitch.on = YES;
     self.landscapeLeftSwitch.on = YES;
     self.portraitUpsideDownSwitch.on = YES;
-    
-    self.autorotationModeSegmentedControl.selectedSegmentIndex = self.stackController.autorotationMode;
     
     HLSLoggerInfo(@"Called for object %@", self);
 }
@@ -319,11 +315,6 @@
 - (void)closeNativeContainer:(id)sender
 {
     [self.stackController popViewControllerAnimated:YES];
-}
-
-- (IBAction)changeAutorotationMode:(id)sender
-{
-    self.stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 @end

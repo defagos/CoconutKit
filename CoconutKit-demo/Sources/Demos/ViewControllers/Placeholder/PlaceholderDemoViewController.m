@@ -33,7 +33,6 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *leftPlaceholderSwitch;
 @property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
 @property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
 @property (nonatomic, retain) HeavyViewController *rightHeavyViewController;
@@ -86,7 +85,6 @@ typedef enum {
     self.inNavigationControllerSwitch = nil;
     self.leftPlaceholderSwitch = nil;
     self.rightPlaceholderSwitch = nil;
-    self.autorotationModeSegmentedControl = nil;
 }
 
 #pragma mark View lifecycle
@@ -99,13 +97,6 @@ typedef enum {
     self.inNavigationControllerSwitch.on = NO;
     self.leftPlaceholderSwitch.on = YES;
     self.rightPlaceholderSwitch.on = YES;
-        
-    if (self.autorotationMode == HLSAutorotationModeContainerAndNoChildren) {
-        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexNoChildren;
-    }
-    else {
-        self.autorotationModeSegmentedControl.selectedSegmentIndex = AutorotationModeIndexAllChildren;
-    }
     
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
@@ -127,9 +118,6 @@ typedef enum {
     [super localize];
     
     self.title = @"HLSPlaceholderViewController";
-    
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:AutorotationModeIndexNoChildren];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:AutorotationModeIndexAllChildren];
 }
 
 #pragma mark Displaying an inset view controller according to the user settings
@@ -377,17 +365,6 @@ typedef enum {
     }
     else {
         self.heavyButton.hidden = NO;
-    }
-}
-
-- (IBAction)changeAutorotationMode:(id)sender
-{
-    if (self.autorotationModeSegmentedControl.selectedSegmentIndex == AutorotationModeIndexNoChildren) {
-        self.autorotationMode = HLSAutorotationModeContainerAndNoChildren;
-    }
-    // All rotation modes involving children are equivalent for a placeholder view controller. Pick any of them
-    else {
-        self.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
     }
 }
 

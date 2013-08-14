@@ -587,39 +587,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return NO;
     }
     
-    switch (self.autorotationMode) {
-        case HLSAutorotationModeContainerAndAllChildren: {
-            for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                if (! [containerContent shouldAutorotate]) {
-                    return NO;
-                }
-            }
-            break;
-        }
-            
-        case HLSAutorotationModeContainerAndTopChildren: {
-            HLSContainerContent *topContainerContent = [self topContainerContent];
-            if (topContainerContent && ! [topContainerContent shouldAutorotate]) {
-                return NO;
-            }
-            break;
-        }
-            
-        case HLSAutorotationModeContainerAndNoChildren: {
-            break;
-        }
-            
-        case HLSAutorotationModeContainer:
-        default: {
-            for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-                NSUInteger index = [self.containerContents count] - 1 - i;
-                HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-                if (! [containerContent shouldAutorotate]) {
-                    return NO;
-                }
-            }
-            break;
-        }
+    // Since the view controllers within the container can be displayed in any kind of orientation,
+    // advertise the container orientation behavior as the one of its top child controller (so that
+    // other non-CoconutKit containers can display them with the optimal orientation)
+    HLSContainerContent *topContainerContent = [self topContainerContent];
+    if (topContainerContent && ! [topContainerContent shouldAutorotate]) {
+        return NO;
     }
     
     return YES;
@@ -628,35 +601,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (NSUInteger)supportedInterfaceOrientations
 {
     NSUInteger supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
-    switch (self.autorotationMode) {
-        case HLSAutorotationModeContainerAndAllChildren: {
-            for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                supportedInterfaceOrientations &= [containerContent supportedInterfaceOrientations];
-            }
-            break;
-        }
-            
-        case HLSAutorotationModeContainerAndTopChildren: {
-            HLSContainerContent *topContainerContent = [self topContainerContent];
-            if (topContainerContent) {
-                supportedInterfaceOrientations &= [topContainerContent supportedInterfaceOrientations];
-            }
-            break;
-        }
-            
-        case HLSAutorotationModeContainerAndNoChildren: {
-            break;
-        }
-            
-        case HLSAutorotationModeContainer:
-        default: {
-            for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-                NSUInteger index = [self.containerContents count] - 1 - i;
-                HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-                supportedInterfaceOrientations &= [containerContent supportedInterfaceOrientations];
-            }
-            break;
-        }
+    
+    // See remark in -shouldAutorotate
+    HLSContainerContent *topContainerContent = [self topContainerContent];
+    if (topContainerContent) {
+        supportedInterfaceOrientations &= [topContainerContent supportedInterfaceOrientations];
     }
     
     return supportedInterfaceOrientations;
@@ -696,35 +645,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
         
-        switch (self.autorotationMode) {
-            case HLSAutorotationModeContainerAndAllChildren: {
-                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                    [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndTopChildren: {
-                HLSContainerContent *topContainerContent = [self topContainerContent];
-                if (topContainerContent) {
-                    [topContainerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndNoChildren: {
-                break;
-            }
-                
-            case HLSAutorotationModeContainer:
-            default: {
-                for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-                    NSUInteger index = [self.containerContents count] - 1 - i;
-                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-                    [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
+        for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+            [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
         }
     }
 }
@@ -752,71 +674,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
         
-        switch (self.autorotationMode) {
-            case HLSAutorotationModeContainerAndAllChildren: {
-                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                    [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndTopChildren: {
-                HLSContainerContent *topContainerContent = [self topContainerContent];
-                if (topContainerContent) {
-                    [topContainerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndNoChildren: {
-                break;
-            }
-                
-            case HLSAutorotationModeContainer:
-            default: {
-                for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-                    NSUInteger index = [self.containerContents count] - 1 - i;
-                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-                    [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
+        for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+            [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
         }
     }
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    if ([self.containerContents count] != 0) {        
-        switch (self.autorotationMode) {
-            case HLSAutorotationModeContainerAndAllChildren: {
-                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                    [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndTopChildren: {
-                HLSContainerContent *topContainerContent = [self topContainerContent];
-                if (topContainerContent) {
-                    [topContainerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndNoChildren: {
-                break;
-            }
-                
-            case HLSAutorotationModeContainer:
-            default: {
-                for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
-                    NSUInteger index = [self.containerContents count] - 1 - i;
-                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-                    [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-                }
-                break;
-            }
+    if ([self.containerContents count] != 0) {
+        for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
+            [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
         }
     }
     

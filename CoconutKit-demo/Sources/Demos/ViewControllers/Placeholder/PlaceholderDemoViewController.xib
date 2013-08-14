@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<int key="IBDocument.SystemTarget">1552</int>
+		<string key="IBDocument.SystemVersion">12E55</string>
+		<string key="IBDocument.InterfaceBuilderVersion">3084</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1930</string>
+			<string key="NS.object.0">2083</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -16,7 +16,6 @@
 			<string>IBUIButton</string>
 			<string>IBUILabel</string>
 			<string>IBUIPickerView</string>
-			<string>IBUISegmentedControl</string>
 			<string>IBUISwitch</string>
 			<string>IBUIView</string>
 		</object>
@@ -397,71 +396,12 @@
 						<string key="NSFrame">{{654, 808}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="243558040"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<bool key="IBUIOn">YES</bool>
-					</object>
-					<object class="IBUILabel" id="243558040">
-						<reference key="NSNextResponder" ref="490296611"/>
-						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{281, 858}, {256, 40}}</string>
-						<reference key="NSSuperview" ref="490296611"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="370566480"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Autorotation</string>
-						<reference key="IBUITextColor" ref="222767216"/>
-						<reference key="IBUIHighlightedColor" ref="114470078"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="820248577"/>
-						<reference key="IBUIFont" ref="832576810"/>
-					</object>
-					<object class="IBUISegmentedControl" id="370566480">
-						<reference key="NSNextResponder" ref="490296611"/>
-						<int key="NSvFlags">303</int>
-						<string key="NSFrame">{{545, 863}, {202, 30}}</string>
-						<reference key="NSSuperview" ref="490296611"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="421107433"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBSegmentControlStyle">2</int>
-						<int key="IBNumberOfSegments">2</int>
-						<int key="IBSelectedSegmentIndex">0</int>
-						<object class="NSArray" key="IBSegmentTitles">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>No children</string>
-							<string>All</string>
-						</object>
-						<object class="NSMutableArray" key="IBSegmentWidths">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<real value="0.0"/>
-							<real value="0.0"/>
-						</object>
-						<object class="NSMutableArray" key="IBSegmentEnabledStates">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<boolean value="YES"/>
-							<boolean value="YES"/>
-						</object>
-						<object class="NSMutableArray" key="IBSegmentContentOffsets">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>{0, 0}</string>
-							<string>{0, 0}</string>
-						</object>
-						<object class="NSMutableArray" key="IBSegmentImages">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="NSNull" id="4"/>
-							<reference ref="4"/>
-						</object>
 					</object>
 					<object class="IBUILabel" id="16578721">
 						<reference key="NSNextResponder" ref="490296611"/>
@@ -547,7 +487,6 @@
 						<string key="NSFrame">{{404, 923}, {217, 37}}</string>
 						<reference key="NSSuperview" ref="490296611"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -650,14 +589,6 @@
 						<reference key="destination" ref="973887671"/>
 					</object>
 					<int key="connectionID">91</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">autorotationModeSegmentedControl</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="370566480"/>
-					</object>
-					<int key="connectionID">103</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -776,15 +707,6 @@
 					</object>
 					<int key="connectionID">95</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">changeAutorotationMode:</string>
-						<reference key="source" ref="370566480"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">13</int>
-					</object>
-					<int key="connectionID">104</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -836,8 +758,6 @@
 							<reference ref="375668740"/>
 							<reference ref="262548350"/>
 							<reference ref="94877724"/>
-							<reference ref="243558040"/>
-							<reference ref="370566480"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -959,16 +879,6 @@
 						<reference key="object" ref="94877724"/>
 						<reference key="parent" ref="490296611"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">96</int>
-						<reference key="object" ref="243558040"/>
-						<reference key="parent" ref="490296611"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">102</int>
-						<reference key="object" ref="370566480"/>
-						<reference key="parent" ref="490296611"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -979,8 +889,6 @@
 					<string>-1.IBPluginDependency</string>
 					<string>-2.CustomClassName</string>
 					<string>-2.IBPluginDependency</string>
-					<string>102.IBPluginDependency</string>
-					<string>102.IUISegmentedControlInspectorSelectedSegmentMetadataKey</string>
 					<string>12.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
@@ -1005,16 +913,12 @@
 					<string>88.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
 					<string>94.IBPluginDependency</string>
-					<string>96.IBPluginDependency</string>
 				</object>
 				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>PlaceholderDemoViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<integer value="0"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1097,127 +1001,10 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PlaceholderDemoViewController</string>
 					<string key="superclassName">HLSPlaceholderViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>changeAutorotationMode:</string>
-							<string>displayContainmentTest:</string>
-							<string>displayFixedSize:</string>
-							<string>displayHeavy:</string>
-							<string>displayLandscapeOnly:</string>
-							<string>displayLifeCycleTest:</string>
-							<string>displayPortraitOnly:</string>
-							<string>displayStretchable:</string>
-							<string>hideWithModal:</string>
-							<string>navigateBackNonAnimated:</string>
-							<string>navigateForwardNonAnimated:</string>
-							<string>remove:</string>
-							<string>testResponderChain:</string>
-							<string>togglePlaceholder:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>changeAutorotationMode:</string>
-							<string>displayContainmentTest:</string>
-							<string>displayFixedSize:</string>
-							<string>displayHeavy:</string>
-							<string>displayLandscapeOnly:</string>
-							<string>displayLifeCycleTest:</string>
-							<string>displayPortraitOnly:</string>
-							<string>displayStretchable:</string>
-							<string>hideWithModal:</string>
-							<string>navigateBackNonAnimated:</string>
-							<string>navigateForwardNonAnimated:</string>
-							<string>remove:</string>
-							<string>testResponderChain:</string>
-							<string>togglePlaceholder:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">changeAutorotationMode:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayContainmentTest:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayFixedSize:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayHeavy:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayLandscapeOnly:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayLifeCycleTest:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayPortraitOnly:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">displayStretchable:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">hideWithModal:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">navigateBackNonAnimated:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">navigateForwardNonAnimated:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">remove:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">testResponderChain:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">togglePlaceholder:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>autorotationModeSegmentedControl</string>
 							<string>heavyButton</string>
 							<string>inNavigationControllerSwitch</string>
 							<string>inTabBarControllerSwitch</string>
@@ -1227,7 +1014,6 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UISegmentedControl</string>
 							<string>UIButton</string>
 							<string>UISwitch</string>
 							<string>UISwitch</string>
@@ -1240,7 +1026,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>autorotationModeSegmentedControl</string>
 							<string>heavyButton</string>
 							<string>inNavigationControllerSwitch</string>
 							<string>inTabBarControllerSwitch</string>
@@ -1250,10 +1035,6 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">autorotationModeSegmentedControl</string>
-								<string key="candidateClassName">UISegmentedControl</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">heavyButton</string>
 								<string key="candidateClassName">UIButton</string>
@@ -1291,7 +1072,7 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1536" key="NS.object.0"/>
+			<real value="1552" key="NS.object.0"/>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
@@ -1299,6 +1080,6 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">1930</string>
+		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>
