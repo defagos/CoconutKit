@@ -19,11 +19,25 @@
     self.view.backgroundColor = [UIColor randomColor];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+}
+
 #pragma mark Orientation management
 
 - (NSUInteger)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 #pragma mark Localization
