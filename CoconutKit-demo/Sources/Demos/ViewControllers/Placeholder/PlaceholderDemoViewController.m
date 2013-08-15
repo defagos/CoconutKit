@@ -135,6 +135,7 @@ typedef enum {
         if (self.inTabBarControllerSwitch.on) {
             UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
             tabBarController.viewControllers = [NSArray arrayWithObject:insetViewController];
+            tabBarController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             insetViewController = tabBarController;
         }    
     }
