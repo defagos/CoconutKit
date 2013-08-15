@@ -33,9 +33,23 @@
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscape;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
     HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
