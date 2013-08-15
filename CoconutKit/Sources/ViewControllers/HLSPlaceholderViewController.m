@@ -202,9 +202,29 @@
 
 #pragma mark Orientation management (these methods are only called if the view controller is visible)
 
-// Remark: -shouldAutorotate and -supportedInterfaceOrientations are NOT implemented by HLSPlaceholderViewController.
-//         Since HLSContainerStack can display view controllers in any orientation, this would not make sense. The
-//         container orientation is therefore the one it defines (supports all orientations by default)
+- (BOOL)shouldAutorotate
+{
+    if (! [super shouldAutorotate]) {
+        return NO;
+    }
+    
+    for (HLSContainerStack *containerStack in self.containerStacks) {
+        if (! [containerStack shouldAutorotate]) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    NSUInteger supportedInterfaceOrientations = [super supportedInterfaceOrientations];
+    for (HLSContainerStack *containerStack in self.containerStacks) {
+        supportedInterfaceOrientations &= [containerStack supportedInterfaceOrientations];
+    }
+    return supportedInterfaceOrientations;
+}
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {   

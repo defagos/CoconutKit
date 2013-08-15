@@ -587,28 +587,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return NO;
     }
     
-    // Since the view controllers within the container can be displayed in any kind of orientation,
-    // advertise the container orientation behavior as the one of its top child controller (so that
-    // other non-CoconutKit containers can display them with the optimal orientation)
-    HLSContainerContent *topContainerContent = [self topContainerContent];
-    if (topContainerContent && ! [topContainerContent shouldAutorotate]) {
-        return NO;
-    }
-    
+    // HLSContainerStack supports insertion of child view controllers with any orientation. Does not have to deal
+    // with orientation itself
     return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    NSUInteger supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
-    
     // See remark in -shouldAutorotate
-    HLSContainerContent *topContainerContent = [self topContainerContent];
-    if (topContainerContent) {
-        supportedInterfaceOrientations &= [topContainerContent supportedInterfaceOrientations];
-    }
-    
-    return supportedInterfaceOrientations;
+    return UIInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -658,7 +645,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         for (NSUInteger i = 0; i < MIN(self.capacity, [self.containerContents count]); ++i) {
             NSUInteger index = [self.containerContents count] - 1 - i;
             HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
-            [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
+            [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.displayedInterfaceOrientation];
             
             if ([containerContent viewIfLoaded]) {
                 HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:[containerContent viewIfLoaded]];
@@ -1075,8 +1062,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     UIViewController *containerViewController = [HLSContainerContent containerViewControllerKindOfClass:Nil
                                                                                       forViewController:self];
     if (containerViewController) {
-        if ([self autorotatesToInterfaceOrientation:containerViewController.interfaceOrientation]) {
-            return containerViewController.interfaceOrientation;
+        if ([self autorotatesToInterfaceOrientation:containerViewController.displayedInterfaceOrientation]) {
+            return containerViewController.displayedInterfaceOrientation;
         }
         else {
             return [self compatibleInterfaceOrientationWithViewController:containerViewController];
