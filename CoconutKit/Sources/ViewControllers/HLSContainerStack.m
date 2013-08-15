@@ -29,6 +29,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 @property (nonatomic, assign) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
 @property (nonatomic, retain) NSArray *previousDisplayedInterfaceOrientations;          // During rotations, temporarily store the orientations previously displayed by children
                                                                                         // (from top to bottom)
+@property (nonatomic, retain) NSNumber *wereAnimationsEnabled;
 
 @end
 
@@ -88,6 +89,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     self.containerView = nil;
     self.delegate = nil;
     self.previousDisplayedInterfaceOrientations = nil;
+    self.wereAnimationsEnabled = nil;
 
     [super dealloc];
 }
@@ -641,15 +643,29 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             UIInterfaceOrientation displayedInterfaceOrientation = containerContent.viewController.displayedInterfaceOrientation;
             UIInterfaceOrientation firstAvailableInterfaceOrientation = [containerContent.viewController firstAvailableInterfaceOrientation];
             
-            // The child can rotate, and changes its orientation
-            if ([containerContent shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-                    && displayedInterfaceOrientation != toInterfaceOrientation) {
-                [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+            // The child can rotate
+            if ([containerContent shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]) {
+                // The child changes its orientation. Notify the orientation change
+                if (displayedInterfaceOrientation != toInterfaceOrientation) {
+                    [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+                }
+                // The top child does not change its orientation: Inhibit transition animations
+                else if (containerContent == [self.containerContents lastObject]) {
+                    self.wereAnimationsEnabled = @([UIView areAnimationsEnabled]);
+                    [UIView setAnimationsEnabled:NO];
+                }
             }
-            // The child cannot rotate, and the new orientation it will adopt is different from the current one
-            else if (! [containerContent shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
-                     && displayedInterfaceOrientation != firstAvailableInterfaceOrientation) {
-                [containerContent willRotateToInterfaceOrientation:firstAvailableInterfaceOrientation duration:duration];
+            // The child cannot rotate
+            else {
+                // The new orientation it will adopt is different from the current one. Notify the orientation change
+                if (displayedInterfaceOrientation != firstAvailableInterfaceOrientation) {
+                    [containerContent willRotateToInterfaceOrientation:firstAvailableInterfaceOrientation duration:duration];
+                }
+                // Same orientation. Inhibit transition animations
+                else if (containerContent == [self.containerContents lastObject]) {
+                    self.wereAnimationsEnabled = @([UIView areAnimationsEnabled]);
+                    [UIView setAnimationsEnabled:NO];
+                }
             }
                                     
             [previousDisplayedInterfaceOrientations addObject:@(displayedInterfaceOrientation)];
@@ -705,6 +721,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             if (containerContent.viewController.displayedInterfaceOrientation != previousDisplayedInterfaceOrientation) {
                 [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
             }
+        }
+        
+        // Restore animation status
+        if (self.wereAnimationsEnabled) {
+            [UIView setAnimationsEnabled:[self.wereAnimationsEnabled boolValue]];
+            self.wereAnimationsEnabled = nil;
         }
         
         self.previousDisplayedInterfaceOrientations = nil;
