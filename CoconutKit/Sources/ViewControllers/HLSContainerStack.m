@@ -27,6 +27,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 @property (nonatomic, assign) UIViewController *containerViewController;                // The container view controller implemented using HLSContainerStack
 @property (nonatomic, retain) NSMutableArray *containerContents;                        // The contents loaded into the stack. The first element corresponds to the root view controller
 @property (nonatomic, assign) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
+@property (nonatomic, retain) NSArray *previousDisplayedInterfaceOrientations;          // During rotations, temporarily store the orientations previously displayed by children
+                                                                                        // (from top to bottom)
 
 @end
 
@@ -85,6 +87,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     self.containerContents = nil;
     self.containerView = nil;
     self.delegate = nil;
+    self.previousDisplayedInterfaceOrientations = nil;
 
     [super dealloc];
 }
@@ -632,9 +635,26 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
         
+        NSMutableArray *previousDisplayedInterfaceOrientations = [NSMutableArray array];
         for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-            [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+            // If the child view controller does not have to rotate when the container rotates, does not call the associated methods
+            UIInterfaceOrientation displayedInterfaceOrientation = containerContent.viewController.displayedInterfaceOrientation;
+            UIInterfaceOrientation firstAvailableInterfaceOrientation = [containerContent.viewController firstAvailableInterfaceOrientation];
+            
+            // The child can rotate, and changes its orientation
+            if ([containerContent shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
+                    && displayedInterfaceOrientation != toInterfaceOrientation) {
+                [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+            }
+            // The child cannot rotate, and the new orientation it will adopt is different from the current one
+            else if (! [containerContent shouldAutorotateToInterfaceOrientation:toInterfaceOrientation]
+                     && displayedInterfaceOrientation != firstAvailableInterfaceOrientation) {
+                [containerContent willRotateToInterfaceOrientation:firstAvailableInterfaceOrientation duration:duration];
+            }
+                                    
+            [previousDisplayedInterfaceOrientations addObject:@(displayedInterfaceOrientation)];
         }
+        self.previousDisplayedInterfaceOrientations = [NSArray arrayWithArray:previousDisplayedInterfaceOrientations];
     }
 }
 
@@ -661,8 +681,15 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
         }
         
+        NSUInteger i = 0;
         for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-            [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+            // See comment in -willRotateToInterfaceOrientation:duration:
+            UIInterfaceOrientation previousDisplayedInterfaceOrientation = [[self.previousDisplayedInterfaceOrientations objectAtIndex:i] integerValue];
+            
+            if (containerContent.viewController.displayedInterfaceOrientation != previousDisplayedInterfaceOrientation) {
+                [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+            }
+            ++i;
         }
     }
 }
@@ -670,9 +697,17 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     if ([self.containerContents count] != 0) {
+        NSUInteger i = 0;
         for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-            [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+            // See comment in -willRotateToInterfaceOrientation:duration:
+            UIInterfaceOrientation previousDisplayedInterfaceOrientation = [[self.previousDisplayedInterfaceOrientations objectAtIndex:i] integerValue];
+            
+            if (containerContent.viewController.displayedInterfaceOrientation != previousDisplayedInterfaceOrientation) {
+                [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+            }
         }
+        
+        self.previousDisplayedInterfaceOrientations = nil;
     }
     
     _rotating = NO;
