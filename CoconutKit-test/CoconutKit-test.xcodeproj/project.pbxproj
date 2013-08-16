@@ -89,7 +89,7 @@
 		6FADE7A214BA04B6007EE121 /* HLSKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71D14BA04B6007EE121 /* HLSKeyboardInformation.m */; };
 		6FADE7A314BA04B6007EE121 /* HLSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71F14BA04B6007EE121 /* HLSNotifications.m */; };
 		6FADE7A414BA04B6007EE121 /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE72314BA04B6007EE121 /* HLSRuntime.m */; };
-		6FADE7A514BA04B6007EE121 /* HLSUserInterfaceLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE72514BA04B6007EE121 /* HLSUserInterfaceLock.m */; };
+		6FADE7A514BA04B6007EE121 /* HLSApplicationLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE72514BA04B6007EE121 /* HLSApplicationLock.m */; };
 		6FADE7A614BA04B6007EE121 /* HLSValidators.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE72814BA04B6007EE121 /* HLSValidators.m */; };
 		6FADE7A714BA04B6007EE121 /* NSArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE72A14BA04B6007EE121 /* NSArray+HLSExtensions.m */; };
 		6FADE7A814BA04B6007EE121 /* NSBundle+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE72C14BA04B6007EE121 /* NSBundle+HLSDynamicLocalization.m */; };
@@ -337,8 +337,8 @@
 		6FADE71F14BA04B6007EE121 /* HLSNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSNotifications.m; sourceTree = "<group>"; };
 		6FADE72214BA04B6007EE121 /* HLSRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntime.h; sourceTree = "<group>"; };
 		6FADE72314BA04B6007EE121 /* HLSRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntime.m; sourceTree = "<group>"; };
-		6FADE72414BA04B6007EE121 /* HLSUserInterfaceLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSUserInterfaceLock.h; sourceTree = "<group>"; };
-		6FADE72514BA04B6007EE121 /* HLSUserInterfaceLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSUserInterfaceLock.m; sourceTree = "<group>"; };
+		6FADE72414BA04B6007EE121 /* HLSApplicationLock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationLock.h; sourceTree = "<group>"; };
+		6FADE72514BA04B6007EE121 /* HLSApplicationLock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationLock.m; sourceTree = "<group>"; };
 		6FADE72614BA04B6007EE121 /* HLSValidable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidable.h; sourceTree = "<group>"; };
 		6FADE72714BA04B6007EE121 /* HLSValidators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidators.h; sourceTree = "<group>"; };
 		6FADE72814BA04B6007EE121 /* HLSValidators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidators.m; sourceTree = "<group>"; };
@@ -765,6 +765,8 @@
 				6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */,
 				6FF74C7A177D46C800BD846D /* HLSApplicationInformation.h */,
 				6FF74C7B177D46C800BD846D /* HLSApplicationInformation.m */,
+				6FADE72414BA04B6007EE121 /* HLSApplicationLock.h */,
+				6FADE72514BA04B6007EE121 /* HLSApplicationLock.m */,
 				6F3E3E8A15A227A7007E78BD /* HLSApplicationPreloader.h */,
 				6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */,
 				6FADE71314BA04B6007EE121 /* HLSAssert.h */,
@@ -788,8 +790,6 @@
 				6FADE72314BA04B6007EE121 /* HLSRuntime.m */,
 				6FCA2DE21679E41F0011CFDA /* HLSStandardFileManager.h */,
 				6FCA2DE31679E41F0011CFDA /* HLSStandardFileManager.m */,
-				6FADE72414BA04B6007EE121 /* HLSUserInterfaceLock.h */,
-				6FADE72514BA04B6007EE121 /* HLSUserInterfaceLock.m */,
 				6FADE72614BA04B6007EE121 /* HLSValidable.h */,
 				6FADE72714BA04B6007EE121 /* HLSValidators.h */,
 				6FADE72814BA04B6007EE121 /* HLSValidators.m */,
@@ -1160,7 +1160,7 @@
 				6FADE7A214BA04B6007EE121 /* HLSKeyboardInformation.m in Sources */,
 				6FADE7A314BA04B6007EE121 /* HLSNotifications.m in Sources */,
 				6FADE7A414BA04B6007EE121 /* HLSRuntime.m in Sources */,
-				6FADE7A514BA04B6007EE121 /* HLSUserInterfaceLock.m in Sources */,
+				6FADE7A514BA04B6007EE121 /* HLSApplicationLock.m in Sources */,
 				6FADE7A614BA04B6007EE121 /* HLSValidators.m in Sources */,
 				6FADE7A714BA04B6007EE121 /* NSArray+HLSExtensions.m in Sources */,
 				6FADE7A814BA04B6007EE121 /* NSBundle+HLSDynamicLocalization.m in Sources */,

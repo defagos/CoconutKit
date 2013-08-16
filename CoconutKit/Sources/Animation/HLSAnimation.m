@@ -9,12 +9,12 @@
 #import "HLSAnimation.h"
 
 #import "HLSAnimationStep+Friend.h"
+#import "HLSApplicationLock.h"
 #import "HLSAssert.h"
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
-#import "HLSUserInterfaceLock.h"
 #import "HLSZeroingWeakRef.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
@@ -241,7 +241,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     
         // Lock the UI during the animation
         if (self.lockingUI) {
-            [[HLSUserInterfaceLock sharedUserInterfaceLock] lock];
+            [[HLSApplicationLock sharedApplicationLock] lockUserInteractions];
         }
     }
     
@@ -325,7 +325,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                 || (_repeatCount != NSUIntegerMax && _currentRepeatCount == _repeatCount)) {
             // Unlock the UI
             if (self.lockingUI) {
-                [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
+                [[HLSApplicationLock sharedApplicationLock] unlockUserInteractions];
             }
             
             self.started = NO;

@@ -8,6 +8,7 @@
 
 #import "HLSContainerStack.h"
 
+#import "HLSApplicationLock.h"
 #import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSContainerStackView.h"
@@ -29,8 +30,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 @property (nonatomic, assign) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
 @property (nonatomic, retain) NSArray *previousDisplayedInterfaceOrientations;          // During rotations, temporarily store the orientations previously displayed by children
                                                                                         // (from top to bottom)
-@property (nonatomic, retain) NSNumber *wereAnimationsEnabled;
-
 @end
 
 @implementation HLSContainerStack {
@@ -39,6 +38,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     BOOL _animating;                                          // Set to YES when a transition animation is running
     BOOL _rotating;                                           // Set to YES when a rotation is being made
     HLSAutorotationMode _autorotationMode;                    // How the container decides to behave when rotation occurs
+    BOOL _lockedAnimations;                                   // Whether or not animations were locked during a rotation animation
 }
 
 #pragma mark Class methods
@@ -89,7 +89,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     self.containerView = nil;
     self.delegate = nil;
     self.previousDisplayedInterfaceOrientations = nil;
-    self.wereAnimationsEnabled = nil;
 
     [super dealloc];
 }
@@ -651,8 +650,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 }
                 // The top child does not change its orientation: Inhibit transition animations
                 else if (containerContent == [self.containerContents lastObject]) {
-                    self.wereAnimationsEnabled = @([UIView areAnimationsEnabled]);
-                    [UIView setAnimationsEnabled:NO];
+                    [[HLSApplicationLock sharedApplicationLock] lockAnimations];
+                    _lockedAnimations = YES;
                 }
             }
             // The child cannot rotate
@@ -663,8 +662,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 }
                 // Same orientation. Inhibit transition animations
                 else if (containerContent == [self.containerContents lastObject]) {
-                    self.wereAnimationsEnabled = @([UIView areAnimationsEnabled]);
-                    [UIView setAnimationsEnabled:NO];
+                    [[HLSApplicationLock sharedApplicationLock] lockAnimations];
+                    _lockedAnimations = YES;
                 }
             }
                                     
@@ -724,9 +723,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         // Restore animation status
-        if (self.wereAnimationsEnabled) {
-            [UIView setAnimationsEnabled:[self.wereAnimationsEnabled boolValue]];
-            self.wereAnimationsEnabled = nil;
+        if (_lockedAnimations) {
+            [[HLSApplicationLock sharedApplicationLock] unlockAnimations];
+            _lockedAnimations = NO;
         }
         
         self.previousDisplayedInterfaceOrientations = nil;

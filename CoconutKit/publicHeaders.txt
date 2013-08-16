@@ -4,6 +4,7 @@ HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
 HLSApplicationInformation.h
+HLSApplicationLock.h
 HLSApplicationPreloader.h
 HLSAssert.h
 HLSAutorotation.h
@@ -47,7 +48,6 @@ HLSTaskOperation+Protected.h
 HLSTextView.h
 HLSTransition.h
 HLSURLConnection.h
-HLSUserInterfaceLock.h
 HLSValidable.h
 HLSValidators.h
 HLSValue1TableViewCell.h
