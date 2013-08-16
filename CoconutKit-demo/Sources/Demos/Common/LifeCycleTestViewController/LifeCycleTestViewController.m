@@ -91,8 +91,8 @@
 {   
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
-                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, duration = %.2f, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), duration, HLSStringFromInterfaceOrientation(self.interfaceOrientation),
                   HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
@@ -100,8 +100,8 @@
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
-                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
+    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, duration = %.2f, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
+                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), duration, HLSStringFromInterfaceOrientation(self.interfaceOrientation),
                   HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 

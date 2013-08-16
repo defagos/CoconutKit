@@ -37,21 +37,24 @@
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, duration = %.2f, displayedInterfaceOrientation = %@", self,
+                  HLSStringFromInterfaceOrientation(toInterfaceOrientation), duration, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, duration = %.2f, displayedInterfaceOrientation = %@", self,
+                  HLSStringFromInterfaceOrientation(toInterfaceOrientation), duration, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    HLSLoggerInfo(@"Called for object %@, displayedInterfaceOrientation = %@", self, HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, fromInterfaceOrientation = %@, displayedInterfaceOrientation = %@", self,
+                  HLSStringFromInterfaceOrientation(fromInterfaceOrientation), HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 #pragma mark Localization
