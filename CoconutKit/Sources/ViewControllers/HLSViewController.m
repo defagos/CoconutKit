@@ -9,7 +9,6 @@
 #import "HLSViewController.h"
 
 #import <objc/runtime.h>
-#import "HLSAutorotation.h"
 #import "HLSConverters.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"

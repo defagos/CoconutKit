@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Hortis. All rights reserved.
 //
 
-#import "HLSAutorotation.h"
-
 // Lifecycle phases
 typedef enum {
     HLSViewControllerLifeCyclePhaseEnumBegin = 0,

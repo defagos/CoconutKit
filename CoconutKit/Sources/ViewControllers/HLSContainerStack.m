@@ -37,7 +37,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerStackBehavior _behavior;                      // How the container manages its child view controllers
     BOOL _animating;                                          // Set to YES when a transition animation is running
     BOOL _rotating;                                           // Set to YES when a rotation is being made
-    HLSAutorotationMode _autorotationMode;                    // How the container decides to behave when rotation occurs
     BOOL _lockedAnimations;                                   // Whether or not animations were locked during a rotation animation
 }
 
@@ -67,7 +66,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.containerContents = [NSMutableArray array];
         _behavior = behavior;
         self.capacity = capacity;
-        _autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
 }

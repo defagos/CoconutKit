@@ -9,7 +9,6 @@
 #import "HLSWebViewController.h"
 
 #import "HLSActionSheet.h"
-#import "HLSAutorotation.h"
 #import "HLSNotifications.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"

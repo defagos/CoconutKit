@@ -7,7 +7,6 @@
 //
 
 #import "HLSAnimation.h"
-#import "HLSAutorotation.h"
 #import "HLSTransition.h"
 
 // Stack behavior
