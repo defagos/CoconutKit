@@ -278,6 +278,11 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [self updateUserInterface];
 }
 
+- (IBAction)toggleBlocking:(id)sender
+{
+    [self calculateAnimation];
+}
+
 - (IBAction)toggleLooping:(id)sender
 {
     [self calculateAnimation];
