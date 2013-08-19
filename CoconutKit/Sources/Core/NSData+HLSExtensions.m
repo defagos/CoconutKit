@@ -10,6 +10,16 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
+/**
+ * These methods have first been exposed with iOS 7, but can be used on iOS 4 and above (see Apple documentation)
+ */
+@interface NSData (HLSExtensionsBase64)
+
+- (id)initWithBase64Encoding:(NSString *)base64String;
+- (NSString *)base64Encoding;
+
+@end
+
 static NSString* digest(NSData *data, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
 	unsigned char md[digestLength];     // C99
@@ -26,6 +36,43 @@ static NSString* digest(NSData *data, unsigned char *(*cc_digest)(const void *, 
 }
 
 @implementation NSData (HLSExtensions)
+
+#pragma mark Class methods
+
++ (instancetype)dataWithBase64EncodedString:(NSString *)base64EncodedString
+{
+    return [[[self alloc] initWithBase64EncodedString:base64EncodedString] autorelease];
+}
+
++ (instancetype)dataWithBase64EncodedData:(NSData *)base64EncodedData
+{
+    return [[[self alloc] initWithBase64EncodedData:base64EncodedData] autorelease];
+}
+
+#pragma mark Object creation and destruction
+
+- (id)initWithBase64EncodedString:(NSString *)base64String
+{
+    return [self initWithBase64Encoding:base64String];
+}
+
+- (id)initWithBase64EncodedData:(NSData *)base64Data
+{
+    NSString *base64DataString = [[[NSString alloc] initWithData:base64Data encoding:NSUTF8StringEncoding] autorelease];
+    return [self initWithBase64EncodedString:base64DataString];
+}
+
+#pragma mark Base 64 encoding
+
+- (NSString *)base64EncodedString
+{
+    return [self base64Encoding];
+}
+
+- (NSData *)base64EncodedData
+{
+    return [[self base64EncodedString] dataUsingEncoding:NSUTF8StringEncoding];
+}
 
 #pragma mark Digest methods
 

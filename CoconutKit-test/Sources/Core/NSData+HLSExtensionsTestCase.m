@@ -12,6 +12,15 @@
 
 #pragma mark Tests
 
+- (void)testBase64Encoding
+{
+    NSData *testData = [@"Hello, World!" dataUsingEncoding:NSUTF8StringEncoding];
+    GHAssertEqualStrings([testData base64EncodedString], @"SGVsbG8sIFdvcmxkIQ==", nil);
+    
+    NSString *testString = [[NSString alloc] initWithData:[NSData dataWithBase64EncodedString:@"SGVsbG8sIFdvcmxkIQ=="] encoding:NSUTF8StringEncoding];
+    GHAssertEqualStrings(testString, @"Hello, World!", nil);
+}
+
 - (void)testHashMethods
 {
     NSData *testData = [@"Hello, World!" dataUsingEncoding:NSUTF8StringEncoding];

@@ -11,6 +11,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "NSData+HLSExtensions.h"
 
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
@@ -30,6 +31,42 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 }
 
 @implementation NSString (HLSExtensions)
+
+#pragma mark Class methods
+
++ (instancetype)stringWithBase64EncodedString:(NSString *)base64EncodedString
+{
+    return [[[self alloc] initWithBase64EncodedString:base64EncodedString] autorelease];
+}
+
++ (instancetype)stringWithBase64EncodedData:(NSData *)base64EncodedData
+{
+    return [[[self alloc] initWithBase64EncodedData:base64EncodedData] autorelease];
+}
+
+#pragma mark Object creation and destruction
+
+- (id)initWithBase64EncodedString:(NSString *)base64String
+{
+    return [self initWithData:[NSData dataWithBase64EncodedString:base64String] encoding:NSUTF8StringEncoding];
+}
+
+- (id)initWithBase64EncodedData:(NSData *)base64Data
+{
+    return [self initWithData:[NSData dataWithBase64EncodedData:base64Data] encoding:NSUTF8StringEncoding];
+}
+
+#pragma mark Base 64 encoding
+
+- (NSString *)base64EncodedString
+{
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] base64EncodedString];
+}
+
+- (NSData *)base64EncodedData
+{
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] base64EncodedData];
+}
 
 #pragma mark Convenience methods
 
