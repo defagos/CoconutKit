@@ -48,6 +48,21 @@ static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self,
 
 @implementation UIViewController (HLSExtensions)
 
+#pragma mark Class methods
+
++ (void)refreshViewControllerOrientations
+{
+    // Hack. See http://stackoverflow.com/questions/181780/is-there-a-documented-way-to-set-the-iphone-orientation
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (! rootViewController) {
+        return;
+    }
+    
+    UIViewController *dummyViewController = [[UIViewController alloc] init];
+    [rootViewController presentViewController:dummyViewController animated:NO completion:nil];
+    [rootViewController dismissViewControllerAnimated:NO completion:nil];
+}
+
 #pragma mark View management
 
 /**

@@ -41,6 +41,11 @@ typedef enum {
 @interface UIViewController (HLSExtensions)
 
 /**
+ * Call to force view controllers to recalculate their orientations and rotate appropriately (without animation)
+ */
++ (void)refreshViewControllerOrientations;
+
+/**
  * Convenience method to set the view controller to nil and forward -viewWill/DidUnload events correctly
  * Not meant to be overridden
  *
