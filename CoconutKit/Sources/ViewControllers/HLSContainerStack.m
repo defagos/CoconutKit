@@ -367,6 +367,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     [self.containerContents insertObject:containerContent atIndex:index];
+    
+    if ([self.containerViewController isViewDisplayed]) {
+        [UIViewController refreshViewControllerOrientations];
+    }
 
     // If no transition occurs (pre-loading before the container view is displayed, or insertion not at the top while
     // displayed), we must call -didMoveToParentViewController: manually right after the containment relationship has
@@ -757,7 +761,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Last element? Add to top
     if (index == [self.containerContents count] - 1) {
         [containerContent addAsSubviewIntoContainerStackView:stackView];
-        [UIViewController refreshViewControllerOrientations];
     }
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
