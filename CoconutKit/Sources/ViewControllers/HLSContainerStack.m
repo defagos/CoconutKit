@@ -368,10 +368,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     [self.containerContents insertObject:containerContent atIndex:index];
     
-    if ([self.containerViewController isViewDisplayed]) {
-        [UIViewController refreshViewControllerOrientations];
-    }
-
     // If no transition occurs (pre-loading before the container view is displayed, or insertion not at the top while
     // displayed), we must call -didMoveToParentViewController: manually right after the containment relationship has
     // been established (iOS 5 and above, see UIViewController documentation)
@@ -388,6 +384,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if ([self.containerContents count] - index - 1 <= self.capacity) {
             [self addViewForContainerContent:containerContent inserting:YES animated:animated];
         }
+        
+        // Force a refresh right after the subview has been added so that transition animations are preserved
+        // TODO: Problem: The initial orientation in the placeholder demo is incorrect
+        [UIViewController refreshViewControllerOrientations];
     }
 }
 
