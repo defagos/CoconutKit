@@ -589,15 +589,13 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         return NO;
     }
     
-    // HLSContainerStack supports insertion of child view controllers with any orientation. Does not have to deal
-    // with orientation itself
     return YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    // See remark in -shouldAutorotate
-    return UIInterfaceOrientationMaskAll;
+    HLSContainerContent *topContainerContent = [self topContainerContent];
+    return topContainerContent ? [topContainerContent supportedInterfaceOrientations] : UIInterfaceOrientationMaskAll;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -1116,11 +1114,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     UIViewController *containerViewController = [HLSContainerContent containerViewControllerKindOfClass:Nil
                                                                                       forViewController:self];
     if (containerViewController) {
-        if ([self autorotatesToInterfaceOrientation:containerViewController.displayedInterfaceOrientation]) {
+        if ([self supportedInterfaceOrientations] & (1 << containerViewController.displayedInterfaceOrientation)) {
             return containerViewController.displayedInterfaceOrientation;
         }
         else {
-            return [self compatibleInterfaceOrientationWithViewController:containerViewController];
+            return [self firstAvailableInterfaceOrientation];
         }
     }
     else {

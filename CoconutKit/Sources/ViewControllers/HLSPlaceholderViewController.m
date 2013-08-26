@@ -208,22 +208,15 @@
         return NO;
     }
     
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        if (! [containerStack shouldAutorotate]) {
-            return NO;
-        }
-    }
-    
-    return YES;
+    HLSContainerStack *firstContainerStack = [self.containerStacks firstObject];
+    return firstContainerStack ? [firstContainerStack shouldAutorotate] : YES;
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    NSUInteger supportedInterfaceOrientations = [super supportedInterfaceOrientations];
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        supportedInterfaceOrientations &= [containerStack supportedInterfaceOrientations];
-    }
-    return supportedInterfaceOrientations;
+    HLSContainerStack *firstContainerStack = [self.containerStacks firstObject];
+    NSUInteger supportedInterfaceOrientations = firstContainerStack ? [firstContainerStack supportedInterfaceOrientations] : UIInterfaceOrientationMaskAll;
+    return [super supportedInterfaceOrientations] & supportedInterfaceOrientations;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
