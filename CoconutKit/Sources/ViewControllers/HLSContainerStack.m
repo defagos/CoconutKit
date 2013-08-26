@@ -757,7 +757,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // Last element? Add to top
     if (index == [self.containerContents count] - 1) {
         [containerContent addAsSubviewIntoContainerStackView:stackView];
-        [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
+        [UIViewController refreshViewControllerOrientations];
     }
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
