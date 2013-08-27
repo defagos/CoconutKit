@@ -385,8 +385,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             [self addViewForContainerContent:containerContent inserting:YES animated:animated];
         }
         
-        // Force a refresh right after the subview has been added so that transition animations are preserved
-        // TODO: Problem: The initial orientation in the placeholder demo is incorrect
+        // Force a refresh AFTER the subview has been added to preserve transition animations
         [UIViewController refreshViewControllerOrientations];
     }
 }
@@ -541,6 +540,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (containerContent) {
             [self addViewForContainerContent:containerContent inserting:NO animated:animated];
         }
+    }
+    
+    if ([self.containerViewController isMovingToParentViewController]) {
+        [UIViewController refreshViewControllerOrientations];
     }
         
     // Forward events (willShow is sent to the delegate before willAppear is sent to the child)
