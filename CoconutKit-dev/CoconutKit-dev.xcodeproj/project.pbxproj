@@ -82,6 +82,8 @@
 		6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAC1509D17B00A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */; };
 		6F6010F015ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */; };
+		6F63E7B817CF6B91006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B717CF6B91006322D9 /* QuickLook.framework */; };
+		6F63E7CA17CF6E56006322D9 /* HLSPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63E7C917CF6E56006322D9 /* HLSPreviewItem.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F66181B16C14B7400303628 /* UIView+HLSRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F66181A16C14B7400303628 /* UIView+HLSRuntimeAttributes.m */; };
 		6F6B0C9916B3DAB5006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9816B3DAB5006B718F /* InnerFolder */; };
 		6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
@@ -402,6 +404,9 @@
 		6F5A0BAD1509D17B00A20DFF /* SlideshowDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowDemoViewController.xib; sourceTree = "<group>"; };
 		6F6010EE15ABEC8C00A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
 		6F6010EF15ABEC8C00A9FEC5 /* HLSContainerStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStack.m; sourceTree = "<group>"; };
+		6F63E7B717CF6B91006322D9 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		6F63E7C817CF6E56006322D9 /* HLSPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPreviewItem.h; sourceTree = "<group>"; };
+		6F63E7C917CF6E56006322D9 /* HLSPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPreviewItem.m; sourceTree = "<group>"; };
 		6F66181916C14B7300303628 /* UIView+HLSRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSRuntimeAttributes.h"; sourceTree = "<group>"; };
 		6F66181A16C14B7400303628 /* UIView+HLSRuntimeAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSRuntimeAttributes.m"; sourceTree = "<group>"; };
 		6F6B0C7E16B3D866006B718F /* InnerBundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InnerBundle.xcodeproj; path = "../CoconutKit-demo/InnerBundle/InnerBundle.xcodeproj"; sourceTree = "<group>"; };
@@ -736,6 +741,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F63E7B817CF6B91006322D9 /* QuickLook.framework in Frameworks */,
 				6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C74F16A93DA80081A9A7 /* CoreText.framework in Frameworks */,
 				6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */,
@@ -783,6 +789,7 @@
 				6FEF8541131F76DA0015B57C /* MessageUI.framework */,
 				6FAB921C16DA709600599256 /* MobileCoreServices.framework */,
 				6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */,
+				6F63E7B717CF6B91006322D9 /* QuickLook.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 			);
 			name = Frameworks;
@@ -1129,6 +1136,8 @@
 				6FADE63F14BA04A6007EE121 /* HLSNotifications.h */,
 				6FADE64014BA04A6007EE121 /* HLSNotifications.m */,
 				6F3E3ECA15A38DAE007E78BD /* HLSOptionalFeatures.h */,
+				6F63E7C817CF6E56006322D9 /* HLSPreviewItem.h */,
+				6F63E7C917CF6E56006322D9 /* HLSPreviewItem.m */,
 				6FA89140179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.h */,
 				6FA89141179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m */,
 				6FADE64314BA04A6007EE121 /* HLSRuntime.h */,
@@ -2161,6 +2170,7 @@
 				6FA89142179D964200AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */,
 				6F10E38C17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */,
 				6F6E814E17CF070700CE578A /* HLSLoggerViewController.m in Sources */,
+				6F63E7CA17CF6E56006322D9 /* HLSPreviewItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
     #import <CoreText/CoreText.h>
     #import <UIKit/UIKit.h>
     #import <QuartzCore/QuartzCore.h>
+    #import <QuickLook/QuickLook.h>
     #import <MessageUI/MessageUI.h>
     #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -46,6 +47,7 @@
     #import "HLSOptionalFeatures.h"
     #import "HLSPlaceholderInsetSegue.h"
     #import "HLSPlaceholderViewController.h"
+    #import "HLSPreviewItem.h"
     #import "HLSRestrictedInterfaceProxy.h"
     #import "HLSRuntime.h"
     #import "HLSSlideshow.h"

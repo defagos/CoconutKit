@@ -30,6 +30,7 @@ HLSObjectAnimation.h
 HLSOptionalFeatures.h
 HLSPlaceholderInsetSegue.h
 HLSPlaceholderViewController.h
+HLSPreviewItem.h
 HLSRestrictedInterfaceProxy.h
 HLSRuntime.h
 HLSSlideshow.h

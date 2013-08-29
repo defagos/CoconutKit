@@ -10,6 +10,7 @@
 
 #import "HLSLogger.h"
 #import "HLSLogger+Friend.h"
+#import "HLSPreviewItem.h"
 #import "HLSTableViewCell.h"
 #import "NSBundle+HLSExtensions.h"
 
@@ -20,6 +21,8 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl *levelSegmentedControl;
 @property (nonatomic, weak) IBOutlet UISwitch *enabledSwitch;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) NSURL *currentLogFileURL;
 
 @end
 
@@ -71,6 +74,18 @@
     [self.tableView reloadData];
 }
 
+#pragma mark QLPreviewControllerDataSource protocol implementation
+
+- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller
+{
+    return 1;
+}
+
+- (id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index
+{
+    return [[HLSPreviewItem alloc] initWithPreviewItemURL:self.currentLogFileURL];
+}
+
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -92,7 +107,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Show document interaction controller. Hopefully can be customized to add a send by email button
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    self.currentLogFileURL = [NSURL fileURLWithPath:[self.logFilePaths objectAtIndex:indexPath.row]];
+    QLPreviewController *previewController = [[QLPreviewController alloc] init];
+    previewController.dataSource = self;
+    [self.navigationController pushViewController:previewController animated:YES];
 }
 
 #pragma mark Action callbacks

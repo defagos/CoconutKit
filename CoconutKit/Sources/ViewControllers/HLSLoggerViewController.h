@@ -8,6 +8,6 @@
 
 #import "HLSViewController.h"
 
-@interface HLSLoggerViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate>
+@interface HLSLoggerViewController : HLSViewController <QLPreviewControllerDataSource, UITableViewDataSource, UITableViewDelegate>
 
 @end
