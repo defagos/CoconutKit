@@ -23,9 +23,6 @@ static const HLSLoggerMode kLoggerModeWarn = {@"WARN", 2, @"255,120,0"};
 static const HLSLoggerMode kLoggerModeError = {@"ERROR", 3, @"255,0,0"};
 static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
-#pragma mark -
-#pragma mark HLSLogger class
-
 @implementation HLSLogger
 
 #pragma mark Class methods
@@ -38,31 +35,7 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 	if (! s_instance) {
         @synchronized(self) {
             if (! s_instance) {
-                // Read the main .plist file content
-                NSDictionary *infoProperties = [[NSBundle mainBundle] infoDictionary];
-                
-                // Create a logger with the corresponding level
-                NSString *levelName = [infoProperties valueForKey:@"HLSLoggerLevel"];
-                HLSLoggerLevel level;
-                if ([levelName isEqualToString:kLoggerModeDebug.name]) {
-                    level = HLSLoggerLevelDebug;
-                }
-                else if ([levelName isEqualToString:kLoggerModeInfo.name]) {
-                    level = HLSLoggerLevelInfo;		
-                }
-                else if ([levelName isEqualToString:kLoggerModeWarn.name]) {
-                    level = HLSLoggerLevelWarn;
-                }
-                else if ([levelName isEqualToString:kLoggerModeError.name]) {
-                    level = HLSLoggerLevelError;
-                }
-                else if ([levelName isEqualToString:kLoggerModeFatal.name]) {
-                    level = HLSLoggerLevelFatal;
-                }
-                else {
-                    level = HLSLoggerLevelNone;
-                }
-                s_instance = [[HLSLogger alloc] initWithLevel:level];                
+                s_instance = [[HLSLogger alloc] init];                
             }
         }
 	}
@@ -71,24 +44,19 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
 #pragma mark Object creation and destruction
 
-- (id)initWithLevel:(HLSLoggerLevel)level
-{
-	if ((self = [super init])) {
-		_level = level;
-	}
-	return self;
-}
-
 - (id)init
 {
-	return [self initWithLevel:HLSLoggerLevelNone];
+	if ((self = [super init])) {
+		self.level = HLSLoggerLevelInfo;
+	}
+	return self;
 }
 
 #pragma mark Logging methods
 
 - (void)logMessage:(NSString *)message forMode:(HLSLoggerMode)mode
 {
-	if (_level > mode.level) {
+	if (self.level > mode.level) {
 		return;
 	}
 
@@ -139,27 +107,27 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
 - (BOOL)isDebug
 {
-	return _level <= HLSLoggerLevelDebug;
+	return self.level <= HLSLoggerLevelDebug;
 }
 
 - (BOOL)isInfo
 {
-	return _level <= HLSLoggerLevelInfo;
+	return self.level <= HLSLoggerLevelInfo;
 }
 
 - (BOOL)isWarn
 {
-	return _level <= HLSLoggerLevelWarn;
+	return self.level <= HLSLoggerLevelWarn;
 }
 
 - (BOOL)isError
 {
-	return _level <= HLSLoggerLevelError;
+	return self.level <= HLSLoggerLevelError;
 }
 
 - (BOOL)isFatal
 {
-	return _level <= HLSLoggerLevelFatal;
+	return self.level <= HLSLoggerLevelFatal;
 }
 
 @end
