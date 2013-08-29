@@ -9,6 +9,7 @@
 #import "HLSLoggerViewController.h"
 
 #import "HLSLogger.h"
+#import "HLSLogger+Friend.h"
 #import "HLSTableViewCell.h"
 #import "NSBundle+HLSExtensions.h"
 
@@ -41,8 +42,9 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = [HLSTableViewCell height];
     
-    // self.enabledSwitch = Applogger.enabled
-    self.levelSegmentedControl.selectedSegmentIndex = [HLSLogger sharedLogger].level;
+    HLSLogger *logger = [HLSLogger sharedLogger];
+    self.enabledSwitch.on = logger.fileLoggingEnabled;
+    self.levelSegmentedControl.selectedSegmentIndex = logger.level;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                           target:self
@@ -64,7 +66,7 @@
 
 - (void)reloadData
 {
-    //self.logFilePaths = [AppLogger logFilePaths];
+    self.logFilePaths = [HLSLogger availableLogFilePaths];
     
     [self.tableView reloadData];
 }
@@ -85,7 +87,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [self.logFilePaths objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[self.logFilePaths objectAtIndex:indexPath.row] lastPathComponent];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

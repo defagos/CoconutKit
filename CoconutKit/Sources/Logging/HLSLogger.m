@@ -9,6 +9,7 @@
 #import "HLSLogger.h"
 
 #import "HLSApplicationInformation.h"
+#import "HLSLogger+Friend.h"
 #import "HLSLoggerViewController.h"
 #import <pthread.h>
 
@@ -47,6 +48,26 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
         }
 	}
 	return s_instance;
+}
+
++ (NSArray *)availableLogFilePaths
+{
+    NSString *logDirectoryPath = [HLSLogger logDirectoryPath];
+    NSArray *logFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:logDirectoryPath error:NULL];
+    
+    // Log files names are sorted in increasing date order
+    NSMutableArray *logFilePaths = [NSMutableArray array];
+    for (NSString *logFileName in [logFileNames reverseObjectEnumerator]) {
+        NSString *logFilePath = [logDirectoryPath stringByAppendingPathComponent:logFileName];
+        [logFilePaths addObject:logFilePath];
+    }
+    
+    return [NSArray arrayWithArray:logFilePaths];
+}
+
++ (NSString *)logDirectoryPath
+{
+    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
 }
 
 #pragma mark Object creation and destruction
@@ -103,7 +124,7 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
             NSFileManager *fileManager = [NSFileManager defaultManager];
             
             // Stores all logs in an HLSLogger directory of Library
-            NSString *logDirectoryPath = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
+            NSString *logDirectoryPath = [HLSLogger logDirectoryPath];
             if (! [fileManager fileExistsAtPath:logDirectoryPath]) {
                 NSError *error = nil;
                 if (! [fileManager createDirectoryAtPath:logDirectoryPath withIntermediateDirectories:YES attributes:nil error:&error]) {
@@ -112,7 +133,7 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
                 }
             }
             
-            // File name: BundleName-version-date.log
+            // File name: BundleName_version_date.log
             static NSDateFormatter *s_dateFormatter = nil;
             if (! s_dateFormatter) {
                 s_dateFormatter = [[NSDateFormatter alloc] init];
@@ -120,9 +141,9 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
             }
             
             NSString *dateString = [s_dateFormatter stringFromDate:[NSDate date]];
-            NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
-            NSString *versionString = [[[NSBundle mainBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
-            NSString *logFileName = [NSString stringWithFormat:@"%@-%@-%@.log", bundleName, versionString, dateString];
+            NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *versionString = [[[NSBundle mainBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *logFileName = [NSString stringWithFormat:@"%@_%@_%@.log", bundleName, versionString, dateString];
             NSString *logFilePath = [logDirectoryPath stringByAppendingPathComponent:logFileName];
             if (! [fileManager fileExistsAtPath:logFilePath]) {
                 if (! [fileManager createFileAtPath:logFilePath contents:nil attributes:nil]) {
