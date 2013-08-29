@@ -60,7 +60,7 @@ typedef enum {
  * adding colors to the Xcode debugging console. Simply install the plugin and set an environment variable called 
  * 'XcodeColors' to YES to enable it for your project.
  *
- * Designated initializer: -init
+ * You should not instantiate an HLSLogger object yourself. Use the singleton class method instead
  */
 @interface HLSLogger : NSObject
 
@@ -91,5 +91,10 @@ typedef enum {
 - (BOOL)isWarn;
 - (BOOL)isError;
 - (BOOL)isFatal;
+
+/**
+ * Display a modal window containing log settings and log file history
+ */
++ (void)showLogs;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "HLSLogger.h"
 
+#import "HLSLoggerViewController.h"
+
 #pragma mark -
 #pragma mark HLSLoggerMode struct
 
@@ -128,6 +130,19 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 - (BOOL)isFatal
 {
 	return self.level <= HLSLoggerLevelFatal;
+}
+
+#pragma mark Log window
+
++ (void)showLogs
+{
+    HLSLoggerViewController *loggerViewController = [[[HLSLoggerViewController alloc] init] autorelease];
+    UINavigationController *loggerNavigationController = [[[UINavigationController alloc] initWithRootViewController:loggerViewController] autorelease];
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (! rootViewController) {
+        return;
+    }
+    [rootViewController presentViewController:loggerNavigationController animated:YES completion:nil];
 }
 
 @end

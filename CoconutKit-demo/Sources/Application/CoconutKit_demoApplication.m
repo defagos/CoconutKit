@@ -104,11 +104,16 @@
             UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
             navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             self.rootViewController = navigationController;
+            
             UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", nil)
                                                                                        style:UIBarButtonItemStyleBordered 
                                                                                       target:self 
                                                                                       action:@selector(toggleLanguageSheet:)] autorelease];
-            demosListViewController.navigationItem.rightBarButtonItem = languageBarButtonItem;
+            UIBarButtonItem *logsButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nik)
+                                                                                style:UIBarButtonItemStyleBordered
+                                                                               target:self
+                                                                               action:@selector(showLogs:)] autorelease];
+            demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem];
         }
     }
     return self;
@@ -123,16 +128,6 @@
 }
 
 #pragma mark Dynamic Localization
-
-- (void)toggleLanguageSheet:(id)sender
-{
-    self.languageActionSheet = [[[HLSActionSheet alloc] init] autorelease];
-    self.languageActionSheet.delegate = self;
-    for (NSString *localization in [[NSBundle mainBundle] localizations]) {
-        [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
-    }
-    [self.languageActionSheet showFromBarButtonItem:sender animated:YES];
-}
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification
 {
@@ -287,6 +282,23 @@
             HLSLoggerError(@"Failed to save pending changes. Reason: %@", [error localizedDescription]);
         }
     }
+}
+
+#pragma mark Actions
+
+- (void)toggleLanguageSheet:(id)sender
+{
+    self.languageActionSheet = [[[HLSActionSheet alloc] init] autorelease];
+    self.languageActionSheet.delegate = self;
+    for (NSString *localization in [[NSBundle mainBundle] localizations]) {
+        [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
+    }
+    [self.languageActionSheet showFromBarButtonItem:sender animated:YES];
+}
+
+- (void)showLogs:(id)sender
+{
+    [HLSLogger showLogs];
 }
 
 @end
