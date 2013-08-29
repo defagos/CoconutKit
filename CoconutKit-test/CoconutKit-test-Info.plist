@@ -33,7 +33,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>HLSLoggerLevel</key>
-	<string>INFO</string>
 </dict>
 </plist>

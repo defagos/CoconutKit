@@ -8,8 +8,10 @@
 
 #import "HLSLogger.h"
 
-#pragma mark -
-#pragma mark HLSLoggerMode struct
+#import "HLSApplicationInformation.h"
+#import "HLSLogger+Friend.h"
+#import "HLSLoggerViewController.h"
+#import <pthread.h>
 
 typedef struct {
 	NSString *name;                 // Mode name
@@ -23,8 +25,14 @@ static const HLSLoggerMode kLoggerModeWarn = {@"WARN", 2, @"255,120,0"};
 static const HLSLoggerMode kLoggerModeError = {@"ERROR", 3, @"255,0,0"};
 static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
-#pragma mark -
-#pragma mark HLSLogger class
+static NSString * const HLSLoggerLevelKey = @"HLSLoggerLevelKey";
+static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingEnabledKey";
+
+@interface HLSLogger ()
+
+@property (nonatomic, retain) NSFileHandle *logFileHandle;
+
+@end
 
 @implementation HLSLogger
 
@@ -38,57 +46,99 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 	if (! s_instance) {
         @synchronized(self) {
             if (! s_instance) {
-                // Read the main .plist file content
-                NSDictionary *infoProperties = [[NSBundle mainBundle] infoDictionary];
-                
-                // Create a logger with the corresponding level
-                NSString *levelName = [infoProperties valueForKey:@"HLSLoggerLevel"];
-                HLSLoggerLevel level;
-                if ([levelName isEqualToString:kLoggerModeDebug.name]) {
-                    level = HLSLoggerLevelDebug;
-                }
-                else if ([levelName isEqualToString:kLoggerModeInfo.name]) {
-                    level = HLSLoggerLevelInfo;		
-                }
-                else if ([levelName isEqualToString:kLoggerModeWarn.name]) {
-                    level = HLSLoggerLevelWarn;
-                }
-                else if ([levelName isEqualToString:kLoggerModeError.name]) {
-                    level = HLSLoggerLevelError;
-                }
-                else if ([levelName isEqualToString:kLoggerModeFatal.name]) {
-                    level = HLSLoggerLevelFatal;
-                }
-                else {
-                    level = HLSLoggerLevelNone;
-                }
-                s_instance = [[HLSLogger alloc] initWithLevel:level];                
+                s_instance = [[HLSLogger alloc] init];                
             }
         }
 	}
 	return s_instance;
 }
 
++ (NSArray *)availableLogFilePaths
+{
+    NSString *logDirectoryPath = [HLSLogger logDirectoryPath];
+    NSArray *logFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:logDirectoryPath error:NULL];
+    
+    // Log files names are sorted in increasing date order
+    NSMutableArray *logFilePaths = [NSMutableArray array];
+    for (NSString *logFileName in [logFileNames reverseObjectEnumerator]) {
+        NSString *logFilePath = [logDirectoryPath stringByAppendingPathComponent:logFileName];
+        [logFilePaths addObject:logFilePath];
+    }
+    
+    return [NSArray arrayWithArray:logFilePaths];
+}
+
++ (NSString *)logDirectoryPath
+{
+    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
+}
+
 #pragma mark Object creation and destruction
 
-- (id)initWithLevel:(HLSLoggerLevel)level
+- (id)init
 {
 	if ((self = [super init])) {
-		_level = level;
+        NSNumber *level = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerLevelKey];
+        _level = level ? [level integerValue] : HLSLoggerLevelInfo;
+        
+        NSNumber *fileLoggingEnabled = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerFileLoggingEnabledKey];
+        _fileLoggingEnabled = fileLoggingEnabled ? [fileLoggingEnabled integerValue] : NO;
 	}
 	return self;
 }
 
-- (id)init
+- (void)dealloc
 {
-	return [self initWithLevel:HLSLoggerLevelNone];
+    self.logFileHandle = nil;
+
+    [super dealloc];
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize level = _level;
+
+- (HLSLoggerLevel)level
+{
+    @synchronized(self) {
+        return _level;
+    }
+}
+
+- (void)setLevel:(HLSLoggerLevel)level
+{
+    @synchronized(self) {
+        _level = level;
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:level forKey:HLSLoggerLevelKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+@synthesize fileLoggingEnabled = _fileLoggingEnabled;
+
+- (BOOL)isFileLoggingEnabled
+{
+    @synchronized(self) {
+        return _fileLoggingEnabled;
+    }
+}
+
+- (void)setFileLoggingEnabled:(BOOL)fileLoggingEnabled
+{
+    @synchronized(self) {
+        _fileLoggingEnabled = fileLoggingEnabled;
+        
+        [[NSUserDefaults standardUserDefaults] setBool:fileLoggingEnabled forKey:HLSLoggerFileLoggingEnabledKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 #pragma mark Logging methods
 
 - (void)logMessage:(NSString *)message forMode:(HLSLoggerMode)mode
 {
-	if (_level > mode.level) {
+	if (self.level > mode.level) {
 		return;
 	}
 
@@ -100,14 +150,72 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
         s_configurationLoaded = YES;
     }
     
-    // NSLog is thread-safe
-    NSString *fullLogEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
+    // NSLog is thread-safe and adds date, thread and process information in front of each line
+    NSString *logEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
     if (s_xcodeColorsEnabled && mode.rgbValues) {
-        NSLog(@"\033[fg%@;%@\033[;", mode.rgbValues, fullLogEntry);
+        NSLog(@"\033[fg%@;%@\033[;", mode.rgbValues, logEntry);
     }
     else {
-        NSLog(@"%@", fullLogEntry);
+        NSLog(@"%@", logEntry);
     }
+    
+    if (self.fileLoggingEnabled) {
+        [self logToFileWithEntry:logEntry];
+    }
+}
+
+- (void)logToFileWithEntry:(NSString *)logEntry
+{
+    @synchronized(self) {
+        if (! self.logFileHandle) {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
+            // Stores all logs in an HLSLogger directory of Library
+            NSString *logDirectoryPath = [HLSLogger logDirectoryPath];
+            if (! [fileManager fileExistsAtPath:logDirectoryPath]) {
+                NSError *error = nil;
+                if (! [fileManager createDirectoryAtPath:logDirectoryPath withIntermediateDirectories:YES attributes:nil error:&error]) {
+                    NSLog(@"Could not create log directory. Reason: %@", error);
+                    return;
+                }
+            }
+            
+            // File name: BundleName_version_date.log
+            static NSDateFormatter *s_dateFormatter = nil;
+            if (! s_dateFormatter) {
+                s_dateFormatter = [[NSDateFormatter alloc] init];
+                [s_dateFormatter setDateFormat:@"yyyyMMdd_HHmmss"];
+            }
+            
+            NSString *dateString = [s_dateFormatter stringFromDate:[NSDate date]];
+            NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *versionString = [[[NSBundle mainBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *logFileName = [NSString stringWithFormat:@"%@_%@_%@.txt", bundleName, versionString, dateString];
+            NSString *logFilePath = [logDirectoryPath stringByAppendingPathComponent:logFileName];
+            if (! [fileManager fileExistsAtPath:logFilePath]) {
+                if (! [fileManager createFileAtPath:logFilePath contents:nil attributes:nil]) {
+                    NSLog(@"Could not create log file");
+                    return;
+                }
+            }
+            
+            self.logFileHandle = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
+        }
+    }
+    
+    // Add date, thread and process information, as NSLog does
+    static NSDateFormatter *s_dateFormatter = nil;
+    if (! s_dateFormatter) {
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        [s_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    }
+    
+    mach_port_t threadId = pthread_mach_thread_np(pthread_self());
+    NSString *logFileEntry = [NSString stringWithFormat:@"%@ [%x] %@\n",
+                                [s_dateFormatter stringFromDate:[NSDate date]],
+                                threadId,
+                                logEntry];
+    [self.logFileHandle writeData:[logFileEntry dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)debug:(NSString *)message
@@ -139,27 +247,40 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
 - (BOOL)isDebug
 {
-	return _level <= HLSLoggerLevelDebug;
+	return self.level <= HLSLoggerLevelDebug;
 }
 
 - (BOOL)isInfo
 {
-	return _level <= HLSLoggerLevelInfo;
+	return self.level <= HLSLoggerLevelInfo;
 }
 
 - (BOOL)isWarn
 {
-	return _level <= HLSLoggerLevelWarn;
+	return self.level <= HLSLoggerLevelWarn;
 }
 
 - (BOOL)isError
 {
-	return _level <= HLSLoggerLevelError;
+	return self.level <= HLSLoggerLevelError;
 }
 
 - (BOOL)isFatal
 {
-	return _level <= HLSLoggerLevelFatal;
+	return self.level <= HLSLoggerLevelFatal;
+}
+
+#pragma mark Log window
+
++ (void)showLogs
+{
+    HLSLoggerViewController *loggerViewController = [[[HLSLoggerViewController alloc] init] autorelease];
+    UINavigationController *loggerNavigationController = [[[UINavigationController alloc] initWithRootViewController:loggerViewController] autorelease];
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if (! rootViewController) {
+        return;
+    }
+    [rootViewController presentViewController:loggerNavigationController animated:YES completion:nil];
 }
 
 @end

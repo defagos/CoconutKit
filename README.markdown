@@ -71,6 +71,7 @@ You can grab the latest tagged binary package available from [the project downlo
 * `MessageUI.framework`
 * `MobileCoreServices.framework`
 * `QuartzCore.framework`
+* `QuickLook.framework`
 * `UIKit.framework`
 
 If your project targets iOS 4 as well as iOS 5 and above, you might encounter _symbol not found_ issues at runtime. When this happens:
