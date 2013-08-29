@@ -72,12 +72,12 @@ typedef enum {
 /**
  * The logger level. The default value is HLSLoggerLevelInfo
  */
-@property (atomic, assign) HLSLoggerLevel level;
+@property (nonatomic, assign) HLSLoggerLevel level;
 
 /**
  * Enable or disable logging at runtime. The default value is NO
  */
-@property (atomic, assign, getter=isFileLoggingEnabled) BOOL fileLoggingEnabled;
+@property (nonatomic, assign, getter=isFileLoggingEnabled) BOOL fileLoggingEnabled;
 
 /**
  * Logging functions; should never be called directly, use the macros instead

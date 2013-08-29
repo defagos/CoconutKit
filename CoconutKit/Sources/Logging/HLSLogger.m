@@ -25,6 +25,9 @@ static const HLSLoggerMode kLoggerModeWarn = {@"WARN", 2, @"255,120,0"};
 static const HLSLoggerMode kLoggerModeError = {@"ERROR", 3, @"255,0,0"};
 static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 
+static NSString * const HLSLoggerLevelKey = @"HLSLoggerLevelKey";
+static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingEnabledKey";
+
 @interface HLSLogger ()
 
 @property (nonatomic, retain) NSFileHandle *logFileHandle;
@@ -75,7 +78,11 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 - (id)init
 {
 	if ((self = [super init])) {
-		self.level = HLSLoggerLevelInfo;
+        NSNumber *level = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerLevelKey];
+        _level = level ? [level integerValue] : HLSLoggerLevelInfo;
+        
+        NSNumber *fileLoggingEnabled = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerFileLoggingEnabledKey];
+        _fileLoggingEnabled = fileLoggingEnabled ? [fileLoggingEnabled integerValue] : NO;
 	}
 	return self;
 }
@@ -85,6 +92,46 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
     self.logFileHandle = nil;
 
     [super dealloc];
+}
+
+#pragma mark Accessors and mutators
+
+@synthesize level = _level;
+
+- (HLSLoggerLevel)level
+{
+    @synchronized(self) {
+        return _level;
+    }
+}
+
+- (void)setLevel:(HLSLoggerLevel)level
+{
+    @synchronized(self) {
+        _level = level;
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:level forKey:HLSLoggerLevelKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+@synthesize fileLoggingEnabled = _fileLoggingEnabled;
+
+- (BOOL)isFileLoggingEnabled
+{
+    @synchronized(self) {
+        return _fileLoggingEnabled;
+    }
+}
+
+- (void)setFileLoggingEnabled:(BOOL)fileLoggingEnabled
+{
+    @synchronized(self) {
+        _fileLoggingEnabled = fileLoggingEnabled;
+        
+        [[NSUserDefaults standardUserDefaults] setBool:fileLoggingEnabled forKey:HLSLoggerFileLoggingEnabledKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 #pragma mark Logging methods

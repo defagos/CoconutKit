@@ -17,8 +17,8 @@
 
 @property (nonatomic, strong) NSArray *logFilePaths;
 
-@property (nonatomic, weak) IBOutlet UISwitch *enabledSwitch;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *levelSegmentedControl;
+@property (nonatomic, weak) IBOutlet UISwitch *enabledSwitch;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
