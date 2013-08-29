@@ -97,7 +97,7 @@
 
 - (IBAction)toggleEnabled:(id)sender
 {
-    
+    [HLSLogger sharedLogger].fileLoggingEnabled = ! [HLSLogger sharedLogger].fileLoggingEnabled;
 }
 
 - (IBAction)selectLevel:(id)sender

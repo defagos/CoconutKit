@@ -8,10 +8,9 @@
 
 #import "HLSLogger.h"
 
+#import "HLSApplicationInformation.h"
 #import "HLSLoggerViewController.h"
-
-#pragma mark -
-#pragma mark HLSLoggerMode struct
+#import <pthread.h>
 
 typedef struct {
 	NSString *name;                 // Mode name
@@ -24,6 +23,12 @@ static const HLSLoggerMode kLoggerModeInfo = {@"INFO", 1, nil};
 static const HLSLoggerMode kLoggerModeWarn = {@"WARN", 2, @"255,120,0"};
 static const HLSLoggerMode kLoggerModeError = {@"ERROR", 3, @"255,0,0"};
 static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
+
+@interface HLSLogger ()
+
+@property (nonatomic, retain) NSFileHandle *logFileHandle;
+
+@end
 
 @implementation HLSLogger
 
@@ -54,6 +59,13 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
 	return self;
 }
 
+- (void)dealloc
+{
+    self.logFileHandle = nil;
+
+    [super dealloc];
+}
+
 #pragma mark Logging methods
 
 - (void)logMessage:(NSString *)message forMode:(HLSLoggerMode)mode
@@ -70,14 +82,72 @@ static const HLSLoggerMode kLoggerModeFatal = {@"FATAL", 4, @"255,0,0"};
         s_configurationLoaded = YES;
     }
     
-    // NSLog is thread-safe
-    NSString *fullLogEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
+    // NSLog is thread-safe and adds date, thread and process information in front of each line
+    NSString *logEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
     if (s_xcodeColorsEnabled && mode.rgbValues) {
-        NSLog(@"\033[fg%@;%@\033[;", mode.rgbValues, fullLogEntry);
+        NSLog(@"\033[fg%@;%@\033[;", mode.rgbValues, logEntry);
     }
     else {
-        NSLog(@"%@", fullLogEntry);
+        NSLog(@"%@", logEntry);
     }
+    
+    if (self.fileLoggingEnabled) {
+        [self logToFileWithEntry:logEntry];
+    }
+}
+
+- (void)logToFileWithEntry:(NSString *)logEntry
+{
+    @synchronized(self) {
+        if (! self.logFileHandle) {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
+            // Stores all logs in an HLSLogger directory of Library
+            NSString *logDirectoryPath = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
+            if (! [fileManager fileExistsAtPath:logDirectoryPath]) {
+                NSError *error = nil;
+                if (! [fileManager createDirectoryAtPath:logDirectoryPath withIntermediateDirectories:YES attributes:nil error:&error]) {
+                    NSLog(@"Could not create log directory. Reason: %@", error);
+                    return;
+                }
+            }
+            
+            // File name: BundleName-version-date.log
+            static NSDateFormatter *s_dateFormatter = nil;
+            if (! s_dateFormatter) {
+                s_dateFormatter = [[NSDateFormatter alloc] init];
+                [s_dateFormatter setDateFormat:@"yyyyMMdd_HHmmss"];
+            }
+            
+            NSString *dateString = [s_dateFormatter stringFromDate:[NSDate date]];
+            NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
+            NSString *versionString = [[[NSBundle mainBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"_"];
+            NSString *logFileName = [NSString stringWithFormat:@"%@-%@-%@.log", bundleName, versionString, dateString];
+            NSString *logFilePath = [logDirectoryPath stringByAppendingPathComponent:logFileName];
+            if (! [fileManager fileExistsAtPath:logFilePath]) {
+                if (! [fileManager createFileAtPath:logFilePath contents:nil attributes:nil]) {
+                    NSLog(@"Could not create log file");
+                    return;
+                }
+            }
+            
+            self.logFileHandle = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
+        }
+    }
+    
+    // Add date, thread and process information, as NSLog does
+    static NSDateFormatter *s_dateFormatter = nil;
+    if (! s_dateFormatter) {
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        [s_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    }
+    
+    mach_port_t threadId = pthread_mach_thread_np(pthread_self());
+    NSString *logFileEntry = [NSString stringWithFormat:@"%@ [%x] %@\n",
+                                [s_dateFormatter stringFromDate:[NSDate date]],
+                                threadId,
+                                logEntry];
+    [self.logFileHandle writeData:[logFileEntry dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)debug:(NSString *)message
