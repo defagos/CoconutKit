@@ -112,7 +112,7 @@
             UIBarButtonItem *logsButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nik)
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self
-                                                                               action:@selector(showLogs:)] autorelease];
+                                                                               action:@selector(showSettings:)] autorelease];
             demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem];
         }
     }
@@ -296,9 +296,9 @@
     [self.languageActionSheet showFromBarButtonItem:sender animated:YES];
 }
 
-- (void)showLogs:(id)sender
+- (void)showSettings:(id)sender
 {
-    [HLSLogger showLogs];
+    [[HLSLogger sharedLogger] showSettings];
 }
 
 @end

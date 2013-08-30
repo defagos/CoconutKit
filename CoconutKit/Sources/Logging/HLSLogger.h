@@ -48,11 +48,11 @@ typedef enum {
 } HLSLoggerLevel;
 
 /**
- * Basic logging facility writing to the console. Thread-safe
+ * Basic logging facility writing to the console or to files, and providing an in-app log viewer. Thread-safe
  *
  * To enable logging, you can use either the release or debug version of this library, the logging code exists in both
  * (the linker ensures that you do not pay for it if your do not actually use it). To add logging to your project,
- * use the logging macros above. Those will strip off the logging code for your release builds, this is why you must
+ * use the logging macros above. Those will remove the logging code for your release builds, this is why you must
  * add -DHLS_LOGGER to the "Other C flags" parameter for the target / configuration for which logging must be available.
  * The default logging level is info.
  *
@@ -75,7 +75,8 @@ typedef enum {
 @property (nonatomic, assign) HLSLoggerLevel level;
 
 /**
- * Enable or disable logging at runtime. The default value is NO
+ * Enable or disable logging to a file at runtime. The sharedLogger instance logs files in /Library/HLSLogger. The default 
+ * value is NO
  */
 @property (nonatomic, assign, getter=isFileLoggingEnabled) BOOL fileLoggingEnabled;
 
@@ -100,6 +101,6 @@ typedef enum {
 /**
  * Display a modal window containing log settings and log file history
  */
-+ (void)showLogs;
+- (void)showSettings;
 
 @end

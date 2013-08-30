@@ -9,8 +9,10 @@
 #import "HLSLogger.h"
 
 #import "HLSApplicationInformation.h"
+#import "HLSAssert.h"
 #import "HLSLogger+Friend.h"
 #import "HLSLoggerViewController.h"
+#import "NSString+HLSExtensions.h"
 #import <pthread.h>
 
 typedef struct {
@@ -30,6 +32,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 @interface HLSLogger ()
 
+@property (nonatomic, retain) NSString *logDirectoryPath;
 @property (nonatomic, retain) NSFileHandle *logFileHandle;
 
 @end
@@ -46,38 +49,26 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 	if (! s_instance) {
         @synchronized(self) {
             if (! s_instance) {
-                s_instance = [[HLSLogger alloc] init];                
+                NSString *logDirectoryPath = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
+                s_instance = [[HLSLogger alloc] initWithLogDirectoryPath:logDirectoryPath];
             }
         }
 	}
 	return s_instance;
 }
 
-+ (NSArray *)availableLogFilePaths
-{
-    NSString *logDirectoryPath = [HLSLogger logDirectoryPath];
-    NSArray *logFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:logDirectoryPath error:NULL];
-    
-    // Log files names are sorted in increasing date order
-    NSMutableArray *logFilePaths = [NSMutableArray array];
-    for (NSString *logFileName in [logFileNames reverseObjectEnumerator]) {
-        NSString *logFilePath = [logDirectoryPath stringByAppendingPathComponent:logFileName];
-        [logFilePaths addObject:logFilePath];
-    }
-    
-    return [NSArray arrayWithArray:logFilePaths];
-}
-
-+ (NSString *)logDirectoryPath
-{
-    return [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
-}
-
 #pragma mark Object creation and destruction
 
-- (id)init
+- (id)initWithLogDirectoryPath:(NSString *)logDirectoryPath
 {
 	if ((self = [super init])) {
+        if (! [logDirectoryPath isFilled]) {
+            NSLog(@"A log directory is mandatory");
+            return nil;
+        }
+        
+        self.logDirectoryPath = logDirectoryPath;
+        
         NSNumber *level = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerLevelKey];
         _level = level ? [level integerValue] : HLSLoggerLevelInfo;
         
@@ -87,8 +78,15 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 	return self;
 }
 
+- (id)init
+{
+    HLSForbiddenInheritedMethod();
+    return nil;
+}
+
 - (void)dealloc
 {
+    self.logDirectoryPath = nil;
     self.logFileHandle = nil;
 
     [super dealloc];
@@ -171,10 +169,9 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             NSFileManager *fileManager = [NSFileManager defaultManager];
             
             // Stores all logs in an HLSLogger directory of Library
-            NSString *logDirectoryPath = [HLSLogger logDirectoryPath];
-            if (! [fileManager fileExistsAtPath:logDirectoryPath]) {
+            if (! [fileManager fileExistsAtPath:self.logDirectoryPath]) {
                 NSError *error = nil;
-                if (! [fileManager createDirectoryAtPath:logDirectoryPath withIntermediateDirectories:YES attributes:nil error:&error]) {
+                if (! [fileManager createDirectoryAtPath:self.logDirectoryPath withIntermediateDirectories:YES attributes:nil error:&error]) {
                     NSLog(@"Could not create log directory. Reason: %@", error);
                     return;
                 }
@@ -191,7 +188,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
             NSString *versionString = [[[NSBundle mainBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
             NSString *logFileName = [NSString stringWithFormat:@"%@_%@_%@.txt", bundleName, versionString, dateString];
-            NSString *logFilePath = [logDirectoryPath stringByAppendingPathComponent:logFileName];
+            NSString *logFilePath = [self.logDirectoryPath stringByAppendingPathComponent:logFileName];
             if (! [fileManager fileExistsAtPath:logFilePath]) {
                 if (! [fileManager createFileAtPath:logFilePath contents:nil attributes:nil]) {
                     NSLog(@"Could not create log file");
@@ -201,21 +198,21 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             
             self.logFileHandle = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
         }
-    }
     
-    // Add date, thread and process information, as NSLog does
-    static NSDateFormatter *s_dateFormatter = nil;
-    if (! s_dateFormatter) {
-        s_dateFormatter = [[NSDateFormatter alloc] init];
-        [s_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+        // Add date, thread and process information, as NSLog does
+        static NSDateFormatter *s_dateFormatter = nil;
+        if (! s_dateFormatter) {
+            s_dateFormatter = [[NSDateFormatter alloc] init];
+            [s_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+        }
+        
+        mach_port_t threadId = pthread_mach_thread_np(pthread_self());
+        NSString *logFileEntry = [NSString stringWithFormat:@"%@ [%x] %@\n",
+                                  [s_dateFormatter stringFromDate:[NSDate date]],
+                                  threadId,
+                                  logEntry];
+        [self.logFileHandle writeData:[logFileEntry dataUsingEncoding:NSUTF8StringEncoding]];
     }
-    
-    mach_port_t threadId = pthread_mach_thread_np(pthread_self());
-    NSString *logFileEntry = [NSString stringWithFormat:@"%@ [%x] %@\n",
-                                [s_dateFormatter stringFromDate:[NSDate date]],
-                                threadId,
-                                logEntry];
-    [self.logFileHandle writeData:[logFileEntry dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)debug:(NSString *)message
@@ -270,11 +267,44 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 	return self.level <= HLSLoggerLevelFatal;
 }
 
+#pragma mark Files
+
+- (NSArray *)availableLogFilePaths
+{
+    @synchronized(self) {
+        NSArray *logFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.logDirectoryPath error:NULL];
+        
+        // Log files names are sorted in increasing date order
+        NSMutableArray *logFilePaths = [NSMutableArray array];
+        for (NSString *logFileName in [logFileNames reverseObjectEnumerator]) {
+            NSString *logFilePath = [self.logDirectoryPath stringByAppendingPathComponent:logFileName];
+            [logFilePaths addObject:logFilePath];
+        }
+        
+        return [NSArray arrayWithArray:logFilePaths];
+    }
+}
+
+- (void)clearLogs
+{
+    @synchronized(self) {
+        self.logFileHandle = nil;
+        
+        NSArray *availableLogPaths = [self availableLogFilePaths];
+        for (NSString *availableLogPath in availableLogPaths) {
+            NSError *error = nil;
+            if (! [[NSFileManager defaultManager] removeItemAtPath:availableLogPath error:&error]) {
+                NSLog(@"Could not cleanup log file %@. Reason: %@", availableLogPath, error);
+            }
+        }
+    }
+}
+
 #pragma mark Log window
 
-+ (void)showLogs
+- (void)showSettings
 {
-    HLSLoggerViewController *loggerViewController = [[[HLSLoggerViewController alloc] init] autorelease];
+    HLSLoggerViewController *loggerViewController = [[[HLSLoggerViewController alloc] initWithLogger:self] autorelease];
     UINavigationController *loggerNavigationController = [[[UINavigationController alloc] initWithRootViewController:loggerViewController] autorelease];
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (! rootViewController) {

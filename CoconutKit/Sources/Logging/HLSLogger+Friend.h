@@ -15,6 +15,11 @@
 /**
  * Return the paths of all available log files, from the most recent to the oldest one
  */
-+ (NSArray *)availableLogFilePaths;
+- (NSArray *)availableLogFilePaths;
+
+/**
+ * Remove all log files
+ */
+- (void)clearLogs;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "HLSLoggerViewController.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSLogger+Friend.h"
 #import "HLSPreviewItem.h"
@@ -15,6 +16,8 @@
 #import "NSBundle+HLSExtensions.h"
 
 @interface HLSLoggerViewController ()
+
+@property (nonatomic, strong) HLSLogger *logger;
 
 @property (nonatomic, strong) NSArray *logFilePaths;
 
@@ -30,9 +33,23 @@
 
 #pragma mark Object creation and destruction
 
+- (id)initWithLogger:(HLSLogger *)logger
+{
+    if ([super initWithBundle:[NSBundle coconutKitBundle]]) {
+        if (! logger) {
+            HLSLoggerError(@"A logger is mandatory");
+            return nil;
+        }
+        
+        self.logger = logger;
+    }
+    return self;
+}
+
 - (id)init
 {
-    return [super initWithBundle:[NSBundle coconutKitBundle]];
+    HLSForbiddenInheritedMethod();
+    return nil;
 }
 
 #pragma mark View lifecycle
@@ -45,9 +62,8 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = [HLSTableViewCell height];
     
-    HLSLogger *logger = [HLSLogger sharedLogger];
-    self.enabledSwitch.on = logger.fileLoggingEnabled;
-    self.levelSegmentedControl.selectedSegmentIndex = logger.level;
+    self.enabledSwitch.on = self.logger.fileLoggingEnabled;
+    self.levelSegmentedControl.selectedSegmentIndex = self.logger.level;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                           target:self
@@ -69,7 +85,7 @@
 
 - (void)reloadData
 {
-    self.logFilePaths = [HLSLogger availableLogFilePaths];
+    self.logFilePaths = [self.logger availableLogFilePaths];
     
     [self.tableView reloadData];
 }
@@ -119,12 +135,18 @@
 
 - (IBAction)toggleEnabled:(id)sender
 {
-    [HLSLogger sharedLogger].fileLoggingEnabled = ! [HLSLogger sharedLogger].fileLoggingEnabled;
+    self.logger.fileLoggingEnabled = ! self.logger.fileLoggingEnabled;
 }
 
 - (IBAction)selectLevel:(id)sender
 {
-    [HLSLogger sharedLogger].level = [self.levelSegmentedControl selectedSegmentIndex];
+    self.logger.level = [self.levelSegmentedControl selectedSegmentIndex];
+}
+
+- (IBAction)clearLogs:(id)sender
+{
+    [self.logger clearLogs];
+    [self reloadData];
 }
 
 - (IBAction)close:(id)sender
