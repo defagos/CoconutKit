@@ -36,10 +36,12 @@
     [super setUpClass];
     
     // Destroy any existing previous store
-    NSString *storeFilePath = [HLSModelManager storeFilePathForModelFileName:@"CoconutKitTestData" storeDirectory:HLSApplicationLibraryDirectoryPath()];
+    NSString *storeFilePath = [HLSModelManager storeFilePathForModelFileName:@"CoconutKitTestData"
+                                                              storeDirectory:HLSApplicationLibraryDirectoryPath()
+                                                                 fileManager:nil];
     if (storeFilePath) {
         NSError *error = nil;
-        if (! [[HLSFileManager defaultManager] removeItemAtPath:storeFilePath error:&error]) {
+        if (! [[HLSStandardFileManager defaultManager] removeItemAtPath:storeFilePath error:&error]) {
             HLSLoggerWarn(@"Could not remove store at path %@", storeFilePath);
         }
     }
@@ -49,6 +51,7 @@
                                                                            inBundle:nil
                                                                       configuration:nil
                                                                      storeDirectory:HLSApplicationLibraryDirectoryPath()
+                                                                        fileManager:nil
                                                                             options:HLSModelManagerLightweightMigrationOptions];
     [HLSModelManager pushModelManager:modelManager];
     

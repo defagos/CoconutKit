@@ -11,6 +11,7 @@
 #import "HLSError.h"
 #import "HLSFileManager.h"
 #import "HLSLogger.h"
+#import "HLSStandardFileManager.h"
 #import "NSArray+HLSExtensions.h"
 
 @interface HLSModelManager ()
@@ -29,13 +30,15 @@
                                            inBundle:(NSBundle *)bundle
                                       configuration:(NSString *)configuration
                                      storeDirectory:(NSString *)storeDirectory
+                                        fileManager:(HLSFileManager *)fileManager
                                             options:(NSDictionary *)options
 {
     return [[[[self class] alloc] initWithModelFileName:modelFileName
                                                inBundle:bundle
                                               storeType:NSSQLiteStoreType
                                           configuration:configuration
-                                         storeDirectory:storeDirectory 
+                                         storeDirectory:storeDirectory
+                                            fileManager:fileManager
                                                 options:options] autorelease];
 }
 
@@ -48,28 +51,31 @@
                                                inBundle:bundle
                                               storeType:NSInMemoryStoreType 
                                           configuration:configuration 
-                                         storeDirectory:nil 
+                                         storeDirectory:nil
+                                            fileManager:nil
                                                 options:options] autorelease];
 }
 
 + (HLSModelManager *)binaryModelManagerWithModelFileName:(NSString *)modelFileName
                                                 inBundle:(NSBundle *)bundle
-                                           configuration:(NSString *)configuration 
+                                           configuration:(NSString *)configuration
                                           storeDirectory:(NSString *)storeDirectory
+                                             fileManager:(HLSFileManager *)fileManager
                                                  options:(NSDictionary *)options
 {
     return [[[[self class] alloc] initWithModelFileName:modelFileName
                                                inBundle:(NSBundle *)bundle
                                               storeType:NSBinaryStoreType
                                           configuration:configuration 
-                                         storeDirectory:storeDirectory 
+                                         storeDirectory:storeDirectory
+                                            fileManager:fileManager
                                                 options:options] autorelease];
 }
 
-+ (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory
++ (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName
+                             storeDirectory:(NSString *)storeDirectory
+                                fileManager:(HLSFileManager *)fileManager
 {
-    HLSFileManager *fileManager = [HLSFileManager defaultManager];
-    
     // Look for a SQLite file
     NSString *sqliteFilePath = [self standardStoreFilePathForModelFileName:modelFileName
                                                                  storeType:NSSQLiteStoreType
@@ -224,9 +230,14 @@
                   storeType:(NSString *)storeType 
               configuration:(NSString *)configuration 
              storeDirectory:(NSString *)storeDirectory
+                fileManager:(HLSFileManager *)fileManager
                     options:(NSDictionary *)options
 {
     if ((self = [super init])) {
+        if (! fileManager) {
+            fileManager = [HLSStandardFileManager defaultManager];
+        }
+        
         self.managedObjectModel = [self managedObjectModelFromModelFileName:modelFileName inBundle:bundle];
         if (! self.managedObjectModel) {
             [self release];
@@ -240,11 +251,12 @@
                                                                                       storeDirectory:storeDirectory];
             standardStoreURL = [NSURL fileURLWithPath:standardStoreFilePath];            
         }
-        self.persistentStoreCoordinator = [self persistentStoreCoordinatorForManagedObjectModel:self.managedObjectModel 
+        self.persistentStoreCoordinator = [self persistentStoreCoordinatorForManagedObjectModel:self.managedObjectModel
                                                                                       storeType:storeType 
                                                                                   configuration:configuration
                                                                                             URL:standardStoreURL
-                                                                                        options:options];
+                                                                                        options:options
+                                                                                    fileManager:fileManager];
         if (! self.persistentStoreCoordinator) {
             [self release];
             return nil;
@@ -291,7 +303,12 @@
                                                                     configuration:(NSString *)configuration 
                                                                               URL:(NSURL *)storeURL 
                                                                           options:(NSDictionary *)options
+                                                                      fileManager:(HLSFileManager *)fileManager
 {
+    if (! fileManager) {
+        fileManager = [HLSStandardFileManager defaultManager];
+    }
+    
     NSPersistentStoreCoordinator *persistentStoreCoordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel] autorelease];
     
 	NSError *error = nil;
@@ -312,7 +329,6 @@
         NSString *oldFilePath = [[fileURLString stringByDeletingLastPathComponent] stringByAppendingPathComponent:oldFileName];
         
         NSError *deletionError = nil;
-        HLSFileManager *fileManager = [HLSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:oldFilePath]
                 && [fileManager removeItemAtPath:oldFilePath error:&deletionError]) {
             HLSLoggerInfo(@"The old store at %@ has been removed after successful migration", oldFilePath);

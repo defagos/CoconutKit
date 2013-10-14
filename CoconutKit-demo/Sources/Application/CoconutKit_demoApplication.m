@@ -38,6 +38,7 @@
                                                                                inBundle:nil
                                                                           configuration:nil 
                                                                          storeDirectory:HLSApplicationDocumentDirectoryPath()
+                                                                            fileManager:nil
                                                                                 options:HLSModelManagerLightweightMigrationOptions];
         [HLSModelManager pushModelManager:modelManager];
         

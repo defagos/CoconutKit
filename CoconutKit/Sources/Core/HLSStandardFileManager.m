@@ -8,13 +8,19 @@
 
 #import "HLSStandardFileManager.h"
 
-__attribute__ ((constructor)) static void HLSStandardFileManagerInstall(void)
-{
-    HLSStandardFileManager *fileManager = [[[HLSStandardFileManager alloc] init] autorelease];
-    [HLSFileManager setDefaultManager:fileManager];
-}
-
 @implementation HLSStandardFileManager
+
+#pragma mark Class methods
+
++ (HLSStandardFileManager *)defaultManager
+{
+    static HLSStandardFileManager *s_sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_sharedInstance = [[HLSStandardFileManager alloc] init];
+    });
+    return s_sharedInstance;
+}
 
 #pragma mark DMSFileManagerAbstract protocol implementation
 

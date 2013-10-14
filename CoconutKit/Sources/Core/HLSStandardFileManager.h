@@ -9,8 +9,13 @@
 #import "HLSFileManager.h"
 
 /**
- * A standard NSFileManager-based file manager
+ * A standard NSFileManager-based file manager, built upon +[NSFileManager defaultManager]
  */
 @interface HLSStandardFileManager : HLSFileManager
+
+/**
+ * Return the default instance
+ */
++ (HLSStandardFileManager *)defaultManager;
 
 @end

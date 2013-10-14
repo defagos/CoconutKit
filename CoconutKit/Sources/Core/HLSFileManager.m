@@ -11,27 +11,7 @@
 // TODO: When available in CoconutKit (feature/url-connection branch), check protocol conformance (all methods from the
 //       abstract protocol must be implemented, though they have been made optional to avoid compilation warnings)
 
-static HLSFileManager *s_defaultManager = nil;
-
 @implementation HLSFileManager
-
-#pragma mark Class methods
-
-+ (HLSFileManager *)setDefaultManager:(HLSFileManager *)defaultManager
-{
-    @synchronized(self) {
-        HLSFileManager *previousManager = [s_defaultManager autorelease];
-        s_defaultManager = [defaultManager retain];
-        return previousManager;
-    }
-}
-
-+ (HLSFileManager *)defaultManager
-{
-    @synchronized(self) {
-        return s_defaultManager;
-    }
-}
 
 #pragma mark Convenience methods
 

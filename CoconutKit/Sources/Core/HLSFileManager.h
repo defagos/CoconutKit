@@ -80,30 +80,12 @@
  * Abstract class for file operations. Subclass and implement methods from the HLSFileManagerAbstract protocol to create
  * your own concrete file management classes. Subclasses should be implemented in a thread-safe manner.
  *
- * For convenience, a default file manager is provided. By default it is simply an instance of HLSStandardFileManager,
- * which corresponds to the usual behavior you can expect from NSFileManager. You can change the default file manager 
- * at any time if you want.
- *
- * Internally, CoconutKit uses the currently installed default file manager to perform disk read and write operations. 
- * By setting your own file manager as default manager, you can therefore tailor the way CoconutKit reads and writes 
- * data to meet the requirements of your application.
- *
  * For all methods, paths represent locations relative to the managed storage, and should be given using the standard
  * notation /path/to/some/file.txt. The / at the beginning represents the storage root
  *
  * Designated initializer: -init
  */
 @interface HLSFileManager : NSObject <HLSFileManagerAbstract>
-
-/**
- * Set the default file manager. The previously installed one is returned
- */
-+ (HLSFileManager *)setDefaultManager:(HLSFileManager *)defaultManager;
-
-/**
- * Return the current default file manager
- */
-+ (HLSFileManager *)defaultManager;
 
 /**
  * Return YES iff the file or folder exists at the specified path
