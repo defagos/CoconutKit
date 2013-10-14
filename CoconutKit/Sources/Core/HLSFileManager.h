@@ -13,7 +13,7 @@
 @optional
 
 /**
- * Return the content of the file at the given location. Large files should be mapped into virtual memory
+ * Return the content of the file at the given location
  */
 - (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError;
 
@@ -23,6 +23,16 @@
  * Return YES iff successful
  */
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError;
+
+/**
+ * Return an input stream for the file at a given location
+ */
+- (NSInputStream *)inputStreamForFileAtPath:(NSString *)path;
+
+/**
+ * Return an output stream for the file at a given location
+ */
+- (NSOutputStream *)outputStreamForFileAtPath:(NSString *)path append:(BOOL)append;
 
 /**
  * Create a directory at the specified path (create intermediate directories if enabled, otherwise fails if the parent directory does not

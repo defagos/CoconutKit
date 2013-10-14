@@ -28,6 +28,16 @@ __attribute__ ((constructor)) static void HLSStandardFileManagerInstall(void)
     return [contents writeToFile:path options:NSDataWritingAtomic error:pError];
 }
 
+- (NSInputStream *)inputStreamForFileAtPath:(NSString *)path
+{
+    return [NSInputStream inputStreamWithFileAtPath:path];
+}
+
+- (NSOutputStream *)outputStreamForFileAtPath:(NSString *)path append:(BOOL)append
+{
+    return [NSOutputStream outputStreamToFileAtPath:path append:append];
+}
+
 - (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError
 {
     return [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:withIntermediateDirectories attributes:nil error:pError];
