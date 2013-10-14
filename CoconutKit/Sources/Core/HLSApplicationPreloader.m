@@ -49,8 +49,7 @@ static BOOL swizzled_UIApplicationDelegate__application_didFinishLaunchingWithOp
     Class *classes = objc_copyClassList(&numberOfClasses);
     for (unsigned int i = 0; i < numberOfClasses; ++i) {
         Class class = classes[i];
-        // TODO: Use hls_class_conformsToProtocol after merge with feature/url-connection
-        if (class_conformsToProtocol(class, @protocol(UIApplicationDelegate))) {
+        if (hls_class_conformsToProtocol(class, @protocol(UIApplicationDelegate))) {
             NSString *className = [NSString stringWithCString:class_getName(class) encoding:NSUTF8StringEncoding];
             IMP UIApplicationDelegate__application_didFinishLaunchingWithOptions_Imp = hls_class_swizzleSelector(class,
                                                                                                                  @selector(application:didFinishLaunchingWithOptions:),
