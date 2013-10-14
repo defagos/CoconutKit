@@ -73,6 +73,7 @@ NSManagedObject+HLSValidation.h
 NSMutableArray+HLSExtensions.h
 NSNumber+HLSExtensions.h
 NSObject+HLSExtensions.h
+NSStream+HLSExtensions.h
 NSString+HLSExtensions.h
 NSTimeZone+HLSExtensions.h
 UIActionSheet+HLSExtensions.h

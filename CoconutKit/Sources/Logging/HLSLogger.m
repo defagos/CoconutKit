@@ -12,6 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger+Friend.h"
 #import "HLSLoggerViewController.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import <pthread.h>
 

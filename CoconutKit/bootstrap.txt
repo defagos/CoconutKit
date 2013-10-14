@@ -24,6 +24,7 @@ NSMutableArray+HLSExtensions.m
 NSNumber+HLSExtensions.m
 NSObject+HLSExtensions.m
 NSSet+HLSExtensions.m
+NSStream+HLSExtensions.m
 NSString+HLSExtensions.m
 NSTimeZone+HLSExtensions.m
 NSURLRequest+HLSExtensions.m

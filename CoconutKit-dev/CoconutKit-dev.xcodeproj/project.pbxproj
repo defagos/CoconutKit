@@ -90,6 +90,7 @@
 		6F6E814E17CF070700CE578A /* HLSLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E814817CF070700CE578A /* HLSLoggerViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F718CA516CF825B001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CA316CF825B001498D6 /* ViewEffectsDemoViewController.m */; };
 		6F718CAA16CF8315001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CA916CF8315001498D6 /* ViewEffectsDemoViewController.xib */; };
+		6F794819180BABC800282253 /* NSStream+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F794818180BABC800282253 /* NSStream+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F7A871516522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660A1588CC770044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366091588CC770044E572 /* HLSVector.m */; };
@@ -418,6 +419,8 @@
 		6F718CA216CF825B001498D6 /* ViewEffectsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewEffectsDemoViewController.h; sourceTree = "<group>"; };
 		6F718CA316CF825B001498D6 /* ViewEffectsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewEffectsDemoViewController.m; sourceTree = "<group>"; };
 		6F718CA916CF8315001498D6 /* ViewEffectsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewEffectsDemoViewController.xib; sourceTree = "<group>"; };
+		6F794817180BABC800282253 /* NSStream+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F794818180BABC800282253 /* NSStream+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7A871316522C210030B091 /* UIPopoverController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7B848514CF1BD90091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -1179,6 +1182,8 @@
 				6FADE65D14BA04A6007EE121 /* NSObject+HLSExtensions.m */,
 				6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */,
 				6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */,
+				6F794817180BABC800282253 /* NSStream+HLSExtensions.h */,
+				6F794818180BABC800282253 /* NSStream+HLSExtensions.m */,
 				6FADE65E14BA04A6007EE121 /* NSString+HLSExtensions.h */,
 				6FADE65F14BA04A6007EE121 /* NSString+HLSExtensions.m */,
 				6FADE66014BA04A6007EE121 /* NSTimeZone+HLSExtensions.h */,
@@ -2171,6 +2176,7 @@
 				6F10E38C17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */,
 				6F6E814E17CF070700CE578A /* HLSLoggerViewController.m in Sources */,
 				6F63E7CA17CF6E56006322D9 /* HLSPreviewItem.m in Sources */,
+				6F794819180BABC800282253 /* NSStream+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

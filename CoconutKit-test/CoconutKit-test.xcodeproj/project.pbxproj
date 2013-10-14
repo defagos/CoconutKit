@@ -52,6 +52,9 @@
 		6F66181816C14B5E00303628 /* UIView+HLSRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F66181716C14B5E00303628 /* UIView+HLSRuntimeAttributes.m */; };
 		6F6C0A1A159B965E007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */; };
 		6F6E815A17CF074300CE578A /* HLSLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E815617CF074300CE578A /* HLSLoggerViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F79481C180BABE300282253 /* NSStream+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F79481B180BABE300282253 /* NSStream+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F794822180BD18400282253 /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F794821180BD18400282253 /* NSStream+HLSExtensionsTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F794824180BD21E00282253 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F794823180BD21E00282253 /* Sample.txt */; };
 		6F7A871A16522C3C0030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871916522C3C0030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848B14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660D1588CC820044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F83660C1588CC820044E572 /* HLSVector.m */; };
@@ -264,6 +267,11 @@
 		6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
 		6F6E815517CF074300CE578A /* HLSLoggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLoggerViewController.h; sourceTree = "<group>"; };
 		6F6E815617CF074300CE578A /* HLSLoggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLoggerViewController.m; sourceTree = "<group>"; };
+		6F79481A180BABE300282253 /* NSStream+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F79481B180BABE300282253 /* NSStream+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F794820180BD18300282253 /* NSStream+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F794821180BD18400282253 /* NSStream+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F794823180BD21E00282253 /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
 		6F7A871816522C3C0030B091 /* UIPopoverController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7A871916522C3C0030B091 /* UIPopoverController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7B848914CF32B20091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -691,6 +699,8 @@
 				6FC8EDBD176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.m */,
 				6F93C4EC140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.h */,
 				6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */,
+				6F794820180BD18300282253 /* NSStream+HLSExtensionsTestCase.h */,
+				6F794821180BD18400282253 /* NSStream+HLSExtensionsTestCase.m */,
 				6F93C4E81404400000FEC9B0 /* NSString+HLSExtensionsTestCase.h */,
 				6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */,
 				6F61D12C14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.h */,
@@ -836,6 +846,8 @@
 				6FADE73C14BA04B6007EE121 /* NSObject+HLSExtensions.m */,
 				6F2D470815761B9000EF5E4F /* NSSet+HLSExtensions.h */,
 				6F2D470915761B9000EF5E4F /* NSSet+HLSExtensions.m */,
+				6F79481A180BABE300282253 /* NSStream+HLSExtensions.h */,
+				6F79481B180BABE300282253 /* NSStream+HLSExtensions.m */,
 				6FADE73D14BA04B6007EE121 /* NSString+HLSExtensions.h */,
 				6FADE73E14BA04B6007EE121 /* NSString+HLSExtensions.m */,
 				6FADE73F14BA04B6007EE121 /* NSTimeZone+HLSExtensions.h */,
@@ -1010,6 +1022,7 @@
 		6FDE68E114757669005EA5FA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				6F794823180BD21E00282253 /* Sample.txt */,
 				6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */,
 			);
 			path = Data;
@@ -1111,6 +1124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F000182156BF3320055CED7 /* CoconutKit-resources.bundle in Resources */,
+				6F794824180BD21E00282253 /* Sample.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,6 +1291,8 @@
 				6F10E39017A0016300BFEF42 /* HLSViewTouchDetector.m in Sources */,
 				6F6E815A17CF074300CE578A /* HLSLoggerViewController.m in Sources */,
 				6F63E7CD17CF6E76006322D9 /* HLSPreviewItem.m in Sources */,
+				6F79481C180BABE300282253 /* NSStream+HLSExtensions.m in Sources */,
+				6F794822180BD18400282253 /* NSStream+HLSExtensionsTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1312,7 +1328,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1337,7 +1353,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",

@@ -53,6 +53,8 @@
 		6F6C7558162DC0DA0094B090 /* HLSAutorotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C7557162DC0D90094B090 /* HLSAutorotation.h */; };
 		6F6E814217CF05FF00CE578A /* HLSLoggerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E813D17CF05FF00CE578A /* HLSLoggerViewController.h */; };
 		6F6E814317CF05FF00CE578A /* HLSLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E813E17CF05FF00CE578A /* HLSLoggerViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F794815180BABAD00282253 /* NSStream+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F794813180BABAD00282253 /* NSStream+HLSExtensions.h */; };
+		6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F7A871016522C0A0030B091 /* UIPopoverController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A870E16522C0A0030B091 /* UIPopoverController+HLSExtensions.h */; };
 		6F7A871116522C0A0030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848F14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */; };
@@ -311,6 +313,8 @@
 		6F6C7557162DC0D90094B090 /* HLSAutorotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotation.h; sourceTree = "<group>"; };
 		6F6E813D17CF05FF00CE578A /* HLSLoggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLoggerViewController.h; sourceTree = "<group>"; };
 		6F6E813E17CF05FF00CE578A /* HLSLoggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLoggerViewController.m; sourceTree = "<group>"; };
+		6F794813180BABAD00282253 /* NSStream+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7A870E16522C0A0030B091 /* UIPopoverController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -711,6 +715,8 @@
 				6FADE54214BA0494007EE121 /* NSObject+HLSExtensions.m */,
 				6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */,
 				6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */,
+				6F794813180BABAD00282253 /* NSStream+HLSExtensions.h */,
+				6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */,
 				6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */,
 				6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */,
 				6FADE54514BA0494007EE121 /* NSTimeZone+HLSExtensions.h */,
@@ -1011,6 +1017,7 @@
 				6F6E814217CF05FF00CE578A /* HLSLoggerViewController.h in Headers */,
 				6F954F6517CF4707001E5F67 /* HLSLogger+Friend.h in Headers */,
 				6F63E7C617CF6E19006322D9 /* HLSPreviewItem.h in Headers */,
+				6F794815180BABAD00282253 /* NSStream+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1215,6 +1222,7 @@
 				6F10E389179FFE2B00BFEF42 /* HLSViewTouchDetector.m in Sources */,
 				6F6E814317CF05FF00CE578A /* HLSLoggerViewController.m in Sources */,
 				6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */,
+				6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

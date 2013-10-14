@@ -89,6 +89,7 @@
     #import "NSNumber+HLSExtensions.h"
     #import "NSObject+HLSExtensions.h"
     #import "NSSet+HLSExtensions.h"
+    #import "NSStream+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
     #import "NSTimeZone+HLSExtensions.h"
     #import "NSURLRequest+HLSExtensions.h"
