@@ -11,6 +11,8 @@
 #import "HLSError.h"
 #import "NSBundle+HLSExtensions.h"
 
+#define BUFFER_SIZE 4096
+
 @implementation NSInputStream (HLSExtensions)
 
 - (BOOL)writeToOutputStream:(NSOutputStream *)outputStream error:(NSError **)pError
@@ -30,8 +32,8 @@
     
     BOOL success = YES;
     while (1) {
-        uint8_t bytes[4096] = {0};
-        NSInteger length = [self read:bytes maxLength:4096];
+        uint8_t bytes[BUFFER_SIZE] = {0};
+        NSInteger length = [self read:bytes maxLength:BUFFER_SIZE];
         
         // Error
         if (length < 0) {
