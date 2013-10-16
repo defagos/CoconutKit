@@ -25,7 +25,7 @@
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError;
 
 /**
- * Return an input stream for the file at a given location
+ * Return an input stream for the file at a given location, nil if the path is invalid
  */
 - (NSInputStream *)inputStreamForFileAtPath:(NSString *)path;
 

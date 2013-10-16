@@ -36,6 +36,16 @@
 
 - (NSInputStream *)inputStreamForFileAtPath:(NSString *)path
 {
+    // If the path is invalid, NSInputStream returns a stream object which fails to open, not nil
+    BOOL isDirectory = NO;
+    if (! [self fileExistsAtPath:path isDirectory:&isDirectory]) {
+        return nil;
+    }
+    
+    if (isDirectory) {
+        return nil;
+    }
+    
     return [NSInputStream inputStreamWithFileAtPath:path];
 }
 
