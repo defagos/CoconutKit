@@ -34,7 +34,7 @@
     return [contents writeToFile:path options:NSDataWritingAtomic error:pError];
 }
 
-- (NSInputStream *)inputStreamForFileAtPath:(NSString *)path
+- (NSInputStream *)inputStreamWithFileAtPath:(NSString *)path
 {
     // If the path is invalid, NSInputStream returns a stream object which fails to open, not nil
     BOOL isDirectory = NO;
@@ -49,7 +49,7 @@
     return [NSInputStream inputStreamWithFileAtPath:path];
 }
 
-- (NSOutputStream *)outputStreamForFileAtPath:(NSString *)path append:(BOOL)append
+- (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append
 {
     return [NSOutputStream outputStreamToFileAtPath:path append:append];
 }

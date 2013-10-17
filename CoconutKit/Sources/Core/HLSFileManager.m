@@ -8,10 +8,19 @@
 
 #import "HLSFileManager.h"
 
-// TODO: When available in CoconutKit (feature/url-connection branch), check protocol conformance (all methods from the
-//       abstract protocol must be implemented, though they have been made optional to avoid compilation warnings)
-
 @implementation HLSFileManager
+
+#pragma mark Accessors and mutators
+
+- (BOOL)isProvidingInputStreams
+{
+    return [self respondsToSelector:@selector(inputStreamWithFileAtPath:)];
+}
+
+- (BOOL)isProvidingOutputStreams
+{
+    return [self respondsToSelector:@selector(outputStreamToFileAtPath:append:)];
+}
 
 #pragma mark Convenience methods
 

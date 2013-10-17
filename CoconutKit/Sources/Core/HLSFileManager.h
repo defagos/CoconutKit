@@ -25,16 +25,6 @@
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError;
 
 /**
- * Return an input stream for the file at a given location, nil if the path is invalid
- */
-- (NSInputStream *)inputStreamForFileAtPath:(NSString *)path;
-
-/**
- * Return an output stream for the file at a given location
- */
-- (NSOutputStream *)outputStreamForFileAtPath:(NSString *)path append:(BOOL)append;
-
-/**
  * Create a directory at the specified path (create intermediate directories if enabled, otherwise fails if the parent directory does not
  * exist)
  *
@@ -77,6 +67,25 @@
 @end
 
 /**
+ * Concrete subclasses of HLSFileManager can implement the set of methods declared by the following protocol if they
+ * support streams. Check providingInputStreams and providingOutputStreams before calling any of them
+ */
+@protocol HLSFileManagerStreams <NSObject>
+@optional
+
+/**
+ * Return an input stream for the file at a given location, nil if the path is invalid
+ */
+- (NSInputStream *)inputStreamWithFileAtPath:(NSString *)path;
+
+/**
+ * Return an output stream for the file at a given location
+ */
+- (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append;
+
+@end
+
+/**
  * Abstract class for file operations. Subclass and implement methods from the HLSFileManagerAbstract protocol to create
  * your own concrete file management classes. Subclasses should be implemented in a thread-safe manner.
  *
@@ -85,11 +94,18 @@
  *
  * Designated initializer: -init
  */
-@interface HLSFileManager : NSObject <HLSFileManagerAbstract>
+@interface HLSFileManager : NSObject <HLSFileManagerAbstract, HLSFileManagerStreams>
 
 /**
  * Return YES iff the file or folder exists at the specified path
  */
 - (BOOL)fileExistsAtPath:(NSString *)path;
+
+/**
+ * Return YES iff the corresponding stream type is supported. Check before calling methods from the HLSFileManagerStreams
+ * protocol
+ */
+@property (atomic, readonly, assign, getter=isProvidingInputStreams) BOOL providingInputStreams;
+@property (atomic, readonly, assign, getter=isProvidingInputStreams) BOOL providingOutputStreams;
 
 @end
