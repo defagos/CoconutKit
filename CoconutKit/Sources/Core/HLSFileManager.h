@@ -68,9 +68,10 @@
 
 /**
  * Concrete subclasses of HLSFileManager can implement the set of methods declared by the following protocol if they
- * support streams. Check providingInputStreams and providingOutputStreams before calling any of them
+ * support streams. Check providingInputStreams and providingOutputStreams before calling any of them on a file manager
+ * instance
  */
-@protocol HLSFileManagerStreams <NSObject>
+@protocol HLSFileManagerStreamSupport <NSObject>
 @optional
 
 /**
@@ -86,6 +87,20 @@
 @end
 
 /**
+ * Concrete subclasses of HLSFileManager can implement the set of methods declared by the following protocol if they
+ * support URLs. Check providingURLs before calling any of them on a file manager instance
+ */
+@protocol HLSFileManagerURLSupport <NSObject>
+@optional
+
+/**
+ * Return the file URL pointing at the file path
+ */
+- (NSURL *)URLForFileAtPath:(NSString *)path;
+
+@end
+
+/**
  * Abstract class for file operations. Subclass and implement methods from the HLSFileManagerAbstract protocol to create
  * your own concrete file management classes. Subclasses should be implemented in a thread-safe manner.
  *
@@ -94,7 +109,7 @@
  *
  * Designated initializer: -init
  */
-@interface HLSFileManager : NSObject <HLSFileManagerAbstract, HLSFileManagerStreams>
+@interface HLSFileManager : NSObject <HLSFileManagerAbstract, HLSFileManagerStreamSupport, HLSFileManagerURLSupport>
 
 /**
  * Return YES iff the file or folder exists at the specified path
@@ -102,10 +117,15 @@
 - (BOOL)fileExistsAtPath:(NSString *)path;
 
 /**
- * Return YES iff the corresponding stream type is supported. Check before calling methods from the HLSFileManagerStreams
+ * Return YES iff the corresponding stream type is supported. Check before calling methods from the HLSFileManagerStreamSupport
  * protocol
  */
 @property (atomic, readonly, assign, getter=isProvidingInputStreams) BOOL providingInputStreams;
 @property (atomic, readonly, assign, getter=isProvidingInputStreams) BOOL providingOutputStreams;
+
+/**
+ * Return YES iff URL mappings are supported. Check before calling methods from the HLSFileManagerURLSupport protocol
+ */
+@property (atomic, readonly, assign, getter=isProvidingURLs) BOOL providingURLs;
 
 @end

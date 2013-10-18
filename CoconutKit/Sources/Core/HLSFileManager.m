@@ -22,6 +22,11 @@
     return [self respondsToSelector:@selector(outputStreamToFileAtPath:append:)];
 }
 
+- (BOOL)isProvidingURLs
+{
+    return [self respondsToSelector:@selector(URLForFileAtPath:)];
+}
+
 #pragma mark Convenience methods
 
 - (BOOL)fileExistsAtPath:(NSString *)path

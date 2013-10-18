@@ -22,7 +22,7 @@
     return s_sharedInstance;
 }
 
-#pragma mark DMSFileManagerAbstract protocol implementation
+#pragma mark HLSFileManagerAbstract protocol implementation
 
 - (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError
 {
@@ -32,26 +32,6 @@
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
 {
     return [contents writeToFile:path options:NSDataWritingAtomic error:pError];
-}
-
-- (NSInputStream *)inputStreamWithFileAtPath:(NSString *)path
-{
-    // If the path is invalid, NSInputStream returns a stream object which fails to open, not nil
-    BOOL isDirectory = NO;
-    if (! [self fileExistsAtPath:path isDirectory:&isDirectory]) {
-        return nil;
-    }
-    
-    if (isDirectory) {
-        return nil;
-    }
-    
-    return [NSInputStream inputStreamWithFileAtPath:path];
-}
-
-- (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append
-{
-    return [NSOutputStream outputStreamToFileAtPath:path append:append];
 }
 
 - (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError
@@ -82,6 +62,35 @@
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError;
 {
     return [[NSFileManager defaultManager] removeItemAtPath:path error:pError];
+}
+
+#pragma mark HLSFileManagerStreamSupport protocol implementation
+
+- (NSInputStream *)inputStreamWithFileAtPath:(NSString *)path
+{
+    // If the path is invalid, NSInputStream returns a stream object which fails to open, not nil
+    BOOL isDirectory = NO;
+    if (! [self fileExistsAtPath:path isDirectory:&isDirectory]) {
+        return nil;
+    }
+    
+    if (isDirectory) {
+        return nil;
+    }
+    
+    return [NSInputStream inputStreamWithFileAtPath:path];
+}
+
+- (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append
+{
+    return [NSOutputStream outputStreamToFileAtPath:path append:append];
+}
+
+#pragma mark HLSFileManagerURLSupport protocol implementation
+
+- (NSURL *)URLForFileAtPath:(NSString *)path
+{
+    return [NSURL fileURLWithPath:path];
 }
 
 @end
