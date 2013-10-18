@@ -68,19 +68,20 @@
 
 /**
  * Concrete subclasses of HLSFileManager can implement the set of methods declared by the following protocol if they
- * support streams. Check providingInputStreams and providingOutputStreams before calling any of them on a file manager
- * instance
+ * support streams
  */
 @protocol HLSFileManagerStreamSupport <NSObject>
 @optional
 
 /**
- * Return an input stream for the file at a given location, nil if the path is invalid
+ * Return an input stream for the file at a given location, nil if the path is invalid. Check the providingInputStreams
+ * property before calling this method
  */
 - (NSInputStream *)inputStreamWithFileAtPath:(NSString *)path;
 
 /**
- * Return an output stream for the file at a given location
+ * Return an output stream for the file at a given location. Check the providingOutputStreams property before calling this 
+ * method
  */
 - (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append;
 
@@ -88,13 +89,13 @@
 
 /**
  * Concrete subclasses of HLSFileManager can implement the set of methods declared by the following protocol if they
- * support URLs. Check providingURLs before calling any of them on a file manager instance
+ * support URLs
  */
 @protocol HLSFileManagerURLSupport <NSObject>
 @optional
 
 /**
- * Return the file URL pointing at the file path
+ * Return the file URL pointing at the file path. Check the providingURLs property before calling this method
  */
 - (NSURL *)URLForFileAtPath:(NSString *)path;
 
