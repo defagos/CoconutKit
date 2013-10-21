@@ -8,6 +8,14 @@
 
 #import "HLSStandardFileManager.h"
 
+#import "HLSLogger.h"
+
+@interface HLSStandardFileManager ()
+
+@property (nonatomic, strong) NSString *rootFolderPath;
+
+@end
+
 @implementation HLSStandardFileManager
 
 #pragma mark Class methods
@@ -22,46 +30,80 @@
     return s_sharedInstance;
 }
 
+#pragma mark Object creation and destruction
+
+- (id)initWithRootFolderPath:(NSString *)rootFolderPath
+{
+    if (self = [super init]) {
+        if (! rootFolderPath) {
+            rootFolderPath = @"/";
+        }
+        
+        if (! [rootFolderPath hasPrefix:@"/"]) {
+            HLSLoggerError(@"The root folder path must begin with a slash");
+            return nil;
+        }
+        
+        self.rootFolderPath = rootFolderPath;
+    }
+    return self;
+}
+
+- (id)init
+{
+    return [self initWithRootFolderPath:nil];
+}
+
 #pragma mark HLSFileManagerAbstract protocol implementation
 
 - (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError
 {
-    return [NSData dataWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:pError];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [NSData dataWithContentsOfFile:fullPath options:NSDataReadingMappedIfSafe error:pError];
 }
 
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
 {
-    return [contents writeToFile:path options:NSDataWritingAtomic error:pError];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [contents writeToFile:fullPath options:NSDataWritingAtomic error:pError];
 }
 
 - (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError
 {
-    return [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:withIntermediateDirectories attributes:nil error:pError];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [[NSFileManager defaultManager] createDirectoryAtPath:fullPath withIntermediateDirectories:withIntermediateDirectories attributes:nil error:pError];
 }
 
 - (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError
 {
-    return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:pError];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:fullPath error:pError];
 }
 
 - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory
 {
-    return [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:pIsDirectory];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:pIsDirectory];
 }
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
-    return [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:destinationPath error:pError];
+    NSString *fullSourcePath = [self.rootFolderPath stringByAppendingPathComponent:sourcePath];
+    NSString *fullDestinationPath = [self.rootFolderPath stringByAppendingPathComponent:destinationPath];
+    return [[NSFileManager defaultManager] copyItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
-    return [[NSFileManager defaultManager] moveItemAtPath:sourcePath toPath:destinationPath error:pError];
+    NSString *fullSourcePath = [self.rootFolderPath stringByAppendingPathComponent:sourcePath];
+    NSString *fullDestinationPath = [self.rootFolderPath stringByAppendingPathComponent:destinationPath];
+    return [[NSFileManager defaultManager] moveItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError;
 {
-    return [[NSFileManager defaultManager] removeItemAtPath:path error:pError];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [[NSFileManager defaultManager] removeItemAtPath:fullPath error:pError];
 }
 
 #pragma mark HLSFileManagerStreamSupport protocol implementation
@@ -70,7 +112,8 @@
 {
     // If the path is invalid, NSInputStream returns a stream object which fails to open, not nil
     BOOL isDirectory = NO;
-    if (! [self fileExistsAtPath:path isDirectory:&isDirectory]) {
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    if (! [self fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
         return nil;
     }
     
@@ -78,19 +121,21 @@
         return nil;
     }
     
-    return [NSInputStream inputStreamWithFileAtPath:path];
+    return [NSInputStream inputStreamWithFileAtPath:fullPath];
 }
 
 - (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append
 {
-    return [NSOutputStream outputStreamToFileAtPath:path append:append];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [NSOutputStream outputStreamToFileAtPath:fullPath append:append];
 }
 
 #pragma mark HLSFileManagerURLSupport protocol implementation
 
 - (NSURL *)URLForFileAtPath:(NSString *)path
 {
-    return [NSURL fileURLWithPath:path];
+    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    return [NSURL fileURLWithPath:fullPath];
 }
 
 @end

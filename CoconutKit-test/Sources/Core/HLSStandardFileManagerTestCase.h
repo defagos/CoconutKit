@@ -1,5 +1,5 @@
 //
-//  HLSInMemoryFileManagerTestCase.h
+//  HLSStandardFileManagerTestCase.h
 //  CoconutKit-test
 //
 //  Created by Samuel Défago on 21.10.13.
@@ -8,6 +8,6 @@
 
 #import "HLSFileManagerTestCase.h"
 
-@interface HLSInMemoryFileManagerTestCase : HLSFileManagerTestCase
+@interface HLSStandardFileManagerTestCase : HLSFileManagerTestCase
 
 @end

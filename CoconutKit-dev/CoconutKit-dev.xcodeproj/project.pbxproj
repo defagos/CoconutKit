@@ -227,7 +227,7 @@
 		6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FAF24F3162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F0162DE58000F93DA2 /* UINavigationController+HLSExtensions.m */; };
 		6FAF24F5162DE58000F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24F2162DE58000F93DA2 /* UITabBarController+HLSExtensions.m */; };
-		6FB318A6181136BA00565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318A5181136BA00565B69 /* HLSInMemoryFileManager.m */; };
+		6FB318A6181136BA00565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318A5181136BA00565B69 /* HLSInMemoryFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB500521705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500501705ABC400779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB500541705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500511705ABC400779DB3 /* ConnectionDemoViewController.xib */; };
 		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
@@ -241,8 +241,8 @@
 		6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */; };
 		6FC8EDB7176EC881000B3BE7 /* NSNumber+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8EDB6176EC87F000B3BE7 /* NSNumber+HLSExtensions.m */; };
 		6FC900F513D4661100834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F413D4661100834900 /* CoreData.framework */; };
-		6FCA2DDE1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DDB1679E3EB0011CFDA /* HLSStandardFileManager.m */; };
-		6FCA2DE01679E3EB0011CFDA /* HLSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DDD1679E3EB0011CFDA /* HLSFileManager.m */; };
+		6FCA2DDE1679E3EB0011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DDB1679E3EB0011CFDA /* HLSStandardFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCA2DE01679E3EB0011CFDA /* HLSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DDD1679E3EB0011CFDA /* HLSFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCDA16914DAE5E000ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16814DAE5E000ED1CD1 /* QuartzCore.framework */; };
 		6FCFEA4E15E37E40002CAF9E /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA4D15E37E40002CAF9E /* HLSAnimationStep.m */; };
 		6FD0025715D5463C00375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0025515D5463C00375240 /* ContainmentTestViewController.m */; };
