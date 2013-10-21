@@ -26,7 +26,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.rootItems = [NSMutableDictionary dictionary];
+        self.rootItems = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"/"];
         self.cache = [[NSCache alloc] init];
     }
     return self;
@@ -41,31 +41,46 @@
  *
  * Intermediate directories are created if they do not exist. If data is nil, a folder is added, otherwise a file
  */
-- (void)addObjectAtPath:(NSString *)path withData:(NSData *)data
+- (BOOL)addObjectAtPath:(NSString *)path withData:(NSData *)data error:(NSError **)pError
 {
-    [self addObjectAtPath:path toItems:self.rootItems withData:data];
+    return [self addObjectAtPath:path toItems:self.rootItems withData:data error:pError];
 }
 
-- (void)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary *)items withData:(NSData *)data
+- (BOOL)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary *)items withData:(NSData *)data error:(NSError **)pError
 {
     NSArray *pathComponents = [path pathComponents];
     if ([pathComponents count] == 0) {
-        return;
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"Invalid path", nil)];
+        }
+        return NO;
     }
     
     if ([pathComponents count] == 1) {
         NSString *objectName = [pathComponents firstObject];
+        if ([items objectForKey:objectName]) {
+            if (pError) {
+                *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                               code:NSFileWriteFileExistsError
+                               localizedDescription:CoconutKitLocalizedString(@"The file or directory already exists", nil)];
+            }            
+            return NO;
+        }
         
         // File
         if (data) {
             NSString *UUID = HLSUUID();
             [items setObject:UUID forKey:objectName];
-            [self.cache setObject:data forKey:UUID];
+            [self.cache setObject:data forKey:UUID cost:[data length]];
         }
         // Folder
         else {
             [items setObject:[NSMutableDictionary dictionary] forKey:objectName];
         }
+        
+        return YES;
     }
     else {
         NSString *firstPathComponent = [pathComponents firstObject];
@@ -80,7 +95,7 @@
         // Go down one level deeper
         NSArray *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
-        [self addObjectAtPath:subpath toItems:subitems withData:data];
+        return [self addObjectAtPath:subpath toItems:subitems withData:data error:pError];
     }
 }
 
@@ -132,19 +147,22 @@
         [self.cache removeObjectForKey:content];
     }
     
-    [items removeObjectForKey:name];
+    if (! [name isEqualToString:@"/"]) {
+        [items removeObjectForKey:name];
+    }
+    
     return YES;
 }
 
 - (BOOL)checkParentDirectoryForPath:(NSString *)path error:(NSError **)pError
 {
     BOOL isDirectory = NO;
-    NSString *parentPath = [path stringByDeletingLastPathComponent];
+    NSString *parentPath = [path stringByDeletingLastPathComponent];    
     if (! [self fileExistsAtPath:parentPath isDirectory:&isDirectory] || ! isDirectory) {
         if (pError) {
             NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", parentPath];
             *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteUnknownError
+                                           code:NSFileNoSuchFileError
                            localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
         }
         return NO;
@@ -171,13 +189,21 @@
 
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
 {
+    if (! contents) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileWriteUnknownError
+                           localizedDescription:CoconutKitLocalizedString(@"Missing data", nil)];
+        }
+        return NO;
+    }
+    
     // Must fail if the parent directory does not exist
     if (! [self checkParentDirectoryForPath:path error:pError]) {
         return NO;
     }
     
-    [self addObjectAtPath:path withData:contents];
-    return YES;
+    return [self addObjectAtPath:path withData:contents error:pError];
 }
 
 - (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError
@@ -188,8 +214,7 @@
         }
     }
     
-    [self addObjectAtPath:path withData:nil];
-    return YES;
+    return [self addObjectAtPath:path withData:nil error:pError];
 }
 
 - (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError
@@ -199,7 +224,7 @@
         if (pError) {
             NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", path];
             *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteUnknownError
+                                           code:NSFileNoSuchFileError
                            localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
         }
         return nil;
@@ -231,15 +256,13 @@
     
     // Folder
     if ([sourceContent isKindOfClass:[NSDictionary class]]) {
-        [self addObjectAtPath:destinationPath withData:nil];
+        return [self addObjectAtPath:destinationPath withData:nil error:pError];
     }
     // File
     else {
         NSData *data = [self.cache objectForKey:sourceContent];
-        [self addObjectAtPath:destinationPath withData:data];
+        return [self addObjectAtPath:destinationPath withData:data error:pError];
     }
-    
-    return YES;
 }
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
@@ -272,6 +295,17 @@
 - (void)cache:(NSCache *)cache willEvictObject:(id)obj
 {
     // TODO: Lookup object and remove entry in filesystem dict
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; rootItems: %@; cache: %@>",
+            [self class],
+            self,
+            self.rootItems,
+            self.cache];
 }
 
 @end

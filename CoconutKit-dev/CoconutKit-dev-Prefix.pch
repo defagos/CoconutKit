@@ -30,6 +30,7 @@
     #import "HLSFileManager.h"
     #import "HLSFileURLConnection.h"
     #import "HLSFloat.h"
+    #import "HLSInMemoryFileManager.h"
     #import "HLSKeyboardInformation.h"
     #import "HLSLabel.h"
     #import "HLSLayerAnimation.h"

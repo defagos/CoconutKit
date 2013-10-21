@@ -17,6 +17,7 @@ HLSFakeConnection.h
 HLSFileManager.h
 HLSFileURLConnection.h
 HLSFloat.h
+HLSInMemoryFileManager.h
 HLSKeyboardInformation.h
 HLSLabel.h
 HLSLayerAnimation.h
