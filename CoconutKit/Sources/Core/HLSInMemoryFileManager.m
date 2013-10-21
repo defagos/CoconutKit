@@ -10,11 +10,12 @@
 
 #import "HLSError.h"
 #import "NSBundle+HLSDynamicLocalization.h"
+#import "NSString+HLSExtensions.h"
 
 @interface HLSInMemoryFileManager ()
 
-@property (nonatomic, strong) NSMutableDictionary *rootItems;
-@property (nonatomic, strong) NSCache *cache;
+@property (nonatomic, strong) NSMutableDictionary *rootItems;           // Stores the directory / file hierarchy
+@property (nonatomic, strong) NSCache *cache;                           // Store data
 
 @end
 
@@ -25,27 +26,27 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.cache = [[NSCache alloc] init];
         self.rootItems = [NSMutableDictionary dictionary];
+        self.cache = [[NSCache alloc] init];
     }
     return self;
 }
 
-#pragma mark Directory management
+#pragma mark Content management
 
 /**
  * We use dictionaries to store directory structure and file names. A dictionary key is the name of a file or of a folder.
  * For folders, the corresponding value is a dictionary (which might be empty if the directory is empty). For files, the
- * value is [NSNull null]
+ * value is a unique string identifier, pointing at the corresponding NSCache data entry
  *
- * Intermediate directories are created if they do not exist
+ * Intermediate directories are created if they do not exist. If data is nil, a folder is added, otherwise a file
  */
-- (void)addObjectAtPath:(NSString *)path isDirectory:(BOOL)isDirectory
+- (void)addObjectAtPath:(NSString *)path withData:(NSData *)data
 {
-    [HLSInMemoryFileManager addObjectAtPath:path toItems:self.rootItems isDirectory:isDirectory];
+    [self addObjectAtPath:path toItems:self.rootItems withData:data];
 }
 
-+ (void)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary *)items isDirectory:(BOOL)isDirectory
+- (void)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary *)items withData:(NSData *)data
 {
     NSArray *pathComponents = [path pathComponents];
     if ([pathComponents count] == 0) {
@@ -54,29 +55,39 @@
     
     if ([pathComponents count] == 1) {
         NSString *objectName = [pathComponents firstObject];
-        [items setObject:(isDirectory ? [NSMutableDictionary dictionary] : [NSNull null])
-                     forKey:objectName];
+        
+        // File
+        if (data) {
+            NSString *UUID = HLSUUID();
+            [items setObject:UUID forKey:objectName];
+            [self.cache setObject:data forKey:UUID];
+        }
+        // Folder
+        else {
+            [items setObject:[NSMutableDictionary dictionary] forKey:objectName];
+        }
     }
     else {
         NSString *firstPathComponent = [pathComponents firstObject];
         
-        // Create intermediate directories
+        // Create intermediate directories if needed
         NSMutableDictionary *subitems = [items objectForKey:firstPathComponent];
         if (! subitems) {
             subitems = [NSMutableDictionary dictionary];
             [items setObject:subitems forKey:firstPathComponent];
         }
         
+        // Go down one level deeper
         NSArray *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
-        [self addObjectAtPath:subpath toItems:subitems isDirectory:isDirectory];
+        [self addObjectAtPath:subpath toItems:subitems withData:data];
     }
 }
 
 /**
- * Return either a dictionary (folder) or NSNull (files)
+ * Return either a dictionary (folder) or a data string identifier (file)
  */
-+ (id)subitemsAtPath:(NSString *)path forItems:(NSDictionary *)items
+- (id)contentAtPath:(NSString *)path forItems:(NSDictionary *)items
 {
     NSArray *pathComponents = [path pathComponents];
     if ([pathComponents count] == 0) {
@@ -92,43 +103,37 @@
     else {
         NSArray *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
-        return [self subitemsAtPath:subpath forItems:subitems];
+        return [self contentAtPath:subpath forItems:subitems];
     }  
 }
 
-#if 0
-+ (BOOL)removeItemAtPath:(NSString *)path forItems:(NSDictionary *)items cache:(NSCache *)cache error:(NSError **)pError
-{
-    // TODO: Must also work when called at the top of the hierarchy
-    NSString *parentPath = [path stringByDeletingLastPathComponent];
-    id parentItems = [self subitemsAtPath:parentPath forItems:items];
-    if (! [parentItems isKindOfClass:[NSDictionary class]]) {
-        return NO;
-    }
-    
-    NSString *lastPathComponent = [path lastPathComponent];
-    [parentItems removeObjectForKey:lastPathComponent];
-    
-    // Remove associated data (if any)
-    [cache removeObjectForKey:path];
-    
-}
-#endif
-
 - (BOOL)removeItemWithName:(NSString *)name inItems:(NSMutableDictionary *)items error:(NSError **)pError
 {
-    if (! [items objectForKey:name]) {
+    id content = [items objectForKey:name];
+    if (! content) {
         if (pError) {
-            // TODO: Does not exist
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
         }
         return NO;
     }
     
-    [items removeObjectForKey:name];
+    // Directory
+    if ([content isKindOfClass:[NSDictionary class]]) {
+        // Recursively remove content
+        NSArray *subnames = [content allKeys];
+        for (NSString *subname in subnames) {
+            [self removeItemWithName:subname inItems:content error:NULL];
+        }
+    }
+    // File
+    else {
+        [self.cache removeObjectForKey:content];
+    }
     
-    // TODO: Problem: The path is unknown! => instead of NSNull, store NSString = unique generated id (not from path hash). More
-    //       robust when we move around stuff, since the id does not change
-//    [self.cache removeObjectForKey:name];
+    [items removeObjectForKey:name];
+    return YES;
 }
 
 - (BOOL)checkParentDirectoryForPath:(NSString *)path error:(NSError **)pError
@@ -151,16 +156,17 @@
 
 - (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError
 {
-    NSData *data = [self.cache objectForKey:path];
-    if (! data) {
+    id content = [self contentAtPath:path forItems:self.rootItems];
+    if (! content || ! [content isKindOfClass:[NSString class]]) {
         if (pError) {
             *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
                                            code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"Not found", nil)];
+                           localizedDescription:CoconutKitLocalizedString(@"File not found", nil)];
         }
-        return nil;
+        return nil;        
     }
-    return data;
+    
+    return [self.cache objectForKey:content];
 }
 
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
@@ -170,8 +176,7 @@
         return NO;
     }
     
-    [self addObjectAtPath:path isDirectory:NO];
-    [self.cache setObject:contents forKey:path];
+    [self addObjectAtPath:path withData:contents];
     return YES;
 }
 
@@ -183,13 +188,13 @@
         }
     }
     
-    [self addObjectAtPath:path isDirectory:YES];    
+    [self addObjectAtPath:path withData:nil];
     return YES;
 }
 
 - (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError
 {
-    id subitems = [HLSInMemoryFileManager subitemsAtPath:path forItems:self.rootItems];
+    id subitems = [self contentAtPath:path forItems:self.rootItems];
     if (! [subitems isKindOfClass:[NSDictionary dictionary]]) {
         if (pError) {
             NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", path];
@@ -205,7 +210,7 @@
 
 - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory
 {
-    id subitems = [HLSInMemoryFileManager subitemsAtPath:path forItems:self.rootItems];
+    id subitems = [self contentAtPath:path forItems:self.rootItems];
     if (pIsDirectory) {
         *pIsDirectory = [subitems isKindOfClass:[NSDictionary class]];
     }
@@ -214,24 +219,59 @@
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
-
+    id sourceContent = [self contentAtPath:sourcePath forItems:self.rootItems];
+    if (! sourceContent) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"File not found", nil)];
+        }
+        return NO;
+    }
+    
+    // Folder
+    if ([sourceContent isKindOfClass:[NSDictionary class]]) {
+        [self addObjectAtPath:destinationPath withData:nil];
+    }
+    // File
+    else {
+        NSData *data = [self.cache objectForKey:sourceContent];
+        [self addObjectAtPath:destinationPath withData:data];
+    }
+    
+    return YES;
 }
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
-
+    if (! [self copyItemAtPath:sourcePath toPath:destinationPath error:pError]) {
+        return NO;
+    }
+    
+    return [self removeItemAtPath:sourcePath error:pError];
 }
 
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError
 {
-
+    NSString *name = [path lastPathComponent];
+    id content = [self contentAtPath:[path stringByDeletingLastPathComponent] forItems:self.rootItems];
+    if (! [content isKindOfClass:[NSDictionary class]]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
+        }
+        return NO;
+    }
+    
+    return [self removeItemWithName:name inItems:content error:pError];
 }
 
 #pragma mark NSCacheDelegate protocol implementation
 
 - (void)cache:(NSCache *)cache willEvictObject:(id)obj
 {
-
+    // TODO: Lookup object and remove entry in filesystem dict
 }
 
 @end

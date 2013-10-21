@@ -1137,6 +1137,8 @@
 				6FCA2DDD1679E3EB0011CFDA /* HLSFileManager.m */,
 				6FADE63B14BA04A6007EE121 /* HLSFloat.h */,
 				6FADE63C14BA04A6007EE121 /* HLSFloat.m */,
+				6FB318A4181136BA00565B69 /* HLSInMemoryFileManager.h */,
+				6FB318A5181136BA00565B69 /* HLSInMemoryFileManager.m */,
 				6FADE63D14BA04A6007EE121 /* HLSKeyboardInformation.h */,
 				6FADE63E14BA04A6007EE121 /* HLSKeyboardInformation.m */,
 				6FADE63F14BA04A6007EE121 /* HLSNotifications.h */,
@@ -1201,8 +1203,6 @@
 				6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */,
 				6FADE66614BA04A6007EE121 /* UIImage+HLSExtensions.h */,
 				6FADE66714BA04A6007EE121 /* UIImage+HLSExtensions.m */,
-				6FB318A4181136BA00565B69 /* HLSInMemoryFileManager.h */,
-				6FB318A5181136BA00565B69 /* HLSInMemoryFileManager.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
