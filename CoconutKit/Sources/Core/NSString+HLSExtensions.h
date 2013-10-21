@@ -9,6 +9,11 @@
 // Formatting functions
 NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
+/**
+ * Generate a unique identifier
+ */
+NSString *HLSUUID(void);
+
 @interface NSString (HLSExtensions)
 
 /**

@@ -130,7 +130,7 @@
 		6FADE6CF14BA04A7007EE121 /* NSDictionary+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65914BA04A6007EE121 /* NSDictionary+HLSExtensions.m */; };
 		6FADE6D014BA04A7007EE121 /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65B14BA04A6007EE121 /* NSError+HLSExtensions.m */; };
 		6FADE6D114BA04A7007EE121 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65D14BA04A6007EE121 /* NSObject+HLSExtensions.m */; };
-		6FADE6D214BA04A7007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65F14BA04A6007EE121 /* NSString+HLSExtensions.m */; };
+		6FADE6D214BA04A7007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE65F14BA04A6007EE121 /* NSString+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE6D314BA04A7007EE121 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66114BA04A6007EE121 /* NSTimeZone+HLSExtensions.m */; };
 		6FADE6D414BA04A7007EE121 /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66314BA04A6007EE121 /* UIColor+HLSExtensions.m */; };
 		6FADE6D514BA04A7007EE121 /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE66514BA04A6007EE121 /* UIControl+HLSExclusiveTouch.m */; };

@@ -135,7 +135,7 @@
 		6FADE5C714BA0494007EE121 /* NSObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54114BA0494007EE121 /* NSObject+HLSExtensions.h */; };
 		6FADE5C814BA0494007EE121 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54214BA0494007EE121 /* NSObject+HLSExtensions.m */; };
 		6FADE5C914BA0494007EE121 /* NSString+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */; };
-		6FADE5CA14BA0494007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */; };
+		6FADE5CA14BA0494007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE5CB14BA0494007EE121 /* NSTimeZone+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54514BA0494007EE121 /* NSTimeZone+HLSExtensions.h */; };
 		6FADE5CC14BA0494007EE121 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54614BA0494007EE121 /* NSTimeZone+HLSExtensions.m */; };
 		6FADE5CD14BA0494007EE121 /* UIColor+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54714BA0494007EE121 /* UIColor+HLSExtensions.h */; };
