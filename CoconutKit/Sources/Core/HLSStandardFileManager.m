@@ -214,6 +214,11 @@
 
 - (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append
 {
+    BOOL isDirectory = NO;
+    if ([self fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory) {
+        return nil;
+    }
+    
     NSString *fullPath = [self fullPathForPath:path withError:NULL];
     if (! fullPath) {
         return nil;

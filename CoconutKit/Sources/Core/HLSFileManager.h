@@ -54,9 +54,9 @@
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError;
 
 /**
- * Move the file or directory at the specified path to a new location
- *
- * Return YES iff successful
+ * Recursively move the file or directory at the specified path to a new location. If any path is invalid, if the move
+ * fails or if the destination already exists, the method must return NO and an error, otherwise YES and no error.
+ * The destination path must contain the name of the file or directory in its new location
  */
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError;
 
@@ -83,8 +83,8 @@
 - (NSInputStream *)inputStreamWithFileAtPath:(NSString *)path;
 
 /**
- * Return an output stream for the file at a given location. Check the providingOutputStreams property before calling this 
- * method
+ * Return an output stream for the file at a given location, nil if the path is invalid (e.g. corresponds to an existing
+ * directory). Check the providingOutputStreams property before calling this method
  */
 - (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append;
 
