@@ -35,7 +35,7 @@
     GHAssertFalse([fileManager createDirectoryAtPath:@"/folder4/folder41" withIntermediateDirectories:NO error:&error41], nil);
     GHAssertNotNil(error41, nil);
     
-    // Fole creation, parent folder does not exist. Must fail
+    // Folder creation, parent folder does not exist. Must fail
     NSError *error42 = nil;
     NSData *data42 = [@"data42" dataUsingEncoding:NSUTF8StringEncoding];
     GHAssertFalse([fileManager createFileAtPath:@"/folder4/file41.txt" contents:data42 error:&error42], nil);

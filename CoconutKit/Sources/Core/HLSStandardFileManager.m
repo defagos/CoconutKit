@@ -56,11 +56,31 @@
     return [self initWithRootFolderPath:nil];
 }
 
+#pragma mark Helpers
+
+- (NSString *)fullPathForPath:(NSString *)path withError:(NSError **)pError
+{
+    if (! [path hasPrefix:@"/"]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileReadInvalidFileNameError
+                           localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
+        }
+        return nil;
+    }
+    
+    return [self.rootFolderPath stringByAppendingPathComponent:path];;
+}
+
 #pragma mark HLSFileManagerAbstract protocol implementation
 
 - (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError
 {
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    NSString *fullPath = [self fullPathForPath:path withError:pError];
+    if (! fullPath) {
+        return nil;
+    }
+    
     return [NSData dataWithContentsOfFile:fullPath options:NSDataReadingMappedIfSafe error:pError];
 }
 
@@ -76,45 +96,91 @@
         return NO;
     }
     
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    // -[NSFileManager createFileAtPath:contents:attributes:] overwrites existing files. Prevent it
+    if ([self fileExistsAtPath:path]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileWriteFileExistsError
+                           localizedDescription:CoconutKitLocalizedString(@"The file already exists", nil)];
+        }
+        return NO;
+    }
+    
+    NSString *fullPath = [self fullPathForPath:path withError:pError];
+    if (! fullPath) {
+        return NO;
+    }
+    
     return [contents writeToFile:fullPath options:NSDataWritingAtomic error:pError];
 }
 
 - (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError
 {
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    NSString *fullPath = [self fullPathForPath:path withError:pError];
+    if (! fullPath) {
+        return NO;
+    }
+    
     return [[NSFileManager defaultManager] createDirectoryAtPath:fullPath withIntermediateDirectories:withIntermediateDirectories attributes:nil error:pError];
 }
 
 - (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError
 {
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    NSString *fullPath = [self fullPathForPath:path withError:pError];
+    if (! fullPath) {
+        return nil;
+    }
+    
     return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:fullPath error:pError];
 }
 
 - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory
 {
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    NSString *fullPath = [self fullPathForPath:path withError:NULL];
+    if (! fullPath) {
+        return NO;
+    }
+    
     return [[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:pIsDirectory];
 }
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
-    NSString *fullSourcePath = [self.rootFolderPath stringByAppendingPathComponent:sourcePath];
-    NSString *fullDestinationPath = [self.rootFolderPath stringByAppendingPathComponent:destinationPath];
+    NSString *fullSourcePath = [self fullPathForPath:sourcePath withError:pError];
+    if (! fullSourcePath) {
+        return NO;
+    }
+    
+    NSString *fullDestinationPath = [self fullPathForPath:destinationPath withError:pError];
+    if (! fullDestinationPath) {
+        return NO;
+    }
+    
     return [[NSFileManager defaultManager] copyItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
-    NSString *fullSourcePath = [self.rootFolderPath stringByAppendingPathComponent:sourcePath];
-    NSString *fullDestinationPath = [self.rootFolderPath stringByAppendingPathComponent:destinationPath];
+    NSString *fullSourcePath = [self fullPathForPath:sourcePath withError:pError];
+    if (! fullSourcePath) {
+        return NO;
+    }
+    
+    NSString *fullDestinationPath = [self fullPathForPath:destinationPath withError:pError];
+    if (! fullDestinationPath) {
+        return NO;
+    }
+    
     return [[NSFileManager defaultManager] moveItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
-- (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError;
+- (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError
 {
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    NSString *fullPath = [self fullPathForPath:path withError:pError];
+    if (! fullPath) {
+        return NO;
+    }
+    
     return [[NSFileManager defaultManager] removeItemAtPath:fullPath error:pError];
 }
 
@@ -124,12 +190,16 @@
 {
     // If the path is invalid, NSInputStream returns a stream object which fails to open, not nil
     BOOL isDirectory = NO;
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
-    if (! [self fileExistsAtPath:fullPath isDirectory:&isDirectory]) {
+    if (! [self fileExistsAtPath:path isDirectory:&isDirectory]) {
         return nil;
     }
     
     if (isDirectory) {
+        return nil;
+    }
+    
+    NSString *fullPath = [self fullPathForPath:path withError:NULL];
+    if (! fullPath) {
         return nil;
     }
     
@@ -138,7 +208,11 @@
 
 - (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append
 {
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    NSString *fullPath = [self fullPathForPath:path withError:NULL];
+    if (! fullPath) {
+        return nil;
+    }
+    
     return [NSOutputStream outputStreamToFileAtPath:fullPath append:append];
 }
 
@@ -146,7 +220,11 @@
 
 - (NSURL *)URLForFileAtPath:(NSString *)path
 {
-    NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
+    NSString *fullPath = [self fullPathForPath:path withError:NULL];
+    if (! fullPath) {
+        return nil;
+    }
+    
     return [NSURL fileURLWithPath:fullPath];
 }
 

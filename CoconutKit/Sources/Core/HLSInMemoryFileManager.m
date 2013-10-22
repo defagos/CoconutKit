@@ -43,6 +43,15 @@
  */
 - (BOOL)addObjectAtPath:(NSString *)path withData:(NSData *)data error:(NSError **)pError
 {
+    if (! [path hasPrefix:@"/"]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileReadInvalidFileNameError
+                           localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
+        }
+        return NO;
+    }
+    
     return [self addObjectAtPath:path toItems:self.rootItems withData:data error:pError];
 }
 
@@ -147,6 +156,7 @@
         [self.cache removeObjectForKey:content];
     }
     
+    // Never remove the root
     if (! [name isEqualToString:@"/"]) {
         [items removeObjectForKey:name];
     }
