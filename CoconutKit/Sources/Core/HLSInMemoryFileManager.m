@@ -155,11 +155,7 @@
         [self.cache removeObjectForKey:content];
     }
     
-    // Never remove the root
-    if (! [name isEqualToString:@"/"]) {
-        [items removeObjectForKey:name];
-    }
-    
+    [items removeObjectForKey:name];
     return YES;
 }
 
@@ -285,7 +281,7 @@
 
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError
 {
-    NSString *name = [path lastPathComponent];
+    // Get the directory in which the element to delete is located
     id content = [self contentAtPath:[path stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [content isKindOfClass:[NSDictionary class]]) {
         if (pError) {
@@ -296,7 +292,20 @@
         return NO;
     }
     
-    return [self removeItemWithName:name inItems:content error:pError];
+    // Never delete the root, rather delete all its contents
+    NSArray *pathComponents = [path pathComponents];
+    if ([pathComponents count] == 1 && [[pathComponents firstObject] isEqualToString:@"/"]) {
+        for (NSString *name in [content allKeys]) {
+            if (! [self removeItemWithName:name inItems:content error:NULL]) {
+                HLSLoggerWarn(@"Could not remove %@", name);
+            }
+        }
+        return YES;
+    }
+    else {
+        NSString *name = [path lastPathComponent];
+        return [self removeItemWithName:name inItems:content error:pError];
+    }
 }
 
 #pragma mark NSCacheDelegate protocol implementation

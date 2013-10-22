@@ -116,6 +116,7 @@
     GHAssertTrue([fileManager removeItemAtPath:@"/" error:&remError4], nil);
     GHAssertNil(remError4, nil);
     GHAssertTrue([fileManager fileExistsAtPath:@"/"], nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/" error:NULL] count], 0U, nil);
 }
 
 - (void)testContentsAndExistenceWithFileManager:(HLSFileManager *)fileManager
