@@ -69,24 +69,23 @@
     
     if ([pathComponents count] == 1) {
         NSString *objectName = [pathComponents firstObject];
-        if ([items objectForKey:objectName]) {
-            if (pError) {
-                *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                               code:NSFileWriteFileExistsError
-                               localizedDescription:CoconutKitLocalizedString(@"The file or directory already exists", nil)];
-            }            
-            return NO;
-        }
         
-        // File
+        // File. If the file already exists, it will be replaced
         if (data) {
+            NSString *oldUUID = [items objectForKey:objectName];
+            if (oldUUID) {
+                [self.cache removeObjectForKey:oldUUID];
+            }
+            
             NSString *UUID = HLSUUID();
             [items setObject:UUID forKey:objectName];
             [self.cache setObject:data forKey:UUID cost:[data length]];
         }
-        // Folder
+        // Folder. If the folder already exists, it is not replaced, and the method succeeds
         else {
-            [items setObject:[NSMutableDictionary dictionary] forKey:objectName];
+            if (! [items objectForKey:objectName]) {
+                [items setObject:[NSMutableDictionary dictionary] forKey:objectName];
+            }
         }
         
         return YES;
