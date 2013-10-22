@@ -11,4 +11,12 @@
  */
 @interface HLSInMemoryFileManager : HLSFileManager <NSCacheDelegate>
 
+/**
+ * Size of the data cache above which the cache might be cleaned (refer to the corresponding NSCache method
+ * documentation for more information). When data is added to the cache, its size is used as cost
+ *
+ * Default value is 0 (no limit)
+ */
+@property (nonatomic, assign) NSUInteger totalCostLimit;
+
 @end

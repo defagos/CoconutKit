@@ -32,6 +32,18 @@
     return self;
 }
 
+#pragma mark Accessors and mutators
+
+- (NSUInteger)totalCostLimit
+{
+    return self.cache.totalCostLimit;
+}
+
+- (void)setTotalCostLimit:(NSUInteger)totalCostLimit
+{
+    self.cache.totalCostLimit = totalCostLimit;
+}
+
 #pragma mark Content management
 
 /**
