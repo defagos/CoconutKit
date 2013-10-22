@@ -41,10 +41,10 @@
     GHAssertFalse([fileManager createFileAtPath:@"/folder4/file41.txt" contents:data42 error:&error42], nil);
     GHAssertNotNil(error42, nil);
     
-    // File creation, no data. Must return NO, but no error
+    // File creation, no data. Must fail
     NSError *error5 = nil;
     GHAssertFalse([fileManager createFileAtPath:@"/file5.txt" contents:nil error:&error5], nil);
-    GHAssertNil(error5, nil);
+    GHAssertNotNil(error5, nil);
     
     // Try to create a file which already exists. Must fail
     NSError *error1b = nil;

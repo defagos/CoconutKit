@@ -8,7 +8,9 @@
 
 #import "HLSStandardFileManager.h"
 
+#import "HLSError.h"
 #import "HLSLogger.h"
+#import "NSBundle+HLSExtensions.h"
 
 @interface HLSStandardFileManager ()
 
@@ -64,6 +66,16 @@
 
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
 {
+    // NSFileManager returns NO but no error when contents == nil
+    if (! contents) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileWriteUnknownError
+                           localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
+        }
+        return NO;
+    }
+    
     NSString *fullPath = [self.rootFolderPath stringByAppendingPathComponent:path];
     return [contents writeToFile:fullPath options:NSDataWritingAtomic error:pError];
 }

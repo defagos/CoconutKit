@@ -189,8 +189,12 @@
 
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
 {
-    // No data. Return NO but no error
     if (! contents) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileWriteUnknownError
+                           localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
+        }
         return NO;
     }
     
