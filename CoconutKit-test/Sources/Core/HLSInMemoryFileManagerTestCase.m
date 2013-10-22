@@ -10,10 +10,18 @@
 
 @implementation HLSInMemoryFileManagerTestCase
 
+#pragma mark Tests
+
 - (void)testCreation
 {
     HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
     [self testCreationWithFileManager:fileManager];
+}
+
+- (void)testContents
+{
+    HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
+    [self testContentsWithFileManager:fileManager];
 }
 
 - (void)testStreams

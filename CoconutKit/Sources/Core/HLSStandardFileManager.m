@@ -96,21 +96,12 @@
         return NO;
     }
     
-    // -[NSFileManager createFileAtPath:contents:attributes:] overwrites existing files. Prevent it
-    if ([self fileExistsAtPath:path]) {
-        if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteFileExistsError
-                           localizedDescription:CoconutKitLocalizedString(@"The file already exists", nil)];
-        }
-        return NO;
-    }
-    
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {
         return NO;
     }
     
+    // Overwrite existing files, returning YES and no error
     return [contents writeToFile:fullPath options:NSDataWritingAtomic error:pError];
 }
 
@@ -121,6 +112,7 @@
         return NO;
     }
     
+    // Return YES if the directory already exists
     return [[NSFileManager defaultManager] createDirectoryAtPath:fullPath withIntermediateDirectories:withIntermediateDirectories attributes:nil error:pError];
 }
 

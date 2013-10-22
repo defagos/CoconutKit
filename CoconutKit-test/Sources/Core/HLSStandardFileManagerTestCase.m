@@ -37,6 +37,13 @@
     [self testCreationWithFileManager:fileManager];
 }
 
+- (void)testContents
+{
+    NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];
+    HLSStandardFileManager *fileManager = [[HLSStandardFileManager alloc] initWithRootFolderPath:rootFolderPath];
+    [self testContentsWithFileManager:fileManager];
+}
+
 - (void)testStreams
 {
     NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];

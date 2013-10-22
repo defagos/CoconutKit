@@ -13,33 +13,36 @@
 @optional
 
 /**
- * Return the content of the file at the given location
+ * Return the content of the file at the given location. If the path is incorrect or if the file does not exist, the method
+ * must return nil and an error, otherwise YES and no error.
  */
 - (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError;
 
 /**
- * Create a file with the specified content at the given location
- *
- * Return YES iff successful
+ * Create a file with the specified content at the given location. If the path is incorrect or if an error is encountered, 
+ * the method must return NO and an error, otherwise YES and no error. If the file already exists, its contents must be 
+ * replaced, and the method must return YES and no error
  */
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError;
 
 /**
- * Create a directory at the specified path (create intermediate directories if enabled, otherwise fails if the parent directory does not
- * exist)
- *
- * Return YES iff successful
+ * Create a directory at the specified path (create intermediate directories if enabled, otherwise fails if the parent 
+ * directory does not exist). If the path is incorrect or if an error is encountered, the method must return NO and an
+ * error, otherwise YES and no error. If the directory already exists, the method must return YES and no error
  */
 - (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError;
 
 /**
- * List the contents of the specified directory
+ * List the contents of the specified directory. If the path is incorrect or if an error is encountered, the method must
+ * return nil and an error, otherwise YES and no error. If the directory is empty, the method must return an empty array,
+ * not nil
  */
 - (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError;
 
 /**
  * Return YES iff the file or folder exists at the specified path (and whether it is a directory or not; you can pass NULL if you do not
- * need this information)
+ * need this information). If the path is invalid or if the file does not exist, the method must return NO and leave the boolean received
+ * by reference unchanged
  */
 - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory;
 
@@ -106,7 +109,7 @@
  * your own concrete file management classes. Subclasses should be implemented in a thread-safe manner.
  *
  * For all methods, paths represent locations relative to the managed storage, and should be given using the standard
- * notation /path/to/some/file.txt. The / at the beginning represents the storage root
+ * notation /path/to/some/file.txt. The / at the beginning represents the storage root and is mandatory
  *
  * Designated initializer: -init
  */
