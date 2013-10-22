@@ -231,6 +231,10 @@
 
 - (NSURL *)URLForFileAtPath:(NSString *)path
 {
+    if (! [self fileExistsAtPath:path]) {
+        return nil;
+    }
+    
     NSString *fullPath = [self fullPathForPath:path withError:NULL];
     if (! fullPath) {
         return nil;

@@ -98,7 +98,8 @@
 @optional
 
 /**
- * Return the file URL pointing at the file path. Check the providingURLs property before calling this method
+ * Return the file URL pointing at a file given its path. If the file does not exist, the method must return nil. Check 
+ * the providingURLs property before calling this method
  */
 - (NSURL *)URLForFileAtPath:(NSString *)path;
 

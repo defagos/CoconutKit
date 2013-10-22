@@ -396,7 +396,24 @@
 
 - (void)testURLsWithFileManager:(HLSFileManager *)fileManager
 {
+    // Create test file and folder
+    NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
+    GHAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/folder2" withIntermediateDirectories:YES error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/folder2/file21.txt" contents:data error:NULL], nil);
     
+    // URL to existing file
+    NSURL *URL1 = [fileManager URLForFileAtPath:@"/file1.txt"];
+    GHAssertNotNil(URL1, nil);
+    GHAssertEqualObjects([NSData dataWithContentsOfURL:URL1], data, nil);
+    
+    // URLs to existing folders
+    GHAssertNotNil([fileManager URLForFileAtPath:@"/folder2"], nil);
+    GHAssertNotNil([fileManager URLForFileAtPath:@"/"], nil);
+    
+    // URLs to a non-existing files
+    GHAssertNil([fileManager URLForFileAtPath:@"/invalid"], nil);
+    GHAssertNil([fileManager URLForFileAtPath:@"invalid"], nil);
 }
 
 @end
