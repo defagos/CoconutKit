@@ -8,8 +8,11 @@
 
 @interface HLSFileManagerTestCase : GHTestCase
 
-- (void)testCreationWithFileManager:(HLSFileManager *)fileManager;
-- (void)testContentsWithFileManager:(HLSFileManager *)fileManager;
+- (void)testCreationAndRemovalWithFileManager:(HLSFileManager *)fileManager;
+- (void)testContentsAndExistenceWithFileManager:(HLSFileManager *)fileManager;
+- (void)testCopyWithFileManager:(HLSFileManager *)fileManager;
+- (void)testMoveWithFileManager:(HLSFileManager *)fileManager;
 - (void)testStreamsWithFileManager:(HLSFileManager *)fileManager;
+- (void)testURLsWithFileManager:(HLSFileManager *)fileManager;
 
 @end

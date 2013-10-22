@@ -106,7 +106,7 @@
 
 #pragma mark Tests
 
-- (void)testCreation
+- (void)testCreationAndRemoval
 {
     FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
     

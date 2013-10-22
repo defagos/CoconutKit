@@ -172,8 +172,22 @@
     if (! fullPath) {
         return NO;
     }
-    
-    return [[NSFileManager defaultManager] removeItemAtPath:fullPath error:pError];
+
+    // Never delete the root, rather delete all its contents
+    NSArray *pathComponents = [path pathComponents];
+    if ([pathComponents count] == 1 && [[pathComponents firstObject] isEqualToString:@"/"]) {
+        NSArray *contents = [self contentsOfDirectoryAtPath:@"/" error:NULL];
+        for (NSString *content in contents) {
+            NSString *contentPath = [path stringByAppendingPathComponent:content];
+            if (! [self removeItemAtPath:contentPath error:NULL]) {
+                HLSLoggerWarn(@"Could not remove %@", content);
+            }
+        }
+        return YES;
+    }
+    else {
+        return [[NSFileManager defaultManager] removeItemAtPath:fullPath error:pError];
+    }
 }
 
 #pragma mark HLSFileManagerStreamSupport protocol implementation

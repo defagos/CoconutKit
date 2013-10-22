@@ -47,9 +47,9 @@
 - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory;
 
 /**
- * Copy the file or directory at the specified path to a new location
- *
- * Return YES iff successful
+ * Recursively copy the file or directory at the specified path to a new location. If any path is invalid, if the copy 
+ * fails or if the destination already exists, the method must return NO and an error, otherwise YES and no error.
+ * The destination path must contain the name of the file or directory in its new location
  */
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError;
 
@@ -61,9 +61,9 @@
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError;
 
 /**
- * Remove the file or directory at the specified path
- *
- * Return YES iff successful
+ * Remove the file or directory at the specified path. If the path is invalid or if an error is encountered, the method
+ * must return nil and an error, otherwise YES and no error. If the path is /, all data is erased, but the root itself
+ * must not be destroyed
  */
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError;
 

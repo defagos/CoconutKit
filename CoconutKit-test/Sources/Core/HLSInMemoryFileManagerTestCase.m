@@ -12,22 +12,40 @@
 
 #pragma mark Tests
 
-- (void)testCreation
+- (void)testCreationAndRemoval
 {
     HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
-    [self testCreationWithFileManager:fileManager];
+    [self testCreationAndRemovalWithFileManager:fileManager];
 }
 
-- (void)testContents
+- (void)testContentsAndExistence
 {
     HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
-    [self testContentsWithFileManager:fileManager];
+    [self testContentsAndExistenceWithFileManager:fileManager];
+}
+
+- (void)testCopy
+{
+    HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
+    [self testCopyWithFileManager:fileManager];
+}
+
+- (void)testMove
+{
+    HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
+    [self testMoveWithFileManager:fileManager];
 }
 
 - (void)testStreams
 {
     HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
     [self testStreamsWithFileManager:fileManager];
+}
+
+- (void)testURLs
+{
+    HLSInMemoryFileManager *fileManager = [[HLSInMemoryFileManager alloc] init];
+    [self testURLsWithFileManager:fileManager];
 }
 
 @end

@@ -12,7 +12,7 @@
 
 #pragma mark Common test code
 
-- (void)testCreationWithFileManager:(HLSFileManager *)fileManager
+- (void)testCreationAndRemovalWithFileManager:(HLSFileManager *)fileManager
 {
     // File creation, parent directory exists. Must succeed
     NSError *error1 = nil;
@@ -88,9 +88,37 @@
     NSData *data9 = [@"data9" dataUsingEncoding:NSUTF8StringEncoding];
     GHAssertTrue([fileManager createFileAtPath:@"/file9.txt/" contents:data9 error:&error9], nil);
     GHAssertNil(error9, nil);
+    
+    // Creation of the root folder. No-op, but still a success
+    NSError *error10 = nil;
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/" withIntermediateDirectories:YES error:&error10], nil);
+    GHAssertNil(error10, nil);
+    
+    // Remove existing file. Must succeed
+    NSError *remError1 = nil;
+    GHAssertTrue([fileManager removeItemAtPath:@"/file1.txt" error:&remError1], nil);
+    GHAssertNil(remError1, nil);
+    GHAssertFalse([fileManager fileExistsAtPath:@"/file1.txt"], nil);
+    
+    // Remove existing directory. Must succeed
+    NSError *remError2 = nil;
+    GHAssertTrue([fileManager removeItemAtPath:@"/folder2" error:&remError2], nil);
+    GHAssertNil(remError2, nil);
+    GHAssertFalse([fileManager fileExistsAtPath:@"/folder2"], nil);
+    
+    // Remove non-existing file. Must fail and return an error
+    NSError *remError3 = nil;
+    GHAssertFalse([fileManager removeItemAtPath:@"/invalid.txt" error:&remError3], nil);
+    GHAssertNotNil(remError3, nil);
+    
+    // Remove /. Remove all files, but do not delete the root itself
+    NSError *remError4 = nil;
+    GHAssertTrue([fileManager removeItemAtPath:@"/" error:&remError4], nil);
+    GHAssertNil(remError4, nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/"], nil);
 }
 
-- (void)testContentsWithFileManager:(HLSFileManager *)fileManager
+- (void)testContentsAndExistenceWithFileManager:(HLSFileManager *)fileManager
 {
     // Create some files and folders
     NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
@@ -167,9 +195,170 @@
     BOOL isDirectory11 = YES;
     GHAssertFalse([fileManager fileExistsAtPath:@"invalid/path" isDirectory:&isDirectory11], nil);
     GHAssertTrue(isDirectory11, nil);
+    
+    // Existence of the root folder
+    BOOL isDirectory12 = NO;
+    GHAssertTrue([fileManager fileExistsAtPath:@"/" isDirectory:&isDirectory12], nil);
+    GHAssertTrue(isDirectory12, nil);
+}
+
+- (void)testCopyWithFileManager:(HLSFileManager *)fileManager
+{
+    // Create some files and folders
+    NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
+    GHAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/folder2" withIntermediateDirectories:YES error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/folder3" withIntermediateDirectories:YES error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/folder3/file31.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/folder3/file32.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/folder3/folder33" withIntermediateDirectories:YES error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/folder3/folder33/file331.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/copy" withIntermediateDirectories:YES error:NULL], nil);
+    
+    // File copy to an existing folder. Must succeed
+    NSError *error1 = nil;
+    GHAssertTrue([fileManager copyItemAtPath:@"/file1.txt" toPath:@"/copy/file1.txt" error:&error1], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/file1.txt"], nil);
+    GHAssertNil(error1, nil);
+    GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/copy/file1.txt" error:&error1], data, nil);
+    GHAssertNil(error1, nil);
+    
+    // File copy to a non-existing folder. Must fail
+    NSError *error2 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/file1.txt" toPath:@"/invalid/file1.txt" error:&error2], nil);
+    GHAssertNotNil(error2, nil);
+    
+    // File copy onto an existing file. Must fail
+    NSError *error3 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/file1.txt" toPath:@"/copy/file1.txt" error:&error3], nil);
+    GHAssertNotNil(error3, nil);
+    
+    // File copy onto an existing folder. Must fail
+    NSError *error4 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/file1.txt" toPath:@"/copy" error:&error4], nil);
+    GHAssertNotNil(error4, nil);
+    
+    // Folder copy to an existing folder. Must succceed and copy recursively
+    NSError *error5 = nil;
+    GHAssertTrue([fileManager copyItemAtPath:@"/folder3" toPath:@"/copy/folder3" error:&error5], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/folder3"], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/folder3/file31.txt"], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/folder3/folder33/file331.txt"], nil);
+    GHAssertNil(error5, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3" error:&error5] count], 3U, nil);
+    GHAssertNil(error5, nil);
+    GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/copy/folder3/file31.txt" error:&error5], data, nil);
+    GHAssertNil(error5, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3/folder33" error:&error5] count], 1U, nil);
+    GHAssertNil(error5, nil);
+    GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/copy/folder3/folder33/file331.txt" error:&error5], data, nil);
+    GHAssertNil(error5, nil);
+    
+    // Folder copy to a non-existing folder. Must fail
+    NSError *error6 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/folder3" toPath:@"/invalid/folder3" error:&error6], nil);
+    GHAssertNotNil(error6, nil);
+    
+    // Folder copy onto an existing folder. Must fail
+    NSError *error7 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/folder3" toPath:@"/copy/folder3" error:&error7], nil);
+    GHAssertNotNil(error7, nil);
+    
+    // Folder copy onto an existing file. Must fail
+    NSError *error8 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/folder3" toPath:@"/copy/file1.txt" error:&error8], nil);
+    GHAssertNotNil(error8, nil);
+    
+    // Missing copy source file. Must fail
+    NSError *error9 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/invalid.txt" toPath:@"/copy/invalid.txt" error:&error9], nil);
+    GHAssertNotNil(error9, nil);
+}
+
+- (void)testMoveWithFileManager:(HLSFileManager *)fileManager
+{
+    // Create some files and folders
+    NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
+    GHAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/file4.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/folder2" withIntermediateDirectories:YES error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/folder3" withIntermediateDirectories:YES error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/folder3/file31.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/folder3/file32.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/folder3/folder33" withIntermediateDirectories:YES error:NULL], nil);
+    GHAssertTrue([fileManager createFileAtPath:@"/folder3/folder33/file331.txt" contents:data error:NULL], nil);
+    GHAssertTrue([fileManager createDirectoryAtPath:@"/move" withIntermediateDirectories:YES error:NULL], nil);
+    
+    // File move to an existing folder. Must succeed
+    NSError *error1 = nil;
+    GHAssertTrue([fileManager moveItemAtPath:@"/file1.txt" toPath:@"/move/file1.txt" error:&error1], nil);
+    GHAssertFalse([fileManager fileExistsAtPath:@"/file1.txt"], nil);
+    GHAssertNil(error1, nil);
+    GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/move/file1.txt" error:&error1], data, nil);
+    GHAssertNil(error1, nil);
+    
+    // File move to a non-existing folder. Must fail
+    NSError *error2 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/file4.txt" toPath:@"/invalid/file4.txt" error:&error2], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/file4.txt"], nil);
+    GHAssertNotNil(error2, nil);
+    
+    // File move onto an existing file. Must fail
+    NSError *error3 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/file4.txt" toPath:@"/move/file1.txt" error:&error3], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/file4.txt"], nil);
+    GHAssertNotNil(error3, nil);
+    
+    // File move onto an existing folder. Must fail
+    NSError *error4 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/file4.txt" toPath:@"/move" error:&error4], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/file4.txt"], nil);
+    GHAssertNotNil(error4, nil);
+    
+    // Folder move to an existing folder. Must succceed and move recursively
+    NSError *error5 = nil;
+    GHAssertTrue([fileManager moveItemAtPath:@"/folder3" toPath:@"/move/folder3" error:&error5], nil);
+    GHAssertFalse([fileManager fileExistsAtPath:@"/folder3"], nil);
+    GHAssertNil(error5, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/move/folder3" error:&error5] count], 3U, nil);
+    GHAssertNil(error5, nil);
+    GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/move/folder3/file31.txt" error:&error5], data, nil);
+    GHAssertNil(error5, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/move/folder3/folder33" error:&error5] count], 1U, nil);
+    GHAssertNil(error5, nil);
+    GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/move/folder3/folder33/file331.txt" error:&error5], data, nil);
+    GHAssertNil(error5, nil);
+    
+    // Folder move to a non-existing folder. Must fail
+    NSError *error6 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/folder2" toPath:@"/invalid/folder2" error:&error6], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/folder2"], nil);
+    GHAssertNotNil(error6, nil);
+    
+    // Folder move onto an existing folder. Must fail
+    NSError *error7 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/folder2" toPath:@"/move/folder3" error:&error7], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/folder2"], nil);
+    GHAssertNotNil(error7, nil);
+    
+    // Folder move onto an existing file. Must fail
+    NSError *error8 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/folder2" toPath:@"/move/file1.txt" error:&error8], nil);
+    GHAssertTrue([fileManager fileExistsAtPath:@"/folder2"], nil);
+    GHAssertNotNil(error8, nil);
+    
+    // Missing move source file. Must fail
+    NSError *error9 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/invalid.txt" toPath:@"/move/invalid.txt" error:&error9], nil);
+    GHAssertNotNil(error9, nil);
 }
 
 - (void)testStreamsWithFileManager:(HLSFileManager *)fileManager
+{
+
+}
+
+- (void)testURLsWithFileManager:(HLSFileManager *)fileManager
 {
 
 }

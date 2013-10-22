@@ -30,18 +30,32 @@
 
 #pragma mark Tests
 
-- (void)testCreation
+- (void)testCreationAndRemoval
 {
     NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];
     HLSStandardFileManager *fileManager = [[HLSStandardFileManager alloc] initWithRootFolderPath:rootFolderPath];
-    [self testCreationWithFileManager:fileManager];
+    [self testCreationAndRemovalWithFileManager:fileManager];
 }
 
-- (void)testContents
+- (void)testContentsAndExistence
 {
     NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];
     HLSStandardFileManager *fileManager = [[HLSStandardFileManager alloc] initWithRootFolderPath:rootFolderPath];
-    [self testContentsWithFileManager:fileManager];
+    [self testContentsAndExistenceWithFileManager:fileManager];
+}
+
+- (void)testCopy
+{
+    NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];
+    HLSStandardFileManager *fileManager = [[HLSStandardFileManager alloc] initWithRootFolderPath:rootFolderPath];
+    [self testCopyWithFileManager:fileManager];
+}
+
+- (void)testMove
+{
+    NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];
+    HLSStandardFileManager *fileManager = [[HLSStandardFileManager alloc] initWithRootFolderPath:rootFolderPath];
+    [self testMoveWithFileManager:fileManager];
 }
 
 - (void)testStreams
@@ -49,6 +63,13 @@
     NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];
     HLSStandardFileManager *fileManager = [[HLSStandardFileManager alloc] initWithRootFolderPath:rootFolderPath];
     [self testStreamsWithFileManager:fileManager];
+}
+
+- (void)testURLs
+{
+    NSString *rootFolderPath = [HLSStandardFileManagerTestCase rootFolderPath];
+    HLSStandardFileManager *fileManager = [[HLSStandardFileManager alloc] initWithRootFolderPath:rootFolderPath];
+    [self testURLsWithFileManager:fileManager];
 }
 
 @end
