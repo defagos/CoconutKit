@@ -261,6 +261,8 @@
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
+    // TODO: This could be more efficiently implemented, but data is not copied, so there should not be any
+    //       major overhead here
     id sourceContent = [self contentAtPath:sourcePath forItems:self.rootItems];
     if (! sourceContent) {
         if (pError) {
@@ -284,6 +286,8 @@
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
+    // TODO: This could be more efficiently implemented, but data is not copied, so there should not be any
+    //       major overhead here
     if (! [self copyItemAtPath:sourcePath toPath:destinationPath error:pError]) {
         return NO;
     }
