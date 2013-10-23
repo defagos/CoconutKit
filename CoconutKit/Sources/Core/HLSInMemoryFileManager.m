@@ -285,19 +285,34 @@
         return NO;
     }
     
+    // Cannot overwrite existing files
+    if ([self contentAtPath:destinationPath forItems:self.rootItems]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileWriteFileExistsError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
+        }
+        return NO;
+    }
+    
+    // The destination parent directory must exist
+    if (! [self checkParentDirectoryForPath:destinationPath error:pError]) {
+        return NO;
+    }
+    
     // Folder
     if ([sourceContent isKindOfClass:[NSDictionary class]]) {
         return [self addObjectAtPath:destinationPath withData:nil error:pError];
     }
     // File
     else {
-        NSData *data = [self.cache objectForKey:sourceContent];
-        return [self addObjectAtPath:destinationPath withData:data error:pError];
+        HLSInMemoryCacheEntry *cacheEntry = [self.cache objectForKey:sourceContent];
+        return [self addObjectAtPath:destinationPath withData:cacheEntry.data error:pError];
     }
 }
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
-{
+{    
     // TODO: This could be more efficiently implemented, but data is not copied, so there should not be any
     //       major overhead here
     if (! [self copyItemAtPath:sourcePath toPath:destinationPath error:pError]) {
