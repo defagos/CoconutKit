@@ -186,6 +186,39 @@
     return YES;
 }
 
+- (BOOL)moveObjectWithName:(NSString *)sourceObjectName
+                   inItems:(NSMutableDictionary *)sourceItems
+          toObjectWithName:(NSString *)destinationObjectName
+                   inItems:(NSMutableDictionary *)destinationItems
+                     error:(NSError **)pError
+{
+    // Retrieve the source content
+    id sourceContent = [sourceItems objectForKey:sourceObjectName];
+    if (! sourceContent) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
+        }
+        return NO;
+    }
+    
+    if ([destinationItems objectForKey:destinationObjectName]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileWriteFileExistsError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
+        }
+        return NO;
+    }
+    
+    // Unlink from source and link to destination folder. Very cheap
+    [destinationItems setObject:sourceContent forKey:destinationObjectName];
+    [sourceItems removeObjectForKey:sourceObjectName];
+    
+    return YES;
+}
+
 /**
  * Return either a dictionary (folder) or a string identifier pointing to a cache entry (file)
  */
@@ -364,14 +397,34 @@
 }
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
-{    
-    // TODO: This could be more efficiently implemented, but data is not copied, so there should not be any
-    //       major overhead here. Should also be able to rollback when move fails
-    if (! [self copyItemAtPath:sourcePath toPath:destinationPath error:pError]) {
+{
+    // Get the directory in which the element to move is located
+    id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    if (! [sourceContent isKindOfClass:[NSDictionary class]]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"The source file or directory does not exist", nil)];
+        }
         return NO;
     }
     
-    return [self removeItemAtPath:sourcePath error:pError];
+    // Get the destination directory contents
+    id destinationContent = [self contentAtPath:[destinationPath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    if (! [destinationContent isKindOfClass:[NSDictionary class]]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination directory does not exist", nil)];
+        }
+        return NO;
+    }
+    
+    return  [self moveObjectWithName:[sourcePath lastPathComponent]
+                             inItems:sourceContent
+                    toObjectWithName:[destinationPath lastPathComponent]
+                             inItems:destinationContent
+                               error:pError];
 }
 
 - (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError
