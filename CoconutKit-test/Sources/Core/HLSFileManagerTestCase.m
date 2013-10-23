@@ -274,6 +274,12 @@
     NSError *error9 = nil;
     GHAssertFalse([fileManager copyItemAtPath:@"/invalid.txt" toPath:@"/copy/invalid.txt" error:&error9], nil);
     GHAssertNotNil(error9, nil);
+    
+    
+    // TODO: Add tests for the following cases:
+    //   - copy to the same directory, same name -> what happens? (see with NSFileManager-based implementation)
+    //   - copy to a subdirectory of itself -> what happens? (see with NSFileManager-based implementation)
+    //   - delete original -> show that copy data is still accessible (i.e. not shared by mistake)
 }
 
 - (void)testMoveWithFileManager:(HLSFileManager *)fileManager
@@ -352,6 +358,10 @@
     NSError *error9 = nil;
     GHAssertFalse([fileManager moveItemAtPath:@"/invalid.txt" toPath:@"/move/invalid.txt" error:&error9], nil);
     GHAssertNotNil(error9, nil);
+    
+    // TODO: Add tests for the following cases:
+    //   - move to the same directory, same name (i.e. does not move) -> what happens? (see with NSFileManager-based implementation)
+    //   - move to a subdirectory of itself -> what happens? (see with NSFileManager-based implementation)
 }
 
 - (void)testStreamsWithFileManager:(HLSFileManager *)fileManager

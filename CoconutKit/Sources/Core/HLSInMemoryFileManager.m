@@ -97,7 +97,7 @@
             
             NSString *UUID = HLSUUID();
             [items setObject:UUID forKey:objectName];
-            [self.cache setObject:cacheEntry forKey:UUID cost:[data length]];
+            [self.cache setObject:cacheEntry forKey:UUID cost:cacheEntry.cost];
         }
         // Folder. If the folder already exists, it is not replaced, and the method succeeds
         else {
@@ -123,6 +123,67 @@
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
         return [self addObjectAtPath:subpath toItems:subitems withData:data error:pError];
     }
+}
+
+/**
+ * Copy the object from sourceItems having the specified name, to the destination dictionary. Fails if the source
+ * is not found or if the destination already exists
+ */
+- (BOOL)copyObjectWithName:(NSString *)sourceObjectName
+                   inItems:(NSDictionary *)sourceItems
+          toObjectWithName:(NSString *)destinationObjectName
+                   inItems:(NSMutableDictionary *)destinationItems
+                     error:(NSError **)pError
+{
+    // Retrieve the source content
+    id sourceContent = [sourceItems objectForKey:sourceObjectName];
+    if (! sourceContent) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
+        }
+        return NO;
+    }
+    
+    if ([destinationItems objectForKey:destinationObjectName]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileWriteFileExistsError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
+        }
+        return NO;
+    }
+    
+    // Folder
+    if ([sourceContent isKindOfClass:[NSDictionary class]]) {
+        NSMutableDictionary *destinationSubitems = [NSMutableDictionary dictionary];
+        [destinationItems setObject:destinationSubitems forKey:destinationObjectName];
+        
+        for (NSString *subname in [sourceContent allKeys]) {
+            if (! [self copyObjectWithName:subname inItems:sourceContent toObjectWithName:subname inItems:destinationSubitems error:pError]) {
+                // FIXME: Should handle rollback more appropriately in case of failure!
+                return NO;
+            }
+        }
+                
+        return YES;
+    }
+    // File UUID
+    else {
+        HLSInMemoryCacheEntry *sourceCacheEntry = [self.cache objectForKey:sourceContent];
+        
+        // Perform a deep copy of the source data
+        HLSInMemoryCacheEntry *destinationCacheEntry = [[HLSInMemoryCacheEntry alloc] initWithParentItems:destinationItems
+                                                                                                     name:destinationObjectName
+                                                                                                     data:[sourceCacheEntry.data copy]];
+        
+        NSString *UUID = HLSUUID();
+        [destinationItems setObject:UUID forKey:destinationObjectName];
+        [self.cache setObject:destinationCacheEntry forKey:UUID cost:destinationCacheEntry.cost];
+    }
+    
+    return YES;
 }
 
 /**
@@ -273,48 +334,39 @@
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
-    // TODO: This could be more efficiently implemented, but data is not copied, so there should not be any
-    //       major overhead here
-    id sourceContent = [self contentAtPath:sourcePath forItems:self.rootItems];
-    if (! sourceContent) {
+    // Get the directory in which the element to copy is located
+    id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    if (! [sourceContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
                                            code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"File not found", nil)];
+                           localizedDescription:CoconutKitLocalizedString(@"The source file or directory does not exist", nil)];
         }
         return NO;
     }
     
-    // Cannot overwrite existing files
-    if ([self contentAtPath:destinationPath forItems:self.rootItems]) {
+    // Get the destination directory contents
+    id destinationContent = [self contentAtPath:[destinationPath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    if (! [destinationContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteFileExistsError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
+                                           code:NSFileNoSuchFileError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination directory does not exist", nil)];
         }
         return NO;
     }
     
-    // The destination parent directory must exist
-    if (! [self checkParentDirectoryForPath:destinationPath error:pError]) {
-        return NO;
-    }
-    
-    // Folder
-    if ([sourceContent isKindOfClass:[NSDictionary class]]) {
-        return [self addObjectAtPath:destinationPath withData:nil error:pError];
-    }
-    // File
-    else {
-        HLSInMemoryCacheEntry *cacheEntry = [self.cache objectForKey:sourceContent];
-        return [self addObjectAtPath:destinationPath withData:cacheEntry.data error:pError];
-    }
+    return [self copyObjectWithName:[sourcePath lastPathComponent]
+                            inItems:sourceContent
+                   toObjectWithName:[destinationPath lastPathComponent]
+                            inItems:destinationContent
+                              error:pError];
 }
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {    
     // TODO: This could be more efficiently implemented, but data is not copied, so there should not be any
-    //       major overhead here
+    //       major overhead here. Should also be able to rollback when move fails
     if (! [self copyItemAtPath:sourcePath toPath:destinationPath error:pError]) {
         return NO;
     }
