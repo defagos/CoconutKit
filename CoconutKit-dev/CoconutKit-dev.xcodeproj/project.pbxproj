@@ -108,6 +108,7 @@
 		6FAB921D16DA709600599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921C16DA709600599256 /* MobileCoreServices.framework */; };
 		6FAB923216DA7FA300599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB923416DA7FA300599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923116DA7FA300599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAD88D11817856D00B02B29 /* HLSInMemoryCacheEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAD88D01817856D00B02B29 /* HLSInMemoryCacheEntry.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE62E14BA04A6007EE121 /* HLSAnimation.m */; };
 		6FADE6BD14BA04A7007EE121 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63014BA04A6007EE121 /* HLSViewAnimationStep.m */; };
 		6FADE6BE14BA04A7007EE121 /* HLSViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE63214BA04A6007EE121 /* HLSViewAnimation.m */; };
@@ -457,6 +458,8 @@
 		6FAB922F16DA7FA300599256 /* HLSFileURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileURLConnection.m; sourceTree = "<group>"; };
 		6FAB923016DA7FA300599256 /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
 		6FAB923116DA7FA300599256 /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
+		6FAD88CF1817856D00B02B29 /* HLSInMemoryCacheEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryCacheEntry.h; sourceTree = "<group>"; };
+		6FAD88D01817856D00B02B29 /* HLSInMemoryCacheEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryCacheEntry.m; sourceTree = "<group>"; };
 		6FADE62D14BA04A6007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE62E14BA04A6007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FADE62F14BA04A6007EE121 /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -1137,6 +1140,8 @@
 				6FCA2DDD1679E3EB0011CFDA /* HLSFileManager.m */,
 				6FADE63B14BA04A6007EE121 /* HLSFloat.h */,
 				6FADE63C14BA04A6007EE121 /* HLSFloat.m */,
+				6FAD88CF1817856D00B02B29 /* HLSInMemoryCacheEntry.h */,
+				6FAD88D01817856D00B02B29 /* HLSInMemoryCacheEntry.m */,
 				6FB318A4181136BA00565B69 /* HLSInMemoryFileManager.h */,
 				6FB318A5181136BA00565B69 /* HLSInMemoryFileManager.m */,
 				6FADE63D14BA04A6007EE121 /* HLSKeyboardInformation.h */,
@@ -2183,6 +2188,7 @@
 				6F63E7CA17CF6E56006322D9 /* HLSPreviewItem.m in Sources */,
 				6F794819180BABC800282253 /* NSStream+HLSExtensions.m in Sources */,
 				6FB318A6181136BA00565B69 /* HLSInMemoryFileManager.m in Sources */,
+				6FAD88D11817856D00B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

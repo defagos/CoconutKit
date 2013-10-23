@@ -1,6 +1,6 @@
 //
 //  HLSInMemoryFileManager.m
-//  CoconutKit-dev
+//  CoconutKit
 //
 //  Created by Samuel Défago on 18.10.13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
@@ -9,6 +9,7 @@
 #import "HLSInMemoryFileManager.h"
 
 #import "HLSError.h"
+#import "HLSInMemoryCacheEntry.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSString+HLSExtensions.h"
 
@@ -28,6 +29,7 @@
     if (self = [super init]) {
         self.rootItems = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"/"];
         self.cache = [[NSCache alloc] init];
+        self.cache.delegate = self;
     }
     return self;
 }
@@ -89,9 +91,13 @@
                 [self.cache removeObjectForKey:oldUUID];
             }
             
+            HLSInMemoryCacheEntry *cacheEntry = [[HLSInMemoryCacheEntry alloc] initWithParentItems:items
+                                                                                              name:objectName
+                                                                                              data:data];
+            
             NSString *UUID = HLSUUID();
             [items setObject:UUID forKey:objectName];
-            [self.cache setObject:data forKey:UUID cost:[data length]];
+            [self.cache setObject:cacheEntry forKey:UUID cost:[data length]];
         }
         // Folder. If the folder already exists, it is not replaced, and the method succeeds
         else {
@@ -120,7 +126,7 @@
 }
 
 /**
- * Return either a dictionary (folder) or a data string identifier (file)
+ * Return either a dictionary (folder) or a string identifier pointing to a cache entry (file)
  */
 - (id)contentAtPath:(NSString *)path forItems:(NSDictionary *)items
 {
@@ -201,7 +207,8 @@
         return nil;        
     }
     
-    return [self.cache objectForKey:content];
+    HLSInMemoryCacheEntry *cacheEntry = [self.cache objectForKey:content];
+    return cacheEntry.data;
 }
 
 - (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
@@ -326,9 +333,11 @@
 
 #pragma mark NSCacheDelegate protocol implementation
 
-- (void)cache:(NSCache *)cache willEvictObject:(id)obj
+- (void)cache:(NSCache *)cache willEvictObject:(id)object
 {
-    // TODO: Lookup object and remove entry in filesystem dict
+    // Remove the corresponding entry from the rootItems dictionary hierarchy
+    HLSInMemoryCacheEntry *cacheEntry = object;
+    [cacheEntry.parentItems removeObjectForKey:cacheEntry.name];
 }
 
 #pragma mark Description

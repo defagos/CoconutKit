@@ -89,6 +89,8 @@
 		6FAB922A16DA7F9100599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922616DA7F9100599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB922B16DA7F9100599256 /* HLSURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAB922716DA7F9100599256 /* HLSURLConnection.h */; };
 		6FAB922C16DA7F9100599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922816DA7F9100599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAD88D41817859F00B02B29 /* HLSInMemoryCacheEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAD88D21817859F00B02B29 /* HLSInMemoryCacheEntry.h */; };
+		6FAD88D51817859F00B02B29 /* HLSInMemoryCacheEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAD88D31817859F00B02B29 /* HLSInMemoryCacheEntry.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; };
 		6FADE59A14BA0494007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
 		6FADE59B14BA0494007EE121 /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51414BA0494007EE121 /* HLSViewAnimationStep.h */; };
@@ -352,6 +354,8 @@
 		6FAB922616DA7F9100599256 /* HLSFileURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileURLConnection.m; sourceTree = "<group>"; };
 		6FAB922716DA7F9100599256 /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
 		6FAB922816DA7F9100599256 /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
+		6FAD88D21817859F00B02B29 /* HLSInMemoryCacheEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryCacheEntry.h; sourceTree = "<group>"; };
+		6FAD88D31817859F00B02B29 /* HLSInMemoryCacheEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryCacheEntry.m; sourceTree = "<group>"; };
 		6FADE51214BA0494007EE121 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FADE51314BA0494007EE121 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FADE51414BA0494007EE121 /* HLSViewAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewAnimationStep.h; sourceTree = "<group>"; };
@@ -671,6 +675,8 @@
 				6FCA2DD21679E36D0011CFDA /* HLSFileManager.m */,
 				6FADE52014BA0494007EE121 /* HLSFloat.h */,
 				6FADE52114BA0494007EE121 /* HLSFloat.m */,
+				6FAD88D21817859F00B02B29 /* HLSInMemoryCacheEntry.h */,
+				6FAD88D31817859F00B02B29 /* HLSInMemoryCacheEntry.m */,
 				6FB318B01815A93100565B69 /* HLSInMemoryFileManager.h */,
 				6FB318B11815A93100565B69 /* HLSInMemoryFileManager.m */,
 				6FADE52214BA0494007EE121 /* HLSKeyboardInformation.h */,
@@ -1025,6 +1031,7 @@
 				6F63E7C617CF6E19006322D9 /* HLSPreviewItem.h in Headers */,
 				6F794815180BABAD00282253 /* NSStream+HLSExtensions.h in Headers */,
 				6FB318B21815A93200565B69 /* HLSInMemoryFileManager.h in Headers */,
+				6FAD88D41817859F00B02B29 /* HLSInMemoryCacheEntry.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,6 +1238,7 @@
 				6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */,
 				6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */,
 				6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */,
+				6FAD88D51817859F00B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
