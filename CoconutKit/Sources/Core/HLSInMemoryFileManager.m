@@ -10,7 +10,9 @@
 
 #import "HLSError.h"
 #import "HLSInMemoryCacheEntry.h"
-#import "NSBundle+HLSDynamicLocalization.h"
+#import "HLSLogger.h"
+#import "NSArray+HLSExtensions.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
 @interface HLSInMemoryFileManager ()
@@ -36,14 +38,14 @@
 
 #pragma mark Accessors and mutators
 
-- (NSUInteger)totalCostLimit
+- (NSUInteger)byteCostLimit
 {
     return self.cache.totalCostLimit;
 }
 
-- (void)setTotalCostLimit:(NSUInteger)totalCostLimit
+- (void)setByteCostLimit:(NSUInteger)byteCostLimit
 {
-    self.cache.totalCostLimit = totalCostLimit;
+    self.cache.totalCostLimit = byteCostLimit;
 }
 
 #pragma mark Content management

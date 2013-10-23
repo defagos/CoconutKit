@@ -10,6 +10,7 @@
 
 #import "HLSError.h"
 #import "HLSLogger.h"
+#import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
 
 @interface HLSStandardFileManager ()
