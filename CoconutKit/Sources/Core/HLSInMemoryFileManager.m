@@ -244,7 +244,7 @@
 - (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError
 {
     id subitems = [self contentAtPath:path forItems:self.rootItems];
-    if (! [subitems isKindOfClass:[NSDictionary dictionary]]) {
+    if (! [subitems isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", path];
             *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
@@ -260,10 +260,15 @@
 - (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory
 {
     id subitems = [self contentAtPath:path forItems:self.rootItems];
+    if (! subitems) {
+        return NO;
+    }
+    
     if (pIsDirectory) {
         *pIsDirectory = [subitems isKindOfClass:[NSDictionary class]];
     }
-    return subitems != nil;
+    
+    return YES;
 }
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
