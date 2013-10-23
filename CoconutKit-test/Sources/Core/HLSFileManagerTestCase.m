@@ -392,38 +392,48 @@
     GHAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL], nil);
     GHAssertTrue([fileManager createDirectoryAtPath:@"/folder2" withIntermediateDirectories:YES error:NULL], nil);
     
-    // Input stream with existing file. Must succeeed
-    NSInputStream *inputStream1 = [fileManager inputStreamWithFileAtPath:@"/file1.txt"];
-    GHAssertNotNil(inputStream1, nil);
-    NSOutputStream *outputStream1 = [NSOutputStream outputStreamToMemory];
-    GHAssertTrue([inputStream1 writeToOutputStream:outputStream1 error:NULL], nil);
-    GHAssertEqualObjects([outputStream1 propertyForKey:NSStreamDataWrittenToMemoryStreamKey], data, nil);
+    if (fileManager.providingInputStreams) {
+        // Input stream with existing file. Must succeeed
+        NSInputStream *inputStream1 = [fileManager inputStreamWithFileAtPath:@"/file1.txt"];
+        GHAssertNotNil(inputStream1, nil);
+        NSOutputStream *outputStream1 = [NSOutputStream outputStreamToMemory];
+        GHAssertTrue([inputStream1 writeToOutputStream:outputStream1 error:NULL], nil);
+        GHAssertEqualObjects([outputStream1 propertyForKey:NSStreamDataWrittenToMemoryStreamKey], data, nil);
+        
+        // Input stream with non-existing file. Must fail
+        GHAssertNil([fileManager inputStreamWithFileAtPath:@"/invalid.txt"], nil);
+        
+        // Input stream with folder. Must fail
+        GHAssertNil([fileManager inputStreamWithFileAtPath:@"/folder2"], nil);
+    }
+    else {
+        GHAssertThrows([fileManager inputStreamWithFileAtPath:@"/file1.txt"], nil);
+    }
     
-    // Input stream with non-existing file. Must fail
-    GHAssertNil([fileManager inputStreamWithFileAtPath:@"/invalid.txt"], nil);
-    
-    // Input stream with folder. Must fail
-    GHAssertNil([fileManager inputStreamWithFileAtPath:@"/folder2"], nil);
-    
-    // Ouput stream to new file. Must succeed
-    NSOutputStream *outputStream2 = [fileManager outputStreamToFileAtPath:@"/file2.txt" append:NO];
-    GHAssertNotNil(outputStream2, nil);
-    NSData *data2 = [@"Hello" dataUsingEncoding:NSUTF8StringEncoding];
-    NSInputStream *inputStream2 = [NSInputStream inputStreamWithData:data2];
-    GHAssertTrue([inputStream2 writeToOutputStream:outputStream2 error:NULL], nil);
-    NSData *outData2 = [fileManager contentsOfFileAtPath:@"/file2.txt" error:NULL];
-    GHAssertEqualObjects(data2, outData2, nil);
-    
-    // Output stream to existing file (and append). Must succeed
-    NSOutputStream *outputStream3 = [fileManager outputStreamToFileAtPath:@"/file2.txt" append:YES];
-    GHAssertNotNil(outputStream3, nil);
-    NSInputStream *inputStream3 = [NSInputStream inputStreamWithData:[@", World!" dataUsingEncoding:NSUTF8StringEncoding]];
-    GHAssertTrue([inputStream3 writeToOutputStream:outputStream3 error:NULL], nil);
-    NSData *outData3 = [fileManager contentsOfFileAtPath:@"/file2.txt" error:NULL];
-    GHAssertEqualObjects([@"Hello, World!" dataUsingEncoding:NSUTF8StringEncoding], outData3, nil);
-    
-    // Output stream to existing folder. Must fail
-    GHAssertNil([fileManager outputStreamToFileAtPath:@"/folder2" append:NO], nil);
+    if (fileManager.providingOutputStreams) {
+        // Ouput stream to new file. Must succeed
+        NSOutputStream *outputStream2 = [fileManager outputStreamToFileAtPath:@"/file2.txt" append:NO];
+        GHAssertNotNil(outputStream2, nil);
+        NSData *data2 = [@"Hello" dataUsingEncoding:NSUTF8StringEncoding];
+        NSInputStream *inputStream2 = [NSInputStream inputStreamWithData:data2];
+        GHAssertTrue([inputStream2 writeToOutputStream:outputStream2 error:NULL], nil);
+        NSData *outData2 = [fileManager contentsOfFileAtPath:@"/file2.txt" error:NULL];
+        GHAssertEqualObjects(data2, outData2, nil);
+        
+        // Output stream to existing file (and append). Must succeed
+        NSOutputStream *outputStream3 = [fileManager outputStreamToFileAtPath:@"/file2.txt" append:YES];
+        GHAssertNotNil(outputStream3, nil);
+        NSInputStream *inputStream3 = [NSInputStream inputStreamWithData:[@", World!" dataUsingEncoding:NSUTF8StringEncoding]];
+        GHAssertTrue([inputStream3 writeToOutputStream:outputStream3 error:NULL], nil);
+        NSData *outData3 = [fileManager contentsOfFileAtPath:@"/file2.txt" error:NULL];
+        GHAssertEqualObjects([@"Hello, World!" dataUsingEncoding:NSUTF8StringEncoding], outData3, nil);
+        
+        // Output stream to existing folder. Must fail
+        GHAssertNil([fileManager outputStreamToFileAtPath:@"/folder2" append:NO], nil);
+    }
+    else {
+        GHAssertThrows([fileManager outputStreamToFileAtPath:@"/file2.txt" append:NO], nil);
+    }
 }
 
 - (void)testURLsWithFileManager:(HLSFileManager *)fileManager
@@ -434,18 +444,23 @@
     GHAssertTrue([fileManager createDirectoryAtPath:@"/folder2" withIntermediateDirectories:YES error:NULL], nil);
     GHAssertTrue([fileManager createFileAtPath:@"/folder2/file21.txt" contents:data error:NULL], nil);
     
-    // URL to existing file
-    NSURL *URL1 = [fileManager URLForFileAtPath:@"/file1.txt"];
-    GHAssertNotNil(URL1, nil);
-    GHAssertEqualObjects([NSData dataWithContentsOfURL:URL1], data, nil);
-    
-    // URLs to existing folders
-    GHAssertNotNil([fileManager URLForFileAtPath:@"/folder2"], nil);
-    GHAssertNotNil([fileManager URLForFileAtPath:@"/"], nil);
-    
-    // URLs to a non-existing files
-    GHAssertNil([fileManager URLForFileAtPath:@"/invalid"], nil);
-    GHAssertNil([fileManager URLForFileAtPath:@"invalid"], nil);
+    if (fileManager.providingURLs) {        
+        // URL to existing file
+        NSURL *URL1 = [fileManager URLForFileAtPath:@"/file1.txt"];
+        GHAssertNotNil(URL1, nil);
+        GHAssertEqualObjects([NSData dataWithContentsOfURL:URL1], data, nil);
+        
+        // URLs to existing folders
+        GHAssertNotNil([fileManager URLForFileAtPath:@"/folder2"], nil);
+        GHAssertNotNil([fileManager URLForFileAtPath:@"/"], nil);
+        
+        // URLs to a non-existing files
+        GHAssertNil([fileManager URLForFileAtPath:@"/invalid"], nil);
+        GHAssertNil([fileManager URLForFileAtPath:@"invalid"], nil);
+    }
+    else {
+        GHAssertThrows([fileManager URLForFileAtPath:@"file1.txt"], nil);
+    }
 }
 
 @end
