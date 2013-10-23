@@ -138,6 +138,16 @@
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
+    // Prevent recursive copy
+    if ([destinationPath hasPrefix:sourcePath]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileReadInvalidFileNameError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+        }
+        return NO;
+    }
+    
     NSString *fullSourcePath = [self fullPathForPath:sourcePath withError:pError];
     if (! fullSourcePath) {
         return NO;
@@ -153,6 +163,16 @@
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
+    // Prevent recursive move
+    if ([destinationPath hasPrefix:sourcePath]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileReadInvalidFileNameError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+        }
+        return NO;
+    }
+    
     NSString *fullSourcePath = [self fullPathForPath:sourcePath withError:pError];
     if (! fullSourcePath) {
         return NO;

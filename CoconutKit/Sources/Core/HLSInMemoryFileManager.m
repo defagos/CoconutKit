@@ -367,6 +367,16 @@
 
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
+    // Prevent recursive copy
+    if ([destinationPath hasPrefix:sourcePath]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileReadInvalidFileNameError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+        }
+        return NO;
+    }
+    
     // Get the directory in which the element to copy is located
     id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [sourceContent isKindOfClass:[NSDictionary class]]) {
@@ -398,6 +408,16 @@
 
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
 {
+    // Prevent recursive move
+    if ([destinationPath hasPrefix:sourcePath]) {
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileReadInvalidFileNameError
+                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+        }
+        return NO;
+    }
+    
     // Get the directory in which the element to move is located
     id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [sourceContent isKindOfClass:[NSDictionary class]]) {

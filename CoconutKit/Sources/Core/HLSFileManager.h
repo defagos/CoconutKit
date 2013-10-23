@@ -48,17 +48,17 @@
 
 /**
  * Recursively copy the file or directory at the specified path to a new location. If any path is invalid, if the copy 
- * fails, if the destination already exists or if the parent destination directory does not exist, the method must 
- * return NO and an error, otherwise YES and no error. The destination path must contain the name of the file or directory 
- * in its new location
+ * fails, if the destination already exists, if the parent destination directory does not exist or if the destination
+ * path is a subfolder of the source path (recursion issues), the method must return NO and an error, otherwise YES 
+ * and no error. The destination path must contain the name of the file or directory in its new location
  */
 - (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError;
 
 /**
  * Recursively move the file or directory at the specified path to a new location. If any path is invalid, if the move
- * fails, if the destination already exists or if the parent destination directory does not exist, the method must 
- * return NO and an error, otherwise YES and no error. The destination path must contain the name of the file or directory 
- * in its new location
+ * fails, if the destination already exists, if the parent destination directory does not exist or if the destination
+ * path is a subfolder of the source path (recursion issues), the method must return NO and an error, otherwise YES and 
+ * no error. The destination path must contain the name of the file or directory in its new location
  */
 - (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError;
 

@@ -275,11 +275,26 @@
     GHAssertFalse([fileManager copyItemAtPath:@"/invalid.txt" toPath:@"/copy/invalid.txt" error:&error9], nil);
     GHAssertNotNil(error9, nil);
     
+    // Copy existing file onto itself. Must fail
+    NSError *error10 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"@/file1.txt" toPath:@"/file1.txt" error:&error10], nil);
+    GHAssertNotNil(error10, nil);
     
-    // TODO: Add tests for the following cases:
-    //   - copy to the same directory, same name -> what happens? (see with NSFileManager-based implementation)
-    //   - copy to a subdirectory of itself -> what happens? (see with NSFileManager-based implementation)
-    //   - delete original -> show that copy data is still accessible (i.e. not shared by mistake)
+    // Copy existing directory onto itself. Must fail
+    NSError *error11 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/folder2" toPath:@"/folder2" error:&error11], nil);
+    GHAssertNotNil(error11, nil);
+    
+    // Copy existing directory to a subfolder of itself (potential recursion issues). Must fail
+    NSError *error12 = nil;
+    GHAssertFalse([fileManager copyItemAtPath:@"/folder2/" toPath:@"/folder2/folder2" error:&error12], nil);
+    GHAssertNotNil(error12, nil);
+    
+    // Try deleting the copy of a file. The original data must still be accessible, i.e. the copy must be deep
+    NSError *error13 = nil;
+    GHAssertTrue([fileManager removeItemAtPath:@"/copy/file1.txt" error:&error13], nil);
+    GHAssertNil(error13, nil);
+    GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/file1.txt" error:&error13], data, nil);
 }
 
 - (void)testMoveWithFileManager:(HLSFileManager *)fileManager
@@ -359,9 +374,15 @@
     GHAssertFalse([fileManager moveItemAtPath:@"/invalid.txt" toPath:@"/move/invalid.txt" error:&error9], nil);
     GHAssertNotNil(error9, nil);
     
-    // TODO: Add tests for the following cases:
-    //   - move to the same directory, same name (i.e. does not move) -> what happens? (see with NSFileManager-based implementation)
-    //   - move to a subdirectory of itself -> what happens? (see with NSFileManager-based implementation)
+    // Move existing directory onto itself. Must fail
+    NSError *error10 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/folder2" toPath:@"/folder2" error:&error10], nil);
+    GHAssertNotNil(error10, nil);
+    
+    // Move existing directory to a subfolder of itself (potential recursion issues). Must fail
+    NSError *error11 = nil;
+    GHAssertFalse([fileManager moveItemAtPath:@"/folder2/" toPath:@"/folder2/folder2" error:&error11], nil);
+    GHAssertNotNil(error11, nil);
 }
 
 - (void)testStreamsWithFileManager:(HLSFileManager *)fileManager
