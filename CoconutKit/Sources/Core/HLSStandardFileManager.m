@@ -47,6 +47,22 @@
             return nil;
         }
         
+        // Create the folder if it does not exist
+        BOOL isDirectory = NO;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:rootFolderPath isDirectory:&isDirectory]) {
+            if (! isDirectory) {
+                HLSLoggerError(@"The path %@ already exists and is not a directory", rootFolderPath);
+                return nil;
+            }
+        }
+        else {
+            NSError *error = nil;
+            if (! [[NSFileManager defaultManager] createDirectoryAtPath:rootFolderPath withIntermediateDirectories:YES attributes:nil error:&error]) {
+                HLSLoggerError(@"Could not create directory %@. Reason: %@", rootFolderPath, error);
+                return nil;
+            }
+        }
+        
         self.rootFolderPath = rootFolderPath;
     }
     return self;
