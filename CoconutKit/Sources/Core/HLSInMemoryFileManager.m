@@ -32,8 +32,18 @@
         self.rootItems = [NSMutableDictionary dictionaryWithObject:[NSMutableDictionary dictionary] forKey:@"/"];
         self.cache = [[NSCache alloc] init];
         self.cache.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didReceiveMemoryWarning:)
+                                                     name:UIApplicationDidReceiveMemoryWarningNotification
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Accessors and mutators
@@ -485,6 +495,13 @@
     // Remove the corresponding entry from the rootItems dictionary hierarchy
     HLSInMemoryCacheEntry *cacheEntry = object;
     [cacheEntry.parentItems removeObjectForKey:cacheEntry.name];
+}
+
+#pragma mark Notification callbacks
+
+- (void)didReceiveMemoryWarning:(NSNotification *)notification
+{
+    [self.cache removeAllObjects];
 }
 
 #pragma mark Description

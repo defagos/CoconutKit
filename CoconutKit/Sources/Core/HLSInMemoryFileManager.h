@@ -9,7 +9,8 @@
 #import "HLSFileManager.h"
 
 /**
- * A file manager implementation storing data in memory
+ * A file manager implementation storing data in memory. If the application receives a memory warning, this data
+ * cache is automatically cleared
  */
 @interface HLSInMemoryFileManager : HLSFileManager <NSCacheDelegate>
 
