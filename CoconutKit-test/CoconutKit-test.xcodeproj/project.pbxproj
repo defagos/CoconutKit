@@ -52,6 +52,9 @@
 		6F66181816C14B5E00303628 /* UIView+HLSRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F66181716C14B5E00303628 /* UIView+HLSRuntimeAttributes.m */; };
 		6F6C0A1A159B965E007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */; };
 		6F6E815A17CF074300CE578A /* HLSLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E815617CF074300CE578A /* HLSLoggerViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F79481C180BABE300282253 /* NSStream+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F79481B180BABE300282253 /* NSStream+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F794822180BD18400282253 /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F794821180BD18400282253 /* NSStream+HLSExtensionsTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F794824180BD21E00282253 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F794823180BD21E00282253 /* Sample.txt */; };
 		6F7A871A16522C3C0030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871916522C3C0030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848B14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848A14CF32B20091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660D1588CC820044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F83660C1588CC820044E572 /* HLSVector.m */; };
@@ -76,6 +79,7 @@
 		6FAB922316DA70D700599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB922216DA70D700599256 /* MobileCoreServices.framework */; };
 		6FAB923B16DA7FB100599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923816DA7FB100599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FAB923C16DA7FB100599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB923A16DA7FB100599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAD88D8181785C100B02B29 /* HLSInMemoryCacheEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAD88D7181785C100B02B29 /* HLSInMemoryCacheEntry.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE47714B9DA1B007EE121 /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47414B9DA1B007EE121 /* House.m */; };
 		6FADE47814B9DA1B007EE121 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE47614B9DA1B007EE121 /* Person.m */; };
 		6FADE48714B9DA58007EE121 /* _House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE48414B9DA58007EE121 /* _House.m */; };
@@ -104,7 +108,7 @@
 		6FADE7AE14BA04B6007EE121 /* NSDictionary+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE73814BA04B6007EE121 /* NSDictionary+HLSExtensions.m */; };
 		6FADE7AF14BA04B6007EE121 /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE73A14BA04B6007EE121 /* NSError+HLSExtensions.m */; };
 		6FADE7B014BA04B6007EE121 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE73C14BA04B6007EE121 /* NSObject+HLSExtensions.m */; };
-		6FADE7B114BA04B6007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE73E14BA04B6007EE121 /* NSString+HLSExtensions.m */; };
+		6FADE7B114BA04B6007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE73E14BA04B6007EE121 /* NSString+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE7B214BA04B6007EE121 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE74014BA04B6007EE121 /* NSTimeZone+HLSExtensions.m */; };
 		6FADE7B314BA04B6007EE121 /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE74214BA04B6007EE121 /* UIColor+HLSExtensions.m */; };
 		6FADE7B414BA04B6007EE121 /* UIControl+HLSExclusiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE74414BA04B6007EE121 /* UIControl+HLSExclusiveTouch.m */; };
@@ -139,13 +143,17 @@
 		6FADE9F514BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9F414BA3AC7007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FAF24FD162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24FA162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m */; };
 		6FAF24FE162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAF24FC162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m */; };
+		6FB318A91815623D00565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318A81815623D00565B69 /* HLSInMemoryFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB318AC181571A700565B69 /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318AB181571A700565B69 /* HLSInMemoryFileManagerTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB318AF1815A88E00565B69 /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318AE1815A88D00565B69 /* HLSFileManagerTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB318B61815AB0B00565B69 /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318B51815AB0A00565B69 /* HLSStandardFileManagerTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB991FE1523B18B00E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991FD1523B18B00E13BED /* HLSZeroingWeakRef.m */; };
 		6FC40C621641D04B00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C611641D04B00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC8CB961574C01C0014B37B /* NSURLRequest+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8CB951574C01C0014B37B /* NSURLRequest+HLSExtensions.m */; };
 		6FC8EDBB176EC89E000B3BE7 /* NSNumber+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8EDBA176EC89E000B3BE7 /* NSNumber+HLSExtensions.m */; };
 		6FC8EDBE176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8EDBD176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.m */; };
-		6FCA2DE61679E41F0011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DE31679E41F0011CFDA /* HLSStandardFileManager.m */; };
-		6FCA2DE71679E41F0011CFDA /* HLSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DE51679E41F0011CFDA /* HLSFileManager.m */; };
+		6FCA2DE61679E41F0011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DE31679E41F0011CFDA /* HLSStandardFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCA2DE71679E41F0011CFDA /* HLSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DE51679E41F0011CFDA /* HLSFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCDA17214DAE61B00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA17114DAE61B00ED1CD1 /* QuartzCore.framework */; };
 		6FCFEA5515E37E4F002CAF9E /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA5215E37E4C002CAF9E /* HLSAnimationStep.m */; };
 		6FCFEA5615E37E4F002CAF9E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA5415E37E4E002CAF9E /* HLSLayerAnimationStep.m */; };
@@ -264,6 +272,11 @@
 		6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
 		6F6E815517CF074300CE578A /* HLSLoggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLoggerViewController.h; sourceTree = "<group>"; };
 		6F6E815617CF074300CE578A /* HLSLoggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLoggerViewController.m; sourceTree = "<group>"; };
+		6F79481A180BABE300282253 /* NSStream+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F79481B180BABE300282253 /* NSStream+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F794820180BD18300282253 /* NSStream+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F794821180BD18400282253 /* NSStream+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F794823180BD21E00282253 /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
 		6F7A871816522C3C0030B091 /* UIPopoverController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7A871916522C3C0030B091 /* UIPopoverController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7B848914CF32B20091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -314,6 +327,8 @@
 		6FAB923816DA7FB100599256 /* HLSFileURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileURLConnection.m; sourceTree = "<group>"; };
 		6FAB923916DA7FB100599256 /* HLSURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSURLConnection.h; sourceTree = "<group>"; };
 		6FAB923A16DA7FB100599256 /* HLSURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSURLConnection.m; sourceTree = "<group>"; };
+		6FAD88D6181785C100B02B29 /* HLSInMemoryCacheEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryCacheEntry.h; sourceTree = "<group>"; };
+		6FAD88D7181785C100B02B29 /* HLSInMemoryCacheEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryCacheEntry.m; sourceTree = "<group>"; };
 		6FADE47314B9DA1B007EE121 /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
 		6FADE47414B9DA1B007EE121 /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
 		6FADE47514B9DA1B007EE121 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -448,6 +463,14 @@
 		6FAF24FA162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FAF24FB162DE59D00F93DA2 /* UITabBarController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FAF24FC162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+HLSExtensions.m"; sourceTree = "<group>"; };
+		6FB318A71815623D00565B69 /* HLSInMemoryFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManager.h; sourceTree = "<group>"; };
+		6FB318A81815623D00565B69 /* HLSInMemoryFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManager.m; sourceTree = "<group>"; };
+		6FB318AA181571A700565B69 /* HLSInMemoryFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManagerTestCase.h; sourceTree = "<group>"; };
+		6FB318AB181571A700565B69 /* HLSInMemoryFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManagerTestCase.m; sourceTree = "<group>"; };
+		6FB318AD1815A88D00565B69 /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
+		6FB318AE1815A88D00565B69 /* HLSFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManagerTestCase.m; sourceTree = "<group>"; };
+		6FB318B41815AB0A00565B69 /* HLSStandardFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardFileManagerTestCase.h; sourceTree = "<group>"; };
+		6FB318B51815AB0A00565B69 /* HLSStandardFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManagerTestCase.m; sourceTree = "<group>"; };
 		6FB8E67115F3D95500CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67415F3EDBE00CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991FC1523B18B00E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
@@ -667,12 +690,18 @@
 				6FEFF35915F9C5FB006B06A6 /* CAMediaTimingFunction+HLExtensionsTestCase.m */,
 				6F26DC6C1493660800086BA5 /* HLSErrorTestCase.h */,
 				6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */,
+				6FB318AD1815A88D00565B69 /* HLSFileManagerTestCase.h */,
+				6FB318AE1815A88D00565B69 /* HLSFileManagerTestCase.m */,
 				6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */,
 				6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */,
+				6FB318AA181571A700565B69 /* HLSInMemoryFileManagerTestCase.h */,
+				6FB318AB181571A700565B69 /* HLSInMemoryFileManagerTestCase.m */,
 				6FA89147179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.h */,
 				6FA89148179D970400AB7BD4 /* HLSRestrictedInterfaceProxyTestCase.m */,
 				6FA89139179D94F700AB7BD4 /* HLSRuntimeTestCase.h */,
 				6FA8913A179D94F800AB7BD4 /* HLSRuntimeTestCase.m */,
+				6FB318B41815AB0A00565B69 /* HLSStandardFileManagerTestCase.h */,
+				6FB318B51815AB0A00565B69 /* HLSStandardFileManagerTestCase.m */,
 				6F3B060A14BC4C2D0026F512 /* HLSValidatorsTestCase.h */,
 				6F3B060B14BC4C2D0026F512 /* HLSValidatorsTestCase.m */,
 				6F897871152B505D006C8231 /* HLSZeroingWeakRefTestCase.h */,
@@ -691,6 +720,8 @@
 				6FC8EDBD176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.m */,
 				6F93C4EC140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.h */,
 				6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */,
+				6F794820180BD18300282253 /* NSStream+HLSExtensionsTestCase.h */,
+				6F794821180BD18400282253 /* NSStream+HLSExtensionsTestCase.m */,
 				6F93C4E81404400000FEC9B0 /* NSString+HLSExtensionsTestCase.h */,
 				6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */,
 				6F61D12C14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.h */,
@@ -788,6 +819,10 @@
 				6FCA2DE51679E41F0011CFDA /* HLSFileManager.m */,
 				6FADE71A14BA04B6007EE121 /* HLSFloat.h */,
 				6FADE71B14BA04B6007EE121 /* HLSFloat.m */,
+				6FAD88D6181785C100B02B29 /* HLSInMemoryCacheEntry.h */,
+				6FAD88D7181785C100B02B29 /* HLSInMemoryCacheEntry.m */,
+				6FB318A71815623D00565B69 /* HLSInMemoryFileManager.h */,
+				6FB318A81815623D00565B69 /* HLSInMemoryFileManager.m */,
 				6FADE71C14BA04B6007EE121 /* HLSKeyboardInformation.h */,
 				6FADE71D14BA04B6007EE121 /* HLSKeyboardInformation.m */,
 				6FADE71E14BA04B6007EE121 /* HLSNotifications.h */,
@@ -836,6 +871,8 @@
 				6FADE73C14BA04B6007EE121 /* NSObject+HLSExtensions.m */,
 				6F2D470815761B9000EF5E4F /* NSSet+HLSExtensions.h */,
 				6F2D470915761B9000EF5E4F /* NSSet+HLSExtensions.m */,
+				6F79481A180BABE300282253 /* NSStream+HLSExtensions.h */,
+				6F79481B180BABE300282253 /* NSStream+HLSExtensions.m */,
 				6FADE73D14BA04B6007EE121 /* NSString+HLSExtensions.h */,
 				6FADE73E14BA04B6007EE121 /* NSString+HLSExtensions.m */,
 				6FADE73F14BA04B6007EE121 /* NSTimeZone+HLSExtensions.h */,
@@ -1010,6 +1047,7 @@
 		6FDE68E114757669005EA5FA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				6F794823180BD21E00282253 /* Sample.txt */,
 				6FDE68E214757669005EA5FA /* CoconutKitTestData.xcdatamodeld */,
 			);
 			path = Data;
@@ -1111,6 +1149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F000182156BF3320055CED7 /* CoconutKit-resources.bundle in Resources */,
+				6F794824180BD21E00282253 /* Sample.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,6 +1316,13 @@
 				6F10E39017A0016300BFEF42 /* HLSViewTouchDetector.m in Sources */,
 				6F6E815A17CF074300CE578A /* HLSLoggerViewController.m in Sources */,
 				6F63E7CD17CF6E76006322D9 /* HLSPreviewItem.m in Sources */,
+				6F79481C180BABE300282253 /* NSStream+HLSExtensions.m in Sources */,
+				6F794822180BD18400282253 /* NSStream+HLSExtensionsTestCase.m in Sources */,
+				6FB318A91815623D00565B69 /* HLSInMemoryFileManager.m in Sources */,
+				6FB318AC181571A700565B69 /* HLSInMemoryFileManagerTestCase.m in Sources */,
+				6FB318AF1815A88E00565B69 /* HLSFileManagerTestCase.m in Sources */,
+				6FB318B61815AB0B00565B69 /* HLSStandardFileManagerTestCase.m in Sources */,
+				6FAD88D8181785C100B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1312,7 +1358,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1337,7 +1383,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",

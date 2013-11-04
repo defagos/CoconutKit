@@ -12,6 +12,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger+Friend.h"
 #import "HLSLoggerViewController.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import <pthread.h>
 
@@ -64,6 +65,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 	if ((self = [super init])) {
         if (! [logDirectoryPath isFilled]) {
             NSLog(@"A log directory is mandatory");
+            [self release];
             return nil;
         }
         

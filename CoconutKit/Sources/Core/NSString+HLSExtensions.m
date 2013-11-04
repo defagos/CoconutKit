@@ -13,6 +13,14 @@
 #import "HLSLogger.h"
 #import "NSData+HLSExtensions.h"
 
+NSString *HLSUUID(void)
+{
+    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
+    CFStringRef uuidStringRef = CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
+    CFRelease(uuidRef);
+    return CFBridgingRelease(uuidStringRef);
+}
+
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
     // Hash calculation
@@ -36,12 +44,12 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 
 + (instancetype)stringWithBase64EncodedString:(NSString *)base64EncodedString
 {
-    return [[[self alloc] initWithBase64EncodedString:base64EncodedString] autorelease];
+    return [[self alloc] initWithBase64EncodedString:base64EncodedString];
 }
 
 + (instancetype)stringWithBase64EncodedData:(NSData *)base64EncodedData
 {
-    return [[[self alloc] initWithBase64EncodedData:base64EncodedData] autorelease];
+    return [[self alloc] initWithBase64EncodedData:base64EncodedData];
 }
 
 #pragma mark Object creation and destruction
@@ -135,12 +143,11 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
-                                                                                 (CFStringRef)self, 
-                                                                                 NULL, 
-                                                                                 CFSTR("!*'();:@&=+$,/?%#[]"), 
-                                                                                 cfEncoding));
-    return [result autorelease];
+    return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                   (__bridge CFStringRef)self,
+                                                   NULL,
+                                                   CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                   cfEncoding));
 }
 
 #pragma mark Hash digests
@@ -206,7 +213,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
         return nil;
     }
     
-    CFStringRef identifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (CFStringRef)pathExtension, NULL);
+    CFStringRef identifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)pathExtension, NULL);
     NSString *MIMEType = (NSString *)CFBridgingRelease(UTTypeCopyPreferredTagWithClass(identifier, kUTTagClassMIMEType));
     CFRelease(identifier);
     return MIMEType;

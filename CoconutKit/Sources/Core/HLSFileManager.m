@@ -8,29 +8,40 @@
 
 #import "HLSFileManager.h"
 
-// TODO: When available in CoconutKit (feature/url-connection branch), check protocol conformance (all methods from the
-//       abstract protocol must be implemented, though they have been made optional to avoid compilation warnings)
-
-static HLSFileManager *s_defaultManager = nil;
+#import "HLSLogger.h"
+#import "HLSRuntime.h"
 
 @implementation HLSFileManager
 
-#pragma mark Class methods
+#pragma mark Object creation and destruction
 
-+ (HLSFileManager *)setDefaultManager:(HLSFileManager *)defaultManager
+- (id)init
 {
-    @synchronized(self) {
-        HLSFileManager *previousManager = [s_defaultManager autorelease];
-        s_defaultManager = [defaultManager retain];
-        return previousManager;
+    if (self = [super init]) {
+        // Check protocol conformance when instantiating concrete classes
+        if (! hls_class_implementsProtocol([self class], @protocol(HLSFileManagerAbstract))) {
+            HLSLoggerError(@"The class %@ does not completely implement the HLSFileManagerAbstract protocol", [self class]);
+            return nil;
+        }
     }
+    return self;
 }
 
-+ (HLSFileManager *)defaultManager
+#pragma mark Accessors and mutators
+
+- (BOOL)isProvidingInputStreams
 {
-    @synchronized(self) {
-        return s_defaultManager;
-    }
+    return [self respondsToSelector:@selector(inputStreamWithFileAtPath:)];
+}
+
+- (BOOL)isProvidingOutputStreams
+{
+    return [self respondsToSelector:@selector(outputStreamToFileAtPath:append:)];
+}
+
+- (BOOL)isProvidingURLs
+{
+    return [self respondsToSelector:@selector(URLForFileAtPath:)];
 }
 
 #pragma mark Convenience methods

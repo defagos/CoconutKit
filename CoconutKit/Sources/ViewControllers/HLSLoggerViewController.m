@@ -35,7 +35,7 @@
 
 - (id)initWithLogger:(HLSLogger *)logger
 {
-    if ([super initWithBundle:[NSBundle coconutKitBundle]]) {
+    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         if (! logger) {
             HLSLoggerError(@"A logger is mandatory");
             return nil;
