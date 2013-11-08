@@ -164,7 +164,6 @@
 		6FADE6F614BA04A7007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B114BA04A6007EE121 /* HLSWebViewController.m */; };
 		6FADE6F714BA04A7007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */; };
 		6FADE89114BA04C9007EE121 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EA14BA04C8007EE121 /* CoconutKit_demoAppDelegate.m */; };
-		6FADE89214BA04C9007EE121 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE7EB14BA04C8007EE121 /* MainWindow.xib */; };
 		6FADE89314BA04C9007EE121 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE7EE14BA04C8007EE121 /* CoconutKit_demoApplication.m */; };
 		6FADE89B14BA04C9007EE121 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE80114BA04C8007EE121 /* FixedSizeViewController.m */; };
 		6FADE89C14BA04C9007EE121 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FADE80214BA04C8007EE121 /* FixedSizeViewController.xib */; };
@@ -236,6 +235,7 @@
 		6FB9EA4415F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4315F0C3900061D807 /* LayerPropertiesTestViewController.xib */; };
 		6FC09CF015EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF215EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */; };
+		6FC378FF182D18AE00B55AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FE182D18AE00B55AF1 /* main.m */; };
 		6FC40C5D1641D03C00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
@@ -258,7 +258,6 @@
 		6FE8EA9114CFE48E0081F249 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */; };
 		6FEEF86514F297DC001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FEF8542131F76DA0015B57C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FEF8541131F76DA0015B57C /* MessageUI.framework */; };
-		6FEF8556131F77490015B57C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEF8552131F77490015B57C /* main.m */; };
 		6FF3E6F715D2E4E300AB9A53 /* HLSTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E6F615D2E4E300AB9A53 /* HLSTransition.m */; };
 		6FF3E71C15D3801600AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71B15D3801600AB9A53 /* CustomTransitions.m */; };
 		6FF74C78177D46B300BD846D /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF74C77177D46B300BD846D /* HLSApplicationInformation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -577,7 +576,6 @@
 		6FADE6B314BA04A6007EE121 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6FADE7E914BA04C8007EE121 /* CoconutKit_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoAppDelegate.h; sourceTree = "<group>"; };
 		6FADE7EA14BA04C8007EE121 /* CoconutKit_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoAppDelegate.m; sourceTree = "<group>"; };
-		6FADE7EB14BA04C8007EE121 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		6FADE7ED14BA04C8007EE121 /* CoconutKit_demoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoApplication.h; sourceTree = "<group>"; };
 		6FADE7EE14BA04C8007EE121 /* CoconutKit_demoApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoApplication.m; sourceTree = "<group>"; };
 		6FADE80014BA04C8007EE121 /* FixedSizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedSizeViewController.h; sourceTree = "<group>"; };
@@ -695,6 +693,7 @@
 		6FC09CED15EFDAAA00C0CC74 /* AnimationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationDemoViewController.h; sourceTree = "<group>"; };
 		6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationDemoViewController.m; sourceTree = "<group>"; };
 		6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimationDemoViewController.xib; sourceTree = "<group>"; };
+		6FC378FE182D18AE00B55AF1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FC40C5B1641D03C00398242 /* UISplitViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISplitViewController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC5E8AB14F380A100C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
@@ -734,9 +733,7 @@
 		6FEEF86314F297DB001585A6 /* UIScrollView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FEF8541131F76DA0015B57C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		6FEF8552131F77490015B57C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
-		6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-dev-Info.plist"; sourceTree = "<group>"; };
 		6FF3E6F515D2E4E300AB9A53 /* HLSTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransition.h; sourceTree = "<group>"; };
 		6FF3E6F615D2E4E300AB9A53 /* HLSTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransition.m; sourceTree = "<group>"; };
 		6FF3E71A15D3801600AB9A53 /* CustomTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTransitions.h; sourceTree = "<group>"; };
@@ -1374,6 +1371,7 @@
 				6FADE87A14BA04C9007EE121 /* DemosNavigator */,
 				6FADE87D14BA04C9007EE121 /* Helpers */,
 				6FADE88014BA04C9007EE121 /* Models */,
+				6FC378FE182D18AE00B55AF1 /* main.m */,
 			);
 			name = Sources;
 			path = "../CoconutKit-demo/Sources";
@@ -1384,7 +1382,6 @@
 			children = (
 				6FADE7E914BA04C8007EE121 /* CoconutKit_demoAppDelegate.h */,
 				6FADE7EA14BA04C8007EE121 /* CoconutKit_demoAppDelegate.m */,
-				6FADE7EB14BA04C8007EE121 /* MainWindow.xib */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -1810,9 +1807,7 @@
 		6FEF8547131F77180015B57C /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6FEF8552131F77490015B57C /* main.m */,
 				6FEF8554131F77490015B57C /* CoconutKit-dev-Prefix.pch */,
-				6FEF8555131F77490015B57C /* CoconutKit-dev-Info.plist */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -1916,7 +1911,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FADE89214BA04C9007EE121 /* MainWindow.xib in Resources */,
 				6FADE89C14BA04C9007EE121 /* FixedSizeViewController.xib in Resources */,
 				6FADE89E14BA04C9007EE121 /* HeavyViewController.xib in Resources */,
 				6FADE8A014BA04C9007EE121 /* LandscapeOnlyViewController.xib in Resources */,
@@ -2018,7 +2012,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FEF8556131F77490015B57C /* main.m in Sources */,
 				6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */,
 				6FADE6BD14BA04A7007EE121 /* HLSViewAnimationStep.m in Sources */,
 				6FADE6BE14BA04A7007EE121 /* HLSViewAnimation.m in Sources */,
@@ -2189,6 +2182,7 @@
 				6F794819180BABC800282253 /* NSStream+HLSExtensions.m in Sources */,
 				6FB318A6181136BA00565B69 /* HLSInMemoryFileManager.m in Sources */,
 				6FAD88D11817856D00B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
+				6FC378FF182D18AE00B55AF1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2262,7 +2256,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
+				INFOPLIST_FILE = "../CoconutKit-demo/CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_NAME = "CoconutKit-dev";
 			};
@@ -2276,7 +2270,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
-				INFOPLIST_FILE = "CoconutKit-dev-Info.plist";
+				INFOPLIST_FILE = "../CoconutKit-demo/CoconutKit-demo-Info.plist";
 				PRODUCT_NAME = "CoconutKit-dev";
 				VALIDATE_PRODUCT = YES;
 			};

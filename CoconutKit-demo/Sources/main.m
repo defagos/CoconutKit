@@ -6,11 +6,11 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CoconutKit_demoAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, nil);
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([CoconutKit_demoAppDelegate class]));
     }
 }

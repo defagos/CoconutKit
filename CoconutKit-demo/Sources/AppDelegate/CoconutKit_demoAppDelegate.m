@@ -42,25 +42,23 @@ HLSEnableApplicationPreloading();
 - (void)dealloc
 {
     self.application = nil;
-    self.window = nil;
     [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize window = _window;
 
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
-    [self.window makeKeyAndVisible];
+{
+    // We do not assign to the optional property, to ensure that CoconutKit does not rely on this property
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window.backgroundColor = [UIColor blackColor];
+    [window makeKeyAndVisible];
     
     // Instead of using the UIAppFonts key in the plist to load the Beon font, do it in code
     [UIFont loadFontWithFileName:@"Beon-Regular.otf" inBundle:nil];
     
     self.application = [[[CoconutKit_demoApplication alloc] init] autorelease];
-    self.window.rootViewController = [self.application rootViewController];
+    window.rootViewController = [self.application rootViewController];
     
     return YES;
 }
