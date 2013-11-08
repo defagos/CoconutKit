@@ -16,9 +16,6 @@ HLSEnableUIControlExclusiveTouch();
 // Enable Core Data easy validation
 HLSEnableNSManagedObjectValidation();
 
-// Enable preloading
-HLSEnableApplicationPreloading();
-
 @interface CoconutKit_demoAppDelegate ()
 
 @property (nonatomic, retain) CoconutKit_demoApplication *application;
@@ -53,6 +50,9 @@ HLSEnableApplicationPreloading();
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     window.backgroundColor = [UIColor blackColor];
     [window makeKeyAndVisible];
+    
+    // Use optional preloading provided by CoconutKit
+    [application preload];
     
     // Instead of using the UIAppFonts key in the plist to load the Beon font, do it in code
     [UIFont loadFontWithFileName:@"Beon-Regular.otf" inBundle:nil];

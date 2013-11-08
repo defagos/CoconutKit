@@ -215,6 +215,8 @@
 		6FB8E67815F3EDD300CA4037 /* HLSViewAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */; };
 		6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */; };
 		6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */; };
+		6FC3790C182D2C2300B55AF1 /* UIApplication+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC3790A182D2C2200B55AF1 /* UIApplication+HLSExtensions.h */; };
+		6FC3790D182D2C2300B55AF1 /* UIApplication+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3790B182D2C2200B55AF1 /* UIApplication+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FC40C581641D02A00398242 /* UISplitViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */; };
 		6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */; };
@@ -480,6 +482,8 @@
 		6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
+		6FC3790A182D2C2200B55AF1 /* UIApplication+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FC3790B182D2C2200B55AF1 /* UIApplication+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISplitViewController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -735,6 +739,8 @@
 				6FADE54614BA0494007EE121 /* NSTimeZone+HLSExtensions.m */,
 				6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */,
 				6FC8CB891574BFC10014B37B /* NSURLRequest+HLSExtensions.m */,
+				6FC3790A182D2C2200B55AF1 /* UIApplication+HLSExtensions.h */,
+				6FC3790B182D2C2200B55AF1 /* UIApplication+HLSExtensions.m */,
 				6FADE54714BA0494007EE121 /* UIColor+HLSExtensions.h */,
 				6FADE54814BA0494007EE121 /* UIColor+HLSExtensions.m */,
 				6FADE54914BA0494007EE121 /* UIControl+HLSExclusiveTouch.h */,
@@ -1032,6 +1038,7 @@
 				6F794815180BABAD00282253 /* NSStream+HLSExtensions.h in Headers */,
 				6FB318B21815A93200565B69 /* HLSInMemoryFileManager.h in Headers */,
 				6FAD88D41817859F00B02B29 /* HLSInMemoryCacheEntry.h in Headers */,
+				6FC3790C182D2C2300B55AF1 /* UIApplication+HLSExtensions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1239,6 +1246,7 @@
 				6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */,
 				6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */,
 				6FAD88D51817859F00B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
+				6FC3790D182D2C2300B55AF1 /* UIApplication+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,7 +4,6 @@ HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
 HLSApplicationInformation.h
-HLSApplicationPreloader.h
 HLSAssert.h
 HLSAutorotation.h
 HLSConnection.h
@@ -78,6 +77,7 @@ NSStream+HLSExtensions.h
 NSString+HLSExtensions.h
 NSTimeZone+HLSExtensions.h
 UIActionSheet+HLSExtensions.h
+UIApplication+HLSExtensions.h
 UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h
 UIFont+HLSExtensions.h

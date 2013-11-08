@@ -236,6 +236,7 @@
 		6FC09CF015EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF215EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */; };
 		6FC378FF182D18AE00B55AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FE182D18AE00B55AF1 /* main.m */; };
+		6FC37910182D2C4000B55AF1 /* UIApplication+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3790F182D2C4000B55AF1 /* UIApplication+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FC40C5D1641D03C00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AC14F380A100C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8AD14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib */; };
@@ -694,6 +695,8 @@
 		6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationDemoViewController.m; sourceTree = "<group>"; };
 		6FC09CEF15EFDAAA00C0CC74 /* AnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimationDemoViewController.xib; sourceTree = "<group>"; };
 		6FC378FE182D18AE00B55AF1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6FC3790E182D2C4000B55AF1 /* UIApplication+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+HLSExtensions.h"; sourceTree = "<group>"; };
+		6FC3790F182D2C4000B55AF1 /* UIApplication+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC40C5B1641D03C00398242 /* UISplitViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISplitViewController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FC40C5C1641D03C00398242 /* UISplitViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISplitViewController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FC5E8AB14F380A100C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
@@ -1197,6 +1200,8 @@
 				6FADE66114BA04A6007EE121 /* NSTimeZone+HLSExtensions.m */,
 				6FC8CB8D1574BFF10014B37B /* NSURLRequest+HLSExtensions.h */,
 				6FC8CB8E1574BFF10014B37B /* NSURLRequest+HLSExtensions.m */,
+				6FC3790E182D2C4000B55AF1 /* UIApplication+HLSExtensions.h */,
+				6FC3790F182D2C4000B55AF1 /* UIApplication+HLSExtensions.m */,
 				6FADE66214BA04A6007EE121 /* UIColor+HLSExtensions.h */,
 				6FADE66314BA04A6007EE121 /* UIColor+HLSExtensions.m */,
 				6FADE66414BA04A6007EE121 /* UIControl+HLSExclusiveTouch.h */,
@@ -2183,6 +2188,7 @@
 				6FB318A6181136BA00565B69 /* HLSInMemoryFileManager.m in Sources */,
 				6FAD88D11817856D00B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
 				6FC378FF182D18AE00B55AF1 /* main.m in Sources */,
+				6FC37910182D2C4000B55AF1 /* UIApplication+HLSExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

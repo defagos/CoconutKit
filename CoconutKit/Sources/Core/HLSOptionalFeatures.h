@@ -12,22 +12,8 @@
  * main.m or your application delegate .m file
  */
 
-#import "HLSApplicationPreloader.h"
 #import "NSManagedObject+HLSValidation.h"
 #import "UIControl+HLSExclusiveTouch.h"
-
-/**
- * Enable preloading of some objects (currently only UIWebView) when the application is started. This 
- * incurs a memory overhead you might not want to pay if you do not need those features (most notably 
- * if your application does not contain any UIWebView)
- */
-#define HLSEnableApplicationPreloading()                                                                  \
-    __attribute__ ((constructor)) void HLSEnableApplicationPreloadingConstructor(void)                    \
-    {                                                                                                     \
-        @autoreleasepool {                                                                                \
-            [HLSApplicationPreloader enable];                                                             \
-        }                                                                                                 \
-    }
 
 /**
  * Enable Core Data validation extensions. You need to enable this feature if you want the CoconutKit

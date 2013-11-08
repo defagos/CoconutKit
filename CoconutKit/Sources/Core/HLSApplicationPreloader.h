@@ -14,9 +14,13 @@
 @interface HLSApplicationPreloader : NSObject <UIWebViewDelegate>
 
 /**
- * Call this method as soon as possible if you want to enable preloading. For simplicity you should use the
- * HLSEnableApplicationPreloading convenience macro instead (see HLSOptionalFeatures.h)
+ * Initialize the preloader. An application is required
  */
-+ (void)enable;
+- (id)initWithApplication:(UIApplication *)application;
+
+/**
+ * Execute preloading
+ */
+- (void)preload;
 
 @end
