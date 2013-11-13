@@ -8,6 +8,10 @@
 
 #import "HLSRuntime.h"
 
+#import <objc/message.h>
+
+static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImplementation);
+
 struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol *protocol,
                                                                        BOOL isRequiredMethod,
                                                                        BOOL isInstanceMethod,

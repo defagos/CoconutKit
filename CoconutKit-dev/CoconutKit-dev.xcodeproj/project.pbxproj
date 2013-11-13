@@ -65,7 +65,6 @@
 		6F255E571712E86C007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E561712E86C007BFC96 /* HLSFakeConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
-		6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */; };
 		6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3D1D7C1795712E0056FF4E /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D7B1795712E0056FF4E /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F3D1D82179571440056FF4E /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D80179571440056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -73,6 +72,42 @@
 		6F3E3E8815A22796007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */; };
 		6F41D23315E6A580009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23215E6A580009A2384 /* CALayer+HLSExtensions.m */; };
 		6F41D24415E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D24315E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m */; };
+		6F45AF1D18335D36002FF0ED /* HLSViewBindingInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF1118335D36002FF0ED /* HLSViewBindingInformation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF1E18335D36002FF0ED /* UILabel+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF1318335D36002FF0ED /* UILabel+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF1F18335D36002FF0ED /* UITableView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF1518335D36002FF0ED /* UITableView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF2018335D36002FF0ED /* UIView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF1718335D36002FF0ED /* UIView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF2118335D36002FF0ED /* UIViewController+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF1918335D36002FF0ED /* UIViewController+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF2218335D36002FF0ED /* UIWebView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF1C18335D36002FF0ED /* UIWebView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5018335D82002FF0ED /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF2518335D82002FF0ED /* Employee.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5118335D82002FF0ED /* EmployeeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF2718335D82002FF0ED /* EmployeeHeaderView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5218335D82002FF0ED /* EmployeeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF2818335D82002FF0ED /* EmployeeHeaderView.xib */; };
+		6F45AF5318335D82002FF0ED /* EmployeeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF2A18335D82002FF0ED /* EmployeeTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5418335D82002FF0ED /* EmployeeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF2B18335D82002FF0ED /* EmployeeTableViewCell.xib */; };
+		6F45AF5518335D82002FF0ED /* EmployeeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF2D18335D82002FF0ED /* EmployeeView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5618335D82002FF0ED /* EmployeeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF2E18335D82002FF0ED /* EmployeeView.xib */; };
+		6F45AF5718335D82002FF0ED /* LabelBindingsDemo1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF3018335D82002FF0ED /* LabelBindingsDemo1ViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5818335D82002FF0ED /* LabelBindingsDemo1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF3118335D82002FF0ED /* LabelBindingsDemo1ViewController.xib */; };
+		6F45AF5918335D82002FF0ED /* LabelBindingsDemo2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF3318335D82002FF0ED /* LabelBindingsDemo2ViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5A18335D82002FF0ED /* LabelBindingsDemo2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF3418335D82002FF0ED /* LabelBindingsDemo2ViewController.xib */; };
+		6F45AF5B18335D82002FF0ED /* LabelBindingsDemo3InsetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF3618335D82002FF0ED /* LabelBindingsDemo3InsetViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5C18335D82002FF0ED /* LabelBindingsDemo3InsetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF3718335D82002FF0ED /* LabelBindingsDemo3InsetViewController.xib */; };
+		6F45AF5D18335D82002FF0ED /* LabelBindingsDemo3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF3918335D82002FF0ED /* LabelBindingsDemo3ViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF5E18335D82002FF0ED /* LabelBindingsDemo3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF3A18335D82002FF0ED /* LabelBindingsDemo3ViewController.xib */; };
+		6F45AF5F18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF3C18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF6018335D82002FF0ED /* LabelBindingsDemo4InsetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF3D18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.xib */; };
+		6F45AF6118335D82002FF0ED /* LabelBindingsDemo4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF3F18335D82002FF0ED /* LabelBindingsDemo4ViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF6218335D82002FF0ED /* LabelBindingsDemo4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF4018335D82002FF0ED /* LabelBindingsDemo4ViewController.xib */; };
+		6F45AF6318335D82002FF0ED /* LabelBindingsDemo5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF4218335D82002FF0ED /* LabelBindingsDemo5ViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF6418335D82002FF0ED /* LabelBindingsDemo5ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF4318335D82002FF0ED /* LabelBindingsDemo5ViewController.xib */; };
+		6F45AF6518335D82002FF0ED /* LabelBindingsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF4518335D82002FF0ED /* LabelBindingsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF6618335D82002FF0ED /* LabelBindingsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF4618335D82002FF0ED /* LabelBindingsDemoViewController.xib */; };
+		6F45AF6718335D82002FF0ED /* TableViewBindingsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF4818335D82002FF0ED /* TableViewBindingsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF6818335D82002FF0ED /* TableViewBindingsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF4918335D82002FF0ED /* TableViewBindingsDemoViewController.xib */; };
+		6F45AF6918335D82002FF0ED /* TodayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF4B18335D82002FF0ED /* TodayView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF6A18335D82002FF0ED /* TodayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF4C18335D82002FF0ED /* TodayView.xib */; };
+		6F45AF6B18335D82002FF0ED /* YesterdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF4E18335D82002FF0ED /* YesterdayView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AF6C18335D82002FF0ED /* YesterdayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF4F18335D82002FF0ED /* YesterdayView.xib */; };
+		6F45AF6F18335EB3002FF0ED /* DemoFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF6E18335EB3002FF0ED /* DemoFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F5007EF1585E17400391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */; };
 		6F5007FB1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007FA1585E91E00391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F5007FD1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007FC1585E92E00391A6C /* ExpandingSearchBarDemoViewController.xib */; };
@@ -153,7 +188,6 @@
 		6FADE6E514BA04A7007EE121 /* HLSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE68F14BA04A6007EE121 /* HLSTableViewCell.m */; };
 		6FADE6E914BA04A7007EE121 /* HLSValue1TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */; };
 		6FADE6EA14BA04A7007EE121 /* HLSValue2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69914BA04A6007EE121 /* HLSValue2TableViewCell.m */; };
-		6FADE6EB14BA04A7007EE121 /* UINavigationBar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */; };
 		6FADE6EC14BA04A7007EE121 /* UITextField+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69D14BA04A6007EE121 /* UITextField+HLSValidation.m */; };
 		6FADE6ED14BA04A7007EE121 /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE69F14BA04A6007EE121 /* UIView+HLSExtensions.m */; };
 		6FADE6EF14BA04A7007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE6A314BA04A6007EE121 /* HLSContainerContent.m */; };
@@ -253,8 +287,6 @@
 		6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */; };
 		6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */; };
 		6FDE688514BC8E9300F8CD3A /* WebViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE688314BC8E9300F8CD3A /* WebViewDemoViewController.xib */; };
-		6FDE68A714BD61F500F8CD3A /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE68A514BD61F500F8CD3A /* SkinningDemoViewController.m */; };
-		6FDE68A814BD61F500F8CD3A /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FDE68A614BD61F500F8CD3A /* SkinningDemoViewController.xib */; };
 		6FDE694914BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FE8EA9114CFE48E0081F249 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */; };
 		6FEEF86514F297DC001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF86414F297DB001585A6 /* UIScrollView+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -376,8 +408,6 @@
 		6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F3B063814BC7BA60026F512 /* UIToolbar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+HLSExtensions.h"; sourceTree = "<group>"; };
-		6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3B064714BC7D500026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3D1D7A1795712E0056FF4E /* HLSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextView.h; sourceTree = "<group>"; };
@@ -392,6 +422,65 @@
 		6F41D23215E6A580009A2384 /* CALayer+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F41D24215E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F41D24315E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F45AF1018335D36002FF0ED /* HLSViewBindingInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingInformation.h; sourceTree = "<group>"; };
+		6F45AF1118335D36002FF0ED /* HLSViewBindingInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewBindingInformation.m; sourceTree = "<group>"; };
+		6F45AF1218335D36002FF0ED /* UILabel+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AF1318335D36002FF0ED /* UILabel+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AF1418335D36002FF0ED /* UITableView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AF1518335D36002FF0ED /* UITableView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AF1618335D36002FF0ED /* UIView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AF1718335D36002FF0ED /* UIView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AF1818335D36002FF0ED /* UIViewController+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AF1918335D36002FF0ED /* UIViewController+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AF1A18335D36002FF0ED /* UIViewController+HLSViewBindingFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSViewBindingFriend.h"; sourceTree = "<group>"; };
+		6F45AF1B18335D36002FF0ED /* UIWebView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AF1C18335D36002FF0ED /* UIWebView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AF2418335D82002FF0ED /* Employee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Employee.h; sourceTree = "<group>"; };
+		6F45AF2518335D82002FF0ED /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
+		6F45AF2618335D82002FF0ED /* EmployeeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeHeaderView.h; sourceTree = "<group>"; };
+		6F45AF2718335D82002FF0ED /* EmployeeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeHeaderView.m; sourceTree = "<group>"; };
+		6F45AF2818335D82002FF0ED /* EmployeeHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeHeaderView.xib; sourceTree = "<group>"; };
+		6F45AF2918335D82002FF0ED /* EmployeeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeTableViewCell.h; sourceTree = "<group>"; };
+		6F45AF2A18335D82002FF0ED /* EmployeeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeTableViewCell.m; sourceTree = "<group>"; };
+		6F45AF2B18335D82002FF0ED /* EmployeeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeTableViewCell.xib; sourceTree = "<group>"; };
+		6F45AF2C18335D82002FF0ED /* EmployeeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeView.h; sourceTree = "<group>"; };
+		6F45AF2D18335D82002FF0ED /* EmployeeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeView.m; sourceTree = "<group>"; };
+		6F45AF2E18335D82002FF0ED /* EmployeeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmployeeView.xib; sourceTree = "<group>"; };
+		6F45AF2F18335D82002FF0ED /* LabelBindingsDemo1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo1ViewController.h; sourceTree = "<group>"; };
+		6F45AF3018335D82002FF0ED /* LabelBindingsDemo1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo1ViewController.m; sourceTree = "<group>"; };
+		6F45AF3118335D82002FF0ED /* LabelBindingsDemo1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo1ViewController.xib; sourceTree = "<group>"; };
+		6F45AF3218335D82002FF0ED /* LabelBindingsDemo2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo2ViewController.h; sourceTree = "<group>"; };
+		6F45AF3318335D82002FF0ED /* LabelBindingsDemo2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo2ViewController.m; sourceTree = "<group>"; };
+		6F45AF3418335D82002FF0ED /* LabelBindingsDemo2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo2ViewController.xib; sourceTree = "<group>"; };
+		6F45AF3518335D82002FF0ED /* LabelBindingsDemo3InsetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo3InsetViewController.h; sourceTree = "<group>"; };
+		6F45AF3618335D82002FF0ED /* LabelBindingsDemo3InsetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo3InsetViewController.m; sourceTree = "<group>"; };
+		6F45AF3718335D82002FF0ED /* LabelBindingsDemo3InsetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo3InsetViewController.xib; sourceTree = "<group>"; };
+		6F45AF3818335D82002FF0ED /* LabelBindingsDemo3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo3ViewController.h; sourceTree = "<group>"; };
+		6F45AF3918335D82002FF0ED /* LabelBindingsDemo3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo3ViewController.m; sourceTree = "<group>"; };
+		6F45AF3A18335D82002FF0ED /* LabelBindingsDemo3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo3ViewController.xib; sourceTree = "<group>"; };
+		6F45AF3B18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo4InsetViewController.h; sourceTree = "<group>"; };
+		6F45AF3C18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo4InsetViewController.m; sourceTree = "<group>"; };
+		6F45AF3D18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo4InsetViewController.xib; sourceTree = "<group>"; };
+		6F45AF3E18335D82002FF0ED /* LabelBindingsDemo4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo4ViewController.h; sourceTree = "<group>"; };
+		6F45AF3F18335D82002FF0ED /* LabelBindingsDemo4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo4ViewController.m; sourceTree = "<group>"; };
+		6F45AF4018335D82002FF0ED /* LabelBindingsDemo4ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo4ViewController.xib; sourceTree = "<group>"; };
+		6F45AF4118335D82002FF0ED /* LabelBindingsDemo5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo5ViewController.h; sourceTree = "<group>"; };
+		6F45AF4218335D82002FF0ED /* LabelBindingsDemo5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo5ViewController.m; sourceTree = "<group>"; };
+		6F45AF4318335D82002FF0ED /* LabelBindingsDemo5ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo5ViewController.xib; sourceTree = "<group>"; };
+		6F45AF4418335D82002FF0ED /* LabelBindingsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemoViewController.h; sourceTree = "<group>"; };
+		6F45AF4518335D82002FF0ED /* LabelBindingsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemoViewController.m; sourceTree = "<group>"; };
+		6F45AF4618335D82002FF0ED /* LabelBindingsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemoViewController.xib; sourceTree = "<group>"; };
+		6F45AF4718335D82002FF0ED /* TableViewBindingsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewBindingsDemoViewController.h; sourceTree = "<group>"; };
+		6F45AF4818335D82002FF0ED /* TableViewBindingsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewBindingsDemoViewController.m; sourceTree = "<group>"; };
+		6F45AF4918335D82002FF0ED /* TableViewBindingsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewBindingsDemoViewController.xib; sourceTree = "<group>"; };
+		6F45AF4A18335D82002FF0ED /* TodayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayView.h; sourceTree = "<group>"; };
+		6F45AF4B18335D82002FF0ED /* TodayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayView.m; sourceTree = "<group>"; };
+		6F45AF4C18335D82002FF0ED /* TodayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodayView.xib; sourceTree = "<group>"; };
+		6F45AF4D18335D82002FF0ED /* YesterdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesterdayView.h; sourceTree = "<group>"; };
+		6F45AF4E18335D82002FF0ED /* YesterdayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesterdayView.m; sourceTree = "<group>"; };
+		6F45AF4F18335D82002FF0ED /* YesterdayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YesterdayView.xib; sourceTree = "<group>"; };
+		6F45AF6D18335EB3002FF0ED /* DemoFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoFormatter.h; sourceTree = "<group>"; };
+		6F45AF6E18335EB3002FF0ED /* DemoFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoFormatter.m; sourceTree = "<group>"; };
 		6F5007ED1585E17400391A6C /* HLSExpandingSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSExpandingSearchBar.h; sourceTree = "<group>"; };
 		6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSExpandingSearchBar.m; sourceTree = "<group>"; };
 		6F5007F91585E91E00391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
@@ -555,8 +644,6 @@
 		6FADE69714BA04A6007EE121 /* HLSValue1TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue1TableViewCell.m; sourceTree = "<group>"; };
 		6FADE69814BA04A6007EE121 /* HLSValue2TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValue2TableViewCell.h; sourceTree = "<group>"; };
 		6FADE69914BA04A6007EE121 /* HLSValue2TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValue2TableViewCell.m; sourceTree = "<group>"; };
-		6FADE69A14BA04A6007EE121 /* UINavigationBar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+HLSExtensions.h"; sourceTree = "<group>"; };
-		6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE69C14BA04A6007EE121 /* UITextField+HLSValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSValidation.h"; sourceTree = "<group>"; };
 		6FADE69D14BA04A6007EE121 /* UITextField+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSValidation.m"; sourceTree = "<group>"; };
 		6FADE69E14BA04A6007EE121 /* UIView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -726,9 +813,6 @@
 		6FDE688114BC8E9300F8CD3A /* WebViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewDemoViewController.h; sourceTree = "<group>"; };
 		6FDE688214BC8E9300F8CD3A /* WebViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewDemoViewController.m; sourceTree = "<group>"; };
 		6FDE688314BC8E9300F8CD3A /* WebViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewDemoViewController.xib; sourceTree = "<group>"; };
-		6FDE68A414BD61F500F8CD3A /* SkinningDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinningDemoViewController.h; sourceTree = "<group>"; };
-		6FDE68A514BD61F500F8CD3A /* SkinningDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkinningDemoViewController.m; sourceTree = "<group>"; };
-		6FDE68A614BD61F500F8CD3A /* SkinningDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SkinningDemoViewController.xib; sourceTree = "<group>"; };
 		6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabelLocalizationInfo.h; sourceTree = "<group>"; };
 		6FDE694814BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FE8EA8F14CFE48E0081F249 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
@@ -1004,6 +1088,77 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		6F45AF0F18335D36002FF0ED /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				6F45AF1018335D36002FF0ED /* HLSViewBindingInformation.h */,
+				6F45AF1118335D36002FF0ED /* HLSViewBindingInformation.m */,
+				6F45AF1218335D36002FF0ED /* UILabel+HLSViewBinding.h */,
+				6F45AF1318335D36002FF0ED /* UILabel+HLSViewBinding.m */,
+				6F45AF1418335D36002FF0ED /* UITableView+HLSViewBinding.h */,
+				6F45AF1518335D36002FF0ED /* UITableView+HLSViewBinding.m */,
+				6F45AF1618335D36002FF0ED /* UIView+HLSViewBinding.h */,
+				6F45AF1718335D36002FF0ED /* UIView+HLSViewBinding.m */,
+				6F45AF1818335D36002FF0ED /* UIViewController+HLSViewBinding.h */,
+				6F45AF1918335D36002FF0ED /* UIViewController+HLSViewBinding.m */,
+				6F45AF1A18335D36002FF0ED /* UIViewController+HLSViewBindingFriend.h */,
+				6F45AF1B18335D36002FF0ED /* UIWebView+HLSViewBinding.h */,
+				6F45AF1C18335D36002FF0ED /* UIWebView+HLSViewBinding.m */,
+			);
+			path = Bindings;
+			sourceTree = "<group>";
+		};
+		6F45AF2318335D82002FF0ED /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				6F45AF2418335D82002FF0ED /* Employee.h */,
+				6F45AF2518335D82002FF0ED /* Employee.m */,
+				6F45AF2618335D82002FF0ED /* EmployeeHeaderView.h */,
+				6F45AF2718335D82002FF0ED /* EmployeeHeaderView.m */,
+				6F45AF2818335D82002FF0ED /* EmployeeHeaderView.xib */,
+				6F45AF2918335D82002FF0ED /* EmployeeTableViewCell.h */,
+				6F45AF2A18335D82002FF0ED /* EmployeeTableViewCell.m */,
+				6F45AF2B18335D82002FF0ED /* EmployeeTableViewCell.xib */,
+				6F45AF2C18335D82002FF0ED /* EmployeeView.h */,
+				6F45AF2D18335D82002FF0ED /* EmployeeView.m */,
+				6F45AF2E18335D82002FF0ED /* EmployeeView.xib */,
+				6F45AF2F18335D82002FF0ED /* LabelBindingsDemo1ViewController.h */,
+				6F45AF3018335D82002FF0ED /* LabelBindingsDemo1ViewController.m */,
+				6F45AF3118335D82002FF0ED /* LabelBindingsDemo1ViewController.xib */,
+				6F45AF3218335D82002FF0ED /* LabelBindingsDemo2ViewController.h */,
+				6F45AF3318335D82002FF0ED /* LabelBindingsDemo2ViewController.m */,
+				6F45AF3418335D82002FF0ED /* LabelBindingsDemo2ViewController.xib */,
+				6F45AF3518335D82002FF0ED /* LabelBindingsDemo3InsetViewController.h */,
+				6F45AF3618335D82002FF0ED /* LabelBindingsDemo3InsetViewController.m */,
+				6F45AF3718335D82002FF0ED /* LabelBindingsDemo3InsetViewController.xib */,
+				6F45AF3818335D82002FF0ED /* LabelBindingsDemo3ViewController.h */,
+				6F45AF3918335D82002FF0ED /* LabelBindingsDemo3ViewController.m */,
+				6F45AF3A18335D82002FF0ED /* LabelBindingsDemo3ViewController.xib */,
+				6F45AF3B18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.h */,
+				6F45AF3C18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.m */,
+				6F45AF3D18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.xib */,
+				6F45AF3E18335D82002FF0ED /* LabelBindingsDemo4ViewController.h */,
+				6F45AF3F18335D82002FF0ED /* LabelBindingsDemo4ViewController.m */,
+				6F45AF4018335D82002FF0ED /* LabelBindingsDemo4ViewController.xib */,
+				6F45AF4118335D82002FF0ED /* LabelBindingsDemo5ViewController.h */,
+				6F45AF4218335D82002FF0ED /* LabelBindingsDemo5ViewController.m */,
+				6F45AF4318335D82002FF0ED /* LabelBindingsDemo5ViewController.xib */,
+				6F45AF4418335D82002FF0ED /* LabelBindingsDemoViewController.h */,
+				6F45AF4518335D82002FF0ED /* LabelBindingsDemoViewController.m */,
+				6F45AF4618335D82002FF0ED /* LabelBindingsDemoViewController.xib */,
+				6F45AF4718335D82002FF0ED /* TableViewBindingsDemoViewController.h */,
+				6F45AF4818335D82002FF0ED /* TableViewBindingsDemoViewController.m */,
+				6F45AF4918335D82002FF0ED /* TableViewBindingsDemoViewController.xib */,
+				6F45AF4A18335D82002FF0ED /* TodayView.h */,
+				6F45AF4B18335D82002FF0ED /* TodayView.m */,
+				6F45AF4C18335D82002FF0ED /* TodayView.xib */,
+				6F45AF4D18335D82002FF0ED /* YesterdayView.h */,
+				6F45AF4E18335D82002FF0ED /* YesterdayView.m */,
+				6F45AF4F18335D82002FF0ED /* YesterdayView.xib */,
+			);
+			path = Bindings;
+			sourceTree = "<group>";
+		};
 		6F5007F81585E90100391A6C /* ExpandingSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1081,6 +1236,7 @@
 			isa = PBXGroup;
 			children = (
 				6FADE62C14BA04A6007EE121 /* Animation */,
+				6F45AF0F18335D36002FF0ED /* Bindings */,
 				6FADE63314BA04A6007EE121 /* Core */,
 				6FADE66814BA04A6007EE121 /* CoreData */,
 				6FADE67214BA04A6007EE121 /* Logging */,
@@ -1296,8 +1452,6 @@
 				6F91452214CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m */,
 				6FADE9F014BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.h */,
 				6FADE9F114BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m */,
-				6FADE69A14BA04A6007EE121 /* UINavigationBar+HLSExtensions.h */,
-				6FADE69B14BA04A6007EE121 /* UINavigationBar+HLSExtensions.m */,
 				6FE8EA8F14CFE48E0081F249 /* UINavigationController+HLSActionSheet.h */,
 				6FE8EA9014CFE48E0081F249 /* UINavigationController+HLSActionSheet.m */,
 				6FEEF86314F297DB001585A6 /* UIScrollView+HLSExtensions.h */,
@@ -1308,8 +1462,6 @@
 				6FADE69D14BA04A6007EE121 /* UITextField+HLSValidation.m */,
 				6FDDEC201529781300CED462 /* UITextView+HLSExtensions.h */,
 				6FDDEC211529781300CED462 /* UITextView+HLSExtensions.m */,
-				6F3B063814BC7BA60026F512 /* UIToolbar+HLSExtensions.h */,
-				6F3B063914BC7BA60026F512 /* UIToolbar+HLSExtensions.m */,
 				6FADE69E14BA04A6007EE121 /* UIView+HLSExtensions.h */,
 				6FADE69F14BA04A6007EE121 /* UIView+HLSExtensions.m */,
 				6F66181916C14B7300303628 /* UIView+HLSRuntimeAttributes.h */,
@@ -1404,6 +1556,7 @@
 			isa = PBXGroup;
 			children = (
 				6FADE7F014BA04C8007EE121 /* Animation */,
+				6F45AF2318335D82002FF0ED /* Bindings */,
 				6FADE7F914BA04C8007EE121 /* Common */,
 				6F4169EB14BB67D5006020E6 /* Core */,
 				6FB5004E1705ABC400779DB3 /* Networking */,
@@ -1551,7 +1704,6 @@
 				6F58C52E17944DCC0092590C /* KeyboardAvoidingScrollView */,
 				6F89149615790DCA009FCC78 /* Label */,
 				6FC5E8AA14F380A100C01ABC /* ParallaxScrolling */,
-				6FDE68A314BD61F400F8CD3A /* Skinning */,
 				6F5A0BAA1509D17B00A20DFF /* Slideshow */,
 				6FADE84A14BA04C8007EE121 /* TableViewCells */,
 				6F3D1D7E179571440056FF4E /* TextViews */,
@@ -1704,6 +1856,8 @@
 				6F53B63816FA321F00E01781 /* DemoColors.m */,
 				6FADE87E14BA04C9007EE121 /* DemoErrors.h */,
 				6FADE87F14BA04C9007EE121 /* DemoErrors.m */,
+				6F45AF6D18335EB3002FF0ED /* DemoFormatter.h */,
+				6F45AF6E18335EB3002FF0ED /* DemoFormatter.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1797,16 +1951,6 @@
 				6FDE688314BC8E9300F8CD3A /* WebViewDemoViewController.xib */,
 			);
 			path = WebView;
-			sourceTree = "<group>";
-		};
-		6FDE68A314BD61F400F8CD3A /* Skinning */ = {
-			isa = PBXGroup;
-			children = (
-				6FDE68A414BD61F500F8CD3A /* SkinningDemoViewController.h */,
-				6FDE68A514BD61F500F8CD3A /* SkinningDemoViewController.m */,
-				6FDE68A614BD61F500F8CD3A /* SkinningDemoViewController.xib */,
-			);
-			path = Skinning;
 			sourceTree = "<group>";
 		};
 		6FEF8547131F77180015B57C /* Other Sources */ = {
@@ -1942,7 +2086,6 @@
 				6FADE8DA14BA04C9007EE121 /* WizardDemoViewController.xib in Resources */,
 				6FADE8DC14BA04C9007EE121 /* WizardIdentityPageViewController.xib in Resources */,
 				6FDE688514BC8E9300F8CD3A /* WebViewDemoViewController.xib in Resources */,
-				6FDE68A814BD61F500F8CD3A /* SkinningDemoViewController.xib in Resources */,
 				6FC5E8AF14F380A100C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */,
 				6F5A0BAF1509D17B00A20DFF /* SlideshowDemoViewController.xib in Resources */,
 				6F000109156BD1360055CED7 /* CoconutKit-resources.bundle in Resources */,
@@ -1990,6 +2133,20 @@
 				6FB500541705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */,
 				6F58C53417944DCC0092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 				6F3D1D84179571440056FF4E /* TextViewsDemoViewController.xib in Resources */,
+				6F45AF5218335D82002FF0ED /* EmployeeHeaderView.xib in Resources */,
+				6F45AF5418335D82002FF0ED /* EmployeeTableViewCell.xib in Resources */,
+				6F45AF5618335D82002FF0ED /* EmployeeView.xib in Resources */,
+				6F45AF5818335D82002FF0ED /* LabelBindingsDemo1ViewController.xib in Resources */,
+				6F45AF5A18335D82002FF0ED /* LabelBindingsDemo2ViewController.xib in Resources */,
+				6F45AF5C18335D82002FF0ED /* LabelBindingsDemo3InsetViewController.xib in Resources */,
+				6F45AF5E18335D82002FF0ED /* LabelBindingsDemo3ViewController.xib in Resources */,
+				6F45AF6018335D82002FF0ED /* LabelBindingsDemo4InsetViewController.xib in Resources */,
+				6F45AF6218335D82002FF0ED /* LabelBindingsDemo4ViewController.xib in Resources */,
+				6F45AF6418335D82002FF0ED /* LabelBindingsDemo5ViewController.xib in Resources */,
+				6F45AF6618335D82002FF0ED /* LabelBindingsDemoViewController.xib in Resources */,
+				6F45AF6818335D82002FF0ED /* TableViewBindingsDemoViewController.xib in Resources */,
+				6F45AF6A18335D82002FF0ED /* TodayView.xib in Resources */,
+				6F45AF6C18335D82002FF0ED /* YesterdayView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2061,7 +2218,6 @@
 				6FADE6E514BA04A7007EE121 /* HLSTableViewCell.m in Sources */,
 				6FADE6E914BA04A7007EE121 /* HLSValue1TableViewCell.m in Sources */,
 				6FADE6EA14BA04A7007EE121 /* HLSValue2TableViewCell.m in Sources */,
-				6FADE6EB14BA04A7007EE121 /* UINavigationBar+HLSExtensions.m in Sources */,
 				6FADE6EC14BA04A7007EE121 /* UITextField+HLSValidation.m in Sources */,
 				6FADE6ED14BA04A7007EE121 /* UIView+HLSExtensions.m in Sources */,
 				6FADE6EF14BA04A7007EE121 /* HLSContainerContent.m in Sources */,
@@ -2108,10 +2264,8 @@
 				6FADE8DF14BA04C9007EE121 /* _Person.m in Sources */,
 				6FADE8E014BA04C9007EE121 /* Person.m in Sources */,
 				6FADE9F214BA3AB4007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
-				6F3B063A14BC7BA60026F512 /* UIToolbar+HLSExtensions.m in Sources */,
 				6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */,
 				6FDE688414BC8E9300F8CD3A /* WebViewDemoViewController.m in Sources */,
-				6FDE68A714BD61F500F8CD3A /* SkinningDemoViewController.m in Sources */,
 				6FDE694914BEDBE300F8CD3A /* HLSLabelLocalizationInfo.m in Sources */,
 				6F91452414CE7E6100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */,
 				6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */,
@@ -2189,6 +2343,28 @@
 				6FAD88D11817856D00B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
 				6FC378FF182D18AE00B55AF1 /* main.m in Sources */,
 				6FC37910182D2C4000B55AF1 /* UIApplication+HLSExtensions.m in Sources */,
+				6F45AF1D18335D36002FF0ED /* HLSViewBindingInformation.m in Sources */,
+				6F45AF1E18335D36002FF0ED /* UILabel+HLSViewBinding.m in Sources */,
+				6F45AF1F18335D36002FF0ED /* UITableView+HLSViewBinding.m in Sources */,
+				6F45AF2018335D36002FF0ED /* UIView+HLSViewBinding.m in Sources */,
+				6F45AF2118335D36002FF0ED /* UIViewController+HLSViewBinding.m in Sources */,
+				6F45AF2218335D36002FF0ED /* UIWebView+HLSViewBinding.m in Sources */,
+				6F45AF5018335D82002FF0ED /* Employee.m in Sources */,
+				6F45AF5118335D82002FF0ED /* EmployeeHeaderView.m in Sources */,
+				6F45AF5318335D82002FF0ED /* EmployeeTableViewCell.m in Sources */,
+				6F45AF5518335D82002FF0ED /* EmployeeView.m in Sources */,
+				6F45AF5718335D82002FF0ED /* LabelBindingsDemo1ViewController.m in Sources */,
+				6F45AF5918335D82002FF0ED /* LabelBindingsDemo2ViewController.m in Sources */,
+				6F45AF5B18335D82002FF0ED /* LabelBindingsDemo3InsetViewController.m in Sources */,
+				6F45AF5D18335D82002FF0ED /* LabelBindingsDemo3ViewController.m in Sources */,
+				6F45AF5F18335D82002FF0ED /* LabelBindingsDemo4InsetViewController.m in Sources */,
+				6F45AF6118335D82002FF0ED /* LabelBindingsDemo4ViewController.m in Sources */,
+				6F45AF6318335D82002FF0ED /* LabelBindingsDemo5ViewController.m in Sources */,
+				6F45AF6518335D82002FF0ED /* LabelBindingsDemoViewController.m in Sources */,
+				6F45AF6718335D82002FF0ED /* TableViewBindingsDemoViewController.m in Sources */,
+				6F45AF6918335D82002FF0ED /* TodayView.m in Sources */,
+				6F45AF6B18335D82002FF0ED /* YesterdayView.m in Sources */,
+				6F45AF6F18335EB3002FF0ED /* DemoFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

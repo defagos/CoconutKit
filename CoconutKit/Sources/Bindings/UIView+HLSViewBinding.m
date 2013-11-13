@@ -56,9 +56,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIView__didMoveToWindow_Imp = (void (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                          @selector(didMoveToWindow),
-                                                                          (IMP)swizzled_UIView__didMoveToWindow_Imp);
+    s_UIView__didMoveToWindow_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                 @selector(didMoveToWindow),
+                                                                                 (IMP)swizzled_UIView__didMoveToWindow_Imp);
 }
 
 #pragma mark Bindings

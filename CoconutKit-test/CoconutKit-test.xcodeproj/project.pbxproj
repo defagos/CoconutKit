@@ -43,6 +43,12 @@
 		6F3E3E8C15A227A7007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */; };
 		6F41D23715E6A590009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */; };
 		6F41D24815E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */; };
+		6F45AFCB183363D4002FF0ED /* HLSViewBindingInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFBF183363D4002FF0ED /* HLSViewBindingInformation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AFCC183363D4002FF0ED /* UILabel+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFC1183363D4002FF0ED /* UILabel+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AFCD183363D4002FF0ED /* UITableView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFC3183363D4002FF0ED /* UITableView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AFCE183363D4002FF0ED /* UIView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFC5183363D4002FF0ED /* UIView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AFCF183363D4002FF0ED /* UIViewController+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFC7183363D4002FF0ED /* UIViewController+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AFD0183363D4002FF0ED /* UIWebView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFCA183363D4002FF0ED /* UIWebView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F5007F21585E18100391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007F11585E18100391A6C /* HLSExpandingSearchBar.m */; };
 		6F6010F515ABECA400A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010F415ABECA400A9FEC5 /* HLSContainerStack.m */; };
 		6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F61D12D14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m */; };
@@ -254,6 +260,19 @@
 		6F41D23615E6A590009A2384 /* CALayer+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F41D24615E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F41D24715E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F45AFBE183363D4002FF0ED /* HLSViewBindingInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingInformation.h; sourceTree = "<group>"; };
+		6F45AFBF183363D4002FF0ED /* HLSViewBindingInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewBindingInformation.m; sourceTree = "<group>"; };
+		6F45AFC0183363D4002FF0ED /* UILabel+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AFC1183363D4002FF0ED /* UILabel+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AFC2183363D4002FF0ED /* UITableView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AFC3183363D4002FF0ED /* UITableView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AFC4183363D4002FF0ED /* UIView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AFC5183363D4002FF0ED /* UIView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AFC6183363D4002FF0ED /* UIViewController+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AFC7183363D4002FF0ED /* UIViewController+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F45AFC8183363D4002FF0ED /* UIViewController+HLSViewBindingFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSViewBindingFriend.h"; sourceTree = "<group>"; };
+		6F45AFC9183363D4002FF0ED /* UIWebView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F45AFCA183363D4002FF0ED /* UIWebView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F5007F01585E18100391A6C /* HLSExpandingSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSExpandingSearchBar.h; sourceTree = "<group>"; };
 		6F5007F11585E18100391A6C /* HLSExpandingSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSExpandingSearchBar.m; sourceTree = "<group>"; };
 		6F6010F315ABECA400A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
@@ -728,6 +747,26 @@
 			path = Sources/Core;
 			sourceTree = SOURCE_ROOT;
 		};
+		6F45AFBD183363D4002FF0ED /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				6F45AFBE183363D4002FF0ED /* HLSViewBindingInformation.h */,
+				6F45AFBF183363D4002FF0ED /* HLSViewBindingInformation.m */,
+				6F45AFC0183363D4002FF0ED /* UILabel+HLSViewBinding.h */,
+				6F45AFC1183363D4002FF0ED /* UILabel+HLSViewBinding.m */,
+				6F45AFC2183363D4002FF0ED /* UITableView+HLSViewBinding.h */,
+				6F45AFC3183363D4002FF0ED /* UITableView+HLSViewBinding.m */,
+				6F45AFC4183363D4002FF0ED /* UIView+HLSViewBinding.h */,
+				6F45AFC5183363D4002FF0ED /* UIView+HLSViewBinding.m */,
+				6F45AFC6183363D4002FF0ED /* UIViewController+HLSViewBinding.h */,
+				6F45AFC7183363D4002FF0ED /* UIViewController+HLSViewBinding.m */,
+				6F45AFC8183363D4002FF0ED /* UIViewController+HLSViewBindingFriend.h */,
+				6F45AFC9183363D4002FF0ED /* UIWebView+HLSViewBinding.h */,
+				6F45AFCA183363D4002FF0ED /* UIWebView+HLSViewBinding.m */,
+			);
+			path = Bindings;
+			sourceTree = "<group>";
+		};
 		6FA74D40140500CC0043693E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -757,6 +796,7 @@
 			isa = PBXGroup;
 			children = (
 				6FADE70B14BA04B6007EE121 /* Animation */,
+				6F45AFBD183363D4002FF0ED /* Bindings */,
 				6FADE71214BA04B6007EE121 /* Core */,
 				6FADE74714BA04B6007EE121 /* CoreData */,
 				6FADE75114BA04B6007EE121 /* Logging */,
@@ -1317,6 +1357,12 @@
 				6FB318B61815AB0B00565B69 /* HLSStandardFileManagerTestCase.m in Sources */,
 				6FAD88D8181785C100B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
 				6FC37913182D2C5700B55AF1 /* UIApplication+HLSExtensions.m in Sources */,
+				6F45AFCB183363D4002FF0ED /* HLSViewBindingInformation.m in Sources */,
+				6F45AFCC183363D4002FF0ED /* UILabel+HLSViewBinding.m in Sources */,
+				6F45AFCD183363D4002FF0ED /* UITableView+HLSViewBinding.m in Sources */,
+				6F45AFCE183363D4002FF0ED /* UIView+HLSViewBinding.m in Sources */,
+				6F45AFCF183363D4002FF0ED /* UIViewController+HLSViewBinding.m in Sources */,
+				6F45AFD0183363D4002FF0ED /* UIWebView+HLSViewBinding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
