@@ -14,13 +14,6 @@
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSViewBindingFriend.h"
 
-// TODO:
-//  - bound table view (use restricted interface proxy to restrict interface. Implement delegate
-//    to which delegate forwards events; implement a runtime function to check whether a method
-//    belongs to a protocol, and use it as a criterium to know whether the delegate must forward
-//    unrecognized selectors to the bound table view delegate)
-//  - demo with table view
-
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindFormatterKey = &s_bindFormatterKey;

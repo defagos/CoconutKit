@@ -90,7 +90,7 @@
  * view according to the text which is received as parameter. For UIView classes which do not implement this method, 
  * bindings will not be available.
  *
- * You can call -bindToObject:,  -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithText:
+ * You can call -bindToObject:, -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithText:
  * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively)
  */
 - (void)updateViewWithText:(NSString *)text;
