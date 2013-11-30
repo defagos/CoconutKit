@@ -16,9 +16,9 @@
  * runtime attributes instead of outlets. Two attributes are available to this purpose:
  *   - bindKeyPath: The keypath to which the view will be bound. This can be any kind of keypath, even one
  *                  containing keypath operators
- *   - bindFormatter: Values to be displayed must be strings. If bindKeyPath returns another kind of object,
- *                    you must provide the name of an instance formatter method 'methodName:' which can 
- *                    either be an instance method with prototype
+ *   - bindFormatter: Values to be displayed by bound views must be strings. If bindKeyPath returns another 
+ *                    kind of object (say of class SomeClass), you must provide the name of an instance 
+ *                    formatter method 'methodName:', which can either be an instance method with prototype
  *                      - (NSString *)methodName:(SomeClass *)object
  *                    or a class method with prototype
  *                      + (NSString *)classMethodName:(SomeClass *)object
@@ -32,9 +32,9 @@
  * method existence is tested first, then class method existence).
  *
  * Often, though, values to be bound stem from a model object, not from the responder chain. In such cases,
- * you must call -bindToObject:, passing it the object to be bind against. The keypath you set must be be 
- * valid for this object. Formatter lookup is first made on the object class itself (instance, then class
- * method), then along the responder chain (instance, then class method, again stopping at view controller 
+ * you must call -bindToObject: on the view to be bound, passing it the object to be bound against. The keypath 
+ * you set must be be valid for this object. Formatter lookup is first made on the object class itself (instance, 
+ * then class method), then along the responder chain (instance, then class method, again stopping at view controller 
  * boundaries), except if a global class formatter is used
  *
  * To summarize, formatter lookup for a method named 'methodName:' is performed from the most specific to 
@@ -44,19 +44,19 @@
  *   - for each responder along the responder chain starting with the bound view:
  *       - instance method -methodName: on the responder object
  *       - class method +methodName: on the responder object
- * In addition, global formatter names can also point to class methods '+[SomeClass methodName:]'
+ * In addition, global formatter names can be provided in the form of class methods '+[SomeClass methodName:]'
  *
- * The binding information is resolved once when views are unarchived, and stored for efficient later use. 
- * Values are not updated automatically when the underlying bound objects changes, this has to be done
- * manually:
- *   - if the object is not the same, call -bindToObject: to set bindings with the new object
- *   - if the object is the same but has different values for its bounds properties, simply call -refreshBindings 
+ * The binding information is resolved as late as possible (usually when the view is displayed), so that the whole
+ * repsonder chain context is available. This information is then stored for efficient later use. Values are not 
+ * updated automatically when the underlying bound objects changes, this has to be done manually:
+ *   - when the object changes, call -bindToObject: to set bindings with the new object
+ *   - if the object does not change but has different values for its bounds properties, simply call -refreshBindings
  *     to reflect the new values which are available
  *
  * It would be painful to call -bindToObject:, -refreshBindings:, etc. on all views belonging to a view hierarchy
- * when bindings must be established or refreshed. For this reason, those calls have been made recursive. This 
+ * when bindings must be established or refreshed. For this reason, those calls are made recursively. This
  * means you can simply call one of those methods at the top of the view hierarchy (or even on the view controller 
- * itself, see UIViewController+HLSViewBinding) to bind or refresh all associated view hierarchy. Note that each 
+ * itself, see UIViewController+HLSViewBinding.h) to bind or refresh all associated view hierarchy. Note that each
  * view class decides whether it recursively binds or refreshes its subviews (see HLSViewBinding protocol)
  *
  * In most cases, you want to bind a single view hierarchy to a single object. But you can also have separate 
@@ -128,7 +128,7 @@
 
 /**
  * Refresh the value displayed by the view, recursively traversing the view hierarchy rooted at it. If forced is set
- * to YES, bindings are not checked again (i.e. formatters are not resolved again), values are only updated using
+ * to NO, bindings are not checked again (i.e. formatters are not resolved again), values are only updated using
  * information which has been cached the first time bindings were successfully checked. If you want to force bindings
  * to be checked again first (i.e. formatters to be resolved again), set forced to YES
  */
