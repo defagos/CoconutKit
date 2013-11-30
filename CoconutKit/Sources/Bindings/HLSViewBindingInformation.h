@@ -6,6 +6,15 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
+typedef enum {
+    HLSViewBindingInformationStatusEnumBegin = 0,
+    HLSViewBindingInformationStatusUnchecked = HLSViewBindingInformationStatusEnumBegin,
+    HLSViewBindingInformationStatusValid,
+    HLSViewBindingInformationStatusInvalid,
+    HLSViewBindingInformationStatusEnumEnd,
+    HLSViewBindingInformationStatusEnumSize = HLSViewBindingInformationStatusEnumEnd - HLSViewBindingInformationStatusEnumBegin
+} HLSViewBindingInformationStatus;
+
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
  */
@@ -14,8 +23,6 @@
 /**
  * Store view binding information. A keypath and a view are mandatory, otherwise the method returns nil. The object
  * parameter can be one of the following:
- *   - HLSViewBindingInformationEmptyObject in which case the value returned by the keypath is nil (binding to an empty 
- *     object)
  *   - a non-nil object, which the keypath is applied to (binding to an object)
  *   - nil, in which case the keypath is applied to the responder chain starting with view
  */
@@ -26,5 +33,9 @@
  * this method returns nil
  */
 - (NSString *)text;
+
+- (void)verify;
+
+@property (nonatomic, readonly, assign) HLSViewBindingInformationStatus status;
 
 @end

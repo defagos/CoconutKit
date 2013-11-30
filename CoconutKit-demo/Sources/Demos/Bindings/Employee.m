@@ -14,9 +14,12 @@
 
 #pragma mark Class methods
 
+// TODO: Add test cases for class formatters
+#if 0
 + (NSString *)stringFromNumber:(NSNumber *)number
 {
     return [DemoFormatter stringFromNumber:number];
 }
+#endif
 
 @end

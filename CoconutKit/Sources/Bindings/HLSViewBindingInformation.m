@@ -15,15 +15,6 @@
 
 #import <objc/runtime.h>
 
-typedef enum {
-    HLSViewBindingInformationStatusEnumBegin = 0,
-    HLSViewBindingInformationStatusUnchecked = HLSViewBindingInformationStatusEnumBegin,
-    HLSViewBindingInformationStatusValid,
-    HLSViewBindingInformationStatusInvalid,
-    HLSViewBindingInformationStatusEnumEnd,
-    HLSViewBindingInformationStatusEnumSize = HLSViewBindingInformationStatusEnumEnd - HLSViewBindingInformationStatusEnumBegin
-} HLSViewBindingInformationStatus;
-
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;
@@ -90,6 +81,11 @@ typedef enum {
 }
 
 #pragma mark Binding
+
+- (void)verify
+{
+    self.status = [self verifyBindingInformation];
+}
 
 // Return 'valid' if the binding information can be verified (keypath is valid, and any required formatting
 // method could be located). If the information is valid but cannot not be fully checked (the keypath is

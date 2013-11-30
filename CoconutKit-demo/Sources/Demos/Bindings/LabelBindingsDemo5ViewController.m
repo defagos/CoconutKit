@@ -8,6 +8,7 @@
 
 #import "LabelBindingsDemo5ViewController.h"
 
+#import "DemoFormatter.h"
 #import "EmployeeView.h"
 #import "TodayView.h"
 #import "YesterdayView.h"
@@ -29,16 +30,26 @@
     return [NSDate date];
 }
 
+#pragma mark Formatters
+
+- (NSString *)stringFromDate:(NSDate *)date
+{
+    return [DemoFormatter stringFromDate:date];
+}
+
+- (NSString *)stringFromNumber:(NSNumber *)number
+{
+    return [DemoFormatter stringFromNumber:number];
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // When instantiated, no -currentDate method is available along the responder chain starting with TodayView (in fact,
-    // there is no responder chain, the view is dangling since it has not been added to a view hierarchy). After the view
-    // has been added to the parent view hierarchy, and if we want to access the -currentDate method, we need to recalculate
-    // the bindings (refreshing them does not suffice since the information is cached)
+    // Bindings are resolved as late as possible (when the view is displayed). In this case, when bindings are resolved,
+    // todayView is already in its view hierarchy, so that the binding keypaths and formatters can be resolved at runtime
     TodayView *todayView = [TodayView view];
     [self.todayPlaceholderView addSubview:todayView];
     

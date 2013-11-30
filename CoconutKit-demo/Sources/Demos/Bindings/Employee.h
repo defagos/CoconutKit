@@ -8,8 +8,6 @@
 
 @interface Employee : NSObject
 
-+ (NSString *)stringFromNumber:(NSNumber *)number;
-
 @property (nonatomic, strong) NSString *fullName;
 @property (nonatomic, strong) NSNumber *age;
 
