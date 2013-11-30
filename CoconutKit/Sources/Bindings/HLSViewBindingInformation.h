@@ -6,15 +6,6 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-typedef enum {
-    HLSViewBindingInformationStatusEnumBegin = 0,
-    HLSViewBindingInformationStatusUnchecked = HLSViewBindingInformationStatusEnumBegin,
-    HLSViewBindingInformationStatusValid,
-    HLSViewBindingInformationStatusInvalid,
-    HLSViewBindingInformationStatusEnumEnd,
-    HLSViewBindingInformationStatusEnumSize = HLSViewBindingInformationStatusEnumEnd - HLSViewBindingInformationStatusEnumBegin
-} HLSViewBindingInformationStatus;
-
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
  */
@@ -33,9 +24,5 @@ typedef enum {
  * this method returns nil
  */
 - (NSString *)text;
-
-- (void)verify;
-
-@property (nonatomic, readonly, assign) HLSViewBindingInformationStatus status;
 
 @end

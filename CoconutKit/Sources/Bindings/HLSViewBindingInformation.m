@@ -15,6 +15,18 @@
 
 #import <objc/runtime.h>
 
+// TODO: Debug mode only; Associate with each bound view another view which displays information about the binding, and whether
+//       it is valid or not). Maybe display this information as an additional overlay. We cannot namely log binding failure
+//       during successive attemps, because bindings might occur late (therefore first attempts might fail, which generates too
+//       many false positives). We can then add keypath information manually added to the demo view controllers, replacing it
+//       with the debug overlay. Strategy:
+//         - in debug mode, when binding information cannot be resolved, attach an error, which gets cleared when binding is
+//           correct. The error message is basically the one in the HLSLoggerError calls in the -verifyBindingInformation. The
+//           logger calls, which can lead to false positives, are discarded (the end result is that we always have the most
+//           recent error message available, which is the relevant information)
+//         - implement a debugging overlay displaying binding information in a convenient way (which field was bound on success,
+//           which formatter was used. Displays the error if binding failed
+
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;
@@ -25,7 +37,7 @@
 @property (nonatomic, weak) id formattingTarget;
 @property (nonatomic, assign) SEL formattingSelector;
 
-@property (nonatomic, assign) HLSViewBindingInformationStatus status;
+@property (nonatomic, assign, getter=isVerified) BOOL verified;
 
 @end
 
@@ -60,14 +72,13 @@
 - (NSString *)text
 {
     // Lazily check and fill binding information
-    if (self.status == HLSViewBindingInformationStatusUnchecked) {
-        self.status = [self verifyBindingInformation];
+    if (! self.verified) {
+        self.verified = [self verifyBindingInformation];
+        if (! self.verified) {
+            return nil;
+        }
     }
-    
-    if (self.status == HLSViewBindingInformationStatusInvalid) {
-        return nil;
-    }
-        
+            
     id value = [self.object valueForKeyPath:self.keyPath];
     if (self.formattingTarget) {
 #pragma clang diagnostic push
@@ -82,15 +93,10 @@
 
 #pragma mark Binding
 
-- (void)verify
-{
-    self.status = [self verifyBindingInformation];
-}
-
-// Return 'valid' if the binding information can be verified (keypath is valid, and any required formatting
+// Return YES if the binding information can be verified (keypath is valid, and any required formatting
 // method could be located). If the information is valid but cannot not be fully checked (the keypath is
-// correct, but returns nil), returns 'unchecked'. Otherwise returns 'invalid'
-- (HLSViewBindingInformationStatus)verifyBindingInformation
+// correct, but returns nil), or if it is invalid, returns NO
+- (BOOL)verifyBindingInformation
 {
     // An object has been provided. Check that the keypath is valid for it
     if (self.object) {
@@ -99,7 +105,7 @@
         }
         @catch (NSException *exception) {
             HLSLoggerError(@"Invalid keypath '%@' for object %@", self.keyPath, self.object);
-            return HLSViewBindingInformationStatusInvalid;
+            return NO;
         }
     }
     // No object provided. Walk along the responder chain to find a responder matching the keypath (might be nil)
@@ -113,19 +119,19 @@
     // The keypath is valid, but we cannot check its type (to guess if formatting is needed) since there is no
     // value. Does not change the status, another check is required
     if (! value) {
-        return HLSViewBindingInformationStatusUnchecked;
+        return NO;
     }
     
     // No formatting required. We are done, the binding is correct
     if ([value isKindOfClass:[NSString class]]) {
-        return HLSViewBindingInformationStatusValid;
+        return YES;
     }
     
     // Formatting required. Check that a formatter is available
     if (! self.formatterName) {
         HLSLoggerError(@"The value returned by the binding keypath '%@' is of class %@, you must provide a formatterName "
                        "user-defined runtime attribute to format it as an NSString", self.keyPath, [value className]);
-        return HLSViewBindingInformationStatusInvalid;
+        return NO;
     }
     
     __block id formattingTarget = nil;
@@ -166,7 +172,7 @@
         formattingSelector = NSSelectorFromString(self.formatterName);
         if (! formattingSelector) {
             HLSLoggerError(@"Invalid formatter name '%@' for keypath '%@'", self.formatterName, self.keyPath);
-            return HLSViewBindingInformationStatusInvalid;
+            return NO;
         }
         
         // Look along the responder chain first (most specific)
@@ -182,7 +188,7 @@
             }
             else {
                 HLSLoggerError(@"No formatter method '%@' could be found for keypath '%@'", self.formatterName, self.keyPath);
-                return HLSViewBindingInformationStatusInvalid;
+                return NO;
             }
         }
     }
@@ -193,14 +199,14 @@
 #pragma clang diagnostic pop
     if (! [formattedValue isKindOfClass:[NSString class]]) {
         HLSLoggerError(@"The formatter method '%@' associated with the keypath '%@' must return an NSString", self.formatterName, self.keyPath);
-        return HLSViewBindingInformationStatusInvalid;
+        return NO;
     }
     
     // Cache the binding information we just verified
     self.formattingTarget = formattingTarget;
     self.formattingSelector = formattingSelector;
     
-    return HLSViewBindingInformationStatusValid;
+    return YES;
 }
 
 #pragma mark Context binding lookup

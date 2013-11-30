@@ -14,12 +14,6 @@
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSViewBindingFriend.h"
 
-// TODO: Debug mode only; Associate with each bound view another view which displays information about the binding, and whether
-//       it is valid or not). Maybe display this information as an additional overlay. We cannot namely log binding failure
-//       during successive attemps, because bindings might occur late (therefore first attempts might fail, which generates too
-//       many false positives). We can then add keypath information manually added to the demo view controllers, replacing it
-//       with the debug overlay
-
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindFormatterKey = &s_bindFormatterKey;
@@ -208,7 +202,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 // complete
 static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
 {
-    // TODO: Is also called when moving to window = nil (problem: self.window != nil here; must cach willMoveToWindow: first?)
+    // TODO: Is also called when moving to window = nil, which leads to unnecessary calls (problem: self.window != nil here; must catch
+    //       willMoveToWindow: first?)
     
     (*s_UIView__didMoveToWindow_Imp)(self, _cmd);
     
@@ -217,8 +212,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
         id boundObject = self.boundObject ?: nearestViewController.boundObject;
         [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
     }
-    else if (self.bindingInformation && self.bindingInformation.status != HLSViewBindingInformationStatusValid) {
-        [self.bindingInformation verify];
+    else if (self.bindingInformation) {
         [self updateText];
     }
 }
