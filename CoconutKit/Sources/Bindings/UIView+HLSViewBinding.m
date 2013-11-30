@@ -202,8 +202,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 // complete
 static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
 {
-    // TODO: Is also called when moving to window = nil, which leads to unnecessary calls (problem: self.window != nil here; must catch
-    //       willMoveToWindow: first?)
+    // TODO: Is also called when moving to window = nil, which leads to unnecessary calls, which can be seen when toggling between
+    //       the first two demo view controllers, which lead to an update (problem: self.window != nil here, we cannot therefore
+    //       simply detect view removal; maybe we should catch willMoveToWindow: first?)
     
     (*s_UIView__didMoveToWindow_Imp)(self, _cmd);
     

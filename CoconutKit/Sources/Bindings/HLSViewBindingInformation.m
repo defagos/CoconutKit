@@ -25,7 +25,7 @@
 //           logger calls, which can lead to false positives, are discarded (the end result is that we always have the most
 //           recent error message available, which is the relevant information)
 //         - implement a debugging overlay displaying binding information in a convenient way (which field was bound on success,
-//           which formatter was used. Displays the error if binding failed
+//           which object, which formatter was used. Displays the error if binding failed
 
 @interface HLSViewBindingInformation ()
 
@@ -36,6 +36,7 @@
 
 @property (nonatomic, weak) id formattingTarget;
 @property (nonatomic, assign) SEL formattingSelector;
+@property (nonatomic, strong) NSString *errorDescription;
 
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
 
@@ -98,19 +99,27 @@
 // correct, but returns nil), or if it is invalid, returns NO
 - (BOOL)verifyBindingInformation
 {
+    // Just to check whether unnecessary verifications are made
+    HLSLoggerDebug(@"Verifying binding information for %@", self);
+    
     // An object has been provided. Check that the keypath is valid for it
     if (self.object) {
         @try {
             [self.object valueForKeyPath:self.keyPath];
         }
         @catch (NSException *exception) {
-            HLSLoggerError(@"Invalid keypath '%@' for object %@", self.keyPath, self.object);
+            self.errorDescription = @"The specified keypath is invalid for the bound object";
             return NO;
         }
     }
     // No object provided. Walk along the responder chain to find a responder matching the keypath (might be nil)
     else {
         self.object = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
+    }
+    
+    if (! self.object) {
+        self.errorDescription = @"No meaningful target was found along the responder chain for the specified keypath";
+        return NO;
     }
     
     // No need to check for exceptions here, the keypath is here guaranteed to be valid the object
@@ -129,8 +138,8 @@
     
     // Formatting required. Check that a formatter is available
     if (! self.formatterName) {
-        HLSLoggerError(@"The value returned by the binding keypath '%@' is of class %@, you must provide a formatterName "
-                       "user-defined runtime attribute to format it as an NSString", self.keyPath, [value className]);
+        self.errorDescription = [NSString stringWithFormat:@"The value returned by the keypath is of class '%@', a formatter name is required to "
+            "format it as a string", [value className]];
         return NO;
     }
     
@@ -152,13 +161,13 @@
         // Check
         Class class = NSClassFromString(className);
         if (! class) {
-            HLSLoggerError(@"Invalid formatter class name %@ for keypath '%@'", className, self.keyPath);
+            self.errorDescription = [NSString stringWithFormat:@"The specified global formatter points to an invalid class '%@'", className];
             return;
         }
         
         SEL selector = NSSelectorFromString(methodName);
         if (! class_getClassMethod(class, selector)) {
-            HLSLoggerError(@"Invalid formatter method name '%@' for keypath '%@'", methodName, self.keyPath);
+            self.errorDescription = [NSString stringWithFormat:@"The specified global formatter method '%@' does not exist for the class '%@'", methodName, className];
             return;
         }
         
@@ -171,7 +180,7 @@
         // Perform instance method lookup
         formattingSelector = NSSelectorFromString(self.formatterName);
         if (! formattingSelector) {
-            HLSLoggerError(@"Invalid formatter name '%@' for keypath '%@'", self.formatterName, self.keyPath);
+            self.errorDescription = @"The formatter is not a valid method name";
             return NO;
         }
         
@@ -187,7 +196,7 @@
                 formattingTarget = [self.object class];
             }
             else {
-                HLSLoggerError(@"No formatter method '%@' could be found for keypath '%@'", self.formatterName, self.keyPath);
+                self.errorDescription = @"The specified formatter is neither a global formatter, nor could be resolved along the responder chain";
                 return NO;
             }
         }
@@ -198,13 +207,14 @@
     id formattedValue = [formattingTarget performSelector:formattingSelector withObject:value];
 #pragma clang diagnostic pop
     if (! [formattedValue isKindOfClass:[NSString class]]) {
-        HLSLoggerError(@"The formatter method '%@' associated with the keypath '%@' must return an NSString", self.formatterName, self.keyPath);
+        self.errorDescription = @"The specified formatter does not return a string";
         return NO;
     }
     
     // Cache the binding information we just verified
     self.formattingTarget = formattingTarget;
     self.formattingSelector = formattingSelector;
+    self.errorDescription = nil;
     
     return YES;
 }
