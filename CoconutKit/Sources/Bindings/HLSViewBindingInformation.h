@@ -25,4 +25,9 @@
  */
 - (NSString *)text;
 
+/**
+ * Return YES iff the information has been verified once
+ */
+@property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
+
 @end

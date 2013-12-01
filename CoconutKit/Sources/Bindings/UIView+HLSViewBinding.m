@@ -202,18 +202,50 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 // complete
 static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
 {
-    // TODO: Is also called when moving to window = nil, which leads to unnecessary calls, which can be seen when toggling between
-    //       the first two demo view controllers, which lead to an update (problem: self.window != nil here, we cannot therefore
-    //       simply detect view removal; maybe we should catch willMoveToWindow: first?)
-    
     (*s_UIView__didMoveToWindow_Imp)(self, _cmd);
     
-    if (self.bindKeyPath && ! self.bindingInformation) {
-        UIViewController *nearestViewController = self.nearestViewController;
-        id boundObject = self.boundObject ?: nearestViewController.boundObject;
-        [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
-    }
-    else if (self.bindingInformation) {
-        [self updateText];
+    // This method is called every time the view has been added to a view hierarchy. When a view gets added to a view hierarchy, it gets
+    // called once with self.window != nil. When removing a view from its hierarchy, it gets called once with self.window == nil. When
+    // transferring a view between two view hierarchies, it gets called twice (once with self.window == nil for removal from the old
+    // hierarchy, and once with self.window != nil for the new view hierarchy)
+    //
+    // We can choose between two different strategies:
+    //
+    // 1) When the window changes (to != nil), invalidate the cached binding information. The binding context might namely change during
+    //    the process of transferring the view to a new hierarchy. More often than not, and though this is the most correct approach, this
+    //    might lead to unnecessary binding calculation (views can namely be transferred between view hierarchies without visible consequences,
+    //    and calculating the binding information in such cases usually lead to the same result).
+    //
+    //    The corresponding code would be:
+    //
+    //    if (self.window) {
+    //        if (self.bindKeyPath && ! self.bindingInformation) {
+    //            UIViewController *nearestViewController = self.nearestViewController;
+    //            id boundObject = self.boundObject ?: nearestViewController.boundObject;
+    //            [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
+    //        }
+    //        else if (self.bindingInformation) {
+    //            [self updateText];
+    //        }
+    //    }
+    //    else {
+    //        self.bindingInformation = nil;
+    //    }
+    //
+    // 2) When the window changes (to != nil), we do not recalculate verified binding information. This does not automatically take into
+    //    account transfers between view hierarchies, but avoids useless binding recalculations (in general, we only want to verify binding
+    //    information once). If recalculation is really needed, the -refreshBindingsForced: method can still be called. This is the approach
+    //    which has been retained here
+    
+    if (self.window) {
+        if (self.bindKeyPath && ! self.bindingInformation) {
+            UIViewController *nearestViewController = self.nearestViewController;
+            id boundObject = self.boundObject ?: nearestViewController.boundObject;
+            [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
+        }
+        // Do not recalculate valid binding information, even if the window has changed
+        else if (self.bindingInformation && ! self.bindingInformation.verified) {
+            [self updateText];
+        }        
     }
 }
