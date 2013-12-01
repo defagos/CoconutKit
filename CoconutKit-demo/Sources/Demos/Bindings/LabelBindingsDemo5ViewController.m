@@ -73,9 +73,4 @@
     [self refreshBindingsForced:NO];
 }
 
-- (IBAction)recalculate:(id)sender
-{
-    [self refreshBindingsForced:YES];
-}
-
 @end
