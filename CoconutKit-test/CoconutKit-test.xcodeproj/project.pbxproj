@@ -202,6 +202,7 @@
 		6F159BE715A5747A0020AFAC /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
 		6F216F10184C4F9D009CE6CD /* HLSBindingDebugOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingDebugOverlayView.h; sourceTree = "<group>"; };
 		6F216F11184C4F9D009CE6CD /* HLSBindingDebugOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingDebugOverlayView.m; sourceTree = "<group>"; };
+		6F216F15184C57F8009CE6CD /* UIView+HLSViewBindingFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBindingFriend.h"; sourceTree = "<group>"; };
 		6F22C74816A859260081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F22C74916A859260081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F22C75516A93DE60081A9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -763,6 +764,7 @@
 				6F45AFC3183363D4002FF0ED /* UITableView+HLSViewBinding.m */,
 				6F45AFC4183363D4002FF0ED /* UIView+HLSViewBinding.h */,
 				6F45AFC5183363D4002FF0ED /* UIView+HLSViewBinding.m */,
+				6F216F15184C57F8009CE6CD /* UIView+HLSViewBindingFriend.h */,
 				6F45AFC6183363D4002FF0ED /* UIViewController+HLSViewBinding.h */,
 				6F45AFC7183363D4002FF0ED /* UIViewController+HLSViewBinding.m */,
 				6F45AFC8183363D4002FF0ED /* UIViewController+HLSViewBindingFriend.h */,

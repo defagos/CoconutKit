@@ -28,11 +28,10 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 
 #pragma mark Overlay
 
-- (void)showBindingDebugOverlayView
+- (void)showBindingDebugOverlayViewRecursive:(BOOL)recursive
 {
-    HLSBindingDebugOverlayView *overlayView = [[HLSBindingDebugOverlayView alloc] initWithDebuggedViewController:self];
-    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    [rootViewController.view addSubview:overlayView];
+    HLSBindingDebugOverlayView *overlayView = [[HLSBindingDebugOverlayView alloc] initWithDebuggedViewController:self recursive:recursive];
+    [overlayView show];
 }
 
 #pragma mark Bindings

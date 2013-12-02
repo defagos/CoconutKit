@@ -61,6 +61,12 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    UIBarButtonItem *debugOverlayBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Debug", nil)
+                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                 target:self
+                                                                                 action:@selector(showBindingDebugOverlay:)];
+    self.navigationItem.rightBarButtonItems = [@[debugOverlayBarButtonItem] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
 }
 
 #pragma mark Localization
@@ -96,6 +102,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [EmployeeHeaderView view];
+}
+
+#pragma mark Action callbacks
+
+- (IBAction)showBindingDebugOverlay:(id)sender
+{
+    [self showBindingDebugOverlayViewRecursive:YES];
 }
 
 @end

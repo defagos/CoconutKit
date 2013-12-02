@@ -8,6 +8,8 @@
 
 @interface HLSBindingDebugOverlayView : UIView
 
-- (id)initWithDebuggedViewController:(UIViewController *)debuggedViewController;
+- (id)initWithDebuggedViewController:(UIViewController *)debuggedViewController recursive:(BOOL)recursive;
+
+- (void)show;
 
 @end

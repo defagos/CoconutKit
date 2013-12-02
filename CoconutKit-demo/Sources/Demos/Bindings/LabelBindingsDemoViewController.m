@@ -86,7 +86,7 @@
 
 - (IBAction)showBindingDebugOverlay:(id)sender
 {
-    [self showBindingDebugOverlayView];
+    [self showBindingDebugOverlayViewRecursive:YES];
 }
 
 @end

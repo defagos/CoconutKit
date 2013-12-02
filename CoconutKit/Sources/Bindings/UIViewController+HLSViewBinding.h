@@ -11,7 +11,7 @@
 
 @interface UIViewController (HLSViewBinding)
 
-- (void)showBindingDebugOverlayView;
+- (void)showBindingDebugOverlayViewRecursive:(BOOL)recursive;
 
 // Document: The object is retained
 - (void)bindToObject:(id)object;
