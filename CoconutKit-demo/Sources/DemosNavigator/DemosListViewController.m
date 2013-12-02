@@ -712,7 +712,7 @@ typedef enum {
     }
 	
 	if (demoViewController) {
-		demoViewController.navigationItem.rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+		demoViewController.navigationItem.rightBarButtonItems = self.navigationItem.rightBarButtonItems;
 		[self.navigationController pushViewController:demoViewController animated:YES];
 	}
 }

@@ -8,6 +8,7 @@
 
 #import "UIViewController+HLSViewBinding.h"
 
+#import "HLSBindingDebugOverlayView.h"
 #import "UIView+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIViewController+HLSExtensions.h"
@@ -24,6 +25,15 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 @end
 
 @implementation UIViewController (HLSViewBinding)
+
+#pragma mark Overlay
+
+- (void)showBindingDebugOverlayView
+{
+    HLSBindingDebugOverlayView *overlayView = [[HLSBindingDebugOverlayView alloc] initWithDebuggedViewController:self];
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [rootViewController.view addSubview:overlayView];
+}
 
 #pragma mark Bindings
 

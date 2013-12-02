@@ -25,6 +25,12 @@
 {
     [super viewDidLoad];
     
+    UIBarButtonItem *debugOverlayBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Debug", nil)
+                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                 target:self
+                                                                                 action:@selector(showBindingDebugOverlay:)];
+    self.navigationItem.rightBarButtonItems = [@[debugOverlayBarButtonItem] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
+    
     [self displayPageAtIndex:_currentPageIndex animated:NO];
 }
 
@@ -76,6 +82,11 @@
 - (IBAction)changePage:(id)sender
 {
     [self displayPageAtIndex:self.segmentedControl.selectedSegmentIndex animated:YES];
+}
+
+- (IBAction)showBindingDebugOverlay:(id)sender
+{
+    [self showBindingDebugOverlayView];
 }
 
 @end

@@ -110,7 +110,7 @@
                                                                                        style:UIBarButtonItemStyleBordered 
                                                                                       target:self 
                                                                                       action:@selector(toggleLanguageSheet:)] autorelease];
-            UIBarButtonItem *logsButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nik)
+            UIBarButtonItem *logsButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nil)
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self
                                                                                action:@selector(showSettings:)] autorelease];

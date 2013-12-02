@@ -11,6 +11,8 @@
 
 @interface UIViewController (HLSViewBinding)
 
+- (void)showBindingDebugOverlayView;
+
 // Document: The object is retained
 - (void)bindToObject:(id)object;
 

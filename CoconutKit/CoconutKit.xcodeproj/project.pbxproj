@@ -31,6 +31,8 @@
 		6F3D1D791795710C0056FF4E /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D771795710C0056FF4E /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F3E3E8315A2277D007E78BD /* HLSApplicationPreloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3E3E8115A2277D007E78BD /* HLSApplicationPreloader.h */; };
 		6F3E3E8415A2277D007E78BD /* HLSApplicationPreloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E3E8215A2277D007E78BD /* HLSApplicationPreloader.m */; };
+		6F3FF25E184C4EE7000CEEA7 /* HLSBindingDebugOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3FF25C184C4EE6000CEEA7 /* HLSBindingDebugOverlayView.h */; };
+		6F3FF25F184C4EE7000CEEA7 /* HLSBindingDebugOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3FF25D184C4EE6000CEEA7 /* HLSBindingDebugOverlayView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F41D22B15E6A527009A2384 /* CALayer+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F41D22915E6A527009A2384 /* CALayer+HLSExtensions.h */; };
 		6F41D22C15E6A527009A2384 /* CALayer+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41D22A15E6A527009A2384 /* CALayer+HLSExtensions.m */; };
 		6F41D23F15E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F41D23D15E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.h */; };
@@ -303,6 +305,8 @@
 		6F3E3E8115A2277D007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
 		6F3E3E8215A2277D007E78BD /* HLSApplicationPreloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationPreloader.m; sourceTree = "<group>"; };
 		6F3E3EC815A38D62007E78BD /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
+		6F3FF25C184C4EE6000CEEA7 /* HLSBindingDebugOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingDebugOverlayView.h; sourceTree = "<group>"; };
+		6F3FF25D184C4EE6000CEEA7 /* HLSBindingDebugOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingDebugOverlayView.m; sourceTree = "<group>"; };
 		6F41D22915E6A527009A2384 /* CALayer+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F41D22A15E6A527009A2384 /* CALayer+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F41D23D15E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -623,6 +627,8 @@
 		6F45AEF418335BCE002FF0ED /* Bindings */ = {
 			isa = PBXGroup;
 			children = (
+				6F3FF25C184C4EE6000CEEA7 /* HLSBindingDebugOverlayView.h */,
+				6F3FF25D184C4EE6000CEEA7 /* HLSBindingDebugOverlayView.m */,
 				6F45AEF518335BCE002FF0ED /* HLSViewBindingInformation.h */,
 				6F45AEF618335BCE002FF0ED /* HLSViewBindingInformation.m */,
 				6F45AEF718335BCE002FF0ED /* UILabel+HLSViewBinding.h */,
@@ -1079,6 +1085,7 @@
 				6F45AF0A18335BCE002FF0ED /* UIViewController+HLSViewBinding.h in Headers */,
 				6F45AF0C18335BCE002FF0ED /* UIViewController+HLSViewBindingFriend.h in Headers */,
 				6F45AF0D18335BCE002FF0ED /* UIWebView+HLSViewBinding.h in Headers */,
+				6F3FF25E184C4EE7000CEEA7 /* HLSBindingDebugOverlayView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1291,6 +1298,7 @@
 				6F45AF0918335BCE002FF0ED /* UIView+HLSViewBinding.m in Sources */,
 				6F45AF0B18335BCE002FF0ED /* UIViewController+HLSViewBinding.m in Sources */,
 				6F45AF0E18335BCE002FF0ED /* UIWebView+HLSViewBinding.m in Sources */,
+				6F3FF25F184C4EE7000CEEA7 /* HLSBindingDebugOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
