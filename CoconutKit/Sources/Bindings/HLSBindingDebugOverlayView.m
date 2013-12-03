@@ -9,12 +9,14 @@
 #import "HLSBindingDebugOverlayView.h"
 
 #import "HLSAssert.h"
+#import "HLSBindingInformationViewController.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
 
 @interface HLSBindingDebugOverlayView ()
 
 @property (nonatomic, weak) UIViewController *debuggedViewController;
+@property (nonatomic, strong) UIPopoverController *bindingInformationPopoverController;
 
 @end
 
@@ -65,16 +67,25 @@
     
     HLSViewBindingInformation *bindingInformation = view.bindingInformation;
     if (bindingInformation) {
-        UIView *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         overlayButton.frame = [view convertRect:view.bounds toView:self];
         overlayButton.layer.borderColor = bindingInformation.verified ? [UIColor greenColor].CGColor : [UIColor redColor].CGColor;
         overlayButton.layer.borderWidth = 2.f;
+        overlayButton.userInfo_hls = @{@"bindingInformation" : bindingInformation};
+        [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:overlayButton];
     }
     
     for (UIView *subview in view.subviews) {
         [self refreshDebugInformationForBindingsInView:subview recursive:recursive];
     }
+}
+
+#pragma mark UIPopoverControllerDelegate protocol implementation
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.bindingInformationPopoverController = nil;
 }
 
 #pragma mark Actions
@@ -86,6 +97,20 @@
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
+}
+
+- (void)showInfos:(id)sender
+{
+    NSAssert([sender isKindOfClass:[UIView class]], @"Expect a view");
+    UIView *view = sender;
+    HLSViewBindingInformation *bindingInformation = view.userInfo_hls[@"bindingInformation"];
+    
+    HLSBindingInformationViewController *bindingInformationViewController = [[HLSBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
+    self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationViewController];
+    [self.bindingInformationPopoverController presentPopoverFromRect:view.frame
+                                                              inView:self
+                                            permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                            animated:YES];
 }
 
 @end

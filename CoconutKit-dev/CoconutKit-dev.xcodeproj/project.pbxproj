@@ -130,6 +130,7 @@
 		6F7A871516522C210030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A871416522C210030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848714CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */; };
 		6F83660A1588CC770044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366091588CC770044E572 /* HLSVector.m */; };
+		6F8379C2184DA2E400C0BBF3 /* HLSBindingInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8379C1184DA2E400C0BBF3 /* HLSBindingInformationViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F89149515790DA8009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149415790DA8009FCC78 /* HLSLabel.m */; };
 		6F89149A15790DCA009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149815790DCA009FCC78 /* LabelDemoViewController.m */; };
 		6F89149B15790DCA009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149915790DCA009FCC78 /* LabelDemoViewController.xib */; };
@@ -522,6 +523,8 @@
 		6F7B848614CF1BD90091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F8366081588CC770044E572 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSVector.h; sourceTree = "<group>"; };
 		6F8366091588CC770044E572 /* HLSVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSVector.m; sourceTree = "<group>"; };
+		6F8379C0184DA2E400C0BBF3 /* HLSBindingInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingInformationViewController.h; sourceTree = "<group>"; };
+		6F8379C1184DA2E400C0BBF3 /* HLSBindingInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingInformationViewController.m; sourceTree = "<group>"; };
 		6F89149315790DA8009FCC78 /* HLSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabel.h; sourceTree = "<group>"; };
 		6F89149415790DA8009FCC78 /* HLSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabel.m; sourceTree = "<group>"; };
 		6F89149715790DCA009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
@@ -1097,6 +1100,8 @@
 			children = (
 				6F216F0D184C4F6A009CE6CD /* HLSBindingDebugOverlayView.h */,
 				6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m */,
+				6F8379C0184DA2E400C0BBF3 /* HLSBindingInformationViewController.h */,
+				6F8379C1184DA2E400C0BBF3 /* HLSBindingInformationViewController.m */,
 				6F45AF1018335D36002FF0ED /* HLSViewBindingInformation.h */,
 				6F45AF1118335D36002FF0ED /* HLSViewBindingInformation.m */,
 				6F45AF1218335D36002FF0ED /* UILabel+HLSViewBinding.h */,
@@ -2373,6 +2378,7 @@
 				6F45AF6B18335D82002FF0ED /* YesterdayView.m in Sources */,
 				6F45AF6F18335EB3002FF0ED /* DemoFormatter.m in Sources */,
 				6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m in Sources */,
+				6F8379C2184DA2E400C0BBF3 /* HLSBindingInformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
