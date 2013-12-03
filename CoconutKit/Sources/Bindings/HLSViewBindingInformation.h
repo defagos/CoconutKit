@@ -26,7 +26,37 @@
 - (NSString *)text;
 
 /**
- * Return YES iff the information has been verified once
+ * Return the object which has been bound, nil if none or not resolved yet
+ */
+@property (nonatomic, readonly, weak) id object;
+
+/**
+ * Return the keypath which must be bound to
+ */
+@property (nonatomic, readonly, strong) NSString *keyPath;
+
+/**
+ * Return the formatter to use, nil if none
+ */
+@property (nonatomic, readonly, strong) NSString *formatterName;
+
+/**
+ * Return the object which the formatter will be called on, nil if none or not resolved yet
+ */
+@property (nonatomic, readonly, weak) id formattingTarget;
+
+/**
+ * Return the selector which will be called on the formatting target, nil if none or not resolved yet
+ */
+@property (nonatomic, readonly, assign) SEL formattingSelector;
+
+/**
+ * Return a message describing current issues with the binding, nil if none
+ */
+@property (nonatomic, readonly, strong) NSString *errorDescription;
+
+/**
+ * Return YES iff the binding has been verified once
  */
 @property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
 
