@@ -46,6 +46,8 @@
 		6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F10E38C17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */; };
+		6F1A54E1184EF630005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F1A54E2184EF630005372B7 /* HLSInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A54E0184EF630005372B7 /* HLSInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */; };
 		6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFC15A1B64700F65ECF /* SegueLeftPanelDemoViewController.m */; };
@@ -378,6 +380,10 @@
 		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
 		6F10E38A17A0015100BFEF42 /* HLSViewTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewTouchDetector.h; sourceTree = "<group>"; };
 		6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewTouchDetector.m; sourceTree = "<group>"; };
+		6F1A54DD184EF630005372B7 /* HLSDetailedInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSDetailedInfoTableViewCell.h; sourceTree = "<group>"; };
+		6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSDetailedInfoTableViewCell.m; sourceTree = "<group>"; };
+		6F1A54DF184EF630005372B7 /* HLSInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInfoTableViewCell.h; sourceTree = "<group>"; };
+		6F1A54E0184EF630005372B7 /* HLSInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInfoTableViewCell.m; sourceTree = "<group>"; };
 		6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
 		6F1F4DF915A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueFirstRightPanelDemoViewController.m; sourceTree = "<group>"; };
@@ -1435,8 +1441,12 @@
 				6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE68514BA04A6007EE121 /* HLSCursor.h */,
 				6FADE68614BA04A6007EE121 /* HLSCursor.m */,
+				6F1A54DD184EF630005372B7 /* HLSDetailedInfoTableViewCell.h */,
+				6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */,
 				6F5007ED1585E17400391A6C /* HLSExpandingSearchBar.h */,
 				6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */,
+				6F1A54DF184EF630005372B7 /* HLSInfoTableViewCell.h */,
+				6F1A54E0184EF630005372B7 /* HLSInfoTableViewCell.m */,
 				6F89149315790DA8009FCC78 /* HLSLabel.h */,
 				6F89149415790DA8009FCC78 /* HLSLabel.m */,
 				6FDE694714BEDBE300F8CD3A /* HLSLabelLocalizationInfo.h */,
@@ -2379,6 +2389,8 @@
 				6F45AF6F18335EB3002FF0ED /* DemoFormatter.m in Sources */,
 				6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m in Sources */,
 				6F8379C2184DA2E400C0BBF3 /* HLSBindingInformationViewController.m in Sources */,
+				6F1A54E1184EF630005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */,
+				6F1A54E2184EF630005372B7 /* HLSInfoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

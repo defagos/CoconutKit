@@ -262,3 +262,8 @@ BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass)
     }
     return NO;
 }
+
+BOOL hls_isClass(id object)
+{
+    return class_isMetaClass(object_getClass(object));
+}

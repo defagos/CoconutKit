@@ -19,6 +19,8 @@
 		6F5007F51585E60600391A6C /* SearchFieldIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007F31585E60600391A6C /* SearchFieldIcon.png */; };
 		6F5007F61585E60600391A6C /* SearchFieldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F5007F41585E60600391A6C /* SearchFieldIcon@2x.png */; };
 		6F6E815D17CF0AE000CE578A /* HLSLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F6E815C17CF0AE000CE578A /* HLSLoggerViewController.xib */; };
+		6FFBEC31184EF3CE00F5FC6E /* HLSDetailedInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFBEC30184EF3CE00F5FC6E /* HLSDetailedInfoTableViewCell.xib */; };
+		6FFBEC33184EF3DF00F5FC6E /* HLSInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFBEC32184EF3DF00F5FC6E /* HLSInfoTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		6F5007F31585E60600391A6C /* SearchFieldIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchFieldIcon.png; sourceTree = "<group>"; };
 		6F5007F41585E60600391A6C /* SearchFieldIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchFieldIcon@2x.png"; sourceTree = "<group>"; };
 		6F6E815C17CF0AE000CE578A /* HLSLoggerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSLoggerViewController.xib; sourceTree = "<group>"; };
+		6FFBEC30184EF3CE00F5FC6E /* HLSDetailedInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSDetailedInfoTableViewCell.xib; sourceTree = "<group>"; };
+		6FFBEC32184EF3DF00F5FC6E /* HLSInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSInfoTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 		6F00016C156BDD280055CED7 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				6FFBEC30184EF3CE00F5FC6E /* HLSDetailedInfoTableViewCell.xib */,
+				6FFBEC32184EF3DF00F5FC6E /* HLSInfoTableViewCell.xib */,
 				6F6E815C17CF0AE000CE578A /* HLSLoggerViewController.xib */,
 				6F00016D156BDD280055CED7 /* HLSWebViewController.xib */,
 			);
@@ -184,6 +190,8 @@
 				6F5007F51585E60600391A6C /* SearchFieldIcon.png in Resources */,
 				6F5007F61585E60600391A6C /* SearchFieldIcon@2x.png in Resources */,
 				6F6E815D17CF0AE000CE578A /* HLSLoggerViewController.xib in Resources */,
+				6FFBEC31184EF3CE00F5FC6E /* HLSDetailedInfoTableViewCell.xib in Resources */,
+				6FFBEC33184EF3DF00F5FC6E /* HLSInfoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

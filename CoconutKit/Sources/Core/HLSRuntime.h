@@ -97,3 +97,8 @@ IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
  * the behavior of +[NSObject isSubclassOfClass:])
  */
 BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass);
+
+/**
+ * Return YES iff object is a class object
+ */
+BOOL hls_isClass(id object);
