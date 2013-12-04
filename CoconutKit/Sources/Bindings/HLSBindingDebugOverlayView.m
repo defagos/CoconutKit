@@ -10,8 +10,11 @@
 
 #import "HLSAssert.h"
 #import "HLSBindingInformationViewController.h"
+#import "HLSLogger.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
+
+static BOOL s_overlayDisplayed = NO;
 
 @interface HLSBindingDebugOverlayView ()
 
@@ -51,8 +54,15 @@
 
 - (void)show
 {
+    if (s_overlayDisplayed) {
+        HLSLoggerInfo(@"The binding debug overlay is already displayed");
+        return;
+    }
+    
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     [rootViewController.view addSubview:self];
+    
+    s_overlayDisplayed = YES;
     
     [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 1.f;
@@ -96,6 +106,7 @@
         self.alpha = 0.f;
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
+        s_overlayDisplayed = NO;
     }];
 }
 
