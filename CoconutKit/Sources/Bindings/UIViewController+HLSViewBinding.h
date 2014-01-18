@@ -11,6 +11,7 @@
 
 @interface UIViewController (HLSViewBinding)
 
+// If recursive set to YES, display binding information for child view controllers as well
 - (void)showBindingDebugOverlayViewRecursive:(BOOL)recursive;
 
 // Document: The object is retained

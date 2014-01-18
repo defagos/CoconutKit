@@ -14,6 +14,11 @@
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
 
+// FIXME: Currently the overlay does not work correctly in the following cases:
+//   - in landscape orientation (and of course when the interface is rotated)
+//   - when bound views are moved while the overlay is displayed (overlay frames do not follow accordingly). This is a minor
+//     issue since, after all, this is only a debugging tool
+
 static BOOL s_overlayDisplayed = NO;
 
 @interface HLSBindingDebugOverlayView ()
@@ -55,7 +60,7 @@ static BOOL s_overlayDisplayed = NO;
 - (void)show
 {
     if (s_overlayDisplayed) {
-        HLSLoggerInfo(@"The binding debug overlay is already displayed");
+        HLSLoggerInfo(@"A binding debug overlay is already displayed");
         return;
     }
     
