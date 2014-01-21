@@ -58,6 +58,12 @@
 {
     [super viewDidLoad];
     
+    // iOS 7: Ensure the view controller does not extend under the navigation and status bars
+    // TODO: Improve when minimum required SDK is iOS 7
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+        [self performSelector:@selector(setEdgesForExtendedLayout:) withObject:@(0 /* UIRectEdgeNone */)];
+    }
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = [HLSTableViewCell height];
