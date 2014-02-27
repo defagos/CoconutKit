@@ -7,7 +7,7 @@
 //
 
 /**
- * Lightweight abstract subclass of HLSError providing a convenient way to create errors and to define and access
+ * Lightweight abstract subclass of NSError providing a convenient way to create errors and to define and access
  * their properties.
  *
  * This class enforces the link between accessor methods and underlying userInfo dictionary keys. This is not
