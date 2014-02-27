@@ -97,7 +97,7 @@ static BOOL swizzled_UISplitViewController__shouldAutorotate_Imp(UISplitViewCont
 static NSUInteger swizzled_UISplitViewController__supportedInterfaceOrientations_Imp(UISplitViewController *self, SEL _cmd)
 {
     // On iOS 6, the container always decides first (does not look at children)
-    BOOL containerSupportedInterfaceOrientations = (*s_UISplitViewController__supportedInterfaceOrientations_Imp)(self, _cmd);
+    NSUInteger containerSupportedInterfaceOrientations = (*s_UISplitViewController__supportedInterfaceOrientations_Imp)(self, _cmd);
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
