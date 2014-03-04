@@ -55,7 +55,7 @@
 		6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0015A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
 		6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */; };
 		6F1F4E0B15A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */; };
-		6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F22C74516A858A60081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */; };
 		6F22C74F16A93DA80081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C74E16A93DA70081A9A7 /* CoreText.framework */; };
 		6F22C75B16A942270081A9A7 /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75A16A942270081A9A7 /* Beon-Regular.otf */; };
@@ -397,8 +397,8 @@
 		6F1F4E0215A1B64700F65ECF /* SegueStackOtherDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackOtherDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4E0315A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueStackRootDemoPlaceholderViewController.h; sourceTree = "<group>"; };
 		6F1F4E0415A1B64700F65ECF /* SegueStackRootDemoPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueStackRootDemoPlaceholderViewController.m; sourceTree = "<group>"; };
-		6F216F0D184C4F6A009CE6CD /* HLSBindingDebugOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingDebugOverlayView.h; sourceTree = "<group>"; };
-		6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingDebugOverlayView.m; sourceTree = "<group>"; };
+		6F216F0D184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingDebugOverlayViewController.h; sourceTree = "<group>"; };
+		6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingDebugOverlayViewController.m; sourceTree = "<group>"; };
 		6F216F16184C5807009CE6CD /* UIView+HLSViewBindingFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBindingFriend.h"; sourceTree = "<group>"; };
 		6F22C74316A858A60081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F22C74416A858A60081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
@@ -1104,8 +1104,8 @@
 		6F45AF0F18335D36002FF0ED /* Bindings */ = {
 			isa = PBXGroup;
 			children = (
-				6F216F0D184C4F6A009CE6CD /* HLSBindingDebugOverlayView.h */,
-				6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m */,
+				6F216F0D184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.h */,
+				6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m */,
 				6F8379C0184DA2E400C0BBF3 /* HLSBindingInformationViewController.h */,
 				6F8379C1184DA2E400C0BBF3 /* HLSBindingInformationViewController.m */,
 				6F45AF1018335D36002FF0ED /* HLSViewBindingInformation.h */,
@@ -2387,7 +2387,7 @@
 				6F45AF6918335D82002FF0ED /* TodayView.m in Sources */,
 				6F45AF6B18335D82002FF0ED /* YesterdayView.m in Sources */,
 				6F45AF6F18335EB3002FF0ED /* DemoFormatter.m in Sources */,
-				6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayView.m in Sources */,
+				6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m in Sources */,
 				6F8379C2184DA2E400C0BBF3 /* HLSBindingInformationViewController.m in Sources */,
 				6F1A54E1184EF630005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */,
 				6F1A54E2184EF630005372B7 /* HLSInfoTableViewCell.m in Sources */,

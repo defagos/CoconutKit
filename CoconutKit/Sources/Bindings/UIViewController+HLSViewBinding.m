@@ -8,7 +8,7 @@
 
 #import "UIViewController+HLSViewBinding.h"
 
-#import "HLSBindingDebugOverlayView.h"
+#import "HLSBindingDebugOverlayViewController.h"
 #import "UIView+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIViewController+HLSExtensions.h"
@@ -30,8 +30,7 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 
 - (void)showBindingDebugOverlayViewRecursive:(BOOL)recursive
 {
-    HLSBindingDebugOverlayView *overlayView = [[HLSBindingDebugOverlayView alloc] initWithDebuggedViewController:self recursive:recursive];
-    [overlayView show];
+    [HLSBindingDebugOverlayViewController showForDebuggedViewController:self recursive:recursive];
 }
 
 #pragma mark Bindings
