@@ -81,7 +81,13 @@ static UIWindow *s_previousKeyWindow = nil;
     
     // Ensure correct orientation, even if the VC is presented while in landscape orientation
     self.view.transform = s_previousKeyWindow.rootViewController.view.transform;
-    self.view.frame = [[UIScreen mainScreen] applicationFrame];
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        self.view.frame = [UIScreen mainScreen].applicationFrame;
+    }
+    else {
+        self.view.frame = [UIScreen mainScreen].bounds;
+    }
     
     [self displayDebugInformationForBindingsInView:self.debuggedViewController.view
                             debuggedViewController:self.debuggedViewController
