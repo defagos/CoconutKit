@@ -79,6 +79,10 @@ static UIWindow *s_previousKeyWindow = nil;
 {
     [super viewDidLoad];
     
+    // Ensure correct orientation, even if the VC is presented while in landscape orientation
+    self.view.transform = s_previousKeyWindow.rootViewController.view.transform;
+    self.view.frame = [[UIScreen mainScreen] applicationFrame];
+    
     [self displayDebugInformationForBindingsInView:self.debuggedViewController.view
                             debuggedViewController:self.debuggedViewController
                                          recursive:self.recursive];

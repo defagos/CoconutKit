@@ -69,6 +69,8 @@
 		6F897873152B505D006C8231 /* HLSZeroingWeakRefTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F897872152B505D006C8231 /* HLSZeroingWeakRefTestCase.m */; };
 		6F8C934515CEE65D006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934415CEE65D006D892C /* HLSContainerGroupView.m */; };
 		6F8C934C15CEF0E6006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934B15CEF0E6006D892C /* HLSContainerStackView.m */; };
+		6F8E5C4E18C601D300AF775A /* HLSDetailedInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8E5C4B18C601D300AF775A /* HLSDetailedInfoTableViewCell.m */; };
+		6F8E5C4F18C601D300AF775A /* HLSInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8E5C4D18C601D300AF775A /* HLSInfoTableViewCell.m */; };
 		6F91452A14CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F77314F3EF0B00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F77214F3EF0B00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */; };
@@ -314,6 +316,10 @@
 		6F8C934415CEE65D006D892C /* HLSContainerGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerGroupView.m; sourceTree = "<group>"; };
 		6F8C934A15CEF0E6006D892C /* HLSContainerStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStackView.h; sourceTree = "<group>"; };
 		6F8C934B15CEF0E6006D892C /* HLSContainerStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStackView.m; sourceTree = "<group>"; };
+		6F8E5C4A18C601D300AF775A /* HLSDetailedInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSDetailedInfoTableViewCell.h; sourceTree = "<group>"; };
+		6F8E5C4B18C601D300AF775A /* HLSDetailedInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSDetailedInfoTableViewCell.m; sourceTree = "<group>"; };
+		6F8E5C4C18C601D300AF775A /* HLSInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInfoTableViewCell.h; sourceTree = "<group>"; };
+		6F8E5C4D18C601D300AF775A /* HLSInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInfoTableViewCell.m; sourceTree = "<group>"; };
 		6F91452714CEBDF100AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
 		6F91452814CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
@@ -995,8 +1001,12 @@
 				6F91452714CEBDF100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE76414BA04B6007EE121 /* HLSCursor.h */,
 				6FADE76514BA04B6007EE121 /* HLSCursor.m */,
+				6F8E5C4A18C601D300AF775A /* HLSDetailedInfoTableViewCell.h */,
+				6F8E5C4B18C601D300AF775A /* HLSDetailedInfoTableViewCell.m */,
 				6F5007F01585E18100391A6C /* HLSExpandingSearchBar.h */,
 				6F5007F11585E18100391A6C /* HLSExpandingSearchBar.m */,
+				6F8E5C4C18C601D300AF775A /* HLSInfoTableViewCell.h */,
+				6F8E5C4D18C601D300AF775A /* HLSInfoTableViewCell.m */,
 				6F8914AA15790E1A009FCC78 /* HLSLabel.h */,
 				6F8914AB15790E1A009FCC78 /* HLSLabel.m */,
 				6FDE694B14BEDC0A00F8CD3A /* HLSLabelLocalizationInfo.h */,
@@ -1318,6 +1328,7 @@
 				6FDDEC131529776000CED462 /* UITextField+HLSExtensions.m in Sources */,
 				6FDDEC251529782500CED462 /* UITextView+HLSExtensions.m in Sources */,
 				6F897873152B505D006C8231 /* HLSZeroingWeakRefTestCase.m in Sources */,
+				6F8E5C4F18C601D300AF775A /* HLSInfoTableViewCell.m in Sources */,
 				6FC8CB961574C01C0014B37B /* NSURLRequest+HLSExtensions.m in Sources */,
 				6F2D455C15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m in Sources */,
 				6F2D470A15761B9000EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */,
@@ -1337,6 +1348,7 @@
 				6FCFEA5615E37E4F002CAF9E /* HLSLayerAnimationStep.m in Sources */,
 				6F97E17D15E60C8700EF6F62 /* HLSObjectAnimation.m in Sources */,
 				6F41D23715E6A590009A2384 /* CALayer+HLSExtensions.m in Sources */,
+				6F8E5C4E18C601D300AF775A /* HLSDetailedInfoTableViewCell.m in Sources */,
 				6F41D24815E6ADB2009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
 				6FEFF35A15F9C5FB006B06A6 /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */,
 				6FAF24FD162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
