@@ -8,8 +8,14 @@
 
 #import "HLSViewBindingInformation.h"
 
+/**
+ * Display various informations about a binding
+ */
 @interface HLSBindingInformationViewController : UITableViewController
 
+/**
+ * Initialize for displaying the provided binding information
+ */
 - (id)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation;
 
 @end

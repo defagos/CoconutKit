@@ -22,8 +22,9 @@
  *                      - (NSString *)methodName:(SomeClass *)object
  *                    or a class method with prototype
  *                      + (NSString *)classMethodName:(SomeClass *)object
- *                    transforming the value into a string. Alternatively, you can provide a global class 
- *                    formatter method '+[SomeClass methodName:]'
+ *                    transforming the value into a string. These methods are looked up along the responder
+ *                    chain, as described below. Alternatively, you can provide a global class formatter 
+ *                    method '+[SomeClass methodName:]', for which no such lookup is needed
  *
  * With no additional measure, keypath lookup is performed along the responder chain, starting with the view
  * bindKeyPath has been set on, and stopping at the first encountered view controller (if any is found). View
