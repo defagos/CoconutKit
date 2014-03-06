@@ -69,8 +69,8 @@
 		6F897873152B505D006C8231 /* HLSZeroingWeakRefTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F897872152B505D006C8231 /* HLSZeroingWeakRefTestCase.m */; };
 		6F8C934515CEE65D006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934415CEE65D006D892C /* HLSContainerGroupView.m */; };
 		6F8C934C15CEF0E6006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934B15CEF0E6006D892C /* HLSContainerStackView.m */; };
-		6F8E5C4E18C601D300AF775A /* HLSDetailedInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8E5C4B18C601D300AF775A /* HLSDetailedInfoTableViewCell.m */; };
-		6F8E5C4F18C601D300AF775A /* HLSInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8E5C4D18C601D300AF775A /* HLSInfoTableViewCell.m */; };
+		6F8E5C4E18C601D300AF775A /* HLSDetailedInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8E5C4B18C601D300AF775A /* HLSDetailedInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F8E5C4F18C601D300AF775A /* HLSInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8E5C4D18C601D300AF775A /* HLSInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F91452A14CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91452914CEBDF100AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
 		6F91F77314F3EF0B00E95EFA /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91F77214F3EF0B00E95EFA /* UIViewController+HLSExtensions.m */; };
 		6F93C4CE1404287400FEC9B0 /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4CD1404287400FEC9B0 /* HLSFloatTestCase.m */; };
@@ -1158,7 +1158,7 @@
 		6F33347A13FAF9E0000FC9FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Hortis;
 			};
 			buildConfigurationList = 6F33347D13FAF9E0000FC9FD /* Build configuration list for PBXProject "CoconutKit-test" */;
@@ -1407,10 +1407,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					armv7,
-				);
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1425,6 +1421,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1440,10 +1437,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					armv7,
-				);
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_THUMB_SUPPORT = NO;
