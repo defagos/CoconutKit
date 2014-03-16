@@ -67,6 +67,9 @@
  * calling -bindToObject: on parent views first.
  *
  * TODO: Document validation and sync in the other direction (when available)
+ *       Warning:
+ *         - bidirectional bindings are not compatible with all keypaths (e.g. keypaths containing operators). This
+ *           has to be checked when trying to resolve bindings
  *
  * Here is how UIKit view classes play with bindings:
  *   - UILabel: The label displays the value which the keypath points at. Recursive bindings have been disabled
@@ -92,7 +95,8 @@
  * bindings will not be available.
  *
  * You can call -bindToObject:, -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithText:
- * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively)
+ * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively) and
+ * perform binding resolution for views deeper in its hierarchy
  */
 - (void)updateViewWithText:(NSString *)text;
 
@@ -102,14 +106,19 @@
  */
 - (BOOL)bindsSubviewsRecursively;
 
-// TODO: Implement and document
-#if 0
-// TODO: This can be implemented to sync from view to model. Do it for UITextField (implement validation too? Make
-//       Core Data bindings a special case)
-- (BOOL)updateObjectWithText:(NSString *)text;
+/**
+ * UIView subclasses which accept user input and want bindings to automatically update the underlying model (as
+ * given by the associated keyPath) can implement the following method. This method must be implemented along
+ * -updateViewWithText:, which is required for bindings to be enabled
+ */
+- (void)updateModelWithText:(NSString *)text;
 
-// TODO: Optional validation (see Key-Value coding programming guide, -validate<field>:error:)
-#endif
+// TODO: -updateViewWithFormattedValue: instead of strings (compatible with NSNumber, e.g.)
+//       -updateModelWithFormattedValue;
+
+// TODO: Optional validation (see Key-Value coding programming guide, -validate<field>:error:). Probably introduce
+//       a boolean user-defined runtime attribute setting whether or not validation must occur (by default should
+//       be YES, i.e. if a validation method exists applies it)
 
 @end
 
