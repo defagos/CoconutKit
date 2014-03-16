@@ -20,10 +20,10 @@
 - (id)initWithObject:(id)object keyPath:(NSString *)keyPath formatterName:(NSString *)formatterName view:(UIView *)view;
 
 /**
- * Return the current text corresponding to the stored binding information. If keypath information is invalid,
- * this method returns nil
+ * Return the current value corresponding to the stored binding information (the formatter method is applied, if any). 
+ * If keypath information is invalid, this method returns nil
  */
-- (NSString *)text;
+- (id)value;
 
 /**
  * Return the object which has been bound, nil if none or not resolved yet
@@ -31,7 +31,7 @@
 @property (nonatomic, readonly, weak) id object;
 
 /**
- * Return the keypath which must be bound to
+ * Return the keypath to which binding is made
  */
 @property (nonatomic, readonly, strong) NSString *keyPath;
 

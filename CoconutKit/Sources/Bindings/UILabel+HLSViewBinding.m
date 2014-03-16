@@ -12,9 +12,9 @@
 
 #pragma mark HLSViewBinding protocol implementation
 
-- (void)updateViewWithText:(NSString *)text
+- (void)updateViewWithValue:(id)value
 {
-    self.text = text;
+    self.text = value;
 }
 
 - (BOOL)bindsSubviewsRecursively

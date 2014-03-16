@@ -12,20 +12,9 @@
 #import "HLSLogger.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
+#import "UIView+HLSViewBinding.h"
 
 #import <objc/runtime.h>
-
-// TODO: Debug mode only; Associate with each bound view another view which displays information about the binding, and whether
-//       it is valid or not). Maybe display this information as an additional overlay. We cannot namely log binding failure
-//       during successive attemps, because bindings might occur late (therefore first attempts might fail, which generates too
-//       many false positives). We can then add keypath information manually added to the demo view controllers, replacing it
-//       with the debug overlay. Strategy:
-//         - in debug mode, when binding information cannot be resolved, attach an error, which gets cleared when binding is
-//           correct. The error message is basically the one in the HLSLoggerError calls in the -verifyBindingInformation. The
-//           logger calls, which can lead to false positives, are discarded (the end result is that we always have the most
-//           recent error message available, which is the relevant information)
-//         - implement a debugging overlay displaying binding information in a convenient way (which field was bound on success,
-//           which object, which formatter was used. Displays the error if binding failed
 
 @interface HLSViewBindingInformation ()
 
@@ -70,7 +59,7 @@
 
 #pragma mark Accessors and mutators
 
-- (NSString *)text
+- (id)value
 {
     // Lazily check and fill binding information
     if (! self.verified) {
@@ -126,13 +115,13 @@
     id value = [self.object valueForKeyPath:self.keyPath];
     
     // The keypath is valid, but we cannot check its type (to guess if formatting is needed) since there is no
-    // value. Does not change the status, another check is required
+    // value. Does not change the status, a later check is required
     if (! value) {
         return NO;
     }
     
     // No formatting required. We are done, the binding is correct
-    if ([value isKindOfClass:[NSString class]]) {
+    if ([self canDisplayValue:value]) {
         return YES;
     }
     
@@ -206,7 +195,7 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     id formattedValue = [formattingTarget performSelector:formattingSelector withObject:value];
 #pragma clang diagnostic pop
-    if (! [formattedValue isKindOfClass:[NSString class]]) {
+    if (! [self canDisplayValue:formattedValue]) {
         self.errorDescription = @"The specified formatter does not return a string";
         return NO;
     }
@@ -217,6 +206,28 @@
     self.errorDescription = nil;
     
     return YES;
+}
+
+#pragma mark Type checking
+
+- (BOOL)canDisplayValue:(id)value
+{
+    Class viewClass = [self.view class];
+    NSArray *supportedBindingClasses = nil;
+    if ([viewClass respondsToSelector:@selector(supportedBindingClasses)]) {
+        supportedBindingClasses = [viewClass supportedBindingClasses];
+    }
+    else {
+        supportedBindingClasses = @[[NSString class]];
+    }
+    
+    for (Class supportedBindingClass in supportedBindingClasses) {
+        if ([value isKindOfClass:supportedBindingClass]) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 #pragma mark Context binding lookup

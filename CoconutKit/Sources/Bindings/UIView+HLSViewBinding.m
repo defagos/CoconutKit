@@ -128,17 +128,17 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     self.boundObject = object;
     
     if (self.bindKeyPath) {
-        if ([self respondsToSelector:@selector(updateViewWithText:)]) {
+        if ([self respondsToSelector:@selector(updateViewWithValue:)]) {
             HLSLoggerDebug(@"Bind object %@ to view %@ with keyPath %@", object, self, self.bindKeyPath);
             
             self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
                                                                                 keyPath:self.bindKeyPath
                                                                           formatterName:self.bindFormatter
                                                                                    view:self];
-            [self updateText];
+            [self updateViewValue];
         }
         else {
-            HLSLoggerWarn(@"A binding path has been set for %@, but its class does not implement bindings", self);
+            HLSLoggerWarn(@"A binding key path has been set for %@, but its class does not implement bindings", self);
         }
     }
     
@@ -162,7 +162,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         [self bindToObject:self.boundObject inViewController:viewController recursive:NO];
     }
     else {
-        [self updateText];
+        [self updateViewValue];
     }
     
     if (recursive) {
@@ -182,16 +182,16 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
 }
 
-- (void)updateText
+- (void)updateViewValue
 {
     if (! self.bindingInformation) {
         return;
     }
     
-    NSAssert([self respondsToSelector:@selector(updateViewWithText:)], @"Binding could only be made it -updateWithText: is implemented");
+    NSAssert([self respondsToSelector:@selector(updateViewWithValue:)], @"Binding could only be made it -updateWithValue: is implemented");
     
-    NSString *text = [self.bindingInformation text];
-    [self performSelector:@selector(updateViewWithText:) withObject:text];
+    id value = [self.bindingInformation value];
+    [self performSelector:@selector(updateViewWithValue:) withObject:value];
 }
 
 @end
@@ -225,7 +225,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
     //            [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
     //        }
     //        else if (self.bindingInformation) {
-    //            [self updateText];
+    //            [self updateViewValue];
     //        }
     //    }
     //    else {
@@ -245,7 +245,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
         }
         // Do not recalculate valid binding information, even if the window has changed
         else if (self.bindingInformation && ! self.bindingInformation.verified) {
-            [self updateText];
+            [self updateViewValue];
         }        
     }
 }

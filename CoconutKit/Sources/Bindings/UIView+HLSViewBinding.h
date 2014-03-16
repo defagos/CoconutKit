@@ -16,15 +16,18 @@
  * runtime attributes instead of outlets. Two attributes are available to this purpose:
  *   - bindKeyPath: The keypath to which the view will be bound. This can be any kind of keypath, even one
  *                  containing keypath operators
- *   - bindFormatter: Values to be displayed by bound views must be strings. If bindKeyPath returns another 
- *                    kind of object (say of class SomeClass), you must provide the name of an instance 
- *                    formatter method 'methodName:', which can either be an instance method with prototype
- *                      - (NSString *)methodName:(SomeClass *)object
+ *   - bindFormatter: Values to be displayed by bound views must have an appropriate type (most of the time
+ *                    NSString). The classes supported for binding to a view are returned by the bound view
+ *                    +supportedBindingClasses class method (if not implemented, defaults to NSString). If 
+ *                    bindKeyPath returns a non-supported kind of object (say of class SomeClass), you must 
+ *                    provide the name of an instance formatter method 'methodName:', which can either be an 
+ *                    instance method with prototype
+ *                      - (id)methodName:(SomeClass *)object
  *                    or a class method with prototype
- *                      + (NSString *)classMethodName:(SomeClass *)object
- *                    transforming the value into a string. These methods are looked up along the responder
- *                    chain, as described below. Alternatively, you can provide a global class formatter 
- *                    method '+[SomeClass methodName:]', for which no such lookup is needed
+ *                      + (id)classMethodName:(SomeClass *)object
+ *                    transforming the object into another one with supported type. These methods are looked up
+ *                    along the responder chain, as described below. Alternatively, you can provide a global 
+ *                    class formatter method '+[SomeClass methodName:]', which will be called directly
  *
  * With no additional measure, keypath lookup is performed along the responder chain, starting with the view
  * bindKeyPath has been set on, and stopping at the first encountered view controller (if any is found). View
@@ -47,18 +50,18 @@
  *       - class method +methodName: on the responder object
  * In addition, global formatter names can be provided in the form of class methods '+[SomeClass methodName:]'
  *
- * The binding information is resolved as late as possible (usually when the view is displayed), so that the whole
- * repsonder chain context is available. This information is then stored for efficient later use. Values are not 
- * updated automatically when the underlying bound objects changes, this has to be done manually:
- *   - when the object changes, call -bindToObject: to set bindings with the new object
+ * The binding information is resolved as late as possible (usually when the view is displayed), when the whole
+ * repsonder chain context is available. This information is then stored for efficient later use. The view is
+ * not updated automatically when the underlying bound objects changes, this has to be done manually:
+ *   - when the object is changed, call -bindToObject: to set bindings with the new object
  *   - if the object does not change but has different values for its bounds properties, simply call -refreshBindings
  *     to reflect the new values which are available
  *
  * It would be painful to call -bindToObject:, -refreshBindings:, etc. on all views belonging to a view hierarchy
  * when bindings must be established or refreshed. For this reason, those calls are made recursively. This
  * means you can simply call one of those methods at the top of the view hierarchy (or even on the view controller 
- * itself, see UIViewController+HLSViewBinding.h) to bind or refresh all associated view hierarchy. Note that each
- * view class decides whether it recursively binds or refreshes its subviews (see HLSViewBinding protocol)
+ * itself, see UIViewController+HLSViewBinding.h) to bind or refresh the whole associated view hierarchy. Note that 
+ * each view class decides whether it recursively binds or refreshes its subviews (see HLSViewBinding protocol)
  *
  * In most cases, you want to bind a single view hierarchy to a single object. But you can also have separate 
  * view hierarchies within the same view controller context if you want, each one bound to a different object.
@@ -72,11 +75,19 @@
  *           has to be checked when trying to resolve bindings
  *
  * Here is how UIKit view classes play with bindings:
- *   - UILabel: The label displays the value which the keypath points at. Recursive bindings have been disabled
- *   - UITextField: <explain>
- *   - UITextView: <explain>
+ *   - UILabel: The label displays the value which the keypath points at. Recursive bindings have been disabled.
+ *              The only supported class is NSString
+ *   - UIProgressView: The progress view displays the value which the keypath points at, and dragging the slider
+ *                     changes the underlying value. Recursive bindings have been disabled. The only supported 
+ *                     class is NSNumber (treated as a float)
  *   - UITableView: No direct binding is available, and recursive bindings haven been disabeld. You can still
  *                  bind table view cells and headers created from nibs
+ *   - UISwitch: The switch displays the value which the keypath points at, and toggling the switch changes the
+ *               underlying value. Recursive bindings have been disabled. The only supported class is NSNumber
+ *               (treated as a boolean)
+ *   - UITextField: <explain>
+ *   - UITextView: <explain>
+ *   - UIWebView: <explain>
  *
  * You can customize the binding behavior for other UIView subclasses (even your own) by implementing the
  * HLSViewBinding protocol
@@ -90,15 +101,22 @@
 @optional
 
 /**
+ * Return the list of classes supported for bindings. If this method is not implemented, this defaults to NSString
+ * only
+ */
++ (NSArray *)supportedBindingClasses;
+
+/**
  * UIView subclasses which want to provide bindings MUST implement this method. Its implementation should update the 
- * view according to the text which is received as parameter. For UIView classes which do not implement this method, 
- * bindings will not be available.
+ * view according to the value which is received as parameter (if this value can be something else than an NSString,
+ * be sure to implemented the +supportedBindingClasses method as well). If a UIView class does not implement this method,
+ * bindings will not be available for it.
  *
- * You can call -bindToObject:, -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithText:
+ * You can call -bindToObject:, -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithValue:
  * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively) and
  * perform binding resolution for views deeper in its hierarchy
  */
-- (void)updateViewWithText:(NSString *)text;
+- (void)updateViewWithValue:(id)value;
 
 /**
  * UIView subclasses can implement this method to return YES if subviews must be updated recursively when the
@@ -106,19 +124,18 @@
  */
 - (BOOL)bindsSubviewsRecursively;
 
+#if 0
 /**
  * UIView subclasses which accept user input and want bindings to automatically update the underlying model (as
  * given by the associated keyPath) can implement the following method. This method must be implemented along
- * -updateViewWithText:, which is required for bindings to be enabled
+ * -updateViewWithValue:, which is required for bindings to be enabled
  */
 - (void)updateModelWithText:(NSString *)text;
-
-// TODO: -updateViewWithFormattedValue: instead of strings (compatible with NSNumber, e.g.)
-//       -updateModelWithFormattedValue;
 
 // TODO: Optional validation (see Key-Value coding programming guide, -validate<field>:error:). Probably introduce
 //       a boolean user-defined runtime attribute setting whether or not validation must occur (by default should
 //       be YES, i.e. if a validation method exists applies it)
+#endif
 
 @end
 
