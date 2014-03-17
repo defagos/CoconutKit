@@ -68,6 +68,11 @@
 		6F255E571712E86C007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E561712E86C007BFC96 /* HLSFakeConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */; };
 		6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */; };
+		6F31D0D518D634A9009AB8F6 /* UIProgressView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31D0CE18D634A9009AB8F6 /* UIProgressView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F31D0D618D634A9009AB8F6 /* UISwitch+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31D0D018D634A9009AB8F6 /* UISwitch+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F31D0D718D634A9009AB8F6 /* UITextField+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31D0D218D634A9009AB8F6 /* UITextField+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F31D0D818D634A9009AB8F6 /* UITextView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31D0D418D634A9009AB8F6 /* UITextView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F31D0EB18D63811009AB8F6 /* UISlider+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31D0EA18D63811009AB8F6 /* UISlider+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F3B064914BC7D500026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3D1D7C1795712E0056FF4E /* HLSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D7B1795712E0056FF4E /* HLSTextView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F3D1D82179571440056FF4E /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D80179571440056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -419,6 +424,16 @@
 		6F2D470015761B7400EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470115761B7400EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470215761B7400EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F31D0CD18D634A9009AB8F6 /* UIProgressView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F31D0CE18D634A9009AB8F6 /* UIProgressView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F31D0CF18D634A9009AB8F6 /* UISwitch+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISwitch+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F31D0D018D634A9009AB8F6 /* UISwitch+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISwitch+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F31D0D118D634A9009AB8F6 /* UITextField+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F31D0D218D634A9009AB8F6 /* UITextField+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F31D0D318D634A9009AB8F6 /* UITextView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F31D0D418D634A9009AB8F6 /* UITextView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F31D0E918D63811009AB8F6 /* UISlider+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F31D0EA18D63811009AB8F6 /* UISlider+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F3B064714BC7D500026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064814BC7D500026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3D1D7A1795712E0056FF4E /* HLSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextView.h; sourceTree = "<group>"; };
@@ -1112,8 +1127,18 @@
 				6F45AF1118335D36002FF0ED /* HLSViewBindingInformation.m */,
 				6F45AF1218335D36002FF0ED /* UILabel+HLSViewBinding.h */,
 				6F45AF1318335D36002FF0ED /* UILabel+HLSViewBinding.m */,
+				6F31D0CD18D634A9009AB8F6 /* UIProgressView+HLSViewBinding.h */,
+				6F31D0CE18D634A9009AB8F6 /* UIProgressView+HLSViewBinding.m */,
+				6F31D0E918D63811009AB8F6 /* UISlider+HLSViewBinding.h */,
+				6F31D0EA18D63811009AB8F6 /* UISlider+HLSViewBinding.m */,
+				6F31D0CF18D634A9009AB8F6 /* UISwitch+HLSViewBinding.h */,
+				6F31D0D018D634A9009AB8F6 /* UISwitch+HLSViewBinding.m */,
 				6F45AF1418335D36002FF0ED /* UITableView+HLSViewBinding.h */,
 				6F45AF1518335D36002FF0ED /* UITableView+HLSViewBinding.m */,
+				6F31D0D118D634A9009AB8F6 /* UITextField+HLSViewBinding.h */,
+				6F31D0D218D634A9009AB8F6 /* UITextField+HLSViewBinding.m */,
+				6F31D0D318D634A9009AB8F6 /* UITextView+HLSViewBinding.h */,
+				6F31D0D418D634A9009AB8F6 /* UITextView+HLSViewBinding.m */,
 				6F45AF1618335D36002FF0ED /* UIView+HLSViewBinding.h */,
 				6F45AF1718335D36002FF0ED /* UIView+HLSViewBinding.m */,
 				6F216F16184C5807009CE6CD /* UIView+HLSViewBindingFriend.h */,
@@ -2256,13 +2281,16 @@
 				6FADE89F14BA04C9007EE121 /* LandscapeOnlyViewController.m in Sources */,
 				6FADE8A114BA04C9007EE121 /* LifeCycleTestViewController.m in Sources */,
 				6FADE8A314BA04C9007EE121 /* MemoryWarningTestCoverViewController.m in Sources */,
+				6F31D0D718D634A9009AB8F6 /* UITextField+HLSViewBinding.m in Sources */,
 				6FADE8AA14BA04C9007EE121 /* PortraitOnlyViewController.m in Sources */,
 				6FADE8AD14BA04C9007EE121 /* StretchableViewController.m in Sources */,
 				6FADE8AF14BA04C9007EE121 /* TransparentViewController.m in Sources */,
 				6FADE8B114BA04C9007EE121 /* ParallelProcessingDemoViewController.m in Sources */,
+				6F31D0D618D634A9009AB8F6 /* UISwitch+HLSViewBinding.m in Sources */,
 				6FADE8B314BA04C9007EE121 /* SleepTask.m in Sources */,
 				6FADE8B414BA04C9007EE121 /* SleepTaskOperation.m in Sources */,
 				6FADE8B514BA04C9007EE121 /* ActionSheetDemoViewController.m in Sources */,
+				6F31D0EB18D63811009AB8F6 /* UISlider+HLSViewBinding.m in Sources */,
 				6FADE8B714BA04C9007EE121 /* CursorCustomPointerView.m in Sources */,
 				6FADE8B914BA04C9007EE121 /* CursorDemoViewController.m in Sources */,
 				6FADE8BB14BA04C9007EE121 /* CursorFolderView.m in Sources */,
@@ -2302,6 +2330,7 @@
 				6F000137156BD17F0055CED7 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FC8CB8F1574BFF10014B37B /* NSURLRequest+HLSExtensions.m in Sources */,
 				6F2D470315761B7400EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */,
+				6F31D0D818D634A9009AB8F6 /* UITextView+HLSViewBinding.m in Sources */,
 				6F2D470415761B7400EF5E4F /* NSSet+HLSExtensions.m in Sources */,
 				6F89149515790DA8009FCC78 /* HLSLabel.m in Sources */,
 				6F89149A15790DCA009FCC78 /* LabelDemoViewController.m in Sources */,
@@ -2312,6 +2341,7 @@
 				6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */,
 				6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F1F4E0715A1B64700F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
+				6F31D0D518D634A9009AB8F6 /* UIProgressView+HLSViewBinding.m in Sources */,
 				6F1F4E0815A1B64700F65ECF /* SeguePlaceholderInsetDemoViewController.m in Sources */,
 				6F1F4E0915A1B64700F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6F1F4E0A15A1B64700F65ECF /* SegueStackOtherDemoViewController.m in Sources */,

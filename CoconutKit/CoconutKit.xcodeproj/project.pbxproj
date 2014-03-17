@@ -28,6 +28,8 @@
 		6F2D46FA15761A8600EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */; };
 		6F2D46FE15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46FC15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m */; };
+		6F31D0E718D6379E009AB8F6 /* UISlider+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F31D0E518D6379E009AB8F6 /* UISlider+HLSViewBinding.h */; };
+		6F31D0E818D6379E009AB8F6 /* UISlider+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F31D0E618D6379E009AB8F6 /* UISlider+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F3B064514BC7D410026F512 /* UIWebView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */; };
 		6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3D1D781795710C0056FF4E /* HLSTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3D1D761795710C0056FF4E /* HLSTextView.h */; };
@@ -56,13 +58,13 @@
 		6F5007EB1585E16300391A6C /* HLSExpandingSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5007E91585E16300391A6C /* HLSExpandingSearchBar.h */; };
 		6F5007EC1585E16300391A6C /* HLSExpandingSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5007EA1585E16300391A6C /* HLSExpandingSearchBar.m */; };
 		6F58601C18C9B89E005A881A /* UIProgressView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F58601A18C9B89E005A881A /* UIProgressView+HLSViewBinding.h */; };
-		6F58601D18C9B89E005A881A /* UIProgressView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58601B18C9B89E005A881A /* UIProgressView+HLSViewBinding.m */; };
+		6F58601D18C9B89E005A881A /* UIProgressView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58601B18C9B89E005A881A /* UIProgressView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F58602018C9B8AF005A881A /* UITextField+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F58601E18C9B8AF005A881A /* UITextField+HLSViewBinding.h */; };
-		6F58602118C9B8AF005A881A /* UITextField+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58601F18C9B8AF005A881A /* UITextField+HLSViewBinding.m */; };
+		6F58602118C9B8AF005A881A /* UITextField+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58601F18C9B8AF005A881A /* UITextField+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F58602418C9B8BE005A881A /* UITextView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F58602218C9B8BE005A881A /* UITextView+HLSViewBinding.h */; };
-		6F58602518C9B8BE005A881A /* UITextView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58602318C9B8BE005A881A /* UITextView+HLSViewBinding.m */; };
+		6F58602518C9B8BE005A881A /* UITextView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58602318C9B8BE005A881A /* UITextView+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F58602818C9B8CC005A881A /* UISwitch+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F58602618C9B8CC005A881A /* UISwitch+HLSViewBinding.h */; };
-		6F58602918C9B8CC005A881A /* UISwitch+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58602718C9B8CC005A881A /* UISwitch+HLSViewBinding.m */; };
+		6F58602918C9B8CC005A881A /* UISwitch+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58602718C9B8CC005A881A /* UISwitch+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F6010EB15AB1E2B00A9FEC5 /* HLSContainerStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */; };
 		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; };
 		6F63E7B617CF6B80006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B517CF6B80006322D9 /* QuickLook.framework */; };
@@ -316,6 +318,8 @@
 		6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D46FC15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F31D0E518D6379E009AB8F6 /* UISlider+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F31D0E618D6379E009AB8F6 /* UISlider+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3D1D761795710C0056FF4E /* HLSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTextView.h; sourceTree = "<group>"; };
@@ -665,6 +669,8 @@
 				6F45AEF818335BCE002FF0ED /* UILabel+HLSViewBinding.m */,
 				6F58601A18C9B89E005A881A /* UIProgressView+HLSViewBinding.h */,
 				6F58601B18C9B89E005A881A /* UIProgressView+HLSViewBinding.m */,
+				6F31D0E518D6379E009AB8F6 /* UISlider+HLSViewBinding.h */,
+				6F31D0E618D6379E009AB8F6 /* UISlider+HLSViewBinding.m */,
 				6F45AEF918335BCE002FF0ED /* UITableView+HLSViewBinding.h */,
 				6F45AEFA18335BCE002FF0ED /* UITableView+HLSViewBinding.m */,
 				6F58601E18C9B8AF005A881A /* UITextField+HLSViewBinding.h */,
@@ -1061,6 +1067,7 @@
 				6FADE61714BA0494007EE121 /* HLSWizardViewController.h in Headers */,
 				6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */,
 				6F3B064514BC7D410026F512 /* UIWebView+HLSExtensions.h in Headers */,
+				6F31D0E718D6379E009AB8F6 /* UISlider+HLSViewBinding.h in Headers */,
 				6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */,
 				6F91451214CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h in Headers */,
 				6F91451714CDCA9500AFA609 /* HLSActionSheet+Friend.h in Headers */,
@@ -1278,6 +1285,7 @@
 				6FADE5ED14BA0494007EE121 /* HLSCursor.m in Sources */,
 				6FADE5EF14BA0494007EE121 /* HLSSlideshow.m in Sources */,
 				6FADE5F114BA0494007EE121 /* HLSNibView.m in Sources */,
+				6F31D0E818D6379E009AB8F6 /* UISlider+HLSViewBinding.m in Sources */,
 				6FADE5F314BA0494007EE121 /* HLSSubtitleTableViewCell.m in Sources */,
 				6FADE5F614BA0494007EE121 /* HLSTableViewCell.m in Sources */,
 				6FADE5FE14BA0494007EE121 /* HLSValue1TableViewCell.m in Sources */,

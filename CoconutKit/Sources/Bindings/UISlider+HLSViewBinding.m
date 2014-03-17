@@ -1,14 +1,14 @@
 //
-//  UIProgressView+HLSViewBinding.m
+//  UISlider+HLSViewBinding.m
 //  CoconutKit
 //
-//  Created by Samuel Défago on 07/03/14.
+//  Created by Samuel Défago on 16/03/14.
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-#import "UIProgressView+HLSViewBinding.h"
+#import "UISlider+HLSViewBinding.h"
 
-@implementation UIProgressView (HLSViewBinding)
+@implementation UISlider (HLSViewBinding)
 
 #pragma mark HLSViewBinding protocol implementation
 
@@ -19,7 +19,7 @@
 
 - (void)updateViewWithValue:(id)value
 {
-    self.progress = [value floatValue];
+    self.value = [value floatValue];
 }
 
 - (BOOL)bindsSubviewsRecursively

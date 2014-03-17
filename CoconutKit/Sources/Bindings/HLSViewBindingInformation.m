@@ -16,6 +16,10 @@
 
 #import <objc/runtime.h>
 
+// TODO: Formatter must be used when transforming a value into a proper compatible class. They should also be available
+//       in cases where no conversion is needed, e.g. to truncate an NSNumber. Fix implementation and documentation
+//       accordingly
+
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;
