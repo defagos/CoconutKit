@@ -128,13 +128,13 @@ typedef enum {
         }
             
         case BindingInformationFormattingTarget: {
-            name = CoconutKitLocalizedString(@"Formatting target", nil);
+            name = CoconutKitLocalizedString(@"Resolved formatting target", nil);
             value = [HLSBindingInformationViewController identityStringForObject:self.bindingInformation.formattingTarget];
             break;
         }
             
         case BindingInformationFormattingSelector: {
-            name = CoconutKitLocalizedString(@"Formatting selector", nil);
+            name = CoconutKitLocalizedString(@"Resolved formatting selector", nil);
             if (self.bindingInformation.formattingSelector) {
                 value = [NSString stringWithFormat:@"%@%@", hls_isClass(self.bindingInformation.formattingTarget) ? @"+" : @"-",
                          NSStringFromSelector(self.bindingInformation.formattingSelector)];

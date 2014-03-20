@@ -16,10 +16,6 @@
 
 #import <objc/runtime.h>
 
-// TODO: Formatter must be used when transforming a value into a proper compatible class. They should also be available
-//       in cases where no conversion is needed, e.g. to truncate an NSNumber. Fix implementation and documentation
-//       accordingly
-
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;
@@ -115,92 +111,86 @@
         return NO;
     }
     
-    // No need to check for exceptions here, the keypath is here guaranteed to be valid the object
+    // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
     id value = [self.object valueForKeyPath:self.keyPath];
     
-    // The keypath is valid, but we cannot check its type (to guess if formatting is needed) since there is no
-    // value. Does not change the status, a later check is required
-    if (! value) {
-        return NO;
-    }
-    
-    // No formatting required. We are done, the binding is correct
-    if ([self canDisplayValue:value]) {
-        return YES;
-    }
-    
-    // Formatting required. Check that a formatter is available
-    if (! self.formatterName) {
-        self.errorDescription = [NSString stringWithFormat:@"The value returned by the keypath is of class '%@', a formatter name is required to "
-            "format it as a string", [value className]];
-        return NO;
-    }
-    
+    // Formatter lookup
     __block id formattingTarget = nil;
     __block SEL formattingSelector = NULL;
     
-    // Check whether the formatter is a class method +[ClassName methodName:]
-    // Regex: ^\s*\+\s*\[(\w*)\s*(\w*:)\]\s*$
-    NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*:)\\]\\s*$";
-    NSRegularExpression *classMethodRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
-                                                                                                  options:0
-                                                                                                    error:NULL];
-    
-    [classMethodRegularExpression enumerateMatchesInString:self.formatterName options:0 range:NSMakeRange(0, [self.formatterName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-        // Extract capture group information
-        NSString *className = [self.formatterName substringWithRange:[result rangeAtIndex:1]];
-        NSString *methodName = [self.formatterName substringWithRange:[result rangeAtIndex:2]];
+    if ([self.formatterName isFilled]) {
+        // Check whether the formatter is a class method +[ClassName methodName:]
+        // Regex: ^\s*\+\s*\[(\w*)\s*(\w*:)\]\s*$
+        NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*:)\\]\\s*$";
+        NSRegularExpression *classMethodRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                                                      options:0
+                                                                                                        error:NULL];
         
-        // Check
-        Class class = NSClassFromString(className);
-        if (! class) {
-            self.errorDescription = [NSString stringWithFormat:@"The specified global formatter points to an invalid class '%@'", className];
-            return;
-        }
+        [classMethodRegularExpression enumerateMatchesInString:self.formatterName options:0 range:NSMakeRange(0, [self.formatterName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+            // Extract capture group information
+            NSString *className = [self.formatterName substringWithRange:[result rangeAtIndex:1]];
+            NSString *methodName = [self.formatterName substringWithRange:[result rangeAtIndex:2]];
+            
+            // Check
+            Class class = NSClassFromString(className);
+            if (! class) {
+                self.errorDescription = [NSString stringWithFormat:@"The specified global formatter points to an invalid class '%@'", className];
+                return;
+            }
+            
+            SEL selector = NSSelectorFromString(methodName);
+            if (! class_getClassMethod(class, selector)) {
+                self.errorDescription = [NSString stringWithFormat:@"The specified global formatter method '%@' does not exist for the class '%@'", methodName, className];
+                return;
+            }
+            
+            formattingTarget = class;
+            formattingSelector = selector;
+        }];
         
-        SEL selector = NSSelectorFromString(methodName);
-        if (! class_getClassMethod(class, selector)) {
-            self.errorDescription = [NSString stringWithFormat:@"The specified global formatter method '%@' does not exist for the class '%@'", methodName, className];
-            return;
-        }
-        
-        formattingTarget = class;
-        formattingSelector = selector;
-    }];
-    
-    // No class method formatter found
-    if (! formattingTarget) {
-        // Perform instance method lookup
-        formattingSelector = NSSelectorFromString(self.formatterName);
-        if (! formattingSelector) {
-            self.errorDescription = @"The formatter is not a valid method name";
-            return NO;
-        }
-        
-        // Look along the responder chain first (most specific)
-        formattingTarget = [HLSViewBindingInformation bindingTargetForSelector:formattingSelector view:self.view];
+        // No class method formatter found
         if (! formattingTarget) {
-            // Look for an instance method on the object
-            if ([self.object respondsToSelector:formattingSelector]) {
-                formattingTarget = self.object;
-            }
-            // Look for a class method on the object class itself (most generic)
-            else if ([[self.object class] respondsToSelector:formattingSelector]) {
-                formattingTarget = [self.object class];
-            }
-            else {
-                self.errorDescription = @"The specified formatter is neither a global formatter, nor could be resolved along the responder chain";
+            // Perform instance method lookup
+            formattingSelector = NSSelectorFromString(self.formatterName);
+            if (! formattingSelector) {
+                self.errorDescription = @"The formatter is not a valid method name";
                 return NO;
+            }
+            
+            // Look along the responder chain first (most specific)
+            formattingTarget = [HLSViewBindingInformation bindingTargetForSelector:formattingSelector view:self.view];
+            if (! formattingTarget) {
+                // Look for an instance method on the object
+                if ([self.object respondsToSelector:formattingSelector]) {
+                    formattingTarget = self.object;
+                }
+                // Look for a class method on the object class itself (most generic)
+                else if ([[self.object class] respondsToSelector:formattingSelector]) {
+                    formattingTarget = [self.object class];
+                }
+                else {
+                    self.errorDescription = @"The specified formatter is neither a global formatter, nor could be resolved along the responder chain";
+                    return NO;
+                }
             }
         }
     }
     
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    id formattedValue = [formattingTarget performSelector:formattingSelector withObject:value];
+    id displayedValue = formattingTarget ? [formattingTarget performSelector:formattingSelector withObject:value] : value;
 #pragma clang diagnostic pop
-    if (! [self canDisplayValue:formattedValue]) {
-        self.errorDescription = @"The specified formatter does not return a string";
+    
+    // We cannot cache binding information if we cannot check the type of the value to be displayed for compatibility. Does not change
+    // the status, a later check is required
+    if (! displayedValue) {
+        return NO;
+    }
+    
+    if (! [self canDisplayValue:displayedValue]) {
+        self.errorDescription = [NSString stringWithFormat:@"The %@ must return one of the following supported types: %@",
+                                 formattingTarget ? @"formatter" : @"keypath",
+                                 [self supportedBindingClassesString]];
         return NO;
     }
     
@@ -214,17 +204,31 @@
 
 #pragma mark Type checking
 
-- (BOOL)canDisplayValue:(id)value
+- (NSArray *)supportedBindingClasses
 {
     Class viewClass = [self.view class];
-    NSArray *supportedBindingClasses = nil;
+    
     if ([viewClass respondsToSelector:@selector(supportedBindingClasses)]) {
-        supportedBindingClasses = [viewClass supportedBindingClasses];
+        return [viewClass supportedBindingClasses];
     }
     else {
-        supportedBindingClasses = @[[NSString class]];
+        return @[[NSString class]];
     }
-    
+}
+
+- (NSString *)supportedBindingClassesString
+{
+    NSArray *supportedBindingClasses = [self supportedBindingClasses];
+    NSMutableArray *classNames = [NSMutableArray array];
+    for (Class supportedBindingClass in supportedBindingClasses) {
+        [classNames addObject:NSStringFromClass(supportedBindingClass)];
+    }
+    return [classNames componentsJoinedByString:@", "];
+}
+
+- (BOOL)canDisplayValue:(id)value
+{
+    NSArray *supportedBindingClasses = [self supportedBindingClasses];
     for (Class supportedBindingClass in supportedBindingClasses) {
         if ([value isKindOfClass:supportedBindingClass]) {
             return YES;
