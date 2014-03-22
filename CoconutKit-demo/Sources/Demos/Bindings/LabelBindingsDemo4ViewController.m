@@ -8,7 +8,7 @@
 
 #import "LabelBindingsDemo4ViewController.h"
 
-#import "DemoFormatter.h"
+#import "DemoTransformer.h"
 #import "Employee.h"
 #import "LabelBindingsDemo4InsetViewController.h"
 
@@ -36,7 +36,7 @@
 
 - (NSString *)stringFromDate:(NSDate *)date
 {
-    return [DemoFormatter stringFromDate:date];
+    return [DemoTransformer stringFromDate:date];
 }
 
 #pragma mark Action callbacks

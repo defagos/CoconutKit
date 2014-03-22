@@ -8,7 +8,7 @@
 
 #import "LabelBindingsDemo5ViewController.h"
 
-#import "DemoFormatter.h"
+#import "DemoTransformer.h"
 #import "EmployeeView.h"
 #import "TodayView.h"
 #import "YesterdayView.h"
@@ -34,12 +34,12 @@
 
 - (NSString *)stringFromDate:(NSDate *)date
 {
-    return [DemoFormatter stringFromDate:date];
+    return [DemoTransformer stringFromDate:date];
 }
 
 - (NSString *)stringFromNumber:(NSNumber *)number
 {
-    return [DemoFormatter stringFromNumber:number];
+    return [DemoTransformer stringFromNumber:number];
 }
 
 #pragma mark View lifecycle

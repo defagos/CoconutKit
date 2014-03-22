@@ -1,14 +1,15 @@
 //
-//  HLSConverters.m
+//  HLSConverter.m
 //  CoconutKit
 //
-//  Created by Samuel Défago on 9/21/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Created by Samuel Défago on 20/03/14.
+//  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-#import "HLSConverters.h"
+#import "HLSTransformer.h"
 
 #import "HLSAssert.h"
+#import "HLSError.h"
 #import "HLSLogger.h"
 
 NSString *HLSStringFromBool(BOOL yesOrNo)
@@ -43,7 +44,7 @@ NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrie
             HLSLoggerError(@"Unknown interface orientation");
             return nil;
             break;
-        }            
+        }
     }
 }
 
@@ -74,7 +75,7 @@ NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
             HLSLoggerError(@"Unknown device orientation");
             return nil;
             break;
-        }            
+        }
     }
 }
 
@@ -92,79 +93,75 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
             transform.m41, transform.m42, transform.m43, transform.m44];
 }
 
-NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
-{
-    if (! string) {
-        return nil;
-    }
-    
-    NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    return [formatter numberFromString:string];
-}
+@interface HLSBlockTransformer ()
 
-@implementation HLSConverters
+@property (nonatomic, copy) HLSTransformerBlock transformerBlock;
+@property (nonatomic, copy) HLSReverseTransformerBlock reverseBlock;
+
+@end
+
+@implementation HLSBlockTransformer
 
 #pragma mark Class methods
 
-+ (NSDate *)dateFromString:(NSString *)string usingFormatString:(NSString *)formatString
++ (instancetype)blockTransformerWithBlock:(HLSTransformerBlock)transformerBlock
+                             reverseBlock:(HLSReverseTransformerBlock)reverseBlock
 {
-    if (! string) {
-        return nil;
-    }
-    
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
-    [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [formatter setDateFormat:formatString];
-    return [formatter dateFromString:string];
-}
-
-+ (void)convertStringValueForKey:(NSString *)sourceKey 
-                    ofDictionary:(NSDictionary *)sourceDictionary
-           intoStringValueForKey:(NSString *)destKey 
-                    ofDictionary:(NSMutableDictionary *)destDictionary
-{
-    NSString *stringValue = [sourceDictionary objectForKey:sourceKey];
-    if (stringValue) {
-        [destDictionary setObject:stringValue forKey:destKey];
-    }
-}
-
-+ (void)convertStringValueForKey:(NSString *)sourceKey 
-                    ofDictionary:(NSDictionary *)sourceDictionary
-      intoUnsignedIntValueForKey:(NSString *)destKey 
-                    ofDictionary:(NSMutableDictionary *)destDictionary
-{
-    NSString *stringValue = [sourceDictionary objectForKey:sourceKey];
-    if (stringValue) {
-        NSNumber *number = HLSUnsignedIntNumberFromString(stringValue);
-        if (number) {
-            [destDictionary setObject:number forKey:destKey];
-        }
-    }
-}
-
-+ (void)convertStringValueForKey:(NSString *)sourceKey  
-                    ofDictionary:(NSDictionary *)sourceDictionary
-             intoDateValueForKey:(NSString *)destKey
-                    ofDictionary:(NSMutableDictionary *)destDictionary
-               usingFormatString:(NSString *)formatString
-{
-    NSString *stringValue = [sourceDictionary objectForKey:sourceKey];
-    if (stringValue) {
-        NSDate *date = [HLSConverters dateFromString:stringValue usingFormatString:formatString];
-        if (date) {
-            [destDictionary setObject:date forKey:destKey];
-        }
-    }
+    return [[[self class] alloc] initWithBlock:transformerBlock reverseBlock:reverseBlock];
 }
 
 #pragma mark Object creation and destruction
+
+- (id)initWithBlock:(HLSTransformerBlock)transformerBlock
+       reverseBlock:(HLSReverseTransformerBlock)reverseBlock
+{
+    if (self = [super init]) {
+        if (! transformerBlock) {
+            HLSLoggerError(@"A transformer block is mandatory");
+            return nil;
+        }
+        
+        self.transformerBlock = transformerBlock;
+        self.reverseBlock = reverseBlock;
+    }
+    return self;
+}
 
 - (id)init
 {
     HLSForbiddenInheritedMethod();
     return nil;
+}
+
+#pragma mark HLSTransformer protocol implementation
+
+- (id)transformObject:(id)object
+{
+    return self.transformerBlock(object);
+}
+
+- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError **)pError
+{
+    if (! self.reverseBlock) {
+        [self doesNotRecognizeSelector:_cmd];
+    }
+    
+    return self.reverseBlock(pObject, fromObject, pError);
+}
+
+#pragma mark Overrides
+
+- (BOOL)respondsToSelector:(SEL)selector
+{
+    // Optional reverse transformation: Does not response if no available block
+    if (selector == @selector(getObject:fromObject:error:)) {
+        return self.reverseBlock != nil;
+    }
+    // Normal behavior
+    else {
+        // See -[NSObject respondsToSelector:] documentation
+        return [[self class] instancesRespondToSelector:selector];
+    }
 }
 
 @end

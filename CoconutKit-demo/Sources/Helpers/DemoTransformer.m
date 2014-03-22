@@ -1,14 +1,14 @@
 //
-//  DemoFormatter.m
+//  DemoTransformer.m
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 29.06.13.
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "DemoFormatter.h"
+#import "DemoTransformer.h"
 
-@implementation DemoFormatter
+@implementation DemoTransformer
 
 + (NSString *)stringFromDate:(NSDate *)date
 {

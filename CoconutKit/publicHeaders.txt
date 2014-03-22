@@ -8,7 +8,6 @@ HLSAssert.h
 HLSAutorotation.h
 HLSConnection.h
 HLSContainerStack.h
-HLSConverters.h
 HLSCursor.h
 HLSError.h
 HLSExpandingSearchBar.h
@@ -46,6 +45,7 @@ HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
 HLSTextView.h
+HLSTransformer.h
 HLSTransition.h
 HLSURLConnection.h
 HLSUserInterfaceLock.h

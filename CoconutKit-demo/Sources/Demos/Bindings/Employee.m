@@ -8,7 +8,7 @@
 
 #import "Employee.h"
 
-#import "DemoFormatter.h"
+#import "DemoTransformer.h"
 
 @implementation Employee
 
@@ -16,7 +16,7 @@
 
 + (NSString *)stringFromNumber:(NSNumber *)number
 {
-    return [DemoFormatter stringFromNumber:number];
+    return [DemoTransformer stringFromNumber:number];
 }
 
 @end

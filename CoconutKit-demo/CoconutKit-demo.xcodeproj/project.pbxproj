@@ -60,7 +60,7 @@
 		6F45AFB71833613D002FF0ED /* TodayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF991833613D002FF0ED /* TodayView.xib */; };
 		6F45AFB81833613D002FF0ED /* YesterdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AF9B1833613D002FF0ED /* YesterdayView.m */; };
 		6F45AFB91833613D002FF0ED /* YesterdayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F45AF9C1833613D002FF0ED /* YesterdayView.xib */; };
-		6F45AFBC18336174002FF0ED /* DemoFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFBB18336174002FF0ED /* DemoFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F45AFBC18336174002FF0ED /* DemoTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F45AFBB18336174002FF0ED /* DemoTransformer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
@@ -288,8 +288,8 @@
 		6F45AF9A1833613D002FF0ED /* YesterdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesterdayView.h; sourceTree = "<group>"; };
 		6F45AF9B1833613D002FF0ED /* YesterdayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesterdayView.m; sourceTree = "<group>"; };
 		6F45AF9C1833613D002FF0ED /* YesterdayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YesterdayView.xib; sourceTree = "<group>"; };
-		6F45AFBA18336174002FF0ED /* DemoFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoFormatter.h; sourceTree = "<group>"; };
-		6F45AFBB18336174002FF0ED /* DemoFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoFormatter.m; sourceTree = "<group>"; };
+		6F45AFBA18336174002FF0ED /* DemoTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTransformer.h; sourceTree = "<group>"; };
+		6F45AFBB18336174002FF0ED /* DemoTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTransformer.m; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
 		6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingSearchBarDemoViewController.m; sourceTree = "<group>"; };
@@ -1095,8 +1095,8 @@
 				6F53B63416FA321000E01781 /* DemoColors.m */,
 				6F9C463614C5C30B00824AB2 /* DemoErrors.h */,
 				6F9C463714C5C30B00824AB2 /* DemoErrors.m */,
-				6F45AFBA18336174002FF0ED /* DemoFormatter.h */,
-				6F45AFBB18336174002FF0ED /* DemoFormatter.m */,
+				6F45AFBA18336174002FF0ED /* DemoTransformer.h */,
+				6F45AFBB18336174002FF0ED /* DemoTransformer.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1542,7 +1542,7 @@
 				6F45AFB41833613D002FF0ED /* TableViewBindingsDemoViewController.m in Sources */,
 				6F45AFB61833613D002FF0ED /* TodayView.m in Sources */,
 				6F45AFB81833613D002FF0ED /* YesterdayView.m in Sources */,
-				6F45AFBC18336174002FF0ED /* DemoFormatter.m in Sources */,
+				6F45AFBC18336174002FF0ED /* DemoTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -84,6 +84,7 @@
 		6F93C4EA1404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4E91404400000FEC9B0 /* NSString+HLSExtensionsTestCase.m */; };
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
 		6F948C3214D6E844003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */; };
+		6F976AEF18DB5AEE00888CFC /* HLSTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F976AEE18DB5AEE00888CFC /* HLSTransformer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F97E17D15E60C8700EF6F62 /* HLSObjectAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F97E17C15E60C8400EF6F62 /* HLSObjectAnimation.m */; };
 		6FA5BDA215E2923900E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDA115E2923900E5182E /* HLSLayerAnimation.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
@@ -104,7 +105,6 @@
 		6FADE79C14BA04B6007EE121 /* HLSViewAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE70F14BA04B6007EE121 /* HLSViewAnimationStep.m */; };
 		6FADE79D14BA04B6007EE121 /* HLSViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71114BA04B6007EE121 /* HLSViewAnimation.m */; };
 		6FADE79E14BA04B6007EE121 /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71414BA04B6007EE121 /* HLSAssert.m */; };
-		6FADE79F14BA04B6007EE121 /* HLSConverters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71714BA04B6007EE121 /* HLSConverters.m */; };
 		6FADE7A014BA04B6007EE121 /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71914BA04B6007EE121 /* HLSError.m */; };
 		6FADE7A114BA04B6007EE121 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71B14BA04B6007EE121 /* HLSFloat.m */; };
 		6FADE7A214BA04B6007EE121 /* HLSKeyboardInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE71D14BA04B6007EE121 /* HLSKeyboardInformation.m */; };
@@ -353,6 +353,8 @@
 		6F948C2E14D6E844003BF765 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
 		6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
 		6F954F6817CF4805001E5F67 /* HLSLogger+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLogger+Friend.h"; sourceTree = "<group>"; };
+		6F976AE718DB5A2400888CFC /* HLSTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformer.h; sourceTree = "<group>"; };
+		6F976AEE18DB5AEE00888CFC /* HLSTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformer.m; sourceTree = "<group>"; };
 		6F97E17515E6055A00EF6F62 /* HLSAnimationStep+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSAnimationStep+Friend.h"; sourceTree = "<group>"; };
 		6F97E17C15E60C8400EF6F62 /* HLSObjectAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSObjectAnimation.m; sourceTree = "<group>"; };
 		6F97E17E15E60CAF00EF6F62 /* HLSObjectAnimation+Friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HLSObjectAnimation+Friend.h"; sourceTree = "<group>"; };
@@ -393,8 +395,6 @@
 		6FADE71114BA04B6007EE121 /* HLSViewAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimation.m; sourceTree = "<group>"; };
 		6FADE71314BA04B6007EE121 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
 		6FADE71414BA04B6007EE121 /* HLSAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAssert.m; sourceTree = "<group>"; };
-		6FADE71614BA04B6007EE121 /* HLSConverters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConverters.h; sourceTree = "<group>"; };
-		6FADE71714BA04B6007EE121 /* HLSConverters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConverters.m; sourceTree = "<group>"; };
 		6FADE71814BA04B6007EE121 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
 		6FADE71914BA04B6007EE121 /* HLSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSError.m; sourceTree = "<group>"; };
 		6FADE71A14BA04B6007EE121 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
@@ -891,8 +891,8 @@
 				6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */,
 				6FADE71314BA04B6007EE121 /* HLSAssert.h */,
 				6FADE71414BA04B6007EE121 /* HLSAssert.m */,
-				6FADE71614BA04B6007EE121 /* HLSConverters.h */,
-				6FADE71714BA04B6007EE121 /* HLSConverters.m */,
+				6F976AE718DB5A2400888CFC /* HLSTransformer.h */,
+				6F976AEE18DB5AEE00888CFC /* HLSTransformer.m */,
 				6FADE71814BA04B6007EE121 /* HLSError.h */,
 				6FADE71914BA04B6007EE121 /* HLSError.m */,
 				6FCA2DE41679E41F0011CFDA /* HLSFileManager.h */,
@@ -1292,7 +1292,6 @@
 				6FADE79C14BA04B6007EE121 /* HLSViewAnimationStep.m in Sources */,
 				6FADE79D14BA04B6007EE121 /* HLSViewAnimation.m in Sources */,
 				6FADE79E14BA04B6007EE121 /* HLSAssert.m in Sources */,
-				6FADE79F14BA04B6007EE121 /* HLSConverters.m in Sources */,
 				6FADE7A014BA04B6007EE121 /* HLSError.m in Sources */,
 				6FADE7A114BA04B6007EE121 /* HLSFloat.m in Sources */,
 				6FADE7A214BA04B6007EE121 /* HLSKeyboardInformation.m in Sources */,
@@ -1356,6 +1355,7 @@
 				6FDDEC251529782500CED462 /* UITextView+HLSExtensions.m in Sources */,
 				6F897873152B505D006C8231 /* HLSZeroingWeakRefTestCase.m in Sources */,
 				6F8E5C4F18C601D300AF775A /* HLSInfoTableViewCell.m in Sources */,
+				6F976AEF18DB5AEE00888CFC /* HLSTransformer.m in Sources */,
 				6FC8CB961574C01C0014B37B /* NSURLRequest+HLSExtensions.m in Sources */,
 				6F2D455C15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m in Sources */,
 				6F2D470A15761B9000EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */,

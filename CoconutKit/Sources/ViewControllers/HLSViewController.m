@@ -10,8 +10,8 @@
 
 #import <objc/runtime.h>
 #import "HLSAutorotation.h"
-#import "HLSConverters.h"
 #import "HLSLogger.h"
+#import "HLSTransformer.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSObject+HLSExtensions.h"
 

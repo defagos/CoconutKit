@@ -8,7 +8,7 @@
 
 /**
  * Usually, when you have to display some value on screen, and if you are using Interface Builder to design 
- * your interface, you have to create and bind an outlet. Though this process is completely straightforward, 
+ * your user interface, you have to create and bind an outlet. Though this process is completely straightforward,
  * this tends to clutter you code and becomes increasingly boring, especially when the number of values to 
  * display is large.
  *
@@ -22,17 +22,21 @@
  *                    bindKeyPath returns a non-supported kind of object (say of class SomeClass), you must 
  *                    provide the name of an instance formatter method 'methodName:', which can either be an 
  *                    instance method with prototype
- *                      - (id)methodName:(SomeClass *)object
+ *                      - (NSFormatter *)methodName
  *                    or a class method with prototype
- *                      + (id)classMethodName:(SomeClass *)object
- *                    transforming the object into another one with supported type. These methods are looked up
- *                    along the responder chain, as described below. Alternatively, you can provide a global 
- *                    class formatter method '+[SomeClass methodName:]', which will be called directly.
+ *                      + (NSFormatter *)classMethodName
+ *                    returning an NSFormatter transforming the object into another one with supported type. 
+ *                    These methods are looked up along the responder chain, as described below. Alternatively, 
+ *                    you can provide a global class formatter method '[SomeClass methodName]', returning an
+ *                    NSFormatter object. 
  *                    Formatters are required when the type of the value returned by the key path does not
  *                    match one of the supported types, but can also be used to further format any value. For
  *                    example, if a view supports binding to NSNumber, and if the key path returns an NSNumber,
  *                    you might still want to use a formatter to round the value, multiply it with some constant,
  *                    etc.
+ *                    If you need to implement a custom formatter, and if you only need bindings for displaying
+ *                    formatted values (not to parsing input), you can only implement the NSFormatter dedicated
+ *                    method (i.e. formatting, not parsing)
  *
  * With no additional measure, keypath lookup is performed along the responder chain, starting with the view
  * bindKeyPath has been set on, and stopping at the first encountered view controller (if any is found). View
@@ -142,6 +146,15 @@
 // TODO: Optional validation (see Key-Value coding programming guide, -validate<field>:error:). Probably introduce
 //       a boolean user-defined runtime attribute setting whether or not validation must occur (by default should
 //       be YES, i.e. if a validation method exists applies it)
+#endif
+
+#if 0
+Formatting: several approaches, must allow all of them with the same resolution mechanism:
+
+- for model -> view: method <objectA>From<Object>:
+- for view -> model: method <objectB>From<ObjectA>:
+- method returning an NSFormatter instance
+
 #endif
 
 @end

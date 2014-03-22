@@ -8,7 +8,7 @@
 
 #import "LabelBindingsDemo1ViewController.h"
 
-#import "DemoFormatter.h"
+#import "DemoTransformer.h"
 #import "Employee.h"
 
 @interface LabelBindingsDemo1ViewController ()
@@ -45,7 +45,7 @@
 
 - (NSString *)currentDateString
 {
-    return [DemoFormatter stringFromDate:[NSDate date]];
+    return [DemoTransformer stringFromDate:[NSDate date]];
 }
 
 - (NSDate *)currentDate
@@ -62,7 +62,7 @@
 
 - (NSString *)stringFromDate:(NSDate *)date
 {
-    return [DemoFormatter stringFromDate:date];
+    return [DemoTransformer stringFromDate:date];
 }
 
 - (NSString *)stringFromArray:(NSArray *)array
