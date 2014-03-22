@@ -85,6 +85,7 @@
 		6F93C4EE140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93C4ED140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.m */; };
 		6F948C3214D6E844003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C2F14D6E844003BF765 /* UINavigationController+HLSActionSheet.m */; };
 		6F976AEF18DB5AEE00888CFC /* HLSTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F976AEE18DB5AEE00888CFC /* HLSTransformer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F976AF218DD947D00888CFC /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F976AF118DD947D00888CFC /* HLSTransformerTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F97E17D15E60C8700EF6F62 /* HLSObjectAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F97E17C15E60C8400EF6F62 /* HLSObjectAnimation.m */; };
 		6FA5BDA215E2923900E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDA115E2923900E5182E /* HLSLayerAnimation.m */; };
 		6FA74D43140500CC0043693E /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA74D42140500CC0043693E /* UIView+HLSExtensionsTestCase.m */; };
@@ -355,6 +356,8 @@
 		6F954F6817CF4805001E5F67 /* HLSLogger+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLogger+Friend.h"; sourceTree = "<group>"; };
 		6F976AE718DB5A2400888CFC /* HLSTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformer.h; sourceTree = "<group>"; };
 		6F976AEE18DB5AEE00888CFC /* HLSTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformer.m; sourceTree = "<group>"; };
+		6F976AF018DD947D00888CFC /* HLSTransformerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformerTestCase.h; sourceTree = "<group>"; };
+		6F976AF118DD947D00888CFC /* HLSTransformerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformerTestCase.m; sourceTree = "<group>"; };
 		6F97E17515E6055A00EF6F62 /* HLSAnimationStep+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSAnimationStep+Friend.h"; sourceTree = "<group>"; };
 		6F97E17C15E60C8400EF6F62 /* HLSObjectAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSObjectAnimation.m; sourceTree = "<group>"; };
 		6F97E17E15E60CAF00EF6F62 /* HLSObjectAnimation+Friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HLSObjectAnimation+Friend.h"; sourceTree = "<group>"; };
@@ -746,6 +749,8 @@
 				6FA8913A179D94F800AB7BD4 /* HLSRuntimeTestCase.m */,
 				6FB318B41815AB0A00565B69 /* HLSStandardFileManagerTestCase.h */,
 				6FB318B51815AB0A00565B69 /* HLSStandardFileManagerTestCase.m */,
+				6F976AF018DD947D00888CFC /* HLSTransformerTestCase.h */,
+				6F976AF118DD947D00888CFC /* HLSTransformerTestCase.m */,
 				6F3B060A14BC4C2D0026F512 /* HLSValidatorsTestCase.h */,
 				6F3B060B14BC4C2D0026F512 /* HLSValidatorsTestCase.m */,
 				6F897871152B505D006C8231 /* HLSZeroingWeakRefTestCase.h */,
@@ -1297,6 +1302,7 @@
 				6FADE7A214BA04B6007EE121 /* HLSKeyboardInformation.m in Sources */,
 				6FADE7A314BA04B6007EE121 /* HLSNotifications.m in Sources */,
 				6FADE7A414BA04B6007EE121 /* HLSRuntime.m in Sources */,
+				6F976AF218DD947D00888CFC /* HLSTransformerTestCase.m in Sources */,
 				6FADE7A514BA04B6007EE121 /* HLSUserInterfaceLock.m in Sources */,
 				6FADE7A614BA04B6007EE121 /* HLSValidators.m in Sources */,
 				6FADE7A714BA04B6007EE121 /* NSArray+HLSExtensions.m in Sources */,

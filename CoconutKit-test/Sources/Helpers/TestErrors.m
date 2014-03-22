@@ -8,4 +8,5 @@
 
 #import "TestErrors.h"
 
+NSString * const TestErrorDomain = @"ch.hortis.CoconutKit-test";
 NSString * const TestValidationErrorDomain = @"ch.hortis.CoconutKit-test.validation";
