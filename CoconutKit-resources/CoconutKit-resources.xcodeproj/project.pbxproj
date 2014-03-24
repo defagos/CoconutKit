@@ -141,7 +141,7 @@
 		6F44E9FD156BB2AF00B45BB4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Hortis;
 			};
 			buildConfigurationList = 6F44EA00156BB2AF00B45BB4 /* Build configuration list for PBXProject "CoconutKit-resources" */;
@@ -220,7 +220,6 @@
 		6F44EA12156BB2AF00B45BB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -231,7 +230,6 @@
 		6F44EA13156BB2AF00B45BB4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
