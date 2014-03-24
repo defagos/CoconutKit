@@ -27,7 +27,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 	unsigned char md[digestLength];     // C99
     memset(md, 0, sizeof(md));
     const char *utf8str = [string UTF8String];
-	cc_digest(utf8str, strlen(utf8str), md);
+	cc_digest(utf8str, (CC_LONG)strlen(utf8str), md);
     
     // Hexadecimal representation
     NSMutableString *hexHash = [NSMutableString string];

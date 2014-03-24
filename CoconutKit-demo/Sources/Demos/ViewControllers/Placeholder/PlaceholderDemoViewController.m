@@ -17,13 +17,13 @@
 #import "PortraitOnlyViewController.h"
 #import "StretchableViewController.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     AutorotationModeIndexEnumBegin = 0,
     AutorotationModeIndexNoChildren = AutorotationModeIndexEnumBegin,
     AutorotationModeIndexAllChildren,
     AutorotationModeIndexEnumEnd,
     AutorotationModeIndexEnumSize = AutorotationModeIndexEnumEnd - AutorotationModeIndexEnumBegin
-} AutorotationModeIndex;
+};
 
 @interface PlaceholderDemoViewController ()
 

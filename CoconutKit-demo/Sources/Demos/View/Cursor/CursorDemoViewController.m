@@ -255,28 +255,28 @@ static NSArray *s_folders = nil;
 
 - (void)cursor:(HLSCursor *)cursor didMoveFromIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did move from index %d", cursor, index);
+    HLSLoggerInfo(@"Cursor %p did move from index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
         self.weekDayIndexLabel.textColor = [UIColor redColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
         self.randomRangeIndexLabel.textColor = [UIColor redColor];
     }    
 }
 
 - (void)cursor:(HLSCursor *)cursor didMoveToIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did move to index %d", cursor, index);
+    HLSLoggerInfo(@"Cursor %p did move to index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
         self.weekDayIndexLabel.textColor = [UIColor blackColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"Index", nil), index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
         self.randomRangeIndexLabel.textColor = [UIColor blackColor];
         
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
@@ -286,7 +286,7 @@ static NSArray *s_folders = nil;
 
 - (void)cursorDidStartDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did start dragging near index %d", cursor, index);
+    HLSLoggerInfo(@"Cursor %p did start dragging near index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.randomRangeCursor) {
         if (! self.currentPopoverController) {
@@ -299,7 +299,7 @@ static NSArray *s_folders = nil;
 
 - (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did drag near index %d", cursor, index);
+    HLSLoggerInfo(@"Cursor %p did drag near index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.randomRangeCursor) {
         CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.currentPopoverController.contentViewController;
@@ -318,7 +318,7 @@ static NSArray *s_folders = nil;
 
 - (void)cursorDidStopDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did stop dragging near index %d", cursor, index);
+    HLSLoggerInfo(@"Cursor %p did stop dragging near index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.randomRangeCursor) {
         [self.currentPopoverController dismissPopoverAnimated:NO];

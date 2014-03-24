@@ -6,7 +6,7 @@
 //  Copyright 2011 Hortis. All rights reserved.
 //
 
-typedef enum {
+typedef NS_ENUM(NSInteger, DeviceType) {
     DeviceTypeEnumBegin = 0,
     DeviceTypeAll = DeviceTypeEnumBegin,
     DeviceTypeMusicPlayer,
@@ -14,7 +14,7 @@ typedef enum {
     DeviceTypeTablet,
     DeviceTypeEnumEnd,
     DeviceTypeEnumSize = DeviceTypeEnumEnd - DeviceTypeEnumBegin
-} DeviceType;
+};
 
 @interface DeviceInfo : NSObject
 

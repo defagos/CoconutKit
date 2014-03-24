@@ -57,7 +57,7 @@
     // Checking the first 20 indices should be sufficient
     for (NSUInteger i = 0; i < 20; ++i) {
         @try {
-            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%d", HLSPlaceholderPreloadSegueIdentifierPrefix, i];
+            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%lu", HLSPlaceholderPreloadSegueIdentifierPrefix, (unsigned long)i];
             [self performSegueWithIdentifier:segueIdentifier sender:self];
         }
         @catch (NSException *exception) {
@@ -160,8 +160,8 @@
         // View controllers have been preloaded
         if (self.containerStacks) {
             if ([self.placeholderViews count] < [self.containerStacks count]) {
-                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%d) to hold preloaded view controllers (%d)", 
-                                    [self.placeholderViews count], [self.containerStacks count]];
+                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%lu) to hold preloaded view controllers (%lu)",
+                                    (unsigned long)[self.placeholderViews count], (unsigned long)[self.containerStacks count]];
                 @throw [NSException exceptionWithName:NSInternalInconsistencyException 
                                                reason:reason
                                              userInfo:nil];
@@ -325,7 +325,7 @@
     }
     else {
         if (index >= [self.containerStacks count]) {
-            HLSLoggerError(@"Invalid index. Must be between 0 and %d", [self.containerStacks count] - 1);
+            HLSLoggerError(@"Invalid index. Must be between 0 and %lu", (unsigned long)[self.containerStacks count] - 1);
             return;
         }
     }

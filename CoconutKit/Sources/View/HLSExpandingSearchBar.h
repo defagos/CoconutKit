@@ -9,10 +9,10 @@
 #import "HLSAnimation.h"
 
 // Search button alignment
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSExpandingSearchBarAlignment) {
     HLSExpandingSearchBarAlignmentLeft = 0,
     HLSExpandingSearchBarAlignmentRight,
-} HLSExpandingSearchBarAlignment;
+};
 
 // Forward declarations
 @protocol HLSExpandingSearchBarDelegate;

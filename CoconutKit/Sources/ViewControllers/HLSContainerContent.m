@@ -237,7 +237,7 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 - (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index
 {
     if (index > [stackView.contentViews count]) {
-        HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [stackView.contentViews count]);
+        HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[stackView.contentViews count]);
         return;
     }
     

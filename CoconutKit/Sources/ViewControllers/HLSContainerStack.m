@@ -130,7 +130,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 {
     if (capacity < HLSContainerStackMinimalCapacity) {
         capacity = HLSContainerStackMinimalCapacity;
-        HLSLoggerWarn(@"The capacity cannot be smaller than %d; set to this value", HLSContainerStackMinimalCapacity);
+        HLSLoggerWarn(@"The capacity cannot be smaller than %lu; set to this value", (unsigned long)HLSContainerStackMinimalCapacity);
     }
     
     _capacity = capacity;
@@ -244,7 +244,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             return;            
         }
         else {
-            HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 2);
+            HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[self.containerContents count] - 2);
             return;
         }
     }
@@ -311,7 +311,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     if (index > [self.containerContents count]) {
-        HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count]);
+        HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[self.containerContents count]);
         return;
     }
     
@@ -423,7 +423,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (void)removeViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
     if (index >= [self.containerContents count]) {
-        HLSLoggerError(@"Invalid index %d. Expected in [0;%d]", index, [self.containerContents count] - 1);
+        HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[self.containerContents count] - 1);
         return;
     }
     

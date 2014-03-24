@@ -33,7 +33,7 @@
 #import "WizardDemoViewController.h"
 
 // Categories
-typedef enum {
+typedef NS_ENUM(NSInteger, DemoCategoryIndex) {
     DemoCategoryIndexEnumBegin = 0,
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
     DemoCategoryIndexCore,
@@ -43,44 +43,44 @@ typedef enum {
     DemoCategoryIndexViewControllers,
     DemoCategoryIndexEnumEnd,
     DemoCategoryIndexEnumSize = DemoCategoryIndexEnumEnd - DemoCategoryIndexEnumBegin
-} DemoCategoryIndex;
+};
 
 // Demos for animation
-typedef enum {
+typedef NS_ENUM(NSInteger, AnimationDemoIndex) {
     AnimationDemoIndexEnumBegin = 0,
     AnimationDemoIndexAnimation = AnimationDemoIndexEnumBegin,
     AnimationDemoIndexLayerPropertiesTest,
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
-} AnimationDemoIndex;
+};
 
 // Demos for core
-typedef enum {
+typedef NS_ENUM(NSInteger, CoreDemoIndex) {
     CoreDemoIndexEnumBegin = 0,
     CoreDemoIndexDynamicLocalization = CoreDemoIndexEnumBegin,
     CoreDemoIndexFonts,
     CoreDemoIndexEnumEnd,
     CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
-} CoreDemoIndex;
+};
 
 // Demos for networking
-typedef enum {
+typedef NS_ENUM(NSInteger, NetworkingDemoIndex) {
     NetworkingDemoIndexEnumBegin = 0,
     NetworkingDemoIndexConnection = NetworkingDemoIndexEnumBegin,
     NetworkingDemoIndexEnumEnd,
     NetworkingDemoIndexEnumSize = NetworkingDemoIndexEnumEnd - NetworkingDemoIndexEnumBegin
-} NetworkingDemoIndex;
+};
 
 // Demos for tasks
-typedef enum {
+typedef NS_ENUM(NSInteger, TaskDemoIndex) {
     TaskDemoIndexEnumBegin = 0,
     TaskDemoIndexParallelProcessing = TaskDemoIndexEnumBegin,
     TaskDemoIndexEnumEnd,
     TaskDemoIndexEnumSize = TaskDemoIndexEnumEnd - TaskDemoIndexEnumBegin
-} TaskDemoIndex;
+};
 
 // Demos for views
-typedef enum {
+typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexKeyboardAvoidingScrollView,
@@ -96,10 +96,10 @@ typedef enum {
     ViewDemoIndexParallaxScrolling,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
-} ViewDemoIndex;
+};
 
 // Demos for view controllers
-typedef enum {
+typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
     ViewControllersDemoIndexEnumBegin = 0,
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
     ViewControllersDemoIndexWizardViewController,
@@ -109,7 +109,7 @@ typedef enum {
     ViewControllersDemoIndexSegue,
     ViewControllersDemoIndexEnumEnd,
     ViewControllersDemoIndexEnumSize = ViewControllersDemoIndexEnumEnd - ViewControllersDemoIndexEnumBegin
-} ViewControllersDemoIndex;
+};
 
 @interface DemosListViewController ()
 

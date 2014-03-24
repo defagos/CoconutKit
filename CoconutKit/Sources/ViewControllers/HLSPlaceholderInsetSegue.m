@@ -51,7 +51,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
             
             if (self.index != [indexNumber unsignedIntegerValue]) {
                 HLSLoggerWarn(@"For preloading segues, the index is extracted from the segue identifier '%@' and will override the one "
-                              "(%d) manually set", self.identifier, self.index);
+                              "(%lu) manually set", self.identifier, (unsigned long)self.index);
                 self.index = [indexNumber unsignedIntegerValue];
             }
         }

@@ -57,12 +57,12 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; name: %@; parentItems: %p; cost: %u>",
+    return [NSString stringWithFormat:@"<%@: %p; name: %@; parentItems: %p; cost: %lu>",
             [self class],
             self,
             self.name,
             self.parentItems,
-            self.cost];
+            (unsigned long)self.cost];
 }
 
 @end

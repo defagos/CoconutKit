@@ -223,7 +223,7 @@
         // Title
         NSString *title = [self.dataSource cursor:self titleAtIndex:index];
         if ([title length] == 0) {
-            HLSLoggerWarn(@"Empty title string at index %d", index);
+            HLSLoggerWarn(@"Empty title string at index %lu", (unsigned long)index);
         }
         
         // Font. If not defined by the data source, use standard font

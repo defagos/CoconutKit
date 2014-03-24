@@ -9,14 +9,14 @@
 /**
  * Vertical alignments
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSLabelVerticalAlignment) {
     HLSLabelVerticalAlignmentEnumBegin = 0,
     HLSLabelVerticalAlignmentMiddle = HLSLabelVerticalAlignmentEnumBegin,
     HLSLabelVerticalAlignmentTop,
     HLSLabelVerticalAlignmentBottom,
     HLSLabelVerticalAlignmentEnumEnd,
     HLSLabelVerticalAlignmentEnumSize = HLSLabelVerticalAlignmentEnumEnd - HLSLabelVerticalAlignmentEnumBegin
-} HLSLabelVerticalAlignment;
+};
 
 /**
  * An HLSLabel is like a UILabel but differs in the following ways:
