@@ -16,48 +16,48 @@
  * runtime attributes instead of outlets. Two attributes are available to this purpose:
  *   - bindKeyPath: The keypath pointing at the value to which the view will be bound. This can be any kind of 
  *                  keypath, even one containing keypath operators
- *   - bindFormatter: Values to be displayed by bound views must have an appropriate type, most of the time
- *                    NSString. The classes supported for binding to a view are returned by the bound view
- *                    +supportedBindingClasses class method (if not implemented, defaults to NSString). If 
- *                    bindKeyPath returns a non-supported kind of object (say of class SomeClass), you must 
- *                    provide the name of an instance formatter method 'methodName:', which can either be an 
- *                    instance method with prototype
- *                      - (NSFormatter *)methodName
- *                    or a class method with prototype
- *                      + (NSFormatter *)classMethodName
- *                    returning an NSFormatter transforming the object into another one with supported type. 
- *                    These methods are looked up along the responder chain, as described below. Alternatively, 
- *                    you can provide a global class formatter method '[SomeClass methodName]', returning an
- *                    NSFormatter object. 
- *                    Formatters are required when the type of the value returned by the key path does not
- *                    match one of the supported types, but can also be used to further format any value. For
- *                    example, if a view supports binding to NSNumber, and if the key path returns an NSNumber,
- *                    you might still want to use a formatter to round the value, multiply it with some constant,
- *                    etc.
- *                    If you need to implement a custom formatter, and if you only need bindings for displaying
- *                    formatted values (not to parsing input), you can only implement the NSFormatter dedicated
- *                    method (i.e. formatting, not parsing)
+ *   - bindTransformer: Values to be displayed by bound views must have an appropriate type, most of the time
+ *                      NSString. The classes supported for binding to a view are returned by the bound view
+ *                      +supportedBindingClasses class method (if not implemented, defaults to NSString). If
+ *                      bindKeyPath returns a non-supported kind of object, you must provide the name of a
+ *                      transformer method 'methodName', which can either be an instance method with prototype
+ *                        - (id<HLSTransformer>)methodName        or
+ *                        - (NSFormatter *)methodName
+ *                      or a class method with prototype
+ *                        + (id<HLSTransformer>)classMethodName   or
+ *                        + (NSFormatter *)classMethodName
+ *                      returning an HLSTransformer or NSFormatter transforming the object into another one with 
+ *                      supported type. These methods are looked up along the responder chain, as described below. 
+ *                      Alternatively, you can provide a global class formatter method '[SomeClass methodName]', 
+ *                      returning either an HLSTransformer or an NSFormatter object.
+ *
+ * Transformers are required when the type of the value returned by the key path does not match one of the supported
+ * types, but can also be used to apply arbitrary changes to values displayed by bound views. For example, if a view 
+ * supports binding to NSNumber, and if the key path returns an NSNumber, you might still want to use a transformer 
+ * to round the value, multiply it with some constant, etc. If an HLSTransformer is only used when displaying values,
+ * not when reading values from a bound view, you can only implement the forward transformation method (see
+ * HLSTransform protocol)
  *
  * With no additional measure, keypath lookup is performed along the responder chain, starting with the view
  * bindKeyPath has been set on, and stopping at the first encountered view controller (if any is found). View
  * controllers namely define a local context, and it does not make sense to proceed further along the responder
- * chain. The same is true for formatter selector lookup (at each step along the responder chain, instance
+ * chain. The same is true for transformer selector lookup (at each step along the responder chain, instance
  * method existence is tested first, then class method existence).
  *
  * Often, though, values to be bound stem from a model object, not from the responder chain. In such cases,
  * you must call -bindToObject: on the view to be bound, passing it the object to be bound against. The keypath 
- * you set must be be valid for this object. Formatter lookup is first made on the object class itself (instance, 
+ * you set must be be valid for this object. Transformer lookup is first made on the object class itself (instance,
  * then class method), then along the responder chain (instance, then class method, again stopping at view controller 
- * boundaries), except if a global class formatter is used
+ * boundaries), except if a global class transformer is used
  *
- * To summarize, formatter lookup for a method named 'methodName:' is performed from the most specific to 
+ * To summarize, transformer lookup for a method named 'methodName' is performed from the most specific to
  * the most generic context, within the boundaries of a view controller (if any), as follows:
- *   - instance method -methodName: on bound object (if -bindToObject: has been used)
- *   - class method +methodName: on bound object (if -bindToObject: has been used)
+ *   - instance method -methodName on bound object (if -bindToObject: has been used)
+ *   - class method +methodName on bound object (if -bindToObject: has been used)
  *   - for each responder along the responder chain starting with the bound view:
- *       - instance method -methodName: on the responder object
- *       - class method +methodName: on the responder object
- * In addition, global formatter names can be provided in the form of class methods '+[SomeClass methodName:]'
+ *       - instance method -methodName on the responder object
+ *       - class method +methodName on the responder object
+ * In addition, global transformer names can be provided in the form of class methods '+[SomeClass methodName]'
  *
  * The binding information is resolved as late as possible (usually when the view is displayed), when the whole
  * repsonder chain context is available. This information is then stored for efficient later use. The view is
@@ -148,15 +148,6 @@
 //       be YES, i.e. if a validation method exists applies it)
 #endif
 
-#if 0
-Formatting: several approaches, must allow all of them with the same resolution mechanism:
-
-- for model -> view: method <objectA>From<Object>:
-- for view -> model: method <objectB>From<ObjectA>:
-- method returning an NSFormatter instance
-
-#endif
-
 @end
 
 /**
@@ -168,16 +159,16 @@ Formatting: several approaches, must allow all of them with the same resolution 
 
 /**
  * Bind the view (and recursively the view hierarchy rooted at it) to a given object (can be nil). During view 
- * hierarchy traversal, keypaths and formatters set via user-defined runtime attributes will be used to automatically 
+ * hierarchy traversal, keypaths and transformers set via user-defined runtime attributes will be used to automatically
  * fill those views which implement binding support
  */
 - (void)bindToObject:(id)object;
 
 /**
  * Refresh the value displayed by the view, recursively traversing the view hierarchy rooted at it. If forced is set
- * to NO, bindings are not checked again (i.e. formatters are not resolved again), values are only updated using
- * information which has been cached the first time bindings were successfully checked. If you want to force bindings
- * to be checked again first (i.e. formatters to be resolved again), set forced to YES
+ * to NO, bindings are not checked again (i.e. keypaths and transformers are not resolved again), values are only updated 
+ * using information which has been cached the first time bindings were successfully checked. If you want to force bindings
+ * to be checked again first (i.e. keypaths and transformers to be resolved again), set forced to YES
  */
 - (void)refreshBindingsForced:(BOOL)forced;
 
