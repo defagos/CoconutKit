@@ -94,6 +94,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         // quickly pressing the shift key three times)
         //
         // Credits to Cédric Luthi, see http://twitter.com/0xced/statuses/232860477317869568
+#if 0
 #if TARGET_IPHONE_SIMULATOR
         static CGFloat (*s_UIAnimationDragCoefficient)(void) = NULL;
         static BOOL s_firstLoad = YES;
@@ -111,6 +112,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             duration *= s_UIAnimationDragCoefficient();
             startTime *= s_UIAnimationDragCoefficient();
         }
+#endif
 #endif
         // If we want to play an animation from somewhere in its middle, we need to reduce the duration of the enclosing
         // group or transaction accordingly, while letting the duration of the individual animations unchanged (see the
