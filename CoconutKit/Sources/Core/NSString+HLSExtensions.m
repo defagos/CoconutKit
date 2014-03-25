@@ -144,10 +144,10 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
     return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                   (__bridge CFStringRef)self,
-                                                   NULL,
-                                                   CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                   cfEncoding));
+                                                                     (__bridge CFStringRef)self,
+                                                                     NULL,
+                                                                     CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                     cfEncoding));
 }
 
 #pragma mark Hash digests
