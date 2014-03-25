@@ -38,7 +38,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 @implementation HLSLayerAnimationStep {
 @private
     NSUInteger _numberOfLayerAnimations;
-    BOOL _numberOfStartedLayerAnimations;
+    NSUInteger _numberOfStartedLayerAnimations;
     NSUInteger _numberOfFinishedLayerAnimations;
     CFTimeInterval _startTime;
     CFTimeInterval _pauseTime;
