@@ -90,17 +90,16 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         
         [CATransaction begin];
         
-        // For tests within the iOS simulator only: Slow down Core Animations as UIView block-based animations (when
-        // quickly pressing the shift key three times)
+        // For tests within the iOS simulator only: Slow down Core Animations as UIView block-based animations
         //
         // Credits to Cédric Luthi, see http://twitter.com/0xced/statuses/232860477317869568
-#if 0
+        
 #if TARGET_IPHONE_SIMULATOR
-        static CGFloat (*s_UIAnimationDragCoefficient)(void) = NULL;
+        static float (*s_UIAnimationDragCoefficient)(void) = NULL;
         static BOOL s_firstLoad = YES;
         if (s_firstLoad) {
             void *UIKitDylib = dlopen([[[NSBundle bundleForClass:[UIApplication class]] executablePath] fileSystemRepresentation], RTLD_LAZY);
-            s_UIAnimationDragCoefficient = (CGFloat (*)(void))dlsym(UIKitDylib, "UIAnimationDragCoefficient");
+            s_UIAnimationDragCoefficient = (float (*)(void))dlsym(UIKitDylib, "UIAnimationDragCoefficient");
             if (! s_UIAnimationDragCoefficient) {
                 HLSLoggerInfo(@"UIAnimationDragCoefficient not found. Slow animations won't be available for animations based on Core Animation");
             }
@@ -113,7 +112,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             startTime *= s_UIAnimationDragCoefficient();
         }
 #endif
-#endif
+        
         // If we want to play an animation from somewhere in its middle, we need to reduce the duration of the enclosing
         // group or transaction accordingly, while letting the duration of the individual animations unchanged (see the
         // CAAnimationGroup creation below). The child animation is not scaled, rather cut at its end (see the CAAnimationGroup
