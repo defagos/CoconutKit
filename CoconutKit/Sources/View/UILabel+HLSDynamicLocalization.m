@@ -90,8 +90,8 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (HLSLabelLocalizationInfo *)localizationInfo
 {
     // Button label
-    if ([[self superview] isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)[self superview];
+    if ([self.superview isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self.superview;
         
         // Get localization info for all states. Attached to the button (because it carries the states)
         NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
@@ -100,7 +100,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         }
         
         // Get the information for the current button state
-        NSNumber *buttonStateKey = [NSNumber numberWithInt:button.state];
+        NSNumber *buttonStateKey = [NSNumber numberWithUnsignedInteger:button.state];
         return [buttonStateToLocalizationInfoMap objectForKey:buttonStateKey];
     }
     // Standalone label
@@ -112,8 +112,8 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (void)setLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
     // Button label
-    if ([[self superview] isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)[self superview];
+    if ([self.superview isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self.superview;
         
         // Get localization info for all states (lazily added if needed). Attached to the button (because it carries the states)
         NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
@@ -122,7 +122,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         }
         
         // Attach the information to the current button state
-        NSNumber *buttonStateKey = [NSNumber numberWithInt:button.state];
+        NSNumber *buttonStateKey = [NSNumber numberWithUnsignedInteger:button.state];
         buttonStateToLocalizationInfoMap = [buttonStateToLocalizationInfoMap dictionaryBySettingObject:localizationInfo 
                                                                                                 forKey:buttonStateKey];
         
@@ -216,8 +216,8 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), originalBackgroundColor);
     
     // Button label
-    if ([[self superview] isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)[self superview];
+    if ([self.superview isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self.superview;
         localizationInfo.locked = YES;
         
         // We must call setTitle:forState: on the button to get proper reszing behavior
