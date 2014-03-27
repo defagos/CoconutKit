@@ -614,7 +614,7 @@
 							</object>
 							<object class="IBUserDefinedRuntimeAttribute">
 								<string key="typeIdentifier">com.apple.InterfaceBuilder.userDefinedRuntimeAttributeType.string</string>
-								<string key="keyPath">bindFormatter</string>
+								<string key="keyPath">bindTransformer</string>
 								<string key="value">stringFromNumber:</string>
 							</object>
 						</array>

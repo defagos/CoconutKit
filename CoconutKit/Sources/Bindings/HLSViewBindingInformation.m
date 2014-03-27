@@ -20,11 +20,11 @@
 
 @property (nonatomic, weak) id object;
 @property (nonatomic, strong) NSString *keyPath;
-@property (nonatomic, strong) NSString *formatterName;
+@property (nonatomic, strong) NSString *transformerName;
 @property (nonatomic, weak) UIView *view;
 
-@property (nonatomic, weak) id formattingTarget;
-@property (nonatomic, assign) SEL formattingSelector;
+@property (nonatomic, weak) id transformationTarget;
+@property (nonatomic, assign) SEL transformationSelector;
 @property (nonatomic, strong) NSString *errorDescription;
 
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
@@ -35,7 +35,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithObject:(id)object keyPath:(NSString *)keyPath formatterName:(NSString *)formatterName view:(UIView *)view
+- (id)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view
 {
     if (self = [super init]) {
         if (! [keyPath isFilled] || ! view) {
@@ -45,7 +45,7 @@
         
         self.object = object;
         self.keyPath = keyPath;
-        self.formatterName = formatterName;
+        self.transformerName = transformerName;
         self.view = view;
     }
     return self;
@@ -70,25 +70,17 @@
     }
             
     id value = [self.object valueForKeyPath:self.keyPath];
-    if (self.formattingTarget) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        return [self.formattingTarget performSelector:self.formattingSelector withObject:value];
-#pragma clang diagnostic pop
-    }
-    else {
-        return value;
-    }
+    return [self transformValue:value withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
 }
 
 #pragma mark Binding
 
-// Return YES if the binding information can be verified (keypath is valid, and any required formatting
-// method could be located). If the information is valid but cannot not be fully checked (the keypath is
-// correct, but returns nil), or if it is invalid, returns NO
+// Return YES if the binding information can be verified (keypath is valid, and any required transformation
+// target and method could be located). If the information is valid but cannot not be fully checked (the keypath
+// is correct, but returns nil), or if it is invalid, returns NO
 - (BOOL)verifyBindingInformation
 {
-    // Just to check whether unnecessary verifications are made
+    // Just to visually check whether unnecessary verifications are made
     HLSLoggerDebug(@"Verifying binding information for %@", self);
     
     // An object has been provided. Check that the keypath is valid for it
@@ -114,72 +106,69 @@
     // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
     id value = [self.object valueForKeyPath:self.keyPath];
     
-    // Formatter lookup
-    __block id formattingTarget = nil;
-    __block SEL formattingSelector = NULL;
+    // Transformer lookup
+    __block id transformationTarget = nil;
+    __block SEL transformationSelector = NULL;
     
-    if ([self.formatterName isFilled]) {
-        // Check whether the formatter is a class method +[ClassName methodName:]
-        // Regex: ^\s*\+\s*\[(\w*)\s*(\w*:)\]\s*$
-        NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*:)\\]\\s*$";
+    if ([self.transformerName isFilled]) {
+        // Check whether the transformer is a class method +[ClassName methodName]
+        // Regex: ^\s*\+\s*\[(\w*)\s*(\w*)\]\s*$
+        NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*)\\]\\s*$";
         NSRegularExpression *classMethodRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
                                                                                                       options:0
                                                                                                         error:NULL];
         
-        [classMethodRegularExpression enumerateMatchesInString:self.formatterName options:0 range:NSMakeRange(0, [self.formatterName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        [classMethodRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
             // Extract capture group information
-            NSString *className = [self.formatterName substringWithRange:[result rangeAtIndex:1]];
-            NSString *methodName = [self.formatterName substringWithRange:[result rangeAtIndex:2]];
+            NSString *className = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
+            NSString *methodName = [self.transformerName substringWithRange:[result rangeAtIndex:2]];
             
             // Check
             Class class = NSClassFromString(className);
             if (! class) {
-                self.errorDescription = [NSString stringWithFormat:@"The specified global formatter points to an invalid class '%@'", className];
+                self.errorDescription = [NSString stringWithFormat:@"The specified global transformer points to an invalid class '%@'", className];
                 return;
             }
             
             SEL selector = NSSelectorFromString(methodName);
             if (! class_getClassMethod(class, selector)) {
-                self.errorDescription = [NSString stringWithFormat:@"The specified global formatter method '%@' does not exist for the class '%@'", methodName, className];
+                self.errorDescription = [NSString stringWithFormat:@"The specified global transformer method '%@' does not exist for the class '%@'", methodName, className];
                 return;
             }
             
-            formattingTarget = class;
-            formattingSelector = selector;
+            transformationTarget = class;
+            transformationSelector = selector;
         }];
         
-        // No class method formatter found
-        if (! formattingTarget) {
+        // No class method transformer found yet
+        if (! transformationTarget) {
             // Perform instance method lookup
-            formattingSelector = NSSelectorFromString(self.formatterName);
-            if (! formattingSelector) {
-                self.errorDescription = @"The formatter is not a valid method name";
+            transformationSelector = NSSelectorFromString(self.transformerName);
+            if (! transformationSelector) {
+                self.errorDescription = @"The transformer is not a valid method name";
                 return NO;
             }
             
             // Look along the responder chain first (most specific)
-            formattingTarget = [HLSViewBindingInformation bindingTargetForSelector:formattingSelector view:self.view];
-            if (! formattingTarget) {
+            transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
+            if (! transformationTarget) {
                 // Look for an instance method on the object
-                if ([self.object respondsToSelector:formattingSelector]) {
-                    formattingTarget = self.object;
+                if ([self.object respondsToSelector:transformationSelector]) {
+                    transformationTarget = self.object;
                 }
                 // Look for a class method on the object class itself (most generic)
-                else if ([[self.object class] respondsToSelector:formattingSelector]) {
-                    formattingTarget = [self.object class];
+                else if ([[self.object class] respondsToSelector:transformationSelector]) {
+                    transformationTarget = [self.object class];
                 }
                 else {
-                    self.errorDescription = @"The specified formatter is neither a global formatter, nor could be resolved along the responder chain";
+                    self.errorDescription = @"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain";
                     return NO;
                 }
             }
         }
     }
     
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    id displayedValue = formattingTarget ? [formattingTarget performSelector:formattingSelector withObject:value] : value;
-#pragma clang diagnostic pop
+    id displayedValue = [self transformValue:value withTransformationTarget:transformationTarget transformationSelector:transformationSelector];
     
     // We cannot cache binding information if we cannot check the type of the value to be displayed for compatibility. Does not change
     // the status, a later check is required
@@ -189,14 +178,14 @@
     
     if (! [self canDisplayValue:displayedValue]) {
         self.errorDescription = [NSString stringWithFormat:@"The %@ must return one of the following supported types: %@",
-                                 formattingTarget ? @"formatter" : @"keypath",
+                                 transformationTarget ? @"transformer" : @"keypath",
                                  [self supportedBindingClassesString]];
         return NO;
     }
     
     // Cache the binding information we just verified
-    self.formattingTarget = formattingTarget;
-    self.formattingSelector = formattingSelector;
+    self.transformationTarget = transformationTarget;
+    self.transformationSelector = transformationSelector;
     self.errorDescription = nil;
     
     return YES;
@@ -238,6 +227,30 @@
     return NO;
 }
 
+#pragma mark Transformation
+
+- (id)transformValue:(id)value withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector
+{
+    if (! _transformationTarget) {
+        return value;
+    }
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    id transformer = [transformationTarget performSelector:transformationSelector];
+#pragma clang diagnostic pop
+    if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
+        return [transformer transformObject:value];
+    }
+    else if ([transformer isKindOfClass:[NSFormatter class]]) {
+        return [transformer stringForObjectValue:value];
+    }
+    else {
+        HLSLoggerError(@"The value cannot be transformed");
+        return nil;
+    }
+}
+
 #pragma mark Context binding lookup
 
 // Locate the first responder which implements the specified method. Stops at view controller boundaries
@@ -245,12 +258,12 @@
 {
     UIResponder *responder = view;
     while (responder) {
-        // Instance formatter lookup first
+        // Instance method lookup first
         if ([responder respondsToSelector:selector]) {
             return responder;
         }
         
-        // Class formatter lookup
+        // Class method lookup
         Class responderClass = [responder class];
         if ([responderClass respondsToSelector:selector]) {
             return responderClass;
@@ -291,13 +304,14 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; object: %@; keyPath: %@; formatterName: %@; formattingTarget: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; object: %@; keyPath: %@; transformerName: %@; transformationTarget: %@; transformationSelector:%@>",
             [self class],
             self,
             self.object,
             self.keyPath,
-            self.formatterName,
-            self.formattingTarget];
+            self.transformerName,
+            self.transformationTarget,
+            NSStringFromSelector(self.transformationSelector)];
 }
 
 @end

@@ -16,7 +16,7 @@
 
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
-static void *s_bindFormatterKey = &s_bindFormatterKey;
+static void *s_bindTransformerKey = &s_bindTransformerKey;
 static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
@@ -32,7 +32,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
  * Private properties which must be set via user-defined runtime attributes
  */
 @property (nonatomic, strong) NSString *bindKeyPath;
-@property (nonatomic, strong) NSString *bindFormatter;
+@property (nonatomic, strong) NSString *bindTransformer;
 
 @property (nonatomic, strong) id boundObject;
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
@@ -82,14 +82,14 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     objc_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSString *)bindFormatter
+- (NSString *)bindTransformer
 {
-    return objc_getAssociatedObject(self, s_bindFormatterKey);
+    return objc_getAssociatedObject(self, s_bindTransformerKey);
 }
 
-- (void)setBindFormatter:(NSString *)bindFormatter
+- (void)setBindTransformer:(NSString *)bindTransformer
 {
-    objc_setAssociatedObject(self, s_bindFormatterKey, bindFormatter, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id)boundObject
@@ -133,7 +133,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
             
             self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
                                                                                 keyPath:self.bindKeyPath
-                                                                          formatterName:self.bindFormatter
+                                                                        transformerName:self.bindTransformer
                                                                                    view:self];
             [self updateViewValue];
         }

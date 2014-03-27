@@ -19,9 +19,9 @@ typedef enum {
     BindingInformationEnumBegin = 0,
     BindingInformationObject = BindingInformationEnumBegin,
     BindingInformationKeyPath,
-    BindingInformationFormatterName,
-    BindingInformationFormattingTarget,
-    BindingInformationFormattingSelector,
+    BindingInformationTransformerName,
+    BindingInformationTransformationTarget,
+    BindingInformationTransformationSelector,
     BindingInformationErrorDescription,
     BindingInformationEnumEnd,
     BindingInformationEnumSize = BindingInformationEnumEnd - BindingInformationEnumBegin
@@ -88,7 +88,7 @@ typedef enum {
 {
     switch (indexPath.row) {
         case BindingInformationObject:
-        case BindingInformationFormattingTarget:
+        case BindingInformationTransformationTarget:
         case BindingInformationErrorDescription: {
             return [HLSDetailedInfoTableViewCell cellForTableView:tableView];
             break;
@@ -121,23 +121,23 @@ typedef enum {
             break;
         }
             
-        case BindingInformationFormatterName: {
-            name = CoconutKitLocalizedString(@"Formatter name", nil);
-            value = self.bindingInformation.formatterName ?: @"-";
+        case BindingInformationTransformerName: {
+            name = CoconutKitLocalizedString(@"Transformer name", nil);
+            value = self.bindingInformation.transformerName ?: @"-";
             break;
         }
             
-        case BindingInformationFormattingTarget: {
-            name = CoconutKitLocalizedString(@"Resolved formatting target", nil);
-            value = [HLSBindingInformationViewController identityStringForObject:self.bindingInformation.formattingTarget];
+        case BindingInformationTransformationTarget: {
+            name = CoconutKitLocalizedString(@"Resolved transformation target", nil);
+            value = [HLSBindingInformationViewController identityStringForObject:self.bindingInformation.transformationTarget];
             break;
         }
             
-        case BindingInformationFormattingSelector: {
-            name = CoconutKitLocalizedString(@"Resolved formatting selector", nil);
-            if (self.bindingInformation.formattingSelector) {
-                value = [NSString stringWithFormat:@"%@%@", hls_isClass(self.bindingInformation.formattingTarget) ? @"+" : @"-",
-                         NSStringFromSelector(self.bindingInformation.formattingSelector)];
+        case BindingInformationTransformationSelector: {
+            name = CoconutKitLocalizedString(@"Resolved transformation selector", nil);
+            if (self.bindingInformation.transformationSelector) {
+                value = [NSString stringWithFormat:@"%@%@", hls_isClass(self.bindingInformation.transformationTarget) ? @"+" : @"-",
+                         NSStringFromSelector(self.bindingInformation.transformationSelector)];
             }
             else {
                 value = @"-";
@@ -167,7 +167,7 @@ typedef enum {
 {
     switch (indexPath.row) {
         case BindingInformationObject:
-        case BindingInformationFormattingTarget:
+        case BindingInformationTransformationTarget:
         case BindingInformationErrorDescription: {
             return [HLSDetailedInfoTableViewCell height];
             break;
