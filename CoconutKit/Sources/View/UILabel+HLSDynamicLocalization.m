@@ -190,14 +190,6 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         }
     }
     
-    // Prevent the call to -[UIButton setTitle:forState:] in localizeTextWithLocalizationInfo: from ending
-    // up in an infinite recursion
-    if (localizationInfo.locked) {
-        (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
-        localizationInfo.locked = NO;
-        return;
-    }
-    
     // Update the label text
     if ([localizationInfo isLocalized]) {
         [self localizeTextWithLocalizationInfo:localizationInfo];
@@ -210,29 +202,21 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
     NSString *localizedText = [localizationInfo localizedText];
+    (*s_UILabel__setText_Imp)(self, @selector(setText:), localizedText);
+    
+    // Avoid button label truncation when the localization changes
+    if ([self.superview isKindOfClass:[UIButton class]]) {
+        [self sizeToFit];
+    }
     
     // Restore the original background color if it had been altered
     UIColor *originalBackgroundColor = objc_getAssociatedObject(self, s_originalBackgroundColorKey);
     (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), originalBackgroundColor);
     
-    // Button label
-    if ([self.superview isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)self.superview;
-        localizationInfo.locked = YES;
-        
-        // We must call setTitle:forState: on the button to get proper reszing behavior
-        [button setTitle:localizedText forState:button.state];
-    }
-    // Standalone label
-    else {
-        (*s_UILabel__setText_Imp)(self, @selector(setText:), localizedText);
-    }
-    
     // Make labels with missing localizations visible (saving the original color first)
     if (s_missingLocalizationsVisible) {
         if ([localizationInfo isIncomplete]) {
-            // Using the original implementation here. We do not want to update the color stored in the information
-            // object
+            // Using the original implementation here. We do not want to update the color stored in the information object
             (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
         }
     }

@@ -51,9 +51,4 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
  */
 - (NSString *)localizedText;
 
-/**
- * Used to mark the object as locked
- */
-@property (nonatomic, assign, getter=isLocked) BOOL locked;
-
 @end
