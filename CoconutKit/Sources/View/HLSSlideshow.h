@@ -12,7 +12,7 @@
  * Slideshow effects. Depending on which effect is applied the images will be scaled to fill or fit the slideshow
  * view frame (preserving their aspect ratio)
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
     HLSSlideshowEffectEnumBegin = 0,
     HLSSlideshowEffectNone = HLSSlideshowEffectEnumBegin,                           // No transition between images (aspect fit)
     HLSSlideshowEffectCrossDissolve,                                                // Cross-dissolve transition between images (aspect fit)
@@ -23,7 +23,7 @@ typedef enum {
     HLSSlideshowEffectInverseVerticalRibbon,                                        // Images slide from bottom to top (aspect fill)
     HLSSlideshowEffectEnumEnd,
     HLSSlideshowEffectEnumSize = HLSSlideshowEffectEnumEnd - HLSSlideshowEffectEnumBegin
-} HLSSlideshowEffect;
+};
 
 // Forward declarations
 @protocol HLSSlideshowDelegate;

@@ -11,14 +11,14 @@
 #import "HLSTransition.h"
 
 // Stack behavior
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSContainerStackBehavior) {
     HLSContainerStackBehaviorEnumBegin = 0,
     HLSContainerStackBehaviorDefault = HLSContainerStackBehaviorEnumBegin,              // Child view controller views get unloaded when the container capacity has been reached
     HLSContainerStackBehaviorRemoving,                                                  // Child view controllers get removed from the container when its capacity has been reached
     HLSContainerStackBehaviorFixedRoot,                                                 // The root view controller is mandatory and cannot be removed. Otherwise same as HLSContainerStackBehaviorDefault
     HLSContainerStackBehaviorEnumEnd,
     HLSContainerStackBehaviorEnumSize = HLSContainerStackBehaviorEnumEnd - HLSContainerStackBehaviorEnumBegin
-} HLSContainerStackBehavior;
+};
 
 // Forward declarations
 @protocol HLSContainerStackDelegate;

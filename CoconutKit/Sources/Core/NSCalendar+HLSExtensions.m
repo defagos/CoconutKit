@@ -393,14 +393,14 @@
     NSDateComponents *dateComponents2 = [self components:unitFlags fromDate:date2 inTimeZone:timeZone];
     
     // Create comparable strings from those components
-    NSString *dateString1 = [NSString stringWithFormat:@"%d%02d%02d", 
-                             [dateComponents1 year],
-                             [dateComponents1 month],
-                             [dateComponents1 day]];
-    NSString *dateString2 = [NSString stringWithFormat:@"%d%02d%02d", 
-                             [dateComponents2 year],
-                             [dateComponents2 month],
-                             [dateComponents2 day]];
+    NSString *dateString1 = [NSString stringWithFormat:@"%ld%02ld%02ld", 
+                             (long)[dateComponents1 year],
+                             (long)[dateComponents1 month],
+                             (long)[dateComponents1 day]];
+    NSString *dateString2 = [NSString stringWithFormat:@"%ld%02ld%02ld", 
+                             (long)[dateComponents2 year],
+                             (long)[dateComponents2 month],
+                             (long)[dateComponents2 day]];
     
     return [dateString1 compare:dateString2];
 }
@@ -429,7 +429,7 @@
 + (NSString *)stringForComponentValue:(NSInteger)componentValue
 {
     if (componentValue != NSUndefinedDateComponent) {
-        return [NSString stringWithFormat:@"%d", componentValue];
+        return [NSString stringWithFormat:@"%ld", (long)componentValue];
     }
     else {
         return @"undefined";

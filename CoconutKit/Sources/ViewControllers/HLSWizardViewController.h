@@ -11,14 +11,14 @@
 // Forward declarations
 @protocol HLSWizardViewControllerDelegate;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSWizardTransitionStyle) {
     HLSWizardTransitionStyleEnumBegin = 0,
     HLSWizardTransitionStyleNone = HLSWizardTransitionStyleEnumBegin,
     HLSWizardTransitionStyleCrossDissolve,
     HLSWizardTransitionStylePushHorizontally,
     HLSWizardTransitionStyleEnumEnd,
     HLSWizardTransitionStyleEnumSize = HLSWizardTransitionStyleEnumEnd - HLSWizardTransitionStyleEnumBegin
-} HLSWizardTransitionStyle;
+};
 
 /**
  * Controller made of pages building a wizard interface. Each page is a separate view controller you must

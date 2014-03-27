@@ -74,7 +74,7 @@
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index
 {
     if (index > [self.groupViews count]) {
-        HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.groupViews count]);
+        HLSLoggerWarn(@"Invalid index %ld. Expected in [0;%lu]", (long)index, (unsigned long)[self.groupViews count]);
         return;
     }
     

@@ -77,7 +77,7 @@
 {
     ++_networkActivityCount;
     
-    HLSLoggerDebug(@"Network activity counter is now %d", _networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %lu", (unsigned long)_networkActivityCount);
     
     if (_networkActivityCount == 1) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -93,7 +93,7 @@
     
     --_networkActivityCount;
     
-    HLSLoggerDebug(@"Network activity counter is now %d", _networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %lu", (unsigned long)_networkActivityCount);
     
     if (_networkActivityCount == 0) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;        

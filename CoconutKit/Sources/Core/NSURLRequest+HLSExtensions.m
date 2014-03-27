@@ -35,7 +35,7 @@ static id swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp(NSU
     // Warns about unimplemented NSURLRequest cache policies. See http://blackpixel.com/blog/1659/caching-and-nsurlconnection/
     self = (*s_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp)(self, _cmd, url, cachePolicy, timeoutInterval);
     if (self.cachePolicy != cachePolicy) {
-        HLSLoggerWarn(@"The cache policy %d is not yet implemented and has been replaced with the cache policy %d", cachePolicy, self.cachePolicy);
+        HLSLoggerWarn(@"The cache policy %lu is not yet implemented and has been replaced with the cache policy %lu", (unsigned long)cachePolicy, (unsigned long)self.cachePolicy);
     }
     return self;
 }

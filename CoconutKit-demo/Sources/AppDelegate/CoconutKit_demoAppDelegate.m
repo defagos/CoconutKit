@@ -47,9 +47,9 @@ HLSEnableNSManagedObjectValidation();
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // We do not assign to the optional property, to ensure that CoconutKit does not rely on this property
-    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    window.backgroundColor = [UIColor blackColor];
-    [window makeKeyAndVisible];
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
     
     // Use optional preloading provided by CoconutKit
     [application preload];
@@ -58,7 +58,7 @@ HLSEnableNSManagedObjectValidation();
     [UIFont loadFontWithFileName:@"Beon-Regular.otf" inBundle:nil];
     
     self.application = [[[CoconutKit_demoApplication alloc] init] autorelease];
-    window.rootViewController = [self.application rootViewController];
+    self.window.rootViewController = [self.application rootViewController];
     
     return YES;
 }

@@ -11,11 +11,11 @@
  */
 extern NSString * const DemoValidationErrorDomain;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, DemoValidation) {
     DemoValidationEnumBegin = 0,
     DemoValidationMandatoryError = DemoValidationEnumBegin,
     DemoValidationIncorrectError,
     DemoValidationEnumEnd,
     DemoValidationEnumSize = DemoValidationEnumEnd - DemoValidationEnumBegin
-} DemoValidation;
+};
 

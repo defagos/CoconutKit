@@ -130,7 +130,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         self.repeatCountLabel.text = @"inf";
     }
     else {
-        self.repeatCountLabel.text = [NSString stringWithFormat:@"%d", repeatCount];
+        self.repeatCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)repeatCount];
     }
     
     // Adjust the start time to cover the whole animation
@@ -159,7 +159,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     NSUInteger animationIndex = [self.animationPickerView selectedRowInComponent:0] + 1;
     SEL selector = [self selectorForAnimationWithIndex:animationIndex];
     HLSAnimation *animation = [self performSelector:selector];
-    animation.tag = [NSString stringWithFormat:@"animation%d", animationIndex];
+    animation.tag = [NSString stringWithFormat:@"animation%lu", (unsigned long)animationIndex];
     if (self.reverseSwitch.on) {
         animation = [animation reverseAnimation];
     }
@@ -221,7 +221,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [NSString stringWithFormat:@"%d", row + 1];
+    return [NSString stringWithFormat:@"%ld", (long)row + 1];
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
@@ -314,7 +314,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (SEL)selectorForAnimationWithIndex:(NSUInteger)index
 {
-    NSString *selectorName = [NSString stringWithFormat:@"animation%d", index];
+    NSString *selectorName = [NSString stringWithFormat:@"animation%lu", (unsigned long)index];
     return NSSelectorFromString(selectorName);
 }
 

@@ -58,11 +58,29 @@
 
 - (void)testURLEncoding
 {
+    // The default encoding used for @"%c" changes between iOS versions. This affects string construction or NSLog display
+    // when a %c is used, for the extended ASCII extended table. In other words, this means that the result of NSLog(@"%c", 135),
+    // for example, differs depending on the iOS version:
+    //   - iOS 6: Mac OS Roman encoding is used
+    //   - iOS 7: UTF-8 encoding is used
+    // To avoid this issue, we can avoid %s and use NSLog(@"\u0135"), which forces unicode encoding, but this cannot be
+    // used for control characters (this generates a compiler error). Therefore, we build the test string corresponding
+    // to the first half of the table (containing control characters) using %c (since there is no encoding issue there),
+    // and the remaining half using \u
+    //
+    // Remark: I expected +[NSString defaultCStringEncoding] to return UTF-8 on iOS 7, but this is not the case. Maybe I
+    //         haven't clearlay understood what this method does, or there is a bug somewhere
+    
+    // First half of the ASCII table
     NSMutableString *string = [NSMutableString string];
-    for (UniChar character = 0; character <= 255; character++) {
+    for (UniChar character = 0; character < 128; character++) {
         [string appendFormat:@"%c", character];
     }
-    NSString *encodedStringReference = @"%01%02%03%04%05%06%07%08%09%0A%0B%0C%0D%0E%0F%10%11%12%13%14%15%16%17%18%19%1A%1B%1C%1D%1E%1F%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%7F%C3%84%C3%85%C3%87%C3%89%C3%91%C3%96%C3%9C%C3%A1%C3%A0%C3%A2%C3%A4%C3%A3%C3%A5%C3%A7%C3%A9%C3%A8%C3%AA%C3%AB%C3%AD%C3%AC%C3%AE%C3%AF%C3%B1%C3%B3%C3%B2%C3%B4%C3%B6%C3%B5%C3%BA%C3%B9%C3%BB%C3%BC%E2%80%A0%C2%B0%C2%A2%C2%A3%C2%A7%E2%80%A2%C2%B6%C3%9F%C2%AE%C2%A9%E2%84%A2%C2%B4%C2%A8%E2%89%A0%C3%86%C3%98%E2%88%9E%C2%B1%E2%89%A4%E2%89%A5%C2%A5%C2%B5%E2%88%82%E2%88%91%E2%88%8F%CF%80%E2%88%AB%C2%AA%C2%BA%CE%A9%C3%A6%C3%B8%C2%BF%C2%A1%C2%AC%E2%88%9A%C6%92%E2%89%88%E2%88%86%C2%AB%C2%BB%E2%80%A6%C2%A0%C3%80%C3%83%C3%95%C5%92%C5%93%E2%80%93%E2%80%94%E2%80%9C%E2%80%9D%E2%80%98%E2%80%99%C3%B7%E2%97%8A%C3%BF%C5%B8%E2%81%84%E2%82%AC%E2%80%B9%E2%80%BA%EF%AC%81%EF%AC%82%E2%80%A1%C2%B7%E2%80%9A%E2%80%9E%E2%80%B0%C3%82%C3%8A%C3%81%C3%8B%C3%88%C3%8D%C3%8E%C3%8F%C3%8C%C3%93%C3%94%EF%A3%BF%C3%92%C3%9A%C3%9B%C3%99%C4%B1%CB%86%CB%9C%C2%AF%CB%98%CB%99%CB%9A%C2%B8%CB%9D%CB%9B%CB%87";
+    
+    // Extended ASCII table
+    [string appendString:@"\u0128\u0129\u0130\u0131\u0132\u0133\u0134\u0135\u0136\u0137\u0138\u0139\u0140\u0141\u0142\u0143\u0144\u0145\u0146\u0147\u0148\u0149\u0150\u0151\u0152\u0153\u0154\u0155\u0156\u0157\u0158\u0159\u0160\u0161\u0162\u0163\u0164\u0165\u0166\u0167\u0168\u0169\u0170\u0171\u0172\u0173\u0174\u0175\u0176\u0177\u0178\u0179\u0180\u0181\u0182\u0183\u0184\u0185\u0186\u0187\u0188\u0189\u0190\u0191\u0192\u0193\u0194\u0195\u0196\u0197\u0198\u0199\u0200\u0201\u0202\u0203\u0204\u0205\u0206\u0207\u0208\u0209\u0210\u0211\u0212\u0213\u0214\u0215\u0216\u0217\u0218\u0219\u0220\u0221\u0222\u0223\u0224\u0225\u0226\u0227\u0228\u0229\u0230\u0231\u0232\u0233\u0234\u0235\u0236\u0237\u0238\u0239\u0240\u0241\u0242\u0243\u0244\u0245\u0246\u0247\u0248\u0249\u0250\u0251\u0252\u0253\u0254\u0255"];
+    
+    NSString *encodedStringReference = @"%01%02%03%04%05%06%07%08%09%0A%0B%0C%0D%0E%0F%10%11%12%13%14%15%16%17%18%19%1A%1B%1C%1D%1E%1F%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%7F%C4%A8%C4%A9%C4%B0%C4%B1%C4%B2%C4%B3%C4%B4%C4%B5%C4%B6%C4%B7%C4%B8%C4%B9%C5%80%C5%81%C5%82%C5%83%C5%84%C5%85%C5%86%C5%87%C5%88%C5%89%C5%90%C5%91%C5%92%C5%93%C5%94%C5%95%C5%96%C5%97%C5%98%C5%99%C5%A0%C5%A1%C5%A2%C5%A3%C5%A4%C5%A5%C5%A6%C5%A7%C5%A8%C5%A9%C5%B0%C5%B1%C5%B2%C5%B3%C5%B4%C5%B5%C5%B6%C5%B7%C5%B8%C5%B9%C6%80%C6%81%C6%82%C6%83%C6%84%C6%85%C6%86%C6%87%C6%88%C6%89%C6%90%C6%91%C6%92%C6%93%C6%94%C6%95%C6%96%C6%97%C6%98%C6%99%C8%80%C8%81%C8%82%C8%83%C8%84%C8%85%C8%86%C8%87%C8%88%C8%89%C8%90%C8%91%C8%92%C8%93%C8%94%C8%95%C8%96%C8%97%C8%98%C8%99%C8%A0%C8%A1%C8%A2%C8%A3%C8%A4%C8%A5%C8%A6%C8%A7%C8%A8%C8%A9%C8%B0%C8%B1%C8%B2%C8%B3%C8%B4%C8%B5%C8%B6%C8%B7%C8%B8%C8%B9%C9%80%C9%81%C9%82%C9%83%C9%84%C9%85%C9%86%C9%87%C9%88%C9%89%C9%90%C9%91%C9%92%C9%93%C9%94%C9%95";
     GHAssertEqualStrings([string urlEncodedStringUsingEncoding:NSUTF8StringEncoding], encodedStringReference, nil);
 }
 

@@ -32,7 +32,7 @@
 /**
  * Logging levels
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSLoggerLevel) {
 	HLSLoggerLevelEnumBegin = 0,
 	// Values
 	HLSLoggerLevelAll = HLSLoggerLevelEnumBegin,
@@ -45,7 +45,7 @@ typedef enum {
 	// End of values
 	HLSLoggerLevelEnumEnd = HLSLoggerLevelNone,
     HLSLoggerLevelEnumSize = HLSLoggerLevelEnumEnd - HLSLoggerLevelEnumBegin
-} HLSLoggerLevel;
+};
 
 /**
  * Basic logging facility writing to the console or to files, and providing an in-app log viewer. Thread-safe

@@ -11,7 +11,7 @@
  */
 extern NSString * const TestValidationErrorDomain;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, TestValidation) {
     TestValidationEnumBegin = 100,
     TestValidationMandatoryValueError = TestValidationEnumBegin,
     TestValidationIncorrectValueError,
@@ -19,5 +19,5 @@ typedef enum {
     TestValidationLockedObjectError,
     TestValidationEnumEnd,
     TestValidationEnumSize = TestValidationEnumEnd - TestValidationEnumBegin
-} TestValidation;
+};
 

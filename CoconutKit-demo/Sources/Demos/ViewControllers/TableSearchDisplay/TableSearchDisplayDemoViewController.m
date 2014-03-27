@@ -11,7 +11,7 @@
 #import "DeviceInfo.h"
 #import "StretchableViewController.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
     ScopeButtonIndexEnumBegin = 0,
     ScopeButtonIndexAll = ScopeButtonIndexEnumBegin,
     ScopeButtonIndexMusicPlayers,
@@ -19,7 +19,7 @@ typedef enum {
     ScopeButtonIndexTablets,
     ScopeButtonIndexEnumEnd,
     ScopeButtonIndexEnumSize = ScopeButtonIndexEnumEnd - ScopeButtonIndexEnumBegin
-} ScopeButtonIndex;
+} ;
 
 @interface TableSearchDisplayDemoViewController ()
 

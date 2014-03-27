@@ -14,16 +14,16 @@
 #import "XibTableViewCell.h"
 
 // Categories
-typedef enum {
+typedef NS_ENUM(NSInteger, CellCategoryIndex) {
     CellCategoryIndexEnumBegin = 0,
     CellCategoryIndexSimple = CellCategoryIndexEnumBegin,
     CellCategoryIndexCustom,
     CellCategoryIndexEnumEnd,
     CellCategoryIndexEnumSize = CellCategoryIndexEnumEnd - CellCategoryIndexEnumBegin
-} CellCategoryIndex;
+};
 
 // Simple cells
-typedef enum {
+typedef NS_ENUM(NSInteger, SimpleCellIndex) {
     SimpleCellIndexEnumBegin = 0,
     SimpleCellIndexDefault = SimpleCellIndexEnumBegin,
     SimpleCellIndexValue1,
@@ -31,16 +31,16 @@ typedef enum {
     SimpleCellIndexSubtitle,
     SimpleCellIndexEnumEnd,
     SimpleCellIndexEnumSize = SimpleCellIndexEnumEnd - SimpleCellIndexEnumBegin
-} SimpleCellIndex;
+};
 
 // Custom cells
-typedef enum {
+typedef NS_ENUM(NSInteger, CustomCellIndex) {
     CustomCellIndexEnumBegin = 0,
     CustomCellIndexXib = CustomCellIndexEnumBegin,
     CustomCellIndexProgrammatically,
     CustomCellIndexEnumEnd,
     CustomCellIndexEnumSize = CustomCellIndexEnumEnd - CustomCellIndexEnumBegin
-} CustomCellIndex;
+};
 
 @interface TableViewCellsDemoViewController ()
 

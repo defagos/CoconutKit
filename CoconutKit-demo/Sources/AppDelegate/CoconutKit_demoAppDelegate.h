@@ -7,5 +7,8 @@
 //
 
 @interface CoconutKit_demoAppDelegate : NSObject <UIApplicationDelegate>
+
+@property (nonatomic, strong) UIWindow *window;
+
 @end
 

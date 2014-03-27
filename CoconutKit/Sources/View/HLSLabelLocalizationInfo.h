@@ -9,7 +9,7 @@
 /**
  * The way the localized string must be displayed
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
     HLSLabelRepresentationEnumBegin = 0,
     HLSLabelRepresentationNormal = HLSLabelRepresentationEnumBegin,
     HLSLabelRepresentationUppercase,
@@ -17,7 +17,7 @@ typedef enum {
     HLSLabelRepresentationCapitalized,
     HLSLabelRepresentationEnumEnd,
     HLSLabelRepresentationEnumSize = HLSLabelRepresentationEnumEnd - HLSLabelRepresentationEnumBegin
-} HLSLabelRepresentation;
+};
 
 /**
  * Internal class for containing the localization information attached to a UILabel (see UILabel+HLSDynamicLocalization.m)
@@ -50,10 +50,5 @@ typedef enum {
  * (i.e. if isLocalized returns NO)
  */
 - (NSString *)localizedText;
-
-/**
- * Used to mark the object as locked
- */
-@property (nonatomic, assign, getter=isLocked) BOOL locked;
 
 @end

@@ -90,8 +90,8 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (HLSLabelLocalizationInfo *)localizationInfo
 {
     // Button label
-    if ([[self superview] isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)[self superview];
+    if ([self.superview isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self.superview;
         
         // Get localization info for all states. Attached to the button (because it carries the states)
         NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
@@ -100,7 +100,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         }
         
         // Get the information for the current button state
-        NSNumber *buttonStateKey = [NSNumber numberWithInt:button.state];
+        NSNumber *buttonStateKey = [NSNumber numberWithUnsignedInteger:button.state];
         return [buttonStateToLocalizationInfoMap objectForKey:buttonStateKey];
     }
     // Standalone label
@@ -112,8 +112,8 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (void)setLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
     // Button label
-    if ([[self superview] isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)[self superview];
+    if ([self.superview isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self.superview;
         
         // Get localization info for all states (lazily added if needed). Attached to the button (because it carries the states)
         NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
@@ -122,7 +122,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         }
         
         // Attach the information to the current button state
-        NSNumber *buttonStateKey = [NSNumber numberWithInt:button.state];
+        NSNumber *buttonStateKey = [NSNumber numberWithUnsignedInteger:button.state];
         buttonStateToLocalizationInfoMap = [buttonStateToLocalizationInfoMap dictionaryBySettingObject:localizationInfo 
                                                                                                 forKey:buttonStateKey];
         
@@ -190,14 +190,6 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         }
     }
     
-    // Prevent the call to -[UIButton setTitle:forState:] in localizeTextWithLocalizationInfo: from ending
-    // up in an infinite recursion
-    if (localizationInfo.locked) {
-        (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
-        localizationInfo.locked = NO;
-        return;
-    }
-    
     // Update the label text
     if ([localizationInfo isLocalized]) {
         [self localizeTextWithLocalizationInfo:localizationInfo];
@@ -210,29 +202,35 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
     NSString *localizedText = [localizationInfo localizedText];
+    (*s_UILabel__setText_Imp)(self, @selector(setText:), localizedText);
+    
+    // Avoid button label truncation when the localization changes (setting the title triggers a sizeToFit), and fixes
+    // issues with the button label tint color. If we only change the label text, we namely face some minor issues
+    // related to how iOS 7 handles buttons. The expected behavior is:
+    //   - the label tint color of buttons changes when clicking on them, if only a title is assigned for the normal
+    //     state
+    //   - when a popover is displayed, the tint color of button labels is changed (private UIViewVisitorEntertainVisitors)
+    // If we only change the label text, not the button title, then buttons behave in both cases as if a title was assigned
+    // for the highlighted state, i.e. the label tint color will not change, but the label disappears and reappears when
+    // transitioning between states
+    if ([self.superview isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)self.superview;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+            [self sizeToFit];
+        }
+        else {
+            [button setTitle:localizedText forState:button.state];
+        }
+    }
     
     // Restore the original background color if it had been altered
     UIColor *originalBackgroundColor = objc_getAssociatedObject(self, s_originalBackgroundColorKey);
     (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), originalBackgroundColor);
     
-    // Button label
-    if ([[self superview] isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)[self superview];
-        localizationInfo.locked = YES;
-        
-        // We must call setTitle:forState: on the button to get proper reszing behavior
-        [button setTitle:localizedText forState:button.state];
-    }
-    // Standalone label
-    else {
-        (*s_UILabel__setText_Imp)(self, @selector(setText:), localizedText);
-    }
-    
     // Make labels with missing localizations visible (saving the original color first)
     if (s_missingLocalizationsVisible) {
         if ([localizationInfo isIncomplete]) {
-            // Using the original implementation here. We do not want to update the color stored in the information
-            // object
+            // Using the original implementation here. We do not want to update the color stored in the information object
             (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
         }
     }

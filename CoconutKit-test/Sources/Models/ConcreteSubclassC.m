@@ -13,8 +13,10 @@
 - (BOOL)checkCodeMandatoryStringC:(NSString *)codeMandatoryStringC error:(NSError **)pError
 {
     if (! codeMandatoryStringC) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationMandatoryValueError];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                           code:TestValidationMandatoryValueError];
+        }
         return NO;
     }
     
@@ -26,8 +28,10 @@
 - (BOOL)checkForConsistency:(NSError **)pError
 {
     if ([self.noValidationStringA isFilled] && ! self.noValidationNumberC) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationInconsistencyError];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                           code:TestValidationInconsistencyError];            
+        }
         return NO;
     }
     

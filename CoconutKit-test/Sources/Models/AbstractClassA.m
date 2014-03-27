@@ -12,14 +12,18 @@
 - (BOOL)checkCodeMandatoryNotEmptyStringA:(NSString *)codeMandatoryNotEmptyStringA error:(NSError **)pError
 {
     if (! codeMandatoryNotEmptyStringA) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationMandatoryValueError];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                           code:TestValidationMandatoryValueError];
+        }
         return NO;
     }
     
     if (! [codeMandatoryNotEmptyStringA isFilled]) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationIncorrectValueError];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                           code:TestValidationIncorrectValueError];
+        }
         return NO;
     }
     
@@ -31,8 +35,10 @@
 - (BOOL)checkForConsistency:(NSError **)pError
 {
     if ([self.noValidationStringA isFilled] && ! [self.noValidationStringA isEqualToString:@"Consistency check"]) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationInconsistencyError];
+        if (pError) {
+            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
+                                           code:TestValidationInconsistencyError];            
+        }
         return NO;
     }
     

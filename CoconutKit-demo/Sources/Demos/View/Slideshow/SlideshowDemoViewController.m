@@ -79,9 +79,9 @@
     self.randomSwitch.on = self.slideshow.random;
     
     self.imageDurationSlider.value = self.slideshow.imageDuration;
-    self.imageDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.imageDuration)];
+    self.imageDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.imageDuration)];
     self.transitionDurationSlider.value = self.slideshow.transitionDuration;
-    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.transitionDuration)];
+    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.transitionDuration)];
     
     [self loadImages];
 }
@@ -274,13 +274,13 @@
 - (IBAction)imageDurationValueChanged:(id)sender
 {
     self.slideshow.imageDuration = round(self.imageDurationSlider.value);
-    self.imageDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.imageDuration)];
+    self.imageDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.imageDuration)];
 }
 
 - (IBAction)transitionDurationValueChanged:(id)sender
 {
     self.slideshow.transitionDuration = round(self.transitionDurationSlider.value);
-    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.transitionDuration)];
+    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.transitionDuration)];
 }
 
 @end

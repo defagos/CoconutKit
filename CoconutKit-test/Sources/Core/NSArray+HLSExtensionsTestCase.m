@@ -29,7 +29,7 @@
 {
     NSMutableArray *array = [NSMutableArray array];
     [array safelyAddObject:nil];
-    GHAssertEquals([array count], 0U, nil);
+    GHAssertEquals([array count], (NSUInteger)0, nil);
 }
 
 @end

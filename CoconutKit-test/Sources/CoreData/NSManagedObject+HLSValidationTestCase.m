@@ -143,7 +143,7 @@
     GHAssertFalse([cInstance checkValue:nil forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB10], nil);
     GHAssertTrue([errorB10 hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain], nil);
     NSArray *subErrorsB10 = [[errorB10 userInfo] objectForKey:NSDetailedErrorsKey];
-    GHAssertEquals([subErrorsB10 count], 2U, nil);
+    GHAssertEquals([subErrorsB10 count], (NSUInteger)2, nil);
     
     NSError *errorB11 = nil;
     GHAssertFalse([cInstance checkValue:[NSNumber numberWithInt:0] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB11], nil);
@@ -188,7 +188,7 @@
     GHAssertFalse([cInstance checkValue:@"This string is too long" forKey:@"modelMandatoryBoundedPatternStringC" error:&errorC6], nil);
     GHAssertTrue([errorC6 hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain], nil);
     NSArray *subErrorsC6 = [[errorC6 userInfo] objectForKey:NSDetailedErrorsKey];
-    GHAssertEquals([subErrorsC6 count], 2U, nil);
+    GHAssertEquals([subErrorsC6 count], (NSUInteger)2, nil);
     
     // TODO: Strange... When a lower bound is set in the xcdatamodel, testing against a smaller value does not fail, though it should (if we do the
     //       same with a value that exceeds the upper bound we also have set, it works, see the corresponding test above. Is this a bug in the Core 
@@ -272,7 +272,7 @@
     GHAssertFalse([cInstance3 check:&error3], nil);
     GHAssertTrue([error3 hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain], nil);
     NSArray *subErrors3 = [[error3 userInfo] objectForKey:NSDetailedErrorsKey];
-    GHAssertEquals([subErrors3 count], 7U, nil);
+    GHAssertEquals([subErrors3 count], (NSUInteger)7, nil);
     
     // Not testing insertion here. Rollback
     [HLSModelManager rollbackCurrentModelContext];

@@ -9,7 +9,7 @@
 #import "HLSAutorotation.h"
 
 // Lifecycle phases
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
     HLSViewControllerLifeCyclePhaseEnumBegin = 0,
     HLSViewControllerLifeCyclePhaseInitialized = HLSViewControllerLifeCyclePhaseEnumBegin,
     HLSViewControllerLifeCyclePhaseViewDidLoad,
@@ -21,7 +21,7 @@ typedef enum {
     HLSViewControllerLifeCyclePhaseViewDidUnload,
     HLSViewControllerLifeCyclePhaseEnumEnd,
     HLSViewControllerLifeCyclePhaseEnumSize = HLSViewControllerLifeCyclePhaseEnumEnd - HLSViewControllerLifeCyclePhaseEnumBegin
-} HLSViewControllerLifeCyclePhase;
+};
 
 /**
  * Various useful additions to UIViewController, most notably the ability get more information about the view lifecycle.

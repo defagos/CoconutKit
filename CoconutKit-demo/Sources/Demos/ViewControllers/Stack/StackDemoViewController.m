@@ -19,13 +19,13 @@
 #import "StretchableViewController.h"
 #import "TransparentViewController.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     ResizeMethodIndexEnumBegin = 0,
     ResizeMethodIndexFrame = ResizeMethodIndexEnumBegin,
     ResizeMethodIndexTransform,
     ResizeMethodIndexEnumEnd,
     ResizeMethodIndexEnumSize = ResizeMethodIndexEnumEnd - ResizeMethodIndexEnumBegin
-} ResizeMethodIndex;
+};
 
 @interface StackDemoViewController ()
 

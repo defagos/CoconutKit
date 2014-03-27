@@ -127,7 +127,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     
     // Sanitize input
     if (currentPage < 0 || currentPage >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", currentPage, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)currentPage, (unsigned long)[self.viewControllers count]);
         return;
     }
     
@@ -182,7 +182,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     
     // Sanitize input
     if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", self.currentPage, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)self.currentPage, (unsigned long)[self.viewControllers count]);
         return;
     }
     
@@ -217,7 +217,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 {
     // Sanitize input (deals with the "no page" case)
     if (page < 0 || page >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)page, (unsigned long)[self.viewControllers count]);
         return YES;
     }
     
@@ -236,7 +236,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 {
     // Sanitize input
     if (page < 0 || page >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)page, (unsigned long)[self.viewControllers count]);
         return;
     }
     
