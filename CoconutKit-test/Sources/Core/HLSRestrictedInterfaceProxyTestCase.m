@@ -164,13 +164,13 @@
     FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
     
     id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
-    GHAssertEquals([proxyB method3], 3, nil);
-    GHAssertEquals([proxyB method4], 4, nil);
+    GHAssertEquals([proxyB method3], (NSInteger)3, nil);
+    GHAssertEquals([proxyB method4], (NSInteger)4, nil);
     
     id<CompatibleRestrictedInterfaceC> proxyC = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
-    GHAssertEquals([proxyC method2], 2, nil);
-    GHAssertEquals([proxyC method3], 3, nil);
-    GHAssertEquals([proxyC method5], 5, nil);
+    GHAssertEquals([proxyC method2], (NSInteger)2, nil);
+    GHAssertEquals([proxyC method3], (NSInteger)3, nil);
+    GHAssertEquals([proxyC method5], (NSInteger)5, nil);
     GHAssertThrows([proxyC method6], nil);
     
     // Cannot access the underlying interface, even when casting by mistake

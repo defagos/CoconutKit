@@ -116,7 +116,7 @@
     GHAssertTrue([fileManager removeItemAtPath:@"/" error:&remError4], nil);
     GHAssertNil(remError4, nil);
     GHAssertTrue([fileManager fileExistsAtPath:@"/"], nil);
-    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/" error:NULL] count], 0U, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/" error:NULL] count], (NSUInteger)0, nil);
 }
 
 - (void)testContentsAndExistenceWithFileManager:(HLSFileManager *)fileManager
@@ -131,19 +131,19 @@
 
     // List files at the root. Must succeed
     NSError *error1 = nil;
-    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/" error:&error1] count], 3U, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/" error:&error1] count], (NSUInteger)3, nil);
     GHAssertNil(error1, nil);
     
     // List files in existing non-empty directory. Must succeed
     NSError *error2 = nil;
-    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/folder3" error:&error2] count], 2U, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/folder3" error:&error2] count], (NSUInteger)2, nil);
     GHAssertNil(error2, nil);
     
     // List file in existing empty directory. Must succeed and return an empty array
     NSError *error3 = nil;
     NSArray *contents3 = [fileManager contentsOfDirectoryAtPath:@"/folder2" error:&error3];
     GHAssertNotNil(contents3, nil);
-    GHAssertEquals([contents3 count], 0U, nil);
+    GHAssertEquals([contents3 count], (NSUInteger)0, nil);
     GHAssertNil(error3, nil);
     
     // Invalid path (does not exist). Must fail and return nil
@@ -246,11 +246,11 @@
     GHAssertTrue([fileManager fileExistsAtPath:@"/folder3/file31.txt"], nil);
     GHAssertTrue([fileManager fileExistsAtPath:@"/folder3/folder33/file331.txt"], nil);
     GHAssertNil(error5, nil);
-    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3" error:&error5] count], 3U, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3" error:&error5] count], (NSUInteger)3, nil);
     GHAssertNil(error5, nil);
     GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/copy/folder3/file31.txt" error:&error5], data, nil);
     GHAssertNil(error5, nil);
-    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3/folder33" error:&error5] count], 1U, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3/folder33" error:&error5] count], (NSUInteger)1, nil);
     GHAssertNil(error5, nil);
     GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/copy/folder3/folder33/file331.txt" error:&error5], data, nil);
     GHAssertNil(error5, nil);
@@ -342,11 +342,11 @@
     GHAssertTrue([fileManager moveItemAtPath:@"/folder3" toPath:@"/move/folder3" error:&error5], nil);
     GHAssertFalse([fileManager fileExistsAtPath:@"/folder3"], nil);
     GHAssertNil(error5, nil);
-    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/move/folder3" error:&error5] count], 3U, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/move/folder3" error:&error5] count], (NSUInteger)3, nil);
     GHAssertNil(error5, nil);
     GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/move/folder3/file31.txt" error:&error5], data, nil);
     GHAssertNil(error5, nil);
-    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/move/folder3/folder33" error:&error5] count], 1U, nil);
+    GHAssertEquals([[fileManager contentsOfDirectoryAtPath:@"/move/folder3/folder33" error:&error5] count], (NSUInteger)1, nil);
     GHAssertNil(error5, nil);
     GHAssertEqualObjects([fileManager contentsOfFileAtPath:@"/move/folder3/folder33/file331.txt" error:&error5], data, nil);
     GHAssertNil(error5, nil);

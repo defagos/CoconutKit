@@ -99,77 +99,77 @@
     
     NSDate *dateFromZurich1 = [timeZone dateWithSameComponentsAsDate:self.date1 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich1 = [self.calendar components:unitFlags fromDate:dateFromZurich1];
-    GHAssertEquals([dateComponentsFromZurich1 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromZurich1 month], 1, nil);
-    GHAssertEquals([dateComponentsFromZurich1 day], 1, nil);
-    GHAssertEquals([dateComponentsFromZurich1 hour], 8, nil);
-    GHAssertEquals([dateComponentsFromZurich1 minute], 23, nil);
+    GHAssertEquals([dateComponentsFromZurich1 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromZurich1 month], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsFromZurich1 day], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsFromZurich1 hour], (NSInteger)8, nil);
+    GHAssertEquals([dateComponentsFromZurich1 minute], (NSInteger)23, nil);
     
     NSDate *dateFromZurich2 = [timeZone dateWithSameComponentsAsDate:self.date2 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich2 = [self.calendar components:unitFlags fromDate:dateFromZurich2];
-    GHAssertEquals([dateComponentsFromZurich2 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromZurich2 month], 3, nil);
-    GHAssertEquals([dateComponentsFromZurich2 day], 1, nil);
-    GHAssertEquals([dateComponentsFromZurich2 hour], 6, nil);
-    GHAssertEquals([dateComponentsFromZurich2 minute], 12, nil);
+    GHAssertEquals([dateComponentsFromZurich2 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromZurich2 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsFromZurich2 day], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsFromZurich2 hour], (NSInteger)6, nil);
+    GHAssertEquals([dateComponentsFromZurich2 minute], (NSInteger)12, nil);
 
     NSDate *dateFromZurich3 = [timeZone dateWithSameComponentsAsDate:self.date3 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich3 = [self.calendar components:unitFlags fromDate:dateFromZurich3];
-    GHAssertEquals([dateComponentsFromZurich3 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromZurich3 month], 3, nil);
-    GHAssertEquals([dateComponentsFromZurich3 day], 25, nil);
-    GHAssertEquals([dateComponentsFromZurich3 hour], 1, nil);
+    GHAssertEquals([dateComponentsFromZurich3 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromZurich3 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsFromZurich3 day], (NSInteger)25, nil);
+    GHAssertEquals([dateComponentsFromZurich3 hour], (NSInteger)1, nil);
     
     NSDate *dateFromZurich4 = [timeZone dateWithSameComponentsAsDate:self.date4 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich4 = [self.calendar components:unitFlags fromDate:dateFromZurich4];
-    GHAssertEquals([dateComponentsFromZurich4 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromZurich4 month], 3, nil);
-    GHAssertEquals([dateComponentsFromZurich4 day], 25, nil);
-    GHAssertEquals([dateComponentsFromZurich4 hour], 3, nil);
+    GHAssertEquals([dateComponentsFromZurich4 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromZurich4 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsFromZurich4 day], (NSInteger)25, nil);
+    GHAssertEquals([dateComponentsFromZurich4 hour], (NSInteger)3, nil);
     
     NSDate *dateFromZurich5 = [timeZone dateWithSameComponentsAsDate:self.date5 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich5 = [self.calendar components:unitFlags fromDate:dateFromZurich5];
-    GHAssertEquals([dateComponentsFromZurich5 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromZurich5 month], 3, nil);
-    GHAssertEquals([dateComponentsFromZurich5 day], 26, nil);
-    GHAssertEquals([dateComponentsFromZurich5 hour], 5, nil);
+    GHAssertEquals([dateComponentsFromZurich5 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromZurich5 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsFromZurich5 day], (NSInteger)26, nil);
+    GHAssertEquals([dateComponentsFromZurich5 hour], (NSInteger)5, nil);
     
     NSDate *dateFromTahiti1 = [timeZone dateWithSameComponentsAsDate:self.date1 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti1 = [self.calendar components:unitFlags fromDate:dateFromTahiti1];
-    GHAssertEquals([dateComponentsFromTahiti1 year], 2011, nil);
-    GHAssertEquals([dateComponentsFromTahiti1 month], 12, nil);
-    GHAssertEquals([dateComponentsFromTahiti1 day], 31, nil);
-    GHAssertEquals([dateComponentsFromTahiti1 hour], 21, nil);
-    GHAssertEquals([dateComponentsFromTahiti1 minute], 23, nil);
+    GHAssertEquals([dateComponentsFromTahiti1 year], (NSInteger)2011, nil);
+    GHAssertEquals([dateComponentsFromTahiti1 month], (NSInteger)12, nil);
+    GHAssertEquals([dateComponentsFromTahiti1 day], (NSInteger)31, nil);
+    GHAssertEquals([dateComponentsFromTahiti1 hour], (NSInteger)21, nil);
+    GHAssertEquals([dateComponentsFromTahiti1 minute], (NSInteger)23, nil);
     
     NSDate *dateFromTahiti2 = [timeZone dateWithSameComponentsAsDate:self.date2 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti2 = [self.calendar components:unitFlags fromDate:dateFromTahiti2];
-    GHAssertEquals([dateComponentsFromTahiti2 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromTahiti2 month], 2, nil);
-    GHAssertEquals([dateComponentsFromTahiti2 day], 29, nil);
-    GHAssertEquals([dateComponentsFromTahiti2 hour], 19, nil);
-    GHAssertEquals([dateComponentsFromTahiti2 minute], 12, nil);
+    GHAssertEquals([dateComponentsFromTahiti2 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromTahiti2 month], (NSInteger)2, nil);
+    GHAssertEquals([dateComponentsFromTahiti2 day], (NSInteger)29, nil);
+    GHAssertEquals([dateComponentsFromTahiti2 hour], (NSInteger)19, nil);
+    GHAssertEquals([dateComponentsFromTahiti2 minute], (NSInteger)12, nil);
     
     NSDate *dateFromTahiti3 = [timeZone dateWithSameComponentsAsDate:self.date3 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti3 = [self.calendar components:unitFlags fromDate:dateFromTahiti3];
-    GHAssertEquals([dateComponentsFromTahiti3 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromTahiti3 month], 3, nil);
-    GHAssertEquals([dateComponentsFromTahiti3 day], 24, nil);
-    GHAssertEquals([dateComponentsFromTahiti3 hour], 14, nil);
+    GHAssertEquals([dateComponentsFromTahiti3 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromTahiti3 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsFromTahiti3 day], (NSInteger)24, nil);
+    GHAssertEquals([dateComponentsFromTahiti3 hour], (NSInteger)14, nil);
     
     NSDate *dateFromTahiti4 = [timeZone dateWithSameComponentsAsDate:self.date4 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti4 = [self.calendar components:unitFlags fromDate:dateFromTahiti4];
-    GHAssertEquals([dateComponentsFromTahiti4 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromTahiti4 month], 3, nil);
-    GHAssertEquals([dateComponentsFromTahiti4 day], 24, nil);
-    GHAssertEquals([dateComponentsFromTahiti4 hour], 15, nil);
+    GHAssertEquals([dateComponentsFromTahiti4 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromTahiti4 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsFromTahiti4 day], (NSInteger)24, nil);
+    GHAssertEquals([dateComponentsFromTahiti4 hour], (NSInteger)15, nil);
     
     NSDate *dateFromTahiti5 = [timeZone dateWithSameComponentsAsDate:self.date5 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti5 = [self.calendar components:unitFlags fromDate:dateFromTahiti5];
-    GHAssertEquals([dateComponentsFromTahiti5 year], 2012, nil);
-    GHAssertEquals([dateComponentsFromTahiti5 month], 3, nil);
-    GHAssertEquals([dateComponentsFromTahiti5 day], 25, nil);
-    GHAssertEquals([dateComponentsFromTahiti5 hour], 17, nil);
+    GHAssertEquals([dateComponentsFromTahiti5 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsFromTahiti5 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsFromTahiti5 day], (NSInteger)25, nil);
+    GHAssertEquals([dateComponentsFromTahiti5 hour], (NSInteger)17, nil);
 }
 
 - (void)testDateByAddingTimeIntervalToDate
@@ -178,77 +178,77 @@
     
     NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingTimeInterval:10. * 60. * 60. toDate:self.date1];
     NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:dateZurich1 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich1 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich1 month], 1, nil);
-    GHAssertEquals([dateComponentsZurich1 day], 1, nil);
-    GHAssertEquals([dateComponentsZurich1 hour], 18, nil);
-    GHAssertEquals([dateComponentsZurich1 minute], 23, nil);
+    GHAssertEquals([dateComponentsZurich1 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich1 month], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsZurich1 day], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsZurich1 hour], (NSInteger)18, nil);
+    GHAssertEquals([dateComponentsZurich1 minute], (NSInteger)23, nil);
     
     NSDate *dateZurich2 = [self.timeZoneZurich dateByAddingTimeInterval:-4. * 60. * 60. toDate:self.date2];
     NSDateComponents *dateComponentsZurich2 = [self.calendar components:unitFlags fromDate:dateZurich2 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich2 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich2 month], 3, nil);
-    GHAssertEquals([dateComponentsZurich2 day], 1, nil);
-    GHAssertEquals([dateComponentsZurich2 hour], 2, nil);
-    GHAssertEquals([dateComponentsZurich2 minute], 12, nil);
+    GHAssertEquals([dateComponentsZurich2 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich2 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsZurich2 day], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsZurich2 hour], (NSInteger)2, nil);
+    GHAssertEquals([dateComponentsZurich2 minute], (NSInteger)12, nil);
     
     NSDate *dateZurich3 = [self.timeZoneZurich dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date3];
     NSDateComponents *dateComponentsZurich3 = [self.calendar components:unitFlags fromDate:dateZurich3 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich3 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich3 month], 3, nil);
-    GHAssertEquals([dateComponentsZurich3 day], 25, nil);
-    GHAssertEquals([dateComponentsZurich3 hour], 6, nil);
+    GHAssertEquals([dateComponentsZurich3 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich3 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsZurich3 day], (NSInteger)25, nil);
+    GHAssertEquals([dateComponentsZurich3 hour], (NSInteger)6, nil);
     
     NSDate *dateZurich4 = [self.timeZoneZurich dateByAddingTimeInterval:-2. * 60. * 60. toDate:self.date4];
     NSDateComponents *dateComponentsZurich4 = [self.calendar components:unitFlags fromDate:dateZurich4 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich4 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich4 month], 3, nil);
-    GHAssertEquals([dateComponentsZurich4 day], 25, nil);
-    GHAssertEquals([dateComponentsZurich4 hour], 1, nil);
+    GHAssertEquals([dateComponentsZurich4 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich4 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsZurich4 day], (NSInteger)25, nil);
+    GHAssertEquals([dateComponentsZurich4 hour], (NSInteger)1, nil);
     
     NSDate *dateZurich5 = [self.timeZoneZurich dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date5];
     NSDateComponents *dateComponentsZurich5 = [self.calendar components:unitFlags fromDate:dateZurich5 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich5 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich5 month], 3, nil);
-    GHAssertEquals([dateComponentsZurich5 day], 26, nil);
-    GHAssertEquals([dateComponentsZurich5 hour], 10, nil);
+    GHAssertEquals([dateComponentsZurich5 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich5 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsZurich5 day], (NSInteger)26, nil);
+    GHAssertEquals([dateComponentsZurich5 hour], (NSInteger)10, nil);
     
     NSDate *dateTahiti1 = [self.timeZoneTahiti dateByAddingTimeInterval:10. * 60. * 60. toDate:self.date1];
     NSDateComponents *dateComponentsTahiti1 = [self.calendar components:unitFlags fromDate:dateTahiti1 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti1 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti1 month], 1, nil);
-    GHAssertEquals([dateComponentsTahiti1 day], 1, nil);
-    GHAssertEquals([dateComponentsTahiti1 hour], 7, nil);
-    GHAssertEquals([dateComponentsTahiti1 minute], 23, nil);
+    GHAssertEquals([dateComponentsTahiti1 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti1 month], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsTahiti1 day], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsTahiti1 hour], (NSInteger)7, nil);
+    GHAssertEquals([dateComponentsTahiti1 minute], (NSInteger)23, nil);
     
     NSDate *dateTahiti2 = [self.timeZoneTahiti dateByAddingTimeInterval:-4. * 60. * 60. toDate:self.date2];
     NSDateComponents *dateComponentsTahiti2 = [self.calendar components:unitFlags fromDate:dateTahiti2 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti2 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti2 month], 2, nil);
-    GHAssertEquals([dateComponentsTahiti2 day], 29, nil);
-    GHAssertEquals([dateComponentsTahiti2 hour], 15, nil);
-    GHAssertEquals([dateComponentsTahiti2 minute], 12, nil);
+    GHAssertEquals([dateComponentsTahiti2 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti2 month], (NSInteger)2, nil);
+    GHAssertEquals([dateComponentsTahiti2 day], (NSInteger)29, nil);
+    GHAssertEquals([dateComponentsTahiti2 hour], (NSInteger)15, nil);
+    GHAssertEquals([dateComponentsTahiti2 minute], (NSInteger)12, nil);
     
     NSDate *dateTahiti3 = [self.timeZoneTahiti dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date3];
     NSDateComponents *dateComponentsTahiti3 = [self.calendar components:unitFlags fromDate:dateTahiti3 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti3 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti3 month], 3, nil);
-    GHAssertEquals([dateComponentsTahiti3 day], 24, nil);
-    GHAssertEquals([dateComponentsTahiti3 hour], 19, nil);
+    GHAssertEquals([dateComponentsTahiti3 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti3 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsTahiti3 day], (NSInteger)24, nil);
+    GHAssertEquals([dateComponentsTahiti3 hour], (NSInteger)19, nil);
     
     NSDate *dateTahiti4 = [self.timeZoneTahiti dateByAddingTimeInterval:-2. * 60. * 60. toDate:self.date4];
     NSDateComponents *dateComponentsTahiti4 = [self.calendar components:unitFlags fromDate:dateTahiti4 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti4 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti4 month], 3, nil);
-    GHAssertEquals([dateComponentsTahiti4 day], 24, nil);
-    GHAssertEquals([dateComponentsTahiti4 hour], 13, nil);
+    GHAssertEquals([dateComponentsTahiti4 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti4 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsTahiti4 day], (NSInteger)24, nil);
+    GHAssertEquals([dateComponentsTahiti4 hour], (NSInteger)13, nil);
     
     NSDate *dateTahiti5 = [self.timeZoneTahiti dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date5];
     NSDateComponents *dateComponentsTahiti5 = [self.calendar components:unitFlags fromDate:dateTahiti5 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti5 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti5 month], 3, nil);
-    GHAssertEquals([dateComponentsTahiti5 day], 25, nil);
-    GHAssertEquals([dateComponentsTahiti5 hour], 22, nil);
+    GHAssertEquals([dateComponentsTahiti5 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti5 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsTahiti5 day], (NSInteger)25, nil);
+    GHAssertEquals([dateComponentsTahiti5 hour], (NSInteger)22, nil);
 }
 
 - (void)testDateByAddingNumberOfDaysToDate
@@ -257,77 +257,77 @@
     
     NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingNumberOfDays:5 toDate:self.date1];
     NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:dateZurich1 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich1 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich1 month], 1, nil);
-    GHAssertEquals([dateComponentsZurich1 day], 6, nil);
-    GHAssertEquals([dateComponentsZurich1 hour], 8, nil);
-    GHAssertEquals([dateComponentsZurich1 minute], 23, nil);
+    GHAssertEquals([dateComponentsZurich1 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich1 month], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsZurich1 day], (NSInteger)6, nil);
+    GHAssertEquals([dateComponentsZurich1 hour], (NSInteger)8, nil);
+    GHAssertEquals([dateComponentsZurich1 minute], (NSInteger)23, nil);
     
     NSDate *dateZurich2 = [self.timeZoneZurich dateByAddingNumberOfDays:-3 toDate:self.date2];
     NSDateComponents *dateComponentsZurich2 = [self.calendar components:unitFlags fromDate:dateZurich2 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich2 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich2 month], 2, nil);
-    GHAssertEquals([dateComponentsZurich2 day], 27, nil);
-    GHAssertEquals([dateComponentsZurich2 hour], 6, nil);
-    GHAssertEquals([dateComponentsZurich2 minute], 12, nil);
+    GHAssertEquals([dateComponentsZurich2 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich2 month], (NSInteger)2, nil);
+    GHAssertEquals([dateComponentsZurich2 day], (NSInteger)27, nil);
+    GHAssertEquals([dateComponentsZurich2 hour], (NSInteger)6, nil);
+    GHAssertEquals([dateComponentsZurich2 minute], (NSInteger)12, nil);
     
     NSDate *dateZurich3 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date3];
     NSDateComponents *dateComponentsZurich3 = [self.calendar components:unitFlags fromDate:dateZurich3 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich3 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich3 month], 3, nil);
-    GHAssertEquals([dateComponentsZurich3 day], 27, nil);
-    GHAssertEquals([dateComponentsZurich3 hour], 1, nil);
+    GHAssertEquals([dateComponentsZurich3 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich3 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsZurich3 day], (NSInteger)27, nil);
+    GHAssertEquals([dateComponentsZurich3 hour], (NSInteger)1, nil);
     
     NSDate *dateZurich4 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date4];
     NSDateComponents *dateComponentsZurich4 = [self.calendar components:unitFlags fromDate:dateZurich4 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich4 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich4 month], 3, nil);
-    GHAssertEquals([dateComponentsZurich4 day], 27, nil);
-    GHAssertEquals([dateComponentsZurich4 hour], 3, nil);
+    GHAssertEquals([dateComponentsZurich4 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich4 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsZurich4 day], (NSInteger)27, nil);
+    GHAssertEquals([dateComponentsZurich4 hour], (NSInteger)3, nil);
     
     NSDate *dateZurich5 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date5];
     NSDateComponents *dateComponentsZurich5 = [self.calendar components:unitFlags fromDate:dateZurich5 inTimeZone:self.timeZoneZurich];
-    GHAssertEquals([dateComponentsZurich5 year], 2012, nil);
-    GHAssertEquals([dateComponentsZurich5 month], 3, nil);
-    GHAssertEquals([dateComponentsZurich5 day], 28, nil);
-    GHAssertEquals([dateComponentsZurich5 hour], 5, nil);
+    GHAssertEquals([dateComponentsZurich5 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsZurich5 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsZurich5 day], (NSInteger)28, nil);
+    GHAssertEquals([dateComponentsZurich5 hour], (NSInteger)5, nil);
     
     NSDate *dateTahiti1 = [self.timeZoneTahiti dateByAddingNumberOfDays:5 toDate:self.date1];
     NSDateComponents *dateComponentsTahiti1 = [self.calendar components:unitFlags fromDate:dateTahiti1 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti1 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti1 month], 1, nil);
-    GHAssertEquals([dateComponentsTahiti1 day], 5, nil);
-    GHAssertEquals([dateComponentsTahiti1 hour], 21, nil);
-    GHAssertEquals([dateComponentsTahiti1 minute], 23, nil);
+    GHAssertEquals([dateComponentsTahiti1 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti1 month], (NSInteger)1, nil);
+    GHAssertEquals([dateComponentsTahiti1 day], (NSInteger)5, nil);
+    GHAssertEquals([dateComponentsTahiti1 hour], (NSInteger)21, nil);
+    GHAssertEquals([dateComponentsTahiti1 minute], (NSInteger)23, nil);
     
     NSDate *dateTahiti2 = [self.timeZoneTahiti dateByAddingNumberOfDays:-3 toDate:self.date2];
     NSDateComponents *dateComponentsTahiti2 = [self.calendar components:unitFlags fromDate:dateTahiti2 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti2 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti2 month], 2, nil);
-    GHAssertEquals([dateComponentsTahiti2 day], 26, nil);
-    GHAssertEquals([dateComponentsTahiti2 hour], 19, nil);
-    GHAssertEquals([dateComponentsTahiti2 minute], 12, nil);
+    GHAssertEquals([dateComponentsTahiti2 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti2 month], (NSInteger)2, nil);
+    GHAssertEquals([dateComponentsTahiti2 day], (NSInteger)26, nil);
+    GHAssertEquals([dateComponentsTahiti2 hour], (NSInteger)19, nil);
+    GHAssertEquals([dateComponentsTahiti2 minute], (NSInteger)12, nil);
     
     NSDate *dateTahiti3 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date3];
     NSDateComponents *dateComponentsTahiti3 = [self.calendar components:unitFlags fromDate:dateTahiti3 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti3 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti3 month], 3, nil);
-    GHAssertEquals([dateComponentsTahiti3 day], 26, nil);
-    GHAssertEquals([dateComponentsTahiti3 hour], 14, nil);
+    GHAssertEquals([dateComponentsTahiti3 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti3 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsTahiti3 day], (NSInteger)26, nil);
+    GHAssertEquals([dateComponentsTahiti3 hour], (NSInteger)14, nil);
     
     NSDate *dateTahiti4 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date4];
     NSDateComponents *dateComponentsTahiti4 = [self.calendar components:unitFlags fromDate:dateTahiti4 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti4 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti4 month], 3, nil);
-    GHAssertEquals([dateComponentsTahiti4 day], 26, nil);
-    GHAssertEquals([dateComponentsTahiti4 hour], 15, nil);
+    GHAssertEquals([dateComponentsTahiti4 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti4 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsTahiti4 day], (NSInteger)26, nil);
+    GHAssertEquals([dateComponentsTahiti4 hour], (NSInteger)15, nil);
     
     NSDate *dateTahiti5 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date5];
     NSDateComponents *dateComponentsTahiti5 = [self.calendar components:unitFlags fromDate:dateTahiti5 inTimeZone:self.timeZoneTahiti];
-    GHAssertEquals([dateComponentsTahiti5 year], 2012, nil);
-    GHAssertEquals([dateComponentsTahiti5 month], 3, nil);
-    GHAssertEquals([dateComponentsTahiti5 day], 27, nil);
-    GHAssertEquals([dateComponentsTahiti5 hour], 17, nil);
+    GHAssertEquals([dateComponentsTahiti5 year], (NSInteger)2012, nil);
+    GHAssertEquals([dateComponentsTahiti5 month], (NSInteger)3, nil);
+    GHAssertEquals([dateComponentsTahiti5 day], (NSInteger)27, nil);
+    GHAssertEquals([dateComponentsTahiti5 hour], (NSInteger)17, nil);
 }
 
 - (void)testTimeIntervalBetweenDateAndDate

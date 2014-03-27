@@ -75,7 +75,7 @@
 - (void)testInformation
 {
     GHAssertEqualStrings([self.error1 domain], @"ch.hortis.CoconutKit-test", nil);
-    GHAssertEquals([self.error1 code], 1012, nil);
+    GHAssertEquals([self.error1 code], (NSInteger)1012, nil);
     
     GHAssertEqualStrings([self.error2 localizedDescription], @"Localized description", nil);
     GHAssertEqualStrings([self.error2 localizedFailureReason], @"Localized failure reason", nil);
@@ -84,7 +84,7 @@
     GHAssertEqualStrings([self.error2 helpAnchor], @"Help anchor", nil);
     GHAssertEquals([self.error2 underlyingError], self.error1, nil);
     GHAssertEqualStrings([self.error2 objectForKey:@"AdditionalInfo2"], @"Additional information 2", nil);
-    GHAssertEquals([[self.error2 customUserInfo] count], 3U, nil);
+    GHAssertEquals([[self.error2 customUserInfo] count], (NSUInteger)3, nil);
 }
 
 - (void)testCopy
