@@ -18,11 +18,18 @@
     [self bindToObject:employee];
 }
 
-#pragma mark Formatters
+#pragma mark Transformers
 
-+ (NSString *)stringFromAge:(NSNumber *)age
++ (HLSBlockTransformer *)numberToAgeStringTransformer
 {
-    return [NSString stringWithFormat:NSLocalizedString(@"Age: %@", nil), age];
+    static dispatch_once_t s_onceToken;
+    static HLSBlockTransformer *s_transformer;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
+            return [NSString stringWithFormat:NSLocalizedString(@"Age: %@", nil), number];
+        } reverseBlock:nil];
+    });
+    return s_transformer;
 }
 
 @end

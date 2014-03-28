@@ -45,7 +45,7 @@
 
 - (NSString *)currentDateString
 {
-    return [DemoTransformer stringFromDate:[NSDate date]];
+    return [[DemoTransformer mediumDateFormatter] stringFromDate:[NSDate date]];
 }
 
 - (NSDate *)currentDate
@@ -58,16 +58,23 @@
     return [self.employees objectAtIndex:arc4random() % [self.employees count]];
 }
 
-#pragma mark Formatters
+#pragma mark Transformers
 
-- (NSString *)stringFromDate:(NSDate *)date
+- (NSFormatter *)mediumDateFormatter
 {
-    return [DemoTransformer stringFromDate:date];
+    return [DemoTransformer mediumDateFormatter];
 }
 
-- (NSString *)stringFromArray:(NSArray *)array
+- (HLSBlockTransformer *)stringArrayToStringFormatter
 {
-    return [array componentsJoinedByString:@", "];
+    static dispatch_once_t s_onceToken;
+    static HLSBlockTransformer *s_transformer;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSArray *array) {
+            return [array componentsJoinedByString:@", "];
+        } reverseBlock:nil];
+    });
+    return s_transformer;
 }
 
 #pragma mark Action callbacks

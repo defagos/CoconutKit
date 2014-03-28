@@ -30,16 +30,16 @@
     return [NSDate date];
 }
 
-#pragma mark Formatters
+#pragma mark Transformers
 
-- (NSString *)stringFromDate:(NSDate *)date
+- (NSDateFormatter *)mediumDateFormatter
 {
-    return [DemoTransformer stringFromDate:date];
+    return [DemoTransformer mediumDateFormatter];
 }
 
-- (NSString *)stringFromNumber:(NSNumber *)number
+- (NSNumberFormatter *)decimalNumberFormatter
 {
-    return [DemoTransformer stringFromNumber:number];
+    return [DemoTransformer decimalNumberFormatter];
 }
 
 #pragma mark View lifecycle

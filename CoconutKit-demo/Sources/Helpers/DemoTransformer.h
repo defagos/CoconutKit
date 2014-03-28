@@ -8,7 +8,7 @@
 
 @interface DemoTransformer : NSObject
 
-+ (NSString *)stringFromDate:(NSDate *)date;
-+ (NSString *)stringFromNumber:(NSNumber *)number;
++ (NSDateFormatter *)mediumDateFormatter;
++ (NSNumberFormatter *)decimalNumberFormatter;
 
 @end

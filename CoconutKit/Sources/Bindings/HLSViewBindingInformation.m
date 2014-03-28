@@ -99,7 +99,7 @@
     }
     
     if (! self.object) {
-        self.errorDescription = @"No meaningful target was found along the responder chain for the specified keypath";
+        self.errorDescription = @"No meaningful target was found along the responder chain for the specified keypath (stopping at view controller boundaries)";
         return NO;
     }
     
@@ -142,8 +142,21 @@
         
         // No class method transformer found yet
         if (! transformationTarget) {
-            // Perform instance method lookup
-            transformationSelector = NSSelectorFromString(self.transformerName);
+            // Perform instance method lookup. First validate the method name
+            // Regex: ^\s*(\w*)\s*$
+            __block NSString *methodName = nil;
+            NSString *pattern = @"^\\s*(\\w*)\\s*$";
+            NSRegularExpression *methodNameRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                                                         options:0
+                                                                                                           error:NULL];
+            [methodNameRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                methodName = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
+            }];
+            
+            if ([methodName isFilled]) {
+                transformationSelector = NSSelectorFromString(methodName);
+            }
+            
             if (! transformationSelector) {
                 self.errorDescription = @"The transformer is not a valid method name";
                 return NO;
@@ -161,7 +174,7 @@
                     transformationTarget = [self.object class];
                 }
                 else {
-                    self.errorDescription = @"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain";
+                    self.errorDescription = @"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain (stopping at view controller boundaries)";
                     return NO;
                 }
             }
@@ -231,7 +244,7 @@
 
 - (id)transformValue:(id)value withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector
 {
-    if (! _transformationTarget) {
+    if (! transformationTarget) {
         return value;
     }
     

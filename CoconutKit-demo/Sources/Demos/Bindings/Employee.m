@@ -14,9 +14,9 @@
 
 #pragma mark Class methods
 
-+ (NSString *)stringFromNumber:(NSNumber *)number
++ (NSNumberFormatter *)decimalNumberFormatter
 {
-    return [DemoTransformer stringFromNumber:number];
+    return [DemoTransformer decimalNumberFormatter];
 }
 
 @end

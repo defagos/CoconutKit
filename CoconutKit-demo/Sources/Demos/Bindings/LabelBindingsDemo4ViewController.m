@@ -32,11 +32,11 @@
     return [NSDate date];
 }
 
-#pragma mark Formatters
+#pragma mark Transformers
 
-- (NSString *)stringFromDate:(NSDate *)date
+- (NSDateFormatter *)mediumDateFormatter
 {
-    return [DemoTransformer stringFromDate:date];
+    return [DemoTransformer mediumDateFormatter];
 }
 
 #pragma mark Action callbacks

@@ -36,7 +36,7 @@
  * supports binding to NSNumber, and if the key path returns an NSNumber, you might still want to use a transformer 
  * to round the value, multiply it with some constant, etc. If an HLSTransformer is only used when displaying values,
  * not when reading values from a bound view, you can only implement the forward transformation method (see
- * HLSTransform protocol)
+ * HLSTransformer protocol)
  *
  * With no additional measure, keypath lookup is performed along the responder chain, starting with the view
  * bindKeyPath has been set on, and stopping at the first encountered view controller (if any is found). View

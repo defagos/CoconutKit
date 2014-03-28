@@ -10,25 +10,27 @@
 
 @implementation DemoTransformer
 
-+ (NSString *)stringFromDate:(NSDate *)date
++ (NSDateFormatter *)mediumDateFormatter
 {
-    static NSDateFormatter *s_dateFormatter = nil;
-    if (! s_dateFormatter) {
+    static dispatch_once_t s_onceToken;
+    static NSDateFormatter *s_dateFormatter;
+    dispatch_once(&s_onceToken, ^{
         s_dateFormatter = [[NSDateFormatter alloc] init];
         [s_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [s_dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    }
-    return [s_dateFormatter stringFromDate:date];
+    });
+    return s_dateFormatter;
 }
 
-+ (NSString *)stringFromNumber:(NSNumber *)number
++ (NSNumberFormatter *)decimalNumberFormatter
 {
-    static NSNumberFormatter *s_numberFormatter = nil;
-    if (! s_numberFormatter) {
+    static dispatch_once_t s_onceToken;
+    static NSNumberFormatter *s_numberFormatter;
+    dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
         [s_numberFormatter setFormatterBehavior:NSNumberFormatterDecimalStyle];
-    }
-    return  [s_numberFormatter stringFromNumber:number];
+    });
+    return s_numberFormatter;
 }
 
 @end

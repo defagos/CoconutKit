@@ -65,7 +65,7 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="currentDate"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoFormatter stringFromDate:]"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoTransformer mediumDateFormatter]"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="55">
@@ -83,7 +83,7 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="currentDate"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoFormatter stringFromDate:]"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="mediumDateFormatter"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Random employee name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="58">
@@ -118,7 +118,7 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="employees.@max.age"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoFormatter stringFromNumber:]"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoTransformer decimalNumberFormatter]"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Names of all employees" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="64">
@@ -136,7 +136,7 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="employees.@unionOfObjects.fullName"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="stringFromArray:"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="stringArrayToStringFormatter"/>
                     </userDefinedRuntimeAttributes>
                 </label>
             </subviews>
