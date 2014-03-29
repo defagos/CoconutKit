@@ -10,6 +10,7 @@
 		6F000182156BF3320055CED7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F000181156BF3320055CED7 /* CoconutKit-resources.bundle */; };
 		6F0F4DE4159CB7C600277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DE3159CB7C600277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F10E39017A0016300BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E38F17A0016300BFEF42 /* HLSViewTouchDetector.m */; };
+		6F132E4718E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F132E4618E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F216F12184C4F9D009CE6CD /* HLSBindingDebugOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F216F11184C4F9D009CE6CD /* HLSBindingDebugOverlayViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F22C74A16A859260081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C74916A859260081A9A7 /* UIFont+HLSExtensions.m */; };
 		6F22C75616A93DE60081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75516A93DE60081A9A7 /* CoreText.framework */; };
@@ -208,6 +209,8 @@
 		6F0F4DE3159CB7C600277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
 		6F10E38E17A0016300BFEF42 /* HLSViewTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewTouchDetector.h; sourceTree = "<group>"; };
 		6F10E38F17A0016300BFEF42 /* HLSViewTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewTouchDetector.m; sourceTree = "<group>"; };
+		6F132E4518E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F132E4618E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F159BE715A5747A0020AFAC /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
 		6F216F10184C4F9D009CE6CD /* HLSBindingDebugOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingDebugOverlayViewController.h; sourceTree = "<group>"; };
 		6F216F11184C4F9D009CE6CD /* HLSBindingDebugOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingDebugOverlayViewController.m; sourceTree = "<group>"; };
@@ -793,6 +796,8 @@
 				6F45AFC1183363D4002FF0ED /* UILabel+HLSViewBinding.m */,
 				6F31D0D918D634D9009AB8F6 /* UIProgressView+HLSViewBinding.h */,
 				6F31D0DA18D634D9009AB8F6 /* UIProgressView+HLSViewBinding.m */,
+				6F132E4518E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.h */,
+				6F132E4618E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.m */,
 				6F31D0EC18D63826009AB8F6 /* UISlider+HLSViewBinding.h */,
 				6F31D0ED18D63826009AB8F6 /* UISlider+HLSViewBinding.m */,
 				6F31D0DB18D634D9009AB8F6 /* UISwitch+HLSViewBinding.h */,
@@ -1387,6 +1392,7 @@
 				6FAF24FD162DE59D00F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,
 				6FAF24FE162DE59D00F93DA2 /* UITabBarController+HLSExtensions.m in Sources */,
 				6FC40C621641D04B00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
+				6F132E4718E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.m in Sources */,
 				6F7A871A16522C3C0030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DE61679E41F0011CFDA /* HLSStandardFileManager.m in Sources */,
 				6FCA2DE71679E41F0011CFDA /* HLSFileManager.m in Sources */,

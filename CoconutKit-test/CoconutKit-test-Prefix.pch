@@ -106,6 +106,7 @@
     #import "UINavigationController+HLSExtensions.h"
     #import "UIPopoverController+HLSExtensions.h"
     #import "UIScrollView+HLSExtensions.h"
+    #import "UISegmentedControl+HLSViewBinding.h"
     #import "UISplitViewController+HLSExtensions.h"
     #import "UITabBarController+HLSExtensions.h"
     #import "UITextField+HLSExtensions.h"

@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "HLSTransformer.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"

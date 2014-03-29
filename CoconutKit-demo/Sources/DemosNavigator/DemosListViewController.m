@@ -10,6 +10,7 @@
 
 #import "ActionSheetDemoViewController.h"
 #import "ConnectionDemoViewController.h"
+#import "ControlBindingsDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "ExpandingSearchBarDemoViewController.h"
@@ -61,6 +62,7 @@ typedef enum {
     BindingsDemoIndexEnumBegin = 0,
     BindingsDemoIndexLabels = BindingsDemoIndexEnumBegin,
     BindingsDemoIndexTableView,
+    BindingsDemoIndexControls,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -303,6 +305,11 @@ typedef enum {
                     break;
                 }
                     
+                case BindingsDemoIndexControls: {
+                    cell.textLabel.text = NSLocalizedString(@"Controls", nil);
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -528,6 +535,11 @@ typedef enum {
                     
                 case BindingsDemoIndexTableView: {
                     demoViewController = [[[TableViewBindingsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case BindingsDemoIndexControls: {
+                    demoViewController = [[[ControlBindingsDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

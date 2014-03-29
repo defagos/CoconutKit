@@ -41,6 +41,7 @@ UINavigationController+HLSActionSheet.m
 UINavigationController+HLSExtensions.m
 UIPopoverController+HLSExtensions.m
 UIScrollView+HLSExtensions.m
+UISegmentedControl+HLSViewBinding.m
 UISplitViewController+HLSExtensions.m
 UITabBarController+HLSExtensions.m
 UITableView+HLSViewBinding.m

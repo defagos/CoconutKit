@@ -46,6 +46,9 @@
 		6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE20163EF00B00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F0F4DE0159CB7A700277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F10E38C17A0015200BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */; };
+		6F132E3718E6DC330070CE86 /* ControlBindingsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F132E3518E6DC330070CE86 /* ControlBindingsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F132E3818E6DC330070CE86 /* ControlBindingsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F132E3618E6DC330070CE86 /* ControlBindingsDemoViewController.xib */; };
+		6F132E4418E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F132E4318E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F1A54E1184EF630005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F1A54E2184EF630005372B7 /* HLSInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A54E0184EF630005372B7 /* HLSInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */; };
@@ -385,6 +388,11 @@
 		6F0F4DDF159CB7A700277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
 		6F10E38A17A0015100BFEF42 /* HLSViewTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewTouchDetector.h; sourceTree = "<group>"; };
 		6F10E38B17A0015200BFEF42 /* HLSViewTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewTouchDetector.m; sourceTree = "<group>"; };
+		6F132E3418E6DC330070CE86 /* ControlBindingsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlBindingsDemoViewController.h; sourceTree = "<group>"; };
+		6F132E3518E6DC330070CE86 /* ControlBindingsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlBindingsDemoViewController.m; sourceTree = "<group>"; };
+		6F132E3618E6DC330070CE86 /* ControlBindingsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlBindingsDemoViewController.xib; sourceTree = "<group>"; };
+		6F132E4218E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F132E4318E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F1A54DD184EF630005372B7 /* HLSDetailedInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSDetailedInfoTableViewCell.h; sourceTree = "<group>"; };
 		6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSDetailedInfoTableViewCell.m; sourceTree = "<group>"; };
 		6F1A54DF184EF630005372B7 /* HLSInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -1129,6 +1137,8 @@
 				6F45AF1318335D36002FF0ED /* UILabel+HLSViewBinding.m */,
 				6F31D0CD18D634A9009AB8F6 /* UIProgressView+HLSViewBinding.h */,
 				6F31D0CE18D634A9009AB8F6 /* UIProgressView+HLSViewBinding.m */,
+				6F132E4218E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.h */,
+				6F132E4318E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m */,
 				6F31D0E918D63811009AB8F6 /* UISlider+HLSViewBinding.h */,
 				6F31D0EA18D63811009AB8F6 /* UISlider+HLSViewBinding.m */,
 				6F31D0CF18D634A9009AB8F6 /* UISwitch+HLSViewBinding.h */,
@@ -1154,6 +1164,9 @@
 		6F45AF2318335D82002FF0ED /* Bindings */ = {
 			isa = PBXGroup;
 			children = (
+				6F132E3418E6DC330070CE86 /* ControlBindingsDemoViewController.h */,
+				6F132E3518E6DC330070CE86 /* ControlBindingsDemoViewController.m */,
+				6F132E3618E6DC330070CE86 /* ControlBindingsDemoViewController.xib */,
 				6F45AF2418335D82002FF0ED /* Employee.h */,
 				6F45AF2518335D82002FF0ED /* Employee.m */,
 				6F45AF2618335D82002FF0ED /* EmployeeHeaderView.h */,
@@ -2172,6 +2185,7 @@
 				6F0BFE27163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 				6F22C75B16A942270081A9A7 /* Beon-Regular.otf in Resources */,
+				6F132E3818E6DC330070CE86 /* ControlBindingsDemoViewController.xib in Resources */,
 				6F22C77416A942B90081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F22C77C16A942E60081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78916A946D30081A9A7 /* sample_text_with_custom_font.html in Resources */,
@@ -2352,12 +2366,14 @@
 				6FF3E6F715D2E4E300AB9A53 /* HLSTransition.m in Sources */,
 				6FF3E71C15D3801600AB9A53 /* CustomTransitions.m in Sources */,
 				6FD0025715D5463C00375240 /* ContainmentTestViewController.m in Sources */,
+				6F132E4418E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m in Sources */,
 				6FA5BD9F15E2921F00E5182E /* HLSLayerAnimation.m in Sources */,
 				6FA5BDC815E34AD600E5182E /* HLSLayerAnimationStep.m in Sources */,
 				6FCFEA4E15E37E40002CAF9E /* HLSAnimationStep.m in Sources */,
 				6F97E17A15E60C7900EF6F62 /* HLSObjectAnimation.m in Sources */,
 				6F41D23315E6A580009A2384 /* CALayer+HLSExtensions.m in Sources */,
 				6F41D24415E6ADA8009A2384 /* CAMediaTimingFunction+HLSExtensions.m in Sources */,
+				6F132E3718E6DC330070CE86 /* ControlBindingsDemoViewController.m in Sources */,
 				6FC09CF015EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */,
 				6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6FAF24F3162DE58000F93DA2 /* UINavigationController+HLSExtensions.m in Sources */,

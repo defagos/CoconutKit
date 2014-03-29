@@ -16,6 +16,8 @@
 		6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */; };
 		6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; };
 		6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
+		6F132E3C18E6DD0E0070CE86 /* ControlBindingsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F132E3A18E6DD0E0070CE86 /* ControlBindingsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F132E3D18E6DD0E0070CE86 /* ControlBindingsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F132E3B18E6DD0E0070CE86 /* ControlBindingsDemoViewController.xib */; };
 		6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */; };
 		6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */; };
 		6F159C3815A5B7B00020AFAC /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F159C3315A5B7B00020AFAC /* CoconutKit.framework */; };
@@ -223,6 +225,9 @@
 		6F0BFE0E163EEDAC00420A5F /* RootTabBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarDemoViewController.h; sourceTree = "<group>"; };
 		6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarDemoViewController.m; sourceTree = "<group>"; };
 		6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabBarDemoViewController.xib; sourceTree = "<group>"; };
+		6F132E3918E6DD0E0070CE86 /* ControlBindingsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlBindingsDemoViewController.h; sourceTree = "<group>"; };
+		6F132E3A18E6DD0E0070CE86 /* ControlBindingsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlBindingsDemoViewController.m; sourceTree = "<group>"; };
+		6F132E3B18E6DD0E0070CE86 /* ControlBindingsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlBindingsDemoViewController.xib; sourceTree = "<group>"; };
 		6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
 		6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
 		6F159C3315A5B7B00020AFAC /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
@@ -626,6 +631,9 @@
 		6F45AF701833613D002FF0ED /* Bindings */ = {
 			isa = PBXGroup;
 			children = (
+				6F132E3918E6DD0E0070CE86 /* ControlBindingsDemoViewController.h */,
+				6F132E3A18E6DD0E0070CE86 /* ControlBindingsDemoViewController.m */,
+				6F132E3B18E6DD0E0070CE86 /* ControlBindingsDemoViewController.xib */,
 				6F45AF711833613D002FF0ED /* Employee.h */,
 				6F45AF721833613D002FF0ED /* Employee.m */,
 				6F45AF731833613D002FF0ED /* EmployeeHeaderView.h */,
@@ -1426,6 +1434,7 @@
 				6F45AFA11833613D002FF0ED /* EmployeeTableViewCell.xib in Resources */,
 				6F45AFA31833613D002FF0ED /* EmployeeView.xib in Resources */,
 				6F45AFA51833613D002FF0ED /* LabelBindingsDemo1ViewController.xib in Resources */,
+				6F132E3D18E6DD0E0070CE86 /* ControlBindingsDemoViewController.xib in Resources */,
 				6F45AFA71833613D002FF0ED /* LabelBindingsDemo2ViewController.xib in Resources */,
 				6F45AFA91833613D002FF0ED /* LabelBindingsDemo3InsetViewController.xib in Resources */,
 				6F45AFAB1833613D002FF0ED /* LabelBindingsDemo3ViewController.xib in Resources */,
@@ -1468,6 +1477,7 @@
 				6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */,
 				6F9C465814C5C30C00824AB2 /* HeavyViewController.m in Sources */,
 				6F9C465A14C5C30C00824AB2 /* LandscapeOnlyViewController.m in Sources */,
+				6F132E3C18E6DD0E0070CE86 /* ControlBindingsDemoViewController.m in Sources */,
 				6F9C465C14C5C30C00824AB2 /* LifeCycleTestViewController.m in Sources */,
 				6F9C465E14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.m in Sources */,
 				6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */,
