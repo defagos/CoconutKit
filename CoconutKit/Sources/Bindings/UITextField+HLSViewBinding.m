@@ -10,4 +10,16 @@
 
 @implementation UITextField (HLSViewBinding)
 
+#pragma mark HLSViewBinding protocol implementation
+
+- (void)updateViewWithValue:(id)value
+{
+    self.text = value;
+}
+
+- (BOOL)bindsSubviewsRecursively
+{
+    return NO;
+}
+
 @end

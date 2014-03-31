@@ -10,4 +10,21 @@
 
 @implementation UISegmentedControl (HLSViewBinding)
 
+#pragma mark HLSViewBinding protocol implementation
+
++ (NSArray *)supportedBindingClasses
+{
+    return @[[NSNumber class]];
+}
+
+- (void)updateViewWithValue:(id)value
+{
+    self.selectedSegmentIndex = [value integerValue];
+}
+
+- (BOOL)bindsSubviewsRecursively
+{
+    return NO;
+}
+
 @end

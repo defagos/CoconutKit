@@ -677,6 +677,8 @@
 				6F132E3F18E6DD410070CE86 /* UISegmentedControl+HLSViewBinding.m */,
 				6F31D0E518D6379E009AB8F6 /* UISlider+HLSViewBinding.h */,
 				6F31D0E618D6379E009AB8F6 /* UISlider+HLSViewBinding.m */,
+				6F58602618C9B8CC005A881A /* UISwitch+HLSViewBinding.h */,
+				6F58602718C9B8CC005A881A /* UISwitch+HLSViewBinding.m */,
 				6F45AEF918335BCE002FF0ED /* UITableView+HLSViewBinding.h */,
 				6F45AEFA18335BCE002FF0ED /* UITableView+HLSViewBinding.m */,
 				6F58601E18C9B8AF005A881A /* UITextField+HLSViewBinding.h */,
@@ -691,8 +693,6 @@
 				6F45AF0118335BCE002FF0ED /* UIWebView+HLSViewBinding.m */,
 				6F58602218C9B8BE005A881A /* UITextView+HLSViewBinding.h */,
 				6F58602318C9B8BE005A881A /* UITextView+HLSViewBinding.m */,
-				6F58602618C9B8CC005A881A /* UISwitch+HLSViewBinding.h */,
-				6F58602718C9B8CC005A881A /* UISwitch+HLSViewBinding.m */,
 			);
 			path = Bindings;
 			sourceTree = "<group>";

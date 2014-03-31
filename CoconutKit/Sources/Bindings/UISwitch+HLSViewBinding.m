@@ -10,4 +10,21 @@
 
 @implementation UISwitch (HLSViewBinding)
 
+#pragma mark HLSViewBinding protocol implementation
+
++ (NSArray *)supportedBindingClasses
+{
+    return @[[NSNumber class]];
+}
+
+- (void)updateViewWithValue:(id)value
+{
+    self.on = [value boolValue];
+}
+
+- (BOOL)bindsSubviewsRecursively
+{
+    return NO;
+}
+
 @end
