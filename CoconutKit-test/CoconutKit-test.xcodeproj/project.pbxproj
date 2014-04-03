@@ -211,6 +211,7 @@
 		6F10E38F17A0016300BFEF42 /* HLSViewTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewTouchDetector.m; sourceTree = "<group>"; };
 		6F132E4518E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+HLSViewBinding.h"; sourceTree = "<group>"; };
 		6F132E4618E6DE200070CE86 /* UISegmentedControl+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6F132E4B18EA784C0070CE86 /* HLSCheckDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCheckDelegate.h; sourceTree = "<group>"; };
 		6F159BE715A5747A0020AFAC /* HLSOptionalFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSOptionalFeatures.h; sourceTree = "<group>"; };
 		6F216F10184C4F9D009CE6CD /* HLSBindingDebugOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingDebugOverlayViewController.h; sourceTree = "<group>"; };
 		6F216F11184C4F9D009CE6CD /* HLSBindingDebugOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingDebugOverlayViewController.m; sourceTree = "<group>"; };
@@ -901,6 +902,7 @@
 				6F3E3E8B15A227A7007E78BD /* HLSApplicationPreloader.m */,
 				6FADE71314BA04B6007EE121 /* HLSAssert.h */,
 				6FADE71414BA04B6007EE121 /* HLSAssert.m */,
+				6F132E4B18EA784C0070CE86 /* HLSCheckDelegate.h */,
 				6F976AE718DB5A2400888CFC /* HLSTransformer.h */,
 				6F976AEE18DB5AEE00888CFC /* HLSTransformer.m */,
 				6FADE71814BA04B6007EE121 /* HLSError.h */,

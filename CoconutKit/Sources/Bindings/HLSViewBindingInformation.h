@@ -25,6 +25,8 @@
  */
 - (id)value;
 
+- (void)updateWithValue:(id)value error:(NSError **)pError;
+
 /**
  * Return the object which has been bound, nil if none or not resolved yet
  */

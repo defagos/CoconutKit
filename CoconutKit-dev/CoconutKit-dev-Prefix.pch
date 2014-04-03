@@ -19,6 +19,7 @@
     #import "HLSApplicationInformation.h"
     #import "HLSAssert.h"
     #import "HLSAutorotation.h"
+    #import "HLSCheckDelegate.h"
     #import "HLSConnection.h"
     #import "HLSContainerStack.h"
     #import "HLSCursor.h"

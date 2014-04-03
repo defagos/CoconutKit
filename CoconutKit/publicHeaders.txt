@@ -6,6 +6,7 @@ HLSAnimationStep.h
 HLSApplicationInformation.h
 HLSAssert.h
 HLSAutorotation.h
+HLSCheckDelegate.h
 HLSConnection.h
 HLSContainerStack.h
 HLSCursor.h

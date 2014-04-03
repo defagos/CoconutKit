@@ -9,6 +9,7 @@
 #import "HLSViewBindingInformation.h"
 
 #import "HLSAssert.h"
+#import "HLSError.h"
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
 #import "NSObject+HLSExtensions.h"
@@ -58,7 +59,7 @@
     return nil;
 }
 
-#pragma mark Accessors and mutators
+#pragma mark Getting and setting values
 
 - (id)value
 {
@@ -72,6 +73,25 @@
             
     id value = [self.object valueForKeyPath:self.keyPath];
     return [self transformValue:value withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
+}
+
+- (void)updateWithValue:(id)value error:(NSError **)pError
+{
+    if (! [self.object validateValue:&value forKeyPath:self.keyPath error:pError]) {
+        return;
+    }
+    
+    @try {
+        [self.object setValue:value forKeyPath:self.keyPath];
+    }
+    @catch (NSException *exception) {
+        HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
+        
+        // TODO: Proper error
+        if (pError) {
+            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain code:1012 localizedDescription:[exception reason]];
+        }
+    }
 }
 
 #pragma mark Binding
