@@ -207,6 +207,52 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @end
 
+@implementation UIView (HLSViewBindingUpdateImplementation)
+
+- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError
+{
+    if (! self.bindingInformation) {
+        // No binding, nothing to do, valid
+        return YES;
+    }
+    
+    id value = nil;
+    if (! [self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:pError]) {
+        return NO;
+    }
+    
+    if (! [self.bindingInformation checkValue:value withError:pError]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+{
+    if (! self.bindingInformation) {
+        // No binding, nothing to do, valid
+        return YES;
+    }
+    
+    id value = nil;
+    if (! [self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:pError]) {
+        return NO;
+    }
+    
+    if (! [self.bindingInformation checkValue:value withError:pError]) {
+        return NO;
+    }
+    
+    if (! [self.bindingInformation updateWithValue:value error:pError]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+@end
+
 #pragma mark Swizzled method implementations
 
 // By swizzling -didMoveToWindow, we know that the view has been added to its view hierarchy. The responder chain is therefore

@@ -75,23 +75,57 @@
     return [self transformValue:value withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
 }
 
-- (void)updateWithValue:(id)value error:(NSError **)pError
+#pragma mark Checking and updating values
+
+- (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
-    if (! [self.object validateValue:&value forKeyPath:self.keyPath error:pError]) {
-        return;
+    if (! self.transformationTarget) {
+        if (pValue) {
+            *pValue = transformedValue;
+        }
+        return YES;
     }
     
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    id transformer = [self.transformationTarget performSelector:self.transformationSelector];
+#pragma clang diagnostic pop
+    NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
+    
+    if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
+        return [transformer getObject:pValue fromObject:transformedValue error:pError];
+    }
+    else {
+        NSString *errorDescription = nil;
+        BOOL success = [transformer getObjectValue:pValue forString:transformedValue errorDescription:&errorDescription];
+        if (! success) {
+            if (pError) {
+                // TODO: Proper error
+                *pError = [HLSError errorWithDomain:NSCocoaErrorDomain code:1012 localizedDescription:errorDescription];
+            }
+            return NO;
+        }
+        return YES;
+    }
+}
+
+- (BOOL)checkValue:(id)value withError:(NSError **)pError
+{
+    BOOL valid = [self validateValue:&value forKeyPath:self.keyPath error:pError];
+    // TODO: Check delegate notification
+    return valid;
+}
+
+- (BOOL)updateWithValue:(id)value error:(NSError **)pError
+{
     @try {
         [self.object setValue:value forKeyPath:self.keyPath];
     }
     @catch (NSException *exception) {
         HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
-        
-        // TODO: Proper error
-        if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain code:1012 localizedDescription:[exception reason]];
-        }
+        return NO;
     }
+    return YES;
 }
 
 #pragma mark Binding

@@ -171,7 +171,7 @@
  *
  * The method returns YES iff all checks have been successful
  */
-- (BOOL)checkBoundValuesWithError:(NSError **)pError exhaustive:(BOOL)exhaustive;
+- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError;
 
 /**
  * Trigger a recursive update of the model for those views which can change their underlying value. The view hierarchy
@@ -185,7 +185,7 @@
  * If all views to be updated have updatingModelAutomatically set to YES, calling this method is redundant and therefore
  * not needed.
  */
-- (BOOL)updateModelWithError:(NSError **)pError exhaustive:(BOOL)exhaustive;
+- (BOOL)updateModelWithDisplayedValuesExhaustive:(BOOL)exhaustive error:(NSError **)pError;
 
 /**
  * If this property has been set, the bound value is automatically updated when the value displayed by the view is
@@ -204,8 +204,7 @@
 /**
  * The delegate which receives validation events
  *
- * TODO: Should be turned into a single block property. HLSCheckDelegate can then be removed. Update the documentation
- *       accordingly
+ * TODO: Locate along the responder chain only when resolving bindings
  */
 @property (nonatomic, weak) id<HLSCheckDelegate> checkDelegate;
 
@@ -227,7 +226,7 @@
  *
  * The method returns YES iff the value is valid
  */
-- (BOOL)checkValue:(id)value withError:(NSError **)pError;
+- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError;
 
 /**
  * Some UIView subclasses do not only display a bound value, but can also be used to change it. When implementing
@@ -238,6 +237,6 @@
  *
  * The method returns YES iff the value is valid (and thus has been updated)
  */
-- (BOOL)checkAndUpdateModelWithValue:(id)value error:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
 
 @end
