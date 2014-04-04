@@ -393,7 +393,6 @@
 		6F132E3618E6DC330070CE86 /* ControlBindingsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlBindingsDemoViewController.xib; sourceTree = "<group>"; };
 		6F132E4218E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+HLSViewBinding.h"; sourceTree = "<group>"; };
 		6F132E4318E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+HLSViewBinding.m"; sourceTree = "<group>"; };
-		6F132E4E18EA78930070CE86 /* HLSCheckDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCheckDelegate.h; sourceTree = "<group>"; };
 		6F1A54DD184EF630005372B7 /* HLSDetailedInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSDetailedInfoTableViewCell.h; sourceTree = "<group>"; };
 		6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSDetailedInfoTableViewCell.m; sourceTree = "<group>"; };
 		6F1A54DF184EF630005372B7 /* HLSInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -575,6 +574,7 @@
 		6F97E17415E6054D00EF6F62 /* HLSAnimationStep+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSAnimationStep+Friend.h"; sourceTree = "<group>"; };
 		6F97E17915E60C7900EF6F62 /* HLSObjectAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSObjectAnimation.m; sourceTree = "<group>"; };
 		6F97E17F15E60CBC00EF6F62 /* HLSObjectAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSObjectAnimation+Friend.h"; sourceTree = "<group>"; };
+		6F982E3A18EE709400555DE0 /* HLSBindingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingDelegate.h; sourceTree = "<group>"; };
 		6FA5BD9D15E2921F00E5182E /* HLSLayerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimation.h; sourceTree = "<group>"; };
 		6FA5BD9E15E2921F00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA5BDC615E34AD500E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
@@ -1130,6 +1130,7 @@
 			children = (
 				6F216F0D184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.h */,
 				6F216F0E184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m */,
+				6F982E3A18EE709400555DE0 /* HLSBindingDelegate.h */,
 				6F8379C0184DA2E400C0BBF3 /* HLSBindingInformationViewController.h */,
 				6F8379C1184DA2E400C0BBF3 /* HLSBindingInformationViewController.m */,
 				6F45AF1018335D36002FF0ED /* HLSViewBindingInformation.h */,
@@ -1345,7 +1346,6 @@
 				6F3E3E8715A22796007E78BD /* HLSApplicationPreloader.m */,
 				6FADE63414BA04A6007EE121 /* HLSAssert.h */,
 				6FADE63514BA04A6007EE121 /* HLSAssert.m */,
-				6F132E4E18EA78930070CE86 /* HLSCheckDelegate.h */,
 				6F976AE618DB5A1600888CFC /* HLSTransformer.h */,
 				6F976AEC18DB5AE100888CFC /* HLSTransformer.m */,
 				6FADE63914BA04A6007EE121 /* HLSError.h */,

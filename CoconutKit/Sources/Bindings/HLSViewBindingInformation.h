@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
+#import "HLSBindingDelegate.h"
+
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
  */
@@ -28,13 +30,13 @@
 /**
  * Try to transform back a value into a value which could be assigned to the key path. Return YES and the value iff the 
  * reverse transformation could be achieved, i.e. if a reverse transformation is available (if a transformer has been set)
- * and could be successfully applied. Errors are returned to the check delegate (if any) and to the caller
+ * and could be successfully applied. Errors are returned to the validation delegate (if any) and to the caller
  */
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError;
 
 /**
  * Check whether a value is correct according to any validation which might have been set. Errors are returned to the 
- * check delegate (if any) and to the caller
+ * validation delegate (if any) and to the caller
  *
  * Returns YES iff the check was successful
  */
@@ -43,7 +45,7 @@
 /**
  * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError: 
  * must be called first. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is available). Errors
- * are returned to the check delegate (if any) and to the caller
+ * are returned to the validation delegate (if any) and to the caller
  */
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError;
 
@@ -71,6 +73,11 @@
  * Return the selector which will be called on the transformation target, nil if none or not resolved yet
  */
 @property (nonatomic, readonly, assign) SEL transformationSelector;
+
+/**
+ * Return the object binding events will be sent to, nil if none or not resolved yet
+ */
+@property (nonatomic, readonly, weak) id<HLSBindingDelegate> delegate;
 
 /**
  * Return a message describing current issues with the binding, nil if none

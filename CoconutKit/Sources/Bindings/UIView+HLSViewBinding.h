@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "HLSCheckDelegate.h"
-
 /**
  * Usually, when you have to display or set some value on screen, and if you are using Interface Builder to design
  * your user interface, you have to create and bind an outlet. Though this process is completely straightforward,
@@ -60,6 +58,11 @@
  *       - instance method -methodName on the responder object
  *       - class method +methodName on the responder object
  * In addition, global transformer names can be provided in the form of class methods '+[SomeClass methodName]'
+ *
+ * When updating the value associated with a bound view, validation is automatically performed (if a validation
+ * method has been defined, see NSKeyValueCoding category on NSObject). Transformation and validation success
+ * or failure is reported to a validation delegate, so that the corresponding status can be reported interactively.
+ * A binding delegate conforming to the HLSBindingDelegate protocol is automatically looked
  *
  * The binding information is resolved as late as possible (usually when the view is displayed),i.e.  when the whole
  * repsonder chain context is available. This information is then stored for efficient later use. The view is not 
@@ -201,13 +204,6 @@
  */
 @property (nonatomic, assign, getter=isUpdatingModelAutomatically) BOOL updatingModelAutomatically;
 
-/**
- * The delegate which receives validation events
- *
- * TODO: Locate along the responder chain only when resolving bindings
- */
-@property (nonatomic, weak) id<HLSCheckDelegate> checkDelegate;
-
 @end
 
 /**
@@ -221,7 +217,7 @@
 
 /**
  * Check whether the value displayed by the bound view is valid with respect to the underlying bound model value.
- * (the value can be transformed and validation, if any, is successful). Errors are reported to the check delegate
+ * (the value can be transformed and validation, if any, is successful). Errors are reported to the validation delegate
  * and to the caller as well.
  *
  * The method returns YES iff the value is valid
@@ -232,7 +228,7 @@
  * Some UIView subclasses do not only display a bound value, but can also be used to change it. When implementing
  * such a class, call the following method when the underlying object should be updated. Note that the object might
  * not be updated, e.g. if a transformation error occurred, or if the bound view is not set to update the underlying
- * automatically (see updatingModelAutomatically property). Any errors are reported to the check delegate, if
+ * automatically (see updatingModelAutomatically property). Any errors are reported to the validation delegate, if
  * any has been set, and to the caller as well.
  *
  * The method returns YES iff the value is valid (and thus has been updated)

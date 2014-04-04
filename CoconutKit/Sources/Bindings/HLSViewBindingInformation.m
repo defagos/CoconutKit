@@ -29,6 +29,8 @@
 @property (nonatomic, assign) SEL transformationSelector;
 @property (nonatomic, strong) NSString *errorDescription;
 
+@property (nonatomic, weak) id<HLSBindingDelegate> delegate;
+
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
 
 @end
@@ -77,6 +79,7 @@
 
 #pragma mark Checking and updating values
 
+// TODO: Validation delegate notification
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
     if (! self.transformationTarget) {
@@ -109,13 +112,13 @@
     }
 }
 
+// TODO: Validation delegate notification
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
 {
-    BOOL valid = [self validateValue:&value forKeyPath:self.keyPath error:pError];
-    // TODO: Check delegate notification
-    return valid;
+    return [self validateValue:&value forKeyPath:self.keyPath error:pError];
 }
 
+// TODO: Validation delegate notification
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError
 {
     @try {
@@ -256,6 +259,9 @@
     self.transformationSelector = transformationSelector;
     self.errorDescription = nil;
     
+    // Locate the binding delegate, if any
+    self.delegate = [HLSViewBindingInformation delegateForView:self.view];
+    
     return YES;
 }
 
@@ -321,7 +327,25 @@
 
 #pragma mark Context binding lookup
 
-// Locate the first responder which implements the specified method. Stops at view controller boundaries
++ (id<HLSBindingDelegate>)delegateForView:(UIView *)view
+{
+    UIResponder *responder = view;
+    while (responder) {
+        if ([responder conformsToProtocol:@protocol(HLSBindingDelegate)]) {
+            return (id<HLSBindingDelegate>)responder;
+        }
+        
+        // Does not get higher than the receiver parent view controller, which defines the binding context
+        if ([responder isKindOfClass:[UIViewController class]]) {
+            return nil;
+        }
+        
+        responder = responder.nextResponder;
+    }
+    return nil;
+}
+
+// Locate the target which implements the specified method. Stops at view controller boundaries
 + (id)bindingTargetForSelector:(SEL)selector view:(UIView *)view
 {
     UIResponder *responder = view;

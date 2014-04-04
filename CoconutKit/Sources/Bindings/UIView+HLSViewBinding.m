@@ -19,7 +19,6 @@ static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindTransformerKey = &s_bindTransformerKey;
 static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
-static void *s_checkDelegateKey = &s_checkDelegateKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UIView__didMoveToWindow_Imp)(id, SEL) = NULL;
@@ -111,16 +110,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)setBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
     objc_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (id<HLSCheckDelegate>)checkDelegate
-{
-    return objc_getAssociatedObject(self, s_checkDelegateKey);
-}
-
-- (void)setCheckDelegate:(id<HLSCheckDelegate>)checkDelegate
-{
-    objc_setAssociatedObject(self, s_checkDelegateKey, checkDelegate, OBJC_ASSOCIATION_ASSIGN);
 }
 
 #pragma mark Bindings
