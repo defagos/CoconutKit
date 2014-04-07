@@ -17,6 +17,7 @@
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindTransformerKey = &s_bindTransformerKey;
+static void *s_updatingModelAutomaticallyKey = &s_updatingModelAutomaticallyKey;
 static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
@@ -40,6 +41,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
 - (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced;
 - (BOOL)bindsRecursively;
+- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError;
+- (BOOL)updateModelWithDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive error:(NSError **)pError;
 
 @end
 
@@ -54,6 +57,18 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                                                                                  (IMP)swizzled_UIView__didMoveToWindow_Imp);
 }
 
+#pragma mark Accessors and mutators
+
+- (BOOL)isUpdatingModelAutomatically
+{
+    return [objc_getAssociatedObject(self, s_updatingModelAutomaticallyKey) boolValue];
+}
+
+- (void)setUpdatingModelAutomatically:(BOOL)updatingModelAutomatically
+{
+    objc_setAssociatedObject(self, s_updatingModelAutomaticallyKey, @(updatingModelAutomatically), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 #pragma mark Bindings
 
 - (void)bindToObject:(id)object
@@ -64,6 +79,16 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)refreshBindingsForced:(BOOL)forced
 {
     [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively] forced:forced];
+}
+
+- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError
+{
+    return [self checkDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive withError:pError];
+}
+
+- (BOOL)updateModelWithDisplayedValuesExhaustive:(BOOL)exhaustive error:(NSError **)pError
+{
+    return [self updateModelWithDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive error:pError];
 }
 
 @end
@@ -192,6 +217,40 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     
     id value = [self.bindingInformation value];
     [self performSelector:@selector(updateViewWithValue:) withObject:value];
+}
+
+- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError
+{
+    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
+    UIViewController *nearestViewController = self.nearestViewController;
+    if (nearestViewController && nearestViewController != viewController) {
+        return YES;
+    }
+    
+    if (self.bindingInformation) {
+        // TODO: Check
+    }
+    
+    for (UIView *subview in self.subviews) {
+        // TODO: Call recursively, combine errors
+    }
+}
+
+- (BOOL)updateModelWithDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive error:(NSError **)pError
+{
+    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
+    UIViewController *nearestViewController = self.nearestViewController;
+    if (nearestViewController && nearestViewController != viewController) {
+        return YES;
+    }
+    
+    if (self.bindingInformation) {
+        // TODO: Check
+    }
+    
+    for (UIView *subview in self.subviews) {
+        // TODO: Call recursively, combine errors
+    }
 }
 
 @end
