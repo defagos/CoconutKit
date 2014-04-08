@@ -26,6 +26,11 @@
 
 #pragma mark Class methods
 
++ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)userInfo
+{
+    return [[[[self class] alloc] initWithDomain:domain code:code userInfo:userInfo] autorelease];
+}
+
 + (id)errorWithDomain:(NSString *)domain code:(NSInteger)code
 {
     return [[[[self class] alloc] initWithDomain:domain code:code] autorelease];
@@ -40,12 +45,17 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithDomain:(NSString *)domain code:(NSInteger)code
+- (id)initWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)userInfo
 {
     if ((self = [super initWithDomain:domain code:code userInfo:nil /* not used */])) {
-        self.internalUserInfo = [NSDictionary dictionary];
+        self.internalUserInfo = userInfo ?: [NSDictionary dictionary];
     }
     return self;
+}
+
+- (id)initWithDomain:(NSString *)domain code:(NSInteger)code
+{
+    return [self initWithDomain:domain code:code userInfo:nil];
 }
 
 - (void)dealloc

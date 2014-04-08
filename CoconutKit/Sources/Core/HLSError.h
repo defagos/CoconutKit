@@ -7,16 +7,18 @@
 //
 
 /**
- * Lightweight abstract subclass of HLSError providing a convenient way to create errors and to define and access
- * their properties.
+ * Lightweight subclass of HLSError providing a convenient way to create errors and to define and access their 
+ * properties.
  *
  * This class enforces the link between accessor methods and underlying userInfo dictionary keys. This is not
  * required, as explained in the documentation:
  *   http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/ErrorHandlingCocoa/ErrorHandling/ErrorHandling.html
  *
- * Designated initializer: -initWithDomain:Code:
+ * Designated initializer: -initWithDomain:code:userInfo:
  */
 @interface HLSError : NSError
+
++ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)userInfo;
 
 /**
  * Instantiate an error with some code within a domain. The error is created with no information, use the mutators below to 
@@ -29,6 +31,8 @@
  * use the mutators below to add more information if needed
  */
 + (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
+
+- (id)initWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)userInfo;
 
 /**
  * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to
