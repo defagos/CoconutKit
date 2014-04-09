@@ -119,6 +119,8 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 	maskLayer.bounds = self.bounds;
 	maskLayer.anchorPoint = CGPointZero;
     
+    // FIXME: Bug: Must resize with the parent layer
+    
 	return maskLayer;
 }
 
