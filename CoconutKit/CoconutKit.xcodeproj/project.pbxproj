@@ -166,7 +166,7 @@
 		6FADE5C314BA0494007EE121 /* NSDictionary+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE53D14BA0494007EE121 /* NSDictionary+HLSExtensions.h */; };
 		6FADE5C414BA0494007EE121 /* NSDictionary+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE53E14BA0494007EE121 /* NSDictionary+HLSExtensions.m */; };
 		6FADE5C514BA0494007EE121 /* NSError+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE53F14BA0494007EE121 /* NSError+HLSExtensions.h */; };
-		6FADE5C614BA0494007EE121 /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54014BA0494007EE121 /* NSError+HLSExtensions.m */; };
+		6FADE5C614BA0494007EE121 /* NSError+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54014BA0494007EE121 /* NSError+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE5C714BA0494007EE121 /* NSObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54114BA0494007EE121 /* NSObject+HLSExtensions.h */; };
 		6FADE5C814BA0494007EE121 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54214BA0494007EE121 /* NSObject+HLSExtensions.m */; };
 		6FADE5C914BA0494007EE121 /* NSString+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */; };
