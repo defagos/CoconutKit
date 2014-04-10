@@ -10,7 +10,6 @@ HLSBindingDelegate.h
 HLSConnection.h
 HLSContainerStack.h
 HLSCursor.h
-HLSError.h
 HLSExpandingSearchBar.h
 HLSFakeConnection.h
 HLSFileManager.h

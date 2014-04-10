@@ -134,8 +134,6 @@
 		6FADE59E14BA0494007EE121 /* HLSViewAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51714BA0494007EE121 /* HLSViewAnimation.m */; };
 		6FADE59F14BA0494007EE121 /* HLSAssert.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51914BA0494007EE121 /* HLSAssert.h */; };
 		6FADE5A014BA0494007EE121 /* HLSAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51A14BA0494007EE121 /* HLSAssert.m */; };
-		6FADE5A414BA0494007EE121 /* HLSError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51E14BA0494007EE121 /* HLSError.h */; };
-		6FADE5A514BA0494007EE121 /* HLSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51F14BA0494007EE121 /* HLSError.m */; };
 		6FADE5A614BA0494007EE121 /* HLSFloat.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE52014BA0494007EE121 /* HLSFloat.h */; };
 		6FADE5A714BA0494007EE121 /* HLSFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE52114BA0494007EE121 /* HLSFloat.m */; };
 		6FADE5A814BA0494007EE121 /* HLSKeyboardInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE52214BA0494007EE121 /* HLSKeyboardInformation.h */; };
@@ -430,8 +428,6 @@
 		6FADE51714BA0494007EE121 /* HLSViewAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewAnimation.m; sourceTree = "<group>"; };
 		6FADE51914BA0494007EE121 /* HLSAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAssert.h; sourceTree = "<group>"; };
 		6FADE51A14BA0494007EE121 /* HLSAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAssert.m; sourceTree = "<group>"; };
-		6FADE51E14BA0494007EE121 /* HLSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSError.h; sourceTree = "<group>"; };
-		6FADE51F14BA0494007EE121 /* HLSError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSError.m; sourceTree = "<group>"; };
 		6FADE52014BA0494007EE121 /* HLSFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloat.h; sourceTree = "<group>"; };
 		6FADE52114BA0494007EE121 /* HLSFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloat.m; sourceTree = "<group>"; };
 		6FADE52214BA0494007EE121 /* HLSKeyboardInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSKeyboardInformation.h; sourceTree = "<group>"; };
@@ -772,8 +768,6 @@
 				6FADE51A14BA0494007EE121 /* HLSAssert.m */,
 				6F976AE818DB5AC900888CFC /* HLSTransformer.h */,
 				6F976AE918DB5AC900888CFC /* HLSTransformer.m */,
-				6FADE51E14BA0494007EE121 /* HLSError.h */,
-				6FADE51F14BA0494007EE121 /* HLSError.m */,
 				6FCA2DD11679E36D0011CFDA /* HLSFileManager.h */,
 				6FCA2DD21679E36D0011CFDA /* HLSFileManager.m */,
 				6FADE52014BA0494007EE121 /* HLSFloat.h */,
@@ -1017,7 +1011,6 @@
 				6FADE59B14BA0494007EE121 /* HLSViewAnimationStep.h in Headers */,
 				6FADE59D14BA0494007EE121 /* HLSViewAnimation.h in Headers */,
 				6FADE59F14BA0494007EE121 /* HLSAssert.h in Headers */,
-				6FADE5A414BA0494007EE121 /* HLSError.h in Headers */,
 				6FADE5A614BA0494007EE121 /* HLSFloat.h in Headers */,
 				6FADE5A814BA0494007EE121 /* HLSKeyboardInformation.h in Headers */,
 				6FADE5AA14BA0494007EE121 /* HLSNotifications.h in Headers */,
@@ -1259,7 +1252,6 @@
 				6FADE59E14BA0494007EE121 /* HLSViewAnimation.m in Sources */,
 				6FADE5A014BA0494007EE121 /* HLSAssert.m in Sources */,
 				6F58602118C9B8AF005A881A /* UITextField+HLSViewBinding.m in Sources */,
-				6FADE5A514BA0494007EE121 /* HLSError.m in Sources */,
 				6FADE5A714BA0494007EE121 /* HLSFloat.m in Sources */,
 				6F58602518C9B8BE005A881A /* UITextView+HLSViewBinding.m in Sources */,
 				6FADE5A914BA0494007EE121 /* HLSKeyboardInformation.m in Sources */,

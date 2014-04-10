@@ -35,10 +35,9 @@
     NSString *numberString = [fromString stringByReplacingOccurrencesOfString:@"x = " withString:@""];
     NSNumber *number = [s_numberFormatter numberFromString:numberString];
     if (! number) {
-        HLSError *error = [HLSError errorWithDomain:TestErrorDomain
-                                               code:TestErrorIncorrectValueError];
         if (pError) {
-            *pError = error;
+            *pError = [NSError errorWithDomain:TestErrorDomain
+                                          code:TestErrorIncorrectValueError];
         }
         return NO;
     }
@@ -91,10 +90,9 @@
     } reverseBlock:^(NSNumber **pNumber, NSString *fromString, NSError **pError) {
         NSNumber *number = [s_numberFormatter numberFromString:fromString];
         if (! number) {
-            HLSError *error = [HLSError errorWithDomain:TestErrorDomain
-                                                   code:TestErrorIncorrectValueError];
             if (pError) {
-                *pError = error;
+                *pError = [NSError errorWithDomain:TestErrorDomain
+                                              code:TestErrorIncorrectValueError];
             }
             return NO;
         }

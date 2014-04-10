@@ -27,6 +27,7 @@
  * Convenience instantiation method for the most common case (an error conveying a description message). You can still
  * use the mutators below to add more information if needed
  */
+// FIXME: Warning: This method already exists elsewhere! Check class dump!
 + (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
 
 /**

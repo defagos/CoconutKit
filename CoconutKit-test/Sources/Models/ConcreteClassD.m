@@ -13,8 +13,8 @@
 - (BOOL)checkForDelete:(NSError **)pError
 {
     if ([self.noValidationStringD isEqualToString:@"LOCKED"]) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationLockedObjectError];
+        *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                      code:TestValidationLockedObjectError];
         return NO;
     }
     

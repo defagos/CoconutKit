@@ -10,11 +10,11 @@
 
 @interface HLSErrorTestCase ()
 
-@property (nonatomic, retain) HLSError *error1;
-@property (nonatomic, retain) HLSError *error2;
-@property (nonatomic, retain) HLSError *error3;
-@property (nonatomic, retain) HLSError *error4;
-@property (nonatomic, retain) HLSError *error5;
+@property (nonatomic, retain) NSError *error1;
+@property (nonatomic, retain) NSError *error2;
+@property (nonatomic, retain) NSError *error3;
+@property (nonatomic, retain) NSError *error4;
+@property (nonatomic, retain) NSError *error5;
 
 @end
 
@@ -40,19 +40,19 @@
     [super setUpClass];
     
     // Error 1
-    self.error1 = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test" 
-                                       code:1012];
+    self.error1 = [NSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+                                      code:1012];
     
     // Error 2
-    self.error2 = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
-                                       code:1013 
-                       localizedDescription:@"Localized description"];
+    self.error2 = [NSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+                                      code:1013
+                      localizedDescription:@"Localized description"];
     [self.error2 setLocalizedFailureReason:@"Localized failure reason"];
     [self.error2 setLocalizedRecoverySuggestion:@"Localized recovery suggestion"];
-    [self.error2 setLocalizedRecoveryOptions:[NSArray arrayWithObjects:@"LocalizedRecoveryOption1", 
-                                        @"LocalizedRecoveryOption2", 
-                                        @"LocalizedRecoveryOption3",
-                                        nil]];
+    [self.error2 setLocalizedRecoveryOptions:[NSArray arrayWithObjects:@"LocalizedRecoveryOption1",
+                                              @"LocalizedRecoveryOption2",
+                                              @"LocalizedRecoveryOption3",
+                                              nil]];
     [self.error2 setHelpAnchor:@"Help anchor"];
     [self.error2 setUnderlyingError:self.error1];
     [self.error2 setObject:@"Additional information 1" forKey:@"AdditionalInfo1"];
@@ -60,14 +60,14 @@
     [self.error2 setObject:@"Additional information 3" forKey:@"AdditionalInfo3"];
     
     // Error 3
-    self.error3 = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test"
-                                       code:1013];
+    self.error3 = [NSError errorWithDomain:@"ch.hortis.CoconutKit-test"
+                                      code:1013];
     
     // Error 4
-    self.error4 = [HLSError errorWithDomain:@"com.domain.other" code:1013];
+    self.error4 = [NSError errorWithDomain:@"com.domain.other" code:1013];
     
     // Error 5
-    self.error5 = [HLSError errorWithDomain:@"ch.hortis.CoconutKit-test" code:7];
+    self.error5 = [NSError errorWithDomain:@"ch.hortis.CoconutKit-test" code:7];
 }
 
 #pragma mark Tests

@@ -8,8 +8,8 @@
 
 #import "NSStream+HLSExtensions.h"
 
-#import "HLSError.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 
 #define BUFFER_SIZE 4096
 
@@ -20,9 +20,9 @@
     if (self.streamStatus != NSStreamStatusNotOpen && self.streamStatus != NSStreamStatusClosed
             && outputStream.streamStatus != NSStreamStatusNotOpen && outputStream.streamStatus != NSStreamStatusClosed) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadUnknownError
-                           localizedDescription:CoconutKitLocalizedString(@"The streams must not be opened", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadUnknownError
+                          localizedDescription:CoconutKitLocalizedString(@"The streams must not be opened", nil)];
         }
         return NO;
     }
@@ -55,9 +55,9 @@
     
     if (! success) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadUnknownError
-                           localizedDescription:CoconutKitLocalizedString(@"The input stream could not be read", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadUnknownError
+                          localizedDescription:CoconutKitLocalizedString(@"The input stream could not be read", nil)];
         }
         return NO;
     }

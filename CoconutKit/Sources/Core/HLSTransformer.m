@@ -9,7 +9,6 @@
 #import "HLSTransformer.h"
 
 #import "HLSAssert.h"
-#import "HLSError.h"
 #import "HLSLogger.h"
 
 NSString *HLSStringFromBool(BOOL yesOrNo)

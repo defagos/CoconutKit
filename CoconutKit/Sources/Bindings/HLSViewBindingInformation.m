@@ -9,9 +9,9 @@
 #import "HLSViewBindingInformation.h"
 
 #import "HLSAssert.h"
-#import "HLSError.h"
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
+#import "NSError+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
@@ -104,7 +104,7 @@
         if (! success) {
             if (pError) {
                 // TODO: Proper error
-                *pError = [HLSError errorWithDomain:NSCocoaErrorDomain code:1012 localizedDescription:errorDescription];
+                *pError = [NSError errorWithDomain:NSCocoaErrorDomain code:1012 localizedDescription:errorDescription];
             }
             return NO;
         }

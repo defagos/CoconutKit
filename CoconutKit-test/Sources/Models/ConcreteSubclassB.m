@@ -13,8 +13,8 @@
 - (BOOL)checkCodeMandatoryNumberB:(NSNumber *)codeMandatoryNumberB error:(NSError **)pError
 {
     if (! codeMandatoryNumberB) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationMandatoryValueError];
+        *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                      code:TestValidationMandatoryValueError];
         return NO;
     }
     
@@ -25,8 +25,8 @@
 - (BOOL)checkModelMandatoryCodeNotZeroNumberB:(NSNumber *)modelMandatoryCodeNotZeroNumberB error:(NSError **)pError
 {
     if ([modelMandatoryCodeNotZeroNumberB intValue] == 0) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationIncorrectValueError];
+        *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                      code:TestValidationIncorrectValueError];
         return NO;
     }
     
@@ -39,8 +39,8 @@
     // To test to-many relationships, test the number of elements (there is always a set in this case, i.e.
     // we cannot simply test against nil)
     if ([codeMandatoryConcreteClassesD count] == 0) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationMandatoryValueError];
+        *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                      code:TestValidationMandatoryValueError];
         return NO;
     }
     
@@ -52,8 +52,8 @@
 - (BOOL)checkForConsistency:(NSError **)pError
 {
     if ([self.noValidationStringA isFilled] && ! self.noValidationNumberB) {
-        *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                       code:TestValidationInconsistencyError];
+        *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                      code:TestValidationInconsistencyError];
         return NO;
     }
     

@@ -26,7 +26,6 @@
     #import "HLSConnection.h"
     #import "HLSContainerStack.h"
     #import "HLSCursor.h"
-    #import "HLSError.h"
     #import "HLSExpandingSearchBar.h"
     #import "HLSFakeConnection.h"
     #import "HLSFileManager.h"

@@ -12,7 +12,7 @@
 #import "HLSLogger.h"
 #import "NSDictionary+HLSExtensions.h"
 
-// TODO: Test creation, mutability and copy (copy should work out of the box)
+#import <objc/runtime.h>
 
 static void *s_mutableUserInfoKey = &s_mutableUserInfoKey;
 
