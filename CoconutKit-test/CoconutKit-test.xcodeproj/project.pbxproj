@@ -16,7 +16,7 @@
 		6F22C75616A93DE60081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75516A93DE60081A9A7 /* CoreText.framework */; };
 		6F255E491712C456007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E481712C456007BFC96 /* HLSConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F255E5B1712E875007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E5A1712E875007BFC96 /* HLSFakeConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6F26DC6E1493660800086BA5 /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */; };
+		6F26DC6E1493660800086BA5 /* NSError+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* NSError+HLSExtensionsTestCase.m */; };
 		6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */; };
 		6F2908511498734100506DDC /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908411498734100506DDC /* AbstractClassA.m */; };
 		6F2908521498734100506DDC /* ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908431498734100506DDC /* ConcreteClassD.m */; };
@@ -221,8 +221,8 @@
 		6F255E481712C456007BFC96 /* HLSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConnection.m; sourceTree = "<group>"; };
 		6F255E591712E875007BFC96 /* HLSFakeConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFakeConnection.h; sourceTree = "<group>"; };
 		6F255E5A1712E875007BFC96 /* HLSFakeConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFakeConnection.m; sourceTree = "<group>"; };
-		6F26DC6C1493660800086BA5 /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
-		6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
+		6F26DC6C1493660800086BA5 /* NSError+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F26DC6D1493660800086BA5 /* NSError+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F26DC70149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
 		6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidationTestCase.m"; sourceTree = "<group>"; };
 		6F2908401498734100506DDC /* AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractClassA.h; sourceTree = "<group>"; };
@@ -736,8 +736,6 @@
 			children = (
 				6FEFF35815F9C5FB006B06A6 /* CAMediaTimingFunction+HLExtensionsTestCase.h */,
 				6FEFF35915F9C5FB006B06A6 /* CAMediaTimingFunction+HLExtensionsTestCase.m */,
-				6F26DC6C1493660800086BA5 /* HLSErrorTestCase.h */,
-				6F26DC6D1493660800086BA5 /* HLSErrorTestCase.m */,
 				6FB318AD1815A88D00565B69 /* HLSFileManagerTestCase.h */,
 				6FB318AE1815A88D00565B69 /* HLSFileManagerTestCase.m */,
 				6F93C4CC1404287400FEC9B0 /* HLSFloatTestCase.h */,
@@ -756,16 +754,18 @@
 				6F3B060B14BC4C2D0026F512 /* HLSValidatorsTestCase.m */,
 				6F897871152B505D006C8231 /* HLSZeroingWeakRefTestCase.h */,
 				6F897872152B505D006C8231 /* HLSZeroingWeakRefTestCase.m */,
+				6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */,
+				6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */,
 				6F33351413FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.h */,
 				6F33351513FB7F80000FC9FD /* NSCalendar+HLSExtensionsTestCase.m */,
 				6F2D455A15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.h */,
 				6F2D455B15752C1200EF5E4F /* NSData+HLSExtensionsTestCase.m */,
 				6F33351613FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.h */,
 				6F33351713FB7F80000FC9FD /* NSDate+HLSExtensionsTestCase.m */,
-				6F93C4D014042B3000FEC9B0 /* NSArray+HLSExtensionsTestCase.h */,
-				6F93C4D114042B3100FEC9B0 /* NSArray+HLSExtensionsTestCase.m */,
 				6F93C4D6140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.h */,
 				6F93C4D7140437D100FEC9B0 /* NSDictionary+HLSExtensionsTestCase.m */,
+				6F26DC6C1493660800086BA5 /* NSError+HLSExtensionsTestCase.h */,
+				6F26DC6D1493660800086BA5 /* NSError+HLSExtensionsTestCase.m */,
 				6FC8EDBC176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.h */,
 				6FC8EDBD176ECD2C000B3BE7 /* NSNumber+HLSExtensionsTestCase.m */,
 				6F93C4EC140442BB00FEC9B0 /* NSObject+HLSExtensionsTestCase.h */,
@@ -1278,7 +1278,7 @@
 				6F61D12E14161E4C004C91F5 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
 				6FDE68E414757669005EA5FA /* CoconutKitTestData.xcdatamodeld in Sources */,
 				6FDE68FC147577C0005EA5FA /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
-				6F26DC6E1493660800086BA5 /* HLSErrorTestCase.m in Sources */,
+				6F26DC6E1493660800086BA5 /* NSError+HLSExtensionsTestCase.m in Sources */,
 				6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */,
 				6F2908511498734100506DDC /* AbstractClassA.m in Sources */,
 				6F2908521498734100506DDC /* ConcreteClassD.m in Sources */,

@@ -1,14 +1,14 @@
 //
-//  HLSErrorTestCase.m
+//  NSError+HLSExtensionsTestCase.m
 //  CoconutKit-test
 //
 //  Created by Samuel Défago on 10.12.11.
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
-#import "HLSErrorTestCase.h"
+#import "NSError+HLSExtensionsTestCase.h"
 
-@interface HLSErrorTestCase ()
+@interface NSError_HLSExtensionsTestCase ()
 
 @property (nonatomic, retain) NSError *error1;
 @property (nonatomic, retain) NSError *error2;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation HLSErrorTestCase
+@implementation NSError_HLSExtensionsTestCase
 
 #pragma mark Object creation and destruction
 
