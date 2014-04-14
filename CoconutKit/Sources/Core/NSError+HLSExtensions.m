@@ -59,6 +59,21 @@ static Class subclass_class(id self, SEL _cmd);
     return [[self userInfo] objectForKey:key];
 }
 
+- (NSArray *)objectsForKey:(NSString *)key
+{
+    id object = [self objectForKey:key];
+    if (! object) {
+        return nil;
+    }
+    
+    if ([object isKindOfClass:[NSArray class]]) {
+        return object;
+    }
+    else {
+        return @[object];
+    }
+}
+
 - (NSDictionary *)customUserInfo
 {
     NSMutableDictionary *customUserInfo = [NSMutableDictionary dictionaryWithDictionary:[self userInfo]];
@@ -153,8 +168,8 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (void)setObject:(id)object forKey:(NSString *)key
 {
-    if (! key) {
-        HLSLoggerError(@"Missing key");
+    if (! key || ! object) {
+        HLSLoggerError(@"Missing key or object");
         return;
     }
     
@@ -163,6 +178,33 @@ static Class subclass_class(id self, SEL _cmd);
     }
     else {
         [[self mutableUserInfo] removeObjectForKey:key];
+    }
+}
+
+- (void)addObject:(id)object forKey:(NSString *)key
+{
+    if (! key || ! object) {
+        HLSLoggerError(@"Missing key or object");
+        return;
+    }
+    
+    [self addObjects:@[object] forKey:key];
+}
+
+- (void)addObjects:(NSArray *)objects forKey:(NSString *)key
+{
+    if ([objects count] == 0 || ! key) {
+        HLSLoggerError(@"Missing key or objects");
+        return;
+    }
+    
+    id existingObject = [self objectForKey:key];
+    if (existingObject) {
+        id existingObjects = [existingObject isKindOfClass:[NSArray class]] ? existingObject : @[existingObject];
+        [self setObject:[existingObjects arrayByAddingObjectsFromArray:objects] forKey:key];
+    }
+    else {
+        [self setObject:[objects firstObject] forKey:key];
     }
 }
 

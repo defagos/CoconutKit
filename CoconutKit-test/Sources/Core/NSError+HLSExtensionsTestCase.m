@@ -87,6 +87,33 @@
     GHAssertEquals([[self.error2 customUserInfo] count], 3U, nil);
 }
 
+- (void)testIdentity
+{
+    // All errors are seen as NSErrors, whether mutated or not (mutated ones are dynamically subclassed internally,
+    // but must correctly lie about their true identity)
+    GHAssertTrue([self.error1 isMemberOfClass:[NSError class]], nil);
+    GHAssertTrue([self.error2 isMemberOfClass:[NSError class]], nil);
+}
+
+- (void)testAdding
+{
+    NSError *error = [NSError errorWithDomain:@"ch.hortis.CoconutKit-test" code:1012];
+    [error addObject:@"A" forKey:@"TestKey"];
+    GHAssertEqualStrings([error objectForKey:@"TestKey"], @"A", nil);
+    NSArray *objects1 = [error objectsForKey:@"TestKey"];
+    GHAssertEquals([objects1 count], 1U, nil);
+    
+    [error addObject:@"B" forKey:@"TestKey"];
+    GHAssertTrue([[error objectForKey:@"TestKey"] isKindOfClass:[NSArray class]], nil);
+    NSArray *objects2 = [error objectsForKey:@"TestKey"];
+    GHAssertEquals([objects2 count], 2U, nil);
+    
+    [error addObjects:@[@"C", @"D"] forKey:@"TestKey"];
+    GHAssertTrue([[error objectForKey:@"TestKey"] isKindOfClass:[NSArray class]], nil);
+    NSArray *objects3 = [error objectsForKey:@"TestKey"];
+    GHAssertEquals([objects3 count], 4U, nil);
+}
+
 - (void)testCopy
 {
     NSError *error2Copy = [self.error2 copy];
