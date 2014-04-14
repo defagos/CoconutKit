@@ -16,7 +16,7 @@
 		6F22C75616A93DE60081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75516A93DE60081A9A7 /* CoreText.framework */; };
 		6F255E491712C456007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E481712C456007BFC96 /* HLSConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F255E5B1712E875007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E5A1712E875007BFC96 /* HLSFakeConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6F26DC6E1493660800086BA5 /* NSError+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* NSError+HLSExtensionsTestCase.m */; };
+		6F26DC6E1493660800086BA5 /* NSError+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC6D1493660800086BA5 /* NSError+HLSExtensionsTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F26DC72149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F26DC71149371EC00086BA5 /* NSManagedObject+HLSValidationTestCase.m */; };
 		6F2908511498734100506DDC /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908411498734100506DDC /* AbstractClassA.m */; };
 		6F2908521498734100506DDC /* ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2908431498734100506DDC /* ConcreteClassD.m */; };

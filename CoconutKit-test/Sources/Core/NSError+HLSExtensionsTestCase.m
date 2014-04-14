@@ -20,19 +20,6 @@
 
 @implementation NSError_HLSExtensionsTestCase
 
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.error1 = nil;
-    self.error2 = nil;
-    self.error3 = nil;
-    self.error4 = nil;
-    self.error5 = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark Test setup and tear down
 
 - (void)setUpClass
