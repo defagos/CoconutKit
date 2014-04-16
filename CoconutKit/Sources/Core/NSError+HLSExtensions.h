@@ -6,6 +6,14 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
+typedef NS_ENUM(NSInteger, HLSError) {
+    HLSErrorValidationMultipleErrors
+};
+
+extern NSString * const CoconutKitErrorDomain;
+
+extern NSString * const HLSDetailedErrorsKey;
+
 /**
  * Extensions to NSError providing a convenient way to create errors. Mutability methods have been implemented so that
  * information can be added to existing errors. The usual NSError interface only allows immutable errors creation, but:

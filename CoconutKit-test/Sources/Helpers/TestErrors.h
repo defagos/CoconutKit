@@ -12,10 +12,7 @@
 extern NSString * const TestErrorDomain;
 
 typedef NS_ENUM(NSInteger, TestError) {
-    TestErrorEnumBegin = 0,
-    TestErrorIncorrectValueError = TestErrorEnumBegin,
-    TestErrorEnumEnd,
-    TestErrorEnumSize = TestErrorEnumEnd - TestErrorEnumBegin
+    TestErrorIncorrectValueError,
 };
 
 /**
@@ -23,12 +20,9 @@ typedef NS_ENUM(NSInteger, TestError) {
  */
 extern NSString * const TestValidationErrorDomain;
 
-typedef NS_ENUM(NSInteger, TestValidation) {
-    TestValidationEnumBegin = 100,
-    TestValidationMandatoryValueError = TestValidationEnumBegin,
+typedef NS_ENUM(NSInteger, TestValidationError) {
+    TestValidationMandatoryValueError,
     TestValidationIncorrectValueError,
     TestValidationInconsistencyError,
-    TestValidationLockedObjectError,
-    TestValidationEnumEnd,
-    TestValidationEnumSize = TestValidationEnumEnd - TestValidationEnumBegin
+    TestValidationLockedObjectError
 };

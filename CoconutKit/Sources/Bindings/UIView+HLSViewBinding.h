@@ -141,6 +141,11 @@
  */
 - (BOOL)bindsSubviewsRecursively;
 
+/**
+ *
+ */
+- (id)displayedValue;
+
 @end
 
 /**

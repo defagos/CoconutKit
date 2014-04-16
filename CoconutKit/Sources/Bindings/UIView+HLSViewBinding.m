@@ -11,6 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "HLSViewBindingInformation.h"
+#import "NSError+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSViewBindingFriend.h"
 
@@ -227,13 +228,39 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
-    if (self.bindingInformation) {
-        // TODO: Check
+    if ([self respondsToSelector:@selector(displayedValue)]) {
+        id displayedValue = [self performSelector:@selector(displayedValue)];
+        
+        NSError *error = nil;
+        if (! [self checkDisplayedValue:displayedValue withError:&error]) {
+            if (! exhaustive) {
+                if (pError) {
+                    *pError = error;
+                }
+                return NO;
+            }
+            
+            if (pError) {
+                if (*pError) {
+                    [*pError addObject:error forKey:HLSDetailedErrorsKey];
+                }
+                else {
+                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSErrorValidationMultipleErrors];
+                }
+            }
+        }
     }
     
     for (UIView *subview in self.subviews) {
-        // TODO: Call recursively, combine errors
+        if (! [subview checkDisplayedValuesInViewController:viewController exhaustive:exhaustive withError:pError]) {
+            if (! exhaustive) {
+                return NO;
+            }
+        }
     }
+    
+    return YES;
 }
 
 - (BOOL)updateModelWithDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive error:(NSError **)pError
@@ -244,13 +271,46 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
-    if (self.bindingInformation) {
-        // TODO: Check
+    if ([self respondsToSelector:@selector(displayedValue)]) {
+        id displayedValue = [self performSelector:@selector(displayedValue)];
+        
+        NSError *error = nil;
+        if (! [self checkDisplayedValue:displayedValue withError:&error]) {
+            if (! exhaustive) {
+                if (pError) {
+                    *pError = error;
+                }
+                return NO;
+            }
+            
+            if (pError) {
+                if (*pError) {
+                    [*pError addObject:error forKey:HLSDetailedErrorsKey];
+                }
+                else {
+                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSErrorValidationMultipleErrors];
+                }
+            }
+        }
     }
     
     for (UIView *subview in self.subviews) {
-        // TODO: Call recursively, combine errors
+        if (! [subview updateModelWithDisplayedValuesInViewController:viewController exhaustive:exhaustive error:pError]) {
+            if (! exhaustive) {
+                return NO;
+            }
+        }
     }
+    
+    // TODO: No update if not exhaustive and failure. As for Core Data, validations must be independent (consistency
+    //       checks are made in a separate method), therefore each value is tested indepdentently, the model does not
+    //       need to be updated during field traversal (document!). Do it at the root call
+    // => introduce an implementation method which has a dictionary parameter with everything to set. But since there
+    //    is no way to test whether a keypath is valid, we still might need a rollback mechanism, which can be an issue
+    //    since setting a keypath back to its initial value might trigger a lot of noisy calls
+    
+    return YES;
 }
 
 @end

@@ -83,7 +83,7 @@
     if (! doublege(rating, failureRate)) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSURLErrorNetworkConnectionLost
-                             localizedDescription:NSLocalizedString(@"Connection error", nil)];
+                             localizedDescription:CoconutKitLocalizedString(@"Connection error", nil)];
         self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }
