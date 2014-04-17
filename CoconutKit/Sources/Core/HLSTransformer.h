@@ -48,6 +48,8 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 
 @end
 
+// TODO: Add a formatter transformer (with +transformerWithFormatter: convenience method)
+
 /**
  * A convenience transformer class which makes it easy to define transformations using blocks
  *

@@ -142,7 +142,11 @@
 - (BOOL)bindsSubviewsRecursively;
 
 /**
+ * UIView subclasses which want to be able to update the underlying model must implement this method, returning
+ * the currently displayed value. The type of the returned value must be one of the classes returned by
+ * +supportedBindingClasses
  *
+ * TODO: Add corresponding type checks in the implementation
  */
 - (id)displayedValue;
 
@@ -173,7 +177,7 @@
 /**
  * Recursively check bound values, stopping at view controller boundaries. Errors are reported to the validation
  * delegates individually, and chained as a single error returned to the caller as well. If the exhaustive boolean
- * is set to NO, the check stops when the first error is encountered (in which case only this error is returned
+ * is set to NO, the checks stop when the first error is encountered (in which case only this error is returned
  * to the caller). If the exhaustive boolean is set to YES, all bound values are checked, and all corresponding
  * errors are returned
  *
@@ -183,17 +187,19 @@
 
 /**
  * Trigger a recursive update of the model for those views which can change their underlying value. The view hierarchy
- * is traversed up to view controller boundaries. All values are validated first. If exhaustive is set to YES, valid
- * values are saved to the model, even if some other validations fail. If exhaustive is set to NO, all values must
- * be valid before the model gets updated. Validation errors are reported to check delegates individually, and
- * also returned chained as a single error to the caller. 
+ * is traversed up to view controller boundaries. Values are checked in a row, and the model gets updated after each
+ * successful validation (no rollback mechanism is provided for technical reasons; if you need one, you need to implement
+ * it yourself or use objects supporting rollback natively, e.g. Core Data objects). If the exhaustive boolean is set to
+ * NO, the checks and updates stop when the first error is encountered (in which case only this error is returned to
+ * the caller). If the exhaustive boolean is set to YES, all bound values are checked, and all corresponding errors are
+ * returned
  *
- * The method returns YES iff all bound values are valid and therefore could be updated.
+ * The method returns YES iff all bound values are valid and were correctly updated
  *
  * If all views to be updated have updatingModelAutomatically set to YES, calling this method is redundant and therefore
  * not needed.
  */
-- (BOOL)updateModelWithDisplayedValuesExhaustive:(BOOL)exhaustive error:(NSError **)pError;
+- (BOOL)checkAndUpdateDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError;
 
 /**
  * If this property has been set, the bound value is automatically updated when the value displayed by the view is

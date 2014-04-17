@@ -43,7 +43,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced;
 - (BOOL)bindsRecursively;
 - (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError;
-- (BOOL)updateModelWithDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive error:(NSError **)pError;
+- (BOOL)checkAndUpdateDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError;
 
 @end
 
@@ -87,9 +87,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return [self checkDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive withError:pError];
 }
 
-- (BOOL)updateModelWithDisplayedValuesExhaustive:(BOOL)exhaustive error:(NSError **)pError
+- (BOOL)checkAndUpdateDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError
 {
-    return [self updateModelWithDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive error:pError];
+    return [self checkAndUpdateDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive withError:pError];
 }
 
 @end
@@ -263,7 +263,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return YES;
 }
 
-- (BOOL)updateModelWithDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive error:(NSError **)pError
+- (BOOL)checkAndUpdateDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -296,7 +296,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     for (UIView *subview in self.subviews) {
-        if (! [subview updateModelWithDisplayedValuesInViewController:viewController exhaustive:exhaustive error:pError]) {
+        if (! [subview checkAndUpdateDisplayedValuesInViewController:viewController exhaustive:exhaustive withError:pError]) {
             if (! exhaustive) {
                 return NO;
             }
