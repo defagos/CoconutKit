@@ -16,6 +16,16 @@
 
 @implementation ControlBindingsDemoViewController
 
+#pragma mark Object creation and destruction
+
+- (id)init
+{
+    if (self = [super init]) {
+        self.switchEnabled = @YES;
+    }
+    return self;
+}
+
 #pragma mark Accessors and mutators
 
 - (NSNumber *)completion
