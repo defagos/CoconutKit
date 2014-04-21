@@ -79,6 +79,7 @@
 
 #pragma mark Checking and updating values
 
+// TODO: Check that the output value has a supported type
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
     if (! self.transformationTarget) {
