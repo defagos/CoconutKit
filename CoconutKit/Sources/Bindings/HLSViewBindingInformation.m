@@ -115,7 +115,8 @@
 // TODO: Validation delegate notification
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
 {
-    return [self validateValue:&value forKeyPath:self.keyPath error:pError];
+    // TODO: Implement call to -check method as well, since cleaner syntax
+    return [self.object validateValue:&value forKeyPath:self.keyPath error:pError];
 }
 
 // TODO: Validation delegate notification
