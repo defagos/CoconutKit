@@ -86,12 +86,12 @@
 
 - (void)view:(UIView *)view didValidateValue:(id)value forObject:(id)object keyPath:(NSString *)keyPath
 {
-
+    NSLog(@"Validate value %@ of object %@ bound to view %@ with keypath %@", value, object, view, keyPath);
 }
 
 - (void)view:(UIView *)view didFailValidationForValue:(id)value object:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
 {
-
+    NSLog(@"Failed validation for value %@ of object %@ bound to view %@ with keypath %@; reason: %@", value, object, view, keyPath, error);
 }
 
 #pragma mark Validation
