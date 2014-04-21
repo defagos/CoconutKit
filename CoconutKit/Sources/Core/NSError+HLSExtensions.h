@@ -10,6 +10,7 @@
 typedef NS_ENUM(NSInteger, HLSError) {
     HLSErrorValidationMultipleErrors,
     HLSErrorTransformationError,
+    HLSErrorUnsupportedTypeError,
     HLSErrorUpdateError
 };
 

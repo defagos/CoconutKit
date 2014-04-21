@@ -89,37 +89,51 @@
 
 #pragma mark Checking and updating values
 
-// TODO: Check that the output value has a supported type
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
+    id value = nil;
     if (! self.transformationTarget) {
-        if (pValue) {
-            *pValue = transformedValue;
-        }
-        return YES;
-    }
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    id transformer = [self.transformationTarget performSelector:self.transformationSelector];
-#pragma clang diagnostic pop
-    NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
-
-    if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-        return [transformer getObject:pValue fromObject:transformedValue error:pError];
+        value = transformedValue;
     }
     else {
-        NSString *errorDescription = nil;
-        BOOL success = [transformer getObjectValue:pValue forString:transformedValue errorDescription:&errorDescription];
-        if (! success) {
-            if (pError) {
-                *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                              code:HLSErrorTransformationError
-                              localizedDescription:errorDescription];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        id transformer = [self.transformationTarget performSelector:self.transformationSelector];
+#pragma clang diagnostic pop
+        NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
+        
+        if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
+            if (! [transformer getObject:&value fromObject:transformedValue error:pError]) {
+                return NO;
             }
         }
-        return success;
+        else {
+            NSString *errorDescription = nil;
+            if (! [transformer getObjectValue:&value forString:transformedValue errorDescription:&errorDescription]) {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSErrorTransformationError
+                                  localizedDescription:errorDescription];
+                }
+                return NO;
+            }
+        }
     }
+    
+    if (! [self canDisplayValue:value]) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSErrorUnsupportedTypeError
+                          localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"The class %@ is not supported (supported are %@)", nil), [value class], [self supportedBindingClassesString]]];
+        }
+        return NO;
+    }
+    
+    if (pValue) {
+        *pValue = value;
+    }
+    
+    return YES;
 }
 
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
