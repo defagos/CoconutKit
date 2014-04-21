@@ -79,7 +79,6 @@
 
 #pragma mark Checking and updating values
 
-// TODO: Validation delegate notification
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
     if (! self.transformationTarget) {
@@ -94,38 +93,61 @@
     id transformer = [self.transformationTarget performSelector:self.transformationSelector];
 #pragma clang diagnostic pop
     NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
-    
+
+    BOOL success = NO;
+    id value = nil;
+    NSError *error = nil;
     if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-        return [transformer getObject:pValue fromObject:transformedValue error:pError];
+        success = [transformer getObject:&value fromObject:transformedValue error:&error];
     }
     else {
         NSString *errorDescription = nil;
-        BOOL success = [transformer getObjectValue:pValue forString:transformedValue errorDescription:&errorDescription];
+        success = [transformer getObjectValue:&value forString:transformedValue errorDescription:&errorDescription];
         if (! success) {
-            if (pError) {
-                // TODO: Proper error
-                *pError = [NSError errorWithDomain:NSCocoaErrorDomain code:1012 localizedDescription:errorDescription];
-            }
-            return NO;
+            error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                        code:HLSErrorTransformationError
+                        localizedDescription:errorDescription];
         }
-        return YES;
     }
+    
+    if (pValue) {
+        *pValue = value;
+    }
+    if (pError) {
+        *pError = error;
+    }
+    
+    [self notifySuccess:success withValue:value error:error];
+    return success;
 }
 
-// TODO: Validation delegate notification
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
 {
+    NSError *error = nil;
+    
     // TODO: Implement call to -check method as well, since cleaner syntax
-    return [self.object validateValue:&value forKeyPath:self.keyPath error:pError];
+    BOOL valid = [self.object validateValue:&value forKeyPath:self.keyPath error:&error];
+    [self notifySuccess:valid withValue:value error:error];
+    if (pError) {
+        *pError = error;
+    }
+    return valid;
 }
 
-// TODO: Validation delegate notification
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError
 {
     @try {
         [self.object setValue:value forKeyPath:self.keyPath];
+        [self notifySuccess:YES withValue:value error:nil];
     }
     @catch (NSException *exception) {
+        NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                             code:HLSErrorUpdateError
+                             localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
+        [self notifySuccess:NO withValue:value error:error];
+        if (pError) {
+            *pError = error;
+        }
         HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
         return NO;
     }
@@ -135,6 +157,20 @@
     self.verified = [self verifyBindingInformation];
     
     return YES;
+}
+
+- (void)notifySuccess:(BOOL)success withValue:(id)value error:(NSError *)error
+{
+    if (! self.delegate) {
+        return;
+    }
+    
+    if (success && [self.delegate respondsToSelector:@selector(view:didValidateValue:forObject:keyPath:)]) {
+        [self.delegate view:self.view didValidateValue:value forObject:self.object keyPath:self.keyPath];
+    }
+    else if (! success && [self.delegate respondsToSelector:@selector(view:didFailValidationForValue:object:keyPath:withError:)]) {
+        [self.delegate view:self.view didFailValidationForValue:value object:self.object keyPath:self.keyPath withError:error];
+    }
 }
 
 #pragma mark Binding

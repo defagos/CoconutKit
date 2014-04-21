@@ -6,8 +6,11 @@
 //  Copyright (c) 2011 Hortis. All rights reserved.
 //
 
+// TODO: Move elsewhere, in a binding-dedicated header file. Probably rename for consistency
 typedef NS_ENUM(NSInteger, HLSError) {
-    HLSErrorValidationMultipleErrors
+    HLSErrorValidationMultipleErrors,
+    HLSErrorTransformationError,
+    HLSErrorUpdateError
 };
 
 extern NSString * const CoconutKitErrorDomain;
