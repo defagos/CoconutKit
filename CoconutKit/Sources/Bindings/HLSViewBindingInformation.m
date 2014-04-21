@@ -129,6 +129,11 @@
         HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
         return NO;
     }
+    
+    // Force a new verification (the value might have been nil, i.e. the information could not be verified, or
+    // might have been set to nil)
+    self.verified = [self verifyBindingInformation];
+    
     return YES;
 }
 

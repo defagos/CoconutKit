@@ -6,6 +6,6 @@
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-@interface ControlBindingsDemoViewController : HLSViewController
+@interface ControlBindingsDemoViewController : HLSViewController <HLSBindingDelegate>
 
 @end

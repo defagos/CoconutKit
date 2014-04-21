@@ -22,6 +22,7 @@ typedef enum {
     BindingInformationTransformerName,
     BindingInformationTransformationTarget,
     BindingInformationTransformationSelector,
+    BindingInformationDelegate,
     BindingInformationErrorDescription,
     BindingInformationEnumEnd,
     BindingInformationEnumSize = BindingInformationEnumEnd - BindingInformationEnumBegin
@@ -74,7 +75,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    self.contentSizeForViewInPopover = CGSizeMake(320.f, 492.f);
+    self.contentSizeForViewInPopover = CGSizeMake(320.f, 554.f);
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -145,9 +146,20 @@ typedef enum {
             break;
         }
             
+        case BindingInformationDelegate: {
+            name = CoconutKitLocalizedString(@"Delegate", nil);
+            value = [HLSBindingInformationViewController identityStringForObject:self.bindingInformation.delegate];
+            break;
+        }
+            
         case BindingInformationErrorDescription: {
             name = CoconutKitLocalizedString(@"Description", nil);
-            value = self.bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
+            if (self.bindingInformation.verified) {
+                value = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
+            }
+            else {
+                value = self.bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
+            }
             break;
         }
             
