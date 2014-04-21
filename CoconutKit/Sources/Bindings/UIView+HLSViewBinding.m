@@ -43,7 +43,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced;
 - (BOOL)bindsRecursively;
 - (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError;
-- (BOOL)checkAndUpdateDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError;
+- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 
 @end
 
@@ -87,9 +87,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return [self checkDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive withError:pError];
 }
 
-- (BOOL)checkAndUpdateDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError
+- (BOOL)updateModelWithError:(NSError **)pError
 {
-    return [self checkAndUpdateDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive withError:pError];
+    return [self updateModelInViewController:[self nearestViewController] withError:pError];
 }
 
 @end
@@ -228,6 +228,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
+    BOOL success = YES;
     if ([self respondsToSelector:@selector(displayedValue)]) {
         id displayedValue = [self performSelector:@selector(displayedValue)];
         
@@ -239,6 +240,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                 }
                 return NO;
             }
+            
+            success = NO;
             
             if (pError) {
                 if (*pError) {
@@ -257,13 +260,15 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
             if (! exhaustive) {
                 return NO;
             }
+            
+            success = NO;
         }
     }
     
-    return YES;
+    return success;
 }
 
-- (BOOL)checkAndUpdateDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError
+- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -271,18 +276,12 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
+    BOOL success = YES;
     if ([self respondsToSelector:@selector(displayedValue)]) {
         id displayedValue = [self performSelector:@selector(displayedValue)];
         
         NSError *error = nil;
-        if (! [self checkDisplayedValue:displayedValue withError:&error]) {
-            if (! exhaustive) {
-                if (pError) {
-                    *pError = error;
-                }
-                return NO;
-            }
-            
+        if (! [self updateModelWithDisplayedValue:displayedValue error:&error]) {
             if (pError) {
                 if (*pError) {
                     [*pError addObject:error forKey:HLSDetailedErrorsKey];
@@ -292,25 +291,18 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                                                   code:HLSErrorValidationMultipleErrors];
                 }
             }
+            
+            success = NO;
         }
     }
     
     for (UIView *subview in self.subviews) {
-        if (! [subview checkAndUpdateDisplayedValuesInViewController:viewController exhaustive:exhaustive withError:pError]) {
-            if (! exhaustive) {
-                return NO;
-            }
+        if (! [subview updateModelInViewController:viewController withError:pError]) {
+            success = NO;
         }
     }
     
-    // TODO: No update if not exhaustive and failure. As for Core Data, validations must be independent (consistency
-    //       checks are made in a separate method), therefore each value is tested indepdentently, the model does not
-    //       need to be updated during field traversal (document!). Do it at the root call
-    // => introduce an implementation method which has a dictionary parameter with everything to set. But since there
-    //    is no way to test whether a keypath is valid, we still might need a rollback mechanism, which can be an issue
-    //    since setting a keypath back to its initial value might trigger a lot of noisy calls
-    
-    return YES;
+    return success;
 }
 
 @end
@@ -336,7 +328,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return YES;
 }
 
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
         // No binding, nothing to do, valid
@@ -345,10 +337,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     
     id value = nil;
     if (! [self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:pError]) {
-        return NO;
-    }
-    
-    if (! [self.bindingInformation checkValue:value withError:pError]) {
         return NO;
     }
     

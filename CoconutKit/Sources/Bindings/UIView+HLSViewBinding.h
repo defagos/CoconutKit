@@ -59,10 +59,11 @@
  *       - class method +methodName on the responder object
  * In addition, global transformer names can be provided in the form of class methods '+[SomeClass methodName]'
  *
- * When updating the value associated with a bound view, validation is automatically performed (if a validation
- * method has been defined, see NSKeyValueCoding category on NSObject). Transformation and validation success
- * or failure is reported to a validation delegate, so that the corresponding status can be reported interactively.
- * A binding delegate conforming to the HLSBindingDelegate protocol is automatically looked
+ * TODO: Rewrite: Validation and update are independent
+ *    When setting the value associated with a bound view, validation can be automatically performed (if a validation
+ *    method has been defined, see NSKeyValueCoding category on NSObject). Transformation and validation success
+ *    or failure is reported to a validation delegate, so that the corresponding status can be reported interactively.
+ *    A binding delegate conforming to the HLSBindingDelegate protocol is automatically looked
  *
  * The binding information is resolved as late as possible (usually when the view is displayed),i.e.  when the whole
  * repsonder chain context is available. This information is then stored for efficient later use. The view is not 
@@ -75,7 +76,8 @@
  * when bindings must be established or refreshed. For this reason, those calls are made recursively. This means you can 
  * simply call one of those methods at the top of the view hierarchy (or even on the view controller itself, see 
  * UIViewController+HLSViewBinding.h) to bind or refresh the whole associated view hierarchy. Note that each view class 
- * decides whether it recursively binds or refreshes its subviews (this behavior is controlled via the HLSViewBinding protocol)
+ * decides whether it recursively binds or refreshes its subviews (this behavior is controlled via the HLSViewBinding 
+ * protocol)
  *
  * In most cases, you want to bind a single view hierarchy to a single object. But you can also have separate 
  * view hierarchies within the same view controller context if you want, each one bound to a different object.
@@ -143,7 +145,7 @@
 
 /**
  * UIView subclasses which want to be able to update the underlying model must implement this method, returning
- * the currently displayed value. The type of the returned value must be one of the classes returned by
+ * the currently displayed value. The type of the returned value must be one of the classes declared by
  * +supportedBindingClasses
  *
  * TODO: Add corresponding type checks in the implementation
@@ -187,31 +189,24 @@
 
 /**
  * Trigger a recursive update of the model for those views which can change their underlying value. The view hierarchy
- * is traversed up to view controller boundaries. Values are checked in a row, and the model gets updated after each
- * successful validation (no rollback mechanism is provided for technical reasons; if you need one, you need to implement
- * it yourself or use objects supporting rollback natively, e.g. Core Data objects). If the exhaustive boolean is set to
- * NO, the checks and updates stop when the first error is encountered (in which case only this error is returned to
- * the caller). If the exhaustive boolean is set to YES, all bound values are checked, and all corresponding errors are
- * returned
+ * is traversed up to view controller boundaries. No rollback mechanism is provided; if you need one, you need to implement 
+ * it yourself or use objects supporting rollback natively, e.g. Core Data objects.
  *
- * The method returns YES iff all bound values are valid and were correctly updated
+ * The method returns YES iff all bound values were correctly updated, otherwise NO and errors to the caller
  *
  * If all views to be updated have updatingModelAutomatically set to YES, calling this method is redundant and therefore
  * not needed.
  */
-- (BOOL)checkAndUpdateDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError;
+- (BOOL)updateModelWithError:(NSError **)pError;
 
 /**
  * If this property has been set, the bound value is automatically updated when the value displayed by the view is
  * changed.
  *
  * The default value is NO. This provides for finer-grained control over when you want to update the model, which is
- * achieved by calling -updateModelWithError:exhaustive: on a top view. If you want the model object to be immediately 
- * updated when the view contents change, set this property to YES. If this property is set to YES for all views, then 
- * calling -updateModelWithError:exhaustive: is not needed
- *
- * Note that the model gets updated automatically when set to YES, but only if no validation error occurs (e.g. no 
- * transformation error occurs)
+ * achieved by calling -updateModelWithError: on a top view. If you want the model object to be immediately updated 
+ * when the view contents change, set this property to YES. If this property is set to YES for all views, then calling 
+ * -updateModelWithError:exhaustive: is not needed
  */
 @property (nonatomic, assign, getter=isUpdatingModelAutomatically) BOOL updatingModelAutomatically;
 
@@ -244,6 +239,6 @@
  *
  * The method returns YES iff the value is valid (and thus has been updated)
  */
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
 
 @end
