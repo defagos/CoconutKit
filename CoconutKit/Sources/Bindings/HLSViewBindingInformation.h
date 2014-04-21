@@ -27,6 +27,8 @@
  */
 - (id)value;
 
+- (id)rawValue;
+
 /**
  * Try to transform back a value into a value which could be assigned to the key path. Return YES and the value iff the 
  * reverse transformation could be achieved, i.e. if a reverse transformation is available (if a transformer has been set)

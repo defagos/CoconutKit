@@ -19,6 +19,8 @@ typedef enum {
     BindingInformationEnumBegin = 0,
     BindingInformationObject = BindingInformationEnumBegin,
     BindingInformationKeyPath,
+    BindingInformationValue,
+    BindingInformationRawValue,
     BindingInformationTransformerName,
     BindingInformationTransformationTarget,
     BindingInformationTransformationSelector,
@@ -49,7 +51,7 @@ typedef enum {
         return [NSString stringWithFormat:@"'%@' class", object];
     }
     else {
-        return [NSString stringWithFormat:@"'%@' instance (%p)", [object class], object];
+        return [object description];
     }
 }
 
@@ -75,7 +77,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    self.contentSizeForViewInPopover = CGSizeMake(320.f, 554.f);
+    self.contentSizeForViewInPopover = CGSizeMake(320.f, 678.f);
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -119,6 +121,18 @@ typedef enum {
         case BindingInformationKeyPath: {
             name = CoconutKitLocalizedString(@"Key path", nil);
             value = self.bindingInformation.keyPath ?: @"-";
+            break;
+        }
+            
+        case BindingInformationValue: {
+            name = CoconutKitLocalizedString(@"Value", nil);
+            value = [HLSBindingInformationViewController identityStringForObject:[self.bindingInformation value]];
+            break;
+        }
+            
+        case BindingInformationRawValue: {
+            name = CoconutKitLocalizedString(@"Raw value", nil);
+            value = [HLSBindingInformationViewController identityStringForObject:[self.bindingInformation rawValue]];
             break;
         }
             

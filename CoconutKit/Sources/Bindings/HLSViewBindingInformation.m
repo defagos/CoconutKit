@@ -77,6 +77,16 @@
     return [self transformValue:value withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
 }
 
+- (id)rawValue
+{
+    @try {
+        return [self.object valueForKeyPath:self.keyPath];
+    }
+    @catch (NSException *exception) {
+        return nil;
+    }
+}
+
 #pragma mark Checking and updating values
 
 // TODO: Check that the output value has a supported type
