@@ -19,6 +19,7 @@
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindTransformerKey = &s_bindTransformerKey;
 static void *s_updatingModelAutomaticallyKey = &s_updatingModelAutomaticallyKey;
+static void *s_checkingDisplayedValueAutomaticallyKey = &s_checkingDisplayedValueAutomaticallyKey;
 static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
@@ -68,6 +69,16 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)setUpdatingModelAutomatically:(BOOL)updatingModelAutomatically
 {
     objc_setAssociatedObject(self, s_updatingModelAutomaticallyKey, @(updatingModelAutomatically), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isCheckingDisplayedValueAutomatically
+{
+    return [objc_getAssociatedObject(self, s_checkingDisplayedValueAutomaticallyKey) boolValue];
+}
+
+- (void)setCheckingDisplayedValueAutomatically:(BOOL)checkingDisplayedValueAutomatically
+{
+    objc_setAssociatedObject(self, s_checkingDisplayedValueAutomaticallyKey, @(checkingDisplayedValueAutomatically), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Bindings
@@ -305,14 +316,10 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return success;
 }
 
-@end
-
-@implementation UIView (HLSViewBindingUpdateImplementation)
-
 - (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError
 {
     if (! self.bindingInformation) {
-        // No binding, nothing to do, valid
+        // No binding, nothing to do
         return YES;
     }
     
@@ -331,7 +338,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
-        // No binding, nothing to do, valid
+        // No binding, nothing to do
         return YES;
     }
     
@@ -345,6 +352,38 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     return YES;
+}
+
+@end
+
+@implementation UIView (HLSViewBindingUpdateImplementation)
+
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+{
+    if (! self.bindingInformation) {
+        // No binding, nothing to do
+        return YES;
+    }
+    
+    id value = nil;
+    if (! [self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:pError]) {
+        return NO;
+    }
+    
+    BOOL success = YES;
+    if (self.checkingDisplayedValueAutomatically) {
+        if (! [self.bindingInformation checkValue:value withError:pError]) {
+            success = NO;
+        }
+    }
+    
+    if (self.updatingModelAutomatically) {
+        if (! [self.bindingInformation updateWithValue:value error:pError]) {
+            success = NO;
+        }
+    }
+    
+    return success;
 }
 
 @end

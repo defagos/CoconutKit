@@ -8,6 +8,12 @@
 
 #import "ControlBindingsDemoViewController.h"
 
+@interface ControlBindingsDemoViewController ()
+
+@property (nonatomic, strong) NSNumber *switchEnabled;
+
+@end
+
 @implementation ControlBindingsDemoViewController
 
 #pragma mark Accessors and mutators
@@ -25,11 +31,6 @@
 - (NSNumber *)category
 {
     return @1;
-}
-
-- (NSNumber *)switchEnabled
-{
-    return @YES;
 }
 
 - (NSString *)name

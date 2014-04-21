@@ -199,6 +199,8 @@
  */
 - (BOOL)updateModelWithError:(NSError **)pError;
 
+@property (nonatomic, assign, getter=isCheckingDisplayedValueAutomatically) BOOL checkingDisplayedValueAutomatically;
+
 /**
  * If this property has been set, the bound value is automatically updated when the value displayed by the view is
  * changed.
@@ -221,24 +223,6 @@
  */
 @interface UIView (HLSViewBindingUpdateImplementation)
 
-/**
- * Check whether the value displayed by the bound view is valid with respect to the underlying bound model value.
- * (the value can be transformed and validation, if any, is successful). Errors are reported to the validation delegate
- * and to the caller as well.
- *
- * The method returns YES iff the value is valid
- */
-- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError;
-
-/**
- * Some UIView subclasses do not only display a bound value, but can also be used to change it. When implementing
- * such a class, call the following method when the underlying object should be updated. Note that the object might
- * not be updated, e.g. if a transformation error occurred, or if the bound view is not set to update the underlying
- * automatically (see updatingModelAutomatically property). Any errors are reported to the validation delegate, if
- * any has been set, and to the caller as well.
- *
- * The method returns YES iff the value is valid (and thus has been updated)
- */
-- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
 
 @end
