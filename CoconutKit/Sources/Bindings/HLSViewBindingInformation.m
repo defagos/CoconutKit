@@ -94,57 +94,38 @@
 #pragma clang diagnostic pop
     NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
 
-    BOOL success = NO;
-    id value = nil;
-    NSError *error = nil;
     if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-        success = [transformer getObject:&value fromObject:transformedValue error:&error];
+        return [transformer getObject:pValue fromObject:transformedValue error:pError];
     }
     else {
         NSString *errorDescription = nil;
-        success = [transformer getObjectValue:&value forString:transformedValue errorDescription:&errorDescription];
+        BOOL success = [transformer getObjectValue:pValue forString:transformedValue errorDescription:&errorDescription];
         if (! success) {
-            error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                        code:HLSErrorTransformationError
-                        localizedDescription:errorDescription];
+            if (pError) {
+                *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                              code:HLSErrorTransformationError
+                              localizedDescription:errorDescription];
+            }
         }
+        return success;
     }
-    
-    if (pValue) {
-        *pValue = value;
-    }
-    if (pError) {
-        *pError = error;
-    }
-    
-    [self notifySuccess:success withValue:value error:error];
-    return success;
 }
 
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
 {
-    NSError *error = nil;
-    
     // TODO: Implement call to -check method as well, since cleaner syntax
-    BOOL valid = [self.object validateValue:&value forKeyPath:self.keyPath error:&error];
-    [self notifySuccess:valid withValue:value error:error];
-    if (pError) {
-        *pError = error;
-    }
-    return valid;
+    return [self.object validateValue:&value forKeyPath:self.keyPath error:pError];
 }
 
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError
 {
     @try {
         [self.object setValue:value forKeyPath:self.keyPath];
-        [self notifySuccess:YES withValue:value error:nil];
     }
     @catch (NSException *exception) {
         NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
                                              code:HLSErrorUpdateError
                              localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
-        [self notifySuccess:NO withValue:value error:error];
         if (pError) {
             *pError = error;
         }

@@ -49,6 +49,8 @@
  */
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError;
 
+- (void)notifySuccess:(BOOL)success withValue:(id)value error:(NSError *)error;
+
 /**
  * Return the object which has been bound, nil if none or not resolved yet
  */

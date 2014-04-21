@@ -324,15 +324,20 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     id value = nil;
-    if (! [self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:pError]) {
-        return NO;
+    NSError *error = nil;
+    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
+        if ([self.bindingInformation checkValue:value withError:&error]) {
+            [self.bindingInformation notifySuccess:YES withValue:value error:nil];
+            return YES;
+        }
     }
     
-    if (! [self.bindingInformation checkValue:value withError:pError]) {
-        return NO;
+    if (pError) {
+        *pError = error;
     }
+    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     
-    return YES;
+    return NO;
 }
 
 - (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
@@ -343,15 +348,19 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     id value = nil;
-    if (! [self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:pError]) {
-        return NO;
+    NSError *error = nil;
+    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
+        if ([self.bindingInformation updateWithValue:value error:&error]) {
+            [self.bindingInformation notifySuccess:YES withValue:value error:nil];
+        }
     }
     
-    if (! [self.bindingInformation updateWithValue:value error:pError]) {
-        return NO;
+    if (pError) {
+        *pError = error;
     }
+    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     
-    return YES;
+    return NO;
 }
 
 @end
@@ -366,24 +375,49 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     id value = nil;
-    if (! [self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:pError]) {
+    NSError *convertError = nil;
+    
+    NSMutableArray *errors = [NSMutableArray array];
+    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&convertError]) {
+        BOOL success = YES;
+        
+        NSError *checkError = nil;
+        if (self.checkingDisplayedValueAutomatically) {
+            if (! [self.bindingInformation checkValue:value withError:&checkError]) {
+                [errors addObject:checkError];
+                success = NO;
+            }
+        }
+        
+        NSError *updateError = nil;
+        if (self.updatingModelAutomatically) {
+            if (! [self.bindingInformation updateWithValue:value error:&updateError]) {
+                [errors addObject:updateError];
+                success = NO;
+            }
+        }
+        
+        NSError *error = nil;
+        if ([errors count] > 1) {
+            error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                        code:HLSErrorValidationMultipleErrors];
+            [error addObjects:errors forKey:HLSDetailedErrorsKey];
+        }
+        else {
+            error = [errors firstObject];
+        }
+        
+        if (pError) {
+            *pError = error;
+        }
+        
+        [self.bindingInformation notifySuccess:success withValue:value error:error];
+        return success;
+    }
+    else {
+        [self.bindingInformation notifySuccess:NO withValue:value error:convertError];
         return NO;
     }
-    
-    BOOL success = YES;
-    if (self.checkingDisplayedValueAutomatically) {
-        if (! [self.bindingInformation checkValue:value withError:pError]) {
-            success = NO;
-        }
-    }
-    
-    if (self.updatingModelAutomatically) {
-        if (! [self.bindingInformation updateWithValue:value error:pError]) {
-            success = NO;
-        }
-    }
-    
-    return success;
 }
 
 @end
