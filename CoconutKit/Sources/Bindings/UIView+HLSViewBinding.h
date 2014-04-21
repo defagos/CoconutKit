@@ -199,6 +199,15 @@
  */
 - (BOOL)updateModelWithError:(NSError **)pError;
 
+/**
+ * If this property has been set, the bound value is automatically updated when the value displayed by the view is
+ * changed.
+ *
+ * The default value is NO. This provides for finer-grained control over when you want to check the model, which is
+ * achieved by calling -updateModelWithError: on a top view. If you want the model object to be immediately updated
+ * when the view contents change, set this property to YES. If this property is set to YES for all views, then calling
+ * -updateModelWithError: is not needed
+ */
 @property (nonatomic, assign, getter=isCheckingDisplayedValueAutomatically) BOOL checkingDisplayedValueAutomatically;
 
 /**
@@ -206,9 +215,9 @@
  * changed.
  *
  * The default value is NO. This provides for finer-grained control over when you want to update the model, which is
- * achieved by calling -updateModelWithError: on a top view. If you want the model object to be immediately updated 
- * when the view contents change, set this property to YES. If this property is set to YES for all views, then calling 
- * -updateModelWithError:exhaustive: is not needed
+ * achieved by calling -checkDisplayedValuesExhaustive:withError: on a top view. If you want the model object to be 
+ * immediately checked when the view contents change, set this property to YES. If this property is set to YES for all 
+ * views, then calling -checkDisplayedValuesExhaustive:withError: is not needed
  */
 @property (nonatomic, assign, getter=isUpdatingModelAutomatically) BOOL updatingModelAutomatically;
 
@@ -223,6 +232,14 @@
  */
 @interface UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+/**
+ * View subclasses which want to provide update of bound values when the value they display change must call this
+ * method in their implementation to update and check the underlying value (whether this actually happens depends
+ * on the checkingDisplayedValueAutomatically and updatingModelAutomatically values)
+ *
+ * The methods returns YES iff the value could be updated and successfully checked. Errors are returned to the
+ * binding delegate as well as to the caller. Update is made first. If it fails, then no check is made
+ */
+- (BOOL)updateAndCheckModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
 
 @end

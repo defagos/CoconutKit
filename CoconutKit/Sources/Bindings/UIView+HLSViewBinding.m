@@ -335,8 +335,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     if (pError) {
         *pError = error;
     }
-    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     
+    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     return NO;
 }
 
@@ -352,14 +352,15 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
         if ([self.bindingInformation updateWithValue:value error:&error]) {
             [self.bindingInformation notifySuccess:YES withValue:value error:nil];
+            return YES;
         }
     }
     
     if (pError) {
         *pError = error;
     }
-    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     
+    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     return NO;
 }
 
@@ -367,7 +368,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @implementation UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+- (BOOL)updateAndCheckModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
         // No binding, nothing to do
@@ -375,49 +376,22 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     id value = nil;
-    NSError *convertError = nil;
+    NSError *error = nil;
+    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
+        if (! self.updatingModelAutomatically || [self.bindingInformation updateWithValue:value error:&error]) {
+            if (! self.checkingDisplayedValueAutomatically || [self.bindingInformation checkValue:value withError:&error]) {
+                [self.bindingInformation notifySuccess:YES withValue:value error:nil];
+                return YES;
+            }
+        }
+    }
     
-    NSMutableArray *errors = [NSMutableArray array];
-    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&convertError]) {
-        BOOL success = YES;
-        
-        NSError *checkError = nil;
-        if (self.checkingDisplayedValueAutomatically) {
-            if (! [self.bindingInformation checkValue:value withError:&checkError]) {
-                [errors addObject:checkError];
-                success = NO;
-            }
-        }
-        
-        NSError *updateError = nil;
-        if (self.updatingModelAutomatically) {
-            if (! [self.bindingInformation updateWithValue:value error:&updateError]) {
-                [errors addObject:updateError];
-                success = NO;
-            }
-        }
-        
-        NSError *error = nil;
-        if ([errors count] > 1) {
-            error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                        code:HLSErrorValidationMultipleErrors];
-            [error addObjects:errors forKey:HLSDetailedErrorsKey];
-        }
-        else {
-            error = [errors firstObject];
-        }
-        
-        if (pError) {
-            *pError = error;
-        }
-        
-        [self.bindingInformation notifySuccess:success withValue:value error:error];
-        return success;
+    if (pError) {
+        *pError = error;
     }
-    else {
-        [self.bindingInformation notifySuccess:NO withValue:value error:convertError];
-        return NO;
-    }
+    
+    [self.bindingInformation notifySuccess:NO withValue:value error:error];
+    return NO;
 }
 
 @end
