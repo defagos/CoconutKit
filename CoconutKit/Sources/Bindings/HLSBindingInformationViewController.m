@@ -47,17 +47,25 @@
 - (id)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.names = @[CoconutKitLocalizedString(@"Object", nil),
+        self.names = @[CoconutKitLocalizedString(@"Binding status", nil),
                        CoconutKitLocalizedString(@"Key path", nil),
-                       CoconutKitLocalizedString(@"Check automatically", nil),
-                       CoconutKitLocalizedString(@"Update automatically", nil),
-                       CoconutKitLocalizedString(@"Value", nil),
-                       CoconutKitLocalizedString(@"Raw value", nil),
                        CoconutKitLocalizedString(@"Transformer name", nil),
+                       CoconutKitLocalizedString(@"Resolved bound object", nil),
+                       CoconutKitLocalizedString(@"Resolved binding delegate", nil),
+                       CoconutKitLocalizedString(@"Formatted value", nil),
+                       CoconutKitLocalizedString(@"Raw value", nil),
                        CoconutKitLocalizedString(@"Resolved transformation target", nil),
                        CoconutKitLocalizedString(@"Resolved transformation selector", nil),
-                       CoconutKitLocalizedString(@"Delegate", nil),
-                       CoconutKitLocalizedString(@"Description", nil)];
+                       CoconutKitLocalizedString(@"Check automatically", nil),
+                       CoconutKitLocalizedString(@"Update automatically", nil)];
+        
+        NSString *statusString = nil;
+        if (bindingInformation.verified) {
+            statusString = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
+        }
+        else {
+            statusString = bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
+        }
         
         NSString *transformationSelectorString = nil;
         if (bindingInformation.transformationSelector) {
@@ -68,25 +76,17 @@
             transformationSelectorString = @"-";
         }
         
-        NSString *statusString = nil;
-        if (bindingInformation.verified) {
-            statusString = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
-        }
-        else {
-            statusString = bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
-        }
-        
-        self.objects = @[bindingInformation.object ?: [NSNull null],
+        self.objects = @[statusString,
                          bindingInformation.keyPath ?: @"-",
-                         HLSStringFromBool(bindingInformation.view.checkingDisplayedValueAutomatically),
-                         HLSStringFromBool(bindingInformation.view.updatingModelAutomatically),
+                         bindingInformation.transformerName ?: @"-",
+                         bindingInformation.object ?: [NSNull null],
+                         bindingInformation.delegate ?: (id)[NSNull null],
                          [bindingInformation value] ?: [NSNull null],
                          [bindingInformation rawValue] ?: [NSNull null],
-                         bindingInformation.transformerName ?: @"-",
                          bindingInformation.transformationTarget ?: [NSNull null],
                          transformationSelectorString,
-                         bindingInformation.delegate ?: (id)[NSNull null],
-                         statusString];
+                         HLSStringFromBool(bindingInformation.view.checkingDisplayedValueAutomatically),
+                         HLSStringFromBool(bindingInformation.view.updatingModelAutomatically)];
         
         NSAssert([self.names count] == [self.objects count], @"Expect the same number of names and objects");
     }
