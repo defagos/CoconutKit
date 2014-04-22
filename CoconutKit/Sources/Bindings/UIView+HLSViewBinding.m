@@ -225,7 +225,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    NSAssert([self respondsToSelector:@selector(updateViewWithValue:)], @"Binding could only be made it -updateWithValue: is implemented");
+    NSAssert([self respondsToSelector:@selector(updateViewWithValue:)], @"Binding could only be made it -updateViewWithValue: is implemented");
     
     id value = [self.bindingInformation value];
     [self performSelector:@selector(updateViewWithValue:) withObject:value];

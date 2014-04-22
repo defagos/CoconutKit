@@ -104,6 +104,7 @@
         NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
         
         if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
+            // TODO: Check method availability, return error if not available
             if (! [transformer getObject:&value fromObject:transformedValue error:pError]) {
                 return NO;
             }

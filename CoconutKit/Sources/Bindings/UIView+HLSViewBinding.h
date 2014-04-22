@@ -59,14 +59,8 @@
  *       - class method +methodName on the responder object
  * In addition, global transformer names can be provided in the form of class methods '+[SomeClass methodName]'
  *
- * TODO: Rewrite: Validation and update are independent
- *    When setting the value associated with a bound view, validation can be automatically performed (if a validation
- *    method has been defined, see NSKeyValueCoding category on NSObject). Transformation and validation success
- *    or failure is reported to a validation delegate, so that the corresponding status can be reported interactively.
- *    A binding delegate conforming to the HLSBindingDelegate protocol is automatically looked
- *
  * The binding information is resolved as late as possible (usually when the view is displayed),i.e.  when the whole
- * repsonder chain context is available. This information is then stored for efficient later use. The view is not 
+ * responder chain context is available. This information is then stored for efficient later use. The view is not
  * updated automatically when the underlying bound objects changes, this has to be done manually:
  *   - when the object is changed, call -bindToObject: to set bindings with the new object
  *   - if the object does not change but has different values for its bounds properties, simply call -refreshBindingsForced:
@@ -85,10 +79,16 @@
  * called. Though you should in general avoid such designs, you can still bind nested views correctly by 
  * calling -bindToObject: on parent views first.
  *
- * TODO: Document validation and sync in the other direction (when available)
- *       Warning:
- *         - bidirectional bindings are not compatible with all keypaths (e.g. keypaths containing operators). This
- *           has to be checked when trying to resolve bindings
+ * Bindings can also be used to update a model with the value displayed by a bound view, provided the keypath supports
+ * it (keypaths containing operators obviously do not provide such capabilities). Values can be transferred to the model 
+ * either manually by calling -updateModelWithError: on a top view, or automatically by setting the updatingModelAutomatically 
+ * property to YES (the default value is NO). As for display, a required attached transformer might be needed if the value 
+ * to be displayed is not natively supported by the view (+supportedBindingClasses method). Bound fields can also be 
+ * validated by calling -checkDisplayedValuesExhaustive:withError: on a top view. Update and check status (including any 
+ * errors which might be encountered) are reported to a binding delegate. The binding delegate of a bound view is resolved 
+ * by looking along the responder chain starting with the view for a class conforming to the HLSBindingDelegate protocol.
+ *
+ * TODO: Document validation via -validate and soon-to-be-implemented -check methods
  *
  * Here is how UIKit view classes play with bindings:
  *   - UILabel: The label displays the value which the keypath points at. Bindings are not recursive. The only 
@@ -105,6 +105,11 @@
  *   - UITextView: <explain>
  *   - UIWebView: <explain>
  *
+ * CoconutKit classes support bindings as well:
+ *   - HLSCursor: <explain>
+ *   - HLSLabel: Automatic, as subclass of UILabel
+ *   - HLSTextField: Automatic, as subclass of UITextField
+ *
  * You can customize the binding behavior for other UIView subclasses (whether these classes are your own or stem
  * from a 3rd party library) by implementing the HLSViewBinding protocol. For views which must be able to update
  * the underlying object when the value they display change, call methods from the HLSViewBindingUpdateImplementation
@@ -113,7 +118,7 @@
  */
 
 /**
- * This protocol can be implemented by UIView subclasses to customize binding behavior 
+ * This protocol can be implemented by UIView subclasses to customize binding behavior
  */
 @protocol HLSViewBinding <NSObject>
 
@@ -147,8 +152,6 @@
  * UIView subclasses which want to be able to update the underlying model must implement this method, returning
  * the currently displayed value. The type of the returned value must be one of the classes declared by
  * +supportedBindingClasses
- *
- * TODO: Add corresponding type checks in the implementation
  */
 - (id)displayedValue;
 
