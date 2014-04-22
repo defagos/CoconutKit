@@ -13,12 +13,16 @@
 #import "HLSInfoTableViewCell.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "HLSTransformer.h"
 #import "NSBundle+HLSExtensions.h"
+#import "UIView+HLSViewBinding.h"
 
 typedef enum {
     BindingInformationEnumBegin = 0,
     BindingInformationObject = BindingInformationEnumBegin,
     BindingInformationKeyPath,
+    BindingInformationCheckingDisplayedValueAutomatically,
+    BindingInformationUpdatingModelAutomatically,
     BindingInformationValue,
     BindingInformationRawValue,
     BindingInformationTransformerName,
@@ -77,7 +81,7 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    self.contentSizeForViewInPopover = CGSizeMake(320.f, 678.f);
+    self.contentSizeForViewInPopover = CGSizeMake(320.f, 640.f);
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -121,6 +125,18 @@ typedef enum {
         case BindingInformationKeyPath: {
             name = CoconutKitLocalizedString(@"Key path", nil);
             value = self.bindingInformation.keyPath ?: @"-";
+            break;
+        }
+            
+        case BindingInformationCheckingDisplayedValueAutomatically: {
+            name = CoconutKitLocalizedString(@"Check automatically", nil);
+            value = HLSStringFromBool(self.bindingInformation.view.checkingDisplayedValueAutomatically);
+            break;
+        }
+            
+        case BindingInformationUpdatingModelAutomatically: {
+            name = CoconutKitLocalizedString(@"Update automatically", nil);
+            value = HLSStringFromBool(self.bindingInformation.view.updatingModelAutomatically);
             break;
         }
             

@@ -11,6 +11,7 @@
 #import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"

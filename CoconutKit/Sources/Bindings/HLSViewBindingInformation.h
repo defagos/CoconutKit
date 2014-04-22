@@ -63,6 +63,8 @@
  */
 @property (nonatomic, readonly, strong) NSString *keyPath;
 
+@property (nonatomic, readonly, weak) UIView *view;
+
 /**
  * Return the transformer to use, nil if none
  */
