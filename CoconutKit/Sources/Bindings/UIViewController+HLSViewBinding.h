@@ -6,9 +6,6 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-// TODO: Document difference between bindings on views or VCs (views: recursive, unless disabled; view controllers: stop at
-//       view controller boundaries)
-
 @interface UIViewController (HLSViewBinding)
 
 // If recursive set to YES, display binding information for child view controllers as well
@@ -18,5 +15,9 @@
 - (void)bindToObject:(id)object;
 
 - (void)refreshBindingsForced:(BOOL)forced;
+
+- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError;
+
+- (BOOL)updateModelWithError:(NSError **)pError;
 
 @end

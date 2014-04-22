@@ -47,6 +47,16 @@ static void *s_boundObjectKey = &s_boundObjectKey;
     [[self viewIfLoaded] refreshBindingsForced:forced];
 }
 
+- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError
+{
+    return [[self viewIfLoaded] checkDisplayedValuesExhaustive:exhaustive withError:pError];
+}
+
+- (BOOL)updateModelWithError:(NSError **)pError
+{
+    return [[self viewIfLoaded] updateModelWithError:pError];
+}
+
 @end
 
 @implementation UIViewController (HLSViewBindingPrivate)
