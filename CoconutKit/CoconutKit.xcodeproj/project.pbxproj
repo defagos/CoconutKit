@@ -14,8 +14,6 @@
 		6F10E389179FFE2B00BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E387179FFE2B00BFEF42 /* HLSViewTouchDetector.m */; };
 		6F132E4018E6DD410070CE86 /* UISegmentedControl+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F132E3E18E6DD400070CE86 /* UISegmentedControl+HLSViewBinding.h */; };
 		6F132E4118E6DD410070CE86 /* UISegmentedControl+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F132E3F18E6DD410070CE86 /* UISegmentedControl+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6F1A54DB184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F1A54D9184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.h */; };
-		6F1A54DC184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A54DA184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F216F14184C57F3009CE6CD /* UIView+HLSViewBindingFriend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F216F13184C57F3009CE6CD /* UIView+HLSViewBindingFriend.h */; };
 		6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */; };
 		6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */; };
@@ -305,8 +303,6 @@
 		6F10E387179FFE2B00BFEF42 /* HLSViewTouchDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewTouchDetector.m; sourceTree = "<group>"; };
 		6F132E3E18E6DD400070CE86 /* UISegmentedControl+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+HLSViewBinding.h"; sourceTree = "<group>"; };
 		6F132E3F18E6DD410070CE86 /* UISegmentedControl+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+HLSViewBinding.m"; sourceTree = "<group>"; };
-		6F1A54D9184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSDetailedInfoTableViewCell.h; sourceTree = "<group>"; };
-		6F1A54DA184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSDetailedInfoTableViewCell.m; sourceTree = "<group>"; };
 		6F216F13184C57F3009CE6CD /* UIView+HLSViewBindingFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBindingFriend.h"; sourceTree = "<group>"; };
 		6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
@@ -899,8 +895,6 @@
 				6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE56A14BA0494007EE121 /* HLSCursor.h */,
 				6FADE56B14BA0494007EE121 /* HLSCursor.m */,
-				6F1A54D9184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.h */,
-				6F1A54DA184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.m */,
 				6F5007E91585E16300391A6C /* HLSExpandingSearchBar.h */,
 				6F5007EA1585E16300391A6C /* HLSExpandingSearchBar.m */,
 				6F7BBCC4184EF4F000567573 /* HLSInfoTableViewCell.h */,
@@ -1145,7 +1139,6 @@
 				6F216F14184C57F3009CE6CD /* UIView+HLSViewBindingFriend.h in Headers */,
 				6F8379C5184DA2EE00C0BBF3 /* HLSBindingInformationViewController.h in Headers */,
 				6F7BBCC6184EF4F000567573 /* HLSInfoTableViewCell.h in Headers */,
-				6F1A54DB184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1366,7 +1359,6 @@
 				6F3FF25F184C4EE7000CEEA7 /* HLSBindingDebugOverlayViewController.m in Sources */,
 				6F8379C6184DA2EE00C0BBF3 /* HLSBindingInformationViewController.m in Sources */,
 				6F7BBCC7184EF4F000567573 /* HLSInfoTableViewCell.m in Sources */,
-				6F1A54DC184EF5D8005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

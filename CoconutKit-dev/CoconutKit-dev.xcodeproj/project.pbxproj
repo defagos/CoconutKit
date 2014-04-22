@@ -49,7 +49,6 @@
 		6F132E3718E6DC330070CE86 /* ControlBindingsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F132E3518E6DC330070CE86 /* ControlBindingsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F132E3818E6DC330070CE86 /* ControlBindingsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F132E3618E6DC330070CE86 /* ControlBindingsDemoViewController.xib */; };
 		6F132E4418E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F132E4318E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6F1A54E1184EF630005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F1A54E2184EF630005372B7 /* HLSInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A54E0184EF630005372B7 /* HLSInfoTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F1F4E0515A1B64700F65ECF /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */; };
 		6F1F4E0615A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DFA15A1B64700F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
@@ -392,8 +391,6 @@
 		6F132E3618E6DC330070CE86 /* ControlBindingsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlBindingsDemoViewController.xib; sourceTree = "<group>"; };
 		6F132E4218E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+HLSViewBinding.h"; sourceTree = "<group>"; };
 		6F132E4318E6DDD90070CE86 /* UISegmentedControl+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+HLSViewBinding.m"; sourceTree = "<group>"; };
-		6F1A54DD184EF630005372B7 /* HLSDetailedInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSDetailedInfoTableViewCell.h; sourceTree = "<group>"; };
-		6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSDetailedInfoTableViewCell.m; sourceTree = "<group>"; };
 		6F1A54DF184EF630005372B7 /* HLSInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInfoTableViewCell.h; sourceTree = "<group>"; };
 		6F1A54E0184EF630005372B7 /* HLSInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInfoTableViewCell.m; sourceTree = "<group>"; };
 		6F1F4DF815A1B64700F65ECF /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
@@ -1476,8 +1473,6 @@
 				6F91451F14CE7E6100AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE68514BA04A6007EE121 /* HLSCursor.h */,
 				6FADE68614BA04A6007EE121 /* HLSCursor.m */,
-				6F1A54DD184EF630005372B7 /* HLSDetailedInfoTableViewCell.h */,
-				6F1A54DE184EF630005372B7 /* HLSDetailedInfoTableViewCell.m */,
 				6F5007ED1585E17400391A6C /* HLSExpandingSearchBar.h */,
 				6F5007EE1585E17400391A6C /* HLSExpandingSearchBar.m */,
 				6F1A54DF184EF630005372B7 /* HLSInfoTableViewCell.h */,
@@ -2431,7 +2426,6 @@
 				6F45AF6F18335EB3002FF0ED /* DemoTransformer.m in Sources */,
 				6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m in Sources */,
 				6F8379C2184DA2E400C0BBF3 /* HLSBindingInformationViewController.m in Sources */,
-				6F1A54E1184EF630005372B7 /* HLSDetailedInfoTableViewCell.m in Sources */,
 				6F1A54E2184EF630005372B7 /* HLSInfoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

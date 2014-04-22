@@ -11,7 +11,9 @@
 
 @interface HLSInfoTableViewCell : HLSTableViewCell
 
++ (CGFloat)heightForValue:(NSString *)value;
+
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet HLSLabel *valueLabel;
+@property (nonatomic, weak) IBOutlet UILabel *valueLabel;
 
 @end

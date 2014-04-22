@@ -19,4 +19,15 @@
     return [DemoTransformer decimalNumberFormatter];
 }
 
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; fullName: %@; age: %@>",
+            [self class],
+            self,
+            self.fullName,
+            self.age];
+}
+
 @end

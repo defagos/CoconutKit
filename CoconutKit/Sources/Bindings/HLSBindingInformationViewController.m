@@ -9,7 +9,6 @@
 #import "HLSBindingInformationViewController.h"
 
 #import "HLSAssert.h"
-#import "HLSDetailedInfoTableViewCell.h"
 #import "HLSInfoTableViewCell.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
@@ -17,26 +16,10 @@
 #import "NSBundle+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 
-typedef enum {
-    BindingInformationEnumBegin = 0,
-    BindingInformationObject = BindingInformationEnumBegin,
-    BindingInformationKeyPath,
-    BindingInformationCheckingDisplayedValueAutomatically,
-    BindingInformationUpdatingModelAutomatically,
-    BindingInformationValue,
-    BindingInformationRawValue,
-    BindingInformationTransformerName,
-    BindingInformationTransformationTarget,
-    BindingInformationTransformationSelector,
-    BindingInformationDelegate,
-    BindingInformationErrorDescription,
-    BindingInformationEnumEnd,
-    BindingInformationEnumSize = BindingInformationEnumEnd - BindingInformationEnumBegin
-} BindingInformation;
-
 @interface HLSBindingInformationViewController ()
 
-@property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
+@property (nonatomic, strong) NSArray *names;
+@property (nonatomic, strong) NSArray *values;
 
 @end
 
@@ -64,7 +47,48 @@ typedef enum {
 - (id)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.bindingInformation = bindingInformation;
+        self.names = @[CoconutKitLocalizedString(@"Object", nil),
+                       CoconutKitLocalizedString(@"Key path", nil),
+                       CoconutKitLocalizedString(@"Check automatically", nil),
+                       CoconutKitLocalizedString(@"Update automatically", nil),
+                       CoconutKitLocalizedString(@"Value", nil),
+                       CoconutKitLocalizedString(@"Raw value", nil),
+                       CoconutKitLocalizedString(@"Transformer name", nil),
+                       CoconutKitLocalizedString(@"Resolved transformation target", nil),
+                       CoconutKitLocalizedString(@"Resolved transformation selector", nil),
+                       CoconutKitLocalizedString(@"Delegate", nil),
+                       CoconutKitLocalizedString(@"Description", nil)];
+        
+        NSString *transformationSelector = nil;
+        if (bindingInformation.transformationSelector) {
+            transformationSelector = [NSString stringWithFormat:@"%@%@", hls_isClass(bindingInformation.transformationTarget) ? @"+" : @"-",
+                                      NSStringFromSelector(bindingInformation.transformationSelector)];
+        }
+        else {
+            transformationSelector = @"-";
+        }
+        
+        NSString *status = nil;
+        if (bindingInformation.verified) {
+            status = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
+        }
+        else {
+            status = bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
+        }
+        
+        self.values = @[[HLSBindingInformationViewController identityStringForObject:bindingInformation.object],
+                        bindingInformation.keyPath ?: @"-",
+                        HLSStringFromBool(bindingInformation.view.checkingDisplayedValueAutomatically),
+                        HLSStringFromBool(bindingInformation.view.updatingModelAutomatically),
+                        [HLSBindingInformationViewController identityStringForObject:[bindingInformation value]],
+                        [HLSBindingInformationViewController identityStringForObject:[bindingInformation rawValue]],
+                        bindingInformation.transformerName ?: @"-",
+                        [HLSBindingInformationViewController identityStringForObject:bindingInformation.transformationTarget],
+                        transformationSelector,
+                        [HLSBindingInformationViewController identityStringForObject:bindingInformation.delegate],
+                        status];
+        
+        NSAssert([self.names count] == [self.values count], @"Expect the same number of names and values");
     }
     return self;
 }
@@ -88,138 +112,27 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return BindingInformationEnumSize;
+    return [self.names count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-        case BindingInformationObject:
-        case BindingInformationTransformationTarget:
-        case BindingInformationErrorDescription: {
-            return [HLSDetailedInfoTableViewCell cellForTableView:tableView];
-            break;
-        }
-            
-        default: {
-            return [HLSInfoTableViewCell cellForTableView:tableView];
-            break;
-        }
-    }
+    return [HLSInfoTableViewCell cellForTableView:tableView];
 }
 
 #pragma mark UITableViewDelegate protocol implementation
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *name = nil;
-    NSString *value = nil;
-    
-    switch (indexPath.row) {
-        case BindingInformationObject: {
-            name = CoconutKitLocalizedString(@"Object", nil);
-            value = [HLSBindingInformationViewController identityStringForObject:self.bindingInformation.object];
-            break;
-        }
-            
-        case BindingInformationKeyPath: {
-            name = CoconutKitLocalizedString(@"Key path", nil);
-            value = self.bindingInformation.keyPath ?: @"-";
-            break;
-        }
-            
-        case BindingInformationCheckingDisplayedValueAutomatically: {
-            name = CoconutKitLocalizedString(@"Check automatically", nil);
-            value = HLSStringFromBool(self.bindingInformation.view.checkingDisplayedValueAutomatically);
-            break;
-        }
-            
-        case BindingInformationUpdatingModelAutomatically: {
-            name = CoconutKitLocalizedString(@"Update automatically", nil);
-            value = HLSStringFromBool(self.bindingInformation.view.updatingModelAutomatically);
-            break;
-        }
-            
-        case BindingInformationValue: {
-            name = CoconutKitLocalizedString(@"Value", nil);
-            value = [HLSBindingInformationViewController identityStringForObject:[self.bindingInformation value]];
-            break;
-        }
-            
-        case BindingInformationRawValue: {
-            name = CoconutKitLocalizedString(@"Raw value", nil);
-            value = [HLSBindingInformationViewController identityStringForObject:[self.bindingInformation rawValue]];
-            break;
-        }
-            
-        case BindingInformationTransformerName: {
-            name = CoconutKitLocalizedString(@"Transformer name", nil);
-            value = self.bindingInformation.transformerName ?: @"-";
-            break;
-        }
-            
-        case BindingInformationTransformationTarget: {
-            name = CoconutKitLocalizedString(@"Resolved transformation target", nil);
-            value = [HLSBindingInformationViewController identityStringForObject:self.bindingInformation.transformationTarget];
-            break;
-        }
-            
-        case BindingInformationTransformationSelector: {
-            name = CoconutKitLocalizedString(@"Resolved transformation selector", nil);
-            if (self.bindingInformation.transformationSelector) {
-                value = [NSString stringWithFormat:@"%@%@", hls_isClass(self.bindingInformation.transformationTarget) ? @"+" : @"-",
-                         NSStringFromSelector(self.bindingInformation.transformationSelector)];
-            }
-            else {
-                value = @"-";
-            }
-            break;
-        }
-            
-        case BindingInformationDelegate: {
-            name = CoconutKitLocalizedString(@"Delegate", nil);
-            value = [HLSBindingInformationViewController identityStringForObject:self.bindingInformation.delegate];
-            break;
-        }
-            
-        case BindingInformationErrorDescription: {
-            name = CoconutKitLocalizedString(@"Description", nil);
-            if (self.bindingInformation.verified) {
-                value = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
-            }
-            else {
-                value = self.bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
-            }
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown cell index");
-            break;
-        }
-    }
-    
     HLSInfoTableViewCell *infoCell = (HLSInfoTableViewCell *)cell;
-    infoCell.nameLabel.text = name;
-    infoCell.valueLabel.text = value;
+    infoCell.nameLabel.text = [self.names objectAtIndex:indexPath.row];
+    infoCell.valueLabel.text = [self.values objectAtIndex:indexPath.row];
     infoCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
-        case BindingInformationObject:
-        case BindingInformationTransformationTarget:
-        case BindingInformationErrorDescription: {
-            return [HLSDetailedInfoTableViewCell height];
-            break;
-        }
-            
-        default: {
-            return [HLSInfoTableViewCell height];
-            break;
-        }
-    }
+    return [HLSInfoTableViewCell heightForValue:[self.values objectAtIndex:indexPath.row]];
 }
 
 @end
