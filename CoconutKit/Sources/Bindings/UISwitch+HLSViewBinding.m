@@ -23,7 +23,7 @@ static id swizzled_UISwitch__initWithFrame_Imp(UISwitch *self, SEL _cmd, CGRect 
 static id swizzled_UISwitch__initWithCoder_Imp(UISwitch *self, SEL _cmd, NSCoder *aDecoder);
 static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL on, BOOL animated);
 
-@implementation UISwitch (HLSViewBinding)
+@implementation UISwitch (HLSViewBindingImplementation)
 
 #pragma mark Class methods
 
@@ -40,7 +40,7 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
                                                                                               (IMP)swizzled_UISwitch__setOn_animated_Imp);
 }
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 + (NSArray *)supportedBindingClasses
 {

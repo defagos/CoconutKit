@@ -11,6 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "HLSViewBindingInformation.h"
+#import "UIView+HLSViewBindingImplementation.h"
 #import "NSError+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSViewBindingFriend.h"
@@ -366,7 +367,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @end
 
-@implementation UIView (HLSViewBindingUpdateImplementation)
+@implementation UIView (HLSViewBindingImplementation)
 
 - (BOOL)updateAndCheckModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {

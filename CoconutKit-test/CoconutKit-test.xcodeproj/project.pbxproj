@@ -308,6 +308,7 @@
 		6F63E7CC17CF6E76006322D9 /* HLSPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPreviewItem.m; sourceTree = "<group>"; };
 		6F66181616C14B5E00303628 /* UIView+HLSRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSRuntimeAttributes.h"; sourceTree = "<group>"; };
 		6F66181716C14B5E00303628 /* UIView+HLSRuntimeAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSRuntimeAttributes.m"; sourceTree = "<group>"; };
+		6F689E6A190651E900081F4D /* UIView+HLSViewBindingImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBindingImplementation.h"; sourceTree = "<group>"; };
 		6F6C0A18159B965E007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
 		6F6C0A19159B965E007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
 		6F6E815517CF074300CE578A /* HLSLoggerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLoggerViewController.h; sourceTree = "<group>"; };
@@ -807,6 +808,7 @@
 				6F45AFC4183363D4002FF0ED /* UIView+HLSViewBinding.h */,
 				6F45AFC5183363D4002FF0ED /* UIView+HLSViewBinding.m */,
 				6F216F15184C57F8009CE6CD /* UIView+HLSViewBindingFriend.h */,
+				6F689E6A190651E900081F4D /* UIView+HLSViewBindingImplementation.h */,
 				6F45AFC6183363D4002FF0ED /* UIViewController+HLSViewBinding.h */,
 				6F45AFC7183363D4002FF0ED /* UIViewController+HLSViewBinding.m */,
 				6F45AFC8183363D4002FF0ED /* UIViewController+HLSViewBindingFriend.h */,

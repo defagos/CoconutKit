@@ -8,9 +8,9 @@
 
 #import "UITextView+HLSViewBinding.h"
 
-@implementation UITextView (HLSViewBinding)
+@implementation UITextView (HLSViewBindingImplementation)
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 - (void)updateViewWithValue:(id)value
 {

@@ -8,9 +8,9 @@
 
 #import "UITableView+HLSViewBinding.h"
 
-@implementation UITableView (HLSViewBinding)
+@implementation UITableView (HLSViewBindingImplementation)
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 - (BOOL)bindsSubviewsRecursively
 {

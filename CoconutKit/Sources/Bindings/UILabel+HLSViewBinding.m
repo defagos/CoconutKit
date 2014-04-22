@@ -8,9 +8,9 @@
 
 #import "UILabel+HLSViewBinding.h"
 
-@implementation UILabel (HLSViewBinding)
+@implementation UILabel (HLSViewBindingImplementation)
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 - (void)updateViewWithValue:(id)value
 {

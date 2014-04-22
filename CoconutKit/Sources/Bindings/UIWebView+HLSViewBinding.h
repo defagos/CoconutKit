@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "UIView+HLSViewBinding.h"
+#import "UIView+HLSViewBindingImplementation.h"
 
 /**
  * Private category implementing binding behavior for UIWebView
  */
-@interface UIWebView (HLSViewBinding) <HLSViewBinding>
+@interface UIWebView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

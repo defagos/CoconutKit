@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-@interface UIProgressView (HLSViewBinding)
+#import "UIView+HLSViewBindingImplementation.h"
+
+@interface UIProgressView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

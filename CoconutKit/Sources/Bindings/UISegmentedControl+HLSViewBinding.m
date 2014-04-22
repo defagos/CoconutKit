@@ -8,9 +8,9 @@
 
 #import "UISegmentedControl+HLSViewBinding.h"
 
-@implementation UISegmentedControl (HLSViewBinding)
+@implementation UISegmentedControl (HLSViewBindingImplementation)
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 + (NSArray *)supportedBindingClasses
 {

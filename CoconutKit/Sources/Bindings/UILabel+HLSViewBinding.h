@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-#import "UIView+HLSViewBinding.h"
+#import "UIView+HLSViewBindingImplementation.h"
 
 /**
  * Private category implementing binding behavior for UILabel
  */
-@interface UILabel (HLSViewBinding) <HLSViewBinding>
+@interface UILabel (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

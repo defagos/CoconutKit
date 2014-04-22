@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-@interface UITextField (HLSViewBinding)
+#import "UIView+HLSViewBindingImplementation.h"
+
+@interface UITextField (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

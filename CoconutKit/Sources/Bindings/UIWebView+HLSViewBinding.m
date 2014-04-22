@@ -8,9 +8,9 @@
 
 #import "UIWebView+HLSViewBinding.h"
 
-@implementation UIWebView (HLSViewBinding)
+@implementation UIWebView (HLSViewBindingImplementation)
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 - (BOOL)bindsSubviewsRecursively
 {

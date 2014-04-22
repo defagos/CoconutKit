@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-@interface UISwitch (HLSViewBinding)
+#import "UIView+HLSViewBindingImplementation.h"
+
+@interface UISwitch (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

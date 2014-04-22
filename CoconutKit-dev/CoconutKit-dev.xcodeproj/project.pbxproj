@@ -531,6 +531,7 @@
 		6F63E7C917CF6E56006322D9 /* HLSPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPreviewItem.m; sourceTree = "<group>"; };
 		6F66181916C14B7300303628 /* UIView+HLSRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSRuntimeAttributes.h"; sourceTree = "<group>"; };
 		6F66181A16C14B7400303628 /* UIView+HLSRuntimeAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSRuntimeAttributes.m"; sourceTree = "<group>"; };
+		6F689E67190651D600081F4D /* UIView+HLSViewBindingImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBindingImplementation.h"; sourceTree = "<group>"; };
 		6F6B0C7E16B3D866006B718F /* InnerBundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InnerBundle.xcodeproj; path = "../CoconutKit-demo/InnerBundle/InnerBundle.xcodeproj"; sourceTree = "<group>"; };
 		6F6B0C9816B3DAB5006B718F /* InnerFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = InnerFolder; path = "../CoconutKit-demo/InnerFolder"; sourceTree = "<group>"; };
 		6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
@@ -1148,6 +1149,7 @@
 				6F45AF1618335D36002FF0ED /* UIView+HLSViewBinding.h */,
 				6F45AF1718335D36002FF0ED /* UIView+HLSViewBinding.m */,
 				6F216F16184C5807009CE6CD /* UIView+HLSViewBindingFriend.h */,
+				6F689E67190651D600081F4D /* UIView+HLSViewBindingImplementation.h */,
 				6F45AF1818335D36002FF0ED /* UIViewController+HLSViewBinding.h */,
 				6F45AF1918335D36002FF0ED /* UIViewController+HLSViewBinding.m */,
 				6F45AF1A18335D36002FF0ED /* UIViewController+HLSViewBindingFriend.h */,

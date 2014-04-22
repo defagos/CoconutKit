@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-@interface UISegmentedControl (HLSViewBinding)
+#import "UIView+HLSViewBindingImplementation.h"
+
+@interface UISegmentedControl (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

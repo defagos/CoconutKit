@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-@interface UISlider (HLSViewBinding)
+#import "UIView+HLSViewBindingImplementation.h"
+
+@interface UISlider (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

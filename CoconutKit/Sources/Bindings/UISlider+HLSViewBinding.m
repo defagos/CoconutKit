@@ -17,7 +17,7 @@ static void (*s_UISlider__didMoveToWindow_Imp)(id, SEL) = NULL;
 // Swizzled method implementations
 static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
 
-@implementation UISlider (HLSViewBinding)
+@implementation UISlider (HLSViewBindingImplementation)
 
 #pragma mark Class methods
 
@@ -34,7 +34,7 @@ static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
     }
 }
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 + (NSArray *)supportedBindingClasses
 {

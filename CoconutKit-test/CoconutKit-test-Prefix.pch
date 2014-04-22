@@ -114,6 +114,7 @@
     #import "UITextView+HLSExtensions.h"
     #import "UIView+HLSExtensions.h"
     #import "UIView+HLSViewBinding.h"
+    #import "UIView+HLSViewBindingImplementation.h"
     #import "UIViewController+HLSExtensions.h"
     #import "UIViewController+HLSViewBinding.h"
     #import "UIWebView+HLSExtensions.h"

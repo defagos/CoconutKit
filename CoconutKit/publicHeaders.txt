@@ -93,6 +93,7 @@ UITextField+HLSValidation.h
 UITextView+HLSExtensions.h
 UIView+HLSExtensions.h
 UIView+HLSViewBinding.h
+UIView+HLSViewBindingImplementation.h
 UIViewController+HLSExtensions.h
 UIViewController+HLSViewBinding.h
 UIWebView+HLSExtensions.h

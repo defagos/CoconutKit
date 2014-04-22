@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Hortis. All rights reserved.
 //
 
-@interface UITextView (HLSViewBinding)
+#import "UIView+HLSViewBindingImplementation.h"
+
+@interface UITextView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

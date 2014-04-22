@@ -8,9 +8,9 @@
 
 #import "UITextField+HLSViewBinding.h"
 
-@implementation UITextField (HLSViewBinding)
+@implementation UITextField (HLSViewBindingImplementation)
 
-#pragma mark HLSViewBinding protocol implementation
+#pragma mark HLSViewBindingImplementation protocol implementation
 
 - (void)updateViewWithValue:(id)value
 {
