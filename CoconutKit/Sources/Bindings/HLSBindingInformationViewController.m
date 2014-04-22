@@ -19,7 +19,7 @@
 @interface HLSBindingInformationViewController ()
 
 @property (nonatomic, strong) NSArray *names;
-@property (nonatomic, strong) NSArray *values;
+@property (nonatomic, strong) NSArray *objects;
 
 @end
 
@@ -29,7 +29,7 @@
 
 + (NSString *)identityStringForObject:(id)object
 {
-    if (! object) {
+    if (! object || object == [NSNull null]) {
         return @"-";
     }
     
@@ -59,36 +59,36 @@
                        CoconutKitLocalizedString(@"Delegate", nil),
                        CoconutKitLocalizedString(@"Description", nil)];
         
-        NSString *transformationSelector = nil;
+        NSString *transformationSelectorString = nil;
         if (bindingInformation.transformationSelector) {
-            transformationSelector = [NSString stringWithFormat:@"%@%@", hls_isClass(bindingInformation.transformationTarget) ? @"+" : @"-",
-                                      NSStringFromSelector(bindingInformation.transformationSelector)];
+            transformationSelectorString = [NSString stringWithFormat:@"%@%@", hls_isClass(bindingInformation.transformationTarget) ? @"+" : @"-",
+                                            NSStringFromSelector(bindingInformation.transformationSelector)];
         }
         else {
-            transformationSelector = @"-";
+            transformationSelectorString = @"-";
         }
         
-        NSString *status = nil;
+        NSString *statusString = nil;
         if (bindingInformation.verified) {
-            status = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
+            statusString = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
         }
         else {
-            status = bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
+            statusString = bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
         }
         
-        self.values = @[[HLSBindingInformationViewController identityStringForObject:bindingInformation.object],
-                        bindingInformation.keyPath ?: @"-",
-                        HLSStringFromBool(bindingInformation.view.checkingDisplayedValueAutomatically),
-                        HLSStringFromBool(bindingInformation.view.updatingModelAutomatically),
-                        [HLSBindingInformationViewController identityStringForObject:[bindingInformation value]],
-                        [HLSBindingInformationViewController identityStringForObject:[bindingInformation rawValue]],
-                        bindingInformation.transformerName ?: @"-",
-                        [HLSBindingInformationViewController identityStringForObject:bindingInformation.transformationTarget],
-                        transformationSelector,
-                        [HLSBindingInformationViewController identityStringForObject:bindingInformation.delegate],
-                        status];
+        self.objects = @[bindingInformation.object ?: [NSNull null],
+                         bindingInformation.keyPath ?: @"-",
+                         HLSStringFromBool(bindingInformation.view.checkingDisplayedValueAutomatically),
+                         HLSStringFromBool(bindingInformation.view.updatingModelAutomatically),
+                         [bindingInformation value] ?: [NSNull null],
+                         [bindingInformation rawValue] ?: [NSNull null],
+                         bindingInformation.transformerName ?: @"-",
+                         bindingInformation.transformationTarget ?: [NSNull null],
+                         transformationSelectorString,
+                         bindingInformation.delegate ?: (id)[NSNull null],
+                         statusString];
         
-        NSAssert([self.names count] == [self.values count], @"Expect the same number of names and values");
+        NSAssert([self.names count] == [self.objects count], @"Expect the same number of names and objects");
     }
     return self;
 }
@@ -106,6 +106,14 @@
     [super viewDidLoad];
     
     self.contentSizeForViewInPopover = CGSizeMake(320.f, 640.f);
+}
+
+#pragma mark Cell contents
+
+- (NSString *)valueAtIndexPath:(NSIndexPath *)indexPath
+{
+    id object = [self.objects objectAtIndex:indexPath.row];
+    return [object isKindOfClass:[NSString class]] ? object : [HLSBindingInformationViewController identityStringForObject:object];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -126,13 +134,43 @@
 {
     HLSInfoTableViewCell *infoCell = (HLSInfoTableViewCell *)cell;
     infoCell.nameLabel.text = [self.names objectAtIndex:indexPath.row];
-    infoCell.valueLabel.text = [self.values objectAtIndex:indexPath.row];
+    infoCell.valueLabel.text = [self valueAtIndexPath:indexPath];
     infoCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [HLSInfoTableViewCell heightForValue:[self.values objectAtIndex:indexPath.row]];
+    NSString *value = [self valueAtIndexPath:indexPath];
+    return [HLSInfoTableViewCell heightForValue:value];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIView *view = nil;
+    id object = [self.objects objectAtIndex:indexPath.row];
+    if ([object isKindOfClass:[UIView class]]) {
+        view = object;
+    }
+    else if ([object isKindOfClass:[UIViewController class]]) {
+        view = [object viewIfLoaded];
+    }
+    
+    if (! view) {
+        return;
+    }
+    
+    // Highlight views
+    CGFloat alpha = view.alpha;
+    UIColor *backgroundColor = view.backgroundColor;
+    [UIView animateWithDuration:0.2 animations:^{
+        view.alpha = alpha / 2.f;
+        view.backgroundColor = [UIColor blueColor];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            view.alpha = alpha;
+            view.backgroundColor = backgroundColor;
+        }];
+    }];
 }
 
 @end
