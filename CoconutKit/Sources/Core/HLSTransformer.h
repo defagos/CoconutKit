@@ -32,6 +32,8 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
  * a reverse transformation does not make sense. In other cases (e.g. multiplication with a constant factor), the
  * reverse transformation can be meaningfully implemented. The rule should be that applying the transform and 
  * reverse transform to some object should return an object equal to it
+ *
+ * Remark: Foundation provides NSValueFormatter, which provides a similar kind of functionality
  */
 @protocol HLSTransformer <NSObject>
 
