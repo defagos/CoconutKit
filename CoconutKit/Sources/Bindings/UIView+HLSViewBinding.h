@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
+// TODO: Automatic update of bound objects when the underlying value changes (automatic behavior, maybe have a bool to
+//       enable or disable)
+
 /**
  * Usually, when you have to display or set some value on screen, and if you are using Interface Builder to design
  * your user interface, you have to create and bind an outlet. Though this process is completely straightforward,
