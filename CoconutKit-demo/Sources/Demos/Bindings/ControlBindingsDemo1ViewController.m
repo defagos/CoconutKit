@@ -11,6 +11,7 @@
 @interface ControlBindingsDemo1ViewController ()
 
 @property (nonatomic, strong) NSNumber *switchEnabled;
+@property (nonatomic, strong) NSNumber *category;
 
 @end
 
@@ -22,6 +23,7 @@
 {
     if (self = [super init]) {
         self.switchEnabled = @YES;
+        self.category = @1;
     }
     return self;
 }
@@ -36,11 +38,6 @@
 - (NSNumber *)completionPercentage
 {
     return @0.8f;
-}
-
-- (NSNumber *)category
-{
-    return @1;
 }
 
 - (NSString *)name

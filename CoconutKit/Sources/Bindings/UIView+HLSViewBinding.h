@@ -89,6 +89,7 @@
  * by looking along the responder chain starting with the view for a class conforming to the HLSBindingDelegate protocol.
  *
  * TODO: Document validation via -validate and soon-to-be-implemented -check methods
+ * TODO: Document: Validation is always available, even if a view cannot update the underlying model object
  *
  * Here is how UIKit view classes play with bindings:
  *   - UILabel: The label displays the value which the keypath points at. Bindings are not recursive. The only 

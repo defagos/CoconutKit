@@ -11,8 +11,6 @@
 #import "HLSRuntime.h"
 #import "UIView+HLSViewBinding.h"
 
-static void commonInit(UISwitch *self);
-
 // Original implementation of the methods we swizzle
 static id (*s_UISwitch__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
 static id (*s_UISwitch__initWithCoder_Imp)(id, SEL, id) = NULL;
@@ -83,14 +81,6 @@ static void commonInit(UISwitch *self)
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL on, BOOL animated)
-{
-    (*s_UISwitch__setOn_animated_Imp)(self, _cmd, on, animated);
-    
-    id displayedValue = @(on);
-    [self updateAndCheckModelWithDisplayedValue:displayedValue error:NULL];
-}
-
 static id swizzled_UISwitch__initWithFrame_Imp(UISwitch *self, SEL _cmd, CGRect frame)
 {
     if ((self = (*s_UISwitch__initWithFrame_Imp)(self, _cmd, frame))) {
@@ -105,4 +95,12 @@ static id swizzled_UISwitch__initWithCoder_Imp(UISwitch *self, SEL _cmd, NSCoder
         commonInit(self);
     }
     return self;
+}
+
+static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL on, BOOL animated)
+{
+    (*s_UISwitch__setOn_animated_Imp)(self, _cmd, on, animated);
+    
+    id displayedValue = @(on);
+    [self updateAndCheckModelWithDisplayedValue:displayedValue error:NULL];
 }

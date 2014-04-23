@@ -25,6 +25,8 @@
                     </segments>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="category"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="checkingDisplayedValueAutomatically" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="updatingModelAutomatically" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </segmentedControl>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" id="iRH-me-wKW">
