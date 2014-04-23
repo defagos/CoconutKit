@@ -10,12 +10,12 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "HLSZeroingWeakRef.h"
+#import "MAZeroingWeakRef.h"
 #import "NSObject+HLSExtensions.h"
 
 @interface HLSRestrictedInterfaceProxy ()
 
-@property (nonatomic, retain) HLSZeroingWeakRef *targetZeroingWeakRef;
+@property (nonatomic, retain) MAZeroingWeakRef *targetZeroingWeakRef;
 
 @end
 
@@ -58,7 +58,7 @@
         }
     }
     
-    self.targetZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:target] autorelease];
+    self.targetZeroingWeakRef = [MAZeroingWeakRef refWithTarget:target];
     _protocol = protocol;
     
     return self;
@@ -89,7 +89,7 @@
     }
     else {
         // See -[NSObject respondsToSelector:] documentation
-        return [[self.targetZeroingWeakRef.object class] instancesRespondToSelector:selector];
+        return [[[self.targetZeroingWeakRef target] class] instancesRespondToSelector:selector];
     }
 }
 
@@ -111,7 +111,7 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel
 {    
-    return [self.targetZeroingWeakRef.object methodSignatureForSelector:sel];
+    return [[self.targetZeroingWeakRef target] methodSignatureForSelector:sel];
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation
@@ -124,7 +124,7 @@
     }
     
     // If the target does not implement the method, an exception will be raised
-    [invocation invokeWithTarget:self.targetZeroingWeakRef.object];
+    [invocation invokeWithTarget:[self.targetZeroingWeakRef target]];
 }
 
 #pragma mark Description
@@ -133,7 +133,7 @@
 {
     // Must override NSProxy implementation, not forwarded automatically. Replace the target class name (if appearing in the description)
     // with the proxy object information
-    id target = self.targetZeroingWeakRef.object;
+    id target = [self.targetZeroingWeakRef target];
     return [[target description] stringByReplacingOccurrencesOfString:[target className]
                                                            withString:[NSString stringWithFormat:@"id<%s>", protocol_getName(_protocol)]];
 }

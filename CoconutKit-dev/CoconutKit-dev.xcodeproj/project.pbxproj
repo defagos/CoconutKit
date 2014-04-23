@@ -278,7 +278,6 @@
 		6FB318A6181136BA00565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318A5181136BA00565B69 /* HLSInMemoryFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB500521705ABC400779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500501705ABC400779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB500541705ABC400779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500511705ABC400779DB3 /* ConnectionDemoViewController.xib */; };
-		6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */; };
 		6FB9EA4115F0C3760061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA4415F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4315F0C3900061D807 /* LayerPropertiesTestViewController.xib */; };
 		6FC09CF015EFDAAA00C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CEE15EFDAAA00C0CC74 /* AnimationDemoViewController.m */; };
@@ -308,6 +307,11 @@
 		6FF3E6F715D2E4E300AB9A53 /* HLSTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E6F615D2E4E300AB9A53 /* HLSTransition.m */; };
 		6FF3E71C15D3801600AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71B15D3801600AB9A53 /* CustomTransitions.m */; };
 		6FF74C78177D46B300BD846D /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF74C77177D46B300BD846D /* HLSApplicationInformation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FFC03A2190848A900EF178E /* MANotificationCenterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC0398190848A900EF178E /* MANotificationCenterAdditions.m */; };
+		6FFC03A3190848A900EF178E /* MAWeakArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC039A190848A900EF178E /* MAWeakArray.m */; };
+		6FFC03A4190848A900EF178E /* MAWeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC039C190848A900EF178E /* MAWeakDictionary.m */; };
+		6FFC03A5190848A900EF178E /* MAZeroingWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC039E190848A900EF178E /* MAZeroingWeakProxy.m */; };
+		6FFC03A6190848A900EF178E /* MAZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC03A0190848A900EF178E /* MAZeroingWeakRef.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -815,8 +819,6 @@
 		6FB500511705ABC400779DB3 /* ConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionDemoViewController.xib; sourceTree = "<group>"; };
 		6FB8E66E15F3D93600CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67315F3EDB000CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
-		6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRef.h; sourceTree = "<group>"; };
-		6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FB9EA3F15F0C3760061D807 /* LayerPropertiesTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPropertiesTestViewController.h; sourceTree = "<group>"; };
 		6FB9EA4015F0C3760061D807 /* LayerPropertiesTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPropertiesTestViewController.m; sourceTree = "<group>"; };
 		6FB9EA4315F0C3900061D807 /* LayerPropertiesTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayerPropertiesTestViewController.xib; sourceTree = "<group>"; };
@@ -869,6 +871,17 @@
 		6FF3E71B15D3801600AB9A53 /* CustomTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitions.m; sourceTree = "<group>"; };
 		6FF74C76177D46B300BD846D /* HLSApplicationInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationInformation.h; sourceTree = "<group>"; };
 		6FF74C77177D46B300BD846D /* HLSApplicationInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationInformation.m; sourceTree = "<group>"; };
+		6FFC0397190848A900EF178E /* MANotificationCenterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MANotificationCenterAdditions.h; sourceTree = "<group>"; };
+		6FFC0398190848A900EF178E /* MANotificationCenterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MANotificationCenterAdditions.m; sourceTree = "<group>"; };
+		6FFC0399190848A900EF178E /* MAWeakArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAWeakArray.h; sourceTree = "<group>"; };
+		6FFC039A190848A900EF178E /* MAWeakArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAWeakArray.m; sourceTree = "<group>"; };
+		6FFC039B190848A900EF178E /* MAWeakDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAWeakDictionary.h; sourceTree = "<group>"; };
+		6FFC039C190848A900EF178E /* MAWeakDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAWeakDictionary.m; sourceTree = "<group>"; };
+		6FFC039D190848A900EF178E /* MAZeroingWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAZeroingWeakProxy.h; sourceTree = "<group>"; };
+		6FFC039E190848A900EF178E /* MAZeroingWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAZeroingWeakProxy.m; sourceTree = "<group>"; };
+		6FFC039F190848A900EF178E /* MAZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAZeroingWeakRef.h; sourceTree = "<group>"; };
+		6FFC03A0190848A900EF178E /* MAZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAZeroingWeakRef.m; sourceTree = "<group>"; };
+		6FFC03A1190848A900EF178E /* MAZeroingWeakRefNativeZWRNotAllowedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAZeroingWeakRefNativeZWRNotAllowedTable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1309,6 +1322,7 @@
 				6F45AF0F18335D36002FF0ED /* Bindings */,
 				6FADE63314BA04A6007EE121 /* Core */,
 				6FADE66814BA04A6007EE121 /* CoreData */,
+				6FFC0395190848A900EF178E /* Externals */,
 				6FADE67214BA04A6007EE121 /* Logging */,
 				6FAB922D16DA7FA300599256 /* Networking */,
 				6FADE67514BA04A6007EE121 /* Task */,
@@ -1388,8 +1402,6 @@
 				6FADE64914BA04A6007EE121 /* HLSValidators.m */,
 				6F8366081588CC770044E572 /* HLSVector.h */,
 				6F8366091588CC770044E572 /* HLSVector.m */,
-				6FB991F81523B17900E13BED /* HLSZeroingWeakRef.h */,
-				6FB991F91523B17900E13BED /* HLSZeroingWeakRef.m */,
 				6FADE64A14BA04A6007EE121 /* NSArray+HLSExtensions.h */,
 				6FADE64B14BA04A6007EE121 /* NSArray+HLSExtensions.m */,
 				6FADE64C14BA04A6007EE121 /* NSBundle+HLSDynamicLocalization.h */,
@@ -2040,6 +2052,32 @@
 			name = Shared;
 			sourceTree = "<group>";
 		};
+		6FFC0395190848A900EF178E /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				6FFC0396190848A900EF178E /* MAZeroingWeakRef-75695a81 */,
+			);
+			path = Externals;
+			sourceTree = "<group>";
+		};
+		6FFC0396190848A900EF178E /* MAZeroingWeakRef-75695a81 */ = {
+			isa = PBXGroup;
+			children = (
+				6FFC0397190848A900EF178E /* MANotificationCenterAdditions.h */,
+				6FFC0398190848A900EF178E /* MANotificationCenterAdditions.m */,
+				6FFC0399190848A900EF178E /* MAWeakArray.h */,
+				6FFC039A190848A900EF178E /* MAWeakArray.m */,
+				6FFC039B190848A900EF178E /* MAWeakDictionary.h */,
+				6FFC039C190848A900EF178E /* MAWeakDictionary.m */,
+				6FFC039D190848A900EF178E /* MAZeroingWeakProxy.h */,
+				6FFC039E190848A900EF178E /* MAZeroingWeakProxy.m */,
+				6FFC039F190848A900EF178E /* MAZeroingWeakRef.h */,
+				6FFC03A0190848A900EF178E /* MAZeroingWeakRef.m */,
+				6FFC03A1190848A900EF178E /* MAZeroingWeakRefNativeZWRNotAllowedTable.h */,
+			);
+			path = "MAZeroingWeakRef-75695a81";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2248,6 +2286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FADE6BC14BA04A7007EE121 /* HLSAnimation.m in Sources */,
+				6FFC03A2190848A900EF178E /* MANotificationCenterAdditions.m in Sources */,
 				6FADE6BD14BA04A7007EE121 /* HLSViewAnimationStep.m in Sources */,
 				6FADE6BE14BA04A7007EE121 /* HLSViewAnimation.m in Sources */,
 				6FADE6BF14BA04A7007EE121 /* HLSAssert.m in Sources */,
@@ -2259,6 +2298,7 @@
 				6FADE6C714BA04A7007EE121 /* HLSValidators.m in Sources */,
 				6FADE6C814BA04A7007EE121 /* NSArray+HLSExtensions.m in Sources */,
 				6FADE6C914BA04A7007EE121 /* NSBundle+HLSDynamicLocalization.m in Sources */,
+				6FFC03A5190848A900EF178E /* MAZeroingWeakProxy.m in Sources */,
 				6FADE6CA14BA04A7007EE121 /* NSBundle+HLSExtensions.m in Sources */,
 				6FADE6CB14BA04A7007EE121 /* NSCalendar+HLSExtensions.m in Sources */,
 				6FADE6CC14BA04A7007EE121 /* NSData+HLSExtensions.m in Sources */,
@@ -2295,6 +2335,7 @@
 				6FADE6F014BA04A7007EE121 /* HLSPlaceholderViewController.m in Sources */,
 				6FADE6F114BA04A7007EE121 /* HLSStackController.m in Sources */,
 				6FADE6F314BA04A7007EE121 /* HLSTableSearchDisplayViewController.m in Sources */,
+				6FFC03A6190848A900EF178E /* MAZeroingWeakRef.m in Sources */,
 				6FADE6F514BA04A7007EE121 /* HLSViewController.m in Sources */,
 				6FADE6F614BA04A7007EE121 /* HLSWebViewController.m in Sources */,
 				6FADE6F714BA04A7007EE121 /* HLSWizardViewController.m in Sources */,
@@ -2311,6 +2352,7 @@
 				6F689E7F1906C9B200081F4D /* ControlBindingsDemo1ViewController.m in Sources */,
 				6FADE8AF14BA04C9007EE121 /* TransparentViewController.m in Sources */,
 				6FADE8B114BA04C9007EE121 /* ParallelProcessingDemoViewController.m in Sources */,
+				6FFC03A4190848A900EF178E /* MAWeakDictionary.m in Sources */,
 				6F31D0D618D634A9009AB8F6 /* UISwitch+HLSViewBinding.m in Sources */,
 				6FADE8B314BA04C9007EE121 /* SleepTask.m in Sources */,
 				6FADE8B414BA04C9007EE121 /* SleepTaskOperation.m in Sources */,
@@ -2349,7 +2391,6 @@
 				6FC5E8AE14F380A100C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F91F76F14F3EEFB00E95EFA /* UIViewController+HLSExtensions.m in Sources */,
 				6F5A0BAE1509D17B00A20DFF /* SlideshowDemoViewController.m in Sources */,
-				6FB991FA1523B17900E13BED /* HLSZeroingWeakRef.m in Sources */,
 				6FDDEC161529777500CED462 /* UITextField+HLSExtensions.m in Sources */,
 				6FDDEC221529781300CED462 /* UITextView+HLSExtensions.m in Sources */,
 				6F000137156BD17F0055CED7 /* CoconutKitDemoData.xcdatamodeld in Sources */,
@@ -2447,6 +2488,7 @@
 				6F45AF6B18335D82002FF0ED /* YesterdayView.m in Sources */,
 				6F45AF6F18335EB3002FF0ED /* DemoTransformer.m in Sources */,
 				6F216F0F184C4F6A009CE6CD /* HLSBindingDebugOverlayViewController.m in Sources */,
+				6FFC03A3190848A900EF178E /* MAWeakArray.m in Sources */,
 				6F8379C2184DA2E400C0BBF3 /* HLSBindingInformationViewController.m in Sources */,
 				6F1A54E2184EF630005372B7 /* HLSInfoTableViewCell.m in Sources */,
 			);

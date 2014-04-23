@@ -15,6 +15,7 @@
 #import "HLSTransformer.h"
 #import "NSBundle+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
+#import "UIViewController+HLSExtensions.h"
 
 @interface HLSBindingInformationViewController ()
 
