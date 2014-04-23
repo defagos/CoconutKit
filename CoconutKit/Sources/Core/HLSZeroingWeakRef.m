@@ -25,6 +25,8 @@ static Class subclass_class(id self, SEL _cmd);
 
 @end
 
+static Class HLSZeroingWeakRefOriginalClass(id object);
+
 @implementation HLSZeroingWeakRef
 
 #pragma mark Object creation and destruction
@@ -64,7 +66,7 @@ static Class subclass_class(id self, SEL _cmd);
                                     @selector(dealloc), 
                                     (IMP)subclass_dealloc, 
                                     method_getTypeEncoding(class_getInstanceMethod(class, @selector(dealloc))));
-                    class_addMethod(subclass, 
+                    class_addMethod(subclass,
                                     @selector(class), 
                                     (IMP)subclass_class, 
                                     method_getTypeEncoding(class_getClassMethod(class, @selector(class))));
@@ -96,8 +98,8 @@ static Class subclass_class(id self, SEL _cmd);
     
     // No weak ref anymore. Can remove the dynamic subclass
     if ([zeroingWeakRefValues count] == 0) {
-        Class superclass = class_getSuperclass(object_getClass(self.object));
-        object_setClass(self.object, superclass);
+        objc_setAssociatedObject(self.object, s_zeroingWeakRefListKey, nil, OBJC_ASSOCIATION_RETAIN);
+        object_setClass(self.object, HLSZeroingWeakRefOriginalClass(self.object));
     }
     
     self.object = nil;
@@ -153,5 +155,14 @@ static Class subclass_class(id self, SEL _cmd)
 {
     // Lie about the dynamic subclass existence, as the KVO implementation does (the real class can still be seen
     // using object_getClass)
-    return class_getSuperclass(object_getClass(self));
+    return HLSZeroingWeakRefOriginalClass(self);
+}
+
+#pragma mark Static functions
+
+static Class HLSZeroingWeakRefOriginalClass(id object)
+{
+    NSString *className = NSStringFromClass(object_getClass(object));
+    NSString *originalClassName = [className stringByReplacingOccurrencesOfString:@"HLSZeroingWeakRef_" withString:@""];
+    return NSClassFromString(originalClassName);
 }
