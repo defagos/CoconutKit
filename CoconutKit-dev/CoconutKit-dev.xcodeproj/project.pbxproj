@@ -130,6 +130,10 @@
 		6F63E7B817CF6B91006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B717CF6B91006322D9 /* QuickLook.framework */; };
 		6F63E7CA17CF6E56006322D9 /* HLSPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63E7C917CF6E56006322D9 /* HLSPreviewItem.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F66181B16C14B7400303628 /* UIView+HLSRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F66181A16C14B7400303628 /* UIView+HLSRuntimeAttributes.m */; };
+		6F689E7F1906C9B200081F4D /* ControlBindingsDemo1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F689E7A1906C9B200081F4D /* ControlBindingsDemo1ViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F689E801906C9B200081F4D /* ControlBindingsDemo1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F689E7B1906C9B200081F4D /* ControlBindingsDemo1ViewController.xib */; };
+		6F689E811906C9B200081F4D /* ControlBindingsDemo2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F689E7D1906C9B200081F4D /* ControlBindingsDemo2ViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F689E821906C9B200081F4D /* ControlBindingsDemo2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F689E7E1906C9B200081F4D /* ControlBindingsDemo2ViewController.xib */; };
 		6F6B0C9916B3DAB5006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9816B3DAB5006B718F /* InnerFolder */; };
 		6F6C0A0F159B842A007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A0E159B842A007933EB /* HLSStackPushSegue.m */; };
 		6F6E814E17CF070700CE578A /* HLSLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E814817CF070700CE578A /* HLSLoggerViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -532,6 +536,12 @@
 		6F66181916C14B7300303628 /* UIView+HLSRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSRuntimeAttributes.h"; sourceTree = "<group>"; };
 		6F66181A16C14B7400303628 /* UIView+HLSRuntimeAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSRuntimeAttributes.m"; sourceTree = "<group>"; };
 		6F689E67190651D600081F4D /* UIView+HLSViewBindingImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBindingImplementation.h"; sourceTree = "<group>"; };
+		6F689E791906C9B200081F4D /* ControlBindingsDemo1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlBindingsDemo1ViewController.h; sourceTree = "<group>"; };
+		6F689E7A1906C9B200081F4D /* ControlBindingsDemo1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlBindingsDemo1ViewController.m; sourceTree = "<group>"; };
+		6F689E7B1906C9B200081F4D /* ControlBindingsDemo1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlBindingsDemo1ViewController.xib; sourceTree = "<group>"; };
+		6F689E7C1906C9B200081F4D /* ControlBindingsDemo2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlBindingsDemo2ViewController.h; sourceTree = "<group>"; };
+		6F689E7D1906C9B200081F4D /* ControlBindingsDemo2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlBindingsDemo2ViewController.m; sourceTree = "<group>"; };
+		6F689E7E1906C9B200081F4D /* ControlBindingsDemo2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlBindingsDemo2ViewController.xib; sourceTree = "<group>"; };
 		6F6B0C7E16B3D866006B718F /* InnerBundle.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InnerBundle.xcodeproj; path = "../CoconutKit-demo/InnerBundle/InnerBundle.xcodeproj"; sourceTree = "<group>"; };
 		6F6B0C9816B3DAB5006B718F /* InnerFolder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = InnerFolder; path = "../CoconutKit-demo/InnerFolder"; sourceTree = "<group>"; };
 		6F6C0A0D159B842A007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
@@ -1162,6 +1172,12 @@
 		6F45AF2318335D82002FF0ED /* Bindings */ = {
 			isa = PBXGroup;
 			children = (
+				6F689E791906C9B200081F4D /* ControlBindingsDemo1ViewController.h */,
+				6F689E7A1906C9B200081F4D /* ControlBindingsDemo1ViewController.m */,
+				6F689E7B1906C9B200081F4D /* ControlBindingsDemo1ViewController.xib */,
+				6F689E7C1906C9B200081F4D /* ControlBindingsDemo2ViewController.h */,
+				6F689E7D1906C9B200081F4D /* ControlBindingsDemo2ViewController.m */,
+				6F689E7E1906C9B200081F4D /* ControlBindingsDemo2ViewController.xib */,
 				6F132E3418E6DC330070CE86 /* ControlBindingsDemoViewController.h */,
 				6F132E3518E6DC330070CE86 /* ControlBindingsDemoViewController.m */,
 				6F132E3618E6DC330070CE86 /* ControlBindingsDemoViewController.xib */,
@@ -2166,6 +2182,7 @@
 				6F000148156BD17F0055CED7 /* img_coconut4.jpg in Resources */,
 				6F000149156BD17F0055CED7 /* parallax_demo_grass_layer.png in Resources */,
 				6F00014A156BD17F0055CED7 /* parallax_demo_mountains_layer.png in Resources */,
+				6F689E821906C9B200081F4D /* ControlBindingsDemo2ViewController.xib in Resources */,
 				6F00014B156BD17F0055CED7 /* parallax_demo_sky_layer.png in Resources */,
 				6F00014C156BD17F0055CED7 /* parallax_demo_trees_layer.png in Resources */,
 				6F00014D156BD17F0055CED7 /* skyscraper.jpg in Resources */,
@@ -2175,6 +2192,7 @@
 				6FD0025915D5463C00375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF215EFDAAA00C0CC74 /* AnimationDemoViewController.xib in Resources */,
 				6FB9EA4415F0C3900061D807 /* LayerPropertiesTestViewController.xib in Resources */,
+				6F689E801906C9B200081F4D /* ControlBindingsDemo1ViewController.xib in Resources */,
 				6F0BFE23163EF00B00420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE27163EF00B00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE2B163EF00B00420A5F /* RootTabBarDemoViewController.xib in Resources */,
@@ -2290,6 +2308,7 @@
 				6F31D0D718D634A9009AB8F6 /* UITextField+HLSViewBinding.m in Sources */,
 				6FADE8AA14BA04C9007EE121 /* PortraitOnlyViewController.m in Sources */,
 				6FADE8AD14BA04C9007EE121 /* StretchableViewController.m in Sources */,
+				6F689E7F1906C9B200081F4D /* ControlBindingsDemo1ViewController.m in Sources */,
 				6FADE8AF14BA04C9007EE121 /* TransparentViewController.m in Sources */,
 				6FADE8B114BA04C9007EE121 /* ParallelProcessingDemoViewController.m in Sources */,
 				6F31D0D618D634A9009AB8F6 /* UISwitch+HLSViewBinding.m in Sources */,
@@ -2356,6 +2375,7 @@
 				6F6010F015ABEC8D00A9FEC5 /* HLSContainerStack.m in Sources */,
 				6F8C934015CEE641006D892C /* HLSContainerGroupView.m in Sources */,
 				6F8C934F15CEF0F8006D892C /* HLSContainerStackView.m in Sources */,
+				6F689E811906C9B200081F4D /* ControlBindingsDemo2ViewController.m in Sources */,
 				6FF3E6F715D2E4E300AB9A53 /* HLSTransition.m in Sources */,
 				6FF3E71C15D3801600AB9A53 /* CustomTransitions.m in Sources */,
 				6FD0025715D5463C00375240 /* ContainmentTestViewController.m in Sources */,
