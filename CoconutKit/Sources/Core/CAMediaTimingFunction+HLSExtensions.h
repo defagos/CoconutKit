@@ -9,6 +9,12 @@
 @interface CAMediaTimingFunction (HLSExtensions)
 
 /**
+ * Evaluate the function for a given time in [0; 1]. Parameters outside this range are clamped to the nearest
+ * valid value
+ */
+- (float)valueForNormalizedTime:(float)time;
+
+/**
  * Return the inverse function, i.e. the one which must be played when playing an animation backwards
  */
 - (CAMediaTimingFunction *)inverseFunction;
