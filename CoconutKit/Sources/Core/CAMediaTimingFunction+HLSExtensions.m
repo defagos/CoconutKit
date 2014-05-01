@@ -57,40 +57,24 @@ static const float kEpsilon = 1e-5f;
 {
     NSValue *coeffsValue = objc_getAssociatedObject(self, s_polynomialCoefficientsKey);
     if (! coeffsValue) {
-        float p1y[2];
-        memset(p1y, 0, sizeof(p1y));
-        [self getControlPointAtIndex:0 values:p1y];
+        float p1[2];
+        memset(p1, 0, sizeof(p1));
+        [self getControlPointAtIndex:1 values:p1];
         
-        float p1x[2];
-        memset(p1x, 0, sizeof(p1x));
-        [self getControlPointAtIndex:1 values:p1x];
-        
-        float p2x[2];
-        memset(p2x, 0, sizeof(p2x));
-        [self getControlPointAtIndex:2 values:p2x];
-        
-        float p2y[2];
-        memset(p2y, 0, sizeof(p2y));
-        [self getControlPointAtIndex:3 values:p2y];
+        float p2[2];
+        memset(p2, 0, sizeof(p2));
+        [self getControlPointAtIndex:2 values:p2];
         
         PolynomialCoefficients coeffs;
         memset(&coeffs, 0, sizeof(PolynomialCoefficients));
         
-        // Cubic Bézier curve parametric equation:
-        //
-        //   C(t) = (1 - t^3) P(0) + 3(1 - t^2)t P(1) + 3(1-t)t^2 P(2) + t^3 P(3)
-        //
-        // where P(i) is the i-th control point. For media timing functions, P(0) = (0, 0) and P(3) = (1, 1). Parameters
-        // of media timing functions are P(1) = (p1x, p1y) and P(2) = (p2x, p2y)
-        //
-        // For each coordinate, the 3rd order coefficients a, 2nd order coefficients b and 1st order coefficients c can
-        // be easily determined by expanding the right hand-side of the equation:
-        coeffs.cx = 3.f * p1x[0];
-        coeffs.bx = 3.f * (p2x[0] - p1x[0]) - coeffs.cx;
+        // Cubic Bézier curve parametric equations
+        coeffs.cx = 3.f * p1[0];
+        coeffs.bx = 3.f * (p2[0] - p1[0]) - coeffs.cx;
         coeffs.ax = 1.f - coeffs.cx - coeffs.bx;
         
-        coeffs.cy = 3.f * p1y[0];
-        coeffs.by = 3.f * (p2y[0] - p1y[0]) - coeffs.cy;
+        coeffs.cy = 3.f * p1[1];
+        coeffs.by = 3.f * (p2[1] - p1[1]) - coeffs.cy;
         coeffs.ay = 1.f - coeffs.cy - coeffs.by;
         
         coeffsValue = [NSValue value:&coeffs withObjCType:@encode(PolynomialCoefficients)];

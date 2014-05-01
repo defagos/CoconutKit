@@ -26,6 +26,8 @@
     [self checkValuesForTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
     [self checkValuesForTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
     [self checkValuesForTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [self checkValuesForTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.45f :0.5f :1.f :1.f]];
+    [self checkValuesForTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.25f :0.85f :0.7f :0.3f]];
 }
 
 - (void)testInverse
