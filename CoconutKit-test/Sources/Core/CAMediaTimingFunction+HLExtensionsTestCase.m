@@ -52,15 +52,12 @@
 
 - (void)checkValuesForTimingFunction:(CAMediaTimingFunction *)timingFunction
 {
-    static const NSUInteger kNumberOfSamples = 101;
+    static const NSUInteger kNumberOfSamples = 1001;
     
-    NSLog(@"-----------------------------");
+    // Check that built-in results and custom implementation match to at least 4 digits
     for (NSUInteger i = 0; i < kNumberOfSamples; ++i) {
         float time = (float)i / (kNumberOfSamples - 1);
-        NSLog(@"Sample %d: Custom = %.12f, built-in = %.12f", i, [timingFunction valueForNormalizedTime:time], [timingFunction _solveForInput:time]);
-        
-        // Check that built-in results and custom implementation match to at least 4 digits
-        // GHAssertTrue(floatlt(fabsf([timingFunction valueForNormalizedTime:time] - [timingFunction _solveForInput:time]), 1e-2), nil);
+        GHAssertTrue(floatlt(fabsf([timingFunction valueForNormalizedTime:time] - [timingFunction _solveForInput:time]), 1e-4), nil);
     }
 }
 
