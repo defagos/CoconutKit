@@ -51,6 +51,7 @@ static const float kEpsilon = 1e-5f;
 
 // Implementation borrowed from WebKit:
 //   http://opensource.apple.com/source/WebCore/WebCore-7537.70/platform/graphics/UnitBezier.h
+// Reproduces the results returned by the private _solveForInput: method
 
 // Compute and cache polynomial coefficients
 - (PolynomialCoefficients)polynomialCoefficients

@@ -12,7 +12,7 @@
 
 // Private method used to compute function values. Use them as reference, tests will never make it to the AppStore
 // after all
-- (float)_solveForInput:(float)arg1;
+- (float)_solveForInput:(float)normalizedTime;
 
 @end
 
