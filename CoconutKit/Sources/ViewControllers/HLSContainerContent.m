@@ -46,8 +46,8 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 @property (nonatomic, assign) HLSContainerStackView *containerStackView;        // The container stack view into which the view controller's view is inserted (weak ref)
 @property (nonatomic, assign) CGRect originalViewFrame;                         // The view controller's view frame prior to insertion
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;      // The view controller's view autoresizing mask prior to insertion
-@property (nonatomic, assign) BOOL movingToParentViewController;
-@property (nonatomic, assign) BOOL movingFromParentViewController;
+@property (nonatomic, assign, getter=isMovingToParentViewController) BOOL movingToParentViewController;
+@property (nonatomic, assign, getter=isMovingFromParentViewController) BOOL movingFromParentViewController;
 
 @end
 
