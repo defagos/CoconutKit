@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "CoconutKit-dev.app"
+               BlueprintIdentifier = "6FCB4E801926651F00047AD3"
+               BuildableName = "CoconutKit-demo copy.app"
                BlueprintName = "CoconutKit-dev"
-               ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+               ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit-dev.app"
+            BlueprintIdentifier = "6FCB4E801926651F00047AD3"
+            BuildableName = "CoconutKit-demo copy.app"
             BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,24 +51,12 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit-dev.app"
+            BlueprintIdentifier = "6FCB4E801926651F00047AD3"
+            BuildableName = "CoconutKit-demo copy.app"
             BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "CoconutKitDemoMode"
-            value = "RootTabBar"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "XcodeColors"
-            value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -81,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit-dev.app"
+            BlueprintIdentifier = "6FCB4E801926651F00047AD3"
+            BuildableName = "CoconutKit-demo copy.app"
             BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-dev.xcodeproj">
+            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

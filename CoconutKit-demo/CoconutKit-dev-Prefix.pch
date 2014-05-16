@@ -1,4 +1,7 @@
 #ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+
     // Additional required framework global headers
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
