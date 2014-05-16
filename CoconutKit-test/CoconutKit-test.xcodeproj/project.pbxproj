@@ -169,26 +169,8 @@
 		6FF74C7C177D46C800BD846D /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF74C7B177D46C800BD846D /* HLSApplicationInformation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		6F000188156BF3530055CED7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6F000184156BF3520055CED7 /* CoconutKit-resources.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6F000048156BCC270055CED7;
-			remoteInfo = "CoconutKit-resources";
-		};
-		6F00018A156BF35D0055CED7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6F000184156BF3520055CED7 /* CoconutKit-resources.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6F44EA05156BB2AF00B45BB4;
-			remoteInfo = "CoconutKit-resources";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		6F000181156BF3320055CED7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CoconutKit-resources.bundle"; path = "../CoconutKit/CoconutKit-resources.bundle"; sourceTree = "<group>"; };
-		6F000184156BF3520055CED7 /* CoconutKit-resources.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CoconutKit-resources.xcodeproj"; path = "../CoconutKit-resources/CoconutKit-resources.xcodeproj"; sourceTree = "<group>"; };
 		6F0C7CFF163A7A6200C6C381 /* HLSAutorotationCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotationCompatibility.h; sourceTree = "<group>"; };
 		6F0F4DE2159CB7C600277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DE3159CB7C600277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
@@ -230,7 +212,7 @@
 		6F2D470715761B9000EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D470815761B9000EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D470915761B9000EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F31A5C3156DF6690069CD98 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = /Developer/Frameworks/GHUnitIOS/0.5.9pre-458fe43/GHUnitIOS.framework; sourceTree = "<absolute>"; };
+		6F31A5C3156DF6690069CD98 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = "/Developer/Frameworks/GHUnitIOS/0.5.9pre-458fe43/GHUnitIOS.framework"; sourceTree = "<absolute>"; };
 		6F33348313FAF9E0000FC9FD /* CoconutKit-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F33348713FAF9E0000FC9FD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F33348913FAF9E0000FC9FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -537,22 +519,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6F000183156BF33B0055CED7 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				6F000184156BF3520055CED7 /* CoconutKit-resources.xcodeproj */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		6F000185156BF3520055CED7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6F000189156BF3530055CED7 /* CoconutKit-resources.bundle */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		6F29083F1498734100506DDC /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -627,7 +593,6 @@
 		6F33347813FAF9E0000FC9FD = {
 			isa = PBXGroup;
 			children = (
-				6F000183156BF33B0055CED7 /* Dependencies */,
 				6F2FCD59140BB8C70080A775 /* Shared */,
 				6FF56D091474F5390041B40F /* Resources */,
 				6F3334E813FB0112000FC9FD /* Sources */,
@@ -1093,7 +1058,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6F00018B156BF35D0055CED7 /* PBXTargetDependency */,
 			);
 			name = "CoconutKit-test";
 			productName = "CoconutKit-test";
@@ -1125,28 +1089,12 @@
 			mainGroup = 6F33347813FAF9E0000FC9FD;
 			productRefGroup = 6F33348413FAF9E0000FC9FD /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6F000185156BF3520055CED7 /* Products */;
-					ProjectRef = 6F000184156BF3520055CED7 /* CoconutKit-resources.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6F33348213FAF9E0000FC9FD /* CoconutKit-test */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6F000189156BF3530055CED7 /* CoconutKit-resources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CoconutKit-resources.bundle";
-			remoteRef = 6F000188156BF3530055CED7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6F33348113FAF9E0000FC9FD /* Resources */ = {
@@ -1334,14 +1282,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		6F00018B156BF35D0055CED7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CoconutKit-resources";
-			targetProxy = 6F00018A156BF35D0055CED7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		6F33349C13FAF9E0000FC9FD /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1398,7 +1338,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Developer/Frameworks/GHUnitIOS/0.5.9pre-458fe43,
+					"/Developer/Frameworks/GHUnitIOS/0.5.9pre-458fe43",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";
@@ -1415,7 +1355,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Developer/Frameworks/GHUnitIOS/0.5.9pre-458fe43,
+					"/Developer/Frameworks/GHUnitIOS/0.5.9pre-458fe43",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-test-Prefix.pch";

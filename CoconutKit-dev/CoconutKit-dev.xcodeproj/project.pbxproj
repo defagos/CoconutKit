@@ -265,20 +265,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6F000077156BCDCF0055CED7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6F000073156BCDCF0055CED7 /* CoconutKit-resources.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6F000048156BCC270055CED7;
-			remoteInfo = "CoconutKit-resources";
-		};
-		6F000079156BCDDB0055CED7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6F000073156BCDCF0055CED7 /* CoconutKit-resources.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6F44EA05156BB2AF00B45BB4;
-			remoteInfo = "CoconutKit-resources";
-		};
 		6F6B0C8516B3D866006B718F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6F6B0C7E16B3D866006B718F /* InnerBundle.xcodeproj */;
@@ -300,7 +286,6 @@
 		1D6058910D05DD3D006BFB54 /* CoconutKit-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6F000073156BCDCF0055CED7 /* CoconutKit-resources.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CoconutKit-resources.xcodeproj"; path = "../CoconutKit-resources/CoconutKit-resources.xcodeproj"; sourceTree = "<group>"; };
 		6F000108156BD1360055CED7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CoconutKit-resources.bundle"; path = "../CoconutKit/CoconutKit-resources.bundle"; sourceTree = "<group>"; };
 		6F00010C156BD17F0055CED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = DemoTable.strings; sourceTree = "<group>"; };
 		6F00010E156BD17F0055CED7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
@@ -804,18 +789,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6F000074156BCDCF0055CED7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6F000078156BCDCF0055CED7 /* CoconutKit-resources.bundle */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		6F00007B156BCEF70055CED7 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				6F000073156BCDCF0055CED7 /* CoconutKit-resources.xcodeproj */,
 				6F6B0C7E16B3D866006B718F /* InnerBundle.xcodeproj */,
 			);
 			name = Dependencies;
@@ -1842,7 +1818,6 @@
 			);
 			dependencies = (
 				6F6B0C8A16B3D901006B718F /* PBXTargetDependency */,
-				6F00007A156BCDDB0055CED7 /* PBXTargetDependency */,
 			);
 			name = "CoconutKit-dev";
 			productName = "CoconutKit-dev";
@@ -1879,10 +1854,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 6F000074156BCDCF0055CED7 /* Products */;
-					ProjectRef = 6F000073156BCDCF0055CED7 /* CoconutKit-resources.xcodeproj */;
-				},
-				{
 					ProductGroup = 6F6B0C7F16B3D866006B718F /* Products */;
 					ProjectRef = 6F6B0C7E16B3D866006B718F /* InnerBundle.xcodeproj */;
 				},
@@ -1895,13 +1866,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6F000078156BCDCF0055CED7 /* CoconutKit-resources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CoconutKit-resources.bundle";
-			remoteRef = 6F000077156BCDCF0055CED7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		6F6B0C8616B3D866006B718F /* InnerBundle.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -2195,11 +2159,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6F00007A156BCDDB0055CED7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CoconutKit-resources";
-			targetProxy = 6F000079156BCDDB0055CED7 /* PBXContainerItemProxy */;
-		};
 		6F6B0C8A16B3D901006B718F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = InnerBundle;

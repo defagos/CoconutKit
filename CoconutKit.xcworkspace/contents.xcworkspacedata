@@ -5,9 +5,6 @@
       location = "group:CoconutKit/CoconutKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:CoconutKit-resources/CoconutKit-resources.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:CoconutKit-dev/CoconutKit-dev.xcodeproj">
    </FileRef>
    <FileRef

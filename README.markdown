@@ -142,7 +142,6 @@ The workspace file contains everything to build CoconutKit binaries, demos and u
 Several projects are available:
 
 * `CoconutKit`: The project used to build the CoconutKit static library
-* `CoconutKit-resources`: The project creating the `.bundle` containing all resources needed by CoconutKit
 * `CoconutKit-dev`: The main project used when working on CoconutKit. This project is an almost empty shell referencing files from both the `CoconutKit` and `CoconutKit-demo` projects
 * `CoconutKit-demo`: The project used to test CoconutKit binaries against linker issues. When building the demo project, the CoconutKit `.staticframework` is first built and saved into the `Binaries` directory
 * `CoconutKit-test`: The project running unit tests. This project references files from the `CoconutKit` project
@@ -213,7 +212,7 @@ There are some requirements when contributing, though:
 
 #### Writing code
 
-Use the `CoconutKit-dev` project to easily write and test your code. When you are done with the `CoconutKit-dev` project, update the `CoconutKit` and `CoconutKit-demo` projects to mirror the changes you made to the source tree. New resources must be added to the `CoconutKit-resources` project. 
+Use the `CoconutKit-dev` project to easily write and test your code. When you are done with the `CoconutKit-dev` project, update the `CoconutKit` and `CoconutKit-demo` projects to mirror the changes you made to the source tree. New resources must be added to the `CoconutKit-resources` target of the `CoconutKit` project. 
 
 Any new public header file must be added to the `CoconutKit-(dev|test).pch` file, as well as to the `publicHeaders.txt` file located in the `CoconutKit-dev` directory. Source files with linker issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the `bootstrap.txt` file. Please refer to the `make-fmwk.sh` documentation for more information.
 
