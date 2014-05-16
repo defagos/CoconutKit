@@ -1126,6 +1126,7 @@
 				6FC5B7701924EDC500660CDF /* Sources */,
 				6FC5B7711924EDC500660CDF /* Frameworks */,
 				6FC5B7721924EDC500660CDF /* Resources */,
+				6FCB4E7F19264D3300047AD3 /* Copy bundle to CoconutKit directory */,
 			);
 			buildRules = (
 			);
@@ -1215,6 +1216,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6FCB4E7F19264D3300047AD3 /* Copy bundle to CoconutKit directory */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy bundle to CoconutKit directory";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "cp -rf \"$CONFIGURATION_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$PROJECT_DIR/../CoconutKit/$FULL_PRODUCT_NAME\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6FC5B7701924EDC500660CDF /* Sources */ = {
@@ -1467,7 +1485,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../CoconutKit";
 				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-resources/CoconutKit-resources-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -1478,7 +1495,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../CoconutKit";
 				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-resources/CoconutKit-resources-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
