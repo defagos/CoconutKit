@@ -19,7 +19,6 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 * View controllers for web browsing and easier table view search management
 * Multi-threaded task management, including task grouping, cancelation, progress status, task dependencies and remaining time estimation
 * New controls
-	* text field moving automatically with the keyboard
 	* cursor
 	* slideshow with several transition animations (cross fade, Ken Burns, etc.)
 	* label with vertical alignment
@@ -50,7 +49,7 @@ If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely 
 
 ### How can I discover CoconutKit components?
 
-Check out the CoconutKit source code repository by visiting [the official project github page](https://github.com/defagos/CoconutKit), open the workspace and either run the `CoconutKit-demo` or the `CoconutKit-dev` targets. The result of running those targets is the same, the only difference is that `CoconutKit-demo` compiles and builds the CoconutKit library source code before using the resulting binaries, whereas `CoconutKit-dev` includes and compiles all libary sources as part of the project itself.
+Check out the CoconutKit source code repository by visiting [the official project github page](https://github.com/defagos/CoconutKit), open the workspace and either run the `CoconutKit-demo` or the `CoconutKit-dev` targets. The result of running those targets is the same, the only difference is that `CoconutKit-demo` compiles and builds CoconutKit as a static framework before linking the demo against it, whereas `CoconutKit-dev` builds and links CoconutKit as a project dependency.
 
 ### Why should I use CoconutKit?
 
@@ -139,13 +138,10 @@ Version 2.0 is a major improvement over 1.x, which means several classes have un
 
 The workspace file contains everything to build CoconutKit binaries, demos and unit tests.
 
-Several projects are available:
+Two projects are available:
 
 * `CoconutKit`: The project used to build the CoconutKit static library
-* `CoconutKit-resources`: The project creating the `.bundle` containing all resources needed by CoconutKit
-* `CoconutKit-dev`: The main project used when working on CoconutKit. This project is an almost empty shell referencing files from both the `CoconutKit` and `CoconutKit-demo` projects
-* `CoconutKit-demo`: The project used to test CoconutKit binaries against linker issues. When building the demo project, the CoconutKit `.staticframework` is first built and saved into the `Binaries` directory
-* `CoconutKit-test`: The project running unit tests. This project references files from the `CoconutKit` project
+* `CoconutKit-demo`: Demos for most of CoconutKit functionalities. This is also the project I use when working on new CoconutKit components
 
 Several schemes are available:
 
@@ -158,9 +154,7 @@ Several schemes are available:
 * `CoconutKit-(dev|demo)-RootTabBar`: A demo where a UIKit tab bar controller is the root view controller of an application
 * `CoconutKit-(dev|demo)-RootNavigation`: A demo where a UIKit navigation controller is the root view controller of an application
 * `CoconutKit-(dev|demo)-RootStoryboard`: A demo where a storyboard defines the whole application view controller hierarchy (itself managed using CoconutKit view controller containers). Runs on iOS 5 and above
-* `CoconutKit-test`: CoconutKit unit tests
-
-Schemes ending with `ios4` are similar, but with features not available on iOS 4 removed.
+* `CoconutKit-tests`: CoconutKit unit tests
 
 ### Frequently asked questions
 
@@ -213,11 +207,11 @@ There are some requirements when contributing, though:
 
 #### Writing code
 
-Use the `CoconutKit-dev` project to easily write and test your code. When you are done with the `CoconutKit-dev` project, update the `CoconutKit` and `CoconutKit-demo` projects to mirror the changes you made to the source tree. New resources must be added to the `CoconutKit-resources` project. 
+Add new component files to the `CoconutKit` project. Use the `CoconutKit-dev` project to create a corresponding demo. If your component requires resources, those must be added to the `CoconutKit-resources` target of the `CoconutKit` project. 
 
-Any new public header file must be added to the `CoconutKit-(dev|test).pch` file, as well as to the `publicHeaders.txt` file located in the `CoconutKit-dev` directory. Source files with linker issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the `bootstrap.txt` file. Please refer to the `make-fmwk.sh` documentation for more information.
+Any new public header file must be added to the `CoconutKit-dev-Prefix.pch` file, as well as to the `publicHeaders.txt` file located in the `CoconutKit-dev` directory. Source files with linker issues (source files containing categories only, or meant to be used in Interface Builder) must also be added to the `bootstrap.txt` file. Please refer to the `make-fmwk.sh` documentation for more information.
 
-For non-interactive components, you should consider adding some test cases to the `CoconutKit-test` project as well. Update it to mirror the changes made to the source and resource files of the `CoconutKit` project.
+For non-interactive components, you should consider adding some test cases to the `CoconutKit-tests` target as well.
 
 #### Code repository
 

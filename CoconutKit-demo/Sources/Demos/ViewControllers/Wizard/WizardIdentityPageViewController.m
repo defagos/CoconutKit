@@ -8,11 +8,11 @@
 
 #import "WizardIdentityPageViewController.h"
 
-#import "Person.h"
+#import "PersonInformation.h"
 
 @interface WizardIdentityPageViewController ()
 
-@property (nonatomic, retain) Person *person;
+@property (nonatomic, retain) PersonInformation *personInformation;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
 
 @property (nonatomic, retain) IBOutlet UITextField *firstNameTextField;
@@ -37,18 +37,18 @@
 {
     if ((self = [super init])) {
         // Only one person in the DB. If does not exist yet, create it
-        Person *person = [[Person allObjects] firstObject];
-        if (! person) {
-            person = [Person insert];
+        PersonInformation *personInformation = [[PersonInformation allObjects] firstObject];
+        if (! personInformation) {
+            personInformation = [PersonInformation insert];
         }
-        self.person = person;
+        self.personInformation = personInformation;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.person = nil;
+    self.personInformation = nil;
     self.dateFormatter = nil;
     
     [super dealloc];
@@ -73,14 +73,14 @@
 
 #pragma mark Accessors and mutators
 
-- (void)setPerson:(Person *)person
+- (void)setPersonInformation:(PersonInformation *)personInformation
 {
-    if (_person == person) {
+    if (_personInformation == personInformation) {
         return;
     }
     
-    [_person release];
-    _person = [person retain];
+    [_personInformation release];
+    _personInformation = [personInformation retain];
     
     [self reloadData];
 }
@@ -184,25 +184,25 @@
         [s_numberFormatter setAllowsFloats:NO];
     }
     
-    [self.firstNameTextField bindToManagedObject:self.person
+    [self.firstNameTextField bindToManagedObject:self.personInformation
                                        fieldName:@"firstName"
                                        formatter:nil
                               validationDelegate:self];
-    [self.lastNameTextField bindToManagedObject:self.person
+    [self.lastNameTextField bindToManagedObject:self.personInformation
                                       fieldName:@"lastName"
                                       formatter:nil
                              validationDelegate:self];
-    [self.emailTextField bindToManagedObject:self.person
+    [self.emailTextField bindToManagedObject:self.personInformation
                                    fieldName:@"email"
                                    formatter:nil
                           validationDelegate:self];
     [self.emailTextField setCheckingOnChange:YES];
-    [self.birthdateTextField bindToManagedObject:self.person
+    [self.birthdateTextField bindToManagedObject:self.personInformation
                                        fieldName:@"birthdate"
                                        formatter:self.dateFormatter
                               validationDelegate:self];
     [self.birthdateTextField setCheckingOnChange:YES];
-    [self.nbrChildrenTextField bindToManagedObject:self.person
+    [self.nbrChildrenTextField bindToManagedObject:self.personInformation
                                          fieldName:@"nbrChildren"
                                          formatter:s_numberFormatter
                                 validationDelegate:self];
@@ -242,13 +242,13 @@
 - (IBAction)resetModel:(id)sender
 {
     // Reset the model programmatically. This shows that the text fields are updated accordingly
-    self.person.firstName = nil;
-    self.person.lastName = nil;
-    self.person.firstName = nil;
-    self.person.lastName = nil;
-    self.person.email = nil;
-    self.person.birthdate = nil;
-    self.person.nbrChildrenValue = 0;
+    self.personInformation.firstName = nil;
+    self.personInformation.lastName = nil;
+    self.personInformation.firstName = nil;
+    self.personInformation.lastName = nil;
+    self.personInformation.email = nil;
+    self.personInformation.birthdate = nil;
+    self.personInformation.nbrChildrenValue = 0;
 }
 
 - (IBAction)resetTextFields:(id)sender

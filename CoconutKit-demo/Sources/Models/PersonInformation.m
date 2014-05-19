@@ -1,8 +1,8 @@
-#import "Person.h"
+#import "PersonInformation.h"
 
 #import "DemoErrors.h"
 
-@implementation Person
+@implementation PersonInformation
 
 #pragma mark Individudal validation methods
 

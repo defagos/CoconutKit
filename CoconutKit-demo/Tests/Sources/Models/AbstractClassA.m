@@ -30,7 +30,7 @@
     return YES;
 }
 
-#pragma Consistency validationa
+#pragma mark Consistency validation
 
 - (BOOL)checkForConsistency:(NSError **)pError
 {

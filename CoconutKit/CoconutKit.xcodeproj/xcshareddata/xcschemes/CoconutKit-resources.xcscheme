@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F33348213FAF9E0000FC9FD"
-               BuildableName = "CoconutKit-test.app"
-               BlueprintName = "CoconutKit-test"
-               ReferencedContainer = "container:CoconutKit-test.xcodeproj">
+               BlueprintIdentifier = "6FC5B7731924EDC500660CDF"
+               BuildableName = "CoconutKit-resources.bundle"
+               BlueprintName = "CoconutKit-resources"
+               ReferencedContainer = "container:CoconutKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,15 +29,6 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F33348213FAF9E0000FC9FD"
-            BuildableName = "CoconutKit-test.app"
-            BlueprintName = "CoconutKit-test"
-            ReferencedContainer = "container:CoconutKit-test.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -48,22 +39,6 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F33348213FAF9E0000FC9FD"
-            BuildableName = "CoconutKit-test.app"
-            BlueprintName = "CoconutKit-test"
-            ReferencedContainer = "container:CoconutKit-test.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "XcodeColors"
-            value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -73,15 +48,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F33348213FAF9E0000FC9FD"
-            BuildableName = "CoconutKit-test.app"
-            BlueprintName = "CoconutKit-test"
-            ReferencedContainer = "container:CoconutKit-test.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
