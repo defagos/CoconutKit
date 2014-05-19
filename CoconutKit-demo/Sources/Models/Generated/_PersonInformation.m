@@ -1,9 +1,9 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Person.m instead.
+// Make changes to PersonInformation.m instead.
 
-#import "_Person.h"
+#import "_PersonInformation.h"
 
-const struct PersonAttributes PersonAttributes = {
+const struct PersonInformationAttributes PersonInformationAttributes = {
 	.birthdate = @"birthdate",
 	.city = @"city",
 	.country = @"country",
@@ -15,33 +15,33 @@ const struct PersonAttributes PersonAttributes = {
 	.street = @"street",
 };
 
-const struct PersonRelationships PersonRelationships = {
+const struct PersonInformationRelationships PersonInformationRelationships = {
 };
 
-const struct PersonFetchedProperties PersonFetchedProperties = {
+const struct PersonInformationFetchedProperties PersonInformationFetchedProperties = {
 };
 
-@implementation PersonID
+@implementation PersonInformationID
 @end
 
-@implementation _Person
+@implementation _PersonInformation
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:moc_];
+	return [NSEntityDescription insertNewObjectForEntityForName:@"PersonInformation" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-	return @"Person";
+	return @"PersonInformation";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
 	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"Person" inManagedObjectContext:moc_];
+	return [NSEntityDescription entityForName:@"PersonInformation" inManagedObjectContext:moc_];
 }
 
-- (PersonID*)objectID {
-	return (PersonID*)[super objectID];
+- (PersonInformationID*)objectID {
+	return (PersonInformationID*)[super objectID];
 }
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {

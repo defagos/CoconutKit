@@ -1,10 +1,10 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
-// Make changes to Person.h instead.
+// Make changes to PersonInformation.h instead.
 
 #import <CoreData/CoreData.h>
 
 
-extern const struct PersonAttributes {
+extern const struct PersonInformationAttributes {
 	 NSString *birthdate;
 	 NSString *city;
 	 NSString *country;
@@ -14,15 +14,13 @@ extern const struct PersonAttributes {
 	 NSString *nbrChildren;
 	 NSString *state;
 	 NSString *street;
-} PersonAttributes;
+} PersonInformationAttributes;
 
-extern const struct PersonRelationships {
-} PersonRelationships;
+extern const struct PersonInformationRelationships {
+} PersonInformationRelationships;
 
-extern const struct PersonFetchedProperties {
-} PersonFetchedProperties;
-
-
+extern const struct PersonInformationFetchedProperties {
+} PersonInformationFetchedProperties;
 
 
 
@@ -33,14 +31,16 @@ extern const struct PersonFetchedProperties {
 
 
 
-@interface PersonID : NSManagedObjectID {}
+
+
+@interface PersonInformationID : NSManagedObjectID {}
 @end
 
-@interface _Person : NSManagedObject {}
+@interface _PersonInformation : NSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-- (PersonID*)objectID;
+- (PersonInformationID*)objectID;
 
 
 
@@ -143,11 +143,11 @@ extern const struct PersonFetchedProperties {
 
 @end
 
-@interface _Person (CoreDataGeneratedAccessors)
+@interface _PersonInformation (CoreDataGeneratedAccessors)
 
 @end
 
-@interface _Person (CoreDataGeneratedPrimitiveAccessors)
+@interface _PersonInformation (CoreDataGeneratedPrimitiveAccessors)
 
 
 - (NSDate*)primitiveBirthdate;

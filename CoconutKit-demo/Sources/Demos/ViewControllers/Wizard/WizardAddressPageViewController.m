@@ -8,11 +8,11 @@
 
 #import "WizardAddressPageViewController.h"
 
-#import "Person.h"
+#import "PersonInformation.h"
 
 @interface WizardAddressPageViewController ()
 
-@property (nonatomic, retain) Person *person;
+@property (nonatomic, retain) PersonInformation *personInformation;
 
 @property (nonatomic, retain) IBOutlet UITextField *streetTextField;
 @property (nonatomic, retain) IBOutlet UILabel *streetErrorLabel;
@@ -32,15 +32,15 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self.person = [[Person allObjects] firstObject];
-        NSAssert(self.person != nil, @"A person must be available");
+        self.personInformation = [[PersonInformation allObjects] firstObject];
+        NSAssert(self.personInformation != nil, @"A person must be available");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.person = nil;
+    self.personInformation = nil;
     
     [super dealloc];
 }
@@ -61,14 +61,14 @@
 
 #pragma mark Accessors and mutators
 
-- (void)setPerson:(Person *)person
+- (void)setPersonInformation:(PersonInformation *)personInformation
 {
-    if (_person == person) {
+    if (_personInformation == personInformation) {
         return;
     }
     
-    [_person release];
-    _person = [person retain];
+    [_personInformation release];
+    _personInformation = [personInformation retain];
     
     [self reloadData];
 }
@@ -136,22 +136,22 @@
 
 - (void)reloadData
 {
-    [self.streetTextField bindToManagedObject:self.person
+    [self.streetTextField bindToManagedObject:self.personInformation
                                     fieldName:@"street"
                                     formatter:nil
                            validationDelegate:self];
     [self.streetTextField setCheckingOnChange:YES];
-    [self.cityTextField bindToManagedObject:self.person
+    [self.cityTextField bindToManagedObject:self.personInformation
                                   fieldName:@"city"
                                   formatter:nil
                          validationDelegate:self];
     [self.cityTextField setCheckingOnChange:YES];
-    [self.stateTextField bindToManagedObject:self.person
+    [self.stateTextField bindToManagedObject:self.personInformation
                                    fieldName:@"state"
                                    formatter:nil
                           validationDelegate:self];
     [self.stateTextField setCheckingOnChange:YES];
-    [self.countryTextField bindToManagedObject:self.person
+    [self.countryTextField bindToManagedObject:self.personInformation
                                      fieldName:@"country"
                                      formatter:nil
                             validationDelegate:self];
@@ -198,10 +198,10 @@
 - (IBAction)resetModel:(id)sender
 {
     // Reset the model programmatically. This shows that the text fields are updated accordingly
-    self.person.street = nil;
-    self.person.city = nil;
-    self.person.state = nil;
-    self.person.country = nil;
+    self.personInformation.street = nil;
+    self.personInformation.city = nil;
+    self.personInformation.state = nil;
+    self.personInformation.country = nil;
 }
 
 - (IBAction)resetTextFields:(id)sender

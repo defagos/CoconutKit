@@ -1,7 +1,4 @@
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-
     // Additional required framework global headers
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
@@ -116,4 +113,10 @@
     #import "UIView+HLSExtensions.h"
     #import "UIViewController+HLSExtensions.h"
     #import "UIWebView+HLSExtensions.h"
+
+    // Additional headers for the test target
+#ifdef COCONUTKIT_TESTS
+    #import <GHUnitIOS/GHUnit.h>
+#endif
+
 #endif

@@ -7,7 +7,4 @@
    <FileRef
       location = "group:CoconutKit-demo/CoconutKit-demo.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:CoconutKit-test/CoconutKit-test.xcodeproj">
-   </FileRef>
 </Workspace>
