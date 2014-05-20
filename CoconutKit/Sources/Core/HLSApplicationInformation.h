@@ -13,6 +13,12 @@ NSString *HLSApplicationLibraryDirectoryPath(void);
 NSURL *HLSApplicationLibraryDirectoryURL(void);
 
 /**
+ * Return the Caches directory
+ */
+NSString *HLSApplicationCachesDirectoryPath(void);
+NSURL *HLSApplicationCachesDirectoryURL(void);
+
+/**
  * Return the application Documents directory
  */
 NSString *HLSApplicationDocumentDirectoryPath(void);

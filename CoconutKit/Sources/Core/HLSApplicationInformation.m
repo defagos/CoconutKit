@@ -30,6 +30,26 @@ NSURL *HLSApplicationLibraryDirectoryURL(void)
     return s_URL;
 }
 
+NSString *HLSApplicationCachesDirectoryPath(void)
+{
+    static NSString *s_path = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    });
+    return s_path;
+}
+
+NSURL *HLSApplicationCachesDirectoryURL(void)
+{
+    static NSURL *s_URL = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_URL = [NSURL fileURLWithPath:HLSApplicationCachesDirectoryPath()];
+    });
+    return s_URL;
+}
+
 NSString *HLSApplicationDocumentDirectoryPath(void)
 {
     static NSString *s_path = nil;
