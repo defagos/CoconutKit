@@ -230,7 +230,6 @@
 		6FC40C581641D02A00398242 /* UISplitViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */; };
 		6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC5B7751924EDC500660CDF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */; };
-		6FC5B7A41924EE4E00660CDF /* CoconutKit-resources-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7811924EE4E00660CDF /* CoconutKit-resources-Info.plist */; };
 		6FC5B7B51924EE4E00660CDF /* HLSLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A21924EE4E00660CDF /* HLSLoggerViewController.xib */; };
 		6FC5B7B61924EE4E00660CDF /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A31924EE4E00660CDF /* HLSWebViewController.xib */; };
 		6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */; };
@@ -1126,7 +1125,7 @@
 				6FC5B7701924EDC500660CDF /* Sources */,
 				6FC5B7711924EDC500660CDF /* Frameworks */,
 				6FC5B7721924EDC500660CDF /* Resources */,
-				6FCB4E7F19264D3300047AD3 /* Copy bundle to CoconutKit directory */,
+				6FCB4E7F19264D3300047AD3 /* Copy Bundle To Static Library Project */,
 			);
 			buildRules = (
 			);
@@ -1205,7 +1204,6 @@
 				6F47EC561924EEEE00C5F6AC /* SearchFieldIcon.png in Resources */,
 				6F47EC551924EEEE00C5F6AC /* CursorDefaultPointer.png in Resources */,
 				6F47EC4F1924EEEE00C5F6AC /* ButtonBarArrowLeft.png in Resources */,
-				6FC5B7A41924EE4E00660CDF /* CoconutKit-resources-Info.plist in Resources */,
 				6FC5B7B51924EE4E00660CDF /* HLSLoggerViewController.xib in Resources */,
 				6FC5B7B61924EE4E00660CDF /* HLSWebViewController.xib in Resources */,
 				6F47EC5A1924EEFC00C5F6AC /* Localizable.strings in Resources */,
@@ -1218,19 +1216,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6FCB4E7F19264D3300047AD3 /* Copy bundle to CoconutKit directory */ = {
+		6FCB4E7F19264D3300047AD3 /* Copy Bundle To Static Library Project */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy bundle to CoconutKit directory";
+			name = "Copy Bundle To Static Library Project";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "cp -rf \"$CONFIGURATION_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$PROJECT_DIR/../CoconutKit/CoconutKit-resources.bundle\"";
+			shellScript = "cp -rf \"$CONFIGURATION_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$PROJECT_DIR/CoconutKit-resources.bundle\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
