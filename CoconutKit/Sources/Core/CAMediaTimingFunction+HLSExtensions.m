@@ -38,7 +38,7 @@ static const float kEpsilon = 1e-5f;
         time = 0.f;
     }
     else if (floatgt(time, 1.f)) {
-        HLSLoggerWarn(@"Time must be >= 0. Fixed to 0");
+        HLSLoggerWarn(@"Time must be <= 1. Fixed to 1");
         time = 1.f;
     }
     
