@@ -3,7 +3,7 @@
 //  CoconutKit-test
 //
 //  Created by Samuel Défago on 14.10.13.
-//  Copyright (c) 2013 Hortis. All rights reserved.
+//  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
 #import "NSStream+HLSExtensionsTestCase.h"

@@ -3,7 +3,7 @@
 //  CoconutKit-dev
 //
 //  Created by Samuel Défago on 20.02.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "ParallaxScrollingDemoViewController.h"

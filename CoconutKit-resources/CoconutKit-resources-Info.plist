@@ -7,7 +7,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>ch.hortis.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>ch.defagos.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -21,6 +21,6 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2012 Hortis. All rights reserved.</string>
+	<string>Copyright © 2012 Samuel Défago. All rights reserved.</string>
 </dict>
 </plist>

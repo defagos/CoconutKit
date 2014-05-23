@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 2/24/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #define CoconutKitLocalizedString(key, comment) \
@@ -12,7 +12,7 @@
 @interface NSBundle (HLSExtensions)
 
 /**
- * Return the friendly Hortis application version number, based on the main bundle version
+ * Return a friendly application version number, based on the main bundle version
  *
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */
@@ -32,7 +32,7 @@
 + (NSBundle *)bundleWithName:(NSString *)name;
 
 /**
- * Return the friendly Hortis bundle version number
+ * Return a friendly bundle version number
  *
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */

@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel DEFAGO on 09.06.10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSNotifications.h"

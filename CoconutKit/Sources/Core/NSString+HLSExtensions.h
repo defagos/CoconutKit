@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 11/3/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 // Formatting functions
@@ -112,7 +112,7 @@ NSString *HLSUUID(void);
 - (NSString *)sha512hash;
 
 /**
- * At Hortis, we use a convenient way to identify versions during development, for tags and for official releases:
+ * Here is a convenient way to identify versions during development, for tags and for official releases:
  *   - For all versions except AppStore releases:         [lastVersionNumber+]versionNumber[+qualifier]
  *   - For AppStore releases:                             versionNumber
  * where:

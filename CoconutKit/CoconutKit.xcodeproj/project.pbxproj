@@ -1162,7 +1162,7 @@
 			attributes = {
 				CLASSPREFIX = HLS;
 				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = Hortis;
+				ORGANIZATIONNAME = "Samuel Défago";
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "CoconutKit" */;
 			compatibilityVersion = "Xcode 3.2";

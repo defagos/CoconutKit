@@ -1,6 +1,6 @@
 ### What is CoconutKit?
 
-CoconutKit is a library of high-quality iOS components written at [hortis le studio](http://www.hortis.ch/) and in my spare time. It includes several tools for dealing with view controllers, multi-threading, animations, as well as some new controls and various utility classes. These components are meant to make the life of an iOS programmer easier by reducing the boilerplate code written every day, improving code quality and enforcing solid application architecture.
+CoconutKit is a library of high-quality iOS components written at my company and in my spare time. It includes several tools for dealing with view controllers, multi-threading, animations, as well as some new controls and various utility classes. These components are meant to make the life of an iOS programmer easier by reducing the boilerplate code written every day, improving code quality and enforcing solid application architecture.
 
 Most of CoconutKit components are not sexy as is, but rather useful. Do not be freaked out! These components are meant to make you more productive, less focused on debugging, so that you can spend more time working on the design of your application (if you have a great designer at hand, of course). Give CoconutKit a try, your life as an iOS programmer will never be the same afterwards!
 
@@ -45,7 +45,7 @@ CoconutKit is and will stay free. However, if you enjoy using it, you can suppor
 
 ### Credits
 
-If you enjoy the library, [hortis](http://www.hortis.ch/) and I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
+If you enjoy the library, I would sincerely love being credited somewhere in your application, for example on some about page. Thanks for your support!
 
 ### How can I discover CoconutKit components?
 
@@ -172,11 +172,9 @@ Yes. As long as you use binaries or CocoaPods, no additional configuration is re
 
 #### Can I use CoconutKit for applications published on the AppStore?
 
-CoconutKit does not use any private API and is therefore AppStore friendly. Several applications hortis developed use CoconutKit and have successfully been approved.
+CoconutKit does not use any private API and is therefore AppStore friendly. Several applications I developed use CoconutKit and have successfully been approved.
 
 #### Why have you released CoconutKit?
-
-My company, [hortis](http://www.hortis.ch/), has a long tradition of open source development. This is one of the major reasons why I started to work for its entity devoted to mobile development, hortis le studio. 
 
 When I started iOS development a few years ago, I immediately felt huge gaps needed to be filled in some areas, so that I could get more productive and write better applications. CoconutKit was born.
 
@@ -188,7 +186,7 @@ No, CoconutKit currently does not use ARC itself. This will maybe change in a no
 
 #### What does the HLS class prefix mean?
 
-HLS stands for hortis le studio.
+HLS stands for hortis le studio, the company I worked for when I started CoconutKit development
 
 ### Contributing to CoconutKit
 
@@ -346,7 +344,7 @@ Thanks for your feedback!
 
 ### Licence
 
-Copyright (c) 2011-2012 hortis le studio, Samuel Défago
+Copyright (c) 2011-2014 Samuel Défago
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

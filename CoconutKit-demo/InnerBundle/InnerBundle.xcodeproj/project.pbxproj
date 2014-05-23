@@ -92,7 +92,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = Hortis;
+				ORGANIZATIONNAME = "Samuel Défago";
 			};
 			buildConfigurationList = 6F44EA00156BB2AF00B45BB4 /* Build configuration list for PBXProject "InnerBundle" */;
 			compatibilityVersion = "Xcode 3.2";

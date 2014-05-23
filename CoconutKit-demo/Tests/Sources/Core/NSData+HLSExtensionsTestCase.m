@@ -3,7 +3,7 @@
 //  CoconutKit-test
 //
 //  Created by Samuel Défago on 29.05.12.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "NSData+HLSExtensionsTestCase.h"

@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/10/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "DemosListViewController.h"
@@ -630,7 +630,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                 
                 case ViewControllersDemoIndexWebViewController: {
-                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.hortis.ch"]];
+                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://about.me/defagos"]];
                     demoViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
                     break;
                 }
