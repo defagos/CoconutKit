@@ -1228,7 +1228,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "cp -rf \"$CONFIGURATION_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$PROJECT_DIR/CoconutKit-resources.bundle\"";
+			shellScript = "bundle_dest_dir=\"$PROJECT_DIR/CoconutKit-resources.bundle\"\n\nif [ -d \"$bundle_dest_dir\" ]; then\nrm -rf \"$bundle_dest_dir\"\nfi\ncp -rf \"$CONFIGURATION_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$bundle_dest_dir\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
