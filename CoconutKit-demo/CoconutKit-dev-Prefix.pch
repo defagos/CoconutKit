@@ -37,6 +37,7 @@
     #import "HLSLogger.h"
     #import "HLSManagedObjectCopying.h"
     #import "HLSFileURLConnection.h"
+    #import "HLSGeometry.h"
     #import "HLSModelManager.h"
     #import "HLSNibView.h"
     #import "HLSNotifications.h"

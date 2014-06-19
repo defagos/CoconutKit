@@ -254,6 +254,7 @@
 		6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */; };
 		6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6FAB922016DA70BE00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
+		6FB007E1195304360082D915 /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007E0195304360082D915 /* HLSGeometryTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
 		6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
@@ -756,6 +757,8 @@
 		6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple3.jpg; sourceTree = "<group>"; };
 		6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_apple4.jpg; sourceTree = "<group>"; };
 		6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6FB007DF195304360082D915 /* HLSGeometryTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSGeometryTestCase.h; sourceTree = "<group>"; };
+		6FB007E0195304360082D915 /* HLSGeometryTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSGeometryTestCase.m; sourceTree = "<group>"; };
 		6FB500471705A60900779DB3 /* ConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionDemoViewController.h; sourceTree = "<group>"; };
 		6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionDemoViewController.m; sourceTree = "<group>"; };
 		6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionDemoViewController.xib; sourceTree = "<group>"; };
@@ -1031,6 +1034,8 @@
 				6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */,
 				6F2B307A1929BE4A003D4C2C /* HLSFloatTestCase.h */,
 				6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */,
+				6FB007DF195304360082D915 /* HLSGeometryTestCase.h */,
+				6FB007E0195304360082D915 /* HLSGeometryTestCase.m */,
 				6F2B307C1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.h */,
 				6F2B307D1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m */,
 				6F2B307E1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.h */,
@@ -2304,6 +2309,7 @@
 				6F2B30F11929BF74003D4C2C /* main.m in Sources */,
 				6F2B30D81929BE4A003D4C2C /* NSStream+HLSExtensionsTestCase.m in Sources */,
 				6F2B30E51929BE4A003D4C2C /* _ConcreteClassD.m in Sources */,
+				6FB007E1195304360082D915 /* HLSGeometryTestCase.m in Sources */,
 				6F2B30E01929BE4A003D4C2C /* ConcreteClassD.m in Sources */,
 				6F2B30DE1929BE4A003D4C2C /* AbstractClassA.m in Sources */,
 				6F2B30DA1929BE4A003D4C2C /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
