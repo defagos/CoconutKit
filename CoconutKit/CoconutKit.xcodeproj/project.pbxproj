@@ -218,6 +218,8 @@
 		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
 		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
+		6FB007DD1952D09B0082D915 /* HLSGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB007DB1952D09B0082D915 /* HLSGeometry.h */; };
+		6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007DC1952D09B0082D915 /* HLSGeometry.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB318B21815A93200565B69 /* HLSInMemoryFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB318B01815A93100565B69 /* HLSInMemoryFileManager.h */; };
 		6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318B11815A93100565B69 /* HLSInMemoryFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB8E66C15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */; };
@@ -327,8 +329,6 @@
 		6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
 		6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStack.m; sourceTree = "<group>"; };
 		6F63E7B517CF6B80006322D9 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
-		6F63E7BD17CF6D58006322D9 /* HLSLoggerPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLoggerPreviewItem.h; sourceTree = "<group>"; };
-		6F63E7BE17CF6D58006322D9 /* HLSLoggerPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLoggerPreviewItem.m; sourceTree = "<group>"; };
 		6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPreviewItem.h; sourceTree = "<group>"; };
 		6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPreviewItem.m; sourceTree = "<group>"; };
 		6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
@@ -496,6 +496,8 @@
 		6FADE59814BA0494007EE121 /* HLSWizardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSWizardViewController.m; sourceTree = "<group>"; };
 		6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+HLSDynamicLocalization.h"; sourceTree = "<group>"; };
 		6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
+		6FB007DB1952D09B0082D915 /* HLSGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSGeometry.h; sourceTree = "<group>"; };
+		6FB007DC1952D09B0082D915 /* HLSGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSGeometry.m; sourceTree = "<group>"; };
 		6FB318B01815A93100565B69 /* HLSInMemoryFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManager.h; sourceTree = "<group>"; };
 		6FB318B11815A93100565B69 /* HLSInMemoryFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManager.m; sourceTree = "<group>"; };
 		6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
@@ -714,6 +716,8 @@
 				6FCA2DD21679E36D0011CFDA /* HLSFileManager.m */,
 				6FADE52014BA0494007EE121 /* HLSFloat.h */,
 				6FADE52114BA0494007EE121 /* HLSFloat.m */,
+				6FB007DB1952D09B0082D915 /* HLSGeometry.h */,
+				6FB007DC1952D09B0082D915 /* HLSGeometry.m */,
 				6FAD88D21817859F00B02B29 /* HLSInMemoryCacheEntry.h */,
 				6FAD88D31817859F00B02B29 /* HLSInMemoryCacheEntry.m */,
 				6FB318B01815A93100565B69 /* HLSInMemoryFileManager.h */,
@@ -907,8 +911,6 @@
 				6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */,
 				6F8C934615CEF0DB006D892C /* HLSContainerStackView.h */,
 				6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */,
-				6F63E7BD17CF6D58006322D9 /* HLSLoggerPreviewItem.h */,
-				6F63E7BE17CF6D58006322D9 /* HLSLoggerPreviewItem.m */,
 				6F6E813D17CF05FF00CE578A /* HLSLoggerViewController.h */,
 				6F6E813E17CF05FF00CE578A /* HLSLoggerViewController.m */,
 				6F0F4DD9159CB75400277267 /* HLSPlaceholderInsetSegue.h */,
@@ -990,6 +992,7 @@
 				6FADE5B914BA0494007EE121 /* NSBundle+HLSExtensions.h in Headers */,
 				6FADE5BB14BA0494007EE121 /* NSCalendar+HLSExtensions.h in Headers */,
 				6FADE5BD14BA0494007EE121 /* NSData+HLSExtensions.h in Headers */,
+				6FB007DD1952D09B0082D915 /* HLSGeometry.h in Headers */,
 				6FADE5BF14BA0494007EE121 /* NSDate+HLSExtensions.h in Headers */,
 				6FADE5C114BA0494007EE121 /* NSDateFormatter+HLSExtensions.h in Headers */,
 				6FADE5C314BA0494007EE121 /* NSDictionary+HLSExtensions.h in Headers */,
@@ -1338,6 +1341,7 @@
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,
 				6F23DB2816B3E84200C085CE /* UIView+HLSRuntimeAttributes.m in Sources */,
 				6FAB922A16DA7F9100599256 /* HLSFileURLConnection.m in Sources */,
+				6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */,
 				6FAB922C16DA7F9100599256 /* HLSURLConnection.m in Sources */,
 				6F255E421712C360007BFC96 /* HLSConnection.m in Sources */,
 				6F255E541712E85F007BFC96 /* HLSFakeConnection.m in Sources */,
