@@ -56,10 +56,14 @@ static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
 static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd)
 {
     // Fix missing call to the super method
-    struct objc_super super;
-    super.receiver = self;
-    super.super_class = class_getSuperclass([UISlider class]);
-    objc_msgSendSuper(&super, _cmd);
+    struct objc_super super = {
+        .receiver = self,
+        .super_class = class_getSuperclass([UISlider class])
+    };
+    
+    // Cast the call to objc_msgSendSuper appropriately
+    id (*objc_msgSendSuper_typed)(struct objc_super *, SEL) = (void *)&objc_msgSendSuper;
+    objc_msgSendSuper_typed(&super, _cmd);
     
     (*s_UISlider__didMoveToWindow_Imp)(self, _cmd);
 }

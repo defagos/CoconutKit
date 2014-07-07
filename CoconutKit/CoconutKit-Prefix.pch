@@ -1,4 +1,6 @@
 #ifdef __OBJC__
+    #define OBJC_OLD_DISPATCH_PROTOTYPES 0
+
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import <CoreGraphics/CoreGraphics.h>
