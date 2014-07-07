@@ -258,6 +258,18 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
     return class_replaceMethod(clazz, selector, newImplementation, types);
 }
 
+IMP hls_class_swizzleClassSelector_block(Class clazz, SEL selector, id newImplementationBlock)
+{
+    IMP newImplementation = imp_implementationWithBlock(newImplementationBlock);
+    return hls_class_swizzleClassSelector(clazz, selector, newImplementation);
+}
+
+IMP hls_class_swizzleSelector_block(Class clazz, SEL selector, id newImplementationBlock)
+{
+    IMP newImplementation = imp_implementationWithBlock(newImplementationBlock);
+    return hls_class_swizzleSelector(clazz, selector, newImplementation);
+}
+
 BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass)
 {
     for (Class class = subclass; class != Nil; class = class_getSuperclass(class)) {

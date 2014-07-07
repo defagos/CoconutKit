@@ -8,6 +8,9 @@
 
 #import <objc/runtime.h> 
 
+// TODO: Add swizzling helpers for methods returning structs, floats (see runtime headers). Add test cases to cover
+//       all cases and potential issues
+
 /**
  * The following methods can be safely used in pure C code
  *
@@ -86,11 +89,22 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
  */
 IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
 
+IMP hls_class_swizzleClassSelector_block(Class clazz, SEL selector, id newImplementationBlock);
+
 /**
  * Replace the implementation of an instance method, given its selector. Return the original implementation,
  * or NULL if not found
  */
 IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
+
+/**
+ * Example:
+ *     __block IMP originalIMP = hls_class_swizzleSelector_block(self, @selector(awakeFromNib), ^(UIView *self_) {
+ *         NSLog(@"Swizzled -[UIView awakeFromNib] for %@", self_);
+ *         ((void (*)(id, SEL))originalIMP)(self_, @selector(awakeFromNib));
+ *     });
+ */
+IMP hls_class_swizzleSelector_block(Class clazz, SEL selector, id newImplementationBlock);
 
 /**
  * Return YES iff subclass is a subclass of superclass, or if subclass == superclass (in agreement with
