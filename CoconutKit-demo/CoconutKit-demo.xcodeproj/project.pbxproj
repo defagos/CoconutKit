@@ -899,7 +899,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk-$(CONFIGURATION).staticframework */,
+				6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				6F22C75116A93DD20081A9A7 /* CoreText.framework */,
@@ -944,15 +944,15 @@
 			path = RootTabBar;
 			sourceTree = "<group>";
 		};
-		6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk-$(CONFIGURATION).staticframework */ = {
+		6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk.staticframework */ = {
 			isa = PBXGroup;
 			children = (
 				6F159C3015A5B7B00020AFAC /* Bootstrap */,
 				6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */,
 				6F159C3315A5B7B00020AFAC /* CoconutKit.framework */,
 			);
-			name = "CoconutKit-trunk-$(CONFIGURATION).staticframework";
-			path = "../Binaries/CoconutKit-trunk-$(CONFIGURATION).staticframework";
+			name = "CoconutKit-trunk.staticframework";
+			path = "../Binaries/CoconutKit-trunk.staticframework";
 			sourceTree = "<group>";
 		};
 		6F159C3015A5B7B00020AFAC /* Bootstrap */ = {
@@ -2462,7 +2462,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk.staticframework\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2470,6 +2470,10 @@
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
+				OTHER_LDFLAGS = (
+					"-framework",
+					"CoconutKit,Debug",
+				);
 				PRODUCT_NAME = "CoconutKit-demo";
 			};
 			name = Debug;
@@ -2479,7 +2483,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk-$(CONFIGURATION).staticframework\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk.staticframework\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
