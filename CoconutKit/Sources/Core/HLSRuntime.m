@@ -96,7 +96,7 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
 BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol)
 {
     Class class = cls;
-    while (class) {
+    while (class != Nil) {
         if (class_conformsToProtocol(class, protocol)) {
             return YES;
         }

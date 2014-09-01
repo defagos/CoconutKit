@@ -67,11 +67,7 @@
         bundle = [NSBundle mainBundle];
     }
     
-    NSString *nibName = nil;
-    if ([bundle pathForResource:[self className] ofType:@"nib"]) {
-        nibName = [self className];
-    }
-    
+    NSString *nibName = [self nibNameInBundle:bundle];
     return [self initWithNibName:nibName bundle:bundle];
 }
 
@@ -217,6 +213,21 @@
 {
     [super didReceiveMemoryWarning];
     HLSLoggerDebug(@"View controller %@ did receive a memory warning", self);
+}
+
+#pragma mark Nib resolving
+
+- (NSString *)nibNameInBundle:(NSBundle *)bundle
+{
+    Class class = [self class];
+    while (class != Nil) {
+        NSString *className = NSStringFromClass(class);
+        if ([bundle pathForResource:className ofType:@"nib"]) {
+            return className;
+        }
+        class = class_getSuperclass(class);
+    }
+    return nil;
 }
 
 @end

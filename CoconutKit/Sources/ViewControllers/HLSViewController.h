@@ -23,8 +23,8 @@
  *     potentially redundant code
  *   - instead of the default nib resolution mechanism of -[UIViewController init] (for @class MyViewController, first
  *     locate MyView.nib, then MyViewController.nib), HLSViewController subclasses look for a nib bearing the same name
- *     as the class only (otherwise the view controller is assumed to be instantiated programmatically). This promotes 
- *     a consistent naming scheme between source and nib files
+ *     as the class or one of its superclasses only (otherwise the view controller is assumed to be instantiated 
+ *     programmatically). This promotes a consistent naming scheme between source and nib files
  *   - view controllers inheriting from HLSViewController MUST implement autorotation behavior using the new iOS 6 
  *     -shouldAutorotate and -supportedInterfaceOrientations methods, not the old -shouldAutorotateToInterfaceOrientation:
  *     method anymore. This way, no code has to be duplicated to implement autorotation behavior for iOS 4 / 5 and 6
@@ -51,8 +51,8 @@
 @interface HLSViewController : UIViewController
 
 /**
- * Instantiate a view controller, looking for a nib bearing the same name as the class in the given bundle. If the
- * specified bundle is nil, lookup is performed in the main bundle
+ * Instantiate a view controller, looking for a nib bearing the same name as the class or one of its superclasses in the 
+ * given bundle. If the specified bundle is nil, lookup is performed in the main bundle
  */
 - (id)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
 
