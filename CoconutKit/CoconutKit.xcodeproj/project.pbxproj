@@ -81,11 +81,6 @@
 		6F8C934915CEF0DB006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */; };
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
-		6F91451214CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F91451014CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h */; };
-		6F91451314CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F91451114CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m */; };
-		6F91451714CDCA9500AFA609 /* HLSActionSheet+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */; };
-		6F948C3814D6E872003BF765 /* UINavigationController+HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */; };
-		6F948C3914D6E872003BF765 /* UINavigationController+HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */; };
 		6F954F6517CF4707001E5F67 /* HLSLogger+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F954F6317CF4707001E5F67 /* HLSLogger+Friend.h */; };
 		6F97E17815E60C6A00EF6F62 /* HLSObjectAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F97E17715E60C6A00EF6F62 /* HLSObjectAnimation.m */; };
 		6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BD9815E28CBB00E5182E /* HLSLayerAnimation.h */; };
@@ -179,8 +174,6 @@
 		6FADE5E714BA0494007EE121 /* HLSTaskOperation+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56414BA0494007EE121 /* HLSTaskOperation+Protected.h */; };
 		6FADE5E814BA0494007EE121 /* HLSTaskOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56514BA0494007EE121 /* HLSTaskOperation.h */; };
 		6FADE5E914BA0494007EE121 /* HLSTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56614BA0494007EE121 /* HLSTaskOperation.m */; };
-		6FADE5EA14BA0494007EE121 /* HLSActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56814BA0494007EE121 /* HLSActionSheet.h */; };
-		6FADE5EB14BA0494007EE121 /* HLSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56914BA0494007EE121 /* HLSActionSheet.m */; };
 		6FADE5EC14BA0494007EE121 /* HLSCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56A14BA0494007EE121 /* HLSCursor.h */; };
 		6FADE5ED14BA0494007EE121 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56B14BA0494007EE121 /* HLSCursor.m */; };
 		6FADE5EE14BA0494007EE121 /* HLSSlideshow.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56C14BA0494007EE121 /* HLSSlideshow.h */; };
@@ -358,11 +351,6 @@
 		6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStackView.m; sourceTree = "<group>"; };
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F8D09A0123F545D00FCF2AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		6F91451014CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HLSActionSheet.h"; sourceTree = "<group>"; };
-		6F91451114CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HLSActionSheet.m"; sourceTree = "<group>"; };
-		6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSActionSheet+Friend.h"; sourceTree = "<group>"; };
-		6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSActionSheet.h"; sourceTree = "<group>"; };
-		6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+HLSActionSheet.m"; sourceTree = "<group>"; };
 		6F954F6317CF4707001E5F67 /* HLSLogger+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLogger+Friend.h"; sourceTree = "<group>"; };
 		6F97E17215E6054000EF6F62 /* HLSAnimationStep+Friend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HLSAnimationStep+Friend.h"; sourceTree = "<group>"; };
 		6F97E17715E60C6A00EF6F62 /* HLSObjectAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSObjectAnimation.m; sourceTree = "<group>"; };
@@ -457,8 +445,6 @@
 		6FADE56414BA0494007EE121 /* HLSTaskOperation+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTaskOperation+Protected.h"; sourceTree = "<group>"; };
 		6FADE56514BA0494007EE121 /* HLSTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTaskOperation.h; sourceTree = "<group>"; };
 		6FADE56614BA0494007EE121 /* HLSTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTaskOperation.m; sourceTree = "<group>"; };
-		6FADE56814BA0494007EE121 /* HLSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSActionSheet.h; sourceTree = "<group>"; };
-		6FADE56914BA0494007EE121 /* HLSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSActionSheet.m; sourceTree = "<group>"; };
 		6FADE56A14BA0494007EE121 /* HLSCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCursor.h; sourceTree = "<group>"; };
 		6FADE56B14BA0494007EE121 /* HLSCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCursor.m; sourceTree = "<group>"; };
 		6FADE56C14BA0494007EE121 /* HLSSlideshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSlideshow.h; sourceTree = "<group>"; };
@@ -840,9 +826,6 @@
 		6FADE56714BA0494007EE121 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6FADE56814BA0494007EE121 /* HLSActionSheet.h */,
-				6FADE56914BA0494007EE121 /* HLSActionSheet.m */,
-				6F91451514CDCA9500AFA609 /* HLSActionSheet+Friend.h */,
 				6FADE56A14BA0494007EE121 /* HLSCursor.h */,
 				6FADE56B14BA0494007EE121 /* HLSCursor.m */,
 				6F5007E91585E16300391A6C /* HLSExpandingSearchBar.h */,
@@ -870,14 +853,10 @@
 				6F10E387179FFE2B00BFEF42 /* HLSViewTouchDetector.m */,
 				6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */,
 				6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */,
-				6F91451014CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h */,
-				6F91451114CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m */,
 				6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */,
 				6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */,
 				6FADE57F14BA0494007EE121 /* UINavigationBar+HLSExtensions.h */,
 				6FADE58014BA0494007EE121 /* UINavigationBar+HLSExtensions.m */,
-				6F948C3414D6E872003BF765 /* UINavigationController+HLSActionSheet.h */,
-				6F948C3514D6E872003BF765 /* UINavigationController+HLSActionSheet.m */,
 				6FEEF85A14F29057001585A6 /* UIScrollView+HLSExtensions.h */,
 				6FEEF85B14F29057001585A6 /* UIScrollView+HLSExtensions.m */,
 				6FDDEC181529778E00CED462 /* UITextField+HLSExtensions.h */,
@@ -1017,7 +996,6 @@
 				6FADE5E514BA0494007EE121 /* HLSTaskManager.h in Headers */,
 				6FADE5E714BA0494007EE121 /* HLSTaskOperation+Protected.h in Headers */,
 				6FADE5E814BA0494007EE121 /* HLSTaskOperation.h in Headers */,
-				6FADE5EA14BA0494007EE121 /* HLSActionSheet.h in Headers */,
 				6FADE5EC14BA0494007EE121 /* HLSCursor.h in Headers */,
 				6FADE5EE14BA0494007EE121 /* HLSSlideshow.h in Headers */,
 				6FADE5F014BA0494007EE121 /* HLSNibView.h in Headers */,
@@ -1040,10 +1018,7 @@
 				6F3B063514BC7B950026F512 /* UIToolbar+HLSExtensions.h in Headers */,
 				6F3B064514BC7D410026F512 /* UIWebView+HLSExtensions.h in Headers */,
 				6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */,
-				6F91451214CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.h in Headers */,
-				6F91451714CDCA9500AFA609 /* HLSActionSheet+Friend.h in Headers */,
 				6F7B848F14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h in Headers */,
-				6F948C3814D6E872003BF765 /* UINavigationController+HLSActionSheet.h in Headers */,
 				6FEEF85C14F29057001585A6 /* UIScrollView+HLSExtensions.h in Headers */,
 				6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */,
 				6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */,
@@ -1283,7 +1258,6 @@
 				6FADE5E314BA0494007EE121 /* HLSTaskGroup.m in Sources */,
 				6FADE5E614BA0494007EE121 /* HLSTaskManager.m in Sources */,
 				6FADE5E914BA0494007EE121 /* HLSTaskOperation.m in Sources */,
-				6FADE5EB14BA0494007EE121 /* HLSActionSheet.m in Sources */,
 				6FADE5ED14BA0494007EE121 /* HLSCursor.m in Sources */,
 				6FADE5EF14BA0494007EE121 /* HLSSlideshow.m in Sources */,
 				6FADE5F114BA0494007EE121 /* HLSNibView.m in Sources */,
@@ -1305,9 +1279,7 @@
 				6F3B063614BC7B950026F512 /* UIToolbar+HLSExtensions.m in Sources */,
 				6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */,
 				6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */,
-				6F91451314CDC97D00AFA609 /* UIBarButtonItem+HLSActionSheet.m in Sources */,
 				6F7B849014CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m in Sources */,
-				6F948C3914D6E872003BF765 /* UINavigationController+HLSActionSheet.m in Sources */,
 				6FEEF85D14F29057001585A6 /* UIScrollView+HLSExtensions.m in Sources */,
 				6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */,
 				6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */,

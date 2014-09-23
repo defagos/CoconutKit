@@ -1,6 +1,5 @@
 CALayer+HLSExtensions.h
 CAMediaTimingFunction+HLSExtensions.h
-HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
 HLSApplicationInformation.h

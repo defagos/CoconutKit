@@ -8,7 +8,6 @@
 
 #import "DemosListViewController.h"
 
-#import "ActionSheetDemoViewController.h"
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
@@ -88,7 +87,6 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
     ViewDemoIndexExpandingSearchBar,
-    ViewDemoIndexActionSheet,
     ViewDemoIndexSlideshow,
     ViewDemoIndexSkinning,
     ViewDemoIndexEffects,
@@ -352,11 +350,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     cell.textLabel.text = NSLocalizedString(@"Search bar", nil);
                     break;
                 }
-                
-                case ViewDemoIndexActionSheet: {
-                    cell.textLabel.text = NSLocalizedString(@"Action sheet", nil);
-                    break;
-                }
                     
                 case ViewDemoIndexSlideshow: {
                     cell.textLabel.text = NSLocalizedString(@"Slideshow", nil);
@@ -563,14 +556,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexExpandingSearchBar: {
                     demoViewController = [[[ExpandingSearchBarDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
-                case ViewDemoIndexActionSheet: {
-                    ActionSheetDemoViewController *actionSheetDemoViewController = [[[ActionSheetDemoViewController alloc] init] autorelease];
-                    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
-                    tabBarController.viewControllers = [NSArray arrayWithObject:actionSheetDemoViewController];
-                    demoViewController = tabBarController;
                     break;
                 }
                     

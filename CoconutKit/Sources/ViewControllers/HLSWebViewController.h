@@ -13,7 +13,7 @@
  *
  * Designated initializer: -initWithRequest:
  */
-@interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIWebViewDelegate>
+@interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, UIWebViewDelegate>
 
 /**
  * Create the browser using the specified request

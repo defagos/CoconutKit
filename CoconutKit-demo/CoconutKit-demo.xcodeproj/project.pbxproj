@@ -39,7 +39,6 @@
 		6F2B301A1929BD78003D4C2C /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6F2B301B1929BD78003D4C2C /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
 		6F2B301C1929BD78003D4C2C /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
-		6F2B301D1929BD78003D4C2C /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */; };
 		6F2B301E1929BD78003D4C2C /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		6F2B301F1929BD78003D4C2C /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		6F2B30201929BD78003D4C2C /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
@@ -191,8 +190,6 @@
 		6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
 		6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
-		6F9C467214C5C30C00824AB2 /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */; };
-		6F9C467314C5C30C00824AB2 /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */; };
 		6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
@@ -282,7 +279,6 @@
 		6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
 		6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
 		6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
-		6FCB4E941926651F00047AD3 /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */; };
 		6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
 		6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */; };
@@ -344,7 +340,6 @@
 		6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
 		6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
-		6FCB4ED41926651F00047AD3 /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */; };
 		6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
@@ -668,9 +663,6 @@
 		6F9C45DD14C5C30B00824AB2 /* SleepTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTask.m; sourceTree = "<group>"; };
 		6F9C45DE14C5C30B00824AB2 /* SleepTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTaskOperation.h; sourceTree = "<group>"; };
 		6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTaskOperation.m; sourceTree = "<group>"; };
-		6F9C45E214C5C30B00824AB2 /* ActionSheetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDemoViewController.h; sourceTree = "<group>"; };
-		6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
-		6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C45E614C5C30B00824AB2 /* CursorCustomPointerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorCustomPointerView.h; sourceTree = "<group>"; };
 		6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorCustomPointerView.m; sourceTree = "<group>"; };
 		6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorCustomPointerView.xib; sourceTree = "<group>"; };
@@ -1413,7 +1405,6 @@
 		6F9C45E014C5C30B00824AB2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45E114C5C30B00824AB2 /* ActionSheet */,
 				6F9C45E514C5C30B00824AB2 /* Cursor */,
 				6F718CAC16CF8714001498D6 /* Effects */,
 				6F5007FE1585EA5600391A6C /* ExpandingSearchBar */,
@@ -1427,16 +1418,6 @@
 				6F9C461114C5C30B00824AB2 /* WebView */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		6F9C45E114C5C30B00824AB2 /* ActionSheet */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45E214C5C30B00824AB2 /* ActionSheetDemoViewController.h */,
-				6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */,
-				6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */,
-			);
-			path = ActionSheet;
 			sourceTree = "<group>";
 		};
 		6F9C45E514C5C30B00824AB2 /* Cursor */ = {
@@ -1927,7 +1908,6 @@
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
-				6F9C467314C5C30C00824AB2 /* ActionSheetDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
 				6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */,
@@ -2006,7 +1986,6 @@
 				6F2B301A1929BD78003D4C2C /* StretchableViewController.xib in Resources */,
 				6F2B301B1929BD78003D4C2C /* TransparentViewController.xib in Resources */,
 				6F2B301C1929BD78003D4C2C /* ParallelProcessingDemoViewController.xib in Resources */,
-				6F2B301D1929BD78003D4C2C /* ActionSheetDemoViewController.xib in Resources */,
 				6F2B301E1929BD78003D4C2C /* CursorCustomPointerView.xib in Resources */,
 				6F2B301F1929BD78003D4C2C /* CursorDemoViewController.xib in Resources */,
 				6F2B30201929BD78003D4C2C /* CursorFolderView.xib in Resources */,
@@ -2086,7 +2065,6 @@
 				6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */,
 				6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */,
 				6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */,
-				6FCB4ED41926651F00047AD3 /* ActionSheetDemoViewController.xib in Resources */,
 				6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */,
 				6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */,
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
@@ -2215,7 +2193,6 @@
 				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
 				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
 				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
-				6F9C467214C5C30C00824AB2 /* ActionSheetDemoViewController.m in Sources */,
 				6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */,
 				6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */,
 				6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */,
@@ -2335,7 +2312,6 @@
 				6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */,
 				6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */,
 				6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */,
-				6FCB4E941926651F00047AD3 /* ActionSheetDemoViewController.m in Sources */,
 				6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */,
 				6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */,
 				6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */,

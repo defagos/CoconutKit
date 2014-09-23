@@ -17,7 +17,7 @@
 @interface CoconutKit_demoApplication ()
 
 @property (nonatomic, retain) UIViewController *rootViewController;
-@property (nonatomic, retain) HLSActionSheet *languageActionSheet;
+@property (nonatomic, retain) UIActionSheet *languageActionSheet;
 
 @end
 
@@ -289,7 +289,7 @@
 
 - (void)toggleLanguageSheet:(id)sender
 {
-    self.languageActionSheet = [[[HLSActionSheet alloc] init] autorelease];
+    self.languageActionSheet = [[[UIActionSheet alloc] init] autorelease];
     self.languageActionSheet.delegate = self;
     for (NSString *localization in [[NSBundle mainBundle] localizations]) {
         [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];

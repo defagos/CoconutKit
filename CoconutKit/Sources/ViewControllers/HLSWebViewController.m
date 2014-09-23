@@ -8,7 +8,6 @@
 
 #import "HLSWebViewController.h"
 
-#import "HLSActionSheet.h"
 #import "HLSAutorotation.h"
 #import "HLSNotifications.h"
 #import "NSBundle+HLSDynamicLocalization.h"
@@ -32,6 +31,8 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *actionBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+@property (nonatomic, strong) NSArray *actions;
 
 @end
 
@@ -168,6 +169,18 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark UIActionSheetDelegate protocol implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
+    [self performSelector:action withObject:actionSheet];
+}
+
 #pragma mark UIWebViewDelegate protocol implementation
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -239,21 +252,25 @@
 }
 
 - (IBAction)displayActionSheet:(id)sender
-{    
-    HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
+{
+    NSMutableArray *actions = [NSMutableArray array];
+    
+    UIActionSheet *actionSheet = [[[UIActionSheet alloc] init] autorelease];
     actionSheet.title = [self.currentURL absoluteString];
-    [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Open in Safari", nil)
-                             target:self
-                             action:@selector(openInSafari:)];
+    actionSheet.delegate = self; 
+    
+    [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Open in Safari", nil)];
+    [actions addObject:[NSValue valueWithPointer:@selector(openInSafari:)]];
+    
     if ([MFMailComposeViewController canSendMail]) {
-        [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Mail Link", nil)
-                                 target:self
-                                 action:@selector(mailLink:)];
+        [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Mail Link", nil)];
+        [actions addObject:[NSValue valueWithPointer:@selector(mailLink:)]];
     }
+    
+    self.actions = [NSArray arrayWithArray:actions];
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
-                                       target:nil
-                                       action:NULL];
+        actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel")];
     }
     [actionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
 }
