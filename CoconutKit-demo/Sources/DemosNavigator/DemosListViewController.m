@@ -11,7 +11,6 @@
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
-#import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "FontsDemoViewController.h"
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
@@ -86,7 +85,6 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexTextViews,
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
-    ViewDemoIndexExpandingSearchBar,
     ViewDemoIndexSlideshow,
     ViewDemoIndexSkinning,
     ViewDemoIndexEffects,
@@ -346,11 +344,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexExpandingSearchBar: {
-                    cell.textLabel.text = NSLocalizedString(@"Search bar", nil);
-                    break;
-                }
-                    
                 case ViewDemoIndexSlideshow: {
                     cell.textLabel.text = NSLocalizedString(@"Slideshow", nil);
                     break;
@@ -551,11 +544,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexLabel: {
                     demoViewController = [[[LabelDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
-                case ViewDemoIndexExpandingSearchBar: {
-                    demoViewController = [[[ExpandingSearchBarDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

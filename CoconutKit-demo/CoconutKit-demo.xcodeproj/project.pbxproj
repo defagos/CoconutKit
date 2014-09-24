@@ -114,8 +114,6 @@
 		6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
-		6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
-		6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
 		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
@@ -266,7 +264,6 @@
 		6FCB4EAE1926651F00047AD3 /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
 		6FCB4EB01926651F00047AD3 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
-		6FCB4EB11926651F00047AD3 /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; };
 		6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */; };
 		6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; };
@@ -340,7 +337,6 @@
 		6FCB4EFC1926651F00047AD3 /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6FCB4EFD1926651F00047AD3 /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
 		6FCB4EFE1926651F00047AD3 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
-		6FCB4EFF1926651F00047AD3 /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6FCB4F001926651F00047AD3 /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */; };
 		6FCB4F021926651F00047AD3 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FCB4F031926651F00047AD3 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */; };
@@ -565,9 +561,6 @@
 		6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewsDemoViewController.xib; sourceTree = "<group>"; };
 		6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
-		6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingSearchBarDemoViewController.m; sourceTree = "<group>"; };
-		6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandingSearchBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F507D6D14BB742800D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DemoTable.strings; sourceTree = "<group>"; };
 		6F507D6F14BB743000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DemoTable.strings; sourceTree = "<group>"; };
 		6F53B63316FA321000E01781 /* DemoColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColors.h; sourceTree = "<group>"; };
@@ -1110,16 +1103,6 @@
 			path = TextViews;
 			sourceTree = "<group>";
 		};
-		6F5007FE1585EA5600391A6C /* ExpandingSearchBar */ = {
-			isa = PBXGroup;
-			children = (
-				6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */,
-				6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */,
-				6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */,
-			);
-			path = ExpandingSearchBar;
-			sourceTree = "<group>";
-		};
 		6F58C53617944E080092590C /* KeyboardAvoidingScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1365,7 +1348,6 @@
 			children = (
 				6F9C45E514C5C30B00824AB2 /* Cursor */,
 				6F718CAC16CF8714001498D6 /* Effects */,
-				6F5007FE1585EA5600391A6C /* ExpandingSearchBar */,
 				6F58C53617944E080092590C /* KeyboardAvoidingScrollView */,
 				6F89149C15790DDE009FCC78 /* Label */,
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
@@ -1908,7 +1890,6 @@
 				6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
 				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
-				6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
 				6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
 				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
@@ -2023,7 +2004,6 @@
 				6FCB4EFC1926651F00047AD3 /* img_apple4.jpg in Resources */,
 				6FCB4EFD1926651F00047AD3 /* SlideshowDemoViewController.xib in Resources */,
 				6FCB4EFE1926651F00047AD3 /* LabelDemoViewController.xib in Resources */,
-				6FCB4EFF1926651F00047AD3 /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FCB4F001926651F00047AD3 /* SegueDemo.storyboard in Resources */,
 				6FCB4F021926651F00047AD3 /* ContainmentTestViewController.xib in Resources */,
 				6FCB4F031926651F00047AD3 /* AnimationDemoViewController.xib in Resources */,
@@ -2137,7 +2117,6 @@
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
 				6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */,
-				6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */,
 				6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */,
 				6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
@@ -2256,7 +2235,6 @@
 				6FCB4EAE1926651F00047AD3 /* ParallaxScrollingDemoViewController.m in Sources */,
 				6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */,
 				6FCB4EB01926651F00047AD3 /* LabelDemoViewController.m in Sources */,
-				6FCB4EB11926651F00047AD3 /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */,
 				6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */,
 				6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */,

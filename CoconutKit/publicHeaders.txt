@@ -10,7 +10,6 @@ HLSContainerStack.h
 HLSConverters.h
 HLSCursor.h
 HLSError.h
-HLSExpandingSearchBar.h
 HLSFakeConnection.h
 HLSFileManager.h
 HLSFileURLConnection.h
