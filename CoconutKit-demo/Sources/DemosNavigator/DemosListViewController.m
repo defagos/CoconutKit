@@ -20,7 +20,6 @@
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "AnimationDemoViewController.h"
-#import "SkinningDemoViewController.h"
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
@@ -84,7 +83,6 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
     ViewDemoIndexSlideshow,
-    ViewDemoIndexSkinning,
     ViewDemoIndexEffects,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
@@ -342,11 +340,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexSkinning: {
-                    cell.textLabel.text = NSLocalizedString(@"Skinning", nil);
-                    break;
-                }
-                    
                 case ViewDemoIndexEffects: {
                     cell.textLabel.text = NSLocalizedString(@"Effects", nil);
                     break;
@@ -537,11 +530,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexSlideshow: {
                     demoViewController = [[[SlideshowDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
-                case ViewDemoIndexSkinning: {
-                    demoViewController = [[[SkinningDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

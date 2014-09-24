@@ -154,8 +154,6 @@
 		6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
 		6F9C467C14C5C30C00824AB2 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */; };
 		6F9C467D14C5C30C00824AB2 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */; };
-		6F9C468014C5C30C00824AB2 /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */; };
-		6F9C468114C5C30C00824AB2 /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */; };
 		6F9C468214C5C30C00824AB2 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460014C5C30B00824AB2 /* FooterView.m */; };
 		6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460114C5C30B00824AB2 /* FooterView.xib */; };
 		6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460314C5C30B00824AB2 /* HeaderView.m */; };
@@ -236,7 +234,6 @@
 		6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
 		6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */; };
 		6FCB4E991926651F00047AD3 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */; };
-		6FCB4E9A1926651F00047AD3 /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */; };
 		6FCB4E9B1926651F00047AD3 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460014C5C30B00824AB2 /* FooterView.m */; };
 		6FCB4E9C1926651F00047AD3 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460314C5C30B00824AB2 /* HeaderView.m */; };
 		6FCB4E9D1926651F00047AD3 /* ProgrammaticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460614C5C30B00824AB2 /* ProgrammaticTableViewCell.m */; };
@@ -294,7 +291,6 @@
 		6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
 		6FCB4ED91926651F00047AD3 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */; };
-		6FCB4EDA1926651F00047AD3 /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */; };
 		6FCB4EDB1926651F00047AD3 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460114C5C30B00824AB2 /* FooterView.xib */; };
 		6FCB4EDC1926651F00047AD3 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460414C5C30B00824AB2 /* HeaderView.xib */; };
 		6FCB4EDD1926651F00047AD3 /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460B14C5C30B00824AB2 /* XibTableViewCell.xib */; };
@@ -616,9 +612,6 @@
 		6F9C45F214C5C30B00824AB2 /* CursorSelectedFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorSelectedFolderView.h; sourceTree = "<group>"; };
 		6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorSelectedFolderView.m; sourceTree = "<group>"; };
 		6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorSelectedFolderView.xib; sourceTree = "<group>"; };
-		6F9C45FA14C5C30B00824AB2 /* SkinningDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinningDemoViewController.h; sourceTree = "<group>"; };
-		6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkinningDemoViewController.m; sourceTree = "<group>"; };
-		6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SkinningDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C45FF14C5C30B00824AB2 /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		6F9C460014C5C30B00824AB2 /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
 		6F9C460114C5C30B00824AB2 /* FooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
@@ -1327,7 +1320,6 @@
 				6F58C53617944E080092590C /* KeyboardAvoidingScrollView */,
 				6F89149C15790DDE009FCC78 /* Label */,
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
-				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
 				6F9C461114C5C30B00824AB2 /* WebView */,
@@ -1352,16 +1344,6 @@
 				6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */,
 			);
 			path = Cursor;
-			sourceTree = "<group>";
-		};
-		6F9C45F914C5C30B00824AB2 /* Skinning */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45FA14C5C30B00824AB2 /* SkinningDemoViewController.h */,
-				6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */,
-				6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */,
-			);
-			path = Skinning;
 			sourceTree = "<group>";
 		};
 		6F9C45FE14C5C30B00824AB2 /* TableViewCells */ = {
@@ -1824,7 +1806,6 @@
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
 				6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */,
 				6F9C467D14C5C30C00824AB2 /* CursorSelectedFolderView.xib in Resources */,
-				6F9C468114C5C30C00824AB2 /* SkinningDemoViewController.xib in Resources */,
 				6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */,
 				6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */,
 				6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */,
@@ -1936,7 +1917,6 @@
 				6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */,
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
 				6FCB4ED91926651F00047AD3 /* CursorSelectedFolderView.xib in Resources */,
-				6FCB4EDA1926651F00047AD3 /* SkinningDemoViewController.xib in Resources */,
 				6FCB4EDB1926651F00047AD3 /* FooterView.xib in Resources */,
 				6FCB4EDC1926651F00047AD3 /* HeaderView.xib in Resources */,
 				6FCB4EDD1926651F00047AD3 /* XibTableViewCell.xib in Resources */,
@@ -2061,7 +2041,6 @@
 				6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */,
 				6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */,
 				6F9C467C14C5C30C00824AB2 /* CursorSelectedFolderView.m in Sources */,
-				6F9C468014C5C30C00824AB2 /* SkinningDemoViewController.m in Sources */,
 				6F9C468214C5C30C00824AB2 /* FooterView.m in Sources */,
 				6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */,
 				6F9C468614C5C30C00824AB2 /* ProgrammaticTableViewCell.m in Sources */,
@@ -2177,7 +2156,6 @@
 				6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */,
 				6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */,
 				6FCB4E991926651F00047AD3 /* CursorSelectedFolderView.m in Sources */,
-				6FCB4E9A1926651F00047AD3 /* SkinningDemoViewController.m in Sources */,
 				6FCB4E9B1926651F00047AD3 /* FooterView.m in Sources */,
 				6FCB4E9C1926651F00047AD3 /* HeaderView.m in Sources */,
 				6FCB4E9D1926651F00047AD3 /* ProgrammaticTableViewCell.m in Sources */,

@@ -81,7 +81,6 @@ UIControl+HLSExclusiveTouch.h
 UIFont+HLSExtensions.h
 UIImage+HLSExtensions.h
 UILabel+HLSDynamicLocalization.h
-UINavigationBar+HLSExtensions.h
 UINavigationController+HLSExtensions.h
 UIPopoverController+HLSExtensions.h
 UIScrollView+HLSExtensions.h
@@ -90,7 +89,6 @@ UITabBarController+HLSExtensions.h
 UITextField+HLSExtensions.h
 UITextField+HLSValidation.h
 UITextView+HLSExtensions.h
-UIToolbar+HLSExtensions.h
 UIView+HLSExtensions.h
 UIViewController+HLSExtensions.h
 UIWebView+HLSExtensions.h
