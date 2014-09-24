@@ -44,7 +44,6 @@ HLSTaskGroup.h
 HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
-HLSTextView.h
 HLSTransition.h
 HLSURLConnection.h
 HLSUserInterfaceLock.h

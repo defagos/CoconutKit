@@ -6,7 +6,6 @@ HLSLabel.m
 HLSPlaceholderInsetSegue.m
 HLSSlideshow.m
 HLSStackPushSegue.m
-HLSTextView.m
 HLSViewController.m
 NSArray+HLSExtensions.m
 NSBundle+HLSDynamicLocalization.m

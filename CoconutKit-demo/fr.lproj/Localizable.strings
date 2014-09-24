@@ -166,7 +166,6 @@
 "Test responder chain"="Tester la responder chain";
 "Text"="Texte";
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
-"Text views"="Zones textuelles";
 "The view controller is not compatible with the container (most probably its orientation)"="Le view controller n'est pas compatible avec le conteneur (probablement au niveau de son orientation)";
 "This field exits edit mode when the user taps outside it"="Ce champ perd le focus lorsque l'utilisateur tape à côté";
 "This value cannot be negative"="Cette valeur ne peut être négative";
@@ -184,5 +183,4 @@
 "Wrapped into UINavigationController"="Inséré dans un UINavigationController";
 "Wrapped into UITabBarController"="Inséré dans un UITabBarController";
 "Year"="Année";
-"Your text here"="Insérez votre texte ici";
 "yyyy/MM/dd"="dd.MM.yyyy";

@@ -109,8 +109,6 @@
 		6F2B30EC1929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30C41929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m */; };
 		6F2B30F11929BF74003D4C2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30F01929BF74003D4C2C /* main.m */; };
 		6F2B30F61929C095003D4C2C /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */; };
-		6F3D1D8A1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6F3D1D8C1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */; };
 		6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
@@ -283,7 +281,6 @@
 		6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6FCB4EC41926651F00047AD3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EC51926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
-		6FCB4EC61926651F00047AD3 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EC71926651F00047AD3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FC182D188900B55AF1 /* main.m */; };
 		6FCB4EC91926651F00047AD3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
 		6FCB4ECA1926651F00047AD3 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
@@ -352,7 +349,6 @@
 		6FCB4F0D1926651F00047AD3 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
 		6FCB4F0E1926651F00047AD3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
 		6FCB4F0F1926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
-		6FCB4F101926651F00047AD3 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */; };
 		6FCB4F121926651F00047AD3 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B917CF6BA1006322D9 /* QuickLook.framework */; };
 		6FCB4F131926651F00047AD3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
 		6FCB4F141926651F00047AD3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75116A93DD20081A9A7 /* CoreText.framework */; };
@@ -556,9 +552,6 @@
 		6F2B30EE1929BF10003D4C2C /* CoconutKit-tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-tests-Info.plist"; sourceTree = "<group>"; };
 		6F2B30F01929BF74003D4C2C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = "/Developer/Frameworks/GHUnitiOS/0.5.9pre-458fe43/GHUnitIOS.framework"; sourceTree = "<absolute>"; };
-		6F3D1D871795721F0056FF4E /* TextViewsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewsDemoViewController.h; sourceTree = "<group>"; };
-		6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewsDemoViewController.m; sourceTree = "<group>"; };
-		6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewsDemoViewController.xib; sourceTree = "<group>"; };
 		6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F507D6D14BB742800D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DemoTable.strings; sourceTree = "<group>"; };
@@ -1093,16 +1086,6 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		6F3D1D861795721F0056FF4E /* TextViews */ = {
-			isa = PBXGroup;
-			children = (
-				6F3D1D871795721F0056FF4E /* TextViewsDemoViewController.h */,
-				6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */,
-				6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */,
-			);
-			path = TextViews;
-			sourceTree = "<group>";
-		};
 		6F58C53617944E080092590C /* KeyboardAvoidingScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1354,7 +1337,6 @@
 				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
-				6F3D1D861795721F0056FF4E /* TextViews */,
 				6F9C461114C5C30B00824AB2 /* WebView */,
 			);
 			path = View;
@@ -1906,7 +1888,6 @@
 				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 				6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
-				6F3D1D8C1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2020,7 +2001,6 @@
 				6FCB4F0E1926651F00047AD3 /* ConnectionDemoViewController.xib in Resources */,
 				6FCB4F0F1926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 				6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */,
-				6FCB4F101926651F00047AD3 /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2137,7 +2117,6 @@
 				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
 				6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
 				6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
-				6F3D1D8A1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */,
 				6FC378FD182D188900B55AF1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2254,7 +2233,6 @@
 				6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */,
 				6FCB4EC41926651F00047AD3 /* ConnectionDemoViewController.m in Sources */,
 				6FCB4EC51926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
-				6FCB4EC61926651F00047AD3 /* TextViewsDemoViewController.m in Sources */,
 				6FCB4EC71926651F00047AD3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

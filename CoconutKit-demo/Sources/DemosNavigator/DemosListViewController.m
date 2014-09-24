@@ -25,7 +25,6 @@
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
-#import "TextViewsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
 #import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
@@ -82,7 +81,6 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexKeyboardAvoidingScrollView,
-    ViewDemoIndexTextViews,
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
     ViewDemoIndexSlideshow,
@@ -329,11 +327,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexTextViews: {
-                    cell.textLabel.text = NSLocalizedString(@"Text views", @"Text views");
-                    break;
-                }
-                    
                 case ViewDemoIndexCursor: {
                     cell.textLabel.text = NSLocalizedString(@"Cursor", nil);
                     break;
@@ -529,11 +522,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexKeyboardAvoidingScrollView: {
                     demoViewController = [[[KeyboardAvoidingScrollViewDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
-                case ViewDemoIndexTextViews: {
-                    demoViewController = [[[TextViewsDemoViewController alloc] init] autorelease];
                     break;
                 }
                     
