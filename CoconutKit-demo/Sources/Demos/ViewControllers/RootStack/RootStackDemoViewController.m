@@ -256,7 +256,7 @@
 - (IBAction)pop:(id)sender
 {
     if (self == [self.stackController rootViewController]) {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
         [self.stackController popViewControllerAnimated:self.animatedSwitch.on];
@@ -293,7 +293,7 @@
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     memoryWarningTestCoverViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 - (void)closeNativeContainer:(id)sender

@@ -376,7 +376,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 - (IBAction)hideWithModal:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 - (IBAction)togglePlaceholder:(id)sender

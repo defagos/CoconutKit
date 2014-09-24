@@ -166,7 +166,7 @@
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark UIActionSheetDelegate protocol implementation
@@ -286,7 +286,7 @@
     mailComposeViewController.mailComposeDelegate = self;
     [mailComposeViewController setSubject:self.title];
     [mailComposeViewController setMessageBody:[[self.webView.request URL] absoluteString] isHTML:NO];
-    [self presentModalViewController:mailComposeViewController animated:YES];
+    [self presentViewController:mailComposeViewController animated:YES completion:nil];
 }
 
 @end

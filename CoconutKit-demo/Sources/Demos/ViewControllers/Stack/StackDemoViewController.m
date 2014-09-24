@@ -438,7 +438,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 - (IBAction)hideWithModal:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 - (IBAction)displayTransparent:(id)sender
@@ -453,7 +453,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController] autorelease];
     // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
     stackController.delegate = self;
-    [self presentModalViewController:stackController animated:YES];
+    [self presentViewController:stackController animated:YES completion:nil];
 }
 
 - (IBAction)testInPopover:(id)sender
