@@ -5,7 +5,6 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Samuel Défago. All rights reserved.
  */
-"Action sheet"="Menu action";
 "Adjust font size to width"="Ajuster en largeur";
 "All"="Tous";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
@@ -139,7 +138,6 @@
 "Root view controller"="View controller racine";
 "Scroll view avoiding the keyboard"="Vue scrollable évitant le clavier";
 "Scrolling"="Défilement";
-"Search bar"="Champ de recherche";
 "Search books"="Rechercher un livre";
 "Section end"="Fin de section";
 "Segues"="Segues";
@@ -147,7 +145,6 @@
 "Segues (not available for iOS 4)"="Segues (pas disponible pour iOS 4)";
 "Single view animation"="Animation d'une seule vue";
 "Size"="Taille";
-"Skinning"="Skinning";
 "Slideshow"="Slideshow";
 "Start"="Démarrer";
 "Start time"="Début";
@@ -168,7 +165,6 @@
 "Test responder chain"="Tester la responder chain";
 "Text"="Texte";
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
-"Text views"="Zones textuelles";
 "The view controller is not compatible with the container (most probably its orientation)"="Le view controller n'est pas compatible avec le conteneur (probablement au niveau de son orientation)";
 "This field exits edit mode when the user taps outside it"="Ce champ perd le focus lorsque l'utilisateur tape à côté";
 "This value cannot be negative"="Cette valeur ne peut être négative";
@@ -186,5 +182,4 @@
 "Wrapped into UINavigationController"="Inséré dans un UINavigationController";
 "Wrapped into UITabBarController"="Inséré dans un UITabBarController";
 "Year"="Année";
-"Your text here"="Insérez votre texte ici";
 "yyyy/MM/dd"="dd.MM.yyyy";

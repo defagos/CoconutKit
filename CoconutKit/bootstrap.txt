@@ -2,12 +2,10 @@ CALayer+HLSExtensions.m
 CAMediaTimingFunction+HLSExtensions.m
 HLSAssert.m
 HLSCursor.m
-HLSExpandingSearchBar.m
 HLSLabel.m
 HLSPlaceholderInsetSegue.m
 HLSSlideshow.m
 HLSStackPushSegue.m
-HLSTextView.m
 HLSViewController.m
 NSArray+HLSExtensions.m
 NSBundle+HLSDynamicLocalization.m
@@ -28,16 +26,12 @@ NSStream+HLSExtensions.m
 NSString+HLSExtensions.m
 NSTimeZone+HLSExtensions.m
 NSURLRequest+HLSExtensions.m
-UIActionSheet+HLSExtensions.m
 UIApplication+HLSExtensions.m
-UIBarButtonItem+HLSActionSheet.m
 UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIFont+HLSExtensions.m
 UIImage+HLSExtensions.m
 UILabel+HLSDynamicLocalization.m
-UINavigationBar+HLSExtensions.m
-UINavigationController+HLSActionSheet.m
 UINavigationController+HLSExtensions.m
 UIPopoverController+HLSExtensions.m
 UIScrollView+HLSExtensions.m
@@ -46,7 +40,6 @@ UITabBarController+HLSExtensions.m
 UITextField+HLSExtensions.m
 UITextField+HLSValidation.m
 UITextView+HLSExtensions.m
-UIToolbar+HLSExtensions.m
 UIView+HLSExtensions.m
 UIView+HLSRuntimeAttributes.m
 UIViewController+HLSExtensions.m

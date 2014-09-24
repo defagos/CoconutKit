@@ -30,33 +30,6 @@
 		6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
 		6F2B30121929BD78003D4C2C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
 		6F2B30131929BD78003D4C2C /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
-		6F2B30141929BD78003D4C2C /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
-		6F2B30151929BD78003D4C2C /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B114C5C30B00824AB2 /* HeavyViewController.xib */; };
-		6F2B30161929BD78003D4C2C /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B514C5C30B00824AB2 /* LandscapeOnlyViewController.xib */; };
-		6F2B30171929BD78003D4C2C /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B914C5C30B00824AB2 /* LifeCycleTestViewController.xib */; };
-		6F2B30181929BD78003D4C2C /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */; };
-		6F2B30191929BD78003D4C2C /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */; };
-		6F2B301A1929BD78003D4C2C /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
-		6F2B301B1929BD78003D4C2C /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		6F2B301C1929BD78003D4C2C /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
-		6F2B301D1929BD78003D4C2C /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */; };
-		6F2B301E1929BD78003D4C2C /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
-		6F2B301F1929BD78003D4C2C /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
-		6F2B30201929BD78003D4C2C /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
-		6F2B30211929BD78003D4C2C /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F114C5C30B00824AB2 /* CursorPointerInfoViewController.xib */; };
-		6F2B30221929BD78003D4C2C /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */; };
-		6F2B30231929BD78003D4C2C /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */; };
-		6F2B30241929BD78003D4C2C /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460114C5C30B00824AB2 /* FooterView.xib */; };
-		6F2B30251929BD78003D4C2C /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460414C5C30B00824AB2 /* HeaderView.xib */; };
-		6F2B30261929BD78003D4C2C /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460B14C5C30B00824AB2 /* XibTableViewCell.xib */; };
-		6F2B30271929BD78003D4C2C /* WebViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461414C5C30B00824AB2 /* WebViewDemoViewController.xib */; };
-		6F2B30281929BD78003D4C2C /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461914C5C30B00824AB2 /* PlaceholderDemoViewController.xib */; };
-		6F2B30291929BD78003D4C2C /* RootStackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461D14C5C30B00824AB2 /* RootStackDemoViewController.xib */; };
-		6F2B302A1929BD78003D4C2C /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462114C5C30B00824AB2 /* StackDemoViewController.xib */; };
-		6F2B302B1929BD78003D4C2C /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462714C5C30B00824AB2 /* TableSearchDisplayDemoViewController.xib */; };
-		6F2B302C1929BD78003D4C2C /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */; };
-		6F2B302D1929BD78003D4C2C /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462E14C5C30B00824AB2 /* WizardDemoViewController.xib */; };
-		6F2B302E1929BD78003D4C2C /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C463114C5C30B00824AB2 /* WizardIdentityPageViewController.xib */; };
 		6F2B302F1929BD78003D4C2C /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46A714C5C36300824AB2 /* ProximaNova-Bold.otf */; };
 		6F2B30301929BD78003D4C2C /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46A814C5C36300824AB2 /* ProximaNova-Regular.otf */; };
 		6F2B30311929BD78003D4C2C /* sample_text.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46AA14C5C36300824AB2 /* sample_text.html */; };
@@ -75,31 +48,15 @@
 		6F2B303E1929BD78003D4C2C /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
 		6F2B303F1929BD78003D4C2C /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */; };
 		6F2B30401929BD78003D4C2C /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86914F29C9A001585A6 /* skyscraper.jpg */; };
-		6F2B30411929BD78003D4C2C /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6F2B30421929BD78003D4C2C /* img_apple1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A014F8E765008B6D5A /* img_apple1.jpg */; };
 		6F2B30431929BD78003D4C2C /* img_apple2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A114F8E765008B6D5A /* img_apple2.jpg */; };
 		6F2B30441929BD78003D4C2C /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */; };
 		6F2B30451929BD78003D4C2C /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
-		6F2B30461929BD78003D4C2C /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
-		6F2B30471929BD78003D4C2C /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
-		6F2B30481929BD78003D4C2C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F2B30491929BD78003D4C2C /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */; };
-		6F2B304A1929BD78003D4C2C /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
-		6F2B304B1929BD78003D4C2C /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */; };
-		6F2B304C1929BD78003D4C2C /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4F15F0DA4D0061D807 /* LayerPropertiesTestViewController.xib */; };
-		6F2B304D1929BD78003D4C2C /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */; };
-		6F2B304E1929BD78003D4C2C /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */; };
-		6F2B304F1929BD78003D4C2C /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F2B30501929BD78003D4C2C /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75716A9420D0081A9A7 /* Beon-Regular.otf */; };
-		6F2B30511929BD78003D4C2C /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C76016A942970081A9A7 /* DynamicLocalizationDemoViewController.xib */; };
-		6F2B30521929BD78003D4C2C /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */; };
 		6F2B30531929BD78003D4C2C /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
 		6F2B30541929BD78003D4C2C /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
-		6F2B30551929BD78003D4C2C /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
-		6F2B30561929BD78003D4C2C /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
-		6F2B30571929BD78003D4C2C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
 		6F2B30581929BD78003D4C2C /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB4F2F19266DE200047AD3 /* CoconutKit-resources.bundle */; };
-		6F2B30591929BD78003D4C2C /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */; };
 		6F2B305B1929BD78003D4C2C /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCB4F281926657B00047AD3 /* libCoconutKit.a */; };
 		6F2B305C1929BD78003D4C2C /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B917CF6BA1006322D9 /* QuickLook.framework */; };
 		6F2B305D1929BD78003D4C2C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
@@ -152,11 +109,9 @@
 		6F2B30EC1929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30C41929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m */; };
 		6F2B30F11929BF74003D4C2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30F01929BF74003D4C2C /* main.m */; };
 		6F2B30F61929C095003D4C2C /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */; };
-		6F3D1D8A1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6F3D1D8C1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */; };
+		6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
+		6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
-		6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
-		6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6F507D6E14BB742800D54088 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
 		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
@@ -191,20 +146,14 @@
 		6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
 		6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
-		6F9C467214C5C30C00824AB2 /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */; };
-		6F9C467314C5C30C00824AB2 /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */; };
 		6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
 		6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */; };
 		6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
-		6F9C467A14C5C30C00824AB2 /* CursorPointerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45F014C5C30B00824AB2 /* CursorPointerInfoViewController.m */; };
-		6F9C467B14C5C30C00824AB2 /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F114C5C30B00824AB2 /* CursorPointerInfoViewController.xib */; };
 		6F9C467C14C5C30C00824AB2 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */; };
 		6F9C467D14C5C30C00824AB2 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */; };
-		6F9C468014C5C30C00824AB2 /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */; };
-		6F9C468114C5C30C00824AB2 /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */; };
 		6F9C468214C5C30C00824AB2 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460014C5C30B00824AB2 /* FooterView.m */; };
 		6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460114C5C30B00824AB2 /* FooterView.xib */; };
 		6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460314C5C30B00824AB2 /* HeaderView.m */; };
@@ -227,7 +176,6 @@
 		6F9C469814C5C30C00824AB2 /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462A14C5C30B00824AB2 /* WizardAddressPageViewController.m */; };
 		6F9C469914C5C30C00824AB2 /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */; };
 		6F9C469A14C5C30C00824AB2 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */; };
-		6F9C469B14C5C30C00824AB2 /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462E14C5C30B00824AB2 /* WizardDemoViewController.xib */; };
 		6F9C469C14C5C30C00824AB2 /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */; };
 		6F9C469D14C5C30C00824AB2 /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C463114C5C30B00824AB2 /* WizardIdentityPageViewController.xib */; };
 		6F9C469E14C5C30C00824AB2 /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463414C5C30B00824AB2 /* DemosListViewController.m */; };
@@ -282,13 +230,10 @@
 		6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
 		6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
 		6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
-		6FCB4E941926651F00047AD3 /* ActionSheetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */; };
 		6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
 		6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */; };
-		6FCB4E981926651F00047AD3 /* CursorPointerInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45F014C5C30B00824AB2 /* CursorPointerInfoViewController.m */; };
 		6FCB4E991926651F00047AD3 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */; };
-		6FCB4E9A1926651F00047AD3 /* SkinningDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */; };
 		6FCB4E9B1926651F00047AD3 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460014C5C30B00824AB2 /* FooterView.m */; };
 		6FCB4E9C1926651F00047AD3 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460314C5C30B00824AB2 /* HeaderView.m */; };
 		6FCB4E9D1926651F00047AD3 /* ProgrammaticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460614C5C30B00824AB2 /* ProgrammaticTableViewCell.m */; };
@@ -311,7 +256,6 @@
 		6FCB4EAE1926651F00047AD3 /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
 		6FCB4EB01926651F00047AD3 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
-		6FCB4EB11926651F00047AD3 /* ExpandingSearchBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */; };
 		6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; };
 		6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */; };
 		6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; };
@@ -331,7 +275,6 @@
 		6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6FCB4EC41926651F00047AD3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EC51926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
-		6FCB4EC61926651F00047AD3 /* TextViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EC71926651F00047AD3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FC182D188900B55AF1 /* main.m */; };
 		6FCB4EC91926651F00047AD3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FBDA7A61303EE9B004B9617 /* Localizable.strings */; };
 		6FCB4ECA1926651F00047AD3 /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F507D6C14BB742800D54088 /* DemoTable.strings */; };
@@ -344,13 +287,10 @@
 		6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
 		6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
-		6FCB4ED41926651F00047AD3 /* ActionSheetDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */; };
 		6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
-		6FCB4ED81926651F00047AD3 /* CursorPointerInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F114C5C30B00824AB2 /* CursorPointerInfoViewController.xib */; };
 		6FCB4ED91926651F00047AD3 /* CursorSelectedFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */; };
-		6FCB4EDA1926651F00047AD3 /* SkinningDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */; };
 		6FCB4EDB1926651F00047AD3 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460114C5C30B00824AB2 /* FooterView.xib */; };
 		6FCB4EDC1926651F00047AD3 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460414C5C30B00824AB2 /* HeaderView.xib */; };
 		6FCB4EDD1926651F00047AD3 /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460B14C5C30B00824AB2 /* XibTableViewCell.xib */; };
@@ -360,7 +300,6 @@
 		6FCB4EE11926651F00047AD3 /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462114C5C30B00824AB2 /* StackDemoViewController.xib */; };
 		6FCB4EE21926651F00047AD3 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462714C5C30B00824AB2 /* TableSearchDisplayDemoViewController.xib */; };
 		6FCB4EE31926651F00047AD3 /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */; };
-		6FCB4EE41926651F00047AD3 /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462E14C5C30B00824AB2 /* WizardDemoViewController.xib */; };
 		6FCB4EE51926651F00047AD3 /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C463114C5C30B00824AB2 /* WizardIdentityPageViewController.xib */; };
 		6FCB4EE61926651F00047AD3 /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46A714C5C36300824AB2 /* ProximaNova-Bold.otf */; };
 		6FCB4EE71926651F00047AD3 /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46A814C5C36300824AB2 /* ProximaNova-Regular.otf */; };
@@ -387,7 +326,6 @@
 		6FCB4EFC1926651F00047AD3 /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6FCB4EFD1926651F00047AD3 /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
 		6FCB4EFE1926651F00047AD3 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
-		6FCB4EFF1926651F00047AD3 /* ExpandingSearchBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */; };
 		6FCB4F001926651F00047AD3 /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */; };
 		6FCB4F021926651F00047AD3 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FCB4F031926651F00047AD3 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */; };
@@ -403,7 +341,6 @@
 		6FCB4F0D1926651F00047AD3 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
 		6FCB4F0E1926651F00047AD3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
 		6FCB4F0F1926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
-		6FCB4F101926651F00047AD3 /* TextViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */; };
 		6FCB4F121926651F00047AD3 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B917CF6BA1006322D9 /* QuickLook.framework */; };
 		6FCB4F131926651F00047AD3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
 		6FCB4F141926651F00047AD3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75116A93DD20081A9A7 /* CoreText.framework */; };
@@ -607,13 +544,8 @@
 		6F2B30EE1929BF10003D4C2C /* CoconutKit-tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-tests-Info.plist"; sourceTree = "<group>"; };
 		6F2B30F01929BF74003D4C2C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = "/Developer/Frameworks/GHUnitiOS/0.5.9pre-458fe43/GHUnitIOS.framework"; sourceTree = "<absolute>"; };
-		6F3D1D871795721F0056FF4E /* TextViewsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewsDemoViewController.h; sourceTree = "<group>"; };
-		6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewsDemoViewController.m; sourceTree = "<group>"; };
-		6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewsDemoViewController.xib; sourceTree = "<group>"; };
+		6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandingSearchBarDemoViewController.h; sourceTree = "<group>"; };
-		6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandingSearchBarDemoViewController.m; sourceTree = "<group>"; };
-		6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandingSearchBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F507D6D14BB742800D54088 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DemoTable.strings; sourceTree = "<group>"; };
 		6F507D6F14BB743000D54088 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DemoTable.strings; sourceTree = "<group>"; };
 		6F53B63316FA321000E01781 /* DemoColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColors.h; sourceTree = "<group>"; };
@@ -668,9 +600,6 @@
 		6F9C45DD14C5C30B00824AB2 /* SleepTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTask.m; sourceTree = "<group>"; };
 		6F9C45DE14C5C30B00824AB2 /* SleepTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTaskOperation.h; sourceTree = "<group>"; };
 		6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTaskOperation.m; sourceTree = "<group>"; };
-		6F9C45E214C5C30B00824AB2 /* ActionSheetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDemoViewController.h; sourceTree = "<group>"; };
-		6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDemoViewController.m; sourceTree = "<group>"; };
-		6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionSheetDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C45E614C5C30B00824AB2 /* CursorCustomPointerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorCustomPointerView.h; sourceTree = "<group>"; };
 		6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorCustomPointerView.m; sourceTree = "<group>"; };
 		6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorCustomPointerView.xib; sourceTree = "<group>"; };
@@ -680,15 +609,9 @@
 		6F9C45EC14C5C30B00824AB2 /* CursorFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorFolderView.h; sourceTree = "<group>"; };
 		6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorFolderView.m; sourceTree = "<group>"; };
 		6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorFolderView.xib; sourceTree = "<group>"; };
-		6F9C45EF14C5C30B00824AB2 /* CursorPointerInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorPointerInfoViewController.h; sourceTree = "<group>"; };
-		6F9C45F014C5C30B00824AB2 /* CursorPointerInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorPointerInfoViewController.m; sourceTree = "<group>"; };
-		6F9C45F114C5C30B00824AB2 /* CursorPointerInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorPointerInfoViewController.xib; sourceTree = "<group>"; };
 		6F9C45F214C5C30B00824AB2 /* CursorSelectedFolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorSelectedFolderView.h; sourceTree = "<group>"; };
 		6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorSelectedFolderView.m; sourceTree = "<group>"; };
 		6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorSelectedFolderView.xib; sourceTree = "<group>"; };
-		6F9C45FA14C5C30B00824AB2 /* SkinningDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinningDemoViewController.h; sourceTree = "<group>"; };
-		6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkinningDemoViewController.m; sourceTree = "<group>"; };
-		6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SkinningDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C45FF14C5C30B00824AB2 /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
 		6F9C460014C5C30B00824AB2 /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
 		6F9C460114C5C30B00824AB2 /* FooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
@@ -724,7 +647,6 @@
 		6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardAddressPageViewController.xib; sourceTree = "<group>"; };
 		6F9C462C14C5C30B00824AB2 /* WizardDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardDemoViewController.h; sourceTree = "<group>"; };
 		6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardDemoViewController.m; sourceTree = "<group>"; };
-		6F9C462E14C5C30B00824AB2 /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C462F14C5C30B00824AB2 /* WizardIdentityPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardIdentityPageViewController.h; sourceTree = "<group>"; };
 		6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardIdentityPageViewController.m; sourceTree = "<group>"; };
 		6F9C463114C5C30B00824AB2 /* WizardIdentityPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardIdentityPageViewController.xib; sourceTree = "<group>"; };
@@ -1150,26 +1072,6 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
-		6F3D1D861795721F0056FF4E /* TextViews */ = {
-			isa = PBXGroup;
-			children = (
-				6F3D1D871795721F0056FF4E /* TextViewsDemoViewController.h */,
-				6F3D1D881795721F0056FF4E /* TextViewsDemoViewController.m */,
-				6F3D1D891795721F0056FF4E /* TextViewsDemoViewController.xib */,
-			);
-			path = TextViews;
-			sourceTree = "<group>";
-		};
-		6F5007FE1585EA5600391A6C /* ExpandingSearchBar */ = {
-			isa = PBXGroup;
-			children = (
-				6F5007FF1585EA5600391A6C /* ExpandingSearchBarDemoViewController.h */,
-				6F5008001585EA5600391A6C /* ExpandingSearchBarDemoViewController.m */,
-				6F5008011585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib */,
-			);
-			path = ExpandingSearchBar;
-			sourceTree = "<group>";
-		};
 		6F58C53617944E080092590C /* KeyboardAvoidingScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1413,30 +1315,16 @@
 		6F9C45E014C5C30B00824AB2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6F9C45E114C5C30B00824AB2 /* ActionSheet */,
 				6F9C45E514C5C30B00824AB2 /* Cursor */,
 				6F718CAC16CF8714001498D6 /* Effects */,
-				6F5007FE1585EA5600391A6C /* ExpandingSearchBar */,
 				6F58C53617944E080092590C /* KeyboardAvoidingScrollView */,
 				6F89149C15790DDE009FCC78 /* Label */,
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
-				6F9C45F914C5C30B00824AB2 /* Skinning */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
-				6F3D1D861795721F0056FF4E /* TextViews */,
 				6F9C461114C5C30B00824AB2 /* WebView */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		6F9C45E114C5C30B00824AB2 /* ActionSheet */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45E214C5C30B00824AB2 /* ActionSheetDemoViewController.h */,
-				6F9C45E314C5C30B00824AB2 /* ActionSheetDemoViewController.m */,
-				6F9C45E414C5C30B00824AB2 /* ActionSheetDemoViewController.xib */,
-			);
-			path = ActionSheet;
 			sourceTree = "<group>";
 		};
 		6F9C45E514C5C30B00824AB2 /* Cursor */ = {
@@ -1451,24 +1339,11 @@
 				6F9C45EC14C5C30B00824AB2 /* CursorFolderView.h */,
 				6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */,
 				6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */,
-				6F9C45EF14C5C30B00824AB2 /* CursorPointerInfoViewController.h */,
-				6F9C45F014C5C30B00824AB2 /* CursorPointerInfoViewController.m */,
-				6F9C45F114C5C30B00824AB2 /* CursorPointerInfoViewController.xib */,
 				6F9C45F214C5C30B00824AB2 /* CursorSelectedFolderView.h */,
 				6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */,
 				6F9C45F414C5C30B00824AB2 /* CursorSelectedFolderView.xib */,
 			);
 			path = Cursor;
-			sourceTree = "<group>";
-		};
-		6F9C45F914C5C30B00824AB2 /* Skinning */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45FA14C5C30B00824AB2 /* SkinningDemoViewController.h */,
-				6F9C45FB14C5C30B00824AB2 /* SkinningDemoViewController.m */,
-				6F9C45FC14C5C30B00824AB2 /* SkinningDemoViewController.xib */,
-			);
-			path = Skinning;
 			sourceTree = "<group>";
 		};
 		6F9C45FE14C5C30B00824AB2 /* TableViewCells */ = {
@@ -1567,7 +1442,7 @@
 				6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */,
 				6F9C462C14C5C30B00824AB2 /* WizardDemoViewController.h */,
 				6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */,
-				6F9C462E14C5C30B00824AB2 /* WizardDemoViewController.xib */,
+				6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */,
 				6F9C462F14C5C30B00824AB2 /* WizardIdentityPageViewController.h */,
 				6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */,
 				6F9C463114C5C30B00824AB2 /* WizardIdentityPageViewController.xib */,
@@ -1845,7 +1720,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Samuel Défago";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CoconutKit-demo" */;
@@ -1927,13 +1802,10 @@
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
-				6F9C467314C5C30C00824AB2 /* ActionSheetDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
 				6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */,
-				6F9C467B14C5C30C00824AB2 /* CursorPointerInfoViewController.xib in Resources */,
 				6F9C467D14C5C30C00824AB2 /* CursorSelectedFolderView.xib in Resources */,
-				6F9C468114C5C30C00824AB2 /* SkinningDemoViewController.xib in Resources */,
 				6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */,
 				6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */,
 				6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */,
@@ -1943,12 +1815,12 @@
 				6F9C469414C5C30C00824AB2 /* StackDemoViewController.xib in Resources */,
 				6F9C469714C5C30C00824AB2 /* TableSearchDisplayDemoViewController.xib in Resources */,
 				6F9C469914C5C30C00824AB2 /* WizardAddressPageViewController.xib in Resources */,
-				6F9C469B14C5C30C00824AB2 /* WizardDemoViewController.xib in Resources */,
 				6F9C469D14C5C30C00824AB2 /* WizardIdentityPageViewController.xib in Resources */,
 				6F9C46B914C5C36300824AB2 /* ProximaNova-Bold.otf in Resources */,
 				6F9C46BA14C5C36300824AB2 /* ProximaNova-Regular.otf in Resources */,
 				6F9C46BB14C5C36300824AB2 /* sample_text.html in Resources */,
 				6F9C46BC14C5C36300824AB2 /* bkgr_bar.png in Resources */,
+				6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */,
 				6F9C46BD14C5C36300824AB2 /* cell_bkgr_brown_large.png in Resources */,
 				6F9C46BE14C5C36300824AB2 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6F9C46BF14C5C36300824AB2 /* img_localized.png in Resources */,
@@ -1970,7 +1842,6 @@
 				6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */,
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
 				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
-				6F5008031585EA5600391A6C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
 				6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
 				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
@@ -1987,7 +1858,6 @@
 				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 				6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
-				6F3D1D8C1795721F0056FF4E /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1997,33 +1867,6 @@
 			files = (
 				6F2B30121929BD78003D4C2C /* Localizable.strings in Resources */,
 				6F2B30131929BD78003D4C2C /* DemoTable.strings in Resources */,
-				6F2B30141929BD78003D4C2C /* FixedSizeViewController.xib in Resources */,
-				6F2B30151929BD78003D4C2C /* HeavyViewController.xib in Resources */,
-				6F2B30161929BD78003D4C2C /* LandscapeOnlyViewController.xib in Resources */,
-				6F2B30171929BD78003D4C2C /* LifeCycleTestViewController.xib in Resources */,
-				6F2B30181929BD78003D4C2C /* MemoryWarningTestCoverViewController.xib in Resources */,
-				6F2B30191929BD78003D4C2C /* PortraitOnlyViewController.xib in Resources */,
-				6F2B301A1929BD78003D4C2C /* StretchableViewController.xib in Resources */,
-				6F2B301B1929BD78003D4C2C /* TransparentViewController.xib in Resources */,
-				6F2B301C1929BD78003D4C2C /* ParallelProcessingDemoViewController.xib in Resources */,
-				6F2B301D1929BD78003D4C2C /* ActionSheetDemoViewController.xib in Resources */,
-				6F2B301E1929BD78003D4C2C /* CursorCustomPointerView.xib in Resources */,
-				6F2B301F1929BD78003D4C2C /* CursorDemoViewController.xib in Resources */,
-				6F2B30201929BD78003D4C2C /* CursorFolderView.xib in Resources */,
-				6F2B30211929BD78003D4C2C /* CursorPointerInfoViewController.xib in Resources */,
-				6F2B30221929BD78003D4C2C /* CursorSelectedFolderView.xib in Resources */,
-				6F2B30231929BD78003D4C2C /* SkinningDemoViewController.xib in Resources */,
-				6F2B30241929BD78003D4C2C /* FooterView.xib in Resources */,
-				6F2B30251929BD78003D4C2C /* HeaderView.xib in Resources */,
-				6F2B30261929BD78003D4C2C /* XibTableViewCell.xib in Resources */,
-				6F2B30271929BD78003D4C2C /* WebViewDemoViewController.xib in Resources */,
-				6F2B30281929BD78003D4C2C /* PlaceholderDemoViewController.xib in Resources */,
-				6F2B30291929BD78003D4C2C /* RootStackDemoViewController.xib in Resources */,
-				6F2B302A1929BD78003D4C2C /* StackDemoViewController.xib in Resources */,
-				6F2B302B1929BD78003D4C2C /* TableSearchDisplayDemoViewController.xib in Resources */,
-				6F2B302C1929BD78003D4C2C /* WizardAddressPageViewController.xib in Resources */,
-				6F2B302D1929BD78003D4C2C /* WizardDemoViewController.xib in Resources */,
-				6F2B302E1929BD78003D4C2C /* WizardIdentityPageViewController.xib in Resources */,
 				6F2B302F1929BD78003D4C2C /* ProximaNova-Bold.otf in Resources */,
 				6F2B30301929BD78003D4C2C /* ProximaNova-Regular.otf in Resources */,
 				6F2B30311929BD78003D4C2C /* sample_text.html in Resources */,
@@ -2042,32 +1885,16 @@
 				6F2B303E1929BD78003D4C2C /* parallax_demo_trees_layer.png in Resources */,
 				6F2B303F1929BD78003D4C2C /* parallax_demo_mountains_layer.png in Resources */,
 				6F2B30401929BD78003D4C2C /* skyscraper.jpg in Resources */,
-				6F2B30411929BD78003D4C2C /* ParallaxScrollingDemoViewController.xib in Resources */,
 				6F2B30421929BD78003D4C2C /* img_apple1.jpg in Resources */,
 				6F2B30431929BD78003D4C2C /* img_apple2.jpg in Resources */,
 				6F2B30441929BD78003D4C2C /* img_apple3.jpg in Resources */,
 				6F2B30451929BD78003D4C2C /* img_apple4.jpg in Resources */,
-				6F2B30461929BD78003D4C2C /* SlideshowDemoViewController.xib in Resources */,
-				6F2B30471929BD78003D4C2C /* LabelDemoViewController.xib in Resources */,
-				6F2B30481929BD78003D4C2C /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6F2B30491929BD78003D4C2C /* SegueDemo.storyboard in Resources */,
-				6F2B304A1929BD78003D4C2C /* ContainmentTestViewController.xib in Resources */,
-				6F2B304B1929BD78003D4C2C /* AnimationDemoViewController.xib in Resources */,
 				6F2B30C61929BE4A003D4C2C /* Sample.txt in Resources */,
-				6F2B304C1929BD78003D4C2C /* LayerPropertiesTestViewController.xib in Resources */,
-				6F2B304D1929BD78003D4C2C /* RootNavigationDemoViewController.xib in Resources */,
-				6F2B304E1929BD78003D4C2C /* RootSplitViewDemoController.xib in Resources */,
-				6F2B304F1929BD78003D4C2C /* RootTabBarDemoViewController.xib in Resources */,
 				6F2B30501929BD78003D4C2C /* Beon-Regular.otf in Resources */,
-				6F2B30511929BD78003D4C2C /* DynamicLocalizationDemoViewController.xib in Resources */,
-				6F2B30521929BD78003D4C2C /* FontsDemoViewController.xib in Resources */,
 				6F2B30531929BD78003D4C2C /* sample_text_with_custom_font.html in Resources */,
 				6F2B30541929BD78003D4C2C /* InnerFolder in Resources */,
-				6F2B30551929BD78003D4C2C /* ViewEffectsDemoViewController.xib in Resources */,
-				6F2B30561929BD78003D4C2C /* ConnectionDemoViewController.xib in Resources */,
-				6F2B30571929BD78003D4C2C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 				6F2B30581929BD78003D4C2C /* CoconutKit-resources.bundle in Resources */,
-				6F2B30591929BD78003D4C2C /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2086,13 +1913,10 @@
 				6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */,
 				6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */,
 				6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */,
-				6FCB4ED41926651F00047AD3 /* ActionSheetDemoViewController.xib in Resources */,
 				6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */,
 				6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */,
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
-				6FCB4ED81926651F00047AD3 /* CursorPointerInfoViewController.xib in Resources */,
 				6FCB4ED91926651F00047AD3 /* CursorSelectedFolderView.xib in Resources */,
-				6FCB4EDA1926651F00047AD3 /* SkinningDemoViewController.xib in Resources */,
 				6FCB4EDB1926651F00047AD3 /* FooterView.xib in Resources */,
 				6FCB4EDC1926651F00047AD3 /* HeaderView.xib in Resources */,
 				6FCB4EDD1926651F00047AD3 /* XibTableViewCell.xib in Resources */,
@@ -2102,12 +1926,12 @@
 				6FCB4EE11926651F00047AD3 /* StackDemoViewController.xib in Resources */,
 				6FCB4EE21926651F00047AD3 /* TableSearchDisplayDemoViewController.xib in Resources */,
 				6FCB4EE31926651F00047AD3 /* WizardAddressPageViewController.xib in Resources */,
-				6FCB4EE41926651F00047AD3 /* WizardDemoViewController.xib in Resources */,
 				6FCB4EE51926651F00047AD3 /* WizardIdentityPageViewController.xib in Resources */,
 				6FCB4EE61926651F00047AD3 /* ProximaNova-Bold.otf in Resources */,
 				6FCB4EE71926651F00047AD3 /* ProximaNova-Regular.otf in Resources */,
 				6FCB4EE81926651F00047AD3 /* sample_text.html in Resources */,
 				6FCB4EE91926651F00047AD3 /* bkgr_bar.png in Resources */,
+				6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */,
 				6FCB4EEA1926651F00047AD3 /* cell_bkgr_brown_large.png in Resources */,
 				6FCB4EEB1926651F00047AD3 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6FCB4EEC1926651F00047AD3 /* img_localized.png in Resources */,
@@ -2129,7 +1953,6 @@
 				6FCB4EFC1926651F00047AD3 /* img_apple4.jpg in Resources */,
 				6FCB4EFD1926651F00047AD3 /* SlideshowDemoViewController.xib in Resources */,
 				6FCB4EFE1926651F00047AD3 /* LabelDemoViewController.xib in Resources */,
-				6FCB4EFF1926651F00047AD3 /* ExpandingSearchBarDemoViewController.xib in Resources */,
 				6FCB4F001926651F00047AD3 /* SegueDemo.storyboard in Resources */,
 				6FCB4F021926651F00047AD3 /* ContainmentTestViewController.xib in Resources */,
 				6FCB4F031926651F00047AD3 /* AnimationDemoViewController.xib in Resources */,
@@ -2146,7 +1969,6 @@
 				6FCB4F0E1926651F00047AD3 /* ConnectionDemoViewController.xib in Resources */,
 				6FCB4F0F1926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 				6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */,
-				6FCB4F101926651F00047AD3 /* TextViewsDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2215,13 +2037,10 @@
 				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
 				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
 				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
-				6F9C467214C5C30C00824AB2 /* ActionSheetDemoViewController.m in Sources */,
 				6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */,
 				6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */,
 				6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */,
-				6F9C467A14C5C30C00824AB2 /* CursorPointerInfoViewController.m in Sources */,
 				6F9C467C14C5C30C00824AB2 /* CursorSelectedFolderView.m in Sources */,
-				6F9C468014C5C30C00824AB2 /* SkinningDemoViewController.m in Sources */,
 				6F9C468214C5C30C00824AB2 /* FooterView.m in Sources */,
 				6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */,
 				6F9C468614C5C30C00824AB2 /* ProgrammaticTableViewCell.m in Sources */,
@@ -2244,7 +2063,6 @@
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
 				6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */,
-				6F5008021585EA5600391A6C /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */,
 				6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */,
 				6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
@@ -2265,7 +2083,6 @@
 				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
 				6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
 				6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
-				6F3D1D8A1795721F0056FF4E /* TextViewsDemoViewController.m in Sources */,
 				6FC378FD182D188900B55AF1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2335,13 +2152,10 @@
 				6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */,
 				6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */,
 				6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */,
-				6FCB4E941926651F00047AD3 /* ActionSheetDemoViewController.m in Sources */,
 				6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */,
 				6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */,
 				6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */,
-				6FCB4E981926651F00047AD3 /* CursorPointerInfoViewController.m in Sources */,
 				6FCB4E991926651F00047AD3 /* CursorSelectedFolderView.m in Sources */,
-				6FCB4E9A1926651F00047AD3 /* SkinningDemoViewController.m in Sources */,
 				6FCB4E9B1926651F00047AD3 /* FooterView.m in Sources */,
 				6FCB4E9C1926651F00047AD3 /* HeaderView.m in Sources */,
 				6FCB4E9D1926651F00047AD3 /* ProgrammaticTableViewCell.m in Sources */,
@@ -2364,7 +2178,6 @@
 				6FCB4EAE1926651F00047AD3 /* ParallaxScrollingDemoViewController.m in Sources */,
 				6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */,
 				6FCB4EB01926651F00047AD3 /* LabelDemoViewController.m in Sources */,
-				6FCB4EB11926651F00047AD3 /* ExpandingSearchBarDemoViewController.m in Sources */,
 				6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */,
 				6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */,
 				6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
@@ -2384,7 +2197,6 @@
 				6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */,
 				6FCB4EC41926651F00047AD3 /* ConnectionDemoViewController.m in Sources */,
 				6FCB4EC51926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
-				6FCB4EC61926651F00047AD3 /* TextViewsDemoViewController.m in Sources */,
 				6FCB4EC71926651F00047AD3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2609,6 +2421,7 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

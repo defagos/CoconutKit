@@ -8,11 +8,9 @@
 
 #import "DemosListViewController.h"
 
-#import "ActionSheetDemoViewController.h"
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
-#import "ExpandingSearchBarDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "FontsDemoViewController.h"
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
@@ -22,12 +20,10 @@
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "AnimationDemoViewController.h"
-#import "SkinningDemoViewController.h"
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
-#import "TextViewsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
 #import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
@@ -84,13 +80,9 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexEnumBegin = 0,
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexKeyboardAvoidingScrollView,
-    ViewDemoIndexTextViews,
     ViewDemoIndexCursor,
     ViewDemoIndexLabel,
-    ViewDemoIndexExpandingSearchBar,
-    ViewDemoIndexActionSheet,
     ViewDemoIndexSlideshow,
-    ViewDemoIndexSkinning,
     ViewDemoIndexEffects,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
@@ -333,11 +325,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexTextViews: {
-                    cell.textLabel.text = NSLocalizedString(@"Text views", @"Text views");
-                    break;
-                }
-                    
                 case ViewDemoIndexCursor: {
                     cell.textLabel.text = NSLocalizedString(@"Cursor", nil);
                     break;
@@ -348,23 +335,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexExpandingSearchBar: {
-                    cell.textLabel.text = NSLocalizedString(@"Search bar", nil);
-                    break;
-                }
-                
-                case ViewDemoIndexActionSheet: {
-                    cell.textLabel.text = NSLocalizedString(@"Action sheet", nil);
-                    break;
-                }
-                    
                 case ViewDemoIndexSlideshow: {
                     cell.textLabel.text = NSLocalizedString(@"Slideshow", nil);
-                    break;
-                }
-                    
-                case ViewDemoIndexSkinning: {
-                    cell.textLabel.text = NSLocalizedString(@"Skinning", nil);
                     break;
                 }
                     
@@ -546,11 +518,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexTextViews: {
-                    demoViewController = [[[TextViewsDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
                 case ViewDemoIndexCursor: {
                     demoViewController = [[[CursorDemoViewController alloc] init] autorelease];
                     break;
@@ -561,26 +528,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexExpandingSearchBar: {
-                    demoViewController = [[[ExpandingSearchBarDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
-                case ViewDemoIndexActionSheet: {
-                    ActionSheetDemoViewController *actionSheetDemoViewController = [[[ActionSheetDemoViewController alloc] init] autorelease];
-                    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
-                    tabBarController.viewControllers = [NSArray arrayWithObject:actionSheetDemoViewController];
-                    demoViewController = tabBarController;
-                    break;
-                }
-                    
                 case ViewDemoIndexSlideshow: {
                     demoViewController = [[[SlideshowDemoViewController alloc] init] autorelease];
-                    break;
-                }
-                    
-                case ViewDemoIndexSkinning: {
-                    demoViewController = [[[SkinningDemoViewController alloc] init] autorelease];
                     break;
                 }
                     

@@ -14,7 +14,6 @@
 @interface RootStackDemoViewController ()
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *backBarButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionSheetBarButtonItem;
 @property (nonatomic, retain) IBOutlet UIButton *popButton;
 @property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
 @property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
@@ -35,7 +34,6 @@
     [super releaseViews];
     
     self.backBarButtonItem = nil;
-    self.actionSheetBarButtonItem = nil;
     self.popButton = nil;
     
     // Avoid a crash when popping a view controller in the root stack demo in the iOS simulator (no crash on the device). This
@@ -208,7 +206,6 @@
     [super localize];
     
     self.backBarButtonItem.title = HLSLocalizedStringFromUIKit(@"Back");
-    self.actionSheetBarButtonItem.title = NSLocalizedString(@"Action sheet", nil);
     
     if (self == [self.stackController rootViewController]) {
         [self.popButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
@@ -259,7 +256,7 @@
 - (IBAction)pop:(id)sender
 {
     if (self == [self.stackController rootViewController]) {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
         [self.stackController popViewControllerAnimated:self.animatedSwitch.on];
@@ -296,24 +293,7 @@
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
     memoryWarningTestCoverViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
-}
-
-- (IBAction)showActionSheet:(id)sender
-{
-    // Just to test behavior during pop
-    HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
-    [actionSheet addButtonWithTitle:@"1"
-                             target:self
-                             action:NULL];
-    [actionSheet addButtonWithTitle:@"2"
-                             target:self
-                             action:NULL];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", nil) target:self action:NULL];
-    }
-    
-    [actionSheet showFromBarButtonItem:self.actionSheetBarButtonItem animated:YES];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 - (void)closeNativeContainer:(id)sender

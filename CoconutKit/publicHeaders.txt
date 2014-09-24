@@ -1,6 +1,5 @@
 CALayer+HLSExtensions.h
 CAMediaTimingFunction+HLSExtensions.h
-HLSActionSheet.h
 HLSAnimation.h
 HLSAnimationStep.h
 HLSApplicationInformation.h
@@ -11,7 +10,6 @@ HLSContainerStack.h
 HLSConverters.h
 HLSCursor.h
 HLSError.h
-HLSExpandingSearchBar.h
 HLSFakeConnection.h
 HLSFileManager.h
 HLSFileURLConnection.h
@@ -46,7 +44,6 @@ HLSTaskGroup.h
 HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
-HLSTextView.h
 HLSTransition.h
 HLSURLConnection.h
 HLSUserInterfaceLock.h
@@ -84,7 +81,6 @@ UIControl+HLSExclusiveTouch.h
 UIFont+HLSExtensions.h
 UIImage+HLSExtensions.h
 UILabel+HLSDynamicLocalization.h
-UINavigationBar+HLSExtensions.h
 UINavigationController+HLSExtensions.h
 UIPopoverController+HLSExtensions.h
 UIScrollView+HLSExtensions.h
@@ -93,7 +89,6 @@ UITabBarController+HLSExtensions.h
 UITextField+HLSExtensions.h
 UITextField+HLSValidation.h
 UITextView+HLSExtensions.h
-UIToolbar+HLSExtensions.h
 UIView+HLSExtensions.h
 UIViewController+HLSExtensions.h
 UIWebView+HLSExtensions.h

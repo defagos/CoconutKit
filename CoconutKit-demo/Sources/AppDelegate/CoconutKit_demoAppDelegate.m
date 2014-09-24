@@ -24,16 +24,6 @@ HLSEnableNSManagedObjectValidation();
 
 @implementation CoconutKit_demoAppDelegate
 
-#pragma mark Class methods
-
-+ (void)load
-{
-    // Make the demos look nice on iOS 7. I will try to update the view layout to cope with iOS 7 when it is the
-    // minimum version required by CoconutKit
-    // See Cédric Luthi's tweet: https://twitter.com/0xced/status/344519492786847744
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UIUseLegacyUI" : @YES}];
-}
-
 #pragma mark Object construction and destruction
 
 - (void)dealloc

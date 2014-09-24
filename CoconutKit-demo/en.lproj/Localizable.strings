@@ -5,7 +5,6 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Samuel Défago. All rights reserved.
  */
-"Action sheet"="Action sheet";
 "Adjust font size to width"="Adjust font size to width";
 "All"="All";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
@@ -140,7 +139,6 @@
 "Root view controller"="Root view controller";
 "Scroll view avoiding the keyboard"="Scroll view avoiding the keyboard";
 "Scrolling"="Scrolling";
-"Search bar"="Search bar";
 "Search books"="Search books";
 "Section end"="Section end";
 "Segues"="Segues";
@@ -148,7 +146,6 @@
 "Segues (not available for iOS 4)"="Segues (not available for iOS 4)";
 "Single view animation"="Single view animation";
 "Size"="Size";
-"Skinning"="Skinning";
 "Slideshow"="Slideshow";
 "Start"="Start";
 "Start time"="Start time";
@@ -169,7 +166,6 @@
 "Test responder chain"="Test responder chain";
 "Text"="Text";
 "Text field for testing keyboard dismissal"="Text field for testing keyboard dismissal";
-"Text views"="Text views";
 "The behavior above can be disabled"="The behavior above can be disabled";
 "The view controller is not compatible with the container (most probably its orientation)"="The view controller is not compatible with the container (most probably its orientation)";
 "This field exits edit mode when the user taps outside it"="This field exits edit mode when the user taps outside it";
@@ -188,5 +184,4 @@
 "Wrapped into UINavigationController"="Wrapped into UINavigationController";
 "Wrapped into UITabBarController"="Wrapped into UITabBarController";
 "Year"="Year";
-"Your text here"="Your text here";
 "yyyy/MM/dd"="yyyy/MM/dd";

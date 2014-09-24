@@ -1,1356 +1,238 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
-	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
-		</object>
-		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBUIProgressView</string>
-			<string>IBUIButton</string>
-			<string>IBUIView</string>
-			<string>IBUILabel</string>
-			<string>IBProxyObject</string>
-		</object>
-		<object class="NSArray" key="IBDocument.PluginDependencies">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.Metadata">
-			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
-			<integer value="1" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="IBProxyObject" id="841351856">
-				<string key="IBProxiedObjectIdentifier">IBFilesOwner</string>
-				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-			</object>
-			<object class="IBProxyObject" id="371349661">
-				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
-				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-			</object>
-			<object class="IBUIView" id="982762895">
-				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">292</int>
-				<object class="NSMutableArray" key="NSSubviews">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUILabel" id="18038195">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 88}, {644, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="703460027"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Task</string>
-						<object class="NSColor" key="IBUITextColor" id="962288358">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MCAwIDAAA</bytes>
-						</object>
-						<object class="NSColor" key="IBUIHighlightedColor" id="683685016">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="428199850">
-							<int key="type">1</int>
-							<double key="pointSize">17</double>
-						</object>
-						<object class="NSFont" key="IBUIFont" id="656122394">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">17</double>
-							<int key="NSfFlags">16</int>
-						</object>
-					</object>
-					<object class="IBUIButton" id="703460027">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 138}, {132, 37}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="408797683"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Start</string>
-						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<object class="NSColor" key="IBUINormalTitleShadowColor" id="114518113">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MC41AA</bytes>
-						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="605830554">
-							<string key="name">Helvetica-Bold</string>
-							<string key="family">Helvetica</string>
-							<int key="traits">2</int>
-							<double key="pointSize">15</double>
-						</object>
-						<object class="NSFont" key="IBUIFont" id="806072207">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
-					</object>
-					<object class="IBUIButton" id="408797683">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 138}, {132, 37}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="476721022"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Stop</string>
-						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="114518113"/>
-						<reference key="IBUIFontDescription" ref="605830554"/>
-						<reference key="IBUIFont" ref="806072207"/>
-					</object>
-					<object class="IBUIProgressView" id="476721022">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 152}, {483, 9}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="182048343"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<float key="IBUIProgress">0.5</float>
-					</object>
-					<object class="IBUILabel" id="182048343">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 182}, {270, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="636263299"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Remaining time estimate</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="428199850"/>
-						<reference key="IBUIFont" ref="656122394"/>
-					</object>
-					<object class="IBUILabel" id="636263299">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{501, 182}, {205, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1046193325"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;remainingTime&gt;</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">2</int>
-						<reference key="IBUIFontDescription" ref="428199850"/>
-						<reference key="IBUIFont" ref="656122394"/>
-					</object>
-					<object class="IBUILabel" id="1046193325">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 570}, {644, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="607778981"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Task group</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="428199850"/>
-						<reference key="IBUIFont" ref="656122394"/>
-					</object>
-					<object class="IBUIButton" id="607778981">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 620}, {132, 37}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="465279575"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Start</string>
-						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="114518113"/>
-						<reference key="IBUIFontDescription" ref="605830554"/>
-						<reference key="IBUIFont" ref="806072207"/>
-					</object>
-					<object class="IBUIButton" id="465279575">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 620}, {132, 37}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="831830403"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Stop</string>
-						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="114518113"/>
-						<reference key="IBUIFontDescription" ref="605830554"/>
-						<reference key="IBUIFont" ref="806072207"/>
-					</object>
-					<object class="IBUIProgressView" id="831830403">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 634}, {483, 9}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="401342058"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<float key="IBUIProgress">0.5</float>
-					</object>
-					<object class="IBUILabel" id="401342058">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 665}, {270, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="524601731"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Remaining time estimate</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="428199850"/>
-						<reference key="IBUIFont" ref="656122394"/>
-					</object>
-					<object class="IBUILabel" id="524601731">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{501, 665}, {205, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="497172839"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;remainingTime&gt;</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">2</int>
-						<reference key="IBUIFontDescription" ref="428199850"/>
-						<reference key="IBUIFont" ref="656122394"/>
-					</object>
-					<object class="IBUILabel" id="497172839">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 727}, {153, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="199883418"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Sub-tasks</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="428199850"/>
-						<reference key="IBUIFont" ref="656122394"/>
-					</object>
-					<object class="IBUIProgressView" id="199883418">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 733}, {355, 9}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="870835724"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<float key="IBUIProgress">0.5</float>
-					</object>
-					<object class="IBUILabel" id="870835724">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 750}, {195, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="969211916"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Remaining time estimate</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="435165455">
-							<string key="name">Helvetica</string>
-							<string key="family">Helvetica</string>
-							<int key="traits">0</int>
-							<double key="pointSize">14</double>
-						</object>
-						<object class="NSFont" key="IBUIFont" id="1008578910">
-							<string key="NSName">Helvetica</string>
-							<double key="NSSize">14</double>
-							<int key="NSfFlags">16</int>
-						</object>
-					</object>
-					<object class="IBUILabel" id="969211916">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{426, 750}, {150, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="516676967"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;remainingTime&gt;</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">2</int>
-						<reference key="IBUIFontDescription" ref="435165455"/>
-						<reference key="IBUIFont" ref="1008578910"/>
-					</object>
-					<object class="IBUIButton" id="516676967">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{633, 719}, {74, 37}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="13645666"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Stop</string>
-						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="114518113"/>
-						<reference key="IBUIFontDescription" ref="605830554"/>
-						<reference key="IBUIFont" ref="806072207"/>
-					</object>
-					<object class="IBUIProgressView" id="13645666">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 785}, {355, 9}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="659104228"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<float key="IBUIProgress">0.5</float>
-					</object>
-					<object class="IBUILabel" id="659104228">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 802}, {195, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="938650982"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Remaining time estimate</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="435165455"/>
-						<reference key="IBUIFont" ref="1008578910"/>
-					</object>
-					<object class="IBUILabel" id="938650982">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{426, 802}, {150, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="691869695"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;remainingTime&gt;</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">2</int>
-						<reference key="IBUIFontDescription" ref="435165455"/>
-						<reference key="IBUIFont" ref="1008578910"/>
-					</object>
-					<object class="IBUIButton" id="691869695">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{633, 771}, {74, 37}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="983030766"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Stop</string>
-						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="114518113"/>
-						<reference key="IBUIFontDescription" ref="605830554"/>
-						<reference key="IBUIFont" ref="806072207"/>
-					</object>
-					<object class="IBUIProgressView" id="983030766">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 837}, {355, 9}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="603858199"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<float key="IBUIProgress">0.5</float>
-					</object>
-					<object class="IBUILabel" id="603858199">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{223, 854}, {195, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="248951204"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">LS/Remaining time estimate</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="435165455"/>
-						<reference key="IBUIFont" ref="1008578910"/>
-					</object>
-					<object class="IBUILabel" id="248951204">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{426, 854}, {150, 21}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="697638063"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">&lt;remainingTime&gt;</string>
-						<reference key="IBUITextColor" ref="962288358"/>
-						<reference key="IBUIHighlightedColor" ref="683685016"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<int key="IBUITextAlignment">2</int>
-						<reference key="IBUIFontDescription" ref="435165455"/>
-						<reference key="IBUIFont" ref="1008578910"/>
-					</object>
-					<object class="IBUIButton" id="697638063">
-						<reference key="NSNextResponder" ref="982762895"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{633, 823}, {74, 37}}</string>
-						<reference key="NSSuperview" ref="982762895"/>
-						<reference key="NSWindow"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">LS/Stop</string>
-						<reference key="IBUIHighlightedTitleColor" ref="683685016"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="114518113"/>
-						<reference key="IBUIFontDescription" ref="605830554"/>
-						<reference key="IBUIFont" ref="806072207"/>
-					</object>
-				</object>
-				<string key="NSFrameSize">{768, 1004}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="18038195"/>
-				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MQA</bytes>
-					<object class="NSColorSpace" key="NSCustomColorSpace">
-						<int key="NSID">2</int>
-					</object>
-				</object>
-				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-			</object>
-		</object>
-		<object class="IBObjectContainer" key="IBDocument.Objects">
-			<object class="NSMutableArray" key="connectionRecords">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskProgressView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="476721022"/>
-					</object>
-					<int key="connectionID">35</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskRemainingTimeEstimateLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="182048343"/>
-					</object>
-					<int key="connectionID">36</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskRemainingTimeLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="636263299"/>
-					</object>
-					<int key="connectionID">37</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">view</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="982762895"/>
-					</object>
-					<int key="connectionID">38</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskStartButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="703460027"/>
-					</object>
-					<int key="connectionID">40</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskStopButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="408797683"/>
-					</object>
-					<int key="connectionID">41</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskGroupStartButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="607778981"/>
-					</object>
-					<int key="connectionID">44</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskGroupStopButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="465279575"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskGroupProgressView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="831830403"/>
-					</object>
-					<int key="connectionID">46</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskGroupRemainingTimeEstimateLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="401342058"/>
-					</object>
-					<int key="connectionID">47</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">taskGroupRemainingTimeLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="524601731"/>
-					</object>
-					<int key="connectionID">48</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask1ProgressView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="199883418"/>
-					</object>
-					<int key="connectionID">50</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask1RemainingTimeEstimateLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="870835724"/>
-					</object>
-					<int key="connectionID">51</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask1RemainingTimeLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="969211916"/>
-					</object>
-					<int key="connectionID">52</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask1StopButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="516676967"/>
-					</object>
-					<int key="connectionID">53</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask2ProgressView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="13645666"/>
-					</object>
-					<int key="connectionID">54</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask2RemainingTimeEstimateLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="659104228"/>
-					</object>
-					<int key="connectionID">55</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask2RemainingTimeLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="938650982"/>
-					</object>
-					<int key="connectionID">56</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask2StopButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="691869695"/>
-					</object>
-					<int key="connectionID">57</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask3ProgressView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="983030766"/>
-					</object>
-					<int key="connectionID">58</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask3RemainingTimeEstimateLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="603858199"/>
-					</object>
-					<int key="connectionID">59</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask3RemainingTimeLabel</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="248951204"/>
-					</object>
-					<int key="connectionID">60</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subTask3StopButton</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="697638063"/>
-					</object>
-					<int key="connectionID">61</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">startTask:</string>
-						<reference key="source" ref="703460027"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">69</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">startTaskGroup:</string>
-						<reference key="source" ref="607778981"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">71</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">stopSubTask1:</string>
-						<reference key="source" ref="516676967"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">73</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">stopSubTask2:</string>
-						<reference key="source" ref="691869695"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">74</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">stopSubTask3:</string>
-						<reference key="source" ref="697638063"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">75</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">stopTask:</string>
-						<reference key="source" ref="408797683"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">70</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">stopTaskGroup:</string>
-						<reference key="source" ref="465279575"/>
-						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">72</int>
-				</object>
-			</object>
-			<object class="IBMutableOrderedSet" key="objectRecords">
-				<object class="NSArray" key="orderedObjects">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBObjectRecord">
-						<int key="objectID">0</int>
-						<object class="NSArray" key="object" id="0">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
-						<reference key="children" ref="1000"/>
-						<nil key="parent"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">-1</int>
-						<reference key="object" ref="841351856"/>
-						<reference key="parent" ref="0"/>
-						<string key="objectName">File's Owner</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">-2</int>
-						<reference key="object" ref="371349661"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">2</int>
-						<reference key="object" ref="982762895"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="703460027"/>
-							<reference ref="607778981"/>
-							<reference ref="831830403"/>
-							<reference ref="199883418"/>
-							<reference ref="969211916"/>
-							<reference ref="659104228"/>
-							<reference ref="603858199"/>
-							<reference ref="697638063"/>
-							<reference ref="408797683"/>
-							<reference ref="870835724"/>
-							<reference ref="938650982"/>
-							<reference ref="248951204"/>
-							<reference ref="182048343"/>
-							<reference ref="636263299"/>
-							<reference ref="476721022"/>
-							<reference ref="18038195"/>
-							<reference ref="401342058"/>
-							<reference ref="524601731"/>
-							<reference ref="1046193325"/>
-							<reference ref="497172839"/>
-							<reference ref="516676967"/>
-							<reference ref="13645666"/>
-							<reference ref="691869695"/>
-							<reference ref="983030766"/>
-							<reference ref="465279575"/>
-						</object>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">4</int>
-						<reference key="object" ref="703460027"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="476721022"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">6</int>
-						<reference key="object" ref="607778981"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="831830403"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">8</int>
-						<reference key="object" ref="199883418"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="18038195"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">13</int>
-						<reference key="object" ref="1046193325"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="497172839"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="182048343"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">17</int>
-						<reference key="object" ref="636263299"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">18</int>
-						<reference key="object" ref="401342058"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">19</int>
-						<reference key="object" ref="524601731"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">20</int>
-						<reference key="object" ref="969211916"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">21</int>
-						<reference key="object" ref="13645666"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">23</int>
-						<reference key="object" ref="938650982"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">24</int>
-						<reference key="object" ref="983030766"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">26</int>
-						<reference key="object" ref="248951204"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">27</int>
-						<reference key="object" ref="870835724"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">28</int>
-						<reference key="object" ref="659104228"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">29</int>
-						<reference key="object" ref="603858199"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">30</int>
-						<reference key="object" ref="516676967"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">31</int>
-						<reference key="object" ref="691869695"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">32</int>
-						<reference key="object" ref="697638063"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">39</int>
-						<reference key="object" ref="408797683"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">43</int>
-						<reference key="object" ref="465279575"/>
-						<reference key="parent" ref="982762895"/>
-					</object>
-				</object>
-			</object>
-			<object class="NSMutableDictionary" key="flattenedProperties">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="NSArray" key="dict.sortedKeys">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>-1.CustomClassName</string>
-					<string>-1.IBPluginDependency</string>
-					<string>-2.CustomClassName</string>
-					<string>-2.IBPluginDependency</string>
-					<string>12.IBPluginDependency</string>
-					<string>13.IBPluginDependency</string>
-					<string>14.IBPluginDependency</string>
-					<string>16.IBPluginDependency</string>
-					<string>17.IBPluginDependency</string>
-					<string>18.IBPluginDependency</string>
-					<string>19.IBPluginDependency</string>
-					<string>2.IBPluginDependency</string>
-					<string>20.IBPluginDependency</string>
-					<string>21.IBPluginDependency</string>
-					<string>23.IBPluginDependency</string>
-					<string>24.IBPluginDependency</string>
-					<string>26.IBPluginDependency</string>
-					<string>27.IBPluginDependency</string>
-					<string>28.IBPluginDependency</string>
-					<string>29.IBPluginDependency</string>
-					<string>30.IBPluginDependency</string>
-					<string>31.IBPluginDependency</string>
-					<string>32.IBPluginDependency</string>
-					<string>39.IBPluginDependency</string>
-					<string>4.IBPluginDependency</string>
-					<string>43.IBPluginDependency</string>
-					<string>5.IBPluginDependency</string>
-					<string>6.IBPluginDependency</string>
-					<string>7.IBPluginDependency</string>
-					<string>8.IBPluginDependency</string>
-				</object>
-				<object class="NSMutableArray" key="dict.values">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>ParallelProcessingDemoViewController</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				</object>
-			</object>
-			<object class="NSMutableDictionary" key="unlocalizedProperties">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<reference key="dict.sortedKeys" ref="0"/>
-				<reference key="dict.values" ref="0"/>
-			</object>
-			<nil key="activeLocalization"/>
-			<object class="NSMutableDictionary" key="localizations">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<reference key="dict.sortedKeys" ref="0"/>
-				<reference key="dict.values" ref="0"/>
-			</object>
-			<nil key="sourceID"/>
-			<int key="maxID">75</int>
-		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">HLSViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/HLSViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ParallelProcessingDemoViewController</string>
-					<string key="superclassName">HLSViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>startTask:</string>
-							<string>startTaskGroup:</string>
-							<string>stopSubTask1:</string>
-							<string>stopSubTask2:</string>
-							<string>stopSubTask3:</string>
-							<string>stopTask:</string>
-							<string>stopTaskGroup:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>startTask:</string>
-							<string>startTaskGroup:</string>
-							<string>stopSubTask1:</string>
-							<string>stopSubTask2:</string>
-							<string>stopSubTask3:</string>
-							<string>stopTask:</string>
-							<string>stopTaskGroup:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">startTask:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">startTaskGroup:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">stopSubTask1:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">stopSubTask2:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">stopSubTask3:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">stopTask:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">stopTaskGroup:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>subTask1ProgressView</string>
-							<string>subTask1RemainingTimeEstimateLabel</string>
-							<string>subTask1RemainingTimeLabel</string>
-							<string>subTask1StopButton</string>
-							<string>subTask2ProgressView</string>
-							<string>subTask2RemainingTimeEstimateLabel</string>
-							<string>subTask2RemainingTimeLabel</string>
-							<string>subTask2StopButton</string>
-							<string>subTask3ProgressView</string>
-							<string>subTask3RemainingTimeEstimateLabel</string>
-							<string>subTask3RemainingTimeLabel</string>
-							<string>subTask3StopButton</string>
-							<string>taskGroupProgressView</string>
-							<string>taskGroupRemainingTimeEstimateLabel</string>
-							<string>taskGroupRemainingTimeLabel</string>
-							<string>taskGroupStartButton</string>
-							<string>taskGroupStopButton</string>
-							<string>taskProgressView</string>
-							<string>taskRemainingTimeEstimateLabel</string>
-							<string>taskRemainingTimeLabel</string>
-							<string>taskStartButton</string>
-							<string>taskStopButton</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIProgressView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIButton</string>
-							<string>UIProgressView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIButton</string>
-							<string>UIProgressView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIButton</string>
-							<string>UIProgressView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-							<string>UIProgressView</string>
-							<string>UILabel</string>
-							<string>UILabel</string>
-							<string>UIButton</string>
-							<string>UIButton</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>subTask1ProgressView</string>
-							<string>subTask1RemainingTimeEstimateLabel</string>
-							<string>subTask1RemainingTimeLabel</string>
-							<string>subTask1StopButton</string>
-							<string>subTask2ProgressView</string>
-							<string>subTask2RemainingTimeEstimateLabel</string>
-							<string>subTask2RemainingTimeLabel</string>
-							<string>subTask2StopButton</string>
-							<string>subTask3ProgressView</string>
-							<string>subTask3RemainingTimeEstimateLabel</string>
-							<string>subTask3RemainingTimeLabel</string>
-							<string>subTask3StopButton</string>
-							<string>taskGroupProgressView</string>
-							<string>taskGroupRemainingTimeEstimateLabel</string>
-							<string>taskGroupRemainingTimeLabel</string>
-							<string>taskGroupStartButton</string>
-							<string>taskGroupStopButton</string>
-							<string>taskProgressView</string>
-							<string>taskRemainingTimeEstimateLabel</string>
-							<string>taskRemainingTimeLabel</string>
-							<string>taskStartButton</string>
-							<string>taskStopButton</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask1ProgressView</string>
-								<string key="candidateClassName">UIProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask1RemainingTimeEstimateLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask1RemainingTimeLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask1StopButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask2ProgressView</string>
-								<string key="candidateClassName">UIProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask2RemainingTimeEstimateLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask2RemainingTimeLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask2StopButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask3ProgressView</string>
-								<string key="candidateClassName">UIProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask3RemainingTimeEstimateLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask3RemainingTimeLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">subTask3StopButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskGroupProgressView</string>
-								<string key="candidateClassName">UIProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskGroupRemainingTimeEstimateLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskGroupRemainingTimeLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskGroupStartButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskGroupStopButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskProgressView</string>
-								<string key="candidateClassName">UIProgressView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskRemainingTimeEstimateLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskRemainingTimeLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskStartButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">taskStopButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ParallelProcessingDemoViewController.h</string>
-					</object>
-				</object>
-			</object>
-		</object>
-		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1280" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.InterfaceBuilder3</string>
-			<integer value="3100" key="NS.object.0"/>
-		</object>
-		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">933</string>
-	</data>
-</archive>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" promptedForUpgradeToXcode5="NO">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParallelProcessingDemoViewController">
+            <connections>
+                <outlet property="subTask1ProgressView" destination="8" id="50"/>
+                <outlet property="subTask1RemainingTimeEstimateLabel" destination="27" id="51"/>
+                <outlet property="subTask1RemainingTimeLabel" destination="20" id="52"/>
+                <outlet property="subTask1StopButton" destination="30" id="53"/>
+                <outlet property="subTask2ProgressView" destination="21" id="54"/>
+                <outlet property="subTask2RemainingTimeEstimateLabel" destination="28" id="55"/>
+                <outlet property="subTask2RemainingTimeLabel" destination="23" id="56"/>
+                <outlet property="subTask2StopButton" destination="31" id="57"/>
+                <outlet property="subTask3ProgressView" destination="24" id="58"/>
+                <outlet property="subTask3RemainingTimeEstimateLabel" destination="29" id="59"/>
+                <outlet property="subTask3RemainingTimeLabel" destination="26" id="60"/>
+                <outlet property="subTask3StopButton" destination="32" id="61"/>
+                <outlet property="taskGroupProgressView" destination="7" id="46"/>
+                <outlet property="taskGroupRemainingTimeEstimateLabel" destination="18" id="47"/>
+                <outlet property="taskGroupRemainingTimeLabel" destination="19" id="48"/>
+                <outlet property="taskGroupStartButton" destination="6" id="44"/>
+                <outlet property="taskGroupStopButton" destination="43" id="45"/>
+                <outlet property="taskProgressView" destination="5" id="35"/>
+                <outlet property="taskRemainingTimeEstimateLabel" destination="16" id="36"/>
+                <outlet property="taskRemainingTimeLabel" destination="17" id="37"/>
+                <outlet property="taskStartButton" destination="4" id="40"/>
+                <outlet property="taskStopButton" destination="39" id="41"/>
+                <outlet property="view" destination="2" id="38"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Task" lineBreakMode="tailTruncation" minimumFontSize="10" id="12">
+                    <rect key="frame" x="62" y="152" width="644" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4">
+                    <rect key="frame" x="62" y="198" width="132" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="LS/Start">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="startTask:" destination="-1" eventType="touchUpInside" id="69"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="39">
+                    <rect key="frame" x="62" y="198" width="132" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="LS/Stop">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="stopTask:" destination="-1" eventType="touchUpInside" id="70"/>
+                    </connections>
+                </button>
+                <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" id="5">
+                    <rect key="frame" x="223" y="216" width="483" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Remaining time estimate" lineBreakMode="tailTruncation" minimumFontSize="10" id="16">
+                    <rect key="frame" x="223" y="246" width="270" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;remainingTime>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="17">
+                    <rect key="frame" x="501" y="246" width="205" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Task group" lineBreakMode="tailTruncation" minimumFontSize="10" id="13">
+                    <rect key="frame" x="62" y="634" width="644" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6">
+                    <rect key="frame" x="62" y="680" width="132" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="LS/Start">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="startTaskGroup:" destination="-1" eventType="touchUpInside" id="71"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="43">
+                    <rect key="frame" x="62" y="680" width="132" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="LS/Stop">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="stopTaskGroup:" destination="-1" eventType="touchUpInside" id="72"/>
+                    </connections>
+                </button>
+                <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" id="7">
+                    <rect key="frame" x="223" y="698" width="483" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Remaining time estimate" lineBreakMode="tailTruncation" minimumFontSize="10" id="18">
+                    <rect key="frame" x="223" y="729" width="270" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;remainingTime>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="19">
+                    <rect key="frame" x="501" y="729" width="205" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Sub-tasks" lineBreakMode="tailTruncation" minimumFontSize="10" id="14">
+                    <rect key="frame" x="62" y="787" width="153" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" id="8">
+                    <rect key="frame" x="223" y="797" width="355" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Remaining time estimate" lineBreakMode="tailTruncation" minimumFontSize="10" id="27">
+                    <rect key="frame" x="223" y="814" width="195" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;remainingTime>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="20">
+                    <rect key="frame" x="426" y="814" width="150" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="30">
+                    <rect key="frame" x="633" y="779" width="74" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="LS/Stop">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="stopSubTask1:" destination="-1" eventType="touchUpInside" id="73"/>
+                    </connections>
+                </button>
+                <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" id="21">
+                    <rect key="frame" x="223" y="849" width="355" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Remaining time estimate" lineBreakMode="tailTruncation" minimumFontSize="10" id="28">
+                    <rect key="frame" x="223" y="866" width="195" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;remainingTime>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="23">
+                    <rect key="frame" x="426" y="866" width="150" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="31">
+                    <rect key="frame" x="633" y="831" width="74" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="LS/Stop">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="stopSubTask2:" destination="-1" eventType="touchUpInside" id="74"/>
+                    </connections>
+                </button>
+                <progressView opaque="NO" contentMode="scaleToFill" progress="0.5" id="24">
+                    <rect key="frame" x="223" y="901" width="355" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Remaining time estimate" lineBreakMode="tailTruncation" minimumFontSize="10" id="29">
+                    <rect key="frame" x="223" y="918" width="195" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;remainingTime>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="26">
+                    <rect key="frame" x="426" y="918" width="150" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="32">
+                    <rect key="frame" x="633" y="883" width="74" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="LS/Stop">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="stopSubTask3:" destination="-1" eventType="touchUpInside" id="75"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

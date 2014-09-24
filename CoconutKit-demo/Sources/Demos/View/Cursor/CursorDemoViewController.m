@@ -10,7 +10,6 @@
 
 #import "CursorCustomPointerView.h"
 #import "CursorFolderView.h"
-#import "CursorPointerInfoViewController.h"
 #import "CursorSelectedFolderView.h"
 
 static NSArray *s_weekDays = nil;
@@ -19,8 +18,6 @@ static NSArray *s_timeScales = nil;
 static NSArray *s_folders = nil;
 
 @interface CursorDemoViewController ()
-
-@property (nonatomic, retain) UIPopoverController *currentPopoverController;
 
 @property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;
 @property (nonatomic, retain) IBOutlet UILabel *weekDayIndexLabel;
@@ -50,13 +47,6 @@ static NSArray *s_folders = nil;
 }
 
 #pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.currentPopoverController = nil;
-    
-    [super dealloc];
-}
 
 - (void)releaseViews
 {
@@ -132,15 +122,6 @@ static NSArray *s_folders = nil;
     [self sizeChanged:nil];
     
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-#pragma mark Memory warnings
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    
-    self.currentPopoverController = nil;
 }
 
 #pragma mark HLSCursorDataSource protocol implementation
@@ -287,14 +268,6 @@ static NSArray *s_folders = nil;
 - (void)cursorDidStartDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
     HLSLoggerInfo(@"Cursor %p did start dragging near index %lu", cursor, (unsigned long)index);
-    
-    if (cursor == self.randomRangeCursor) {
-        if (! self.currentPopoverController) {
-            CursorPointerInfoViewController *infoViewController = [[[CursorPointerInfoViewController alloc] init] autorelease];
-            self.currentPopoverController = [[[UIPopoverController alloc] initWithContentViewController:infoViewController] autorelease];
-            self.currentPopoverController.popoverContentSize = infoViewController.view.frame.size;
-        }        
-    }
 }
 
 - (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index
@@ -302,15 +275,6 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did drag near index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.randomRangeCursor) {
-        CursorPointerInfoViewController *infoViewController = (CursorPointerInfoViewController *)self.currentPopoverController.contentViewController;
-        infoViewController.valueLabel.text = [s_completeRange objectAtIndex:index];
-        
-        [self.currentPopoverController dismissPopoverAnimated:NO];
-        [self.currentPopoverController presentPopoverFromRect:cursor.pointerView.bounds
-                                                       inView:cursor.pointerView
-                                     permittedArrowDirections:UIPopoverArrowDirectionDown
-                                                     animated:NO];
-        
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
         pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
     }
@@ -319,10 +283,6 @@ static NSArray *s_folders = nil;
 - (void)cursorDidStopDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
     HLSLoggerInfo(@"Cursor %p did stop dragging near index %lu", cursor, (unsigned long)index);
-    
-    if (cursor == self.randomRangeCursor) {
-        [self.currentPopoverController dismissPopoverAnimated:NO];
-    }
 }
 
 #pragma mark Event callbacks

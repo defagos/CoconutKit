@@ -15,7 +15,7 @@
 /**
  * We often need to manage a stack of view controllers. Usually, we use a navigation controller, but there is no way
  * to easily use other transition animations as the built-in ones. Sometimes, we also want to show view controllers
- * modally, but often the usual -presentModalViewController:animated: method of UIViewController is too limited (modal
+ * modally, but often the usual -presentViewController:animated:completion: method of UIViewController is too limited (modal
  * sheets on the iPad have pre-defined sizes, and when displaying full screen the view below disappears, which prevents
  * from displaying transparent modal windows).
  *

@@ -217,6 +217,7 @@
     self.previousButton.hidden = NO;
     self.nextButton.hidden = NO;
     self.playButton.hidden = YES;
+    self.resumeButton.hidden = YES;
     self.pauseButton.hidden = NO;
     self.stopButton.hidden = NO;
     self.skipToSpecificButton.hidden = NO;
@@ -251,12 +252,17 @@
     self.previousButton.hidden = YES;
     self.nextButton.hidden = YES;
     self.playButton.hidden = NO;
+    self.pauseButton.hidden = YES;
+    self.resumeButton.hidden = YES;
     self.stopButton.hidden = YES;
     self.skipToSpecificButton.hidden = YES;
 }
 
 - (IBAction)skipToSpecificImage:(id)sender
 {
+    self.pauseButton.hidden = NO;
+    self.resumeButton.hidden = YES;
+    
     [self.slideshow skipToImageWithNameOrPath:@"img_coconut1.jpg"];
 }
 
