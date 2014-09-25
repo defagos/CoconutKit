@@ -153,12 +153,7 @@
     }
     
     SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    // Safe, methods return void
     [self performSelector:action withObject:actionSheet];
-#pragma clang diagnostic pop
 }
 
 #pragma mark UIWebViewDelegate protocol implementation

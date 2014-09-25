@@ -123,11 +123,13 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
     // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
+    return YES;
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
     // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
+    return YES;
 }
 
 #pragma mark UITableViewDataSource protocol implementation
