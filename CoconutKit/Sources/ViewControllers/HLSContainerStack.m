@@ -264,7 +264,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     NSUInteger i = [self.containerContents count] - firstRemovedIndex - 1;
     while (i > 0) {
         // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
-        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
         HLSContainerContent *containerContent = [self.containerContents objectAtIndex:firstRemovedIndex];
         [containerContent.viewController willMoveToParentViewController:nil];
         
@@ -350,7 +349,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // will get removed
     if (_behavior == HLSContainerStackBehaviorRemoving && [self.containerContents count] == self.capacity) {
         // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
-        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
         [[self rootViewController] willMoveToParentViewController:nil];
     }
     
@@ -369,10 +367,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
     // If no transition occurs (pre-loading before the container view is displayed, or insertion not at the top while
     // displayed), we must call -didMoveToParentViewController: manually right after the containment relationship has
-    // been established (iOS 5 and above, see UIViewController documentation)
+    // been established
     if (! [self.containerViewController isViewDisplayed]
             || (index == [self.containerContents count] - 1 && ! animated)) {
-        // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
         [viewController didMoveToParentViewController:self.containerViewController];
     }
     
@@ -454,7 +451,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
     
     // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
-    // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
     [containerContent.viewController willMoveToParentViewController:nil];
     
     if (containerContent.addedToContainerView) {
@@ -1103,13 +1099,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             }
             else {
                 // The view is only removed from the view hierarchy, so that blending can be made faster. The view is NOT unloaded
-                // (on iOS 4 and 5, it will only be unloaded if a memory warning is later received)
                 [containerContentAtCapacity removeViewFromContainerStackView];
             }
                         
             // iOS 5 and above only: -didMoveToParentViewController: must be called manually after the push transition has
             // been performed (iOS 5 and above, see UIViewController documentation)
-            // This method is always available, even on iOS 4 through method injection (see HLSContainerContent.m)
             [appearingViewController didMoveToParentViewController:self.containerViewController];
             
             // Notify the delegate

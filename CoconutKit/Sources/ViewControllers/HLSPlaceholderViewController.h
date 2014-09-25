@@ -73,15 +73,6 @@
  *     the source inset view controller belongs to
  * For further information, refer to the documentation of HLSPlaceholderInsetSegue.
  *
- * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
- *     -willMoveToParentViewController:
- *     -didMoveToParentViewController:
- * Implementations should call the super implementation first. Moreover, the following methods are also available
- * for child view controllers, even on iOS 4:
- *     -isMovingToParentViewController
- *     -isMovingFromParentViewController
- * Refer to the documentation of those methods for more information.
- *
  * About view controller's view reuse:
  * A view controller is retained when set as inset, and released when removed. If no other object keeps a strong reference 
  * to it, it will get deallocated, and so will its view. This is perfectly fine in general since it contributes to saving 

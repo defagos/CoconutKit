@@ -47,12 +47,6 @@
  * controller must happen through the HLSContainerContent interface to guarantee proper status tracking and to 
  * ensure that the view is created when it is really needed, not earlier.
  *
- * For convenience, the -[UIViewController isMovingTo/FromParentViewController] methods have also been made available 
- * on iOS 4, for CoconutKit containers only (not for UIKit ones). These methods simply follow the parent view controller
- * hierarchy until they find a view controller which is being moved to / from a CoconutKit container, in which case they 
- * return YES. If they reach the top of the view controller hierarchy without having found such a view controller, they 
- * return NO.
- *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the
  *    -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]

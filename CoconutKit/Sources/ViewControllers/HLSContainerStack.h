@@ -30,11 +30,10 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 
 /**
  * The HLSContainerStack provides a convenient and easy interface to implement your own view controller containers,
- * which is usually not a trivial task. Unlike the UIViewController containment API, this class is compatible with 
- * iOS 4 as well, and provides powerful features which let you implement custom containers correctly in a snap. The 
- * iOS 5 containment API, though powerful, namely still requires a lot of work to implement perfect containers. 
- * This is not the case with HLSContainerStack, which provides a robust way to implement the containers of your
- * dreams.
+ * which is usually not a trivial task. This class is provides powerful features which let you implement custom 
+ * containers correctly in a snap. The iOS 5 containment API, though powerful, namely still requires a lot of work 
+ * to implement perfect containers. This is not the case with HLSContainerStack, which provides a robust way to 
+ * implement the containers of your dreams.
  *
  * HLSContainerStack uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation methods
  * for view controllers you insert in it (they will be ignored, see UIViewController documentation). The 2-step rotation 
@@ -58,9 +57,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     Your custom containers usually just need to forward the events their users might be interested in through a
  *     dedicated delegate protocol
  *   - the methods -[UIViewController isMovingTo/FromParentViewController] return correct results, consistent
- *     with those returned when using standard built-in UIKit containers (these methods are available since iOS 5 
- *     only, but CoconutKit injects implementations as well so that you can use them with custom containers on
- *     iOS 4 as well)
+ *     with those returned when using standard built-in UIKit containers
  *   - a capacity can be provided so that children view controller's views deep enough are automatically removed
  *     from the view hierarchy and reinserted when needed. The reason is that having too many view non-opaque
  *     view controllers can lead to performance issues, especially during animations (due to layer blending).
@@ -110,16 +107,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * Remark: No methods have been provided for -viewDidLoad and -viewWill/DidUnload (call -releaseViews instead)
  *
- * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
- *     -willMoveToParentViewController:
- *     -didMoveToParentViewController:
- * Implementations should call the super implementation first. Moreover, the following methods are also available
- * for child view controllers, even on iOS 4:
- *     -isMovingToParentViewController
- *     -isMovingFromParentViewController
- * Refer to the documentation of those methods for more information.
- *
- * Even though the new iOS 5 containment API is promising, implementing your own view controllers using
+ * Even though the iOS 5 containment API is promising, implementing your own view controllers using
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
  * at HLSStackController.m and HLSPlaceholderViewController.m. Give it a try, you won't be disappointed!
  *

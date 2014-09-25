@@ -22,20 +22,12 @@
 static void *s_containerContentKey = &s_containerContentKey;
 
 // Original implementation of the methods we swizzle
-static id (*s_UIViewController__parentViewController_Imp)(id, SEL) = NULL;
 static BOOL (*s_UIViewController__isMovingToParentViewController_Imp)(id, SEL) = NULL;
 static BOOL (*s_UIViewController__isMovingFromParentViewController_Imp)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
 static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
-
-// Added method implementations
-static void iOS4_UIViewController__willMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController);
-static void iOS4_UIViewController__didMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController);
-static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
-static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
 
 @interface HLSContainerContent ()
 
@@ -50,21 +42,6 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 @property (nonatomic, assign, getter=isMovingFromParentViewController) BOOL movingFromParentViewController;
 
 @end
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-
-/**
- * Declarations to suppress warnings when compiling against the iOS SDK 5. Remove when CoconutKit support requires
- * at least SDK 6
- */
-@interface UIViewController (HLSContainerContentSDK5Compatibility)
-
-- (BOOL)shouldAutomaticallyForwardAppearanceMethods;
-- (BOOL)shouldAutomaticallyForwardRotationMethods;
-
-@end
-
-#endif
 
 @interface UIViewController (HLSContainerContent) <HLSAutorotationCompatibility>
 
@@ -452,62 +429,16 @@ static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewCo
 
 + (void)load
 {
-    // iOS 4: Private -addChildViewController: and -removeChildViewController: methods exist to define parent-child containment relationships, but
-    //        of course these cannot be used. This is sad since they make the public -parentViewController return the parent container of a view
-    //        controller (if any), providing correct propagation for several view controller properties (e.g. embedding in a navigation controller,
-    //        correct value for interfaceOrientation, correct container containment chain, etc.).
-    //
-    //        Note that the -addChildViewController: method has been made public in iOS 5, but that the -removeChildViewController: method has been
-    //        replaced with the new -removeFromParentViewController. To test whether we are running iOS 4, we therefore must test whether
-    //        -removeFromParentViewController exists
-    
-    // iOS 4: Swizzle parentViewController to return the custom container into which a view controller has been inserted (if any), and inject
-    //        implementations for isMovingTo/FromParentViewController and willMoveTo/FromParentViewController
-    if (! class_getInstanceMethod(self, @selector(removeFromParentViewController))) {
-        s_UIViewController__parentViewController_Imp = (id (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                  @selector(parentViewController),
-                                                                                                  (IMP)swizzled_UIViewController__parentViewController_Imp);
-        class_addMethod(self,
-                        @selector(willMoveToParentViewController:),
-                        (IMP)iOS4_UIViewController__willMoveToParentViewController_Imp,
-                        "v@:@");
-        class_addMethod(self,
-                        @selector(didMoveToParentViewController:),
-                        (IMP)iOS4_UIViewController__didMoveToParentViewController_Imp,
-                        "v@:@");
-        class_addMethod(self,
-                        @selector(isMovingToParentViewController),
-                        (IMP)iOS4_UIViewController__isMovingToParentViewController_Imp,
-                        "c@:");
-        class_addMethod(self,
-                        @selector(isMovingFromParentViewController),
-                        (IMP)iOS4_UIViewController__isMovingFromParentViewController_Imp,
-                        "c@:");
-    }
-    // iOS 5: Swizzle the new methods introduced by the containment API so that view controllers can get a correct information even
-    //        when inserted into a custom container
-    else {
-        s_UIViewController__isMovingToParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                              @selector(isMovingToParentViewController),
-                                                                                                              (IMP)swizzled_UIViewController__isMovingToParentViewController_Imp);
-        s_UIViewController__isMovingFromParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                                @selector(isMovingFromParentViewController),
-                                                                                                                (IMP)swizzled_UIViewController__isMovingFromParentViewController_Imp);
-    }
+    // Swizzle the methods introduced by the containment API so that view controllers can get a correct information even when inserted into a custom container
+    s_UIViewController__isMovingToParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                                          @selector(isMovingToParentViewController),
+                                                                                                          (IMP)swizzled_UIViewController__isMovingToParentViewController_Imp);
+    s_UIViewController__isMovingFromParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
+                                                                                                            @selector(isMovingFromParentViewController),
+                                                                                                            (IMP)swizzled_UIViewController__isMovingFromParentViewController_Imp);
 }
 
 @end
-
-static UIViewController *swizzled_UIViewController__parentViewController_Imp(UIViewController *self, SEL _cmd)
-{
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
-    if (containerContent) {
-        return containerContent.containerViewController;
-    }
-    else {
-        return (*s_UIViewController__parentViewController_Imp)(self, _cmd);
-    }
-}
 
 static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)
 {
@@ -529,40 +460,4 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     else {
         return (*s_UIViewController__isMovingFromParentViewController_Imp)(self, _cmd);
     }
-}
-
-static void iOS4_UIViewController__willMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController)
-{
-    // Empty implementation, so that subclasses of UIViewController can call [super willMoveToParentViewController:]
-}
-
-static void iOS4_UIViewController__didMoveToParentViewController_Imp(UIViewController *self, SEL _cmd, UIViewController *viewController)
-{
-    // Empty implementation, so that subclasses of UIViewController can call [super didMoveToParentViewController:]
-}
-
-static BOOL iOS4_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)
-{
-    UIViewController *currentViewController = self;
-    while (currentViewController) {
-        HLSContainerContent *containerContent = objc_getAssociatedObject(currentViewController, s_containerContentKey);
-        if (containerContent.movingToParentViewController) {
-            return YES;
-        }
-        currentViewController = currentViewController.parentViewController;
-    }
-    return NO;
-}
-
-static BOOL iOS4_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd)
-{
-    UIViewController *currentViewController = self;
-    while (currentViewController) {
-        HLSContainerContent *containerContent = objc_getAssociatedObject(currentViewController, s_containerContentKey);
-        if (containerContent.movingFromParentViewController) {
-            return YES;
-        }
-        currentViewController = currentViewController.parentViewController;
-    }
-    return NO;
 }

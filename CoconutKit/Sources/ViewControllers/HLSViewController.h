@@ -25,9 +25,6 @@
  *     locate MyView.nib, then MyViewController.nib), HLSViewController subclasses look for a nib bearing the same name
  *     as the class or one of its superclasses only (otherwise the view controller is assumed to be instantiated 
  *     programmatically). This promotes a consistent naming scheme between source and nib files
- *   - view controllers inheriting from HLSViewController MUST implement autorotation behavior using the new iOS 6 
- *     -shouldAutorotate and -supportedInterfaceOrientations methods, not the old -shouldAutorotateToInterfaceOrientation:
- *     method anymore. This way, no code has to be duplicated to implement autorotation behavior for iOS 4 / 5 and 6
  *   - the way how methods must be overridden is clean and consistent: The rule is now "Always call the super implementation 
  *     first" (if failing to do so, the behavior is undefined). This includes all view lifecycle methods, rotation methods,
  *     as well as -localize and -didReceiveMemoryWarning
@@ -84,24 +81,6 @@
  */
 - (void)localize NS_REQUIRES_SUPER;
 
-/**
- * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set whether the view controller should
- * autorotate or not
- *
- * Do not override -shouldAutorotateToInterfaceOrientation: when subclassing HLSViewController, otherwise the behavior 
- * is undefined
- */
-- (BOOL)shouldAutorotate NS_REQUIRES_SUPER;
-
-/**
- * On iOS 4 and 5 (as well of course on iOS 6), implement this method to set the orientations which a view
- * controller is compatible with
- *
- * Do not override -shouldAutorotateToInterfaceOrientation: when subclassing HLSViewController, otherwise the behavior
- * is undefined
- */
-- (NSUInteger)supportedInterfaceOrientations NS_REQUIRES_SUPER;
-
 @end
 
 @interface HLSViewController (HLSRequiresSuper)
@@ -118,5 +97,9 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration NS_REQUIRES_SUPER;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation NS_REQUIRES_SUPER;
 - (void)didReceiveMemoryWarning NS_REQUIRES_SUPER;
+- (void)willMoveToParentViewController:(UIViewController *)parent NS_REQUIRES_SUPER;
+- (void)didMoveToParentViewController:(UIViewController *)parent NS_REQUIRES_SUPER;
+- (BOOL)shouldAutorotate NS_REQUIRES_SUPER;
+- (NSUInteger)supportedInterfaceOrientations NS_REQUIRES_SUPER;
 
 @end

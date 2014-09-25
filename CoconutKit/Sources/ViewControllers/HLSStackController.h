@@ -58,15 +58,6 @@
  *     programmatically
  * For further information, refer to the documentation of HLSStackPushSegue.
  *
- * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
- *     -willMoveToParentViewController:
- *     -didMoveToParentViewController:
- * Implementations should call the super implementation first. Moreover, the following methods are also available
- * for child view controllers, even on iOS 4:
- *     -isMovingToParentViewController
- *     -isMovingFromParentViewController
- * Refer to the documentation of those methods for more information.
- *
  * Designated initializer: -initWithRootViewController:capacity:
  */
 @interface HLSStackController : HLSViewController <HLSContainerStackDelegate>

@@ -11,10 +11,6 @@
  *   - which view controllers decide whether rotation can occur or not
  *   - which view controllers receive rotation events (for children, this always occur from the topmost to the bottommost
  *     view controller, if they are involved)
- *
- * The default values are currently:
- *   - for iOS 4 and 5: HLSAutorotationModeContainerAndTopChildren
- *   - for iOS 6: HLSAutorotationModeContainer
  */
 typedef NS_ENUM(NSInteger, HLSAutorotationMode) {
     HLSAutorotationModeEnumBegin = 0,
@@ -28,19 +24,3 @@ typedef NS_ENUM(NSInteger, HLSAutorotationMode) {
     HLSAutorotationModeEnumEnd,
     HLSAutorotationModeEnumSize = HLSAutorotationModeEnumEnd - HLSAutorotationModeEnumBegin
 };
-
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-
-// Enum available starting with the iOS 6 SDK, here made available for previous SDK versions as well
-typedef NS_ENUM(NS_OPTIONS, UIInterfaceOrientationMask) {
-    UIInterfaceOrientationMaskPortrait = (1 << UIInterfaceOrientationPortrait),
-    UIInterfaceOrientationMaskLandscapeLeft = (1 << UIInterfaceOrientationLandscapeLeft),
-    UIInterfaceOrientationMaskLandscapeRight = (1 << UIInterfaceOrientationLandscapeRight),
-    UIInterfaceOrientationMaskPortraitUpsideDown = (1 << UIInterfaceOrientationPortraitUpsideDown),
-    UIInterfaceOrientationMaskLandscape = (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-    UIInterfaceOrientationMaskAll = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortraitUpsideDown),
-    UIInterfaceOrientationMaskAllButUpsideDown = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-} UIInterfaceOrientationMask;
-
-#endif
