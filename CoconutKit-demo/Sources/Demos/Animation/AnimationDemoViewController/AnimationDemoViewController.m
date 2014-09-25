@@ -12,31 +12,31 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @interface AnimationDemoViewController ()
 
-@property (nonatomic, retain) HLSAnimation *animation;
+@property (nonatomic, strong) HLSAnimation *animation;
 
-@property (nonatomic, retain) IBOutlet UIView *rectangleView1;
-@property (nonatomic, retain) IBOutlet UIView *rectangleView2;
-@property (nonatomic, retain) IBOutlet UIPickerView *animationPickerView;
-@property (nonatomic, retain) IBOutlet UIButton *playButton;
-@property (nonatomic, retain) IBOutlet UIButton *pauseButton;
-@property (nonatomic, retain) IBOutlet UIButton *cancelButton;
-@property (nonatomic, retain) IBOutlet UIButton *terminateButton;
-@property (nonatomic, retain) IBOutlet UIView *settingsView;
-@property (nonatomic, retain) IBOutlet UISwitch *reverseSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *lockingUISwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *loopingSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *animatedSwitch;
-@property (nonatomic, retain) IBOutlet UISlider *repeatCountSlider;
-@property (nonatomic, retain) IBOutlet UILabel *repeatCountLabel;
-@property (nonatomic, retain) IBOutlet UIView *animatedSettingsView;
-@property (nonatomic, retain) IBOutlet UISlider *durationSlider;
-@property (nonatomic, retain) IBOutlet UILabel *durationLabel;
-@property (nonatomic, retain) IBOutlet UIView *delayBackgroundView;
-@property (nonatomic, retain) IBOutlet UISlider *delaySlider;
-@property (nonatomic, retain) IBOutlet UILabel *delayLabel;
-@property (nonatomic, retain) IBOutlet UIView *startTimeBackgroundView;
-@property (nonatomic, retain) IBOutlet UISlider *startTimeSlider;
-@property (nonatomic, retain) IBOutlet UILabel *startTimeLabel;
+@property (nonatomic, weak) IBOutlet UIView *rectangleView1;
+@property (nonatomic, weak) IBOutlet UIView *rectangleView2;
+@property (nonatomic, weak) IBOutlet UIPickerView *animationPickerView;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (nonatomic, weak) IBOutlet UIButton *pauseButton;
+@property (nonatomic, weak) IBOutlet UIButton *cancelButton;
+@property (nonatomic, weak) IBOutlet UIButton *terminateButton;
+@property (nonatomic, weak) IBOutlet UIView *settingsView;
+@property (nonatomic, weak) IBOutlet UISwitch *reverseSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *lockingUISwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *loopingSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, weak) IBOutlet UISlider *repeatCountSlider;
+@property (nonatomic, weak) IBOutlet UILabel *repeatCountLabel;
+@property (nonatomic, weak) IBOutlet UIView *animatedSettingsView;
+@property (nonatomic, weak) IBOutlet UISlider *durationSlider;
+@property (nonatomic, weak) IBOutlet UILabel *durationLabel;
+@property (nonatomic, weak) IBOutlet UIView *delayBackgroundView;
+@property (nonatomic, weak) IBOutlet UISlider *delaySlider;
+@property (nonatomic, weak) IBOutlet UILabel *delayLabel;
+@property (nonatomic, weak) IBOutlet UIView *startTimeBackgroundView;
+@property (nonatomic, weak) IBOutlet UISlider *startTimeSlider;
+@property (nonatomic, weak) IBOutlet UILabel *startTimeLabel;
 
 @end
 

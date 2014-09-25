@@ -10,59 +10,59 @@
 
 @interface LayerPropertiesTestViewController ()
 
-@property (nonatomic, retain) IBOutlet UIView *rectangleView;
-@property (nonatomic, retain) IBOutlet UIView *topSubview;
-@property (nonatomic, retain) IBOutlet UIView *bottomSubview;
+@property (nonatomic, weak) IBOutlet UIView *rectangleView;
+@property (nonatomic, weak) IBOutlet UIView *topSubview;
+@property (nonatomic, weak) IBOutlet UIView *bottomSubview;
 
-@property (nonatomic, retain) IBOutlet UISlider *transformTxSlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformTxLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformTySlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformTyLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformTzSlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformTzLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformRxSlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformRxLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformRySlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformRyLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformRzSlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformRzLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformSxSlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformSxLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformSySlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformSyLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transformSzSlider;
-@property (nonatomic, retain) IBOutlet UILabel *transformSzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformTxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformTxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformTySlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformTyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformTzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformTzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformRxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformRxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformRySlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformRyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformRzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformRzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformSxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformSxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformSySlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformSyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformSzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformSzLabel;
 
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformTxSlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformTxLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformTySlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformTyLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformTzSlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformTzLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformRxSlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformRxLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformRySlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformRyLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformRzSlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformRzLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformSxSlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformSxLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformSySlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformSyLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformSzSlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformSzLabel;
-@property (nonatomic, retain) IBOutlet UISlider *sublayerTransformSkewSlider;
-@property (nonatomic, retain) IBOutlet UILabel *sublayerTransformSkewLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformTxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformTxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformTySlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformTyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformTzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformTzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformRxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformRxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformRySlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformRyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformRzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformRzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSySlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSkewSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSkewLabel;
 
-@property (nonatomic, retain) IBOutlet UISlider *anchorPointXSlider;
-@property (nonatomic, retain) IBOutlet UILabel *anchorPointXLabel;
-@property (nonatomic, retain) IBOutlet UISlider *anchorPointYSlider;
-@property (nonatomic, retain) IBOutlet UILabel *anchorPointYLabel;
-@property (nonatomic, retain) IBOutlet UISlider *anchorPointZSlider;
-@property (nonatomic, retain) IBOutlet UILabel *anchorPointZLabel;
+@property (nonatomic, weak) IBOutlet UISlider *anchorPointXSlider;
+@property (nonatomic, weak) IBOutlet UILabel *anchorPointXLabel;
+@property (nonatomic, weak) IBOutlet UISlider *anchorPointYSlider;
+@property (nonatomic, weak) IBOutlet UILabel *anchorPointYLabel;
+@property (nonatomic, weak) IBOutlet UISlider *anchorPointZSlider;
+@property (nonatomic, weak) IBOutlet UILabel *anchorPointZLabel;
 
-@property (nonatomic, retain) IBOutlet UISlider *viewSublayerTransformSkewSlider;
-@property (nonatomic, retain) IBOutlet UILabel *viewSublayerTransformSkewLabel;
+@property (nonatomic, weak) IBOutlet UISlider *viewSublayerTransformSkewSlider;
+@property (nonatomic, weak) IBOutlet UILabel *viewSublayerTransformSkewLabel;
 
 @end
 

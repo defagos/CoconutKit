@@ -10,22 +10,22 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */; };
+		6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */; };
 		6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE08163EED9F00420A5F /* RootSplitViewDemoController.m */; };
 		6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */; };
-		6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; };
+		6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */; };
 		6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */; };
-		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
-		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
-		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
+		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F22C75216A93DD20081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75116A93DD20081A9A7 /* CoreText.framework */; };
 		6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75716A9420D0081A9A7 /* Beon-Regular.otf */; };
-		6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */; };
+		6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C76016A942970081A9A7 /* DynamicLocalizationDemoViewController.xib */; };
-		6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */; };
+		6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */; };
 		6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
 		6F2B302F1929BD78003D4C2C /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46A714C5C36300824AB2 /* ProximaNova-Bold.otf */; };
@@ -113,41 +113,45 @@
 		6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
-		6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
+		6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
-		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
+		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
 		6F63E7BA17CF6BA1006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B917CF6BA1006322D9 /* QuickLook.framework */; };
 		6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
-		6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; };
+		6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
-		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
+		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
+		6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
+		6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
+		6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83319D448D90010A128 /* DemosListViewController.xib */; };
+		6F96C83519D448D90010A128 /* DemosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83319D448D90010A128 /* DemosListViewController.xib */; };
 		6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
-		6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
+		6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
-		6F9C465814C5C30C00824AB2 /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B014C5C30B00824AB2 /* HeavyViewController.m */; };
+		6F9C465814C5C30C00824AB2 /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B014C5C30B00824AB2 /* HeavyViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C465914C5C30C00824AB2 /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B114C5C30B00824AB2 /* HeavyViewController.xib */; };
-		6F9C465A14C5C30C00824AB2 /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B414C5C30B00824AB2 /* LandscapeOnlyViewController.m */; };
+		6F9C465A14C5C30C00824AB2 /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B414C5C30B00824AB2 /* LandscapeOnlyViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C465B14C5C30C00824AB2 /* LandscapeOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B514C5C30B00824AB2 /* LandscapeOnlyViewController.xib */; };
-		6F9C465C14C5C30C00824AB2 /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B814C5C30B00824AB2 /* LifeCycleTestViewController.m */; };
+		6F9C465C14C5C30C00824AB2 /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B814C5C30B00824AB2 /* LifeCycleTestViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C465D14C5C30C00824AB2 /* LifeCycleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B914C5C30B00824AB2 /* LifeCycleTestViewController.xib */; };
-		6F9C465E14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45BC14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.m */; };
+		6F9C465E14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45BC14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C465F14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45BD14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.xib */; };
-		6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; };
+		6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C466614C5C30C00824AB2 /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */; };
-		6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; };
+		6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
-		6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
+		6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
+		6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
 		6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
 		6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
-		6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
+		6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */; };
 		6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
@@ -158,26 +162,26 @@
 		6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460314C5C30B00824AB2 /* HeaderView.m */; };
 		6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460414C5C30B00824AB2 /* HeaderView.xib */; };
 		6F9C468614C5C30C00824AB2 /* ProgrammaticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460614C5C30B00824AB2 /* ProgrammaticTableViewCell.m */; };
-		6F9C468714C5C30C00824AB2 /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460814C5C30B00824AB2 /* TableViewCellsDemoViewController.m */; };
+		6F9C468714C5C30C00824AB2 /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460814C5C30B00824AB2 /* TableViewCellsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C468814C5C30C00824AB2 /* XibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460A14C5C30B00824AB2 /* XibTableViewCell.m */; };
 		6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C460B14C5C30B00824AB2 /* XibTableViewCell.xib */; };
-		6F9C468D14C5C30C00824AB2 /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461314C5C30B00824AB2 /* WebViewDemoViewController.m */; };
+		6F9C468D14C5C30C00824AB2 /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461314C5C30B00824AB2 /* WebViewDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C468E14C5C30C00824AB2 /* WebViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461414C5C30B00824AB2 /* WebViewDemoViewController.xib */; };
-		6F9C468F14C5C30C00824AB2 /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461814C5C30B00824AB2 /* PlaceholderDemoViewController.m */; };
+		6F9C468F14C5C30C00824AB2 /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461814C5C30B00824AB2 /* PlaceholderDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C469014C5C30C00824AB2 /* PlaceholderDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461914C5C30B00824AB2 /* PlaceholderDemoViewController.xib */; };
-		6F9C469114C5C30C00824AB2 /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461C14C5C30B00824AB2 /* RootStackDemoViewController.m */; };
+		6F9C469114C5C30C00824AB2 /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461C14C5C30B00824AB2 /* RootStackDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C469214C5C30C00824AB2 /* RootStackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C461D14C5C30B00824AB2 /* RootStackDemoViewController.xib */; };
-		6F9C469314C5C30C00824AB2 /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462014C5C30B00824AB2 /* StackDemoViewController.m */; };
+		6F9C469314C5C30C00824AB2 /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462014C5C30B00824AB2 /* StackDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C469414C5C30C00824AB2 /* StackDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462114C5C30B00824AB2 /* StackDemoViewController.xib */; };
 		6F9C469514C5C30C00824AB2 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462414C5C30B00824AB2 /* DeviceInfo.m */; };
-		6F9C469614C5C30C00824AB2 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462614C5C30B00824AB2 /* TableSearchDisplayDemoViewController.m */; };
+		6F9C469614C5C30C00824AB2 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462614C5C30B00824AB2 /* TableSearchDisplayDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C469714C5C30C00824AB2 /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462714C5C30B00824AB2 /* TableSearchDisplayDemoViewController.xib */; };
-		6F9C469814C5C30C00824AB2 /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462A14C5C30B00824AB2 /* WizardAddressPageViewController.m */; };
+		6F9C469814C5C30C00824AB2 /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462A14C5C30B00824AB2 /* WizardAddressPageViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C469914C5C30C00824AB2 /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */; };
-		6F9C469A14C5C30C00824AB2 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */; };
-		6F9C469C14C5C30C00824AB2 /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */; };
+		6F9C469A14C5C30C00824AB2 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F9C469C14C5C30C00824AB2 /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C469D14C5C30C00824AB2 /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C463114C5C30B00824AB2 /* WizardIdentityPageViewController.xib */; };
-		6F9C469E14C5C30C00824AB2 /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463414C5C30B00824AB2 /* DemosListViewController.m */; };
+		6F9C469E14C5C30C00824AB2 /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463414C5C30B00824AB2 /* DemosListViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F9C469F14C5C30C00824AB2 /* DemoErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463714C5C30B00824AB2 /* DemoErrors.m */; };
 		6F9C46A014C5C30C00824AB2 /* _PersonInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463B14C5C30B00824AB2 /* _PersonInformation.m */; };
 		6F9C46A114C5C30C00824AB2 /* PersonInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463D14C5C30B00824AB2 /* PersonInformation.m */; };
@@ -202,76 +206,76 @@
 		6FB007E1195304360082D915 /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007E0195304360082D915 /* HLSGeometryTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
-		6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
+		6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4F15F0DA4D0061D807 /* LayerPropertiesTestViewController.xib */; };
-		6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CF615EFDAC600C0CC74 /* AnimationDemoViewController.m */; };
+		6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CF615EFDAC600C0CC74 /* AnimationDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */; };
 		6FC378FD182D188900B55AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FC182D188900B55AF1 /* main.m */; };
 		6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */; };
-		6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; };
-		6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */; };
-		6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; };
-		6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
+		6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
 		6FCB4E871926651F00047AD3 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6FCB4E881926651F00047AD3 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
-		6FCB4E891926651F00047AD3 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
-		6FCB4E8A1926651F00047AD3 /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B014C5C30B00824AB2 /* HeavyViewController.m */; };
-		6FCB4E8B1926651F00047AD3 /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B414C5C30B00824AB2 /* LandscapeOnlyViewController.m */; };
-		6FCB4E8C1926651F00047AD3 /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B814C5C30B00824AB2 /* LifeCycleTestViewController.m */; };
-		6FCB4E8D1926651F00047AD3 /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45BC14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.m */; };
-		6FCB4E8E1926651F00047AD3 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; };
-		6FCB4E8F1926651F00047AD3 /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; };
-		6FCB4E901926651F00047AD3 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
-		6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
+		6FCB4E891926651F00047AD3 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E8A1926651F00047AD3 /* HeavyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B014C5C30B00824AB2 /* HeavyViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E8B1926651F00047AD3 /* LandscapeOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B414C5C30B00824AB2 /* LandscapeOnlyViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E8C1926651F00047AD3 /* LifeCycleTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45B814C5C30B00824AB2 /* LifeCycleTestViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E8D1926651F00047AD3 /* MemoryWarningTestCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45BC14C5C30B00824AB2 /* MemoryWarningTestCoverViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E8E1926651F00047AD3 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E8F1926651F00047AD3 /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E901926651F00047AD3 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
 		6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
 		6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
-		6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
+		6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */; };
 		6FCB4E991926651F00047AD3 /* CursorSelectedFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45F314C5C30B00824AB2 /* CursorSelectedFolderView.m */; };
 		6FCB4E9B1926651F00047AD3 /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460014C5C30B00824AB2 /* FooterView.m */; };
 		6FCB4E9C1926651F00047AD3 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460314C5C30B00824AB2 /* HeaderView.m */; };
 		6FCB4E9D1926651F00047AD3 /* ProgrammaticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460614C5C30B00824AB2 /* ProgrammaticTableViewCell.m */; };
-		6FCB4E9E1926651F00047AD3 /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460814C5C30B00824AB2 /* TableViewCellsDemoViewController.m */; };
+		6FCB4E9E1926651F00047AD3 /* TableViewCellsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460814C5C30B00824AB2 /* TableViewCellsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4E9F1926651F00047AD3 /* XibTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C460A14C5C30B00824AB2 /* XibTableViewCell.m */; };
-		6FCB4EA01926651F00047AD3 /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461314C5C30B00824AB2 /* WebViewDemoViewController.m */; };
-		6FCB4EA11926651F00047AD3 /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461814C5C30B00824AB2 /* PlaceholderDemoViewController.m */; };
-		6FCB4EA21926651F00047AD3 /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461C14C5C30B00824AB2 /* RootStackDemoViewController.m */; };
-		6FCB4EA31926651F00047AD3 /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462014C5C30B00824AB2 /* StackDemoViewController.m */; };
+		6FCB4EA01926651F00047AD3 /* WebViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461314C5C30B00824AB2 /* WebViewDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EA11926651F00047AD3 /* PlaceholderDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461814C5C30B00824AB2 /* PlaceholderDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EA21926651F00047AD3 /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461C14C5C30B00824AB2 /* RootStackDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EA31926651F00047AD3 /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462014C5C30B00824AB2 /* StackDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EA41926651F00047AD3 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462414C5C30B00824AB2 /* DeviceInfo.m */; };
-		6FCB4EA51926651F00047AD3 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462614C5C30B00824AB2 /* TableSearchDisplayDemoViewController.m */; };
-		6FCB4EA61926651F00047AD3 /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462A14C5C30B00824AB2 /* WizardAddressPageViewController.m */; };
-		6FCB4EA71926651F00047AD3 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */; };
-		6FCB4EA81926651F00047AD3 /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */; };
-		6FCB4EA91926651F00047AD3 /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463414C5C30B00824AB2 /* DemosListViewController.m */; };
+		6FCB4EA51926651F00047AD3 /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462614C5C30B00824AB2 /* TableSearchDisplayDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EA61926651F00047AD3 /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462A14C5C30B00824AB2 /* WizardAddressPageViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EA71926651F00047AD3 /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EA81926651F00047AD3 /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EA91926651F00047AD3 /* DemosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463414C5C30B00824AB2 /* DemosListViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EAA1926651F00047AD3 /* DemoErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463714C5C30B00824AB2 /* DemoErrors.m */; };
 		6FCB4EAB1926651F00047AD3 /* _PersonInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463B14C5C30B00824AB2 /* _PersonInformation.m */; };
 		6FCB4EAC1926651F00047AD3 /* PersonInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463D14C5C30B00824AB2 /* PersonInformation.m */; };
 		6FCB4EAD1926651F00047AD3 /* CoconutKitDemoData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C46A414C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld */; };
-		6FCB4EAE1926651F00047AD3 /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
-		6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
-		6FCB4EB01926651F00047AD3 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
-		6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; };
-		6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */; };
-		6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; };
-		6FCB4EB51926651F00047AD3 /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
-		6FCB4EB61926651F00047AD3 /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
-		6FCB4EB71926651F00047AD3 /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
+		6FCB4EAE1926651F00047AD3 /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EB01926651F00047AD3 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A5159E0422001A290E /* SegueStackOtherDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EB51926651F00047AD3 /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EB61926651F00047AD3 /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EB71926651F00047AD3 /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EB91926651F00047AD3 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */; };
-		6FCB4EBA1926651F00047AD3 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
-		6FCB4EBB1926651F00047AD3 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CF615EFDAC600C0CC74 /* AnimationDemoViewController.m */; };
-		6FCB4EBC1926651F00047AD3 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
-		6FCB4EBD1926651F00047AD3 /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */; };
+		6FCB4EBA1926651F00047AD3 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EBB1926651F00047AD3 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CF615EFDAC600C0CC74 /* AnimationDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EBC1926651F00047AD3 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EBD1926651F00047AD3 /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EBE1926651F00047AD3 /* RootSplitViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE08163EED9F00420A5F /* RootSplitViewDemoController.m */; };
-		6FCB4EBF1926651F00047AD3 /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; };
-		6FCB4EC01926651F00047AD3 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */; };
-		6FCB4EC11926651F00047AD3 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */; };
-		6FCB4EC21926651F00047AD3 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; };
+		6FCB4EBF1926651F00047AD3 /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EC01926651F00047AD3 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EC11926651F00047AD3 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCB4EC21926651F00047AD3 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6FCB4EC41926651F00047AD3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6FCB4EC51926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
+		6FCB4EC51926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FCB4EC71926651F00047AD3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FC182D188900B55AF1 /* main.m */; };
 		6FCB4ECB1926651F00047AD3 /* FixedSizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45AD14C5C30B00824AB2 /* FixedSizeViewController.xib */; };
 		6FCB4ECC1926651F00047AD3 /* HeavyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45B114C5C30B00824AB2 /* HeavyViewController.xib */; };
@@ -347,7 +351,7 @@
 		6FCB4F2D192667EE00047AD3 /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCB4F281926657B00047AD3 /* libCoconutKit.a */; };
 		6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB4F2F19266DE200047AD3 /* CoconutKit-resources.bundle */; };
 		6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
-		6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
+		6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
@@ -561,6 +565,8 @@
 		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
+		6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellsDemoViewController.xib; sourceTree = "<group>"; };
+		6F96C83319D448D90010A128 /* DemosListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemosListViewController.xib; sourceTree = "<group>"; };
 		6F9C459414C5C30B00824AB2 /* CoconutKit_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoAppDelegate.h; sourceTree = "<group>"; };
 		6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_demoAppDelegate.m; sourceTree = "<group>"; };
 		6F9C459814C5C30B00824AB2 /* CoconutKit_demoApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoApplication.h; sourceTree = "<group>"; };
@@ -1352,6 +1358,7 @@
 				6F9C460914C5C30B00824AB2 /* XibTableViewCell.h */,
 				6F9C460A14C5C30B00824AB2 /* XibTableViewCell.m */,
 				6F9C460B14C5C30B00824AB2 /* XibTableViewCell.xib */,
+				6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1445,6 +1452,7 @@
 			children = (
 				6F9C463314C5C30B00824AB2 /* DemosListViewController.h */,
 				6F9C463414C5C30B00824AB2 /* DemosListViewController.m */,
+				6F96C83319D448D90010A128 /* DemosListViewController.xib */,
 			);
 			path = DemosNavigator;
 			sourceTree = "<group>";
@@ -1784,6 +1792,7 @@
 				6F9C465F14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.xib in Resources */,
 				6F9C466614C5C30C00824AB2 /* PortraitOnlyViewController.xib in Resources */,
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
+				6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
@@ -1805,6 +1814,7 @@
 				6F9C46BB14C5C36300824AB2 /* sample_text.html in Resources */,
 				6F9C46BC14C5C36300824AB2 /* bkgr_bar.png in Resources */,
 				6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */,
+				6F96C83519D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6F9C46BD14C5C36300824AB2 /* cell_bkgr_brown_large.png in Resources */,
 				6F9C46BE14C5C36300824AB2 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6F9C46C014C5C36300824AB2 /* icn_bookmark.png in Resources */,
@@ -1922,6 +1932,7 @@
 				6FCB4EF11926651F00047AD3 /* img_coconut3.jpg in Resources */,
 				6FCB4EF21926651F00047AD3 /* img_coconut4.jpg in Resources */,
 				6FCB4EF31926651F00047AD3 /* parallax_demo_grass_layer.png in Resources */,
+				6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6FCB4EF41926651F00047AD3 /* parallax_demo_sky_layer.png in Resources */,
 				6FCB4EF51926651F00047AD3 /* parallax_demo_trees_layer.png in Resources */,
 				6FCB4EF61926651F00047AD3 /* parallax_demo_mountains_layer.png in Resources */,
@@ -1939,6 +1950,7 @@
 				6FCB4F041926651F00047AD3 /* LayerPropertiesTestViewController.xib in Resources */,
 				6FCB4F051926651F00047AD3 /* RootNavigationDemoViewController.xib in Resources */,
 				6FCB4F061926651F00047AD3 /* RootSplitViewDemoController.xib in Resources */,
+				6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
 				6FCB4F071926651F00047AD3 /* RootTabBarDemoViewController.xib in Resources */,
 				6FCB4F081926651F00047AD3 /* Beon-Regular.otf in Resources */,
 				6FCB4F091926651F00047AD3 /* DynamicLocalizationDemoViewController.xib in Resources */,

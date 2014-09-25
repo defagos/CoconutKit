@@ -13,20 +13,20 @@ static NSArray *s_fontNames = nil;
 
 @interface LabelDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet HLSLabel *label;
-@property (nonatomic, retain) IBOutlet UILabel *standardLabel;
-@property (nonatomic, retain) IBOutlet UIPickerView *textPickerView;
-@property (nonatomic, retain) IBOutlet UIPickerView *fontPickerView;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *baselineAdjustmentSegmentedControl;
-@property (nonatomic, retain) IBOutlet UISlider *numberOfLinesSlider;
-@property (nonatomic, retain) IBOutlet UILabel *numberOfLinesLabel;
-@property (nonatomic, retain) IBOutlet UISlider *fontSizeSlider;
-@property (nonatomic, retain) IBOutlet UILabel *fontSizeLabel;
-@property (nonatomic, retain) IBOutlet UISwitch *adjustsFontSizeToFitWidthSwitch;
-@property (nonatomic, retain) IBOutlet UISlider *minFontSizeSlider;
-@property (nonatomic, retain) IBOutlet UILabel *minFontSizeLabel;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *verticalAlignmentSegmentedControl;
-@property (nonatomic, retain) IBOutlet UIPickerView *lineBreakModePickerView;
+@property (nonatomic, weak) IBOutlet HLSLabel *label;
+@property (nonatomic, weak) IBOutlet UILabel *standardLabel;
+@property (nonatomic, weak) IBOutlet UIPickerView *textPickerView;
+@property (nonatomic, weak) IBOutlet UIPickerView *fontPickerView;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *baselineAdjustmentSegmentedControl;
+@property (nonatomic, weak) IBOutlet UISlider *numberOfLinesSlider;
+@property (nonatomic, weak) IBOutlet UILabel *numberOfLinesLabel;
+@property (nonatomic, weak) IBOutlet UISlider *fontSizeSlider;
+@property (nonatomic, weak) IBOutlet UILabel *fontSizeLabel;
+@property (nonatomic, weak) IBOutlet UISwitch *adjustsFontSizeToFitWidthSwitch;
+@property (nonatomic, weak) IBOutlet UISlider *minFontSizeSlider;
+@property (nonatomic, weak) IBOutlet UILabel *minFontSizeLabel;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *verticalAlignmentSegmentedControl;
+@property (nonatomic, weak) IBOutlet UIPickerView *lineBreakModePickerView;
 
 @end
 
@@ -40,13 +40,13 @@ static NSArray *s_fontNames = nil;
         return;
     }
     
-    s_textExamples = [[NSArray arrayWithObjects:@"Lorem ipsum",
-                       @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
-                       @"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                       @"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz",
-                       @"--------- -- --------- -------",
-                       @"", 
-                       @"......... ... ......... .... .", nil] retain];
+    s_textExamples = [NSArray arrayWithObjects:@"Lorem ipsum",
+                      @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+                      @"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                      @"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz",
+                      @"--------- -- --------- -------",
+                      @"",
+                      @"......... ... ......... .... .", nil];
     
     NSMutableArray *fontNames = [NSMutableArray array];
     NSArray *familyNames = [[UIFont familyNames] sortedArrayUsingSelector:@selector(localizedCompare:)];
@@ -54,7 +54,7 @@ static NSArray *s_fontNames = nil;
         NSArray *familyFontNames = [[UIFont fontNamesForFamilyName:familyName] sortedArrayUsingSelector:@selector(localizedCompare:)];
         [fontNames addObjectsFromArray:familyFontNames];
     }
-    s_fontNames = [[NSArray arrayWithArray:fontNames] retain];
+    s_fontNames = [NSArray arrayWithArray:fontNames];
 }
 
 #pragma mark View lifecycle

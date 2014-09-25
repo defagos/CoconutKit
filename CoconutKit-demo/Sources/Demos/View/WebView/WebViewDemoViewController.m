@@ -10,8 +10,8 @@
 
 @interface WebViewDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UISwitch *scrollEnabledSwitch;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UISwitch *scrollEnabledSwitch;
 
 @end
 

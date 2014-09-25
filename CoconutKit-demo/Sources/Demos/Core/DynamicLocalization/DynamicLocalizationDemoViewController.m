@@ -10,10 +10,10 @@
 
 @interface DynamicLocalizationDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UILabel *coloredLabel;   // No outlet would be needed for localization purposes only, but
+@property (nonatomic, weak) IBOutlet UILabel *coloredLabel;     // No outlet would be needed for localization purposes only, but
                                                                 // here we want to test background color changes
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UISwitch *missingLocalizationVisibilitySwitch;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UISwitch *missingLocalizationVisibilitySwitch;
 
 @end
 

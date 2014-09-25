@@ -10,20 +10,20 @@
 
 @interface ParallaxScrollingDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UITextView *textView;
-@property (nonatomic, retain) IBOutlet UIScrollView *skyScrapperScrollView;
-@property (nonatomic, retain) IBOutlet UIImageView *skyScrapperImageView;
+@property (nonatomic, weak) IBOutlet UITextView *textView;
+@property (nonatomic, weak) IBOutlet UIScrollView *skyScrapperScrollView;
+@property (nonatomic, weak) IBOutlet UIImageView *skyScrapperImageView;
 
-@property (nonatomic, retain) IBOutlet UIScrollView *skyScrollView;
-@property (nonatomic, retain) IBOutlet UIScrollView *mountainsScrollView;
-@property (nonatomic, retain) IBOutlet UIScrollView *grassScrollView;
-@property (nonatomic, retain) IBOutlet UIScrollView *treesScrollView;
-@property (nonatomic, retain) IBOutlet UIImageView *skyImageView;
-@property (nonatomic, retain) IBOutlet UIImageView *mountainsImageView;
-@property (nonatomic, retain) IBOutlet UIImageView *grassImageView;
-@property (nonatomic, retain) IBOutlet UIImageView *treesImageView;
+@property (nonatomic, weak) IBOutlet UIScrollView *skyScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *mountainsScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *grassScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *treesScrollView;
+@property (nonatomic, weak) IBOutlet UIImageView *skyImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *mountainsImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *grassImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *treesImageView;
 
-@property (nonatomic, retain) IBOutlet UISwitch *bouncesSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *bouncesSwitch;
 
 @end
 

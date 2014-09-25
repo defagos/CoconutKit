@@ -12,20 +12,20 @@
 
 @interface WizardIdentityPageViewController ()
 
-@property (nonatomic, retain) PersonInformation *personInformation;
-@property (nonatomic, retain) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) PersonInformation *personInformation;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
-@property (nonatomic, retain) IBOutlet UITextField *firstNameTextField;
-@property (nonatomic, retain) IBOutlet UILabel *firstNameErrorLabel;
-@property (nonatomic, retain) IBOutlet UITextField *lastNameTextField;
-@property (nonatomic, retain) IBOutlet UILabel *lastNameErrorLabel;
-@property (nonatomic, retain) IBOutlet UITextField *emailTextField;
-@property (nonatomic, retain) IBOutlet UILabel *emailErrorLabel;
-@property (nonatomic, retain) IBOutlet UILabel *birthdateLabel;
-@property (nonatomic, retain) IBOutlet UITextField *birthdateTextField;
-@property (nonatomic, retain) IBOutlet UILabel *birthdateErrorLabel;
-@property (nonatomic, retain) IBOutlet UITextField *nbrChildrenTextField;
-@property (nonatomic, retain) IBOutlet UILabel *nbrChildrenErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
+@property (nonatomic, weak) IBOutlet UILabel *firstNameErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
+@property (nonatomic, weak) IBOutlet UILabel *lastNameErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic, weak) IBOutlet UILabel *emailErrorLabel;
+@property (nonatomic, weak) IBOutlet UILabel *birthdateLabel;
+@property (nonatomic, weak) IBOutlet UITextField *birthdateTextField;
+@property (nonatomic, weak) IBOutlet UILabel *birthdateErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *nbrChildrenTextField;
+@property (nonatomic, weak) IBOutlet UILabel *nbrChildrenErrorLabel;
 
 @end
 
@@ -46,14 +46,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.personInformation = nil;
-    self.dateFormatter = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark Accessors and mutators
 
 - (void)setPersonInformation:(PersonInformation *)personInformation
@@ -62,8 +54,7 @@
         return;
     }
     
-    [_personInformation release];
-    _personInformation = [personInformation retain];
+    _personInformation = personInformation;
     
     [self reloadData];
 }
@@ -93,7 +84,7 @@
     
     // The date formatter is also localized!
     // TODO: Does not work yet. Try to switch languages!
-    self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // Trigger a new validation to get localized error messages if any

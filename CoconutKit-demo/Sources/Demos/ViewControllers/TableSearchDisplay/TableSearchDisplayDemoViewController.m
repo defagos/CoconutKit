@@ -23,8 +23,8 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 
 @interface TableSearchDisplayDemoViewController ()
 
-@property (nonatomic, retain) NSArray *devices;
-@property (nonatomic, retain) NSArray *filteredDevices;
+@property (nonatomic, strong) NSArray *devices;
+@property (nonatomic, strong) NSArray *filteredDevices;
 
 @end
 
@@ -70,13 +70,6 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
         self.devices = [NSArray arrayWithArray:devices];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.devices = nil;
-    self.filteredDevices = nil;
-    [super dealloc];
 }
 
 #pragma mark UISearchDisplayDelegate protocol implementation
@@ -158,7 +151,7 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
     
     // Push another dummy level
     if (self.navigationController) {
-        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        StretchableViewController *stretchableViewController = [[StretchableViewController alloc] init];
         [self.navigationController pushViewController:stretchableViewController animated:YES];        
     }
 }

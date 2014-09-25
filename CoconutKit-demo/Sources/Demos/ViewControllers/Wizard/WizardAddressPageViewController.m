@@ -12,16 +12,16 @@
 
 @interface WizardAddressPageViewController ()
 
-@property (nonatomic, retain) PersonInformation *personInformation;
+@property (nonatomic, strong) PersonInformation *personInformation;
 
-@property (nonatomic, retain) IBOutlet UITextField *streetTextField;
-@property (nonatomic, retain) IBOutlet UILabel *streetErrorLabel;
-@property (nonatomic, retain) IBOutlet UITextField *cityTextField;
-@property (nonatomic, retain) IBOutlet UILabel *cityErrorLabel;
-@property (nonatomic, retain) IBOutlet UITextField *stateTextField;
-@property (nonatomic, retain) IBOutlet UILabel *stateErrorLabel;
-@property (nonatomic, retain) IBOutlet UITextField *countryTextField;
-@property (nonatomic, retain) IBOutlet UILabel *countryErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *streetTextField;
+@property (nonatomic, weak) IBOutlet UILabel *streetErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *cityTextField;
+@property (nonatomic, weak) IBOutlet UILabel *cityErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *stateTextField;
+@property (nonatomic, weak) IBOutlet UILabel *stateErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *countryTextField;
+@property (nonatomic, weak) IBOutlet UILabel *countryErrorLabel;
 
 @end
 
@@ -38,13 +38,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.personInformation = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark Accessors and mutators
 
 - (void)setPersonInformation:(PersonInformation *)personInformation
@@ -53,8 +46,7 @@
         return;
     }
     
-    [_personInformation release];
-    _personInformation = [personInformation retain];
+    _personInformation = personInformation;
     
     [self reloadData];
 }

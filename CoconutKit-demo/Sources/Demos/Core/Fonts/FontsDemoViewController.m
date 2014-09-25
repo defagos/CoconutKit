@@ -10,8 +10,8 @@
 
 @interface FontsDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UILabel *label;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UILabel *label;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @end
 

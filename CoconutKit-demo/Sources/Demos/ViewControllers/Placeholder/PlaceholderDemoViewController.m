@@ -27,13 +27,13 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 
 @interface PlaceholderDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UIButton *heavyButton;
-@property (nonatomic, retain) IBOutlet UIPickerView *transitionPickerView;
-@property (nonatomic, retain) IBOutlet UISwitch *inTabBarControllerSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *inNavigationControllerSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *leftPlaceholderSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *rightPlaceholderSwitch;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+@property (nonatomic, weak) IBOutlet UIButton *heavyButton;
+@property (nonatomic, weak) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, weak) IBOutlet UISwitch *inTabBarControllerSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *inNavigationControllerSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *leftPlaceholderSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *rightPlaceholderSwitch;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
 @property (nonatomic, retain) HeavyViewController *leftHeavyViewController;
 @property (nonatomic, retain) HeavyViewController *rightHeavyViewController;
@@ -48,32 +48,21 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 {
     if ((self = [super init])) {
         // To be able to test modal presentation contexts, we here make the placeholder view controller display those modal view controllers
-        // with the UIModalPresentationCurrentContext presentation style. The definesPresentationContext property is only available
-        // since iOS 5
-        if ([self respondsToSelector:@selector(setDefinesPresentationContext:)]) {
-            self.definesPresentationContext = YES;
-        }
+        // with the UIModalPresentationCurrentContext presentation style.        if ([self respondsToSelector:@selector(setDefinesPresentationContext:)]) {
+        self.definesPresentationContext = YES;
         
         // Preload view controllers before display. Yep, this is possible (not all placeholders have to be preloaded)!
-        LifeCycleTestViewController *lifeCycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        LifeCycleTestViewController *lifeCycleTestViewController = [[LifeCycleTestViewController alloc] init];
         [self setInsetViewController:lifeCycleTestViewController atIndex:0];
         
         // We can even assign a transition animation. Since the view controller has been preloaded, it won't be played,
         // but it will later be used if we set the inset to nil
-        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        ContainmentTestViewController *containmentTestViewController = [[ContainmentTestViewController alloc] init];
         [self setInsetViewController:containmentTestViewController atIndex:1 withTransitionClass:[HLSTransitionCoverFromBottom class]];
         
         self.delegate = self;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.leftHeavyViewController = nil;
-    self.rightHeavyViewController = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark View lifecycle
@@ -127,12 +116,12 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     UIViewController *insetViewController = viewController;
     if (insetViewController) {
         if (self.inNavigationControllerSwitch.on) {
-            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:insetViewController] autorelease];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:insetViewController];
             navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             insetViewController = navigationController;
         }
         if (self.inTabBarControllerSwitch.on) {
-            UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+            UITabBarController *tabBarController = [[UITabBarController alloc] init];
             tabBarController.viewControllers = [NSArray arrayWithObject:insetViewController];
             insetViewController = tabBarController;
         }    
@@ -145,11 +134,11 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
         [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
     }
     @catch (NSException *exception) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                             message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
-                                                            delegate:nil
-                                                   cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                                   otherButtonTitles:nil] autorelease];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
+                                                            message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                                  otherButtonTitles:nil];
         [alertView show];
     }
 }
@@ -227,11 +216,11 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     }
     
     if (self.leftPlaceholderSwitch.on) {
-        LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        LifeCycleTestViewController *lifecycleTestViewController = [[LifeCycleTestViewController alloc] init];
         [self displayInsetViewController:lifecycleTestViewController atIndex:0];
     }
     if (self.rightPlaceholderSwitch.on) {
-        LifeCycleTestViewController *lifecycleTestViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        LifeCycleTestViewController *lifecycleTestViewController = [[LifeCycleTestViewController alloc] init];
         [self displayInsetViewController:lifecycleTestViewController atIndex:1];
     }
 }
@@ -244,11 +233,11 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     }
     
     if (self.leftPlaceholderSwitch.on) {
-        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        ContainmentTestViewController *containmentTestViewController = [[ContainmentTestViewController alloc] init];
         [self displayInsetViewController:containmentTestViewController atIndex:0];
     }
     if (self.rightPlaceholderSwitch.on) {
-        ContainmentTestViewController *containmentTestViewController = [[[ContainmentTestViewController alloc] init] autorelease];
+        ContainmentTestViewController *containmentTestViewController = [[ContainmentTestViewController alloc] init];
         [self displayInsetViewController:containmentTestViewController atIndex:1];
     }    
 }
@@ -261,11 +250,11 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     }
     
     if (self.leftPlaceholderSwitch.on) {
-        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        StretchableViewController *stretchableViewController = [[StretchableViewController alloc] init];
         [self displayInsetViewController:stretchableViewController atIndex:0];
     }
     if (self.rightPlaceholderSwitch.on) {
-        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        StretchableViewController *stretchableViewController = [[StretchableViewController alloc] init];
         [self displayInsetViewController:stretchableViewController atIndex:1];
     }
 }
@@ -278,11 +267,11 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     }
     
     if (self.leftPlaceholderSwitch.on) {
-        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        FixedSizeViewController *fixedSizeViewController = [[FixedSizeViewController alloc] init];
         [self displayInsetViewController:fixedSizeViewController atIndex:0];
     }
     if (self.rightPlaceholderSwitch.on) {
-        FixedSizeViewController *fixedSizeViewController = [[[FixedSizeViewController alloc] init] autorelease];
+        FixedSizeViewController *fixedSizeViewController = [[FixedSizeViewController alloc] init];
         [self displayInsetViewController:fixedSizeViewController atIndex:1];
     }
 }
@@ -299,13 +288,13 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     // that caching view controller's views is made possible by HLSPlaceholderViewController if needed
     if (self.leftPlaceholderSwitch.on) {
         if (! self.leftHeavyViewController) {
-            self.leftHeavyViewController = [[[HeavyViewController alloc] init] autorelease];
+            self.leftHeavyViewController = [[HeavyViewController alloc] init];
         }
         [self displayInsetViewController:self.leftHeavyViewController atIndex:0];
     }
     if (self.rightPlaceholderSwitch.on) {
         if (! self.rightHeavyViewController) {
-            self.rightHeavyViewController = [[[HeavyViewController alloc] init] autorelease];
+            self.rightHeavyViewController = [[HeavyViewController alloc] init];
         }
         [self displayInsetViewController:self.rightHeavyViewController atIndex:1];
     }
@@ -319,11 +308,11 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     }
     
     if (self.leftPlaceholderSwitch.on) {
-        PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
+        PortraitOnlyViewController *portraitOnlyViewController = [[PortraitOnlyViewController alloc] init];
         [self displayInsetViewController:portraitOnlyViewController atIndex:0];
     }
     if (self.rightPlaceholderSwitch.on) {
-        PortraitOnlyViewController *portraitOnlyViewController = [[[PortraitOnlyViewController alloc] init] autorelease];
+        PortraitOnlyViewController *portraitOnlyViewController = [[PortraitOnlyViewController alloc] init];
         [self displayInsetViewController:portraitOnlyViewController atIndex:1];
     }
 }
@@ -336,11 +325,11 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     }
     
     if (self.leftPlaceholderSwitch.on) {
-        LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
+        LandscapeOnlyViewController *landscapeOnlyViewController = [[LandscapeOnlyViewController alloc] init];
         [self displayInsetViewController:landscapeOnlyViewController atIndex:0];
     }
     if (self.rightPlaceholderSwitch.on) {
-        LandscapeOnlyViewController *landscapeOnlyViewController = [[[LandscapeOnlyViewController alloc] init] autorelease];
+        LandscapeOnlyViewController *landscapeOnlyViewController = [[LandscapeOnlyViewController alloc] init];
         [self displayInsetViewController:landscapeOnlyViewController atIndex:1];
     }
 }
@@ -362,7 +351,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 
 - (IBAction)hideWithModal:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[MemoryWarningTestCoverViewController alloc] init];
     [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
@@ -391,17 +380,17 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 
 - (IBAction)testResponderChain:(id)sender
 {
-    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
-                                                         message:nil
-                                                        delegate:nil
-                                               cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                               otherButtonTitles:nil] autorelease];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
+                                              otherButtonTitles:nil];
     [alertView show];
 }
 
 - (IBAction)navigateForwardNonAnimated:(id)sender
 {
-    PlaceholderDemoViewController *placeholderDemoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
+    PlaceholderDemoViewController *placeholderDemoViewController = [[PlaceholderDemoViewController alloc] init];
     [self.navigationController pushViewController:placeholderDemoViewController animated:NO];
 }
 

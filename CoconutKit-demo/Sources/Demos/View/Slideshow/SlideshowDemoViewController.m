@@ -10,22 +10,22 @@
 
 @interface SlideshowDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet HLSSlideshow *slideshow;
-@property (nonatomic, retain) IBOutlet UIPickerView *effectPickerView;
-@property (nonatomic, retain) IBOutlet UILabel *currentImageNameLabel;
-@property (nonatomic, retain) IBOutlet UIButton *previousButton;
-@property (nonatomic, retain) IBOutlet UIButton *nextButton;
-@property (nonatomic, retain) IBOutlet UIButton *playButton;
-@property (nonatomic, retain) IBOutlet UIButton *pauseButton;
-@property (nonatomic, retain) IBOutlet UIButton *resumeButton;
-@property (nonatomic, retain) IBOutlet UIButton *stopButton;
-@property (nonatomic, retain) IBOutlet UIButton *skipToSpecificButton;
-@property (nonatomic, retain) IBOutlet UISwitch *randomSwitch;
-@property (nonatomic, retain) IBOutlet UIButton *imageSetButton;
-@property (nonatomic, retain) IBOutlet UISlider *imageDurationSlider;
-@property (nonatomic, retain) IBOutlet UILabel *imageDurationLabel;
-@property (nonatomic, retain) IBOutlet UISlider *transitionDurationSlider;
-@property (nonatomic, retain) IBOutlet UILabel *transitionDurationLabel;
+@property (nonatomic, weak) IBOutlet HLSSlideshow *slideshow;
+@property (nonatomic, weak) IBOutlet UIPickerView *effectPickerView;
+@property (nonatomic, weak) IBOutlet UILabel *currentImageNameLabel;
+@property (nonatomic, weak) IBOutlet UIButton *previousButton;
+@property (nonatomic, weak) IBOutlet UIButton *nextButton;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (nonatomic, weak) IBOutlet UIButton *pauseButton;
+@property (nonatomic, weak) IBOutlet UIButton *resumeButton;
+@property (nonatomic, weak) IBOutlet UIButton *stopButton;
+@property (nonatomic, weak) IBOutlet UIButton *skipToSpecificButton;
+@property (nonatomic, weak) IBOutlet UISwitch *randomSwitch;
+@property (nonatomic, weak) IBOutlet UIButton *imageSetButton;
+@property (nonatomic, weak) IBOutlet UISlider *imageDurationSlider;
+@property (nonatomic, weak) IBOutlet UILabel *imageDurationLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transitionDurationSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transitionDurationLabel;
 
 @end
 

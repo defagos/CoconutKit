@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
 
 @interface TableViewCellsDemoViewController ()
 
-@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
@@ -52,20 +52,15 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
 
 #pragma mark View lifecycle
 
-- (void)loadView
-{
-    self.tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain] autorelease];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.view = self.tableView;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.tableView.sectionHeaderHeight = [HeaderView height];
     self.tableView.sectionFooterHeight = [FooterView height];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
