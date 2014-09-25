@@ -49,9 +49,7 @@
  *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the -[UIViewController shouldAutomaticallyForwardRotationMethods] and 
- * -[UIViewController shouldAutomaticallyForwardAppearanceMethods] methods return NO. These deprecated method
- * -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers] should not be used
- * anymore
+ * -[UIViewController shouldAutomaticallyForwardAppearanceMethods] methods return NO
  * 
  * Designated initializer: -initWithViewController:containerViewController:transitionClass:duration:
  */
@@ -81,12 +79,12 @@
  * -[HLSContainerContent viewIfLoaded] accessor to access a view which you created this way (and which does not
  * instantiate the view lazily).
  */
-@property (nonatomic, readonly, retain) UIViewController *viewController;
+@property (nonatomic, readonly, strong) UIViewController *viewController;
 
 /**
  * The container into which a view controller has been inserted
  */
-@property (nonatomic, readonly, assign) UIViewController *containerViewController;
+@property (nonatomic, readonly, weak) UIViewController *containerViewController;
 
 /**
  * The transition properties to be applied when the view controller's view gets displayed
@@ -105,15 +103,15 @@
  *
  * If the view has already been added to a stack view, this method does nothing
  */
-- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView;
+- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView;
 
 /**
- * Valid values for index range from 0 to [stackView.contentViews count] (this last value being equivalent to
+ * Valid values for index range from 0 to [containerStackView.contentViews count] (this last value being equivalent to
  * calling -addAsSubviewIntoContainerStackView:)
  *
  * If the view has already been added to a stack view or if the index is invalid, this method does nothing
  */
-- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index;
+- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView atIndex:(NSUInteger)index;
 
 /**
  * Return the view controller's view if it has been loaded, nil otherwise. This does not perform lazy view 

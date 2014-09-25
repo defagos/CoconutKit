@@ -13,7 +13,7 @@
 
 @interface HLSContainerStackView ()
 
-@property (nonatomic, retain) NSMutableArray *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
+@property (nonatomic, strong) NSMutableArray *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
 
 @end
 
@@ -29,14 +29,6 @@
         self.autoresizingMask = HLSViewAutoresizingAll;
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.groupViews = nil;
-    self.delegate = nil;
-
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -82,7 +74,7 @@
     if (index == [self.groupViews count]) {
         HLSContainerGroupView *topGroupView = [self.groupViews lastObject];
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView] autorelease];
+        HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = topGroupView;
         
         [self.groupViews addObject:newGroupView];
@@ -93,7 +85,7 @@
         HLSContainerGroupView *groupViewAtIndex = [self.groupViews objectAtIndex:index];
         HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView] autorelease];
+        HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = belowGroupViewAtIndex;
         groupViewAtIndex.backContentView = newGroupView;
         

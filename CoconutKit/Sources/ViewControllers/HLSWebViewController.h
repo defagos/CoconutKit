@@ -23,6 +23,6 @@
 /**
  * The initial request
  */
-@property (nonatomic, readonly, retain) NSURLRequest *request;
+@property (nonatomic, readonly, strong) NSURLRequest *request;
 
 @end

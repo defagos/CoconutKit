@@ -15,9 +15,9 @@
 /**
  * We often need to manage a stack of view controllers. Usually, we use a navigation controller, but there is no way
  * to easily use other transition animations as the built-in ones. Sometimes, we also want to show view controllers
- * modally, but often the usual -presentViewController:animated:completion: method of UIViewController is too limited (modal
- * sheets on the iPad have pre-defined sizes, and when displaying full screen the view below disappears, which prevents
- * from displaying transparent modal windows).
+ * modally, but often the usual -presentViewController:animated:completion: method of UIViewController is too limited. Modal
+ * sheets on the iPad have namely pre-defined sizes, and when displaying full screen the view below disappears, which prevents
+ * from displaying transparent modal windows (transparent modals are available since iOS 8, though).
  *
  * To circumvent those problems, HLSStackController provides a generic way to deal with a view controller stack, whose
  * root view is fixed and set once at creation time. It can be applied a richer set of transition animations, even
@@ -42,7 +42,7 @@
  * to minimize blending calculations. Usually, the default value should fulfill most needs, but if you require more transparency 
  * levels you can increase this value. Standard capacity values are provided at the beginning of the HLSContainerStack.h file.
  *
- * You can also use stack controllers with storyboards (a feature available since iOS 5):
+ * You can also use stack controllers with storyboards:
  *   - drop a view controller onto the storyboard, and set its class to HLSStackController. You can customize the
  *     view controller capacity by setting an NSNumber user-defined runtime attribute called 'capacity'
  *   - drop another view controller onto the storyboard, and set it as root view controller of the stack by
@@ -94,7 +94,7 @@
 /**
  * The stack controller delegate
  */
-@property (nonatomic, assign) id<HLSStackControllerDelegate> delegate;
+@property (nonatomic, weak) id<HLSStackControllerDelegate> delegate;
 
 /**
  * Return the view controller at the bottom
@@ -310,6 +310,6 @@
 /**
  * Return the stack controller the view controller is inserted in, or nil if none.
  */
-@property (nonatomic, readonly, assign) HLSStackController *stackController;
+@property (nonatomic, readonly, weak) HLSStackController *stackController;
 
 @end

@@ -52,13 +52,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     _wizardTransitionStyle = HLSWizardTransitionStyleNone;
 }
 
-- (void)dealloc
-{
-    self.viewControllers = nil;
-    self.delegate = nil;
-    [super dealloc];
-}
-
 #pragma mark View lifecycle management
 
 - (void)viewDidLoad
@@ -84,14 +77,11 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(viewControllers, UIViewController);
     
-    // Check for self-assignment
     if (_viewControllers == viewControllers) {
         return;
     }
     
-    // Update the value
-    [_viewControllers release];
-    _viewControllers = [viewControllers retain];
+    _viewControllers = viewControllers;
     
     // Start with the first page
     if ([_viewControllers count] > 0) {
@@ -101,7 +91,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 - (void)setCurrentPage:(NSInteger)currentPage
 {
-    // If no change, nothing to do
     if (currentPage == _currentPage) {
         return;
     }

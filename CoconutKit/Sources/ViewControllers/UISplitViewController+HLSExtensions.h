@@ -13,8 +13,7 @@
 /**
  * Set how a split view controller decides whether it must rotate or not
  *
- * HLSAutorotationModeContainer: The original UIKit behavior is used (the child view controllers decide on iOS 4 and 5,
- *                               none on iOS 6)
+ * HLSAutorotationModeContainer: The original UIKit behavior is used
  * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
  *                                            related events
  * HLSAutorotationModeContainerAndTopChildren

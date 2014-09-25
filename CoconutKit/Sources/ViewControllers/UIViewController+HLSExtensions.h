@@ -17,8 +17,6 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
     HLSViewControllerLifeCyclePhaseViewDidAppear,
     HLSViewControllerLifeCyclePhaseViewWillDisappear,
     HLSViewControllerLifeCyclePhaseViewDidDisappear,
-    HLSViewControllerLifeCyclePhaseViewWillUnload,
-    HLSViewControllerLifeCyclePhaseViewDidUnload,
     HLSViewControllerLifeCyclePhaseEnumEnd,
     HLSViewControllerLifeCyclePhaseEnumSize = HLSViewControllerLifeCyclePhaseEnumEnd - HLSViewControllerLifeCyclePhaseEnumBegin
 };
@@ -32,7 +30,7 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
  * -------
  * As written in the UIKit documentation (though slightly scattered all around), view controller's view frame dimensions
  * are only known when -viewWillAppear: gets called, not earlier (this means you should avoid making calculations
- * depending on it in the viewDidLoad method; the frame is the one you got from the xib, not necessarily the one which
+ * depending on it in the -viewDidLoad method; the frame is the one you got from the xib, not necessarily the one which
  * will be used after status, navigation bar, etc. have been added, or after some container controller updates the
  * view controller's frame for display).
  *
@@ -73,12 +71,6 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
  * Return YES iff the current view controller lifecycle can be transitioned to the one received as parameter
  */
 - (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase;
-
-/**
- * Return YES iff the receiver implements the new iOS 6 rotation methods -shouldAutorotate and -supportedInterfaceOrientations
- * (also possible for iOS 4 when using CoconutKit)
- */
-- (BOOL)implementsNewAutorotationMethods;
 
 /**
  * Return YES iff the receiver can autorotate to at least one of the supplied orientations

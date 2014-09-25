@@ -24,8 +24,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @interface HLSContainerStack () <HLSContainerStackViewDelegate>
 
-@property (nonatomic, assign) UIViewController *containerViewController;                // The container view controller implemented using HLSContainerStack
-@property (nonatomic, retain) NSMutableArray *containerContents;                        // The contents loaded into the stack. The first element corresponds to the root view controller
+@property (nonatomic, weak) UIViewController *containerViewController;                  // The container view controller implemented using HLSContainerStack
+@property (nonatomic, strong) NSMutableArray *containerContents;                        // The contents loaded into the stack. The first element corresponds to the root view controller
 @property (nonatomic, assign) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
 
 @end
@@ -43,9 +43,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 + (id)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController
 {
-    return [[[[self class] alloc] initWithContainerViewController:containerViewController
-                                                         behavior:HLSContainerStackBehaviorRemoving
-                                                         capacity:HLSContainerStackMinimalCapacity] autorelease];
+    return [[[self class] alloc] initWithContainerViewController:containerViewController
+                                                        behavior:HLSContainerStackBehaviorRemoving
+                                                        capacity:HLSContainerStackMinimalCapacity];
 }
 
 #pragma mark Object creation and destruction
@@ -57,7 +57,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if ((self = [super init])) {
         if (! containerViewController) {
             HLSLoggerError(@"Missing container view controller");
-            [self release];
             return nil;
         }
                 
@@ -78,16 +77,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)dealloc
 {
-    self.containerViewController = nil;
-    
     for (HLSContainerContent *containerContent in self.containerContents) {
         [containerContent.viewController willMoveToParentViewController:nil];
     }
-    self.containerContents = nil;
-    self.containerView = nil;
-    self.delegate = nil;
-
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -113,13 +105,12 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         containerView.clipsToBounds = YES;
         
         // Create the container base view maintaining the whole container view hiearchy
-        HLSContainerStackView *containerStackView = [[[HLSContainerStackView alloc] initWithFrame:containerView.bounds] autorelease];
+        HLSContainerStackView *containerStackView = [[HLSContainerStackView alloc] initWithFrame:containerView.bounds];
         containerStackView.delegate = self;
         [containerView addSubview:containerStackView];
     }
     
-    [_containerView release];
-    _containerView = [containerView retain];
+    _containerView = containerView;
 }
 
 - (HLSContainerStackView *)containerStackView
@@ -353,10 +344,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     }
     
     // Associate the new view controller with its container (this increases [container count])
-    HLSContainerContent *containerContent = [[[HLSContainerContent alloc] initWithViewController:viewController
-                                                                         containerViewController:self.containerViewController
-                                                                                 transitionClass:transitionClass
-                                                                                        duration:duration] autorelease];
+    HLSContainerContent *containerContent = [[HLSContainerContent alloc] initWithViewController:viewController
+                                                                        containerViewController:self.containerViewController
+                                                                                transitionClass:transitionClass
+                                                                                       duration:duration];
     if (! containerContent) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"The view controller to insert is incompatible with the container it is inserted into"
@@ -1079,7 +1070,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
         
         // Keep the disappearing view controller alive a little bit longer
-        UIViewController *disappearingViewController = [disappearingContainerContent.viewController retain];
+        UIViewController *disappearingViewController = disappearingContainerContent.viewController;
         UIViewController *appearingViewController = appearingContainerContent.viewController;
         
         if ([animation.tag isEqualToString:@"push_animation"]) {
@@ -1117,8 +1108,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                      animated:animated];
             }
         }
-    
-        [disappearingViewController release];
     }
     // Insertions: Ensure that view controllers are removed according to the container capacity (if this behavior has been set)
     else if (_behavior == HLSContainerStackBehaviorRemoving) {

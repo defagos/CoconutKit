@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F0F4DDB159CB75400277267 /* HLSPlaceholderInsetSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0F4DD9159CB75400277267 /* HLSPlaceholderInsetSegue.h */; };
-		6F0F4DDC159CB75400277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */; };
+		6F0F4DDC159CB75400277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F10E388179FFE2B00BFEF42 /* HLSViewTouchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F10E386179FFE2B00BFEF42 /* HLSViewTouchDetector.h */; };
 		6F10E389179FFE2B00BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E387179FFE2B00BFEF42 /* HLSViewTouchDetector.m */; };
 		6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */; };
@@ -42,12 +42,12 @@
 		6F47EC561924EEEE00C5F6AC /* SearchFieldIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4D1924EEEE00C5F6AC /* SearchFieldIcon.png */; };
 		6F47EC571924EEEE00C5F6AC /* SearchFieldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4E1924EEEE00C5F6AC /* SearchFieldIcon@2x.png */; };
 		6F6010EB15AB1E2B00A9FEC5 /* HLSContainerStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */; };
-		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; };
+		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F63E7B617CF6B80006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B517CF6B80006322D9 /* QuickLook.framework */; };
 		6F63E7C617CF6E19006322D9 /* HLSPreviewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */; };
 		6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */; };
-		6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; };
+		6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F6C7550162DC0290094B090 /* UINavigationController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */; };
 		6F6C7551162DC0290094B090 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C754F162DC0290094B090 /* UINavigationController+HLSExtensions.m */; };
 		6F6C7555162DC0550094B090 /* UITabBarController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C7553162DC0550094B090 /* UITabBarController+HLSExtensions.h */; };
@@ -64,13 +64,13 @@
 		6F8366061588CC690044E572 /* HLSVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8366041588CC690044E572 /* HLSVector.h */; };
 		6F8366071588CC690044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366051588CC690044E572 /* HLSVector.m */; };
 		6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */; };
-		6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */; };
+		6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F89148A15790D21009FCC78 /* HLSLabel.h */; };
 		6F89148D15790D21009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89148B15790D21009FCC78 /* HLSLabel.m */; };
 		6F8C933B15CEE623006D892C /* HLSContainerGroupView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8C933915CEE623006D892C /* HLSContainerGroupView.h */; };
-		6F8C933C15CEE623006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C933A15CEE623006D892C /* HLSContainerGroupView.m */; };
+		6F8C933C15CEE623006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C933A15CEE623006D892C /* HLSContainerGroupView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F8C934815CEF0DB006D892C /* HLSContainerStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8C934615CEF0DB006D892C /* HLSContainerStackView.h */; };
-		6F8C934915CEF0DB006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */; };
+		6F8C934915CEF0DB006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
 		6F954F6517CF4707001E5F67 /* HLSLogger+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F954F6317CF4707001E5F67 /* HLSLogger+Friend.h */; };
@@ -186,19 +186,19 @@
 		6FADE60514BA0494007EE121 /* UIView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58314BA0494007EE121 /* UIView+HLSExtensions.h */; };
 		6FADE60614BA0494007EE121 /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58414BA0494007EE121 /* UIView+HLSExtensions.m */; };
 		6FADE60714BA0494007EE121 /* HLSContainerContent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58714BA0494007EE121 /* HLSContainerContent.h */; };
-		6FADE60814BA0494007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58814BA0494007EE121 /* HLSContainerContent.m */; };
+		6FADE60814BA0494007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58814BA0494007EE121 /* HLSContainerContent.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE60914BA0494007EE121 /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58914BA0494007EE121 /* HLSPlaceholderViewController.h */; };
-		6FADE60A14BA0494007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */; };
+		6FADE60A14BA0494007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE60B14BA0494007EE121 /* HLSStackController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58B14BA0494007EE121 /* HLSStackController.h */; };
-		6FADE60C14BA0494007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58C14BA0494007EE121 /* HLSStackController.m */; };
+		6FADE60C14BA0494007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58C14BA0494007EE121 /* HLSStackController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE60F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */; };
-		6FADE61014BA0494007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; };
+		6FADE61014BA0494007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE61314BA0494007EE121 /* HLSViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59314BA0494007EE121 /* HLSViewController.h */; };
-		6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59414BA0494007EE121 /* HLSViewController.m */; };
+		6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59414BA0494007EE121 /* HLSViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE61514BA0494007EE121 /* HLSWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59514BA0494007EE121 /* HLSWebViewController.h */; };
-		6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59614BA0494007EE121 /* HLSWebViewController.m */; };
+		6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59614BA0494007EE121 /* HLSWebViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE61714BA0494007EE121 /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59714BA0494007EE121 /* HLSWizardViewController.h */; };
-		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
+		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FB007DD1952D09B0082D915 /* HLSGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB007DB1952D09B0082D915 /* HLSGeometry.h */; };
@@ -213,7 +213,7 @@
 		6FC3790C182D2C2300B55AF1 /* UIApplication+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC3790A182D2C2200B55AF1 /* UIApplication+HLSExtensions.h */; };
 		6FC3790D182D2C2300B55AF1 /* UIApplication+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3790B182D2C2200B55AF1 /* UIApplication+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FC40C581641D02A00398242 /* UISplitViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */; };
-		6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; };
+		6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FC5B7751924EDC500660CDF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */; };
 		6FC5B7B51924EE4E00660CDF /* HLSLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A21924EE4E00660CDF /* HLSLoggerViewController.xib */; };
 		6FC5B7B61924EE4E00660CDF /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A31924EE4E00660CDF /* HLSWebViewController.xib */; };

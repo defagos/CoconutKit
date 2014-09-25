@@ -16,7 +16,7 @@
 
 @interface HLSPlaceholderViewController ()
 
-@property (nonatomic, retain) NSMutableArray *containerStacks;
+@property (nonatomic, strong) NSMutableArray *containerStacks;
 
 @end
 
@@ -66,14 +66,6 @@
     }
 }
 
-- (void)dealloc
-{
-    self.containerStacks = nil;
-    self.delegate = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark Accessors and mutators
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
@@ -104,12 +96,6 @@
 }
 
 #pragma mark View lifecycle
-
-// Deprecated since iOS 6
-- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
-{
-    return NO;
-}
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
 {

@@ -30,11 +30,11 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 @interface HLSContainerContent ()
 
-@property (nonatomic, retain) UIViewController *viewController;                 // The embedded view controller
-@property (nonatomic, assign) UIViewController *containerViewController;        // The container it is inserted into (weak ref)
+@property (nonatomic, strong) UIViewController *viewController;                 // The embedded view controller
+@property (nonatomic, weak) UIViewController *containerViewController;          // The container it is inserted into
 @property (nonatomic, assign) Class transitionClass;                            // The transition animation class used when inserting the view controller
 @property (nonatomic, assign) NSTimeInterval duration;                          // The transition animation duration
-@property (nonatomic, assign) HLSContainerStackView *containerStackView;        // The container stack view into which the view controller's view is inserted (weak ref)
+@property (nonatomic, weak) HLSContainerStackView *containerStackView;          // The container stack view into which the view controller's view is inserted
 @property (nonatomic, assign) CGRect originalViewFrame;                         // The view controller's view frame prior to insertion
 @property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;      // The view controller's view autoresizing mask prior to insertion
 @property (nonatomic, assign, getter=isMovingToParentViewController) BOOL movingToParentViewController;
@@ -79,13 +79,11 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     if ((self = [super init])) {
         if (! viewController) {
             HLSLoggerError(@"A view controller is mandatory");
-            [self release];
             return nil;
         }
         
         if (! containerViewController) {
             HLSLoggerError(@"A container view controller must be provided");
-            [self release];
             return nil;
         }
         
@@ -94,16 +92,13 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
             transitionClass = [HLSTransition class];
         }
         
-        // Cannot be mixed with iOS 5 & 6 containment API (but fully iOS 5 & 6 compatible)
-        if (([containerViewController respondsToSelector:@selector(automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers)]
-                    && [containerViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers])
-                || ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardAppearanceMethods)]
-                    && [containerViewController shouldAutomaticallyForwardAppearanceMethods])
-                || ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardRotationMethods)]
-                    && [containerViewController shouldAutomaticallyForwardRotationMethods])) {
+        // Cannot be mixed with the containment API automatic event management
+        if (([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardAppearanceMethods)]
+             && [containerViewController shouldAutomaticallyForwardAppearanceMethods])
+            || ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardRotationMethods)]
+                && [containerViewController shouldAutomaticallyForwardRotationMethods])) {
             HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which view lifecycle and rotation event automatic "
-                           "forwarding has been explicitly disabled (iOS 5 and 6)");
-            [self release];
+                           "forwarding has been explicitly disabled");
             return nil;
         }
         
@@ -119,29 +114,21 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
         // Associate the view controller with its container content object        
         if (objc_getAssociatedObject(viewController, s_containerContentKey)) {
             HLSLoggerError(@"A view controller can only be associated with one container");
-            [self release];
             return nil;
         }
         objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
         
-        // >= iOS 5: For containers having automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
-        // return NO, we MUST use the UIViewController containment API to declare each view controller we insert
-        // into it as child. 
+        // We MUST use the UIViewController containment API to declare each view controller we insert into it as child.
         //
         // If we don't, problems arise when the container is the root view controller of an application or is presented 
-        // modally. In such cases, view controller nesting is not detected, which yields to automatic viewWillAppear: 
-        // and viewDidAppear: event forwarding to ALL view controllers loaded into the container when the container 
+        // modally. In such cases, view controller nesting is not detected, which yields to automatic -viewWillAppear:
+        // and -viewDidAppear: event forwarding to ALL view controllers loaded into the container when the container
         // appears (i.e. when the application gets displayed or when the modal view appears). This leads to two
         // undesired effects:
-        //   - non-top view controllers get viewWillAppear: and viewDidAppear: events
+        //   - non-top view controllers get -viewWillAppear: and -viewDidAppear: events
         //   - the top view controller gets each of these events twice (once from UIKit internals, and once
         //     through manual forwarding by the container implementation)
-        //
-        // Remark: Cannot test -addChildViewController: existence since it existed as a private method before iOS 5.
-        //         Test -removeFromParentViewController existence instead
-        if ([containerViewController respondsToSelector:@selector(removeFromParentViewController)]) {
-            [containerViewController addChildViewController:viewController];
-        }
+        [containerViewController addChildViewController:viewController];
                 
         self.viewController = viewController;
         self.containerViewController = containerViewController;
@@ -161,23 +148,15 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 - (void)dealloc
 {
-    // Remove the view from the stack (this does NOT set viewController.view to nil to avoid view caching)
+    // Remove the view from the stack (this does NOT set viewController.view to nil to allow view caching)
     [self removeViewFromContainerStackView];
         
     // Remove the association of the view controller with its content container object
     NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
     objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
-        
-    // iOS 5 only: See comment in initWithViewController:containerViewController:transitionStyle:duration:. We need to -callRemoveFromParentViewController:
-    //             so that the view controller reference count is correctly decreased
-    if ([self.viewController respondsToSelector:@selector(removeFromParentViewController)]) {
-        [self.viewController removeFromParentViewController];
-    }
     
-    self.viewController = nil;
-    self.containerViewController = nil;
-    
-    [super dealloc];
+    // We must remove the parent - child relationship, see comment in -initWithViewController:containerViewController:transitionStyle:duration:
+    [self.viewController removeFromParentViewController];
 }
 
 #pragma mark Accessors and mutators
@@ -206,15 +185,15 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 #pragma mark View management
 
-- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView
+- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView
 {
-    [self insertAsSubviewIntoContainerStackView:stackView atIndex:[stackView.contentViews count]];
+    [self insertAsSubviewIntoContainerStackView:containerStackView atIndex:[containerStackView.contentViews count]];
 }
 
-- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index
+- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView atIndex:(NSUInteger)index
 {
-    if (index > [stackView.contentViews count]) {
-        HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[stackView.contentViews count]);
+    if (index > [containerStackView.contentViews count]) {
+        HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[containerStackView.contentViews count]);
         return;
     }
     
@@ -236,7 +215,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     // internally)
     if ([self.viewController isKindOfClass:[UINavigationController class]] 
             || [self.viewController isKindOfClass:[UITabBarController class]]) {
-        viewControllerView.frame = stackView.bounds;
+        viewControllerView.frame = containerStackView.bounds;
     }
     
     // Ugly fix for UITabBarController only: After a memory warning has caused the tab bar controller to unload its current
@@ -277,11 +256,11 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     viewControllerView.autoresizingMask = HLSViewAutoresizingAll;
     
     // Match the inserted view frame so that it fills the container bounds
-    viewControllerView.frame = stackView.bounds;
+    viewControllerView.frame = containerStackView.bounds;
         
-    [stackView insertContentView:viewControllerView atIndex:index];
+    [containerStackView insertContentView:viewControllerView atIndex:index];
     
-    self.containerStackView = stackView;
+    self.containerStackView = containerStackView;
 }
 
 - (void)removeViewFromContainerStackView
@@ -292,7 +271,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     
     // Remove the view controller's view
     [self.containerStackView removeContentView:[self viewIfLoaded]];
-    self.containerStackView = nil;
     
     // Restore view controller original properties
     self.viewController.view.frame = self.originalViewFrame;
@@ -353,38 +331,12 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 - (BOOL)shouldAutorotate
 {
-    if ([self.viewController respondsToSelector:@selector(shouldAutorotate)]) {
-        return [self.viewController shouldAutorotate];
-    }
-    else {
-        return [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]
-            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]
-            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]
-            || [self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
-    }
+    return [self.viewController shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    if ([self.viewController respondsToSelector:@selector(supportedInterfaceOrientations)]) {
-        return [self.viewController supportedInterfaceOrientations];
-    }
-    else {
-        UIInterfaceOrientationMask orientations = 0;
-        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortrait]) {
-            orientations |= UIInterfaceOrientationMaskPortrait;
-        }
-        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
-            orientations |= UIInterfaceOrientationMaskPortraitUpsideDown;
-        }
-        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeLeft]) {
-            orientations |= UIInterfaceOrientationMaskLandscapeLeft;
-        }
-        if ([self.viewController shouldAutorotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight]) {
-            orientations |= UIInterfaceOrientationMaskLandscapeRight;
-        }
-        return orientations;
-    }
+    return [self.viewController supportedInterfaceOrientations];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

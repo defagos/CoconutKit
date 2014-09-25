@@ -46,14 +46,14 @@ typedef NS_ENUM(NSInteger, HLSWizardTransitionStyle) {
  * The wizard buttons. Create them either using Interface Builder or by implementing a loadview. Do not attempt
  * to replace the callback method registered for UIControlEventTouchUpInside, or the behavior will be undefined
  */
-@property (nonatomic, retain) IBOutlet UIButton *previousButton;
-@property (nonatomic, retain) IBOutlet UIButton *nextButton;
-@property (nonatomic, retain) IBOutlet UIButton *doneButton;
+@property (nonatomic, weak) IBOutlet UIButton *previousButton;
+@property (nonatomic, weak) IBOutlet UIButton *nextButton;
+@property (nonatomic, weak) IBOutlet UIButton *doneButton;
 
 /**
  * The view controllers to display as pages
  */
-@property (nonatomic, retain) NSArray *viewControllers;
+@property (nonatomic, strong) NSArray *viewControllers;
 
 /**
  * The transition style to use when changing pages. Default is HLSWizardTransitionStyleNone

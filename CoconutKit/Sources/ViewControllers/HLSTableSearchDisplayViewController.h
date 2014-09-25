@@ -32,9 +32,6 @@
  * UISearchDisplayDelegate methods to return YES when the table view needs reloading. These methods are called each 
  * time the search string or the search scope are changed.
  *
- * HLSTableSearchDisplayViewController saves the current search criteria and restore them if the view has been
- * unloaded. You do not have to code this mechanism yourself.
- *
  * This class only implements the standard UISearchDisplayController behavior (scope buttons are only active when a
  * search string has been entered). Having scope buttons active even if no search criterium is entered requires
  * further investigation (it would be nice to implement this behavior using UISearchDisplayController. Otherwise
@@ -50,22 +47,22 @@
 
 /**
  * The search bar is created and managed for you, but you can use this accessor for customizing it if needed. This search bar is available
- * once the view has been loaded (viewDidLoad or later in the view lifecycle)
+ * once the view has been loaded (-viewDidLoad or later in the view lifecycle)
  */
-@property (nonatomic, readonly, retain) UISearchBar *searchBar;
+@property (nonatomic, readonly, strong) UISearchBar *searchBar;
 
 /**
  * The table view displaying all entries when the search interface is inactive
  *
- * Derived classes must initialize this outlet, either using Interface Builder or programmatically (i.e. when implementing the loadView method).
- * You never need to (and therefore should) call reloadData on this table view manually, the HLSTableSearchDisplayViewController view controller
+ * Derived classes must initialize this outlet, either using Interface Builder or programmatically (i.e. when implementing the -loadView method).
+ * You never need to (and therefore should) call -reloadData on this table view manually, the HLSTableSearchDisplayViewController view controller
  * will take care of this for you.
  */
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 /**
  * The table view displaying the entries matching a search criterium
  */
-@property (nonatomic, readonly, assign) UITableView *searchResultsTableView;
+@property (nonatomic, readonly, weak) UITableView *searchResultsTableView;
 
 @end

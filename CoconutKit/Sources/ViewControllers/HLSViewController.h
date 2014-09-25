@@ -34,7 +34,7 @@
  * UIViewController: HLSViewController supports all interface orientations by default. This choice was made so that 
  * the "Always call the super implementation first" rule can be applied. This also makes sense from a user's perspective 
  * since view controllers tend to support more and more orientations (especially since the iPad was launched, or more 
- * recently with the autorotation behavior introduced in iOS 6).
+ * with the autorotation behavior introduced in iOS 6).
  *
  * This class also provides a way to debug view controller events (lifecycle, rotation, memory warnings). You must
  * set the logger level of your application to DEBUG (see HLSLogger.h to know how this is achieved). Then use the 
