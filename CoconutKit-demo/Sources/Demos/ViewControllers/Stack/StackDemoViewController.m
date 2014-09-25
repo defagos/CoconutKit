@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
         [stackController pushViewController:sixthViewController
                         withTransitionClass:[HLSTransitionRotateVerticallyFromLeftClockwise class]
                                    animated:NO];
-        UIViewController *seventhViewController = [[[LifeCycleTestViewController alloc] init] autorelease];
+        UIViewController *seventhViewController = [[[TransparentViewController alloc] init] autorelease];
         [stackController pushViewController:seventhViewController
                         withTransitionClass:[HLSTransitionFlipHorizontally class]
                                    animated:NO];
