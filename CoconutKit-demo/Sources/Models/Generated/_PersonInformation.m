@@ -15,12 +15,6 @@ const struct PersonInformationAttributes PersonInformationAttributes = {
 	.street = @"street",
 };
 
-const struct PersonInformationRelationships PersonInformationRelationships = {
-};
-
-const struct PersonInformationFetchedProperties PersonInformationFetchedProperties = {
-};
-
 @implementation PersonInformationID
 @end
 
@@ -46,7 +40,7 @@ const struct PersonInformationFetchedProperties PersonInformationFetchedProperti
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"nbrChildrenValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"nbrChildren"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -56,54 +50,19 @@ const struct PersonInformationFetchedProperties PersonInformationFetchedProperti
 	return keyPaths;
 }
 
-
-
-
 @dynamic birthdate;
-
-
-
-
-
 
 @dynamic city;
 
-
-
-
-
-
 @dynamic country;
-
-
-
-
-
 
 @dynamic email;
 
-
-
-
-
-
 @dynamic firstName;
-
-
-
-
-
 
 @dynamic lastName;
 
-
-
-
-
-
 @dynamic nbrChildren;
-
-
 
 - (int16_t)nbrChildrenValue {
 	NSNumber *result = [self nbrChildren];
@@ -123,27 +82,9 @@ const struct PersonInformationFetchedProperties PersonInformationFetchedProperti
 	[self setPrimitiveNbrChildren:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
 @dynamic state;
-
-
-
-
-
 
 @dynamic street;
 
-
-
-
-
-
-
-
-
-
-
 @end
+
