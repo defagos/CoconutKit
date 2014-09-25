@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F0C7D03163A7B7E00C6C381 /* HLSAutorotationCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0C7D02163A7B7E00C6C381 /* HLSAutorotationCompatibility.h */; };
 		6F0F4DDB159CB75400277267 /* HLSPlaceholderInsetSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0F4DD9159CB75400277267 /* HLSPlaceholderInsetSegue.h */; };
 		6F0F4DDC159CB75400277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F10E388179FFE2B00BFEF42 /* HLSViewTouchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F10E386179FFE2B00BFEF42 /* HLSViewTouchDetector.h */; };
@@ -260,7 +259,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6F0C7D02163A7B7E00C6C381 /* HLSAutorotationCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAutorotationCompatibility.h; sourceTree = "<group>"; };
 		6F0F4DD9159CB75400277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
 		6F10E386179FFE2B00BFEF42 /* HLSViewTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewTouchDetector.h; sourceTree = "<group>"; };
@@ -849,7 +847,6 @@
 			isa = PBXGroup;
 			children = (
 				6F6C7557162DC0D90094B090 /* HLSAutorotation.h */,
-				6F0C7D02163A7B7E00C6C381 /* HLSAutorotationCompatibility.h */,
 				6FADE58714BA0494007EE121 /* HLSContainerContent.h */,
 				6FADE58814BA0494007EE121 /* HLSContainerContent.m */,
 				6F8C933915CEE623006D892C /* HLSContainerGroupView.h */,
@@ -1014,7 +1011,6 @@
 				6F6C7550162DC0290094B090 /* UINavigationController+HLSExtensions.h in Headers */,
 				6F6C7555162DC0550094B090 /* UITabBarController+HLSExtensions.h in Headers */,
 				6F6C7558162DC0DA0094B090 /* HLSAutorotation.h in Headers */,
-				6F0C7D03163A7B7E00C6C381 /* HLSAutorotationCompatibility.h in Headers */,
 				6FC40C581641D02A00398242 /* UISplitViewController+HLSExtensions.h in Headers */,
 				6F7A871016522C0A0030B091 /* UIPopoverController+HLSExtensions.h in Headers */,
 				6FCA2DD31679E36D0011CFDA /* HLSFileManager.h in Headers */,

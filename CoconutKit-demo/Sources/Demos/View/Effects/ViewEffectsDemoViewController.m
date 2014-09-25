@@ -17,16 +17,6 @@
 
 @implementation ViewEffectsDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.imageView1 = nil;
-    self.imageView2 = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

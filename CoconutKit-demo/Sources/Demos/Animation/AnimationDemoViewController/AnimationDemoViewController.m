@@ -42,38 +42,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @implementation AnimationDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.rectangleView1 = nil;
-    self.rectangleView2 = nil;
-    self.animationPickerView = nil;
-    self.playButton = nil;
-    self.pauseButton = nil;
-    self.cancelButton = nil;
-    self.terminateButton = nil;
-    self.settingsView = nil;
-    self.reverseSwitch = nil;
-    self.lockingUISwitch = nil;
-    self.loopingSwitch = nil;
-    self.animatedSwitch = nil;
-    self.repeatCountSlider = nil;
-    self.repeatCountLabel = nil;
-    self.animatedSettingsView = nil;
-    self.durationSlider = nil;
-    self.durationLabel = nil;
-    self.delayBackgroundView = nil;
-    self.delaySlider = nil;
-    self.delayLabel = nil;
-    self.startTimeBackgroundView = nil;
-    self.startTimeSlider = nil;
-    self.startTimeLabel = nil;
-    self.animation = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

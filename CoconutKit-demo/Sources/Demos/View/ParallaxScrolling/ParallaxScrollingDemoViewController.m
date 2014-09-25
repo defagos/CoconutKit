@@ -29,26 +29,6 @@
 
 @implementation ParallaxScrollingDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.textView = nil;
-    self.skyScrapperScrollView = nil;
-    self.skyScrapperImageView = nil;
-    self.skyScrollView = nil;
-    self.mountainsScrollView = nil;
-    self.grassScrollView = nil;
-    self.treesScrollView = nil;
-    self.skyImageView = nil;
-    self.mountainsImageView = nil;
-    self.grassImageView = nil;
-    self.treesImageView = nil;
-    self.bouncesSwitch = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

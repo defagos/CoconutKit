@@ -74,17 +74,6 @@
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        [containerStack releaseViews];
-    }
-    
-    self.placeholderViews = nil;
-}
-
 #pragma mark Accessors and mutators
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode

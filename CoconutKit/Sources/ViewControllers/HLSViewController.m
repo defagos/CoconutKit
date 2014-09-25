@@ -88,24 +88,7 @@
 {
     HLSLoggerDebug(@"View controller %@ deallocated", self);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:HLSCurrentLocalizationDidChangeNotification object:nil];
-    [self releaseViews];
     [super dealloc];
-}
-
-- (void)releaseViews
-{
-    HLSLoggerDebug(@"Views released for view controller %@", self);
-}
-
-#pragma mark Accessors and mutators
-
-- (void)setView:(UIView *)view
-{
-    [super setView:view];
-    if (! view) {
-        HLSLoggerDebug(@"View controller %@: view set to nil", self);
-        [self releaseViews];
-    }
 }
 
 #pragma mark View lifecycle

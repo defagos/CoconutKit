@@ -17,16 +17,6 @@
 
 @implementation WebViewDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.webView = nil;
-    self.scrollEnabledSwitch = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

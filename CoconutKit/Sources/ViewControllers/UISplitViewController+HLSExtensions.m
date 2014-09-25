@@ -8,7 +8,6 @@
 
 #import "UISplitViewController+HLSExtensions.h"
 
-#import "HLSAutorotationCompatibility.h"
 #import "HLSRuntime.h"
 
 // Associated object keys
@@ -75,7 +74,7 @@ static BOOL swizzled_UISplitViewController__shouldAutorotate_Imp(UISplitViewCont
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
         case HLSAutorotationModeContainerAndTopChildren: {
-            for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
+            for (UIViewController *viewController in self.viewControllers) {
                 if (! [viewController shouldAutorotate]) {
                     return NO;
                 }
@@ -102,7 +101,7 @@ static NSUInteger swizzled_UISplitViewController__supportedInterfaceOrientations
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:
         case HLSAutorotationModeContainerAndTopChildren: {
-            for (UIViewController<HLSAutorotationCompatibility> *viewController in self.viewControllers) {
+            for (UIViewController *viewController in self.viewControllers) {
                 containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
             break;

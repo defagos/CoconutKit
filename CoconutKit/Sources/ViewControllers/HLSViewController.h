@@ -19,8 +19,6 @@
  *     it possible to change a view controller localization at runtime (if this is not needed, HLSViewController of course
  *     remains compatible with the usual way of changing localization via system preferences, but it is stil good practice
  *     to collect localization code in a single method anyway)
- *   - view cleanup (-releaseViews) and general cleanup (-dealloc) are separated, enforcing good practices and eliminating
- *     potentially redundant code
  *   - instead of the default nib resolution mechanism of -[UIViewController init] (for @class MyViewController, first
  *     locate MyView.nib, then MyViewController.nib), HLSViewController subclasses look for a nib bearing the same name
  *     as the class or one of its superclasses only (otherwise the view controller is assumed to be instantiated 
@@ -52,19 +50,6 @@
  * given bundle. If the specified bundle is nil, lookup is performed in the main bundle
  */
 - (id)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
-
-/**
- * Override this method in your subclass and release all views retained by the view controller in its implementation. This method 
- * gets called automatically when deallocating or receiving a -viewDidUnload event. This allows to cleanly separate the object releasing
- * code of a view controller into two blocks:
- *   - in -releaseViews: Release all views created when loading the view, and retained by the view controller. If your view controller 
- *     subclass retains view controllers to avoid creating their views too often ("view caching"), also set the views of thesee view 
- *     controllers to nil in this method. If you are subclassing a class already subclassing HLSViewController, always send the 
- *     -releaseViews message to super first.
- *   - in -dealloc: Release all other resources owned by the view controller (model objects, other view controllers, views
- *     existing before the view is loaded, etc.)
- */
-- (void)releaseViews NS_REQUIRES_SUPER;
 
 /**
  * In your subclass, use this method to collect your localization code. You must not call this method directly, it is automatically

@@ -46,23 +46,6 @@ static NSArray *s_folders = nil;
     s_folders = [[NSArray arrayWithObjects:@"A-F", @"G-L", @"M-R", @"S-Z", nil] retain];
 }
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.weekDaysCursor = nil;
-    self.weekDayIndexLabel = nil;
-    self.randomRangeCursor = nil;
-    self.randomRangeIndexLabel = nil;
-    self.widthFactorSlider = nil;
-    self.heightFactorSlider = nil;
-    self.timeScalesCursor = nil;
-    self.foldersCursor = nil;
-    self.mixedFoldersCursor = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

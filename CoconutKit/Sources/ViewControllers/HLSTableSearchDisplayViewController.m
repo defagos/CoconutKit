@@ -39,14 +39,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.searchBar = nil;
-    self.tableView = nil;
-}
-
 #pragma mark Accessors and mutators
 
 - (UITableView *)searchResultsTableView

@@ -91,7 +91,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * When implementing your own view controller container, be sure to call the following HLSContainerStack
  * methods, otherwise the behavior is undefined (refer to the documentation of these methods for more 
  * information):
- *     -releaseViews
  *     -viewWillAppear:
  *     -viewDidAppear:
  *     -viewWillDisappear:
@@ -105,7 +104,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * Also do not forget to set a containerView, either in your container -loadView or -viewDidLoad methods
  *
- * Remark: No methods have been provided for -viewDidLoad and -viewWill/DidUnload (call -releaseViews instead)
+ * Remark: No methods have been provided for -viewDidLoad and -viewWill/DidUnload
  *
  * Even though the iOS 5 containment API is promising, implementing your own view controllers using
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
@@ -292,12 +291,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * does nothing
  */
 - (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated;
-
-/**
- * Release all view and view-related resources. On iOS 4 and 5, this also forwards the -viewWill/DidUnload messages 
- * to the corresponding view controllers
- */
-- (void)releaseViews;
 
 /**
  * Call this method from your container view controller -viewWillAppear: method, otherwise the behavior is undefined

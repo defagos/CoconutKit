@@ -45,20 +45,6 @@
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.streetTextField = nil;
-    self.streetErrorLabel = nil;
-    self.cityTextField = nil;
-    self.cityErrorLabel = nil;
-    self.stateTextField = nil;
-    self.stateErrorLabel = nil;
-    self.countryTextField = nil;
-    self.countryErrorLabel = nil;
-}
-
 #pragma mark Accessors and mutators
 
 - (void)setPersonInformation:(PersonInformation *)personInformation

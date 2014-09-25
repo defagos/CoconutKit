@@ -43,14 +43,6 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
 @interface UIViewController (HLSExtensions)
 
 /**
- * Convenience method to set the view controller to nil and forward -viewWill/DidUnload events correctly
- * Not meant to be overridden
- *
- * Remark: Originally I intended to call this method unloadView, but UIViewController already implements this method... privately
- */
-- (void)unloadViews;
-
-/**
  * Return the lifecycle phase the view controller is currently in
  * Not meant to be overridden
  */

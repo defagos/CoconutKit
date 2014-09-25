@@ -76,19 +76,6 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.heavyButton = nil;
-    self.transitionPickerView = nil;
-    self.inTabBarControllerSwitch = nil;
-    self.inNavigationControllerSwitch = nil;
-    self.leftPlaceholderSwitch = nil;
-    self.rightPlaceholderSwitch = nil;
-    self.autorotationModeSegmentedControl = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

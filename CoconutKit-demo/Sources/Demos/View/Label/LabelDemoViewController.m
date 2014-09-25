@@ -57,28 +57,6 @@ static NSArray *s_fontNames = nil;
     s_fontNames = [[NSArray arrayWithArray:fontNames] retain];
 }
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.label = nil;
-    self.standardLabel = nil;
-    self.textPickerView = nil;
-    self.fontPickerView = nil;
-    self.baselineAdjustmentSegmentedControl = nil;
-    self.numberOfLinesSlider = nil;
-    self.numberOfLinesLabel = nil;
-    self.fontSizeSlider = nil;
-    self.fontSizeLabel = nil;
-    self.adjustsFontSizeToFitWidthSwitch = nil;
-    self.minFontSizeSlider = nil;
-    self.minFontSizeLabel = nil;
-    self.verticalAlignmentSegmentedControl = nil;
-    self.lineBreakModePickerView = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

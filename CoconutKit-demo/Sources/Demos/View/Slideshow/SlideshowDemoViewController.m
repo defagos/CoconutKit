@@ -31,30 +31,6 @@
 
 @implementation SlideshowDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.slideshow = nil;
-    self.effectPickerView = nil;
-    self.currentImageNameLabel = nil;
-    self.previousButton = nil;
-    self.nextButton = nil;
-    self.playButton = nil;
-    self.pauseButton = nil;
-    self.resumeButton = nil;
-    self.stopButton = nil;
-    self.skipToSpecificButton = nil;
-    self.randomSwitch = nil;
-    self.imageSetButton = nil;
-    self.imageDurationSlider = nil;
-    self.imageDurationLabel = nil;
-    self.transitionDurationSlider = nil;
-    self.transitionDurationLabel = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

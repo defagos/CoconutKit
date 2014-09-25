@@ -59,15 +59,6 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.previousButton = nil;
-    self.nextButton = nil;
-    self.doneButton = nil;
-}
-
 #pragma mark View lifecycle management
 
 - (void)viewDidLoad

@@ -36,7 +36,7 @@
  *     a child knows when it is inserted or removed from a container. These methods must return a correct result
  *     for custom containers as well
  *   - when a view controller is removed from a container, its view must not be released. This lets clients decide whether
- *     they want to cache the associated view (by retaining the view controller elswhere) or not (if the view controller 
+ *     they want to cache the associated view (by retaining the view controller elsewhere) or not (if the view controller
  *     is not retained elsewhere, it will simply be deallocated when it gets removed from the container, and so will be 
  *     its view)
  *
@@ -48,11 +48,10 @@
  * ensure that the view is created when it is really needed, not earlier.
  *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
- * has been disabled, i.e. for which the
- *    -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]
- * method returns NO (a feature available as of iOS 5). On iOS 6, this method has been split into the two methods
- *    -[UIViewController shouldAutomaticallyForwardRotationMethods]
- *    and -[UIViewController shouldAutomaticallyForwardAppearanceMethods]
+ * has been disabled, i.e. for which the -[UIViewController shouldAutomaticallyForwardRotationMethods] and 
+ * -[UIViewController shouldAutomaticallyForwardAppearanceMethods] methods return NO. These deprecated method
+ * -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers] should not be used
+ * anymore
  * 
  * Designated initializer: -initWithViewController:containerViewController:transitionClass:duration:
  */
@@ -62,7 +61,8 @@
  * Return the CoconutKit-based container into which a view controller has been inserted into (if any). If a class parameter 
  * is provided, the method returns nil if the container class does not match
  */
-+ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController;
++ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass
+                                       forViewController:(UIViewController *)viewController;
 
 /**
  * Initialize a container content object. Expect the view controller to be managed (which is retained), the container 
@@ -128,19 +128,12 @@
 - (void)removeViewFromContainerStackView;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewWillUnload and -viewDidUnload
- * messages to the underlying view controller (this mechanism is deprecated starting with iOS 6)
- */
-- (void)releaseViews;
-
-/**
  * Forward the corresponding view lifecycle events to the view controller, ensuring that forwarding occurs only if
  * the view controller current lifecycle phase is coherent with it. Set movingTo/FromParentViewController to YES
  * if the events occur because the view controller is being added to / removed from its parent container
  *
  * Remark: No methods have been provided for -viewDidLoad (which is called automatically when the view has been loaded)
- *         and -viewWill/DidUnload (which container implementations must not call directly; use the -releaseViews method 
- *         above)
+ *         and -viewWill/DidUnload
  */
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
 - (void)viewDidAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;

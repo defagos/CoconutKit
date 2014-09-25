@@ -8,7 +8,6 @@
 
 #import "UINavigationController+HLSExtensions.h"
 
-#import "HLSAutorotationCompatibility.h"
 #import "HLSRuntime.h"
 
 // Associated object keys
@@ -74,7 +73,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {
-            for (UIViewController<HLSAutorotationCompatibility> *viewController in [self.viewControllers reverseObjectEnumerator]) {
+            for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
                 if (! [viewController shouldAutorotate]) {
                     return NO;
                 }
@@ -83,8 +82,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
         }
             
         case HLSAutorotationModeContainerAndTopChildren: {
-            UIViewController<HLSAutorotationCompatibility> *topViewController = (UIViewController<HLSAutorotationCompatibility> *)self.topViewController;
-            if (! [topViewController shouldAutorotate]) {
+            if (! [self.topViewController shouldAutorotate]) {
                 return NO;
             }
             break;
@@ -108,15 +106,14 @@ static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientation
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {
-            for (UIViewController<HLSAutorotationCompatibility> *viewController in [self.viewControllers reverseObjectEnumerator]) {
+            for (UIViewController *viewController in [self.viewControllers reverseObjectEnumerator]) {
                 containerSupportedInterfaceOrientations &= [viewController supportedInterfaceOrientations];
             }
             break;
         }
             
         case HLSAutorotationModeContainerAndTopChildren: {
-            UIViewController<HLSAutorotationCompatibility> *topViewController = (UIViewController<HLSAutorotationCompatibility> *)self.topViewController;
-            containerSupportedInterfaceOrientations &= [topViewController supportedInterfaceOrientations];
+            containerSupportedInterfaceOrientations &= [self.topViewController supportedInterfaceOrientations];
             break;
         }
             

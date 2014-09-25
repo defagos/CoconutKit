@@ -501,15 +501,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     [self removeViewControllerAtIndex:index animated:animated];
 }
 
-- (void)releaseViews
-{
-    for (HLSContainerContent *containerContent in self.containerContents) {
-        [containerContent releaseViews];
-    }
-    
-    self.containerView = nil;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     if (! self.containerView) {

@@ -9,7 +9,6 @@
 #import "UIViewController+HLSExtensions.h"
 
 #import <objc/runtime.h>
-#import "HLSAutorotationCompatibility.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "UITextField+HLSExtensions.h"
@@ -42,38 +41,7 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
 static void swizzled_UIViewController__viewWillUnload_Imp(UIViewController *self, SEL _cmd);
 static void swizzled_UIViewController__viewDidUnload_Imp(UIViewController *self, SEL _cmd);
 
-@interface UIViewController (HLSExtensionsPrivate) <HLSAutorotationCompatibility>
-
-@end
-
 @implementation UIViewController (HLSExtensions)
-
-#pragma mark View management
-
-/**
- * Remark: We have NOT overridden the view property to perform the viewDidUnload, and on purpose. This would have been
- *         very convenient, but this would have been unusual and in most cases the viewDidUnload would have
- *         been sent twice (when a container controller nils a view it manages, it is likely it will set the view
- *         to nil and send it the viewDidUnload afterwards. If all view controller containers of the world knew
- *         about HLSViewController, this would work, but since they don't this would lead to viewDidUnload be
- *         called twice in most cases)! 
- */
-- (void)unloadViews
-{
-    if ([self isViewLoaded]) {
-        BOOL isRunningIOS6 = (class_getInstanceMethod([UIViewController class], @selector(shouldAutorotate)) != NULL);
-        
-        if (! isRunningIOS6) {
-            // The -viewWillUnload method is available starting with iOS 5 and deprecated starting with iOS 6, but was
-            // in fact already privately implemented on iOS 4 (with empty implementation). Does not harm to call it here
-            [self viewWillUnload];
-        }
-        self.view = nil;
-        if (! isRunningIOS6) {
-            [self viewDidUnload];
-        }
-    }
-}
 
 #pragma mark Accessors and mutators
 

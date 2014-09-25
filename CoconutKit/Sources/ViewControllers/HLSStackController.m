@@ -101,13 +101,6 @@
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    [self.containerStack releaseViews];
-}
-
 #pragma mark Accessors and mutators
 
 - (void)setCapacity:(NSUInteger)capacity

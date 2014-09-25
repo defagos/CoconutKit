@@ -57,38 +57,6 @@
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.taskStartButton = nil;
-    self.taskStopButton = nil;
-    self.taskProgressView = nil;
-    self.taskRemainingTimeEstimateLabel = nil;
-    self.taskRemainingTimeLabel = nil;
-    
-    self.taskGroupStartButton = nil;
-    self.taskGroupStopButton = nil;
-    self.taskGroupProgressView = nil;
-    self.taskGroupRemainingTimeEstimateLabel = nil;
-    self.taskGroupRemainingTimeLabel = nil;
-    
-    self.subTask1StopButton = nil;
-    self.subTask1ProgressView = nil;
-    self.subTask1RemainingTimeEstimateLabel = nil;
-    self.subTask1RemainingTimeLabel = nil;
-    
-    self.subTask2StopButton = nil;
-    self.subTask2ProgressView = nil;
-    self.subTask2RemainingTimeEstimateLabel = nil;
-    self.subTask2RemainingTimeLabel = nil;
-    
-    self.subTask3StopButton = nil;
-    self.subTask3ProgressView = nil;
-    self.subTask3RemainingTimeEstimateLabel = nil;
-    self.subTask3RemainingTimeLabel = nil;    
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

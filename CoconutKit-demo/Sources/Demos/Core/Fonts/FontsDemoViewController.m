@@ -17,16 +17,6 @@
 
 @implementation FontsDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.label = nil;
-    self.webView = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

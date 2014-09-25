@@ -19,17 +19,6 @@
 
 @implementation DynamicLocalizationDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.coloredLabel = nil;
-    self.imageView = nil;
-    self.missingLocalizationVisibilitySwitch = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

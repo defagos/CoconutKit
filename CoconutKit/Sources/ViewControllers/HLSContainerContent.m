@@ -9,7 +9,6 @@
 #import "HLSContainerContent.h"
 
 #import "HLSAssert.h"
-#import "HLSAutorotationCompatibility.h"
 #import "HLSConverters.h"
 #import "HLSFloat.h"
 #import "HLSLogger.h"
@@ -43,7 +42,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 @end
 
-@interface UIViewController (HLSContainerContent) <HLSAutorotationCompatibility>
+@interface UIViewController (HLSContainerContent)
 
 // Empty category. Just swizzling some UIViewController methods for HLSContainerContent
 
@@ -53,7 +52,8 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 #pragma mark Class methods
 
-+ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController
++ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass
+                                       forViewController:(UIViewController *)viewController
 {
     HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, s_containerContentKey);
     if (containerViewControllerClass) {
@@ -300,12 +300,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     
     // We do NOT set self.viewController.view = nil here, on purpose: This allows a view controller's view to be cached
     // somewhere else if needed for performance reasons
-}
-
-- (void)releaseViews
-{
-    [self removeViewFromContainerStackView];
-    [self.viewController unloadViews];
 }
 
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController

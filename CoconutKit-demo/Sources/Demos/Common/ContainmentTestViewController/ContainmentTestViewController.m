@@ -18,15 +18,6 @@
 
 @implementation ContainmentTestViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.presentingModalSwitch = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

@@ -74,12 +74,6 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    self.tableView = nil;
-}
-
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

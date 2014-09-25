@@ -16,15 +16,6 @@
 
 @implementation MemoryWarningTestCoverViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.closeBarButtonItem = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

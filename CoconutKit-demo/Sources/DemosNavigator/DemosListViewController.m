@@ -111,15 +111,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
 
 @implementation DemosListViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.tableView = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)loadView

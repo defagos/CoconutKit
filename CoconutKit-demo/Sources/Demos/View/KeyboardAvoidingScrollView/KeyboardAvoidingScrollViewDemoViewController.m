@@ -24,15 +24,6 @@
 
 @implementation KeyboardAvoidingScrollViewDemoViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.textFields = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

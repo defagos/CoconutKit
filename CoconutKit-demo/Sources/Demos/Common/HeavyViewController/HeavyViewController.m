@@ -8,20 +8,7 @@
 
 #import "HeavyViewController.h"
 
-@implementation HeavyViewController {
-@private
-    void *_largeBlock;
-}
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    free(_largeBlock);
-    _largeBlock = NULL;
-}
+@implementation HeavyViewController
 
 #pragma mark View lifecycle
 
@@ -33,11 +20,6 @@
     [NSThread sleepForTimeInterval:2.];
     
     self.view.backgroundColor = [UIColor randomColor];
-    
-    // Simulate a heavy memory consumption for the view
-    if (! _largeBlock) {
-        _largeBlock = malloc(5000000);
-    }
 }
 
 #pragma mark Localization

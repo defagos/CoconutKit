@@ -56,20 +56,6 @@
     [super dealloc];
 }
 
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.webView = nil;
-    self.toolbar = nil;
-    self.goBackBarButtonItem = nil;
-    self.goForwardBarButtonItem = nil;
-    self.refreshBarButtonItem = nil;
-    self.actionBarButtonItem = nil;
-    self.activityIndicator = nil;
-    self.refreshImage = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
