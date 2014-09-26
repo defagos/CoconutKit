@@ -14,9 +14,6 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 	.codeMandatoryConcreteClassesD = @"codeMandatoryConcreteClassesD",
 };
 
-const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperties = {
-};
-
 @implementation ConcreteSubclassBID
 @end
 
@@ -42,7 +39,7 @@ const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperti
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"codeMandatoryNumberBValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"codeMandatoryNumberB"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -67,12 +64,7 @@ const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperti
 	return keyPaths;
 }
 
-
-
-
 @dynamic codeMandatoryNumberB;
-
-
 
 - (int16_t)codeMandatoryNumberBValue {
 	NSNumber *result = [self codeMandatoryNumberB];
@@ -92,13 +84,7 @@ const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperti
 	[self setPrimitiveCodeMandatoryNumberB:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
 @dynamic modelMandatoryBoundedNumberB;
-
-
 
 - (int16_t)modelMandatoryBoundedNumberBValue {
 	NSNumber *result = [self modelMandatoryBoundedNumberB];
@@ -118,13 +104,7 @@ const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperti
 	[self setPrimitiveModelMandatoryBoundedNumberB:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
 @dynamic modelMandatoryCodeNotZeroNumberB;
-
-
 
 - (int16_t)modelMandatoryCodeNotZeroNumberBValue {
 	NSNumber *result = [self modelMandatoryCodeNotZeroNumberB];
@@ -144,13 +124,7 @@ const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperti
 	[self setPrimitiveModelMandatoryCodeNotZeroNumberB:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
 @dynamic noValidationNumberB;
-
-
 
 - (int16_t)noValidationNumberBValue {
 	NSNumber *result = [self noValidationNumberB];
@@ -170,26 +144,16 @@ const struct ConcreteSubclassBFetchedProperties ConcreteSubclassBFetchedProperti
 	[self setPrimitiveNoValidationNumberB:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
 @dynamic codeMandatoryConcreteClassesD;
 
-	
 - (NSMutableSet*)codeMandatoryConcreteClassesDSet {
 	[self willAccessValueForKey:@"codeMandatoryConcreteClassesD"];
-  
+
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"codeMandatoryConcreteClassesD"];
-  
+
 	[self didAccessValueForKey:@"codeMandatoryConcreteClassesD"];
 	return result;
 }
-	
-
-
-
-
-
 
 @end
+

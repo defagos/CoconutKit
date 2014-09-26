@@ -12,9 +12,6 @@ const struct ConcreteClassDRelationships ConcreteClassDRelationships = {
 	.concreteSubclassB = @"concreteSubclassB",
 };
 
-const struct ConcreteClassDFetchedProperties ConcreteClassDFetchedProperties = {
-};
-
 @implementation ConcreteClassDID
 @end
 
@@ -40,7 +37,7 @@ const struct ConcreteClassDFetchedProperties ConcreteClassDFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"noValidationNumberDValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"noValidationNumberD"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -50,12 +47,7 @@ const struct ConcreteClassDFetchedProperties ConcreteClassDFetchedProperties = {
 	return keyPaths;
 }
 
-
-
-
 @dynamic noValidationNumberD;
-
-
 
 - (int16_t)noValidationNumberDValue {
 	NSNumber *result = [self noValidationNumberD];
@@ -75,33 +67,18 @@ const struct ConcreteClassDFetchedProperties ConcreteClassDFetchedProperties = {
 	[self setPrimitiveNoValidationNumberD:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
 @dynamic noValidationStringD;
-
-
-
-
-
 
 @dynamic concreteSubclassB;
 
-	
 - (NSMutableSet*)concreteSubclassBSet {
 	[self willAccessValueForKey:@"concreteSubclassB"];
-  
+
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"concreteSubclassB"];
-  
+
 	[self didAccessValueForKey:@"concreteSubclassB"];
 	return result;
 }
-	
-
-
-
-
-
 
 @end
+

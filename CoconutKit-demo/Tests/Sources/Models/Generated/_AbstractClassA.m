@@ -8,12 +8,6 @@ const struct AbstractClassAAttributes AbstractClassAAttributes = {
 	.noValidationStringA = @"noValidationStringA",
 };
 
-const struct AbstractClassARelationships AbstractClassARelationships = {
-};
-
-const struct AbstractClassAFetchedProperties AbstractClassAFetchedProperties = {
-};
-
 @implementation AbstractClassAID
 @end
 
@@ -39,31 +33,13 @@ const struct AbstractClassAFetchedProperties AbstractClassAFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
 
 	return keyPaths;
 }
 
-
-
-
 @dynamic codeMandatoryNotEmptyStringA;
-
-
-
-
-
 
 @dynamic noValidationStringA;
 
-
-
-
-
-
-
-
-
-
-
 @end
+

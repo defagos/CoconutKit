@@ -11,9 +11,6 @@ const struct HouseRelationships HouseRelationships = {
 	.owners = @"owners",
 };
 
-const struct HouseFetchedProperties HouseFetchedProperties = {
-};
-
 @implementation HouseID
 @end
 
@@ -39,37 +36,22 @@ const struct HouseFetchedProperties HouseFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
 
 	return keyPaths;
 }
 
-
-
-
 @dynamic name;
-
-
-
-
-
 
 @dynamic owners;
 
-	
 - (NSMutableSet*)ownersSet {
 	[self willAccessValueForKey:@"owners"];
-  
+
 	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"owners"];
-  
+
 	[self didAccessValueForKey:@"owners"];
 	return result;
 }
-	
-
-
-
-
-
 
 @end
+
