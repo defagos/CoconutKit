@@ -41,6 +41,7 @@
 		6F47EC551924EEEE00C5F6AC /* CursorDefaultPointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4C1924EEEE00C5F6AC /* CursorDefaultPointer.png */; };
 		6F47EC561924EEEE00C5F6AC /* SearchFieldIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4D1924EEEE00C5F6AC /* SearchFieldIcon.png */; };
 		6F47EC571924EEEE00C5F6AC /* SearchFieldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4E1924EEEE00C5F6AC /* SearchFieldIcon@2x.png */; };
+		6F5D355D19D59B0D00DDE0EF /* CoconutKit-resources-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7811924EE4E00660CDF /* CoconutKit-resources-Info.plist */; };
 		6F6010EB15AB1E2B00A9FEC5 /* HLSContainerStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */; };
 		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6F63E7B617CF6B80006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B517CF6B80006322D9 /* QuickLook.framework */; };
@@ -205,6 +206,7 @@
 		6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007DC1952D09B0082D915 /* HLSGeometry.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB318B21815A93200565B69 /* HLSInMemoryFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB318B01815A93100565B69 /* HLSInMemoryFileManager.h */; };
 		6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318B11815A93100565B69 /* HLSInMemoryFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB7ABEA19D59AD200C7DE82 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FB7ABE819D59AD200C7DE82 /* Localizable.strings */; };
 		6FB8E66C15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */; };
 		6FB8E67715F3EDD300CA4037 /* HLSObjectAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */; };
 		6FB8E67815F3EDD300CA4037 /* HLSViewAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */; };
@@ -295,6 +297,12 @@
 		6F47EC4C1924EEEE00C5F6AC /* CursorDefaultPointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CursorDefaultPointer.png; sourceTree = "<group>"; };
 		6F47EC4D1924EEEE00C5F6AC /* SearchFieldIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchFieldIcon.png; sourceTree = "<group>"; };
 		6F47EC4E1924EEEE00C5F6AC /* SearchFieldIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchFieldIcon@2x.png"; sourceTree = "<group>"; };
+		6F5D355719D59AF300DDE0EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../CoconutKit-resources/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6F5D355819D59AF900DDE0EF /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "../CoconutKit-resources/es.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6F5D355919D59B0300DDE0EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "../CoconutKit-resources/fr.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6F5D355A19D59B0D00DDE0EF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = "../CoconutKit-resources/it.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6F5D355B19D59B0D00DDE0EF /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = "../CoconutKit-resources/ja.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6F5D355C19D59B0D00DDE0EF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = "../CoconutKit-resources/ko.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
 		6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStack.m; sourceTree = "<group>"; };
 		6F63E7B517CF6B80006322D9 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -460,6 +468,7 @@
 		6FB007DC1952D09B0082D915 /* HLSGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSGeometry.m; sourceTree = "<group>"; };
 		6FB318B01815A93100565B69 /* HLSInMemoryFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManager.h; sourceTree = "<group>"; };
 		6FB318B11815A93100565B69 /* HLSInMemoryFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManager.m; sourceTree = "<group>"; };
+		6FB7ABE919D59AD200C7DE82 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = "../CoconutKit-resources/de.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLayerAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSObjectAnimation+Friend.h"; sourceTree = "<group>"; };
 		6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSViewAnimation+Friend.h"; sourceTree = "<group>"; };
@@ -892,6 +901,7 @@
 		6FC5B7801924EE0A00660CDF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FB7ABE819D59AD200C7DE82 /* Localizable.strings */,
 				6FC5B7811924EE4E00660CDF /* CoconutKit-resources-Info.plist */,
 				6F47EC451924EEEE00C5F6AC /* Images */,
 				6FC5B7A11924EE4E00660CDF /* Nibs */,
@@ -1136,6 +1146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F47EC511924EEEE00C5F6AC /* ButtonBarArrowRight.png in Resources */,
+				6FB7ABEA19D59AD200C7DE82 /* Localizable.strings in Resources */,
 				6F47EC501924EEEE00C5F6AC /* ButtonBarArrowLeft@2x.png in Resources */,
 				6F47EC521924EEEE00C5F6AC /* ButtonBarArrowRight@2x.png in Resources */,
 				6F47EC561924EEEE00C5F6AC /* SearchFieldIcon.png in Resources */,
@@ -1144,6 +1155,7 @@
 				6FC5B7B51924EE4E00660CDF /* HLSLoggerViewController.xib in Resources */,
 				6FC5B7B61924EE4E00660CDF /* HLSWebViewController.xib in Resources */,
 				6F47EC531924EEEE00C5F6AC /* ButtonBarRefresh.png in Resources */,
+				6F5D355D19D59B0D00DDE0EF /* CoconutKit-resources-Info.plist in Resources */,
 				6F47EC571924EEEE00C5F6AC /* SearchFieldIcon@2x.png in Resources */,
 				6F47EC541924EEEE00C5F6AC /* ButtonBarRefresh@2x.png in Resources */,
 			);
@@ -1294,6 +1306,23 @@
 			targetProxy = 6F47EC651924F36D00C5F6AC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6FB7ABE819D59AD200C7DE82 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6FB7ABE919D59AD200C7DE82 /* de */,
+				6F5D355719D59AF300DDE0EF /* en */,
+				6F5D355819D59AF900DDE0EF /* es */,
+				6F5D355919D59B0300DDE0EF /* fr */,
+				6F5D355A19D59B0D00DDE0EF /* it */,
+				6F5D355B19D59B0D00DDE0EF /* ja */,
+				6F5D355C19D59B0D00DDE0EF /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {

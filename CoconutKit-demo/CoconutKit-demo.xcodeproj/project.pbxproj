@@ -106,6 +106,7 @@
 		6F2B30EC1929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30C41929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m */; };
 		6F2B30F11929BF74003D4C2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30F01929BF74003D4C2C /* main.m */; };
 		6F2B30F61929C095003D4C2C /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */; };
+		6F3569AD19D59A68000CADE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAE19D2E7920021B95D /* Localizable.strings */; };
 		6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F468CB019D2E7920021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
@@ -1802,6 +1803,7 @@
 				6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */,
 				6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */,
 				6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */,
+				6F3569AD19D59A68000CADE2 /* Localizable.strings in Resources */,
 				6F9C468E14C5C30C00824AB2 /* WebViewDemoViewController.xib in Resources */,
 				6F9C469014C5C30C00824AB2 /* PlaceholderDemoViewController.xib in Resources */,
 				6F9C469214C5C30C00824AB2 /* RootStackDemoViewController.xib in Resources */,
