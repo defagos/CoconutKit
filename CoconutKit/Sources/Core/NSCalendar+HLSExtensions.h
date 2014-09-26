@@ -54,9 +54,9 @@
 
 /**
  * Return the date corresponding to given components in the specified time zone. The NSCalendar time zone is ignored
- * This function plays the same role as the NSDateComponents -setTimeZone: instance method which is available starting 
- * with iOS 4.
- * If you are targeting iOS 4 or higher, you therefore have two options:
+ * This function plays the same role as the NSDateComponents -setTimeZone: instance method
+ *
+ * You therefore have two options:
  *   - either use -dateFromComponents:inTimeZone:
  *   - or use -dateFromComponents: with the time zone set using -setTimeZone:
  * You must not attempt to call -dateFromComponents:inTimeZone: if a time zone has been set using -setTimeZone:
