@@ -10,13 +10,4 @@
 
 @implementation CursorSelectedFolderView
 
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.nameLabel = nil;
-    
-    [super dealloc];
-}
-
 @end

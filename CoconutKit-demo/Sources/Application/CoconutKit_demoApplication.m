@@ -16,8 +16,8 @@
 
 @interface CoconutKit_demoApplication ()
 
-@property (nonatomic, retain) UIViewController *rootViewController;
-@property (nonatomic, retain) UIActionSheet *languageActionSheet;
+@property (nonatomic, strong) UIViewController *rootViewController;
+@property (nonatomic, strong) UIActionSheet *languageActionSheet;
 
 @end
 
@@ -49,32 +49,32 @@
         if ([demoMode isEqualToString:@"RootStack"]) {
             // Pre-load the stack with two view controllers (by enabling logging, one can discover that view events are correctly
             // forwarded to the view controller on top only)
-            RootStackDemoViewController *rootStackDemoViewController1 = [[[RootStackDemoViewController alloc] init] autorelease];
-            HLSStackController *stackController = [[[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController1] autorelease];
+            RootStackDemoViewController *rootStackDemoViewController1 = [[RootStackDemoViewController alloc] init];
+            HLSStackController *stackController = [[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController1];
             stackController.delegate = self;
-            RootStackDemoViewController *rootStackDemoViewController2 = [[[RootStackDemoViewController alloc] init] autorelease];
+            RootStackDemoViewController *rootStackDemoViewController2 = [[RootStackDemoViewController alloc] init];
             [stackController pushViewController:rootStackDemoViewController2 withTransitionClass:[HLSTransitionCoverFromBottom class] animated:NO];
             self.rootViewController = stackController;
         }
         else if ([demoMode isEqualToString:@"RootNavigation"]) {
-            RootNavigationDemoViewController *rootNavigationDemoViewController = [[[RootNavigationDemoViewController alloc] init] autorelease];
-            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:rootNavigationDemoViewController] autorelease];
+            RootNavigationDemoViewController *rootNavigationDemoViewController = [[RootNavigationDemoViewController alloc] init];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootNavigationDemoViewController];
             navigationController.delegate = self;
             self.rootViewController = navigationController;
         }
         else if ([demoMode isEqualToString:@"RootSplitView"]) {
-            RootSplitViewDemoController *leftRootSplitViewController = [[[RootSplitViewDemoController alloc] init] autorelease];
-            RootSplitViewDemoController *rightRootSplitViewController = [[[RootSplitViewDemoController alloc] init] autorelease];
-            UISplitViewController *splitViewController = [[[UISplitViewController alloc] init] autorelease];
+            RootSplitViewDemoController *leftRootSplitViewController = [[RootSplitViewDemoController alloc] init];
+            RootSplitViewDemoController *rightRootSplitViewController = [[RootSplitViewDemoController alloc] init];
+            UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
             splitViewController.viewControllers = [NSArray arrayWithObjects:leftRootSplitViewController, rightRootSplitViewController, nil];
             splitViewController.delegate = self;
             self.rootViewController = splitViewController;
         }
         else if ([demoMode isEqualToString:@"RootTabBar"]) {
-            RootTabBarDemoViewController *rootTabBarDemoViewController1 = [[[RootTabBarDemoViewController alloc] init] autorelease];
-            RootTabBarDemoViewController *rootTabBarDemoViewController2 = [[[RootTabBarDemoViewController alloc] init] autorelease];
-            RootTabBarDemoViewController *rootTabBarDemoViewController3 = [[[RootTabBarDemoViewController alloc] init] autorelease];
-            UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
+            RootTabBarDemoViewController *rootTabBarDemoViewController1 = [[RootTabBarDemoViewController alloc] init];
+            RootTabBarDemoViewController *rootTabBarDemoViewController2 = [[RootTabBarDemoViewController alloc] init];
+            RootTabBarDemoViewController *rootTabBarDemoViewController3 = [[RootTabBarDemoViewController alloc] init];
+            UITabBarController *tabBarController = [[UITabBarController alloc] init];
             tabBarController.viewControllers = [NSArray arrayWithObjects:rootTabBarDemoViewController1, rootTabBarDemoViewController2,
                                                 rootTabBarDemoViewController3, nil];
             tabBarController.delegate = self;
@@ -85,19 +85,19 @@
             self.rootViewController = [segueStoryboard instantiateInitialViewController];
         }
         else {
-            DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
-            UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:demosListViewController] autorelease];
+            DemosListViewController *demosListViewController = [[DemosListViewController alloc] init];
+            UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:demosListViewController];
             navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
             self.rootViewController = navigationController;
             
-            UIBarButtonItem *languageBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", nil)
+            UIBarButtonItem *languageBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", nil)
                                                                                        style:UIBarButtonItemStyleBordered 
                                                                                       target:self 
-                                                                                      action:@selector(toggleLanguageSheet:)] autorelease];
-            UIBarButtonItem *logsButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nik)
+                                                                                      action:@selector(toggleLanguageSheet:)];
+            UIBarButtonItem *logsButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nik)
                                                                                 style:UIBarButtonItemStyleBordered
                                                                                target:self
-                                                                               action:@selector(showSettings:)] autorelease];
+                                                                               action:@selector(showSettings:)];
             demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem];
         }
     }
@@ -107,9 +107,6 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:HLSCurrentLocalizationDidChangeNotification object:nil];
-    self.rootViewController = nil;
-    self.languageActionSheet = nil;
-    [super dealloc];
 }
 
 #pragma mark Dynamic Localization
@@ -273,7 +270,7 @@
 
 - (void)toggleLanguageSheet:(id)sender
 {
-    self.languageActionSheet = [[[UIActionSheet alloc] init] autorelease];
+    self.languageActionSheet = [[UIActionSheet alloc] init];
     self.languageActionSheet.delegate = self;
     for (NSString *localization in [[NSBundle mainBundle] localizations]) {
         [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];

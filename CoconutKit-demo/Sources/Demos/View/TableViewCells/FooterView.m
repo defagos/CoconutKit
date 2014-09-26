@@ -10,12 +10,4 @@
 
 @implementation FooterView
 
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.label = nil;
-    [super dealloc];
-}
-
 @end

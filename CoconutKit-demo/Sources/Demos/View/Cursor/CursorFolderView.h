@@ -11,6 +11,6 @@
  */
 @interface CursorFolderView : HLSNibView
 
-@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 
 @end

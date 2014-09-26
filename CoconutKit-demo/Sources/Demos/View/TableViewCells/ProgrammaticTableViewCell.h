@@ -8,6 +8,6 @@
 
 @interface ProgrammaticTableViewCell : HLSTableViewCell
 
-@property (nonatomic, retain) UILabel *label;
+@property (nonatomic, weak) UILabel *label;
 
 @end
