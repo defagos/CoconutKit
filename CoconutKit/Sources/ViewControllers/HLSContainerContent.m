@@ -271,6 +271,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     
     // Remove the view controller's view
     [self.containerStackView removeContentView:[self viewIfLoaded]];
+    self.containerStackView = nil;
     
     // Restore view controller original properties
     self.viewController.view.frame = self.originalViewFrame;
