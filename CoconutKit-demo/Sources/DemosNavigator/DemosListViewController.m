@@ -377,26 +377,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                     
                 case ViewControllersDemoIndexSegue: {
-                    cell.textLabel.textColor = [UIColor grayColor];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    
-                    // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
-                    if ([UIStoryboard class]) {
-                        // The compiled storyboard has a storyboardc extension
-                        if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
-                            [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
-                            
-                            cell.textLabel.text = NSLocalizedString(@"Segues", nil);
-                            cell.textLabel.textColor = [UIColor blackColor];
-                            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                        }
-                        else {
-                            cell.textLabel.text = NSLocalizedString(@"Segues (not available in bundle)", nil);
-                        }
-                    }
-                    else {
-                        cell.textLabel.text = NSLocalizedString(@"Segues (not available for iOS 4)", nil);
-                    }
+                    cell.textLabel.text = NSLocalizedString(@"Segues", nil);
                     break;
                 }
 

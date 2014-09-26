@@ -10,16 +10,6 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
-/**
- * These methods have first been exposed with iOS 7, but can be used on iOS 4 and above (see Apple documentation)
- */
-@interface NSData (HLSExtensionsBase64)
-
-- (id)initWithBase64Encoding:(NSString *)base64String;
-- (NSString *)base64Encoding;
-
-@end
-
 static NSString* digest(NSData *data, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
 	unsigned char md[digestLength];     // C99

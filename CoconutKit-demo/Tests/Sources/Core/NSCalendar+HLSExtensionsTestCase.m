@@ -169,11 +169,7 @@
 
 - (void)testComponentsFromDateInTimeZone
 {
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
-    
-    // iOS 4 and above only
-    // TODO: When iOS 4 and above required: Can use NSTimeZoneCalendarUnit and remove respondsToSelector test
-    unitFlags |= NSTimeZoneCalendarUnit;
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSTimeZoneCalendarUnit;
     
     NSDateComponents *dateComponentsZurich1 = [self.calendar components:unitFlags fromDate:self.date1 inTimeZone:self.timeZoneZurich];
     GHAssertEquals([dateComponentsZurich1 year], (NSInteger)2012, nil);
@@ -181,12 +177,9 @@
     GHAssertEquals([dateComponentsZurich1 day], (NSInteger)1, nil);
     GHAssertEquals([dateComponentsZurich1 hour], (NSInteger)8, nil);
     GHAssertEquals([dateComponentsZurich1 minute], (NSInteger)23, nil);
-    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
-    if ([dateComponentsZurich1 respondsToSelector:@selector(timeZone)]) {       // iOS 4 and above
-        NSTimeZone *componentsTimeZone = [dateComponentsZurich1 performSelector:@selector(timeZone)];
-        GHAssertEqualStrings([componentsTimeZone name], [self.timeZoneZurich name], nil);
-    }
-    
+    NSTimeZone *componentsTimeZone1 = [dateComponentsZurich1 timeZone];
+    GHAssertEqualStrings([componentsTimeZone1 name], [self.timeZoneZurich name], nil);
+
     unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
     
     NSDateComponents *dateComponentsZurich2 = [self.calendar components:unitFlags fromDate:self.date2 inTimeZone:self.timeZoneZurich];
@@ -195,11 +188,8 @@
     GHAssertEquals([dateComponentsZurich2 day], (NSInteger)1, nil);
     GHAssertEquals([dateComponentsZurich2 hour], (NSInteger)6, nil);
     GHAssertEquals([dateComponentsZurich2 minute], (NSInteger)12, nil);
-    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
-    if ([dateComponentsZurich2 respondsToSelector:@selector(timeZone)]) {       // iOS 4 and above
-        NSTimeZone *componentsTimeZone = [dateComponentsZurich2 performSelector:@selector(timeZone)];
-        GHAssertNil(componentsTimeZone, nil);
-    }
+    NSTimeZone *componentsTimeZone2 = [dateComponentsZurich2 timeZone];
+    GHAssertNil(componentsTimeZone2, nil);
     
     NSDateComponents *dateComponentsZurich3 = [self.calendar components:unitFlags fromDate:self.date3 inTimeZone:self.timeZoneZurich];
     GHAssertEquals([dateComponentsZurich3 year], (NSInteger)2012, nil);

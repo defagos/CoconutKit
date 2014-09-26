@@ -81,24 +81,8 @@
             self.rootViewController = tabBarController;
         }
         else if ([demoMode isEqualToString:@"RootStoryboard"]) {
-            // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
-            if ([UIStoryboard class]) {
-                // The compiled storyboard has a storyboardc extension
-                if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
-                    UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
-                    self.rootViewController = [segueStoryboard instantiateInitialViewController];
-                }
-                else {
-                    HLSLoggerError(@"No storyboard file available in application bundle");
-                    [self release];
-                    return nil;
-                }
-            }
-            else {
-                HLSLoggerError(@"Storyboards are not available on iOS 4");
-                [self release];
-                return nil;
-            }
+            UIStoryboard *segueStoryboard = [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
+            self.rootViewController = [segueStoryboard instantiateInitialViewController];
         }
         else {
             DemosListViewController *demosListViewController = [[[DemosListViewController alloc] init] autorelease];
