@@ -1084,8 +1084,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                 [containerContentAtCapacity removeViewFromContainerStackView];
             }
                         
-            // iOS 5 and above only: -didMoveToParentViewController: must be called manually after the push transition has
-            // been performed (iOS 5 and above, see UIViewController documentation)
+            // -didMoveToParentViewController: must be called manually after the push transition has been performed (see
+            // UIViewController documentation)
             [appearingViewController didMoveToParentViewController:self.containerViewController];
             
             // Notify the delegate

@@ -32,7 +32,7 @@
  *     properties when it displays the corresponding parent view controller, for example. Moreover, this ensures that when 
  *     a child view controller presents another view controller modally, it is actually its furthest ancestor who does. 
  *     Finally, this guarantees that the -[UIViewController interfaceOrientation] method returns a correct result
- *   - the iOS 5 containment API defines new methods -[UIViewController isMovingTo/FromParentViewController] so that
+ *   - the iOS containment API defines methods -[UIViewController isMovingTo/FromParentViewController] so that
  *     a child knows when it is inserted or removed from a container. These methods must return a correct result
  *     for custom containers as well
  *   - when a view controller is removed from a container, its view must not be released. This lets clients decide whether

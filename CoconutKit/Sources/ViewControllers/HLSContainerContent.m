@@ -222,9 +222,9 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     // view controller's view (if any), this view is neither reloaded nor added as subview of the tab bar controller's view 
     // again. The tab bar controller ends up empty.
     //
-    // This happens only if the iOS 5 -[UIViewController addChildViewController:] method has been called to declare the tab
+    // This happens only if the -[UIViewController addChildViewController:] method has been called to declare the tab
     // bar controller as child of a custom container implemented using HLSContainerContent. But since this containment
-    // relationship must be declared for correct behavior on iOS 5, we have to find a workaround.
+    // relationship must be declared for correct behavior with the containment API, we have to find a workaround.
     //
     // Steps to reproduce the issue (with the code below commented out):
     //   - push a view controller wrapped into a tab bar controller into a custom stack-based container (e.g. HLSStackController)

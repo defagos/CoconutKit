@@ -52,7 +52,7 @@
  * in subclasses and inset view controllers (it will be ignored, see UIViewController documentation). The 2-step
  * rotation is deprecated starting with iOS 5, you should not use it anymore anyway.
  *
- * You can also use placeholder view controllers with storyboards (a feature available since iOS 5);
+ * You can also use placeholder view controllers with storyboards:
  *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
  *     subviews which you connect to the placeholderViews outlet collection. This defines where inset view controllers
  *     will be drawn
