@@ -39,16 +39,16 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     BOOL _pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
 }
 
-@property (nonatomic, retain) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
-@property (nonatomic, retain) NSArray *animationStepCopies;                     // another copy made temporarily during animation
-@property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;           // enumerator over steps
-@property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;           // the currently played animation step
+@property (nonatomic, strong) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
+@property (nonatomic, strong) NSArray *animationStepCopies;                     // another copy made temporarily during animation
+@property (nonatomic, strong) NSEnumerator *animationStepsEnumerator;           // enumerator over steps
+@property (nonatomic, strong) HLSAnimationStep *currentAnimationStep;           // the currently played animation step
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isPlaying) BOOL playing;
 @property (nonatomic, assign, getter=isStarted) BOOL started;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
-@property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
+@property (nonatomic, strong) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 
@@ -58,7 +58,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 + (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps
 {
-    return [[[[self class] alloc] initWithAnimationSteps:animationSteps] autorelease];
+    return [[[self class] alloc] initWithAnimationSteps:animationSteps];
 }
 
 + (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
@@ -74,7 +74,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 {
     NSMutableArray *animationStepCopies = [NSMutableArray array];
     for (HLSAnimationStep *animationStep in animationSteps) {
-        [animationStepCopies addObject:[[animationStep copy] autorelease]];
+        [animationStepCopies addObject:[animationStep copy]];
     }
     return [NSArray arrayWithArray:animationStepCopies];
 }
@@ -120,16 +120,6 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                                                   object:nil];
     
     [self cancel];
-    
-    self.animationSteps = nil;
-    self.animationStepCopies = nil;
-    self.animationStepsEnumerator = nil;
-    self.currentAnimationStep = nil;
-    self.tag = nil;
-    self.userInfo = nil;
-    self.delegateZeroingWeakRef = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -146,7 +136,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)setDelegate:(id<HLSAnimationDelegate>)delegate
 {
-    self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
+    self.delegateZeroingWeakRef = [[HLSZeroingWeakRef alloc] initWithObject:delegate];
     [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
 }
 
@@ -428,7 +418,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         return nil;
     }
     
-    HLSAnimation *animation = [[self copy] autorelease];
+    HLSAnimation *animation = [self copy];
     
     // Find out which factor must be applied to each animation step to preserve the animation appearance for the
     // specified duration
@@ -528,7 +518,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     if (self.animationSteps) {
         NSMutableArray *animationStepCopies = [NSMutableArray array];
         for (HLSAnimationStep *animationStep in self.animationSteps) {
-            HLSAnimationStep *animationStepCopy = [[animationStep copyWithZone:zone] autorelease];
+            HLSAnimationStep *animationStepCopy = [animationStep copyWithZone:zone];
             [animationStepCopies addObject:animationStepCopy];
         }
         animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:[NSMutableArray arrayWithArray:animationStepCopies]];

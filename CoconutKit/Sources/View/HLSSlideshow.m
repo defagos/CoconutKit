@@ -23,8 +23,8 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 @interface HLSSlideshow () <HLSAnimationDelegate>
 
-@property (nonatomic, retain) NSArray *imageViews;
-@property (nonatomic, retain) HLSAnimation *animation;
+@property (nonatomic, strong) NSArray *imageViews;
+@property (nonatomic, strong) HLSAnimation *animation;
 
 @end
 
@@ -61,7 +61,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     self.imageViews = [NSArray array];
     for (NSUInteger i = 0; i < 2; ++i) {
-        UIImageView *imageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.autoresizingMask = HLSViewAutoresizingAll;
         [self addSubview:imageView];
@@ -77,13 +77,6 @@ static const NSInteger kSlideshowNoIndex = -1;
 - (void)dealloc
 {
     [self stop];
-    
-    self.imageViews = nil;
-    self.imageNamesOrPaths = nil;
-    self.animation = nil;
-    self.delegate = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -126,8 +119,7 @@ static const NSInteger kSlideshowNoIndex = -1;
         [self stop];
     }
     
-    [_imageNamesOrPaths release];
-    _imageNamesOrPaths = [imageNamesOrPaths retain];
+    _imageNamesOrPaths = imageNamesOrPaths;
 }
 
 - (void)setImageDuration:(NSTimeInterval)imageDuration

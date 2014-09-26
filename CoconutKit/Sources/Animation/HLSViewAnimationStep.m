@@ -17,7 +17,7 @@
 
 @interface HLSViewAnimationStep ()
 
-@property (nonatomic, retain) UIView *dummyView;
+@property (nonatomic, strong) UIView *dummyView;
 
 @end
 
@@ -31,13 +31,6 @@
         self.curve = UIViewAnimationCurveEaseInOut;        
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.dummyView = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Managing the animation
@@ -58,7 +51,7 @@
         // during an animation block, the block duration is reduced to 0. To prevent this, we create
         // and animate a dummy invisible view in each animation step, so that the duration is never
         // reduced to 0
-        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.dummyView = [[UIView alloc] initWithFrame:CGRectZero];
         [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
         
         [UIView beginAnimations:nil context:NULL];

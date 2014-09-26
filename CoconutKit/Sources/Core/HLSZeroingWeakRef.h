@@ -36,7 +36,7 @@
 /**
  * Return the current object if it is still alive, or nil if the reference has been zeroed
  */
-@property (nonatomic, readonly, assign) id object;
+@property (nonatomic, readonly, weak) id object;
 
 /**
  * Optional invocations to be performed just before the weak reference is zeroed. The actions / invocations 

@@ -27,7 +27,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     }
     
     // The size map is common for the whole HLSTableViewCell inheritance hierarchy
-    s_classNameToSizeMap = [[NSMutableDictionary dictionary] retain];
+    s_classNameToSizeMap = [NSMutableDictionary dictionary];
 }
 
 + (id)cellForTableView:(UITableView *)tableView
@@ -67,7 +67,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         }
         // Created programmatically
         else {
-            cell = [[[[self class] alloc] initWithStyle:[self style] reuseIdentifier:[self identifier]] autorelease];
+            cell = [[[self class] alloc] initWithStyle:[self style] reuseIdentifier:[self identifier]];
         }
     }
     
@@ -82,7 +82,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     if (backgroundImageName) {
         UIImage *backgroundImage = [UIImage imageNamed:backgroundImageName];
         if (backgroundImage) {
-            self.backgroundView = [[[UIImageView alloc] initWithImage:backgroundImage] autorelease];
+            self.backgroundView = [[UIImageView alloc] initWithImage:backgroundImage];
         }
         else {
             HLSLoggerWarn(@"The image %@ does not exist", backgroundImageName);
@@ -93,13 +93,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     if (selectedBackgroundImageName) {
         UIImage *selectedBackgroundImage = [UIImage imageNamed:selectedBackgroundImageName];
         if (selectedBackgroundImage) {
-            self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:selectedBackgroundImage] autorelease];
+            self.selectedBackgroundView = [[UIImageView alloc] initWithImage:selectedBackgroundImage];
         }
         else {
             HLSLoggerWarn(@"The image %@ does not exist", selectedBackgroundImage);
             self.selectedBackgroundView = nil;
         }
-        self.selectedBackgroundView = [[[UIImageView alloc] initWithImage:selectedBackgroundImage] autorelease];
+        self.selectedBackgroundView = [[UIImageView alloc] initWithImage:selectedBackgroundImage];
     }
 }
 

@@ -25,7 +25,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         return;
     }
     
-    s_classNameToSizeMap = [[NSMutableDictionary dictionary] retain];
+    s_classNameToSizeMap = [NSMutableDictionary dictionary];
 }
 
 + (id)view

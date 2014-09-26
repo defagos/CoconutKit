@@ -47,7 +47,7 @@
  *
  * As soon as the pointer view has been set it cannot be changed anymore.
  */
-@property (nonatomic, retain) IBOutlet UIView *pointerView;
+@property (nonatomic, strong) IBOutlet UIView *pointerView;     // strong, not an error
 
 /**
  * The duration of cursor animations
@@ -86,12 +86,12 @@
 /**
  * Set / get the data source used to fill the cursor with elements
  */
-@property (nonatomic, assign) id<HLSCursorDataSource> dataSource;
+@property (nonatomic, weak) id<HLSCursorDataSource> dataSource;
 
 /**
  * Set / get the cursor delegate receiving the cursor events
  */
-@property (nonatomic, assign) id<HLSCursorDelegate> delegate;
+@property (nonatomic, weak) id<HLSCursorDelegate> delegate;
 
 @end
 

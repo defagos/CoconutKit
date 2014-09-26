@@ -10,8 +10,8 @@
 
 @interface HLSViewTouchDetector ()
 
-@property (nonatomic, assign) UIView *view;               // weak ref. Detector lifetime is managed by the text field
-@property (nonatomic, retain) UIGestureRecognizer *gestureRecognizer;
+@property (nonatomic, weak) UIView *view;               // weak ref. Detector lifetime is managed by the text field
+@property (nonatomic, strong) UIGestureRecognizer *gestureRecognizer;
 
 @end
 
@@ -27,8 +27,8 @@
         self.view = view;
         
         // Create a gesture recognizer capturing taps on the whole window
-        self.gestureRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                          action:@selector(dismissKeyboard:)] autorelease];
+        self.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(dismissKeyboard:)];
         self.gestureRecognizer.cancelsTouchesInView = NO;       // Let the taps go through
         self.gestureRecognizer.delegate = self;
         
@@ -46,11 +46,7 @@
 
 - (void)dealloc
 {
-    self.view = nil;
-    self.gestureRecognizer = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super dealloc];
 }
 
 #pragma mark UIGestureRecognizerDelegate protocol implementation

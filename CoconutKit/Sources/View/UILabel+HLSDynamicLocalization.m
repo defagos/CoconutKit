@@ -72,7 +72,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 + (void)load
 {
     s_UILabel__dealloc_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                          @selector(dealloc),
+                                                                          NSSelectorFromString(@"dealloc"),
                                                                           (IMP)swizzled_UILabel__dealloc_Imp);
     s_UILabel__awakeFromNib_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
                                                                                @selector(awakeFromNib),
@@ -178,7 +178,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
             bundleName = parentView.locBundle;
         }
         
-        localizationInfo = [[[HLSLabelLocalizationInfo alloc] initWithText:text tableName:tableName bundleName:bundleName] autorelease];
+        localizationInfo = [[HLSLabelLocalizationInfo alloc] initWithText:text tableName:tableName bundleName:bundleName];
         [self setLocalizationInfo:localizationInfo];
         
         // For labels localized with prefixes only: Listen to localization change notifications

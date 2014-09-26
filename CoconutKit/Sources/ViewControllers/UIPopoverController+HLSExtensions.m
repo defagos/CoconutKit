@@ -40,7 +40,7 @@ static void swizzled_UIPopoverController__setContentViewController_animated_Imp(
                                                                                                               @selector(initWithContentViewController:),
                                                                                                               (IMP)swizzled_UIPopoverController__initWithContentViewController_Imp);
     s_UIPopoverController__dealloc_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                      @selector(dealloc),
+                                                                                      NSSelectorFromString(@"dealloc"),
                                                                                       (IMP)swizzled_UIPopoverController__dealloc_Imp);
     s_UIPopoverController__setContentViewController_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzleSelector(self,
                                                                                                                           @selector(setContentViewController:animated:),

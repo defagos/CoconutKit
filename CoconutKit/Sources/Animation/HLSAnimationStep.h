@@ -21,12 +21,12 @@
 /**
  * Optional tag to help identifying animation steps
  */
-@property (nonatomic, retain) NSString *tag;
+@property (nonatomic, strong) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information
  */
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 /**
  * Animation duration. Unlike UIView animation blocks, the duration of an animation step is never reduced

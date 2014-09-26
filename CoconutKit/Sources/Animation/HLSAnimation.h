@@ -76,12 +76,12 @@
 /**
  * Tag which can optionally be used to help identifying an animation
  */
-@property (nonatomic, retain) NSString *tag;
+@property (nonatomic, strong) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information
  */
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
@@ -95,7 +95,7 @@
  * The animation delegate. Note that the animation is automatically cancelled if a delegate has been set
  * and gets deallocated while the animation is runnning
  */
-@property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
+@property (nonatomic, weak) id<HLSAnimationDelegate> delegate;
 
 /**
  * Play the animation. If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the 

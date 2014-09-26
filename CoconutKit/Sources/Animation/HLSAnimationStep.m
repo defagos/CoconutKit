@@ -18,9 +18,9 @@
 
 @interface HLSAnimationStep ()
 
-@property (nonatomic, retain) NSMutableArray *objectKeys;
-@property (nonatomic, retain) NSMutableDictionary *objectToObjectAnimationMap;
-@property (nonatomic, retain) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
+@property (nonatomic, strong) NSMutableArray *objectKeys;
+@property (nonatomic, strong) NSMutableDictionary *objectToObjectAnimationMap;
+@property (nonatomic, strong) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
 @property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
 @end
@@ -31,7 +31,7 @@
 
 + (id)animationStep
 {
-    return [[[[self class] alloc] init] autorelease];
+    return [[[self class] alloc] init];
 }
 
 #pragma mark Object creation and destruction
@@ -46,17 +46,6 @@
         self.duration = 0.2;        
     }
     return self;
-}
-
-- (void)dealloc
-{    
-    self.objectKeys = nil;
-    self.objectToObjectAnimationMap = nil;
-    self.tag = nil;
-    self.userInfo = nil;
-    self.delegate = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -104,7 +93,7 @@
     
     NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     [self.objectKeys addObject:objectKey];
-    [self.objectToObjectAnimationMap setObject:[[objectAnimation copy] autorelease] forKey:objectKey];
+    [self.objectToObjectAnimationMap setObject:[objectAnimation copy] forKey:objectKey];
 }
 
 - (id)objectAnimationForObject:(id)object
@@ -257,7 +246,7 @@
     HLSAnimationStep *animationStepCopy = [[[self class] allocWithZone:zone] init];
     for (id object in [self objects]) {
         HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
-        HLSObjectAnimation *objectAnimationCopy = [[objectAnimation copyWithZone:zone] autorelease];
+        HLSObjectAnimation *objectAnimationCopy = [objectAnimation copyWithZone:zone];
         [animationStepCopy addObjectAnimation:objectAnimationCopy forObject:object];
     }
     animationStepCopy.tag = self.tag;

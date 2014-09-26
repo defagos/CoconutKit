@@ -15,14 +15,14 @@
 
 @interface HLSTaskManager ()
 
-@property (nonatomic, retain) NSOperationQueue *operationQueue;                         // Manages the separate threads used for task processing
-@property (nonatomic, retain) NSMutableSet *tasks;                                      // Keep a strong ref to task groups so that they stay alive
-@property (nonatomic, retain) NSMutableSet *taskGroups;                                 // Keep a strong ref to task groups so that they stay alive
-@property (nonatomic, retain) NSMutableDictionary *taskToOperationMap;                  // Maps a task to the associated HLSTaskOperation object
-@property (nonatomic, retain) NSMutableDictionary *taskToDelegateMap;                   // Maps a task to the associated id<HLSTaskDelegate> object
-@property (nonatomic, retain) NSMutableDictionary *delegateToTasksMap;                  // Maps some object id to the NSMutableSet of all HLSTask objects it is the delegate of
-@property (nonatomic, retain) NSMutableDictionary *taskGroupToDelegateMap;              // Maps a task group to the associated id<HLSTaskGroupDelegate> object
-@property (nonatomic, retain) NSMutableDictionary *delegateToTaskGroupsMap;             // Maps some object id to the NSMutableSet of all HLSTaskGroup objects it is the delegate of
+@property (nonatomic, strong) NSOperationQueue *operationQueue;                         // Manages the separate threads used for task processing
+@property (nonatomic, strong) NSMutableSet *tasks;                                      // Keep a strong ref to task groups so that they stay alive
+@property (nonatomic, strong) NSMutableSet *taskGroups;                                 // Keep a strong ref to task groups so that they stay alive
+@property (nonatomic, strong) NSMutableDictionary *taskToOperationMap;                  // Maps a task to the associated HLSTaskOperation object
+@property (nonatomic, strong) NSMutableDictionary *taskToDelegateMap;                   // Maps a task to the associated id<HLSTaskDelegate> object
+@property (nonatomic, strong) NSMutableDictionary *delegateToTasksMap;                  // Maps some object id to the NSMutableSet of all HLSTask objects it is the delegate of
+@property (nonatomic, strong) NSMutableDictionary *taskGroupToDelegateMap;              // Maps a task group to the associated id<HLSTaskGroupDelegate> object
+@property (nonatomic, strong) NSMutableDictionary *delegateToTaskGroupsMap;             // Maps some object id to the NSMutableSet of all HLSTaskGroup objects it is the delegate of
 
 @end
 
@@ -44,7 +44,7 @@
 - (id)init
 {
     if ((self = [super init])) {
-        self.operationQueue = [[[NSOperationQueue alloc] init] autorelease];
+        self.operationQueue = [[NSOperationQueue alloc] init];
         [self setMaxConcurrentTaskCount:4];
         [self.operationQueue setMaxConcurrentOperationCount:4];
         self.tasks = [NSMutableSet set];
@@ -56,19 +56,6 @@
         self.delegateToTaskGroupsMap = [NSMutableDictionary dictionary];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.operationQueue = nil;
-    self.tasks = nil;
-    self.taskGroups = nil;
-    self.taskToOperationMap = nil;
-    self.taskToDelegateMap = nil;
-    self.delegateToTasksMap = nil;
-    self.taskGroupToDelegateMap = nil;
-    self.delegateToTaskGroupsMap = nil;
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -449,9 +436,7 @@
     for (HLSTask *task in tasks) {
         Class operationClass = [task operationClass];
         NSAssert([operationClass isSubclassOfClass:[HLSTaskOperation class]], @"Class %@ is not a subclass of HLSTaskOperation", operationClass);
-        HLSTaskOperation *operation = [[[operationClass alloc] initWithTaskManager:self
-                                                                              task:task]
-                                       autorelease];
+        HLSTaskOperation *operation = [[operationClass alloc] initWithTaskManager:self task:task];
         [operations addObject:operation];
     }
     return operations;

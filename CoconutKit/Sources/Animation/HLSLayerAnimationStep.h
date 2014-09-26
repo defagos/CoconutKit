@@ -40,6 +40,6 @@
  *
  * Default value is the function corresponding to the kCAMediaTimingFunctionEaseInEaseOut constant
  */
-@property (nonatomic, retain) CAMediaTimingFunction *timingFunction;
+@property (nonatomic, strong) CAMediaTimingFunction *timingFunction;
 
 @end

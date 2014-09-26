@@ -13,7 +13,7 @@
 
 @interface HLSApplicationPreloader ()
 
-@property (nonatomic, assign) UIApplication *application;           // weak ref since retained by the application
+@property (nonatomic, weak) UIApplication *application;           // weak ref since retained by the application
 
 @end
 
@@ -26,7 +26,6 @@
     if ((self = [super init])) {
         if (! application) {
             HLSLoggerError(@"Missing application");
-            [self release];
             return nil;
         }
         
@@ -39,13 +38,6 @@
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-- (void)dealloc
-{
-    self.application = nil;
-
-    [super dealloc];
 }
 
 #pragma mark Pre-loading
@@ -82,7 +74,6 @@
 {
     // The web view is not needed anymore
     [webView removeFromSuperview];
-    [webView release];
 }
 
 @end

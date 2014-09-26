@@ -20,8 +20,8 @@ static Class subclass_class(id object, SEL _cmd);
 
 @interface HLSZeroingWeakRef ()
 
-@property (nonatomic, assign) id object;
-@property (nonatomic, retain) NSMutableArray *invocations;
+@property (nonatomic, weak) id object;
+@property (nonatomic, strong) NSMutableArray *invocations;
 
 @end
 
@@ -61,9 +61,9 @@ static Class subclass_class(id object, SEL _cmd);
                     subclass = objc_allocateClassPair(class, [subclassName UTF8String], 0);
                     NSAssert(subclass != Nil, @"Could not register subclass");
                     class_addMethod(subclass, 
-                                    @selector(dealloc), 
+                                    NSSelectorFromString(@"dealloc"),
                                     (IMP)subclass_dealloc, 
-                                    method_getTypeEncoding(class_getInstanceMethod(class, @selector(dealloc))));
+                                    method_getTypeEncoding(class_getInstanceMethod(class, NSSelectorFromString(@"dealloc"))));
                     class_addMethod(subclass, 
                                     @selector(class), 
                                     (IMP)subclass_class, 
@@ -99,11 +99,6 @@ static Class subclass_class(id object, SEL _cmd);
         Class superclass = class_getSuperclass(object_getClass(self.object));
         object_setClass(self.object, superclass);
     }
-    
-    self.object = nil;
-    self.invocations = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Optional cleanup
@@ -142,7 +137,7 @@ static void subclass_dealloc(id object, SEL _cmd)
     
     // Call parent implementation
     Class superclass = class_getSuperclass(object_getClass(object));
-    void (*parent_dealloc_Imp)(id, SEL) = (void (*)(id, SEL))class_getMethodImplementation(superclass, @selector(dealloc));
+    void (*parent_dealloc_Imp)(id, SEL) = (void (*)(id, SEL))class_getMethodImplementation(superclass, NSSelectorFromString(@"dealloc"));
     NSCAssert(parent_dealloc_Imp != NULL, @"Could not locate parent dealloc implementation");
     (*parent_dealloc_Imp)(object, _cmd);
 }

@@ -31,7 +31,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 @interface HLSLayerAnimationStep ()
 
-@property (nonatomic, retain) UIView *dummyView;
+@property (nonatomic, strong) UIView *dummyView;
 
 @end
 
@@ -53,14 +53,6 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];        
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.timingFunction = nil;
-    self.dummyView = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Managing the animation
@@ -85,7 +77,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         // Therefore, we always ensure the transaction is never empty by animating a dummy view, and we set
         // animation callbacks for its associated animation (which, since it is part of the transaction,
         // will be triggered when the transaction begins / ends animating)
-        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.dummyView = [[UIView alloc] initWithFrame:CGRectZero];
         [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
         
         [CATransaction begin];

@@ -17,9 +17,9 @@
 #import <pthread.h>
 
 typedef struct {
-	NSString *name;                 // Mode name
-	HLSLoggerLevel level;           // Corresponding level
-    NSString *rgbValues;            // RGB values for XcodeColors
+	__unsafe_unretained NSString *name;                 // Mode name
+	HLSLoggerLevel level;                               // Corresponding level
+    __unsafe_unretained NSString *rgbValues;            // RGB values for XcodeColors
 } HLSLoggerMode;
 
 static const HLSLoggerMode kLoggerModeDebug = {@"DEBUG", 0, nil};
@@ -33,8 +33,8 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 @interface HLSLogger ()
 
-@property (nonatomic, retain) NSString *logDirectoryPath;
-@property (nonatomic, retain) NSFileHandle *logFileHandle;
+@property (nonatomic, strong) NSString *logDirectoryPath;
+@property (nonatomic, strong) NSFileHandle *logFileHandle;
 
 @end
 
@@ -65,7 +65,6 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 	if ((self = [super init])) {
         if (! [logDirectoryPath isFilled]) {
             NSLog(@"A log directory is mandatory");
-            [self release];
             return nil;
         }
         
@@ -84,14 +83,6 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-- (void)dealloc
-{
-    self.logDirectoryPath = nil;
-    self.logFileHandle = nil;
-
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -306,8 +297,8 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 - (void)showSettings
 {
-    HLSLoggerViewController *loggerViewController = [[[HLSLoggerViewController alloc] initWithLogger:self] autorelease];
-    UINavigationController *loggerNavigationController = [[[UINavigationController alloc] initWithRootViewController:loggerViewController] autorelease];
+    HLSLoggerViewController *loggerViewController = [[HLSLoggerViewController alloc] initWithLogger:self];
+    UINavigationController *loggerNavigationController = [[UINavigationController alloc] initWithRootViewController:loggerViewController];
     UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
     if (! rootViewController) {
         return;

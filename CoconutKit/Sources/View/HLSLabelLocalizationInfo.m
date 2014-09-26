@@ -19,9 +19,9 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 @interface HLSLabelLocalizationInfo ()
 
-@property (nonatomic, retain) NSString *localizationKey;
-@property (nonatomic, retain) NSString *tableName;
-@property (nonatomic, retain) NSString *bundleName;
+@property (nonatomic, strong) NSString *localizationKey;
+@property (nonatomic, strong) NSString *tableName;
+@property (nonatomic, strong) NSString *bundleName;
 @property (nonatomic, assign) HLSLabelRepresentation representation;
 
 @end
@@ -45,15 +45,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-- (void)dealloc
-{
-    self.localizationKey = nil;
-    self.tableName = nil;
-    self.bundleName = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Parsing text

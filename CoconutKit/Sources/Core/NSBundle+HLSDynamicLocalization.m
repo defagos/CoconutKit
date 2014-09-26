@@ -22,7 +22,7 @@ static void initialize(void);
 
 NSString *HLSLanguageForLocalization(NSString *localization)
 {
-    NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:localization] autorelease];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:localization];
     return [[locale displayNameForKey:NSLocaleLanguageCode value:localization] capitalizedString];
 }
 
@@ -54,8 +54,6 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
 
 static void setDefaultLocalization(void)
 {
-    [currentLocalization release];
-    
     NSArray *mainBundleLocalizations = [[NSBundle mainBundle] localizations];
     NSArray *preferredLocalizations = [NSBundle preferredLocalizationsFromArray:mainBundleLocalizations];
     if ([preferredLocalizations count] > 0) {
@@ -95,11 +93,9 @@ static void setDefaultLocalization(void)
     }
     else {
         if (currentLocalization == localization) {
-            [previousLocalization release];
             return;
         }
         
-        [currentLocalization release];
         currentLocalization = [localization copy];
     }
     
@@ -108,7 +104,6 @@ static void setDefaultLocalization(void)
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:currentLocalization forKey:HLSPreferredLocalizationDefaultsKey];
-    [previousLocalization release];
 }
 
 // MARK: - Localized strings
