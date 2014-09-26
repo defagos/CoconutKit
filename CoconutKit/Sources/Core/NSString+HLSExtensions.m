@@ -13,14 +13,6 @@
 #import "HLSLogger.h"
 #import "NSData+HLSExtensions.h"
 
-NSString *HLSUUID(void)
-{
-    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
-    CFStringRef uuidStringRef = CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
-    CFRelease(uuidRef);
-    return CFBridgingRelease(uuidStringRef);
-}
-
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
     // Hash calculation

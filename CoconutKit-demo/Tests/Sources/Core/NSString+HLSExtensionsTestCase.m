@@ -12,11 +12,6 @@
 
 #pragma mark Tests
 
-- (void)testUUID
-{
-    GHAssertNotNil(HLSUUID(), nil);
-}
-
 - (void)testTrim
 {
     NSString *string = [NSString stringWithFormat:@" \t    Hello, World!    \t   "];
