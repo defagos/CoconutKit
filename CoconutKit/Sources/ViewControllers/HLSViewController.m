@@ -13,6 +13,7 @@
 #import "HLSLogger.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSObject+HLSExtensions.h"
+#import "UIViewController+HLSExtensions.h"
 
 @implementation HLSViewController
 
@@ -165,6 +166,17 @@
         class = class_getSuperclass(class);
     }
     return nil;
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; view: %@; superview: %@>",
+            [self class],
+            self,
+            self.viewIfLoaded,
+            self.viewIfLoaded.superview];
 }
 
 @end
