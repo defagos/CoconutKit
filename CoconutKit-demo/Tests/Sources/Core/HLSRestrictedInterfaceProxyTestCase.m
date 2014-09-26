@@ -108,10 +108,10 @@
 
 - (void)testCreationAndRemoval
 {
-    FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
+    FullInterfaceTestClass *target = [[FullInterfaceTestClass alloc] init];
     
     id<CompatibleRestrictedInterfaceA> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
-    GHAssertNil([[[HLSRestrictedInterfaceProxy alloc] initWithTarget:proxyB protocol:@protocol(CompatibleRestrictedInterfaceBSubset)] autorelease], nil);
+    GHAssertNil([[HLSRestrictedInterfaceProxy alloc] initWithTarget:proxyB protocol:@protocol(CompatibleRestrictedInterfaceBSubset)], nil);
     GHAssertFalse([target isProxy], nil);
     GHAssertTrue([proxyB isProxy], nil);
     
@@ -132,7 +132,7 @@
 
 - (void)testConformance
 {
-    FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
+    FullInterfaceTestClass *target = [[FullInterfaceTestClass alloc] init];
     
     id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
     id<CompatibleRestrictedInterfaceC> proxyC = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
@@ -161,7 +161,7 @@
 
 - (void)testInstanceMethodCalls
 {
-    FullInterfaceTestClass *target = [[[FullInterfaceTestClass alloc] init] autorelease];
+    FullInterfaceTestClass *target = [[FullInterfaceTestClass alloc] init];
     
     id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
     GHAssertEquals([proxyB method3], (NSInteger)3, nil);

@@ -12,22 +12,12 @@
 
 @interface NSManagedObject_HLSExtensionsTestCase ()
 
-@property (nonatomic, retain) Person *person1;
-@property (nonatomic, retain) Person *person2;
+@property (nonatomic, strong) Person *person1;
+@property (nonatomic, strong) Person *person2;
 
 @end
 
 @implementation NSManagedObject_HLSExtensionsTestCase
-
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.person1 = nil;
-    self.person2 = nil;
-    
-    [super dealloc];
-}
 
 #pragma mark Test setup and tear down
 

@@ -68,12 +68,12 @@
 		6F2B30C61929BE4A003D4C2C /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F2B30711929BE4A003D4C2C /* Sample.txt */; };
 		6F2B30C71929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30751929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
 		6F2B30C81929BE4A003D4C2C /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30771929BE4A003D4C2C /* HLSErrorTestCase.m */; };
-		6F2B30C91929BE4A003D4C2C /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F2B30C91929BE4A003D4C2C /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */; };
 		6F2B30CA1929BE4A003D4C2C /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */; };
-		6F2B30CB1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307D1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F2B30CB1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307D1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m */; };
 		6F2B30CC1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307F1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.m */; };
 		6F2B30CD1929BE4A003D4C2C /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30811929BE4A003D4C2C /* HLSRuntimeTestCase.m */; };
-		6F2B30CE1929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30831929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F2B30CE1929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30831929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m */; };
 		6F2B30CF1929BE4A003D4C2C /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30851929BE4A003D4C2C /* HLSValidatorsTestCase.m */; };
 		6F2B30D01929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30871929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.m */; };
 		6F2B30D11929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30891929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m */; };
@@ -83,7 +83,7 @@
 		6F2B30D51929BE4A003D4C2C /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30911929BE4A003D4C2C /* NSDictionary+HLSExtensionsTestCase.m */; };
 		6F2B30D61929BE4A003D4C2C /* NSNumber+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30931929BE4A003D4C2C /* NSNumber+HLSExtensionsTestCase.m */; };
 		6F2B30D71929BE4A003D4C2C /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30951929BE4A003D4C2C /* NSObject+HLSExtensionsTestCase.m */; };
-		6F2B30D81929BE4A003D4C2C /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30971929BE4A003D4C2C /* NSStream+HLSExtensionsTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F2B30D81929BE4A003D4C2C /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30971929BE4A003D4C2C /* NSStream+HLSExtensionsTestCase.m */; };
 		6F2B30D91929BE4A003D4C2C /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30991929BE4A003D4C2C /* NSString+HLSExtensionsTestCase.m */; };
 		6F2B30DA1929BE4A003D4C2C /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B309B1929BE4A003D4C2C /* NSTimeZone+HLSExtensionsTestCase.m */; };
 		6F2B30DB1929BE4A003D4C2C /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B309E1929BE4A003D4C2C /* NSManagedObject+HLSExtensionsTestCase.m */; };
@@ -204,7 +204,7 @@
 		6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */; };
 		6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6FAB922016DA70BE00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
-		6FB007E1195304360082D915 /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007E0195304360082D915 /* HLSGeometryTestCase.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB007E1195304360082D915 /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007E0195304360082D915 /* HLSGeometryTestCase.m */; };
 		6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; };
 		6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
 		6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
@@ -2310,6 +2310,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2335,6 +2336,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

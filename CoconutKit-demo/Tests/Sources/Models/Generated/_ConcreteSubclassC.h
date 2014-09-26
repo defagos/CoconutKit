@@ -5,9 +5,9 @@
 #import "ConcreteSubclassB.h"
 
 extern const struct ConcreteSubclassCAttributes {
-	 NSString *codeMandatoryStringC;
-	 NSString *modelMandatoryBoundedPatternStringC;
-	 NSString *noValidationNumberC;
+	__unsafe_unretained NSString *codeMandatoryStringC;
+	__unsafe_unretained NSString *modelMandatoryBoundedPatternStringC;
+	__unsafe_unretained NSString *noValidationNumberC;
 } ConcreteSubclassCAttributes;
 
 @interface ConcreteSubclassCID : ConcreteSubclassBID {}
@@ -19,15 +19,15 @@ extern const struct ConcreteSubclassCAttributes {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) ConcreteSubclassCID* objectID;
 
-@property (nonatomic, retain) NSString* codeMandatoryStringC;
+@property (nonatomic, strong) NSString* codeMandatoryStringC;
 
 //- (BOOL)validateCodeMandatoryStringC:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSString* modelMandatoryBoundedPatternStringC;
+@property (nonatomic, strong) NSString* modelMandatoryBoundedPatternStringC;
 
 //- (BOOL)validateModelMandatoryBoundedPatternStringC:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSNumber* noValidationNumberC;
+@property (nonatomic, strong) NSNumber* noValidationNumberC;
 
 @property (atomic) int16_t noValidationNumberCValue;
 - (int16_t)noValidationNumberCValue;

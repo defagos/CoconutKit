@@ -4,8 +4,8 @@
 #import <CoreData/CoreData.h>
 
 extern const struct AbstractClassAAttributes {
-	 NSString *codeMandatoryNotEmptyStringA;
-	 NSString *noValidationStringA;
+	__unsafe_unretained NSString *codeMandatoryNotEmptyStringA;
+	__unsafe_unretained NSString *noValidationStringA;
 } AbstractClassAAttributes;
 
 @interface AbstractClassAID : NSManagedObjectID {}
@@ -17,11 +17,11 @@ extern const struct AbstractClassAAttributes {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) AbstractClassAID* objectID;
 
-@property (nonatomic, retain) NSString* codeMandatoryNotEmptyStringA;
+@property (nonatomic, strong) NSString* codeMandatoryNotEmptyStringA;
 
 //- (BOOL)validateCodeMandatoryNotEmptyStringA:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSString* noValidationStringA;
+@property (nonatomic, strong) NSString* noValidationStringA;
 
 //- (BOOL)validateNoValidationStringA:(id*)value_ error:(NSError**)error_;
 

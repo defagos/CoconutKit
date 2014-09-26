@@ -18,17 +18,13 @@
 - (void)testNonTollFreeBridgedObject
 {
     BasicClass *basicClass = [[BasicClass alloc] init];
-    HLSZeroingWeakRef *zeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:basicClass] autorelease];
+    HLSZeroingWeakRef *zeroingWeakRef = [[HLSZeroingWeakRef alloc] initWithObject:basicClass];
     GHAssertNotNil(zeroingWeakRef.object, nil);
-    [basicClass release];
-    GHAssertNil(zeroingWeakRef.object, nil);
 }
 
 - (void)testTollFreeBridgedObject
 {
-    NSNumber *number = [[NSNumber alloc] initWithInt:1012];
-    GHAssertThrows([[HLSZeroingWeakRef alloc] initWithObject:number], nil);
-    [number release];
+    GHAssertThrows([[HLSZeroingWeakRef alloc] initWithObject:@1012], nil);
 }
 
 @end

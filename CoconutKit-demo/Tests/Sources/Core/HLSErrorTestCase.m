@@ -10,28 +10,15 @@
 
 @interface HLSErrorTestCase ()
 
-@property (nonatomic, retain) HLSError *error1;
-@property (nonatomic, retain) HLSError *error2;
-@property (nonatomic, retain) HLSError *error3;
-@property (nonatomic, retain) HLSError *error4;
-@property (nonatomic, retain) HLSError *error5;
+@property (nonatomic, strong) HLSError *error1;
+@property (nonatomic, strong) HLSError *error2;
+@property (nonatomic, strong) HLSError *error3;
+@property (nonatomic, strong) HLSError *error4;
+@property (nonatomic, strong) HLSError *error5;
 
 @end
 
 @implementation HLSErrorTestCase
-
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.error1 = nil;
-    self.error2 = nil;
-    self.error3 = nil;
-    self.error4 = nil;
-    self.error5 = nil;
-    
-    [super dealloc];
-}
 
 #pragma mark Test setup and tear down
 
