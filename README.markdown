@@ -11,7 +11,7 @@ CoconutKit is distributed under a permissive [MIT license](http://www.opensource
 CoconutKit provides your with several kinds of classes covering various aspects of iOS development:
 
 * High-quality view controller containers. These containers are the result of two years of hard work, and exceed by far the capabilities of UIKit built-in containers. In particular, view controllers can be combined or stacked, using any kind of transition animation (even yours). Your applications will never look the same as before!
-* View controller containment API (compatible with iOS 4), richer, easier to use and far more powerful than the iOS 5 UIKit containment API. Writing your own view controller containers correctly has never been easier!
+* View controller containment API, richer, easier to use and far more powerful than the UIKit containment API. Writing your own view controller containers correctly has never been easier!
 * Easy way to change the language used by an application at runtime, without having to alter system preferences
 * Localization of labels and buttons directly in nib files, without having to create and bind outlets anymore
 * Classes for creating animations made of several UIView block-based or Core Animation-based sub-animations in a declarative way. Such animations can be paused, reversed, played instantaneously, cancelled, repeated, and even more! Animations have never been so fun and easy to create!
@@ -72,11 +72,6 @@ You can grab the latest tagged binary package available from [the project downlo
 * `QuartzCore.framework`
 * `QuickLook.framework`
 * `UIKit.framework`
-
-If your project targets iOS 4 as well as iOS 5 and above, you might encounter _symbol not found_ issues at runtime. When this happens:
-
-* If the symbol belongs to UIKit, then weakly link your target with `UIKit.framework` (click on your target, select _Build Phases_, and under _Link Binary With Libraries_ set `UIKit.framework` as optional)
-* If the symbol begins with `_objc`, then link your target with the ARC Lite libraries by adding the `-fobjc-arc` flag to your target `Other Linker Flags` settting
 
 #### Adding source files using CocoaPods
 
@@ -160,7 +155,7 @@ Several schemes are available:
 
 #### With which versions of iOS is CoconutKit compatible?
 
-CoconutKit is compatible with iOS 4 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover this is not the case.
+CoconutKit is compatible with iOS 7 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover this is not the case.
 
 #### With which versions of Xcode and the iOS SDK is CoconutKit compatible?
 
