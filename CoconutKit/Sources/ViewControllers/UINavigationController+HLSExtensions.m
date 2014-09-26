@@ -57,7 +57,7 @@ static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientation
 
 static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationController *self, SEL _cmd)
 {
-    // On iOS 6, the container always decides first (does not look at children)
+    // The container always decides first (does not look at children)
     if (! (*s_UINavigationController__shouldAutorotate_Imp)(self, _cmd)) {
         return NO;
     }
@@ -91,7 +91,7 @@ static BOOL swizzled_UINavigationController__shouldAutorotate_Imp(UINavigationCo
 
 static NSUInteger swizzled_UINavigationController__supportedInterfaceOrientations_Imp(UINavigationController *self, SEL _cmd)
 {
-    // On iOS 6, the container always decides first (does not look at children)
+    // The container always decides first (does not look at children)
     NSUInteger containerSupportedInterfaceOrientations = (*s_UINavigationController__supportedInterfaceOrientations_Imp)(self, _cmd);
     
     switch (self.autorotationMode) {

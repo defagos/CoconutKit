@@ -21,7 +21,6 @@ void (*UITextField__setText_Imp)(id, SEL, id) = NULL;                       // e
 static void (*UITextField__setAttributedText_Imp)(id, SEL, id) = NULL;      // external linkage
 
 // Swizzled method implementations
-static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSString *text);
 static void swizzled_UITextField__setAttributedText_Imp(UITextField *self, SEL _cmd, NSAttributedString *attributedText);
 
 // Extern declarations
@@ -36,9 +35,6 @@ extern BOOL injectedManagedObjectValidation(void);
 
 + (void)load
 {
-    UITextField__setText_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                @selector(setText:),
-                                                                                (IMP)swizzled_UITextField__setText_Imp);
     UITextField__setAttributedText_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
                                                                                 @selector(setAttributedText:),
                                                                                 (IMP)swizzled_UITextField__setAttributedText_Imp);
@@ -167,23 +163,7 @@ extern BOOL injectedManagedObjectValidation(void);
 #pragma mark -
 #pragma mark Swizzled method implementations
 
-// Swizzled so that changes made to the text field (either programmatically or interactively) are trapped. We need to swizzle setText: prior
-// to iOS 6 and setAttributedText: on iOS 7 (respectively called by _endedEditing when exiting edit mode, on iOS 6 and iOS 7 respectively)
-
-// TODO: Drop setText: swizzle when CoconutKit supports iOS 7 and above only
-static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSString *text)
-{
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    if (validator) {
-        id value = nil;
-        [validator getValue:&value forString:text];
-        [validator setValue:value];
-    }
-    else {
-        (*UITextField__setText_Imp)(self, _cmd, text);
-    }    
-}
-
+// Swizzled so that changes made to the text field (either programmatically or interactively) are trapped
 static void swizzled_UITextField__setAttributedText_Imp(UITextField *self, SEL _cmd, NSAttributedString *attributedText)
 {
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);

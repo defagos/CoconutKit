@@ -57,7 +57,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
 
 static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController *self, SEL _cmd)
 {
-    // On iOS 6, the container always decides first (does not look at children)
+    // The container always decides first (does not look at children)
     if (! (*s_UITabBarController__shouldAutorotate_Imp)(self, _cmd)) {
         return NO;
     }
@@ -85,7 +85,7 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
 
 static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Imp(UITabBarController *self, SEL _cmd)
 {
-    // On iOS 6, the container always decides first (does not look at children)
+    // The container always decides first (does not look at children)
     NSUInteger containerSupportedInterfaceOrientations = (*s_UITabBarController__supportedInterfaceOrientations_Imp)(self, _cmd);
     
     switch (self.autorotationMode) {
