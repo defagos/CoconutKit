@@ -17,12 +17,6 @@
     GHAssertNotNil(HLSUUID(), nil);
 }
 
-- (void)testBase64Encoding
-{
-    GHAssertEqualStrings([NSString stringWithBase64EncodedString:@"SGVsbG8sIFdvcmxkIQ=="], @"Hello, World!", nil);
-    GHAssertEqualStrings([@"Hello, World!" base64EncodedString], @"SGVsbG8sIFdvcmxkIQ==", nil);
-}
-
 - (void)testTrim
 {
     NSString *string = [NSString stringWithFormat:@" \t    Hello, World!    \t   "];
