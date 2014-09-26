@@ -11,7 +11,6 @@
 @interface WebViewDemoViewController ()
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
-@property (nonatomic, weak) IBOutlet UISwitch *scrollEnabledSwitch;
 
 @end
 
@@ -23,14 +22,11 @@
 {
     [super viewDidLoad];
     
-    [self.webView makeBackgroundTransparent];
-    self.webView.shadowHidden = YES;
+    self.webView.transparent = YES;
         
     NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"sample_text" ofType:@"html"];
     NSString *htmlText = [NSString stringWithContentsOfFile:htmlFilePath encoding:NSUTF8StringEncoding error:NULL];
     [self.webView loadHTMLString:htmlText baseURL:[[NSBundle mainBundle] bundleURL]];
-    
-    self.scrollEnabledSwitch.on = self.webView.scrollView.scrollEnabled;
 }
 
 #pragma mark Localization
@@ -40,13 +36,6 @@
     [super localize];
     
     self.title = NSLocalizedString(@"Web view", nil);
-}
-
-#pragma mark Event callbacks
-
-- (IBAction)toggleScrollEnabled:(id)sender
-{
-    self.webView.scrollView.scrollEnabled = self.scrollEnabledSwitch.on;
 }
 
 @end
