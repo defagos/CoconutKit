@@ -18,7 +18,7 @@
 
 @interface HLSStackController ()
 
-@property (nonatomic, retain) HLSContainerStack *containerStack;
+@property (nonatomic, strong) HLSContainerStack *containerStack;
 @property (nonatomic, assign) NSUInteger capacity;
 
 @end
@@ -32,9 +32,9 @@
     if ((self = [super init])) {
         self.autorotationMode = HLSAutorotationModeContainer;
         
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self
-                                                                                 behavior:HLSContainerStackBehaviorFixedRoot
-                                                                                 capacity:capacity] autorelease];
+        self.containerStack = [[HLSContainerStack alloc] initWithContainerViewController:self
+                                                                                behavior:HLSContainerStackBehaviorFixedRoot
+                                                                                capacity:capacity];
         self.containerStack.autorotationMode = self.autorotationMode;
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
@@ -69,9 +69,9 @@
 {
     [super awakeFromNib];
     
-    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self
-                                                                             behavior:HLSContainerStackBehaviorFixedRoot
-                                                                             capacity:self.capacity] autorelease];
+    self.containerStack = [[HLSContainerStack alloc] initWithContainerViewController:self
+                                                                            behavior:HLSContainerStackBehaviorFixedRoot
+                                                                            capacity:self.capacity];
     self.containerStack.autorotationMode = self.autorotationMode;
     self.containerStack.delegate = self;
     
@@ -91,21 +91,6 @@
                                        reason:reason
                                      userInfo:nil];
     }
-}
-
-- (void)dealloc
-{
-    self.containerStack = nil;
-    self.delegate = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    [self.containerStack releaseViews];
 }
 
 #pragma mark Accessors and mutators
@@ -157,12 +142,6 @@
 
 #pragma mark View lifecycle
 
-// Deprecated since iOS 6
-- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
-{
-    return NO;
-}
-
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
 {
     return NO;
@@ -177,7 +156,7 @@
 {
     // Take all space available
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
-    self.view = [[[UIView alloc] initWithFrame:applicationFrame] autorelease];
+    self.view = [[UIView alloc] initWithFrame:applicationFrame];
     self.view.autoresizingMask = HLSViewAutoresizingAll;
     
     self.containerStack.containerView = self.view;

@@ -3,7 +3,6 @@
 
 #import <CoreData/CoreData.h>
 
-
 extern const struct PersonAttributes {
 	 NSString *firstName;
 	 NSString *lastName;
@@ -14,14 +13,8 @@ extern const struct PersonRelationships {
 	 NSString *houses;
 } PersonRelationships;
 
-extern const struct PersonFetchedProperties {
-} PersonFetchedProperties;
-
 @class BankAccount;
 @class House;
-
-
-
 
 @interface PersonID : NSManagedObjectID {}
 @end
@@ -30,56 +23,35 @@ extern const struct PersonFetchedProperties {
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-- (PersonID*)objectID;
-
-
-
-
+@property (nonatomic, readonly, strong) PersonID* objectID;
 
 @property (nonatomic, retain) NSString* firstName;
 
-
-
 //- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
-
-
-
-
 
 @property (nonatomic, retain) NSString* lastName;
 
-
-
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
-
-
-
-
 
 @property (nonatomic, retain) NSSet *accounts;
 
 - (NSMutableSet*)accountsSet;
 
-
-
-
 @property (nonatomic, retain) NSSet *houses;
 
 - (NSMutableSet*)housesSet;
 
-
-
-
-
 @end
 
-@interface _Person (CoreDataGeneratedAccessors)
-
+@interface _Person (AccountsCoreDataGeneratedAccessors)
 - (void)addAccounts:(NSSet*)value_;
 - (void)removeAccounts:(NSSet*)value_;
 - (void)addAccountsObject:(BankAccount*)value_;
 - (void)removeAccountsObject:(BankAccount*)value_;
 
+@end
+
+@interface _Person (HousesCoreDataGeneratedAccessors)
 - (void)addHouses:(NSSet*)value_;
 - (void)removeHouses:(NSSet*)value_;
 - (void)addHousesObject:(House*)value_;
@@ -89,27 +61,16 @@ extern const struct PersonFetchedProperties {
 
 @interface _Person (CoreDataGeneratedPrimitiveAccessors)
 
-
 - (NSString*)primitiveFirstName;
 - (void)setPrimitiveFirstName:(NSString*)value;
-
-
-
 
 - (NSString*)primitiveLastName;
 - (void)setPrimitiveLastName:(NSString*)value;
 
-
-
-
-
 - (NSMutableSet*)primitiveAccounts;
 - (void)setPrimitiveAccounts:(NSMutableSet*)value;
 
-
-
 - (NSMutableSet*)primitiveHouses;
 - (void)setPrimitiveHouses:(NSMutableSet*)value;
-
 
 @end

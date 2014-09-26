@@ -10,28 +10,19 @@
 
 @interface KeyboardAvoidingScrollViewDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) IBOutlet UIView *backgroundView;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UIView *backgroundView;
 
-@property (nonatomic, retain) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
 
-@property (nonatomic, retain) IBOutlet UITextView *textView;
+@property (nonatomic, weak) IBOutlet UITextView *textView;
 
-@property (nonatomic, retain) IBOutlet UIView *smallCustomInputView;
-@property (nonatomic, retain) IBOutlet UIView *largeCustomInputView;
+@property (nonatomic, weak) IBOutlet UIView *smallCustomInputView;
+@property (nonatomic, weak) IBOutlet UIView *largeCustomInputView;
 
 @end
 
 @implementation KeyboardAvoidingScrollViewDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.textFields = nil;
-}
 
 #pragma mark View lifecycle
 

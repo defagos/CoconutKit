@@ -10,22 +10,12 @@
 
 @interface FontsDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UILabel *label;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UILabel *label;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @end
 
 @implementation FontsDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.label = nil;
-    self.webView = nil;
-}
 
 #pragma mark View lifecycle
 

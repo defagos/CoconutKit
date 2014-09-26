@@ -13,13 +13,6 @@
 #import "NSArray+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
 
-@interface HLSContainerGroupView ()
-
-@property (nonatomic, retain) UIView *savedFrontContentView;
-@property (nonatomic, retain) UIView *savedBackContentView;
-
-@end
-
 @implementation HLSContainerGroupView
 
 #pragma mark Object creation and destruction
@@ -29,7 +22,6 @@
     if ((self = [super initWithFrame:frame])) {
         if (! frontContentView) {
             HLSLoggerError(@"A front content view is mandatory");
-            [self release];
             return nil;
         }
         
@@ -38,7 +30,7 @@
         
         // Wrap into a transparent view with alpha = 1.f. This ensures that no animation applied on frontContentView relies
         // on its initial alpha. The transform is always set to identity, corresponding to an initial portrait orientation
-        UIView *frontView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+        UIView *frontView = [[UIView alloc] initWithFrame:self.bounds];
         frontView.transform = CGAffineTransformIdentity;
         frontView.backgroundColor = [UIColor clearColor];
         frontView.autoresizingMask = HLSViewAutoresizingAll;
@@ -56,14 +48,6 @@
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-- (void)dealloc
-{
-    self.savedFrontContentView = nil;
-    self.savedBackContentView = nil;
-
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
@@ -94,14 +78,14 @@
     if (! backView) {
         // Wrap into a transparent view with alpha = 1.f. This ensures that no animation applied on backContentView relies
         // on its initial alpha
-        backView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+        backView = [[UIView alloc] initWithFrame:self.bounds];
         backView.backgroundColor = [UIColor clearColor];
         backView.autoresizingMask = HLSViewAutoresizingAll;
         [self insertSubview:backView atIndex:0];
     }
     
-    // Remark: If backContentView was previously added to another superview, it is removed while kept alive. No need to
-    //         call -removeFromSuperview and no need for a retain-autorelease. See UIView documentation
+    // Remark: If backContentView was previously added to another superview, it is removed while kept alive. No need for
+    //         reference counting gymmastics, see UIView documentation
     [backView addSubview:backContentView];
 }
 

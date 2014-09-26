@@ -23,20 +23,6 @@
 
 @implementation RootSplitViewDemoController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.portraitSwitch = nil;
-    self.landscapeRightSwitch = nil;
-    self.landscapeLeftSwitch = nil;
-    self.portraitUpsideDownSwitch = nil;
-    self.autorotationBackgroundView = nil;
-    self.autorotationModeSegmentedControl = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad

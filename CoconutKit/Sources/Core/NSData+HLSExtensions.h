@@ -9,36 +9,6 @@
 @interface NSData (HLSExtensions)
 
 /**
- * Return a data object decoded from a base 64 string
- */
-+ (instancetype)dataWithBase64EncodedString:(NSString *)base64EncodedString;
-
-/**
- * Return a data object decoded from base 64, UTF-8 data
- */
-+ (instancetype)dataWithBase64EncodedData:(NSData *)base64EncodedData;
-
-/**
- * Create an NSData decoded from a base 64 encoded string
- */
-- (id)initWithBase64EncodedString:(NSString *)base64String;
-
-/**
- * Create an NSData decoded from base 64, UTF-8 encoded data
- */
-- (id)initWithBase64EncodedData:(NSData *)base64Data;
-
-/**
- * Return the data as a base 64 encoded string
- */
-- (NSString *)base64EncodedString;
-
-/**
- * Return the data encoded in base 64, UTF-8
- */
-- (NSData *)base64EncodedData;
-
-/**
  * Calculates the MD2 hash
  */
 - (NSString *)md2hash;

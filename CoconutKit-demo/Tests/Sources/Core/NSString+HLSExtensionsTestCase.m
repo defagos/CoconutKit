@@ -12,17 +12,6 @@
 
 #pragma mark Tests
 
-- (void)testUUID
-{
-    GHAssertNotNil(HLSUUID(), nil);
-}
-
-- (void)testBase64Encoding
-{
-    GHAssertEqualStrings([NSString stringWithBase64EncodedString:@"SGVsbG8sIFdvcmxkIQ=="], @"Hello, World!", nil);
-    GHAssertEqualStrings([@"Hello, World!" base64EncodedString], @"SGVsbG8sIFdvcmxkIQ==", nil);
-}
-
 - (void)testTrim
 {
     NSString *string = [NSString stringWithFormat:@" \t    Hello, World!    \t   "];
@@ -68,7 +57,7 @@
     // to the first half of the table (containing control characters) using %c (since there is no encoding issue there),
     // and the remaining half using \u
     //
-    // Remark: I expected +[NSString defaultCStringEncoding] to return UTF-8 on iOS 7, but this is not the case. Maybe I
+    // Remark: I expected +[NSString defaultCStringEncoding] to return UTF-8 on iOS >= 7, but this is not the case. Maybe I
     //         haven't clearlay understood what this method does, or there is a bug somewhere
     
     // First half of the ASCII table

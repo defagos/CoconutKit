@@ -138,12 +138,9 @@
 "Reverse"="Reverse";
 "Root view controller"="Root view controller";
 "Scroll view avoiding the keyboard"="Scroll view avoiding the keyboard";
-"Scrolling"="Scrolling";
 "Search books"="Search books";
 "Section end"="Section end";
 "Segues"="Segues";
-"Segues (not available in bundle)"="Segues (not available in bundle)";
-"Segues (not available for iOS 4)"="Segues (not available for iOS 4)";
 "Single view animation"="Single view animation";
 "Size"="Size";
 "Slideshow"="Slideshow";

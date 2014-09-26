@@ -19,15 +19,15 @@ static NSArray *s_folders = nil;
 
 @interface CursorDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet HLSCursor *weekDaysCursor;
-@property (nonatomic, retain) IBOutlet UILabel *weekDayIndexLabel;
-@property (nonatomic, retain) IBOutlet HLSCursor *randomRangeCursor;
-@property (nonatomic, retain) IBOutlet UILabel *randomRangeIndexLabel;
-@property (nonatomic, retain) IBOutlet UISlider *widthFactorSlider;
-@property (nonatomic, retain) IBOutlet UISlider *heightFactorSlider;
-@property (nonatomic, retain) IBOutlet HLSCursor *timeScalesCursor;
-@property (nonatomic, retain) IBOutlet HLSCursor *foldersCursor;
-@property (nonatomic, retain) IBOutlet HLSCursor *mixedFoldersCursor;
+@property (nonatomic, weak) IBOutlet HLSCursor *weekDaysCursor;
+@property (nonatomic, weak) IBOutlet UILabel *weekDayIndexLabel;
+@property (nonatomic, weak) IBOutlet HLSCursor *randomRangeCursor;
+@property (nonatomic, weak) IBOutlet UILabel *randomRangeIndexLabel;
+@property (nonatomic, weak) IBOutlet UISlider *widthFactorSlider;
+@property (nonatomic, weak) IBOutlet UISlider *heightFactorSlider;
+@property (nonatomic, weak) IBOutlet HLSCursor *timeScalesCursor;
+@property (nonatomic, weak) IBOutlet HLSCursor *foldersCursor;
+@property (nonatomic, weak) IBOutlet HLSCursor *mixedFoldersCursor;
 
 @end
 
@@ -40,27 +40,10 @@ static NSArray *s_folders = nil;
 
 + (void)initialize
 {
-    s_weekDays = [[NSDateFormatter orderedWeekdaySymbols] retain];    
-    s_completeRange = [[NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
-                      @"11", @"12", @"13", @"14", @"15", @"16", nil] retain];
-    s_folders = [[NSArray arrayWithObjects:@"A-F", @"G-L", @"M-R", @"S-Z", nil] retain];
-}
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.weekDaysCursor = nil;
-    self.weekDayIndexLabel = nil;
-    self.randomRangeCursor = nil;
-    self.randomRangeIndexLabel = nil;
-    self.widthFactorSlider = nil;
-    self.heightFactorSlider = nil;
-    self.timeScalesCursor = nil;
-    self.foldersCursor = nil;
-    self.mixedFoldersCursor = nil;
+    s_weekDays = [NSDateFormatter orderedWeekdaySymbols];
+    s_completeRange = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
+                       @"11", @"12", @"13", @"14", @"15", @"16", nil];
+    s_folders = [NSArray arrayWithObjects:@"A-F", @"G-L", @"M-R", @"S-Z", nil];
 }
 
 #pragma mark View lifecycle
@@ -313,12 +296,11 @@ static NSArray *s_folders = nil;
     
     self.title = NSLocalizedString(@"Cursor", nil);
     
-    [s_timeScales release];
-    s_timeScales = [[NSArray arrayWithObjects:[NSLocalizedString(@"Year", nil) uppercaseString],
-                     [NSLocalizedString(@"Month", nil) uppercaseString],
-                     [NSLocalizedString(@"Week", nil) uppercaseString],
-                     [NSLocalizedString(@"Day", nil) uppercaseString],
-                     nil] retain];
+    s_timeScales = [NSArray arrayWithObjects:[NSLocalizedString(@"Year", nil) uppercaseString],
+                    [NSLocalizedString(@"Month", nil) uppercaseString],
+                    [NSLocalizedString(@"Week", nil) uppercaseString],
+                    [NSLocalizedString(@"Day", nil) uppercaseString],
+                    nil];
     
     [self.weekDaysCursor reloadData];
     [self.timeScalesCursor reloadData];

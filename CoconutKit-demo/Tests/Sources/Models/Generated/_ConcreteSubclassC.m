@@ -9,12 +9,6 @@ const struct ConcreteSubclassCAttributes ConcreteSubclassCAttributes = {
 	.noValidationNumberC = @"noValidationNumberC",
 };
 
-const struct ConcreteSubclassCRelationships ConcreteSubclassCRelationships = {
-};
-
-const struct ConcreteSubclassCFetchedProperties ConcreteSubclassCFetchedProperties = {
-};
-
 @implementation ConcreteSubclassCID
 @end
 
@@ -40,7 +34,7 @@ const struct ConcreteSubclassCFetchedProperties ConcreteSubclassCFetchedProperti
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"noValidationNumberCValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"noValidationNumberC"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -50,26 +44,11 @@ const struct ConcreteSubclassCFetchedProperties ConcreteSubclassCFetchedProperti
 	return keyPaths;
 }
 
-
-
-
 @dynamic codeMandatoryStringC;
-
-
-
-
-
 
 @dynamic modelMandatoryBoundedPatternStringC;
 
-
-
-
-
-
 @dynamic noValidationNumberC;
-
-
 
 - (int16_t)noValidationNumberCValue {
 	NSNumber *result = [self noValidationNumberC];
@@ -89,13 +68,5 @@ const struct ConcreteSubclassCFetchedProperties ConcreteSubclassCFetchedProperti
 	[self setPrimitiveNoValidationNumberC:[NSNumber numberWithShort:value_]];
 }
 
-
-
-
-
-
-
-
-
-
 @end
+

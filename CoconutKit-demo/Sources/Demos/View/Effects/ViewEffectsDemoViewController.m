@@ -10,22 +10,12 @@
 
 @interface ViewEffectsDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UIImageView *imageView1;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView2;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView1;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView2;
 
 @end
 
 @implementation ViewEffectsDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.imageView1 = nil;
-    self.imageView2 = nil;
-}
 
 #pragma mark View lifecycle
 

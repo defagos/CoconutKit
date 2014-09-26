@@ -19,18 +19,18 @@
 
 @interface HLSWebViewController ()
 
-@property (nonatomic, retain) NSURLRequest *request;
-@property (nonatomic, retain) NSURL *currentURL;
+@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic, strong) NSURL *currentURL;
 
-@property (nonatomic, retain) UIImage *refreshImage;
+@property (nonatomic, strong) UIImage *refreshImage;
 
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *goBackBarButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshBarButtonItem;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionBarButtonItem;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *goBackBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *actionBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) NSArray *actions;
 
@@ -48,28 +48,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.request = nil;
-    self.currentURL = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.webView = nil;
-    self.toolbar = nil;
-    self.goBackBarButtonItem = nil;
-    self.goForwardBarButtonItem = nil;
-    self.refreshBarButtonItem = nil;
-    self.actionBarButtonItem = nil;
-    self.activityIndicator = nil;
-    self.refreshImage = nil;
-}
-
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -77,9 +55,6 @@
     [super viewDidLoad];
     
     self.refreshImage = self.refreshBarButtonItem.image;
-    
-    // Start with the initial URL when the view gets (re)loaded
-    self.currentURL = nil;
     
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
@@ -212,11 +187,11 @@
     // We can also encounter other types of errors here (e.g. if a user clicks on two links consecutively on the same page. 
     // The first request is cancelled and ends with NSURLErrorCancelled)
     if ([error hasCode:NSURLErrorNotConnectedToInternet withinDomain:NSURLErrorDomain]) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:CoconutKitLocalizedString(@"Cannot Open Page", nil)
-                                                             message:CoconutKitLocalizedString(@"No Internet connection is available", nil)
-                                                            delegate:nil 
-                                                   cancelButtonTitle:HLSLocalizedStringFromUIKit(@"OK") 
-                                                   otherButtonTitles:nil] autorelease];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:CoconutKitLocalizedString(@"Cannot Open Page", nil)
+                                                            message:CoconutKitLocalizedString(@"No Internet connection is available", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                  otherButtonTitles:nil];
         [alertView show];
     }
 }
@@ -255,7 +230,7 @@
 {
     NSMutableArray *actions = [NSMutableArray array];
     
-    UIActionSheet *actionSheet = [[[UIActionSheet alloc] init] autorelease];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
     actionSheet.title = [self.currentURL absoluteString];
     actionSheet.delegate = self; 
     
@@ -282,7 +257,7 @@
 
 - (void)mailLink:(id)sender
 {
-    MFMailComposeViewController *mailComposeViewController = [[[MFMailComposeViewController alloc] init] autorelease];
+    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
     mailComposeViewController.mailComposeDelegate = self;
     [mailComposeViewController setSubject:self.title];
     [mailComposeViewController setMessageBody:[[self.webView.request URL] absoluteString] isHTML:NO];

@@ -12,9 +12,6 @@ const struct BankAccountRelationships BankAccountRelationships = {
 	.owner = @"owner",
 };
 
-const struct BankAccountFetchedProperties BankAccountFetchedProperties = {
-};
-
 @implementation BankAccountID
 @end
 
@@ -40,7 +37,7 @@ const struct BankAccountFetchedProperties BankAccountFetchedProperties = {
 
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
-	
+
 	if ([key isEqualToString:@"balanceValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"balance"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -50,12 +47,7 @@ const struct BankAccountFetchedProperties BankAccountFetchedProperties = {
 	return keyPaths;
 }
 
-
-
-
 @dynamic balance;
-
-
 
 - (double)balanceValue {
 	NSNumber *result = [self balance];
@@ -75,24 +67,9 @@ const struct BankAccountFetchedProperties BankAccountFetchedProperties = {
 	[self setPrimitiveBalance:[NSNumber numberWithDouble:value_]];
 }
 
-
-
-
-
 @dynamic name;
-
-
-
-
-
 
 @dynamic owner;
 
-	
-
-
-
-
-
-
 @end
+

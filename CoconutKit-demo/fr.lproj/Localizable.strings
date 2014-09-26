@@ -137,12 +137,9 @@
 "Reverse"="Inversée";
 "Root view controller"="View controller racine";
 "Scroll view avoiding the keyboard"="Vue scrollable évitant le clavier";
-"Scrolling"="Défilement";
 "Search books"="Rechercher un livre";
 "Section end"="Fin de section";
 "Segues"="Segues";
-"Segues (not available in bundle)"="Segues (pas disponible dans le bundle)";
-"Segues (not available for iOS 4)"="Segues (pas disponible pour iOS 4)";
 "Single view animation"="Animation d'une seule vue";
 "Size"="Taille";
 "Slideshow"="Slideshow";

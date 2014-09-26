@@ -196,11 +196,8 @@
         return [self dateFromComponents:components];
     }
     
-    // iOS 4 and above: The time zone can be specified in the date components. We do not want this method to be called 
-    // in such cases
-    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
-    NSAssert(! [components respondsToSelector:@selector(timeZone)] || ! [components timeZone], 
-             @"The time zone must not be specified in the date components");
+    // The time zone can be specified in the date components. We do not want this method to be called in such cases
+    NSAssert(! [components timeZone], @"The time zone must not be specified in the date components");
     
     NSDate *dateInCalendarTimeZone = [self dateFromComponents:components];
     return [timeZone dateWithSameComponentsAsDate:dateInCalendarTimeZone fromTimeZone:[self timeZone]];
@@ -215,12 +212,8 @@
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInCalendarTimeZone];
     
-    // iOS 4 and above only
-    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
     if (unitFlags & NSTimeZoneCalendarUnit) {
-        if ([dateComponents respondsToSelector:@selector(setTimeZone:)]) {
-            [dateComponents setTimeZone:timeZone];
-        }
+        [dateComponents setTimeZone:timeZone];
     }
     return dateComponents;
 }

@@ -12,28 +12,15 @@
 
 @interface RootNavigationDemoViewController ()
 
-@property (nonatomic, retain) IBOutlet UISwitch *portraitSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *landscapeRightSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *landscapeLeftSwitch;
-@property (nonatomic, retain) IBOutlet UISwitch *portraitUpsideDownSwitch;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+@property (nonatomic, weak) IBOutlet UISwitch *portraitSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *landscapeRightSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *landscapeLeftSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *portraitUpsideDownSwitch;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
 @end
 
 @implementation RootNavigationDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.portraitSwitch = nil;
-    self.landscapeRightSwitch = nil;
-    self.landscapeLeftSwitch = nil;
-    self.portraitUpsideDownSwitch = nil;
-    self.autorotationModeSegmentedControl = nil;
-}
 
 #pragma mark View lifecycle
 
@@ -197,7 +184,7 @@
 
 - (IBAction)push:(id)sender
 {
-    RootNavigationDemoViewController *rootNavigationDemoViewController = [[[RootNavigationDemoViewController alloc] init] autorelease];
+    RootNavigationDemoViewController *rootNavigationDemoViewController = [[RootNavigationDemoViewController alloc] init];
     [self.navigationController pushViewController:rootNavigationDemoViewController animated:YES];
 }
 
@@ -208,7 +195,7 @@
 
 - (IBAction)hideWithModal:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[MemoryWarningTestCoverViewController alloc] init];
     [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 

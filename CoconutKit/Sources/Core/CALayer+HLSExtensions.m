@@ -86,14 +86,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
 // See http://developer.apple.com/library/ios/#qa/qa1703/_index.html
 - (UIImage *)flattenedImage
 {
-    // >= iOS 4: Take the scale into account
-    if (UIGraphicsBeginImageContextWithOptions) {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.f /* use the device scale factor */);
-    }
-    // < iOS 4
-    else {
-        UIGraphicsBeginImageContext(self.bounds.size);
-    }
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.f /* use the device scale factor */);
     
     // -renderInContext: renders in the layer coordinate space, i.e. the origin of the layer is ignored. This has
     // to be fixed before creating the image

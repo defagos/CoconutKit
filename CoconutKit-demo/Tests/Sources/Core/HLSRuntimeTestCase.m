@@ -296,13 +296,7 @@
     unsigned int NSObject_numberOfRequiredInstanceMethods = 0;
     struct objc_method_description *NSObject_requiredInstanceMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), YES, YES, &NSObject_numberOfRequiredInstanceMethods);
     GHAssertNotNULL(NSObject_requiredInstanceMethodDescriptions, nil);
-    // Prior to iOS 7, -debugDescription is @required, even though marked as @optional. Fixed in iOS 7
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        GHAssertEquals(NSObject_numberOfRequiredInstanceMethods, (unsigned int)20, nil);
-    }
-    else {
-        GHAssertEquals(NSObject_numberOfRequiredInstanceMethods, (unsigned int)19, nil);
-    }
+    GHAssertEquals(NSObject_numberOfRequiredInstanceMethods, (unsigned int)19, nil);
     free(NSObject_requiredInstanceMethodDescriptions);
 
     unsigned int NSObject_numberOfOptionalClassMethods = 0;
@@ -314,13 +308,7 @@
     unsigned int NSObject_numberOfOptionalInstanceMethods = 0;
     struct objc_method_description *NSObject_optionalInstanceMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), NO, YES, &NSObject_numberOfOptionalInstanceMethods);
     GHAssertNotNULL(NSObject_requiredInstanceMethodDescriptions, nil);
-    // Prior to iOS 7, -debugDescription is @required, even though marked as @optional. Fixed in iOS 7
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        GHAssertEquals(NSObject_numberOfOptionalInstanceMethods, (unsigned int)0, nil);
-    }
-    else {
-        GHAssertEquals(NSObject_numberOfOptionalInstanceMethods, (unsigned int)1, nil);
-    }
+    GHAssertEquals(NSObject_numberOfOptionalInstanceMethods, (unsigned int)1, nil);
     free(NSObject_optionalInstanceMethodDescriptions);
     
     unsigned int RuntimeTestCompositeProtocol_numberOfRequiredClassMethods = 0;

@@ -37,9 +37,7 @@
  * been defined)
  *
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
- * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
- * when rebuilding a view which has been unloaded (typically after a view controller received a memory warning 
- * notification on iOS 4 & 5. Note that views are not unloaded anymore since iOS 6)
+ * non-animated, an animation reaches its end state instantaneously.
  *
  * Running animations (this includes animations which have been paused) are automatically paused and resumed (if they
  * were running before) when the application enters, respectively exits background. Note that this mechanism works 

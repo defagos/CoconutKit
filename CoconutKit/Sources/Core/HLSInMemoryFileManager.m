@@ -107,7 +107,7 @@
                                                                                               name:objectName
                                                                                               data:data];
             
-            NSString *UUID = HLSUUID();
+            NSString *UUID = [[NSUUID UUID] UUIDString];
             [items setObject:UUID forKey:objectName];
             [self.cache setObject:cacheEntry forKey:UUID cost:cacheEntry.cost];
         }
@@ -190,7 +190,7 @@
                                                                                                      name:destinationObjectName
                                                                                                      data:[sourceCacheEntry.data copy]];
         
-        NSString *UUID = HLSUUID();
+        NSString *UUID = [[NSUUID UUID] UUIDString];
         [destinationItems setObject:UUID forKey:destinationObjectName];
         [self.cache setObject:destinationCacheEntry forKey:UUID cost:destinationCacheEntry.cost];
     }

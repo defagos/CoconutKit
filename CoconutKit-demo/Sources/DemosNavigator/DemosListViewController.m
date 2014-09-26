@@ -105,36 +105,22 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
 
 @interface DemosListViewController ()
 
-@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation DemosListViewController
 
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.tableView = nil;
-}
-
 #pragma mark View lifecycle
-
-- (void)loadView
-{
-    self.tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain] autorelease];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.view = self.tableView;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.tableView.rowHeight = [HLSTableViewCell height];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -391,26 +377,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                     
                 case ViewControllersDemoIndexSegue: {
-                    cell.textLabel.textColor = [UIColor grayColor];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    
-                    // TODO: Cleanup this mess when CoconutKit compatible with iOS >= 5. Remove UIKit weak-linking in CoconutKit-demo
-                    if ([UIStoryboard class]) {
-                        // The compiled storyboard has a storyboardc extension
-                        if ([[NSBundle mainBundle] pathForResource:@"SegueDemo" ofType:@"storyboardc"]) {
-                            [UIStoryboard storyboardWithName:@"SegueDemo" bundle:nil];
-                            
-                            cell.textLabel.text = NSLocalizedString(@"Segues", nil);
-                            cell.textLabel.textColor = [UIColor blackColor];
-                            cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-                        }
-                        else {
-                            cell.textLabel.text = NSLocalizedString(@"Segues (not available in bundle)", nil);
-                        }
-                    }
-                    else {
-                        cell.textLabel.text = NSLocalizedString(@"Segues (not available for iOS 4)", nil);
-                    }
+                    cell.textLabel.text = NSLocalizedString(@"Segues", nil);
                     break;
                 }
 
@@ -439,12 +406,12 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexAnimation: {
             switch (indexPath.row) {
                 case AnimationDemoIndexAnimation: {
-                    demoViewController = [[[AnimationDemoViewController alloc] init] autorelease];
+                    demoViewController = [[AnimationDemoViewController alloc] init];
                     break;
                 }
                     
                 case AnimationDemoIndexLayerPropertiesTest: {
-                    demoViewController = [[[LayerPropertiesTestViewController alloc] init] autorelease];
+                    demoViewController = [[LayerPropertiesTestViewController alloc] init];
                     break;
                 }
                     
@@ -459,12 +426,12 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexCore: {
             switch (indexPath.row) {
                 case CoreDemoIndexDynamicLocalization: {
-                    demoViewController = [[[DynamicLocalizationDemoViewController alloc] init] autorelease];
+                    demoViewController = [[DynamicLocalizationDemoViewController alloc] init];
                     break;
                 }
                     
                 case CoreDemoIndexFonts: {
-                    demoViewController = [[[FontsDemoViewController alloc] init] autorelease];
+                    demoViewController = [[FontsDemoViewController alloc] init];
                     break;
                 }
                     
@@ -479,7 +446,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexNetworking: {
             switch (indexPath.row) {
                 case NetworkingDemoIndexConnection: {
-                    demoViewController = [[[ConnectionDemoViewController alloc] init] autorelease];
+                    demoViewController = [[ConnectionDemoViewController alloc] init];
                     break;
                 }
                     
@@ -494,7 +461,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexTask: {
             switch (indexPath.row) {
                 case TaskDemoIndexParallelProcessing: {
-                    demoViewController = [[[ParallelProcessingDemoViewController alloc] init] autorelease];
+                    demoViewController = [[ParallelProcessingDemoViewController alloc] init];
                     break;
                 }
                     
@@ -509,42 +476,42 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexView: {
             switch (indexPath.row) {
                 case ViewDemoIndexTableViewCells: {
-                    demoViewController = [[[TableViewCellsDemoViewController alloc] init] autorelease];
+                    demoViewController = [[TableViewCellsDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewDemoIndexKeyboardAvoidingScrollView: {
-                    demoViewController = [[[KeyboardAvoidingScrollViewDemoViewController alloc] init] autorelease];
+                    demoViewController = [[KeyboardAvoidingScrollViewDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewDemoIndexCursor: {
-                    demoViewController = [[[CursorDemoViewController alloc] init] autorelease];
+                    demoViewController = [[CursorDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewDemoIndexLabel: {
-                    demoViewController = [[[LabelDemoViewController alloc] init] autorelease];
+                    demoViewController = [[LabelDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewDemoIndexSlideshow: {
-                    demoViewController = [[[SlideshowDemoViewController alloc] init] autorelease];
+                    demoViewController = [[SlideshowDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewDemoIndexEffects: {
-                    demoViewController = [[[ViewEffectsDemoViewController alloc] init] autorelease];
+                    demoViewController = [[ViewEffectsDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewDemoIndexWebView: {
-                    demoViewController = [[[WebViewDemoViewController alloc] init] autorelease];
+                    demoViewController = [[WebViewDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewDemoIndexParallaxScrolling: {
-                    demoViewController = [[[ParallaxScrollingDemoViewController alloc] init] autorelease];
+                    demoViewController = [[ParallaxScrollingDemoViewController alloc] init];
                     break;
                 }
                     
@@ -559,28 +526,28 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexViewControllers: {
             switch (indexPath.row) {
                 case ViewControllersDemoIndexPlaceholderViewController: {
-                    demoViewController = [[[PlaceholderDemoViewController alloc] init] autorelease];
+                    demoViewController = [[PlaceholderDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
-                    demoViewController = [[[WizardDemoViewController alloc] init] autorelease];
+                    demoViewController = [[WizardDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewControllersDemoIndexStackController: {
-                    demoViewController = [[[StackDemoViewController alloc] init] autorelease];
+                    demoViewController = [[StackDemoViewController alloc] init];
                     break;
                 }
                     
                 case ViewControllersDemoIndexTableSearchDisplayViewController: {
-                    demoViewController = [[[TableSearchDisplayDemoViewController alloc] init] autorelease];
+                    demoViewController = [[TableSearchDisplayDemoViewController alloc] init];
                     break;
                 }
                 
                 case ViewControllersDemoIndexWebViewController: {
                     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://about.me/defagos"]];
-                    demoViewController = [[[HLSWebViewController alloc] initWithRequest:request] autorelease];
+                    demoViewController = [[HLSWebViewController alloc] initWithRequest:request];
                     break;
                 }
                     

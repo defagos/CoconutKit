@@ -25,6 +25,6 @@ if [ -d "$MACHINE_DIR" ]; then
 fi
 mkdir -p "$MACHINE_DIR"
 
-mogenerator --model "$MODEL_DIR" --machine-dir "$MACHINE_DIR" --human-dir "$HUMAN_DIR"
+mogenerator --template-var arc=true --model "$MODEL_DIR" --machine-dir "$MACHINE_DIR" --human-dir "$HUMAN_DIR"
 
 echo "Done."

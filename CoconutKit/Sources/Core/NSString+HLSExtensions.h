@@ -9,42 +9,7 @@
 // Formatting functions
 NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
-/**
- * Generate a unique identifier
- */
-NSString *HLSUUID(void);
-
 @interface NSString (HLSExtensions)
-
-/**
- * Return a string object decoded from a base 64 string
- */
-+ (instancetype)stringWithBase64EncodedString:(NSString *)base64EncodedString;
-
-/**
- * Return a string object decoded from base 64, UTF-8 data
- */
-+ (instancetype)stringWithBase64EncodedData:(NSData *)base64EncodedData;
-
-/**
- * Create a string decoded from a base 64 encoded string
- */
-- (id)initWithBase64EncodedString:(NSString *)base64String;
-
-/**
- * Create a string decoded from base 64, UTF-8 encoded data
- */
-- (id)initWithBase64EncodedData:(NSData *)base64Data;
-
-/**
- * Return the string as a base 64 encoded string
- */
-- (NSString *)base64EncodedString;
-
-/**
- * Return the string encoded in base 64, UTF-8
- */
-- (NSData *)base64EncodedData;
 
 /**
  * Trim spaces left and right

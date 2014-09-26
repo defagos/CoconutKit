@@ -32,11 +32,11 @@
  *     properties when it displays the corresponding parent view controller, for example. Moreover, this ensures that when 
  *     a child view controller presents another view controller modally, it is actually its furthest ancestor who does. 
  *     Finally, this guarantees that the -[UIViewController interfaceOrientation] method returns a correct result
- *   - the iOS 5 containment API defines new methods -[UIViewController isMovingTo/FromParentViewController] so that
+ *   - the iOS containment API defines methods -[UIViewController isMovingTo/FromParentViewController] so that
  *     a child knows when it is inserted or removed from a container. These methods must return a correct result
  *     for custom containers as well
  *   - when a view controller is removed from a container, its view must not be released. This lets clients decide whether
- *     they want to cache the associated view (by retaining the view controller elswhere) or not (if the view controller 
+ *     they want to cache the associated view (by retaining the view controller elsewhere) or not (if the view controller
  *     is not retained elsewhere, it will simply be deallocated when it gets removed from the container, and so will be 
  *     its view)
  *
@@ -47,18 +47,9 @@
  * controller must happen through the HLSContainerContent interface to guarantee proper status tracking and to 
  * ensure that the view is created when it is really needed, not earlier.
  *
- * For convenience, the -[UIViewController isMovingTo/FromParentViewController] methods have also been made available 
- * on iOS 4, for CoconutKit containers only (not for UIKit ones). These methods simply follow the parent view controller
- * hierarchy until they find a view controller which is being moved to / from a CoconutKit container, in which case they 
- * return YES. If they reach the top of the view controller hierarchy without having found such a view controller, they 
- * return NO.
- *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
- * has been disabled, i.e. for which the
- *    -[UIViewController automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers]
- * method returns NO (a feature available as of iOS 5). On iOS 6, this method has been split into the two methods
- *    -[UIViewController shouldAutomaticallyForwardRotationMethods]
- *    and -[UIViewController shouldAutomaticallyForwardAppearanceMethods]
+ * has been disabled, i.e. for which the -[UIViewController shouldAutomaticallyForwardRotationMethods] and 
+ * -[UIViewController shouldAutomaticallyForwardAppearanceMethods] methods return NO
  * 
  * Designated initializer: -initWithViewController:containerViewController:transitionClass:duration:
  */
@@ -68,7 +59,8 @@
  * Return the CoconutKit-based container into which a view controller has been inserted into (if any). If a class parameter 
  * is provided, the method returns nil if the container class does not match
  */
-+ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass forViewController:(UIViewController *)viewController;
++ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass
+                                       forViewController:(UIViewController *)viewController;
 
 /**
  * Initialize a container content object. Expect the view controller to be managed (which is retained), the container 
@@ -87,12 +79,12 @@
  * -[HLSContainerContent viewIfLoaded] accessor to access a view which you created this way (and which does not
  * instantiate the view lazily).
  */
-@property (nonatomic, readonly, retain) UIViewController *viewController;
+@property (nonatomic, readonly, strong) UIViewController *viewController;
 
 /**
  * The container into which a view controller has been inserted
  */
-@property (nonatomic, readonly, assign) UIViewController *containerViewController;
+@property (nonatomic, readonly, weak) UIViewController *containerViewController;
 
 /**
  * The transition properties to be applied when the view controller's view gets displayed
@@ -111,15 +103,15 @@
  *
  * If the view has already been added to a stack view, this method does nothing
  */
-- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView;
+- (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView;
 
 /**
- * Valid values for index range from 0 to [stackView.contentViews count] (this last value being equivalent to
+ * Valid values for index range from 0 to [containerStackView.contentViews count] (this last value being equivalent to
  * calling -addAsSubviewIntoContainerStackView:)
  *
  * If the view has already been added to a stack view or if the index is invalid, this method does nothing
  */
-- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)stackView atIndex:(NSUInteger)index;
+- (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView atIndex:(NSUInteger)index;
 
 /**
  * Return the view controller's view if it has been loaded, nil otherwise. This does not perform lazy view 
@@ -134,19 +126,12 @@
 - (void)removeViewFromContainerStackView;
 
 /**
- * Release all view and view-related resources. This also forwards the -viewWillUnload and -viewDidUnload
- * messages to the underlying view controller (this mechanism is deprecated starting with iOS 6)
- */
-- (void)releaseViews;
-
-/**
  * Forward the corresponding view lifecycle events to the view controller, ensuring that forwarding occurs only if
  * the view controller current lifecycle phase is coherent with it. Set movingTo/FromParentViewController to YES
  * if the events occur because the view controller is being added to / removed from its parent container
  *
  * Remark: No methods have been provided for -viewDidLoad (which is called automatically when the view has been loaded)
- *         and -viewWill/DidUnload (which container implementations must not call directly; use the -releaseViews method 
- *         above)
+ *         and -viewWill/DidUnload
  */
 - (void)viewWillAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;
 - (void)viewDidAppear:(BOOL)animated movingToParentViewController:(BOOL)movingToParentViewController;

@@ -16,35 +16,14 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @interface HLSTableSearchDisplayViewController ()
 
-@property (nonatomic, retain) UISearchBar *searchBar;
-@property (nonatomic, retain) NSString *searchText;
-@property (nonatomic, retain) UISearchDisplayController *searchController;      // Not called searchDisplayController to avoid conflicts with 
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UISearchDisplayController *searchController;      // Not called searchDisplayController to avoid conflicts with
                                                                                 // UIViewController's searchViewController property
 @end
 
 @implementation HLSTableSearchDisplayViewController {
 @private
     NSInteger _selectedScopeButtonIndex;
-    BOOL _searchInterfaceActive;
-    BOOL _firstLoad;
-}
-
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.searchText = nil;
-    self.searchController = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.searchBar = nil;
-    self.tableView = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -61,13 +40,12 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     [super viewDidLoad];
     
     // Create the search bar for displaying at the top of the table view (created at initialization time so that it
-    // can be further customized by the subclass viewDidLoad method)
+    // can be further customized by the subclass -viewDidLoad method)
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
-    self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.f,
-                                                                    0.f,
-                                                                    applicationFrame.size.width, 
-                                                                    kSearchBarStandardHeight)]
-                      autorelease];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.f,
+                                                                   0.f,
+                                                                   applicationFrame.size.width,
+                                                                   kSearchBarStandardHeight)];
     
     // The search bar might be localized as well. Localization is made in [HLSViewController viewDidLoad], but at that
     // time the search bar was not available. Run through localization again to solve this issue
@@ -75,9 +53,8 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     
     // Manage the search interface using the built-in UISearchDisplayController. We therefore benefit from its
     // features (animations, dimming view, navigation controller dedicated support, etc.) for free
-    self.searchController = [[[UISearchDisplayController alloc] initWithSearchBar:self.searchBar 
-                                                               contentsController:self] 
-                             autorelease];
+    self.searchController = [[UISearchDisplayController alloc] initWithSearchBar:self.searchBar
+                                                               contentsController:self];
     self.searchController.delegate = self;
     self.searchController.searchResultsDataSource = self;
     self.searchController.searchResultsDelegate = self;
@@ -89,30 +66,6 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
     self.tableView.tableHeaderView = self.searchBar;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    // Track when view has been loaded for the first time (or after an unload)
-    _firstLoad = YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    // Done in viewWillAppear; in viewDidLoad, we would not have had a chance to reach the subclass viewDidLoad code (which
-    // e.g. defines the scope buttons if any)
-    if (_firstLoad) {
-        // Restore the previous search status (if the view has been unloaded)
-        self.searchController.active = _searchInterfaceActive;
-        self.searchBar.text = self.searchText;
-        self.searchBar.selectedScopeButtonIndex = _selectedScopeButtonIndex;
-        
-        // Simulate a search to reload the data
-        if ([self searchDisplayController:self.searchController shouldReloadTableForSearchString:self.searchText]) {
-            [self.searchController.searchResultsTableView reloadData];
-        }
-        
-        _firstLoad = NO;
-    }
 }
 
 #pragma mark UISearchDisplayDelegate protocol implementation
@@ -124,7 +77,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
 {
-    _searchInterfaceActive = YES;
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
 }
 
 - (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
@@ -134,7 +87,7 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
-    _searchInterfaceActive = NO;
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
 }
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView
@@ -169,13 +122,13 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    self.searchText = searchString;
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
     return YES;
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
-    _selectedScopeButtonIndex = searchOption;
+    // Must provide a dummy implementation for subclasses (which are asked to call the super methods)
     return YES;
 }
 

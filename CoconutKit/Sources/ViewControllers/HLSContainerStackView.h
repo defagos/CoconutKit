@@ -123,7 +123,7 @@
  */
 - (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView;
 
-@property (nonatomic, assign) id<HLSContainerStackViewDelegate> delegate;
+@property (nonatomic, weak) id<HLSContainerStackViewDelegate> delegate;
 
 @end
 

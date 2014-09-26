@@ -14,9 +14,6 @@
 #import "NSManagedObject+HLSValidation.h"
 #import "NSObject+HLSExtensions.h"
 
-// This implementation has been swizzled in UITextField+HLSValidation.m
-extern void (*UITextField__setText_Imp)(id, SEL, id);
-
 @interface HLSManagedTextFieldValidator ()
 
 @property (nonatomic, assign) UITextField *textField;               // weak ref. Detector lifetime is managed by the text field
@@ -200,9 +197,7 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         }            
     }
     
-    // Set the value. Use the original setter to avoid triggering validation again (which is why the setter has
-    // been swizzled)
-    (*UITextField__setText_Imp)(self.textField, @selector(setText:), text);
+    self.textField.text = text;
 }
 
 #pragma mark Key-value observing
