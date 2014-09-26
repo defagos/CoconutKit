@@ -17,6 +17,8 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
+// FIXME: Issues with stacking action sheets. Solve more elegantly than HLSActionSheet before
+
 @interface HLSWebViewController ()
 
 @property (nonatomic, strong) NSURLRequest *request;
@@ -230,6 +232,7 @@
 {
     NSMutableArray *actions = [NSMutableArray array];
     
+    // TODO: Replace with UIAlertController when CoconutKit requires >= iOS 8
     UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
     actionSheet.title = [self.currentURL absoluteString];
     actionSheet.delegate = self; 
