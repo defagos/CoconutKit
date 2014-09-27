@@ -87,9 +87,9 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
     }
     
     CAGradientLayer *gradientLayer = [self gradientMaskLayer];
-	gradientLayer.locations = @[@(0.f), @(left), @(1.f - right), @(1.f)];
-	gradientLayer.startPoint = CGPointMake(0.f, 0.f);
-	gradientLayer.endPoint = CGPointMake(1.f, 0.f);
+    gradientLayer.locations = @[@(0.f), @(left), @(1.f - right), @(1.f)];
+    gradientLayer.startPoint = CGPointMake(0.f, 0.f);
+    gradientLayer.endPoint = CGPointMake(1.f, 0.f);
     self.layer.mask = gradientLayer;
 }
 
@@ -99,29 +99,29 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
         HLSLoggerWarn(@"Invalid values for fading parameters. Must be >= 0 and must not add up to a value larger than 1");
         return;
     }
-
+    
     CAGradientLayer *gradientLayer = [self gradientMaskLayer];
-	gradientLayer.locations = @[@(0.f), @(top), @(1.f - bottom), @(1.f)];
-	gradientLayer.startPoint = CGPointMake(0.f, 0.f);
-	gradientLayer.endPoint = CGPointMake(0.f, 1.f);
-	self.layer.mask = gradientLayer;
+    gradientLayer.locations = @[@(0.f), @(top), @(1.f - bottom), @(1.f)];
+    gradientLayer.startPoint = CGPointMake(0.f, 0.f);
+    gradientLayer.endPoint = CGPointMake(0.f, 1.f);
+    self.layer.mask = gradientLayer;
 }
 
 - (CAGradientLayer *)gradientMaskLayer
 {
-	CAGradientLayer *maskLayer = [CAGradientLayer layer];
-	
-	UIColor *outerColor = [UIColor colorWithWhite:1.f alpha:0.f];
-	UIColor *innerColor = [UIColor colorWithWhite:1.f alpha:1.f];
-	
-	maskLayer.colors = @[(id)outerColor.CGColor, (id)innerColor.CGColor, (id)innerColor.CGColor, (id)outerColor.CGColor];
-	
-	maskLayer.bounds = self.bounds;
-	maskLayer.anchorPoint = CGPointZero;
+    CAGradientLayer *maskLayer = [CAGradientLayer layer];
+    
+    UIColor *outerColor = [UIColor colorWithWhite:1.f alpha:0.f];
+    UIColor *innerColor = [UIColor colorWithWhite:1.f alpha:1.f];
+    
+    maskLayer.colors = @[(id)outerColor.CGColor, (id)innerColor.CGColor, (id)innerColor.CGColor, (id)outerColor.CGColor];
+    
+    maskLayer.bounds = self.bounds;
+    maskLayer.anchorPoint = CGPointZero;
     
     // FIXME: Bug: Must resize with the parent layer
     
-	return maskLayer;
+    return maskLayer;
 }
 
 @end
