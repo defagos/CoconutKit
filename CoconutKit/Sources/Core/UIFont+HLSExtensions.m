@@ -29,7 +29,7 @@
     // See http://www.marco.org/2012/12/21/ios-dynamic-font-loading
     BOOL success = YES;
     CFErrorRef error = NULL;
-    CGDataProviderRef provider = CGDataProviderCreateWithCFData((CFDataRef)data);
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     CGFontRef font = CGFontCreateWithDataProvider(provider);
     if (! CTFontManagerRegisterGraphicsFont(font, &error)) {
         CFStringRef errorDescription = CFErrorCopyDescription(error);
