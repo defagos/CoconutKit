@@ -156,11 +156,13 @@
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
             UIImage *pointerImage = [UIImage coconutKitImageNamed:@"CursorDefaultPointer.png"];
+            
+            // Calculate caps so that the tiled area is as close as possible to 1 x 1
+            CGFloat horizontalCapInset = floorf((pointerImage.size.width - 1.f) / 2.f);
+            CGFloat verticalCapInset = floorf((pointerImage.size.height - 1.f) / 2.f);
+            pointerImage = [pointerImage resizableImageWithCapInsets:UIEdgeInsetsMake(verticalCapInset, horizontalCapInset, verticalCapInset, horizontalCapInset)];
+            
             UIImageView *imageView = [[UIImageView alloc] initWithImage:pointerImage];
-            imageView.contentStretch = CGRectMake(0.5f,
-                                                  0.5f,
-                                                  1.f / CGRectGetWidth(imageView.frame),
-                                                  1.f / CGRectGetHeight(imageView.frame));
             self.pointerView = imageView;
         }
         
