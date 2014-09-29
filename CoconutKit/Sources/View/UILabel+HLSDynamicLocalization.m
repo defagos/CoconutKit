@@ -23,13 +23,13 @@ static void *s_localizationInfosKey = &s_localizationInfosKey;
 static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
 
 // Original implementation of the methods we swizzle
-static void (*s_UILabel__dealloc_Imp)(id, SEL) = NULL;
+static void (*s_UILabel__dealloc_Imp)(__unsafe_unretained id, SEL) = NULL;
 static void (*s_UILabel__awakeFromNib_Imp)(id, SEL) = NULL;
 static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
 static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UILabel__dealloc_Imp(UILabel *self, SEL _cmd);
+static void swizzled_UILabel__dealloc_Imp(__unsafe_unretained UILabel *self, SEL _cmd);
 static void swizzled_UILabel__awakeFromNib_Imp(UILabel *self, SEL _cmd);
 static void swizzled_UILabel__setText_Imp(UILabel *self, SEL _cmd, NSString *text);
 static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UIColor *backgroundColor);
@@ -71,9 +71,9 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 
 + (void)load
 {
-    s_UILabel__dealloc_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                          NSSelectorFromString(@"dealloc"),
-                                                                          (IMP)swizzled_UILabel__dealloc_Imp);
+    s_UILabel__dealloc_Imp = (void (*)(__unsafe_unretained id, SEL))hls_class_swizzleSelector(self,
+                                                                                              NSSelectorFromString(@"dealloc"),
+                                                                                              (IMP)swizzled_UILabel__dealloc_Imp);
     s_UILabel__awakeFromNib_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
                                                                                @selector(awakeFromNib),
                                                                                (IMP)swizzled_UILabel__awakeFromNib_Imp);
@@ -250,7 +250,8 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UILabel__dealloc_Imp(UILabel *self, SEL _cmd)
+// Marked as __unsafe_unretained to avoid ARC inserting incorrect memory management calls leading to crashes for -dealloc
+static void swizzled_UILabel__dealloc_Imp(__unsafe_unretained UILabel *self, SEL _cmd)
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:HLSCurrentLocalizationDidChangeNotification 

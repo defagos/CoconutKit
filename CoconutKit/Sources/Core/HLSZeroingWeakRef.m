@@ -15,8 +15,8 @@
 static void *s_zeroingWeakRefListKey = &s_zeroingWeakRefListKey;
 
 // Static methods
-static void subclass_dealloc(id object, SEL _cmd);
-static Class subclass_class(id object, SEL _cmd);
+static void subclass_dealloc(__unsafe_unretained id self, SEL _cmd);
+static Class subclass_class(id self, SEL _cmd);
 
 @interface HLSZeroingWeakRef ()
 
@@ -119,10 +119,11 @@ static Class subclass_class(id object, SEL _cmd);
 
 @end
 
-static void subclass_dealloc(id object, SEL _cmd)
+// Marked as __unsafe_unretained to avoid ARC inserting incorrect memory management calls leading to crashes for -dealloc
+static void subclass_dealloc(__unsafe_unretained id self, SEL _cmd)
 {
     // Set all weak references bound to object to nil
-    NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(object, s_zeroingWeakRefListKey);
+    NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(self, s_zeroingWeakRefListKey);
     for (NSValue *zeroingWeakRefValue in zeroingWeakRefValues) {
         HLSZeroingWeakRef *zeroingWeakRef = [zeroingWeakRefValue nonretainedObjectValue];
         
@@ -136,15 +137,15 @@ static void subclass_dealloc(id object, SEL _cmd)
     }
     
     // Call parent implementation
-    Class superclass = class_getSuperclass(object_getClass(object));
+    Class superclass = class_getSuperclass(object_getClass(self));
     void (*parent_dealloc_Imp)(id, SEL) = (void (*)(id, SEL))class_getMethodImplementation(superclass, NSSelectorFromString(@"dealloc"));
     NSCAssert(parent_dealloc_Imp != NULL, @"Could not locate parent dealloc implementation");
-    (*parent_dealloc_Imp)(object, _cmd);
+    (*parent_dealloc_Imp)(self, _cmd);
 }
 
-static Class subclass_class(id object, SEL _cmd)
+static Class subclass_class(id self, SEL _cmd)
 {
     // Lie about the dynamic subclass existence, as the KVO implementation does (the real class can still be seen
     // using object_getClass)
-    return class_getSuperclass(object_getClass(object));
+    return class_getSuperclass(object_getClass(self));
 }
