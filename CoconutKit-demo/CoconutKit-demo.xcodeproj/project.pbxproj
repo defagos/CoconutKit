@@ -28,6 +28,8 @@
 		6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */; };
 		6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */; };
 		6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */; };
+		6F28177119D99A33009D1CC3 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F28176E19D99A33009D1CC3 /* img_localized.png */; };
+		6F28177219D99A33009D1CC3 /* img_localized.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F28176E19D99A33009D1CC3 /* img_localized.png */; };
 		6F2B302F1929BD78003D4C2C /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46A714C5C36300824AB2 /* ProximaNova-Bold.otf */; };
 		6F2B30301929BD78003D4C2C /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46A814C5C36300824AB2 /* ProximaNova-Regular.otf */; };
 		6F2B30311929BD78003D4C2C /* sample_text.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C46AA14C5C36300824AB2 /* sample_text.html */; };
@@ -461,6 +463,8 @@
 		6F22C77F16A942F10081A9A7 /* FontsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontsDemoViewController.m; sourceTree = "<group>"; };
 		6F22C78016A942F10081A9A7 /* FontsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontsDemoViewController.xib; sourceTree = "<group>"; };
 		6F22C78516A946C40081A9A7 /* sample_text_with_custom_font.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample_text_with_custom_font.html; sourceTree = "<group>"; };
+		6F28176F19D99A33009D1CC3 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/img_localized.png; sourceTree = "<group>"; };
+		6F28177019D99A33009D1CC3 /* fr */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fr; path = fr.lproj/img_localized.png; sourceTree = "<group>"; };
 		6F2B30681929BD78003D4C2C /* CoconutKit-tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-tests.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F2B30701929BE4A003D4C2C /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
 		6F2B30711929BE4A003D4C2C /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
@@ -1533,6 +1537,7 @@
 		6F9C46AB14C5C36300824AB2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6F28176E19D99A33009D1CC3 /* img_localized.png */,
 				6F9C46AC14C5C36300824AB2 /* bkgr_bar.png */,
 				6F9C46AD14C5C36300824AB2 /* cell_bkgr_brown_large.png */,
 				6F9C46AE14C5C36300824AB2 /* cell_bkgr_brown_large_selected.png */,
@@ -1800,6 +1805,7 @@
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
 				6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */,
 				6F9C467D14C5C30C00824AB2 /* CursorSelectedFolderView.xib in Resources */,
+				6F28177219D99A33009D1CC3 /* img_localized.png in Resources */,
 				6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */,
 				6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */,
 				6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */,
@@ -1909,6 +1915,7 @@
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
 				6FCB4ED91926651F00047AD3 /* CursorSelectedFolderView.xib in Resources */,
 				6F468CB119D2E7920021B95D /* Localizable.strings in Resources */,
+				6F28177119D99A33009D1CC3 /* img_localized.png in Resources */,
 				6FCB4EDB1926651F00047AD3 /* FooterView.xib in Resources */,
 				6FCB4EDC1926651F00047AD3 /* HeaderView.xib in Resources */,
 				6FCB4EDD1926651F00047AD3 /* XibTableViewCell.xib in Resources */,
@@ -2231,6 +2238,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6F28176E19D99A33009D1CC3 /* img_localized.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6F28176F19D99A33009D1CC3 /* en */,
+				6F28177019D99A33009D1CC3 /* fr */,
+			);
+			name = img_localized.png;
+			sourceTree = "<group>";
+		};
 		6F468CAC19D2E7920021B95D /* DemoTable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
