@@ -15,12 +15,12 @@
 /**
  * Use this property if you want to tag your view with a string instead of an integer
  */
-@property (nonatomic, retain) NSString *tag_hls;
+@property (nonatomic, strong) NSString *tag_hls;
 
 /**
  * Use this dictionary to convey additional information about your views
  */
-@property (nonatomic, retain) NSDictionary *userInfo_hls;
+@property (nonatomic, strong) NSDictionary *userInfo_hls;
 
 /**
  * Return the view and all its subview flattened as a UIImage

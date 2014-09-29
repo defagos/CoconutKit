@@ -24,7 +24,7 @@ static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, N
 
 @interface UITextField (HLSExtensionsPrivate)
 
-@property (nonatomic, retain) HLSViewTouchDetector *touchDetector;
+@property (nonatomic, strong) HLSViewTouchDetector *touchDetector;
 
 @end
 

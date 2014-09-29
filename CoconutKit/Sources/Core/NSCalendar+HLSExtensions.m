@@ -440,7 +440,8 @@
             "\thour: %@\n"
             "\tminute: %@\n"
             "\tsecond: %@\n"
-            "\tweek: %@\n"
+            "\tweekOfYear: %@\n"
+            "\tweekOfMonth: %@\n"
             "\tweekday: %@\n"
             "\tweekdayOrdinal: %@\n"
             "\tera: %@\n"
@@ -453,7 +454,8 @@
             [NSDateComponents stringForComponentValue:[self hour]],
             [NSDateComponents stringForComponentValue:[self minute]],
             [NSDateComponents stringForComponentValue:[self second]],
-            [NSDateComponents stringForComponentValue:[self week]],
+            [NSDateComponents stringForComponentValue:[self weekOfYear]],
+            [NSDateComponents stringForComponentValue:[self weekOfMonth]],
             [NSDateComponents stringForComponentValue:[self weekday]],
             [NSDateComponents stringForComponentValue:[self weekdayOrdinal]],
             [NSDateComponents stringForComponentValue:[self era]]];

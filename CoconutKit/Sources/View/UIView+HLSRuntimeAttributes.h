@@ -13,7 +13,7 @@
 @interface UIView (HLSRuntimeAttributes)
 
 // User-defined runtime attributes for dynamic localization
-@property (nonatomic, retain) NSString *locTable;
-@property (nonatomic, retain) NSString *locBundle;
+@property (nonatomic, strong) NSString *locTable;
+@property (nonatomic, strong) NSString *locBundle;
 
 @end

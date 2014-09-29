@@ -155,9 +155,9 @@ static NSArray *s_fontNames = nil;
                 break;
             }
                 
-            case UILineBreakModeWordWrap:
+            case NSLineBreakByWordWrapping:
             default: {
-                return @"UILineBreakModeWordWrap";
+                return @"NSLineBreakByWordWrapping";
                 break;
             }
         }
