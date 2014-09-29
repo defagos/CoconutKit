@@ -34,7 +34,6 @@
                   "\n\tstackController = %@"
                   "\n\tplaceholderViewController = %@"
                   "\n\tparentViewController = %@"
-                  "\n\tmodalViewController = %@"
                   "\n\tpresentedViewController = %@"
                   "\n\ttpresentingViewController = %@",
                   self.navigationController,
@@ -42,7 +41,6 @@
                   self.stackController,
                   self.placeholderViewController,
                   self.parentViewController,
-                  self.modalViewController,
                   self.presentedViewController,
                   self.presentingViewController);
 }

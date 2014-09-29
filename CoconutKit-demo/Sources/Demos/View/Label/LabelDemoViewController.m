@@ -110,7 +110,7 @@ static NSArray *s_fontNames = nil;
         return [s_fontNames count];
     }
     else if (pickerView == self.lineBreakModePickerView) {
-        return UILineBreakModeMiddleTruncation + 1;
+        return NSLineBreakByTruncatingMiddle + 1;
     }
     else {
         HLSLoggerError(@"Unknown picker view");
@@ -130,28 +130,28 @@ static NSArray *s_fontNames = nil;
     }
     else if (pickerView == self.lineBreakModePickerView) {
         switch (row) {                
-            case UILineBreakModeCharacterWrap: {
-                return @"UILineBreakModeCharacterWrap";
+            case NSLineBreakByCharWrapping: {
+                return @"NSLineBreakByCharWrapping";
                 break;
             }
                 
-            case UILineBreakModeClip: {
-                return @"UILineBreakModeClip";
+            case NSLineBreakByClipping: {
+                return @"NSLineBreakByClipping";
                 break;
             }
                 
-            case UILineBreakModeHeadTruncation: {
-                return @"UILineBreakModeHeadTruncation";
+            case NSLineBreakByTruncatingHead: {
+                return @"NSLineBreakByTruncatingHead";
                 break;
             }
                 
-            case UILineBreakModeTailTruncation: {
-                return @"UILineBreakModeTailTruncation";
+            case NSLineBreakByTruncatingTail: {
+                return @"NSLineBreakByTruncatingTail";
                 break;
             }
                 
-            case UILineBreakModeMiddleTruncation: {
-                return @"UILineBreakModeMiddleTruncation";
+            case NSLineBreakByTruncatingMiddle: {
+                return @"NSLineBreakByTruncatingMiddle";
                 break;
             }
                 
