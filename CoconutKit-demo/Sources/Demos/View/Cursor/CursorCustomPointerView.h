@@ -8,6 +8,6 @@
 
 @interface CursorCustomPointerView : HLSNibView
 
-@property (nonatomic, retain) IBOutlet UILabel *valueLabel;
+@property (nonatomic, weak) IBOutlet UILabel *valueLabel;
 
 @end

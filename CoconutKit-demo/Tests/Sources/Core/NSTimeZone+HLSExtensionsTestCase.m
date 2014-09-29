@@ -10,34 +10,18 @@
 
 @interface NSTimeZone_HLSExtensionsTestCase ()
 
-@property (nonatomic, retain) NSCalendar *calendar;
-@property (nonatomic, retain) NSTimeZone *timeZoneZurich;
-@property (nonatomic, retain) NSTimeZone *timeZoneTahiti;
-@property (nonatomic, retain) NSDate *date1;
-@property (nonatomic, retain) NSDate *date2;
-@property (nonatomic, retain) NSDate *date3;
-@property (nonatomic, retain) NSDate *date4;
-@property (nonatomic, retain) NSDate *date5;
+@property (nonatomic, strong) NSCalendar *calendar;
+@property (nonatomic, strong) NSTimeZone *timeZoneZurich;
+@property (nonatomic, strong) NSTimeZone *timeZoneTahiti;
+@property (nonatomic, strong) NSDate *date1;
+@property (nonatomic, strong) NSDate *date2;
+@property (nonatomic, strong) NSDate *date3;
+@property (nonatomic, strong) NSDate *date4;
+@property (nonatomic, strong) NSDate *date5;
 
 @end
 
 @implementation NSTimeZone_HLSExtensionsTestCase
-
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.calendar = nil;
-    self.date1 = nil;
-    self.date2 = nil;
-    self.date3 = nil;
-    self.date4 = nil;
-    self.date5 = nil;
-    self.timeZoneZurich = nil;
-    self.timeZoneTahiti = nil;
-    
-    [super dealloc];
-}
 
 #pragma mark Test setup and tear down
 

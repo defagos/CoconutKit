@@ -10,7 +10,7 @@
 
 @interface DeviceInfo ()
 
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) DeviceType type;
 
 @end
@@ -21,7 +21,7 @@
 
 + (DeviceInfo *)deviceInfoWithName:(NSString *)name type:(DeviceType)type
 {
-    return [[[[self class] alloc] initWithName:name type:type] autorelease];
+    return [[[self class] alloc] initWithName:name type:type];
 }
 
 #pragma mark Object creation and destruction
@@ -39,12 +39,6 @@
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-- (void)dealloc
-{
-    self.name = nil;
-    [super dealloc];
 }
 
 @end

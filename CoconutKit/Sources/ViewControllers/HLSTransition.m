@@ -59,7 +59,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         }
         free(classes);
         
-        s_availableTransitionNames = [[availableTransitionNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] retain];
+        s_availableTransitionNames = [availableTransitionNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
     }
     return s_availableTransitionNames;
 }
@@ -140,7 +140,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     // Durations are constants for each transition animation class. Can cache them
     static NSMutableDictionary *s_animationClassNameToDurationMap = nil;
     if (! s_animationClassNameToDurationMap) {
-        s_animationClassNameToDurationMap = [[NSMutableDictionary dictionary] retain];
+        s_animationClassNameToDurationMap = [NSMutableDictionary dictionary];
     }
     
     NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];

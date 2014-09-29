@@ -167,8 +167,8 @@
 /**
  * Access to Core Data internals
  */
-@property (nonatomic, readonly, retain) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, readonly, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, readonly, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readonly, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, readonly, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

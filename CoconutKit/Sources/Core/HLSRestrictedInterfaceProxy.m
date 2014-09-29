@@ -15,7 +15,7 @@
 
 @interface HLSRestrictedInterfaceProxy ()
 
-@property (nonatomic, retain) HLSZeroingWeakRef *targetZeroingWeakRef;
+@property (nonatomic, strong) HLSZeroingWeakRef *targetZeroingWeakRef;
 
 @end
 
@@ -28,7 +28,7 @@
 
 + (id)proxyWithTarget:(id)target protocol:(Protocol *)protocol
 {
-    return [[[[self class] alloc] initWithTarget:target protocol:protocol] autorelease];
+    return [[[self class] alloc] initWithTarget:target protocol:protocol];
 }
 
 #pragma mark Object creation and destruction
@@ -37,13 +37,11 @@
 {
     if (! protocol) {
         HLSLoggerError(@"Cannot create a proxy to target %@ without a protocol", target);
-        [self release];
         return nil;
     }
     
     if ([target isProxy]) {
         HLSLoggerError(@"Cannot create a proxy to another proxy");
-        [self release];
         return nil;
     }
     
@@ -53,22 +51,14 @@
         Class targetClass = [target class];
         if (! hls_class_conformsToInformalProtocol(targetClass, protocol)) {
             HLSLoggerError(@"The class %@ must implement the protocol %s (at least informally)", targetClass, protocol_getName(protocol));
-            [self release];
             return nil;
         }
     }
     
-    self.targetZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:target] autorelease];
+    self.targetZeroingWeakRef = [[HLSZeroingWeakRef alloc] initWithObject:target];
     _protocol = protocol;
     
     return self;
-}
-
-- (void)dealloc
-{
-    self.targetZeroingWeakRef = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators

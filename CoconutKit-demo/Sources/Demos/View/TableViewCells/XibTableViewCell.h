@@ -8,7 +8,7 @@
 
 @interface XibTableViewCell : HLSTableViewCell
 
-@property (nonatomic, retain) IBOutlet UIImageView *testImageView;
-@property (nonatomic, retain) IBOutlet UILabel *testLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *testImageView;
+@property (nonatomic, weak) IBOutlet UILabel *testLabel;
 
 @end

@@ -16,9 +16,9 @@
 
 @interface HLSModelManager ()
 
-@property (nonatomic, retain) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -33,27 +33,27 @@
                                         fileManager:(HLSFileManager *)fileManager
                                             options:(NSDictionary *)options
 {
-    return [[[[self class] alloc] initWithModelFileName:modelFileName
-                                               inBundle:bundle
-                                              storeType:NSSQLiteStoreType
-                                          configuration:configuration
-                                         storeDirectory:storeDirectory
-                                            fileManager:fileManager
-                                                options:options] autorelease];
+    return [[[self class] alloc] initWithModelFileName:modelFileName
+                                              inBundle:bundle
+                                             storeType:NSSQLiteStoreType
+                                         configuration:configuration
+                                        storeDirectory:storeDirectory
+                                           fileManager:fileManager
+                                               options:options];
 }
 
 + (HLSModelManager *)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
                                                   inBundle:(NSBundle *)bundle
-                                             configuration:(NSString *)configuration 
+                                             configuration:(NSString *)configuration
                                                    options:(NSDictionary *)options
 {
-    return [[[[self class] alloc] initWithModelFileName:modelFileName
-                                               inBundle:bundle
-                                              storeType:NSInMemoryStoreType 
-                                          configuration:configuration 
-                                         storeDirectory:nil
-                                            fileManager:nil
-                                                options:options] autorelease];
+    return [[[self class] alloc] initWithModelFileName:modelFileName
+                                              inBundle:bundle
+                                             storeType:NSInMemoryStoreType
+                                         configuration:configuration
+                                        storeDirectory:nil
+                                           fileManager:nil
+                                               options:options];
 }
 
 + (HLSModelManager *)binaryModelManagerWithModelFileName:(NSString *)modelFileName
@@ -63,13 +63,13 @@
                                              fileManager:(HLSFileManager *)fileManager
                                                  options:(NSDictionary *)options
 {
-    return [[[[self class] alloc] initWithModelFileName:modelFileName
-                                               inBundle:(NSBundle *)bundle
-                                              storeType:NSBinaryStoreType
-                                          configuration:configuration 
-                                         storeDirectory:storeDirectory
-                                            fileManager:fileManager
-                                                options:options] autorelease];
+    return [[[self class] alloc] initWithModelFileName:modelFileName
+                                              inBundle:(NSBundle *)bundle
+                                             storeType:NSBinaryStoreType
+                                         configuration:configuration
+                                        storeDirectory:storeDirectory
+                                           fileManager:fileManager
+                                               options:options];
 }
 
 + (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName
@@ -97,8 +97,8 @@
 }
 
 // Return the standard path for a store given its type and a model name
-+ (NSString *)standardStoreFilePathForModelFileName:(NSString *)modelFileName 
-                                          storeType:(NSString *)storeType 
++ (NSString *)standardStoreFilePathForModelFileName:(NSString *)modelFileName
+                                          storeType:(NSString *)storeType
                                      storeDirectory:(NSString *)storeDirectory
 {
     NSString *extension = nil;
@@ -227,8 +227,8 @@
 
 - (id)initWithModelFileName:(NSString *)modelFileName
                    inBundle:(NSBundle *)bundle
-                  storeType:(NSString *)storeType 
-              configuration:(NSString *)configuration 
+                  storeType:(NSString *)storeType
+              configuration:(NSString *)configuration
              storeDirectory:(NSString *)storeDirectory
                 fileManager:(HLSFileManager *)fileManager
                     options:(NSDictionary *)options
@@ -240,7 +240,6 @@
         
         self.managedObjectModel = [self managedObjectModelFromModelFileName:modelFileName inBundle:bundle];
         if (! self.managedObjectModel) {
-            [self release];
             return nil;
         }
         
@@ -249,35 +248,24 @@
             NSString *standardStoreFilePath = [HLSModelManager standardStoreFilePathForModelFileName:modelFileName
                                                                                            storeType:storeType
                                                                                       storeDirectory:storeDirectory];
-            standardStoreURL = [NSURL fileURLWithPath:standardStoreFilePath];            
+            standardStoreURL = [NSURL fileURLWithPath:standardStoreFilePath];
         }
         self.persistentStoreCoordinator = [self persistentStoreCoordinatorForManagedObjectModel:self.managedObjectModel
-                                                                                      storeType:storeType 
+                                                                                      storeType:storeType
                                                                                   configuration:configuration
                                                                                             URL:standardStoreURL
                                                                                         options:options
                                                                                     fileManager:fileManager];
         if (! self.persistentStoreCoordinator) {
-            [self release];
             return nil;
         }
         
         self.managedObjectContext = [self managedObjectContextForPersistentStoreCoordinator:self.persistentStoreCoordinator];
         if (! self.managedObjectContext) {
-            [self release];
             return nil;
         }
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.managedObjectModel = nil;
-    self.persistentStoreCoordinator = nil;
-    self.managedObjectContext = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Initialization
@@ -295,13 +283,13 @@
     }
     
     NSURL *modelFileURL = [NSURL fileURLWithPath:modelFilePath];
-    return [[[NSManagedObjectModel alloc] initWithContentsOfURL:modelFileURL] autorelease];
+    return [[NSManagedObjectModel alloc] initWithContentsOfURL:modelFileURL];
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinatorForManagedObjectModel:(NSManagedObjectModel *)managedObjectModel
-                                                                        storeType:(NSString *)storeType 
-                                                                    configuration:(NSString *)configuration 
-                                                                              URL:(NSURL *)storeURL 
+                                                                        storeType:(NSString *)storeType
+                                                                    configuration:(NSString *)configuration
+                                                                              URL:(NSURL *)storeURL
                                                                           options:(NSDictionary *)options
                                                                       fileManager:(HLSFileManager *)fileManager
 {
@@ -309,9 +297,9 @@
         fileManager = [HLSStandardFileManager defaultManager];
     }
     
-    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel] autorelease];
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
     
-	NSError *error = nil;
+    NSError *error = nil;
     NSPersistentStore *persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:storeType
                                                                                   configuration:configuration
                                                                                             URL:storeURL
@@ -330,17 +318,17 @@
         
         NSError *deletionError = nil;
         if ([fileManager fileExistsAtPath:oldFilePath]
-                && [fileManager removeItemAtPath:oldFilePath error:&deletionError]) {
+            && [fileManager removeItemAtPath:oldFilePath error:&deletionError]) {
             HLSLoggerInfo(@"The old store at %@ has been removed after successful migration", oldFilePath);
         }
     }
-        
+    
     return persistentStoreCoordinator;
 }
 
 - (NSManagedObjectContext *)managedObjectContextForPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-    NSManagedObjectContext *managedObjectContext = [[[NSManagedObjectContext alloc] init] autorelease];
+    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] init];
     [managedObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
     
     return managedObjectContext;
@@ -351,7 +339,7 @@
 - (HLSModelManager *)duplicate
 {
     // Duplicate the context, the rest is the same
-    HLSModelManager *modelManager = [[[HLSModelManager alloc] init] autorelease];
+    HLSModelManager *modelManager = [[HLSModelManager alloc] init];
     modelManager.managedObjectContext = [self managedObjectContextForPersistentStoreCoordinator:self.persistentStoreCoordinator];
     modelManager.managedObjectModel = self.managedObjectModel;
     modelManager.persistentStoreCoordinator = self.persistentStoreCoordinator;

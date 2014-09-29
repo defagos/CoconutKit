@@ -34,13 +34,13 @@
  * Optional tag to identify a task
  * Not meant to be overridden
  */
-@property (nonatomic, retain) NSString *tag;
+@property (nonatomic, strong) NSString *tag;
 
 /**
  * Dictionary which can be used freely to convey additional information
  * Not meant to be overridden
  */
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 /**
  * Return YES if the task processing is running
@@ -86,13 +86,13 @@
  * NSDictionary which can freely be used to convey return information
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, retain) NSDictionary *returnInfo;
+@property (nonatomic, readonly, strong) NSDictionary *returnInfo;
 
 /**
  * When the process is complete, check this property to find out if an error was encountered
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, retain) NSError *error;
+@property (nonatomic, readonly, strong) NSError *error;
 
 @end
 

@@ -13,6 +13,6 @@
  * or simply a UIView depending on which show... method was called. If the action sheet is currently
  * not displayed, the property returns nil
  */
-@property (nonatomic, readonly, assign) id owner;
+@property (nonatomic, readonly, weak) id owner;
 
 @end

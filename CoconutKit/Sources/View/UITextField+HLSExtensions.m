@@ -24,7 +24,7 @@ static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, N
 
 @interface UITextField (HLSExtensionsPrivate)
 
-@property (nonatomic, retain) HLSViewTouchDetector *touchDetector;
+@property (nonatomic, strong) HLSViewTouchDetector *touchDetector;
 
 @end
 
@@ -76,9 +76,9 @@ static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, N
 
 static void commonInit(UITextField *self)
 {
-    self.touchDetector = [[[HLSViewTouchDetector alloc] initWithView:self
-                                               beginNotificationName:UITextFieldTextDidBeginEditingNotification
-                                                 endNotificationName:UITextFieldTextDidEndEditingNotification] autorelease];
+    self.touchDetector = [[HLSViewTouchDetector alloc] initWithView:self
+                                              beginNotificationName:UITextFieldTextDidBeginEditingNotification
+                                                endNotificationName:UITextFieldTextDidEndEditingNotification];
 }
 
 #pragma mark Swizzled method implementations

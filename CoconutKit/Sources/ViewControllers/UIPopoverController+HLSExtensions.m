@@ -16,12 +16,12 @@ static void *s_popoverControllerKey = &s_popoverControllerKey;
 
 // Original implementation of the methods we swizzle
 static id (*s_UIPopoverController__initWithContentViewController_Imp)(id, SEL, id) = NULL;
-static void (*s_UIPopoverController__dealloc_Imp)(id, SEL) = NULL;
+static void (*s_UIPopoverController__dealloc_Imp)(__unsafe_unretained id, SEL) = NULL;
 static void (*s_UIPopoverController__setContentViewController_animated_Imp)(id, SEL, id, BOOL) = NULL;
 
 // Swizzled method implementations
 static id swizzled_UIPopoverController__initWithContentViewController_Imp(UIPopoverController *self, SEL _cmd, UIViewController *viewController);
-static void swizzled_UIPopoverController__dealloc_Imp(UIPopoverController *self, SEL _cmd);
+static void swizzled_UIPopoverController__dealloc_Imp(__unsafe_unretained UIPopoverController *self, SEL _cmd);
 static void swizzled_UIPopoverController__setContentViewController_animated_Imp(UIPopoverController *self, SEL _cmd, UIViewController *viewController, BOOL animated);
 
 @interface UIPopoverController (HLSExtensionsPrivate)
@@ -39,9 +39,9 @@ static void swizzled_UIPopoverController__setContentViewController_animated_Imp(
     s_UIPopoverController__initWithContentViewController_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
                                                                                                               @selector(initWithContentViewController:),
                                                                                                               (IMP)swizzled_UIPopoverController__initWithContentViewController_Imp);
-    s_UIPopoverController__dealloc_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                      @selector(dealloc),
-                                                                                      (IMP)swizzled_UIPopoverController__dealloc_Imp);
+    s_UIPopoverController__dealloc_Imp = (void (*)(__unsafe_unretained id, SEL))hls_class_swizzleSelector(self,
+                                                                                                          NSSelectorFromString(@"dealloc"),
+                                                                                                          (IMP)swizzled_UIPopoverController__dealloc_Imp);
     s_UIPopoverController__setContentViewController_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzleSelector(self,
                                                                                                                           @selector(setContentViewController:animated:),
                                                                                                                           (IMP)swizzled_UIPopoverController__setContentViewController_animated_Imp);
@@ -73,7 +73,8 @@ static id swizzled_UIPopoverController__initWithContentViewController_Imp(UIPopo
     return (*s_UIPopoverController__initWithContentViewController_Imp)(self, _cmd, viewController);
 }
 
-static void swizzled_UIPopoverController__dealloc_Imp(UIPopoverController *self, SEL _cmd)
+// Marked as __unsafe_unretained to avoid ARC inserting incorrect memory management calls leading to crashes for -dealloc
+static void swizzled_UIPopoverController__dealloc_Imp(__unsafe_unretained UIPopoverController *self, SEL _cmd)
 {
     objc_setAssociatedObject(self.contentViewController, s_popoverControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
     

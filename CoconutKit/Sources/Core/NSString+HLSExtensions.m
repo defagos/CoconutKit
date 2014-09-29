@@ -63,7 +63,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     
     CGFloat height = [self sizeWithFont:font
                       constrainedToSize:CGSizeMake(size.width, FLT_MAX)
-                          lineBreakMode:UILineBreakModeWordWrap].height;
+                          lineBreakMode:NSLineBreakByWordWrapping].height;
     
     // Empty text
     if (floateq(height, 0.f)) {
@@ -72,7 +72,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     
     CGFloat lineHeight = [self sizeWithFont:font
                           constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)
-                              lineBreakMode:UILineBreakModeWordWrap].height;
+                              lineBreakMode:NSLineBreakByWordWrapping].height;
     
     // Reduce the font size so that the text fits vertically
     UIFont *newFont = font;
@@ -84,11 +84,11 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
         newFont = [UIFont fontWithName:font.fontName size:newFont.pointSize - 1.f];
         height = [self sizeWithFont:newFont 
                   constrainedToSize:CGSizeMake(size.width, FLT_MAX) 
-                      lineBreakMode:UILineBreakModeWordWrap].height;
+                      lineBreakMode:NSLineBreakByWordWrapping].height;
         
         lineHeight = [self sizeWithFont:newFont 
                       constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) 
-                          lineBreakMode:UILineBreakModeWordWrap].height;        
+                          lineBreakMode:NSLineBreakByWordWrapping].height;        
     }
     
     return newFont.pointSize;

@@ -17,20 +17,11 @@
 
 @interface NSManagedObject_HLSValidationTestCase ()
 
-@property (nonatomic, retain) ConcreteClassD *lockedDInstance;
+@property (nonatomic, strong) ConcreteClassD *lockedDInstance;
 
 @end
 
 @implementation NSManagedObject_HLSValidationTestCase
-
-#pragma mark Object creation and destruction
-
-- (void)dealloc
-{
-    self.lockedDInstance = nil;
-    
-    [super dealloc];
-}
 
 #pragma mark Test setup and tear down
 

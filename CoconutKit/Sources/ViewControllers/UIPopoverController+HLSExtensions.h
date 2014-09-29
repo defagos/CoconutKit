@@ -11,6 +11,6 @@
 /**
  * Return the popover controller which displays the receiver, or nil if none
  */
-@property (nonatomic, readonly, assign) UIPopoverController *popoverController;
+@property (nonatomic, readonly, weak) UIPopoverController *popoverController;
 
 @end

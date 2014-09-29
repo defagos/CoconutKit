@@ -15,25 +15,21 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        // Just add some customized label
-        self.label = [[[UILabel alloc] initWithFrame:CGRectMake(20.f, 20.f, 400.f, 20.f)] autorelease];
-        self.label.font = [UIFont systemFontOfSize:13.f];
-        
         // Make cell taller than default size (if not altered, 44.f)
         self.frame = CGRectMake(self.contentView.frame.origin.x,
                                 self.contentView.frame.origin.y,
                                 self.contentView.frame.size.width,
                                 60.f);
         
+        // Just add some customized label
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20.f, 20.f, 400.f, 20.f)];
+        label.font = [UIFont systemFontOfSize:13.f];
         [self.contentView addSubview:self.label];
+        self.label = label;
     }
     return self;
 }
 
-- (void)dealloc
-{
-    self.label = nil;
-    [super dealloc];
-}
+
 
 @end

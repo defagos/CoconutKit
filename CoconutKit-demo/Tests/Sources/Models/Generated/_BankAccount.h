@@ -4,12 +4,12 @@
 #import <CoreData/CoreData.h>
 
 extern const struct BankAccountAttributes {
-	 NSString *balance;
-	 NSString *name;
+	__unsafe_unretained NSString *balance;
+	__unsafe_unretained NSString *name;
 } BankAccountAttributes;
 
 extern const struct BankAccountRelationships {
-	 NSString *owner;
+	__unsafe_unretained NSString *owner;
 } BankAccountRelationships;
 
 @class Person;
@@ -23,7 +23,7 @@ extern const struct BankAccountRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) BankAccountID* objectID;
 
-@property (nonatomic, retain) NSNumber* balance;
+@property (nonatomic, strong) NSNumber* balance;
 
 @property (atomic) double balanceValue;
 - (double)balanceValue;
@@ -31,11 +31,11 @@ extern const struct BankAccountRelationships {
 
 //- (BOOL)validateBalance:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSString* name;
+@property (nonatomic, strong) NSString* name;
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) Person *owner;
+@property (nonatomic, strong) Person *owner;
 
 //- (BOOL)validateOwner:(id*)value_ error:(NSError**)error_;
 

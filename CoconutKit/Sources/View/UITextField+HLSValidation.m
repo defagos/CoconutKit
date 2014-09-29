@@ -58,12 +58,11 @@ extern BOOL injectedManagedObjectValidation(void);
     }
     
     // Bind to a validator object, with the current text field delegate as validator delegate
-    HLSManagedTextFieldValidator *validator = [[[HLSManagedTextFieldValidator alloc] initWithTextField:self 
-                                                                                         managedObject:managedObject
-                                                                                             fieldName:fieldName 
-                                                                                             formatter:formatter
-                                                                                    validationDelegate:validationDelegate] 
-                                               autorelease];
+    HLSManagedTextFieldValidator *validator = [[HLSManagedTextFieldValidator alloc] initWithTextField:self
+                                                                                        managedObject:managedObject
+                                                                                            fieldName:fieldName
+                                                                                            formatter:formatter
+                                                                                   validationDelegate:validationDelegate];
     if (! validator) {
         return;
     }

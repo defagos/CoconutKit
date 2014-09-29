@@ -22,10 +22,10 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
 @property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
-@property (nonatomic, retain) NSDate *lastEstimateDate;         // date & time when the remaining time was previously estimated
-@property (nonatomic, retain) NSDictionary *returnInfo;
-@property (nonatomic, retain) NSError *error;
-@property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group, nil if none
+@property (nonatomic, strong) NSDate *lastEstimateDate;         // date & time when the remaining time was previously estimated
+@property (nonatomic, strong) NSDictionary *returnInfo;
+@property (nonatomic, strong) NSError *error;
+@property (nonatomic, weak) HLSTaskGroup *taskGroup;           // weak ref to parent task group, nil if none
 
 @end
 
@@ -43,17 +43,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
         [self reset];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.tag = nil;
-    self.userInfo = nil;
-    self.lastEstimateDate = nil;
-    self.returnInfo = nil;
-    self.error = nil;
-    self.taskGroup = nil;
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators

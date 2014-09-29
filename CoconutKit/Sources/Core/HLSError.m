@@ -18,7 +18,7 @@
  * We do not use the NSError userInfo dictionary since it is set at NSError creation time and cannot be updated afterwards.
  * Instead, we use our own internal dictionary
  */
-@property (nonatomic, retain) NSDictionary *internalUserInfo;
+@property (nonatomic, strong) NSDictionary *internalUserInfo;
 
 @end
 
@@ -28,7 +28,7 @@
 
 + (id)errorWithDomain:(NSString *)domain code:(NSInteger)code
 {
-    return [[[[self class] alloc] initWithDomain:domain code:code] autorelease];
+    return [[[self class] alloc] initWithDomain:domain code:code];
 }
 
 + (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription
@@ -46,13 +46,6 @@
         self.internalUserInfo = [NSDictionary dictionary];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.internalUserInfo = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators

@@ -5,14 +5,14 @@
 #import "AbstractClassA.h"
 
 extern const struct ConcreteSubclassBAttributes {
-	 NSString *codeMandatoryNumberB;
-	 NSString *modelMandatoryBoundedNumberB;
-	 NSString *modelMandatoryCodeNotZeroNumberB;
-	 NSString *noValidationNumberB;
+	__unsafe_unretained NSString *codeMandatoryNumberB;
+	__unsafe_unretained NSString *modelMandatoryBoundedNumberB;
+	__unsafe_unretained NSString *modelMandatoryCodeNotZeroNumberB;
+	__unsafe_unretained NSString *noValidationNumberB;
 } ConcreteSubclassBAttributes;
 
 extern const struct ConcreteSubclassBRelationships {
-	 NSString *codeMandatoryConcreteClassesD;
+	__unsafe_unretained NSString *codeMandatoryConcreteClassesD;
 } ConcreteSubclassBRelationships;
 
 @class ConcreteClassD;
@@ -26,7 +26,7 @@ extern const struct ConcreteSubclassBRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) ConcreteSubclassBID* objectID;
 
-@property (nonatomic, retain) NSNumber* codeMandatoryNumberB;
+@property (nonatomic, strong) NSNumber* codeMandatoryNumberB;
 
 @property (atomic) int16_t codeMandatoryNumberBValue;
 - (int16_t)codeMandatoryNumberBValue;
@@ -34,7 +34,7 @@ extern const struct ConcreteSubclassBRelationships {
 
 //- (BOOL)validateCodeMandatoryNumberB:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSNumber* modelMandatoryBoundedNumberB;
+@property (nonatomic, strong) NSNumber* modelMandatoryBoundedNumberB;
 
 @property (atomic) int16_t modelMandatoryBoundedNumberBValue;
 - (int16_t)modelMandatoryBoundedNumberBValue;
@@ -42,7 +42,7 @@ extern const struct ConcreteSubclassBRelationships {
 
 //- (BOOL)validateModelMandatoryBoundedNumberB:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSNumber* modelMandatoryCodeNotZeroNumberB;
+@property (nonatomic, strong) NSNumber* modelMandatoryCodeNotZeroNumberB;
 
 @property (atomic) int16_t modelMandatoryCodeNotZeroNumberBValue;
 - (int16_t)modelMandatoryCodeNotZeroNumberBValue;
@@ -50,7 +50,7 @@ extern const struct ConcreteSubclassBRelationships {
 
 //- (BOOL)validateModelMandatoryCodeNotZeroNumberB:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSNumber* noValidationNumberB;
+@property (nonatomic, strong) NSNumber* noValidationNumberB;
 
 @property (atomic) int16_t noValidationNumberBValue;
 - (int16_t)noValidationNumberBValue;
@@ -58,7 +58,7 @@ extern const struct ConcreteSubclassBRelationships {
 
 //- (BOOL)validateNoValidationNumberB:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSSet *codeMandatoryConcreteClassesD;
+@property (nonatomic, strong) NSSet *codeMandatoryConcreteClassesD;
 
 - (NSMutableSet*)codeMandatoryConcreteClassesDSet;
 

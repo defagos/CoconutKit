@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F0F4DDB159CB75400277267 /* HLSPlaceholderInsetSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0F4DD9159CB75400277267 /* HLSPlaceholderInsetSegue.h */; };
-		6F0F4DDC159CB75400277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F0F4DDC159CB75400277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F10E388179FFE2B00BFEF42 /* HLSViewTouchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F10E386179FFE2B00BFEF42 /* HLSViewTouchDetector.h */; };
 		6F10E389179FFE2B00BFEF42 /* HLSViewTouchDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F10E387179FFE2B00BFEF42 /* HLSViewTouchDetector.m */; };
 		6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */; };
@@ -17,9 +17,9 @@
 		6F23DB2716B3E84200C085CE /* UIView+HLSRuntimeAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F23DB2516B3E84200C085CE /* UIView+HLSRuntimeAttributes.h */; };
 		6F23DB2816B3E84200C085CE /* UIView+HLSRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */; };
 		6F255E411712C360007BFC96 /* HLSConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F255E3F1712C360007BFC96 /* HLSConnection.h */; };
-		6F255E421712C360007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E401712C360007BFC96 /* HLSConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F255E421712C360007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E401712C360007BFC96 /* HLSConnection.m */; };
 		6F255E531712E85F007BFC96 /* HLSFakeConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F255E511712E85F007BFC96 /* HLSFakeConnection.h */; };
-		6F255E541712E85F007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E521712E85F007BFC96 /* HLSFakeConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F255E541712E85F007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E521712E85F007BFC96 /* HLSFakeConnection.m */; };
 		6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */; };
 		6F2D46FA15761A8600EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */; };
@@ -43,21 +43,21 @@
 		6F47EC571924EEEE00C5F6AC /* SearchFieldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4E1924EEEE00C5F6AC /* SearchFieldIcon@2x.png */; };
 		6F5D355D19D59B0D00DDE0EF /* CoconutKit-resources-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7811924EE4E00660CDF /* CoconutKit-resources-Info.plist */; };
 		6F6010EB15AB1E2B00A9FEC5 /* HLSContainerStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */; };
-		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; };
 		6F63E7B617CF6B80006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B517CF6B80006322D9 /* QuickLook.framework */; };
 		6F63E7C617CF6E19006322D9 /* HLSPreviewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */; };
-		6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */; };
 		6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */; };
-		6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; };
 		6F6C7550162DC0290094B090 /* UINavigationController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */; };
 		6F6C7551162DC0290094B090 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C754F162DC0290094B090 /* UINavigationController+HLSExtensions.m */; };
 		6F6C7555162DC0550094B090 /* UITabBarController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C7553162DC0550094B090 /* UITabBarController+HLSExtensions.h */; };
 		6F6C7556162DC0550094B090 /* UITabBarController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7554162DC0550094B090 /* UITabBarController+HLSExtensions.m */; };
 		6F6C7558162DC0DA0094B090 /* HLSAutorotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C7557162DC0D90094B090 /* HLSAutorotation.h */; };
 		6F6E814217CF05FF00CE578A /* HLSLoggerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6E813D17CF05FF00CE578A /* HLSLoggerViewController.h */; };
-		6F6E814317CF05FF00CE578A /* HLSLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E813E17CF05FF00CE578A /* HLSLoggerViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F6E814317CF05FF00CE578A /* HLSLoggerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E813E17CF05FF00CE578A /* HLSLoggerViewController.m */; };
 		6F794815180BABAD00282253 /* NSStream+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F794813180BABAD00282253 /* NSStream+HLSExtensions.h */; };
-		6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */; };
 		6F7A871016522C0A0030B091 /* UIPopoverController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A870E16522C0A0030B091 /* UIPopoverController+HLSExtensions.h */; };
 		6F7A871116522C0A0030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848F14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */; };
@@ -65,13 +65,13 @@
 		6F8366061588CC690044E572 /* HLSVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8366041588CC690044E572 /* HLSVector.h */; };
 		6F8366071588CC690044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366051588CC690044E572 /* HLSVector.m */; };
 		6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */; };
-		6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */; };
 		6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F89148A15790D21009FCC78 /* HLSLabel.h */; };
 		6F89148D15790D21009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89148B15790D21009FCC78 /* HLSLabel.m */; };
 		6F8C933B15CEE623006D892C /* HLSContainerGroupView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8C933915CEE623006D892C /* HLSContainerGroupView.h */; };
-		6F8C933C15CEE623006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C933A15CEE623006D892C /* HLSContainerGroupView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F8C933C15CEE623006D892C /* HLSContainerGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C933A15CEE623006D892C /* HLSContainerGroupView.m */; };
 		6F8C934815CEF0DB006D892C /* HLSContainerStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8C934615CEF0DB006D892C /* HLSContainerStackView.h */; };
-		6F8C934915CEF0DB006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6F8C934915CEF0DB006D892C /* HLSContainerStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */; };
 		6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */; };
 		6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8D09A0123F545D00FCF2AF /* UIKit.framework */; };
 		6F954F6517CF4707001E5F67 /* HLSLogger+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F954F6317CF4707001E5F67 /* HLSLogger+Friend.h */; };
@@ -84,11 +84,11 @@
 		6FA8913F179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8913D179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.m */; };
 		6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */; };
 		6FAB922916DA7F9100599256 /* HLSFileURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAB922516DA7F9100599256 /* HLSFileURLConnection.h */; };
-		6FAB922A16DA7F9100599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922616DA7F9100599256 /* HLSFileURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAB922A16DA7F9100599256 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922616DA7F9100599256 /* HLSFileURLConnection.m */; };
 		6FAB922B16DA7F9100599256 /* HLSURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAB922716DA7F9100599256 /* HLSURLConnection.h */; };
-		6FAB922C16DA7F9100599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922816DA7F9100599256 /* HLSURLConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAB922C16DA7F9100599256 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922816DA7F9100599256 /* HLSURLConnection.m */; };
 		6FAD88D41817859F00B02B29 /* HLSInMemoryCacheEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAD88D21817859F00B02B29 /* HLSInMemoryCacheEntry.h */; };
-		6FAD88D51817859F00B02B29 /* HLSInMemoryCacheEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAD88D31817859F00B02B29 /* HLSInMemoryCacheEntry.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FAD88D51817859F00B02B29 /* HLSInMemoryCacheEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAD88D31817859F00B02B29 /* HLSInMemoryCacheEntry.m */; };
 		6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; };
 		6FADE59A14BA0494007EE121 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
 		6FADE59B14BA0494007EE121 /* HLSViewAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51414BA0494007EE121 /* HLSViewAnimationStep.h */; };
@@ -135,7 +135,7 @@
 		6FADE5C714BA0494007EE121 /* NSObject+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54114BA0494007EE121 /* NSObject+HLSExtensions.h */; };
 		6FADE5C814BA0494007EE121 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54214BA0494007EE121 /* NSObject+HLSExtensions.m */; };
 		6FADE5C914BA0494007EE121 /* NSString+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */; };
-		6FADE5CA14BA0494007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE5CA14BA0494007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */; };
 		6FADE5CB14BA0494007EE121 /* NSTimeZone+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54514BA0494007EE121 /* NSTimeZone+HLSExtensions.h */; };
 		6FADE5CC14BA0494007EE121 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54614BA0494007EE121 /* NSTimeZone+HLSExtensions.m */; };
 		6FADE5CD14BA0494007EE121 /* UIColor+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54714BA0494007EE121 /* UIColor+HLSExtensions.h */; };
@@ -187,35 +187,35 @@
 		6FADE60514BA0494007EE121 /* UIView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58314BA0494007EE121 /* UIView+HLSExtensions.h */; };
 		6FADE60614BA0494007EE121 /* UIView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58414BA0494007EE121 /* UIView+HLSExtensions.m */; };
 		6FADE60714BA0494007EE121 /* HLSContainerContent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58714BA0494007EE121 /* HLSContainerContent.h */; };
-		6FADE60814BA0494007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58814BA0494007EE121 /* HLSContainerContent.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE60814BA0494007EE121 /* HLSContainerContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58814BA0494007EE121 /* HLSContainerContent.m */; };
 		6FADE60914BA0494007EE121 /* HLSPlaceholderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58914BA0494007EE121 /* HLSPlaceholderViewController.h */; };
-		6FADE60A14BA0494007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE60A14BA0494007EE121 /* HLSPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */; };
 		6FADE60B14BA0494007EE121 /* HLSStackController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58B14BA0494007EE121 /* HLSStackController.h */; };
-		6FADE60C14BA0494007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58C14BA0494007EE121 /* HLSStackController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE60C14BA0494007EE121 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58C14BA0494007EE121 /* HLSStackController.m */; };
 		6FADE60F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */; };
-		6FADE61014BA0494007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE61014BA0494007EE121 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; };
 		6FADE61314BA0494007EE121 /* HLSViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59314BA0494007EE121 /* HLSViewController.h */; };
-		6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59414BA0494007EE121 /* HLSViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59414BA0494007EE121 /* HLSViewController.m */; };
 		6FADE61514BA0494007EE121 /* HLSWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59514BA0494007EE121 /* HLSWebViewController.h */; };
-		6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59614BA0494007EE121 /* HLSWebViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59614BA0494007EE121 /* HLSWebViewController.m */; };
 		6FADE61714BA0494007EE121 /* HLSWizardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE59714BA0494007EE121 /* HLSWizardViewController.h */; };
-		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
 		6FADE9EE14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE9EC14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.h */; };
 		6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE9ED14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m */; };
 		6FB007DD1952D09B0082D915 /* HLSGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB007DB1952D09B0082D915 /* HLSGeometry.h */; };
-		6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007DC1952D09B0082D915 /* HLSGeometry.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007DC1952D09B0082D915 /* HLSGeometry.m */; };
 		6FB318B21815A93200565B69 /* HLSInMemoryFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB318B01815A93100565B69 /* HLSInMemoryFileManager.h */; };
-		6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318B11815A93100565B69 /* HLSInMemoryFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6FB7ABEA19D59AD200C7DE82 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6FB7ABE819D59AD200C7DE82 /* Localizable.strings */; };
+		6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB318B11815A93100565B69 /* HLSInMemoryFileManager.m */; };
 		6FB8E66C15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E66B15F3D91E00CA4037 /* HLSLayerAnimation+Friend.h */; };
 		6FB8E67715F3EDD300CA4037 /* HLSObjectAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67515F3EDD300CA4037 /* HLSObjectAnimation+Friend.h */; };
 		6FB8E67815F3EDD300CA4037 /* HLSViewAnimation+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB8E67615F3EDD300CA4037 /* HLSViewAnimation+Friend.h */; };
 		6FB991F51523A89000E13BED /* HLSZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB991F31523A89000E13BED /* HLSZeroingWeakRef.h */; };
 		6FB991F61523A89000E13BED /* HLSZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB991F41523A89000E13BED /* HLSZeroingWeakRef.m */; };
 		6FC3790C182D2C2300B55AF1 /* UIApplication+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC3790A182D2C2200B55AF1 /* UIApplication+HLSExtensions.h */; };
-		6FC3790D182D2C2300B55AF1 /* UIApplication+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3790B182D2C2200B55AF1 /* UIApplication+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FC3790D182D2C2300B55AF1 /* UIApplication+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3790B182D2C2200B55AF1 /* UIApplication+HLSExtensions.m */; };
 		6FC40C581641D02A00398242 /* UISplitViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */; };
-		6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; };
 		6FC5B7751924EDC500660CDF /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F44E8FD156B8B1A00B45BB4 /* CoreFoundation.framework */; };
 		6FC5B7B51924EE4E00660CDF /* HLSLoggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A21924EE4E00660CDF /* HLSLoggerViewController.xib */; };
 		6FC5B7B61924EE4E00660CDF /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A31924EE4E00660CDF /* HLSWebViewController.xib */; };
@@ -225,9 +225,9 @@
 		6FC8EDB4176EC866000B3BE7 /* NSNumber+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8EDB2176EC866000B3BE7 /* NSNumber+HLSExtensions.m */; };
 		6FC900F313D465F700834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F213D465F700834900 /* CoreData.framework */; };
 		6FCA2DD31679E36D0011CFDA /* HLSFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCA2DD11679E36D0011CFDA /* HLSFileManager.h */; };
-		6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DD21679E36D0011CFDA /* HLSFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DD21679E36D0011CFDA /* HLSFileManager.m */; };
 		6FCA2DD81679E3B20011CFDA /* HLSStandardFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCA2DD61679E3B10011CFDA /* HLSStandardFileManager.h */; };
-		6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DD71679E3B20011CFDA /* HLSStandardFileManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA2DD71679E3B20011CFDA /* HLSStandardFileManager.m */; };
 		6FCDA16C14DAE5EF00ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */; };
 		6FCFEA4915E37E25002CAF9E /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCFEA4715E37E25002CAF9E /* HLSAnimationStep.h */; };
 		6FCFEA4A15E37E25002CAF9E /* HLSAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCFEA4815E37E25002CAF9E /* HLSAnimationStep.m */; };
@@ -240,11 +240,11 @@
 		6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */; };
 		6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FEEF85C14F29057001585A6 /* UIScrollView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEEF85A14F29057001585A6 /* UIScrollView+HLSExtensions.h */; };
-		6FEEF85D14F29057001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF85B14F29057001585A6 /* UIScrollView+HLSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FEEF85D14F29057001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF85B14F29057001585A6 /* UIScrollView+HLSExtensions.m */; };
 		6FF3E6EF15D2E4C900AB9A53 /* HLSTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF3E6ED15D2E4C800AB9A53 /* HLSTransition.h */; };
 		6FF3E6F015D2E4C900AB9A53 /* HLSTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E6EE15D2E4C800AB9A53 /* HLSTransition.m */; };
 		6FF74C74177D469B00BD846D /* HLSApplicationInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF74C72177D469B00BD846D /* HLSApplicationInformation.h */; };
-		6FF74C75177D469B00BD846D /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF74C73177D469B00BD846D /* HLSApplicationInformation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6FF74C75177D469B00BD846D /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF74C73177D469B00BD846D /* HLSApplicationInformation.m */; };
 		AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		DA838787131EAD1000ECAED3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA838786131EAD1000ECAED3 /* MessageUI.framework */; };
@@ -1360,6 +1360,7 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_THUMB_SUPPORT = NO;
@@ -1375,7 +1376,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1386,6 +1387,7 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -1400,7 +1402,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

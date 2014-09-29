@@ -16,11 +16,11 @@
 
 @interface HLSManagedTextFieldValidator ()
 
-@property (nonatomic, assign) UITextField *textField;               // weak ref. Detector lifetime is managed by the text field
-@property (nonatomic, retain) NSManagedObject *managedObject;
-@property (nonatomic, retain) NSString *fieldName;
-@property (nonatomic, retain) NSFormatter *formatter;
-@property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
+@property (nonatomic, weak) UITextField *textField;               // weak ref. Detector lifetime is managed by the text field
+@property (nonatomic, strong) NSManagedObject *managedObject;
+@property (nonatomic, strong) NSString *fieldName;
+@property (nonatomic, strong) NSFormatter *formatter;
+@property (nonatomic, weak) id<HLSTextFieldValidationDelegate> validationDelegate;
 
 @end
 
@@ -38,7 +38,6 @@
         // Sanity check
         if (! managedObject || ! fieldName) {
             HLSLoggerError(@"Missing managed object or field name");
-            [self release];
             return nil;
         }
         
@@ -46,7 +45,6 @@
         NSPropertyDescription *propertyDescription = [[[managedObject entity] propertiesByName] objectForKey:fieldName];
         if (! propertyDescription) {
             HLSLoggerError(@"The property %@ does not exist for %@", fieldName, managedObject);
-            [self release];
             return nil;
         }
         
@@ -54,7 +52,6 @@
         // make sense
         if (! [propertyDescription isKindOfClass:[NSAttributeDescription class]]) {
             HLSLoggerError(@"The field %@ is not an attribute and cannot be bound", fieldName);
-            [self release];
             return nil;
         }
         
@@ -86,14 +83,6 @@
 {
     [self.managedObject removeObserver:self forKeyPath:self.fieldName];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    self.textField = nil;
-    self.managedObject = nil;
-    self.fieldName = nil;
-    self.formatter = nil;
-    self.validationDelegate = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Sync and check

@@ -16,11 +16,11 @@
 {
     static NSArray *s_orderedWeekdays = nil;
     if (! s_orderedWeekdays) {
-        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         NSArray *weekDays = [dateFormatter weekdaySymbols];
         // firstWeekday returns indices starting at 1
         NSUInteger offset = [[NSCalendar currentCalendar] firstWeekday] - 1;
-        s_orderedWeekdays = [[weekDays arrayByLeftRotatingNumberOfObjects:offset] retain];
+        s_orderedWeekdays = [weekDays arrayByLeftRotatingNumberOfObjects:offset];
     }
     return s_orderedWeekdays;
 }
@@ -29,11 +29,11 @@
 {
     static NSArray *s_orderedShortWeekdays = nil;
     if (! s_orderedShortWeekdays) {
-        NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         NSArray *shortWeekDays = [dateFormatter shortWeekdaySymbols];
         // firstWeekday returns indices starting at 1
         NSUInteger offset = [[NSCalendar currentCalendar] firstWeekday] - 1;
-        s_orderedShortWeekdays = [[shortWeekDays arrayByLeftRotatingNumberOfObjects:offset] retain];
+        s_orderedShortWeekdays = [shortWeekDays arrayByLeftRotatingNumberOfObjects:offset];
     }
     return s_orderedShortWeekdays;
 }

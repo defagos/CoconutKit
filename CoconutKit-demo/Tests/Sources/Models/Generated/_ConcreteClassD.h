@@ -4,12 +4,12 @@
 #import <CoreData/CoreData.h>
 
 extern const struct ConcreteClassDAttributes {
-	 NSString *noValidationNumberD;
-	 NSString *noValidationStringD;
+	__unsafe_unretained NSString *noValidationNumberD;
+	__unsafe_unretained NSString *noValidationStringD;
 } ConcreteClassDAttributes;
 
 extern const struct ConcreteClassDRelationships {
-	 NSString *concreteSubclassB;
+	__unsafe_unretained NSString *concreteSubclassB;
 } ConcreteClassDRelationships;
 
 @class ConcreteSubclassB;
@@ -23,7 +23,7 @@ extern const struct ConcreteClassDRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) ConcreteClassDID* objectID;
 
-@property (nonatomic, retain) NSNumber* noValidationNumberD;
+@property (nonatomic, strong) NSNumber* noValidationNumberD;
 
 @property (atomic) int16_t noValidationNumberDValue;
 - (int16_t)noValidationNumberDValue;
@@ -31,11 +31,11 @@ extern const struct ConcreteClassDRelationships {
 
 //- (BOOL)validateNoValidationNumberD:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSString* noValidationStringD;
+@property (nonatomic, strong) NSString* noValidationStringD;
 
 //- (BOOL)validateNoValidationStringD:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSSet *concreteSubclassB;
+@property (nonatomic, strong) NSSet *concreteSubclassB;
 
 - (NSMutableSet*)concreteSubclassBSet;
 

@@ -32,6 +32,6 @@
 
 - (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task NS_REQUIRES_SUPER;
 
-@property (nonatomic, readonly, assign) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
+@property (nonatomic, readonly, weak) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
 
 @end

@@ -14,14 +14,14 @@
 
 - (void)testTag
 {
-    UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithFrame:CGRectZero] autorelease];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
     segmentedControl.tag_hls = @"tag";
     GHAssertEqualStrings(segmentedControl.tag_hls, @"tag", nil);
 }
 
 - (void)testUserInfo
 {
-    UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithFrame:CGRectZero] autorelease];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
     segmentedControl.userInfo_hls = [NSDictionary dictionary];
     GHAssertNotNil(segmentedControl.userInfo_hls, nil);
 }

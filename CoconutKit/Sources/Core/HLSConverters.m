@@ -98,7 +98,7 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
         return nil;
     }
     
-    NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     return [formatter numberFromString:string];
 }
@@ -113,7 +113,7 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
         return nil;
     }
     
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
     [formatter setDateFormat:formatString];
     return [formatter dateFromString:string];

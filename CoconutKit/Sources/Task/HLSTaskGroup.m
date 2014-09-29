@@ -23,13 +23,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @interface HLSTaskGroup ()
 
-@property (nonatomic, retain) NSMutableSet *taskSet;                                    // contains HLSTask objects
+@property (nonatomic, strong) NSMutableSet *taskSet;                                    // contains HLSTask objects
 
 // Dependencies between tasks are saved in both directions for faster lookup
-@property (nonatomic, retain) NSMutableDictionary *weakTaskDependencyMap;               // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
-@property (nonatomic, retain) NSMutableDictionary *strongTaskDependencyMap;             // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
-@property (nonatomic, retain) NSMutableDictionary *taskToWeakDependentsMap;             // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
-@property (nonatomic, retain) NSMutableDictionary *taskToStrongDependentsMap;           // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
+@property (nonatomic, strong) NSMutableDictionary *weakTaskDependencyMap;               // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
+@property (nonatomic, strong) NSMutableDictionary *strongTaskDependencyMap;             // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
+@property (nonatomic, strong) NSMutableDictionary *taskToWeakDependentsMap;             // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
+@property (nonatomic, strong) NSMutableDictionary *taskToStrongDependentsMap;           // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
 
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
@@ -37,7 +37,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign) float progress;                                           // all individual progress values added
 @property (nonatomic, assign) float fullProgress;                                       // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
 @property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;             // date & time when the remaining time was previously estimated ...
-@property (nonatomic, retain) NSDate *lastEstimateDate;
+@property (nonatomic, strong) NSDate *lastEstimateDate;
 
 @end
 
@@ -61,19 +61,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         [self reset];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.tag = nil;
-    self.userInfo = nil;
-    self.taskSet = nil;
-    self.weakTaskDependencyMap = nil;
-    self.strongTaskDependencyMap = nil;
-    self.taskToWeakDependentsMap = nil;
-    self.taskToStrongDependentsMap = nil;
-    self.lastEstimateDate = nil;
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators

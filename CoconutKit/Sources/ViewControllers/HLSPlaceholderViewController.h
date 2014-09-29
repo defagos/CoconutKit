@@ -132,7 +132,7 @@
  * The order of the placeholder views in the IBOutletCollection is the one in which they are bound in the corresponding
  * nib or storyboard file
  */
-@property (nonatomic, retain) IBOutletCollection(UIView) NSArray *placeholderViews;
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *placeholderViews;
 
 /**
  * Return the placeholder view at the given index, or nil if none
@@ -161,7 +161,7 @@
 /**
  * The placeholder view controller delegate
  */
-@property (nonatomic, assign) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 
 @end
 
@@ -207,6 +207,6 @@
 /**
  * Return the placeholder view controller a view controller is inserted in, or nil if none
  */
-@property (nonatomic, readonly, assign) HLSPlaceholderViewController *placeholderViewController;
+@property (nonatomic, readonly, weak) HLSPlaceholderViewController *placeholderViewController;
 
 @end

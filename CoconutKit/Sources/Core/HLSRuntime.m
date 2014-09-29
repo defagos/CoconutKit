@@ -30,7 +30,7 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
     
     // Climb up the protocol inheritance hierarchy
     unsigned int numberOfParentProtocols = 0;
-    Protocol **parentProtocols = protocol_copyProtocolList(protocol, &numberOfParentProtocols);
+    Protocol * __unsafe_unretained * parentProtocols = protocol_copyProtocolList(protocol, &numberOfParentProtocols);
     for (unsigned int i = 0; i < numberOfParentProtocols; ++i) {
         Protocol *parentProtocol = parentProtocols[i];
         unsigned int numberOfParentProtocolMethodDescriptions = 0;

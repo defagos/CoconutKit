@@ -8,6 +8,6 @@
 
 @interface FooterView : HLSNibView
 
-@property (nonatomic, retain) IBOutlet UILabel *label;
+@property (nonatomic, weak) IBOutlet UILabel *label;
 
 @end

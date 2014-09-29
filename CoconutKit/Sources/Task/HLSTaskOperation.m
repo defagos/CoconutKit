@@ -16,9 +16,9 @@
 
 @interface HLSTaskOperation ()
 
-@property (nonatomic, assign) HLSTaskManager *taskManager;          // The task manager which spawned the operation
-@property (nonatomic, assign) HLSTask *task;                        // The task the operation is processing
-@property (nonatomic, retain) NSThread *callingThread;              // Thread onto which spawned the operation
+@property (nonatomic, weak) HLSTaskManager *taskManager;          // The task manager which spawned the operation
+@property (nonatomic, weak) HLSTask *task;                        // The task the operation is processing
+@property (nonatomic, strong) NSThread *callingThread;              // Thread onto which spawned the operation
 
 @end
 
@@ -40,14 +40,6 @@
 {
     HLSForbiddenInheritedMethod();
     return nil;
-}
-
-- (void)dealloc
-{
-    self.taskManager = nil;
-    self.task = nil;
-    self.callingThread = nil;
-    [super dealloc];
 }
 
 #pragma mark Thread main function

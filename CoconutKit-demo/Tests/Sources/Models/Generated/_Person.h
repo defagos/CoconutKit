@@ -4,13 +4,13 @@
 #import <CoreData/CoreData.h>
 
 extern const struct PersonAttributes {
-	 NSString *firstName;
-	 NSString *lastName;
+	__unsafe_unretained NSString *firstName;
+	__unsafe_unretained NSString *lastName;
 } PersonAttributes;
 
 extern const struct PersonRelationships {
-	 NSString *accounts;
-	 NSString *houses;
+	__unsafe_unretained NSString *accounts;
+	__unsafe_unretained NSString *houses;
 } PersonRelationships;
 
 @class BankAccount;
@@ -25,19 +25,19 @@ extern const struct PersonRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) PersonID* objectID;
 
-@property (nonatomic, retain) NSString* firstName;
+@property (nonatomic, strong) NSString* firstName;
 
 //- (BOOL)validateFirstName:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSString* lastName;
+@property (nonatomic, strong) NSString* lastName;
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSSet *accounts;
+@property (nonatomic, strong) NSSet *accounts;
 
 - (NSMutableSet*)accountsSet;
 
-@property (nonatomic, retain) NSSet *houses;
+@property (nonatomic, strong) NSSet *houses;
 
 - (NSMutableSet*)housesSet;
 

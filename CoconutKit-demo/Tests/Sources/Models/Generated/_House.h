@@ -4,11 +4,11 @@
 #import <CoreData/CoreData.h>
 
 extern const struct HouseAttributes {
-	 NSString *name;
+	__unsafe_unretained NSString *name;
 } HouseAttributes;
 
 extern const struct HouseRelationships {
-	 NSString *owners;
+	__unsafe_unretained NSString *owners;
 } HouseRelationships;
 
 @class Person;
@@ -22,11 +22,11 @@ extern const struct HouseRelationships {
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) HouseID* objectID;
 
-@property (nonatomic, retain) NSString* name;
+@property (nonatomic, strong) NSString* name;
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, retain) NSSet *owners;
+@property (nonatomic, strong) NSSet *owners;
 
 - (NSMutableSet*)ownersSet;
 

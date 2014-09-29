@@ -9,5 +9,4 @@
 #import "HLSFileManagerTestCase.h"
 
 @interface HLSStandardFileManagerTestCase : HLSFileManagerTestCase
-
 @end
