@@ -22,10 +22,8 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 	* cursor
 	* slideshow with several transition animations (cross fade, Ken Burns, etc.)
 	* label with vertical alignment
-	* expanding / collapsing search bar
 * Classes for common UI tasks (keyboard management, interface locking)
 * Classes for single-line table view cell and view instantiations
-* Methods for skinning some built-in controls prior to iOS 5 appearance API
 * Lightweight logger, assertions, float comparisons, etc.
 * Various extensions to Cocoa and UIKit classes (calendrical calculations, collections, notifications, etc.)
 * ... and more!
@@ -155,15 +153,11 @@ Several schemes are available:
 
 #### With which versions of iOS is CoconutKit compatible?
 
-CoconutKit is compatible with iOS 7 and later (this will change as old OS versions get deprecated), both for iPhone and iPad projects. Please file a bug if you discover this is not the case.
+In general, I try to keep CoconutKit compatible with at least the two most recent major versions of iOS. Currently, CoconutKit is therefore officially compatible with iOS 7 and 8, both for iPhone and iPad projects.
 
 #### With which versions of Xcode and the iOS SDK is CoconutKit compatible?
 
-CoconutKit can be used with Xcode 4.4.1 (iOS SDK 5.1) and above, but is best used with the latest versions of Xcode and of the iOS SDK. Binaries themselves have been compiled using LLVM so that only projects built with LLVM will be able to successfully link against it (linking a project built with LLVM GCC against a library built with LLVM may result in crashes at runtime).
-
-#### Can I use CoconutKit with ARC projects?
-
-Yes. As long as you use binaries or CocoaPods, no additional configuration is required.
+CoconutKit is best used with the most recent Xcode and iOS SDK releases. In general you should be able to use and compile CoconutKit with prior versions of Xcode, though this is not officially supported. Currently, CoconutKit is therefore officially compatible with Xcode 6 and the iOS 8 SDK.
 
 #### Can I use CoconutKit for applications published on the AppStore?
 
@@ -175,17 +169,13 @@ When I started iOS development a few years ago, I immediately felt huge gaps nee
 
 During the last years, I was able to develop some areas of expertise (most notably view controller management, animations and Core Data). I always try to push the envelope in those areas, and I humbly hope the iOS community will be able to benefit from my experience.
 
-#### Does CoconutKit use ARC?
-
-No, CoconutKit currently does not use ARC itself. This will maybe change in a not-so-near future as ARC is adopted.
-
 #### What does the HLS class prefix mean?
 
-HLS stands for hortis le studio, the company I worked for when I started CoconutKit development
+HLS stands for hortis le studio, the company I worked for when I started CoconutKit development. 
 
 ### Contributing to CoconutKit
 
-You can contribute, and you are strongly encouraged to. Use github pull requests to submit your improvements and bug fixes. You can submit everything you want, documentation and comment fixes included! Everything that tends to increase code quality is always warmly welcome.
+You can contribute, and you are warmly encouraged to. Use github pull requests to submit your improvements and bug fixes. You can submit everything you want, documentation and comment fixes included! Everything that tends to increase code quality is always warmly welcome.
 
 #### Requirements
 
