@@ -223,6 +223,7 @@
         }
         if (! font) {
             font = [UIFont systemFontOfSize:17.f];
+            otherFont = [UIFont systemFontOfSize:17.f];
         }
         
         // Text color. If not defined by the data source, use standard colors
@@ -248,8 +249,8 @@
         
         // Create a label with appropriate size. The size must accomodate both the font sizes for selected and non-selected
         // states
-        CGSize titleSize = [title sizeWithFont:font];
-        CGSize otherTitleSize = [title sizeWithFont:otherFont];
+        CGSize titleSize = [title sizeWithAttributes:@{ NSFontAttributeName : font }];
+        CGSize otherTitleSize = [title sizeWithAttributes:@{ NSFontAttributeName : otherFont }];
         UILabel *elementLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f,
                                                                           0.f,
                                                                           floatmax(titleSize.width, otherTitleSize.width),
