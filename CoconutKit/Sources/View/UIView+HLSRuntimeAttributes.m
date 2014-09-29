@@ -137,5 +137,9 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
     
     NSString *colorSetterSelectorName = [NSString stringWithCString:sel_getName(_cmd) encoding:NSUTF8StringEncoding];
     SEL colorSelector = NSSelectorFromString([colorSetterSelectorName stringByReplacingOccurrencesOfString:@"setHls" withString:@"set"]);
-    [self performSelector:colorSelector withObject:color];
+    
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+    // correct memory management
+    void (*methodImp)(id, SEL, id) = (void (*)(id, SEL, id))[self methodForSelector:colorSelector];
+    methodImp(self, colorSelector, color);
 }
