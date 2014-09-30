@@ -23,10 +23,13 @@
  * A task group must not be submitted several times simultaneously (this leads to undefined behavior). A task 
  * group which was fully processed can be submitted again (and with another delegate if needed), but must not be 
  * already running.
- *
- * Designated initializer: -init:
  */
 @interface HLSTaskGroup : NSObject
+
+/**
+ * Create a task group
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Optional tag to identify a task group

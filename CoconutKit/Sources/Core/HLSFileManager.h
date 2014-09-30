@@ -113,10 +113,13 @@
  *
  * For all methods, paths represent locations relative to the managed storage, and should be given using the standard
  * notation /path/to/some/file.txt. The / at the beginning represents the storage root and is mandatory
- *
- * Designated initializer: -init
  */
 @interface HLSFileManager : NSObject <HLSFileManagerAbstract, HLSFileManagerStreamSupport, HLSFileManagerURLSupport>
+
+/**
+ * Create a file manager
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return YES iff the file or folder exists at the specified path

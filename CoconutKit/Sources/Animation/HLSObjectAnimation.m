@@ -14,7 +14,7 @@
 
 #pragma mark Class methods
 
-+ (id)animation
++ (instancetype)animation
 {
     return [[[self class] alloc] init];
 }

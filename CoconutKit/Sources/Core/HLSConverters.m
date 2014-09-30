@@ -161,7 +161,7 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
     return nil;

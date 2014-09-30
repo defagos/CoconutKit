@@ -11,7 +11,7 @@
  */
 @interface HLSPreviewItem : NSObject <QLPreviewItem>
 
-- (id)initWithPreviewItemURL:(NSURL *)previewItemURL previewItemTitle:(NSString *)previewItemTitle;
-- (id)initWithPreviewItemURL:(NSURL *)previewItemURL;
+- (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL previewItemTitle:(NSString *)previewItemTitle NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL;
 
 @end

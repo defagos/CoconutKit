@@ -107,15 +107,13 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Even though the iOS containment API is promising, implementing your own view controllers using
  * HLSContainerStack has many advantages, and is far easier. For examples of implementations, have a look 
  * at HLSStackController.m and HLSPlaceholderViewController.m. Give it a try, you won't be disappointed!
- *
- * Designated initializer: -initWithContainerViewController:behavior:capacity:
  */
 @interface HLSContainerStack : NSObject <HLSAnimationDelegate>
 
 /**
  * Convenience constructor to instantiate a stack containing at most one child view controller
  */
-+ (id)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController;
++ (instancetype)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController;
 
 /**
  * Create a stack which will manage the children view controllers of a container view controller. The containerViewController
@@ -133,9 +131,9 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Remark: During transition animations, the capacity is temporary increased by one to avoid view controllers popping up
  *         unnecessarily. This is not a bug
  */
-- (id)initWithContainerViewController:(UIViewController *)containerViewController
-                             behavior:(HLSContainerStackBehavior)behavior
-                             capacity:(NSUInteger)capacity;
+- (instancetype)initWithContainerViewController:(UIViewController *)containerViewController
+                                       behavior:(HLSContainerStackBehavior)behavior
+                                       capacity:(NSUInteger)capacity NS_DESIGNATED_INITIALIZER;
 
 /**
  * The view where the stack must display the children view controller's views. This view must be part of the container

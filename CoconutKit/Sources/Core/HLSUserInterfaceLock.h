@@ -9,11 +9,14 @@
 /**
  * Singleton class for preventing / allowing user interface interaction
  *
- * Designated initializer: -init
+ * Not meant to be instantiated. Use the singleton method instance
  */
 @interface HLSUserInterfaceLock : NSObject
 
-+ (HLSUserInterfaceLock *)sharedUserInterfaceLock;
+/**
+ * Singleton instance
+ */
++ (instancetype)sharedUserInterfaceLock;
 
 /**
  * Locking and unlocking the UI. Each lock increments an internal counter, each unlock decrements it. When

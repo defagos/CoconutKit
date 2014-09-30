@@ -30,18 +30,18 @@
 
 #pragma mark Class methods
 
-+ (HLSTaskManager *)defaultManager
++ (instancetype)defaultManager
 {
     static HLSTaskManager *s_instance = nil;
     if (! s_instance) {
-        s_instance = [[HLSTaskManager alloc] init];
+        s_instance = [[[self class] alloc] init];
     }
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.operationQueue = [[NSOperationQueue alloc] init];

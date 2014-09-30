@@ -17,7 +17,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 
 #pragma mark Object creation and destruction
 
-- (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
+- (instancetype)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
 {
     if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
         self.transitionClass = [HLSTransitionNone class];

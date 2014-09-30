@@ -17,7 +17,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView
+- (instancetype)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView
 {
     if ((self = [super initWithFrame:frame])) {
         if (! frontContentView) {
@@ -44,10 +44,10 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithFrame:CGRectZero frontContentView:nil];
 }
 
 #pragma mark Accessors and mutators

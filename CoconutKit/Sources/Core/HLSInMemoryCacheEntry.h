@@ -12,17 +12,15 @@
  * This additional bookkeeping is required because the cache can cleanup objects when it grows too large. In such
  * cases, the internal file hierarchy dictionary maintained by the file manager needs to be updated to reflect which
  * object has been discarded
- *
- * Designated initializer: -initWithParentItems:name:data:
  */
 @interface HLSInMemoryCacheEntry : NSObject
 
 /**
  * Create a cache entry. The name points at an object contained within the parentItems file dictionary
  */
-- (id)initWithParentItems:(NSMutableDictionary *)parentItems
-                     name:(NSString *)name
-                     data:(NSData *)data;
+- (instancetype)initWithParentItems:(NSMutableDictionary *)parentItems
+                               name:(NSString *)name
+                               data:(NSData *)data NS_DESIGNATED_INITIALIZER;
 
 /**
  * Access entry information

@@ -19,7 +19,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
+- (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     if ((self = [super initWithNibName:nibName bundle:bundle])) {
         [self hlsViewControllerInit];
@@ -27,7 +27,7 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
         [self hlsViewControllerInit];
@@ -35,7 +35,7 @@
     return self;
 }
 
-- (id)initWithBundle:(NSBundle *)bundle
+- (instancetype)initWithBundle:(NSBundle *)bundle
 {
     if (! bundle) {
         bundle = [NSBundle mainBundle];
@@ -45,7 +45,7 @@
     return [self initWithNibName:nibName bundle:bundle];
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithBundle:nil];
 }

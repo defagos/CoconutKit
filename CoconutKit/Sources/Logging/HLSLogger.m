@@ -42,7 +42,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 #pragma mark Class methods
 
-+ (HLSLogger *)sharedLogger
++ (instancetype)sharedLogger
 {
 	static HLSLogger *s_instance = nil;
 	
@@ -51,7 +51,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
         @synchronized(self) {
             if (! s_instance) {
                 NSString *logDirectoryPath = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
-                s_instance = [[HLSLogger alloc] initWithLogDirectoryPath:logDirectoryPath];
+                s_instance = [[[self class] alloc] initWithLogDirectoryPath:logDirectoryPath];
             }
         }
 	}
@@ -60,7 +60,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 #pragma mark Object creation and destruction
 
-- (id)initWithLogDirectoryPath:(NSString *)logDirectoryPath
+- (instancetype)initWithLogDirectoryPath:(NSString *)logDirectoryPath
 {
 	if ((self = [super init])) {
         if (! [logDirectoryPath isFilled]) {
@@ -79,10 +79,10 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 	return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithLogDirectoryPath:nil];
 }
 
 #pragma mark Accessors and mutators

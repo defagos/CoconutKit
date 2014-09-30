@@ -33,7 +33,7 @@
  * Factory method for creating the view. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (id)view;
++ (instancetype)view;
 
 /**
  * Return the view dimensions

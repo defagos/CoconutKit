@@ -14,6 +14,6 @@
 /**
  * Identity animation
  */
-+ (id)animation;
++ (instancetype)animation;
 
 @end

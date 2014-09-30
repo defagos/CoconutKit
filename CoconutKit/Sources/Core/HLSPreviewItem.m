@@ -21,7 +21,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithPreviewItemURL:(NSURL *)previewItemURL previewItemTitle:(NSString *)previewItemTitle
+- (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL previewItemTitle:(NSString *)previewItemTitle
 {
     if (self = [super init]) {
         self.previewItemURL = previewItemURL;
@@ -30,15 +30,15 @@
     return self;
 }
 
-- (id)initWithPreviewItemURL:(NSURL *)previewItemURL
+- (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL
 {
     return [self initWithPreviewItemURL:previewItemURL previewItemTitle:nil];
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithPreviewItemURL:nil previewItemTitle:nil];
 }
 
 @end

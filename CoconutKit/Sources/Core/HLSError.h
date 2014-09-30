@@ -13,8 +13,6 @@
  * This class enforces the link between accessor methods and underlying userInfo dictionary keys. This is not
  * required, as explained in the documentation:
  *   http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/ErrorHandlingCocoa/ErrorHandling/ErrorHandling.html
- *
- * Designated initializer: -initWithDomain:Code:
  */
 @interface HLSError : NSError
 
@@ -22,19 +20,19 @@
  * Instantiate an error with some code within a domain. The error is created with no information, use the mutators below to 
  * add the information you need
  */
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code;
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code;
 
 /**
  * Convenience instantiation method for the most common case (an error conveying a description message). You can still
  * use the mutators below to add more information if needed
  */
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
 
 /**
  * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to
  * add the information you need
  */
-- (id)initWithDomain:(NSString *)domain code:(NSInteger)code;
+- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code NS_DESIGNATED_INITIALIZER;
 
 /**
  * Various mutators for setting standard NSError properties. Please refer to the NSError documentation for more information

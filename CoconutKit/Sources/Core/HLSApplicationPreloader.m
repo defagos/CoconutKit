@@ -21,7 +21,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithApplication:(UIApplication *)application
+- (instancetype)initWithApplication:(UIApplication *)application
 {
     if ((self = [super init])) {
         if (! application) {
@@ -34,10 +34,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithApplication:nil];
 }
 
 #pragma mark Pre-loading

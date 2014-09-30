@@ -98,10 +98,13 @@
  *
  * The HLSContainerStackView class simply implements the above view hierarchy and provides methods for easy insertion
  * and removal of views.
- *
- * Designated initializer: -initWithFrame:
  */
 @interface HLSContainerStackView : UIView
+
+/**
+ * Create the stack view
+ */
+- (instancetype)initWithFrame:(CGRect)frame;
 
 /**
  * Return the array of views used to display content (child views), from the bottommost to the topmost one

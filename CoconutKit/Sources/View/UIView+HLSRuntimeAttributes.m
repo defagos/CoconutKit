@@ -48,8 +48,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
             }
             
             // Look for KVC-compliant setters ending in "Color"
-            NSString *methodName = [NSString stringWithCString:sel_getName(method_getName(method))
-                                                      encoding:NSUTF8StringEncoding];
+            NSString *methodName = @(sel_getName(method_getName(method)));
             if (! [methodName hasSuffix:@"Color:"] || ! [methodName hasPrefix:@"set"]) {
                 continue;
             }
@@ -135,7 +134,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
         return;
     }
     
-    NSString *colorSetterSelectorName = [NSString stringWithCString:sel_getName(_cmd) encoding:NSUTF8StringEncoding];
+    NSString *colorSetterSelectorName = @(sel_getName(_cmd));
     SEL colorSelector = NSSelectorFromString([colorSetterSelectorName stringByReplacingOccurrencesOfString:@"setHls" withString:@"set"]);
     
     // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform

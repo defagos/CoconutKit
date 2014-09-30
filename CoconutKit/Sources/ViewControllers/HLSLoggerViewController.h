@@ -11,6 +11,6 @@
 
 @interface HLSLoggerViewController : HLSViewController <QLPreviewControllerDataSource, UITableViewDataSource, UITableViewDelegate>
 
-- (id)initWithLogger:(HLSLogger *)logger;
+- (instancetype)initWithLogger:(HLSLogger *)logger NS_DESIGNATED_INITIALIZER;
 
 @end

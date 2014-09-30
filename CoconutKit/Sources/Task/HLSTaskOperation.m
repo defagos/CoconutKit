@@ -26,7 +26,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task
+- (instancetype)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task
 {
     if ((self = [super init])) {
         self.taskManager = taskManager;
@@ -36,10 +36,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithTaskManager:nil task:nil];
 }
 
 #pragma mark Thread main function
@@ -86,7 +86,7 @@
 - (void)updateProgressToValue:(float)progress
 {
     [self onCallingThreadPerformSelector:@selector(notifyRunningWithProgress:) 
-                                  object:[NSNumber numberWithFloat:progress]];
+                                  object:@(progress)];
 }
 
 - (void)attachReturnInfo:(NSDictionary *)returnInfo

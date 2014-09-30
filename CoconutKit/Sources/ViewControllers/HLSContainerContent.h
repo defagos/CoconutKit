@@ -50,8 +50,6 @@
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
  * has been disabled, i.e. for which the -[UIViewController shouldAutomaticallyForwardRotationMethods] and 
  * -[UIViewController shouldAutomaticallyForwardAppearanceMethods] methods return NO
- * 
- * Designated initializer: -initWithViewController:containerViewController:transitionClass:duration:
  */
 @interface HLSContainerContent : NSObject
 
@@ -67,10 +65,10 @@
  * in which it is inserted into (not retained), as well as the details of the transition animation with which it gets 
  * displayed. Use the reserved kAnimationTransitionDefaultDuration duration to use the default animation duration.
  */
-- (id)initWithViewController:(UIViewController *)viewController
-     containerViewController:(UIViewController *)containerViewController
-             transitionClass:(Class)transitionClass
-                    duration:(NSTimeInterval)duration;
+- (instancetype)initWithViewController:(UIViewController *)viewController
+               containerViewController:(UIViewController *)containerViewController
+                       transitionClass:(Class)transitionClass
+                              duration:(NSTimeInterval)duration NS_DESIGNATED_INITIALIZER;
 
 /**
  * The attached view controller. If you need to access its view, do not use the -[UIViewController view] property

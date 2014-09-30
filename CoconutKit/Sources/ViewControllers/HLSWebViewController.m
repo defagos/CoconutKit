@@ -42,7 +42,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request
+- (instancetype)initWithRequest:(NSURLRequest *)request
 {
     if ((self = [super initWithBundle:[NSBundle coconutKitBundle]])) {
         self.request = request;

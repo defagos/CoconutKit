@@ -11,12 +11,12 @@
 /**
  * Create a color from non-normalized RGB components (i.e. from 0 to 255)
  */
-+ (UIColor *)colorWithNonNormalizedRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
++ (instancetype)colorWithNonNormalizedRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha;
 
 /**
  * Return a random color
  */
-+ (UIColor *)randomColor;
++ (instancetype)randomColor;
 
 /**
  * Return a color by name. By convention, all class methods ending with 'Color' and returning a UIColor
@@ -56,7 +56,7 @@
  * to 'corporate'. If the color is defined on a UIColor subclass, say +[SomeColor corporateColor] color, 
  * then set the 'hlsTextColor' value to 'SomeColor:corporate'
  */
-+ (UIColor *)colorWithName:(NSString *)name;
++ (instancetype)colorWithName:(NSString *)name;
 
 /**
  * Return the invert color corresponding to the receiver

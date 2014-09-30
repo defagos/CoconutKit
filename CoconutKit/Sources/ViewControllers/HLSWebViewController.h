@@ -10,15 +10,13 @@
 
 /**
  * A web browser with standard features (navigation buttons, link sharing, etc.)
- *
- * Designated initializer: -initWithRequest:
  */
 @interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, UIWebViewDelegate>
 
 /**
  * Create the browser using the specified request
  */
-- (id)initWithRequest:(NSURLRequest *)request;
+- (instancetype)initWithRequest:(NSURLRequest *)request NS_DESIGNATED_INITIALIZER;
 
 /**
  * The initial request

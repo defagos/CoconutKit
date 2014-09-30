@@ -71,10 +71,10 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 #pragma mark Object creation and destruction
 
-- (id)initWithViewController:(UIViewController *)viewController
-     containerViewController:(UIViewController *)containerViewController
-             transitionClass:(Class)transitionClass
-                    duration:(NSTimeInterval)duration
+- (instancetype)initWithViewController:(UIViewController *)viewController
+               containerViewController:(UIViewController *)containerViewController
+                       transitionClass:(Class)transitionClass
+                              duration:(NSTimeInterval)duration
 {
     if ((self = [super init])) {
         if (! viewController) {
@@ -140,10 +140,10 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithViewController:nil containerViewController:nil transitionClass:Nil duration:0.];
 }
 
 - (void)dealloc

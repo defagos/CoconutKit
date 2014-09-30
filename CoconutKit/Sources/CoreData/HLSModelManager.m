@@ -26,12 +26,12 @@
 
 #pragma mark Class methods
 
-+ (HLSModelManager *)SQLiteManagerWithModelFileName:(NSString *)modelFileName
-                                           inBundle:(NSBundle *)bundle
-                                      configuration:(NSString *)configuration
-                                     storeDirectory:(NSString *)storeDirectory
-                                        fileManager:(HLSFileManager *)fileManager
-                                            options:(NSDictionary *)options
++ (instancetype)SQLiteManagerWithModelFileName:(NSString *)modelFileName
+                                      inBundle:(NSBundle *)bundle
+                                 configuration:(NSString *)configuration
+                                storeDirectory:(NSString *)storeDirectory
+                                   fileManager:(HLSFileManager *)fileManager
+                                       options:(NSDictionary *)options
 {
     return [[[self class] alloc] initWithModelFileName:modelFileName
                                               inBundle:bundle
@@ -42,10 +42,10 @@
                                                options:options];
 }
 
-+ (HLSModelManager *)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
-                                                  inBundle:(NSBundle *)bundle
-                                             configuration:(NSString *)configuration
-                                                   options:(NSDictionary *)options
++ (instancetype)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
+                                             inBundle:(NSBundle *)bundle
+                                        configuration:(NSString *)configuration
+                                              options:(NSDictionary *)options
 {
     return [[[self class] alloc] initWithModelFileName:modelFileName
                                               inBundle:bundle
@@ -56,15 +56,15 @@
                                                options:options];
 }
 
-+ (HLSModelManager *)binaryModelManagerWithModelFileName:(NSString *)modelFileName
-                                                inBundle:(NSBundle *)bundle
-                                           configuration:(NSString *)configuration
-                                          storeDirectory:(NSString *)storeDirectory
-                                             fileManager:(HLSFileManager *)fileManager
-                                                 options:(NSDictionary *)options
++ (instancetype)binaryModelManagerWithModelFileName:(NSString *)modelFileName
+                                           inBundle:(NSBundle *)bundle
+                                      configuration:(NSString *)configuration
+                                     storeDirectory:(NSString *)storeDirectory
+                                        fileManager:(HLSFileManager *)fileManager
+                                            options:(NSDictionary *)options
 {
     return [[[self class] alloc] initWithModelFileName:modelFileName
-                                              inBundle:(NSBundle *)bundle
+                                              inBundle:bundle
                                              storeType:NSBinaryStoreType
                                          configuration:configuration
                                         storeDirectory:storeDirectory
@@ -225,13 +225,13 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithModelFileName:(NSString *)modelFileName
-                   inBundle:(NSBundle *)bundle
-                  storeType:(NSString *)storeType
-              configuration:(NSString *)configuration
-             storeDirectory:(NSString *)storeDirectory
-                fileManager:(HLSFileManager *)fileManager
-                    options:(NSDictionary *)options
+- (instancetype)initWithModelFileName:(NSString *)modelFileName
+                             inBundle:(NSBundle *)bundle
+                            storeType:(NSString *)storeType
+                        configuration:(NSString *)configuration
+                       storeDirectory:(NSString *)storeDirectory
+                          fileManager:(HLSFileManager *)fileManager
+                              options:(NSDictionary *)options
 {
     if ((self = [super init])) {
         if (! fileManager) {

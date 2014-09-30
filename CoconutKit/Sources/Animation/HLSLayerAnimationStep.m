@@ -47,7 +47,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];        
@@ -136,8 +136,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         
         if (animated) {
             CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-            [opacityAnimation setFromValue:[NSNumber numberWithFloat:layer.opacity]];
-            [opacityAnimation setToValue:[NSNumber numberWithFloat:opacity]];
+            [opacityAnimation setFromValue:@(layer.opacity)];
+            [opacityAnimation setToValue:@(opacity)];
             [animations addObject:opacityAnimation];
         }
         layer.opacity = opacity;
@@ -169,8 +169,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             [animations addObject:anchorPointAnimation];
             
             CABasicAnimation *anchorPointZAnimation = [CABasicAnimation animationWithKeyPath:@"anchorPointZ"];
-            [anchorPointZAnimation setFromValue:[NSNumber numberWithFloat:layer.anchorPointZ]];
-            [anchorPointZAnimation setToValue:[NSNumber numberWithFloat:anchorPointZ]];
+            [anchorPointZAnimation setFromValue:@(layer.anchorPointZ)];
+            [anchorPointZAnimation setToValue:@(anchorPointZ)];
             [animations addObject:anchorPointZAnimation];
         }
         layer.anchorPoint = anchorPoint;
@@ -181,8 +181,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             BOOL shouldRasterize = ! layer.shouldRasterize;
             if (animated) {
                 CABasicAnimation *shouldRasterizeAnimation = [CABasicAnimation animationWithKeyPath:@"shouldRasterize"];
-                [shouldRasterizeAnimation setFromValue:[NSNumber numberWithBool:layer.shouldRasterize]];
-                [shouldRasterizeAnimation setToValue:[NSNumber numberWithBool:shouldRasterize]];
+                [shouldRasterizeAnimation setFromValue:@(layer.shouldRasterize)];
+                [shouldRasterizeAnimation setToValue:@(shouldRasterize)];
                 [animations addObject:shouldRasterizeAnimation];
             }
             layer.shouldRasterize = shouldRasterize;
@@ -192,8 +192,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         CGFloat rasterizationScale = layer.rasterizationScale + layerAnimation.rasterizationScaleIncrement;
         if (animated) {
             CABasicAnimation *rasterizationScaleAnimation = [CABasicAnimation animationWithKeyPath:@"rasterizationScale"];
-            [rasterizationScaleAnimation setFromValue:[NSNumber numberWithFloat:layer.rasterizationScale]];
-            [rasterizationScaleAnimation setToValue:[NSNumber numberWithFloat:rasterizationScale]];
+            [rasterizationScaleAnimation setFromValue:@(layer.rasterizationScale)];
+            [rasterizationScaleAnimation setToValue:@(rasterizationScale)];
             [animations addObject:rasterizationScaleAnimation];
         }
         layer.rasterizationScale = rasterizationScale;
@@ -228,7 +228,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         sublayerCameraZPosition += layerAnimation.sublayerCameraTranslationZ;
         
         // Save the information relative / not relative to the perspective separately
-        [layer setValue:[NSNumber numberWithFloat:sublayerCameraZPosition] forKey:kLayerCameraZPositionForSublayersKey];
+        [layer setValue:@(sublayerCameraZPosition) forKey:kLayerCameraZPositionForSublayersKey];
         [layer setValue:[NSValue valueWithCATransform3D:sublayerTransform] forKey:kLayerNonProjectedSublayerTransformKey];
         
         // Create the perspective matrix (see http://en.wikipedia.org/wiki/3D_projection#Perspective_projection)
@@ -270,8 +270,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     // which will receive the start / end animation events
     if (animated) {
         CABasicAnimation *dummyViewOpacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-        dummyViewOpacityAnimation.fromValue = [NSNumber numberWithFloat:self.dummyView.layer.opacity];
-        dummyViewOpacityAnimation.toValue = [NSNumber numberWithFloat:1.f - self.dummyView.layer.opacity];
+        dummyViewOpacityAnimation.fromValue = @(self.dummyView.layer.opacity);
+        dummyViewOpacityAnimation.toValue = @(1.f - self.dummyView.layer.opacity);
         dummyViewOpacityAnimation.delegate = self;
         [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:kDummyViewLayerAnimationKey];
     }

@@ -38,12 +38,13 @@ typedef void (^HLSConnectionProgressBlock)(long long bytesTransferred, long long
 /**
  * Abstract class for connections. Subclass and implement methods from the HLSConnectionAbstract protocol to create 
  * your own concrete connection classes
- *
- * Designated initializer: -initWithCompletionBlock:
  */
 @interface HLSConnection : NSObject <HLSConnectionAbstract>
 
-- (id)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock;
+/**
+ * Create a connection, attaching it the specified completion block (optional)
+ */
+- (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
 
 /**
  * Start the connection, scheduling it for the NSRunLoopCommonModes run loop modes

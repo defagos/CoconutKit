@@ -28,7 +28,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     s_classNameToSizeMap = [NSMutableDictionary dictionary];
 }
 
-+ (id)view
++ (instancetype)view
 {   
     if ([self isMemberOfClass:[HLSNibView class]]) {
         HLSLoggerError(@"HLSNibView cannot be instantiated directly");

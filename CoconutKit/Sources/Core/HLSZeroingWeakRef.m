@@ -29,7 +29,7 @@ static Class subclass_class(id self, SEL _cmd);
 
 #pragma mark Object creation and destruction
 
-- (id)initWithObject:(id)object
+- (instancetype)initWithObject:(id)object
 {
     if ((self = [super init])) {
         self.invocations = [NSMutableArray array];
@@ -53,7 +53,7 @@ static Class subclass_class(id self, SEL _cmd);
             // Dynamically subclass the object class to override -dealloc selectively, and use this class instead.
             // Another approach would involve swizzling -dealloc at the NSObject level, but this solution would 
             // incur an unacceptable overhead on all NSObjects
-            NSString *className = [NSString stringWithUTF8String:class_getName(class)];
+            NSString *className = @(class_getName(class));
             if (! [className hasPrefix:kSubclassPrefix]) {
                 NSString *subclassName = [kSubclassPrefix stringByAppendingString:className];
                 Class subclass = NSClassFromString(subclassName);

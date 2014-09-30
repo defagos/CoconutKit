@@ -51,8 +51,6 @@
  * in each of them, corresponding to how the play method was called. For steps whose duration is 0, the boolean is
  * also YES if the animation was run with animated = YES (even though the step was not actually animated, it is still
  * part of an animation which was played animated).
- *
- * Designated initializer: -initWithAnimationSteps:
  */
 @interface HLSAnimation : NSObject <NSCopying>
 
@@ -60,8 +58,8 @@
  * Convenience constructor for creating an animation from HLSAnimationStep objects. Providing nil creates an empty
  * animation
  */
-+ (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
-+ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
++ (instancetype)animationWithAnimationSteps:(NSArray *)animationSteps;
++ (instancetype)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
 
 /**
  * Create an animation using HLSAnimationStep objects. Those steps will be chained together when the animation
@@ -71,7 +69,7 @@
  * A deep copy of the animation steps is performed to prevent further changes once the steps have been assigned to an
  * animation
  */
-- (id)initWithAnimationSteps:(NSArray *)animationSteps;
+- (instancetype)initWithAnimationSteps:(NSArray *)animationSteps NS_DESIGNATED_INITIALIZER;
 
 /**
  * Tag which can optionally be used to help identifying an animation

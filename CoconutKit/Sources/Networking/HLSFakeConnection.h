@@ -13,11 +13,9 @@
  *
  * When the fake connection is started, its completion block is called with the provided response object and error.
  * Cancelling a fake connection is a no-op
- *
- * Designated initializer: -initWithResponseObject:error:completionBlock:
  */
 @interface HLSFakeConnection : HLSConnection
 
-- (id)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock;
+- (instancetype)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
 
 @end

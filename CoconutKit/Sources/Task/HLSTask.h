@@ -19,10 +19,13 @@
  * A task must not be submitted several times simultaneously (this leads to undefined behavior). A task
  * which was fully processed can be submitted again (and with another delegate if needed), but only when it
  * is not running anymore.
- *
- * Designated initializer: -init
  */
 @interface HLSTask : NSObject
+
+/**
+ * Create a task
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Class responsible of processing the task. Must be a subclass of HLSTaskOperation

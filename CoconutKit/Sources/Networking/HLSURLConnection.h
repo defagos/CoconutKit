@@ -14,8 +14,6 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 /**
  * Abstract class for URL connections. Subclass and implement methods from the HLSConnectionAbstract protocol
  * to create your own concrete connection classes
- *
- * Designated initializer: -initWithRequest:completionBlock:
  */
 @interface HLSURLConnection : HLSConnection
 
@@ -23,7 +21,7 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
  * Create the connection. Success or failure is notified through a single completion block. Other blocks are used
  * to report download, resp. upload progress (see HLSURLConnection.h)
  */
-- (id)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock;
+- (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
 
 /**
  * The request attached to the connection

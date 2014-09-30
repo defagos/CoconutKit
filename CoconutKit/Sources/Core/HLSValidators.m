@@ -26,7 +26,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
     return nil;

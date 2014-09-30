@@ -24,7 +24,7 @@
     // At most one error can be stored in an NSError using the standard NSUnderlyingErrorKey key
     NSError *error = [[self userInfo] objectForKey:NSUnderlyingErrorKey];
     if (error) {
-        return [NSArray arrayWithObject:error];
+        return @[error];
     }
     else {
         return nil;

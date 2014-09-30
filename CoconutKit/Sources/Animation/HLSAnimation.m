@@ -56,18 +56,18 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 #pragma mark Class methods
 
-+ (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps
++ (instancetype)animationWithAnimationSteps:(NSArray *)animationSteps
 {
     return [[[self class] alloc] initWithAnimationSteps:animationSteps];
 }
 
-+ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
++ (instancetype)animationWithAnimationStep:(HLSAnimationStep *)animationStep
 {
     NSArray *animationSteps = nil;
     if (animationStep) {
-        animationSteps = [NSArray arrayWithObject:animationStep];
+        animationSteps = @[animationStep];
     }
-    return [HLSAnimation animationWithAnimationSteps:animationSteps];
+    return [self animationWithAnimationSteps:animationSteps];
 }
 
 + (NSArray *)duplicateAnimationSteps:(NSArray *)animationSteps
@@ -81,11 +81,11 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 #pragma mark Object creation and destruction
 
-- (id)initWithAnimationSteps:(NSArray *)animationSteps
+- (instancetype)initWithAnimationSteps:(NSArray *)animationSteps
 {
     if ((self = [super init])) {
         if (! animationSteps) {
-            self.animationSteps = [NSArray array];
+            self.animationSteps = @[];
         }
         else {
             HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
@@ -104,10 +104,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithAnimationSteps:nil];
 }
 
 - (void)dealloc

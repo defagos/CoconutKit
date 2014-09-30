@@ -23,19 +23,19 @@
 
 #pragma mark Class methods
 
-+ (HLSStandardFileManager *)defaultManager
++ (instancetype)defaultManager
 {
     static HLSStandardFileManager *s_sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        s_sharedInstance = [[HLSStandardFileManager alloc] init];
+        s_sharedInstance = [[[self class] alloc] init];
     });
     return s_sharedInstance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRootFolderPath:(NSString *)rootFolderPath
+- (instancetype)initWithRootFolderPath:(NSString *)rootFolderPath
 {
     if (self = [super init]) {
         if (! rootFolderPath) {
@@ -68,7 +68,7 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithRootFolderPath:nil];
 }

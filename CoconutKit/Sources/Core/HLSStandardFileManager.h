@@ -10,21 +10,19 @@
 
 /**
  * A standard NSFileManager-based file manager, built upon +[NSFileManager defaultManager]
- *
- * Designated initializer: -initWithRootFolderPath:
  */
 @interface HLSStandardFileManager : HLSFileManager
 
 /**
  * Return the default instance (with root folder /)
  */
-+ (HLSStandardFileManager *)defaultManager;
++ (instancetype)defaultManager;
 
 /**
  * Create a file manager, using the specified root folder path (relative to the system file hierarchy) as root.
  * If rootFolderPath is nil, uses / as root (this is equivalent to calling -init). The folder will be automatically
  * created if it does not exist
  */
-- (id)initWithRootFolderPath:(NSString *)rootFolderPath;
+- (instancetype)initWithRootFolderPath:(NSString *)rootFolderPath NS_DESIGNATED_INITIALIZER;
 
 @end

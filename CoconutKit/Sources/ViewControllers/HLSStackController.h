@@ -57,8 +57,6 @@
  *     documentation for more information). If you want to pop a view controller, you therefore have to do it
  *     programmatically
  * For further information, refer to the documentation of HLSStackPushSegue.
- *
- * Designated initializer: -initWithRootViewController:capacity:
  */
 @interface HLSStackController : HLSViewController <HLSContainerStackDelegate>
 
@@ -67,13 +65,13 @@
  * installed, and can neither be replaced, nor removed. The capacity can be freely set. Standard values are provided
  * at the beginning of the HLSContainerStack.h file
  */
-- (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity;
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity NS_DESIGNATED_INITIALIZER;
 
 /**
  * Create a new stack controller with the specified view controller as root. This view controller cannot be animated when 
  * installed, and can neither be replaced, nor removed. The default capacity (HLSContainerStackDefaultCapacity= 2) is used.
  */
-- (id)initWithRootViewController:(UIViewController *)rootViewController;
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController;
 
 /**
  * Set how the stack controller decides whether it must rotate or not

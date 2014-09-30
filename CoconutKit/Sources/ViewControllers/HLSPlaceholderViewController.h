@@ -83,8 +83,6 @@
  * If those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers, 
  * since this would make navigating between tabs slow. In such cases, it makes sense to keep strong references to
  * those view controllers elsewhere (most probably as additional ivars of your placeholder view controller subclass)
- *
- * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate>
 

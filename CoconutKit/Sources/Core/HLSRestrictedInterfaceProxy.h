@@ -43,7 +43,7 @@
 /**
  * Convenience constructor
  */
-+ (id)proxyWithTarget:(id)target protocol:(Protocol *)protocol;
++ (instancetype)proxyWithTarget:(id)target protocol:(Protocol *)protocol;
 
 /**
  * Create a proxy object. On success a proxy object is returned, otherwise nil (most notably if the target fails to 
@@ -52,7 +52,7 @@
  *
  * Currently the target cannot be another NSProxy object
  */
-- (id)initWithTarget:(id)target protocol:(Protocol *)protocol;
+- (instancetype)initWithTarget:(id)target protocol:(Protocol *)protocol NS_DESIGNATED_INITIALIZER;
 
 @end
 

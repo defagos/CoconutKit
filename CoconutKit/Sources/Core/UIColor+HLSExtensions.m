@@ -18,7 +18,7 @@
 
 #pragma mark Class methods
 
-+ (UIColor *)colorWithNonNormalizedRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha
++ (instancetype)colorWithNonNormalizedRed:(NSUInteger)red green:(NSUInteger)green blue:(NSUInteger)blue alpha:(CGFloat)alpha
 {
     if (red > 255) {
         HLSLoggerWarn(@"Incorrect R component, larger than 255. Fixed to 255");
@@ -35,7 +35,7 @@
     return [self colorWithRed:red / 255.f green:green / 255.f blue:blue / 255.f alpha:alpha];
 }
 
-+ (UIColor *)randomColor
++ (instancetype)randomColor
 {
     return [UIColor colorWithRed:(arc4random() % 256) / 255.f
                            green:(arc4random() % 256) / 255.f 
@@ -43,7 +43,7 @@
                            alpha:1.f];
 }
 
-+ (UIColor *)colorWithName:(NSString *)name
++ (instancetype)colorWithName:(NSString *)name
 {    
     SEL selector = NSSelectorFromString([name stringByAppendingString:@"Color"]);
     Method method = class_getClassMethod(self, selector);
