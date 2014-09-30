@@ -30,7 +30,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 #pragma mark Object creation and destruction
 
-- (id)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName
+- (instancetype)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName
 {
     if ((self = [super init])) {
         [self parseText:text];
@@ -41,10 +41,10 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithText:nil tableName:nil bundleName:nil];
 }
 
 #pragma mark Parsing text

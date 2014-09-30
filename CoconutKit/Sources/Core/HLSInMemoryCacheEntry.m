@@ -23,9 +23,9 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithParentItems:(NSMutableDictionary *)parentItems
-                     name:(NSString *)name
-                     data:(NSData *)data
+- (instancetype)initWithParentItems:(NSMutableDictionary *)parentItems
+                               name:(NSString *)name
+                               data:(NSData *)data
 {
     if (self = [super init]) {
         if (! parentItems || ! name || ! data) {
@@ -40,10 +40,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithParentItems:nil name:nil data:nil];
 }
 
 #pragma mark Accessors and mutators

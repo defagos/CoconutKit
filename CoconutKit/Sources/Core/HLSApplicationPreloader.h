@@ -16,7 +16,7 @@
 /**
  * Initialize the preloader. An application is required
  */
-- (id)initWithApplication:(UIApplication *)application;
+- (instancetype)initWithApplication:(UIApplication *)application NS_DESIGNATED_INITIALIZER;
 
 /**
  * Execute preloading

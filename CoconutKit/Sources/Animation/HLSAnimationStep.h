@@ -8,15 +8,18 @@
 
 /**
  * Abstract base class for animation steps. Do not instantiate directly
- *
- * Designated initializer: -init
  */
 @interface HLSAnimationStep : NSObject <NSCopying>
 
 /**
  * Convenience constructor for an animation step with default settings and nothing to animate
  */
-+ (id)animationStep;
++ (instancetype)animationStep;
+
+/**
+ * Create an animation step with default settings
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Optional tag to help identifying animation steps

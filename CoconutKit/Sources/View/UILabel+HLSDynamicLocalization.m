@@ -100,7 +100,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         }
         
         // Get the information for the current button state
-        NSNumber *buttonStateKey = [NSNumber numberWithUnsignedInteger:button.state];
+        NSNumber *buttonStateKey = @(button.state);
         return [buttonStateToLocalizationInfoMap objectForKey:buttonStateKey];
     }
     // Standalone label
@@ -118,11 +118,11 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         // Get localization info for all states (lazily added if needed). Attached to the button (because it carries the states)
         NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
         if (! buttonStateToLocalizationInfoMap) {
-            buttonStateToLocalizationInfoMap = [NSDictionary dictionary];
+            buttonStateToLocalizationInfoMap = @{};
         }
         
         // Attach the information to the current button state
-        NSNumber *buttonStateKey = [NSNumber numberWithUnsignedInteger:button.state];
+        NSNumber *buttonStateKey = @(button.state);
         buttonStateToLocalizationInfoMap = [buttonStateToLocalizationInfoMap dictionaryBySettingObject:localizationInfo 
                                                                                                 forKey:buttonStateKey];
         

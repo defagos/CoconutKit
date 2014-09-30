@@ -17,7 +17,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
+- (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     if (! [[request URL] isFileURL]) {
         HLSLoggerError(@"The request is not a file request");
@@ -108,7 +108,7 @@
         contents = [NSArray arrayWithArray:mutableContents];
     }
     else {
-        contents = [NSArray arrayWithObject:[NSURL fileURLWithPath:filePath]];
+        contents = @[[NSURL fileURLWithPath:filePath]];
     }
     self.completionBlock ? self.completionBlock(self, contents, nil) : nil;
 }

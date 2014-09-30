@@ -37,8 +37,6 @@ typedef NS_ENUM(NSInteger, HLSWizardTransitionStyle) {
  * HLSValidable protocol, the page is checked for validity before displaying the next one. Similarly
  * when clicking on the "done" button. If the page does not implement this protocol, the page is
  * always assumed to be valid.
- *
- * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSWizardViewController : HLSPlaceholderViewController
 

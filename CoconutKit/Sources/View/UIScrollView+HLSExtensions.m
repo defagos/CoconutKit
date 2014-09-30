@@ -79,7 +79,7 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
     }
     
     objc_setAssociatedObject(self, s_synchronizedScrollViewsKey, scrollViews, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(self, s_parallaxBouncesKey, [NSNumber numberWithBool:bounces], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_parallaxBouncesKey, @(bounces), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)removeSynchronization

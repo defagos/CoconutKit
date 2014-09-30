@@ -31,7 +31,7 @@
  * Initialize a weak reference to an Objective-C object (throws an exception if object is a toll-free
  * bridged object)
  */
-- (id)initWithObject:(id)object;
+- (instancetype)initWithObject:(id)object NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return the current object if it is still alive, or nil if the reference has been zeroed

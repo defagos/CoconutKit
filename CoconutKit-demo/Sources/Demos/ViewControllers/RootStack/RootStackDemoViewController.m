@@ -250,7 +250,7 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:stretchableViewController];
     navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = [NSArray arrayWithObject:navigationController];
+    tabBarController.viewControllers = @[navigationController];
     [self displayViewController:tabBarController];    
 }
 

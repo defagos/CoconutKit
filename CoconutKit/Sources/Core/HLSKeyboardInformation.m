@@ -26,14 +26,14 @@ static HLSKeyboardInformation *s_instance = nil;
 
 #pragma mark Class methods
 
-+ (HLSKeyboardInformation *)keyboardInformation
++ (instancetype)keyboardInformation
 {
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)initWithUserInfo:(NSDictionary *)userInfo
+- (instancetype)initWithUserInfo:(NSDictionary *)userInfo
 {
     if ((self = [super init])) {
         self.beginFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
@@ -44,10 +44,10 @@ static HLSKeyboardInformation *s_instance = nil;
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithUserInfo:nil];
 }
 
 #pragma mark Notification callbacks

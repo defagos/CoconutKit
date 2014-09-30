@@ -23,10 +23,13 @@
  *
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should 
  * use layer animations instead of view animations since they have far more capabilities.
- *
- * Designated initializer: -init (create a view animation step with default settings)
  */
 @interface HLSViewAnimation : HLSObjectAnimation
+
+/**
+ * Create an animation with default settings (identity, leaving the view unchanged)
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Geometric transform parameters to be applied during the view animation. The resulting transform applies the scale, 

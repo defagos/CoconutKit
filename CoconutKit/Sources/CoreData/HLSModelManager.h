@@ -42,8 +42,6 @@
  *   - go on working with the previously pushed model manager
  *   - if you need to perform database operations on another thread, duplicate the current context and push 
  *     the new instance onto the other thread model manager stack
- *
- * Designated initializer: -initWithModelFileName:storeType:configuration:storeDirectory:fileManager:options:
  */
 @interface HLSModelManager : NSObject
 
@@ -57,12 +55,12 @@
  * please refer to the documentation of
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
-+ (HLSModelManager *)SQLiteManagerWithModelFileName:(NSString *)modelFileName
-                                           inBundle:(NSBundle *)bundle
-                                      configuration:(NSString *)configuration
-                                     storeDirectory:(NSString *)storeDirectory
-                                        fileManager:(HLSFileManager *)fileManager
-                                            options:(NSDictionary *)options;
++ (instancetype)SQLiteManagerWithModelFileName:(NSString *)modelFileName
+                                      inBundle:(NSBundle *)bundle
+                                 configuration:(NSString *)configuration
+                                storeDirectory:(NSString *)storeDirectory
+                                   fileManager:(HLSFileManager *)fileManager
+                                       options:(NSDictionary *)options;
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
@@ -72,10 +70,10 @@
  * please refer to the documentation of
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
-+ (HLSModelManager *)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
-                                                  inBundle:(NSBundle *)bundle
-                                             configuration:(NSString *)configuration 
-                                                   options:(NSDictionary *)options;
++ (instancetype)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
+                                             inBundle:(NSBundle *)bundle
+                                        configuration:(NSString *)configuration
+                                              options:(NSDictionary *)options;
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
@@ -87,12 +85,12 @@
  * please refer to the documentation of
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
-+ (HLSModelManager *)binaryModelManagerWithModelFileName:(NSString *)modelFileName
-                                                inBundle:(NSBundle *)bundle
-                                           configuration:(NSString *)configuration 
-                                          storeDirectory:(NSString *)storeDirectory
-                                             fileManager:(HLSFileManager *)fileManager
-                                                 options:(NSDictionary *)options;
++ (instancetype)binaryModelManagerWithModelFileName:(NSString *)modelFileName
+                                           inBundle:(NSBundle *)bundle
+                                      configuration:(NSString *)configuration
+                                     storeDirectory:(NSString *)storeDirectory
+                                        fileManager:(HLSFileManager *)fileManager
+                                            options:(NSDictionary *)options;
 /**
  * Return the file path of the file-based store for a model, searching in a given directory using the specified
  * file manager (or the HLSStandardFileManager singleton if nil). Return nil if not found. You usually do not
@@ -145,13 +143,13 @@
  * Convenience constructors have been provided for easy instantiation of the most common store types and are the
  * preferred way of instantiating model managers.
  */
-- (id)initWithModelFileName:(NSString *)modelFileName
-                   inBundle:(NSBundle *)bundle
-                  storeType:(NSString *)storeType 
-              configuration:(NSString *)configuration 
-             storeDirectory:(NSString *)storeDirectory
-                fileManager:(HLSFileManager *)fileManager
-                    options:(NSDictionary *)options;
+- (instancetype)initWithModelFileName:(NSString *)modelFileName
+                             inBundle:(NSBundle *)bundle
+                            storeType:(NSString *)storeType
+                        configuration:(NSString *)configuration
+                       storeDirectory:(NSString *)storeDirectory
+                          fileManager:(HLSFileManager *)fileManager
+                              options:(NSDictionary *)options NS_DESIGNATED_INITIALIZER;
 /**
  * Duplicate an existing manager
  */

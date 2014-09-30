@@ -457,7 +457,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [animationStep4 addLayerAnimation:layerAnimation41 forView:self.rectangleView1];
     [animationStep4 addLayerAnimation:layerAnimation41 forView:self.rectangleView2];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, animationStep4, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3, animationStep4]];
 }
 
 - (HLSAnimation *)animation10
@@ -491,7 +491,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView1];
     [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView2];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, animationStep4, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3, animationStep4]];
 }
 
 - (HLSAnimation *)animation11
@@ -518,7 +518,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     animationStep3.duration = 0.;
     [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView1];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3]];
 }
 
 - (HLSAnimation *)animation12
@@ -543,7 +543,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView1];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView2];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2]];
 }
 
 - (HLSAnimation *)animation13
@@ -568,7 +568,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     animationStep3.tag = @"step3";
     [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView1];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3]];
 }
 
 - (HLSAnimation *)animation14

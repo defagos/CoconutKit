@@ -37,9 +37,6 @@
  *   - do not forget to set the cell identifier to the one returned by the identifier class method. By default this
  *     identifier is the class name, except if your class overrides it. If you fail to do so, the reuse mechanism
  *     will not work
- *
- * Designated initializer: -initWithStyle:reuseIdentifier:
- * (You usually do not need to create a cell manually. Use the factory macros instead)
  */
 @interface HLSTableViewCell : UITableViewCell
 
@@ -47,7 +44,7 @@
  * Factory method for creating a table view cell. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (id)cellForTableView:(UITableView *)tableView;
++ (instancetype)cellForTableView:(UITableView *)tableView;
 
 /**
  * Obtaining a cell with custom background and selected background images is surprisingly not so easy, especially if

@@ -26,7 +26,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithName:(NSString *)name type:(DeviceType)type
+- (instancetype)initWithName:(NSString *)name type:(DeviceType)type
 {
     if ((self = [super init])) {
         self.name = name;
@@ -35,10 +35,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithName:nil type:0];
 }
 
 @end

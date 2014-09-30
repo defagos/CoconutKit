@@ -21,8 +21,8 @@
  * When called on an NSManagedObject subclass, create a new instance of it (without context parameter, the current
  * HLSModelManager context is used)
  */
-+ (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (id)insert;
++ (instancetype)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (instancetype)insert;
 
 /**
  * When called on an NSManagedObject subclass, query instances of it matching a predicate, sorting them using the

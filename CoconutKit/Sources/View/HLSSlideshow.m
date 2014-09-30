@@ -37,7 +37,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
         [self hlsSlideshowInit];
@@ -45,7 +45,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
         [self hlsSlideshowInit];
@@ -59,7 +59,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     _currentImageIndex = kSlideshowNoIndex;
     
-    self.imageViews = [NSArray array];
+    self.imageViews = @[];
     for (NSUInteger i = 0; i < 2; ++i) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -343,7 +343,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     imageView.layer.transform = CATransform3DIdentity;
     imageView.alpha = 1.f;
     imageView.image = image;
-    imageView.userInfo_hls = [NSDictionary dictionaryWithObject:imageNameOrPath forKey:@"imageNameOrPath"];
+    imageView.userInfo_hls = @{ @"imageNameOrPath" : imageNameOrPath };
 }
 
 - (void)releaseImageView:(UIImageView *)imageView
@@ -428,7 +428,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     [layerAnimation32 addToOpacity:1.f];
     [animationStep3 addLayerAnimation:layerAnimation32 forView:nextImageView];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3]];
 }
 
 - (HLSAnimation *)kenBurnsAnimationWithCurrentImageView:(UIImageView *)currentImageView
@@ -520,14 +520,12 @@ static const NSInteger kSlideshowNoIndex = -1;
     [layerAnimation32 addToOpacity:1.f];
     [animationStep3 addLayerAnimation:layerAnimation32 forView:nextImageView];
     
-    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1,
+    HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:@[animationStep1,
                                                                          animationStep2,
-                                                                         animationStep3,
-                                                                         nil]];
-    animation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:nextImageScaleFactor], @"scaleFactor",
-                          [NSNumber numberWithFloat:nextImageXOffset], @"xOffset", 
-                          [NSNumber numberWithFloat:nextImageYOffset], @"yOffset",
-                          nil];
+                                                                         animationStep3]];
+    animation.userInfo = @{ @"scaleFactor" : @(nextImageScaleFactor),
+                            @"xOffset" : @(nextImageXOffset),
+                            @"yOffset" : @(nextImageYOffset) };
     return animation;
 }
 
@@ -558,7 +556,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     [layerAnimation32 translateByVectorWithX:-xOffset y:-yOffset];
     [animationStep3 addLayerAnimation:layerAnimation32 forView:nextImageView];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3]];
 }
 
 - (HLSAnimation *)animationForEffect:(HLSSlideshowEffect)effect

@@ -29,14 +29,14 @@
 
 #pragma mark Convenience methods
 
-+ (id)animationStep
++ (instancetype)animationStep
 {
     return [[[self class] alloc] init];
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.objectKeys = [NSMutableArray array];

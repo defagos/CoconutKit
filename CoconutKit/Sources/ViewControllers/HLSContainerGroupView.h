@@ -16,8 +16,6 @@
  * animated the content views directly, which can have arbitrary alpha values, this would not have been 
  * possible. Moreover, this additional wrapping yields smoother animations (I cannot explain why, though.
  * Probably blending can be performed more efficiently)
- *
- * Designated initializer: -initWithFrame:frontView:
  */
 @interface HLSContainerGroupView : UIView
 
@@ -25,7 +23,7 @@
  * Create a group view with the given content view (mandatory) displayed at the front. If the view was 
  * previously added to another view it is transferred to the group view
  */
-- (id)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView;
+- (instancetype)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView NS_DESIGNATED_INITIALIZER;
 
 /**
  * The content view which has been inserted at the front into the group view. Do not use this view for 

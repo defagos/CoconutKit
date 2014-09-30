@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, HLSLoggerLevel) {
 /**
  * Singleton instance fetcher
  */
-+ (HLSLogger *)sharedLogger;
++ (instancetype)sharedLogger;
 
 /**
  * The logger level. The default value is HLSLoggerLevelInfo

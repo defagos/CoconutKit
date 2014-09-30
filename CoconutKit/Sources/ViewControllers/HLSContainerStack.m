@@ -41,7 +41,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Class methods
 
-+ (id)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController
++ (instancetype)singleControllerContainerStackWithContainerViewController:(UIViewController *)containerViewController
 {
     return [[[self class] alloc] initWithContainerViewController:containerViewController
                                                         behavior:HLSContainerStackBehaviorRemoving
@@ -50,9 +50,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithContainerViewController:(UIViewController *)containerViewController
-                             behavior:(HLSContainerStackBehavior)behavior
-                             capacity:(NSUInteger)capacity
+- (instancetype)initWithContainerViewController:(UIViewController *)containerViewController
+                                       behavior:(HLSContainerStackBehavior)behavior
+                                       capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
         if (! containerViewController) {
@@ -69,10 +69,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithContainerViewController:nil behavior:HLSContainerStackBehaviorDefault capacity:0];
 }
 
 - (void)dealloc

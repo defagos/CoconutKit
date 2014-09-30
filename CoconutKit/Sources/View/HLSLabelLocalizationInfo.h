@@ -21,8 +21,6 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
 
 /**
  * Internal class for containing the localization information attached to a UILabel (see UILabel+HLSDynamicLocalization.m)
- *
- * Designated initializer: -initWithText:tableName:bundleName:
  */
 @interface HLSLabelLocalizationInfo : NSObject
 
@@ -33,7 +31,7 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
  * default localization table name). The main bundle is used if bundleName is set to nil. Bundles are searched
  * recursively in the main bundle
  */
-- (id)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName;
+- (instancetype)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return YES iff the information object corresponds to localized content

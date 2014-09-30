@@ -51,7 +51,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
         HLSLoggerDebug(@"Layer animations have already been paused");
         return;
     }
-    [self setValue:[NSNumber numberWithFloat:self.speed] forKey:kLayerSpeedBeforePauseKey];
+    [self setValue:@(self.speed) forKey:kLayerSpeedBeforePauseKey];
     
     // Call order / use of temporaries is very important here! See remark above!
     CFTimeInterval pausedTime = [self convertTime:CACurrentMediaTime() fromLayer:nil];

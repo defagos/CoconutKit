@@ -11,8 +11,6 @@
 /**
  * Private class for implementation purposes. Synchronizes the text field value with a managed field object and performs 
  * automatic validation when appropriate
- *
- * Designated initializer: -initWithTextField:managedObject:fieldName:formatter:validationDelegate:
  */
 @interface HLSManagedTextFieldValidator : NSObject
 
@@ -20,11 +18,11 @@
  * Initialize with a managed object and the field we want to validate, as well as a delegate which must receive
  * validation events. An optional formatter can be provided if needed (e.g. for date or numeric fields)
  */
-- (id)initWithTextField:(UITextField *)textField
-          managedObject:(NSManagedObject *)managedObject 
-              fieldName:(NSString *)fieldName 
-              formatter:(NSFormatter *)formatter
-     validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
+- (instancetype)initWithTextField:(UITextField *)textField
+                    managedObject:(NSManagedObject *)managedObject
+                        fieldName:(NSString *)fieldName
+                        formatter:(NSFormatter *)formatter
+               validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate NS_DESIGNATED_INITIALIZER;
 
 /**
  * If set to YES, validation is also called during input.

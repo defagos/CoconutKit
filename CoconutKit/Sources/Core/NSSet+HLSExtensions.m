@@ -12,7 +12,7 @@
 
 - (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self sortedArrayUsingDescriptors:sortDescriptors];
 }
 

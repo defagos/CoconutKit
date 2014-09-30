@@ -34,8 +34,6 @@
  *   - basic: You just set the text and basic text properties (font, colors, shadows)
  *   - custom: Each element is a view and can be customized using Interface Builder
  * Cursors using both ways of customisation can coexist in the same source file.
- *
- * Designated initializer: -initWithFrame:
  */
 @interface HLSCursor : UIView <HLSAnimationDelegate>
 

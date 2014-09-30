@@ -27,7 +27,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
         self.autorotationMode = HLSAutorotationModeContainer;
@@ -45,12 +45,15 @@
     return self;
 }
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
     return [self initWithRootViewController:rootViewController capacity:HLSContainerStackDefaultCapacity];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
         self.capacity = HLSContainerStackDefaultCapacity;
@@ -59,10 +62,12 @@
     return self;
 }
 
-- (id)init
+#pragma clang diagnostic pop
+
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithRootViewController:nil capacity:0];
 }
 
 - (void)awakeFromNib

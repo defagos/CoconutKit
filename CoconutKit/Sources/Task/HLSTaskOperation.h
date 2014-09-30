@@ -25,12 +25,10 @@
  *    current work as soon as possible
  *  - operations are instantiated by the HLSTaskManager using their designated initializer. Your subclass must therefore
  *    not define any other initializer since they would never be called
- *
- * Designated initializer: -initWithTaskManager:task:
  */
 @interface HLSTaskOperation : NSOperation
 
-- (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task NS_REQUIRES_SUPER;
+- (instancetype)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task NS_REQUIRES_SUPER NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly, weak) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
 

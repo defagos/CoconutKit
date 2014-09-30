@@ -21,7 +21,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
+- (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     if ((self = [super initWithCompletionBlock:completionBlock])) {
         if (! request) {
@@ -34,10 +34,16 @@
     return self;
 }
 
-- (id)init
+- (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithRequest:nil completionBlock:completionBlock];
+}
+
+- (instancetype)init
+{
+    HLSForbiddenInheritedMethod();
+    return [self initWithRequest:nil completionBlock:nil];
 }
 
 @end

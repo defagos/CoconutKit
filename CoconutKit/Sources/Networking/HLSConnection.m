@@ -31,7 +31,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
+- (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     if ((self = [super init])) {
         self.completionBlock = completionBlock;
@@ -41,7 +41,7 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     return [self initWithCompletionBlock:nil];
 }

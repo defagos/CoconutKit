@@ -14,14 +14,14 @@
 
 - (void)testReturnModified
 {
-    NSDictionary *dictionary1 = [NSDictionary dictionary];
+    NSDictionary *dictionary1 = @{};
     dictionary1 = [dictionary1 dictionaryBySettingObject:@"obj1" forKey:@"key1"];
     GHAssertEqualStrings([dictionary1 objectForKey:@"key1"], @"obj1", nil);
     dictionary1 = [dictionary1 dictionaryByRemovingObjectForKey:@"key1"];
     GHAssertEquals([dictionary1 count], (NSUInteger)0, nil);
     
-    NSDictionary *dictionary2 = [NSDictionary dictionaryWithObjectsAndKeys:@"obj1", @"key1", @"obj2", @"key2", nil];
-    dictionary2 = [dictionary2 dictionaryByRemovingObjectsForKeys:[NSArray arrayWithObjects:@"key1", @"key2", nil]];
+    NSDictionary *dictionary2 = @{ @"key1" : @"obj1", @"key2" : @"obj2" };
+    dictionary2 = [dictionary2 dictionaryByRemovingObjectsForKeys:@[@"key1", @"key2"]];
     GHAssertEquals([dictionary2 count], (NSUInteger)0, nil);
 }
 

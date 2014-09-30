@@ -25,15 +25,18 @@
  * Manages application-wide notification mechanisms
  *
  * This class is not thread-safe
- *
- * Designated initializer: -init
  */
 @interface HLSNotificationManager : NSObject
 
 /**
  * Get the shared object managing application-wide notifications
  */
-+ (HLSNotificationManager *)sharedNotificationManager;
++ (instancetype)sharedNotificationManager;
+
+/**
+ * Create a notification manager
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Call this method to notify that a network task has started. This method can be called several times if several
@@ -56,8 +59,6 @@
  * those notifications into its own notifications, otherwise the object internals might be revealed. Writing
  * such conversion code can be tedious and error prone. The HLSNotificationConverter singleton provides a convenient
  * way to define conversions with very litte code.
- *
- * Designated initializer: -init
  */
 @interface HLSNotificationConverter : NSObject {
 @private
@@ -69,7 +70,15 @@
     NSMutableDictionary *_objectToNotificationMap;
 }
 
+/**
+ * Singleton instance
+ */
 + (HLSNotificationConverter *)sharedNotificationConverter;
+
+/**
+ * Create a notification converter
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Add a conversion rule. The objectFrom and objectTo objects are NOT retained, as for NSNotificationManager. This is 

@@ -12,7 +12,7 @@
 
 @implementation UIImage (HLSExtensions)
 
-+ (UIImage *)coconutKitImageNamed:(NSString *)imageName
++ (instancetype)coconutKitImageNamed:(NSString *)imageName
 {
     static NSString *s_relativeBundlePath = nil;
     static dispatch_once_t onceToken;
@@ -37,7 +37,7 @@
     }
 }
 
-+ (UIImage *)imageWithColor:(UIColor *)color
++ (instancetype)imageWithColor:(UIColor *)color
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     

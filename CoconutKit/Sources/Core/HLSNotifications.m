@@ -25,7 +25,7 @@
     id __weak _object;
 }
 
-- (id)initWithNotificationName:(NSString *)notificationName forObject:(id)object;
+- (instancetype)initWithNotificationName:(NSString *)notificationName forObject:(id)object NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, strong) NSString *notificationName;
 @property (nonatomic, weak) id object;
@@ -51,19 +51,19 @@
 
 #pragma mark Class methods
 
-+ (HLSNotificationManager *)sharedNotificationManager
++ (instancetype)sharedNotificationManager
 {
     static HLSNotificationManager *s_instance = nil;
-    
-    if (! s_instance) {
-        s_instance = [[HLSNotificationManager alloc] init];
-    }
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_instance = [[[self class] alloc] init];
+    });
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         _networkActivityCount = 0;
@@ -109,7 +109,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNotificationName:(NSString *)notificationName forObject:(id)object
+- (instancetype)initWithNotificationName:(NSString *)notificationName forObject:(id)object
 {
     if ((self = [super init])) {
         self.notificationName = notificationName;
@@ -127,19 +127,19 @@
 
 #pragma mark Class methods
 
-+ (HLSNotificationConverter *)sharedNotificationConverter
++ (instancetype)sharedNotificationConverter
 {
     static HLSNotificationConverter *s_instance = nil;
-    
-    if (! s_instance) {
-        s_instance = [[HLSNotificationConverter alloc] init];
-    }
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_instance = [[[self class] alloc] init];
+    });
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.objectToNotificationMap = [NSMutableDictionary dictionary];

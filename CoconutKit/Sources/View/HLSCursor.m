@@ -42,7 +42,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
         [self hlsCursorInit];
@@ -50,7 +50,7 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
         [self hlsCursorInit];
@@ -85,8 +85,8 @@
     // the views before they are displayed
     if (! _viewsCreated) {
         // Create the subview set
-        self.elementWrapperViews = [NSArray array];
-        self.elementWrapperViewSizeValues = [NSArray array];
+        self.elementWrapperViews = @[];
+        self.elementWrapperViewSizeValues = @[];
         
         // Check the data source
         NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
@@ -325,8 +325,7 @@
         moveAnimation.tag = @"move";
         moveAnimation.lockingUI = YES;
         moveAnimation.delegate = self;
-        moveAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:selectedIndex],
-                                  @"targetIndex", nil];
+        moveAnimation.userInfo = @{ @"targetIndex" : @(selectedIndex) };
         [moveAnimation playAnimated:animated];
     }
     else {
@@ -546,8 +545,7 @@
         snapAnimation.tag = @"snap";
         snapAnimation.lockingUI = YES;
         snapAnimation.delegate = self;
-        snapAnimation.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInteger:index],
-                                  @"targetIndex", nil];
+        snapAnimation.userInfo = @{ @"targetIndex" : @(index) };
         [snapAnimation playAnimated:YES];
     }
     else {

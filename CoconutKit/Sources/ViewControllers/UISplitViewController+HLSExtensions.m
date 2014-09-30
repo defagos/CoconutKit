@@ -51,7 +51,7 @@ static NSUInteger swizzled_UISplitViewController__supportedInterfaceOrientations
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {
-    objc_setAssociatedObject(self, s_autorotationModeKey, [NSNumber numberWithInteger:autorotationMode], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_autorotationModeKey, @(autorotationMode), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

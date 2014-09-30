@@ -28,11 +28,11 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithTextField:(UITextField *)textField
-          managedObject:(NSManagedObject *)managedObject 
-              fieldName:(NSString *)fieldName 
-              formatter:(NSFormatter *)formatter
-     validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
+- (instancetype)initWithTextField:(UITextField *)textField
+                    managedObject:(NSManagedObject *)managedObject
+                        fieldName:(NSString *)fieldName
+                        formatter:(NSFormatter *)formatter
+               validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
 {
     if ((self = [super init])) {
         // Sanity check
@@ -169,7 +169,7 @@
     if (value) {
         // We do not display "0" for numbers equal to zero. This does not make much sense, an empty number text field
         // means 0, which allows the placeholder text to be displayed in such cases
-        if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:[NSNumber numberWithInteger:0]]) {
+        if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:@0]) {
             text = @"";
         }
         else if (self.formatter) {

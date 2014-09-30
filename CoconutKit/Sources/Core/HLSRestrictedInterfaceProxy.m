@@ -26,15 +26,18 @@
 
 #pragma mark Class methods
 
-+ (id)proxyWithTarget:(id)target protocol:(Protocol *)protocol
++ (instancetype)proxyWithTarget:(id)target protocol:(Protocol *)protocol
 {
     return [[[self class] alloc] initWithTarget:target protocol:protocol];
 }
 
 #pragma mark Object creation and destruction
 
-- (id)initWithTarget:(id)target protocol:(Protocol *)protocol
-{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+
+- (instancetype)initWithTarget:(id)target protocol:(Protocol *)protocol
+{    
     if (! protocol) {
         HLSLoggerError(@"Cannot create a proxy to target %@ without a protocol", target);
         return nil;
@@ -60,6 +63,8 @@
     
     return self;
 }
+
+#pragma clang diagnostic pop
 
 #pragma mark Accessors and mutators
 

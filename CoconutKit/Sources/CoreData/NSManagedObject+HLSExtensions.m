@@ -18,13 +18,13 @@
 
 #pragma mark Class methods
 
-+ (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
++ (instancetype)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     return [NSEntityDescription insertNewObjectForEntityForName:[self className] 
                                          inManagedObjectContext:managedObjectContext];
 }
 
-+ (id)insert
++ (instancetype)insert
 {
     return [self insertIntoManagedObjectContext:[HLSModelManager currentModelContext]];
 }
@@ -68,7 +68,7 @@
                      sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
                     inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors 
                         inManagedObjectContext:managedObjectContext];
@@ -77,7 +77,7 @@
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
                      sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors];
 }
@@ -98,14 +98,14 @@
 + (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
                       inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self allObjectsSortedUsingDescriptors:sortDescriptors
                            inManagedObjectContext:managedObjectContext];
 }
 
 + (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self allObjectsSortedUsingDescriptors:sortDescriptors];
 }
 

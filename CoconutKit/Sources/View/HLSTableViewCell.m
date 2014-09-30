@@ -30,10 +30,10 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     s_classNameToSizeMap = [NSMutableDictionary dictionary];
 }
 
-+ (id)cellForTableView:(UITableView *)tableView
++ (instancetype)cellForTableView:(UITableView *)tableView
 {
     // Try to find if a cell is available for the cell class identifier
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self identifier]];
+    HLSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self identifier]];
     
     // If not, create one lazily
     if (! cell) {
@@ -56,7 +56,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
                 return nil;
             }
             
-            cell = (UITableViewCell *)firstObject;
+            cell = (HLSTableViewCell *)firstObject;
             
             // Check that the reuse identifier defined in the xib is correct
             if (! [[cell reuseIdentifier] isEqualToString:[self identifier]]) {

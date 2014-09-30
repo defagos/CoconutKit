@@ -19,7 +19,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithView:(UIView *)view beginNotificationName:(NSString *)beginNotificationName endNotificationName:(NSString *)endNotificationName
+- (instancetype)initWithView:(UIView *)view beginNotificationName:(NSString *)beginNotificationName endNotificationName:(NSString *)endNotificationName
 {
     NSAssert(beginNotificationName && endNotificationName, @"Notifications required");
     

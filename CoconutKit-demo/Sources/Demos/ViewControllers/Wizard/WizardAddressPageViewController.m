@@ -29,7 +29,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.personInformation = [[PersonInformation allObjects] firstObject];

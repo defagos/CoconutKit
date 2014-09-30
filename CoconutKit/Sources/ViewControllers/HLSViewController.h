@@ -40,8 +40,6 @@
  * set the logger level of your application to DEBUG (see HLSLogger.h to know how this is achieved). Then use the 
  * console when running your application to have a look at view controller events. This most notably can help you 
  * discover incorrect view controller hierarchies or poorly implemented view controller containers.
- *
- * Designated initializer: -initWithNibName:bundle:
  */
 @interface HLSViewController : UIViewController
 
@@ -49,7 +47,7 @@
  * Instantiate a view controller, looking for a nib bearing the same name as the class or one of its superclasses in the 
  * given bundle. If the specified bundle is nil, lookup is performed in the main bundle
  */
-- (id)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+- (instancetype)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
 
 /**
  * In your subclass, use this method to collect your localization code. You must not call this method directly, it is automatically
@@ -70,8 +68,8 @@
 
 @interface HLSViewController (HLSRequiresSuper)
 
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
-- (id)initWithCoder:(NSCoder *)aDecoder NS_REQUIRES_SUPER;
+- (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_REQUIRES_SUPER;
 - (void)viewDidLoad NS_REQUIRES_SUPER;
 - (void)viewWillAppear:(BOOL)animated NS_REQUIRES_SUPER;
 - (void)viewDidAppear:(BOOL)animated NS_REQUIRES_SUPER;

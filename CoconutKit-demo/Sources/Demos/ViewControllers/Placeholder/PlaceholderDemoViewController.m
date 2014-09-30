@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         // To be able to test modal presentation contexts, we here make the placeholder view controller display those modal view controllers
@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
         }
         if (self.inTabBarControllerSwitch.on) {
             UITabBarController *tabBarController = [[UITabBarController alloc] init];
-            tabBarController.viewControllers = [NSArray arrayWithObject:insetViewController];
+            tabBarController.viewControllers = @[insetViewController];
             insetViewController = tabBarController;
         }    
     }

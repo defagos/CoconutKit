@@ -26,8 +26,6 @@
  *
  * This object is not thread-safe. All operations on it must stem from the same thread, otherwise the behavior is 
  * undefined.
- *
- * Designated initializer: -init
  */
 @interface HLSTaskManager : NSObject
 
@@ -36,7 +34,12 @@
  * instances (in a multi-threaded code, you might e.g. want to assign separate managers to separate threads), you can 
  * create those manually.
  */
-+ (HLSTaskManager *)defaultManager;
++ (instancetype)defaultManager;
+
+/**
+ * Create a task manager
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Change the number of tasks processed simultaneously. Default is 4. This setting does not affect already running

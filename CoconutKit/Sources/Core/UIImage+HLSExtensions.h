@@ -11,12 +11,12 @@
 /**
  * Return an image from the CoconutKit-resources bundle
  */
-+ (UIImage *)coconutKitImageNamed:(NSString *)imageName;
++ (instancetype)coconutKitImageNamed:(NSString *)imageName;
 
 /**
  * Return a 1x1 px image having a given color
  */
-+ (UIImage *)imageWithColor:(UIColor *)color;
++ (instancetype)imageWithColor:(UIColor *)color;
 
 /**
  * Return the receiver masked with some image. Black mask pixels correspond to unmasked portions. To make parts of

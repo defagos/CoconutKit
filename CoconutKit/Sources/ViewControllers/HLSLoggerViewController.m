@@ -33,7 +33,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithLogger:(HLSLogger *)logger
+- (instancetype)initWithLogger:(HLSLogger *)logger
 {
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         if (! logger) {
@@ -46,10 +46,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithLogger:nil];
 }
 
 #pragma mark View lifecycle

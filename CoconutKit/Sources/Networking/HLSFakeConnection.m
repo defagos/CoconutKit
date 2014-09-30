@@ -19,7 +19,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock
+- (instancetype)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     if ((self = [super initWithCompletionBlock:completionBlock])) {
         self.responseObject = responseObject;
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (id)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
+- (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     return [self initWithResponseObject:nil error:nil completionBlock:completionBlock];
 }

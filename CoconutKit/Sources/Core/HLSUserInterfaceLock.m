@@ -17,19 +17,19 @@
 
 #pragma mark Class methods
 
-+ (HLSUserInterfaceLock *)sharedUserInterfaceLock
++ (instancetype)sharedUserInterfaceLock
 {
     static HLSUserInterfaceLock *s_instance = nil;
-    
-    if (! s_instance) {
-        s_instance = [[HLSUserInterfaceLock alloc] init];
-    }
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_instance = [[[self class] alloc] init];
+    });
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         _useCount = 0;

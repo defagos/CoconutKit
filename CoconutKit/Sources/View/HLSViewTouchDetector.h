@@ -15,7 +15,7 @@
 /**
  * Create a touch detector for the specified text field (not retained) and notification pair
  */
-- (id)initWithView:(UIView *)view beginNotificationName:(NSString *)beginNotificationName endNotificationName:(NSString *)endNotificationName;
+- (instancetype)initWithView:(UIView *)view beginNotificationName:(NSString *)beginNotificationName endNotificationName:(NSString *)endNotificationName NS_DESIGNATED_INITIALIZER;
 
 /**
  * If set to YES, and between the time the begin and end notifications are received, taps outside the view frame

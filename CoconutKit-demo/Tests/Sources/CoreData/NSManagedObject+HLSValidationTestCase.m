@@ -87,7 +87,7 @@
     GHAssertNil(errorB1, nil);
     
     NSError *errorB2 = nil;
-    GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:3] forKey:@"noValidationNumberB" error:&errorB2], nil);
+    GHAssertTrue([cInstance checkValue:@3 forKey:@"noValidationNumberB" error:&errorB2], nil);
     GHAssertNil(errorB2, nil);
     
     // Field codeMandatoryNumberB
@@ -96,7 +96,7 @@
     GHAssertTrue([errorB3 hasCode:TestValidationMandatoryValueError withinDomain:TestValidationErrorDomain], nil);
     
     NSError *errorB4 = nil;
-    GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:7] forKey:@"codeMandatoryNumberB" error:&errorB4], nil);
+    GHAssertTrue([cInstance checkValue:@7 forKey:@"codeMandatoryNumberB" error:&errorB4], nil);
     GHAssertNil(errorB4, nil);
     
     // Field modelMandatoryBoundedNumberB
@@ -105,7 +105,7 @@
     GHAssertTrue([errorB5 hasCode:NSValidationMissingMandatoryPropertyError withinDomain:NSCocoaErrorDomain], nil);
 
     NSError *errorB6 = nil;
-    GHAssertFalse([cInstance checkValue:[NSNumber numberWithInt:11] forKey:@"modelMandatoryBoundedNumberB" error:&errorB6], nil);
+    GHAssertFalse([cInstance checkValue:@11 forKey:@"modelMandatoryBoundedNumberB" error:&errorB6], nil);
     GHAssertTrue([errorB6 hasCode:NSValidationNumberTooLargeError withinDomain:NSCocoaErrorDomain], nil);
 
     // TODO: Strange... When a lower bound is set in the xcdatamodel, testing against a smaller value does not fail, though it should (if we do the
@@ -118,11 +118,11 @@
 #endif
     
     NSError *errorB8 = nil;
-    GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:10] forKey:@"modelMandatoryBoundedNumberB" error:&errorB8], nil);
+    GHAssertTrue([cInstance checkValue:@10 forKey:@"modelMandatoryBoundedNumberB" error:&errorB8], nil);
     GHAssertNil(errorB8, nil);
     
     NSError *errorB9 = nil;
-    GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:3] forKey:@"modelMandatoryBoundedNumberB" error:&errorB9], nil);
+    GHAssertTrue([cInstance checkValue:@3 forKey:@"modelMandatoryBoundedNumberB" error:&errorB9], nil);
     GHAssertNil(errorB9, nil);
     
     // Field modelMandatoryCodeNotZeroNumberB
@@ -137,11 +137,11 @@
     GHAssertEquals([subErrorsB10 count], (NSUInteger)2, nil);
     
     NSError *errorB11 = nil;
-    GHAssertFalse([cInstance checkValue:[NSNumber numberWithInt:0] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB11], nil);
+    GHAssertFalse([cInstance checkValue:@0 forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB11], nil);
     GHAssertTrue([errorB11 hasCode:TestValidationIncorrectValueError withinDomain:TestValidationErrorDomain], nil);
     
     NSError *errorB12 = nil;
-    GHAssertTrue([cInstance checkValue:[NSNumber numberWithInt:9] forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB12], nil);
+    GHAssertTrue([cInstance checkValue:@9 forKey:@"modelMandatoryCodeNotZeroNumberB" error:&errorB12], nil);
     GHAssertNil(errorB12, nil);
     
     // Field codeMandatoryConcreteClassesD
@@ -218,13 +218,13 @@
     ConcreteSubclassC *cInstance1 = [ConcreteSubclassC insert];
     cInstance1.noValidationStringA = @"Consistency check";
     cInstance1.codeMandatoryNotEmptyStringA = @"Mandatory A";
-    cInstance1.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
-    cInstance1.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
-    cInstance1.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:3];
-    cInstance1.noValidationNumberB = [NSNumber numberWithInteger:-12];
+    cInstance1.codeMandatoryNumberB = @0;
+    cInstance1.modelMandatoryBoundedNumberB = @6;
+    cInstance1.modelMandatoryCodeNotZeroNumberB = @3;
+    cInstance1.noValidationNumberB = @-12;
     cInstance1.codeMandatoryStringC = @"Mandatory C";
     cInstance1.modelMandatoryBoundedPatternStringC = @"Hello, World!";
-    cInstance1.noValidationNumberC = [NSNumber numberWithInteger:1012];
+    cInstance1.noValidationNumberC = @1012;
     cInstance1.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, dInstance2, nil];
     
     NSError *error1 = nil;
@@ -235,12 +235,12 @@
     ConcreteSubclassC *cInstance2 = [ConcreteSubclassC insert];
     cInstance2.noValidationStringA = @"Consistency check";
     cInstance2.codeMandatoryNotEmptyStringA = @"Mandatory A";
-    cInstance2.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
-    cInstance2.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
-    cInstance2.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:3];
+    cInstance2.codeMandatoryNumberB = @0;
+    cInstance2.modelMandatoryBoundedNumberB = @6;
+    cInstance2.modelMandatoryCodeNotZeroNumberB = @3;
     cInstance2.codeMandatoryStringC = @"Mandatory C";
     cInstance2.modelMandatoryBoundedPatternStringC = @"Hello, World!";
-    cInstance2.noValidationNumberC = [NSNumber numberWithInteger:1012];
+    cInstance2.noValidationNumberC = @1012;
     cInstance2.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, nil];
     
     NSError *error2 = nil;
@@ -251,10 +251,10 @@
     // that the error hierarchy is correctly flattened out
     ConcreteSubclassC *cInstance3 = [ConcreteSubclassC insert];
     cInstance3.noValidationStringA = @"Unexpected string for consistency check";
-    cInstance3.codeMandatoryNotEmptyStringA = nil;               // <-- 1 individual error
-    cInstance3.codeMandatoryNumberB = [NSNumber numberWithInteger:0];
-    cInstance3.modelMandatoryBoundedNumberB = [NSNumber numberWithInteger:6];
-    cInstance3.modelMandatoryCodeNotZeroNumberB = [NSNumber numberWithInteger:0];       // <-- 1 individual error
+    cInstance3.codeMandatoryNotEmptyStringA = nil;                      // <-- 1 individual error
+    cInstance3.codeMandatoryNumberB = @0;
+    cInstance3.modelMandatoryBoundedNumberB = @6;
+    cInstance3.modelMandatoryCodeNotZeroNumberB = @0;                   // <-- 1 individual error
     cInstance3.codeMandatoryStringC = @"Mandatory C";
     cInstance3.modelMandatoryBoundedPatternStringC = @"This string is too long, and does not match the expected pattern";       // <-- 2 individual errors
     cInstance3.codeMandatoryConcreteClassesD = [NSSet setWithObjects:dInstance1, dInstance2, nil];

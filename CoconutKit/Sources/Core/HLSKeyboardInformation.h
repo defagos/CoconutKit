@@ -23,7 +23,7 @@
  * Return the keyboard information if docked and displayed (or about to be displayed), nil if the keyboard is not visible,
  * about to be hidden, or floating
  */
-+ (HLSKeyboardInformation *)keyboardInformation;
++ (instancetype)keyboardInformation;
 
 /**
  * Start frame of the keyboard before it is displayed (in the window coordinate system). Refer to the 

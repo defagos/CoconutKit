@@ -26,12 +26,12 @@
 
 #pragma mark Class methods
 
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code
 {
     return [[[self class] alloc] initWithDomain:domain code:code];
 }
 
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription
 {
     HLSError *error = [HLSError errorWithDomain:domain code:code];
     [error setLocalizedDescription:localizedDescription];
@@ -40,12 +40,18 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithDomain:(NSString *)domain code:(NSInteger)code
+- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code
 {
     if ((self = [super initWithDomain:domain code:code userInfo:nil /* not used */])) {
-        self.internalUserInfo = [NSDictionary dictionary];
+        self.internalUserInfo = @{};
     }
     return self;
+}
+
+- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)userInfo
+{
+    HLSForbiddenInheritedMethod();
+    return [self initWithDomain:nil code:0];
 }
 
 #pragma mark Accessors and mutators
