@@ -38,7 +38,7 @@
 - (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithName:nil type:0];
 }
 
 @end

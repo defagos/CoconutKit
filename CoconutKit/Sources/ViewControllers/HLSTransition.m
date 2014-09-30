@@ -29,7 +29,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 + (NSArray *)availableTransitionNames
 {
     static NSArray *s_availableTransitionNames = nil;
-    if (! s_availableTransitionNames) {
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
         NSMutableArray *availableTransitionNames = [NSMutableArray array];
         
         // Find all HLSTransition subclasses (except HLSTransition itself)
@@ -60,7 +61,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         free(classes);
         
         s_availableTransitionNames = [availableTransitionNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-    }
+    });
     return s_availableTransitionNames;
 }
 
@@ -139,10 +140,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     // Durations are constants for each transition animation class. Can cache them
     static NSMutableDictionary *s_animationClassNameToDurationMap = nil;
-    if (! s_animationClassNameToDurationMap) {
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
         s_animationClassNameToDurationMap = [NSMutableDictionary dictionary];
-    }
-    
+    });
+        
     NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];
     if (! duration) {
         // Calculate for a dummy animation

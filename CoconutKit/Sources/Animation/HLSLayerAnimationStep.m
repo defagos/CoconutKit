@@ -88,16 +88,14 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         
 #if TARGET_IPHONE_SIMULATOR
         static float (*s_UIAnimationDragCoefficient)(void) = NULL;
-        static BOOL s_firstLoad = YES;
-        if (s_firstLoad) {
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
             void *UIKitDylib = dlopen([[[NSBundle bundleForClass:[UIApplication class]] executablePath] fileSystemRepresentation], RTLD_LAZY);
             s_UIAnimationDragCoefficient = (float (*)(void))dlsym(UIKitDylib, "UIAnimationDragCoefficient");
             if (! s_UIAnimationDragCoefficient) {
                 HLSLoggerInfo(@"UIAnimationDragCoefficient not found. Slow animations won't be available for animations based on Core Animation");
             }
-            
-            s_firstLoad = NO;
-        }
+        });
         
         if (s_UIAnimationDragCoefficient) {
             duration *= s_UIAnimationDragCoefficient();

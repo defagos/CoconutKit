@@ -40,9 +40,10 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
             NSString *indexString = [self.identifier stringByReplacingOccurrencesOfString:HLSPlaceholderPreloadSegueIdentifierPrefix
                                                                                withString:@""];
             static NSNumberFormatter *s_numberFormatter = nil;
-            if (! s_numberFormatter) {
+            static dispatch_once_t s_onceToken;
+            dispatch_once(&s_onceToken, ^{
                 s_numberFormatter = [[NSNumberFormatter alloc] init];
-            }
+            });
             NSNumber *indexNumber = [s_numberFormatter numberFromString:indexString];
             if (! indexNumber) {
                 HLSLoggerError(@"Cannot parse inset index from segue identifier '%@'", self.identifier);

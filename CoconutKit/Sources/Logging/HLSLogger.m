@@ -45,16 +45,12 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 + (instancetype)sharedLogger
 {
 	static HLSLogger *s_instance = nil;
-	
-    // Double-checked locking pattern
-	if (! s_instance) {
-        @synchronized(self) {
-            if (! s_instance) {
-                NSString *logDirectoryPath = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
-                s_instance = [[[self class] alloc] initWithLogDirectoryPath:logDirectoryPath];
-            }
-        }
-	}
+    static dispatch_once_t s_onceToken;
+    
+    dispatch_once(&s_onceToken, ^{
+        NSString *logDirectoryPath = [HLSApplicationLibraryDirectoryPath() stringByAppendingPathComponent:@"HLSLogger"];
+        s_instance = [[[self class] alloc] initWithLogDirectoryPath:logDirectoryPath];
+    });
 	return s_instance;
 }
 
@@ -133,13 +129,12 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 		return;
 	}
 
-    static BOOL s_configurationLoaded = NO;
     static BOOL s_xcodeColorsEnabled = NO;
-    if (! s_configurationLoaded) {
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
         NSString *xcodeColorsValue = [[[NSProcessInfo processInfo] environment] objectForKey:@"XcodeColors"];
         s_xcodeColorsEnabled = [xcodeColorsValue isEqualToString:@"YES"];
-        s_configurationLoaded = YES;
-    }
+    });
     
     // NSLog is thread-safe and adds date, thread and process information in front of each line
     NSString *logEntry = [NSString stringWithFormat:@"[%@] %@", mode.name, message];
@@ -172,10 +167,11 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             
             // File name: BundleName_version_date.log
             static NSDateFormatter *s_dateFormatter = nil;
-            if (! s_dateFormatter) {
+            static dispatch_once_t s_onceToken;
+            dispatch_once(&s_onceToken, ^{
                 s_dateFormatter = [[NSDateFormatter alloc] init];
                 [s_dateFormatter setDateFormat:@"yyyyMMdd_HHmmss"];
-            }
+            });
             
             NSString *dateString = [s_dateFormatter stringFromDate:[NSDate date]];
             NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
@@ -194,10 +190,11 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
     
         // Add date, thread and process information, as NSLog does
         static NSDateFormatter *s_dateFormatter = nil;
-        if (! s_dateFormatter) {
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
             s_dateFormatter = [[NSDateFormatter alloc] init];
             [s_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
-        }
+        });
         
         mach_port_t threadId = pthread_mach_thread_np(pthread_self());
         NSString *logFileEntry = [NSString stringWithFormat:@"%@ [%x] %@\n",

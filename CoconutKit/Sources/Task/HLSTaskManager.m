@@ -33,9 +33,10 @@
 + (instancetype)defaultManager
 {
     static HLSTaskManager *s_instance = nil;
-    if (! s_instance) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         s_instance = [[[self class] alloc] init];
-    }
+    });
     return s_instance;
 }
 

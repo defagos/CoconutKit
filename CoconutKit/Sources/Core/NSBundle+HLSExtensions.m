@@ -37,9 +37,10 @@
     }
     
     static NSMutableDictionary *s_nameToBundleMap = nil;
-    if (! s_nameToBundleMap) {
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
         s_nameToBundleMap = [[NSMutableDictionary alloc] init];
-    }
+    });
     
     NSBundle *bundle = [s_nameToBundleMap objectForKey:name];
     if (bundle) {

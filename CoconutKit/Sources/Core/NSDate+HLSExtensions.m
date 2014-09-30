@@ -57,11 +57,12 @@ static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _c
 static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _cmd, id locale)
 {
     static NSDateFormatter *s_dateFormatter = nil;
-    if (! s_dateFormatter) {
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
         // Create time formatter for system timezone (which is the default one if not set)
         s_dateFormatter = [[NSDateFormatter alloc] init];
         [s_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ"];
-    }
+    });
     
     NSString *originalString = (*s_NSDate__descriptionWithLocale_Imp)(self, _cmd, locale);
     return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
