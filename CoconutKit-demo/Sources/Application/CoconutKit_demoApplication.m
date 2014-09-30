@@ -25,7 +25,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -66,7 +66,7 @@
             RootSplitViewDemoController *leftRootSplitViewController = [[RootSplitViewDemoController alloc] init];
             RootSplitViewDemoController *rightRootSplitViewController = [[RootSplitViewDemoController alloc] init];
             UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
-            splitViewController.viewControllers = [NSArray arrayWithObjects:leftRootSplitViewController, rightRootSplitViewController, nil];
+            splitViewController.viewControllers = @[leftRootSplitViewController, rightRootSplitViewController];
             splitViewController.delegate = self;
             self.rootViewController = splitViewController;
         }
@@ -75,8 +75,8 @@
             RootTabBarDemoViewController *rootTabBarDemoViewController2 = [[RootTabBarDemoViewController alloc] init];
             RootTabBarDemoViewController *rootTabBarDemoViewController3 = [[RootTabBarDemoViewController alloc] init];
             UITabBarController *tabBarController = [[UITabBarController alloc] init];
-            tabBarController.viewControllers = [NSArray arrayWithObjects:rootTabBarDemoViewController1, rootTabBarDemoViewController2,
-                                                rootTabBarDemoViewController3, nil];
+            tabBarController.viewControllers = @[rootTabBarDemoViewController1, rootTabBarDemoViewController2,
+                                                rootTabBarDemoViewController3];
             tabBarController.delegate = self;
             self.rootViewController = tabBarController;
         }

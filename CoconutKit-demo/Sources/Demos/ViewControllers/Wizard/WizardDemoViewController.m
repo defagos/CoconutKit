@@ -15,7 +15,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.delegate = self;
@@ -23,7 +23,7 @@
         
         WizardIdentityPageViewController *wizardIdentityPageController = [[WizardIdentityPageViewController alloc] init];
         WizardAddressPageViewController *wizardAddressPageController = [[WizardAddressPageViewController alloc] init];
-        self.viewControllers = [NSArray arrayWithObjects:wizardIdentityPageController, wizardAddressPageController, nil];
+        self.viewControllers = @[wizardIdentityPageController, wizardAddressPageController];
     }
     return self;
 }

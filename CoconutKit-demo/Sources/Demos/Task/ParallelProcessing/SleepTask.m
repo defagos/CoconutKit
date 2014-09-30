@@ -17,7 +17,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithSecondsToSleep:(NSUInteger)secondsToSleep
+- (instancetype)initWithSecondsToSleep:(NSUInteger)secondsToSleep
 {
     if ((self = [super init])) {
         _secondsToSleep = secondsToSleep;

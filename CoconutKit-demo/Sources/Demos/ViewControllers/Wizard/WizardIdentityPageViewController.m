@@ -33,7 +33,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         // Only one person in the DB. If does not exist yet, create it

@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         NSMutableArray *devices = [NSMutableArray array];
@@ -215,11 +215,10 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
     [super localize];
     
     self.title = @"HLSTableSearchDisplayViewController";
-    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", nil),
-                                        NSLocalizedString(@"Music players", nil),
-                                        NSLocalizedString(@"Phones", nil),
-                                        NSLocalizedString(@"Tablets", nil),
-                                        nil];
+    self.searchBar.scopeButtonTitles = @[NSLocalizedString(@"All", nil),
+                                         NSLocalizedString(@"Music players", nil),
+                                         NSLocalizedString(@"Phones", nil),
+                                         NSLocalizedString(@"Tablets", nil)];
 }
 
 @end

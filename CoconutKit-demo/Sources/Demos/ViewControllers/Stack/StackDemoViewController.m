@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         UIViewController *rootViewController = [[LifeCycleTestViewController alloc] init];
@@ -199,7 +199,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
         }
         if (self.inTabBarControllerSwitch.on) {
             UITabBarController *tabBarController = [[UITabBarController alloc] init];
-            tabBarController.viewControllers = [NSArray arrayWithObject:pushedViewController];
+            tabBarController.viewControllers = @[pushedViewController];
             pushedViewController = tabBarController;
         }    
     }

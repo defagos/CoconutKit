@@ -14,14 +14,14 @@
 
 - (void)testRotation
 {
-    NSArray *array = [NSArray arrayWithObjects:@"1", @"2", @"3", nil];
+    NSArray *array = @[@"1", @"2", @"3"];
     
     NSArray *leftArray = [array arrayByLeftRotatingNumberOfObjects:2];
-    NSArray *expectedLeftArray = [NSArray arrayWithObjects:@"3", @"1", @"2", nil];
+    NSArray *expectedLeftArray = @[@"3", @"1", @"2"];
     GHAssertTrue([leftArray isEqualToArray:expectedLeftArray], nil);
     
     NSArray *rightArray = [array arrayByRightRotatingNumberOfObjects:2];
-    NSArray *expectedRightArray = [NSArray arrayWithObjects:@"2", @"3", @"1", nil];
+    NSArray *expectedRightArray = @[@"2", @"3", @"1"];
     GHAssertTrue([rightArray isEqualToArray:expectedRightArray], nil);
 }
 

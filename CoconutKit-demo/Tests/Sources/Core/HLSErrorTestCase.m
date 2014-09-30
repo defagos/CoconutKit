@@ -36,10 +36,7 @@
                        localizedDescription:@"Localized description"];
     [self.error2 setLocalizedFailureReason:@"Localized failure reason"];
     [self.error2 setLocalizedRecoverySuggestion:@"Localized recovery suggestion"];
-    [self.error2 setLocalizedRecoveryOptions:[NSArray arrayWithObjects:@"LocalizedRecoveryOption1", 
-                                        @"LocalizedRecoveryOption2", 
-                                        @"LocalizedRecoveryOption3",
-                                        nil]];
+    [self.error2 setLocalizedRecoveryOptions:@[@"LocalizedRecoveryOption1", @"LocalizedRecoveryOption2", @"LocalizedRecoveryOption3"]];
     [self.error2 setHelpAnchor:@"Help anchor"];
     [self.error2 setUnderlyingError:self.error1];
     [self.error2 setObject:@"Additional information 1" forKey:@"AdditionalInfo1"];

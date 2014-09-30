@@ -41,9 +41,9 @@ static NSArray *s_folders = nil;
 + (void)initialize
 {
     s_weekDays = [NSDateFormatter orderedWeekdaySymbols];
-    s_completeRange = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
-                       @"11", @"12", @"13", @"14", @"15", @"16", nil];
-    s_folders = [NSArray arrayWithObjects:@"A-F", @"G-L", @"M-R", @"S-Z", nil];
+    s_completeRange = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
+                        @"11", @"12", @"13", @"14", @"15", @"16"];
+    s_folders = @[@"A-F", @"G-L", @"M-R", @"S-Z"];
 }
 
 #pragma mark View lifecycle
@@ -296,11 +296,10 @@ static NSArray *s_folders = nil;
     
     self.title = NSLocalizedString(@"Cursor", nil);
     
-    s_timeScales = [NSArray arrayWithObjects:[NSLocalizedString(@"Year", nil) uppercaseString],
-                    [NSLocalizedString(@"Month", nil) uppercaseString],
-                    [NSLocalizedString(@"Week", nil) uppercaseString],
-                    [NSLocalizedString(@"Day", nil) uppercaseString],
-                    nil];
+    s_timeScales = @[[NSLocalizedString(@"Year", nil) uppercaseString],
+                     [NSLocalizedString(@"Month", nil) uppercaseString],
+                     [NSLocalizedString(@"Week", nil) uppercaseString],
+                     [NSLocalizedString(@"Day", nil) uppercaseString]];
     
     [self.weekDaysCursor reloadData];
     [self.timeScalesCursor reloadData];

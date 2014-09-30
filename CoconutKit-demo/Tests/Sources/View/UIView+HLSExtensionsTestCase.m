@@ -22,7 +22,7 @@
 - (void)testUserInfo
 {
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithFrame:CGRectZero];
-    segmentedControl.userInfo_hls = [NSDictionary dictionary];
+    segmentedControl.userInfo_hls = @{};
     GHAssertNotNil(segmentedControl.userInfo_hls, nil);
 }
 
