@@ -22,9 +22,6 @@ static NSArray *s_fontNames = nil;
 @property (nonatomic, weak) IBOutlet UILabel *numberOfLinesLabel;
 @property (nonatomic, weak) IBOutlet UISlider *fontSizeSlider;
 @property (nonatomic, weak) IBOutlet UILabel *fontSizeLabel;
-@property (nonatomic, weak) IBOutlet UISwitch *adjustsFontSizeToFitWidthSwitch;
-@property (nonatomic, weak) IBOutlet UISlider *minFontSizeSlider;
-@property (nonatomic, weak) IBOutlet UILabel *minFontSizeLabel;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *verticalAlignmentSegmentedControl;
 @property (nonatomic, weak) IBOutlet UIPickerView *lineBreakModePickerView;
 
@@ -42,7 +39,7 @@ static NSArray *s_fontNames = nil;
     
     s_textExamples = [NSArray arrayWithObjects:@"Lorem ipsum",
                       @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
-                      @"At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                      @"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
                       @"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz",
                       @"--------- -- --------- -------",
                       @"",
@@ -183,25 +180,20 @@ static NSArray *s_fontNames = nil;
     UIBaselineAdjustment baselineAdjustment = [self.baselineAdjustmentSegmentedControl selectedSegmentIndex];
     
     self.label.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];
-    self.label.minimumFontSize = self.minFontSizeSlider.value;
     self.label.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
     self.label.verticalAlignment = self.verticalAlignmentSegmentedControl.selectedSegmentIndex;
-    self.label.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
     self.label.baselineAdjustment = baselineAdjustment;
     self.label.lineBreakMode = lineBreakMode;
     self.label.text = text;
     
     self.standardLabel.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];
-    self.standardLabel.minimumFontSize = self.minFontSizeSlider.value;
     self.standardLabel.numberOfLines = (NSInteger)self.numberOfLinesSlider.value;
-    self.standardLabel.adjustsFontSizeToFitWidth = self.adjustsFontSizeToFitWidthSwitch.on;
     self.standardLabel.baselineAdjustment = baselineAdjustment;
     self.standardLabel.lineBreakMode = lineBreakMode;
     self.standardLabel.text = text;
     
-    self.numberOfLinesLabel.text = [NSString stringWithFormat:@"%.0f", self.numberOfLinesSlider.value];
+    self.numberOfLinesLabel.text = [NSString stringWithFormat:@"%@", @(self.label.numberOfLines)];
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.fontSizeSlider.value];
-    self.minFontSizeLabel.text = [NSString stringWithFormat:@"%.0f", self.minFontSizeSlider.value];
 }
 
 #pragma mark Event callbacks

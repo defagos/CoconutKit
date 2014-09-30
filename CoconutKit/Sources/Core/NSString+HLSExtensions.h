@@ -22,15 +22,6 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
 - (BOOL)isFilled;
 
 /**
- * Given a font, return the largest font size (smaller than font.pointSize and larger than a given minimum size) so that
- * the receiver fits within a given area on a maximum number of lines.
- */
-- (CGFloat)fontSizeWithFont:(UIFont *)font 
-          constrainedToSize:(CGSize)size 
-                minFontSize:(CGFloat)minFontSize
-              numberOfLines:(NSUInteger)numberOfLines;
-
-/**
  * URL encoded (aka percent encoded) string with RFC 3986 compliance
  * See http://www.openradar.me/6546984
  */
