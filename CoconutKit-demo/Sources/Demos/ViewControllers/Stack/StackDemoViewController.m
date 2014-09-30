@@ -435,7 +435,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     HLSStackController *stackController = [[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController];
     // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
     stackController.delegate = self;
-    stackController.contentSizeForViewInPopover = CGSizeMake(800.f, 600.);
+    stackController.preferredContentSize = CGSizeMake(800.f, 600.);
     self.displayedPopoverController = [[UIPopoverController alloc] initWithContentViewController:stackController];
     self.displayedPopoverController.delegate = self;
     [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds

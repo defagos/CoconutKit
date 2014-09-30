@@ -126,7 +126,12 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 {
     NSUInteger animationIndex = [self.animationPickerView selectedRowInComponent:0] + 1;
     SEL selector = [self selectorForAnimationWithIndex:animationIndex];
-    HLSAnimation *animation = [self performSelector:selector];
+    
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+    // correct memory management
+    id (*methodImp)(id, SEL) = (id (*)(id, SEL))[self methodForSelector:selector];
+    HLSAnimation *animation = methodImp(self, selector);
+    
     animation.tag = [NSString stringWithFormat:@"animation%lu", (unsigned long)animationIndex];
     if (self.reverseSwitch.on) {
         animation = [animation reverseAnimation];

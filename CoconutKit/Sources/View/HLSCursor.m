@@ -156,11 +156,13 @@
         // If no custom pointer view specified, create a default one
         if (! self.pointerView) {
             UIImage *pointerImage = [UIImage coconutKitImageNamed:@"CursorDefaultPointer.png"];
+            
+            // Calculate caps so that the tiled area is as close as possible to 1 x 1
+            CGFloat horizontalCapInset = floorf((pointerImage.size.width - 1.f) / 2.f);
+            CGFloat verticalCapInset = floorf((pointerImage.size.height - 1.f) / 2.f);
+            pointerImage = [pointerImage resizableImageWithCapInsets:UIEdgeInsetsMake(verticalCapInset, horizontalCapInset, verticalCapInset, horizontalCapInset)];
+            
             UIImageView *imageView = [[UIImageView alloc] initWithImage:pointerImage];
-            imageView.contentStretch = CGRectMake(0.5f,
-                                                  0.5f,
-                                                  1.f / CGRectGetWidth(imageView.frame),
-                                                  1.f / CGRectGetHeight(imageView.frame));
             self.pointerView = imageView;
         }
         
@@ -221,6 +223,7 @@
         }
         if (! font) {
             font = [UIFont systemFontOfSize:17.f];
+            otherFont = [UIFont systemFontOfSize:17.f];
         }
         
         // Text color. If not defined by the data source, use standard colors
@@ -246,8 +249,8 @@
         
         // Create a label with appropriate size. The size must accomodate both the font sizes for selected and non-selected
         // states
-        CGSize titleSize = [title sizeWithFont:font];
-        CGSize otherTitleSize = [title sizeWithFont:otherFont];
+        CGSize titleSize = [title sizeWithAttributes:@{ NSFontAttributeName : font }];
+        CGSize otherTitleSize = [title sizeWithAttributes:@{ NSFontAttributeName : otherFont }];
         UILabel *elementLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f,
                                                                           0.f,
                                                                           floatmax(titleSize.width, otherTitleSize.width),

@@ -5,7 +5,6 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Samuel Défago. All rights reserved.
  */
-"Adjust font size to width"="Ajuster en largeur";
 "All"="Tous";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
@@ -87,8 +86,7 @@
 "Line break mode"="Mode saut de ligne";
 "Looping"="Boucle";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
-"Middle"="Milieu";
-"Min font size"="Taille de police minimale";
+"Middle"="Milieu";  
 "Missing city"="Ville manquante";
 "Missing country"="Pays manquant";
 "Missing first name"="Prénom manquant";

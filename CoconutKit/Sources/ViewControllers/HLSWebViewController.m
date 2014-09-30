@@ -155,7 +155,11 @@
     }
     
     SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
-    [self performSelector:action withObject:actionSheet];
+    
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+    // correct memory management
+    void (*methodImp)(id, SEL, id) = (void (*)(id, SEL, id))[self methodForSelector:action];
+    methodImp(self, action, actionSheet);
 }
 
 #pragma mark UIWebViewDelegate protocol implementation

@@ -44,56 +44,6 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return [[self stringByTrimmingWhitespaces] length] != 0;
 }
 
-#pragma mark Font size adjustment
-
-// Based on: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
-- (CGFloat)fontSizeWithFont:(UIFont *)font 
-          constrainedToSize:(CGSize)size 
-                minFontSize:(CGFloat)minFontSize
-              numberOfLines:(NSUInteger)numberOfLines
-{    
-    if (floatle(font.pointSize, minFontSize)) {
-        return minFontSize;
-    }
-    
-    if (numberOfLines == 0) {
-        HLSLoggerWarn(@"The number of lines must be different from 0");
-        return font.pointSize;
-    }
-    
-    CGFloat height = [self sizeWithFont:font
-                      constrainedToSize:CGSizeMake(size.width, FLT_MAX)
-                          lineBreakMode:NSLineBreakByWordWrapping].height;
-    
-    // Empty text
-    if (floateq(height, 0.f)) {
-        return font.pointSize;
-    }
-    
-    CGFloat lineHeight = [self sizeWithFont:font
-                          constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)
-                              lineBreakMode:NSLineBreakByWordWrapping].height;
-    
-    // Reduce the font size so that the text fits vertically
-    UIFont *newFont = font;
-    while (floatgt(height, size.height) || floatgt(ceilf(height / lineHeight), numberOfLines)) {
-        if (floatle(newFont.pointSize, minFontSize)) {
-            return minFontSize;
-        }
-        
-        newFont = [UIFont fontWithName:font.fontName size:newFont.pointSize - 1.f];
-        height = [self sizeWithFont:newFont 
-                  constrainedToSize:CGSizeMake(size.width, FLT_MAX) 
-                      lineBreakMode:NSLineBreakByWordWrapping].height;
-        
-        lineHeight = [self sizeWithFont:newFont 
-                      constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) 
-                          lineBreakMode:NSLineBreakByWordWrapping].height;        
-    }
-    
-    return newFont.pointSize;
-}
-
 #pragma mark URL encoding
 
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
