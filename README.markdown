@@ -82,12 +82,10 @@ Since CoconutKit 2.0, the easiest way to add CoconutKit to a project is using [C
 
 CoconutKit uses a logger to provide valuable information about its internal status. This should help you easily discover any issue you might encounter when using CoconutKit. To enable internal CoconutKit logging:
 
-* If you are using CoconutKit binaries:
-	* Link your project against the debug version of the CoconutKit `.staticframework` (edit your project debug configuration settings so that the debug binaries are used)
-	* Add an `HLSLoggerLevel` entry to your project `.plist` to set the desired logging level (`DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`)
-* If you are using CocoaPods:
-	* Edit the generated `Pods.xcodeproj` project settings, adding `-DHLS_LOGGER` to the _Other C Flags_ setting for the debug configuration. This setting is sadly lost every time your run `pod install` to generate the CocoaPods workspace
-	* Add an `HLSLoggerLevel` entry to your project `.plist` to set the desired logging level (`DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`)
+* If you are using CoconutKit binaries, link your project against the debug version of the CoconutKit `.staticframework` (edit your project debug configuration settings so that the debug binaries are used)
+* If you are using CocoaPods, edit the generated `Pods.xcodeproj` project settings, adding `-DHLS_LOGGER` to the _Other C Flags_ setting for the debug configuration. This setting is sadly lost every time your run `pod install` to generate the CocoaPods workspace
+
+The default logging level is info. To change the logging level or to display an in-app interface for logger management, please refer to `HLSLogger` documentation.
 
 CoconutKit logger also supports [XcodeColors](https://github.com/robbiehanson/XcodeColors). Simply install the XcodeColors plugin and enable colors when debugging your project within Xcode by adding an environment variable called `XcodeColors` to your project schemes. Projects in the CoconutKit workspace all have this environment variable set. If you see strange `[fg` sequences in your Xcode debugging console, either install XcodeColors or disable the `XcodeColors` environment variable by editing the corresponding project schemes.
 
@@ -157,6 +155,10 @@ In general, I try to keep CoconutKit compatible with at least the two most recen
 
 CoconutKit is best used with the most recent Xcode and iOS SDK releases. In general you should be able to use and compile CoconutKit with prior versions of Xcode, though this is not officially supported. Currently, CoconutKit is therefore officially compatible with Xcode 6 and the iOS 8 SDK.
 
+#### With which architectures is CoconutKit compatible?
+
+CoconutKit is compatible with all 32-bit and 64-bit architectures.
+
 #### Can I use CoconutKit for applications published on the AppStore?
 
 CoconutKit does not use any private API and is therefore AppStore friendly. Several applications I developed use CoconutKit and have successfully been approved.
@@ -180,10 +182,9 @@ You can contribute, and you are warmly encouraged to. Use github pull requests t
 There are some requirements when contributing, though:
 
 * Code style guidelines are not formalized anywhere, but try to stay as close as possible to the style I use. This saves me some work when merging pull requests. IMHO, having a consistent way of organizing and writing source code makes it easier to read, write and maintain
-* Read my [article about the memory management techniques](http://subjective-objective-c.blogspot.com/2011/04/use-objective-c-properties-to-manage.html) I use, and apply the same rules
-* Do not use ARC
+* Use ARC
 * Use of private APIs is strictly forbidden (except if the private method calls never make it into released binaries. You can still call private APIs to implement helpful debugging features, for example)
-* Development and demo projects should be updated. Both are almost the same, except that the demo project uses the library in its binary form. New components should be written using the development project, so that an example with good code coverage is automatically available when your new component is ready. The demo project should then be updated accordingly
+* New components should be added the demo project, so that an example with good code coverage is available
 * Unit tests require version 0.5.2 of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit) to be installed under `/Developer/Frameworks/GHUnitIOS/0.5.2/GHUnitIOS.framework`
 
 #### Writing code
@@ -207,7 +208,7 @@ If you plan to develop for CoconutKit, install `git-flow` and setup your local r
 
 ### Acknowledgements
 
-I really would like to thank my company for having allowed me to publish this work, as well as all my colleagues which have contributed and given me invaluable advice. This work is yours as well!
+I really would like to thank my companies for having allowed me to publish this work, as well as all my colleagues which have contributed and given me invaluable advice. This work is yours as well!
 
 #### Contributors
 
@@ -217,6 +218,18 @@ The following lists all people who contributed to CoconutKit:
 *  Joris Heuberger wrote the HLSLabel class
 
 ### Release notes
+
+#### Version 2.1
+
+* Compatibility with iOS 7 and 8. The deployment target is now iOS 7
+* 64-bit compatibility
+* Code modernization
+* Migration to ARC (finally!)
+* Removal of useless code and functionalities:
+  * `HLSActionSheet` has been removed since `UIActionSheet` has been replaced by `UIAlertController`
+  * Useless `HLSConverters` conversion methods
+* Improvement of the build process
+* Fixed CocoaPods specification file
 
 #### Version 2.0.2
 
