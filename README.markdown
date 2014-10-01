@@ -223,6 +223,10 @@ The following lists all people who contributed to CoconutKit:
 
 ### Release notes
 
+#### Version 2.1.1
+
+* Fixes for CocoaPods
+
 #### Version 2.1
 
 * Compatibility with iOS 7 and 8. The deployment target is now iOS 7
