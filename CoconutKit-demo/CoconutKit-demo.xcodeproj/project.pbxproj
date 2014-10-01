@@ -16,8 +16,6 @@
 		6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */; };
 		6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; };
 		6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
-		6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */; };
-		6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */; };
 		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
 		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
@@ -126,6 +124,9 @@
 		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
 		6F8CBE9C19DC2591003286F7 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */; };
+		6F8CC0C419DC2A8C003286F7 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */; };
+		6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */; };
+		6F8CC0C619DC2A8C003286F7 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */; };
 		6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
 		6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
 		6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83319D448D90010A128 /* DemosListViewController.xib */; };
@@ -445,9 +446,6 @@
 		6F0BFE0E163EEDAC00420A5F /* RootTabBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarDemoViewController.h; sourceTree = "<group>"; };
 		6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarDemoViewController.m; sourceTree = "<group>"; };
 		6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabBarDemoViewController.xib; sourceTree = "<group>"; };
-		6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
-		6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
-		6F159C3315A5B7B00020AFAC /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
 		6F1F4DEC15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4DF015A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
@@ -570,6 +568,10 @@
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
 		6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../Externals/GHUnitIOS.framework; sourceTree = "<group>"; };
+		6F8CC0A519DC2A3D003286F7 /* version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
+		6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
+		6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
+		6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoconutKit.framework; sourceTree = "<group>"; };
 		6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellsDemoViewController.xib; sourceTree = "<group>"; };
 		6F96C83319D448D90010A128 /* DemosListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemosListViewController.xib; sourceTree = "<group>"; };
 		6F9C459414C5C30B00824AB2 /* CoconutKit_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoAppDelegate.h; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 				6F63E7BA17CF6BA1006322D9 /* QuickLook.framework in Frameworks */,
 				6FAB922016DA70BE00599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C75216A93DD20081A9A7 /* CoreText.framework in Frameworks */,
+				6F8CC0C619DC2A8C003286F7 /* CoconutKit.framework in Frameworks */,
 				6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */,
 				6FC900F713D4662400834900 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -800,6 +803,7 @@
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				6F8CC0A519DC2A3D003286F7 /* version.xcconfig */,
 			);
 			indentWidth = 4;
 			name = CustomTemplate;
@@ -820,7 +824,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk.staticframework */,
+				6F8CC0BF19DC2A8C003286F7 /* CoconutKit.staticframework */,
 				6FC900F613D4662400834900 /* CoreData.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				6F22C75116A93DD20081A9A7 /* CoreText.framework */,
@@ -863,25 +867,6 @@
 				6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */,
 			);
 			path = RootTabBar;
-			sourceTree = "<group>";
-		};
-		6F159C2F15A5B7B00020AFAC /* CoconutKit-trunk.staticframework */ = {
-			isa = PBXGroup;
-			children = (
-				6F159C3015A5B7B00020AFAC /* Bootstrap */,
-				6F159C3215A5B7B00020AFAC /* CoconutKit-resources.bundle */,
-				6F159C3315A5B7B00020AFAC /* CoconutKit.framework */,
-			);
-			name = "CoconutKit-trunk.staticframework";
-			path = "../Binaries/CoconutKit-trunk.staticframework";
-			sourceTree = "<group>";
-		};
-		6F159C3015A5B7B00020AFAC /* Bootstrap */ = {
-			isa = PBXGroup;
-			children = (
-				6F159C3115A5B7B00020AFAC /* CoconutKit_bootstrap.m */,
-			);
-			path = Bootstrap;
 			sourceTree = "<group>";
 		};
 		6F22C75D16A942970081A9A7 /* DynamicLocalization */ = {
@@ -1129,6 +1114,25 @@
 				6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		6F8CC0BF19DC2A8C003286F7 /* CoconutKit.staticframework */ = {
+			isa = PBXGroup;
+			children = (
+				6F8CC0C019DC2A8C003286F7 /* Bootstrap */,
+				6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */,
+				6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */,
+			);
+			name = CoconutKit.staticframework;
+			path = ../Binaries/CoconutKit.staticframework;
+			sourceTree = "<group>";
+		};
+		6F8CC0C019DC2A8C003286F7 /* Bootstrap */ = {
+			isa = PBXGroup;
+			children = (
+				6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */,
+			);
+			path = Bootstrap;
 			sourceTree = "<group>";
 		};
 		6F9C459214C5C30B00824AB2 /* Sources */ = {
@@ -1845,7 +1849,6 @@
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
 				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
-				6F159C3615A5B7B00020AFAC /* CoconutKit-resources.bundle in Resources */,
 				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */,
 				6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */,
@@ -1853,6 +1856,7 @@
 				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 				6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
+				6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */,
 				6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
@@ -2070,7 +2074,6 @@
 				6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
 				6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
-				6F159C3415A5B7B00020AFAC /* CoconutKit_bootstrap.m in Sources */,
 				6FF3E71715D37FB900AB9A53 /* CustomTransitions.m in Sources */,
 				6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */,
 				6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */,
@@ -2079,6 +2082,7 @@
 				6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
 				6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
+				6F8CC0C419DC2A8C003286F7 /* CoconutKit_bootstrap.m in Sources */,
 				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
@@ -2270,10 +2274,11 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk.staticframework\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit.staticframework\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2291,10 +2296,11 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit-trunk.staticframework\"";
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit.staticframework\"";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -2310,18 +2316,21 @@
 		};
 		6F159C2715A596590020AFAC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		6F159C2815A596590020AFAC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		6F2B30661929BD78003D4C2C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -2347,6 +2356,7 @@
 		};
 		6F2B30671929BD78003D4C2C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
@@ -2371,6 +2381,7 @@
 		};
 		6FCB4F1D1926651F00047AD3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -2389,6 +2400,7 @@
 		};
 		6FCB4F1E1926651F00047AD3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;

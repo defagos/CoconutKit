@@ -333,6 +333,7 @@
 		6F8C933A15CEE623006D892C /* HLSContainerGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerGroupView.m; sourceTree = "<group>"; };
 		6F8C934615CEF0DB006D892C /* HLSContainerStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStackView.h; sourceTree = "<group>"; };
 		6F8C934715CEF0DB006D892C /* HLSContainerStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSContainerStackView.m; sourceTree = "<group>"; };
+		6F8CC0A419DC29D1003286F7 /* version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		6F8D0975123F53F500FCF2AF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6F8D09A0123F545D00FCF2AF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6F954F6317CF4707001E5F67 /* HLSLogger+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSLogger+Friend.h"; sourceTree = "<group>"; };
@@ -559,6 +560,7 @@
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
+				6F8CC0A419DC29D1003286F7 /* version.xcconfig */,
 			);
 			indentWidth = 4;
 			name = CoconutKit;
@@ -1327,6 +1329,7 @@
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -1345,6 +1348,7 @@
 		};
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DSTROOT = /tmp/CoconutKit.dst;
@@ -1422,6 +1426,7 @@
 		};
 		6F159C6F15A5D7720020AFAC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				GCC_THUMB_SUPPORT = NO;
 			};
@@ -1429,6 +1434,7 @@
 		};
 		6F159C7015A5D7720020AFAC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				GCC_THUMB_SUPPORT = NO;
 			};
@@ -1436,6 +1442,7 @@
 		};
 		6FC5B77D1924EDC500660CDF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-resources/CoconutKit-resources-Info.plist";
@@ -1446,6 +1453,7 @@
 		};
 		6FC5B77E1924EDC500660CDF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-resources/CoconutKit-resources-Info.plist";
