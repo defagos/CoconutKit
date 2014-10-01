@@ -176,7 +176,7 @@ static NSArray *s_fontNames = nil;
 {
     NSString *text = [s_textExamples objectAtIndex:[self.textPickerView selectedRowInComponent:0]];
     NSString *fontName = [s_fontNames objectAtIndex:[self.fontPickerView selectedRowInComponent:0]];
-    UILineBreakMode lineBreakMode = [self.lineBreakModePickerView selectedRowInComponent:0];
+    NSLineBreakMode lineBreakMode = [self.lineBreakModePickerView selectedRowInComponent:0];
     UIBaselineAdjustment baselineAdjustment = [self.baselineAdjustmentSegmentedControl selectedSegmentIndex];
     
     self.label.font = [UIFont fontWithName:fontName size:self.fontSizeSlider.value];

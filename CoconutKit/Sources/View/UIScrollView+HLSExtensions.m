@@ -54,7 +54,7 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
 
 - (BOOL)isAvoidingKeyboard
 {
-    return objc_getAssociatedObject(self, s_avoidingKeyboardKey);
+    return [objc_getAssociatedObject(self, s_avoidingKeyboardKey) boolValue];
 }
 
 - (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
