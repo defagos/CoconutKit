@@ -228,6 +228,7 @@ The following lists all people who contributed to CoconutKit:
 * Removal of useless code and functionalities:
   * `HLSActionSheet` has been removed since `UIActionSheet` has been replaced by `UIAlertController`
   * Useless `HLSConverters` conversion methods
+* Changes to `HLSLabel` behavior
 * Improvement of the build process
 * Fixed CocoaPods specification file
 
