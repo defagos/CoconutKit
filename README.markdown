@@ -98,8 +98,6 @@ After CoconutKit has been added to your project, simply import its global public
 * If you are using CoconutKit binaries, use `#import <CoconutKit/CoconutKit.h>`
 * If you are using CocoaPods, use `#import "CoconutKit.h"`
 
-Some code snippets have been provided in the `Snippets` directory (and more will probably be added in the future), both for ARC and non-ARC projects. Add them to your favorite snippet manager to make working with CoconutKit classes even more easier!
-
 ### How can I learn using CoconutKit?
 
 To discover what CoconutKit can do, read the [project wiki](https://github.com/defagos/CoconutKit/wiki) and, once you want to learn more, have a look at header documentation. I try to keep documentation close to the code, that is why header documentation is rather extensive. All you need to know should be written there since I avoid detailed external documentation which often gets outdated. After you have read the documentation of a class, have a look at the demos and unit tests to see how the component is used in a concrete case.

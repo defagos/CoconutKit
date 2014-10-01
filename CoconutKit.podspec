@@ -1,38 +1,37 @@
 Pod::Spec.new do |s|
   s.name = 'CoconutKit'
-  s.version = '2.0.3'
+  s.version = '2.1'
   s.license = 'MIT'
   s.summary = 'CoconutKit is a library of high-quality iOS components.'
   s.homepage = 'https://github.com/defagos/CoconutKit'
   s.author = { 'Samuel Défago' => 'defagos@gmail.com' }
-  s.source = { :git => 'https://github.com/defagos/CoconutKit.git', :tag => '2.0.3' }
-  s.platform = :ios, '4.3'
+  s.source = { :git => 'https://github.com/defagos/CoconutKit.git', :tag => '2.1' }
+  s.social_media_url = 'http://twitter.com/defagos'
+  s.platform = :ios, '7.0'
   
-  s.description = 'CoconutKit is a library of high-quality iOS components written at my company and in my spare time. It includes several tools for dealing with view controllers, multi-threading, view animations, as well as some new controls and various utility classes. These components are meant to make the life of an iOS programmer easier by reducing the boilerplate code written every day, improving code quality and enforcing solid application architecture.'
+  s.description = <<-DESC
+                  CoconutKit is a library of high-quality iOS components, including:
+
+                  * Custom view controller containers
+                  * Declarative UIView and Core Animation-based animations
+                  * Language change at runtime
+                  * Localization in nib files without outlets
+                  * Core Data model management and validation made easy
+                  * Custom controls
+                  * ... and much more!
+                  DESC
   
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
   s.prefix_header_file = 'CoconutKit/CoconutKit-Prefix.pch'
   
-  s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'UIKit'
-  s.requires_arc = false
-  s.preserve_paths = 'CoconutKit/publicHeaders.txt'
-  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/Resources/{Images,Nibs}/*', 'CoconutKit-resources/Resources/*.lproj/*'] }
-  
-  s.prefix_header_contents = <<-EOS
-#ifdef __OBJC__
-  #import "CoconutKit.h"
-#endif
-EOS
-  
-  s.pre_install do |pod, target_definition|
-    Dir.chdir File.join(pod.root, 'CoconutKit') do
-      public_headers = File.read('publicHeaders.txt').split("\n")
-      File.open('Sources/CoconutKit.h', 'w') do |file|
-        file.puts File.read('CoconutKit-Prefix.pch')
-        public_headers.each { |h| file.puts "#import <CoconutKit/#{h}>" }
-      end
-      public_headers << 'CoconutKit.h'
-      s.public_header_files = public_headers.map { |f| File.join('**', f) }
-    end
-  end
+  s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit'
+  s.requires_arc = true
+
+  # Process the publicHeaders.txt file listing public headers to generate a public header directory as well as a global header file
+  s.preserve_paths = 'CoconutKit/publicHeaders.txt'  
+  s.prepare_command = 'ruby Tools/Scripts/generate_public_headers.rb'
+  s.public_header_files = 'Tools/Scripts/GeneratedHeaders/*.h'
+
+  # Do not use CoconutKit-resources target, use CocoaPods native bundle creation mechanism
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{Images,Nibs}/*', 'CoconutKit-resources/*.lproj/*'] }
 end
