@@ -3,9 +3,8 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 19.11.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
-
 
 /**
  * Writing Core Data validations is cumbersome, error-prone and ultimately painful. Though the initial idea 

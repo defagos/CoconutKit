@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/10/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 @interface CoconutKit_demoApplication : NSObject <
@@ -11,11 +11,8 @@
     UIActionSheetDelegate,
     UINavigationControllerDelegate,
     UISplitViewControllerDelegate,
-    UITabBarControllerDelegate> {
-@private
-    UIViewController *m_rootViewController;
-    HLSActionSheet *m_languageActionSheet;
-}
+    UITabBarControllerDelegate
+>
 
 - (UIViewController *)rootViewController;
 

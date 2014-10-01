@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.03.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -25,22 +25,18 @@
  * classes, accessed from a single thread). In other cases, consider using Mike Ash implementation
  * found at https://github.com/mikeash/MAZeroingWeakRef or ARC zeroing weak references.
  */
-@interface HLSZeroingWeakRef : NSObject {
-@private
-    id m_object;
-    NSMutableArray *m_invocations;
-}
+@interface HLSZeroingWeakRef : NSObject
 
 /**
  * Initialize a weak reference to an Objective-C object (throws an exception if object is a toll-free
  * bridged object)
  */
-- (id)initWithObject:(id)object;
+- (instancetype)initWithObject:(id)object NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return the current object if it is still alive, or nil if the reference has been zeroed
  */
-@property (nonatomic, readonly, assign) id object;
+@property (nonatomic, readonly, weak) id object;
 
 /**
  * Optional invocations to be performed just before the weak reference is zeroed. The actions / invocations 

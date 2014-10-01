@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 11/3/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 // Formatting functions
@@ -20,15 +20,6 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
  * Return NO if the string is empty or only made of whitespaces
  */
 - (BOOL)isFilled;
-
-/**
- * Given a font, return the largest font size (smaller than font.pointSize and larger than a given minimum size) so that
- * the receiver fits within a given area on a maximum number of lines.
- */
-- (CGFloat)fontSizeWithFont:(UIFont *)font 
-          constrainedToSize:(CGSize)size 
-                minFontSize:(CGFloat)minFontSize
-              numberOfLines:(NSUInteger)numberOfLines;
 
 /**
  * URL encoded (aka percent encoded) string with RFC 3986 compliance
@@ -77,7 +68,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
 - (NSString *)sha512hash;
 
 /**
- * At Hortis, we use a convenient way to identify versions during development, for tags and for official releases:
+ * Here is a convenient way to identify versions during development, for tags and for official releases:
  *   - For all versions except AppStore releases:         [lastVersionNumber+]versionNumber[+qualifier]
  *   - For AppStore releases:                             versionNumber
  * where:
@@ -114,5 +105,10 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
  *   1.0+test
  */
 - (NSString *)friendlyVersionNumber;
+
+/**
+ * Guess the MIME type from the path extension
+ */
+- (NSString *)MIMEType;
 
 @end

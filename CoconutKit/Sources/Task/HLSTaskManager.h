@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/18/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTask.h"
@@ -26,27 +26,20 @@
  *
  * This object is not thread-safe. All operations on it must stem from the same thread, otherwise the behavior is 
  * undefined.
- *
- * Designated initializer: -init
  */
-@interface HLSTaskManager : NSObject {
-@private
-    NSOperationQueue *_operationQueue;                   // Manages the separate threads used for task processing
-    NSMutableSet *_tasks;                                // Keep a strong ref to task groups so that they stay alive
-    NSMutableSet *_taskGroups;                           // Keep a strong ref to task groups so that they stay alive
-    NSMutableDictionary *_taskToOperationMap;            // Maps a task to the associated HLSTaskOperation object
-    NSMutableDictionary *_taskToDelegateMap;             // Maps a task to the associated id<HLSTaskDelegate> object
-    NSMutableDictionary *_delegateToTasksMap;            // Maps some object id to the NSMutableSet of all HLSTask objects it is the delegate of
-    NSMutableDictionary *_taskGroupToDelegateMap;        // Maps a task group to the associated id<HLSTaskGroupDelegate> object
-    NSMutableDictionary *_delegateToTaskGroupsMap;       // Maps some object id to the NSMutableSet of all HLSTaskGroup objects it is the delegate of
-}
+@interface HLSTaskManager : NSObject
 
 /**
  * Returns the default singleton instance. In general this instance should suffice. If you need more task manager
  * instances (in a multi-threaded code, you might e.g. want to assign separate managers to separate threads), you can 
  * create those manually.
  */
-+ (HLSTaskManager *)defaultManager;
++ (instancetype)defaultManager;
+
+/**
+ * Create a task manager
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Change the number of tasks processed simultaneously. Default is 4. This setting does not affect already running

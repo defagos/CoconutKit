@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 29.05.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "NSURLRequest+HLSExtensions.h"
@@ -21,9 +21,9 @@ static id swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp(NSU
 
 + (void)load
 {
-    s_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp = (id (*)(id, SEL, id, NSURLRequestCachePolicy, NSTimeInterval))HLSSwizzleSelector(self, 
-                                                                                                                                                   @selector(initWithURL:cachePolicy:timeoutInterval:),
-                                                                                                                                                   (IMP)swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp);
+    s_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp = (id (*)(id, SEL, id, NSURLRequestCachePolicy, NSTimeInterval))hls_class_swizzleSelector(self,
+                                                                                                                                                          @selector(initWithURL:cachePolicy:timeoutInterval:),
+                                                                                                                                                          (IMP)swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp);
 }
 
 @end
@@ -35,7 +35,7 @@ static id swizzled_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp(NSU
     // Warns about unimplemented NSURLRequest cache policies. See http://blackpixel.com/blog/1659/caching-and-nsurlconnection/
     self = (*s_NSURLRequest__initWithURL_cachePolicy_timeoutInterval_Imp)(self, _cmd, url, cachePolicy, timeoutInterval);
     if (self.cachePolicy != cachePolicy) {
-        HLSLoggerWarn(@"The cache policy %d is not yet implemented and has been replaced with the cache policy %d", cachePolicy, self.cachePolicy);
+        HLSLoggerWarn(@"The cache policy %lu is not yet implemented and has been replaced with the cache policy %lu", (unsigned long)cachePolicy, (unsigned long)self.cachePolicy);
     }
     return self;
 }

@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/21/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAnimationStep.h"
@@ -17,20 +17,13 @@
  *
  * To create a layer animation step, simply instantiate it using the +animationStep class method, then add layer animations
  * to it, and set its duration and curve
- *
- * Designated initializer: -init (create an animation step with default settings)
  */
-@interface HLSLayerAnimationStep : HLSAnimationStep {
-@private
-    CAMediaTimingFunction *m_timingFunction;
-    UIView *m_dummyView;
-    NSUInteger m_numberOfLayerAnimations;
-    BOOL m_numberOfStartedLayerAnimations;
-    NSUInteger m_numberOfFinishedLayerAnimations;
-    CFTimeInterval m_startTime;
-    CFTimeInterval m_pauseTime;
-    CFTimeInterval m_previousPauseDuration;
-}
+@interface HLSLayerAnimationStep : HLSAnimationStep
+
+/**
+ * Create an animation step with default settings
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Setting a layer animation for a layer. Only one layer animation can be defined at most for a layer within an
@@ -50,6 +43,6 @@
  *
  * Default value is the function corresponding to the kCAMediaTimingFunctionEaseInEaseOut constant
  */
-@property (nonatomic, retain) CAMediaTimingFunction *timingFunction;
+@property (nonatomic, strong) CAMediaTimingFunction *timingFunction;
 
 @end

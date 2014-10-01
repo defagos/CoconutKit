@@ -3,7 +3,7 @@
 //  CoconutKit-dev
 //
 //  Created by Samuel Défago on 24.01.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "UIActionSheet+HLSExtensions.h"
@@ -35,24 +35,24 @@ static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(U
 
 + (void)load
 {
-    s_UIActionSheet__showFromToolbar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                     @selector(showFromToolbar:), 
-                                                                                     (IMP)swizzled_UIActionSheet__showFromToolbar_Imp);
-    s_UIActionSheet__showFromTabBar_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                    @selector(showFromTabBar:), 
-                                                                                    (IMP)swizzled_UIActionSheet__showFromTabBar_Imp);
-    s_UIActionSheet__showFromBarButtonItem_animated_Imp = (void (*)(id, SEL, id, BOOL))HLSSwizzleSelector(self, 
-                                                                                                          @selector(showFromBarButtonItem:animated:), 
-                                                                                                          (IMP)swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp);
-    s_UIActionSheet__showFromRect_inView_animated_Imp = (void (*)(id, SEL, CGRect, id, BOOL))HLSSwizzleSelector(self,
-                                                                                                                @selector(showFromRect:inView:animated:), 
-                                                                                                                (IMP)swizzled_UIActionSheet__showFromRect_inView_animated_Imp);
-    s_UIActionSheet__showInView_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                                @selector(showInView:), 
-                                                                                (IMP)swizzled_UIActionSheet__showInView_Imp);
-    s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp = (void (*)(id, SEL, NSInteger, BOOL))HLSSwizzleSelector(self,
-                                                                                                                         @selector(dismissWithClickedButtonIndex:animated:), 
-                                                                                                                         (IMP)swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp);
+    s_UIActionSheet__showFromToolbar_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
+                                                                                            @selector(showFromToolbar:),
+                                                                                            (IMP)swizzled_UIActionSheet__showFromToolbar_Imp);
+    s_UIActionSheet__showFromTabBar_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
+                                                                                           @selector(showFromTabBar:),
+                                                                                           (IMP)swizzled_UIActionSheet__showFromTabBar_Imp);
+    s_UIActionSheet__showFromBarButtonItem_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzleSelector(self,
+                                                                                                                 @selector(showFromBarButtonItem:animated:),
+                                                                                                                 (IMP)swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp);
+    s_UIActionSheet__showFromRect_inView_animated_Imp = (void (*)(id, SEL, CGRect, id, BOOL))hls_class_swizzleSelector(self,
+                                                                                                                       @selector(showFromRect:inView:animated:),
+                                                                                                                       (IMP)swizzled_UIActionSheet__showFromRect_inView_animated_Imp);
+    s_UIActionSheet__showInView_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
+                                                                                       @selector(showInView:),
+                                                                                       (IMP)swizzled_UIActionSheet__showInView_Imp);
+    s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp = (void (*)(id, SEL, NSInteger, BOOL))hls_class_swizzleSelector(self,
+                                                                                                                                @selector(dismissWithClickedButtonIndex:animated:),
+                                                                                                                                (IMP)swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp);
 }
 
 #pragma mark Accessors and mutators

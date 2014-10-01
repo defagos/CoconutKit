@@ -3,42 +3,25 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 10/29/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "RootSplitViewDemoController.h"
 
 #import "MemoryWarningTestCoverViewController.h"
 
+@interface RootSplitViewDemoController ()
+
+@property (nonatomic, weak) IBOutlet UISwitch *portraitSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *landscapeRightSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *landscapeLeftSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *portraitUpsideDownSwitch;
+@property (nonatomic, weak) IBOutlet UIView *autorotationBackgroundView;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
+
+@end
+
 @implementation RootSplitViewDemoController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.portraitSwitch = nil;
-    self.landscapeRightSwitch = nil;
-    self.landscapeLeftSwitch = nil;
-    self.portraitUpsideDownSwitch = nil;
-    self.autorotationBackgroundView = nil;
-    self.autorotationModeSegmentedControl = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize portraitSwitch = m_portraitSwitch;
-
-@synthesize landscapeRightSwitch = m_landscapeRightSwitch;
-
-@synthesize landscapeLeftSwitch = m_landscapeLeftSwitch;
-
-@synthesize portraitUpsideDownSwitch = m_portraitUpsideDownSwitch;
-
-@synthesize autorotationBackgroundView = m_autorotationBackgroundView;
-
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 
@@ -202,18 +185,18 @@
     
     self.title = @"RootSplitViewDemoController";
     
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", @"Container") forSegmentAtIndex:0];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", @"No children") forSegmentAtIndex:1];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", @"Visible") forSegmentAtIndex:2];
-    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", @"All") forSegmentAtIndex:3];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Visible", nil) forSegmentAtIndex:2];
+    [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:3];
 }
 
 #pragma mark Action callbacks
 
 - (IBAction)hideWithModal:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[MemoryWarningTestCoverViewController alloc] init];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 - (IBAction)changeAutorotationMode:(id)sender

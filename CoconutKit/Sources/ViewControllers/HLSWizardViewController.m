@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10/8/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSWizardViewController.h"
@@ -17,25 +17,19 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 
-- (void)hlsWizardViewControllerInit;
-
 @property (nonatomic, assign) NSInteger currentPage;
-
-- (void)refreshWizardInterface;
-
-- (BOOL)validatePage:(NSInteger)page;
-
-- (void)previousPage:(id)sender;
-- (void)nextPage:(id)sender;
-- (void)done:(id)sender;
 
 @end
 
-@implementation HLSWizardViewController
+@implementation HLSWizardViewController {
+@private
+    HLSWizardTransitionStyle _wizardTransitionStyle;
+    NSInteger _currentPage;
+}
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         [self hlsWizardViewControllerInit];
@@ -43,7 +37,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
         [self hlsWizardViewControllerInit];
@@ -54,24 +48,8 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 // Common initialization code
 - (void)hlsWizardViewControllerInit
 {
-    m_currentPage = kWizardViewControllerNoPage;
-    m_wizardTransitionStyle = HLSWizardTransitionStyleNone;
-}
-
-- (void)dealloc
-{
-    self.viewControllers = nil;
-    self.delegate = nil;
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.previousButton = nil;
-    self.nextButton = nil;
-    self.doneButton = nil;
+    _currentPage = kWizardViewControllerNoPage;
+    _wizardTransitionStyle = HLSWizardTransitionStyleNone;
 }
 
 #pragma mark View lifecycle management
@@ -95,57 +73,41 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 #pragma mark Accessors and mutators
 
-@synthesize previousButton = m_previousButton;
-
-@synthesize nextButton = m_nextButton;
-
-@synthesize doneButton = m_doneButton;
-
-@synthesize viewControllers = m_viewControllers;
-
 - (void)setViewControllers:(NSArray *)viewControllers
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(viewControllers, UIViewController);
     
-    // Check for self-assignment
-    if (m_viewControllers == viewControllers) {
+    if (_viewControllers == viewControllers) {
         return;
     }
     
-    // Update the value
-    [m_viewControllers release];
-    m_viewControllers = [viewControllers retain];
+    _viewControllers = viewControllers;
     
     // Start with the first page
-    if ([m_viewControllers count] > 0) {
+    if ([_viewControllers count] > 0) {
         self.currentPage = 0;   
     }    
 }
 
-@synthesize wizardTransitionStyle = m_wizardTransitionStyle;
-
-@synthesize currentPage = m_currentPage;
-
 - (void)setCurrentPage:(NSInteger)currentPage
 {
-    // If no change, nothing to do
-    if (currentPage == m_currentPage) {
+    if (currentPage == _currentPage) {
         return;
     }
     
     // Update the value and refresh the UI accordingly
-    NSInteger oldCurrentPage = m_currentPage;
-    m_currentPage = currentPage;
+    NSInteger oldCurrentPage = _currentPage;
+    _currentPage = currentPage;
     [self refreshWizardInterface];
     
     // If no page selected, done
-    if (m_currentPage == kWizardViewControllerNoPage) {
+    if (_currentPage == kWizardViewControllerNoPage) {
         return;
     }
     
     // Sanitize input
     if (currentPage < 0 || currentPage >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", currentPage, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)currentPage, (unsigned long)[self.viewControllers count]);
         return;
     }
     
@@ -163,7 +125,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
         }
             
         case HLSWizardTransitionStylePushHorizontally: {
-            if (m_currentPage > oldCurrentPage) {
+            if (_currentPage > oldCurrentPage) {
                 transitionClass = [HLSTransitionPushFromRight class];
             }
             else {
@@ -180,7 +142,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Display the current page
-    UIViewController *viewController = [self.viewControllers objectAtIndex:m_currentPage];
+    UIViewController *viewController = [self.viewControllers objectAtIndex:_currentPage];
     [self setInsetViewController:viewController atIndex:0 withTransitionClass:transitionClass];
 }
 
@@ -200,7 +162,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     
     // Sanitize input
     if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", self.currentPage, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)self.currentPage, (unsigned long)[self.viewControllers count]);
         return;
     }
     
@@ -235,7 +197,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 {
     // Sanitize input (deals with the "no page" case)
     if (page < 0 || page >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)page, (unsigned long)[self.viewControllers count]);
         return YES;
     }
     
@@ -254,7 +216,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 {
     // Sanitize input
     if (page < 0 || page >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %d, must lie between 0 and %d", page, [self.viewControllers count]);
+        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)page, (unsigned long)[self.viewControllers count]);
         return;
     }
     

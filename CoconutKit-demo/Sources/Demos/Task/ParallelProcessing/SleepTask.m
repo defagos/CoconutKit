@@ -3,21 +3,24 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/12/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "SleepTask.h"
 
 #import "SleepTaskOperation.h"
 
-@implementation SleepTask
+@implementation SleepTask {
+@private
+    NSUInteger _secondsToSleep;
+}
 
 #pragma mark Object creation and destruction
 
-- (id)initWithSecondsToSleep:(NSUInteger)secondsToSleep
+- (instancetype)initWithSecondsToSleep:(NSUInteger)secondsToSleep
 {
     if ((self = [super init])) {
-        m_secondsToSleep = secondsToSleep;
+        _secondsToSleep = secondsToSleep;
     }
     return self;
 }
@@ -31,7 +34,7 @@
 
 - (NSUInteger)secondsToSleep
 {
-    return m_secondsToSleep;
+    return _secondsToSleep;
 }
 
 @end

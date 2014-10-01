@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 04.07.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 @interface NSDictionary (HLSExtensions)
@@ -11,17 +11,25 @@
 /**
  * Return the receiver, to which object has been set for key
  */
-- (id)dictionaryBySettingObject:(id)object forKey:(id)key;
+- (NSDictionary *)dictionaryBySettingObject:(id)object forKey:(id)key;
 
 /**
  * Return the receiver without the object designated by key
  */
-- (id)dictionaryByRemovingObjectForKey:(id)key;
+- (NSDictionary *)dictionaryByRemovingObjectForKey:(id)key;
 
 /**
  * Return the receiver without the objects designated by the keys and the array
  */
-- (id)dictionaryByRemovingObjectsForKeys:(NSArray *)keyArray;
+- (NSDictionary *)dictionaryByRemovingObjectsForKeys:(NSArray *)keyArray;
+
+/**
+ * Return the receiver, but merged with the dictionary returned by [[NSProcessInfo processInfo] environment]. This 
+ * method can only be used for dictionaries whose keys are strings
+ *
+ * Can be very handy to provide default plist value overriding via environment variables, for example
+ */
+- (NSDictionary *)dictionaryOverriddenWithEnvironment;
 
 @end
 

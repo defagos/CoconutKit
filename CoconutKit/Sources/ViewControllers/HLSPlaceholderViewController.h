@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10/8/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSContainerStack.h"
@@ -52,7 +52,7 @@
  * in subclasses and inset view controllers (it will be ignored, see UIViewController documentation). The 2-step
  * rotation is deprecated starting with iOS 5, you should not use it anymore anyway.
  *
- * You can also use placeholder view controllers with storyboards (a feature available since iOS 5);
+ * You can also use placeholder view controllers with storyboards:
  *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
  *     subviews which you connect to the placeholderViews outlet collection. This defines where inset view controllers
  *     will be drawn
@@ -73,15 +73,6 @@
  *     the source inset view controller belongs to
  * For further information, refer to the documentation of HLSPlaceholderInsetSegue.
  *
- * The following iOS 5 methods can also be implemented by child view controllers, even on iOS 4:
- *     -willMoveToParentViewController:
- *     -didMoveToParentViewController:
- * Implementations should call the super implementation first. Moreover, the following methods are also available
- * for child view controllers, even on iOS 4:
- *     -isMovingToParentViewController
- *     -isMovingFromParentViewController
- * Refer to the documentation of those methods for more information.
- *
  * About view controller's view reuse:
  * A view controller is retained when set as inset, and released when removed. If no other object keeps a strong reference 
  * to it, it will get deallocated, and so will its view. This is perfectly fine in general since it contributes to saving 
@@ -92,17 +83,8 @@
  * If those view controllers bear heavy views, you do not want to have them destroyed when you switch view controllers, 
  * since this would make navigating between tabs slow. In such cases, it makes sense to keep strong references to
  * those view controllers elsewhere (most probably as additional ivars of your placeholder view controller subclass)
- *
- * Designated initializer: -initWithNibName:bundle:
  */
-@interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate> {
-@private
-    NSMutableArray *m_containerStacks;
-    NSArray *m_placeholderViews;                            // Views onto which the inset views are drawn
-    HLSAutorotationMode m_autorotationMode;
-    id<HLSPlaceholderViewControllerDelegate> m_delegate;
-    BOOL m_loadedOnce;
-}
+@interface HLSPlaceholderViewController : HLSViewController <HLSContainerStackDelegate>
 
 /**
  * Set a view controller to display as inset on the placeholder view corresponding to the given index. The transition 
@@ -145,11 +127,10 @@
  * -loadView method or bound to a UIView using Interface Builder. You cannot change the number of placeholder views 
  * once the placeholder view controller has been displayed once.
  *
- * The order of the outlets in an IBOutletCollection is unreliable (it is sadly not the order in which they are bound
- * in the nib). Though this issue seems to affect only storyboards on iOS 5 and 6, the placeholderViews property expects 
- * you to index placeholder views using the UIView tag property, and will sort them in increasing order
+ * The order of the placeholder views in the IBOutletCollection is the one in which they are bound in the corresponding
+ * nib or storyboard file
  */
-@property (nonatomic, retain) IBOutletCollection(UIView) NSArray *placeholderViews;
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *placeholderViews;
 
 /**
  * Return the placeholder view at the given index, or nil if none
@@ -178,7 +159,7 @@
 /**
  * The placeholder view controller delegate
  */
-@property (nonatomic, assign) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 
 @end
 
@@ -224,6 +205,6 @@
 /**
  * Return the placeholder view controller a view controller is inserted in, or nil if none
  */
-@property (nonatomic, readonly, assign) HLSPlaceholderViewController *placeholderViewController;
+@property (nonatomic, readonly, weak) HLSPlaceholderViewController *placeholderViewController;
 
 @end

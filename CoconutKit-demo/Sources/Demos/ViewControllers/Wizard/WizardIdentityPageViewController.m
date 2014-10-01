@@ -3,21 +3,29 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/28/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "WizardIdentityPageViewController.h"
 
-#import "Person.h"
+#import "PersonInformation.h"
 
 @interface WizardIdentityPageViewController ()
 
-@property (nonatomic, retain) Person *person;
-@property (nonatomic, retain) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) PersonInformation *personInformation;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
-- (void)reloadData;
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField;
+@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
+@property (nonatomic, weak) IBOutlet UILabel *firstNameErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
+@property (nonatomic, weak) IBOutlet UILabel *lastNameErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic, weak) IBOutlet UILabel *emailErrorLabel;
+@property (nonatomic, weak) IBOutlet UILabel *birthdateLabel;
+@property (nonatomic, weak) IBOutlet UITextField *birthdateTextField;
+@property (nonatomic, weak) IBOutlet UILabel *birthdateErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *nbrChildrenTextField;
+@property (nonatomic, weak) IBOutlet UILabel *nbrChildrenErrorLabel;
 
 @end
 
@@ -25,83 +33,31 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         // Only one person in the DB. If does not exist yet, create it
-        Person *person = [[Person allObjects] firstObject_hls];
-        if (! person) {
-            person = [Person insert];
+        PersonInformation *personInformation = [[PersonInformation allObjects] firstObject];
+        if (! personInformation) {
+            personInformation = [PersonInformation insert];
         }
-        self.person = person;
+        self.personInformation = personInformation;
     }
     return self;
 }
 
-- (void)dealloc
-{
-    self.person = nil;
-    self.dateFormatter = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.firstNameTextField = nil;
-    self.firstNameErrorLabel = nil;
-    self.lastNameTextField = nil;
-    self.lastNameErrorLabel = nil;
-    self.emailTextField = nil;
-    self.emailErrorLabel = nil;
-    self.birthdateLabel = nil;
-    self.birthdateTextField = nil;
-    self.birthdateErrorLabel = nil;
-    self.nbrChildrenTextField = nil;
-    self.nbrChildrenErrorLabel = nil;
-}
-
 #pragma mark Accessors and mutators
 
-@synthesize person = m_person;
-
-- (void)setPerson:(Person *)person
+- (void)setPersonInformation:(PersonInformation *)personInformation
 {
-    if (m_person == person) {
+    if (_personInformation == personInformation) {
         return;
     }
     
-    [m_person release];
-    m_person = [person retain];
+    _personInformation = personInformation;
     
     [self reloadData];
 }
-
-@synthesize firstNameTextField = m_firstNameTextField;
-
-@synthesize firstNameErrorLabel = m_firstNameErrorLabel;
-
-@synthesize lastNameTextField = m_lastNameTextField;
-
-@synthesize lastNameErrorLabel = m_lastNameErrorLabel;
-
-@synthesize emailTextField = m_emailTextField;
-
-@synthesize emailErrorLabel = m_emailErrorLabel;
-
-@synthesize birthdateLabel = m_birthdateLabel;
-
-@synthesize birthdateTextField = m_birthdateTextField;
-
-@synthesize birthdateErrorLabel = m_birthdateErrorLabel;
-
-@synthesize nbrChildrenTextField = m_nbrChildrenTextField;
-
-@synthesize nbrChildrenErrorLabel = m_nbrChildrenErrorLabel;
-
-@synthesize dateFormatter = m_dateFormatter;
 
 #pragma mark View lifecycle
 
@@ -124,12 +80,12 @@
 {
     [super localize];
     
-    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", @"Birthdate"), NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // The date formatter is also localized!
     // TODO: Does not work yet. Try to switch languages!
-    self.dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", @"yyyy/MM/dd")];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // Trigger a new validation to get localized error messages if any
     [self checkTextFields];
@@ -172,7 +128,7 @@
     textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     
     UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = NSLocalizedString(@"Formatting error", @"Formatting error");
+    errorLabel.text = NSLocalizedString(@"Formatting error", nil);
 }
 
 - (void)textFieldDidPassValidation:(UITextField *)textField
@@ -196,31 +152,32 @@
 - (void)reloadData
 {
     static NSNumberFormatter *s_numberFormatter = nil;
-    if (! s_numberFormatter) {
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
         [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         [s_numberFormatter setAllowsFloats:NO];
-    }
+    });
     
-    [self.firstNameTextField bindToManagedObject:self.person
+    [self.firstNameTextField bindToManagedObject:self.personInformation
                                        fieldName:@"firstName"
                                        formatter:nil
                               validationDelegate:self];
-    [self.lastNameTextField bindToManagedObject:self.person
+    [self.lastNameTextField bindToManagedObject:self.personInformation
                                       fieldName:@"lastName"
                                       formatter:nil
                              validationDelegate:self];
-    [self.emailTextField bindToManagedObject:self.person
+    [self.emailTextField bindToManagedObject:self.personInformation
                                    fieldName:@"email"
                                    formatter:nil
                           validationDelegate:self];
     [self.emailTextField setCheckingOnChange:YES];
-    [self.birthdateTextField bindToManagedObject:self.person
+    [self.birthdateTextField bindToManagedObject:self.personInformation
                                        fieldName:@"birthdate"
                                        formatter:self.dateFormatter
                               validationDelegate:self];
     [self.birthdateTextField setCheckingOnChange:YES];
-    [self.nbrChildrenTextField bindToManagedObject:self.person
+    [self.nbrChildrenTextField bindToManagedObject:self.personInformation
                                          fieldName:@"nbrChildren"
                                          formatter:s_numberFormatter
                                 validationDelegate:self];
@@ -260,13 +217,13 @@
 - (IBAction)resetModel:(id)sender
 {
     // Reset the model programmatically. This shows that the text fields are updated accordingly
-    self.person.firstName = nil;
-    self.person.lastName = nil;
-    self.person.firstName = nil;
-    self.person.lastName = nil;
-    self.person.email = nil;
-    self.person.birthdate = nil;
-    self.person.nbrChildrenValue = 0;
+    self.personInformation.firstName = nil;
+    self.personInformation.lastName = nil;
+    self.personInformation.firstName = nil;
+    self.personInformation.lastName = nil;
+    self.personInformation.email = nil;
+    self.personInformation.birthdate = nil;
+    self.personInformation.nbrChildrenValue = 0;
 }
 
 - (IBAction)resetTextFields:(id)sender

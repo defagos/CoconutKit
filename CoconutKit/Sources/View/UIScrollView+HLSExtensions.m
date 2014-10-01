@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 20.02.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "UIScrollView+HLSExtensions.h"
@@ -12,6 +12,7 @@
 #import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "UIView+HLSExtensions.h"
 #import <objc/runtime.h>
 
 /**
@@ -24,15 +25,22 @@
  *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
  */
 
+// FIXME: There is a bug with keyboard undocking in iOS 8 (the UIKeyboardWillHideNotification is not sent correctly
+//        when the keyboard is undocked). See http://openradar.appspot.com/18010127. This will hopefully be fixed
+
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
+static void *s_avoidingKeyboardKey = &s_avoidingKeyboardKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
 
 // Swizzled method implementations
 static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
+
+static NSArray *s_adjustedScrollViews = nil;
+static NSDictionary *s_scrollViewOriginalHeights = nil;
 
 @interface UIScrollView (HLSExtensionsPrivate)
 
@@ -41,6 +49,18 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
 @end
 
 @implementation UIScrollView (HLSExtensions)
+
+#pragma mark Accessors and mutators
+
+- (BOOL)isAvoidingKeyboard
+{
+    return [objc_getAssociatedObject(self, s_avoidingKeyboardKey) boolValue];
+}
+
+- (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
+{
+    objc_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 #pragma mark Synchronizing scroll views
 
@@ -59,7 +79,7 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     }
     
     objc_setAssociatedObject(self, s_synchronizedScrollViewsKey, scrollViews, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(self, s_parallaxBouncesKey, [NSNumber numberWithBool:bounces], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, s_parallaxBouncesKey, @(bounces), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)removeSynchronization
@@ -76,9 +96,9 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
 
 + (void)load
 {
-    s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))HLSSwizzleSelector(self, 
-                                                                                          @selector(setContentOffset:), 
-                                                                                          (IMP)swizzled_UIScrollView__setContentOffset_Imp);
+    s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))hls_class_swizzleSelector(self,
+                                                                                                 @selector(setContentOffset:),
+                                                                                                 (IMP)swizzled_UIScrollView__setContentOffset_Imp);
 }
 
 #pragma mark Scrolling synchronization
@@ -134,7 +154,141 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     }
 }
 
+#pragma mark Collecting scroll views which avoid the keyboard
+
++ (NSArray *)keyboardAvoidingScrollViewsInView:(UIView *)view
+{
+    if ([view isKindOfClass:[UIScrollView class]]) {
+        UIScrollView *scrollView = (UIScrollView *)view;
+        
+        // Do not go further when we have found a scroll view which avoids the keyboard. Any scroll view within
+        // it with the same property does not need to be adjusted
+        if (scrollView.avoidingKeyboard) {
+            return @[scrollView];
+        }
+    }
+    
+    NSMutableArray *keyboardAvoidingScrollViews = [NSMutableArray array];
+    for (UIView *subview in view.subviews) {
+        [keyboardAvoidingScrollViews addObjectsFromArray:[self keyboardAvoidingScrollViewsInView:subview]];
+    }
+    return [NSArray arrayWithArray:keyboardAvoidingScrollViews];
+}
+
+#pragma mark Notification callbacks
+
++ (void)keyboardWillShow:(NSNotification *)notification
+{
+    UIView *rootView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+    NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:rootView];
+    
+    CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    BOOL animated = ! doubleeq(keyboardAnimationDuration, 0.);
+    
+    NSMutableArray *adjustedScrollViews = [NSMutableArray array];
+    NSMutableDictionary *scrollViewOriginalHeights = [NSMutableDictionary dictionary];
+    
+    // We animate the transition when showing the keyboard (but not when hiding it: Hiding it can occur by docking the keyboard,
+    // which is can occur instantaneously, but with a reported animation duration of 0.25). The animation is made at the end of
+    // the keyboard animation to get a perfect behavior in all cases
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:animated ? 0.4 : 0.];
+    [UIView setAnimationDelay:keyboardAnimationDuration];
+    
+    // Not all scroll views avoiding the keyboard need to be adjusted (depending on where they are located on
+    // screen). Frames will be adjusted after the keyboard has been displayed for a perfect result, but we
+    // need to trigger content offset animation earler (this is why we need to calculate adjustments earlier)
+    for (UIScrollView *scrollView in keyboardAvoidingScrollViews) {
+        CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardEndFrameInWindow fromView:nil];
+        
+        // Calculate the required vertical adjustment
+        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView)
+            + scrollView.contentOffset.y;
+        
+        // For scroll views which have not been adjusted yet, first check that the scroll view is neither completely
+        // covered by the keyboard, nor completely visible (in which case no adjustment is required)
+        if (! [s_adjustedScrollViews containsObject:scrollView]
+                && (floatlt(keyboardHeightAdjustment, 0.f) || floatgt(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame)))) {
+            continue;
+        }
+        
+        // Store the original scroll view height once, namely when a scroll view first needs to be resized
+        NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
+        NSNumber *scrollViewOriginalHeight = [s_scrollViewOriginalHeights objectForKey:pointerKey] ?: @(CGRectGetHeight(scrollView.frame));
+        [scrollViewOriginalHeights setObject:scrollViewOriginalHeight forKey:pointerKey];
+        
+        // Prevent the scroll view from growing larger than its original size, or smaller than zero
+        keyboardHeightAdjustment = floatmin(floatmax(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame) - [scrollViewOriginalHeight floatValue]),
+                                            CGRectGetHeight(scrollView.frame));
+                
+        // Adjust the scroll view frame so that it does not get covered by the keyboard
+        scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
+                                      CGRectGetMinY(scrollView.frame),
+                                      CGRectGetWidth(scrollView.frame),
+                                      CGRectGetHeight(scrollView.frame) - keyboardHeightAdjustment);
+        [adjustedScrollViews addObject:scrollView];
+    }
+    
+    [UIView commitAnimations];
+    
+    s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
+    s_scrollViewOriginalHeights = [NSDictionary dictionaryWithDictionary:scrollViewOriginalHeights];
+}
+
++ (void)keyboardDidShow:(NSNotification *)notification
+{
+    for (UIScrollView *scrollView in s_adjustedScrollViews) {
+        // Find if the first responder is contained within the scroll view
+        UIView *firstResponderView = [scrollView firstResponderView];
+        if (! firstResponderView) {
+            continue;
+        }
+        
+        // If the first responder is not visible, change the offset to make it visible. Not made in -willShow since result not convincing
+        // enough if frame and content offset are changed at the same time
+        CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
+        [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:YES];
+    }
+}
+
++ (void)keyboardWillHide:(NSNotification *)notification
+{
+    for (UIScrollView *scrollView in s_adjustedScrollViews) {
+        NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
+        CGFloat scrollViewOriginalHeight = [[s_scrollViewOriginalHeights objectForKey:pointerKey] floatValue];
+        scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
+                                      CGRectGetMinY(scrollView.frame),
+                                      CGRectGetWidth(scrollView.frame),
+                                      scrollViewOriginalHeight);
+    }
+    
+    s_adjustedScrollViews = nil;
+    s_scrollViewOriginalHeights = nil;
+}
+
 @end
+
+#pragma mark Global notification registration
+
+__attribute__ ((constructor)) static void HLSTextFieldInit(void)
+{
+    // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
+    // willShow and didShow in sequence. When an inpuView has been set (replacing the keyboard), the willShow and didShow
+    // events are also received when the input view associated with the responder getting the focus must be changed
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
 
 #pragma mark Swizzled method implementations
 

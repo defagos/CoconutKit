@@ -3,14 +3,11 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 20.06.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
-@interface CursorCustomPointerView : HLSNibView {
-@private
-    UILabel *m_valueLabel;
-}
+@interface CursorCustomPointerView : HLSNibView
 
-@property (nonatomic, retain) IBOutlet UILabel *valueLabel;
+@property (nonatomic, weak) IBOutlet UILabel *valueLabel;
 
 @end

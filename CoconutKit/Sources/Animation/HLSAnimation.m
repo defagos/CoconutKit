@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 2/8/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAnimation.h"
@@ -28,34 +28,27 @@
 
 static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
-@interface HLSAnimation () <HLSAnimationStepDelegate>
+@interface HLSAnimation () <HLSAnimationStepDelegate>  {
+@private
+    BOOL _animated;
+    NSUInteger _repeatCount;
+    NSUInteger _currentRepeatCount;
+    NSTimeInterval _remainingTimeBeforeStart;                      // the time remaining before the start time is reached
+    NSTimeInterval _elapsedTime;                                   // the currently elapsed time (does not include pauses)
+    BOOL _runningBeforeEnteringBackground;                         // was the animation running before the application entered background?
+    BOOL _pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
+}
 
-+ (NSArray *)duplicateAnimationSteps:(NSArray *)animationSteps;
-
-@property (nonatomic, retain) NSArray *animationSteps;
-@property (nonatomic, retain) NSArray *animationStepCopies;
-@property (nonatomic, retain) NSEnumerator *animationStepsEnumerator;
-@property (nonatomic, retain) HLSAnimationStep *currentAnimationStep;
+@property (nonatomic, strong) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
+@property (nonatomic, strong) NSArray *animationStepCopies;                     // another copy made temporarily during animation
+@property (nonatomic, strong) NSEnumerator *animationStepsEnumerator;           // enumerator over steps
+@property (nonatomic, strong) HLSAnimationStep *currentAnimationStep;           // the currently played animation step
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isPlaying) BOOL playing;
 @property (nonatomic, assign, getter=isStarted) BOOL started;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
-@property (nonatomic, retain) HLSZeroingWeakRef *delegateZeroingWeakRef;
-
-- (void)playWithStartTime:(NSTimeInterval)startTime
-              repeatCount:(NSUInteger)repeatCount
-       currentRepeatCount:(NSUInteger)currentRepeatCount
-               afterDelay:(NSTimeInterval)delay
-                 animated:(BOOL)animated;
-
-- (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
-- (void)playNextAnimationStepAnimated:(BOOL)animated;
-
-- (NSArray *)reverseAnimationSteps;
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification;
-- (void)applicationWillEnterForeground:(NSNotification *)notification;
+@property (nonatomic, strong) HLSZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 
@@ -63,36 +56,36 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 #pragma mark Class methods
 
-+ (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps
++ (instancetype)animationWithAnimationSteps:(NSArray *)animationSteps
 {
-    return [[[[self class] alloc] initWithAnimationSteps:animationSteps] autorelease];
+    return [[[self class] alloc] initWithAnimationSteps:animationSteps];
 }
 
-+ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep
++ (instancetype)animationWithAnimationStep:(HLSAnimationStep *)animationStep
 {
     NSArray *animationSteps = nil;
     if (animationStep) {
-        animationSteps = [NSArray arrayWithObject:animationStep];
+        animationSteps = @[animationStep];
     }
-    return [HLSAnimation animationWithAnimationSteps:animationSteps];
+    return [self animationWithAnimationSteps:animationSteps];
 }
 
 + (NSArray *)duplicateAnimationSteps:(NSArray *)animationSteps
 {
     NSMutableArray *animationStepCopies = [NSMutableArray array];
     for (HLSAnimationStep *animationStep in animationSteps) {
-        [animationStepCopies addObject:[[animationStep copy] autorelease]];
+        [animationStepCopies addObject:[animationStep copy]];
     }
     return [NSArray arrayWithArray:animationStepCopies];
 }
 
 #pragma mark Object creation and destruction
 
-- (id)initWithAnimationSteps:(NSArray *)animationSteps
+- (instancetype)initWithAnimationSteps:(NSArray *)animationSteps
 {
     if ((self = [super init])) {
         if (! animationSteps) {
-            self.animationSteps = [NSArray array];
+            self.animationSteps = @[];
         }
         else {
             HLSAssertObjectsInEnumerationAreKindOfClass(animationSteps, HLSAnimationStep);
@@ -111,10 +104,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithAnimationSteps:nil];
 }
 
 - (void)dealloc
@@ -127,50 +120,14 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                                                   object:nil];
     
     [self cancel];
-    
-    self.animationSteps = nil;
-    self.animationStepCopies = nil;
-    self.animationStepsEnumerator = nil;
-    self.currentAnimationStep = nil;
-    self.tag = nil;
-    self.userInfo = nil;
-    self.delegateZeroingWeakRef = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize animationSteps = m_animationSteps;
-
-@synthesize animationStepCopies = m_animationStepCopies;
-
-@synthesize animationStepsEnumerator = m_animationStepsEnumerator;
-
-@synthesize currentAnimationStep = m_currentAnimationStep;
-
-@synthesize tag = m_tag;
-
-@synthesize userInfo = m_userInfo;
-
-@synthesize lockingUI = m_lockingUI;
-
-@synthesize running = m_running;
-
-@synthesize playing = m_playing;
-
-@synthesize started = m_started;
 
 - (BOOL)isPaused
 {
     return [self.currentAnimationStep isPaused];
 }
-
-@synthesize cancelling = m_cancelling;
-
-@synthesize terminating = m_terminating;
-
-@synthesize delegateZeroingWeakRef = m_delegateZeroingWeakRef;
 
 - (id<HLSAnimationDelegate>)delegate
 {
@@ -179,7 +136,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)setDelegate:(id<HLSAnimationDelegate>)delegate
 {
-    self.delegateZeroingWeakRef = [[[HLSZeroingWeakRef alloc] initWithObject:delegate] autorelease];
+    self.delegateZeroingWeakRef = [[HLSZeroingWeakRef alloc] initWithObject:delegate];
     [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
 }
 
@@ -282,11 +239,11 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     // notably when repeatCount > 1), we work on a deep copy of them
     self.animationStepCopies = [HLSAnimation duplicateAnimationSteps:self.animationSteps];
         
-    m_animated = animated;
-    m_repeatCount = repeatCount;
-    m_currentRepeatCount = currentRepeatCount;
-    m_remainingTimeBeforeStart = startTime;
-    m_elapsedTime = 0.;
+    _animated = animated;
+    _repeatCount = repeatCount;
+    _currentRepeatCount = currentRepeatCount;
+    _remainingTimeBeforeStart = startTime;
+    _elapsedTime = 0.;
     
     // Create a dummy animation step to simulate the delay. This way we avoid two potential issues:
     //   - if an animation step subclass is implemented using an animation framework which does not support delays,
@@ -310,17 +267,17 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)playAnimationStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
-    // Instantaneously play all animation steps which complete before the start time. The value of m_remainingTimeBeforeStart
+    // Instantaneously play all animation steps which complete before the start time. The value of _remainingTimeBeforeStart
     // is updated before the animation is played (so that it can be used as a criterium to guess whether we are playing
     // animation steps instantaneously to reach the start time)
-    if (doublegt(m_remainingTimeBeforeStart, animationStep.duration)) {
-        m_remainingTimeBeforeStart -= animationStep.duration;
+    if (doublegt(_remainingTimeBeforeStart, animationStep.duration)) {
+        _remainingTimeBeforeStart -= animationStep.duration;
         [animationStep playWithDelegate:self startTime:0. animated:NO];
     }
     // Play the incomplete animation step, starting where appropriate
     else {
-        NSTimeInterval remainingTimeBeforeStart = m_remainingTimeBeforeStart;
-        m_remainingTimeBeforeStart = 0.;
+        NSTimeInterval remainingTimeBeforeStart = _remainingTimeBeforeStart;
+        _remainingTimeBeforeStart = 0.;
         [animationStep playWithDelegate:self startTime:remainingTimeBeforeStart animated:animated];
     }
 }
@@ -340,7 +297,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     // Done with the animation
     else {
         // Empty animations (without animation steps) must still call the animationWillStart:animated delegate method
-        if (m_currentRepeatCount == 0 && [self.animationStepCopies count] == 0) {
+        if (_currentRepeatCount == 0 && [self.animationStepCopies count] == 0) {
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                 [self.delegate animationWillStart:self animated:animated];
             }
@@ -350,12 +307,12 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         
         self.animationStepsEnumerator = nil;
                 
-        // Could theoretically overflow if m_repeatCount == NSUIntegerMax, but this would still yield a correct
+        // Could theoretically overflow if _repeatCount == NSUIntegerMax, but this would still yield a correct
         // behavior here
-        ++m_currentRepeatCount;
+        ++_currentRepeatCount;
         
-        if ((m_repeatCount == NSUIntegerMax && (self.terminating || self.cancelling))
-                || (m_repeatCount != NSUIntegerMax && m_currentRepeatCount == m_repeatCount)) {
+        if ((_repeatCount == NSUIntegerMax && (self.terminating || self.cancelling))
+                || (_repeatCount != NSUIntegerMax && _currentRepeatCount == _repeatCount)) {
             // Unlock the UI
             if (self.lockingUI) {
                 [[HLSUserInterfaceLock sharedUserInterfaceLock] unlock];
@@ -377,11 +334,11 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         }    
         // Repeat as needed
         else {
-            [self playWithStartTime:m_remainingTimeBeforeStart
-                        repeatCount:m_repeatCount
-                 currentRepeatCount:m_currentRepeatCount
+            [self playWithStartTime:_remainingTimeBeforeStart
+                        repeatCount:_repeatCount
+                 currentRepeatCount:_currentRepeatCount
                          afterDelay:0.
-                           animated:(self.cancelling || self.terminating) ? NO : m_animated];
+                           animated:(self.cancelling || self.terminating) ? NO : _animated];
         }
     }
 }
@@ -461,7 +418,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         return nil;
     }
     
-    HLSAnimation *animation = [[self copy] autorelease];
+    HLSAnimation *animation = [self copy];
     
     // Find out which factor must be applied to each animation step to preserve the animation appearance for the
     // specified duration
@@ -520,14 +477,14 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 {
     // Still send all delegate notifications if terminating and if not playing animation steps instantaneously
     // when a start time has been set
-    if (! self.cancelling && doubleeq(m_remainingTimeBeforeStart, 0.)) {
+    if (! self.cancelling && doubleeq(_remainingTimeBeforeStart, 0.)) {
         // Notify that the animation begins when the initial delay animation (always played) ends. This way
         // we get rid of subtle differences which might arise with animation steps only being able to notify
         // when they did start, rather than when they will
         if ([animationStep.tag isEqualToString:kDelayLayerAnimationTag]) {
             // Note that if a delay has been set, this event is not fired until the delay period is over, as for UIView
             // animation blocks)
-            if (m_currentRepeatCount == 0) {
+            if (_currentRepeatCount == 0) {
                 if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                     [self.delegate animationWillStart:self animated:animated];
                 }
@@ -544,13 +501,13 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     
     // We accumulate the effective duration of the animation which has been run until now
     if (! self.cancelling && ! self.terminating) {
-        m_elapsedTime += [self.currentAnimationStep duration];
+        _elapsedTime += [self.currentAnimationStep duration];
     }
     
     // Play the next step (or the first step if the initial delay animation step has ended(), but non-animated if the
     // animation did not reach completion normally. Moreover, if some animation steps are played non-animated because
-    // a start time has been set, we must override animated = NO with the original m_animated value of the animation
-    [self playNextAnimationStepAnimated:finished ? (! doubleeq(m_remainingTimeBeforeStart, 0.) ? m_animated : animated) : NO];
+    // a start time has been set, we must override animated = NO with the original _animated value of the animation
+    [self playNextAnimationStepAnimated:finished ? (! doubleeq(_remainingTimeBeforeStart, 0.) ? _animated : animated) : NO];
 }
 
 #pragma mark NSCopying protocol implementation
@@ -561,7 +518,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     if (self.animationSteps) {
         NSMutableArray *animationStepCopies = [NSMutableArray array];
         for (HLSAnimationStep *animationStep in self.animationSteps) {
-            HLSAnimationStep *animationStepCopy = [[animationStep copyWithZone:zone] autorelease];
+            HLSAnimationStep *animationStepCopy = [animationStep copyWithZone:zone];
             [animationStepCopies addObject:animationStepCopy];
         }
         animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:[NSMutableArray arrayWithArray:animationStepCopies]];
@@ -582,9 +539,9 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
-    m_runningBeforeEnteringBackground = self.running;
+    _runningBeforeEnteringBackground = self.running;
     
-    if (m_runningBeforeEnteringBackground) {
+    if (_runningBeforeEnteringBackground) {
         // Core Animations are removed and added back again automatically when the application enters / leaves background. This makes
         // it very hard to resume running animations after the application wakes up, since we have no real control over this process.
         // But since HLSAnimations can be given a start time, we can apply the following strategy to solve those issues:
@@ -592,8 +549,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         //      delegate events are not received
         //   2) Rewind the animation at the beginning, without a delegate
         //   3) Play the animation from where it was cancelled when the application enters foreground
-        m_elapsedTime += [self.currentAnimationStep elapsedTime];
-        m_pausedBeforeEnteringBackground = self.paused;
+        _elapsedTime += [self.currentAnimationStep elapsedTime];
+        _pausedBeforeEnteringBackground = self.paused;
         
         [self cancel];
         
@@ -605,14 +562,14 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
-    if (m_runningBeforeEnteringBackground) {
-        [self playWithStartTime:m_elapsedTime repeatCount:m_repeatCount];
-        if (m_pausedBeforeEnteringBackground) {
+    if (_runningBeforeEnteringBackground) {
+        [self playWithStartTime:_elapsedTime repeatCount:_repeatCount];
+        if (_pausedBeforeEnteringBackground) {
             [self pause];
         }
         
-        m_runningBeforeEnteringBackground = NO;
-        m_pausedBeforeEnteringBackground = NO;
+        _runningBeforeEnteringBackground = NO;
+        _pausedBeforeEnteringBackground = NO;
     }
 }
 

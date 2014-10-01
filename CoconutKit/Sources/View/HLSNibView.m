@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 9/1/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSNibView.h"
@@ -25,33 +25,35 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         return;
     }
     
-    s_classNameToSizeMap = [[NSMutableDictionary dictionary] retain];
+    s_classNameToSizeMap = [NSMutableDictionary dictionary];
 }
 
-+ (id)view
++ (instancetype)view
 {   
     if ([self isMemberOfClass:[HLSNibView class]]) {
         HLSLoggerError(@"HLSNibView cannot be instantiated directly");
         return nil;
     }
     
+    NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
+    
     // A xib has been found, use it
     NSString *nibName = [self nibName];
-    if ([[NSBundle mainBundle] pathForResource:nibName ofType:@"nib"]) {
-        NSArray *bundleContents = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
+    if ([bundle pathForResource:nibName ofType:@"nib"]) {
+        NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
         if ([bundleContents count] == 0) {
             HLSLoggerError(@"Missing view object in xib file %@", nibName);
             return nil;
         }
         
         // Get the first object and check that it is what we expect
-        id firstObject_hls = [bundleContents firstObject_hls];
-        if (! [firstObject_hls isKindOfClass:self]) {
+        id firstObject = [bundleContents firstObject];
+        if (! [firstObject isKindOfClass:self]) {
             HLSLoggerError(@"The view object must be the first one in the xib file, and must be of type %@", [self className]);
             return nil;
         }
         
-        return firstObject_hls;
+        return firstObject;
     }
     else {
         HLSLoggerError(@"xib file not found");
@@ -86,6 +88,11 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 + (NSString *)nibName
 {
     return [self className];
+}
+
++ (NSBundle *)bundle
+{
+    return nil;
 }
 
 @end

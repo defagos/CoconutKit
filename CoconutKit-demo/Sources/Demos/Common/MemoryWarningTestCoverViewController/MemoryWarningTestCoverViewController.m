@@ -3,31 +3,18 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/15/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "MemoryWarningTestCoverViewController.h"
 
 @interface MemoryWarningTestCoverViewController ()
 
-- (void)close:(id)sender;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *closeBarButtonItem;
 
 @end
 
 @implementation MemoryWarningTestCoverViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.closeBarButtonItem = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize closeBarButtonItem = m_closeBarButtonItem;
 
 #pragma mark View lifecycle
 
@@ -43,7 +30,7 @@
 
 - (void)close:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Localization
@@ -53,7 +40,7 @@
     [super localize];
     
     self.title = @"MemoryWarningTestCoverViewController";
-    self.closeBarButtonItem.title = NSLocalizedString(@"Close", @"Close");
+    self.closeBarButtonItem.title = NSLocalizedString(@"Close", nil);
 }
 
 @end

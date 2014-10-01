@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/8/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTransition.h"
@@ -22,59 +22,6 @@ const NSTimeInterval kAnimationTransitionDefaultDuration = -1.;
 static CGFloat kPushToTheBackScaleFactor = 0.95f;
 static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
-@interface HLSTransition ()
-
-+ (NSArray *)coverLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                yOffset:(CGFloat)yOffset
-                                          appearingView:(UIView *)appearingView;
-
-+ (NSArray *)coverPushToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                          yOffset:(CGFloat)yOffset
-                                                    appearingView:(UIView *)appearingView
-                                                 disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)pushLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                               yOffset:(CGFloat)yOffset
-                                         appearingView:(UIView *)appearingView
-                                      disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)pushAndFadeLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                      yOffset:(CGFloat)yOffset
-                                                appearingView:(UIView *)appearingView
-                                             disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)pushAndToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                        yOffset:(CGFloat)yOffset
-                                                  appearingView:(UIView *)appearingView
-                                               disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)flowLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                               yOffset:(CGFloat)yOffset
-                                         appearingView:(UIView *)appearingView
-                                      disappearingView:(UIView *)disappearingView;
-
-+ (NSArray *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
-                                                    y:(CGFloat)y
-                                                    z:(CGFloat)z
-                                   cameraZTranslation:(CGFloat)cameraZTranslation
-                                        appearingView:(UIView *)appearingView
-                                     disappearingView:(UIView *)disappearingView
-                                               inView:(UIView *)view;
-
-+ (NSArray *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
-                                                     yOffset:(CGFloat)yOffset
-                                           aroundVectorWithX:(CGFloat)x
-                                                           y:(CGFloat)y
-                                                           z:(CGFloat)z
-                                            counterclockwise:(BOOL)counterclockwise
-                                          cameraZTranslation:(CGFloat)cameraZTranslation
-                                               appearingView:(UIView *)appearingView
-                                            disappearingView:(UIView *)disappearingView
-                                                      inView:(UIView *)view
-                                                  withBounds:(CGRect)bounds;
-
-@end
-
 @implementation HLSTransition
 
 #pragma mark Getting transition animation information
@@ -82,13 +29,14 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 + (NSArray *)availableTransitionNames
 {
     static NSArray *s_availableTransitionNames = nil;
-    if (! s_availableTransitionNames) {
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
         NSMutableArray *availableTransitionNames = [NSMutableArray array];
         
         // Find all HLSTransition subclasses (except HLSTransition itself)
         unsigned int numberOfClasses = 0;
         Class *classes = objc_copyClassList(&numberOfClasses);
-        for (int i = 0; i < numberOfClasses; ++i) {
+        for (unsigned int i = 0; i < numberOfClasses; ++i) {
             Class class = classes[i];
             
             // Discard HLSTransition
@@ -112,8 +60,8 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         }
         free(classes);
         
-        s_availableTransitionNames = [[availableTransitionNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] retain];
-    }
+        s_availableTransitionNames = [availableTransitionNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    });
     return s_availableTransitionNames;
 }
 
@@ -192,10 +140,11 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 {
     // Durations are constants for each transition animation class. Can cache them
     static NSMutableDictionary *s_animationClassNameToDurationMap = nil;
-    if (! s_animationClassNameToDurationMap) {
-        s_animationClassNameToDurationMap = [[NSMutableDictionary dictionary] retain];
-    }
-    
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_animationClassNameToDurationMap = [NSMutableDictionary dictionary];
+    });
+        
     NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];
     if (! duration) {
         // Calculate for a dummy animation
@@ -203,7 +152,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                                                               disappearingView:nil
                                                                                                                         inView:nil
                                                                                                                     withBounds:CGRectZero]];
-        duration = [NSNumber numberWithDouble:[animation duration]];
+        duration = @([animation duration]);
         [s_animationClassNameToDurationMap setObject:duration forKey:[self className]];
     }
     

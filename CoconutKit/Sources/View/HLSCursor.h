@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 09.06.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAnimation.h"
@@ -34,31 +34,8 @@
  *   - basic: You just set the text and basic text properties (font, colors, shadows)
  *   - custom: Each element is a view and can be customized using Interface Builder
  * Cursors using both ways of customisation can coexist in the same source file.
- *
- * Designated initializer: -initWithFrame:
  */
-@interface HLSCursor : UIView <HLSAnimationDelegate> {
-@private
-    NSArray *m_elementWrapperViews;
-    NSArray *m_elementWrapperViewSizeValues;
-    UIView *m_pointerView;
-    UIView *m_pointerContainerView;
-    CGSize m_pointerViewTopLeftOffset;
-    CGSize m_pointerViewBottomRightOffset;
-    NSTimeInterval m_animationDuration;
-    NSUInteger m_selectedIndex;
-    CGFloat m_initialDraggingXOffset;
-    BOOL m_moved;
-    BOOL m_moving;
-    BOOL m_dragging;
-    BOOL m_holding;
-    BOOL m_creatingViews;
-    BOOL m_viewsCreated;
-    NSUInteger m_initialIndex;
-    CGFloat m_spacing;
-    id<HLSCursorDataSource> m_dataSource;
-    id<HLSCursorDelegate> m_delegate;
-}
+@interface HLSCursor : UIView <HLSAnimationDelegate>
 
 /**
  * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.
@@ -68,7 +45,7 @@
  *
  * As soon as the pointer view has been set it cannot be changed anymore.
  */
-@property (nonatomic, retain) IBOutlet UIView *pointerView;
+@property (nonatomic, strong) IBOutlet UIView *pointerView;     // strong, not an error
 
 /**
  * The duration of cursor animations
@@ -107,12 +84,12 @@
 /**
  * Set / get the data source used to fill the cursor with elements
  */
-@property (nonatomic, assign) id<HLSCursorDataSource> dataSource;
+@property (nonatomic, weak) id<HLSCursorDataSource> dataSource;
 
 /**
  * Set / get the cursor delegate receiving the cursor events
  */
-@property (nonatomic, assign) id<HLSCursorDelegate> delegate;
+@property (nonatomic, weak) id<HLSCursorDelegate> delegate;
 
 @end
 

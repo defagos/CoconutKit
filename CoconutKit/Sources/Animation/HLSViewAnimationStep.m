@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/10/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSViewAnimationStep.h"
@@ -17,9 +17,7 @@
 
 @interface HLSViewAnimationStep ()
 
-@property (nonatomic, retain) UIView *dummyView;
-
-- (void)animationStepDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
+@property (nonatomic, strong) UIView *dummyView;
 
 @end
 
@@ -27,26 +25,13 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.curve = UIViewAnimationCurveEaseInOut;        
     }
     return self;
 }
-
-- (void)dealloc
-{
-    self.dummyView = nil;
-    
-    [super dealloc];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize curve = m_curve;
-
-@synthesize dummyView = m_dummyView;
 
 #pragma mark Managing the animation
 
@@ -66,7 +51,7 @@
         // during an animation block, the block duration is reduced to 0. To prevent this, we create
         // and animate a dummy invisible view in each animation step, so that the duration is never
         // reduced to 0
-        self.dummyView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+        self.dummyView = [[UIView alloc] initWithFrame:CGRectZero];
         [[UIApplication sharedApplication].keyWindow addSubview:self.dummyView];
         
         [UIView beginAnimations:nil context:NULL];

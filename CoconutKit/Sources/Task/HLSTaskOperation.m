@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/18/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTaskOperation.h"
@@ -16,30 +16,17 @@
 
 @interface HLSTaskOperation ()
 
-@property (nonatomic, assign) HLSTaskManager *taskManager;
-@property (nonatomic, assign) HLSTask *task;
-@property (nonatomic, retain) NSThread *callingThread;
-
-- (void)operationMain;
-
-- (void)onCallingThreadPerformSelector:(SEL)selector object:(NSObject *)objectOrNil;
-- (void)updateProgressToValue:(float)progress;
-- (void)attachError:(NSError *)error;
-
-- (void)notifyStart;
-- (void)notifyRunningWithProgress:(NSNumber *)progress;
-- (void)notifyEnd;
-- (void)notifySettingReturnInfo:(NSDictionary *)returnInfo;
-- (void)notifySettingError:(NSError *)error;
+@property (nonatomic, weak) HLSTaskManager *taskManager;          // The task manager which spawned the operation
+@property (nonatomic, weak) HLSTask *task;                        // The task the operation is processing
+@property (nonatomic, strong) NSThread *callingThread;              // Thread onto which spawned the operation
 
 @end
 
 @implementation HLSTaskOperation
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
-- (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task
+- (instancetype)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task
 {
     if ((self = [super init])) {
         self.taskManager = taskManager;
@@ -49,30 +36,12 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithTaskManager:nil task:nil];
 }
 
-- (void)dealloc
-{
-    self.taskManager = nil;
-    self.task = nil;
-    self.callingThread = nil;
-    [super dealloc];
-}
-
-#pragma mark -
-#pragma mark Accessors and mutators
-
-@synthesize taskManager = _taskManager;
-
-@synthesize task = _task;
-
-@synthesize callingThread = _callingThread;
-
-#pragma mark -
 #pragma mark Thread main function
 
 - (void)main
@@ -92,7 +61,6 @@
     HLSMissingMethodImplementation();
 }
 
-#pragma mark -
 #pragma mark Executing code on the calling thread
 
 - (void)onCallingThreadPerformSelector:(SEL)selector object:(NSObject *)objectOrNil
@@ -118,7 +86,7 @@
 - (void)updateProgressToValue:(float)progress
 {
     [self onCallingThreadPerformSelector:@selector(notifyRunningWithProgress:) 
-                                  object:[NSNumber numberWithFloat:progress]];
+                                  object:@(progress)];
 }
 
 - (void)attachReturnInfo:(NSDictionary *)returnInfo
@@ -133,7 +101,6 @@
                                   object:error];
 }
 
-#pragma mark -
 #pragma mark Code to be executed on the calling thread
 
 - (void)notifyStart

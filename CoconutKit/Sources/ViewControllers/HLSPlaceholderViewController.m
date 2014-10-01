@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10/8/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSPlaceholderViewController.h"
@@ -16,17 +16,18 @@
 
 @interface HLSPlaceholderViewController ()
 
-- (void)hlsPlaceholderViewControllerInit;
-
-@property (nonatomic, retain) NSMutableArray *containerStacks;
+@property (nonatomic, strong) NSMutableArray *containerStacks;
 
 @end
 
-@implementation HLSPlaceholderViewController
+@implementation HLSPlaceholderViewController {
+@private
+    BOOL _loadedOnce;
+}
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         [self hlsPlaceholderViewControllerInit];
@@ -34,7 +35,7 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
         [self hlsPlaceholderViewControllerInit];
@@ -56,7 +57,7 @@
     // Checking the first 20 indices should be sufficient
     for (NSUInteger i = 0; i < 20; ++i) {
         @try {
-            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%d", HLSPlaceholderPreloadSegueIdentifierPrefix, i];
+            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%lu", HLSPlaceholderPreloadSegueIdentifierPrefix, (unsigned long)i];
             [self performSegueWithIdentifier:segueIdentifier sender:self];
         }
         @catch (NSException *exception) {
@@ -65,43 +66,16 @@
     }
 }
 
-- (void)dealloc
-{
-    self.containerStacks = nil;
-    self.delegate = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        [containerStack releaseViews];
-    }
-    
-    self.placeholderViews = nil;
-}
-
 #pragma mark Accessors and mutators
-
-@synthesize containerStacks = m_containerStacks;
-
-@synthesize placeholderViews = m_placeholderViews;
-
-@synthesize autorotationMode = m_autorotationMode;
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {    
-    m_autorotationMode = autorotationMode;
+    _autorotationMode = autorotationMode;
     
     for (HLSContainerStack *containerStack in self.containerStacks) {
         containerStack.autorotationMode = autorotationMode;
     }
 }
-
-@synthesize delegate = m_delegate;
 
 - (UIView *)placeholderViewAtIndex:(NSUInteger)index
 {
@@ -118,16 +92,10 @@
     }
     
     HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
-    return [containerStack rootViewController];
+    return [containerStack topViewController];
 }
 
 #pragma mark View lifecycle
-
-// Deprecated since iOS 6
-- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
-{
-    return NO;
-}
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
 {
@@ -143,32 +111,13 @@
 {
     [super viewDidLoad];
     
-    // The order of outlets within an IBOutletCollection is sadly not the one defined in the nib file. Expect the user
-    // to explictly order them using the UIView tag property, and warn if this was not done properly. This is not an
-    // issue if the placeholder views are set programmatically
-    // (also see rdar://12121242: This issue seems to affect storyboards only)
-    if ([self nibName]) {
-        NSMutableSet *tags = [NSMutableSet set];
-        for (UIView *placeholderView in self.placeholderViews) {
-            [tags addObject:[NSNumber numberWithInteger:placeholderView.tag]];
-        }
-        if ([tags count] != [self.placeholderViews count]) {
-            HLSLoggerWarn(@"Duplicate placeholder view tags found. The order of the placeholder view collection is "
-                          "unreliable. Please set a different tag for each placeholder view, the one with the lowest "
-                          "tag will be the first one in the collection");
-        }
-    }
-    
-    NSSortDescriptor *tagSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES];
-    self.placeholderViews = [self.placeholderViews sortedArrayUsingDescriptor:tagSortDescriptor];
-    
     // The first time the view is loaded, guess which number of placeholder views have been defined
-    if (! m_loadedOnce) {
+    if (! _loadedOnce) {
         // View controllers have been preloaded
         if (self.containerStacks) {
             if ([self.placeholderViews count] < [self.containerStacks count]) {
-                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%d) to hold preloaded view controllers (%d)", 
-                                    [self.placeholderViews count], [self.containerStacks count]];
+                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%lu) to hold preloaded view controllers (%lu)",
+                                    (unsigned long)[self.placeholderViews count], (unsigned long)[self.containerStacks count]];
                 @throw [NSException exceptionWithName:NSInternalInconsistencyException 
                                                reason:reason
                                              userInfo:nil];
@@ -187,7 +136,7 @@
             [self.containerStacks addObject:containerStack];
         }
         
-        m_loadedOnce = YES;
+        _loadedOnce = YES;
     }
     // If the view has been unloaded, we expect the same number of placeholder views after a reload
     else {
@@ -318,7 +267,7 @@
 {
     // Grows up the list of stacks as necessary while the container still can be implicitly resized (that is, when
     // it has not been loaded once)
-    if (! m_loadedOnce) {
+    if (! _loadedOnce) {
         if (! self.containerStacks) {
             self.containerStacks = [NSMutableArray array];
         }
@@ -332,7 +281,7 @@
     }
     else {
         if (index >= [self.containerStacks count]) {
-            HLSLoggerError(@"Invalid index. Must be between 0 and %d", [self.containerStacks count] - 1);
+            HLSLoggerError(@"Invalid index. Must be between 0 and %lu", (unsigned long)[self.containerStacks count] - 1);
             return;
         }
     }

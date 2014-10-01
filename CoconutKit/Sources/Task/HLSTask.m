@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/17/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTask.h"
@@ -22,21 +22,22 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
 @property (nonatomic, assign) float progress;
 @property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
-@property (nonatomic, retain) NSDate *lastEstimateDate;
-@property (nonatomic, retain) NSDictionary *returnInfo;
-@property (nonatomic, retain) NSError *error;
-@property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group
-
-- (void)reset;
+@property (nonatomic, strong) NSDate *lastEstimateDate;         // date & time when the remaining time was previously estimated
+@property (nonatomic, strong) NSDictionary *returnInfo;
+@property (nonatomic, strong) NSError *error;
+@property (nonatomic, weak) HLSTaskGroup *taskGroup;           // weak ref to parent task group, nil if none
 
 @end
 
-@implementation HLSTask
+@implementation HLSTask {
+@private
+    float _lastEstimateProgress;            // Progress value when the remaining time was previously estimated (lastEstimateDate)
+    NSUInteger _progressStepsCounter;
+}
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         [self reset];
@@ -44,18 +45,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     return self;
 }
 
-- (void)dealloc
-{
-    self.tag = nil;
-    self.userInfo = nil;
-    self.lastEstimateDate = nil;
-    self.returnInfo = nil;
-    self.error = nil;
-    self.taskGroup = nil;
-    [super dealloc];
-}
-
-#pragma mark -
 #pragma mark Accessors and mutators
 
 - (Class)operationClass
@@ -63,18 +52,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     HLSLoggerError(@"No operation class attached to task class %@", [self class]);
     return NULL;
 }
-
-@synthesize tag = _tag;
-
-@synthesize userInfo = _userInfo;
-
-@synthesize running = _running;
-
-@synthesize finished = _finished;
-
-@synthesize cancelled = _cancelled;
-
-@synthesize progress = _progress;
 
 - (void)setProgress:(float)progress
 {
@@ -125,8 +102,6 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
-
 - (NSTimeInterval)remainingTimeIntervalEstimate
 {
     if (! self.finished &&  ! self.cancelled) {
@@ -137,18 +112,10 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize lastEstimateDate = _lastEstimateDate;
-
-@synthesize returnInfo = _returnInfo;
-
-@synthesize error = _error;
-
-@synthesize taskGroup = _taskGroup;
-
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
 {
     if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
-        return NSLocalizedStringFromTableInBundle(@"No remaining time estimate available", @"Localizable", [NSBundle coconutKitBundle], @"No remaining time estimate available");
+        return CoconutKitLocalizedString(@"No remaining time estimate available", nil);
     }    
     
     NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
@@ -159,20 +126,19 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     NSUInteger minutes = timeInterval / 60;
     
     if (days != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dd %dh remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%dd %dh remaining (estimate)"), days, hours];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%dd %dh remaining (estimate)", nil), days, hours];
     }
     else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dh %dm remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%dh %dm remaining (estimate)"), hours, minutes];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%dh %dm remaining (estimate)", nil), hours, minutes];
     }
     else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%d min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%d min remaining (estimate)"), minutes];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%d min remaining (estimate)", nil), minutes];
     }
     else {
-        return NSLocalizedStringFromTableInBundle(@"< 1 min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"< 1 min remaining (estimate)");
+        return CoconutKitLocalizedString(@"< 1 min remaining (estimate)", nil);
     }
 }
 
-#pragma mark -
 #pragma mark Resetting
 
 - (void)reset

@@ -3,64 +3,31 @@
 //  CoconutKit-dev
 //
 //  Created by Samuel Défago on 20.02.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "ParallaxScrollingDemoViewController.h"
 
 @interface ParallaxScrollingDemoViewController ()
 
-- (void)setupParallax;
+@property (nonatomic, weak) IBOutlet UITextView *textView;
+@property (nonatomic, weak) IBOutlet UIScrollView *skyScrapperScrollView;
+@property (nonatomic, weak) IBOutlet UIImageView *skyScrapperImageView;
+
+@property (nonatomic, weak) IBOutlet UIScrollView *skyScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *mountainsScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *grassScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *treesScrollView;
+@property (nonatomic, weak) IBOutlet UIImageView *skyImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *mountainsImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *grassImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *treesImageView;
+
+@property (nonatomic, weak) IBOutlet UISwitch *bouncesSwitch;
 
 @end
 
 @implementation ParallaxScrollingDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.textView = nil;
-    self.skyScrapperScrollView = nil;
-    self.skyScrapperImageView = nil;
-    self.skyScrollView = nil;
-    self.mountainsScrollView = nil;
-    self.grassScrollView = nil;
-    self.treesScrollView = nil;
-    self.skyImageView = nil;
-    self.mountainsImageView = nil;
-    self.grassImageView = nil;
-    self.treesImageView = nil;
-    self.bouncesSwitch = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize textView = m_textView;
-
-@synthesize skyScrapperScrollView = m_skyScrapperScrollView;
-
-@synthesize skyScrapperImageView = m_skyScrapperImageView;
-
-@synthesize skyScrollView = m_skyScrollView;
-
-@synthesize mountainsScrollView = m_mountainsScrollView;
-
-@synthesize grassScrollView = m_grassScrollView;
-
-@synthesize treesScrollView = m_treesScrollView;
-
-@synthesize skyImageView = m_skyImageView;
-
-@synthesize mountainsImageView = m_mountainsImageView;
-
-@synthesize grassImageView = m_grassImageView;
-
-@synthesize treesImageView = m_treesImageView;
-
-@synthesize bouncesSwitch = m_bouncesSwitch;
 
 #pragma mark View lifecycle
 
@@ -92,7 +59,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Parallax scrolling", @"Parallax scrolling");
+    self.title = NSLocalizedString(@"Parallax scrolling", nil);
 }
 
 #pragma mark Action callbacks
@@ -111,14 +78,11 @@
 
 - (void)setupParallax
 {
-    [self.textView synchronizeWithScrollViews:[NSArray arrayWithObject:self.skyScrapperScrollView]
+    [self.textView synchronizeWithScrollViews:@[self.skyScrapperScrollView]
                                       bounces:self.bouncesSwitch.on];
     
     // The bounces argument is irrelevant here. The master scroll view bounces property has namely been set to NO in the nib
-    [self.treesScrollView synchronizeWithScrollViews:[NSArray arrayWithObjects:self.skyScrollView, 
-                                                      self.mountainsScrollView, 
-                                                      self.grassScrollView, 
-                                                      nil]
+    [self.treesScrollView synchronizeWithScrollViews:@[self.skyScrollView, self.mountainsScrollView, self.grassScrollView]
                                              bounces:self.bouncesSwitch.on];
 }
 

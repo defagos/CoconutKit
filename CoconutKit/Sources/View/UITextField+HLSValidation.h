@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.10.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 // Forward declarations
@@ -37,7 +37,9 @@
 @interface UITextField (HLSValidation)
 
 /**
- * Bind the text field to a specific field of a managed object. A formatter and a validation delegate can be provided
+ * Bind the text field to a specific field of a managed object. A formatter and a validation delegate can be provided. Any
+ * previously existing binding will be removed (if managedObject is called, the end effect is therefore the same as calling
+ * -unbind)
  */
 - (void)bindToManagedObject:(NSManagedObject *)managedObject
                   fieldName:(NSString *)fieldName

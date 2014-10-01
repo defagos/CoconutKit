@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/10/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "TableViewCellsDemoViewController.h"
@@ -14,16 +14,16 @@
 #import "XibTableViewCell.h"
 
 // Categories
-typedef enum {
+typedef NS_ENUM(NSInteger, CellCategoryIndex) {
     CellCategoryIndexEnumBegin = 0,
     CellCategoryIndexSimple = CellCategoryIndexEnumBegin,
     CellCategoryIndexCustom,
     CellCategoryIndexEnumEnd,
     CellCategoryIndexEnumSize = CellCategoryIndexEnumEnd - CellCategoryIndexEnumBegin
-} CellCategoryIndex;
+};
 
 // Simple cells
-typedef enum {
+typedef NS_ENUM(NSInteger, SimpleCellIndex) {
     SimpleCellIndexEnumBegin = 0,
     SimpleCellIndexDefault = SimpleCellIndexEnumBegin,
     SimpleCellIndexValue1,
@@ -31,36 +31,26 @@ typedef enum {
     SimpleCellIndexSubtitle,
     SimpleCellIndexEnumEnd,
     SimpleCellIndexEnumSize = SimpleCellIndexEnumEnd - SimpleCellIndexEnumBegin
-} SimpleCellIndex;
+};
 
 // Custom cells
-typedef enum {
+typedef NS_ENUM(NSInteger, CustomCellIndex) {
     CustomCellIndexEnumBegin = 0,
     CustomCellIndexXib = CustomCellIndexEnumBegin,
     CustomCellIndexProgrammatically,
     CustomCellIndexEnumEnd,
     CustomCellIndexEnumSize = CustomCellIndexEnumEnd - CustomCellIndexEnumBegin
-} CustomCellIndex;
+};
 
 @interface TableViewCellsDemoViewController ()
 
-@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
 @implementation TableViewCellsDemoViewController
 
-@synthesize tableView = m_tableView;
-
 #pragma mark View lifecycle
-
-- (void)loadView
-{
-    self.tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain] autorelease];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.view = self.tableView;
-}
 
 - (void)viewDidLoad
 {
@@ -68,18 +58,15 @@ typedef enum {
     
     self.tableView.sectionHeaderHeight = [HeaderView height];
     self.tableView.sectionFooterHeight = [FooterView height];
+    
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    self.tableView = nil;
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -125,7 +112,7 @@ typedef enum {
                 case SimpleCellIndexValue1: {
                     HLSValue1TableViewCell *cell = [HLSValue1TableViewCell cellForTableView:tableView];
                     cell.textLabel.text = @"HLSValue1TableViewCell";
-                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
+                    cell.detailTextLabel.text = NSLocalizedString(@"Details", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;
@@ -134,7 +121,7 @@ typedef enum {
                 case SimpleCellIndexValue2: {
                     HLSValue2TableViewCell *cell = [HLSValue2TableViewCell cellForTableView:tableView];
                     cell.textLabel.text = @"HLSValue2TableViewCell";
-                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
+                    cell.detailTextLabel.text = NSLocalizedString(@"Details", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;
@@ -143,7 +130,7 @@ typedef enum {
                 case SimpleCellIndexSubtitle: {
                     HLSSubtitleTableViewCell *cell = [HLSSubtitleTableViewCell cellForTableView:tableView];
                     cell.textLabel.text = @"HLSSubtitleTableViewCell";
-                    cell.detailTextLabel.text = NSLocalizedString(@"Details", @"Details");
+                    cell.detailTextLabel.text = NSLocalizedString(@"Details", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;                    
                     break;
@@ -161,8 +148,8 @@ typedef enum {
             switch (indexPath.row) {
                 case CustomCellIndexXib: {
                     XibTableViewCell *cell = [XibTableViewCell cellForTableView:tableView];
-                    cell.label.text = NSLocalizedString(@"Custom cell from xib", @"Custom cell from xib");
-                    cell.imageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
+                    cell.testLabel.text = NSLocalizedString(@"Custom cell from xib", nil);
+                    cell.testImageView.image = [UIImage imageNamed:@"icn_bookmark.png"];
                     // Selection enabled to show that customisation works
                     return cell;
                     break;
@@ -170,7 +157,7 @@ typedef enum {
                     
                 case CustomCellIndexProgrammatically: {
                     ProgrammaticTableViewCell *cell = [ProgrammaticTableViewCell cellForTableView:tableView];
-                    cell.label.text = NSLocalizedString(@"Custom cell created programmatically", @"Custom cell created programmatically");
+                    cell.label.text = NSLocalizedString(@"Custom cell created programmatically", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;
@@ -198,12 +185,12 @@ typedef enum {
     HeaderView *headerView = [HeaderView view];
     switch (section) {
         case CellCategoryIndexSimple: {
-            headerView.label.text = NSLocalizedString(@"Header: simple cells", @"Header: simple cells");
+            headerView.label.text = NSLocalizedString(@"Header: simple cells", nil);
             break;
         }
             
         case CellCategoryIndexCustom: {
-            headerView.label.text = NSLocalizedString(@"Header: custom cells", @"Header: custom cells");            
+            headerView.label.text = NSLocalizedString(@"Header: custom cells", nil);
             break;
         }
             
@@ -218,7 +205,7 @@ typedef enum {
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     FooterView *footerView = [FooterView view];
-    footerView.label.text = NSLocalizedString(@"Section end", @"Section end");
+    footerView.label.text = NSLocalizedString(@"Section end", nil);
     return footerView;
 }
 
@@ -287,7 +274,7 @@ typedef enum {
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Table view cells", @"Table view cells");
+    self.title = NSLocalizedString(@"Table view cells", nil);
     [self.tableView reloadData];
 }
 

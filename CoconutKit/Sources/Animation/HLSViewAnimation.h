@@ -3,12 +3,10 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 2/8/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSObjectAnimation.h"
-
-#import "HLSVector.h"
 
 /**
  * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 
@@ -25,15 +23,13 @@
  *
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should 
  * use layer animations instead of view animations since they have far more capabilities.
- *
- * Designated initializer: -init (create a view animation step with default settings)
  */
-@interface HLSViewAnimation : HLSObjectAnimation {
-@private
-    HLSVector2 m_scaleParameters;
-    HLSVector2 m_translationParameters;
-    CGFloat m_alphaIncrement;
-}
+@interface HLSViewAnimation : HLSObjectAnimation
+
+/**
+ * Create an animation with default settings (identity, leaving the view unchanged)
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Geometric transform parameters to be applied during the view animation. The resulting transform applies the scale, 

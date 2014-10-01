@@ -3,22 +3,30 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 30.01.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "UITextField+HLSExtensions.h"
 
 #import "HLSRuntime.h"
+#import "HLSViewTouchDetector.h"
 
-static UITextField *s_currentTextField = nil;           // weak ref to the current first responder
+// Associated object keys
+static void *s_touchDetectorKey = &s_touchDetectorKey;
 
 // Original implementation of the methods we swizzle
-static BOOL (*s_UITextField__becomeFirstResponder_Imp)(id, SEL) = NULL;
-static BOOL (*s_UITextField__resignFirstResponder_Imp)(id, SEL) = NULL;
+static id (*s_UITextField__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
+static id (*s_UITextField__initWithCoder_Imp)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
-static BOOL swizzled_UITextField__becomeFirstResponder_Imp(UITextField *self, SEL _cmd);
-static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SEL _cmd);
+static id swizzled_UITextField__initWithFrame_Imp(UITextField *self, SEL _cmd, CGRect frame);
+static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, NSCoder *aDecoder);
+
+@interface UITextField (HLSExtensionsPrivate)
+
+@property (nonatomic, strong) HLSViewTouchDetector *touchDetector;
+
+@end
 
 @implementation UITextField (HLSExtensions)
 
@@ -26,34 +34,67 @@ static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SE
 
 + (void)load
 {
-    s_UITextField__becomeFirstResponder_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                    @selector(becomeFirstResponder), 
-                                                                                    (IMP)swizzled_UITextField__becomeFirstResponder_Imp);
-    s_UITextField__resignFirstResponder_Imp = (BOOL (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                    @selector(resignFirstResponder), 
-                                                                                    (IMP)swizzled_UITextField__resignFirstResponder_Imp);
+    s_UITextField__initWithFrame_Imp = (id (*)(id, SEL, CGRect))hls_class_swizzleSelector(self,
+                                                                                          @selector(initWithFrame:),
+                                                                                          (IMP)swizzled_UITextField__initWithFrame_Imp);
+    s_UITextField__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
+                                                                                      @selector(initWithCoder:),
+                                                                                      (IMP)swizzled_UITextField__initWithCoder_Imp);
 }
 
-+ (UITextField *)currentTextField
+#pragma mark Accessors and mutators
+
+- (BOOL)isResigningFirstResponderOnTap
 {
-    return s_currentTextField;
+    return self.touchDetector.resigningFirstResponderOnTap;
+}
+
+- (void)setResigningFirstResponderOnTap:(BOOL)resigningFirstResponderOnTap
+{
+    self.touchDetector.resigningFirstResponderOnTap = resigningFirstResponderOnTap;
 }
 
 @end
 
-#pragma mark Swizzled method implementations
+@implementation UITextField (HLSExtensionsPrivate)
 
-static BOOL swizzled_UITextField__becomeFirstResponder_Imp(UITextField *self, SEL _cmd)
+#pragma mark Accessors and mutators
+
+- (HLSViewTouchDetector *)touchDetector
 {
-    s_currentTextField = self;
-    return (*s_UITextField__becomeFirstResponder_Imp)(self, _cmd);
+    return objc_getAssociatedObject(self, s_touchDetectorKey);
 }
 
-static BOOL swizzled_UITextField__resignFirstResponder_Imp(UITextField *self, SEL _cmd)
+- (void)setTouchDetector:(HLSViewTouchDetector *)touchDetector
 {
-    BOOL result = (*s_UITextField__resignFirstResponder_Imp)(self, _cmd);
-    if (self == s_currentTextField) {
-        s_currentTextField = nil;
+    objc_setAssociatedObject(self, s_touchDetectorKey, touchDetector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end
+
+#pragma mark Common initialization
+
+static void commonInit(UITextField *self)
+{
+    self.touchDetector = [[HLSViewTouchDetector alloc] initWithView:self
+                                              beginNotificationName:UITextFieldTextDidBeginEditingNotification
+                                                endNotificationName:UITextFieldTextDidEndEditingNotification];
+}
+
+#pragma mark Swizzled method implementations
+
+static id swizzled_UITextField__initWithFrame_Imp(UITextField *self, SEL _cmd, CGRect frame)
+{
+    if ((self = (*s_UITextField__initWithFrame_Imp)(self, _cmd, frame))) {
+        commonInit(self);
     }
-    return result;
+    return self;
+}
+
+static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, NSCoder *aDecoder)
+{
+    if ((self = (*s_UITextField__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+        commonInit(self);
+    }
+    return self;
 }

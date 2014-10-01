@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 09.12.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -11,11 +11,11 @@
  */
 extern NSString * const DemoValidationErrorDomain;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, DemoValidation) {
     DemoValidationEnumBegin = 0,
     DemoValidationMandatoryError = DemoValidationEnumBegin,
     DemoValidationIncorrectError,
     DemoValidationEnumEnd,
     DemoValidationEnumSize = DemoValidationEnumEnd - DemoValidationEnumBegin
-} DemoValidation;
+};
 

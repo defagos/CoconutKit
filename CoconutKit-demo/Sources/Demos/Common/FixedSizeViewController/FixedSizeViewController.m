@@ -3,31 +3,12 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/15/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "FixedSizeViewController.h"
 
 @implementation FixedSizeViewController
-
-#pragma mark Object creation and destruction
-
-- (id)initLarge:(BOOL)large
-{
-    if ((self = [super initWithNibName:large ? @"FixedSizeLargeViewController" : @"FixedSizeViewController" bundle:nil])) {
-        self.large = large;
-    }
-    return self;
-}
-
-- (id)init
-{
-    return [self initLarge:NO];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize large = m_large;
 
 #pragma mark View lifecycle
 
@@ -44,7 +25,7 @@
 {
     [super localize];
     
-    self.title = self.isLarge ? @"FixedSizeViewController (large)" : @"FixedSizeViewController";
+    self.title = @"FixedSizeViewController";
 }
 
 @end

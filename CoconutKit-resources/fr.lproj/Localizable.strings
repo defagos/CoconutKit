@@ -1,0 +1,20 @@
+/* 
+   Localizable.strings
+   CoconutKit
+
+   Created by Samuel Défago on 1/27/11.
+   Copyright 2010 Samuel Défago. All rights reserved.
+ */
+
+"< 1 min remaining (estimate)"="< 1 min restante (estimation)";
+"%d min remaining (estimate)"="%d min restante(s) (estimation)";
+"%dd %dh remaining (estimate)"="%dd %dh restants (estimation)";
+"%dh %dm remaining (estimate)"="%dh %dm restants (estimation)";
+"Cannot Open Page"="Impossible d'ouvrir la page";
+"Formatting error"="Erreur de formattage";
+"Mail Link"="Envoyer par E-mail";
+"No Internet connection is available"="Aucune connexion à Internet n'est disponible";
+"No remaining time estimate available"="Aucune estimation du temps restant";
+"Not found"="Non trouvé";
+"Open in Safari"="Ouvrir dans Safari";
+"Untitled"="Sans titre";

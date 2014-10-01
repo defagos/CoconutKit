@@ -3,14 +3,16 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 30.01.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 @interface UITextField (HLSExtensions)
 
 /**
- * Return the text field which is the current first responder, otherwise nil
+ * If set to YES, the text field resigns its first responder status when the user taps outside it 
+ *
+ * The default value is NO
  */
-+ (UITextField *)currentTextField;
+@property (nonatomic, assign, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;
 
 @end

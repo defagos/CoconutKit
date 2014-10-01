@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.10.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "UITextField+HLSValidation.h"
@@ -17,14 +17,11 @@
 static void *s_validatorKey = &s_validatorKey;
 
 // Original implementation of the methods we swizzle
-static id<UITextFieldDelegate> (*s_UITextField__delegate_Imp)(id, SEL) = NULL;
-static void (*s_UITextField__setDelegate_Imp)(id, SEL, id) = NULL;
-void (*UITextField__setText_Imp)(id, SEL, id) = NULL;      // external linkage
+void (*UITextField__setText_Imp)(id, SEL, id) = NULL;                       // external linkage
+static void (*UITextField__setAttributedText_Imp)(id, SEL, id) = NULL;      // external linkage
 
 // Swizzled method implementations
-static id<UITextFieldDelegate> swizzled_UITextField__delegate_Imp(UITextField *self, SEL _cmd);
-static void swizzled_UITextField__setDelegate_Imp(UITextField *self, SEL _cmd, id<UITextFieldDelegate> delegate);
-static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSString *text);
+static void swizzled_UITextField__setAttributedText_Imp(UITextField *self, SEL _cmd, NSAttributedString *attributedText);
 
 // Extern declarations
 extern BOOL injectedManagedObjectValidation(void);
@@ -38,15 +35,9 @@ extern BOOL injectedManagedObjectValidation(void);
 
 + (void)load
 {
-    s_UITextField__delegate_Imp = (id<UITextFieldDelegate> (*)(id, SEL))HLSSwizzleSelector(self,
-                                                                                           @selector(delegate), 
-                                                                                           (IMP)swizzled_UITextField__delegate_Imp);
-    s_UITextField__setDelegate_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                               @selector(setDelegate:), 
-                                                                               (IMP)swizzled_UITextField__setDelegate_Imp);
-    UITextField__setText_Imp = (void (*)(id, SEL, id))HLSSwizzleSelector(self, 
-                                                                         @selector(setText:), 
-                                                                         (IMP)swizzled_UITextField__setText_Imp);
+    UITextField__setAttributedText_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
+                                                                                @selector(setAttributedText:),
+                                                                                (IMP)swizzled_UITextField__setAttributedText_Imp);
 }
 
 #pragma mark Binding to managed object fields
@@ -67,23 +58,16 @@ extern BOOL injectedManagedObjectValidation(void);
     }
     
     // Bind to a validator object, with the current text field delegate as validator delegate
-    HLSManagedTextFieldValidator *validator = [[[HLSManagedTextFieldValidator alloc] initWithTextField:self 
-                                                                                         managedObject:managedObject
-                                                                                             fieldName:fieldName 
-                                                                                             formatter:formatter
-                                                                                    validationDelegate:validationDelegate] 
-                                               autorelease];
+    HLSManagedTextFieldValidator *validator = [[HLSManagedTextFieldValidator alloc] initWithTextField:self
+                                                                                        managedObject:managedObject
+                                                                                            fieldName:fieldName
+                                                                                            formatter:formatter
+                                                                                   validationDelegate:validationDelegate];
     if (! validator) {
         return;
     }
     
-    validator.delegate = (*s_UITextField__delegate_Imp)(self, @selector(delegate));
-    objc_setAssociatedObject(self, s_validatorKey, validator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
-    // Set the validator as text field delegate to catch events and perform validation. We need an intermediate object 
-    // because trying to set self as delegate does not work for a UITextField (this conflicts with the text field
-    // implementation and leads to infinite recursion)
-    (*s_UITextField__setDelegate_Imp)(self, @selector(setDelegate:), validator);
+    objc_setAssociatedObject(self, s_validatorKey, validator, OBJC_ASSOCIATION_RETAIN_NONATOMIC);    
 }
 
 - (void)unbind
@@ -94,10 +78,6 @@ extern BOOL injectedManagedObjectValidation(void);
     if (! objc_getAssociatedObject(self, s_validatorKey)) {
         return;
     }
-    
-    // Restore the original delegate
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    (*s_UITextField__setDelegate_Imp)(self, @selector(setDelegate:), validator.delegate);
     
     // Remove the validator
     objc_setAssociatedObject(self, s_validatorKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);    
@@ -182,38 +162,16 @@ extern BOOL injectedManagedObjectValidation(void);
 #pragma mark -
 #pragma mark Swizzled method implementations
 
-static id<UITextFieldDelegate> swizzled_UITextField__delegate_Imp(UITextField *self, SEL _cmd)
-{
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    if (validator) {
-        return validator.delegate;
-    }
-    else {
-        return (*s_UITextField__delegate_Imp)(self, _cmd);
-    }
-}
-
-static void swizzled_UITextField__setDelegate_Imp(UITextField *self, SEL _cmd, id<UITextFieldDelegate> delegate)
-{
-    HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
-    if (validator) {
-        validator.delegate = delegate;
-    }
-    else {
-        (*s_UITextField__setDelegate_Imp)(self, _cmd, delegate);
-    }
-}
-
 // Swizzled so that changes made to the text field (either programmatically or interactively) are trapped
-static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSString *text)
+static void swizzled_UITextField__setAttributedText_Imp(UITextField *self, SEL _cmd, NSAttributedString *attributedText)
 {
     HLSManagedTextFieldValidator *validator = objc_getAssociatedObject(self, s_validatorKey);
     if (validator) {
         id value = nil;
-        [validator getValue:&value forString:text];
+        [validator getValue:&value forString:[attributedText string]];
         [validator setValue:value];
     }
     else {
-        (*UITextField__setText_Imp)(self, _cmd, text);
-    }    
+        (*UITextField__setAttributedText_Imp)(self, _cmd, attributedText);
+    }
 }

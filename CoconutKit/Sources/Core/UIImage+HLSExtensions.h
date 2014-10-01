@@ -3,15 +3,20 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 14.07.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 @interface UIImage (HLSExtensions)
 
 /**
+ * Return an image from the CoconutKit-resources bundle
+ */
++ (instancetype)coconutKitImageNamed:(NSString *)imageName;
+
+/**
  * Return a 1x1 px image having a given color
  */
-+ (UIImage *)imageWithColor:(UIColor *)color;
++ (instancetype)imageWithColor:(UIColor *)color;
 
 /**
  * Return the receiver masked with some image. Black mask pixels correspond to unmasked portions. To make parts of

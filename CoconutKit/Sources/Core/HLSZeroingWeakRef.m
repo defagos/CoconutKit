@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.03.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSZeroingWeakRef.h"
@@ -15,13 +15,13 @@
 static void *s_zeroingWeakRefListKey = &s_zeroingWeakRefListKey;
 
 // Static methods
-static void subclass_dealloc(id object, SEL _cmd);
-static Class subclass_class(id object, SEL _cmd);
+static void subclass_dealloc(__unsafe_unretained id self, SEL _cmd);
+static Class subclass_class(id self, SEL _cmd);
 
 @interface HLSZeroingWeakRef ()
 
-@property (nonatomic, assign) id object;
-@property (nonatomic, retain) NSMutableArray *invocations;
+@property (nonatomic, weak) id object;
+@property (nonatomic, strong) NSMutableArray *invocations;
 
 @end
 
@@ -29,7 +29,7 @@ static Class subclass_class(id object, SEL _cmd);
 
 #pragma mark Object creation and destruction
 
-- (id)initWithObject:(id)object
+- (instancetype)initWithObject:(id)object
 {
     if ((self = [super init])) {
         self.invocations = [NSMutableArray array];
@@ -53,7 +53,7 @@ static Class subclass_class(id object, SEL _cmd);
             // Dynamically subclass the object class to override -dealloc selectively, and use this class instead.
             // Another approach would involve swizzling -dealloc at the NSObject level, but this solution would 
             // incur an unacceptable overhead on all NSObjects
-            NSString *className = [NSString stringWithUTF8String:class_getName(class)];
+            NSString *className = @(class_getName(class));
             if (! [className hasPrefix:kSubclassPrefix]) {
                 NSString *subclassName = [kSubclassPrefix stringByAppendingString:className];
                 Class subclass = NSClassFromString(subclassName);
@@ -61,9 +61,9 @@ static Class subclass_class(id object, SEL _cmd);
                     subclass = objc_allocateClassPair(class, [subclassName UTF8String], 0);
                     NSAssert(subclass != Nil, @"Could not register subclass");
                     class_addMethod(subclass, 
-                                    @selector(dealloc), 
+                                    NSSelectorFromString(@"dealloc"),
                                     (IMP)subclass_dealloc, 
-                                    method_getTypeEncoding(class_getInstanceMethod(class, @selector(dealloc))));
+                                    method_getTypeEncoding(class_getInstanceMethod(class, NSSelectorFromString(@"dealloc"))));
                     class_addMethod(subclass, 
                                     @selector(class), 
                                     (IMP)subclass_class, 
@@ -81,7 +81,7 @@ static Class subclass_class(id object, SEL _cmd);
                 zeroingWeakRefValues = [NSMutableSet set];
                 objc_setAssociatedObject(object, s_zeroingWeakRefListKey, zeroingWeakRefValues, OBJC_ASSOCIATION_RETAIN);
             }
-            NSValue *selfValue = [NSValue valueWithPointer:self];
+            NSValue *selfValue = [NSValue valueWithNonretainedObject:self];
             [zeroingWeakRefValues addObject:selfValue];
         }        
     }
@@ -91,7 +91,7 @@ static Class subclass_class(id object, SEL _cmd);
 - (void)dealloc
 {
     NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(self.object, s_zeroingWeakRefListKey);
-    NSValue *selfValue = [NSValue valueWithPointer:self];
+    NSValue *selfValue = [NSValue valueWithNonretainedObject:self];
     [zeroingWeakRefValues removeObject:selfValue];
     
     // No weak ref anymore. Can remove the dynamic subclass
@@ -99,18 +99,7 @@ static Class subclass_class(id object, SEL _cmd);
         Class superclass = class_getSuperclass(object_getClass(self.object));
         object_setClass(self.object, superclass);
     }
-    
-    self.object = nil;
-    self.invocations = nil;
-    
-    [super dealloc];
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize object = m_object;
-
-@synthesize invocations = m_invocations;
 
 #pragma mark Optional cleanup
 
@@ -130,12 +119,13 @@ static Class subclass_class(id object, SEL _cmd);
 
 @end
 
-static void subclass_dealloc(id object, SEL _cmd)
+// Marked as __unsafe_unretained to avoid ARC inserting incorrect memory management calls leading to crashes for -dealloc
+static void subclass_dealloc(__unsafe_unretained id self, SEL _cmd)
 {
     // Set all weak references bound to object to nil
-    NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(object, s_zeroingWeakRefListKey);
+    NSMutableSet *zeroingWeakRefValues = objc_getAssociatedObject(self, s_zeroingWeakRefListKey);
     for (NSValue *zeroingWeakRefValue in zeroingWeakRefValues) {
-        HLSZeroingWeakRef *zeroingWeakRef = [zeroingWeakRefValue pointerValue];
+        HLSZeroingWeakRef *zeroingWeakRef = [zeroingWeakRefValue nonretainedObjectValue];
         
         // Execute optional invocations
         for (NSInvocation *invocation in zeroingWeakRef.invocations) {
@@ -147,15 +137,15 @@ static void subclass_dealloc(id object, SEL _cmd)
     }
     
     // Call parent implementation
-    Class superclass = class_getSuperclass(object_getClass(object));
-    void (*parent_dealloc_Imp)(id, SEL) = (void (*)(id, SEL))class_getMethodImplementation(superclass, @selector(dealloc));
+    Class superclass = class_getSuperclass(object_getClass(self));
+    void (*parent_dealloc_Imp)(id, SEL) = (void (*)(id, SEL))class_getMethodImplementation(superclass, NSSelectorFromString(@"dealloc"));
     NSCAssert(parent_dealloc_Imp != NULL, @"Could not locate parent dealloc implementation");
-    (*parent_dealloc_Imp)(object, _cmd);
+    (*parent_dealloc_Imp)(self, _cmd);
 }
 
-static Class subclass_class(id object, SEL _cmd)
+static Class subclass_class(id self, SEL _cmd)
 {
     // Lie about the dynamic subclass existence, as the KVO implementation does (the real class can still be seen
     // using object_getClass)
-    return class_getSuperclass(object_getClass(object));
+    return class_getSuperclass(object_getClass(self));
 }

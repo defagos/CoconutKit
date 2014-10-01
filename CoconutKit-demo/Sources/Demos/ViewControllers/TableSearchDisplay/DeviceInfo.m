@@ -3,14 +3,14 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/14/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "DeviceInfo.h"
 
 @interface DeviceInfo ()
 
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) DeviceType type;
 
 @end
@@ -21,12 +21,12 @@
 
 + (DeviceInfo *)deviceInfoWithName:(NSString *)name type:(DeviceType)type
 {
-    return [[[[self class] alloc] initWithName:name type:type] autorelease];
+    return [[[self class] alloc] initWithName:name type:type];
 }
 
 #pragma mark Object creation and destruction
 
-- (id)initWithName:(NSString *)name type:(DeviceType)type
+- (instancetype)initWithName:(NSString *)name type:(DeviceType)type
 {
     if ((self = [super init])) {
         self.name = name;
@@ -35,22 +35,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithName:nil type:0];
 }
-
-- (void)dealloc
-{
-    self.name = nil;
-    [super dealloc];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize name = m_name;
-
-@synthesize type = m_type;
 
 @end

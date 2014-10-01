@@ -3,10 +3,8 @@
    CoconutKit-demo
 
    Created by Samuel Défago on 2/10/11.
-   Copyright 2011 Hortis. All rights reserved.
+   Copyright 2011 Samuel Défago. All rights reserved.
  */
-"Action sheet"="Menu action";
-"Adjust font size to width"="Ajuster en largeur";
 "All"="Tous";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
@@ -16,7 +14,6 @@
 "Baseline adjustment"="Ajustement de la ligne de base";
 "Baselines"="Lignes";
 "Birthdate"="Date de naissance";
-"By default, an HLSTextField exits edit mode when the user taps outside it"="Par défaut, un HLSTextField perd le focus lorsque l'utilisateur clique à côté";
 "Blocking"="Bloquant";
 "Bottom"="Bas";
 "Bounces"="Rebond";
@@ -33,6 +30,8 @@
 "Close"="Fermer";
 "Coconuts"="Noix de coco";
 "Collapse"="Contracter";
+"Colors defined via user-defined runtime attributes, colors from UIColor category"="Couleurs définies via user-defined runtime attributes, couleurs définies dans une catégorie de UIColor";
+"Colors defined via user-defined runtime attributes, colors from UIColor subclass"="Couleurs définies via user-defined runtime attributes, couleurs définies dans une sous-classe de UIColor";
 "Container"="Conteneur";
 "Containment test"="Test d'appartenance";
 "Core"="Core";
@@ -41,6 +40,7 @@
 "Cursor"="Curseur";
 "Custom cell created programmatically"="Cellule personnalisée créée par le code";
 "Custom cell from xib"="Cellule personnalisée au moyen d'un xib";
+"Custom input view"="Vue de saisie personnalisée";
 "Day"="Jour";
 "Delay"="Retard";
 "Demos"="Démos";
@@ -50,6 +50,7 @@
 "Duration"="Durée";
 "Dynamic localization"="Localisation dynamique";
 "E-mail"="E-mail";
+"Effects"="Effets";
 "Enter a search criterium"="Entrez un critère de recherche";
 "Error"="Erreur";
 "Expand"="Etirer";
@@ -57,6 +58,7 @@
 "Fixed size"="Taille fixe";
 "Font"="Police";
 "Font size"="Taille de la police";
+"Fonts"="Polices";
 "Formatting error"="Erreur de formattage";
 "Header: custom cells"="En-tête: cellules personnalisées";
 "Header: simple cells"="En-tête: cellules basiques";
@@ -84,8 +86,7 @@
 "Line break mode"="Mode saut de ligne";
 "Looping"="Boucle";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
-"Middle"="Milieu";
-"Min font size"="Taille de police minimale";
+"Middle"="Milieu";  
 "Missing city"="Ville manquante";
 "Missing country"="Pays manquant";
 "Missing first name"="Prénom manquant";
@@ -133,16 +134,12 @@
 "Resume"="Reprendre";
 "Reverse"="Inversée";
 "Root view controller"="View controller racine";
-"Scrolling"="Défilement";
-"Search bar"="Champ de recherche";
+"Scroll view avoiding the keyboard"="Vue scrollable évitant le clavier";
 "Search books"="Rechercher un livre";
 "Section end"="Fin de section";
 "Segues"="Segues";
-"Segues (not available in bundle)"="Segues (pas disponible dans le bundle)";
-"Segues (not available for iOS 4)"="Segues (pas disponible pour iOS 4)";
 "Single view animation"="Animation d'une seule vue";
 "Size"="Taille";
-"Skinning"="Skinning";
 "Slideshow"="Slideshow";
 "Start"="Démarrer";
 "Start time"="Début";
@@ -163,9 +160,8 @@
 "Test responder chain"="Tester la responder chain";
 "Text"="Texte";
 "Text field for testing keyboard dismissal"="Champ textuel pour tester la disparition du clavier";
-"Text fields"="Champs textuels";
-"The behavior above can be disabled"="Le comportement ci-dessus peut être désactivé";
 "The view controller is not compatible with the container (most probably its orientation)"="Le view controller n'est pas compatible avec le conteneur (probablement au niveau de son orientation)";
+"This field exits edit mode when the user taps outside it"="Ce champ perd le focus lorsque l'utilisateur tape à côté";
 "This value cannot be negative"="Cette valeur ne peut être négative";
 "Top"="Haut";
 "Transition"="Transition";

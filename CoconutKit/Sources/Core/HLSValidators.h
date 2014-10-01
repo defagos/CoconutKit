@@ -3,16 +3,13 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10/13/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 /**
  * Not meant to be instantiated
  */
-@interface HLSValidators : NSObject {
-@private
-    
-}
+@interface HLSValidators : NSObject
 
 /**
  * Validates an e-mail address

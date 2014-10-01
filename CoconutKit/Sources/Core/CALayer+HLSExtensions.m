@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/23/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "CALayer+HLSExtensions.h"
@@ -51,7 +51,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
         HLSLoggerDebug(@"Layer animations have already been paused");
         return;
     }
-    [self setValue:[NSNumber numberWithFloat:self.speed] forKey:kLayerSpeedBeforePauseKey];
+    [self setValue:@(self.speed) forKey:kLayerSpeedBeforePauseKey];
     
     // Call order / use of temporaries is very important here! See remark above!
     CFTimeInterval pausedTime = [self convertTime:CACurrentMediaTime() fromLayer:nil];
@@ -86,14 +86,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
 // See http://developer.apple.com/library/ios/#qa/qa1703/_index.html
 - (UIImage *)flattenedImage
 {
-    // >= iOS 4: Take the scale into account
-    if (UIGraphicsBeginImageContextWithOptions) {
-        UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.f /* use the device scale factor */);
-    }
-    // < iOS 4
-    else {
-        UIGraphicsBeginImageContext(self.bounds.size);
-    }
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.f /* use the device scale factor */);
     
     // -renderInContext: renders in the layer coordinate space, i.e. the origin of the layer is ignored. This has
     // to be fixed before creating the image

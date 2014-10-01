@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 03.11.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSManagedTextFieldValidator.h"
@@ -14,18 +14,13 @@
 #import "NSManagedObject+HLSValidation.h"
 #import "NSObject+HLSExtensions.h"
 
-// This implementation has been swizzled in UITextField+HLSValidation.m
-extern void (*UITextField__setText_Imp)(id, SEL, id);
-
 @interface HLSManagedTextFieldValidator ()
 
-@property (nonatomic, retain) NSManagedObject *managedObject;
-@property (nonatomic, retain) NSString *fieldName;
-@property (nonatomic, retain) NSFormatter *formatter;
-@property (nonatomic, assign) id<HLSTextFieldValidationDelegate> validationDelegate;
-
-- (BOOL)checkValue:(id)value;
-- (void)synchronizeTextField;
+@property (nonatomic, weak) UITextField *textField;               // weak ref. Detector lifetime is managed by the text field
+@property (nonatomic, strong) NSManagedObject *managedObject;
+@property (nonatomic, strong) NSString *fieldName;
+@property (nonatomic, strong) NSFormatter *formatter;
+@property (nonatomic, weak) id<HLSTextFieldValidationDelegate> validationDelegate;
 
 @end
 
@@ -33,17 +28,16 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 
 #pragma mark Object creation and destruction
 
-- (id)initWithTextField:(UITextField *)textField
-          managedObject:(NSManagedObject *)managedObject 
-              fieldName:(NSString *)fieldName 
-              formatter:(NSFormatter *)formatter
-     validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
+- (instancetype)initWithTextField:(UITextField *)textField
+                    managedObject:(NSManagedObject *)managedObject
+                        fieldName:(NSString *)fieldName
+                        formatter:(NSFormatter *)formatter
+               validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
 {
-    if ((self = [super initWithTextField:textField])) {
+    if ((self = [super init])) {
         // Sanity check
         if (! managedObject || ! fieldName) {
             HLSLoggerError(@"Missing managed object or field name");
-            [self release];
             return nil;
         }
         
@@ -51,7 +45,6 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         NSPropertyDescription *propertyDescription = [[[managedObject entity] propertiesByName] objectForKey:fieldName];
         if (! propertyDescription) {
             HLSLoggerError(@"The property %@ does not exist for %@", fieldName, managedObject);
-            [self release];
             return nil;
         }
         
@@ -59,11 +52,11 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         // make sense
         if (! [propertyDescription isKindOfClass:[NSAttributeDescription class]]) {
             HLSLoggerError(@"The field %@ is not an attribute and cannot be bound", fieldName);
-            [self release];
             return nil;
         }
         
         // Binding parameters correct. Remember them
+        self.textField = textField;
         self.managedObject = managedObject;
         self.fieldName = fieldName;
         self.formatter = formatter;
@@ -73,10 +66,15 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         [self synchronizeTextField];
         
         // Enable KVO to update the text field automatically when the model field value changes
-        [self.managedObject addObserver:self
-                             forKeyPath:self.fieldName 
-                                options:0 
-                                context:NULL];
+        [managedObject addObserver:self
+                        forKeyPath:fieldName
+                           options:0
+                           context:NULL];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(textFieldDidChange:)
+                                                     name:UITextFieldTextDidChangeNotification
+                                                   object:textField];
     }
     return self;
 }
@@ -84,47 +82,7 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 - (void)dealloc
 {
     [self.managedObject removeObserver:self forKeyPath:self.fieldName];
-    
-    self.managedObject = nil;
-    self.fieldName = nil;
-    self.formatter = nil;
-    self.validationDelegate = nil;
-    
-    [super dealloc];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize managedObject = m_managedObject;
-
-@synthesize fieldName = m_fieldName;
-
-@synthesize formatter = m_formatter;
-
-@synthesize validationDelegate = m_validationDelegate;
-
-@synthesize checkingOnChange = m_checkingOnChange;
-
-#pragma mark UITextFieldDelegate protocol implementation
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (! [super textField:textField shouldChangeCharactersInRange:range replacementString:string]) {
-        return NO;
-    }
-    
-    // Check when typing?
-    if (self.checkingOnChange) {
-        id value = nil;
-        NSString *updatedText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        if ([self getValue:&value forString:updatedText]) {
-            [self checkValue:value];
-        }
-        
-        // The model is not updated here. It will be when input mode is exited
-    }
-    
-    return YES;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark Sync and check
@@ -204,14 +162,23 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
 {
     // By default, we display an empty string, not nil. As soon as a text field has been edited and is cleared, the empty
     // value is namely an empty string, never nil. The value which therefore makes sense for an empty text field is always
-    // an empty string, not nil
+    // an empty string, not nil. Note that the placeholder text of a text field (if any) is displayed if the string is
+    // empty or nil
     id value = [self.managedObject valueForKey:self.fieldName];
     NSString *text = @"";
     if (value) {
-        if (self.formatter) {
+        // We do not display "0" for numbers equal to zero. This does not make much sense, an empty number text field
+        // means 0, which allows the placeholder text to be displayed in such cases
+        if ([value isKindOfClass:[NSNumber class]] && [value isEqualToNumber:@0]) {
+            text = @"";
+        }
+        else if (self.formatter) {
             NSString *formattedValue = [self.formatter stringForObjectValue:value];
             if (formattedValue) {
                 text = formattedValue;
+            }
+            else {
+                text = @"";
             }
         }
         else {
@@ -219,9 +186,7 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
         }            
     }
     
-    // Set the value. Use the original setter to avoid triggering validation again (which is why the setter has
-    // been swizzled)
-    (*UITextField__setText_Imp)(self.textField, @selector(setText:), text);
+    self.textField.text = text;
 }
 
 #pragma mark Key-value observing
@@ -238,18 +203,32 @@ extern void (*UITextField__setText_Imp)(id, SEL, id);
     [self synchronizeTextField];
 }
 
+#pragma mark Notification callbacks
+
+- (void)textFieldDidChange:(NSNotification *)notification
+{
+    // Check when typing?
+    if (self.checkingOnChange) {
+        id value = nil;
+        if ([self getValue:&value forString:self.textField.text]) {
+            [self checkValue:value];
+        }
+        
+        // The model is not updated here. It will be when input mode is exited
+    }
+}
+
 #pragma mark Description
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; textField: %@; managedObject: %@; fieldName: %@; formatter: %@; delegate: %@>", 
+    return [NSString stringWithFormat:@"<%@: %p; textField: %@; managedObject: %@; fieldName: %@; formatter: %@>", 
             [self class],
             self,
             self.textField,
             self.managedObject,
             self.fieldName,
-            self.formatter,
-            self.delegate];
+            self.formatter];
 }
 
 @end

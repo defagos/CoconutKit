@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/10/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "CoconutKit_demoAppDelegate.h"
@@ -16,39 +16,30 @@ HLSEnableUIControlExclusiveTouch();
 // Enable Core Data easy validation
 HLSEnableNSManagedObjectValidation();
 
-// Enable preloading
-HLSEnableApplicationPreloading();
-
 @interface CoconutKit_demoAppDelegate ()
 
-@property (nonatomic, retain) CoconutKit_demoApplication *application;
+@property (nonatomic, strong) CoconutKit_demoApplication *application;
 
 @end
 
 @implementation CoconutKit_demoAppDelegate
 
-#pragma mark Object construction and destruction
-
-- (void)dealloc
-{
-    self.application = nil;
-    self.window = nil;
-    [super dealloc];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize application = m_application;
-
-@synthesize window = m_window;
-
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
+{
+    // We do not assign to the optional property, to ensure that CoconutKit does not rely on this property
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     
-    self.application = [[[CoconutKit_demoApplication alloc] init] autorelease];
+    // Use optional preloading provided by CoconutKit
+    [application preload];
+    
+    // Instead of using the UIAppFonts key in the plist to load the Beon font, do it in code
+    [UIFont loadFontWithFileName:@"Beon-Regular.otf" inBundle:nil];
+    
+    self.application = [[CoconutKit_demoApplication alloc] init];
     self.window.rootViewController = [self.application rootViewController];
     
     return YES;

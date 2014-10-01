@@ -3,11 +3,12 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 7/14/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 /**
- * Logging macros. Only active if HLS_LOGGER is added to your configuration preprocessor flags (-DHLS_LOGGER)
+ * Logging macros. Only active if HLS_LOGGER is added to your configuration preprocessor flags (-DHLS_LOGGER). You can also use this macro in your
+ * own code if you need to enable or disable logging-specific code for some of your configurations
  */
 #ifdef HLS_LOGGER
 
@@ -31,7 +32,7 @@
 /**
  * Logging levels
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSLoggerLevel) {
 	HLSLoggerLevelEnumBegin = 0,
 	// Values
 	HLSLoggerLevelAll = HLSLoggerLevelEnumBegin,
@@ -44,37 +45,40 @@ typedef enum {
 	// End of values
 	HLSLoggerLevelEnumEnd = HLSLoggerLevelNone,
     HLSLoggerLevelEnumSize = HLSLoggerLevelEnumEnd - HLSLoggerLevelEnumBegin
-} HLSLoggerLevel;
+};
 
 /**
- * Basic logging facility writing to the console. Thread-safe
+ * Basic logging facility writing to the console or to files, and providing an in-app log viewer. Thread-safe
  *
  * To enable logging, you can use either the release or debug version of this library, the logging code exists in both
  * (the linker ensures that you do not pay for it if your do not actually use it). To add logging to your project,
- * use the logging macros above. Those will strip off the logging code for your release builds. Debug builds with
- * logging enabled must be configured as follows:
- *   - in your project target settings, add -DHLS_LOGGER to the "Other C flags" parameter. This disables logging code
- *     stripping
- *   - add an HLSLoggerLevel setting to your project main .plist file, with one of the following values (DEBUG, INFO,
- *     WARN, ERROR or FATAL). This sets the logging level to apply
+ * use the logging macros above. Those will remove the logging code for your release builds, this is why you must
+ * add -DHLS_LOGGER to the "Other C flags" parameter for the target / configuration for which logging must be available.
+ * The default logging level is info.
  *
  * HLSLogger supports XcodeColors (see https://github.com/robbiehanson/XcodeColors for the active fork), an Xcode plugin
  * adding colors to the Xcode debugging console. Simply install the plugin and set an environment variable called 
  * 'XcodeColors' to YES to enable it for your project.
  *
- * Designated initializer: -initWithLevel:
+ * You should not instantiate an HLSLogger object yourself. Use the singleton class method instead
  */
-@interface HLSLogger : NSObject {
-@private
-	HLSLoggerLevel m_level;
-}
+@interface HLSLogger : NSObject
 
 /**
  * Singleton instance fetcher
  */
-+ (HLSLogger *)sharedLogger;
++ (instancetype)sharedLogger;
 
-- (id)initWithLevel:(HLSLoggerLevel)level;
+/**
+ * The logger level. The default value is HLSLoggerLevelInfo
+ */
+@property (nonatomic, assign) HLSLoggerLevel level;
+
+/**
+ * Enable or disable logging to a file at runtime. The sharedLogger instance logs files in /Library/HLSLogger. The default 
+ * value is NO
+ */
+@property (nonatomic, assign, getter=isFileLoggingEnabled) BOOL fileLoggingEnabled;
 
 /**
  * Logging functions; should never be called directly, use the macros instead
@@ -93,5 +97,10 @@ typedef enum {
 - (BOOL)isWarn;
 - (BOOL)isError;
 - (BOOL)isFatal;
+
+/**
+ * Display a modal window containing log settings and log file history
+ */
+- (void)showSettings;
 
 @end

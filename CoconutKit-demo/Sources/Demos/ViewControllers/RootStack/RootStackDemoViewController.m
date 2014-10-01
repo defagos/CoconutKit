@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 21.09.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "RootStackDemoViewController.h"
@@ -13,59 +13,19 @@
 
 @interface RootStackDemoViewController ()
 
-- (void)displayViewController:(UIViewController *)viewController;
-
-- (void)closeNativeContainer:(id)sender;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *backBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIButton *popButton;
+@property (nonatomic, weak) IBOutlet UIPickerView *transitionPickerView;
+@property (nonatomic, weak) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *portraitSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *landscapeRightSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *landscapeLeftSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *portraitUpsideDownSwitch;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
 @end
 
 @implementation RootStackDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.backBarButtonItem = nil;
-    self.actionSheetBarButtonItem = nil;
-    self.popButton = nil;
-    
-    // Avoid a crash when popping a view controller in the root stack demo in the iOS simulator (no crash on the device). This
-    // seems related to the accessibility inspector feature of the iOS simulator
-    self.transitionPickerView.dataSource = nil;
-    self.transitionPickerView.delegate = nil;
-    
-    self.transitionPickerView = nil;
-    self.animatedSwitch = nil;
-    self.autorotationModeSegmentedControl = nil;
-    self.portraitSwitch = nil;
-    self.landscapeRightSwitch = nil;
-    self.landscapeLeftSwitch = nil;
-    self.portraitUpsideDownSwitch = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize backBarButtonItem = m_backBarButtonItem;
-
-@synthesize actionSheetBarButtonItem = m_actionSheetBarButtonItem;
-
-@synthesize popButton = m_popButton;
-
-@synthesize transitionPickerView = m_transitionPickerView;
-
-@synthesize animatedSwitch = m_animatedSwitch;
-
-@synthesize portraitSwitch = m_portraitSwitch;
-
-@synthesize landscapeRightSwitch = m_landscapeRightSwitch;
-
-@synthesize landscapeLeftSwitch = m_landscapeLeftSwitch;
-
-@synthesize portraitUpsideDownSwitch = m_portraitUpsideDownSwitch;
-
-@synthesize autorotationModeSegmentedControl = m_autorotationModeSegmentedControl;
 
 #pragma mark View lifecycle
 
@@ -223,13 +183,12 @@
     [super localize];
     
     self.backBarButtonItem.title = HLSLocalizedStringFromUIKit(@"Back");
-    self.actionSheetBarButtonItem.title = NSLocalizedString(@"Action sheet", @"Action sheet");
     
     if (self == [self.stackController rootViewController]) {
-        [self.popButton setTitle:NSLocalizedString(@"Close", @"Close") forState:UIControlStateNormal];
+        [self.popButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
     }
     else {
-        [self.popButton setTitle:NSLocalizedString(@"Pop", @"Pop") forState:UIControlStateNormal];
+        [self.popButton setTitle:NSLocalizedString(@"Pop", nil) forState:UIControlStateNormal];
     }
 }
 
@@ -267,14 +226,14 @@
 
 - (IBAction)push:(id)sender
 {
-    RootStackDemoViewController *demoViewController = [[[RootStackDemoViewController alloc] init] autorelease];
+    RootStackDemoViewController *demoViewController = [[RootStackDemoViewController alloc] init];
     [self displayViewController:demoViewController];
 }
 
 - (IBAction)pop:(id)sender
 {
     if (self == [self.stackController rootViewController]) {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
         [self.stackController popViewControllerAnimated:self.animatedSwitch.on];
@@ -283,52 +242,35 @@
 
 - (IBAction)pushTabBarController:(id)sender
 {
-    StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
-                                                                                                   style:UIBarButtonItemStyleDone 
-                                                                                                  target:self 
-                                                                                                  action:@selector(closeNativeContainer:)] autorelease];
-    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
+    StretchableViewController *stretchableViewController = [[StretchableViewController alloc] init];
+    stretchableViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
+                                                                                                  style:UIBarButtonItemStyleDone
+                                                                                                 target:self
+                                                                                                 action:@selector(closeNativeContainer:)];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:stretchableViewController];
     navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
-    UITabBarController *tabBarController = [[[UITabBarController alloc] init] autorelease];
-    tabBarController.viewControllers = [NSArray arrayWithObject:navigationController];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[navigationController];
     [self displayViewController:tabBarController];    
 }
 
 - (IBAction)pushNavigationController:(id)sender
 {
-    StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
-    stretchableViewController.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close")
-                                                                                                   style:UIBarButtonItemStyleDone 
-                                                                                                  target:self 
-                                                                                                  action:@selector(closeNativeContainer:)] autorelease];
-    UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:stretchableViewController] autorelease];
+    StretchableViewController *stretchableViewController = [[StretchableViewController alloc] init];
+    stretchableViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil)
+                                                                                                  style:UIBarButtonItemStyleDone
+                                                                                                 target:self
+                                                                                                 action:@selector(closeNativeContainer:)];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:stretchableViewController];
     navigationController.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
     [self displayViewController:navigationController];
 }
 
 - (IBAction)hideWithModal:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[MemoryWarningTestCoverViewController alloc] init];
     memoryWarningTestCoverViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
-}
-
-- (IBAction)showActionSheet:(id)sender
-{
-    // Just to test behavior during pop
-    HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
-    [actionSheet addButtonWithTitle:@"1"
-                             target:self
-                             action:NULL];
-    [actionSheet addButtonWithTitle:@"2"
-                             target:self
-                             action:NULL];
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel") target:self action:NULL];
-    }
-    
-    [actionSheet showFromBarButtonItem:self.actionSheetBarButtonItem animated:YES];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 - (void)closeNativeContainer:(id)sender

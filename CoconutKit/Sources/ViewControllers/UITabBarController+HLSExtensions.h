@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10/16/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAutorotation.h"
@@ -13,8 +13,7 @@
 /**
  * Set how a tab bar controller decides whether it must rotate or not
  *
- * HLSAutorotationModeContainer: The original UIKit behavior is used (the child view controllers decide on iOS 4 and 5,
- *                               none on iOS 6)
+ * HLSAutorotationModeContainer: The original UIKit behavior is used
  * HLSAutorotationModeContainerAndNoChildren: No children decide whether rotation occur, and none receive the
  *                                            related events
  * HLSAutorotationModeContainerAndTopChildren

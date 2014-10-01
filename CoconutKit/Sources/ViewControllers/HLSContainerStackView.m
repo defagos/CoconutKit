@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/5/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSContainerStackView.h"
@@ -13,9 +13,7 @@
 
 @interface HLSContainerStackView ()
 
-@property (nonatomic, retain) NSMutableArray *groupViews;
-
-- (NSUInteger)indexOfContentView:(UIView *)contentView;
+@property (nonatomic, strong) NSMutableArray *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
 
 @end
 
@@ -23,7 +21,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
         self.groupViews = [NSMutableArray array];
@@ -33,19 +31,7 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.groupViews = nil;
-    self.delegate = nil;
-
-    [super dealloc];
-}
-
 #pragma mark Accessors and mutators
-
-@synthesize groupViews = m_groupViews;
-
-@synthesize delegate = m_delegate;
 
 - (void)setFrame:(CGRect)frame
 {
@@ -80,7 +66,7 @@
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index
 {
     if (index > [self.groupViews count]) {
-        HLSLoggerWarn(@"Invalid index %d. Expected in [0;%d]", index, [self.groupViews count]);
+        HLSLoggerWarn(@"Invalid index %ld. Expected in [0;%lu]", (long)index, (unsigned long)[self.groupViews count]);
         return;
     }
     
@@ -88,7 +74,7 @@
     if (index == [self.groupViews count]) {
         HLSContainerGroupView *topGroupView = [self.groupViews lastObject];
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView] autorelease];
+        HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = topGroupView;
         
         [self.groupViews addObject:newGroupView];
@@ -99,7 +85,7 @@
         HLSContainerGroupView *groupViewAtIndex = [self.groupViews objectAtIndex:index];
         HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
         
-        HLSContainerGroupView *newGroupView = [[[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView] autorelease];
+        HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = belowGroupViewAtIndex;
         groupViewAtIndex.backContentView = newGroupView;
         

@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 11/3/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "NSString+HLSExtensions.h"
@@ -11,6 +11,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "HLSFloat.h"
 #import "HLSLogger.h"
+#import "NSData+HLSExtensions.h"
 
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {
@@ -18,7 +19,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 	unsigned char md[digestLength];     // C99
     memset(md, 0, sizeof(md));
     const char *utf8str = [string UTF8String];
-	cc_digest(utf8str, strlen(utf8str), md);
+	cc_digest(utf8str, (CC_LONG)strlen(utf8str), md);
     
     // Hexadecimal representation
     NSMutableString *hexHash = [NSMutableString string];
@@ -43,67 +44,16 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return [[self stringByTrimmingWhitespaces] length] != 0;
 }
 
-#pragma mark Font size adjustment
-
-// Based on: http://stackoverflow.com/questions/4382976/multiline-uilabel-with-adjustsfontsizetofitwidth
-- (CGFloat)fontSizeWithFont:(UIFont *)font 
-          constrainedToSize:(CGSize)size 
-                minFontSize:(CGFloat)minFontSize
-              numberOfLines:(NSUInteger)numberOfLines
-{    
-    if (floatle(font.pointSize, minFontSize)) {
-        return minFontSize;
-    }
-    
-    if (numberOfLines == 0) {
-        HLSLoggerWarn(@"The number of lines must be different from 0");
-        return font.pointSize;
-    }
-    
-    CGFloat height = [self sizeWithFont:font
-                      constrainedToSize:CGSizeMake(size.width, FLT_MAX)
-                          lineBreakMode:UILineBreakModeWordWrap].height;
-    
-    // Empty text
-    if (floateq(height, 0.f)) {
-        return font.pointSize;
-    }
-    
-    CGFloat lineHeight = [self sizeWithFont:font
-                          constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX)
-                              lineBreakMode:UILineBreakModeWordWrap].height;
-    
-    // Reduce the font size so that the text fits vertically
-    UIFont *newFont = font;
-    while (floatgt(height, size.height) || floatgt(ceilf(height / lineHeight), numberOfLines)) {
-        if (floatle(newFont.pointSize, minFontSize)) {
-            return minFontSize;
-        }
-        
-        newFont = [UIFont fontWithName:font.fontName size:newFont.pointSize - 1.f];
-        height = [self sizeWithFont:newFont 
-                  constrainedToSize:CGSizeMake(size.width, FLT_MAX) 
-                      lineBreakMode:UILineBreakModeWordWrap].height;
-        
-        lineHeight = [self sizeWithFont:newFont 
-                      constrainedToSize:CGSizeMake(FLT_MAX, FLT_MAX) 
-                          lineBreakMode:UILineBreakModeWordWrap].height;        
-    }
-    
-    return newFont.pointSize;
-}
-
 #pragma mark URL encoding
 
 - (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
 {
     CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
-                                                                                 (CFStringRef)self, 
-                                                                                 NULL, 
-                                                                                 CFSTR("!*'();:@&=+$,/?%#[]"), 
-                                                                                 cfEncoding));
-    return [result autorelease];
+    return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                     (__bridge CFStringRef)self,
+                                                                     NULL,
+                                                                     CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                                     cfEncoding));
 }
 
 #pragma mark Hash digests
@@ -160,6 +110,19 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
         }
     }
     return self;
+}
+
+- (NSString *)MIMEType
+{
+    NSString *pathExtension = [self pathExtension];
+    if (! pathExtension) {
+        return nil;
+    }
+    
+    CFStringRef identifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)pathExtension, NULL);
+    NSString *MIMEType = (NSString *)CFBridgingRelease(UTTypeCopyPreferredTagWithClass(identifier, kUTTagClassMIMEType));
+    CFRelease(identifier);
+    return MIMEType;
 }
 
 @end

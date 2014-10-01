@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10.12.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSError.h"
@@ -18,7 +18,7 @@
  * We do not use the NSError userInfo dictionary since it is set at NSError creation time and cannot be updated afterwards.
  * Instead, we use our own internal dictionary
  */
-@property (nonatomic, retain) NSDictionary *internalUserInfo;
+@property (nonatomic, strong) NSDictionary *internalUserInfo;
 
 @end
 
@@ -26,12 +26,12 @@
 
 #pragma mark Class methods
 
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code
 {
-    return [[[[self class] alloc] initWithDomain:domain code:code] autorelease];
+    return [[[self class] alloc] initWithDomain:domain code:code];
 }
 
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription
 {
     HLSError *error = [HLSError errorWithDomain:domain code:code];
     [error setLocalizedDescription:localizedDescription];
@@ -40,24 +40,21 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithDomain:(NSString *)domain code:(NSInteger)code
+- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code
 {
     if ((self = [super initWithDomain:domain code:code userInfo:nil /* not used */])) {
-        self.internalUserInfo = [NSDictionary dictionary];
+        self.internalUserInfo = @{};
     }
     return self;
 }
 
-- (void)dealloc
+- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)userInfo
 {
-    self.internalUserInfo = nil;
-    
-    [super dealloc];
+    HLSForbiddenInheritedMethod();
+    return [self initWithDomain:nil code:0];
 }
 
 #pragma mark Accessors and mutators
-
-@synthesize internalUserInfo = m_internalUserInfo;
 
 - (NSDictionary *)userInfo
 {

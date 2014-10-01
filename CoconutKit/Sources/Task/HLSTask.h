@@ -3,11 +3,10 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/17/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 // Forward declarations
-@class HLSTaskGroup;
 @protocol HLSTaskDelegate;
 
 #define kTaskNoTimeIntervalEstimateAvailable        -1.
@@ -20,25 +19,13 @@
  * A task must not be submitted several times simultaneously (this leads to undefined behavior). A task
  * which was fully processed can be submitted again (and with another delegate if needed), but only when it
  * is not running anymore.
- *
- * Designated initializer: -init
  */
-@interface HLSTask : NSObject {
-@private
-    NSString *_tag;
-    NSDictionary *_userInfo;
-    BOOL _running;
-    BOOL _finished;
-    BOOL _cancelled;
-    float _progress;
-    NSTimeInterval _remainingTimeIntervalEstimate;
-    NSDate *_lastEstimateDate;              // date & time when the remaining time was previously estimated ...
-    float _lastEstimateProgress;            // ... and corresponding progress value 
-    NSUInteger _progressStepsCounter; 
-    NSDictionary *_returnInfo;
-    NSError *_error;
-    HLSTaskGroup *_taskGroup;               // parent task group if any, nil if none
-}
+@interface HLSTask : NSObject
+
+/**
+ * Create a task
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Class responsible of processing the task. Must be a subclass of HLSTaskOperation
@@ -50,13 +37,13 @@
  * Optional tag to identify a task
  * Not meant to be overridden
  */
-@property (nonatomic, retain) NSString *tag;
+@property (nonatomic, strong) NSString *tag;
 
 /**
  * Dictionary which can be used freely to convey additional information
  * Not meant to be overridden
  */
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 /**
  * Return YES if the task processing is running
@@ -102,13 +89,13 @@
  * NSDictionary which can freely be used to convey return information
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, retain) NSDictionary *returnInfo;
+@property (nonatomic, readonly, strong) NSDictionary *returnInfo;
 
 /**
  * When the process is complete, check this property to find out if an error was encountered
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, retain) NSError *error;
+@property (nonatomic, readonly, strong) NSError *error;
 
 @end
 

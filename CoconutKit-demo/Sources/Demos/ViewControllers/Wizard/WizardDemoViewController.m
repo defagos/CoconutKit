@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/28/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "WizardDemoViewController.h"
@@ -15,17 +15,15 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.delegate = self;
         self.wizardTransitionStyle = HLSWizardTransitionStylePushHorizontally; 
         
-        WizardIdentityPageViewController *wizardIdentityPageController = [[[WizardIdentityPageViewController alloc] init] autorelease];
-        WizardAddressPageViewController *wizardAddressPageController = [[[WizardAddressPageViewController alloc] init] autorelease];
-        self.viewControllers = [NSArray arrayWithObjects:wizardIdentityPageController,
-                                                    wizardAddressPageController,
-                                                    nil];
+        WizardIdentityPageViewController *wizardIdentityPageController = [[WizardIdentityPageViewController alloc] init];
+        WizardAddressPageViewController *wizardAddressPageController = [[WizardAddressPageViewController alloc] init];
+        self.viewControllers = @[wizardIdentityPageController, wizardAddressPageController];
     }
     return self;
 }

@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/21/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAnimationStep.h"
@@ -18,9 +18,9 @@
 
 @interface HLSAnimationStep ()
 
-@property (nonatomic, retain) NSMutableArray *objectKeys;
-@property (nonatomic, retain) NSMutableDictionary *objectToObjectAnimationMap;
-@property (nonatomic, retain) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
+@property (nonatomic, strong) NSMutableArray *objectKeys;
+@property (nonatomic, strong) NSMutableDictionary *objectToObjectAnimationMap;
+@property (nonatomic, strong) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
 @property (nonatomic, assign, getter=isCancelling) BOOL terminating;
 
 @end
@@ -29,14 +29,14 @@
 
 #pragma mark Convenience methods
 
-+ (id)animationStep
++ (instancetype)animationStep
 {
-    return [[[[self class] alloc] init] autorelease];
+    return [[[self class] alloc] init];
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.objectKeys = [NSMutableArray array];
@@ -48,55 +48,30 @@
     return self;
 }
 
-- (void)dealloc
-{    
-    self.objectKeys = nil;
-    self.objectToObjectAnimationMap = nil;
-    self.tag = nil;
-    self.userInfo = nil;
-    self.delegate = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark Accessors and mutators
-
-@synthesize objectKeys = m_objectKeys;
-
-@synthesize objectToObjectAnimationMap = m_objectToObjectAnimationMap;
-
-@synthesize tag = m_tag;
-
-@synthesize userInfo = m_userInfo;
-
-@synthesize duration = m_duration;
 
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
     if (doublelt(duration, 0.)) {
         HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
-        m_duration = 0.;
+        _duration = 0.;
     }
     else {
-        m_duration = duration;
+        _duration = duration;
     }
 }
-
-@synthesize delegate = m_delegate;
 
 - (BOOL)isPaused
 {
     return [self isAnimationPaused];
 }
 
-@synthesize terminating = m_terminating;
-
 - (NSArray *)objects
 {
     NSMutableArray *objects = [NSMutableArray array];
     for (NSValue *objectKey in self.objectKeys) {
-        id object = [objectKey pointerValue];
+        id object = [objectKey nonretainedObjectValue];
         [objects addObject:object];
     }
     return [NSArray arrayWithArray:objects];
@@ -112,13 +87,13 @@
     }
     
     if (! object) {
-        HLSLoggerDebug(@"No object to animated");
+        HLSLoggerDebug(@"No object to animate");
         return;
     }
     
-    NSValue *objectKey = [NSValue valueWithPointer:object];
+    NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     [self.objectKeys addObject:objectKey];
-    [self.objectToObjectAnimationMap setObject:[[objectAnimation copy] autorelease] forKey:objectKey];
+    [self.objectToObjectAnimationMap setObject:[objectAnimation copy] forKey:objectKey];
 }
 
 - (id)objectAnimationForObject:(id)object
@@ -127,7 +102,7 @@
         return nil;
     }
     
-    NSValue *objectKey = [NSValue valueWithPointer:object];
+    NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     return [self.objectToObjectAnimationMap objectForKey:objectKey];
 }
 
@@ -271,7 +246,7 @@
     HLSAnimationStep *animationStepCopy = [[[self class] allocWithZone:zone] init];
     for (id object in [self objects]) {
         HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
-        HLSObjectAnimation *objectAnimationCopy = [[objectAnimation copyWithZone:zone] autorelease];
+        HLSObjectAnimation *objectAnimationCopy = [objectAnimation copyWithZone:zone];
         [animationStepCopy addObjectAnimation:objectAnimationCopy forObject:object];
     }
     animationStepCopy.tag = self.tag;

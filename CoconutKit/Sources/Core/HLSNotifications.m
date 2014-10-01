@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel DEFAGO on 09.06.10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSNotifications.h"
@@ -21,14 +21,14 @@
  */
 @interface NotificationSender : NSObject {
 @private
-    NSString *m_notificationName;
-    id m_object;
+    NSString *_notificationName;
+    id __weak _object;
 }
 
-- (id)initWithNotificationName:(NSString *)notificationName forObject:(id)object;
+- (instancetype)initWithNotificationName:(NSString *)notificationName forObject:(id)object NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, retain) NSString *notificationName;
-@property (nonatomic, assign) id object;
+@property (nonatomic, strong) NSString *notificationName;
+@property (nonatomic, weak) id object;
 
 @end
 
@@ -37,37 +37,36 @@
 
 @interface HLSNotificationConverter ()
 
-@property (nonatomic, retain) NSMutableDictionary *objectToNotificationMap;
-
-- (NSString *)buildIdentifierForObject:(id)object;
-
-- (void)convertNotification:(NSNotification *)notification;
+@property (nonatomic, strong) NSMutableDictionary *objectToNotificationMap;
 
 @end
 
 #pragma mark -
 #pragma mark HLSNotificationManager class implementation
 
-@implementation HLSNotificationManager
+@implementation HLSNotificationManager  {
+@private
+    NSUInteger _networkActivityCount;
+}
 
 #pragma mark Class methods
 
-+ (HLSNotificationManager *)sharedNotificationManager
++ (instancetype)sharedNotificationManager
 {
     static HLSNotificationManager *s_instance = nil;
-    
-    if (! s_instance) {
-        s_instance = [[HLSNotificationManager alloc] init];
-    }
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_instance = [[[self class] alloc] init];
+    });
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
-        m_networkActivityCount = 0;
+        _networkActivityCount = 0;
     }
     return self;
 }
@@ -76,27 +75,27 @@
 
 - (void)notifyBeginNetworkActivity
 {
-    ++m_networkActivityCount;
+    ++_networkActivityCount;
     
-    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %lu", (unsigned long)_networkActivityCount);
     
-    if (m_networkActivityCount == 1) {
+    if (_networkActivityCount == 1) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     }
 }
 
 - (void)notifyEndNetworkActivity
 {
-    if (m_networkActivityCount == 0) {
+    if (_networkActivityCount == 0) {
         HLSLoggerWarn(@"Warning: Notifying the end of a network activity which has not been started");
         return;
     }
     
-    --m_networkActivityCount;
+    --_networkActivityCount;
     
-    HLSLoggerDebug(@"Network activity counter is now %d", m_networkActivityCount);
+    HLSLoggerDebug(@"Network activity counter is now %lu", (unsigned long)_networkActivityCount);
     
-    if (m_networkActivityCount == 0) {
+    if (_networkActivityCount == 0) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;        
     }
 }
@@ -110,7 +109,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithNotificationName:(NSString *)notificationName forObject:(id)object
+- (instancetype)initWithNotificationName:(NSString *)notificationName forObject:(id)object
 {
     if ((self = [super init])) {
         self.notificationName = notificationName;
@@ -118,19 +117,6 @@
     }
     return self;
 }
-
-- (void)dealloc
-{
-    self.notificationName = nil;
-    self.object = nil;
-    [super dealloc];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize notificationName = m_notificationName;
-
-@synthesize object = m_object;
 
 @end
 
@@ -141,35 +127,25 @@
 
 #pragma mark Class methods
 
-+ (HLSNotificationConverter *)sharedNotificationConverter
++ (instancetype)sharedNotificationConverter
 {
     static HLSNotificationConverter *s_instance = nil;
-    
-    if (! s_instance) {
-        s_instance = [[HLSNotificationConverter alloc] init];
-    }
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_instance = [[[self class] alloc] init];
+    });
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.objectToNotificationMap = [NSMutableDictionary dictionary];
     }
     return self;
 }
-
-- (void)dealloc
-{
-    self.objectToNotificationMap = nil;
-    [super dealloc];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize objectToNotificationMap = m_objectToNotificationMap;
 
 #pragma mark (Un)registering conversion rules
 
@@ -189,7 +165,7 @@
     // Get the associated notification map, or create it if it does not exist
     NSMutableDictionary *notificationMap = [self.objectToNotificationMap objectForKey:fromIdentifier];
     if (! notificationMap) {
-        notificationMap = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
+        notificationMap = [[NSMutableDictionary alloc] initWithCapacity:1];
         [self.objectToNotificationMap setObject:notificationMap forKey:fromIdentifier];
     }
     
@@ -199,9 +175,8 @@
     }
     
     // Create the rule object describing the new receiver
-    NotificationSender *toSender = [[[NotificationSender alloc] initWithNotificationName:notificationNameTo
-                                                                               forObject:objectTo]
-                                    autorelease];
+    NotificationSender *toSender = [[NotificationSender alloc] initWithNotificationName:notificationNameTo
+                                                                              forObject:objectTo];
     
     // Add the new rule
     [notificationMap setObject:toSender forKey:notificationNameFrom];

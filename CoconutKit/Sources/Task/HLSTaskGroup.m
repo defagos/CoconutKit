@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/17/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTaskGroup.h"
@@ -23,39 +23,34 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @interface HLSTaskGroup ()
 
-@property (nonatomic, retain) NSMutableSet *taskSet;
-@property (nonatomic, retain) NSMutableDictionary *weakTaskDependencyMap;
-@property (nonatomic, retain) NSMutableDictionary *strongTaskDependencyMap;
-@property (nonatomic, retain) NSMutableDictionary *taskToWeakDependentsMap;
-@property (nonatomic, retain) NSMutableDictionary *taskToStrongDependentsMap;
+@property (nonatomic, strong) NSMutableSet *taskSet;                                    // contains HLSTask objects
+
+// Dependencies between tasks are saved in both directions for faster lookup
+@property (nonatomic, strong) NSMutableDictionary *weakTaskDependencyMap;               // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
+@property (nonatomic, strong) NSMutableDictionary *strongTaskDependencyMap;             // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
+@property (nonatomic, strong) NSMutableDictionary *taskToWeakDependentsMap;             // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
+@property (nonatomic, strong) NSMutableDictionary *taskToStrongDependentsMap;           // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
+
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isFinished) BOOL finished;
 @property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
-@property (nonatomic, assign) float progress;
-@property (nonatomic, assign) float fullProgress;
-@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
-@property (nonatomic, retain) NSDate *lastEstimateDate;
-
-- (void)updateStatus;
-
-- (NSSet *)dependenciesForTask:(HLSTask *)task;
-- (NSSet *)weakDependenciesForTask:(HLSTask *)task;
-- (NSSet *)strongDependenciesForTask:(HLSTask *)task;
-
-- (NSSet *)dependentsForTask:(HLSTask *)task;
-- (NSSet *)weakDependentsForTask:(HLSTask *)task;
-- (NSSet *)strongDependentsForTask:(HLSTask *)task;
-
-- (void)reset;
+@property (nonatomic, assign) float progress;                                           // all individual progress values added
+@property (nonatomic, assign) float fullProgress;                                       // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
+@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;             // date & time when the remaining time was previously estimated ...
+@property (nonatomic, strong) NSDate *lastEstimateDate;
 
 @end
 
-@implementation HLSTaskGroup
+@implementation HLSTaskGroup {
+@private
+    float _lastEstimateFullProgress;            // the progress value when the remaining time was previously estimated (lastEstimateDate)
+    NSUInteger _fullProgressStepsCounter;
+    NSUInteger _nbrFailures;
+}
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         self.taskSet = [NSMutableSet set];
@@ -68,50 +63,12 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     return self;
 }
 
-- (void)dealloc
-{
-    self.tag = nil;
-    self.userInfo = nil;
-    self.taskSet = nil;
-    self.weakTaskDependencyMap = nil;
-    self.strongTaskDependencyMap = nil;
-    self.taskToWeakDependentsMap = nil;
-    self.taskToStrongDependentsMap = nil;
-    self.lastEstimateDate = nil;
-    [super dealloc];
-}
-
-#pragma mark -
 #pragma mark Accessors and mutators
-
-@synthesize tag = _tag;
-
-@synthesize userInfo = _userInfo;
-
-@synthesize taskSet = _taskSet;
 
 - (NSSet *)tasks
 {
     return [NSSet setWithSet:self.taskSet];
 }
-
-@synthesize weakTaskDependencyMap = _weakTaskDependencyMap;
-
-@synthesize strongTaskDependencyMap = _strongTaskDependencyMap;
-
-@synthesize taskToWeakDependentsMap = _taskToWeakDependentsMap;
-
-@synthesize taskToStrongDependentsMap = _taskToStrongDependentsMap;
-
-@synthesize running = _running;
-
-@synthesize finished = _finished;
-
-@synthesize cancelled = _cancelled;
-
-@synthesize progress = _progress;
-
-@synthesize fullProgress = _fullProgress;
 
 - (void)setFullProgress:(float)fullProgress
 {
@@ -162,8 +119,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize remainingTimeIntervalEstimate = _remainingTimeIntervalEstimate;
-
 - (NSTimeInterval)remainingTimeIntervalEstimate
 {
     if (! self.finished && ! self.cancelled) {
@@ -174,9 +129,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     }
 }
 
-@synthesize lastEstimateDate = _lastEstimateDate;
-
-
 - (NSUInteger)nbrFailures
 {
     return _nbrFailures;
@@ -185,7 +137,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
 {
     if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
-        return NSLocalizedStringFromTableInBundle(@"No remaining time estimate available", @"Localizable", [NSBundle coconutKitBundle], @"No remaining time estimate available");
+        return CoconutKitLocalizedString(@"No remaining time estimate available", nil);
     }
     
     NSTimeInterval timeInterval = self.remainingTimeIntervalEstimate;
@@ -196,20 +148,19 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     NSUInteger minutes = timeInterval / 60;
     
     if (days != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dd %dh remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%dd %dh remaining (estimate)"), days, hours];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%dd %dh remaining (estimate)", nil), days, hours];
     }
     else if (hours != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%dh %dm remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%dh %dm remaining (estimate)"), hours, minutes];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%dh %dm remaining (estimate)", nil), hours, minutes];
     }
     else if (minutes != 0) {
-        return [NSString stringWithFormat:NSLocalizedStringFromTableInBundle(@"%d min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"%d min remaining (estimate)"), minutes];
+        return [NSString stringWithFormat:CoconutKitLocalizedString(@"%d min remaining (estimate)", nil), minutes];
     }
     else {
-        return NSLocalizedStringFromTableInBundle(@"< 1 min remaining (estimate)", @"Localizable", [NSBundle coconutKitBundle], @"< 1 min remaining (estimate)");
+        return CoconutKitLocalizedString(@"< 1 min remaining (estimate)", nil);
     }
 }
 
-#pragma mark -
 #pragma mark Managing tasks
 
 - (void)addTask:(HLSTask *)task
@@ -223,7 +174,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     task.taskGroup = self;
 }
 
-#pragma mark -
 #pragma mark Recalculating the task group status
 
 - (void)updateStatus
@@ -258,7 +208,6 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     self.finished = finished;
 }
 
-#pragma mark -
 #pragma mark Managing dependencies
 
 - (void)addDependencyForTask:(HLSTask *)task1 onTask:(HLSTask *)task2 strong:(BOOL)strong
@@ -279,7 +228,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     }
     
     // A dependency is either weak or strong, and cannot be registered several times
-    NSValue *task1Key = [NSValue valueWithPointer:task1];
+    NSValue *task1Key = [NSValue valueWithNonretainedObject:task1];
     NSMutableSet *task1WeakDependencies = [self.weakTaskDependencyMap objectForKey:task1Key];
     if ([task1WeakDependencies containsObject:task2]) {
         HLSLoggerError(@"Task %@ already registered as weak dependency on task %@", task1, task2);
@@ -304,7 +253,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     
     // Register the inverse relation, i.e. task1 in the dependents of task2
     NSMutableDictionary *taskToDependentsMap = strong ? self.taskToStrongDependentsMap : self.taskToWeakDependentsMap;
-    NSValue *task2Key = [NSValue valueWithPointer:task2];
+    NSValue *task2Key = [NSValue valueWithNonretainedObject:task2];
     NSMutableSet *task2Dependents = [taskToDependentsMap objectForKey:task2Key];
     // Create the depdents set if it does not exist
     if (! task2Dependents) {
@@ -323,13 +272,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 - (NSSet *)weakDependenciesForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.weakTaskDependencyMap objectForKey:taskKey]];
 }
 
 - (NSSet *)strongDependenciesForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.strongTaskDependencyMap objectForKey:taskKey]];    
 }
 
@@ -342,17 +291,16 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 - (NSSet *)weakDependentsForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.taskToWeakDependentsMap objectForKey:taskKey]];
 }
 
 - (NSSet *)strongDependentsForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [NSSet setWithSet:[self.taskToStrongDependentsMap objectForKey:taskKey]];    
 }
 
-#pragma mark -
 #pragma mark Resetting
 
 - (void)reset

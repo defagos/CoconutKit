@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/17/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTaskGroup.h"
@@ -26,11 +26,11 @@
  */
 @property (nonatomic, assign) float progress;
 
-@property (nonatomic, retain) NSDictionary *returnInfo;
+@property (nonatomic, strong) NSDictionary *returnInfo;
 
-@property (nonatomic, retain) NSError *error;
+@property (nonatomic, strong) NSError *error;
 
-@property (nonatomic, assign) HLSTaskGroup *taskGroup;           // weak ref to parent task group
+@property (nonatomic, weak) HLSTaskGroup *taskGroup;           // weak ref to parent task group
 
 /**
  * Reset internal status variables

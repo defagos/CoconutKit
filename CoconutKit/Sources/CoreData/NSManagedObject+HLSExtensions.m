@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 21.10.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "NSManagedObject+HLSExtensions.h"
@@ -18,13 +18,13 @@
 
 #pragma mark Class methods
 
-+ (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
++ (instancetype)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     return [NSEntityDescription insertNewObjectForEntityForName:[self className] 
                                          inManagedObjectContext:managedObjectContext];
 }
 
-+ (id)insert
++ (instancetype)insert
 {
     return [self insertIntoManagedObjectContext:[HLSModelManager currentModelContext]];
 }
@@ -41,7 +41,7 @@
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[self className]
                                                          inManagedObjectContext:managedObjectContext];
-    NSFetchRequest *fetchRequest = [[[NSFetchRequest alloc] init] autorelease];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];
     fetchRequest.sortDescriptors = sortDescriptors;
     fetchRequest.predicate = predicate;
@@ -68,7 +68,7 @@
                      sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
                     inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors 
                         inManagedObjectContext:managedObjectContext];
@@ -77,7 +77,7 @@
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
                      sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors];
 }
@@ -98,14 +98,14 @@
 + (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
                       inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self allObjectsSortedUsingDescriptors:sortDescriptors
                            inManagedObjectContext:managedObjectContext];
 }
 
 + (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self allObjectsSortedUsingDescriptors:sortDescriptors];
 }
 

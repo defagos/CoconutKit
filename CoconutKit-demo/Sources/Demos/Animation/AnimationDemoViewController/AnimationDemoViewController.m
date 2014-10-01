@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/13/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "AnimationDemoViewController.h"
@@ -12,70 +12,35 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @interface AnimationDemoViewController ()
 
-@property (nonatomic, retain) HLSAnimation *animation;
+@property (nonatomic, strong) HLSAnimation *animation;
 
-- (void)updateUserInterface;
-- (void)calculateAnimation;
-
-- (SEL)selectorForAnimationWithIndex:(NSUInteger)index;
-
-- (NSTimeInterval)delay;
-- (NSTimeInterval)duration;
-- (NSUInteger)repeatCount;
-- (NSTimeInterval)startTime;
-
-- (HLSAnimation *)animation1;
-- (HLSAnimation *)animation2;
-- (HLSAnimation *)animation3;
-- (HLSAnimation *)animation4;
-- (HLSAnimation *)animation5;
-- (HLSAnimation *)animation6;
-- (HLSAnimation *)animation7;
-- (HLSAnimation *)animation8;
-- (HLSAnimation *)animation9;
-- (HLSAnimation *)animation10;
-- (HLSAnimation *)animation11;
-- (HLSAnimation *)animation12;
-- (HLSAnimation *)animation13;
-- (HLSAnimation *)animation14;
-- (HLSAnimation *)animation15;
-- (HLSAnimation *)animation16;
+@property (nonatomic, weak) IBOutlet UIView *rectangleView1;
+@property (nonatomic, weak) IBOutlet UIView *rectangleView2;
+@property (nonatomic, weak) IBOutlet UIPickerView *animationPickerView;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (nonatomic, weak) IBOutlet UIButton *pauseButton;
+@property (nonatomic, weak) IBOutlet UIButton *cancelButton;
+@property (nonatomic, weak) IBOutlet UIButton *terminateButton;
+@property (nonatomic, weak) IBOutlet UIView *settingsView;
+@property (nonatomic, weak) IBOutlet UISwitch *reverseSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *lockingUISwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *loopingSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *animatedSwitch;
+@property (nonatomic, weak) IBOutlet UISlider *repeatCountSlider;
+@property (nonatomic, weak) IBOutlet UILabel *repeatCountLabel;
+@property (nonatomic, weak) IBOutlet UIView *animatedSettingsView;
+@property (nonatomic, weak) IBOutlet UISlider *durationSlider;
+@property (nonatomic, weak) IBOutlet UILabel *durationLabel;
+@property (nonatomic, weak) IBOutlet UIView *delayBackgroundView;
+@property (nonatomic, weak) IBOutlet UISlider *delaySlider;
+@property (nonatomic, weak) IBOutlet UILabel *delayLabel;
+@property (nonatomic, weak) IBOutlet UIView *startTimeBackgroundView;
+@property (nonatomic, weak) IBOutlet UISlider *startTimeSlider;
+@property (nonatomic, weak) IBOutlet UILabel *startTimeLabel;
 
 @end
 
 @implementation AnimationDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.rectangleView1 = nil;
-    self.rectangleView2 = nil;
-    self.animationPickerView = nil;
-    self.playButton = nil;
-    self.pauseButton = nil;
-    self.cancelButton = nil;
-    self.terminateButton = nil;
-    self.settingsView = nil;
-    self.reverseSwitch = nil;
-    self.lockingUISwitch = nil;
-    self.loopingSwitch = nil;
-    self.animatedSwitch = nil;
-    self.repeatCountSlider = nil;
-    self.repeatCountLabel = nil;
-    self.animatedSettingsView = nil;
-    self.durationSlider = nil;
-    self.durationLabel = nil;
-    self.delayBackgroundView = nil;
-    self.delaySlider = nil;
-    self.delayLabel = nil;
-    self.startTimeBackgroundView = nil;
-    self.startTimeSlider = nil;
-    self.startTimeLabel = nil;
-    self.animation = nil;
-}
 
 #pragma mark View lifecycle
 
@@ -94,56 +59,6 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [self updateUserInterface];
 }
 
-#pragma mark Accessors and mutators
-
-@synthesize rectangleView1 = m_rectangleView1;
-
-@synthesize rectangleView2 = m_rectangleView2;
-
-@synthesize animationPickerView = m_animationPickerView;
-
-@synthesize playButton = m_playButton;
-
-@synthesize pauseButton = m_pauseButton;
-
-@synthesize cancelButton = m_cancelButton;
-
-@synthesize terminateButton = m_terminateButton;
-
-@synthesize settingsView = m_settingsView;
-
-@synthesize reverseSwitch = m_reverseSwitch;
-
-@synthesize lockingUISwitch = m_lockingUISwitch;
-
-@synthesize loopingSwitch = m_loopingSwitch;
-
-@synthesize animatedSwitch = m_animatedSwitch;
-
-@synthesize repeatCountSlider = m_repeatCountSlider;
-
-@synthesize repeatCountLabel = m_repeatCountLabel;
-
-@synthesize animatedSettingsView = m_animatedSettingsView;
-
-@synthesize durationSlider = m_durationSlider;
-
-@synthesize durationLabel = m_durationLabel;
-
-@synthesize delayBackgroundView = m_delayBackgroundView;
-
-@synthesize delaySlider = m_delaySlider;
-
-@synthesize delayLabel = m_delayLabel;
-
-@synthesize startTimeBackgroundView = m_startTimeBackgroundView;
-
-@synthesize startTimeSlider = m_startTimeSlider;
-
-@synthesize startTimeLabel = m_startTimeLabel;
-
-@synthesize animation = m_animation;
-
 #pragma mark Orientation management
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -157,7 +72,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Single view animation", @"Single view animation");
+    self.title = NSLocalizedString(@"Single view animation", nil);
 }
 
 #pragma mark Responding to parameter adjustment
@@ -183,7 +98,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         self.repeatCountLabel.text = @"inf";
     }
     else {
-        self.repeatCountLabel.text = [NSString stringWithFormat:@"%d", repeatCount];
+        self.repeatCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)repeatCount];
     }
     
     // Adjust the start time to cover the whole animation
@@ -211,8 +126,13 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 {
     NSUInteger animationIndex = [self.animationPickerView selectedRowInComponent:0] + 1;
     SEL selector = [self selectorForAnimationWithIndex:animationIndex];
-    HLSAnimation *animation = [self performSelector:selector];
-    animation.tag = [NSString stringWithFormat:@"animation%d", animationIndex];
+    
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+    // correct memory management
+    id (*methodImp)(id, SEL) = (id (*)(id, SEL))[self methodForSelector:selector];
+    HLSAnimation *animation = methodImp(self, selector);
+    
+    animation.tag = [NSString stringWithFormat:@"animation%lu", (unsigned long)animationIndex];
     if (self.reverseSwitch.on) {
         animation = [animation reverseAnimation];
     }
@@ -274,7 +194,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [NSString stringWithFormat:@"%d", row + 1];
+    return [NSString stringWithFormat:@"%ld", (long)row + 1];
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
@@ -367,7 +287,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (SEL)selectorForAnimationWithIndex:(NSUInteger)index
 {
-    NSString *selectorName = [NSString stringWithFormat:@"animation%d", index];
+    NSString *selectorName = [NSString stringWithFormat:@"animation%lu", (unsigned long)index];
     return NSSelectorFromString(selectorName);
 }
 
@@ -537,7 +457,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [animationStep4 addLayerAnimation:layerAnimation41 forView:self.rectangleView1];
     [animationStep4 addLayerAnimation:layerAnimation41 forView:self.rectangleView2];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, animationStep4, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3, animationStep4]];
 }
 
 - (HLSAnimation *)animation10
@@ -571,7 +491,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView1];
     [animationStep4 addViewAnimation:viewAnimation41 forView:self.rectangleView2];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, animationStep4, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3, animationStep4]];
 }
 
 - (HLSAnimation *)animation11
@@ -598,7 +518,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     animationStep3.duration = 0.;
     [animationStep3 addLayerAnimation:layerAnimation31 forView:self.rectangleView1];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3]];
 }
 
 - (HLSAnimation *)animation12
@@ -623,7 +543,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView1];
     [animationStep2 addLayerAnimation:layerAnimation21 forView:self.rectangleView2];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2]];
 }
 
 - (HLSAnimation *)animation13
@@ -648,7 +568,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     animationStep3.tag = @"step3";
     [animationStep3 addViewAnimation:viewAnimation31 forView:self.rectangleView1];
     
-    return [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithObjects:animationStep1, animationStep2, animationStep3, nil]];
+    return [HLSAnimation animationWithAnimationSteps:@[animationStep1, animationStep2, animationStep3]];
 }
 
 - (HLSAnimation *)animation14

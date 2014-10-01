@@ -3,7 +3,7 @@
 //  CoconutKit-dev
 //
 //  Created by Samuel Défago on 24.01.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 @interface UIActionSheet (HLSExtensions)
@@ -13,6 +13,6 @@
  * or simply a UIView depending on which show... method was called. If the action sheet is currently
  * not displayed, the property returns nil
  */
-@property (nonatomic, readonly, assign) id owner;
+@property (nonatomic, readonly, weak) id owner;
 
 @end

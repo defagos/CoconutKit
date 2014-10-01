@@ -3,176 +3,70 @@
 //  CoconutKit-dev
 //
 //  Created by Samuel Défago on 8/31/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "LayerPropertiesTestViewController.h"
 
 @interface LayerPropertiesTestViewController ()
 
-- (void)reloadData;
-- (void)reset;
+@property (nonatomic, weak) IBOutlet UIView *rectangleView;
+@property (nonatomic, weak) IBOutlet UIView *topSubview;
+@property (nonatomic, weak) IBOutlet UIView *bottomSubview;
+
+@property (nonatomic, weak) IBOutlet UISlider *transformTxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformTxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformTySlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformTyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformTzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformTzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformRxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformRxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformRySlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformRyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformRzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformRzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformSxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformSxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformSySlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformSyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transformSzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transformSzLabel;
+
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformTxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformTxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformTySlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformTyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformTzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformTzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformRxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformRxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformRySlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformRyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformRzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformRzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSxSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSxLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSySlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSyLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSzSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSzLabel;
+@property (nonatomic, weak) IBOutlet UISlider *sublayerTransformSkewSlider;
+@property (nonatomic, weak) IBOutlet UILabel *sublayerTransformSkewLabel;
+
+@property (nonatomic, weak) IBOutlet UISlider *anchorPointXSlider;
+@property (nonatomic, weak) IBOutlet UILabel *anchorPointXLabel;
+@property (nonatomic, weak) IBOutlet UISlider *anchorPointYSlider;
+@property (nonatomic, weak) IBOutlet UILabel *anchorPointYLabel;
+@property (nonatomic, weak) IBOutlet UISlider *anchorPointZSlider;
+@property (nonatomic, weak) IBOutlet UILabel *anchorPointZLabel;
+
+@property (nonatomic, weak) IBOutlet UISlider *viewSublayerTransformSkewSlider;
+@property (nonatomic, weak) IBOutlet UILabel *viewSublayerTransformSkewLabel;
 
 @end
 
 @implementation LayerPropertiesTestViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.rectangleView = nil;
-    self.topSubview = nil;
-    self.bottomSubview = nil;
-    self.transformTxSlider = nil;
-    self.transformTxLabel = nil;
-    self.transformTySlider = nil;
-    self.transformTyLabel = nil;
-    self.transformTzSlider = nil;
-    self.transformTzLabel = nil;
-    self.transformRxSlider = nil;
-    self.transformRxLabel = nil;
-    self.transformRySlider = nil;
-    self.transformRyLabel = nil;
-    self.transformRzSlider = nil;
-    self.transformRzLabel = nil;
-    self.transformSxSlider = nil;
-    self.transformSxLabel = nil;
-    self.transformSySlider = nil;
-    self.transformSyLabel = nil;
-    self.transformSzSlider = nil;
-    self.transformSzLabel = nil;
-    self.sublayerTransformTxSlider = nil;
-    self.sublayerTransformTxLabel = nil;
-    self.sublayerTransformTySlider = nil;
-    self.sublayerTransformTyLabel = nil;
-    self.sublayerTransformTzSlider = nil;
-    self.sublayerTransformTzLabel = nil;
-    self.sublayerTransformRxSlider = nil;
-    self.sublayerTransformRxLabel = nil;
-    self.sublayerTransformRySlider = nil;
-    self.sublayerTransformRyLabel = nil;
-    self.sublayerTransformRzSlider = nil;
-    self.sublayerTransformRzLabel = nil;
-    self.sublayerTransformSxSlider = nil;
-    self.sublayerTransformSxLabel = nil;
-    self.sublayerTransformSySlider = nil;
-    self.sublayerTransformSyLabel = nil;
-    self.sublayerTransformSzSlider = nil;
-    self.sublayerTransformSzLabel = nil;
-    self.sublayerTransformSkewSlider = nil;
-    self.sublayerTransformSkewLabel = nil;
-    self.anchorPointXSlider = nil;
-    self.anchorPointXLabel = nil;
-    self.anchorPointYSlider = nil;
-    self.anchorPointYLabel = nil;
-    self.anchorPointZSlider = nil;
-    self.anchorPointZLabel = nil;
-    self.viewSublayerTransformSkewSlider = nil;
-    self.viewSublayerTransformSkewLabel = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize rectangleView = m_rectangleView;
-
-@synthesize topSubview = m_topSubview;
-
-@synthesize bottomSubview = m_bottomSubview;
-
-@synthesize transformTxSlider = m_transformTxSlider;
-
-@synthesize transformTxLabel = m_transformTxLabel;
-
-@synthesize transformTySlider = m_transformTySlider;
-
-@synthesize transformTyLabel = m_transformTyLabel;
-
-@synthesize transformTzSlider = m_transformTzSlider;
-
-@synthesize transformTzLabel = m_transformTzLabel;
-
-@synthesize transformRxSlider = m_transformRxSlider;
-
-@synthesize transformRxLabel = m_transformRxLabel;
-
-@synthesize transformRySlider = m_transformRySlider;
-
-@synthesize transformRyLabel = m_transformRyLabel;
-
-@synthesize transformRzSlider = m_transformRzSlider;
-
-@synthesize transformRzLabel = m_transformRzLabel;
-
-@synthesize transformSxSlider = m_transformSxSlider;
-
-@synthesize transformSxLabel = m_transformSxLabel;
-
-@synthesize transformSySlider = m_transformSySlider;
-
-@synthesize transformSyLabel = m_transformSyLabel;
-
-@synthesize transformSzSlider = m_transformSzSlider;
-
-@synthesize transformSzLabel = m_transformSzLabel;
-
-@synthesize sublayerTransformTxSlider = m_sublayerTransformTxSlider;
-
-@synthesize sublayerTransformTxLabel = m_sublayerTransformTxLabel;
-
-@synthesize sublayerTransformTySlider = m_sublayerTransformTySlider;
-
-@synthesize sublayerTransformTyLabel = m_sublayerTransformTyLabel;
-
-@synthesize sublayerTransformTzSlider = m_sublayerTransformTzSlider;
-
-@synthesize sublayerTransformTzLabel = m_sublayerTransformTzLabel;
-
-@synthesize sublayerTransformRxSlider = m_sublayerTransformRxSlider;
-
-@synthesize sublayerTransformRxLabel = m_sublayerTransformRxLabel;
-
-@synthesize sublayerTransformRySlider = m_sublayerTransformRySlider;
-
-@synthesize sublayerTransformRyLabel = m_sublayerTransformRyLabel;
-
-@synthesize sublayerTransformRzSlider = m_sublayerTransformRzSlider;
-
-@synthesize sublayerTransformRzLabel = m_sublayerTransformRzLabel;
-
-@synthesize sublayerTransformSxSlider = m_sublayerTransformSxSlider;
-
-@synthesize sublayerTransformSxLabel = m_sublayerTransformSxLabel;
-
-@synthesize sublayerTransformSySlider = m_sublayerTransformSySlider;
-
-@synthesize sublayerTransformSyLabel = m_sublayerTransformSyLabel;
-
-@synthesize sublayerTransformSzSlider = m_sublayerTransformSzSlider;
-
-@synthesize sublayerTransformSzLabel = m_sublayerTransformSzLabel;
-
-@synthesize sublayerTransformSkewSlider = m_sublayerTransformSkewSlider;
-
-@synthesize sublayerTransformSkewLabel = m_sublayerTransformSkewLabel;
-
-@synthesize anchorPointXSlider = m_anchorPointXSlider;
-
-@synthesize anchorPointXLabel = m_anchorPointXLabel;
-
-@synthesize anchorPointYSlider = m_anchorPointYSlider;
-
-@synthesize anchorPointYLabel = m_anchorPointYLabel;
-
-@synthesize anchorPointZSlider = m_anchorPointZSlider;
-
-@synthesize anchorPointZLabel = m_anchorPointZLabel;
-
-@synthesize viewSublayerTransformSkewSlider = m_viewSublayerTransformSkewSlider;
-
-@synthesize viewSublayerTransformSkewLabel = m_viewSublayerTransformSkewLabel;
 
 #pragma mark View lifecycle
 
@@ -200,7 +94,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Layer properties test", @"Layer properties test");
+    self.title = NSLocalizedString(@"Layer properties test", nil);
 }
 
 #pragma mark Refreshing the screen

@@ -3,42 +3,33 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/21/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
-
-// Forward declarations
-@protocol HLSAnimationStepDelegate;
 
 /**
  * Abstract base class for animation steps. Do not instantiate directly
- *
- * Designated initializer: -init
  */
-@interface HLSAnimationStep : NSObject <NSCopying> {
-@private
-    NSMutableArray *m_objectKeys;
-    NSMutableDictionary *m_objectToObjectAnimationMap;
-    NSString *m_tag;
-    NSDictionary *m_userInfo;
-    NSTimeInterval m_duration;
-    id<HLSAnimationStepDelegate> m_delegate;
-    BOOL m_terminating;
-}
+@interface HLSAnimationStep : NSObject <NSCopying>
 
 /**
  * Convenience constructor for an animation step with default settings and nothing to animate
  */
-+ (id)animationStep;
++ (instancetype)animationStep;
+
+/**
+ * Create an animation step with default settings
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Optional tag to help identifying animation steps
  */
-@property (nonatomic, retain) NSString *tag;
+@property (nonatomic, strong) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information
  */
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 /**
  * Animation duration. Unlike UIView animation blocks, the duration of an animation step is never reduced

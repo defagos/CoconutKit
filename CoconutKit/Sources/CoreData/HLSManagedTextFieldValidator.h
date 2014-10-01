@@ -3,36 +3,26 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 03.11.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
-#import "HLSTextFieldInternalDelegate.h"
 #import "UITextField+HLSValidation.h"
 
 /**
- * Private class for implementation purposes. This internal delegate synchronizes the text field
- * value with a managed field object and performs automatic validation when appropriate
- *
- * Designated initializer: -initWithTextField:managedObject:fieldName:formatter:validationDelegate:
+ * Private class for implementation purposes. Synchronizes the text field value with a managed field object and performs 
+ * automatic validation when appropriate
  */
-@interface HLSManagedTextFieldValidator : HLSTextFieldInternalDelegate {
-@private
-    NSManagedObject *m_managedObject;
-    NSString *m_fieldName;
-    NSFormatter *m_formatter;
-    id<HLSTextFieldValidationDelegate> m_validationDelegate;
-    BOOL m_checkingOnChange;
-}
+@interface HLSManagedTextFieldValidator : NSObject
 
 /**
  * Initialize with a managed object and the field we want to validate, as well as a delegate which must receive
  * validation events. An optional formatter can be provided if needed (e.g. for date or numeric fields)
  */
-- (id)initWithTextField:(UITextField *)textField
-          managedObject:(NSManagedObject *)managedObject 
-              fieldName:(NSString *)fieldName 
-              formatter:(NSFormatter *)formatter
-     validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate;
+- (instancetype)initWithTextField:(UITextField *)textField
+                    managedObject:(NSManagedObject *)managedObject
+                        fieldName:(NSString *)fieldName
+                        formatter:(NSFormatter *)formatter
+               validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate NS_DESIGNATED_INITIALIZER;
 
 /**
  * If set to YES, validation is also called during input.

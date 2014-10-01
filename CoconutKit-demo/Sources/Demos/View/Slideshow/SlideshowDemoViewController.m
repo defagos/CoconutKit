@@ -3,76 +3,33 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 17.10.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "SlideshowDemoViewController.h"
 
 @interface SlideshowDemoViewController ()
 
-- (void)loadImages;
+@property (nonatomic, weak) IBOutlet HLSSlideshow *slideshow;
+@property (nonatomic, weak) IBOutlet UIPickerView *effectPickerView;
+@property (nonatomic, weak) IBOutlet UILabel *currentImageNameLabel;
+@property (nonatomic, weak) IBOutlet UIButton *previousButton;
+@property (nonatomic, weak) IBOutlet UIButton *nextButton;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (nonatomic, weak) IBOutlet UIButton *pauseButton;
+@property (nonatomic, weak) IBOutlet UIButton *resumeButton;
+@property (nonatomic, weak) IBOutlet UIButton *stopButton;
+@property (nonatomic, weak) IBOutlet UIButton *skipToSpecificButton;
+@property (nonatomic, weak) IBOutlet UISwitch *randomSwitch;
+@property (nonatomic, weak) IBOutlet UIButton *imageSetButton;
+@property (nonatomic, weak) IBOutlet UISlider *imageDurationSlider;
+@property (nonatomic, weak) IBOutlet UILabel *imageDurationLabel;
+@property (nonatomic, weak) IBOutlet UISlider *transitionDurationSlider;
+@property (nonatomic, weak) IBOutlet UILabel *transitionDurationLabel;
 
 @end
 
 @implementation SlideshowDemoViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.slideshow = nil;
-    self.effectPickerView = nil;
-    self.currentImageNameLabel = nil;
-    self.previousButton = nil;
-    self.nextButton = nil;
-    self.playButton = nil;
-    self.pauseButton = nil;
-    self.resumeButton = nil;
-    self.stopButton = nil;
-    self.skipToSpecificButton = nil;
-    self.randomSwitch = nil;
-    self.imageSetButton = nil;
-    self.imageDurationSlider = nil;
-    self.imageDurationLabel = nil;
-    self.transitionDurationSlider = nil;
-    self.transitionDurationLabel = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize slideshow = m_slideshow;
-
-@synthesize effectPickerView = m_effectPickerView;
-
-@synthesize currentImageNameLabel = m_currentImageNameLabel;
-
-@synthesize previousButton = m_previousButton;
-
-@synthesize nextButton = m_nextButton;
-
-@synthesize playButton = m_playButton;
-
-@synthesize pauseButton = m_pauseButton;
-
-@synthesize resumeButton = m_resumeButton;
-
-@synthesize stopButton = m_stopButton;
-
-@synthesize skipToSpecificButton = m_skipToSpecificButton;
-
-@synthesize randomSwitch = m_randomSwitch;
-
-@synthesize imageSetButton = m_imageSetButton;
-
-@synthesize imageDurationSlider = m_imageDurationSlider;
-
-@synthesize imageDurationLabel = m_imageDurationLabel;
-
-@synthesize transitionDurationSlider = m_transitionDurationSlider;
-
-@synthesize transitionDurationLabel = m_transitionDurationLabel;
 
 #pragma mark View lifecycle
 
@@ -98,9 +55,9 @@
     self.randomSwitch.on = self.slideshow.random;
     
     self.imageDurationSlider.value = self.slideshow.imageDuration;
-    self.imageDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.imageDuration)];
+    self.imageDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.imageDuration)];
     self.transitionDurationSlider.value = self.slideshow.transitionDuration;
-    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.transitionDuration)];
+    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.transitionDuration)];
     
     [self loadImages];
 }
@@ -111,7 +68,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Slideshow", @"Slideshow");
+    self.title = NSLocalizedString(@"Slideshow", nil);
 }
 
 #pragma mark HLSSlideshowDelegate protocol implementation
@@ -204,10 +161,10 @@
 - (void)loadImages
 {
     if (self.imageSetButton.selected) {
-        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_apple1.jpg", @"img_apple2.jpg", @"img_coconut1.jpg", @"img_apple3.jpg", @"img_apple4.jpg", nil];
+        self.slideshow.imageNamesOrPaths = @[@"img_apple1.jpg", @"img_apple2.jpg", @"img_coconut1.jpg", @"img_apple3.jpg", @"img_apple4.jpg"];
     }
     else {
-        self.slideshow.imageNamesOrPaths = [NSArray arrayWithObjects:@"img_coconut1.jpg", @"img_coconut2.jpg", @"img_coconut3.jpg", @"img_coconut4.jpg", nil];
+        self.slideshow.imageNamesOrPaths = @[@"img_coconut1.jpg", @"img_coconut2.jpg", @"img_coconut3.jpg", @"img_coconut4.jpg"];
     }
 }
 
@@ -236,6 +193,7 @@
     self.previousButton.hidden = NO;
     self.nextButton.hidden = NO;
     self.playButton.hidden = YES;
+    self.resumeButton.hidden = YES;
     self.pauseButton.hidden = NO;
     self.stopButton.hidden = NO;
     self.skipToSpecificButton.hidden = NO;
@@ -270,12 +228,17 @@
     self.previousButton.hidden = YES;
     self.nextButton.hidden = YES;
     self.playButton.hidden = NO;
+    self.pauseButton.hidden = YES;
+    self.resumeButton.hidden = YES;
     self.stopButton.hidden = YES;
     self.skipToSpecificButton.hidden = YES;
 }
 
 - (IBAction)skipToSpecificImage:(id)sender
 {
+    self.pauseButton.hidden = NO;
+    self.resumeButton.hidden = YES;
+    
     [self.slideshow skipToImageWithNameOrPath:@"img_coconut1.jpg"];
 }
 
@@ -293,13 +256,13 @@
 - (IBAction)imageDurationValueChanged:(id)sender
 {
     self.slideshow.imageDuration = round(self.imageDurationSlider.value);
-    self.imageDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.imageDuration)];
+    self.imageDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.imageDuration)];
 }
 
 - (IBAction)transitionDurationValueChanged:(id)sender
 {
     self.slideshow.transitionDuration = round(self.transitionDurationSlider.value);
-    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)round(self.slideshow.transitionDuration)];
+    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.transitionDuration)];
 }
 
 @end

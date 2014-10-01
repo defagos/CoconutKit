@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/10/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAnimationStep.h"
@@ -17,14 +17,13 @@
  *
  * To create a view animation step, simply instantiate it using the +animationStep class method, then add view animations
  * to it, and set its duration and curve
- *
- * Designated initializer: -init (create an animation step with default settings)
  */
-@interface HLSViewAnimationStep : HLSAnimationStep {
-@private
-    UIViewAnimationCurve m_curve;
-    UIView *m_dummyView;
-}
+@interface HLSViewAnimationStep : HLSAnimationStep
+
+/**
+ * Create an animation steep with default settings
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Setting a view animation for a view. Only one view animation can be defined at most for a view within an

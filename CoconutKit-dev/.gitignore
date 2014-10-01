@@ -1,7 +1,0 @@
-.DS_Store
-build/
-CoconutKit-dev.xcodeproj/xcuserdata/
-CoconutKit-dev.xcodeproj/*.pbxuser
-CoconutKit-dev.xcodeproj/*.mode1v3
-CoconutKit-dev.xcodeproj/*.perspectivev3
-

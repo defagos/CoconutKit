@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10/16/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -11,12 +11,8 @@
  *   - which view controllers decide whether rotation can occur or not
  *   - which view controllers receive rotation events (for children, this always occur from the topmost to the bottommost
  *     view controller, if they are involved)
- *
- * The default values are currently:
- *   - for iOS 4 and 5: HLSAutorotationModeContainerAndTopChildren
- *   - for iOS 6: HLSAutorotationModeContainer
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSAutorotationMode) {
     HLSAutorotationModeEnumBegin = 0,
     HLSAutorotationModeContainer = HLSAutorotationModeEnumBegin,            // Default: The container implementation decides which view controllers are involved
                                                                             // and which ones receive events (for UIKit containers this might vary between iOS
@@ -27,20 +23,4 @@ typedef enum {
     HLSAutorotationModeContainerAndAllChildren,                             // The container and all its children (even those not visible) decide and receive events
     HLSAutorotationModeEnumEnd,
     HLSAutorotationModeEnumSize = HLSAutorotationModeEnumEnd - HLSAutorotationModeEnumBegin
-} HLSAutorotationMode;
-
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED < 60000
-
-// Enum available starting with the iOS 6 SDK, here made available for previous SDK versions as well
-typedef enum {
-    UIInterfaceOrientationMaskPortrait = (1 << UIInterfaceOrientationPortrait),
-    UIInterfaceOrientationMaskLandscapeLeft = (1 << UIInterfaceOrientationLandscapeLeft),
-    UIInterfaceOrientationMaskLandscapeRight = (1 << UIInterfaceOrientationLandscapeRight),
-    UIInterfaceOrientationMaskPortraitUpsideDown = (1 << UIInterfaceOrientationPortraitUpsideDown),
-    UIInterfaceOrientationMaskLandscape = (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-    UIInterfaceOrientationMaskAll = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortraitUpsideDown),
-    UIInterfaceOrientationMaskAllButUpsideDown = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-} UIInterfaceOrientationMask;
-
-#endif
+};

@@ -3,12 +3,10 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/20/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSObjectAnimation.h"
-
-#import "HLSVector.h"
 
 /**
  * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step
@@ -27,23 +25,13 @@
  *
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should
  * use layer animations instead of view animations since they have far more capabilities.
- *
- * Designated initializer: -init (create a layer animation step with default settings)
  */
-@interface HLSLayerAnimation : HLSObjectAnimation {
-@private
-    HLSVector4 m_rotationParameters;
-    HLSVector3 m_scaleParameters;
-    HLSVector3 m_translationParameters;
-    HLSVector3 m_anchorPointTranslationParameters;
-    HLSVector4 m_sublayerRotationParameters;
-    HLSVector3 m_sublayerScaleParameters;
-    HLSVector3 m_sublayerTranslationParameters;
-    CGFloat m_sublayerCameraTranslationZ;
-    CGFloat m_opacityIncrement;
-    BOOL m_togglingShouldRasterize;
-    CGFloat m_rasterizationScaleIncrement;
-}
+@interface HLSLayerAnimation : HLSObjectAnimation
+
+/**
+ * Create a layer animation step with default settings
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Geometric transform parameters to be applied during the layer animation. The resulting transform applies the rotation, 

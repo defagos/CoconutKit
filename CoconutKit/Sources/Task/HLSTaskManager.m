@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/18/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTaskManager.h"
@@ -15,49 +15,37 @@
 
 @interface HLSTaskManager ()
 
-@property (nonatomic, retain) NSOperationQueue *operationQueue;
-@property (nonatomic, retain) NSMutableSet *tasks;
-@property (nonatomic, retain) NSMutableSet *taskGroups;
-@property (nonatomic, retain) NSMutableDictionary *taskToOperationMap;
-@property (nonatomic, retain) NSMutableDictionary *taskToDelegateMap;
-@property (nonatomic, retain) NSMutableDictionary *delegateToTasksMap;
-@property (nonatomic, retain) NSMutableDictionary *taskGroupToDelegateMap;
-@property (nonatomic, retain) NSMutableDictionary *delegateToTaskGroupsMap;
-
-- (NSSet *)operationsForTasks:(NSSet *)tasks;
-
-- (void)registerOperation:(HLSTaskOperation *)operation;
-- (void)unregisterOperation:(HLSTaskOperation *)operation;
-
-- (void)registerTaskGroup:(HLSTaskGroup *)taskGroup;
-- (void)unregisterTaskGroup:(HLSTaskGroup *)taskGroup;
-
-- (id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task;
-- (id<HLSTaskGroupDelegate>)delegateForTaskGroup:(HLSTaskGroup *)taskGroup;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;                         // Manages the separate threads used for task processing
+@property (nonatomic, strong) NSMutableSet *tasks;                                      // Keep a strong ref to task groups so that they stay alive
+@property (nonatomic, strong) NSMutableSet *taskGroups;                                 // Keep a strong ref to task groups so that they stay alive
+@property (nonatomic, strong) NSMutableDictionary *taskToOperationMap;                  // Maps a task to the associated HLSTaskOperation object
+@property (nonatomic, strong) NSMutableDictionary *taskToDelegateMap;                   // Maps a task to the associated id<HLSTaskDelegate> object
+@property (nonatomic, strong) NSMutableDictionary *delegateToTasksMap;                  // Maps some object id to the NSMutableSet of all HLSTask objects it is the delegate of
+@property (nonatomic, strong) NSMutableDictionary *taskGroupToDelegateMap;              // Maps a task group to the associated id<HLSTaskGroupDelegate> object
+@property (nonatomic, strong) NSMutableDictionary *delegateToTaskGroupsMap;             // Maps some object id to the NSMutableSet of all HLSTaskGroup objects it is the delegate of
 
 @end
 
 @implementation HLSTaskManager
 
-#pragma mark -
 #pragma mark Class methods
 
-+ (HLSTaskManager *)defaultManager
++ (instancetype)defaultManager
 {
     static HLSTaskManager *s_instance = nil;
-    if (! s_instance) {
-        s_instance = [[HLSTaskManager alloc] init];
-    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_instance = [[[self class] alloc] init];
+    });
     return s_instance;
 }
 
-#pragma mark -
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
-        self.operationQueue = [[[NSOperationQueue alloc] init] autorelease];
+        self.operationQueue = [[NSOperationQueue alloc] init];
         [self setMaxConcurrentTaskCount:4];
         [self.operationQueue setMaxConcurrentOperationCount:4];
         self.tasks = [NSMutableSet set];
@@ -71,37 +59,7 @@
     return self;
 }
 
-- (void)dealloc
-{
-    self.operationQueue = nil;
-    self.tasks = nil;
-    self.taskGroups = nil;
-    self.taskToOperationMap = nil;
-    self.taskToDelegateMap = nil;
-    self.delegateToTasksMap = nil;
-    self.taskGroupToDelegateMap = nil;
-    self.delegateToTaskGroupsMap = nil;
-    [super dealloc];
-}
-
-#pragma mark -
 #pragma mark Accessors and mutators
-
-@synthesize operationQueue = _operationQueue;
-
-@synthesize tasks = _tasks;
-
-@synthesize taskGroups = _taskGroups;
-
-@synthesize taskToOperationMap = _taskToOperationMap;
-
-@synthesize taskToDelegateMap = _taskToDelegateMap;
-
-@synthesize delegateToTasksMap = _delegateToTasksMap;
-
-@synthesize taskGroupToDelegateMap = _taskGroupToDelegateMap;
-
-@synthesize delegateToTaskGroupsMap = _delegateToTaskGroupsMap;
 
 - (void)setMaxConcurrentTaskCount:(NSInteger)count
 {
@@ -120,7 +78,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Submitting tasks
 
 - (void)submitTask:(HLSTask *)task
@@ -186,13 +143,13 @@
         }
         
         // Retrieve the corresponding operation
-        NSValue *taskKey = [NSValue valueWithPointer:task];
+        NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
         HLSTaskOperation *operation = [self.taskToOperationMap objectForKey:taskKey];
         
         // Set dependencies
         for (HLSTask *dependencyTask in dependencyTasks) {
             // Get the dependency operation
-            NSValue *dependencyTaskKey = [NSValue valueWithPointer:dependencyTask];
+            NSValue *dependencyTaskKey = [NSValue valueWithNonretainedObject:dependencyTask];
             HLSTaskOperation *dependencyOperation = [self.taskToOperationMap objectForKey:dependencyTaskKey];
             if (! dependencyOperation) {
                 continue;
@@ -212,7 +169,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Cancelling tasks
 
 - (void)cancelTask:(HLSTask *)task
@@ -224,7 +180,7 @@
     }
     
     // Locate the associated operation
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     HLSTaskOperation *operation = [self.taskToOperationMap objectForKey:taskKey];
     if (! operation) {
         return;
@@ -315,7 +271,7 @@
 - (void)cancelTasksWithDelegate:(id)delegate
 {
     // Cancel all task groups associated with this delegate
-    NSValue *delegateKey = [NSValue valueWithPointer:delegate];
+    NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSSet *taskGroupsForDelegate = [NSSet setWithSet:[self.delegateToTaskGroupsMap objectForKey:delegateKey]];
     for (HLSTaskGroup *taskGroup in taskGroupsForDelegate) {
         [self cancelTaskGroup:taskGroup];
@@ -328,7 +284,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Finding tasks
 
 - (NSArray *)tasksWithTag:(NSString *)tag
@@ -343,7 +298,6 @@
     return [[self.taskGroups filteredSetUsingPredicate:predicate] allObjects];    
 }
 
-#pragma mark -
 #pragma mark Registering and unregistering task delegates
 
 - (void)registerDelegate:(id<HLSTaskDelegate>)delegate forTask:(HLSTask *)task
@@ -353,7 +307,7 @@
     
     // Register the task - delegate relationship; use the task pointer as key
     // TODO: I first expected the obvious following code to work:
-    //          NSValue *taskKey = [NSValue valueWithPointer:task];
+    //          NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     //          [self.taskToDelegateMap setObject:delegate forKey:taskKey];
     //       but some strange crashes occurred under some circumstances (most notably when the manager
     //       object was fed with many tasks while many other tasks were still being processed; in my
@@ -364,13 +318,13 @@
     //         - I was careful enough to iterate on copies of data structures when a loop body can potentially
     //           alter it, so no enumerator invalidation issues should occur
     //       I could not find the reason why this problem occurs, but I found a solution: copy & swap. 
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     NSMutableDictionary *tempTaskToDelegateMap = [NSMutableDictionary dictionaryWithDictionary:self.taskToDelegateMap];
     [tempTaskToDelegateMap setObject:delegate forKey:taskKey];
     self.taskToDelegateMap = tempTaskToDelegateMap;
     
     // Register the inverse delegate - task relationship; use the delegate pointer as key
-    NSValue *delegateKey = [NSValue valueWithPointer:delegate];
+    NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSMutableSet *tasksForDelegate = [self.delegateToTasksMap objectForKey:delegateKey];
     // Create the set lazily if it does not exist
     if (! tasksForDelegate) {
@@ -386,11 +340,11 @@
     [self unregisterDelegateForTaskGroup:taskGroup];
     
     // Register the task group - delegate relationship; use the task pointer as key
-    NSValue *taskGroupKey = [NSValue valueWithPointer:taskGroup];
+    NSValue *taskGroupKey = [NSValue valueWithNonretainedObject:taskGroup];
     [self.taskGroupToDelegateMap setObject:delegate forKey:taskGroupKey];
     
     // Register the inverse delegate - task group relationship; use the delgate pointer as key
-    NSValue *delegateKey = [NSValue valueWithPointer:delegate];
+    NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSMutableSet *taskGroupsForDelegate = [self.delegateToTaskGroupsMap objectForKey:delegateKey];
     // Create the set lazily if it does not exist
     if (! taskGroupsForDelegate) {
@@ -403,7 +357,7 @@
 - (void)unregisterDelegateForTask:(HLSTask *)task
 {
     // Find if a delegate has been defined for this task; use the task pointer as key
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     id<HLSTaskDelegate> delegate = [self.taskToDelegateMap objectForKey:taskKey];
     if (! delegate) {
         return;
@@ -418,7 +372,7 @@
     self.taskToDelegateMap = tempTaskToDelegateMap;
     
     // Remove the inverse delegate - task relationship; use the delegate pointer as key
-    NSValue *delegateKey = [NSValue valueWithPointer:delegate];
+    NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSMutableSet *tasksForDelegate = [self.delegateToTasksMap objectForKey:delegateKey];
     [tasksForDelegate removeObject:task];
     
@@ -431,7 +385,7 @@
 - (void)unregisterDelegateForTaskGroup:(HLSTaskGroup *)taskGroup
 {
     // Find if a delegate has been defined for this task group; use the task pointer as key
-    NSValue *taskGroupKey = [NSValue valueWithPointer:taskGroup];
+    NSValue *taskGroupKey = [NSValue valueWithNonretainedObject:taskGroup];
     id<HLSTaskGroupDelegate> delegate = [self.taskGroupToDelegateMap objectForKey:taskGroupKey];
     if (! delegate) {
         return;
@@ -441,7 +395,7 @@
     [self.taskGroupToDelegateMap removeObjectForKey:taskGroupKey];
     
     // Remove the inverse delegate - task group relationship
-    NSValue *delegateKey = [NSValue valueWithPointer:delegate];
+    NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSMutableSet *taskGroupsForDelegate = [self.delegateToTaskGroupsMap objectForKey:delegateKey];
     [taskGroupsForDelegate removeObject:taskGroup];
     
@@ -462,7 +416,7 @@
 - (void)unregisterDelegate:(id)delegate
 {
     // Find all tasks for this delegate, and unregister; use the delegate pointer as key
-    NSValue *delegateKey = [NSValue valueWithPointer:delegate];
+    NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSSet *tasksForDelegate = [NSSet setWithSet:[self.delegateToTasksMap objectForKey:delegateKey]];
     for (HLSTask *task in tasksForDelegate) {
         [self unregisterDelegateForTask:task];
@@ -475,7 +429,6 @@
     }
 }
 
-#pragma mark -
 #pragma mark Instantiating operations for a set of tasks
 
 - (NSSet *)operationsForTasks:(NSSet *)tasks
@@ -484,15 +437,12 @@
     for (HLSTask *task in tasks) {
         Class operationClass = [task operationClass];
         NSAssert([operationClass isSubclassOfClass:[HLSTaskOperation class]], @"Class %@ is not a subclass of HLSTaskOperation", operationClass);
-        HLSTaskOperation *operation = [[[operationClass alloc] initWithTaskManager:self
-                                                                              task:task]
-                                       autorelease];
+        HLSTaskOperation *operation = [[operationClass alloc] initWithTaskManager:self task:task];
         [operations addObject:operation];
     }
     return operations;
 }
 
-#pragma mark -
 #pragma mark Registering object relationships
 
 - (void)registerOperation:(HLSTaskOperation *)operation
@@ -501,14 +451,14 @@
     [self.tasks addObject:operation.task];
     
     // Save the relationship between task and operation; use the task pointer as key
-    NSValue *taskKey = [NSValue valueWithPointer:operation.task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:operation.task];
     [self.taskToOperationMap setObject:operation forKey:taskKey];
 }
 
 - (void)unregisterOperation:(HLSTaskOperation *)operation
 {
     // Unregister the associated task - operation relationship; use the task pointer as key
-    NSValue *taskKey = [NSValue valueWithPointer:operation.task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:operation.task];
     [self.taskToOperationMap removeObjectForKey:taskKey];   
     
     // Automatically cleanup delegate registrations
@@ -541,18 +491,17 @@
     [self.taskGroups removeObject:taskGroup];
 }
 
-#pragma mark -
 #pragma mark Retrieving registered delegates
 
 - (id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task
 {
-    NSValue *taskKey = [NSValue valueWithPointer:task];
+    NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [self.taskToDelegateMap objectForKey:taskKey];
 }
 
 - (id<HLSTaskGroupDelegate>)delegateForTaskGroup:(HLSTaskGroup *)taskGroup
 {
-    NSValue *taskGroupKey = [NSValue valueWithPointer:taskGroup];
+    NSValue *taskGroupKey = [NSValue valueWithNonretainedObject:taskGroup];
     return [self.taskGroupToDelegateMap objectForKey:taskGroupKey];
 }
 

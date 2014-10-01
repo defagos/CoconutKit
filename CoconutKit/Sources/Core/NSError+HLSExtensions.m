@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 27.12.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "NSError+HLSExtensions.h"
@@ -24,7 +24,7 @@
     // At most one error can be stored in an NSError using the standard NSUnderlyingErrorKey key
     NSError *error = [[self userInfo] objectForKey:NSUnderlyingErrorKey];
     if (error) {
-        return [NSArray arrayWithObject:error];
+        return @[error];
     }
     else {
         return nil;

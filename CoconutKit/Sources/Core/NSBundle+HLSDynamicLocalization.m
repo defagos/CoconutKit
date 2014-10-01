@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Cédric Luthi on 08/15/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "NSBundle+HLSDynamicLocalization.h"
@@ -14,9 +14,15 @@
 NSString * const HLSPreferredLocalizationDefaultsKey = @"HLSPreferredLocalization";
 NSString * const HLSCurrentLocalizationDidChangeNotification = @"HLSCurrentLocalizationDidChangeNotification";
 
+static NSString *currentLocalization = nil;
+
+static void setDefaultLocalization(void);
+static void exchangeNSBundleInstanceMethod(SEL originalSelector);
+static void initialize(void);
+
 NSString *HLSLanguageForLocalization(NSString *localization)
 {
-    NSLocale *locale = [[[NSLocale alloc] initWithLocaleIdentifier:localization] autorelease];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:localization];
     return [[locale displayNameForKey:NSLocaleLanguageCode value:localization] capitalizedString];
 }
 
@@ -29,7 +35,7 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
     }
     
     // We use an explicit constant string for missing localizations since otherwise the localization key itself would 
-    // be returned by the localizedStringForKey:value:table method
+    // be returned by the -localizedStringForKey:value:table: method
     static NSString * const kMissingLocalizedString = @"NSBundle_HLSDynamicLocalization_missing";
     NSString *localizedString = [bundle localizedStringForKey:key
                                                         value:kMissingLocalizedString
@@ -46,16 +52,8 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
 
 @implementation NSBundle (HLSDynamicLocalization)
 
-static NSString *currentLocalization = nil;
-
-static void setDefaultLocalization(void);
-static void exchangeNSBundleInstanceMethod(SEL originalSelector);
-static void initialize(void);
-
 static void setDefaultLocalization(void)
 {
-    [currentLocalization release];
-    
     NSArray *mainBundleLocalizations = [[NSBundle mainBundle] localizations];
     NSArray *preferredLocalizations = [NSBundle preferredLocalizationsFromArray:mainBundleLocalizations];
     if ([preferredLocalizations count] > 0) {
@@ -68,14 +66,12 @@ static void setDefaultLocalization(void)
 
 + (void)load
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
-    if (preferredLocalization) {
-        [NSBundle setLocalization:preferredLocalization];
+    @autoreleasepool {
+        NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
+        if (preferredLocalization) {
+            [NSBundle setLocalization:preferredLocalization];
+        }  
     }
-    
-    [pool drain];
 }
 
 + (NSString *)localization
@@ -90,19 +86,16 @@ static void setDefaultLocalization(void)
 {
     initialize();
     
-    NSArray *mainBundleLocalizations = [[NSBundle mainBundle] localizations];
     NSString *previousLocalization = [currentLocalization copy];
     
-    if (localization == nil || ![mainBundleLocalizations containsObject:localization]) {
+    if (!localization) {
         setDefaultLocalization();
     }
     else {
         if (currentLocalization == localization) {
-            [previousLocalization release];
             return;
         }
         
-        [currentLocalization release];
         currentLocalization = [localization copy];
     }
     
@@ -111,13 +104,19 @@ static void setDefaultLocalization(void)
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:currentLocalization forKey:HLSPreferredLocalizationDefaultsKey];
-    [previousLocalization release];
 }
 
 // MARK: - Localized strings
 
 - (NSString *)dynamic_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
 {
+    // See -localizedStringForKey:value:table: return value documentation
+    NSString *notFoundValue = [value length] > 0 ? value : key;
+    
+    if (!currentLocalization || !key) {    
+        return notFoundValue;
+    }
+    
     NSString *localizationName = currentLocalization;
     BOOL lprojFound = YES;
     NSString *lprojPath = [[[self bundlePath] stringByAppendingPathComponent:currentLocalization] stringByAppendingPathExtension:@"lproj"];
@@ -137,12 +136,8 @@ static void setDefaultLocalization(void)
         }
     }
     
-    if (!currentLocalization || !lprojFound) {
-        return [self dynamic_localizedStringForKey:key value:value table:tableName];
-    }
-    
-    if (!key) {
-        return value;
+    if (!lprojFound) {
+        return notFoundValue;
     }
     
     if ([tableName length] == 0) {
@@ -159,7 +154,7 @@ static void setDefaultLocalization(void)
             HLSLoggerWarn(@"Localizable string \"%@\" not found in strings table \"%@\" of bundle %@", key, tableName, self);
             return [key uppercaseString];
         }
-        return [value length] > 0 ? value : key;
+        return notFoundValue;
     }
     
     return localizedString;

@@ -3,12 +3,11 @@
 //  CoconutKit
 //
 //  Created by Cédric Luthi on 02.03.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSWebViewController.h"
 
-#import "HLSActionSheet.h"
 #import "HLSAutorotation.h"
 #import "HLSNotifications.h"
 #import "NSBundle+HLSDynamicLocalization.h"
@@ -18,19 +17,24 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
+// FIXME: Issues with stacking action sheets. Solve more elegantly than HLSActionSheet before
+
 @interface HLSWebViewController ()
 
-@property (nonatomic, retain) NSURLRequest *request;
-@property (nonatomic, retain) NSURL *currentURL;
+@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic, strong) NSURL *currentURL;
 
-@property (nonatomic, retain) UIImage *refreshImage;
+@property (nonatomic, strong) UIImage *refreshImage;
 
-- (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-- (void)updateInterface;
-- (void)updateTitle;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *goBackBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *actionBarButtonItem;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-- (void)openInSafari:(id)sender;
-- (void)mailLink:(id)sender;
+@property (nonatomic, strong) NSArray *actions;
 
 @end
 
@@ -38,57 +42,13 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRequest:(NSURLRequest *)request
+- (instancetype)initWithRequest:(NSURLRequest *)request
 {
     if ((self = [super initWithBundle:[NSBundle coconutKitBundle]])) {
         self.request = request;
     }
     return self;
 }
-
-- (void)dealloc
-{
-    self.request = nil;
-    self.currentURL = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.webView = nil;
-    self.toolbar = nil;
-    self.goBackBarButtonItem = nil;
-    self.goForwardBarButtonItem = nil;
-    self.refreshBarButtonItem = nil;
-    self.actionBarButtonItem = nil;
-    self.activityIndicator = nil;
-    self.refreshImage = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize request = m_request;
-
-@synthesize currentURL = m_currentURL;
-
-@synthesize webView = m_webView;
-
-@synthesize toolbar = m_toolbar;
-
-@synthesize goBackBarButtonItem = m_goBackBarButtonItem;
-
-@synthesize goForwardBarButtonItem = m_goForwardBarButtonItem;
-
-@synthesize refreshBarButtonItem = m_refreshBarButtonItem;
-
-@synthesize actionBarButtonItem = m_actionBarButtonItem;
-
-@synthesize activityIndicator = m_activityIndicator;
-
-@synthesize refreshImage = m_refreshImage;
 
 #pragma mark View lifecycle
 
@@ -97,9 +57,6 @@
     [super viewDidLoad];
     
     self.refreshImage = self.refreshBarButtonItem.image;
-    
-    // Start with the initial URL when the view gets (re)loaded
-    self.currentURL = nil;
     
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
@@ -178,7 +135,7 @@
         self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
     else {
-        self.title = NSLocalizedStringFromTableInBundle(@"Untitled", @"Localizable", [NSBundle coconutKitBundle], @"Untitled");
+        self.title = CoconutKitLocalizedString(@"Untitled", nil);
     }
 }
 
@@ -186,7 +143,23 @@
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark UIActionSheetDelegate protocol implementation
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
+    
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+    // correct memory management
+    void (*methodImp)(id, SEL, id) = (void (*)(id, SEL, id))[self methodForSelector:action];
+    methodImp(self, action, actionSheet);
 }
 
 #pragma mark UIWebViewDelegate protocol implementation
@@ -220,12 +193,11 @@
     // We can also encounter other types of errors here (e.g. if a user clicks on two links consecutively on the same page. 
     // The first request is cancelled and ends with NSURLErrorCancelled)
     if ([error hasCode:NSURLErrorNotConnectedToInternet withinDomain:NSURLErrorDomain]) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTableInBundle(@"Cannot Open Page", @"Localizable", [NSBundle coconutKitBundle], @"Cannot Open Page") 
-                                                             message:NSLocalizedStringFromTableInBundle(@"No Internet connection is available", @"Localizable", [NSBundle coconutKitBundle], 
-                                                                                                @"No Internet connection is available")
-                                                            delegate:nil 
-                                                   cancelButtonTitle:HLSLocalizedStringFromUIKit(@"OK") 
-                                                   otherButtonTitles:nil] autorelease];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:CoconutKitLocalizedString(@"Cannot Open Page", nil)
+                                                            message:CoconutKitLocalizedString(@"No Internet connection is available", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                  otherButtonTitles:nil];
         [alertView show];
     }
 }
@@ -261,21 +233,26 @@
 }
 
 - (IBAction)displayActionSheet:(id)sender
-{    
-    HLSActionSheet *actionSheet = [[[HLSActionSheet alloc] init] autorelease];
+{
+    NSMutableArray *actions = [NSMutableArray array];
+    
+    // TODO: Replace with UIAlertController when CoconutKit requires >= iOS 8
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
     actionSheet.title = [self.currentURL absoluteString];
-    [actionSheet addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Open in Safari", @"Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Open in Safari' action")
-                             target:self
-                             action:@selector(openInSafari:)];
+    actionSheet.delegate = self; 
+    
+    [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Open in Safari", nil)];
+    [actions addObject:[NSValue valueWithPointer:@selector(openInSafari:)]];
+    
     if ([MFMailComposeViewController canSendMail]) {
-        [actionSheet addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"Mail Link", @"Localizable", [NSBundle coconutKitBundle], @"HLSWebViewController 'Mail Link' action")
-                                 target:self
-                                 action:@selector(mailLink:)];
+        [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Mail Link", nil)];
+        [actions addObject:[NSValue valueWithPointer:@selector(mailLink:)]];
     }
+    
+    self.actions = [NSArray arrayWithArray:actions];
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        [actionSheet addCancelButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel") 
-                                       target:nil
-                                       action:NULL];
+        actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel")];
     }
     [actionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
 }
@@ -287,11 +264,11 @@
 
 - (void)mailLink:(id)sender
 {
-    MFMailComposeViewController *mailComposeViewController = [[[MFMailComposeViewController alloc] init] autorelease];
+    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
     mailComposeViewController.mailComposeDelegate = self;
     [mailComposeViewController setSubject:self.title];
     [mailComposeViewController setMessageBody:[[self.webView.request URL] absoluteString] isHTML:NO];
-    [self presentModalViewController:mailComposeViewController animated:YES];
+    [self presentViewController:mailComposeViewController animated:YES completion:nil];
 }
 
 @end

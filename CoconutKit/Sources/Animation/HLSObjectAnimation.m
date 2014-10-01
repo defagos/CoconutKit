@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/23/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSObjectAnimation.h"
@@ -14,9 +14,9 @@
 
 #pragma mark Class methods
 
-+ (id)animation
++ (instancetype)animation
 {
-    return [[[[self class] alloc] init] autorelease];
+    return [[[self class] alloc] init];
 }
 
 #pragma mark NSCopying protocol implementation

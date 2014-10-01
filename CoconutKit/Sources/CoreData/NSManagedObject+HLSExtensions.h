@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 21.10.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -21,8 +21,8 @@
  * When called on an NSManagedObject subclass, create a new instance of it (without context parameter, the current
  * HLSModelManager context is used)
  */
-+ (id)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (id)insert;
++ (instancetype)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (instancetype)insert;
 
 /**
  * When called on an NSManagedObject subclass, query instances of it matching a predicate, sorting them using the

@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.06.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSTransition.h"
@@ -27,12 +27,7 @@ extern NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
  * controllers. This should be sufficient: Though a placeholder view controller can hold more than 20 view controllers,
  * this should never occur in practice
  */
-@interface HLSPlaceholderInsetSegue : UIStoryboardSegue {
-@private
-    NSUInteger m_index;
-    Class m_transitionClass;
-    NSTimeInterval m_duration;
-}
+@interface HLSPlaceholderInsetSegue : UIStoryboardSegue
 
 /**
  * The placeholder view index which the destination view controller must be displayed in

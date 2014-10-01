@@ -3,8 +3,10 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 9/2/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
+
+#import "HLSVector.h"
 
 /**
   * Interface meant to be used by friend classes of HLSLayerAnimation (= classes which must have access to private implementation

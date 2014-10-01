@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Cédric Luthi on 08/15/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 extern NSString * const HLSPreferredLocalizationDefaultsKey;

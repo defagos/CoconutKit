@@ -3,20 +3,25 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 21.10.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "WizardAddressPageViewController.h"
 
-#import "Person.h"
+#import "PersonInformation.h"
 
 @interface WizardAddressPageViewController ()
 
-@property (nonatomic, retain) Person *person;
+@property (nonatomic, strong) PersonInformation *personInformation;
 
-- (void)reloadData;
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField;
+@property (nonatomic, weak) IBOutlet UITextField *streetTextField;
+@property (nonatomic, weak) IBOutlet UILabel *streetErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *cityTextField;
+@property (nonatomic, weak) IBOutlet UILabel *cityErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *stateTextField;
+@property (nonatomic, weak) IBOutlet UILabel *stateErrorLabel;
+@property (nonatomic, weak) IBOutlet UITextField *countryTextField;
+@property (nonatomic, weak) IBOutlet UILabel *countryErrorLabel;
 
 @end
 
@@ -24,67 +29,27 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
-        self.person = [[Person allObjects] firstObject_hls];
-        NSAssert(self.person != nil, @"A person must be available");
+        self.personInformation = [[PersonInformation allObjects] firstObject];
+        NSAssert(self.personInformation != nil, @"A person must be available");
     }
     return self;
 }
 
-- (void)dealloc
-{
-    self.person = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.streetTextField = nil;
-    self.streetErrorLabel = nil;
-    self.cityTextField = nil;
-    self.cityErrorLabel = nil;
-    self.stateTextField = nil;
-    self.stateErrorLabel = nil;
-    self.countryTextField = nil;
-    self.countryErrorLabel = nil;
-}
-
 #pragma mark Accessors and mutators
 
-@synthesize person = m_person;
-
-- (void)setPerson:(Person *)person
+- (void)setPersonInformation:(PersonInformation *)personInformation
 {
-    if (m_person == person) {
+    if (_personInformation == personInformation) {
         return;
     }
     
-    [m_person release];
-    m_person = [person retain];
+    _personInformation = personInformation;
     
     [self reloadData];
 }
-
-@synthesize streetTextField = m_streetTextField;
-
-@synthesize streetErrorLabel = m_streetErrorLabel;
-
-@synthesize cityTextField = m_cityTextField;
-
-@synthesize cityErrorLabel = m_cityErrorLabel;
-
-@synthesize stateTextField = m_stateTextField;
-
-@synthesize stateErrorLabel = m_stateErrorLabel;
-
-@synthesize countryTextField = m_countryTextField;
-
-@synthesize countryErrorLabel = m_countryErrorLabel;
 
 #pragma mark View lifecycle
 
@@ -149,22 +114,22 @@
 
 - (void)reloadData
 {
-    [self.streetTextField bindToManagedObject:self.person
+    [self.streetTextField bindToManagedObject:self.personInformation
                                     fieldName:@"street"
                                     formatter:nil
                            validationDelegate:self];
     [self.streetTextField setCheckingOnChange:YES];
-    [self.cityTextField bindToManagedObject:self.person
+    [self.cityTextField bindToManagedObject:self.personInformation
                                   fieldName:@"city"
                                   formatter:nil
                          validationDelegate:self];
     [self.cityTextField setCheckingOnChange:YES];
-    [self.stateTextField bindToManagedObject:self.person
+    [self.stateTextField bindToManagedObject:self.personInformation
                                    fieldName:@"state"
                                    formatter:nil
                           validationDelegate:self];
     [self.stateTextField setCheckingOnChange:YES];
-    [self.countryTextField bindToManagedObject:self.person
+    [self.countryTextField bindToManagedObject:self.personInformation
                                      fieldName:@"country"
                                      formatter:nil
                             validationDelegate:self];
@@ -211,10 +176,10 @@
 - (IBAction)resetModel:(id)sender
 {
     // Reset the model programmatically. This shows that the text fields are updated accordingly
-    self.person.street = nil;
-    self.person.city = nil;
-    self.person.state = nil;
-    self.person.country = nil;
+    self.personInformation.street = nil;
+    self.personInformation.city = nil;
+    self.personInformation.state = nil;
+    self.personInformation.country = nil;
 }
 
 - (IBAction)resetTextFields:(id)sender

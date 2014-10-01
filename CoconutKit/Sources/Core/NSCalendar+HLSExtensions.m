@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 01.07.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "NSCalendar+HLSExtensions.h"
@@ -196,11 +196,8 @@
         return [self dateFromComponents:components];
     }
     
-    // iOS 4 and above: The time zone can be specified in the date components. We do not want this method to be called 
-    // in such cases
-    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
-    NSAssert(! [components respondsToSelector:@selector(timeZone)] || ! [components timeZone], 
-             @"The time zone must not be specified in the date components");
+    // The time zone can be specified in the date components. We do not want this method to be called in such cases
+    NSAssert(! [components timeZone], @"The time zone must not be specified in the date components");
     
     NSDate *dateInCalendarTimeZone = [self dateFromComponents:components];
     return [timeZone dateWithSameComponentsAsDate:dateInCalendarTimeZone fromTimeZone:[self timeZone]];
@@ -215,12 +212,8 @@
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInCalendarTimeZone];
     
-    // iOS 4 and above only
-    // TODO: When iOS 4 and above required: Can remove respondsToSelector test
     if (unitFlags & NSTimeZoneCalendarUnit) {
-        if ([dateComponents respondsToSelector:@selector(setTimeZone:)]) {
-            [dateComponents setTimeZone:timeZone];
-        }
+        [dateComponents setTimeZone:timeZone];
     }
     return dateComponents;
 }
@@ -393,14 +386,14 @@
     NSDateComponents *dateComponents2 = [self components:unitFlags fromDate:date2 inTimeZone:timeZone];
     
     // Create comparable strings from those components
-    NSString *dateString1 = [NSString stringWithFormat:@"%d%02d%02d", 
-                             [dateComponents1 year],
-                             [dateComponents1 month],
-                             [dateComponents1 day]];
-    NSString *dateString2 = [NSString stringWithFormat:@"%d%02d%02d", 
-                             [dateComponents2 year],
-                             [dateComponents2 month],
-                             [dateComponents2 day]];
+    NSString *dateString1 = [NSString stringWithFormat:@"%ld%02ld%02ld", 
+                             (long)[dateComponents1 year],
+                             (long)[dateComponents1 month],
+                             (long)[dateComponents1 day]];
+    NSString *dateString2 = [NSString stringWithFormat:@"%ld%02ld%02ld", 
+                             (long)[dateComponents2 year],
+                             (long)[dateComponents2 month],
+                             (long)[dateComponents2 day]];
     
     return [dateString1 compare:dateString2];
 }
@@ -429,7 +422,7 @@
 + (NSString *)stringForComponentValue:(NSInteger)componentValue
 {
     if (componentValue != NSUndefinedDateComponent) {
-        return [NSString stringWithFormat:@"%d", componentValue];
+        return [NSString stringWithFormat:@"%ld", (long)componentValue];
     }
     else {
         return @"undefined";
@@ -447,7 +440,8 @@
             "\thour: %@\n"
             "\tminute: %@\n"
             "\tsecond: %@\n"
-            "\tweek: %@\n"
+            "\tweekOfYear: %@\n"
+            "\tweekOfMonth: %@\n"
             "\tweekday: %@\n"
             "\tweekdayOrdinal: %@\n"
             "\tera: %@\n"
@@ -460,7 +454,8 @@
             [NSDateComponents stringForComponentValue:[self hour]],
             [NSDateComponents stringForComponentValue:[self minute]],
             [NSDateComponents stringForComponentValue:[self second]],
-            [NSDateComponents stringForComponentValue:[self week]],
+            [NSDateComponents stringForComponentValue:[self weekOfYear]],
+            [NSDateComponents stringForComponentValue:[self weekOfMonth]],
             [NSDateComponents stringForComponentValue:[self weekday]],
             [NSDateComponents stringForComponentValue:[self weekdayOrdinal]],
             [NSDateComponents stringForComponentValue:[self era]]];

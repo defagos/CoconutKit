@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 8/5/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSContainerGroupView.h"
@@ -98,14 +98,13 @@
  *
  * The HLSContainerStackView class simply implements the above view hierarchy and provides methods for easy insertion
  * and removal of views.
- *
- * Designated initializer: -initWithFrame:
  */
-@interface HLSContainerStackView : UIView {
-@private
-    NSMutableArray *m_groupViews;               // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
-    id<HLSContainerStackViewDelegate> m_delegate;
-}
+@interface HLSContainerStackView : UIView
+
+/**
+ * Create the stack view
+ */
+- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return the array of views used to display content (child views), from the bottommost to the topmost one
@@ -127,7 +126,7 @@
  */
 - (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView;
 
-@property (nonatomic, assign) id<HLSContainerStackViewDelegate> delegate;
+@property (nonatomic, weak) id<HLSContainerStackViewDelegate> delegate;
 
 @end
 

@@ -3,13 +3,12 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 2/8/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAnimationStep.h"
 
 // Forward declarations
-@class HLSZeroingWeakRef;
 @protocol HLSAnimationDelegate;
 
 /**
@@ -38,9 +37,7 @@
  * been defined)
  *
  * Animations can be played animated or not (yeah, that sounds weird, but I called it that way :-) ). When played
- * non-animated, an animation reaches its end state instantaneously. This is a perfect way to replay an animation
- * when rebuilding a view which has been unloaded (typically after a view controller received a memory warning 
- * notification on iOS 4 & 5. Note that views are not unloaded anymore since iOS 6)
+ * non-animated, an animation reaches its end state instantaneously.
  *
  * Running animations (this includes animations which have been paused) are automatically paused and resumed (if they
  * were running before) when the application enters, respectively exits background. Note that this mechanism works 
@@ -54,39 +51,15 @@
  * in each of them, corresponding to how the play method was called. For steps whose duration is 0, the boolean is
  * also YES if the animation was run with animated = YES (even though the step was not actually animated, it is still
  * part of an animation which was played animated).
- *
- * Designated initializer: -initWithAnimationSteps:
  */
-@interface HLSAnimation : NSObject <NSCopying> {
-@private
-    NSArray *m_animationSteps;                                      // a copy of the HLSAnimationSteps passed at initialization time
-    NSArray *m_animationStepCopies;                                 // another copy made temporarily during animation
-    NSEnumerator *m_animationStepsEnumerator;                       // enumerator over steps
-    HLSAnimationStep *m_currentAnimationStep;                       // the currently played animation step
-    NSString *m_tag;
-    NSDictionary *m_userInfo;
-    BOOL m_lockingUI;
-    BOOL m_animated;
-    NSUInteger m_repeatCount;
-    NSUInteger m_currentRepeatCount;
-    NSTimeInterval m_remainingTimeBeforeStart;                      // the time remaining before the start time is reached
-    NSTimeInterval m_elapsedTime;                                   // the currently elapsed time (does not include pauses)
-    BOOL m_runningBeforeEnteringBackground;                         // was the animation running before the application entered background?
-    BOOL m_pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
-    BOOL m_running;
-    BOOL m_playing;
-    BOOL m_started;
-    BOOL m_cancelling;
-    BOOL m_terminating;
-    HLSZeroingWeakRef *m_delegateZeroingWeakRef;
-}
+@interface HLSAnimation : NSObject <NSCopying>
 
 /**
  * Convenience constructor for creating an animation from HLSAnimationStep objects. Providing nil creates an empty
  * animation
  */
-+ (HLSAnimation *)animationWithAnimationSteps:(NSArray *)animationSteps;
-+ (HLSAnimation *)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
++ (instancetype)animationWithAnimationSteps:(NSArray *)animationSteps;
++ (instancetype)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
 
 /**
  * Create an animation using HLSAnimationStep objects. Those steps will be chained together when the animation
@@ -96,17 +69,17 @@
  * A deep copy of the animation steps is performed to prevent further changes once the steps have been assigned to an
  * animation
  */
-- (id)initWithAnimationSteps:(NSArray *)animationSteps;
+- (instancetype)initWithAnimationSteps:(NSArray *)animationSteps NS_DESIGNATED_INITIALIZER;
 
 /**
  * Tag which can optionally be used to help identifying an animation
  */
-@property (nonatomic, retain) NSString *tag;
+@property (nonatomic, strong) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information
  */
-@property (nonatomic, retain) NSDictionary *userInfo;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
@@ -120,7 +93,7 @@
  * The animation delegate. Note that the animation is automatically cancelled if a delegate has been set
  * and gets deallocated while the animation is runnning
  */
-@property (nonatomic, assign) id<HLSAnimationDelegate> delegate;
+@property (nonatomic, weak) id<HLSAnimationDelegate> delegate;
 
 /**
  * Play the animation. If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the 

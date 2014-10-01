@@ -3,33 +3,36 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 11/15/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSUserInterfaceLock.h"
 
 #import "HLSLogger.h"
 
-@implementation HLSUserInterfaceLock
+@implementation HLSUserInterfaceLock {
+@private
+    NSUInteger _useCount;
+}
 
 #pragma mark Class methods
 
-+ (HLSUserInterfaceLock *)sharedUserInterfaceLock
++ (instancetype)sharedUserInterfaceLock
 {
     static HLSUserInterfaceLock *s_instance = nil;
-    
-    if (! s_instance) {
-        s_instance = [[HLSUserInterfaceLock alloc] init];
-    }
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_instance = [[[self class] alloc] init];
+    });
     return s_instance;
 }
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
-        m_useCount = 0;
+        _useCount = 0;
     }
     return self;
 }
@@ -38,10 +41,10 @@
 
 - (void)lock
 {    
-    ++m_useCount;
+    ++_useCount;
     HLSLoggerDebug(@"Acquire UI lock");
     
-    if (m_useCount == 1) {
+    if (_useCount == 1) {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     }
 }
@@ -49,15 +52,15 @@
 - (void)unlock
 {
     // Check that the UI was locked
-    if (m_useCount == 0) {
+    if (_useCount == 0) {
         HLSLoggerDebug(@"The UI was not locked, nothing to unlock");
         return;
     }
     
-    --m_useCount;
+    --_useCount;
     HLSLoggerDebug(@"Release UI lock");
     
-    if (m_useCount == 0) {
+    if (_useCount == 0) {
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     }
 }

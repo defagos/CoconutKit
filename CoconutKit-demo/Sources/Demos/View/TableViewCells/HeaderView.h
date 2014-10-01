@@ -3,14 +3,11 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/11/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
-@interface HeaderView : HLSNibView {
-@private
-    UILabel *m_label;
-}
+@interface HeaderView : HLSNibView
 
-@property (nonatomic, retain) IBOutlet UILabel *label;
+@property (nonatomic, weak) IBOutlet UILabel *label;
 
 @end

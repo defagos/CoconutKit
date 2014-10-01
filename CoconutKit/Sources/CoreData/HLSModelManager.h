@@ -3,8 +3,10 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 28.06.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
+
+#import "HLSFileManager.h"
 
 // Standard option combinations
 #define HLSModelManagerLightweightMigrationOptions          [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,   \
@@ -40,30 +42,25 @@
  *   - go on working with the previously pushed model manager
  *   - if you need to perform database operations on another thread, duplicate the current context and push 
  *     the new instance onto the other thread model manager stack
- *
- * Designated initializer: -initWithModelFileName:storeType:configuration:storeDirectory:options:
  */
-@interface HLSModelManager : NSObject {
-@private
-    NSManagedObjectModel *_managedObjectModel;
-    NSPersistentStoreCoordinator *_persistentStoreCoordinator;
-    NSManagedObjectContext *_managedObjectContext;
-}
+@interface HLSModelManager : NSObject
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
- * or in the main bundle if nil) and saving data at the specified store path within an SQLite store (the store 
- * file name bears the model name). If the store file already exists it is reused
+ * or in the main bundle if nil) and saving data at the specified store path within an SQLite store (the store
+ * file name bears the model name), created using the provided file manager (if nil, uses the HLSStandardFileManager
+ * singleton). If the store file already exists it is reused
  * 
  * For information about the configuration and options parameters 
  * please refer to the documentation of
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
-+ (HLSModelManager *)SQLiteManagerWithModelFileName:(NSString *)modelFileName
-                                           inBundle:(NSBundle *)bundle
-                                      configuration:(NSString *)configuration
-                                     storeDirectory:(NSString *)storeDirectory
-                                            options:(NSDictionary *)options;
++ (instancetype)SQLiteManagerWithModelFileName:(NSString *)modelFileName
+                                      inBundle:(NSBundle *)bundle
+                                 configuration:(NSString *)configuration
+                                storeDirectory:(NSString *)storeDirectory
+                                   fileManager:(HLSFileManager *)fileManager
+                                       options:(NSDictionary *)options;
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
@@ -73,31 +70,35 @@
  * please refer to the documentation of
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
-+ (HLSModelManager *)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
-                                                  inBundle:(NSBundle *)bundle
-                                             configuration:(NSString *)configuration 
-                                                   options:(NSDictionary *)options;
++ (instancetype)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
+                                             inBundle:(NSBundle *)bundle
+                                        configuration:(NSString *)configuration
+                                              options:(NSDictionary *)options;
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
- * or in the main bundle if nil) and saving data at the specified store path within a binary file (the store file 
- * name bears the model name). If the store file already exists it is reused
+ * or in the main bundle if nil) and saving data at the specified store path within a binary file (the store file
+ * name bears the model name), created using the provided file manager  (if nil, uses the HLSStandardFileManager
+ * singleton). If the store file already exists it is reused
  *
  * For information about the configuration and options parameters 
  * please refer to the documentation of
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
-+ (HLSModelManager *)binaryModelManagerWithModelFileName:(NSString *)modelFileName
-                                                inBundle:(NSBundle *)bundle
-                                           configuration:(NSString *)configuration 
-                                          storeDirectory:(NSString *)storeDirectory
-                                                 options:(NSDictionary *)options;
++ (instancetype)binaryModelManagerWithModelFileName:(NSString *)modelFileName
+                                           inBundle:(NSBundle *)bundle
+                                      configuration:(NSString *)configuration
+                                     storeDirectory:(NSString *)storeDirectory
+                                        fileManager:(HLSFileManager *)fileManager
+                                            options:(NSDictionary *)options;
 /**
- * Return the file path of the file-based store for a model, searching in a given directory. Return nil if not
- * found. You usually do not have to get this path explicitly, except e.g. if you want to cleanup a store
- * by removing its corresponding file
+ * Return the file path of the file-based store for a model, searching in a given directory using the specified
+ * file manager (or the HLSStandardFileManager singleton if nil). Return nil if not found. You usually do not
+ * have to get this path explicitly, except e.g. if you want to cleanup a store by removing its corresponding file
  */
-+ (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName storeDirectory:(NSString *)storeDirectory;
++ (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName
+                             storeDirectory:(NSString *)storeDirectory
+                                fileManager:(HLSFileManager *)fileManager;
 
 /**
  * Manage the stack of model managers attached to the current thread
@@ -129,7 +130,8 @@
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
- * or in the main bundle if nil), and saving it in the specified directory. 
+ * or in the main bundle if nil), and saving it in the specified directory, using the provided file manager (if
+ * nil, the HLSStandardFileManager singleton instance is used).
  * 
  * For information about the storeType, configuration and options parameters 
  * please refer to the documentation of
@@ -141,24 +143,30 @@
  * Convenience constructors have been provided for easy instantiation of the most common store types and are the
  * preferred way of instantiating model managers.
  */
-- (id)initWithModelFileName:(NSString *)modelFileName
-                   inBundle:(NSBundle *)bundle
-                  storeType:(NSString *)storeType 
-              configuration:(NSString *)configuration 
-             storeDirectory:(NSString *)storeDirectory
-                    options:(NSDictionary *)options;
+- (instancetype)initWithModelFileName:(NSString *)modelFileName
+                             inBundle:(NSBundle *)bundle
+                            storeType:(NSString *)storeType
+                        configuration:(NSString *)configuration
+                       storeDirectory:(NSString *)storeDirectory
+                          fileManager:(HLSFileManager *)fileManager
+                              options:(NSDictionary *)options NS_DESIGNATED_INITIALIZER;
 /**
  * Duplicate an existing manager
  */
 - (HLSModelManager *)duplicate;
 
+/**
+ * Migrate the persistence store. See -[NSPersistentStoreCoordinator migratePersistentStore:toURL:options:withType:error:]
+ * for more information. Due to implementation constraints, migration can only be performed to a file URL, no arbitrary
+ * file manager can be specified
+ */
 - (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError **)pError;
 
 /**
  * Access to Core Data internals
  */
-@property (nonatomic, readonly, retain) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, readonly, retain) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, readonly, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readonly, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, readonly, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

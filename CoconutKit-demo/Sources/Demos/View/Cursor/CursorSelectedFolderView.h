@@ -3,17 +3,14 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 17.06.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 /**
  * Designated initializer: -initWithFrame:
  */
-@interface CursorSelectedFolderView : HLSNibView {
-@private
-    UILabel *m_nameLabel;
-}
+@interface CursorSelectedFolderView : HLSNibView
 
-@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 
 @end

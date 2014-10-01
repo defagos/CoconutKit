@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 27.06.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "SegueStackRootDemoPlaceholderViewController.h"
@@ -19,15 +19,6 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor randomColor];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    // Just to suppress localization warnings
 }
 
 #pragma mark Segues
@@ -49,8 +40,8 @@
 
 - (IBAction)hideWithModal:(id)sender
 {
-    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[MemoryWarningTestCoverViewController alloc] init];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 @end

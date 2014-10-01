@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 02.07.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -11,15 +11,16 @@
  * increased. For the moment only UIWebView is preloaded so that the time usually required when instantiating the first
  * web view is reduced
  */
-@interface HLSApplicationPreloader : NSObject <UIWebViewDelegate> {
-@private
-    UIApplication *_application;
-}
+@interface HLSApplicationPreloader : NSObject <UIWebViewDelegate>
 
 /**
- * Call this method as soon as possible if you want to enable preloading. For simplicity you should use the
- * HLSEnableApplicationPreloading convenience macro instead (see HLSOptionalFeatures.h)
+ * Initialize the preloader. An application is required
  */
-+ (void)enable;
+- (instancetype)initWithApplication:(UIApplication *)application NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Execute preloading
+ */
+- (void)preload;
 
 @end

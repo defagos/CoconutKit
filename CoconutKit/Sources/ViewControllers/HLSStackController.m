@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 22.07.11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSStackController.h"
@@ -18,7 +18,7 @@
 
 @interface HLSStackController ()
 
-@property (nonatomic, retain) HLSContainerStack *containerStack;
+@property (nonatomic, strong) HLSContainerStack *containerStack;
 @property (nonatomic, assign) NSUInteger capacity;
 
 @end
@@ -27,15 +27,14 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
     if ((self = [super init])) {
         self.autorotationMode = HLSAutorotationModeContainer;
         
-        self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
-                                                                                 capacity:capacity 
-                                                                                 removing:NO
-                                                                  rootViewControllerFixed:YES] autorelease];
+        self.containerStack = [[HLSContainerStack alloc] initWithContainerViewController:self
+                                                                                behavior:HLSContainerStackBehaviorFixedRoot
+                                                                                capacity:capacity];
         self.containerStack.autorotationMode = self.autorotationMode;
         self.containerStack.delegate = self;
         [self.containerStack pushViewController:rootViewController 
@@ -46,12 +45,15 @@
     return self;
 }
 
-- (id)initWithRootViewController:(UIViewController *)rootViewController
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
     return [self initWithRootViewController:rootViewController capacity:HLSContainerStackDefaultCapacity];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
         self.capacity = HLSContainerStackDefaultCapacity;
@@ -60,21 +62,23 @@
     return self;
 }
 
-- (id)init
+#pragma clang diagnostic pop
+
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithRootViewController:nil capacity:0];
 }
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     
-    self.containerStack = [[[HLSContainerStack alloc] initWithContainerViewController:self 
-                                                                             capacity:self.capacity 
-                                                                             removing:NO
-                                                              rootViewControllerFixed:YES] autorelease];
+    self.containerStack = [[HLSContainerStack alloc] initWithContainerViewController:self
+                                                                            behavior:HLSContainerStackBehaviorFixedRoot
+                                                                            capacity:self.capacity];
     self.containerStack.autorotationMode = self.autorotationMode;
+    self.containerStack.delegate = self;
     
     // Load the root view controller when using segues. A reserved segue called 'hls_root' must be used for such purposes
     @try {
@@ -94,26 +98,7 @@
     }
 }
 
-- (void)dealloc
-{
-    self.containerStack = nil;
-    self.delegate = nil;
-    
-    [super dealloc];
-}
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    [self.containerStack releaseViews];
-}
-
 #pragma mark Accessors and mutators
-
-@synthesize containerStack = m_containerStack;
-
-@synthesize capacity = m_capacity;
 
 - (void)setCapacity:(NSUInteger)capacity
 {
@@ -122,18 +107,16 @@
         return;
     }
     
-    m_capacity = capacity;
+    _capacity = capacity;
 }
-
-@synthesize autorotationMode = m_autorotationMode;
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {
-    if (autorotationMode == m_autorotationMode) {
+    if (autorotationMode == _autorotationMode) {
         return;
     }
     
-    m_autorotationMode = autorotationMode;
+    _autorotationMode = autorotationMode;
     
     // If the container stack has not been instantiated (which can happen when using storyboards, since in this case
     // it gets intantiated in -awakeFromNimb), the following does nothing. This is why the autorotation mode value
@@ -141,8 +124,6 @@
     // in this case
     self.containerStack.autorotationMode = autorotationMode;
 }
-
-@synthesize delegate = m_delegate;
 
 - (UIViewController *)rootViewController
 {
@@ -166,12 +147,6 @@
 
 #pragma mark View lifecycle
 
-// Deprecated since iOS 6
-- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers
-{
-    return NO;
-}
-
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
 {
     return NO;
@@ -186,7 +161,7 @@
 {
     // Take all space available
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
-    self.view = [[[UIView alloc] initWithFrame:applicationFrame] autorelease];
+    self.view = [[UIView alloc] initWithFrame:applicationFrame];
     self.view.autoresizingMask = HLSViewAutoresizingAll;
     
     self.containerStack.containerView = self.view;
@@ -255,15 +230,6 @@
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
     [self.containerStack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    // Just to suppress localization warning
 }
 
 #pragma mark Inserting or removing view controllers

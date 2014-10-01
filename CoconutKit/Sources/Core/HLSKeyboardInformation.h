@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 2/17/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -11,21 +11,19 @@
  * method. If the returned object is not nil, then the keyboard is docked and visible (or soon will) and you can check its 
  * properties. The object is nil if the keyboard is floating (iPad) or invisible.
  *
+ * You should avoid accessing HLSKeyboardInformation from within keyboard notification callbacks (since keyboard notifications
+ * are used to fill HLSKeyboardInformation, the information might be unreliable depending on the order in which notifications
+ * callbacks are called)
+ *
  * Not meant to be instantiated directly. Simply use the +keyboardInformation class method.
  */
-@interface HLSKeyboardInformation : NSObject {
-@private
-    CGRect m_beginFrame;
-    CGRect m_endFrame;
-    NSTimeInterval m_animationDuration;
-    UIViewAnimationCurve m_animationCurve;
-}
+@interface HLSKeyboardInformation : NSObject
 
 /**
  * Return the keyboard information if docked and displayed (or about to be displayed), nil if the keyboard is not visible,
  * about to be hidden, or floating
  */
-+ (HLSKeyboardInformation *)keyboardInformation;
++ (instancetype)keyboardInformation;
 
 /**
  * Start frame of the keyboard before it is displayed (in the window coordinate system). Refer to the 

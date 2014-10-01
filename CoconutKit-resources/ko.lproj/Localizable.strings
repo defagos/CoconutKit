@@ -1,0 +1,10 @@
+/* 
+   Localizable.strings
+   CoconutKit
+
+   Created by Cédric Luthi on 3/10/11.
+   Copyright 2010 Samuel Défago. All rights reserved.
+ */
+
+"Mail Link"="링크를 이메일로 전송하기";
+"Open in Safari"="Safari에서 열기";

@@ -3,9 +3,10 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 12/18/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import "HLSAssert.h"
 #import "HLSTask.h"
 #import "HLSTaskManager.h"
 
@@ -24,18 +25,11 @@
  *    current work as soon as possible
  *  - operations are instantiated by the HLSTaskManager using their designated initializer. Your subclass must therefore
  *    not define any other initializer since they would never be called
- *
- * Designated initializer: -initWithTaskManager:task:
  */
-@interface HLSTaskOperation : NSOperation {
-@private
-    HLSTaskManager *_taskManager;       // The task manager which spawned the operation
-    HLSTask *_task;                     // The task the operation is processing
-    NSThread *_callingThread;           // Thread onto which spawned the operation
-}
+@interface HLSTaskOperation : NSOperation
 
-- (id)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task;
+- (instancetype)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task NS_REQUIRES_SUPER NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, readonly, assign) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
+@property (nonatomic, readonly, weak) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
 
 @end

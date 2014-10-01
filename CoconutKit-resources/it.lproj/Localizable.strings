@@ -1,0 +1,10 @@
+/* 
+   Localizable.strings
+   CoconutKit
+
+   Created by Cédric Luthi on 3/10/11.
+   Copyright 2010 Samuel Défago. All rights reserved.
+ */
+
+"Mail Link"="Invia il link";
+"Open in Safari"="Apri in Safari";

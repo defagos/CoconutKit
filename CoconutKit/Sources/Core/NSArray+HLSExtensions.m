@@ -3,27 +3,12 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 2/24/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "NSArray+HLSExtensions.h"
 
-@interface NSArray (HLSExtensionsPrivate)
-
-- (NSArray *)arrayByShiftingNumberOfObjects:(NSUInteger)numberOfElements;
-
-@end
-
 @implementation NSArray (HLSExtensions)
-
-- (id)firstObject_hls
-{
-    if ([self count] == 0) {
-        return nil;
-    }
-    
-    return [self objectAtIndex:0];
-}
 
 - (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfObjects
 {
@@ -53,7 +38,7 @@
 
 - (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? [NSArray arrayWithObject:sortDescriptor] : nil;
+    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self sortedArrayUsingDescriptors:sortDescriptors];
 }
 

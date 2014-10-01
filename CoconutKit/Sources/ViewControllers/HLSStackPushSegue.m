@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 27.06.12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "HLSStackPushSegue.h"
@@ -17,7 +17,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 
 #pragma mark Object creation and destruction
 
-- (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
+- (instancetype)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
 {
     if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
         self.transitionClass = [HLSTransitionNone class];
@@ -26,14 +26,6 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
     }
     return self;
 }
-
-#pragma mark Accessors and mutators
-
-@synthesize transitionClass = m_transitionClass;
-
-@synthesize duration = m_duration;
-
-@synthesize animated = m_animated;
 
 #pragma mark Overrides
 

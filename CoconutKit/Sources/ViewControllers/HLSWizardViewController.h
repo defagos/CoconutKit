@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 10/8/10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 #import "HLSPlaceholderViewController.h"
@@ -11,14 +11,14 @@
 // Forward declarations
 @protocol HLSWizardViewControllerDelegate;
 
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSWizardTransitionStyle) {
     HLSWizardTransitionStyleEnumBegin = 0,
     HLSWizardTransitionStyleNone = HLSWizardTransitionStyleEnumBegin,
     HLSWizardTransitionStyleCrossDissolve,
     HLSWizardTransitionStylePushHorizontally,
     HLSWizardTransitionStyleEnumEnd,
     HLSWizardTransitionStyleEnumSize = HLSWizardTransitionStyleEnumEnd - HLSWizardTransitionStyleEnumBegin
-} HLSWizardTransitionStyle;
+};
 
 /**
  * Controller made of pages building a wizard interface. Each page is a separate view controller you must
@@ -37,31 +37,21 @@ typedef enum {
  * HLSValidable protocol, the page is checked for validity before displaying the next one. Similarly
  * when clicking on the "done" button. If the page does not implement this protocol, the page is
  * always assumed to be valid.
- *
- * Designated initializer: -initWithNibName:bundle:
  */
-@interface HLSWizardViewController : HLSPlaceholderViewController {
-@private
-    UIButton *m_previousButton;
-    UIButton *m_nextButton;
-    UIButton *m_doneButton;
-    NSArray *m_viewControllers;
-    HLSWizardTransitionStyle m_wizardTransitionStyle;
-    NSInteger m_currentPage;
-}
+@interface HLSWizardViewController : HLSPlaceholderViewController
 
 /**
  * The wizard buttons. Create them either using Interface Builder or by implementing a loadview. Do not attempt
  * to replace the callback method registered for UIControlEventTouchUpInside, or the behavior will be undefined
  */
-@property (nonatomic, retain) IBOutlet UIButton *previousButton;
-@property (nonatomic, retain) IBOutlet UIButton *nextButton;
-@property (nonatomic, retain) IBOutlet UIButton *doneButton;
+@property (nonatomic, weak) IBOutlet UIButton *previousButton;
+@property (nonatomic, weak) IBOutlet UIButton *nextButton;
+@property (nonatomic, weak) IBOutlet UIButton *doneButton;
 
 /**
  * The view controllers to display as pages
  */
-@property (nonatomic, retain) NSArray *viewControllers;
+@property (nonatomic, strong) NSArray *viewControllers;
 
 /**
  * The transition style to use when changing pages. Default is HLSWizardTransitionStyleNone

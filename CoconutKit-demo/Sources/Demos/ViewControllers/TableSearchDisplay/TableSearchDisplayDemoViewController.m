@@ -3,7 +3,7 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/14/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
 #import "TableSearchDisplayDemoViewController.h"
@@ -11,7 +11,7 @@
 #import "DeviceInfo.h"
 #import "StretchableViewController.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
     ScopeButtonIndexEnumBegin = 0,
     ScopeButtonIndexAll = ScopeButtonIndexEnumBegin,
     ScopeButtonIndexMusicPlayers,
@@ -19,14 +19,12 @@ typedef enum {
     ScopeButtonIndexTablets,
     ScopeButtonIndexEnumEnd,
     ScopeButtonIndexEnumSize = ScopeButtonIndexEnumEnd - ScopeButtonIndexEnumBegin
-} ScopeButtonIndex;
+} ;
 
 @interface TableSearchDisplayDemoViewController ()
 
-@property (nonatomic, retain) NSArray *devices;
-@property (nonatomic, retain) NSArray *filteredDevices;
-
-- (void)filterDevices;
+@property (nonatomic, strong) NSArray *devices;
+@property (nonatomic, strong) NSArray *filteredDevices;
 
 @end
 
@@ -34,7 +32,7 @@ typedef enum {
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if ((self = [super init])) {
         NSMutableArray *devices = [NSMutableArray array];
@@ -73,19 +71,6 @@ typedef enum {
     }
     return self;
 }
-
-- (void)dealloc
-{
-    self.devices = nil;
-    self.filteredDevices = nil;
-    [super dealloc];
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize devices = m_devices;
-
-@synthesize filteredDevices = m_filteredDevices;
 
 #pragma mark UISearchDisplayDelegate protocol implementation
 
@@ -166,7 +151,7 @@ typedef enum {
     
     // Push another dummy level
     if (self.navigationController) {
-        StretchableViewController *stretchableViewController = [[[StretchableViewController alloc] init] autorelease];
+        StretchableViewController *stretchableViewController = [[StretchableViewController alloc] init];
         [self.navigationController pushViewController:stretchableViewController animated:YES];        
     }
 }
@@ -230,11 +215,10 @@ typedef enum {
     [super localize];
     
     self.title = @"HLSTableSearchDisplayViewController";
-    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:NSLocalizedString(@"All", @"All"),
-                                        NSLocalizedString(@"Music players", @"Music players"),
-                                        NSLocalizedString(@"Phones", @"Phones"),
-                                        NSLocalizedString(@"Tablets", @"Tablets"),
-                                        nil];
+    self.searchBar.scopeButtonTitles = @[NSLocalizedString(@"All", nil),
+                                         NSLocalizedString(@"Music players", nil),
+                                         NSLocalizedString(@"Phones", nil),
+                                         NSLocalizedString(@"Tablets", nil)];
 }
 
 @end

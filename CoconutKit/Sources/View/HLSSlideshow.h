@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 17.10.11.
-//  Copyright (c) 2011 Hortis. All rights reserved.
+//  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
 #import "HLSAnimation.h"
@@ -12,7 +12,7 @@
  * Slideshow effects. Depending on which effect is applied the images will be scaled to fill or fit the slideshow
  * view frame (preserving their aspect ratio)
  */
-typedef enum {
+typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
     HLSSlideshowEffectEnumBegin = 0,
     HLSSlideshowEffectNone = HLSSlideshowEffectEnumBegin,                           // No transition between images (aspect fit)
     HLSSlideshowEffectCrossDissolve,                                                // Cross-dissolve transition between images (aspect fit)
@@ -23,7 +23,7 @@ typedef enum {
     HLSSlideshowEffectInverseVerticalRibbon,                                        // Images slide from bottom to top (aspect fill)
     HLSSlideshowEffectEnumEnd,
     HLSSlideshowEffectEnumSize = HLSSlideshowEffectEnumEnd - HLSSlideshowEffectEnumBegin
-} HLSSlideshowEffect;
+};
 
 // Forward declarations
 @protocol HLSSlideshowDelegate;
@@ -36,23 +36,8 @@ typedef enum {
  * effect or timings.
  *
  * You should not alter the frame of a slideshow while it is running. This is currently not supported.
- *
- * Designated initializer: -initWithFrame:
  */
-@interface HLSSlideshow : UIView <HLSAnimationDelegate> {
-@private
-    HLSSlideshowEffect m_effect;
-    NSArray *m_imageViews;                      // Two image views needed (front / back buffer) to create smooth cross-dissolve transitions
-    NSArray *m_imageNamesOrPaths;
-    NSInteger m_currentImageIndex;
-    NSInteger m_nextImageIndex;
-    NSInteger m_currentImageViewIndex;
-    HLSAnimation *m_animation;
-    NSTimeInterval m_imageDuration;
-    NSTimeInterval m_transitionDuration;
-    BOOL m_random;
-    id<HLSSlideshowDelegate> m_delegate;
-}
+@interface HLSSlideshow : UIView <HLSAnimationDelegate>
 
 /**
  * The transition effect to be applied
@@ -70,7 +55,7 @@ typedef enum {
  * slideshow does not have to be stopped. If you want the change to happen immediately, stop the slideshow, update its 
  * image set and start it again.
  */
-@property (nonatomic, retain) NSArray *imageNamesOrPaths;
+@property (nonatomic, strong) NSArray *imageNamesOrPaths;
 
 /**
  * How much time an image stays visible alone. Default is 4 seconds. Must be > 0
@@ -95,7 +80,7 @@ typedef enum {
  */
 @property (nonatomic, assign) BOOL random;
 
-@property (nonatomic, assign) id<HLSSlideshowDelegate> delegate;
+@property (nonatomic, weak) id<HLSSlideshowDelegate> delegate;
 
 /**
  * Slideshow controls

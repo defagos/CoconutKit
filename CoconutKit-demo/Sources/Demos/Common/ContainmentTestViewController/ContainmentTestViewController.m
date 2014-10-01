@@ -3,27 +3,20 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 8/10/12.
-//  Copyright (c) 2012 Hortis. All rights reserved.
+//  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
 #import "ContainmentTestViewController.h"
 
 #import "MemoryWarningTestCoverViewController.h"
 
+@interface ContainmentTestViewController ()
+
+@property (nonatomic, weak) IBOutlet UISwitch *presentingModalSwitch;
+
+@end
+
 @implementation ContainmentTestViewController
-
-#pragma mark Object creation and destruction
-
-- (void)releaseViews
-{
-    [super releaseViews];
-    
-    self.presentingModalSwitch = nil;
-}
-
-#pragma mark Accessors and mutators
-
-@synthesize presentingModalSwitch = m_presentingModalSwitch;
 
 #pragma mark View lifecycle
 
@@ -41,29 +34,21 @@
                   "\n\tstackController = %@"
                   "\n\tplaceholderViewController = %@"
                   "\n\tparentViewController = %@"
-                  "\n\tmodalViewController = %@",
+                  "\n\tpresentedViewController = %@"
+                  "\n\ttpresentingViewController = %@",
                   self.navigationController,
                   self.tabBarController,
                   self.stackController,
                   self.placeholderViewController,
                   self.parentViewController,
-                  self.modalViewController);
-    
-    // iOS 5 only (warning: presentedViewController existed before iOS 5 as private method, must test presentingViewController
-    // for which it was not the case)
-    if ([self respondsToSelector:@selector(presentingViewController)]) {
-        HLSLoggerInfo(@"(iOS 5) presentedViewController = %@"
-                      "\n\tpresentingViewController = %@",
-                      self.presentedViewController,
-                      self.presentingViewController);
-    }
+                  self.presentedViewController,
+                  self.presentingViewController);
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 
@@ -71,7 +56,6 @@
 {
     [super viewDidAppear:animated];
     
-    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingToParentViewController = %@", HLSStringFromBool([self isMovingToParentViewController]));
 }
 
@@ -79,7 +63,6 @@
 {
     [super viewWillDisappear:animated];
     
-    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingFromParentViewController = %@", HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
@@ -87,7 +70,6 @@
 {
     [super viewDidDisappear:animated];
     
-    // Can be called also in iOS 4 thanks to CoconutKit
     HLSLoggerInfo(@"isMovingFromParentViewController = %@", HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
@@ -137,9 +119,9 @@
 - (IBAction)hideWithModal:(id)sender
 {
     // Just to test -parentViewController (if correct, then the topmost container will be presenting the modal)
-    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[[MemoryWarningTestCoverViewController alloc] init] autorelease];
+    MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[MemoryWarningTestCoverViewController alloc] init];
     memoryWarningTestCoverViewController.modalPresentationStyle = self.presentingModalSwitch.on ? UIModalPresentationCurrentContext : UIModalPresentationFullScreen;
-    [self presentModalViewController:memoryWarningTestCoverViewController animated:YES];
+    [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
 @end

@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel DEFAGO on 03.06.10.
-//  Copyright 2010 Hortis. All rights reserved.
+//  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -25,18 +25,18 @@
  * Manages application-wide notification mechanisms
  *
  * This class is not thread-safe
- *
- * Designated initializer: -init
  */
-@interface HLSNotificationManager : NSObject {
-@private
-    NSUInteger m_networkActivityCount;
-}
+@interface HLSNotificationManager : NSObject
 
 /**
  * Get the shared object managing application-wide notifications
  */
-+ (HLSNotificationManager *)sharedNotificationManager;
++ (instancetype)sharedNotificationManager;
+
+/**
+ * Create a notification manager
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Call this method to notify that a network task has started. This method can be called several times if several
@@ -59,8 +59,6 @@
  * those notifications into its own notifications, otherwise the object internals might be revealed. Writing
  * such conversion code can be tedious and error prone. The HLSNotificationConverter singleton provides a convenient
  * way to define conversions with very litte code.
- *
- * Designated initializer: -init
  */
 @interface HLSNotificationConverter : NSObject {
 @private
@@ -69,10 +67,18 @@
     //   - 1st dictionary: maps objects to a notification map
     //   - 2nd dictionary (notification map): maps notification name to the (object, notification name) pair to
     //                                        convert to
-    NSMutableDictionary *m_objectToNotificationMap;
+    NSMutableDictionary *_objectToNotificationMap;
 }
 
+/**
+ * Singleton instance
+ */
 + (HLSNotificationConverter *)sharedNotificationConverter;
+
+/**
+ * Create a notification converter
+ */
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /**
  * Add a conversion rule. The objectFrom and objectTo objects are NOT retained, as for NSNotificationManager. This is 

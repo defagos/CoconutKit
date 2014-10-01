@@ -3,10 +3,10 @@
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 2/14/11.
-//  Copyright 2011 Hortis. All rights reserved.
+//  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
-typedef enum {
+typedef NS_ENUM(NSInteger, DeviceType) {
     DeviceTypeEnumBegin = 0,
     DeviceTypeAll = DeviceTypeEnumBegin,
     DeviceTypeMusicPlayer,
@@ -14,19 +14,15 @@ typedef enum {
     DeviceTypeTablet,
     DeviceTypeEnumEnd,
     DeviceTypeEnumSize = DeviceTypeEnumEnd - DeviceTypeEnumBegin
-} DeviceType;
+};
 
-@interface DeviceInfo : NSObject {
-@private
-    NSString *m_name;
-    DeviceType m_type;
-}
+@interface DeviceInfo : NSObject
 
 + (DeviceInfo *)deviceInfoWithName:(NSString *)name type:(DeviceType)type;
 
-- (id)initWithName:(NSString *)name type:(DeviceType)type;
+- (instancetype)initWithName:(NSString *)name type:(DeviceType)type NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, readonly, retain) NSString *name;
+@property (nonatomic, readonly, strong) NSString *name;
 @property (nonatomic, readonly, assign) DeviceType type;
 
 @end
