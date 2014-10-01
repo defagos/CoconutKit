@@ -107,7 +107,6 @@
 		6F2B30EB1929BE4A003D4C2C /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30C11929BE4A003D4C2C /* Person.m */; };
 		6F2B30EC1929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30C41929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m */; };
 		6F2B30F11929BF74003D4C2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30F01929BF74003D4C2C /* main.m */; };
-		6F2B30F61929C095003D4C2C /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */; };
 		6F3569AD19D59A68000CADE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAE19D2E7920021B95D /* Localizable.strings */; };
 		6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
@@ -126,6 +125,7 @@
 		6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
 		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
+		6F8CBE9C19DC2591003286F7 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */; };
 		6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
 		6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
 		6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83319D448D90010A128 /* DemosListViewController.xib */; };
@@ -546,7 +546,6 @@
 		6F2B30C41929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F2B30EE1929BF10003D4C2C /* CoconutKit-tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-tests-Info.plist"; sourceTree = "<group>"; };
 		6F2B30F01929BF74003D4C2C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = "/Developer/Frameworks/GHUnitiOS/0.5.9pre-458fe43/GHUnitIOS.framework"; sourceTree = "<absolute>"; };
 		6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
 		6F468CAD19D2E7920021B95D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DemoTable.strings; sourceTree = SOURCE_ROOT; };
 		6F468CAF19D2E7920021B95D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
@@ -570,6 +569,7 @@
 		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
+		6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../Externals/GHUnitIOS.framework; sourceTree = "<group>"; };
 		6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellsDemoViewController.xib; sourceTree = "<group>"; };
 		6F96C83319D448D90010A128 /* DemosListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemosListViewController.xib; sourceTree = "<group>"; };
 		6F9C459414C5C30B00824AB2 /* CoconutKit_demoAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit_demoAppDelegate.h; sourceTree = "<group>"; };
@@ -750,7 +750,7 @@
 				6F2B305D1929BD78003D4C2C /* MobileCoreServices.framework in Frameworks */,
 				6F2B305E1929BD78003D4C2C /* CoreText.framework in Frameworks */,
 				6F2B305F1929BD78003D4C2C /* QuartzCore.framework in Frameworks */,
-				6F2B30F61929C095003D4C2C /* GHUnitIOS.framework in Frameworks */,
+				6F8CBE9C19DC2591003286F7 /* GHUnitIOS.framework in Frameworks */,
 				6F2B30601929BD78003D4C2C /* CoreData.framework in Frameworks */,
 				6F2B30611929BD78003D4C2C /* Foundation.framework in Frameworks */,
 				6F2B30621929BD78003D4C2C /* UIKit.framework in Frameworks */,
@@ -825,7 +825,7 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				6F22C75116A93DD20081A9A7 /* CoreText.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				6F2B30F51929C095003D4C2C /* GHUnitIOS.framework */,
+				6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */,
 				6F4F84AA136E8BA4007D027B /* MessageUI.framework */,
 				6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */,
 				6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */,
@@ -2327,7 +2327,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Developer/Frameworks/GHUnitiOS/0.5.9pre-458fe43",
+					/Users/defagos/Development/repositories/CoconutKit/Externals,
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2352,7 +2352,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Developer/Frameworks/GHUnitiOS/0.5.9pre-458fe43",
+					/Users/defagos/Development/repositories/CoconutKit/Externals,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";

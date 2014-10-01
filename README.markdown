@@ -185,7 +185,7 @@ There are some requirements when contributing, though:
 * Use ARC
 * Use of private APIs is strictly forbidden (except if the private method calls never make it into released binaries. You can still call private APIs to implement helpful debugging features, for example)
 * New components should be added the demo project, so that an example with good code coverage is available
-* Unit tests require version 0.5.2 of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit) to be installed under `/Developer/Frameworks/GHUnitIOS/0.5.2/GHUnitIOS.framework`
+* Unit tests require use of the [GHUnit framework for iOS](https://github.com/gabriel/gh-unit), supplied in the `Externals` directory
 
 #### Writing code
 
