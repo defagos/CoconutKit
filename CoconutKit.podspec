@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
                   * Localization in nib files without outlets
                   * Core Data model management and validation made easy
                   * Custom controls
+                  * ... and much more!
                   DESC
   
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
@@ -25,6 +26,12 @@ Pod::Spec.new do |s|
   
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit'
   s.requires_arc = true
-  s.preserve_paths = 'CoconutKit/publicHeaders.txt'
+
+  # Process the publicHeaders.txt file listing public headers to generate a public header directory as well as a global header file
+  s.preserve_paths = 'CoconutKit/publicHeaders.txt'  
+  s.prepare_command = 'ruby Tools/Scripts/generate_public_headers.rb'
+  s.public_header_files = 'Tools/Scripts/GeneratedHeaders/*.h'
+
+  # Do not use CoconutKit-resources target, use CocoaPods native bundle creation mechanism
   s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{Images,Nibs}/*', 'CoconutKit-resources/*.lproj/*'] }
 end
