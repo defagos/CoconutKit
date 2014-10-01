@@ -212,7 +212,7 @@
     NSDate *dateInCalendarTimeZone = [[self timeZone] dateWithSameComponentsAsDate:date fromTimeZone:timeZone];
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:dateInCalendarTimeZone];
     
-    if (unitFlags & NSTimeZoneCalendarUnit) {
+    if (unitFlags & NSCalendarUnitTimeZone) {
         [dateComponents setTimeZone:timeZone];
     }
     return dateComponents;
@@ -362,7 +362,7 @@
         return [self dateAtHour:hour minute:minute second:second theSameDayAsDate:date];
     }
     
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:date inTimeZone:timeZone];
     [dateComponents setHour:hour];
     [dateComponents setMinute:minute];
@@ -381,7 +381,7 @@
         return [self compareDaysBetweenDate:date1 andDate:date2];
     }
     
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSDateComponents *dateComponents1 = [self components:unitFlags fromDate:date1 inTimeZone:timeZone];
     NSDateComponents *dateComponents2 = [self components:unitFlags fromDate:date2 inTimeZone:timeZone];
     
@@ -421,7 +421,7 @@
 
 + (NSString *)stringForComponentValue:(NSInteger)componentValue
 {
-    if (componentValue != NSUndefinedDateComponent) {
+    if (componentValue != NSDateComponentUndefined) {
         return [NSString stringWithFormat:@"%ld", (long)componentValue];
     }
     else {
