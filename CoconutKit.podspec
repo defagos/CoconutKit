@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'CoconutKit'
-  s.version = '2.1'
+  s.version = '2.1.1'
   s.license = 'MIT'
   s.summary = 'CoconutKit is a library of high-quality iOS components.'
   s.homepage = 'https://github.com/defagos/CoconutKit'
   s.author = { 'Samuel Défago' => 'defagos@gmail.com' }
-  s.source = { :git => 'https://github.com/defagos/CoconutKit.git', :tag => '2.1' }
+  s.source = { :git => 'https://github.com/defagos/CoconutKit.git', :tag => '2.1.1' }
   s.social_media_url = 'http://twitter.com/defagos'
   s.platform = :ios, '7.0'
   
