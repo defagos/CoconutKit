@@ -1,5 +1,7 @@
 #!/usr/bin/ruby
 
+# Create the public header list for use with CocoaPods
+
 require 'FileUtils'
 
 project_directory = File.expand_path(File.join(File.dirname(__FILE__), '../../CoconutKit'))

@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'CoconutKit'
-  s.version = '2.1'
+  s.version = '2.1.1'
   s.license = 'MIT'
   s.summary = 'CoconutKit is a library of high-quality iOS components.'
   s.homepage = 'https://github.com/defagos/CoconutKit'
   s.author = { 'Samuel Défago' => 'defagos@gmail.com' }
-  s.source = { :git => 'https://github.com/defagos/CoconutKit.git', :tag => '2.1' }
+  s.source = { :git => 'https://github.com/defagos/CoconutKit.git', :tag => '2.1.1' }
   s.social_media_url = 'http://twitter.com/defagos'
   s.platform = :ios, '7.0'
   
@@ -28,10 +28,15 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # Process the publicHeaders.txt file listing public headers to generate a public header directory as well as a global header file
+  # TODO: An additional CocoaPods temporary fix has been added, see https://github.com/CocoaPods/CocoaPods/issues/1653.
   s.preserve_paths = 'CoconutKit/publicHeaders.txt'  
-  s.prepare_command = 'ruby Tools/Scripts/generate_public_headers.rb'
+  s.prepare_command = <<-CMD
+                      ruby Tools/Scripts/fix_cocoapods_localized_strings.rb
+                      ruby Tools/Scripts/generate_public_headers.rb
+                      CMD
   s.public_header_files = 'Tools/Scripts/GeneratedHeaders/*.h'
 
   # Do not use CoconutKit-resources target, use CocoaPods native bundle creation mechanism
-  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{Images,Nibs}/*', 'CoconutKit-resources/*.lproj/*'] }
+  # TODO: Replace with localized resources with 'CoconutKit-resources/*.lproj' when the bug above has been fixed
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{Images,Nibs}/*', 'Tools/Scripts/GeneratedResources/*.lproj'] }
 end
