@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
   s.prefix_header_file = 'CoconutKit/CoconutKit-Prefix.pch'
   
-  s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'UIKit'
+  s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit'
   s.requires_arc = true
   s.preserve_paths = 'CoconutKit/publicHeaders.txt'
   s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{Images,Nibs}/*', 'CoconutKit-resources/*.lproj/*'] }
