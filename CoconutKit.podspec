@@ -26,5 +26,5 @@ Pod::Spec.new do |s|
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'UIKit'
   s.requires_arc = true
   s.preserve_paths = 'CoconutKit/publicHeaders.txt'
-  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/Resources/{Images,Nibs}/*', 'CoconutKit-resources/Resources/*.lproj/*'] }
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{Images,Nibs}/*', 'CoconutKit-resources/*.lproj/*'] }
 end
