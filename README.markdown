@@ -159,6 +159,10 @@ CoconutKit is best used with the most recent Xcode and iOS SDK releases. In gene
 
 CoconutKit is compatible with all 32-bit and 64-bit architectures.
 
+#### Can I use CoconutKit with Swift projects?
+
+Yes, you can if you use CoconutKit as a `.staticframework`. Support with bridging headers is currently not officially supported. Add the `.staticframework` to your project and `import CoconutKit` where needed. If automatic linking is enabled no explicit linking against system frameworks is required.
+
 #### Can I use CoconutKit for applications published on the AppStore?
 
 CoconutKit does not use any private API and is therefore AppStore friendly. Several applications I developed use CoconutKit and have successfully been approved.
