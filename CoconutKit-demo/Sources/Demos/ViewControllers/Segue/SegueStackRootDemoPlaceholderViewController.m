@@ -21,21 +21,6 @@
     self.view.backgroundColor = [UIColor randomColor];
 }
 
-#pragma mark Segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue isKindOfClass:[HLSStackPushSegue class]]) {
-        HLSStackPushSegue *stackPushSegue = (HLSStackPushSegue *)segue;
-        if ([stackPushSegue.identifier isEqualToString:@"pushFromBottom"]) {
-            stackPushSegue.transitionClass = [HLSTransitionPushFromBottom class];
-        }
-        else if ([stackPushSegue.identifier isEqualToString:@"coverFromTop"]) {
-            stackPushSegue.transitionClass = [HLSTransitionCoverFromTop class];
-        }
-    }
-}
-
 #pragma mark Action callbacks
 
 - (IBAction)hideWithModal:(id)sender
