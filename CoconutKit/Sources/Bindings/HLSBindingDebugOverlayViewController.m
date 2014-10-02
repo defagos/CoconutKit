@@ -49,7 +49,7 @@ static UIWindow *s_previousKeyWindow = nil;
 
 #pragma mark Object creation and destruction
 
-- (id)initWithDebuggedViewController:(UIViewController *)debuggedViewController recursive:(BOOL)recursive
+- (instancetype)initWithDebuggedViewController:(UIViewController *)debuggedViewController recursive:(BOOL)recursive
 {
     if (self = [super init]) {
         self.debuggedViewController = debuggedViewController;
@@ -58,7 +58,7 @@ static UIWindow *s_previousKeyWindow = nil;
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
     return nil;

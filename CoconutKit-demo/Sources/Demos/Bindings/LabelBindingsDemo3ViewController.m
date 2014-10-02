@@ -15,7 +15,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)init
+- (instancetype)init
 {
     if (self = [super init]) {
         LabelBindingsDemo3InsetViewController *insetViewController = [[LabelBindingsDemo3InsetViewController alloc] init];

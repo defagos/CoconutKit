@@ -9,7 +9,6 @@
 #import "HLSContainerContent.h"
 
 #import "HLSAssert.h"
-#import "HLSAutorotationCompatibility.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"

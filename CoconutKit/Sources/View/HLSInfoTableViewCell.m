@@ -27,7 +27,11 @@
         s_constraintSize = CGSizeMake(CGRectGetWidth(s_cell.valueLabel.frame), CGFLOAT_MAX);
     });
     
-    return s_baseHeight + [value sizeWithFont:s_cell.valueLabel.font constrainedToSize:s_constraintSize].height + 20.f;
+    CGRect boundingRect = [value boundingRectWithSize:s_constraintSize
+                                              options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                           attributes:@{ NSFontAttributeName : s_cell.valueLabel.font }
+                                              context:nil];
+    return s_baseHeight + CGRectGetHeight(boundingRect) + 20.f;
 }
 
 #pragma mark Overrides

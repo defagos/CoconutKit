@@ -40,7 +40,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view
+- (instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view
 {
     if (self = [super init]) {
         if (! [keyPath isFilled] || ! view) {
@@ -56,10 +56,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithObject:nil keyPath:nil transformerName:nil view:nil];
 }
 
 #pragma mark Getting and setting values

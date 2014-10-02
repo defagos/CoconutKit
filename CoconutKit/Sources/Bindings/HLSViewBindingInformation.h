@@ -19,7 +19,7 @@
  *   - a non-nil object, which the keypath is applied to (binding to an object)
  *   - nil, in which case the keypath is applied to the responder chain starting with view
  */
-- (id)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view;
+- (instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return the current value corresponding to the stored binding information (the transformer method is applied, if any). 

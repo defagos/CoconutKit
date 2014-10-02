@@ -28,7 +28,7 @@
     static NSNumberFormatter *s_numberFormatter;
     dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setFormatterBehavior:NSNumberFormatterDecimalStyle];
+        [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     });
     return s_numberFormatter;
 }

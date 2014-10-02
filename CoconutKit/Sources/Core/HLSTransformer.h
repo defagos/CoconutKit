@@ -69,7 +69,7 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
  * Designated intializer. The forward transformer block is mandatory, the reverse one is optional. If no reverse
  * transformation block has been provided, the instance does not respond to -getObject:fromObject:error:
  */
-- (id)initWithBlock:(HLSTransformerBlock)transformerBlock
-       reverseBlock:(HLSReverseTransformerBlock)reverseBlock;
+- (instancetype)initWithBlock:(HLSTransformerBlock)transformerBlock
+                 reverseBlock:(HLSReverseTransformerBlock)reverseBlock NS_DESIGNATED_INITIALIZER;
 
 @end

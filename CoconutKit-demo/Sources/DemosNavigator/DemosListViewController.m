@@ -475,17 +475,17 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexBindings: {
             switch (indexPath.row) {
                 case BindingsDemoIndexLabels: {
-                    demoViewController = [[[LabelBindingsDemoViewController alloc] init] autorelease];
+                    demoViewController = [[LabelBindingsDemoViewController alloc] init];
                     break;
                 }
                     
                 case BindingsDemoIndexTableView: {
-                    demoViewController = [[[TableViewBindingsDemoViewController alloc] init] autorelease];
+                    demoViewController = [[TableViewBindingsDemoViewController alloc] init];
                     break;
                 }
                     
                 case BindingsDemoIndexControls: {
-                    demoViewController = [[[ControlBindingsDemoViewController alloc] init] autorelease];
+                    demoViewController = [[ControlBindingsDemoViewController alloc] init];
                     break;
                 }
                     

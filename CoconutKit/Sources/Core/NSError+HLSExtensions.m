@@ -27,12 +27,12 @@ static Class subclass_class(id self, SEL _cmd);
 
 #pragma mark Class methods
 
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code
 {
     return [[[self class] alloc] initWithDomain:domain code:code];
 }
 
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription
 {
     NSDictionary *userInfo = localizedDescription ? @{ NSLocalizedDescriptionKey : localizedDescription} : nil;
     return [[[self class] alloc] initWithDomain:domain code:code userInfo:userInfo];
@@ -40,7 +40,7 @@ static Class subclass_class(id self, SEL _cmd);
 
 #pragma mark Object creation and destruction
 
-- (id)initWithDomain:(NSString *)domain code:(NSInteger)code
+- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code
 {
     return [self initWithDomain:domain code:code userInfo:nil];
 }

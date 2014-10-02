@@ -35,8 +35,6 @@ extern NSString * const HLSDetailedErrorsKey;
  * The interface below enforces the link between accessor methods and underlying userInfo dictionary keys. This is not
  * required, as explained in the documentation:
  *   http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/ErrorHandlingCocoa/ErrorHandling/ErrorHandling.html
- *
- * Designated initializer: -initWithDomain:code:userInfo:
  */
 @interface NSError (HLSExtensions)
 
@@ -44,20 +42,20 @@ extern NSString * const HLSDetailedErrorsKey;
  * Instantiate an error with some code within a domain. The error is created with no information, use the mutators below to
  * add the information you need
  */
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code;
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code;
 
 /**
  * Convenience instantiation method for the most common case (an error conveying a description message). You can still
  * use the mutators below to add more information if needed
  */
 // FIXME: Warning: This method already exists elsewhere! Check class dump!
-+ (id)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
 
 /**
  * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to
  * add the information you need
  */
-- (id)initWithDomain:(NSString *)domain code:(NSInteger)code;
+- (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code;
 
 /**
  * Return the nested error which has been set (if any)

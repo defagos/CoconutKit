@@ -213,7 +213,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (BOOL)bindsRecursively
 {
     if ([self respondsToSelector:@selector(bindsSubviewsRecursively)]) {
-        return [self performSelector:@selector(bindsSubviewsRecursively)];
+        return [[self performSelector:@selector(bindsSubviewsRecursively)] boolValue];
     }
     else {
         return YES;

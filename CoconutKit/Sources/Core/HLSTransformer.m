@@ -1,18 +1,14 @@
 //
-//  HLSConverter.m
+//  HLSTransformer.m
 //  CoconutKit
 //
-<<<<<<< HEAD:CoconutKit/Sources/Core/HLSConverters.m
 //  Created by Samuel Défago on 9/21/10.
 //  Copyright 2010 Samuel Défago. All rights reserved.
-=======
-//  Created by Samuel Défago on 20/03/14.
-//  Copyright (c) 2014 Hortis. All rights reserved.
->>>>>>> feature/bindings:CoconutKit/Sources/Core/HLSTransformer.m
 //
 
 #import "HLSTransformer.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 NSString *HLSStringFromBool(BOOL yesOrNo)
@@ -96,18 +92,6 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
             transform.m41, transform.m42, transform.m43, transform.m44];
 }
 
-<<<<<<< HEAD:CoconutKit/Sources/Core/HLSConverters.m
-NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
-{
-    if (! string) {
-        return nil;
-    }
-    
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    return [formatter numberFromString:string];
-}
-=======
 @interface HLSBlockTransformer ()
 
 @property (nonatomic, copy) HLSTransformerBlock transformerBlock;
@@ -127,8 +111,8 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
 
 #pragma mark Object creation and destruction
 
-- (id)initWithBlock:(HLSTransformerBlock)transformerBlock
-       reverseBlock:(HLSReverseTransformerBlock)reverseBlock
+- (instancetype)initWithBlock:(HLSTransformerBlock)transformerBlock
+                 reverseBlock:(HLSReverseTransformerBlock)reverseBlock
 {
     if (self = [super init]) {
         if (! transformerBlock) {
@@ -142,10 +126,10 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithBlock:nil reverseBlock:nil];
 }
 
 #pragma mark HLSTransformer protocol implementation
@@ -180,4 +164,3 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
 }
 
 @end
->>>>>>> feature/bindings:CoconutKit/Sources/Core/HLSTransformer.m

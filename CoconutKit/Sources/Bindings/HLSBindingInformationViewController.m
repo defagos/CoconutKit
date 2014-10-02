@@ -15,6 +15,7 @@
 #import "HLSTransformer.h"
 #import "NSBundle+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
+#import "UIView+HLSViewBindingImplementation.h"
 #import "UIViewController+HLSExtensions.h"
 
 @interface HLSBindingInformationViewController ()
@@ -45,7 +46,7 @@
 
 #pragma mark Object creation and destruction
 
-- (id)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
+- (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
         self.names = @[CoconutKitLocalizedString(@"Binding status", nil),
@@ -96,10 +97,10 @@
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     HLSForbiddenInheritedMethod();
-    return nil;
+    return [self initWithBindingInformation:nil];
 }
 
 #pragma mark View lifecycle
@@ -108,7 +109,7 @@
 {
     [super viewDidLoad];
     
-    self.contentSizeForViewInPopover = CGSizeMake(320.f, 640.f);
+    self.preferredContentSize = CGSizeMake(320.f, 640.f);
 }
 
 #pragma mark Cell contents

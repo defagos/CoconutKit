@@ -10,11 +10,6 @@
 
 #import "HLSAnimationStep+Friend.h"
 #import "HLSAssert.h"
-<<<<<<< HEAD
-#import "HLSConverters.h"
-=======
-#import "HLSFloat.h"
->>>>>>> feature/bindings
 #import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
@@ -52,11 +47,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @property (nonatomic, assign, getter=isStarted) BOOL started;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
-<<<<<<< HEAD
-@property (nonatomic, strong) HLSZeroingWeakRef *delegateZeroingWeakRef;
-=======
-@property (nonatomic, retain) MAZeroingWeakRef *delegateZeroingWeakRef;
->>>>>>> feature/bindings
+@property (nonatomic, strong) MAZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 
@@ -144,15 +135,12 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)setDelegate:(id<HLSAnimationDelegate>)delegate
 {
-<<<<<<< HEAD
-    self.delegateZeroingWeakRef = [[HLSZeroingWeakRef alloc] initWithObject:delegate];
-    [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
-=======
     self.delegateZeroingWeakRef = [MAZeroingWeakRef refWithTarget:delegate];
+    
+    __weak __typeof(self) weakSelf = self;
     [self.delegateZeroingWeakRef setCleanupBlock:^(id target) {
-        [self cancel];
+        [weakSelf cancel];
     }];
->>>>>>> feature/bindings
 }
 
 - (NSTimeInterval)duration

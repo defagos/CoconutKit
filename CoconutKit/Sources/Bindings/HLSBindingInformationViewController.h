@@ -16,6 +16,6 @@
 /**
  * Initialize for displaying the provided binding information
  */
-- (id)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation;
+- (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -242,7 +242,7 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
     // The following only adds a method implementation if the class does not implement it itself (block implementations
     // sigatures must not have a SEL argument). The added method only calls the super counterpart, see explanation above
     const char *types = method_getTypeEncoding(method);
-    class_addMethod(clazz, selector, imp_implementationWithBlock(^(id self, va_list argp) {
+    class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
         struct objc_super super = {
             .receiver = self,
             .super_class = class_getSuperclass(clazz)
