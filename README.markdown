@@ -223,6 +223,10 @@ The following lists all people who contributed to CoconutKit:
 
 ### Release notes
 
+#### Version 2.1.2
+
+* Fixes for CocoaPods (public headers were incorrectly cleaned up after generation)
+
 #### Version 2.1.1
 
 * Fixes for CocoaPods
