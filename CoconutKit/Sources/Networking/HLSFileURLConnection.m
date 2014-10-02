@@ -9,7 +9,6 @@
 #import "HLSFileURLConnection.h"
 
 #import "HLSError.h"
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
 
@@ -44,10 +43,9 @@
 - (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
 {
     // A latency can be added using environment variables
-    // TODO: Cache
     NSTimeInterval delay = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSFileURLConnectionLatency"] doubleValue]
         + (arc4random() % 1001) / 1000.;
-    if (doublelt(delay, 0.)) {
+    if (isless(delay, 0.)) {
         HLSLoggerWarn(@"The connection latency must be >= 0. Fixed to 0");
         delay = 0.;
     }
@@ -69,18 +67,17 @@
     
     // If the corresponding environment variable has been set, the connection can be set to be unreliable, in which
     // case it will have the corresponding failure probability
-    // TODO: Cache
     double failureRate = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSFileURLConnectionFailureRate"] doubleValue];
-    if (doublelt(failureRate, 0.)) {
+    if (isless(failureRate, 0.)) {
         HLSLoggerWarn(@"The failure rate must be >= 0. Fixed to 0");
         failureRate = 0.;
     }
-    if (doublegt(failureRate, 1.)) {
+    if (isgreater(failureRate, 1.)) {
         HLSLoggerWarn(@"The failure rate must be <= 1. Fixed to 1");
         failureRate = 1.;
     }
     double rating = (arc4random() % 1001) / 1000.;
-    if (! doublege(rating, failureRate)) {
+    if (isless(rating, failureRate)) {
         HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
                                                code:NSURLErrorNetworkConnectionLost
                                localizedDescription:NSLocalizedString(@"Connection error", nil)];

@@ -10,7 +10,6 @@
 
 #import "HLSAssert.h"
 #import "HLSConverters.h"
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "HLSTransition.h"
@@ -164,7 +163,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
-    if (doublelt(duration, 0.) && ! doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+    if (isless(duration, 0.) && duration != kAnimationTransitionDefaultDuration) {
         HLSLoggerWarn(@"Duration must be non-negative or the default duration %.2f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
         _duration = kAnimationTransitionDefaultDuration;
     }

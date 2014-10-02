@@ -11,7 +11,6 @@
 #import "HLSAnimationStep+Friend.h"
 #import "HLSAnimationStep+Protected.h"
 #import "HLSAssert.h"
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"
 #import "NSString+HLSExtensions.h"
@@ -53,7 +52,7 @@
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
-    if (doublelt(duration, 0.)) {
+    if (isless(duration, 0.)) {
         HLSLoggerWarn(@"Duration must be non-negative. Fixed to 0");
         _duration = 0.;
     }
@@ -113,7 +112,7 @@
     self.terminating = NO;
     
     // We do not perform the animation if the duration is 0 (this can lead to unnecessary flickering in animations)
-    BOOL actuallyAnimated = animated && ! doubleeq(self.duration - startTime, 0.);
+    BOOL actuallyAnimated = animated && (self.duration - startTime != 0.);
     
     // Retain the delegate during the time of the animation (this is based on the assumption
     // that animations implemented in subclasses do the same, and that they always call the

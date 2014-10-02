@@ -9,7 +9,6 @@
 #import "NSString+HLSExtensions.h"
 
 #import <CommonCrypto/CommonDigest.h>
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "NSData+HLSExtensions.h"
 

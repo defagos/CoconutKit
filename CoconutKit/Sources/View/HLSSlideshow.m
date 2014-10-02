@@ -9,7 +9,6 @@
 #import "HLSSlideshow.h"
 
 #import "HLSAssert.h"
-#import "HLSFloat.h"
 #import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "UIImage+HLSExtensions.h"
@@ -124,7 +123,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)setImageDuration:(NSTimeInterval)imageDuration
 {
-    if (doublele(imageDuration, 0.)) {
+    if (islessequal(imageDuration, 0.)) {
         HLSLoggerWarn(@"Image duration must be > 0; fixed to default value");
         imageDuration = kSlideshowDefaultImageDuration;
     }
@@ -134,7 +133,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)setTransitionDuration:(NSTimeInterval)transitionDuration
 {
-    if (doublelt(transitionDuration, 0.)) {
+    if (isless(transitionDuration, 0.)) {
         HLSLoggerWarn(@"Transition duration must be >= 0; fixed to 0");
         transitionDuration = 0.;
     }
@@ -315,7 +314,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat imageRatio = image.size.width / image.size.height;
     if (self.effect == HLSSlideshowEffectNone || self.effect == HLSSlideshowEffectCrossDissolve) {
         // The image is more portrait-shaped than self
-        if (floatlt(imageRatio, frameRatio)) {
+        if (isless(imageRatio, frameRatio)) {
             zoomScale = CGRectGetHeight(self.frame) / image.size.height;
         }
         // The image is more landscape-shaped than self
@@ -326,7 +325,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     // Calculate the scale which needs to be applied to get aspect fit behavior for the image view
     else {
         // The image is more portrait-shaped than self
-        if (floatlt(imageRatio, frameRatio)) {
+        if (isless(imageRatio, frameRatio)) {
             zoomScale = CGRectGetWidth(self.frame) / image.size.width;
         }
         // The image is more landscape-shaped than self

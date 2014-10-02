@@ -8,7 +8,6 @@
 
 #import "CAMediaTimingFunction+HLSExtensions.h"
 
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import <objc/runtime.h>
 
@@ -33,11 +32,11 @@ static const float kEpsilon = 1e-5f;
 
 - (float)valueForNormalizedTime:(float)time
 {
-    if (floatlt(time, 0.f)) {
+    if (isless(time, 0.f)) {
         HLSLoggerWarn(@"Time must be >= 0. Fixed to 0");
         time = 0.f;
     }
-    else if (floatgt(time, 1.f)) {
+    else if (isgreater(time, 1.f)) {
         HLSLoggerWarn(@"Time must be <= 1. Fixed to 1");
         time = 1.f;
     }
@@ -119,11 +118,11 @@ static const float kEpsilon = 1e-5f;
     // First try a few iterations of Newton's method -- normally very fast.
     for (int i = 0; i < 8; i++) {
         x2 = [self xAtT:t2 forCurveWithPolynomialCoefficients:coeffs] - x;
-        if (floatlt(fabsf(x2), kEpsilon)) {
+        if (isless(fabsf(x2), kEpsilon)) {
             return t2;
         }
         d2 = [self xAtT:t2 forDerivativeOfCurveWithPolynomialCoefficients:coeffs];
-        if (floatlt(fabsf(d2), 1e-6f /* fixed tolerance for small denominators */)) {
+        if (isless(fabsf(d2), 1e-6f /* fixed tolerance for small denominators */)) {
             break;
         }
         t2 -= x2 / d2;
@@ -134,21 +133,21 @@ static const float kEpsilon = 1e-5f;
     t1 = 1.f;
     t2 = x;
     
-    if (floatlt(t2, t0)) {
+    if (isless(t2, t0)) {
         return t0;
     }
     
-    if (floatgt(t2, t1)) {
+    if (isgreater(t2, t1)) {
         return t1;
     }
     
-    while (floatlt(t0, t1)) {
+    while (isless(t0, t1)) {
         x2 = [self xAtT:t2 forCurveWithPolynomialCoefficients:coeffs];
-        if (floatlt(fabsf(x2 - x), kEpsilon)) {
+        if (isless(fabsf(x2 - x), kEpsilon)) {
             return t2;
         }
         
-        if (floatgt(x, x2)) {
+        if (isgreater(x, x2)) {
             t0 = t2;
         }
         else {

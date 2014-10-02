@@ -69,7 +69,6 @@
 		6F2B30C71929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30751929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
 		6F2B30C81929BE4A003D4C2C /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30771929BE4A003D4C2C /* HLSErrorTestCase.m */; };
 		6F2B30C91929BE4A003D4C2C /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */; };
-		6F2B30CA1929BE4A003D4C2C /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */; };
 		6F2B30CB1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307D1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m */; };
 		6F2B30CC1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307F1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.m */; };
 		6F2B30CD1929BE4A003D4C2C /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30811929BE4A003D4C2C /* HLSRuntimeTestCase.m */; };
@@ -472,8 +471,6 @@
 		6F2B30771929BE4A003D4C2C /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
 		6F2B30781929BE4A003D4C2C /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
 		6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManagerTestCase.m; sourceTree = "<group>"; };
-		6F2B307A1929BE4A003D4C2C /* HLSFloatTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloatTestCase.h; sourceTree = "<group>"; };
-		6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloatTestCase.m; sourceTree = "<group>"; };
 		6F2B307C1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManagerTestCase.h; sourceTree = "<group>"; };
 		6F2B307D1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManagerTestCase.m; sourceTree = "<group>"; };
 		6F2B307E1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxyTestCase.h; sourceTree = "<group>"; };
@@ -938,8 +935,6 @@
 				6F2B30771929BE4A003D4C2C /* HLSErrorTestCase.m */,
 				6F2B30781929BE4A003D4C2C /* HLSFileManagerTestCase.h */,
 				6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */,
-				6F2B307A1929BE4A003D4C2C /* HLSFloatTestCase.h */,
-				6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */,
 				6FB007DF195304360082D915 /* HLSGeometryTestCase.h */,
 				6FB007E0195304360082D915 /* HLSGeometryTestCase.m */,
 				6F2B307C1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.h */,
@@ -2099,7 +2094,6 @@
 				6F2B30E41929BE4A003D4C2C /* _BankAccount.m in Sources */,
 				6F2B30CB1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m in Sources */,
 				6F2B30EB1929BE4A003D4C2C /* Person.m in Sources */,
-				6F2B30CA1929BE4A003D4C2C /* HLSFloatTestCase.m in Sources */,
 				6F2B30D91929BE4A003D4C2C /* NSString+HLSExtensionsTestCase.m in Sources */,
 				6F2B30DC1929BE4A003D4C2C /* NSManagedObject+HLSValidationTestCase.m in Sources */,
 				6F2B30DD1929BE4A003D4C2C /* TestErrors.m in Sources */,

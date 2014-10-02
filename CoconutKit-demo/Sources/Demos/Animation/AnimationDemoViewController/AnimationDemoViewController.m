@@ -80,13 +80,13 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 - (void)updateUserInterface
 {
     self.animatedSettingsView.hidden = ! self.animatedSwitch.on;
-    self.delayBackgroundView.hidden = ! floateq(self.startTimeSlider.value, 0.f);
-    self.startTimeBackgroundView.hidden = ! floateq(self.delaySlider.value, 0.f);
+    self.delayBackgroundView.hidden = (self.startTimeSlider.value != 0.f);
+    self.startTimeBackgroundView.hidden = (self.delaySlider.value != 0.f);
     
     self.delayLabel.text = [NSString stringWithFormat:@"%.2f", [self delay]];
     
     NSTimeInterval duration = [self duration];
-    if (doubleeq(duration, kAnimationIntrinsicDuration)) {
+    if (duration == kAnimationIntrinsicDuration) {
         self.durationLabel.text = @"-";
     }
     else {
@@ -139,7 +139,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     if (self.loopingSwitch.on) {
         animation = [animation loopAnimation];
     }
-    if (! doubleeq([self duration], kAnimationIntrinsicDuration)) {
+    if ([self duration] != kAnimationIntrinsicDuration) {
         animation = [animation animationWithDuration:[self duration]];
     }
     animation.delegate = self;
@@ -213,10 +213,10 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         [self.animation resume];
     }
     else {
-        if (! doubleeq([self delay], 0.)) {
+        if ([self delay] == 0.) {
             [self.animation playWithRepeatCount:[self repeatCount] afterDelay:[self delay]];
         }
-        else if (! doubleeq([self startTime], 0.)) {
+        else if ([self startTime] != 0.) {
             [self.animation playWithStartTime:[self startTime] repeatCount:[self repeatCount]];
         }
         else {
@@ -298,7 +298,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSTimeInterval)duration
 {
-    if (floateq(self.durationSlider.value, self.durationSlider.maximumValue)) {
+    if (self.durationSlider.value == self.durationSlider.maximumValue) {
         return kAnimationIntrinsicDuration;
     }
     else {
@@ -320,7 +320,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSUInteger)repeatCount
 {
-    if (floateq(self.repeatCountSlider.value, self.repeatCountSlider.maximumValue)) {
+    if (self.repeatCountSlider.value == self.repeatCountSlider.maximumValue) {
         return NSUIntegerMax;
     }
     else {
@@ -330,7 +330,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSTimeInterval)startTime
 {
-    if (doubleeq(self.startTimeSlider.value, [self totalDuration])) {
+    if (self.startTimeSlider.value == [self totalDuration]) {
         return self.startTimeSlider.value;
     }
     else {

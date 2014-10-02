@@ -13,7 +13,6 @@ HLSError.h
 HLSFakeConnection.h
 HLSFileManager.h
 HLSFileURLConnection.h
-HLSFloat.h
 HLSGeometry.h
 HLSInMemoryFileManager.h
 HLSKeyboardInformation.h

@@ -8,7 +8,6 @@
 
 #import "HLSViewAnimation.h"
 
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"
 #import "HLSVector.h"
@@ -45,11 +44,11 @@
 - (void)addToAlpha:(CGFloat)alphaIncrement
 {
     // Sanitize input
-    if (floatlt(alphaIncrement, -1.f)) {
+    if (isless(alphaIncrement, -1.f)) {
         HLSLoggerWarn(@"Alpha increment cannot be smaller than -1. Fixed to -1");
         _alphaIncrement = -1.f;
     }
-    else if (floatgt(alphaIncrement, 1.f)) {
+    else if (isgreater(alphaIncrement, 1.f)) {
         HLSLoggerWarn(@"Alpha variation cannot be larger than 1. Fixed to 1");
         _alphaIncrement = 1.f;
     }

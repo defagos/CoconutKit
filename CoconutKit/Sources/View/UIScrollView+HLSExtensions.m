@@ -9,10 +9,10 @@
 #import "UIScrollView+HLSExtensions.h"
 
 #import "HLSAssert.h"
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "UIView+HLSExtensions.h"
+
 #import <objc/runtime.h>
 
 /**
@@ -112,7 +112,7 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
     
     // Calculate the relative offset position (in [0; 1]) of the receiver
     CGFloat relativeXPos = 0.f;
-    if (floatle(self.contentSize.width, CGRectGetWidth(self.frame))) {
+    if (islessequal(self.contentSize.width, CGRectGetWidth(self.frame))) {
         relativeXPos = 0.f;
     }
     else {
@@ -120,7 +120,7 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
     }
     
     CGFloat relativeYPos = 0.f;
-    if (floatle(self.contentSize.height, CGRectGetHeight(self.frame))) {
+    if (islessequal(self.contentSize.height, CGRectGetHeight(self.frame))) {
         relativeYPos = 0.f;
     }
     else {
@@ -131,17 +131,17 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
     // scrolling further (if enabled)
     BOOL bounces = [objc_getAssociatedObject(self, s_parallaxBouncesKey) boolValue];
     if (! bounces) {
-        if (floatlt(relativeXPos, 0.f)) {
+        if (isless(relativeXPos, 0.f)) {
             relativeXPos = 0.f;
         }
-        else if (floatgt(relativeXPos, 1.f)) {
+        else if (isgreater(relativeXPos, 1.f)) {
             relativeXPos = 1.f;
         }
         
-        if (floatlt(relativeYPos, 0.f)) {
+        if (isless(relativeYPos, 0.f)) {
             relativeYPos = 0.f;
         }
-        else if (floatgt(relativeYPos, 1.f)) {
+        else if (isgreater(relativeYPos, 1.f)) {
             relativeYPos = 1.f;
         }            
     }
@@ -184,7 +184,7 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    BOOL animated = ! doubleeq(keyboardAnimationDuration, 0.);
+    BOOL animated = (keyboardAnimationDuration != 0.);
     
     NSMutableArray *adjustedScrollViews = [NSMutableArray array];
     NSMutableDictionary *scrollViewOriginalHeights = [NSMutableDictionary dictionary];
@@ -209,7 +209,7 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
         // For scroll views which have not been adjusted yet, first check that the scroll view is neither completely
         // covered by the keyboard, nor completely visible (in which case no adjustment is required)
         if (! [s_adjustedScrollViews containsObject:scrollView]
-                && (floatlt(keyboardHeightAdjustment, 0.f) || floatgt(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame)))) {
+                && (isless(keyboardHeightAdjustment, 0.f) || isgreater(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame)))) {
             continue;
         }
         
@@ -219,9 +219,9 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
         [scrollViewOriginalHeights setObject:scrollViewOriginalHeight forKey:pointerKey];
         
         // Prevent the scroll view from growing larger than its original size, or smaller than zero
-        keyboardHeightAdjustment = floatmin(floatmax(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame) - [scrollViewOriginalHeight floatValue]),
-                                            CGRectGetHeight(scrollView.frame));
-                
+        keyboardHeightAdjustment = fminf(fmaxf(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame) - [scrollViewOriginalHeight floatValue]),
+                                         CGRectGetHeight(scrollView.frame));
+        
         // Adjust the scroll view frame so that it does not get covered by the keyboard
         scrollView.frame = CGRectMake(CGRectGetMinX(scrollView.frame),
                                       CGRectGetMinY(scrollView.frame),
@@ -297,3 +297,13 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     (*s_UIScrollView__setContentOffset_Imp)(self, _cmd, contentOffset);
     [self synchronizeScrolling];
 }
+
+@interface UIScrollViewHLSExtensions_Linker : NSObject
++ (void)link;
+@end
+
+
+@implementation UIScrollViewHLSExtensions_Linker
++ (void)link {}
+@end
+

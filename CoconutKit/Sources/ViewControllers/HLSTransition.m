@@ -10,7 +10,6 @@
 
 #import "HLSAnimation.h"
 #import "HLSAssert.h"
-#import "HLSFloat.h"
 #import "HLSLayerAnimationStep.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSSet+HLSExtensions.h"
@@ -86,7 +85,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
     
     // Generate an animation with the proper duration
-    if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+    if (duration == kAnimationTransitionDefaultDuration) {
         return animation;
     }
     else {
@@ -120,7 +119,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:animationSteps];
         
         // Generate an animation with the proper duration
-        if (doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+        if (duration == kAnimationTransitionDefaultDuration) {
             return animation;
         }
         else {
