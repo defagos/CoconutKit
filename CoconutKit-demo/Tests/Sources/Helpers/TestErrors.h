@@ -7,6 +7,15 @@
 //
 
 /**
+ * Common errors
+ */
+extern NSString * const TestErrorDomain;
+
+typedef NS_ENUM(NSInteger, TestError) {
+    TestErrorIncorrectValueError,
+};
+
+/**
  * Validation errors
  */
 extern NSString * const TestValidationErrorDomain;
@@ -20,4 +29,3 @@ typedef NS_ENUM(NSInteger, TestValidation) {
     TestValidationEnumEnd,
     TestValidationEnumSize = TestValidationEnumEnd - TestValidationEnumBegin
 };
-

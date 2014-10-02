@@ -5,11 +5,15 @@ HLSAnimationStep.h
 HLSApplicationInformation.h
 HLSAssert.h
 HLSAutorotation.h
+HLSBindingDelegate.h
 HLSConnection.h
 HLSContainerStack.h
-HLSConverters.h
 HLSCursor.h
+<<<<<<< HEAD
 HLSError.h
+=======
+HLSExpandingSearchBar.h
+>>>>>>> feature/bindings
 HLSFakeConnection.h
 HLSFileManager.h
 HLSFileURLConnection.h
@@ -43,6 +47,11 @@ HLSTaskGroup.h
 HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
+<<<<<<< HEAD
+=======
+HLSTextView.h
+HLSTransformer.h
+>>>>>>> feature/bindings
 HLSTransition.h
 HLSURLConnection.h
 HLSUserInterfaceLock.h
@@ -89,5 +98,8 @@ UITextField+HLSExtensions.h
 UITextField+HLSValidation.h
 UITextView+HLSExtensions.h
 UIView+HLSExtensions.h
+UIView+HLSViewBinding.h
+UIView+HLSViewBindingImplementation.h
 UIViewController+HLSExtensions.h
+UIViewController+HLSViewBinding.h
 UIWebView+HLSExtensions.h

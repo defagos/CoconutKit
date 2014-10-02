@@ -8,9 +8,9 @@
 
 #import "HLSFileURLConnection.h"
 
-#import "HLSError.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 
 @implementation HLSFileURLConnection
 
@@ -78,17 +78,17 @@
     }
     double rating = (arc4random() % 1001) / 1000.;
     if (isless(rating, failureRate)) {
-        HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                               code:NSURLErrorNetworkConnectionLost
-                               localizedDescription:NSLocalizedString(@"Connection error", nil)];
+        NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                             code:NSURLErrorNetworkConnectionLost
+                             localizedDescription:NSLocalizedString(@"Connection error", nil)];
         self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }
     
     if (! [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDirectory]) {
-        HLSError *error = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                               code:NSURLErrorResourceUnavailable
-                               localizedDescription:CoconutKitLocalizedString(@"Not found", nil)];
+        NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                             code:NSURLErrorResourceUnavailable
+                             localizedDescription:CoconutKitLocalizedString(@"Not found", nil)];
         self.completionBlock ? self.completionBlock(self, nil, error) : nil;
         return;
     }

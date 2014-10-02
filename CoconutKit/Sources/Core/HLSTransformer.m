@@ -1,12 +1,17 @@
 //
-//  HLSConverters.m
+//  HLSConverter.m
 //  CoconutKit
 //
+<<<<<<< HEAD:CoconutKit/Sources/Core/HLSConverters.m
 //  Created by Samuel Défago on 9/21/10.
 //  Copyright 2010 Samuel Défago. All rights reserved.
+=======
+//  Created by Samuel Défago on 20/03/14.
+//  Copyright (c) 2014 Hortis. All rights reserved.
+>>>>>>> feature/bindings:CoconutKit/Sources/Core/HLSTransformer.m
 //
 
-#import "HLSConverters.h"
+#import "HLSTransformer.h"
 
 #import "HLSLogger.h"
 
@@ -42,7 +47,7 @@ NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrie
             HLSLoggerError(@"Unknown interface orientation");
             return nil;
             break;
-        }            
+        }
     }
 }
 
@@ -73,7 +78,7 @@ NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
             HLSLoggerError(@"Unknown device orientation");
             return nil;
             break;
-        }            
+        }
     }
 }
 
@@ -91,6 +96,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
             transform.m41, transform.m42, transform.m43, transform.m44];
 }
 
+<<<<<<< HEAD:CoconutKit/Sources/Core/HLSConverters.m
 NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
 {
     if (! string) {
@@ -101,3 +107,77 @@ NSNumber *HLSUnsignedIntNumberFromString(NSString *string)
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     return [formatter numberFromString:string];
 }
+=======
+@interface HLSBlockTransformer ()
+
+@property (nonatomic, copy) HLSTransformerBlock transformerBlock;
+@property (nonatomic, copy) HLSReverseTransformerBlock reverseBlock;
+
+@end
+
+@implementation HLSBlockTransformer
+
+#pragma mark Class methods
+
++ (instancetype)blockTransformerWithBlock:(HLSTransformerBlock)transformerBlock
+                             reverseBlock:(HLSReverseTransformerBlock)reverseBlock
+{
+    return [[[self class] alloc] initWithBlock:transformerBlock reverseBlock:reverseBlock];
+}
+
+#pragma mark Object creation and destruction
+
+- (id)initWithBlock:(HLSTransformerBlock)transformerBlock
+       reverseBlock:(HLSReverseTransformerBlock)reverseBlock
+{
+    if (self = [super init]) {
+        if (! transformerBlock) {
+            HLSLoggerError(@"A transformer block is mandatory");
+            return nil;
+        }
+        
+        self.transformerBlock = transformerBlock;
+        self.reverseBlock = reverseBlock;
+    }
+    return self;
+}
+
+- (id)init
+{
+    HLSForbiddenInheritedMethod();
+    return nil;
+}
+
+#pragma mark HLSTransformer protocol implementation
+
+- (id)transformObject:(id)object
+{
+    return self.transformerBlock(object);
+}
+
+- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError **)pError
+{
+    if (! self.reverseBlock) {
+        [self doesNotRecognizeSelector:_cmd];
+    }
+    
+    return self.reverseBlock(pObject, fromObject, pError);
+}
+
+#pragma mark Overrides
+
+- (BOOL)respondsToSelector:(SEL)selector
+{
+    // Optional reverse transformation: Does not response if no available block
+    if (selector == @selector(getObject:fromObject:error:)) {
+        return self.reverseBlock != nil;
+    }
+    // Normal behavior
+    else {
+        // See -[NSObject respondsToSelector:] documentation
+        return [[self class] instancesRespondToSelector:selector];
+    }
+}
+
+@end
+>>>>>>> feature/bindings:CoconutKit/Sources/Core/HLSTransformer.m

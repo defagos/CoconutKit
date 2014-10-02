@@ -10,13 +10,13 @@
 {
     if (! [firstName isFilled]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                           code:DemoValidationMandatoryError
-                           localizedDescription:NSLocalizedString(@"Missing first name", nil)];
+            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
+                                          code:DemoValidationMandatoryError
+                          localizedDescription:NSLocalizedString(@"Missing first name", nil)];
         }
         return NO;
     }
-
+    
     return YES;
 }
 
@@ -24,9 +24,9 @@
 {
     if (! [lastName isFilled]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                           code:DemoValidationMandatoryError
-                           localizedDescription:NSLocalizedString(@"Missing last name", nil)];
+            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
+                                          code:DemoValidationMandatoryError
+                          localizedDescription:NSLocalizedString(@"Missing last name", nil)];
         }
         return NO;
     }
@@ -43,11 +43,11 @@
     
     if (! [HLSValidators validateEmailAddress:email]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                           code:DemoValidationIncorrectError
-                           localizedDescription:NSLocalizedString(@"Invalid email address", nil)];
+            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
+                                          code:DemoValidationIncorrectError
+                          localizedDescription:NSLocalizedString(@"Invalid email address", nil)];
         }
-        return NO;        
+        return NO;
     }
     
     return YES;
@@ -57,9 +57,9 @@
 {
     if ([nbrChildren integerValue] < 0) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                           code:DemoValidationIncorrectError
-                           localizedDescription:NSLocalizedString(@"This value cannot be negative", nil)];
+            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
+                                          code:DemoValidationIncorrectError
+                          localizedDescription:NSLocalizedString(@"This value cannot be negative", nil)];
         }
         return NO;
     }
@@ -77,9 +77,9 @@
 {
     if (! [city isFilled]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                           code:DemoValidationMandatoryError 
-                           localizedDescription:NSLocalizedString(@"Missing city", nil)];
+            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
+                                          code:DemoValidationMandatoryError
+                          localizedDescription:NSLocalizedString(@"Missing city", nil)];
         }
         return NO;
     }
@@ -97,9 +97,9 @@
 {
     if (! [country isFilled]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:DemoValidationErrorDomain 
-                                           code:DemoValidationMandatoryError 
-                           localizedDescription:NSLocalizedString(@"Missing country", nil)];
+            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
+                                          code:DemoValidationMandatoryError
+                          localizedDescription:NSLocalizedString(@"Missing country", nil)];
         }
         return NO;
     }

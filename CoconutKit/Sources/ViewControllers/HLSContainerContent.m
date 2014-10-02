@@ -9,9 +9,10 @@
 #import "HLSContainerContent.h"
 
 #import "HLSAssert.h"
-#import "HLSConverters.h"
+#import "HLSAutorotationCompatibility.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "HLSTransformer.h"
 #import "HLSTransition.h"
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"

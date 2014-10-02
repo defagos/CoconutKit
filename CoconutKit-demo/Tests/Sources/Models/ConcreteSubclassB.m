@@ -14,8 +14,8 @@
 {
     if (! codeMandatoryNumberB) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationMandatoryValueError];
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationMandatoryValueError];
         }
         return NO;
     }
@@ -28,8 +28,8 @@
 {
     if ([modelMandatoryCodeNotZeroNumberB intValue] == 0) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationIncorrectValueError];
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationIncorrectValueError];
         }
         return NO;
     }
@@ -44,8 +44,8 @@
     // we cannot simply test against nil)
     if ([codeMandatoryConcreteClassesD count] == 0) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationMandatoryValueError];
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationMandatoryValueError];
         }
         return NO;
     }
@@ -59,8 +59,8 @@
 {
     if ([self.noValidationStringA isFilled] && ! self.noValidationNumberB) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationInconsistencyError];
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationInconsistencyError];
         }
         return NO;
     }

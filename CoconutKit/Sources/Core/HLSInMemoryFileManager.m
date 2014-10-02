@@ -8,11 +8,11 @@
 
 #import "HLSInMemoryFileManager.h"
 
-#import "HLSError.h"
 #import "HLSInMemoryCacheEntry.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
 @interface HLSInMemoryFileManager ()
@@ -71,9 +71,9 @@
 {
     if (! [path hasPrefix:@"/"]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
         }
         return NO;
     }
@@ -86,9 +86,9 @@
     NSArray *pathComponents = [path pathComponents];
     if ([pathComponents count] == 0) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"Invalid path", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"Invalid path", nil)];
         }
         return NO;
     }
@@ -151,18 +151,18 @@
     id sourceContent = [sourceItems objectForKey:sourceObjectName];
     if (! sourceContent) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
         }
         return NO;
     }
     
     if ([destinationItems objectForKey:destinationObjectName]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteFileExistsError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileWriteFileExistsError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
         }
         return NO;
     }
@@ -208,18 +208,18 @@
     id sourceContent = [sourceItems objectForKey:sourceObjectName];
     if (! sourceContent) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
         }
         return NO;
     }
     
     if ([destinationItems objectForKey:destinationObjectName]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteFileExistsError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileWriteFileExistsError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination already exists", nil)];
         }
         return NO;
     }
@@ -259,9 +259,9 @@
     id content = [items objectForKey:name];
     if (! content) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
         }
         return NO;
     }
@@ -290,9 +290,9 @@
     if (! [self fileExistsAtPath:parentPath isDirectory:&isDirectory] || ! isDirectory) {
         if (pError) {
             NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", parentPath];
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
         }
         return NO;
     }
@@ -306,11 +306,11 @@
     id content = [self contentAtPath:path forItems:self.rootItems];
     if (! content || ! [content isKindOfClass:[NSString class]]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"File not found", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"File not found", nil)];
         }
-        return nil;        
+        return nil;
     }
     
     HLSInMemoryCacheEntry *cacheEntry = [self.cache objectForKey:content];
@@ -321,9 +321,9 @@
 {
     if (! contents) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteUnknownError
-                           localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileWriteUnknownError
+                          localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
         }
         return NO;
     }
@@ -353,9 +353,9 @@
     if (! [subitems isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", path];
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
         }
         return nil;
     }
@@ -382,9 +382,9 @@
     // Prevent recursive copy
     if ([destinationPath hasPrefix:sourcePath]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
         }
         return NO;
     }
@@ -393,9 +393,9 @@
     id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [sourceContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"The source file or directory does not exist", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"The source file or directory does not exist", nil)];
         }
         return NO;
     }
@@ -404,9 +404,9 @@
     id destinationContent = [self contentAtPath:[destinationPath stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [destinationContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination directory does not exist", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination directory does not exist", nil)];
         }
         return NO;
     }
@@ -423,9 +423,9 @@
     // Prevent recursive move
     if ([destinationPath hasPrefix:sourcePath]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
         }
         return NO;
     }
@@ -434,9 +434,9 @@
     id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [sourceContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"The source file or directory does not exist", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"The source file or directory does not exist", nil)];
         }
         return NO;
     }
@@ -445,9 +445,9 @@
     id destinationContent = [self contentAtPath:[destinationPath stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [destinationContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination directory does not exist", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination directory does not exist", nil)];
         }
         return NO;
     }
@@ -465,9 +465,9 @@
     id content = [self contentAtPath:[path stringByDeletingLastPathComponent] forItems:self.rootItems];
     if (! [content isKindOfClass:[NSDictionary class]]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileNoSuchFileError
-                           localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileNoSuchFileError
+                          localizedDescription:CoconutKitLocalizedString(@"File or directory not found", nil)];
         }
         return NO;
     }

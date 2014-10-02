@@ -8,11 +8,11 @@
 
 #import "HLSModelManager.h"
 
-#import "HLSError.h"
 #import "HLSFileManager.h"
 #import "HLSLogger.h"
 #import "HLSStandardFileManager.h"
 #import "NSArray+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 
 @interface HLSModelManager ()
 
@@ -191,8 +191,8 @@
     NSManagedObjectContext *currentModelContext = [self currentModelContext];
     if (! currentModelContext) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSCoreDataError];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSCoreDataError];
         }
         HLSLoggerError(@"No current context");
         return NO;

@@ -14,8 +14,8 @@
 {
     if (! codeMandatoryStringC) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationMandatoryValueError];
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationMandatoryValueError];
         }
         return NO;
     }
@@ -29,8 +29,8 @@
 {
     if ([self.noValidationStringA isFilled] && ! self.noValidationNumberC) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationInconsistencyError];            
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationInconsistencyError];            
         }
         return NO;
     }

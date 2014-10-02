@@ -8,10 +8,10 @@
 
 #import "HLSStandardFileManager.h"
 
-#import "HLSError.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 
 @interface HLSStandardFileManager ()
 
@@ -79,9 +79,9 @@
 {
     if (! [path hasPrefix:@"/"]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
         }
         return nil;
     }
@@ -106,9 +106,9 @@
     // NSFileManager returns NO but no error when contents == nil
     if (! contents) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteUnknownError
-                           localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileWriteUnknownError
+                          localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
         }
         return NO;
     }
@@ -158,9 +158,9 @@
     // Prevent recursive copy
     if ([destinationPath hasPrefix:sourcePath]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
         }
         return NO;
     }
@@ -183,9 +183,9 @@
     // Prevent recursive move
     if ([destinationPath hasPrefix:sourcePath]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
         }
         return NO;
     }

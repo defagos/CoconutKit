@@ -9,8 +9,9 @@
 #import "HLSViewController.h"
 
 #import <objc/runtime.h>
-#import "HLSConverters.h"
+#import "HLSAutorotation.h"
 #import "HLSLogger.h"
+#import "HLSTransformer.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSObject+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"

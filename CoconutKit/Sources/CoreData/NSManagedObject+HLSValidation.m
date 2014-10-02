@@ -218,7 +218,8 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  *   - or a NSValidationMultipleErrorsError error, with all embedded errors at the same level (as in the
  *     fieldStringB/C example)
  *
- * The purpose of the following method is therefore to flatten out the error hierarchy to remove those inconsistencies
+ * The purpose of the following method is therefore to flatten out the error hierarchy to remove those inconsistencies,
+ * returning the flattened error as a result
  */
 + (NSError *)flattenHiearchyForError:(NSError *)error
 {

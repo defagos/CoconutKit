@@ -94,10 +94,10 @@
                                                                                        style:UIBarButtonItemStyleBordered 
                                                                                       target:self 
                                                                                       action:@selector(toggleLanguageSheet:)];
-            UIBarButtonItem *logsButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nik)
-                                                                                style:UIBarButtonItemStyleBordered
-                                                                               target:self
-                                                                               action:@selector(showSettings:)];
+            UIBarButtonItem *logsButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nil)
+                                                                               style:UIBarButtonItemStyleBordered
+                                                                              target:self
+                                                                              action:@selector(showSettings:)];
             demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem];
         }
     }

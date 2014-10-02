@@ -9,12 +9,14 @@
 #import "DemosListViewController.h"
 
 #import "ConnectionDemoViewController.h"
+#import "ControlBindingsDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "FontsDemoViewController.h"
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
 #import "LabelDemoViewController.h"
+#import "LabelBindingsDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
@@ -23,6 +25,7 @@
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
+#import "TableViewBindingsDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
 #import "WebViewDemoViewController.h"
@@ -32,6 +35,7 @@
 typedef NS_ENUM(NSInteger, DemoCategoryIndex) {
     DemoCategoryIndexEnumBegin = 0,
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
+    DemoCategoryIndexBindings,
     DemoCategoryIndexCore,
     DemoCategoryIndexNetworking,
     DemoCategoryIndexTask,
@@ -49,6 +53,16 @@ typedef NS_ENUM(NSInteger, AnimationDemoIndex) {
     AnimationDemoIndexEnumEnd,
     AnimationDemoIndexEnumSize = AnimationDemoIndexEnumEnd - AnimationDemoIndexEnumBegin
 };
+
+// Demos for bindings
+typedef enum {
+    BindingsDemoIndexEnumBegin = 0,
+    BindingsDemoIndexLabels = BindingsDemoIndexEnumBegin,
+    BindingsDemoIndexTableView,
+    BindingsDemoIndexControls,
+    BindingsDemoIndexEnumEnd,
+    BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
+} BindingsDemoIndex;
 
 // Demos for core
 typedef NS_ENUM(NSInteger, CoreDemoIndex) {
@@ -152,6 +166,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             break;
         }
             
+        case DemoCategoryIndexBindings: {
+            return NSLocalizedString(@"Bindings", nil);
+            break;
+        }
+            
         case DemoCategoryIndexCore: {
             return NSLocalizedString(@"Core", nil);
             break;
@@ -189,6 +208,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
     switch (section) {
         case DemoCategoryIndexAnimation: {
             return AnimationDemoIndexEnumSize;
+            break;
+        }
+            
+        case DemoCategoryIndexBindings: {
+            return BindingsDemoIndexEnumSize;
             break;
         }
             
@@ -245,6 +269,31 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     return nil;
                     break;
                 }            
+            }
+            break;
+        }
+            
+        case DemoCategoryIndexBindings: {
+            switch (indexPath.row) {
+                case BindingsDemoIndexLabels: {
+                    cell.textLabel.text = NSLocalizedString(@"Labels", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexTableView: {
+                    cell.textLabel.text = NSLocalizedString(@"Table view", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexControls: {
+                    cell.textLabel.text = NSLocalizedString(@"Controls", nil);
+                    break;
+                }
+                    
+                default: {
+                    return nil;
+                    break;
+                }
             }
             break;
         }
@@ -423,6 +472,31 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             break;
         }
             
+        case DemoCategoryIndexBindings: {
+            switch (indexPath.row) {
+                case BindingsDemoIndexLabels: {
+                    demoViewController = [[[LabelBindingsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case BindingsDemoIndexTableView: {
+                    demoViewController = [[[TableViewBindingsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                case BindingsDemoIndexControls: {
+                    demoViewController = [[[ControlBindingsDemoViewController alloc] init] autorelease];
+                    break;
+                }
+                    
+                default: {
+                    return;
+                    break;
+                }
+            }
+            break;        
+        }
+            
         case DemoCategoryIndexCore: {
             switch (indexPath.row) {
                 case CoreDemoIndexDynamicLocalization: {
@@ -499,7 +573,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     demoViewController = [[SlideshowDemoViewController alloc] init];
                     break;
                 }
-                    
+                
                 case ViewDemoIndexEffects: {
                     demoViewController = [[ViewEffectsDemoViewController alloc] init];
                     break;
@@ -578,7 +652,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
     }
 	
 	if (demoViewController) {
-		demoViewController.navigationItem.rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+		demoViewController.navigationItem.rightBarButtonItems = self.navigationItem.rightBarButtonItems;
 		[self.navigationController pushViewController:demoViewController animated:YES];
 	}
 }
