@@ -43,3 +43,22 @@ extern NSString * const HLSStackRootSegueIdentifier;
 @property (nonatomic, assign) BOOL animated;
 
 @end
+
+/**
+ * Segue unwinding. Bind to the scene's exit icon
+ */
+@interface UIViewController (HLSStackControllerSegueUnwinding)
+
+/**
+ * Pop one view controller
+ */
+- (IBAction)unwindToPreviousViewControllerInStackControllerAnimated:(UIStoryboardSegue *)sender;
+- (IBAction)unwindToPreviousViewControllerInStackControllerNotAnimated:(UIStoryboardSegue *)sender;
+
+/**
+ * Pop to the root view controller
+ */
+- (IBAction)unwindToRootViewControllerInStackControllerNotAnimated:(UIStoryboardSegue *)sender;
+- (IBAction)unwindToRootViewControllerInStackControllerAnimated:(UIStoryboardSegue *)sender;
+
+@end
