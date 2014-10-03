@@ -82,7 +82,12 @@ static UIWindow *s_previousKeyWindow = nil;
     [super viewDidLoad];
     
     // Ensure correct orientation, even if the VC is presented while in landscape orientation
-    self.view.transform = s_previousKeyWindow.rootViewController.view.transform;
+    
+    // Since iOS 8: Rotation has completely changed (the view frame only is changed, no rotation transform is applied anymore).
+    if (! [self.view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+        // iOS 7: Apply the same transform as the previous key window
+        self.view.transform = s_previousKeyWindow.rootViewController.view.transform;
+    }
     self.view.frame = [UIScreen mainScreen].bounds;
         
     [self displayDebugInformationForBindingsInView:self.debuggedViewController.view
@@ -121,7 +126,15 @@ static UIWindow *s_previousKeyWindow = nil;
     HLSViewBindingInformation *bindingInformation = view.bindingInformation;
     if (bindingInformation) {
         UIButton *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        overlayButton.frame = [view convertRect:view.bounds toView:self.view];
+        
+        // iOS 8: Since no rotation is applied anymore, we must use another method to convert view frames
+        if ([view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+            overlayButton.frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
+        }
+        // Pre-iOS 7: The usual conversion gives correct results for views, even in different windows
+        else {
+            overlayButton.frame = [view convertRect:view.bounds toView:self.view];
+        }
         overlayButton.layer.borderColor = bindingInformation.verified ? [UIColor greenColor].CGColor : [UIColor redColor].CGColor;
         overlayButton.layer.borderWidth = 2.f;
         overlayButton.userInfo_hls = @{@"bindingInformation" : bindingInformation};
