@@ -297,13 +297,3 @@ static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL 
     (*s_UIScrollView__setContentOffset_Imp)(self, _cmd, contentOffset);
     [self synchronizeScrolling];
 }
-
-@interface UIScrollViewHLSExtensions_Linker : NSObject
-+ (void)link;
-@end
-
-
-@implementation UIScrollViewHLSExtensions_Linker
-+ (void)link {}
-@end
-
