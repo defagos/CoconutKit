@@ -14,6 +14,7 @@
 @interface LabelBindingsDemo1ViewController ()
 
 @property (nonatomic, strong) NSArray *employees;
+@property (nonatomic, strong) Employee *randomEmployee;
 
 @end
 
@@ -37,6 +38,7 @@
         employee3.age = @52;
         
         self.employees = @[employee1, employee2, employee3];
+        self.randomEmployee = [self.employees objectAtIndex:arc4random() % [self.employees count]];
     }
     return self;
 }
@@ -51,11 +53,6 @@
 - (NSDate *)currentDate
 {
     return [NSDate date];
-}
-
-- (Employee *)randomEmployee
-{
-    return [self.employees objectAtIndex:arc4random() % [self.employees count]];
 }
 
 #pragma mark Transformers

@@ -14,8 +14,6 @@
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
 
-// TODO: Bug: The status bar moves to landscape even if only portrait orientation is supported
-
 static UIWindow *s_overlayWindow = nil;
 static UIWindow *s_previousKeyWindow = nil;
 
