@@ -9,11 +9,6 @@ HLSBindingDelegate.h
 HLSConnection.h
 HLSContainerStack.h
 HLSCursor.h
-<<<<<<< HEAD
-HLSError.h
-=======
-HLSExpandingSearchBar.h
->>>>>>> feature/bindings
 HLSFakeConnection.h
 HLSFileManager.h
 HLSFileURLConnection.h
@@ -47,11 +42,7 @@ HLSTaskGroup.h
 HLSTaskManager.h
 HLSTaskOperation.h
 HLSTaskOperation+Protected.h
-<<<<<<< HEAD
-=======
-HLSTextView.h
 HLSTransformer.h
->>>>>>> feature/bindings
 HLSTransition.h
 HLSURLConnection.h
 HLSUserInterfaceLock.h
