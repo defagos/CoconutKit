@@ -215,12 +215,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     // transitioning between states
     if ([self.superview isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)self.superview;
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-            [self sizeToFit];
-        }
-        else {
-            [button setTitle:localizedText forState:button.state];
-        }
+        [button setTitle:localizedText forState:button.state];
     }
     
     // Restore the original background color if it had been altered
