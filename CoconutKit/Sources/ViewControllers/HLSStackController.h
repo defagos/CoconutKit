@@ -320,6 +320,18 @@
 
 @end
 
+/**
+ * User-defined runtime attributes exposed in the attributes inspector. Not meant to be set by code
+ */
+@interface HLSStackController (HLSInspectables)
+
+/**
+ * The maximum number of views loaded at any time in the stack
+ */
+@property (nonatomic, readonly, assign) IBInspectable NSUInteger capacity;
+
+@end
+
 @interface UIViewController (HLSStackController)
 
 /**

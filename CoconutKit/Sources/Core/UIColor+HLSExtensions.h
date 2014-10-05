@@ -44,7 +44,8 @@
  * anywhere you set someNameColor, you can set an hlsSomeColorName attribute instead. For example, the 
  * backgroundColor property has an associated hlsBackgroundColor attribute, textColor has a corresponding 
  * hlsTextColor attribute, and so on. The color set using attributes will replace the one defined in the
- * nib (except if the color is not found, in which case the original color is kept).
+ * nib (except if the color is not found, in which case the original color is kept). For convenience, most
+ * UIKit views color attributes have been exposed through dedicated inspectable properties.
  *
  * The values of these user-defined runtime attributes must be strings of the form 'colorClassName:colorName', 
  * where 'colorClassName' is the name of the class on which the color is defined, and 'colorName' is the color 
@@ -78,3 +79,40 @@
 - (CGFloat)normalizedBlueComponent;
 
 @end
+
+/**
+ * User-defined runtime attributes exposed in the attributes inspector. Not meant to be set by code
+ */
+@interface UIView (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsBackgroundColor;
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsTintColor;
+
+@end
+
+@interface UILabel (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsTextColor;
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsShadowColor;
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsHighlightedTextColor;
+
+@end
+
+@interface UITextView (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsTextColor;
+
+@end
+
+@interface UITextField (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsTextColor;
+
+@end
+
+@interface UISearchBar (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *hlsBarTintColor;
+
+@end
+
