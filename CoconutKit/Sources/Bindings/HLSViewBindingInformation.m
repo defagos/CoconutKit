@@ -90,10 +90,10 @@
         value = transformedValue;
     }
     else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        id transformer = [self.transformationTarget performSelector:self.transformationSelector];
-#pragma clang diagnostic pop
+        // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+        // correct memory management
+        id (*methodImp)(id, SEL) = (id (*)(id, SEL))[self.transformationTarget methodForSelector:self.transformationSelector];
+        id transformer = methodImp(self.transformationTarget, self.transformationSelector);
         NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
         
         if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
@@ -352,10 +352,10 @@
         return value;
     }
     
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    id transformer = [transformationTarget performSelector:transformationSelector];
-#pragma clang diagnostic pop
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+    // correct memory management
+    id (*methodImp)(id, SEL) = (id (*)(id, SEL))[transformationTarget methodForSelector:transformationSelector];
+    id transformer = methodImp(transformationTarget, transformationSelector);
     if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
         return [transformer transformObject:value];
     }
