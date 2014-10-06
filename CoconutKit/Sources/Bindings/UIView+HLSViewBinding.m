@@ -223,7 +223,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    NSAssert([self respondsToSelector:@selector(updateViewWithValue:)], @"Binding could only be made it -updateViewWithValue: is implemented");
+    NSAssert([self respondsToSelector:@selector(updateViewWithValue:)], @"Binding can only be made if -updateViewWithValue: is implemented");
     
     id value = [self.bindingInformation value];
     [self performSelector:@selector(updateViewWithValue:) withObject:value];
@@ -364,7 +364,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @end
 
-@implementation UIView (HLSViewBindingImplementation)
+@implementation UIView (HLSViewBindingUpdateImplementation)
 
 - (BOOL)updateAndCheckModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {

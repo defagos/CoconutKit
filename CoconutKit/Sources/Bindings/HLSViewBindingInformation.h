@@ -27,6 +27,9 @@
  */
 - (id)value;
 
+/**
+ * The value corresponding to the keypath. No transformer is applied
+ */
 - (id)rawValue;
 
 /**

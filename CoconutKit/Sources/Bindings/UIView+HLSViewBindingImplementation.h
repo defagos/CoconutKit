@@ -36,8 +36,8 @@
 - (void)updateViewWithValue:(id)value;
 
 /**
- * UIView subclasses can implement this method to return YES if subviews must be updated recursively when the
- * receiver is updated. When not implemented, the default behavior is YES
+ * UIView subclasses can implement this method to return YES if subviews must be bound recursively when the receiver is 
+ * bound. When not implemented, the default behavior is YES
  */
 - (BOOL)bindsSubviewsRecursively;
 
@@ -52,12 +52,9 @@
 
 /**
  * Methods meant to be called when implementing binding support for view subclasses which must be able to update the
- * underlying bound value. Two methods have been provided, one which does not update the underlying value but performs
- * checks, the other one checking and updating the value if valid. In general, you want to call the latter in your
- * own implementation, except if you intend to implement some kind of on-the-fly validation while a value is being
- * entered (e.g. validating user input in some kind of text field while the user is typing)
+ * underlying bound value
  */
-@interface UIView (HLSViewBindingImplementation)
+@interface UIView (HLSViewBindingUpdateImplementation)
 
 /**
  * View subclasses which want to provide update of bound values when the value they display change must call this
