@@ -88,6 +88,11 @@ static UIWindow *s_previousKeyWindow = nil;
 
 #pragma mark Rotation
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & [self.debuggedViewController supportedInterfaceOrientations];
+}
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
