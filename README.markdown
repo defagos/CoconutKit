@@ -31,9 +31,7 @@ CoconutKit provides your with several kinds of classes covering various aspects 
 
 ### Where can I download CoconutKit?
 
-You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), both in binary and source forms.
-
-You can also directly checkout the git repository. Note that there are submodules you must update using the `git submodule update --init` command.
+You can download CoconutKit from [the official github page](https://github.com/defagos/CoconutKit), though you should in general directly checkout the git repository. Note that there are submodules you must update using the `git submodule update --init` command.
 
 ### Supporting development
 
@@ -59,7 +57,7 @@ You can add CoconutKit to your project in several different ways:
 
 #### Adding binaries manually
 
-You can grab the latest tagged binary package available from [the project download page](https://github.com/defagos/CoconutKit/downloads). Add the `.staticframework` directory to your project (the _Create groups for any added folders_ option must be checked) and link your project against the following system frameworks:
+To compile the binaries, checkout the project and run the `staticframework` scheme. The build product is a `.staticframework` package which you must add to your project (the _Create groups for any added folders_ option must be checked). The project must be linked against the following frameworks:
 
 * `CoreData.framework`
 * `CoreGraphics.framework`
@@ -70,6 +68,8 @@ You can grab the latest tagged binary package available from [the project downlo
 * `QuickLook.framework`
 * `UIKit.framework`
 * `WebKit.framework`
+
+Explicit linkig is only needed if you disable the auto-linking feature available since Xcode 5.
 
 #### Adding source files using CocoaPods
 
