@@ -321,7 +321,7 @@
 @end
 
 /**
- * User-defined runtime attributes exposed in the attributes inspector. Not meant to be set by code
+ * User-defined runtime attributes exposed in the attributes inspector. Not meant to be set in code
  */
 @interface HLSStackController (HLSInspectables)
 

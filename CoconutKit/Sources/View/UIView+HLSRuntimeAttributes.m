@@ -32,7 +32,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
     Class *classes = objc_copyClassList(&numberOfClasses);
     for (unsigned int i = 0; i < numberOfClasses; ++i) {
         Class class = classes[i];
-        if (! hls_class_isSubclassOfClass(class, objc_getClass("UIView"))) {
+        if (! hls_class_isSubclassOfClass(class, [UIView class])) {
             continue;
         }
         
@@ -53,8 +53,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
                 continue;
             }
             
-            SEL colorSetterSelector = NSSelectorFromString([methodName stringByReplacingCharactersInRange:NSMakeRange(0, 3)
-                                                                                               withString:@"setHls"]);
+            SEL colorSetterSelector = NSSelectorFromString([methodName stringByReplacingOccurrencesOfString:@":" withString:@"Name:"]);
             class_addMethod(class, colorSetterSelector, (IMP)UIView__setColorFormat_Imp, "v@:@");
         }
         free(methods);
@@ -135,7 +134,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
     }
     
     NSString *colorSetterSelectorName = @(sel_getName(_cmd));
-    SEL colorSelector = NSSelectorFromString([colorSetterSelectorName stringByReplacingOccurrencesOfString:@"setHls" withString:@"set"]);
+    SEL colorSelector = NSSelectorFromString([colorSetterSelectorName stringByReplacingOccurrencesOfString:@"Name:" withString:@":"]);
     
     // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
     // correct memory management
