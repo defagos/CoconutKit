@@ -51,7 +51,6 @@ UITextView+HLSExtensions.m
 UITextView+HLSViewBinding.m
 UIView+HLSExtensions.m
 UIView+HLSViewBinding.m
-UIView+HLSRuntimeAttributes.m
 UIViewController+HLSExtensions.m
 UIViewController+HLSViewBinding.m
 UIWebView+HLSExtensions.m

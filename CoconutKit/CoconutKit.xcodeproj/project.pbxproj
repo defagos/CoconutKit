@@ -46,8 +46,6 @@
 		6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */; };
 		6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */; };
 		6F22C74D16A93D8C0081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C74C16A93D8C0081A9A7 /* CoreText.framework */; };
-		6F23DB2716B3E84200C085CE /* UIView+HLSRuntimeAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F23DB2516B3E84200C085CE /* UIView+HLSRuntimeAttributes.h */; };
-		6F23DB2816B3E84200C085CE /* UIView+HLSRuntimeAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */; };
 		6F255E411712C360007BFC96 /* HLSConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F255E3F1712C360007BFC96 /* HLSConnection.h */; };
 		6F255E421712C360007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E401712C360007BFC96 /* HLSConnection.m */; };
 		6F255E531712E85F007BFC96 /* HLSFakeConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F255E511712E85F007BFC96 /* HLSFakeConnection.h */; };
@@ -361,8 +359,6 @@
 		6F22C73E16A858530081A9A7 /* UIFont+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F22C74C16A93D8C0081A9A7 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		6F23DB2516B3E84200C085CE /* UIView+HLSRuntimeAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSRuntimeAttributes.h"; sourceTree = "<group>"; };
-		6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSRuntimeAttributes.m"; sourceTree = "<group>"; };
 		6F255E3F1712C360007BFC96 /* HLSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSConnection.h; sourceTree = "<group>"; };
 		6F255E401712C360007BFC96 /* HLSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConnection.m; sourceTree = "<group>"; };
 		6F255E511712E85F007BFC96 /* HLSFakeConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFakeConnection.h; sourceTree = "<group>"; };
@@ -1027,8 +1023,6 @@
 				6FDDEC1D1529780200CED462 /* UITextView+HLSExtensions.m */,
 				6FADE58314BA0494007EE121 /* UIView+HLSExtensions.h */,
 				6FADE58414BA0494007EE121 /* UIView+HLSExtensions.m */,
-				6F23DB2516B3E84200C085CE /* UIView+HLSRuntimeAttributes.h */,
-				6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */,
 				6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */,
 				6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */,
 				6F28D61219FF79F400564BD3 /* UIWindow+HLSExtensions.h */,
@@ -1265,7 +1259,6 @@
 				6FCA2DD31679E36D0011CFDA /* HLSFileManager.h in Headers */,
 				6FCA2DD81679E3B20011CFDA /* HLSStandardFileManager.h in Headers */,
 				6F22C74016A858530081A9A7 /* UIFont+HLSExtensions.h in Headers */,
-				6F23DB2716B3E84200C085CE /* UIView+HLSRuntimeAttributes.h in Headers */,
 				6FAB922916DA7F9100599256 /* HLSFileURLConnection.h in Headers */,
 				6FAB922B16DA7F9100599256 /* HLSURLConnection.h in Headers */,
 				6F0CA8DB19DD934300CBE2E1 /* HLSBindingDelegate.h in Headers */,
