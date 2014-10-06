@@ -1,6 +1,6 @@
 //
 //  NSCalendar+HLSExtensionsTestCase.m
-//  CoconutKit-test
+//  CoconutKit-demo
 //
 //  Created by Samuel Défago on 17.08.11.
 //  Copyright 2011 Samuel Défago. All rights reserved.

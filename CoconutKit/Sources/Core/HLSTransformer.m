@@ -145,7 +145,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 
 - (BOOL)respondsToSelector:(SEL)selector
 {
-    // Optional reverse transformation: Does not response if no available block
+    // Optional reverse transformation: Does not respond if no available block
     if (selector == @selector(getObject:fromObject:error:)) {
         return self.reverseBlock != nil;
     }
