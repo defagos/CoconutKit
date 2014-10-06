@@ -128,6 +128,9 @@
  */
 @interface UIView (HLSViewBinding)
 
+@property (nonatomic, strong) IBInspectable NSString *bindKeyPath;
+@property (nonatomic, strong) IBInspectable NSString *bindTransformer;
+
 /**
  * Bind the view (and recursively the view hierarchy rooted at it) to a given object (can be nil). During view 
  * hierarchy traversal, keypaths and transformers set via user-defined runtime attributes will be used to automatically

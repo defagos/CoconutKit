@@ -32,9 +32,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @interface UIView (HLSViewBindingPrivate)
 
-/**
- * Private properties which must be set via user-defined runtime attributes
- */
 @property (nonatomic, strong) NSString *bindKeyPath;
 @property (nonatomic, strong) NSString *bindTransformer;
 
