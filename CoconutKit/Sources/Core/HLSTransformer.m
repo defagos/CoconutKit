@@ -9,6 +9,7 @@
 #import "HLSTransformer.h"
 
 #import "HLSLogger.h"
+#import "NSError+HLSExtensions.h"
 
 NSString *HLSStringFromBool(BOOL yesOrNo)
 {
@@ -153,6 +154,46 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
     else {
         // See -[NSObject respondsToSelector:] documentation
         return [[self class] instancesRespondToSelector:selector];
+    }
+}
+
+@end
+
+@implementation HLSBlockTransformer (Adapters)
+
++ (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter
+{
+    return [self blockTransformerWithBlock:^(id object) {
+        return [formatter stringForObjectValue:object];
+    } reverseBlock:^(__autoreleasing id *pObject, NSString *string, NSError *__autoreleasing *pError) {
+        NSString *errorDescription = nil;
+        BOOL result = [formatter getObjectValue:pObject forString:string errorDescription:&errorDescription];
+        if (! result && pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSErrorTransformationError
+                          localizedDescription:errorDescription];
+            
+        }
+        return result;
+    }];
+}
+
++ (instancetype)blockTransformerFromValueTransformer:(NSValueTransformer *)valueTransformer
+{
+    HLSTransformerBlock block = ^(id object) {
+        return [valueTransformer transformedValue:object];
+    };
+    
+    if ( [[valueTransformer class] allowsReverseTransformation]) {
+        return [HLSBlockTransformer blockTransformerWithBlock:block reverseBlock:^(__autoreleasing id *pObject, id fromObject, NSError *__autoreleasing *pError) {
+            if (pObject) {
+                *pObject = [valueTransformer reverseTransformedValue:fromObject];
+            }
+            return YES;
+        }];
+    }
+    else {
+        return [HLSBlockTransformer blockTransformerWithBlock:block reverseBlock:nil];
     }
 }
 

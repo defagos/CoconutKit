@@ -51,9 +51,6 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 
 @end
 
-// TODO: Add a formatter transformer (with +transformerWithFormatter: convenience method). Do the same
-//       for NSValueFormatter conversion into a block transformer
-
 /**
  * A convenience transformer class which makes it easy to define transformations using blocks
  *
@@ -79,5 +76,19 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 @interface HLSBlockTransformer (UnavailableMethods)
 
 - (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+@interface HLSBlockTransformer (Adapters)
+
+/**
+ * Create a block transformer from a standard NSFormatter
+ */
++ (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter;
+
+/**
+ * Create a block transformer from a standard NSValueFormatter
+ */
++ (instancetype)blockTransformerFromValueTransformer:(NSValueTransformer *)valueTransformer;
 
 @end

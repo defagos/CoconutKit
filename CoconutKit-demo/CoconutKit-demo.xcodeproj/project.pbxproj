@@ -216,6 +216,7 @@
 		6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CF615EFDAC600C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */; };
 		6FC12F2A19E28B460008C961 /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC12F2919E28B460008C961 /* HLSTransformerTestCase.m */; };
+		6FC12F2F19E2B12D0008C961 /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC12F2E19E2B12D0008C961 /* UppercaseValueTransformer.m */; };
 		6FC378FD182D188900B55AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FC182D188900B55AF1 /* main.m */; };
 		6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */; };
 		6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A3159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m */; };
@@ -768,6 +769,8 @@
 		6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimationDemoViewController.xib; sourceTree = "<group>"; };
 		6FC12F2819E28B460008C961 /* HLSTransformerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformerTestCase.h; sourceTree = "<group>"; };
 		6FC12F2919E28B460008C961 /* HLSTransformerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformerTestCase.m; sourceTree = "<group>"; };
+		6FC12F2D19E2B12D0008C961 /* UppercaseValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UppercaseValueTransformer.h; sourceTree = "<group>"; };
+		6FC12F2E19E2B12D0008C961 /* UppercaseValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UppercaseValueTransformer.m; sourceTree = "<group>"; };
 		6FC378FC182D188900B55AF1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6FC3A2A1159E0422001A290E /* SegueDemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SegueDemo.storyboard; sourceTree = "<group>"; };
 		6FC3A2A2159E0422001A290E /* SeguePlaceholderInsetDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeguePlaceholderInsetDemoViewController.h; sourceTree = "<group>"; };
@@ -1121,6 +1124,8 @@
 			children = (
 				6F2B30A21929BE4A003D4C2C /* TestErrors.h */,
 				6F2B30A31929BE4A003D4C2C /* TestErrors.m */,
+				6FC12F2D19E2B12D0008C961 /* UppercaseValueTransformer.h */,
+				6FC12F2E19E2B12D0008C961 /* UppercaseValueTransformer.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2364,6 +2369,7 @@
 				6F2B30DB1929BE4A003D4C2C /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
 				6F2B30CF1929BE4A003D4C2C /* HLSValidatorsTestCase.m in Sources */,
 				6F2B30C81929BE4A003D4C2C /* HLSErrorTestCase.m in Sources */,
+				6FC12F2F19E2B12D0008C961 /* UppercaseValueTransformer.m in Sources */,
 				6F2B30EC1929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m in Sources */,
 				6F2B30E91929BE4A003D4C2C /* _Person.m in Sources */,
 				6F2B30D11929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m in Sources */,
