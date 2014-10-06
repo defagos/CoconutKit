@@ -6,9 +6,6 @@
 //  Copyright (c) 2013 Hortis. All rights reserved.
 //
 
-// TODO: Automatic update of bound objects when the underlying value changes (automatic behavior, maybe have a bool to
-//       enable or disable)
-
 /**
  * Usually, when you have to display or set some value on screen, and if you are using Interface Builder to design
  * your user interface, you have to create and bind an outlet. Though this process is completely straightforward,
@@ -62,7 +59,7 @@
  *       - class method +methodName on the responder object
  * In addition, global transformer names can be provided in the form of class methods '+[SomeClass methodName]'
  *
- * The binding information is resolved as late as possible (usually when the view is displayed),i.e.  when the whole
+ * The binding information is resolved as late as possible (usually when the view is displayed), i.e. when the whole
  * responder chain context is available. This information is then stored for efficient later use. The view is not
  * updated automatically when the underlying bound objects changes, this has to be done manually:
  *   - when the object is changed, call -bindToObject: to set bindings with the new object
@@ -100,8 +97,10 @@
  *   - UIProgressView: The progress view displays the value which the keypath points at, and dragging the slider
  *                     changes the underlying value. Bindings are not recursive. The only supported class is NSNumber 
  *                     (treated as a float)
- *   - UITableView: No direct binding is available, and bindings are not recursive. You can still bind table view 
+ *   - UITableView: No direct binding is available, and bindings are not recursive. You can still bind table view
  *                  cells and headers created from nibs, though
+ *   - UISegmentedControl: <explain>
+ *   - UIStepper: <explain>
  *   - UISwitch: The switch displays the value which the keypath points at, and toggling the switch changes the
  *               underlying value. Bindings are not recursive. The only supported class is NSNumber (treated as a 
  *               boolean)
@@ -112,7 +111,6 @@
  * CoconutKit classes support bindings as well:
  *   - HLSCursor: <explain>
  *   - HLSLabel: Automatic, as subclass of UILabel
- *   - HLSTextField: Automatic, as subclass of UITextField
  *
  * You can customize the binding behavior for other UIView subclasses (whether these classes are your own or stem
  * from a 3rd party library) by implementing the HLSViewBinding protocol. For views which must be able to update
