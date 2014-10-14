@@ -145,6 +145,16 @@
     return [self.containerStack count];
 }
 
+- (void)setLockingUI:(BOOL)lockingUI
+{
+    self.containerStack.lockingUI = lockingUI;
+}
+
+- (BOOL)lockingUI
+{
+    return self.containerStack.lockingUI;
+}
+
 #pragma mark View lifecycle
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods

@@ -466,7 +466,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             //
             // Same remark as in -addViewForContainerContent:inserting:animated: regarding animations in nested containers
             reverseAnimation.tag = @"pop_animation";
-            reverseAnimation.lockingUI = YES;
+            reverseAnimation.lockingUI = self.lockingUI;
             [reverseAnimation playAnimated:animated];
             
             // Check the animation callback implementations for what happens next
@@ -897,7 +897,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Some more work has to be done for push animations in the animation begin / end callbacks. To identify such animations,
         // we give them a tag which we can test in those callbacks
         animation.tag = @"push_animation";
-        animation.lockingUI = YES;
+        animation.lockingUI = self.lockingUI;
         [animation playAnimated:animated];
         
         // Check the animation callback implementations for what happens next
