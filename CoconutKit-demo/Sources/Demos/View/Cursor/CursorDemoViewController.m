@@ -136,7 +136,7 @@ static NSArray *s_folders = nil;
     }
     else if (cursor == self.randomRangeCursor) {
         // Omit up to 10 objects at the end of the array
-        return arc4random() % 10 + [s_completeRange count] - 10 + 1;
+        return arc4random_uniform(10) + [s_completeRange count] - 10 + 1;
     }
     else if (cursor == self.timeScalesCursor) {
         return [s_timeScales count];

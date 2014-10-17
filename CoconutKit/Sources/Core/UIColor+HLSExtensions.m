@@ -37,9 +37,9 @@
 
 + (instancetype)randomColor
 {
-    return [UIColor colorWithRed:(arc4random() % 256) / 255.f
-                           green:(arc4random() % 256) / 255.f 
-                            blue:(arc4random() % 256) / 255.f 
+    return [UIColor colorWithRed:arc4random_uniform(256) / 255.f
+                           green:arc4random_uniform(256) / 255.f
+                            blue:arc4random_uniform(256) / 255.f
                            alpha:1.f];
 }
 

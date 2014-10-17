@@ -366,7 +366,7 @@ static const NSInteger kSlideshowNoIndex = -1;
                               yOffset:(CGFloat *)pYOffset
 {
     // Pick up a random initial scale factor. Must be >= 1, and not too large. Use random factor in [0;1]
-    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * arc4random_uniform(1001) / 1000.f;
     
     // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
     // scale factor so that the image view still covers self
@@ -374,15 +374,15 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat maxYOffset = (scaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
     
     // Pick up some random offsets. Use random factor in [-1;1]
-    CGFloat xOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxXOffset;
-    CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
+    CGFloat xOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxXOffset;
+    CGFloat yOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxYOffset;
     
     // Pick up random scale factor to reach at the end of the animation. Same constraints as above
-    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * arc4random_uniform(1001) / 1000.f;
     CGFloat maxFinalXOffset = (finalScaleFactor * CGRectGetWidth(imageView.frame) - CGRectGetWidth(self.frame)) / 2.f;
     CGFloat maxFinalYOffset = (finalScaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
-    CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;
-    CGFloat finalYOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalYOffset;
+    CGFloat finalXOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxFinalXOffset;
+    CGFloat finalYOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxFinalYOffset;
     
     // Apply initial transform to set initial image view position
     imageView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor, scaleFactor, 1.f),
@@ -761,7 +761,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 {
     NSInteger randomIndex;
     do {
-        randomIndex = arc4random() % upperBound;
+        randomIndex = arc4random_uniform(upperBound);
     } while (randomIndex == forbiddenIndex);
     return randomIndex;
 }

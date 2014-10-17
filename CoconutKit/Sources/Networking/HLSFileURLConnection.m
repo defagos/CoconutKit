@@ -44,7 +44,7 @@
 {
     // A latency can be added using environment variables
     NSTimeInterval delay = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSFileURLConnectionLatency"] doubleValue]
-        + (arc4random() % 1001) / 1000.;
+        + arc4random_uniform(1001) / 1000.;
     if (isless(delay, 0.)) {
         HLSLoggerWarn(@"The connection latency must be >= 0. Fixed to 0");
         delay = 0.;
@@ -76,7 +76,7 @@
         HLSLoggerWarn(@"The failure rate must be <= 1. Fixed to 1");
         failureRate = 1.;
     }
-    double rating = (arc4random() % 1001) / 1000.;
+    double rating = arc4random_uniform(1001) / 1000.;
     if (isless(rating, failureRate)) {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSURLErrorNetworkConnectionLost
