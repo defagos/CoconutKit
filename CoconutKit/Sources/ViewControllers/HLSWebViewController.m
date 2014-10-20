@@ -17,8 +17,6 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
-// FIXME: Issues with stacking action sheets. Solve more elegantly than HLSActionSheet before
-
 @interface HLSWebViewController ()
 
 @property (nonatomic, strong) NSURLRequest *request;
@@ -35,6 +33,8 @@
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) NSArray *actions;
+
+@property (nonatomic, strong) UIPopoverController *activityPopoverController;
 
 @end
 
@@ -81,7 +81,7 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
     }
     else {
@@ -162,6 +162,14 @@
     methodImp(self, action, actionSheet);
 }
 
+#pragma mark UIPopoverControllerDelegate protocol implementation
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    NSAssert(popoverController == self.activityPopoverController, @"Expect activity popover, no other popover supported yet");
+    self.activityPopoverController = nil;
+}
+
 #pragma mark UIWebViewDelegate protocol implementation
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -218,10 +226,8 @@
 
 - (IBAction)refresh:(id)sender
 {
-    NSURL *webViewURL = [self.webView.request URL];
-    
     // Reload the currently displayed page (if any)
-    if ([[webViewURL absoluteString] isFilled]) {
+    if ([[self.currentURL absoluteString] isFilled]) {
         [self.webView loadRequest:self.webView.request];
     }
     // Reload the start page
@@ -234,41 +240,26 @@
 
 - (IBAction)displayActionSheet:(id)sender
 {
-    NSMutableArray *actions = [NSMutableArray array];
+    NSAssert([sender isKindOfClass:[UIBarButtonItem class]], @"Expect a bar button item");
+    UIBarButtonItem *barButtonItem = sender;
     
-    // TODO: Replace with UIAlertController when CoconutKit requires >= iOS 8
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-    actionSheet.title = [self.currentURL absoluteString];
-    actionSheet.delegate = self; 
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.currentURL] applicationActivities:nil];
     
-    [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Open in Safari", nil)];
-    [actions addObject:[NSValue valueWithPointer:@selector(openInSafari:)]];
-    
-    if ([MFMailComposeViewController canSendMail]) {
-        [actionSheet addButtonWithTitle:CoconutKitLocalizedString(@"Mail Link", nil)];
-        [actions addObject:[NSValue valueWithPointer:@selector(mailLink:)]];
+    // iOS 8: Must set the bar button item which presents the activity popover for the iPad (automatically managed via iOS 8 UIPopoverPresentationController)
+    if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
+        activityViewController.popoverPresentationController.barButtonItem = barButtonItem;
+        [self presentViewController:activityViewController animated:YES completion:nil];
     }
-    
-    self.actions = [NSArray arrayWithArray:actions];
-    
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:HLSLocalizedStringFromUIKit(@"Cancel")];
+    // iOS 7: Present as is on iPhone
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityViewController animated:YES completion:nil];
     }
-    [actionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
-}
-
-- (void)openInSafari:(id)sender
-{
-    [[UIApplication sharedApplication] openURL:[self.webView.request URL]];
-}
-
-- (void)mailLink:(id)sender
-{
-    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
-    mailComposeViewController.mailComposeDelegate = self;
-    [mailComposeViewController setSubject:self.title];
-    [mailComposeViewController setMessageBody:[[self.webView.request URL] absoluteString] isHTML:NO];
-    [self presentViewController:mailComposeViewController animated:YES completion:nil];
+    // iOS 7: Present in manually instantiated popover
+    else {
+        self.activityPopoverController = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        self.activityPopoverController.delegate = self;
+        [self.activityPopoverController presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 @end

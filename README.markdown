@@ -65,7 +65,6 @@ You can grab the latest tagged binary package available from [the project downlo
 * `CoreGraphics.framework`
 * `CoreText.framework`
 * `Foundation.framework`
-* `MessageUI.framework`
 * `MobileCoreServices.framework`
 * `QuartzCore.framework`
 * `QuickLook.framework`

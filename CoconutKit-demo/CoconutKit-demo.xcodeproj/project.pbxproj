@@ -63,7 +63,6 @@
 		6F2B30611929BD78003D4C2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		6F2B30621929BD78003D4C2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		6F2B30631929BD78003D4C2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		6F2B30641929BD78003D4C2C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F2B30C51929BE4A003D4C2C /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B306F1929BE4A003D4C2C /* CoconutKitTestData.xcdatamodeld */; };
 		6F2B30C61929BE4A003D4C2C /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F2B30711929BE4A003D4C2C /* Sample.txt */; };
 		6F2B30C71929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30751929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
@@ -109,7 +108,6 @@
 		6F468CB019D2E7920021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
 		6F468CB119D2E7920021B95D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAE19D2E7920021B95D /* Localizable.strings */; };
 		6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
-		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
 		6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
@@ -349,7 +347,6 @@
 		6FCB4F171926651F00047AD3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		6FCB4F181926651F00047AD3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		6FCB4F191926651F00047AD3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		6FCB4F1A1926651F00047AD3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6FCB4F2D192667EE00047AD3 /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCB4F281926657B00047AD3 /* libCoconutKit.a */; };
 		6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB4F2F19266DE200047AD3 /* CoconutKit-resources.bundle */; };
 		6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
@@ -615,7 +612,6 @@
 		6F468CAF19D2E7920021B95D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		6F468CB219D2E7990021B95D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DemoTable.strings; sourceTree = SOURCE_ROOT; };
 		6F468CB319D2E7990021B95D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F53B63316FA321000E01781 /* DemoColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColors.h; sourceTree = "<group>"; };
 		6F53B63416FA321000E01781 /* DemoColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoColors.m; sourceTree = "<group>"; };
 		6F58C53717944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingScrollViewDemoViewController.h; sourceTree = "<group>"; };
@@ -861,7 +857,6 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
-				6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,7 +874,6 @@
 				6F2B30611929BD78003D4C2C /* Foundation.framework in Frameworks */,
 				6F2B30621929BD78003D4C2C /* UIKit.framework in Frameworks */,
 				6F2B30631929BD78003D4C2C /* CoreGraphics.framework in Frameworks */,
-				6F2B30641929BD78003D4C2C /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,7 +890,6 @@
 				6FCB4F171926651F00047AD3 /* Foundation.framework in Frameworks */,
 				6FCB4F181926651F00047AD3 /* UIKit.framework in Frameworks */,
 				6FCB4F191926651F00047AD3 /* CoreGraphics.framework in Frameworks */,
-				6FCB4F1A1926651F00047AD3 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -951,7 +944,6 @@
 				6F22C75116A93DD20081A9A7 /* CoreText.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */,
-				6F4F84AA136E8BA4007D027B /* MessageUI.framework */,
 				6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */,
 				6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */,
 				6F63E7B917CF6BA1006322D9 /* QuickLook.framework */,
