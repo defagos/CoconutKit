@@ -13,6 +13,7 @@ HLSFakeConnection.h
 HLSFileManager.h
 HLSFileURLConnection.h
 HLSGeometry.h
+HLSGoogleChromeActivity.h
 HLSInMemoryFileManager.h
 HLSKeyboardInformation.h
 HLSLabel.h
@@ -30,6 +31,7 @@ HLSPlaceholderViewController.h
 HLSPreviewItem.h
 HLSRestrictedInterfaceProxy.h
 HLSRuntime.h
+HLSSafariActivity.h
 HLSSlideshow.h
 HLSStackController.h
 HLSStackPushSegue.h

@@ -9,7 +9,9 @@
 #import "HLSWebViewController.h"
 
 #import "HLSAutorotation.h"
+#import "HLSGoogleChromeActivity.h"
 #import "HLSNotifications.h"
+#import "HLSSafariActivity.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
@@ -243,7 +245,9 @@
     NSAssert([sender isKindOfClass:[UIBarButtonItem class]], @"Expect a bar button item");
     UIBarButtonItem *barButtonItem = sender;
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.currentURL] applicationActivities:nil];
+    HLSGoogleChromeActivity *googleChromeActivity = [[HLSGoogleChromeActivity alloc] init];
+    HLSSafariActivity *safariActivity = [[HLSSafariActivity alloc] init];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[self.currentURL] applicationActivities:@[safariActivity, googleChromeActivity]];
     
     // iOS 8: Must set the bar button item which presents the activity popover for the iPad (automatically managed via iOS 8 UIPopoverPresentationController)
     if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
