@@ -45,12 +45,14 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
 
-@property (nonatomic, assign) CGFloat progress;
 @property (nonatomic, strong) NSTimer *fakeProgressTimer;
 
 @end
 
-@implementation HLSWebViewController
+@implementation HLSWebViewController {
+@private
+    CGFloat _progress;
+}
 
 #pragma mark Object creation and destruction
 
@@ -70,7 +72,7 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
     _fakeProgressTimer = fakeProgressTimer;
 }
 
-- (void)setProgress:(CGFloat)progress
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated
 {
     if (isless(progress, 0.f)) {
         HLSLoggerWarn(@"Progress cannot be < 0. Fixed to 0");
@@ -84,18 +86,38 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
         _progress = progress;
     }
     
+    // Fake progress
+    // See http://stackoverflow.com/questions/21263358/uiwebview-with-progress-bar
     if (_progress == 0.f) {
         self.fakeProgressTimer = [NSTimer scheduledTimerWithTimeInterval:HLSWebViewFakeTimerInterval
                                                                   target:self
                                                                 selector:@selector(updateProgress:)
                                                                 userInfo:nil
                                                                  repeats:YES];
+        self.fakeProgressView.alpha = 1.f;
     }
     else if (isgreaterequal(progress, HLSWebViewFakeTimerMaxProgress)) {
         self.fakeProgressTimer = nil;
     }
     
+    // Never animated
     [self.fakeProgressView setProgress:_progress animated:NO];
+    
+    if (_progress == 1.f) {
+        if (animated) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.fakeProgressView.alpha = 0.f;
+            }];
+        }
+        else {
+            self.fakeProgressView.alpha = 0.f;
+        }
+    }
+}
+
+- (CGFloat)progress
+{
+    return _progress;
 }
 
 #pragma mark View lifecycle
@@ -105,6 +127,7 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
     [super viewDidLoad];
     
     self.refreshImage = self.refreshBarButtonItem.image;
+    self.fakeProgressView.alpha = 0.f;
     
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
@@ -222,7 +245,7 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    self.progress = 0.f;
+    [self setProgress:0.f animated:NO];
     
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     [self.activityIndicator startAnimating];
@@ -232,7 +255,7 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    self.progress = 1.f;
+    [self setProgress:1.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
@@ -245,7 +268,7 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    self.progress = 1.f;
+    [self setProgress:1.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
@@ -324,7 +347,7 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 {
     // 33% update chance to make fake progress more realistic
     if (arc4random_uniform(3) == 0) {
-        self.progress += HLSWebViewFakeTimerProgressIncrement;
+        [self setProgress:[self progress] + HLSWebViewFakeTimerProgressIncrement animated:YES];
     }
 }
 
