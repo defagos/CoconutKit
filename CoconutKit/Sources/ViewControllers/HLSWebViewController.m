@@ -24,6 +24,7 @@ static const NSTimeInterval HLSWebViewMaxFakeDuration = 3.;
 static const NSTimeInterval HLSWebViewFakeTimerInterval = 1. / 60.;
 static const CGFloat HLSWebViewFakeTimerMaxProgress = 0.95f;
 static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerMaxProgress / HLSWebViewMaxFakeDuration * HLSWebViewFakeTimerInterval;
+static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 @interface HLSWebViewController ()
 
@@ -33,6 +34,8 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 @property (nonatomic, strong) UIImage *refreshImage;
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIWebView *errorWebView;
+
 @property (nonatomic, weak) IBOutlet UIProgressView *fakeProgressView;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goBackBarButtonItem;
@@ -126,9 +129,16 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 {
     [super viewDidLoad];
     
+    self.errorWebView.scrollView.scrollEnabled = NO;
+    self.errorWebView.alpha = 0.f;
+    
+    NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
+    [self.errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
+    
     self.refreshImage = self.refreshBarButtonItem.image;
     self.fakeProgressView.alpha = 0.f;
     
+    self.webView.alpha = 0.f;
     self.webView.delegate = self;
     [self.webView loadRequest:self.request];
 }
@@ -270,6 +280,11 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 {
     [self setProgress:1.f animated:YES];
     
+    [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
+        self.webView.alpha = 1.f;
+        self.errorWebView.alpha = 0.f;
+    }];
+    
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
     
@@ -281,23 +296,27 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    if (webView == self.errorWebView) {
+        return;
+    }
+    
+    if (! [error hasCode:NSURLErrorCancelled withinDomain:NSURLErrorDomain]) {
+        [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
+            self.webView.alpha = 0.f;
+            self.errorWebView.alpha = 1.f;
+        }];
+    }
+    
+    NSString *escapedErrorDescription = [[error localizedDescription] stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+    NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", escapedErrorDescription];
+    [self.errorWebView stringByEvaluatingJavaScriptFromString:replaceErrorJavaScript];
+    
     [self setProgress:1.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
     
-    [self updateInterface];
-    
-    // We can also encounter other types of errors here (e.g. if a user clicks on two links consecutively on the same page. 
-    // The first request is cancelled and ends with NSURLErrorCancelled)
-    if ([error hasCode:NSURLErrorNotConnectedToInternet withinDomain:NSURLErrorDomain]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:CoconutKitLocalizedString(@"Cannot Open Page", nil)
-                                                            message:CoconutKitLocalizedString(@"No Internet connection is available", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:HLSLocalizedStringFromUIKit(@"OK")
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }
+    [self updateInterface];    
 }
 
 #pragma mark Action callbacks

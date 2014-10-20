@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="actionBarButtonItem" destination="9" id="43"/>
                 <outlet property="activityIndicator" destination="23" id="44"/>
+                <outlet property="errorWebView" destination="jgy-mK-iYQ" id="sEZ-WK-aq1"/>
                 <outlet property="fakeProgressView" destination="Q9M-Si-VTD" id="tMD-D5-I2d"/>
                 <outlet property="goBackBarButtonItem" destination="5" id="40"/>
                 <outlet property="goForwardBarButtonItem" destination="6" id="41"/>
@@ -23,6 +24,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
+                <webView contentMode="scaleToFill" id="jgy-mK-iYQ" userLabel="Error Web View">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </webView>
                 <webView multipleTouchEnabled="YES" contentMode="scaleToFill" scalesPageToFit="YES" id="10">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

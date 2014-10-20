@@ -94,6 +94,12 @@
 		6F7A871116522C0A0030B091 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */; };
 		6F7B848F14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */; };
 		6F7B849014CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */; };
+		6F7ECAC019F5503B00B6BE62 /* EmbossedIcon@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7ECABA19F5503B00B6BE62 /* EmbossedIcon@2x~ipad.png */; };
+		6F7ECAC119F5503B00B6BE62 /* EmbossedIcon@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7ECABB19F5503B00B6BE62 /* EmbossedIcon@2x~iphone.png */; };
+		6F7ECAC219F5503B00B6BE62 /* EmbossedIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7ECABC19F5503B00B6BE62 /* EmbossedIcon~ipad.png */; };
+		6F7ECAC319F5503B00B6BE62 /* EmbossedIcon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7ECABD19F5503B00B6BE62 /* EmbossedIcon~iphone.png */; };
+		6F7ECAC419F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~ipad.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F7ECABE19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~ipad.html */; };
+		6F7ECAC519F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~iphone.html in Resources */ = {isa = PBXBuildFile; fileRef = 6F7ECABF19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~iphone.html */; };
 		6F8366061588CC690044E572 /* HLSVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8366041588CC690044E572 /* HLSVector.h */; };
 		6F8366071588CC690044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366051588CC690044E572 /* HLSVector.m */; };
 		6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */; };
@@ -406,6 +412,12 @@
 		6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7B848D14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F7B848E14CF32CC0091EE4B /* UIActionSheet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F7ECABA19F5503B00B6BE62 /* EmbossedIcon@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon@2x~ipad.png"; sourceTree = "<group>"; };
+		6F7ECABB19F5503B00B6BE62 /* EmbossedIcon@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon@2x~iphone.png"; sourceTree = "<group>"; };
+		6F7ECABC19F5503B00B6BE62 /* EmbossedIcon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon~ipad.png"; sourceTree = "<group>"; };
+		6F7ECABD19F5503B00B6BE62 /* EmbossedIcon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EmbossedIcon~iphone.png"; sourceTree = "<group>"; };
+		6F7ECABE19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~ipad.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "HLSWebViewControllerErrorTemplate~ipad.html"; sourceTree = "<group>"; };
+		6F7ECABF19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~iphone.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "HLSWebViewControllerErrorTemplate~iphone.html"; sourceTree = "<group>"; };
 		6F8366041588CC690044E572 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSVector.h; sourceTree = "<group>"; };
 		6F8366051588CC690044E572 /* HLSVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSVector.m; sourceTree = "<group>"; };
 		6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -763,6 +775,20 @@
 			path = "../CoconutKit-resources/Images";
 			sourceTree = "<group>";
 		};
+		6F7ECAB919F5503B00B6BE62 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				6F7ECABA19F5503B00B6BE62 /* EmbossedIcon@2x~ipad.png */,
+				6F7ECABB19F5503B00B6BE62 /* EmbossedIcon@2x~iphone.png */,
+				6F7ECABC19F5503B00B6BE62 /* EmbossedIcon~ipad.png */,
+				6F7ECABD19F5503B00B6BE62 /* EmbossedIcon~iphone.png */,
+				6F7ECABE19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~ipad.html */,
+				6F7ECABF19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~iphone.html */,
+			);
+			name = HTML;
+			path = "../CoconutKit-resources/HTML";
+			sourceTree = "<group>";
+		};
 		6FAB922416DA7F9100599256 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,6 +1087,7 @@
 			children = (
 				6FB7ABE819D59AD200C7DE82 /* Localizable.strings */,
 				6FC5B7811924EE4E00660CDF /* CoconutKit-resources-Info.plist */,
+				6F7ECAB919F5503B00B6BE62 /* HTML */,
 				6F47EC451924EEEE00C5F6AC /* Images */,
 				6FC5B7A11924EE4E00660CDF /* Nibs */,
 			);
@@ -1352,14 +1379,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F47EC511924EEEE00C5F6AC /* ButtonBarArrowRight.png in Resources */,
+				6F7ECAC519F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~iphone.html in Resources */,
 				6FB7ABEA19D59AD200C7DE82 /* Localizable.strings in Resources */,
+				6F7ECAC019F5503B00B6BE62 /* EmbossedIcon@2x~ipad.png in Resources */,
 				6F47EC501924EEEE00C5F6AC /* ButtonBarArrowLeft@2x.png in Resources */,
 				6FAD1BC319F5077100EA435A /* GoogleChromeActivityIcon@2x~ipad.png in Resources */,
 				6FAD1BC919F5077100EA435A /* SafariActivityIcon@2x~iphone.png in Resources */,
+				6F7ECAC319F5503B00B6BE62 /* EmbossedIcon~iphone.png in Resources */,
 				6F47EC521924EEEE00C5F6AC /* ButtonBarArrowRight@2x.png in Resources */,
+				6F7ECAC419F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~ipad.html in Resources */,
 				6FAD1BC419F5077100EA435A /* GoogleChromeActivityIcon@2x~iphone.png in Resources */,
 				6F47EC561924EEEE00C5F6AC /* SearchFieldIcon.png in Resources */,
+				6F7ECAC119F5503B00B6BE62 /* EmbossedIcon@2x~iphone.png in Resources */,
 				6FAD1BC519F5077100EA435A /* GoogleChromeActivityIcon@3x~iphone.png in Resources */,
+				6F7ECAC219F5503B00B6BE62 /* EmbossedIcon~ipad.png in Resources */,
 				6F47EC551924EEEE00C5F6AC /* CursorDefaultPointer.png in Resources */,
 				6FAD1BCA19F5077100EA435A /* SafariActivityIcon@3x~iphone.png in Resources */,
 				6FAD1BC619F5077100EA435A /* GoogleChromeActivityIcon~ipad.png in Resources */,
