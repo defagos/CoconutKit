@@ -65,7 +65,7 @@
                         <barButtonItem width="18" systemItem="fixedSpace" id="35"/>
                     </items>
                 </toolbar>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="white" id="23">
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" id="23">
                     <rect key="frame" x="204" y="428" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                 </activityIndicatorView>
