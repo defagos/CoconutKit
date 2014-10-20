@@ -761,7 +761,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 {
     NSInteger randomIndex;
     do {
-        randomIndex = arc4random_uniform(upperBound);
+        randomIndex = arc4random_uniform((u_int32_t)upperBound);
     } while (randomIndex == forbiddenIndex);
     return randomIndex;
 }

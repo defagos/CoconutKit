@@ -57,7 +57,7 @@
 
 - (void)displayPageAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
-    NSString *viewControllerClassName = [NSString stringWithFormat:@"ControlBindingsDemo%dViewController", index + 1];
+    NSString *viewControllerClassName = [NSString stringWithFormat:@"ControlBindingsDemo%luViewController", (unsigned long)index + 1];
     Class viewControllerClass = NSClassFromString(viewControllerClassName);
     if (! viewControllerClass) {
         HLSLoggerError(@"Unknown class %@", viewControllerClassName);
