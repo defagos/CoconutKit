@@ -148,6 +148,19 @@ static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerM
     [self.webView stopLoading];
 }
 
+#pragma mark Layout
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    // Position the progress view under the top layout guide when wrapped in a navigation controller
+    self.fakeProgressView.frame = CGRectMake(CGRectGetMinX(self.fakeProgressView.frame),
+                                             self.navigationController ? self.topLayoutGuide.length : 0.f,
+                                             CGRectGetWidth(self.fakeProgressView.frame),
+                                             CGRectGetHeight(self.fakeProgressView.frame));
+}
+
 #pragma mark Orientation management
 
 - (NSUInteger)supportedInterfaceOrientations
