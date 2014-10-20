@@ -10,6 +10,7 @@
 
 #import "HLSAutorotation.h"
 #import "HLSGoogleChromeActivity.h"
+#import "HLSLogger.h"
 #import "HLSNotifications.h"
 #import "HLSSafariActivity.h"
 #import "NSBundle+HLSDynamicLocalization.h"
@@ -19,6 +20,11 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
+static const NSTimeInterval HLSWebViewMaxFakeDuration = 3.;
+static const NSTimeInterval HLSWebViewFakeTimerInterval = 1. / 60.;
+static const CGFloat HLSWebViewFakeTimerMaxProgress = 0.95f;
+static const CGFloat HLSWebViewFakeTimerProgressIncrement = HLSWebViewFakeTimerMaxProgress / HLSWebViewMaxFakeDuration * HLSWebViewFakeTimerInterval;
+
 @interface HLSWebViewController ()
 
 @property (nonatomic, strong) NSURLRequest *request;
@@ -27,6 +33,7 @@
 @property (nonatomic, strong) UIImage *refreshImage;
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIProgressView *fakeProgressView;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goBackBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
@@ -37,6 +44,9 @@
 @property (nonatomic, strong) NSArray *actions;
 
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
+
+@property (nonatomic, assign) CGFloat progress;
+@property (nonatomic, strong) NSTimer *fakeProgressTimer;
 
 @end
 
@@ -50,6 +60,42 @@
         self.request = request;
     }
     return self;
+}
+
+#pragma mark Accessors and mutators
+
+- (void)setFakeProgressTimer:(NSTimer *)fakeProgressTimer
+{
+    [_fakeProgressTimer invalidate];
+    _fakeProgressTimer = fakeProgressTimer;
+}
+
+- (void)setProgress:(CGFloat)progress
+{
+    if (isless(progress, 0.f)) {
+        HLSLoggerWarn(@"Progress cannot be < 0. Fixed to 0");
+        _progress = 0.f;
+    }
+    else if (isgreater(progress, 1.f)) {
+        HLSLoggerWarn(@"Progress cannot be > 1. Fixed to 1");
+        _progress = 1.f;
+    }
+    else {
+        _progress = progress;
+    }
+    
+    if (_progress == 0.f) {
+        self.fakeProgressTimer = [NSTimer scheduledTimerWithTimeInterval:HLSWebViewFakeTimerInterval
+                                                                  target:self
+                                                                selector:@selector(updateProgress:)
+                                                                userInfo:nil
+                                                                 repeats:YES];
+    }
+    else if (isgreaterequal(progress, HLSWebViewFakeTimerMaxProgress)) {
+        self.fakeProgressTimer = nil;
+    }
+    
+    [self.fakeProgressView setProgress:_progress animated:NO];
 }
 
 #pragma mark View lifecycle
@@ -176,6 +222,8 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.progress = 0.f;
+    
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     [self.activityIndicator startAnimating];
     
@@ -184,6 +232,8 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    self.progress = 1.f;
+    
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
     
@@ -195,6 +245,8 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    self.progress = 1.f;
+    
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
     
@@ -263,6 +315,16 @@
         self.activityPopoverController = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
         self.activityPopoverController.delegate = self;
         [self.activityPopoverController presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+#pragma mark Timer callbacks
+
+- (void)updateProgress:(NSTimer *)timer
+{
+    // 33% update chance to make fake progress more realistic
+    if (arc4random_uniform(3) == 0) {
+        self.progress += HLSWebViewFakeTimerProgressIncrement;
     }
 }
 
