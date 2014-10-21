@@ -26,15 +26,13 @@ NSString *HLSLanguageForLocalization(NSString *localization)
     return [[locale displayNameForKey:NSLocaleLanguageCode value:localization] capitalizedString];
 }
 
-NSString *HLSLocalizedStringFromUIKit(NSString *key)
+NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle)
 {
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
     if (! bundle) {
-        HLSLoggerWarn(@"UIKit bundle not found; searching in main bundle instead");
         bundle = [NSBundle mainBundle];
     }
     
-    // We use an explicit constant string for missing localizations since otherwise the localization key itself would 
+    // We use an explicit constant string for missing localizations since otherwise the localization key itself would
     // be returned by the -localizedStringForKey:value:table: method
     static NSString * const kMissingLocalizedString = @"NSBundle_HLSDynamicLocalization_missing";
     NSString *localizedString = [bundle localizedStringForKey:key
@@ -48,6 +46,19 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
     }
     
     return localizedString;
+}
+
+NSString *HLSLocalizedStringFromUIKit(NSString *key)
+{
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
+    return HLSLocalizedStringFromBundle(key, bundle);
+}
+
+NSString *HLSLocalizedDescriptionForCFNetworkError(int errorCode)
+{
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
+    NSString *key = [NSString stringWithFormat:@"Err%@", @(errorCode)];
+    return HLSLocalizedStringFromBundle(key, bundle);
 }
 
 @implementation NSBundle (HLSDynamicLocalization)

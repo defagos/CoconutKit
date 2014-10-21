@@ -307,8 +307,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         }];
     }
     
-    NSString *escapedErrorDescription = [[error localizedDescription] stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-    NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", escapedErrorDescription];
+    // Error information is filled in the CFNetwork layer and escapes control of CoconutKit dynamic localization mechanism.
+    // Fix by applying dynamic localization based on the error code and escape properly
+    NSString *localizedEscapedDescription = [HLSLocalizedDescriptionForCFNetworkError(error.code) stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+    NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", localizedEscapedDescription];
     [self.errorWebView stringByEvaluatingJavaScriptFromString:replaceErrorJavaScript];
     
     [self setProgress:1.f animated:YES];

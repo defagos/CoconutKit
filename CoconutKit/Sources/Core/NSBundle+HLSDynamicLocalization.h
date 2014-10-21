@@ -18,13 +18,26 @@ extern NSString * const HLSCurrentLocalizationDidChangeNotification;
 NSString *HLSLanguageForLocalization(NSString *localization);
 
 /**
+ * Return a localized string from the specified bundle (if the bundle is nil, then
+ * the main bundle is searched)
+ *
+ * If no match is found, return the localization key
+ */
+NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle);
+
+/**
  * Return a localized string from the UIKit bundle
  *
- * If the localized version of the key parameter is not found in the UIKit bundle
- * then this function searches for the localized string inside the main bundle using
- * the NSLocalizedStringFromTableInBundle() macro.
+ * If no match is found, return the localization key
  */
 NSString *HLSLocalizedStringFromUIKit(NSString *key);
+
+/**
+ * Return the localized description matching an error code
+ *
+ * If no match is found, return the localization key
+ */
+NSString *HLSLocalizedDescriptionForCFNetworkError(int errorCode);
 
 /**
  * This category makes it possible to change the application language at runtime without leaving the application. 
