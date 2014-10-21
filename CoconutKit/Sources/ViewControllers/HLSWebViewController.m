@@ -19,6 +19,7 @@
 #import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
+#import "UIImage+HLSExtensions.h"
 
 static void *s_KVOContext = &s_KVOContext;
 
@@ -35,8 +36,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, strong) NSURL *currentURL;
 @property (nonatomic, strong) NSError *currentError;
 
-@property (nonatomic, strong) UIImage *refreshImage;
-
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) WKWebView *errorWebView;
 
@@ -46,7 +45,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *actionBarButtonItem;
-@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, strong) NSArray *actions;
 
@@ -193,7 +191,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self.view insertSubview:errorWebView atIndex:0];
     self.errorWebView = errorWebView;
     
-    self.refreshImage = self.refreshBarButtonItem.image;
     self.progressView.alpha = 0.f;
 }
 
@@ -262,17 +259,13 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
     self.toolbar.frame = (CGRect){CGPointMake(0.f, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
     self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
-    
-    // Center UI elements accordingly
-    self.activityIndicator.center = CGPointMake(self.activityIndicator.center.x, CGRectGetMidY(self.toolbar.frame));
 }
 
 - (void)updateInterface
 {
     self.goBackBarButtonItem.enabled = self.webView.canGoBack;
     self.goForwardBarButtonItem.enabled = self.webView.canGoForward;
-    self.refreshBarButtonItem.enabled = ! self.webView.loading;
-    self.refreshBarButtonItem.image = self.webView.loading ? nil : self.refreshImage;
+    self.refreshBarButtonItem.image = self.webView.loading ? [UIImage coconutKitImageNamed:@"ButtonBarStop.png"] : [UIImage coconutKitImageNamed:@"ButtonBarRefresh.png"];
     self.actionBarButtonItem.enabled = ! self.webView.loading && self.currentURL;
     
     [self updateTitle];
@@ -360,7 +353,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self setProgress:0.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
-    [self.activityIndicator startAnimating];
     
     [self updateInterface];
 }
@@ -381,7 +373,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self setProgress:1.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
-    [self.activityIndicator stopAnimating];
     
     // A new page has been displayed. Remember its URL
     if ([WKWebView class]) {
@@ -412,7 +403,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self updateErrorDescription];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
-    [self.activityIndicator stopAnimating];
     
     [self updateInterface];
 }
@@ -450,18 +440,18 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (IBAction)refresh:(id)sender
 {
-    // Reload the currently displayed page (if any)
-    if ([[self.currentURL absoluteString] isFilled]) {
-        if ([WKWebView class]) {
+    if (! self.webView.loading) {
+        // Reload the currently displayed page (if any)
+        if ([[self.currentURL absoluteString] isFilled]) {
             [self.webView reload];
         }
+        // Reload the start page
         else {
-            [(UIWebView *)self.webView loadRequest:((UIWebView *)self.webView).request];
+            [self.webView loadRequest:self.request];
         }
     }
-    // Reload the start page
     else {
-        [self.webView loadRequest:self.request];
+        [self.webView stopLoading];
     }
     
     [self updateInterface];
