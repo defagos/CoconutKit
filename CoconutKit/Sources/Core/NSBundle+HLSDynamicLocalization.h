@@ -37,7 +37,7 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key);
  *
  * If no match is found, return the localization key
  */
-NSString *HLSLocalizedDescriptionForCFNetworkError(int errorCode);
+NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode);
 
 /**
  * This category makes it possible to change the application language at runtime without leaving the application. 

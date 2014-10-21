@@ -30,6 +30,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, strong) NSURL *currentURL;
+@property (nonatomic, strong) NSError *currentError;
 
 @property (nonatomic, strong) UIImage *refreshImage;
 
@@ -197,6 +198,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [super localize];
     
     [self updateTitle];
+    [self updateErrorDescription];
 }
 
 #pragma mark Layout and display
@@ -231,6 +233,19 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     else {
         self.title = CoconutKitLocalizedString(@"Untitled", nil);
     }
+}
+
+- (void)updateErrorDescription
+{
+    if (! self.currentError) {
+        return;
+    }
+    
+    // Error information is filled in the CFNetwork layer and escapes control of CoconutKit dynamic localization mechanism.
+    // Fix by applying dynamic localization based on the error code and escape properly
+    NSString *localizedEscapedDescription = [HLSLocalizedDescriptionForCFNetworkError(self.currentError.code) stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+    NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", localizedEscapedDescription];
+    [self.errorWebView stringByEvaluatingJavaScriptFromString:replaceErrorJavaScript];
 }
 
 #pragma mark MFMailComposeViewControllerDelegate protocol implementation
@@ -268,6 +283,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    self.currentError = nil;
+    
     [self setProgress:0.f animated:NO];
     
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
@@ -307,11 +324,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         }];
     }
     
-    // Error information is filled in the CFNetwork layer and escapes control of CoconutKit dynamic localization mechanism.
-    // Fix by applying dynamic localization based on the error code and escape properly
-    NSString *localizedEscapedDescription = [HLSLocalizedDescriptionForCFNetworkError(error.code) stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
-    NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", localizedEscapedDescription];
-    [self.errorWebView stringByEvaluatingJavaScriptFromString:replaceErrorJavaScript];
+    self.currentError = error;
+    [self updateErrorDescription];
     
     [self setProgress:1.f animated:YES];
     

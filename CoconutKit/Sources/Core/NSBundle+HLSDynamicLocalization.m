@@ -54,7 +54,7 @@ NSString *HLSLocalizedStringFromUIKit(NSString *key)
     return HLSLocalizedStringFromBundle(key, bundle);
 }
 
-NSString *HLSLocalizedDescriptionForCFNetworkError(int errorCode)
+NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode)
 {
     NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
     NSString *key = [NSString stringWithFormat:@"Err%@", @(errorCode)];
