@@ -153,6 +153,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     WKWebView *errorWebView = [[webViewClass alloc] initWithFrame:frame];
     errorWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     errorWebView.alpha = 0.f;
+    if ([WKWebView class]) {
+        errorWebView.navigationDelegate = self;
+    }
+    else {
+        ((UIWebView *)errorWebView).delegate = self;
+    }
     errorWebView.scrollView.scrollEnabled = NO;
     
     NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
@@ -317,8 +323,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 #pragma mark UIWebViewDelegate protocol implementation
 
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
+    if (webView == self.errorWebView) {
+        return;
+    }
+    
     self.currentError = nil;
     
     [self setProgress:0.f animated:NO];
@@ -331,6 +341,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
+    if (webView == self.errorWebView) {
+        // Reliably executing JavaScript requires us to wait until the error page has been loaded
+        [self updateErrorDescription];
+        return;
+    }
+    
     [self setProgress:1.f animated:YES];
     
     [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
@@ -351,8 +367,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self updateInterface];
 }
 
-- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
+    if (webView == self.errorWebView) {
+        return;
+    }
+    
     if (! [error hasCode:NSURLErrorCancelled withinDomain:NSURLErrorDomain]) {
         [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
             self.webView.alpha = 0.f;
@@ -375,7 +395,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [self webView:(WKWebView *)webView didCommitNavigation:nil];
+    [self webView:(WKWebView *)webView didStartProvisionalNavigation:nil];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -385,7 +405,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [self webView:(WKWebView *)webView didFailNavigation:nil withError:error];
+    [self webView:(WKWebView *)webView didFailProvisionalNavigation:nil withError:error];
 }
 
 #pragma mark Action callbacks
