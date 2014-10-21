@@ -34,8 +34,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 @property (nonatomic, strong) UIImage *refreshImage;
 
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
-@property (nonatomic, weak) IBOutlet UIWebView *errorWebView;
+@property (nonatomic, weak) WKWebView *webView;
+@property (nonatomic, weak) WKWebView *errorWebView;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *fakeProgressView;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
@@ -130,18 +130,39 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [super viewDidLoad];
     
-    self.errorWebView.scrollView.scrollEnabled = NO;
-    self.errorWebView.alpha = 0.f;
+    // Trick: We use outlets marked as WKWebView to avoid redundancies. On iOS 7 the web view is an old web view. Since the
+    //        web view class interfaces have only slightly changed, we will use a cast where appropriate
+    // TODO: Remove when CoconutKit requires at least iOS 8. Improve using new WKWebView abilities
+    Class webViewClass = [WKWebView class] ?: [UIWebView class];
+    
+    CGRect frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
+    WKWebView *webView = [[webViewClass alloc] initWithFrame:frame];
+    webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    webView.alpha = 0.f;
+    if ([WKWebView class]) {
+        webView.navigationDelegate = self;
+    }
+    else {
+        ((UIWebView *)webView).delegate = self;
+    }
+    [webView loadRequest:self.request];
+    
+    [self.view insertSubview:webView atIndex:0];
+    self.webView = webView;
+    
+    WKWebView *errorWebView = [[webViewClass alloc] initWithFrame:frame];
+    errorWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    errorWebView.alpha = 0.f;
+    errorWebView.scrollView.scrollEnabled = NO;
     
     NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
-    [self.errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
+    [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
+    
+    [self.view insertSubview:errorWebView atIndex:0];
+    self.errorWebView = errorWebView;
     
     self.refreshImage = self.refreshBarButtonItem.image;
     self.fakeProgressView.alpha = 0.f;
-    
-    self.webView.alpha = 0.f;
-    self.webView.delegate = self;
-    [self.webView loadRequest:self.request];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -228,7 +249,16 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 - (void)updateTitle
 {
     if (self.currentURL) {
-        self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        NSString *titleJavaScript = @"document.title";
+        
+        if ([WKWebView class]) {
+            [self.webView evaluateJavaScript:titleJavaScript completionHandler:^(NSString *title, NSError *error) {
+                self.title = title;
+            }];
+        }
+        else {
+            self.title = [(UIWebView *)self.webView stringByEvaluatingJavaScriptFromString:titleJavaScript];
+        }
     }
     else {
         self.title = CoconutKitLocalizedString(@"Untitled", nil);
@@ -245,7 +275,13 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     // Fix by applying dynamic localization based on the error code and escape properly
     NSString *localizedEscapedDescription = [HLSLocalizedDescriptionForCFNetworkError(self.currentError.code) stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
     NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", localizedEscapedDescription];
-    [self.errorWebView stringByEvaluatingJavaScriptFromString:replaceErrorJavaScript];
+    
+    if ([WKWebView class]) {
+        [self.errorWebView evaluateJavaScript:replaceErrorJavaScript completionHandler:nil];
+    }
+    else {
+        [(UIWebView *)self.errorWebView stringByEvaluatingJavaScriptFromString:replaceErrorJavaScript];
+    }
 }
 
 #pragma mark MFMailComposeViewControllerDelegate protocol implementation
@@ -281,7 +317,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 #pragma mark UIWebViewDelegate protocol implementation
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation
 {
     self.currentError = nil;
     
@@ -293,7 +329,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self updateInterface];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     [self setProgress:1.f animated:YES];
     
@@ -306,17 +342,17 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self.activityIndicator stopAnimating];
     
     // A new page has been displayed. Remember its URL
-    self.currentURL = [self.webView.request URL];
-    
+    if ([WKWebView class]) {
+        self.currentURL = self.webView.URL;
+    }
+    else {
+        self.currentURL = ((UIWebView *)self.webView).request.URL;
+    }
     [self updateInterface];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
-    if (webView == self.errorWebView) {
-        return;
-    }
-    
     if (! [error hasCode:NSURLErrorCancelled withinDomain:NSURLErrorDomain]) {
         [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
             self.webView.alpha = 0.f;
@@ -332,7 +368,24 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
     
-    [self updateInterface];    
+    [self updateInterface];
+}
+
+#pragma mark WKWebViewDelegate protocol implementation
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self webView:(WKWebView *)webView didCommitNavigation:nil];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self webView:(WKWebView *)webView didFinishNavigation:nil];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self webView:(WKWebView *)webView didFailNavigation:nil withError:error];
 }
 
 #pragma mark Action callbacks
@@ -353,7 +406,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     // Reload the currently displayed page (if any)
     if ([[self.currentURL absoluteString] isFilled]) {
-        [self.webView loadRequest:self.webView.request];
+        if ([WKWebView class]) {
+            [self.webView reload];
+        }
+        else {
+            [(UIWebView *)self.webView loadRequest:((UIWebView *)self.webView).request];
+        }
     }
     // Reload the start page
     else {

@@ -108,6 +108,9 @@
 		6F468CB019D2E7920021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
 		6F468CB119D2E7920021B95D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAE19D2E7920021B95D /* Localizable.strings */; };
 		6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
+		6F4D3DDB19F65780009718E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DDA19F65780009718E4 /* WebKit.framework */; };
+		6F4D3DDC19F6578A009718E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DDA19F65780009718E4 /* WebKit.framework */; };
+		6F4D3DDD19F65796009718E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DDA19F65780009718E4 /* WebKit.framework */; };
 		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
 		6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
@@ -612,6 +615,7 @@
 		6F468CAF19D2E7920021B95D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		6F468CB219D2E7990021B95D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/DemoTable.strings; sourceTree = SOURCE_ROOT; };
 		6F468CB319D2E7990021B95D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		6F4D3DDA19F65780009718E4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6F53B63316FA321000E01781 /* DemoColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColors.h; sourceTree = "<group>"; };
 		6F53B63416FA321000E01781 /* DemoColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoColors.m; sourceTree = "<group>"; };
 		6F58C53717944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingScrollViewDemoViewController.h; sourceTree = "<group>"; };
@@ -848,6 +852,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F4D3DDC19F6578A009718E4 /* WebKit.framework in Frameworks */,
 				6F63E7BA17CF6BA1006322D9 /* QuickLook.framework in Frameworks */,
 				6FAB922016DA70BE00599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C75216A93DD20081A9A7 /* CoreText.framework in Frameworks */,
@@ -864,6 +869,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F4D3DDD19F65796009718E4 /* WebKit.framework in Frameworks */,
 				6F2B305B1929BD78003D4C2C /* libCoconutKit.a in Frameworks */,
 				6F2B305C1929BD78003D4C2C /* QuickLook.framework in Frameworks */,
 				6F2B305D1929BD78003D4C2C /* MobileCoreServices.framework in Frameworks */,
@@ -881,6 +887,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F4D3DDB19F65780009718E4 /* WebKit.framework in Frameworks */,
 				6FCB4F2D192667EE00047AD3 /* libCoconutKit.a in Frameworks */,
 				6FCB4F121926651F00047AD3 /* QuickLook.framework in Frameworks */,
 				6FCB4F131926651F00047AD3 /* MobileCoreServices.framework in Frameworks */,
@@ -948,6 +955,7 @@
 				6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */,
 				6F63E7B917CF6BA1006322D9 /* QuickLook.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				6F4D3DDA19F65780009718E4 /* WebKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

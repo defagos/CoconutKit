@@ -47,6 +47,7 @@
     // To avoid the delay which occurs when loading a UIWebView for the first time, we display one as soon as possible
     // (out of screen bounds). It seems that loading a large web view (here with the application frame size) is more 
     // effective
+    // TODO: Investigate if really needed with the new WKWebView
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(applicationFrame), 
                                                                      CGRectGetMaxY(applicationFrame), 

@@ -73,6 +73,7 @@
 		6F47EC551924EEEE00C5F6AC /* CursorDefaultPointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4C1924EEEE00C5F6AC /* CursorDefaultPointer.png */; };
 		6F47EC561924EEEE00C5F6AC /* SearchFieldIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4D1924EEEE00C5F6AC /* SearchFieldIcon.png */; };
 		6F47EC571924EEEE00C5F6AC /* SearchFieldIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4E1924EEEE00C5F6AC /* SearchFieldIcon@2x.png */; };
+		6F4D3DD919F6576C009718E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DD819F6576C009718E4 /* WebKit.framework */; };
 		6F5D355D19D59B0D00DDE0EF /* CoconutKit-resources-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7811924EE4E00660CDF /* CoconutKit-resources-Info.plist */; };
 		6F6010EB15AB1E2B00A9FEC5 /* HLSContainerStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */; };
 		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; };
@@ -390,6 +391,7 @@
 		6F47EC4C1924EEEE00C5F6AC /* CursorDefaultPointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CursorDefaultPointer.png; sourceTree = "<group>"; };
 		6F47EC4D1924EEEE00C5F6AC /* SearchFieldIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchFieldIcon.png; sourceTree = "<group>"; };
 		6F47EC4E1924EEEE00C5F6AC /* SearchFieldIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchFieldIcon@2x.png"; sourceTree = "<group>"; };
+		6F4D3DD819F6576C009718E4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6F5D355719D59AF300DDE0EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../CoconutKit-resources/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6F5D355919D59B0300DDE0EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "../CoconutKit-resources/fr.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSContainerStack.h; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F4D3DD919F6576C009718E4 /* WebKit.framework in Frameworks */,
 				6F63E7B617CF6B80006322D9 /* QuickLook.framework in Frameworks */,
 				6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C74D16A93D8C0081A9A7 /* CoreText.framework in Frameworks */,
@@ -697,6 +700,7 @@
 				6FCDA16B14DAE5EF00ED1CD1 /* QuartzCore.framework */,
 				6F63E7B517CF6B80006322D9 /* QuickLook.framework */,
 				6F8D09A0123F545D00FCF2AF /* UIKit.framework */,
+				6F4D3DD819F6576C009718E4 /* WebKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

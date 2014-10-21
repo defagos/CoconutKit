@@ -69,6 +69,7 @@ You can grab the latest tagged binary package available from [the project downlo
 * `QuartzCore.framework`
 * `QuickLook.framework`
 * `UIKit.framework`
+* `WebKit.framework`
 
 #### Adding source files using CocoaPods
 
