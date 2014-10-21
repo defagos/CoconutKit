@@ -171,6 +171,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     [webView loadRequest:self.request];
     
+    // Scroll view insets are adjusted automatically only for the scroll view at index 0
     [self.view insertSubview:webView atIndex:0];
     self.webView = webView;
     
@@ -188,7 +189,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
     [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
     
-    [self.view insertSubview:errorWebView atIndex:0];
+    [self.view insertSubview:errorWebView atIndex:1];
     self.errorWebView = errorWebView;
     
     self.progressView.alpha = 0.f;
