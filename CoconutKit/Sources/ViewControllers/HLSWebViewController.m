@@ -171,7 +171,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     [webView loadRequest:self.request];
     
-    // Scroll view insets are adjusted automatically only for the scroll view at index 0
     [self.view insertSubview:webView atIndex:0];
     self.webView = webView;
     
@@ -189,7 +188,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
     [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
     
-    [self.view insertSubview:errorWebView atIndex:1];
+    [self.view insertSubview:errorWebView atIndex:0];
     self.errorWebView = errorWebView;
     
     self.progressView.alpha = 0.f;
@@ -215,6 +214,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
+    
+    // Scroll view content insets are adjusted automatically, but only for the scroll view at index 0 (here the error web
+    // view). Apply the same content insets to the main web view
+    self.webView.scrollView.contentInset = self.errorWebView.scrollView.contentInset;
     
     // Position the progress view under the top layout guide when wrapped in a navigation controller
     self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
