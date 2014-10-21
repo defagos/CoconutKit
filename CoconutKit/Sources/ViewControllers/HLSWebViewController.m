@@ -183,7 +183,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     else {
         ((UIWebView *)errorWebView).delegate = self;
     }
-    errorWebView.scrollView.scrollEnabled = NO;
+    errorWebView.userInteractionEnabled = NO;
     
     NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
     [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
