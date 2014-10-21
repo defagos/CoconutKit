@@ -20,6 +20,9 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
+static void *s_KVOContext = &s_KVOContext;
+
+// TODO: Remove fake constants and variables when CoconutKit requires iOS 8 and above
 static const NSTimeInterval HLSWebViewMaxFakeDuration = 3.;
 static const NSTimeInterval HLSWebViewFakeTimerInterval = 1. / 60.;
 static const CGFloat HLSWebViewFakeTimerMaxProgress = 0.95f;
@@ -37,7 +40,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) WKWebView *errorWebView;
 
-@property (nonatomic, weak) IBOutlet UIProgressView *fakeProgressView;
+@property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goBackBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *goForwardBarButtonItem;
@@ -68,6 +71,11 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     return self;
 }
 
+- (void)dealloc
+{
+    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+}
+
 #pragma mark Accessors and mutators
 
 - (void)setFakeProgressTimer:(NSTimer *)fakeProgressTimer
@@ -90,31 +98,46 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         _progress = progress;
     }
     
-    // Fake progress
+    // Fake progress on iOS 7 since progress information not available from UIWebView
     // See http://stackoverflow.com/questions/21263358/uiwebview-with-progress-bar
+    if (! [WKWebView class]) {
+        if (_progress == 0.f) {
+            self.fakeProgressTimer = [NSTimer scheduledTimerWithTimeInterval:HLSWebViewFakeTimerInterval
+                                                                      target:self
+                                                                    selector:@selector(updateFakeProgress:)
+                                                                    userInfo:nil
+                                                                     repeats:YES];
+        }
+        else if (isgreaterequal(progress, HLSWebViewFakeTimerMaxProgress)) {
+            self.fakeProgressTimer = nil;
+        }
+    }
+    
     if (_progress == 0.f) {
-        self.fakeProgressTimer = [NSTimer scheduledTimerWithTimeInterval:HLSWebViewFakeTimerInterval
-                                                                  target:self
-                                                                selector:@selector(updateProgress:)
-                                                                userInfo:nil
-                                                                 repeats:YES];
-        self.fakeProgressView.alpha = 1.f;
-    }
-    else if (isgreaterequal(progress, HLSWebViewFakeTimerMaxProgress)) {
-        self.fakeProgressTimer = nil;
-    }
-    
-    // Never animated
-    [self.fakeProgressView setProgress:_progress animated:NO];
-    
-    if (_progress == 1.f) {
         if (animated) {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.fakeProgressView.alpha = 0.f;
+            [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
+                self.progressView.alpha = 1.f;
             }];
         }
         else {
-            self.fakeProgressView.alpha = 0.f;
+            self.progressView.alpha = 1.f;
+        }
+    }
+    
+    // Never animated
+    [self.progressView setProgress:_progress animated:animated];
+    
+    if (_progress == 1.f) {
+        if (animated) {
+            [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
+                self.progressView.alpha = 0.f;
+            } completion:^(BOOL finished) {
+                // Reset the progress bar
+                self.progressView.progress = 0.f;
+            }];
+        }
+        else {
+            self.progressView.alpha = 0.f;
         }
     }
 }
@@ -141,6 +164,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     webView.alpha = 0.f;
     if ([WKWebView class]) {
         webView.navigationDelegate = self;
+        
+        // Progress information is available from WKWebView
+        [webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:s_KVOContext];
     }
     else {
         ((UIWebView *)webView).delegate = self;
@@ -168,7 +194,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     self.errorWebView = errorWebView;
     
     self.refreshImage = self.refreshBarButtonItem.image;
-    self.fakeProgressView.alpha = 0.f;
+    self.progressView.alpha = 0.f;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -193,10 +219,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [super viewWillLayoutSubviews];
     
     // Position the progress view under the top layout guide when wrapped in a navigation controller
-    self.fakeProgressView.frame = CGRectMake(CGRectGetMinX(self.fakeProgressView.frame),
-                                             self.navigationController ? self.topLayoutGuide.length : 0.f,
-                                             CGRectGetWidth(self.fakeProgressView.frame),
-                                             CGRectGetHeight(self.fakeProgressView.frame));
+    self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
+                                         self.navigationController ? self.topLayoutGuide.length : 0.f,
+                                         CGRectGetWidth(self.progressView.frame),
+                                         CGRectGetHeight(self.progressView.frame));
 }
 
 #pragma mark Orientation management
@@ -331,7 +357,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     
     self.currentError = nil;
     
-    [self setProgress:0.f animated:NO];
+    [self setProgress:0.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     [self.activityIndicator startAnimating];
@@ -347,12 +373,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         return;
     }
     
-    [self setProgress:1.f animated:YES];
-    
     [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
         self.webView.alpha = 1.f;
         self.errorWebView.alpha = 0.f;
     }];
+    
+    [self setProgress:1.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
@@ -380,10 +406,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         }];
     }
     
+    [self setProgress:1.f animated:YES];
+    
     self.currentError = error;
     [self updateErrorDescription];
-    
-    [self setProgress:1.f animated:YES];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     [self.activityIndicator stopAnimating];
@@ -469,11 +495,26 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 #pragma mark Timer callbacks
 
-- (void)updateProgress:(NSTimer *)timer
+- (void)updateFakeProgress:(NSTimer *)timer
 {
     // 33% update chance to make fake progress more realistic
     if (arc4random_uniform(3) == 0) {
         [self setProgress:[self progress] + HLSWebViewFakeTimerProgressIncrement animated:YES];
+    }
+}
+
+#pragma mark KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context != s_KVOContext) {
+        return;
+    }
+    
+    // Check if loading since progress information can be received before -webView:didStartProvisionalNavigation:, which
+    // initially resets progress to 0
+    if (object == self.webView && [keyPath isEqualToString:@"estimatedProgress"] && self.webView.loading) {
+        [self setProgress:self.webView.estimatedProgress animated:YES];
     }
 }
 

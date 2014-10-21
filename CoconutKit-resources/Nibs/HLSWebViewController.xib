@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
@@ -9,9 +8,9 @@
             <connections>
                 <outlet property="actionBarButtonItem" destination="9" id="43"/>
                 <outlet property="activityIndicator" destination="23" id="44"/>
-                <outlet property="fakeProgressView" destination="Q9M-Si-VTD" id="tMD-D5-I2d"/>
                 <outlet property="goBackBarButtonItem" destination="5" id="40"/>
                 <outlet property="goForwardBarButtonItem" destination="6" id="41"/>
+                <outlet property="progressView" destination="Q9M-Si-VTD" id="xvv-pN-1hz"/>
                 <outlet property="refreshBarButtonItem" destination="8" id="42"/>
                 <outlet property="toolbar" destination="4" id="49"/>
                 <outlet property="view" destination="1" id="38"/>
