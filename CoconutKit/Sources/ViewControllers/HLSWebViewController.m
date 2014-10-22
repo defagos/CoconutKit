@@ -8,6 +8,7 @@
 
 #import "HLSWebViewController.h"
 
+#import "HLSApplicationInformation.h"
 #import "HLSAutorotation.h"
 #import "HLSGoogleChromeActivity.h"
 #import "HLSLogger.h"
@@ -186,7 +187,31 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     errorWebView.userInteractionEnabled = NO;
     
-    NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
+    NSBundle *coconutKitBundle = [NSBundle coconutKitBundle];
+
+    // WKWebView cannot load file URLs, except in the temporary directory, see
+    //   http://stackoverflow.com/questions/24882834/wkwebview-not-working-in-ios-8-beta-4
+    // As a workaround, copy CoconutKit resource bundle to the temporary directory, and load pages from there. Since there are not so many
+    // resources, copying the whole bundle does not harm
+    //
+    // TODO: Remove when a fix is available
+    if ([WKWebView class]) {
+        NSString *temporaryCoconutKitBundlePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingString:@"CoconutKit-resources.bundle"];
+        
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            if ([[NSFileManager defaultManager] fileExistsAtPath:temporaryCoconutKitBundlePath]) {
+                [[NSFileManager defaultManager] removeItemAtPath:temporaryCoconutKitBundlePath error:NULL];
+            }
+            
+            NSString *coconutKitBundlePath = [[NSBundle coconutKitBundle] bundlePath];
+            [[NSFileManager defaultManager] copyItemAtPath:coconutKitBundlePath toPath:temporaryCoconutKitBundlePath error:NULL];
+        });
+        
+        coconutKitBundle = [NSBundle bundleWithPath:temporaryCoconutKitBundlePath];
+    }
+    
+    NSURL *errorHTMLFileURL = [coconutKitBundle URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
     [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
     
     // No automatic scroll inset adjustment, but not a problem since the error view displays static centered content
