@@ -232,6 +232,15 @@
 
 @end
 
+@interface HLSStackController (UnavailableMethods)
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithBundle NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
 /**
  * This protocol offers more methods than the equivalent protocol of UINavigationController. This provides much
  * more information about appearance and disappearance events (and especially since HLSStackController allows

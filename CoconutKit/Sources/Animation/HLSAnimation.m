@@ -103,12 +103,6 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     return self;
 }
 
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithAnimationSteps:nil];
-}
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self

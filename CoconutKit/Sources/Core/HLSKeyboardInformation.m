@@ -8,7 +8,6 @@
 
 #import "HLSKeyboardInformation.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 @interface HLSKeyboardInformation ()
@@ -42,12 +41,6 @@ static HLSKeyboardInformation *s_instance = nil;
         self.animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntValue];
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithUserInfo:nil];
 }
 
 #pragma mark Notification callbacks

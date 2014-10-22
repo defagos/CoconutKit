@@ -32,3 +32,9 @@
 @property (nonatomic, readonly, assign) NSUInteger cost;
 
 @end
+
+@interface HLSInMemoryCacheEntry (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

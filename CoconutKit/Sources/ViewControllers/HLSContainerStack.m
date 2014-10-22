@@ -8,7 +8,6 @@
 
 #import "HLSContainerStack.h"
 
-#import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSContainerStackView.h"
 #import "HLSLayerAnimationStep.h"
@@ -66,12 +65,6 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         _autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithContainerViewController:nil behavior:HLSContainerStackBehaviorDefault capacity:0];
 }
 
 - (void)dealloc

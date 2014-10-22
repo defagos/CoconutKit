@@ -8,7 +8,6 @@
 
 #import "HLSTransformer.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 NSString *HLSStringFromBool(BOOL yesOrNo)
@@ -124,12 +123,6 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
         self.reverseBlock = reverseBlock;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithBlock:nil reverseBlock:nil];
 }
 
 #pragma mark HLSTransformer protocol implementation

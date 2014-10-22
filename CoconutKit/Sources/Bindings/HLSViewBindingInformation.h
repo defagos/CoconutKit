@@ -96,3 +96,9 @@
 @property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
 
 @end
+
+@interface HLSViewBindingInformation (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

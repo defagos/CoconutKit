@@ -8,7 +8,6 @@
 
 #import "HLSURLConnection.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 @interface HLSURLConnection ()
@@ -36,14 +35,7 @@
 
 - (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
-    HLSForbiddenInheritedMethod();
-    return [self initWithRequest:nil completionBlock:completionBlock];
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithRequest:nil completionBlock:nil];
+    return nil;
 }
 
 @end

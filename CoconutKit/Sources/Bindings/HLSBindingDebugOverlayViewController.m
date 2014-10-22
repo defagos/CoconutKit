@@ -8,7 +8,6 @@
 
 #import "HLSBindingDebugOverlayViewController.h"
 
-#import "HLSAssert.h"
 #import "HLSBindingInformationViewController.h"
 #import "HLSLogger.h"
 #import "UIView+HLSViewBindingFriend.h"
@@ -54,12 +53,6 @@ static UIWindow *s_previousKeyWindow = nil;
         self.recursive = recursive;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return nil;
 }
 
 #pragma mark View lifecycle

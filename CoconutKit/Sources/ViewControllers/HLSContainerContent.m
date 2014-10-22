@@ -8,7 +8,6 @@
 
 #import "HLSContainerContent.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"
@@ -137,12 +136,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
         self.originalViewFrame = CGRectZero;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithViewController:nil containerViewController:nil transitionClass:Nil duration:0.];
 }
 
 - (void)dealloc

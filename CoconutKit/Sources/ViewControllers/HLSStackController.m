@@ -8,7 +8,6 @@
 
 #import "HLSStackController.h"
 
-#import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
 #import "HLSStackPushSegue.h"
@@ -63,12 +62,6 @@
 }
 
 #pragma clang diagnostic pop
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithRootViewController:nil capacity:0];
-}
 
 - (void)awakeFromNib
 {

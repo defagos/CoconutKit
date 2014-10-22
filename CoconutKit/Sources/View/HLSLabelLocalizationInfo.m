@@ -8,7 +8,6 @@
 
 #import "HLSLabelLocalizationInfo.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
@@ -39,12 +38,6 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
         self.bundleName = bundleName;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithText:nil tableName:nil bundleName:nil];
 }
 
 #pragma mark Parsing text

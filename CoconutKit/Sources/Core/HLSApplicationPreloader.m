@@ -8,7 +8,6 @@
 
 #import "HLSApplicationPreloader.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 @interface HLSApplicationPreloader ()
@@ -32,12 +31,6 @@
         self.application = application;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithApplication:nil];
 }
 
 #pragma mark Pre-loading

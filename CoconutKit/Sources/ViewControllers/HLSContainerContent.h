@@ -149,3 +149,9 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
 
 @end
+
+@interface HLSContainerContent (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

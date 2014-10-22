@@ -154,7 +154,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
             userInfo = @{ NSDetailedErrorsKey : errors };
         }
         
-        // Fill with error object (code in the NSCocoaErrorDomain domain; cannot use HLSError here)
+        // Fill with error object (code in the NSCocoaErrorDomain domain)
         *pExistingError = [NSError errorWithDomain:NSCocoaErrorDomain 
                                               code:NSValidationMultipleErrorsError 
                                           userInfo:userInfo];

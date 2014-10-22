@@ -35,10 +35,4 @@
     return self;
 }
 
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithName:nil type:0];
-}
-
 @end

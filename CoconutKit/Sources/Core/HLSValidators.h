@@ -17,3 +17,9 @@
 + (BOOL)validateEmailAddress:(NSString *)emailAddress;
 
 @end
+
+@interface HLSValidators (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

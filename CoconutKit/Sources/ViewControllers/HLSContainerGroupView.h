@@ -50,3 +50,10 @@
 @property (nonatomic, readonly, strong) UIView *backView;
 
 @end
+
+@interface HLSContainerGroupView (UnavailableMethods)
+
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+
+@end

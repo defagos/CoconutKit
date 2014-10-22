@@ -8,7 +8,6 @@
 
 #import "HLSTaskOperation.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSTask+Friend.h"
 #import "HLSTaskGroup+Friend.h"
@@ -34,12 +33,6 @@
         self.callingThread = [NSThread currentThread];
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithTaskManager:nil task:nil];
 }
 
 #pragma mark Thread main function

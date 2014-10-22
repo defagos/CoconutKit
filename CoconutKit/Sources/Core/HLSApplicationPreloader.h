@@ -24,3 +24,9 @@
 - (void)preload;
 
 @end
+
+@interface HLSApplicationPreloader (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

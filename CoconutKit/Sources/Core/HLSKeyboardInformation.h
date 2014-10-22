@@ -49,3 +49,9 @@
 @property (nonatomic, readonly, assign) UIViewAnimationCurve animationCurve;
 
 @end
+
+@interface HLSKeyboardInformation (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

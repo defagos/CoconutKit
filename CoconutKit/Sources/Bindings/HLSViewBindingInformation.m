@@ -8,7 +8,6 @@
 
 #import "HLSViewBindingInformation.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
 #import "NSBundle+HLSExtensions.h"
@@ -54,12 +53,6 @@
         self.view = view;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithObject:nil keyPath:nil transformerName:nil view:nil];
 }
 
 #pragma mark Getting and setting values

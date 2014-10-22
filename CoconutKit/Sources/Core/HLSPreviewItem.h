@@ -15,3 +15,9 @@
 - (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL;
 
 @end
+
+@interface HLSPreviewItem (Unavailalble)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

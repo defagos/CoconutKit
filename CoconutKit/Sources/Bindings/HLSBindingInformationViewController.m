@@ -8,7 +8,6 @@
 
 #import "HLSBindingInformationViewController.h"
 
-#import "HLSAssert.h"
 #import "HLSInfoTableViewCell.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
@@ -95,12 +94,6 @@
         NSAssert([self.names count] == [self.objects count], @"Expect the same number of names and objects");
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithBindingInformation:nil];
 }
 
 #pragma mark View lifecycle

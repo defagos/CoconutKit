@@ -447,3 +447,9 @@ willHideViewController:(UIViewController *)viewController
 @property (nonatomic, readonly, assign) UIInterfaceOrientation displayedInterfaceOrientation;
 
 @end
+
+@interface HLSContainerStack (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

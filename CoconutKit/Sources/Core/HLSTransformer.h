@@ -73,3 +73,9 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
                  reverseBlock:(HLSReverseTransformerBlock)reverseBlock NS_DESIGNATED_INITIALIZER;
 
 @end
+
+@interface HLSBlockTransformer (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
