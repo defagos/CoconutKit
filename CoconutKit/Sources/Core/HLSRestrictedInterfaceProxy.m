@@ -10,12 +10,12 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "MAZeroingWeakRef.h"
+#import "HLSMAZeroingWeakRef.h"
 #import "NSObject+HLSExtensions.h"
 
 @interface HLSRestrictedInterfaceProxy ()
 
-@property (nonatomic, strong) MAZeroingWeakRef *targetZeroingWeakRef;
+@property (nonatomic, strong) HLSMAZeroingWeakRef *targetZeroingWeakRef;
 
 @end
 
@@ -58,7 +58,7 @@
         }
     }
     
-    self.targetZeroingWeakRef = [MAZeroingWeakRef refWithTarget:target];
+    self.targetZeroingWeakRef = [HLSMAZeroingWeakRef refWithTarget:target];
     _protocol = protocol;
     
     return self;

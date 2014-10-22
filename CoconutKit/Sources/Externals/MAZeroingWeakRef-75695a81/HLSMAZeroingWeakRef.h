@@ -1,5 +1,5 @@
 //
-//  MAZeroingWeakRef.h
+//  HLSMAZeroingWeakRef.h
 //  ZeroingWeakRef
 //
 //  Created by Michael Ash on 7/5/10.
@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MAZeroingWeakRef : NSObject
+@interface HLSMAZeroingWeakRef : NSObject
 {
     id _target;
     BOOL _nativeZWR;
@@ -52,22 +52,22 @@
 #define __has_feature(feature) 0
 #endif
 
-#define MAWeakVar(var)            __weak_ ## var
+#define HLSMAWeakVar(var)            __weak_ ## var
 
 #if __has_feature(objc_arc_weak)
 
-#define MAWeakDeclare(var)        __weak __typeof__((var)) MAWeakVar(var) = var
-#define MAWeakImport(var)         __typeof__((MAWeakVar(var))) var = MAWeakVar(var)
-#define MAWeakImportReturn(var)   MAWeakImport(var); do { if(var == nil) return; } while(NO)
+#define HLSMAWeakDeclare(var)        __weak __typeof__((var)) HLSMAWeakVar(var) = var
+#define HLSMAWeakImport(var)         __typeof__((HLSMAWeakVar(var))) var = HLSMAWeakVar(var)
+#define HLSMAWeakImportReturn(var)   HLSMAWeakImport(var); do { if(var == nil) return; } while(NO)
 
 #else
 
-#define MAWeakDeclare(var)        __typeof__((var)) MAWeakVar(var) = (id)[MAZeroingWeakRef refWithTarget:var]
-#define MAWeakImport(var)         __typeof__((MAWeakVar(var))) var = [(MAZeroingWeakRef *)MAWeakVar(var) target]
-#define MAWeakImportReturn(var)   MAWeakImport(var); do { if(var == nil) return; } while(NO)
+#define HLSMAWeakDeclare(var)        __typeof__((var)) HLSMAWeakVar(var) = (id)[HLSMAZeroingWeakRef refWithTarget:var]
+#define HLSMAWeakImport(var)         __typeof__((HLSMAWeakVar(var))) var = [(HLSMAZeroingWeakRef *)HLSMAWeakVar(var) target]
+#define HLSMAWeakImportReturn(var)   HLSMAWeakImport(var); do { if(var == nil) return; } while(NO)
 
 #endif
 
-#define MAWeakSelfDeclare()       MAWeakDeclare(self)
-#define MAWeakSelfImport()        MAWeakImport(self)
-#define MAWeakSelfImportReturn()  MAWeakImportReturn(self)
+#define HLSMAWeakSelfDeclare()       HLSMAWeakDeclare(self)
+#define HLSMAWeakSelfImport()        HLSMAWeakImport(self)
+#define HLSMAWeakSelfImportReturn()  HLSMAWeakImportReturn(self)

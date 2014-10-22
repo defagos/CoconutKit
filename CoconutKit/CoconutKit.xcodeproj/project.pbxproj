@@ -300,17 +300,17 @@
 		6FF3E6F015D2E4C900AB9A53 /* HLSTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E6EE15D2E4C800AB9A53 /* HLSTransition.m */; };
 		6FF74C74177D469B00BD846D /* HLSApplicationInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF74C72177D469B00BD846D /* HLSApplicationInformation.h */; };
 		6FF74C75177D469B00BD846D /* HLSApplicationInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF74C73177D469B00BD846D /* HLSApplicationInformation.m */; };
-		6FFAB76419DD8DA800A91997 /* MANotificationCenterAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75919DD8DA800A91997 /* MANotificationCenterAdditions.h */; };
-		6FFAB76519DD8DA800A91997 /* MANotificationCenterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB75A19DD8DA800A91997 /* MANotificationCenterAdditions.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
-		6FFAB76619DD8DA800A91997 /* MAWeakArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75B19DD8DA800A91997 /* MAWeakArray.h */; };
-		6FFAB76719DD8DA800A91997 /* MAWeakArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB75C19DD8DA800A91997 /* MAWeakArray.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
-		6FFAB76819DD8DA800A91997 /* MAWeakDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75D19DD8DA800A91997 /* MAWeakDictionary.h */; };
-		6FFAB76919DD8DA800A91997 /* MAWeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB75E19DD8DA800A91997 /* MAWeakDictionary.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
-		6FFAB76A19DD8DA800A91997 /* MAZeroingWeakProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75F19DD8DA800A91997 /* MAZeroingWeakProxy.h */; };
-		6FFAB76B19DD8DA800A91997 /* MAZeroingWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB76019DD8DA800A91997 /* MAZeroingWeakProxy.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
-		6FFAB76C19DD8DA800A91997 /* MAZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB76119DD8DA800A91997 /* MAZeroingWeakRef.h */; };
-		6FFAB76D19DD8DA800A91997 /* MAZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB76219DD8DA800A91997 /* MAZeroingWeakRef.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
-		6FFAB76E19DD8DA800A91997 /* MAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB76319DD8DA800A91997 /* MAZeroingWeakRefNativeZWRNotAllowedTable.h */; };
+		6FFAB76419DD8DA800A91997 /* HLSMANotificationCenterAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75919DD8DA800A91997 /* HLSMANotificationCenterAdditions.h */; };
+		6FFAB76519DD8DA800A91997 /* HLSMANotificationCenterAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB75A19DD8DA800A91997 /* HLSMANotificationCenterAdditions.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		6FFAB76619DD8DA800A91997 /* HLSMAWeakArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75B19DD8DA800A91997 /* HLSMAWeakArray.h */; };
+		6FFAB76719DD8DA800A91997 /* HLSMAWeakArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB75C19DD8DA800A91997 /* HLSMAWeakArray.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		6FFAB76819DD8DA800A91997 /* HLSMAWeakDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75D19DD8DA800A91997 /* HLSMAWeakDictionary.h */; };
+		6FFAB76919DD8DA800A91997 /* HLSMAWeakDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB75E19DD8DA800A91997 /* HLSMAWeakDictionary.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		6FFAB76A19DD8DA800A91997 /* HLSMAZeroingWeakProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB75F19DD8DA800A91997 /* HLSMAZeroingWeakProxy.h */; };
+		6FFAB76B19DD8DA800A91997 /* HLSMAZeroingWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB76019DD8DA800A91997 /* HLSMAZeroingWeakProxy.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		6FFAB76C19DD8DA800A91997 /* HLSMAZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB76119DD8DA800A91997 /* HLSMAZeroingWeakRef.h */; };
+		6FFAB76D19DD8DA800A91997 /* HLSMAZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB76219DD8DA800A91997 /* HLSMAZeroingWeakRef.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
+		6FFAB76E19DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB76319DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h */; };
 		AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -625,17 +625,17 @@
 		6FF3E6EE15D2E4C800AB9A53 /* HLSTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransition.m; sourceTree = "<group>"; };
 		6FF74C72177D469B00BD846D /* HLSApplicationInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationInformation.h; sourceTree = "<group>"; };
 		6FF74C73177D469B00BD846D /* HLSApplicationInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSApplicationInformation.m; sourceTree = "<group>"; };
-		6FFAB75919DD8DA800A91997 /* MANotificationCenterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MANotificationCenterAdditions.h; sourceTree = "<group>"; };
-		6FFAB75A19DD8DA800A91997 /* MANotificationCenterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MANotificationCenterAdditions.m; sourceTree = "<group>"; };
-		6FFAB75B19DD8DA800A91997 /* MAWeakArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAWeakArray.h; sourceTree = "<group>"; };
-		6FFAB75C19DD8DA800A91997 /* MAWeakArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAWeakArray.m; sourceTree = "<group>"; };
-		6FFAB75D19DD8DA800A91997 /* MAWeakDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAWeakDictionary.h; sourceTree = "<group>"; };
-		6FFAB75E19DD8DA800A91997 /* MAWeakDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAWeakDictionary.m; sourceTree = "<group>"; };
-		6FFAB75F19DD8DA800A91997 /* MAZeroingWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAZeroingWeakProxy.h; sourceTree = "<group>"; };
-		6FFAB76019DD8DA800A91997 /* MAZeroingWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAZeroingWeakProxy.m; sourceTree = "<group>"; };
-		6FFAB76119DD8DA800A91997 /* MAZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAZeroingWeakRef.h; sourceTree = "<group>"; };
-		6FFAB76219DD8DA800A91997 /* MAZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAZeroingWeakRef.m; sourceTree = "<group>"; };
-		6FFAB76319DD8DA800A91997 /* MAZeroingWeakRefNativeZWRNotAllowedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAZeroingWeakRefNativeZWRNotAllowedTable.h; sourceTree = "<group>"; };
+		6FFAB75919DD8DA800A91997 /* HLSMANotificationCenterAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMANotificationCenterAdditions.h; sourceTree = "<group>"; };
+		6FFAB75A19DD8DA800A91997 /* HLSMANotificationCenterAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMANotificationCenterAdditions.m; sourceTree = "<group>"; };
+		6FFAB75B19DD8DA800A91997 /* HLSMAWeakArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMAWeakArray.h; sourceTree = "<group>"; };
+		6FFAB75C19DD8DA800A91997 /* HLSMAWeakArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMAWeakArray.m; sourceTree = "<group>"; };
+		6FFAB75D19DD8DA800A91997 /* HLSMAWeakDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMAWeakDictionary.h; sourceTree = "<group>"; };
+		6FFAB75E19DD8DA800A91997 /* HLSMAWeakDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMAWeakDictionary.m; sourceTree = "<group>"; };
+		6FFAB75F19DD8DA800A91997 /* HLSMAZeroingWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMAZeroingWeakProxy.h; sourceTree = "<group>"; };
+		6FFAB76019DD8DA800A91997 /* HLSMAZeroingWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMAZeroingWeakProxy.m; sourceTree = "<group>"; };
+		6FFAB76119DD8DA800A91997 /* HLSMAZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMAZeroingWeakRef.h; sourceTree = "<group>"; };
+		6FFAB76219DD8DA800A91997 /* HLSMAZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMAZeroingWeakRef.m; sourceTree = "<group>"; };
+		6FFAB76319DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCoconutKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoconutKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1132,17 +1132,17 @@
 		6FFAB75819DD8DA800A91997 /* MAZeroingWeakRef-75695a81 */ = {
 			isa = PBXGroup;
 			children = (
-				6FFAB75919DD8DA800A91997 /* MANotificationCenterAdditions.h */,
-				6FFAB75A19DD8DA800A91997 /* MANotificationCenterAdditions.m */,
-				6FFAB75B19DD8DA800A91997 /* MAWeakArray.h */,
-				6FFAB75C19DD8DA800A91997 /* MAWeakArray.m */,
-				6FFAB75D19DD8DA800A91997 /* MAWeakDictionary.h */,
-				6FFAB75E19DD8DA800A91997 /* MAWeakDictionary.m */,
-				6FFAB75F19DD8DA800A91997 /* MAZeroingWeakProxy.h */,
-				6FFAB76019DD8DA800A91997 /* MAZeroingWeakProxy.m */,
-				6FFAB76119DD8DA800A91997 /* MAZeroingWeakRef.h */,
-				6FFAB76219DD8DA800A91997 /* MAZeroingWeakRef.m */,
-				6FFAB76319DD8DA800A91997 /* MAZeroingWeakRefNativeZWRNotAllowedTable.h */,
+				6FFAB75919DD8DA800A91997 /* HLSMANotificationCenterAdditions.h */,
+				6FFAB75A19DD8DA800A91997 /* HLSMANotificationCenterAdditions.m */,
+				6FFAB75B19DD8DA800A91997 /* HLSMAWeakArray.h */,
+				6FFAB75C19DD8DA800A91997 /* HLSMAWeakArray.m */,
+				6FFAB75D19DD8DA800A91997 /* HLSMAWeakDictionary.h */,
+				6FFAB75E19DD8DA800A91997 /* HLSMAWeakDictionary.m */,
+				6FFAB75F19DD8DA800A91997 /* HLSMAZeroingWeakProxy.h */,
+				6FFAB76019DD8DA800A91997 /* HLSMAZeroingWeakProxy.m */,
+				6FFAB76119DD8DA800A91997 /* HLSMAZeroingWeakRef.h */,
+				6FFAB76219DD8DA800A91997 /* HLSMAZeroingWeakRef.m */,
+				6FFAB76319DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h */,
 			);
 			path = "MAZeroingWeakRef-75695a81";
 			sourceTree = "<group>";
@@ -1180,7 +1180,7 @@
 				6FADE5B914BA0494007EE121 /* NSBundle+HLSExtensions.h in Headers */,
 				6FADE5BB14BA0494007EE121 /* NSCalendar+HLSExtensions.h in Headers */,
 				6F0CA8EE19DD934300CBE2E1 /* UITextView+HLSViewBinding.h in Headers */,
-				6FFAB76819DD8DA800A91997 /* MAWeakDictionary.h in Headers */,
+				6FFAB76819DD8DA800A91997 /* HLSMAWeakDictionary.h in Headers */,
 				6FADE5BD14BA0494007EE121 /* NSData+HLSExtensions.h in Headers */,
 				6FB007DD1952D09B0082D915 /* HLSGeometry.h in Headers */,
 				6FADE5BF14BA0494007EE121 /* NSDate+HLSExtensions.h in Headers */,
@@ -1198,7 +1198,7 @@
 				6FADE5D114BA0494007EE121 /* UIImage+HLSExtensions.h in Headers */,
 				6FADE5D314BA0494007EE121 /* HLSManagedObjectCopying.h in Headers */,
 				6FADE5D414BA0494007EE121 /* HLSManagedTextFieldValidator.h in Headers */,
-				6FFAB76A19DD8DA800A91997 /* MAZeroingWeakProxy.h in Headers */,
+				6FFAB76A19DD8DA800A91997 /* HLSMAZeroingWeakProxy.h in Headers */,
 				6FADE5D614BA0494007EE121 /* HLSModelManager.h in Headers */,
 				6FADE5D814BA0494007EE121 /* NSManagedObject+HLSExtensions.h in Headers */,
 				6FADE5DA14BA0494007EE121 /* NSManagedObject+HLSValidation.h in Headers */,
@@ -1214,7 +1214,7 @@
 				6FADE5E814BA0494007EE121 /* HLSTaskOperation.h in Headers */,
 				6FADE5EC14BA0494007EE121 /* HLSCursor.h in Headers */,
 				6FADE5EE14BA0494007EE121 /* HLSSlideshow.h in Headers */,
-				6FFAB76E19DD8DA800A91997 /* MAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */,
+				6FFAB76E19DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */,
 				6FADE5F014BA0494007EE121 /* HLSNibView.h in Headers */,
 				6FADE5F214BA0494007EE121 /* HLSSubtitleTableViewCell.h in Headers */,
 				6FADE5F414BA0494007EE121 /* HLSTableViewCell+Protected.h in Headers */,
@@ -1230,7 +1230,7 @@
 				6FADE60F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h in Headers */,
 				6F0CA8E219DD934300CBE2E1 /* UIProgressView+HLSViewBinding.h in Headers */,
 				6F0CA8DC19DD934300CBE2E1 /* HLSBindingInformationViewController.h in Headers */,
-				6FFAB76619DD8DA800A91997 /* MAWeakArray.h in Headers */,
+				6FFAB76619DD8DA800A91997 /* HLSMAWeakArray.h in Headers */,
 				6F0CA8F219DD934300CBE2E1 /* UIView+HLSViewBindingFriend.h in Headers */,
 				6F0CA8F019DD934300CBE2E1 /* UIView+HLSViewBinding.h in Headers */,
 				6FADE61314BA0494007EE121 /* HLSViewController.h in Headers */,
@@ -1244,7 +1244,7 @@
 				6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */,
 				6FDDEC1A1529778E00CED462 /* UITextField+HLSExtensions.h in Headers */,
 				6FDDEC1E1529780200CED462 /* UITextView+HLSExtensions.h in Headers */,
-				6FFAB76C19DD8DA800A91997 /* MAZeroingWeakRef.h in Headers */,
+				6FFAB76C19DD8DA800A91997 /* HLSMAZeroingWeakRef.h in Headers */,
 				6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */,
 				6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */,
 				6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */,
@@ -1283,7 +1283,7 @@
 				6F255E411712C360007BFC96 /* HLSConnection.h in Headers */,
 				6F255E531712E85F007BFC96 /* HLSFakeConnection.h in Headers */,
 				6FC8EDB3176EC866000B3BE7 /* NSNumber+HLSExtensions.h in Headers */,
-				6FFAB76419DD8DA800A91997 /* MANotificationCenterAdditions.h in Headers */,
+				6FFAB76419DD8DA800A91997 /* HLSMANotificationCenterAdditions.h in Headers */,
 				6FF74C74177D469B00BD846D /* HLSApplicationInformation.h in Headers */,
 				6FA8913E179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.h in Headers */,
 				6F10E388179FFE2B00BFEF42 /* HLSViewTouchDetector.h in Headers */,
@@ -1474,7 +1474,7 @@
 				6F0CA8DF19DD934300CBE2E1 /* HLSViewBindingInformation.m in Sources */,
 				6FADE5B414BA0494007EE121 /* HLSValidators.m in Sources */,
 				6FADE5B614BA0494007EE121 /* NSArray+HLSExtensions.m in Sources */,
-				6FFAB76B19DD8DA800A91997 /* MAZeroingWeakProxy.m in Sources */,
+				6FFAB76B19DD8DA800A91997 /* HLSMAZeroingWeakProxy.m in Sources */,
 				6FADE5B814BA0494007EE121 /* NSBundle+HLSDynamicLocalization.m in Sources */,
 				6F0CA8F519DD934300CBE2E1 /* UIViewController+HLSViewBinding.m in Sources */,
 				6FADE5BA14BA0494007EE121 /* NSBundle+HLSExtensions.m in Sources */,
@@ -1488,8 +1488,8 @@
 				6F0CA8F119DD934300CBE2E1 /* UIView+HLSViewBinding.m in Sources */,
 				6FADE5C614BA0494007EE121 /* NSError+HLSExtensions.m in Sources */,
 				6FAD1BD019F5287A00EA435A /* HLSGoogleChromeActivity.m in Sources */,
-				6FFAB76919DD8DA800A91997 /* MAWeakDictionary.m in Sources */,
-				6FFAB76519DD8DA800A91997 /* MANotificationCenterAdditions.m in Sources */,
+				6FFAB76919DD8DA800A91997 /* HLSMAWeakDictionary.m in Sources */,
+				6FFAB76519DD8DA800A91997 /* HLSMANotificationCenterAdditions.m in Sources */,
 				6F0CA8F819DD934300CBE2E1 /* UIWebView+HLSViewBinding.m in Sources */,
 				6F0CA8DD19DD934300CBE2E1 /* HLSBindingInformationViewController.m in Sources */,
 				6FADE5C814BA0494007EE121 /* NSObject+HLSExtensions.m in Sources */,
@@ -1517,7 +1517,7 @@
 				6FADE5FE14BA0494007EE121 /* HLSValue1TableViewCell.m in Sources */,
 				6FADE60014BA0494007EE121 /* HLSValue2TableViewCell.m in Sources */,
 				6FADE60414BA0494007EE121 /* UITextField+HLSValidation.m in Sources */,
-				6FFAB76719DD8DA800A91997 /* MAWeakArray.m in Sources */,
+				6FFAB76719DD8DA800A91997 /* HLSMAWeakArray.m in Sources */,
 				6FADE60614BA0494007EE121 /* UIView+HLSExtensions.m in Sources */,
 				6FADE60814BA0494007EE121 /* HLSContainerContent.m in Sources */,
 				6FADE60A14BA0494007EE121 /* HLSPlaceholderViewController.m in Sources */,
@@ -1564,7 +1564,7 @@
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,
 				6F23DB2816B3E84200C085CE /* UIView+HLSRuntimeAttributes.m in Sources */,
-				6FFAB76D19DD8DA800A91997 /* MAZeroingWeakRef.m in Sources */,
+				6FFAB76D19DD8DA800A91997 /* HLSMAZeroingWeakRef.m in Sources */,
 				6FAB922A16DA7F9100599256 /* HLSFileURLConnection.m in Sources */,
 				6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */,
 				6F0CA8E919DD934300CBE2E1 /* UISwitch+HLSViewBinding.m in Sources */,
@@ -1615,6 +1615,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/CoconutKit.dst;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1633,6 +1634,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DSTROOT = /tmp/CoconutKit.dst;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-Prefix.pch";

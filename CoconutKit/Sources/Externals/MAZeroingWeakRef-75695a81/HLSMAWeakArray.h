@@ -1,5 +1,5 @@
 //
-//  MAWeakDictionary.h
+//  MAWeakArray.h
 //  ZeroingWeakRef
 //
 //  Created by Mike Ash on 7/13/10.
@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface MAWeakDictionary : NSMutableDictionary
+@interface HLSMAWeakArray : NSMutableArray
 {
-    NSMutableDictionary *_dict;
+    NSMutableArray *_weakRefs;
 }
 
 @end

@@ -6,11 +6,11 @@
 //  Copyright 2010 Michael Ash. All rights reserved.
 //
 
-#import "MAZeroingWeakProxy.h"
+#import "HLSMAZeroingWeakProxy.h"
 
-#import "MAZeroingWeakRef.h"
+#import "HLSMAZeroingWeakRef.h"
 
-@implementation MAZeroingWeakProxy
+@implementation HLSMAZeroingWeakProxy
 
 + (id)proxyWithTarget: (id)target
 {
@@ -21,7 +21,7 @@
 {
     // stash the class of the target so we can get method signatures after it goes away
     _targetClass = [target class];
-    _weakRef = [[MAZeroingWeakRef alloc] initWithTarget: target];
+    _weakRef = [[HLSMAZeroingWeakRef alloc] initWithTarget: target];
     return self;
 }
 

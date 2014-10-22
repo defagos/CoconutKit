@@ -20,12 +20,23 @@ Pod::Spec.new do |s|
                   * Custom controls
                   * ... and much more!
                   DESC
-  
-  s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
+
   s.prefix_header_file = 'CoconutKit/CoconutKit-Prefix.pch'
-  
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit', 'WebKit'
+
+  # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
+  non_arc_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}'
+
+  # ARC source files
   s.requires_arc = true
+  s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
+  s.exclude_files = non_arc_source_files
+
+  # Non-ARC source files
+  s.subspec 'fno-objc-arc' do |source_file|
+    source_file.requires_arc = false
+    source_file.source_files = non_arc_source_files
+  end
 
   # Process the publicHeaders.txt file listing public headers to generate a public header directory as well as a global header file
   # TODO: An additional CocoaPods temporary fix has been added, see https://github.com/CocoaPods/CocoaPods/issues/1653.
