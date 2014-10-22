@@ -72,7 +72,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)dealloc
 {
-    [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+    @try {
+        [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+    }
+    @catch (NSException *exception) {}
 }
 
 #pragma mark Accessors and mutators
