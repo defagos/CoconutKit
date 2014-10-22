@@ -11,7 +11,7 @@
 /**
  * A web browser with standard features (navigation buttons, link sharing, etc.)
  */
-@interface HLSWebViewController : HLSViewController <MFMailComposeViewControllerDelegate, UIActionSheetDelegate, UIWebViewDelegate>
+@interface HLSWebViewController : HLSViewController <UIPopoverControllerDelegate, UIWebViewDelegate, WKNavigationDelegate>
 
 /**
  * Create the browser using the specified request

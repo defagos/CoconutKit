@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <style>
+            body {
+                -webkit-user-select: none;
+                -webkit-text-size-adjust: none;
+                font-family: 'Helvetica Neue';
+                font-size: 15px;
+                color: #808895;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                display: table;
+            }
+
+            p {
+                display: table-cell;
+                vertical-align: middle;
+                text-align:center;
+                word-wrap: break-word;
+                overflow: hidden;
+            }
+
+            .error {
+                display: block;
+                width: 40%;
+                margin: 2em auto 0 auto;
+            }
+
+            .icon {
+                display: block;
+                margin:0 auto;
+                width: 160px;
+                height: 160px;
+                background-image: url('./EmbossedIcon~ipad.png');
+            }
+
+            @media screen and (-webkit-device-pixel-ratio:2) {
+                body {
+                    font-family: 'Helvetica Neue';
+                }
+
+                .icon {
+                    background-image: url('./EmbossedIcon@2x~ipad.png');
+                    -webkit-background-size: 160px 160px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <p>
+            <span class="icon"></span>
+            <span class="error" id="localizedErrorDescription"></span>
+            </p>
+        </div>
+    </body>
+</html>

@@ -620,7 +620,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                 
                 case ViewControllersDemoIndexWebViewController: {
-                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://about.me/defagos"]];
+                    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.apple.com"]];
                     demoViewController = [[HLSWebViewController alloc] initWithRequest:request];
                     break;
                 }
