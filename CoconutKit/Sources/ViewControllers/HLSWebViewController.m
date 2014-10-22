@@ -156,8 +156,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     // TODO: Remove when CoconutKit requires at least iOS 8. Improve using new WKWebView abilities
     Class webViewClass = [WKWebView class] ?: [UIWebView class];
     
-    CGRect frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
-    WKWebView *webView = [[webViewClass alloc] initWithFrame:frame];
+    WKWebView *webView = [[webViewClass alloc] initWithFrame:self.view.bounds];
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     webView.alpha = 0.f;
     if ([WKWebView class]) {
@@ -171,10 +170,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     [webView loadRequest:self.request];
     
+    // Scroll view content insets are adjusted automatically, but only for the scroll view at index 0. This
+    // is the main content web view, we therefore put it at index 0
     [self.view insertSubview:webView atIndex:0];
     self.webView = webView;
     
-    WKWebView *errorWebView = [[webViewClass alloc] initWithFrame:frame];
+    WKWebView *errorWebView = [[webViewClass alloc] initWithFrame:self.view.bounds];
     errorWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     errorWebView.alpha = 0.f;
     if ([WKWebView class]) {
@@ -188,7 +189,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
     [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
     
-    [self.view insertSubview:errorWebView atIndex:0];
+    // No automatic scroll inset adjustment, but not a problem since the error view displays static centered content
+    [self.view insertSubview:errorWebView atIndex:1];
     self.errorWebView = errorWebView;
     
     self.progressView.alpha = 0.f;
@@ -199,7 +201,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [super viewWillAppear:animated];
     
     [self updateInterface];
-    [self layoutForInterfaceOrientation:self.interfaceOrientation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -215,15 +216,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [super viewWillLayoutSubviews];
     
-    // Scroll view content insets are adjusted automatically, but only for the scroll view at index 0 (here the error web
-    // view). Apply the same content insets to the main web view
-    self.webView.scrollView.contentInset = self.errorWebView.scrollView.contentInset;
-    
-    // Position the progress view under the top layout guide when wrapped in a navigation controller
-    self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
-                                         self.navigationController ? self.topLayoutGuide.length : 0.f,
-                                         CGRectGetWidth(self.progressView.frame),
-                                         CGRectGetHeight(self.progressView.frame));
+    [self layoutForInterfaceOrientation:self.interfaceOrientation];
 }
 
 #pragma mark Orientation management
@@ -259,10 +252,25 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    // Position the progress view under the top layout guide when wrapped in a navigation controller
+    self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
+                                         self.navigationController ? self.topLayoutGuide.length : 0.f,
+                                         CGRectGetWidth(self.progressView.frame),
+                                         CGRectGetHeight(self.progressView.frame));
+    
     // Adjust the toolbar height depending on the screen orientation
     CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
     self.toolbar.frame = (CGRect){CGPointMake(0.f, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
-    self.webView.frame = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.toolbar.frame))};
+    
+    // Properly position the vertical scroll bar to avoid the bottom toolbar
+    UIEdgeInsets contentInset = self.webView.scrollView.contentInset;
+    contentInset = UIEdgeInsetsMake(contentInset.top,
+                                    contentInset.left,
+                                    toolbarSize.height,
+                                    contentInset.right);
+    
+    self.webView.scrollView.contentInset = contentInset;
+    self.webView.scrollView.scrollIndicatorInsets = contentInset;
 }
 
 - (void)updateInterface
