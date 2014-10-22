@@ -43,7 +43,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame])) {
+    if (self = [super initWithFrame:frame]) {
         [self hlsCursorInit];
     }
     return self;
@@ -51,7 +51,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self hlsCursorInit];
     }
     return self;

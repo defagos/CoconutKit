@@ -14,7 +14,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         // Make cell taller than default size (if not altered, 44.f)
         self.frame = CGRectMake(self.contentView.frame.origin.x,
                                 self.contentView.frame.origin.y,

@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         // To be able to test modal presentation contexts, we here make the placeholder view controller display those modal view controllers
         // with the UIModalPresentationCurrentContext presentation style.        if ([self respondsToSelector:@selector(setDefinesPresentationContext:)]) {
         self.definesPresentationContext = YES;

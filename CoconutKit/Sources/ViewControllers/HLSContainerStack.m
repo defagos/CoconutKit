@@ -52,7 +52,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                        behavior:(HLSContainerStackBehavior)behavior
                                        capacity:(NSUInteger)capacity
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! containerViewController) {
             HLSLoggerError(@"Missing container view controller");
             return nil;

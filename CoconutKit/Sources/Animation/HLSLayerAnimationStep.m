@@ -48,7 +48,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];        
     }
     return self;

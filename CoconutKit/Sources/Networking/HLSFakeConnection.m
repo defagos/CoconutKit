@@ -21,7 +21,7 @@
 
 - (instancetype)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
-    if ((self = [super initWithCompletionBlock:completionBlock])) {
+    if (self = [super initWithCompletionBlock:completionBlock]) {
         self.responseObject = responseObject;
         self.error = error;
     }

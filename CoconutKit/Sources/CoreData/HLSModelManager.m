@@ -233,7 +233,7 @@
                           fileManager:(HLSFileManager *)fileManager
                               options:(NSDictionary *)options
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! fileManager) {
             fileManager = [HLSStandardFileManager defaultManager];
         }

@@ -31,7 +31,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         [self hlsWizardViewControllerInit];
     }
     return self;
@@ -39,7 +39,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self hlsWizardViewControllerInit];
     }
     return self;

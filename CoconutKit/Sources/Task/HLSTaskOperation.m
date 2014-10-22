@@ -27,7 +27,7 @@
 
 - (instancetype)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.taskManager = taskManager;
         self.task = task;
         self.callingThread = [NSThread currentThread];

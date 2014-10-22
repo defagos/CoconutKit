@@ -23,7 +23,7 @@
 {
     NSAssert(beginNotificationName && endNotificationName, @"Notifications required");
     
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.view = view;
         
         // Create a gesture recognizer capturing taps on the whole window

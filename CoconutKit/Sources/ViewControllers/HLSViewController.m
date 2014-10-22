@@ -22,7 +22,7 @@
 
 - (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
-    if ((self = [super initWithNibName:nibName bundle:bundle])) {
+    if (self = [super initWithNibName:nibName bundle:bundle]) {
         [self hlsViewControllerInit];
     }
     return self;
@@ -30,7 +30,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self hlsViewControllerInit];
     }
     return self;

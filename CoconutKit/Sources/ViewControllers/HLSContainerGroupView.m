@@ -18,7 +18,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView
 {
-    if ((self = [super initWithFrame:frame])) {
+    if (self = [super initWithFrame:frame]) {
         if (! frontContentView) {
             HLSLoggerError(@"A front content view is mandatory");
             return nil;

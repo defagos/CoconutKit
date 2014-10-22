@@ -29,7 +29,7 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         [self hlsPlaceholderViewControllerInit];
     }
     return self;
@@ -37,7 +37,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self hlsPlaceholderViewControllerInit];
     }
     return self;

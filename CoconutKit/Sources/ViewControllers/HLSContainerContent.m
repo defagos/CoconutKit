@@ -74,7 +74,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
                        transitionClass:(Class)transitionClass
                               duration:(NSTimeInterval)duration
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! viewController) {
             HLSLoggerError(@"A view controller is mandatory");
             return nil;

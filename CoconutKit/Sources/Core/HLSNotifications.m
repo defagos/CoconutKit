@@ -65,7 +65,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         _networkActivityCount = 0;
     }
     return self;
@@ -111,7 +111,7 @@
 
 - (instancetype)initWithNotificationName:(NSString *)notificationName forObject:(id)object
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.notificationName = notificationName;
         self.object = object;
     }
@@ -141,7 +141,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.objectToNotificationMap = [NSMutableDictionary dictionary];
     }
     return self;

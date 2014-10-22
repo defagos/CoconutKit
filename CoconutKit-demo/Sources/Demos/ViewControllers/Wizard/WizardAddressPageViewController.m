@@ -31,7 +31,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.personInformation = [[PersonInformation allObjects] firstObject];
         NSAssert(self.personInformation != nil, @"A person must be available");
     }

@@ -38,7 +38,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame])) {
+    if (self = [super initWithFrame:frame]) {
         [self hlsSlideshowInit];
     }
     return self;
@@ -46,7 +46,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self hlsSlideshowInit];
     }
     return self;

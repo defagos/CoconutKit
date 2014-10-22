@@ -22,7 +22,7 @@
 
 - (instancetype)initWithApplication:(UIApplication *)application
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! application) {
             HLSLoggerError(@"Missing application");
             return nil;

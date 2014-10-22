@@ -31,7 +31,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 - (instancetype)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         [self parseText:text];
         
         self.tableName = tableName;

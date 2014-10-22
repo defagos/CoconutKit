@@ -31,7 +31,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         // Default: No change
         self.scaleParameters = HLSVector2Make(1.f, 1.f);
         self.translationParameters = HLSVector2Make(0.f, 0.f);

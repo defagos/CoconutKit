@@ -28,7 +28,7 @@
 
 - (instancetype)initWithName:(NSString *)name type:(DeviceType)type
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.name = name;
         self.type = type;
     }

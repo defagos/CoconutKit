@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         UIViewController *rootViewController = [[LifeCycleTestViewController alloc] init];
         HLSStackController *stackController = [[HLSStackController alloc] initWithRootViewController:rootViewController];
         stackController.delegate = self;

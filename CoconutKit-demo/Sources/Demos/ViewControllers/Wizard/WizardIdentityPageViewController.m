@@ -35,7 +35,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         // Only one person in the DB. If does not exist yet, create it
         PersonInformation *personInformation = [[PersonInformation allObjects] firstObject];
         if (! personInformation) {

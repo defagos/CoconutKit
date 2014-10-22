@@ -33,7 +33,7 @@
 
 - (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.completionBlock = completionBlock;
         
         self.childConnections = [NSMutableArray array];

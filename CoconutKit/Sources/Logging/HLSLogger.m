@@ -57,7 +57,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 - (instancetype)initWithLogDirectoryPath:(NSString *)logDirectoryPath
 {
-	if ((self = [super init])) {
+	if (self = [super init]) {
         if (! [logDirectoryPath isFilled]) {
             NSLog(@"A log directory is mandatory");
             return nil;

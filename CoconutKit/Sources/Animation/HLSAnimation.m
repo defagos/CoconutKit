@@ -82,7 +82,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (instancetype)initWithAnimationSteps:(NSArray *)animationSteps
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! animationSteps) {
             self.animationSteps = @[];
         }

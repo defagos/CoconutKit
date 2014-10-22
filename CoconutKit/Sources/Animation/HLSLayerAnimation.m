@@ -54,7 +54,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         // Default: No change
         self.rotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
         self.scaleParameters = HLSVector3Make(1.f, 1.f, 1.f);

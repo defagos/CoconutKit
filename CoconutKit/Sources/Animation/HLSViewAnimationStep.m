@@ -26,7 +26,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.curve = UIViewAnimationCurveEaseInOut;        
     }
     return self;

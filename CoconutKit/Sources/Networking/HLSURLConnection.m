@@ -22,7 +22,7 @@
 
 - (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
-    if ((self = [super initWithCompletionBlock:completionBlock])) {
+    if (self = [super initWithCompletionBlock:completionBlock]) {
         if (! request) {
             HLSLoggerError(@"Missing request");
             return nil;

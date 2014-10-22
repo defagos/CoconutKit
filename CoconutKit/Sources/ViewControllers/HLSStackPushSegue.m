@@ -25,7 +25,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 
 - (instancetype)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination
 {
-    if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
+    if (self = [super initWithIdentifier:identifier source:source destination:destination]) {
         self.transitionClass = [HLSTransitionNone class];
         self.duration = kAnimationTransitionDefaultDuration;
         self.animated = YES;
@@ -82,7 +82,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
                        destination:(UIViewController *)destination
                    transitionClass:(Class)transitionClass
 {
-    if ((self = [super initWithIdentifier:identifier source:source destination:destination])) {
+    if (self = [super initWithIdentifier:identifier source:source destination:destination]) {
         self.transitionClass = transitionClass;
         self.duration = kAnimationTransitionDefaultDuration;
         self.animated = YES;

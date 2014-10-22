@@ -34,7 +34,7 @@ static HLSKeyboardInformation *s_instance = nil;
 
 - (instancetype)initWithUserInfo:(NSDictionary *)userInfo
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.beginFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
         self.endFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
         self.animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];

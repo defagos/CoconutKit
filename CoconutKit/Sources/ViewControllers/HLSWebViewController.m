@@ -64,7 +64,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (instancetype)initWithRequest:(NSURLRequest *)request
 {
-    if ((self = [super initWithBundle:[NSBundle coconutKitBundle]])) {
+    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.request = request;
     }
     return self;

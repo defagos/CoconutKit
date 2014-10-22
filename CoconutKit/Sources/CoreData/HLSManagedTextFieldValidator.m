@@ -33,7 +33,7 @@
                         formatter:(NSFormatter *)formatter
                validationDelegate:(id<HLSTextFieldValidationDelegate>)validationDelegate
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         // Sanity check
         if (! managedObject || ! fieldName) {
             HLSLoggerError(@"Missing managed object or field name");
