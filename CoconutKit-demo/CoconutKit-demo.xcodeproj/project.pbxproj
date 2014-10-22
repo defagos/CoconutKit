@@ -103,6 +103,7 @@
 		6F2B30EC1929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30C41929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m */; };
 		6F2B30F11929BF74003D4C2C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30F01929BF74003D4C2C /* main.m */; };
 		6F3569AD19D59A68000CADE2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAE19D2E7920021B95D /* Localizable.strings */; };
+		6F41BB6C19F78D6600CE9C3E /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F41BB6819F78D4400CE9C3E /* NSBundle+HLSDynamicLocalizationTestCase.m */; };
 		6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */; };
 		6F468CB019D2E7920021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
@@ -610,6 +611,8 @@
 		6F2B30C41929BE4A003D4C2C /* UIView+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F2B30EE1929BF10003D4C2C /* CoconutKit-tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-tests-Info.plist"; sourceTree = "<group>"; };
 		6F2B30F01929BF74003D4C2C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6F41BB6719F78D4400CE9C3E /* NSBundle+HLSDynamicLocalizationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSDynamicLocalizationTestCase.h"; sourceTree = "<group>"; };
+		6F41BB6819F78D4400CE9C3E /* NSBundle+HLSDynamicLocalizationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalizationTestCase.m"; sourceTree = "<group>"; };
 		6F41D2FC19D2987800E8681A /* WizardDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardDemoViewController.xib; sourceTree = "<group>"; };
 		6F468CAD19D2E7920021B95D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DemoTable.strings; sourceTree = SOURCE_ROOT; };
 		6F468CAF19D2E7920021B95D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
@@ -1073,6 +1076,8 @@
 				6F2B30851929BE4A003D4C2C /* HLSValidatorsTestCase.m */,
 				6F2B30881929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.h */,
 				6F2B30891929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m */,
+				6F41BB6719F78D4400CE9C3E /* NSBundle+HLSDynamicLocalizationTestCase.h */,
+				6F41BB6819F78D4400CE9C3E /* NSBundle+HLSDynamicLocalizationTestCase.m */,
 				6F2B308A1929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.h */,
 				6F2B308B1929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.m */,
 				6F2B308C1929BE4A003D4C2C /* NSData+HLSExtensionsTestCase.h */,
@@ -2340,6 +2345,7 @@
 				6F2B30E81929BE4A003D4C2C /* _House.m in Sources */,
 				6F2B30C71929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */,
 				6F2B30DF1929BE4A003D4C2C /* BankAccount.m in Sources */,
+				6F41BB6C19F78D6600CE9C3E /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */,
 				6F2B30E31929BE4A003D4C2C /* _AbstractClassA.m in Sources */,
 				6F2B30D51929BE4A003D4C2C /* NSDictionary+HLSExtensionsTestCase.m in Sources */,
 				6F2B30E21929BE4A003D4C2C /* ConcreteSubclassC.m in Sources */,

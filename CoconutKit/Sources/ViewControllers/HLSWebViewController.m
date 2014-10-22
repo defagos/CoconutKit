@@ -311,6 +311,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     // Error information is filled in the CFNetwork layer and escapes control of CoconutKit dynamic localization mechanism.
     // Fix by applying dynamic localization based on the error code and escape properly
     NSString *localizedEscapedDescription = [HLSLocalizedDescriptionForCFNetworkError(self.currentError.code) stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+    if ([localizedEscapedDescription isEqualToString:HLSMissingLocalization]) {
+        localizedEscapedDescription = [HLSLocalizedDescriptionForCFNetworkError(kCFURLErrorUnknown) stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"];
+    }
     NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", localizedEscapedDescription];
     
     if ([WKWebView class]) {
@@ -407,12 +410,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
             self.webView.alpha = 0.f;
             self.errorWebView.alpha = 1.f;
         }];
+        
+        self.currentError = error;
+        [self updateErrorDescription];
     }
     
     [self setProgress:1.f animated:YES];
-    
-    self.currentError = error;
-    [self updateErrorDescription];
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     

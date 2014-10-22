@@ -11,8 +11,10 @@
 #import <objc/runtime.h>
 #import "HLSLogger.h"
 
-NSString * const HLSPreferredLocalizationDefaultsKey = @"HLSPreferredLocalization";
 NSString * const HLSCurrentLocalizationDidChangeNotification = @"HLSCurrentLocalizationDidChangeNotification";
+NSString * const HLSMissingLocalization = @"HLSMissingLocalization";
+
+static NSString * const HLSPreferredLocalizationDefaultsKey = @"HLSPreferredLocalization";
 
 static NSString *currentLocalization = nil;
 
@@ -32,19 +34,9 @@ NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle)
         bundle = [NSBundle mainBundle];
     }
     
-    // We use an explicit constant string for missing localizations since otherwise the localization key itself would
-    // be returned by the -localizedStringForKey:value:table: method
-    static NSString * const kMissingLocalizedString = @"NSBundle_HLSDynamicLocalization_missing";
     NSString *localizedString = [bundle localizedStringForKey:key
-                                                        value:kMissingLocalizedString
-                                                        table:nil];
-    
-    // Use the localization key as text if missing
-    if ([localizedString isEqualToString:kMissingLocalizedString]) {
-        HLSLoggerWarn(@"Missing localization for key %@", key);
-        localizedString = key;
-    }
-    
+                                                        value:HLSMissingLocalization
+                                                        table:nil];    
     return localizedString;
 }
 

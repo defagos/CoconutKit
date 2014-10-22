@@ -6,8 +6,15 @@
 //  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
-extern NSString * const HLSPreferredLocalizationDefaultsKey;
+/**
+ * Notification sent when the localization is changed at runtime
+ */
 extern NSString * const HLSCurrentLocalizationDidChangeNotification;
+
+/**
+ * This constant is returned when a localized string could not be found
+ */
+extern NSString * const HLSMissingLocalization;
 
 /**
  * Return the language for a localization
@@ -21,21 +28,21 @@ NSString *HLSLanguageForLocalization(NSString *localization);
  * Return a localized string from the specified bundle (if the bundle is nil, then
  * the main bundle is searched)
  *
- * If no match is found, return the localization key
+ * If no match is found, return HLSMissingLocalization
  */
 NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle);
 
 /**
  * Return a localized string from the UIKit bundle
  *
- * If no match is found, return the localization key
+ * If no match is found, return HLSMissingLocalization
  */
 NSString *HLSLocalizedStringFromUIKit(NSString *key);
 
 /**
  * Return the localized description matching an error code
  *
- * If no match is found, return the localization key
+ * If no match is found, return HLSMissingLocalization
  */
 NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode);
 
