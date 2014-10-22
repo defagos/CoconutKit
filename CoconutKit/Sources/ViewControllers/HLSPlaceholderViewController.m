@@ -95,6 +95,20 @@
     return [containerStack topViewController];
 }
 
+- (void)setLockingUI:(BOOL)lockingUI
+{
+    for (HLSContainerStack *containerStack in self.containerStacks) {
+        containerStack.lockingUI = lockingUI;
+    }
+}
+
+- (BOOL)lockingUI
+{
+    // This property is consistently set for all container stacks. Return what the first says
+    HLSContainerStack *firstContainerStack = [self.containerStacks firstObject];
+    return firstContainerStack.lockingUI;
+}
+
 #pragma mark View lifecycle
 
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods
