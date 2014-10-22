@@ -49,5 +49,5 @@ Pod::Spec.new do |s|
 
   # Do not use CoconutKit-resources target, use CocoaPods native bundle creation mechanism
   # TODO: Replace with localized resources with 'CoconutKit-resources/*.lproj' when the bug above has been fixed
-  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{Images,Nibs}/*', 'Tools/Scripts/GeneratedResources/*.lproj'] }
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{HTML,Images,Nibs}/*', 'Tools/Scripts/GeneratedResources/*.lproj'] }
 end
