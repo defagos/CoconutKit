@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
   s.prefix_header_file = 'CoconutKit/CoconutKit-Prefix.pch'
   
-  s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit'
+  s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit', 'WebKit'
   s.requires_arc = true
 
   # Process the publicHeaders.txt file listing public headers to generate a public header directory as well as a global header file
