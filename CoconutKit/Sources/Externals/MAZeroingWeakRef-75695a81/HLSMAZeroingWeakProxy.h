@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 
 
-@class MAZeroingWeakRef;
+@class HLSMAZeroingWeakRef;
 
-@interface MAZeroingWeakProxy : NSProxy
+@interface HLSMAZeroingWeakProxy : NSProxy
 {
-    MAZeroingWeakRef *_weakRef;
+    HLSMAZeroingWeakRef *_weakRef;
     Class _targetClass;
 }
 
@@ -24,7 +24,7 @@
 - (id)zeroingProxyTarget;
 
 #if NS_BLOCKS_AVAILABLE
-// same caveats/restrictions as MAZeroingWeakRef cleanup block
+// same caveats/restrictions as HLSMAZeroingWeakRef cleanup block
 - (void)setCleanupBlock: (void (^)(id target))block;
 #endif
 

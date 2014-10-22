@@ -14,7 +14,7 @@
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
 #import "HLSUserInterfaceLock.h"
-#import "MAZeroingWeakRef.h"
+#import "HLSMAZeroingWeakRef.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
@@ -47,7 +47,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @property (nonatomic, assign, getter=isStarted) BOOL started;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
-@property (nonatomic, strong) MAZeroingWeakRef *delegateZeroingWeakRef;
+@property (nonatomic, strong) HLSMAZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 
@@ -135,7 +135,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (void)setDelegate:(id<HLSAnimationDelegate>)delegate
 {
-    self.delegateZeroingWeakRef = [MAZeroingWeakRef refWithTarget:delegate];
+    self.delegateZeroingWeakRef = [HLSMAZeroingWeakRef refWithTarget:delegate];
     
     __weak __typeof(self) weakSelf = self;
     [self.delegateZeroingWeakRef setCleanupBlock:^(id target) {

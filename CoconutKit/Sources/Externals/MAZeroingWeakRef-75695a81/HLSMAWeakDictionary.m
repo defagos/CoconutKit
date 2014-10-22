@@ -5,12 +5,12 @@
 //  Created by Mike Ash on 7/13/10.
 //
 
-#import "MAWeakDictionary.h"
+#import "HLSMAWeakDictionary.h"
 
-#import "MAZeroingWeakRef.h"
+#import "HLSMAZeroingWeakRef.h"
 
 
-@implementation MAWeakDictionary
+@implementation HLSMAWeakDictionary
 
 - (id)init
 {
@@ -34,7 +34,7 @@
 
 - (id)objectForKey: (id)aKey
 {
-    MAZeroingWeakRef *ref = [_dict objectForKey: aKey];
+    HLSMAZeroingWeakRef *ref = [_dict objectForKey: aKey];
     id obj = [ref target];
     
     // clean out keys whose objects have gone away
@@ -59,7 +59,7 @@
 
 - (void)setObject: (id)anObject forKey: (id)aKey
 {
-    [_dict setObject: [MAZeroingWeakRef refWithTarget: anObject]
+    [_dict setObject: [HLSMAZeroingWeakRef refWithTarget: anObject]
                                                forKey: aKey];
 }
 

@@ -5,12 +5,12 @@
 //  Created by Mike Ash on 7/13/10.
 //
 
-#import "MAWeakArray.h"
+#import "HLSMAWeakArray.h"
 
-#import "MAZeroingWeakRef.h"
+#import "HLSMAZeroingWeakRef.h"
 
 
-@implementation MAWeakArray
+@implementation HLSMAWeakArray
 
 - (id)init
 {
@@ -55,12 +55,12 @@
 
 - (void)addObject: (id)anObject
 {
-    [_weakRefs addObject: [MAZeroingWeakRef refWithTarget: anObject]];
+    [_weakRefs addObject: [HLSMAZeroingWeakRef refWithTarget: anObject]];
 }
 
 - (void)insertObject: (id)anObject atIndex: (NSUInteger)index
 {
-    [_weakRefs insertObject: [MAZeroingWeakRef refWithTarget: anObject]
+    [_weakRefs insertObject: [HLSMAZeroingWeakRef refWithTarget: anObject]
                     atIndex: index];
 }
 
@@ -77,7 +77,7 @@
 - (void)replaceObjectAtIndex: (NSUInteger)index withObject: (id)anObject
 {
     [_weakRefs replaceObjectAtIndex: index
-                         withObject: [MAZeroingWeakRef refWithTarget: anObject]];
+                         withObject: [HLSMAZeroingWeakRef refWithTarget: anObject]];
 }
 
 - (id)copyWithZone:(NSZone *)zone

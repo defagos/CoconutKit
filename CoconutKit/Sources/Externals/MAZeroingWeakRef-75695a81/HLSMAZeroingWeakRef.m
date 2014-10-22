@@ -1,13 +1,13 @@
 //
-//  MAZeroingWeakRef.m
+//  HLSMAZeroingWeakRef.m
 //  ZeroingWeakRef
 //
 //  Created by Michael Ash on 7/5/10.
 //
 
-#import "MAZeroingWeakRef.h"
+#import "HLSMAZeroingWeakRef.h"
 
-#import "MAZeroingWeakRefNativeZWRNotAllowedTable.h"
+#import "HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h"
 
 #if __APPLE__
 #import <CommonCrypto/CommonDigest.h>
@@ -70,7 +70,7 @@
 #endif
 
 #if KVO_HACK_LEVEL >= 1
-@interface NSObject (KVOPrivateMethod)
+@interface NSObject (HLSKVOPrivateMethod)
 
 - (BOOL)_isKVOA;
 
@@ -78,18 +78,18 @@
 #endif
 
 
-@interface NSObject (MAZeroingWeakRefSwizzled)
-- (void)MAZeroingWeakRef_KVO_original_release;
-- (void)MAZeroingWeakRef_KVO_original_dealloc;
-- (void)MAZeroingWeakRef_KVO_original_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(void *)context;
-- (void)MAZeroingWeakRef_KVO_original_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
-- (void)MAZeroingWeakRef_KVO_original_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(void *)context;
+@interface NSObject (HLSMAZeroingWeakRefSwizzled)
+- (void)HLSMAZeroingWeakRef_KVO_original_release;
+- (void)HLSMAZeroingWeakRef_KVO_original_dealloc;
+- (void)HLSMAZeroingWeakRef_KVO_original_addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(void *)context;
+- (void)HLSMAZeroingWeakRef_KVO_original_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath;
+- (void)HLSMAZeroingWeakRef_KVO_original_removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath context:(void *)context;
 @end
 
 
 static void EnsureCustomSubclass(id obj);
 
-@interface MAZeroingWeakRef ()
+@interface HLSMAZeroingWeakRef ()
 
 - (void)_zeroTarget;
 - (void)_executeCleanupBlockWithTarget: (id)target;
@@ -100,19 +100,19 @@ static void EnsureCustomSubclass(id obj);
 static id (*objc_loadWeak_fptr)(id *location);
 static id (*objc_storeWeak_fptr)(id *location, id obj);
 
-@interface _MAZeroingWeakRefCleanupHelper : NSObject
+@interface _HLSMAZeroingWeakRefCleanupHelper : NSObject
 {
-    MAZeroingWeakRef *_ref;
+    HLSMAZeroingWeakRef *_ref;
     id _target;
 }
 
-- (id)initWithRef: (MAZeroingWeakRef *)ref target: (id)target;
+- (id)initWithRef: (HLSMAZeroingWeakRef *)ref target: (id)target;
 
 @end
 
-@implementation _MAZeroingWeakRefCleanupHelper
+@implementation _HLSMAZeroingWeakRefCleanupHelper
 
-- (id)initWithRef: (MAZeroingWeakRef *)ref target: (id)target
+- (id)initWithRef: (HLSMAZeroingWeakRef *)ref target: (id)target
 {
     if((self = [self init]))
     {
@@ -124,7 +124,7 @@ static id (*objc_storeWeak_fptr)(id *location, id obj);
 
 - (void)dealloc
 {
-    MAZeroingWeakRef *ref = objc_loadWeak_fptr(&_ref);
+    HLSMAZeroingWeakRef *ref = objc_loadWeak_fptr(&_ref);
     [ref _executeCleanupBlockWithTarget: _target];
     objc_storeWeak_fptr(&_ref, nil);
     
@@ -134,7 +134,7 @@ static id (*objc_storeWeak_fptr)(id *location, id obj);
 @end
 
 
-@implementation MAZeroingWeakRef
+@implementation HLSMAZeroingWeakRef
 
 #if COREFOUNDATION_HACK_LEVEL >= 2
 
@@ -183,7 +183,7 @@ static NSOperationQueue *gCFDelayedDestructionQueue;
 
 + (void)initialize
 {
-    if(self == [MAZeroingWeakRef class])
+    if(self == [HLSMAZeroingWeakRef class])
     {
         pthread_mutexattr_t mutexattr;
         pthread_mutexattr_init(&mutexattr);
@@ -252,7 +252,7 @@ static void WhileLocked(void (^block)(void))
     } while(0)
 #endif
 
-static void AddWeakRefToObject(id obj, MAZeroingWeakRef *ref)
+static void AddWeakRefToObject(id obj, HLSMAZeroingWeakRef *ref)
 {
 #if __APPLE__
     CFMutableSetRef set = (void *)CFDictionaryGetValue(gObjectWeakRefsMap, obj);
@@ -274,7 +274,7 @@ static void AddWeakRefToObject(id obj, MAZeroingWeakRef *ref)
 #endif
 }
 
-static void RemoveWeakRefFromObject(id obj, MAZeroingWeakRef *ref)
+static void RemoveWeakRefFromObject(id obj, HLSMAZeroingWeakRef *ref)
 {
 #if __APPLE__
     CFMutableSetRef set = (void *)CFDictionaryGetValue(gObjectWeakRefsMap, obj);
@@ -354,7 +354,7 @@ static Class CustomSubclassClassForCoder(id self, SEL _cmd)
 
 static void KVOSubclassRelease(id self, SEL _cmd)
 {
-    IMP originalRelease = class_getMethodImplementation(object_getClass(self), @selector(MAZeroingWeakRef_KVO_original_release));
+    IMP originalRelease = class_getMethodImplementation(object_getClass(self), @selector(HLSMAZeroingWeakRef_KVO_original_release));
     WhileLocked({
         ((void (*)(id, SEL))originalRelease)(self, _cmd);
     });
@@ -363,14 +363,14 @@ static void KVOSubclassRelease(id self, SEL _cmd)
 static void KVOSubclassDealloc(id self, SEL _cmd)
 {
     ClearWeakRefsForObject(self);
-    IMP originalDealloc = class_getMethodImplementation(object_getClass(self), @selector(MAZeroingWeakRef_KVO_original_dealloc));
+    IMP originalDealloc = class_getMethodImplementation(object_getClass(self), @selector(HLSMAZeroingWeakRef_KVO_original_dealloc));
     ((void (*)(id, SEL))originalDealloc)(self, _cmd);
 }
 
 static void KVOSubclassRemoveObserverForKeyPath(id self, SEL _cmd, id observer, NSString *keyPath)
 {
     WhileLocked({
-        IMP originalIMP = class_getMethodImplementation(object_getClass(self), @selector(MAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:));
+        IMP originalIMP = class_getMethodImplementation(object_getClass(self), @selector(HLSMAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:));
         ((void (*)(id, SEL, id, NSString *))originalIMP)(self, _cmd, observer, keyPath);
         
         EnsureCustomSubclass(self);
@@ -380,7 +380,7 @@ static void KVOSubclassRemoveObserverForKeyPath(id self, SEL _cmd, id observer, 
 static void KVOSubclassRemoveObserverForKeyPathContext(id self, SEL _cmd, id observer, NSString *keyPath, void *context)
 {
     WhileLocked({
-        IMP originalIMP = class_getMethodImplementation(object_getClass(self), @selector(MAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:context:));
+        IMP originalIMP = class_getMethodImplementation(object_getClass(self), @selector(HLSMAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:context:));
         ((void (*)(id, SEL, id, NSString *, void *))originalIMP)(self, _cmd, observer, keyPath, context);
         
         EnsureCustomSubclass(self);
@@ -395,8 +395,8 @@ static void CallCFReleaseLater(CFTypeRef cf)
     
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     SEL sel = @selector(releaseLater:fromThread:);
-    NSInvocation *inv = [NSInvocation invocationWithMethodSignature: [MAZeroingWeakRef methodSignatureForSelector: sel]];
-    [inv setTarget: [MAZeroingWeakRef class]];
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature: [HLSMAZeroingWeakRef methodSignatureForSelector: sel]];
+    [inv setTarget: [HLSMAZeroingWeakRef class]];
     [inv setSelector: sel];
     [inv setArgument: &cf atIndex: 2];
     [inv setArgument: &thread atIndex: 3];
@@ -568,11 +568,11 @@ static BOOL IsKVOSubclass(id obj)
 // and so a simple comparison can be used to check for membership at
 // that point.
 #if __APPLE__
-static BOOL HashPresentInTable(unsigned char *hash, int length, struct _NativeZWRTableEntry *table)
+static BOOL HashPresentInTable(unsigned char *hash, int length, struct _HLSNativeZWRTableEntry *table)
 {
     while(length)
     {
-        struct _NativeZWRTableEntry entry = table[hash[0]];
+        struct _HLSNativeZWRTableEntry entry = table[hash[0]];
         if(entry.ptr == NULL)
         {
             return NO;
@@ -643,11 +643,11 @@ static void PatchKVOSubclass(Class class)
     Method dealloc = class_getInstanceMethod(class, @selector(dealloc));
     
     class_addMethod(class,
-                    @selector(MAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:),
+                    @selector(HLSMAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:),
                     method_getImplementation(removeObserverForKeyPath),
                     method_getTypeEncoding(removeObserverForKeyPath));
-    class_addMethod(class, @selector(MAZeroingWeakRef_KVO_original_release), method_getImplementation(release), method_getTypeEncoding(release));
-    class_addMethod(class, @selector(MAZeroingWeakRef_KVO_original_dealloc), method_getImplementation(dealloc), method_getTypeEncoding(dealloc));
+    class_addMethod(class, @selector(HLSMAZeroingWeakRef_KVO_original_release), method_getImplementation(release), method_getTypeEncoding(release));
+    class_addMethod(class, @selector(HLSMAZeroingWeakRef_KVO_original_dealloc), method_getImplementation(dealloc), method_getTypeEncoding(dealloc));
     
     class_replaceMethod(class,
                         @selector(removeObserver:forKeyPath:),
@@ -661,7 +661,7 @@ static void PatchKVOSubclass(Class class)
     if(removeObserverForKeyPathContext)
     {
         class_addMethod(class,
-                        @selector(MAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:context:),
+                        @selector(HLSMAZeroingWeakRef_KVO_original_removeObserver:forKeyPath:context:),
                         method_getImplementation(removeObserverForKeyPathContext),
                         method_getTypeEncoding(removeObserverForKeyPathContext));
         class_replaceMethod(class,
@@ -731,7 +731,7 @@ static void EnsureCustomSubclass(id obj)
     }
 }
 
-static void RegisterRef(MAZeroingWeakRef *ref, id target)
+static void RegisterRef(HLSMAZeroingWeakRef *ref, id target)
 {
     WhileLocked({
         EnsureCustomSubclass(target);
@@ -743,7 +743,7 @@ static void RegisterRef(MAZeroingWeakRef *ref, id target)
     });
 }
 
-static void UnregisterRef(MAZeroingWeakRef *ref)
+static void UnregisterRef(HLSMAZeroingWeakRef *ref)
 {
     WhileLocked({
         id target = ref->_target;
@@ -824,7 +824,7 @@ static void UnregisterRef(MAZeroingWeakRef *ref)
                 objc_setAssociatedObject(target, associatedKey, cleanupHelpers, OBJC_ASSOCIATION_RETAIN);
             }
             
-            _MAZeroingWeakRefCleanupHelper *helper = [[_MAZeroingWeakRefCleanupHelper alloc] initWithRef: self target: target];
+            _HLSMAZeroingWeakRefCleanupHelper *helper = [[_HLSMAZeroingWeakRefCleanupHelper alloc] initWithRef: self target: target];
             [cleanupHelpers addObject:helper];
             
             [helper release];
