@@ -391,6 +391,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         return;
     }
     
+    if (self.errorWebView.alpha == 1.f) {
+        [UIView animateWithDuration:HLSWebViewFadeAnimationDuration animations:^{
+            self.errorWebView.alpha = 0.f;
+        }];
+    }
+    
     self.currentError = nil;
     
     [self setProgress:0.f animated:YES];
