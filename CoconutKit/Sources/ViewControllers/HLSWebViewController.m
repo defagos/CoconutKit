@@ -37,8 +37,13 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, strong) NSURL *currentURL;
 @property (nonatomic, strong) NSError *currentError;
 
-@property (nonatomic, weak) WKWebView *webView;
-@property (nonatomic, weak) WKWebView *errorWebView;
+// Tempting to use WKWebView or UIWebView here as type, but using id lets the compiler find methods with ambiguous
+// prototypes (e.g. -goBack or -loadRequest). Incorrectly called, ARC would insert incorrect memory management
+// calls, leading to crashes. The best we can do is to use the common superclass
+// TODO: When CoconutKit requires at least iOS 8, use WKWebView as type. Track down all calls which have been made via []
+//       and switch to dot notation
+@property (nonatomic, weak) UIView *webView;
+@property (nonatomic, weak) UIView *errorWebView;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
@@ -163,30 +168,31 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     // TODO: Remove when CoconutKit requires at least iOS 8. Improve using new WKWebView abilities
     Class webViewClass = [WKWebView class] ?: [UIWebView class];
     
-    WKWebView *webView = [[webViewClass alloc] initWithFrame:self.view.bounds];
+    UIView *webView = [[webViewClass alloc] initWithFrame:self.view.bounds];
     webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     webView.alpha = 0.f;
     if ([WKWebView class]) {
-        webView.navigationDelegate = self;
+        ((WKWebView *)webView).navigationDelegate = self;
+        [(WKWebView *)webView loadRequest:self.request];
         
         // Progress information is available from WKWebView
         [webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:s_KVOContext];
     }
     else {
         ((UIWebView *)webView).delegate = self;
+        [(UIWebView *)webView loadRequest:self.request];
     }
-    [webView loadRequest:self.request];
     
     // Scroll view content insets are adjusted automatically, but only for the scroll view at index 0. This
     // is the main content web view, we therefore put it at index 0
     [self.view insertSubview:webView atIndex:0];
     self.webView = webView;
     
-    WKWebView *errorWebView = [[webViewClass alloc] initWithFrame:self.view.bounds];
+    UIView *errorWebView = [[webViewClass alloc] initWithFrame:self.view.bounds];
     errorWebView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     errorWebView.alpha = 0.f;
     if ([WKWebView class]) {
-        errorWebView.navigationDelegate = self;
+        ((WKWebView *)errorWebView).navigationDelegate = self;
     }
     else {
         ((UIWebView *)errorWebView).delegate = self;
@@ -218,7 +224,13 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     
     NSURL *errorHTMLFileURL = [coconutKitBundle URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
-    [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
+    
+    if ([WKWebView class]) {
+        [(WKWebView *)errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
+    }
+    else {
+        [(UIWebView *)errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
+    }
     
     // No automatic scroll inset adjustment, but not a problem since the error view displays static centered content
     [self.view insertSubview:errorWebView atIndex:1];
@@ -246,7 +258,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [super viewWillDisappear:animated];
     
-    [self.webView stopLoading];
+    if ([WKWebView class]) {
+        [(WKWebView *)self.webView stopLoading];
+    }
+    else {
+        [(UIWebView *)self.webView stopLoading];
+    }
 }
 
 #pragma mark Layout
@@ -302,29 +319,48 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     self.toolbar.frame = (CGRect){CGPointMake(0.f, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
     
     // Properly position the vertical scroll bar to avoid the bottom toolbar
-    UIEdgeInsets contentInset = self.webView.scrollView.contentInset;
+    UIScrollView *scrollView = nil;
+    if ([WKWebView class]) {
+        scrollView = ((WKWebView *)self.webView).scrollView;
+    }
+    else {
+        scrollView = ((UIWebView *)self.webView).scrollView;
+    }
+    
+    UIEdgeInsets contentInset = scrollView.contentInset;
     contentInset = UIEdgeInsetsMake(contentInset.top,
                                     contentInset.left,
                                     toolbarSize.height,
                                     contentInset.right);
     
-    self.webView.scrollView.contentInset = contentInset;
-    self.webView.scrollView.scrollIndicatorInsets = contentInset;
+    scrollView.contentInset = contentInset;
+    scrollView.scrollIndicatorInsets = contentInset;
 }
 
 - (void)updateInterfaceAnimated:(BOOL)animated
 {
-    self.goBackBarButtonItem.enabled = self.webView.canGoBack;
-    self.goForwardBarButtonItem.enabled = self.webView.canGoForward;
+    BOOL isLoading = NO;
+    if ([WKWebView class]) {
+        self.goBackBarButtonItem.enabled = ((WKWebView *)self.webView).canGoBack;
+        self.goForwardBarButtonItem.enabled = ((WKWebView *)self.webView).canGoForward;
+        
+        isLoading = ((WKWebView *)self.webView).loading;
+    }
+    else {
+        self.goBackBarButtonItem.enabled = ((UIWebView *)self.webView).canGoBack;
+        self.goForwardBarButtonItem.enabled = ((UIWebView *)self.webView).canGoForward;
+        
+        isLoading = ((UIWebView *)self.webView).loading;
+    }
     
-    if (self.webView.loading) {
+    if (isLoading) {
         [self.toolbar setItems:self.loadingToolbarItems animated:animated];
     }
     else {
         [self.toolbar setItems:self.normalToolbarItems animated:animated];
     }
     
-    self.actionBarButtonItem.enabled = ! self.webView.loading && self.currentURL;
+    self.actionBarButtonItem.enabled = ! isLoading && self.currentURL;
     
     [self updateTitle];
 }
@@ -335,7 +371,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         NSString *titleJavaScript = @"document.title";
         
         if ([WKWebView class]) {
-            [self.webView evaluateJavaScript:titleJavaScript completionHandler:^(NSString *title, NSError *error) {
+            [(WKWebView *)self.webView evaluateJavaScript:titleJavaScript completionHandler:^(NSString *title, NSError *error) {
                 self.title = title;
             }];
         }
@@ -363,7 +399,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     NSString *replaceErrorJavaScript = [NSString stringWithFormat:@"document.getElementById('localizedErrorDescription').innerHTML = '%@'", localizedEscapedDescription];
     
     if ([WKWebView class]) {
-        [self.errorWebView evaluateJavaScript:replaceErrorJavaScript completionHandler:nil];
+        [(WKWebView *)self.errorWebView evaluateJavaScript:replaceErrorJavaScript completionHandler:nil];
     }
     else {
         [(UIWebView *)self.errorWebView stringByEvaluatingJavaScriptFromString:replaceErrorJavaScript];
@@ -403,7 +439,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 #pragma mark UIWebViewDelegate protocol implementation
 
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
+// TODO: When iOS 8 only, use explicit WKWebView type here, instead of common UIView * type (use to help the compiler catch errors)
+- (void)webView:(UIView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
     if (webView == self.errorWebView) {
         return;
@@ -424,7 +461,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self updateInterfaceAnimated:YES];
 }
 
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
+- (void)webView:(UIView *)webView didFinishNavigation:(WKNavigation *)navigation
 {
     if (webView == self.errorWebView) {
         // Reliably executing JavaScript requires us to wait until the error page has been loaded
@@ -443,7 +480,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     
     // A new page has been displayed. Remember its URL
     if ([WKWebView class]) {
-        self.currentURL = self.webView.URL;
+        self.currentURL = ((WKWebView *)self.webView).URL;
     }
     else {
         self.currentURL = ((UIWebView *)self.webView).request.URL;
@@ -451,7 +488,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self updateInterfaceAnimated:YES];
 }
 
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
+- (void)webView:(UIView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     if (webView == self.errorWebView) {
         return;
@@ -495,13 +532,23 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (IBAction)goBack:(id)sender
 {
-    [self.webView goBack];
+    if ([WKWebView class]) {
+        [(WKWebView *)self.webView goBack];
+    }
+    else {
+        [(UIWebView *)self.webView goBack];
+    }
     [self updateInterfaceAnimated:YES];
 }
 
 - (IBAction)goForward:(id)sender
 {
-    [self.webView goForward];
+    if ([WKWebView class]) {
+        [(WKWebView *)self.webView goForward];
+    }
+    else {
+        [(UIWebView *)self.webView goForward];
+    }
     [self updateInterfaceAnimated:YES];
 }
 
@@ -509,18 +556,33 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     // Reload the currently displayed page (if any)
     if ([[self.currentURL absoluteString] isFilled]) {
-        [self.webView reload];
+        if ([WKWebView class]) {
+            [(WKWebView *)self.webView reload];
+        }
+        else {
+            [(UIWebView *)self.webView reload];
+        }
     }
     // Reload the start page
     else {
-        [self.webView loadRequest:self.request];
+        if ([WKWebView class]) {
+            [(WKWebView *)self.webView loadRequest:self.request];
+        }
+        else {
+            [(UIWebView *)self.webView loadRequest:self.request];
+        }
     }
     [self updateInterfaceAnimated:YES];
 }
 
 - (void)stop:(id)sender
 {
-    [self.webView stopLoading];
+    if ([WKWebView class]) {
+        [(WKWebView *)self.webView stopLoading];
+    }
+    else {
+        [(UIWebView *)self.webView stopLoading];
+    }
     [self updateInterfaceAnimated:YES];
 }
 
@@ -570,8 +632,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     
     // Check if loading since progress information can be received before -webView:didStartProvisionalNavigation:, which
     // initially resets progress to 0
-    if (object == self.webView && [keyPath isEqualToString:@"estimatedProgress"] && self.webView.loading) {
-        [self setProgress:self.webView.estimatedProgress animated:YES];
+    if (object == self.webView && [keyPath isEqualToString:@"estimatedProgress"] && ((WKWebView *)self.webView).loading) {
+        [self setProgress:((WKWebView *)self.webView).estimatedProgress animated:YES];
     }
 }
 
