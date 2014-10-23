@@ -47,6 +47,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *actionBarButtonItem;
 
+@property (nonatomic, strong) NSArray *normalToolbarItems;
+@property (nonatomic, strong) NSArray *loadingToolbarItems;
+
 @property (nonatomic, strong) NSArray *actions;
 
 @property (nonatomic, strong) UIPopoverController *activityPopoverController;
@@ -222,13 +225,21 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     self.errorWebView = errorWebView;
     
     self.progressView.alpha = 0.f;
+    
+    self.normalToolbarItems = self.toolbar.items;
+    
+    // Build the toolbar displayed when the web view is loading content
+    NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
+    UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
+    [loadingToolbarItems replaceObjectAtIndex:[loadingToolbarItems indexOfObject:self.refreshBarButtonItem] withObject:stopBarButtonItem];
+    self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self updateInterface];
+    [self updateInterfaceAnimated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -301,11 +312,18 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     self.webView.scrollView.scrollIndicatorInsets = contentInset;
 }
 
-- (void)updateInterface
+- (void)updateInterfaceAnimated:(BOOL)animated
 {
     self.goBackBarButtonItem.enabled = self.webView.canGoBack;
     self.goForwardBarButtonItem.enabled = self.webView.canGoForward;
-    self.refreshBarButtonItem.image = self.webView.loading ? [UIImage coconutKitImageNamed:@"ButtonBarStop.png"] : [UIImage coconutKitImageNamed:@"ButtonBarRefresh.png"];
+    
+    if (self.webView.loading) {
+        [self.toolbar setItems:self.loadingToolbarItems animated:animated];
+    }
+    else {
+        [self.toolbar setItems:self.normalToolbarItems animated:animated];
+    }
+    
     self.actionBarButtonItem.enabled = ! self.webView.loading && self.currentURL;
     
     [self updateTitle];
@@ -403,7 +421,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     
     [[HLSNotificationManager sharedNotificationManager] notifyBeginNetworkActivity];
     
-    [self updateInterface];
+    [self updateInterfaceAnimated:YES];
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation
@@ -430,7 +448,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     else {
         self.currentURL = ((UIWebView *)self.webView).request.URL;
     }
-    [self updateInterface];
+    [self updateInterfaceAnimated:YES];
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
@@ -453,7 +471,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     
     [[HLSNotificationManager sharedNotificationManager] notifyEndNetworkActivity];
     
-    [self updateInterface];
+    [self updateInterfaceAnimated:YES];
 }
 
 #pragma mark WKWebViewDelegate protocol implementation
@@ -478,32 +496,32 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 - (IBAction)goBack:(id)sender
 {
     [self.webView goBack];
-    [self updateInterface];
+    [self updateInterfaceAnimated:YES];
 }
 
 - (IBAction)goForward:(id)sender
 {
     [self.webView goForward];
-    [self updateInterface];
+    [self updateInterfaceAnimated:YES];
 }
 
 - (IBAction)refresh:(id)sender
 {
-    if (! self.webView.loading) {
-        // Reload the currently displayed page (if any)
-        if ([[self.currentURL absoluteString] isFilled]) {
-            [self.webView reload];
-        }
-        // Reload the start page
-        else {
-            [self.webView loadRequest:self.request];
-        }
+    // Reload the currently displayed page (if any)
+    if ([[self.currentURL absoluteString] isFilled]) {
+        [self.webView reload];
     }
+    // Reload the start page
     else {
-        [self.webView stopLoading];
+        [self.webView loadRequest:self.request];
     }
-    
-    [self updateInterface];
+    [self updateInterfaceAnimated:YES];
+}
+
+- (void)stop:(id)sender
+{
+    [self.webView stopLoading];
+    [self updateInterfaceAnimated:YES];
 }
 
 - (IBAction)displayActionSheet:(id)sender
