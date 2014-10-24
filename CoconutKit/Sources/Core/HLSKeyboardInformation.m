@@ -47,15 +47,40 @@ static HLSKeyboardInformation *s_instance = nil;
 
 + (void)keyboardWillShow:(NSNotification *)notification
 {
-    HLSLoggerDebug(@"Keyboard shown");
+    HLSLoggerDebug(@"Keyboard will show");
     s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:[notification userInfo]];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
-    HLSLoggerDebug(@"Keyboard hidden");
+    HLSLoggerDebug(@"Keyboard will hide");
     s_instance = nil;
 }
+
+#ifdef DEBUG
+
++ (void)keyboardDidShow:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard did show");
+    s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:[notification userInfo]];
+}
+
++ (void)keyboardDidHide:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard did hide");
+}
+
++ (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard will change frame");
+}
+
++ (void)keyboardDidChangeFrame:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard did change frame");
+}
+
+#endif
 
 #pragma mark Description
 
@@ -84,4 +109,24 @@ __attribute__ ((constructor)) static void HLSKeyboardInformationInit(void)
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+#ifdef DEBUG
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardWillChangeFrame:)
+                                                 name:UIKeyboardWillChangeFrameNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardDidChangeFrame:)
+                                                 name:UIKeyboardDidChangeFrameNotification
+                                               object:nil];
+#endif
+
 }
