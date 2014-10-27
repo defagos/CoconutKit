@@ -30,6 +30,8 @@
 {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     // This property could also be conveniently set via user-defined runtime attributes
     self.scrollView.avoidingKeyboard = YES;
     self.textView.avoidingKeyboard = YES;
