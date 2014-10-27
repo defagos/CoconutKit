@@ -25,9 +25,6 @@
  *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
  */
 
-// FIXME: There is a bug with keyboard undocking in iOS 8 (the UIKeyboardWillHideNotification is not sent correctly
-//        when the keyboard is undocked). See http://openradar.appspot.com/18010127. This will hopefully be fixed
-
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;

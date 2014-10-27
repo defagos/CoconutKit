@@ -27,7 +27,7 @@ static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
     // Prior to iOS 7.1, -[UISlider didMoveToWindow] implementation failed to call the super method counterpart. The
     // -[UISlider didMoveToWindow] method implementation has been removed starting with iOS 7.1, which fixes this
     // issue. On iOS 7.0 and below, though, we must inject a fix so that the call chain is the expected one
-    if (NSFoundationVersionNumber <= 1047.22 /* iOS 7.0 constant, not yet available from the headers */) {
+    if (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_7_1) {
         s_UISlider__didMoveToWindow_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
                                                                                        @selector(didMoveToWindow),
                                                                                        (IMP)swizzled_UISlider__didMoveToWindow_Imp);
