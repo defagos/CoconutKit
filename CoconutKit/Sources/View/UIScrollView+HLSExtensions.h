@@ -42,11 +42,7 @@
  * responder views located within the scroll view (e.g. text fields, text views, search bars) stay visible when they
  * get the focus. Custom input views (even with non-standard sizes) are supported as well.
  *
- * Note that you MUST set a scroll view contentSize so that the scroll view can actually scroll. Moreover, the scroll 
- * view frame is changed when the keyboard is displayed, so be sure that the subview autoresizing masks are appropriately 
- * set, e.g.: 
- *   - if you want subviews to stay where they are, you should use fixed top margins
- *   - if you want subviews to stay centered, use a stretchable top margin
+ * Note that you MUST set a scroll view contentSize so that the scroll view can actually scroll.
  *
  * Nested scroll views are supported. If several scroll views avoiding the keyboard are nested, the top parent will
  * be the only only one to avoid the keyboard

@@ -122,7 +122,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3">
                     <rect key="frame" x="0.0" y="64" width="384" height="896"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.12156863510608673" green="0.67843139171600342" blue="0.9803922176361084" alpha="1" colorSpace="deviceRGB"/>
                 </scrollView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="37">
                     <rect key="frame" x="441" y="279" width="286" height="514"/>
