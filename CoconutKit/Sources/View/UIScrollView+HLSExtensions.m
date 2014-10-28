@@ -190,7 +190,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 #pragma mark Notification callbacks
 
-+ (void)keyboardDidShow:(NSNotification *)notification
++ (void)keyboardWillShow:(NSNotification *)notification
 {
     UIView *activeView = [UIApplication sharedApplication].keyWindow.activeViewController.view;
     NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:activeView];
@@ -246,8 +246,11 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         
         // If the first responder is not visible, change the offset to make it visible. Not made in -willShow since result not convincing
         // enough if frame and content offset are changed at the same time
-        CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
-        [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:YES];
+        NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        [UIView animateWithDuration:keyboardAnimationDuration animations:^{
+            CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
+            [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
+        }];
     }
     
     s_adjustedScrollViews = [NSArray arrayWithArray:adjustedScrollViews];
@@ -284,12 +287,9 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 __attribute__ ((constructor)) static void HLSTextFieldInit(void)
 {
-    // Those events are only fired when the dock keyboard is used. When the keyboard rotates, we receive willHide, didHide,
-    // willShow and didShow in sequence. When an inpuView has been set (replacing the keyboard), the willShow and didShow
-    // events are also received when the input view associated with the responder getting the focus must be changed
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
                                              selector:@selector(keyboardWillHide:)
