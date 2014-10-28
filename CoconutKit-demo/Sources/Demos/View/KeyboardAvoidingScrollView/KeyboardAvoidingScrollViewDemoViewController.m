@@ -30,6 +30,8 @@
 {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     // This property could also be conveniently set via user-defined runtime attributes
     self.scrollView.avoidingKeyboard = YES;
     self.textView.avoidingKeyboard = YES;
@@ -83,7 +85,7 @@
 
 - (IBAction)closeInput:(id)sender
 {
-    [[[UIApplication sharedApplication] keyWindow].rootViewController.view endEditing:NO];
+    [[UIApplication sharedApplication].keyWindow.activeViewController.view endEditing:NO];
 }
 
 @end

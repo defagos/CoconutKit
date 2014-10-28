@@ -52,6 +52,8 @@
 		6F255E421712C360007BFC96 /* HLSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E401712C360007BFC96 /* HLSConnection.m */; };
 		6F255E531712E85F007BFC96 /* HLSFakeConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F255E511712E85F007BFC96 /* HLSFakeConnection.h */; };
 		6F255E541712E85F007BFC96 /* HLSFakeConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F255E521712E85F007BFC96 /* HLSFakeConnection.m */; };
+		6F28D61419FF79F400564BD3 /* UIWindow+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F28D61219FF79F400564BD3 /* UIWindow+HLSExtensions.h */; };
+		6F28D61519FF79F400564BD3 /* UIWindow+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28D61319FF79F400564BD3 /* UIWindow+HLSExtensions.m */; };
 		6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */; };
 		6F2D46FA15761A8600EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */; };
@@ -363,6 +365,8 @@
 		6F255E401712C360007BFC96 /* HLSConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSConnection.m; sourceTree = "<group>"; };
 		6F255E511712E85F007BFC96 /* HLSFakeConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFakeConnection.h; sourceTree = "<group>"; };
 		6F255E521712E85F007BFC96 /* HLSFakeConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFakeConnection.m; sourceTree = "<group>"; };
+		6F28D61219FF79F400564BD3 /* UIWindow+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+HLSExtensions.h"; sourceTree = "<group>"; };
+		6F28D61319FF79F400564BD3 /* UIWindow+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -1023,6 +1027,8 @@
 				6F23DB2616B3E84200C085CE /* UIView+HLSRuntimeAttributes.m */,
 				6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */,
 				6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */,
+				6F28D61219FF79F400564BD3 /* UIWindow+HLSExtensions.h */,
+				6F28D61319FF79F400564BD3 /* UIWindow+HLSExtensions.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1157,6 +1163,7 @@
 				6F0CA8EE19DD934300CBE2E1 /* UITextView+HLSViewBinding.h in Headers */,
 				6FFAB76819DD8DA800A91997 /* HLSMAWeakDictionary.h in Headers */,
 				6FADE5BD14BA0494007EE121 /* NSData+HLSExtensions.h in Headers */,
+				6F28D61419FF79F400564BD3 /* UIWindow+HLSExtensions.h in Headers */,
 				6FB007DD1952D09B0082D915 /* HLSGeometry.h in Headers */,
 				6FADE5BF14BA0494007EE121 /* NSDate+HLSExtensions.h in Headers */,
 				6FADE5C114BA0494007EE121 /* NSDateFormatter+HLSExtensions.h in Headers */,
@@ -1544,6 +1551,7 @@
 				6FA8913F179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */,
 				6F10E389179FFE2B00BFEF42 /* HLSViewTouchDetector.m in Sources */,
 				6F6E814317CF05FF00CE578A /* HLSLoggerViewController.m in Sources */,
+				6F28D61519FF79F400564BD3 /* UIWindow+HLSExtensions.m in Sources */,
 				6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */,
 				6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */,
 				6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */,
@@ -1589,6 +1597,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_CFLAGS = "-DHLS_LOGGER";
@@ -1606,6 +1615,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = CoconutKit;

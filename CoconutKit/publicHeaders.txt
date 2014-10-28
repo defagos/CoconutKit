@@ -96,3 +96,4 @@ UIView+HLSViewBindingImplementation.h
 UIViewController+HLSExtensions.h
 UIViewController+HLSViewBinding.h
 UIWebView+HLSExtensions.h
+UIWindow+HLSextensions.h

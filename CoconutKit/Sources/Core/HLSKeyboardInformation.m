@@ -9,6 +9,18 @@
 #import "HLSKeyboardInformation.h"
 
 #import "HLSLogger.h"
+#import "HLSRuntime.h"
+
+// FIXME: There are serious bugs with the undocked keyboard in iOS 8 / 8.1:
+//          - when undocked by dragging the keyboard upwards, the keyboard does not transition to undocked state. The
+//            hide notifications are not received and, if you long-press the keyboard button, the keyboard can still
+//            be undocked. The behavior is correct when the keyboard is undocked by long-pressing the keyboard button
+//            and tapping Undock. See http://openradar.appspot.com/18010127.
+//          - conversely, when the undocked keyboard is thrown against the bottom, depending on the velocity, show
+//            notifications might be received or not
+//          - when moving the undocked the keyboard to the top, the keyboard jumps everywhere like mad
+//          - the keyboard background has a really weird behavior, sometimes appears and never disappears, sometimes
+//            gets bigger and then suddenly smaller, etc.
 
 @interface HLSKeyboardInformation ()
 
@@ -47,15 +59,40 @@ static HLSKeyboardInformation *s_instance = nil;
 
 + (void)keyboardWillShow:(NSNotification *)notification
 {
-    HLSLoggerDebug(@"Keyboard shown");
+    HLSLoggerDebug(@"Keyboard will show");
     s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:[notification userInfo]];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
-    HLSLoggerDebug(@"Keyboard hidden");
+    HLSLoggerDebug(@"Keyboard will hide");
     s_instance = nil;
 }
+
+#ifdef DEBUG
+
++ (void)keyboardDidShow:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard did show");
+    s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:[notification userInfo]];
+}
+
++ (void)keyboardDidHide:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard did hide");
+}
+
++ (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard will change frame");
+}
+
++ (void)keyboardDidChangeFrame:(NSNotification *)notification
+{
+    HLSLoggerDebug(@"Keyboard did change frame");
+}
+
+#endif
 
 #pragma mark Description
 
@@ -84,4 +121,24 @@ __attribute__ ((constructor)) static void HLSKeyboardInformationInit(void)
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+#ifdef DEBUG
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardWillChangeFrame:)
+                                                 name:UIKeyboardWillChangeFrameNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[HLSKeyboardInformation class]
+                                             selector:@selector(keyboardDidChangeFrame:)
+                                                 name:UIKeyboardDidChangeFrameNotification
+                                               object:nil];
+#endif
+
 }

@@ -249,7 +249,6 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
         };
         
         // Cast the call to objc_msgSendSuper appropriately
-        // Warning: Does not work with ARC
         id (*objc_msgSendSuper_typed)(struct objc_super *, SEL, va_list) = (void *)&objc_msgSendSuper;
         return objc_msgSendSuper_typed(&super, selector, argp);
     }), types);
