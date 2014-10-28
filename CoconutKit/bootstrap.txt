@@ -55,3 +55,4 @@ UIViewController+HLSExtensions.m
 UIViewController+HLSViewBinding.m
 UIWebView+HLSExtensions.m
 UIWebView+HLSViewBinding.m
+UIWindow+HLSExtensions.m

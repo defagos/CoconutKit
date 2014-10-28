@@ -60,12 +60,12 @@
 
 - (void)viewDidBeginEditing:(NSNotification *)notification
 {
-    [[[UIApplication sharedApplication] keyWindow] addGestureRecognizer:self.gestureRecognizer];
+    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:self.gestureRecognizer];
 }
 
 - (void)viewDidEndEditing:(NSNotification *)notification
 {
-    [[[UIApplication sharedApplication] keyWindow] removeGestureRecognizer:self.gestureRecognizer];
+    [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:self.gestureRecognizer];
 }
 
 #pragma mark Event callbacks

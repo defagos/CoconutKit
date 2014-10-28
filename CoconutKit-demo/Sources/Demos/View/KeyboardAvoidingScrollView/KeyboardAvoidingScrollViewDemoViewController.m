@@ -85,7 +85,7 @@
 
 - (IBAction)closeInput:(id)sender
 {
-    [[[UIApplication sharedApplication] keyWindow].rootViewController.view endEditing:NO];
+    [[UIApplication sharedApplication].keyWindow.activeViewController.view endEditing:NO];
 }
 
 @end

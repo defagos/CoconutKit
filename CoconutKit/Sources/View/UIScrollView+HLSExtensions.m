@@ -12,6 +12,7 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "UIView+HLSExtensions.h"
+#import "UIWindow+HLSExtensions.h"
 
 #import <objc/runtime.h>
 
@@ -176,7 +177,7 @@ static NSDictionary *s_scrollViewOriginalHeights = nil;
 
 + (void)keyboardWillShow:(NSNotification *)notification
 {
-    UIView *rootView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+    UIView *rootView = [UIApplication sharedApplication].keyWindow.activeViewController.view;
     NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:rootView];
     
     CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
