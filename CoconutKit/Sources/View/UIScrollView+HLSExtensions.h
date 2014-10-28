@@ -49,6 +49,11 @@
  *
  * The default value is NO
  */
-@property (nonatomic, assign, getter=isAvoidingKeyboard) BOOL avoidingKeyboard;
+@property (nonatomic, assign, getter=isAvoidingKeyboard) IBInspectable BOOL avoidingKeyboard;
+
+/**
+ * The distance to at least keep between keyboard and content. Defaults to 10.f
+ */
+@property (nonatomic, assign) IBInspectable CGFloat keyboardDistance;
 
 @end

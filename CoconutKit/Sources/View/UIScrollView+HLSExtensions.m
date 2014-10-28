@@ -30,6 +30,7 @@
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
 static void *s_avoidingKeyboardKey = &s_avoidingKeyboardKey;
+static void *s_keyboardDistanceKey = &s_keyboardDistanceKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
@@ -59,6 +60,19 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 - (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
 {
     objc_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)keyboardDistance
+{
+    static const CGFloat HLSDefaultKeyboardDistance = 10.f;
+    
+    NSNumber *keyboardDistanceNumber = objc_getAssociatedObject(self, s_keyboardDistanceKey);
+    return keyboardDistanceNumber ? [keyboardDistanceNumber floatValue] : HLSDefaultKeyboardDistance;
+}
+
+- (void)setKeyboardDistance:(CGFloat)keyboardDistance
+{
+    objc_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Synchronizing scroll views
@@ -213,10 +227,10 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         [scrollViewOriginalIndicatorBottomInsets setObject:scrollViewOriginalIndicatorBottomInset forKey:pointerKey];
         
         // Prevent the scroll view from growing larger than its original size, or smaller than zero
-        static const CGFloat HLSKeyboardScrollViewVerticalMargin = 10.f;
+        
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
-                                                   keyboardHeightAdjustment + HLSKeyboardScrollViewVerticalMargin,
+                                                   keyboardHeightAdjustment + scrollView.keyboardDistance,
                                                    scrollView.contentInset.right);
         scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                             scrollView.scrollIndicatorInsets.left,
