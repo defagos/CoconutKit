@@ -16,16 +16,6 @@
 
 #import <objc/runtime.h>
 
-/**
- * There are at least three way to detect contentOffset changes of the master view:
- *   - use an internal delegate which transparently forwards events to the real scroll view delegate, and which
- *     performs synchronization in its scrollViewDidScroll: method implementation. This might break if 
- *     UIScrollViewDelegate changes, though
- *   - use KVO on contentOffset. The problem is that the observeValue... method to implement could be overridden by
- *     existing subclasses of UIScrollView, or even by categories. This is clearly not robust enough
- *   - swizzling contentOffset mutators. This is the safest approach which has been retained here
- */
-
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
@@ -215,19 +205,17 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
             continue;
         }
         
-        // Store the original scroll view height once, namely when a scroll view first needs to be resized
-        NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
-        
         // The didShow notification is received consecutively without intermediate willHide notification. We need to preserve the
         // initial values in such cases
+        NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
+        
         NSNumber *scrollViewOriginalBottomInset = [s_scrollViewOriginalBottomInsets objectForKey:pointerKey] ?: @(scrollView.contentInset.bottom);
         [scrollViewOriginalBottomInsets setObject:scrollViewOriginalBottomInset forKey:pointerKey];
         
         NSNumber *scrollViewOriginalIndicatorBottomInset = [s_scrollViewOriginalIndicatorBottomInsets objectForKey:pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
         [scrollViewOriginalIndicatorBottomInsets setObject:scrollViewOriginalIndicatorBottomInset forKey:pointerKey];
         
-        // Prevent the scroll view from growing larger than its original size, or smaller than zero
-        
+        // Adjust content
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
                                                    keyboardHeightAdjustment + scrollView.keyboardDistance,
@@ -244,8 +232,8 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
             continue;
         }
         
-        // If the first responder is not visible, change the offset to make it visible. Not made in -willShow since result not convincing
-        // enough if frame and content offset are changed at the same time
+        // If the first responder is not visible, change the offset to make it visible. Override the animation duration to match
+        // the one of the keyboard
         NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         [UIView animateWithDuration:keyboardAnimationDuration animations:^{
             CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
