@@ -9,6 +9,8 @@
 #import "UITextView+HLSCursorVisibility.h"
 
 #import "HLSLogger.h"
+#import "UIView+HLSExtensions.h"
+#import "UIWindow+HLSExtensions.h"
 
 // TODO: This functionality can be completely removed when CoconutKit requires iOS 8
 
@@ -25,11 +27,11 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textViewDidChangeCursorPosition:)
-                                                 name:UITextViewTextDidBeginEditingNotification
+                                                 name:UITextViewTextDidChangeNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textViewDidChangeCursorPosition:)
-                                                 name:UITextViewTextDidChangeNotification
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
                                                object:nil];
 }
 
@@ -65,6 +67,15 @@
     // The cursor position is updated after this notification is changed. Wait a little bit to have the most
     // recent cursor position
     [notification.object performSelector:@selector(scrollCursorToVisible) withObject:nil afterDelay:0.05];
+}
+
++ (void)keyboardDidShow:(NSNotification *)notification
+{
+    UIView *firstResponderView = [[UIApplication sharedApplication].keyWindow.activeViewController.view firstResponderView];
+    if ([firstResponderView isKindOfClass:[UITextView class]]) {
+        UITextView *textView = (UITextView *)firstResponderView;
+        [textView scrollCursorToVisible];
+    }
 }
 
 @end
