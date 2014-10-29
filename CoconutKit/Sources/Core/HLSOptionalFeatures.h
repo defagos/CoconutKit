@@ -14,6 +14,15 @@
 
 #import "NSManagedObject+HLSValidation.h"
 #import "UIControl+HLSExclusiveTouch.h"
+#import "UITextView+HLSCursorVisibility.h"
+
+#define HLSEnableUITextViewCursorVisibility()                                                            \
+    __attribute__ ((constructor)) void HLSEnableUITextViewCursorVisibilityConstructor(void)              \
+    {                                                                                                    \
+        @autoreleasepool {                                                                               \
+            [UITextView enableCursorVisibility];                                                         \
+        }                                                                                                \
+    }
 
 /**
  * Enable Core Data validation extensions. You need to enable this feature if you want the CoconutKit
@@ -24,7 +33,7 @@
     __attribute__ ((constructor)) void HLSEnableNSManagedObjectValidationConstructor(void)               \
     {                                                                                                    \
         @autoreleasepool {                                                                               \
-            [NSManagedObject enable];                                                                    \
+            [NSManagedObject enableObjectValidation];                                                    \
         }                                                                                                \
     }
 
@@ -37,6 +46,6 @@
     __attribute__ ((constructor)) void HLSEnableUIControlExclusiveTouchConstructor(void)                 \
     {                                                                                                    \
         @autoreleasepool {                                                                               \
-            [UIControl enable];                                                                          \
+            [UIControl enableExclusiveTouch];                                                            \
         }                                                                                                \
     }

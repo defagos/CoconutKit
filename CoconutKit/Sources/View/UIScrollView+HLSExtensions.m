@@ -226,11 +226,6 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
                                                             scrollView.scrollIndicatorInsets.right);
         [adjustedScrollViews addObject:scrollView];
         
-        
-        if ([scrollView isKindOfClass:[UITextView class]]) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChange:) name:UITextViewTextDidChangeNotification object:scrollView];
-        }
-        
         // Find if the first responder is contained within the scroll view
         UIView *firstResponderView = [scrollView firstResponderView];
         if (firstResponderView) {
@@ -252,8 +247,6 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 + (void)keyboardWillHide:(NSNotification *)notification
 {
     for (UIScrollView *scrollView in s_adjustedScrollViews) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:scrollView];
-        
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         
         CGFloat scrollViewOriginalBottomInset = [[s_scrollViewOriginalBottomInsets objectForKey:pointerKey] floatValue];
@@ -274,20 +267,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
     s_scrollViewOriginalIndicatorBottomInsets = nil;
 }
 
-// This is not needed anymore since iOS 8, which ensures the cursor stays within the area defined by content insets
-// TODO: Remove when CoconutKit requires iOS 8
-+ (void)textViewTextDidChange:(NSNotification *)notification
-{
-    NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
-    
-    UITextView *textView = notification.object;
-    UIView *containerView = [textView.subviews firstObject];
-    UIView *selectionView = [containerView.subviews firstObject];
-    UIView *cursorView = [selectionView.subviews firstObject];
-    
-    CGRect cursorViewFrameInScrollView = [textView convertRect:cursorView.bounds fromView:cursorView];
-    [textView scrollRectToVisible:cursorViewFrameInScrollView animated:YES];
-}
+
 
 @end
 
