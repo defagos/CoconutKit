@@ -229,10 +229,8 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         // Find if the first responder is contained within the scroll view
         UIView *firstResponderView = [scrollView firstResponderView];
         if (firstResponderView) {
-            // If the first responder is not visible, change the offset to make it visible. Override the animation duration to match
-            // the one of the keyboard
-            NSTimeInterval keyboardAnimationDuration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-            [UIView animateWithDuration:keyboardAnimationDuration animations:^{
+            // If the first responder is not visible, change the offset to make it visible
+            [UIView animateWithDuration:0.25 animations:^{
                 CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
                 [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
             }];
