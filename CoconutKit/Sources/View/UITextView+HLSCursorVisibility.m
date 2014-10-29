@@ -22,19 +22,27 @@
         HLSLoggerInfo(@"Cursor fixes not needed since iOS 8");
         return;
     }
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textViewTextDidChange:)
+                                             selector:@selector(textViewDidChangeCursorPosition:)
+                                                 name:UITextViewTextDidBeginEditingNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewDidChangeCursorPosition:)
                                                  name:UITextViewTextDidChangeNotification
                                                object:nil];
 }
 
+#pragma mark Visibility
+
 - (void)scrollCursorToVisible
 {
-    // Locate the blinking cursor in the text view hierarchy, and ensure its stays visible
-    UIView *containerView = [self.subviews firstObject];
-    UIView *selectionView = [containerView.subviews firstObject];
-    UIView *cursorView = [selectionView.subviews firstObject];
+    // Locate the first view leaf. Can be the blinking cursor or part of the selection view. This trick works because the possible
+    // view hierarchies are stable, this trick namely only targets iOS 7
+    UIView *cursorView = self;
+    while ([cursorView.subviews count] != 0) {
+        cursorView = [cursorView.subviews firstObject];
+    }
     
     static const CGFloat HLSCursorVisibilityMargin = 10.f;
     CGRect cursorViewFrameInTextView = [self convertRect:cursorView.bounds fromView:cursorView];
@@ -50,13 +58,13 @@
 
 #pragma mark Notification callbacks
 
-+ (void)textViewTextDidChange:(NSNotification *)notification
++ (void)textViewDidChangeCursorPosition:(NSNotification *)notification
 {
     NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
     
     // The cursor position is updated after this notification is changed. Wait a little bit to have the most
     // recent cursor position
-    [notification.object performSelector:@selector(scrollCursorToVisible) withObject:nil afterDelay:0.01];
+    [notification.object performSelector:@selector(scrollCursorToVisible) withObject:nil afterDelay:0.05];
 }
 
 @end
