@@ -29,28 +29,34 @@
                                                object:nil];
 }
 
-#pragma mark Notification callbacks
-
-+ (void)textViewTextDidChange:(NSNotification *)notification
+- (void)scrollCursorToVisible
 {
-    NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
-    
     // Locate the blinking cursor in the text view hierarchy, and ensure its stays visible
-    UITextView *textView = notification.object;
-    UIView *containerView = [textView.subviews firstObject];
+    UIView *containerView = [self.subviews firstObject];
     UIView *selectionView = [containerView.subviews firstObject];
     UIView *cursorView = [selectionView.subviews firstObject];
     
     static const CGFloat HLSCursorVisibilityMargin = 10.f;
-    CGRect cursorViewFrameInTextView = [textView convertRect:cursorView.bounds fromView:cursorView];
+    CGRect cursorViewFrameInTextView = [self convertRect:cursorView.bounds fromView:cursorView];
     CGRect enlargedCursorViewFrameInTextView = CGRectMake(CGRectGetMinX(cursorViewFrameInTextView) - HLSCursorVisibilityMargin,
                                                           CGRectGetMinY(cursorViewFrameInTextView) - HLSCursorVisibilityMargin,
                                                           CGRectGetWidth(cursorViewFrameInTextView) + 2 * HLSCursorVisibilityMargin,
                                                           CGRectGetHeight(cursorViewFrameInTextView) + 2 * HLSCursorVisibilityMargin);
     
     [UIView animateWithDuration:0.25 animations:^{
-        [textView scrollRectToVisible:enlargedCursorViewFrameInTextView animated:NO];
+        [self scrollRectToVisible:enlargedCursorViewFrameInTextView animated:NO];
     }];
+}
+
+#pragma mark Notification callbacks
+
++ (void)textViewTextDidChange:(NSNotification *)notification
+{
+    NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
+    
+    // The cursor position is updated after this notification is changed. Wait a little bit to have the most
+    // recent cursor position
+    [notification.object performSelector:@selector(scrollCursorToVisible) withObject:nil afterDelay:0.01];
 }
 
 @end
