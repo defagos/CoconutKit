@@ -328,10 +328,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     
     UIEdgeInsets contentInset = scrollView.contentInset;
-    contentInset = UIEdgeInsetsMake(contentInset.top,
-                                    contentInset.left,
-                                    toolbarSize.height,
-                                    contentInset.right);
+    contentInset.bottom = toolbarSize.height;
     
     scrollView.contentInset = contentInset;
     scrollView.scrollIndicatorInsets = contentInset;
