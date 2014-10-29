@@ -11,6 +11,7 @@
 #import "HLSApplicationInformation.h"
 #import "HLSAutorotation.h"
 #import "HLSGoogleChromeActivity.h"
+#import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
 #import "HLSNotifications.h"
 #import "HLSSafariActivity.h"
@@ -80,6 +81,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     @try {
         [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     }
@@ -245,6 +248,11 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
     [loadingToolbarItems replaceObjectAtIndex:[loadingToolbarItems indexOfObject:self.refreshBarButtonItem] withObject:stopBarButtonItem];
     self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidChangeFrame:)
+                                                 name:UIKeyboardDidChangeFrameNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -328,10 +336,18 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     
     UIEdgeInsets contentInset = scrollView.contentInset;
-    contentInset = UIEdgeInsetsMake(contentInset.top,
-                                    contentInset.left,
-                                    toolbarSize.height,
-                                    contentInset.right);
+    
+    // Keyboard visible: Adjust content and indicator insets to avoid being hidden by the keyboard
+    HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
+    if (keyboardInformation) {
+        CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardInformation.endFrame fromView:nil];
+        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView) + scrollView.contentOffset.y;
+        contentInset.bottom = keyboardHeightAdjustment;
+    }
+    // Keyboard not visible: Adjust content and indicator insets to avoid being hidden by the toolbar
+    else {
+        contentInset.bottom = toolbarSize.height;
+    }
     
     scrollView.contentInset = contentInset;
     scrollView.scrollIndicatorInsets = contentInset;
@@ -620,6 +636,13 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     if (arc4random_uniform(3) == 0) {
         [self setProgress:[self progress] + HLSWebViewFakeTimerProgressIncrement animated:YES];
     }
+}
+
+#pragma mark Notification callbacks
+
+- (void)keyboardDidChangeFrame:(NSNotification *)notification
+{
+    [self layoutForInterfaceOrientation:self.interfaceOrientation];
 }
 
 #pragma mark KVO

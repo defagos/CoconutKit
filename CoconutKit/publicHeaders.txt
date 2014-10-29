@@ -89,6 +89,7 @@ UISplitViewController+HLSExtensions.h
 UITabBarController+HLSExtensions.h
 UITextField+HLSExtensions.h
 UITextField+HLSValidation.h
+UITextView+HLSCursorVisibility.h
 UITextView+HLSExtensions.h
 UIView+HLSExtensions.h
 UIView+HLSViewBinding.h
@@ -96,4 +97,4 @@ UIView+HLSViewBindingImplementation.h
 UIViewController+HLSExtensions.h
 UIViewController+HLSViewBinding.h
 UIWebView+HLSExtensions.h
-UIWindow+HLSextensions.h
+UIWindow+HLSExtensions.h
