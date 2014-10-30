@@ -56,6 +56,8 @@
 {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.tableView.rowHeight = [EmployeeTableViewCell height];
     self.tableView.sectionHeaderHeight = [EmployeeHeaderView height];
     
