@@ -83,10 +83,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    @try {
-        [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+    if ([WKWebView class]) {
+        @try {
+            [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+        }
+        @catch (NSException *exception) {}
     }
-    @catch (NSException *exception) {}
 }
 
 #pragma mark Accessors and mutators
