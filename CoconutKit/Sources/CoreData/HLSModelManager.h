@@ -170,3 +170,9 @@
 @property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
+
+@interface HLSModelManager (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

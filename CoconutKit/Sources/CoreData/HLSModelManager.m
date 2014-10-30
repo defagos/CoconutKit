@@ -339,7 +339,7 @@
 - (HLSModelManager *)duplicate
 {
     // Duplicate the context, the rest is the same
-    HLSModelManager *modelManager = [[HLSModelManager alloc] init];
+    HLSModelManager *modelManager = [[[self class] alloc] init];
     modelManager.managedObjectContext = [self managedObjectContextForPersistentStoreCoordinator:self.persistentStoreCoordinator];
     modelManager.managedObjectModel = self.managedObjectModel;
     modelManager.persistentStoreCoordinator = self.persistentStoreCoordinator;
