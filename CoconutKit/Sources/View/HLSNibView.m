@@ -53,12 +53,33 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             return nil;
         }
         
-        return firstObject;
+        HLSNibView *view = firstObject;
+        return view;
     }
     else {
         HLSLoggerError(@"xib file not found");
         return nil;
     }
+}
+
+#pragma mark NSCoding protocol
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        // If no child views, consider we are deserializing a placeholder, and add a proper instance as subview
+        if ([self.subviews count] == 0) {
+            // Match frame and colors so that the placeholder view is visually replaced by a properly instantiated
+            // view instance
+            UIView *view = [[self class] view];
+            view.frame = self.bounds;
+            view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            [self addSubview:view];
+            
+            self.backgroundColor = view.backgroundColor;
+        }
+    }
+    return self;
 }
 
 #pragma mark Class methods for customisation

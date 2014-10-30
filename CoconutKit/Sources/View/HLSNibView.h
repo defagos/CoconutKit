@@ -24,6 +24,14 @@
  * to set its type to match your view class name (if you need to bind outlets). Use this class as origin when drawing 
  * bindings (do not use the file's owner)
  *
+ * When adding an HLSNibView to a view hierarchy, you have two options:
+ *   - In code: Instantiate the view programmatically and install it in the hierarchy
+ *   - In Interface Builder: Add a placeholder view (a simple view containing no subviews) to a view, and set its class to
+ *                           the HLSNibView to instantiate. An HLSNibView instance will automatically be added
+ *                           within the placeholder view when the nib is deserialized (with same size and appropriate 
+ *                           resizing behavior). If your placeholder view contains subviews, the result is undefined
+ *                           (most likely a crash because of missing outlets)
+ *
  * Designated initializer: -initWithFrame: (you usually do not need to create a view manually. Use the factory method 
  *                                          instead)
  */
@@ -54,5 +62,12 @@
  * default, this method returns nil, which corresponds to the main bundle)
  */
 + (NSBundle *)bundle;
+
+@end
+
+@interface HLSNibView (UnavailableMethods)
+
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end
