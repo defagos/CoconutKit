@@ -123,6 +123,8 @@
 		6FA5BD9B15E28CBB00E5182E /* HLSLayerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */; };
 		6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */; };
 		6FA5BDC115E34A8F00E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */; };
+		6FA624ED1A023B0E00133735 /* WKWebView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA624EB1A023B0E00133735 /* WKWebView+HLSViewBinding.h */; };
+		6FA624EE1A023B0E00133735 /* WKWebView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA624EC1A023B0E00133735 /* WKWebView+HLSViewBinding.m */; };
 		6FA8913E179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA8913C179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.h */; };
 		6FA8913F179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8913D179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.m */; };
 		6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */; };
@@ -442,6 +444,8 @@
 		6FA5BD9915E28CBB00E5182E /* HLSLayerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimation.m; sourceTree = "<group>"; };
 		6FA5BDBE15E34A8F00E5182E /* HLSLayerAnimationStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLayerAnimationStep.h; sourceTree = "<group>"; };
 		6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
+		6FA624EB1A023B0E00133735 /* WKWebView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6FA624EC1A023B0E00133735 /* WKWebView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6FA8913C179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxy.h; sourceTree = "<group>"; };
 		6FA8913D179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxy.m; sourceTree = "<group>"; };
 		6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -743,6 +747,8 @@
 				6F0CA8D619DD934300CBE2E1 /* UIViewController+HLSViewBindingFriend.h */,
 				6F0CA8D719DD934300CBE2E1 /* UIWebView+HLSViewBinding.h */,
 				6F0CA8D819DD934300CBE2E1 /* UIWebView+HLSViewBinding.m */,
+				6FA624EB1A023B0E00133735 /* WKWebView+HLSViewBinding.h */,
+				6FA624EC1A023B0E00133735 /* WKWebView+HLSViewBinding.m */,
 			);
 			path = Bindings;
 			sourceTree = "<group>";
@@ -1200,6 +1206,7 @@
 				6FFAB76E19DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */,
 				6FADE5F014BA0494007EE121 /* HLSNibView.h in Headers */,
 				6FADE5F214BA0494007EE121 /* HLSSubtitleTableViewCell.h in Headers */,
+				6FA624ED1A023B0E00133735 /* WKWebView+HLSViewBinding.h in Headers */,
 				6FADE5F414BA0494007EE121 /* HLSTableViewCell+Protected.h in Headers */,
 				6FADE5F514BA0494007EE121 /* HLSTableViewCell.h in Headers */,
 				6FADE5FD14BA0494007EE121 /* HLSValue1TableViewCell.h in Headers */,
@@ -1539,7 +1546,6 @@
 				6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */,
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,
-				6F23DB2816B3E84200C085CE /* UIView+HLSRuntimeAttributes.m in Sources */,
 				6FFAB76D19DD8DA800A91997 /* HLSMAZeroingWeakRef.m in Sources */,
 				6FAB922A16DA7F9100599256 /* HLSFileURLConnection.m in Sources */,
 				6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */,
@@ -1556,6 +1562,7 @@
 				6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */,
 				6F794816180BABAD00282253 /* NSStream+HLSExtensions.m in Sources */,
 				6FB318B31815A93200565B69 /* HLSInMemoryFileManager.m in Sources */,
+				6FA624EE1A023B0E00133735 /* WKWebView+HLSViewBinding.m in Sources */,
 				6F0CA8EB19DD934300CBE2E1 /* UITableView+HLSViewBinding.m in Sources */,
 				6FAD88D51817859F00B02B29 /* HLSInMemoryCacheEntry.m in Sources */,
 				6FC3790D182D2C2300B55AF1 /* UIApplication+HLSExtensions.m in Sources */,
