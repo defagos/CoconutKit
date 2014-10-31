@@ -14,7 +14,7 @@
 
 #import <objc/runtime.h>
 
-NSString * const CoconutKitErrorDomain = @"ch.hortis.coconutkit";
+NSString * const CoconutKitErrorDomain = @"ch.defagos.coconutkit";
 NSString * const HLSDetailedErrorsKey = @"HLSDetailedErrorsKey";
 
 static void *s_mutableUserInfoKey = &s_mutableUserInfoKey;
