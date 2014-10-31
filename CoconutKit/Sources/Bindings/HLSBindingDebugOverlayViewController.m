@@ -131,6 +131,9 @@ static UIWindow *s_previousKeyWindow = nil;
         else {
             overlayButton.frame = [view convertRect:view.bounds toView:self.view];
         }
+        
+        // TODO: Would be cool to display a status "Unresolved" in orange. Instead of changing verified to be an enum,
+        //       simply use another bool
         overlayButton.layer.borderColor = bindingInformation.verified ? [UIColor greenColor].CGColor : [UIColor redColor].CGColor;
         overlayButton.layer.borderWidth = 2.f;
         overlayButton.userInfo_hls = @{@"bindingInformation" : bindingInformation};

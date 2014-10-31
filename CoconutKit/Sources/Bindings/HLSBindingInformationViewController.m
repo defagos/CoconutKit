@@ -38,8 +38,11 @@
     if (hls_isClass(object)) {
         return [NSString stringWithFormat:@"'%@' class", object];
     }
+    else if ([object isKindOfClass:[UIViewController class]]) {
+        return [NSString stringWithFormat:@"%p (%@)", object, [object class]];
+    }
     else {
-        return [object description];
+        return [NSString stringWithFormat:@"%@ (%@)", object, [object class]];
     }
 }
 
@@ -79,11 +82,11 @@
         self.objects = @[statusString,
                          bindingInformation.keyPath ?: @"-",
                          bindingInformation.transformerName ?: @"-",
-                         bindingInformation.object ?: [NSNull null],
-                         bindingInformation.delegate ?: (id)[NSNull null],
-                         [bindingInformation value] ?: [NSNull null],
-                         [bindingInformation rawValue] ?: [NSNull null],
-                         bindingInformation.transformationTarget ?: [NSNull null],
+                         [HLSBindingInformationViewController identityStringForObject:bindingInformation.object],
+                         [HLSBindingInformationViewController identityStringForObject:bindingInformation.delegate],
+                         [HLSBindingInformationViewController identityStringForObject:[bindingInformation value]],
+                         [HLSBindingInformationViewController identityStringForObject:[bindingInformation rawValue]],
+                         [HLSBindingInformationViewController identityStringForObject:bindingInformation.transformationTarget],
                          transformationSelectorString,
                          HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)])];
         
@@ -105,8 +108,7 @@
 
 - (NSString *)valueAtIndexPath:(NSIndexPath *)indexPath
 {
-    id object = [self.objects objectAtIndex:indexPath.row];
-    return [object isKindOfClass:[NSString class]] ? object : [HLSBindingInformationViewController identityStringForObject:object];
+    return [self.objects objectAtIndex:indexPath.row];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -137,6 +139,8 @@
     return [HLSInfoTableViewCell heightForValue:value];
 }
 
+// FIXME: Implement highlighting again
+#if 0
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIView *view = nil;
@@ -165,5 +169,6 @@
         }];
     }];
 }
+#endif
 
 @end
