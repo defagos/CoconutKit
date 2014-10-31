@@ -137,15 +137,6 @@
         }
     }
     
-    if (! [self canDisplayValue:value]) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSErrorUnsupportedTypeError
-                          localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"The class %@ is not supported (supported are %@)", nil), [value class], [self supportedBindingClassesString]]];
-        }
-        return NO;
-    }
-    
     if (pValue) {
         *pValue = value;
     }
