@@ -12,11 +12,7 @@
 @protocol HLSBindingDelegate <NSObject>
 
 @optional
-
-// TODO: Add methods for udpate success / failure
-
 - (void)view:(UIView *)view didValidateValue:(id)value forObject:(id)object keyPath:(NSString *)keyPath;
-
 - (void)view:(UIView *)view didFailValidationForValue:(id)value object:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
 
 @end

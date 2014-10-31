@@ -64,6 +64,9 @@
  */
 @property (nonatomic, readonly, strong) NSString *keyPath;
 
+/**
+ * The bound view
+ */
 @property (nonatomic, readonly, weak) UIView *view;
 
 /**

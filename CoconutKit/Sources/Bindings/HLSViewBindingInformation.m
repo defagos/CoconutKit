@@ -94,13 +94,35 @@
         // correct memory management
         id (*methodImp)(id, SEL) = (id (*)(id, SEL))[self.transformationTarget methodForSelector:self.transformationSelector];
         id transformer = methodImp(self.transformationTarget, self.transformationSelector);
-        NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)] || [transformer isKindOfClass:[NSFormatter class]], @"Invalid transformer");
+        NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)]
+                    || [transformer isKindOfClass:[NSFormatter class]]
+                    || [transformer isKindOfClass:[NSValueTransformer class]], @"Invalid transformer");
         
         if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-            // TODO: Check method availability, return error if not available
+            if (! [transformer respondsToSelector:@selector(getObject:fromObject:error:)]) {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSErrorTransformationError
+                                  localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
+                }
+                return NO;
+            }
+            
             if (! [transformer getObject:&value fromObject:transformedValue error:pError]) {
                 return NO;
             }
+        }
+        else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
+            if (! [[transformer class] allowsReverseTransformation]) {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSErrorTransformationError
+                                  localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
+                }
+                return NO;
+            }
+            
+            value = [transformer reverseTransformedValue:transformedValue];
         }
         else {
             NSString *errorDescription = nil;
@@ -347,6 +369,9 @@
     }
     else if ([transformer isKindOfClass:[NSFormatter class]]) {
         return [transformer stringForObjectValue:value];
+    }
+    else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
+        return [transformer transformedValue:value];
     }
     else {
         HLSLoggerError(@"The value cannot be transformed");

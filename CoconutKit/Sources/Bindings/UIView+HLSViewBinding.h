@@ -22,14 +22,17 @@
  *                      bindKeyPath returns a non-supported kind of object, you must provide the name of a
  *                      transformer method 'methodName', which can either be an instance method with prototype
  *                        - (id<HLSTransformer>)methodName        or
- *                        - (NSFormatter *)methodName
+ *                        - (NSFormatter *)methodName             or
+ *                        - (NSValueTransformer *)methodName
  *                      or a class method with prototype
  *                        + (id<HLSTransformer>)classMethodName   or
- *                        + (NSFormatter *)classMethodName
- *                      returning an HLSTransformer or NSFormatter transforming the object into another one with 
- *                      supported type. These methods are looked up along the responder chain, as described below. 
- *                      Alternatively, you can provide a global class method '[SomeClass methodName]', returning 
- *                      either an HLSTransformer or an NSFormatter object.
+ *                        + (NSFormatter *)classMethodName        or
+ *                        + (NSValueTransformer *)classMethodName
+ *                      returning an HLSTransformer, NSFormatter or NSValueTransformer transforming the object 
+ *                      into another one with supported type. These methods are looked up along the responder 
+ *                      chain, as described below. Alternatively, you can provide a global class method 
+ *                      '[SomeClass methodName]', returning either an HLSTransformer, NSFormatter or
+ *                      NSValueTransformer object.
  *
  * Transformers are required when the type of the value returned by the key path does not match one of the supported
  * types, but can also be used to apply arbitrary changes to values displayed by bound views. For example, if a view 
