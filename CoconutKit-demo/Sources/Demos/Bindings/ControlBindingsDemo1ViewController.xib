@@ -27,7 +27,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="category"/>
                     </userDefinedRuntimeAttributes>
                 </segmentedControl>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" id="iRH-me-wKW">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" continuous="NO" id="iRH-me-wKW">
                     <rect key="frame" x="219" y="238" width="331" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <userDefinedRuntimeAttributes>

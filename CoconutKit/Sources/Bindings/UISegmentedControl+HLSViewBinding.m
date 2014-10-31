@@ -9,7 +9,6 @@
 #import "UISegmentedControl+HLSViewBinding.h"
 
 #import "HLSRuntime.h"
-#import "UIView+HLSViewBinding.h"
 
 // Associated object keys
 static void *s_lockKey = &s_lockKey;

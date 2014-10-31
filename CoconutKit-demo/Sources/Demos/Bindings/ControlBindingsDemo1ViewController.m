@@ -11,7 +11,9 @@
 @interface ControlBindingsDemo1ViewController ()
 
 @property (nonatomic, strong) NSNumber *switchEnabled;
+
 @property (nonatomic, strong) NSNumber *category;
+@property (nonatomic, strong) NSNumber *completion;
 
 @end
 
@@ -24,16 +26,12 @@
     if (self = [super init]) {
         self.switchEnabled = @YES;
         self.category = @1;
+        self.completion = @60.f;
     }
     return self;
 }
 
 #pragma mark Accessors and mutators
-
-- (NSNumber *)completion
-{
-    return @60.f;
-}
 
 - (NSNumber *)completionPercentage
 {

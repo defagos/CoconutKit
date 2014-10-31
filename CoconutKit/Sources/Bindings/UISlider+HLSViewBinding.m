@@ -13,9 +13,11 @@
 
 // Original implementation of the methods we swizzle
 static void (*s_UISlider__didMoveToWindow_Imp)(id, SEL) = NULL;
+static void (*s_UISlider__setValue_animated_Imp)(id, SEL, float, BOOL) = NULL;
 
 // Swizzled method implementations
 static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
+static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, float value, BOOL animated);
 
 @implementation UISlider (HLSViewBindingImplementation)
 
@@ -32,6 +34,10 @@ static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
                                                                                        @selector(didMoveToWindow),
                                                                                        (IMP)swizzled_UISlider__didMoveToWindow_Imp);
     }
+    
+    s_UISlider__setValue_animated_Imp = (void (*)(id, SEL, float, BOOL))hls_class_swizzleSelector(self,
+                                                                                                  @selector(setValue:animated:),
+                                                                                                  (IMP)swizzled_UISlider__setValue_animated_Imp);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -51,7 +57,14 @@ static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
     return NO;
 }
 
+- (id)displayedValue
+{
+    return @(self.value);
+}
+
 @end
+
+#pragma mark Static functions
 
 static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd)
 {
@@ -66,4 +79,12 @@ static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd)
     objc_msgSendSuper_typed(&super, _cmd);
     
     (*s_UISlider__didMoveToWindow_Imp)(self, _cmd);
+}
+
+static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, float value, BOOL animated)
+{
+    (*s_UISlider__setValue_animated_Imp)(self, _cmd, value, animated);
+
+    id displayedValue = @(value);
+    [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
 }
