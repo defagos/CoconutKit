@@ -327,9 +327,13 @@
     }
     
     if (! [self canDisplayValue:displayedValue]) {
-        self.errorDescription = [NSString stringWithFormat:@"The %@ must return one of the following supported types: %@",
-                                 transformationTarget ? @"transformer" : @"keypath",
-                                 [self supportedBindingClassesString]];
+        if (transformationTarget) {
+            self.errorDescription = [NSString stringWithFormat:@"The transformer must return one of the following supported types: %@", [self supportedBindingClassesString]];
+        }
+        else {
+            self.errorDescription = [NSString stringWithFormat:@"The keypath must return one of the following supported types: %@. Fix the return type "
+                                     "or use a transformer", [self supportedBindingClassesString]];
+        }
         return NO;
     }
     
