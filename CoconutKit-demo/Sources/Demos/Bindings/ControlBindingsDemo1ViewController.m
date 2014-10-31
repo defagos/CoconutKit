@@ -35,7 +35,7 @@
 
 - (NSNumber *)completionPercentage
 {
-    return @0.8f;
+    return @([self.completion floatValue] / 100.f);
 }
 
 - (NSString *)name
@@ -79,6 +79,8 @@
 - (void)view:(UIView *)view updateDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
 {
     NSLog(@"Update did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
+    
+    [self refreshBindingsForced:NO];
 }
 
 - (void)view:(UIView *)view updateDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error

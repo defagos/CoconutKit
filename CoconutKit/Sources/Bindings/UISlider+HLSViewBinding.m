@@ -11,6 +11,9 @@
 #import "HLSRuntime.h"
 #import <objc/message.h>
 
+// Associated object keys
+static void *s_lockKey = &s_lockKey;
+
 // Original implementation of the methods we swizzle
 static void (*s_UISlider__didMoveToWindow_Imp)(id, SEL) = NULL;
 static void (*s_UISlider__setValue_animated_Imp)(id, SEL, float, BOOL) = NULL;
@@ -49,7 +52,9 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
 
 - (void)updateViewWithValue:(id)value
 {
+    objc_setAssociatedObject(self, s_lockKey, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.value = [value floatValue];
+    objc_setAssociatedObject(self, s_lockKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)bindsSubviewsRecursively
@@ -85,6 +90,8 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
 {
     (*s_UISlider__setValue_animated_Imp)(self, _cmd, value, animated);
 
-    id displayedValue = @(value);
-    [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
+    if (! objc_getAssociatedObject(self, s_lockKey)) {
+        id displayedValue = @(value);
+        [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
+    }
 }
