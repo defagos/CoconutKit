@@ -29,7 +29,6 @@
         self.switchEnabled = @YES;
         self.category = @1;
         self.completion = @60.f;
-        self.name = @"Tom";
     }
     return self;
 }
@@ -48,7 +47,7 @@
 
 - (NSString *)greetings
 {
-    return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), self.name];
+    return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), ([self.name length] != 0) ? self.name : NSLocalizedString(@"John Doe", nil)];
 }
 
 - (NSString *)summary
