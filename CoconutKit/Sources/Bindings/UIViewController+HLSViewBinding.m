@@ -47,9 +47,9 @@ static void *s_boundObjectKey = &s_boundObjectKey;
     [[self viewIfLoaded] refreshBindingsForced:forced];
 }
 
-- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError
+- (BOOL)checkDisplayedValuesWithError:(NSError **)pError
 {
-    return [[self viewIfLoaded] checkDisplayedValuesExhaustive:exhaustive withError:pError];
+    return [[self viewIfLoaded] checkDisplayedValuesWithError:pError];
 }
 
 - (BOOL)updateModelWithError:(NSError **)pError

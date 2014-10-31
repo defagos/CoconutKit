@@ -84,7 +84,7 @@
  * either manually by calling -updateModelWithError: on a top view, or automatically by setting the updatingModelAutomatically 
  * property to YES (the default value is NO). As for display, a required attached transformer might be needed if the value 
  * to be displayed is not natively supported by the view (+supportedBindingClasses method). Bound fields can also be 
- * validated by calling -checkDisplayedValuesExhaustive:withError: on a top view. Update and check status (including any 
+ * validated by calling -checkDisplayedValues:withError: on a top view. Update and check status (including any
  * errors which might be encountered) are reported to a binding delegate. The binding delegate of a bound view is resolved 
  * by looking along the responder chain starting with the view for a class conforming to the HLSBindingDelegate protocol.
  *
@@ -146,14 +146,12 @@
 
 /**
  * Recursively check bound values, stopping at view controller boundaries. Errors are reported to the validation
- * delegates individually, and chained as a single error returned to the caller as well. If the exhaustive boolean
- * is set to NO, the checks stop when the first error is encountered (in which case only this error is returned
- * to the caller). If the exhaustive boolean is set to YES, all bound values are checked, and all corresponding
- * errors are returned
+ * delegates individually, and chained as a single error returned to the caller as well. All bound values are 
+ * checked, and all corresponding errors are returned
  *
  * The method returns YES iff all checks have been successful
  */
-- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError;
+- (BOOL)checkDisplayedValuesWithError:(NSError **)pError;
 
 /**
  * Trigger a recursive update of the model for those views which can change their underlying value. The view hierarchy
@@ -183,9 +181,9 @@
  * changed.
  *
  * The default value is NO. This provides for finer-grained control over when you want to update the model, which is
- * achieved by calling -checkDisplayedValuesExhaustive:withError: on a top view. If you want the model object to be 
- * immediately checked when the view contents change, set this property to YES. If this property is set to YES for all 
- * views, then calling -checkDisplayedValuesExhaustive:withError: is not needed
+ * achieved by calling -checkDisplayedValues:withError: on a top view. If you want the model object to be immediately 
+ * checked when the view contents change, set this property to YES. If this property is set to YES for all views, 
+ * then calling -checkDisplayedValues:withError: is not needed
  */
 @property (nonatomic, assign, getter=isUpdatingModelAutomatically) BOOL updatingModelAutomatically;
 

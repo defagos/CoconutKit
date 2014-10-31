@@ -41,7 +41,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
 - (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced;
 - (BOOL)bindsRecursively;
-- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError;
+- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 - (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 
 @end
@@ -91,9 +91,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively] forced:forced];
 }
 
-- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError
+- (BOOL)checkDisplayedValuesWithError:(NSError **)pError
 {
-    return [self checkDisplayedValuesInViewController:[self nearestViewController] exhaustive:exhaustive withError:pError];
+    return [self checkDisplayedValuesInViewController:[self nearestViewController] withError:pError];
 }
 
 - (BOOL)updateModelWithError:(NSError **)pError
@@ -229,7 +229,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self performSelector:@selector(updateViewWithValue:) withObject:value];
 }
 
-- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController exhaustive:(BOOL)exhaustive withError:(NSError **)pError
+- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -243,13 +243,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         
         NSError *error = nil;
         if (! [self checkDisplayedValue:displayedValue withError:&error]) {
-            if (! exhaustive) {
-                if (pError) {
-                    *pError = error;
-                }
-                return NO;
-            }
-            
             success = NO;
             
             if (pError) {
@@ -257,6 +250,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                     [*pError addObject:error forKey:HLSDetailedErrorsKey];
                 }
                 else {
+                    // FIXME: Where is error????????
                     *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                                   code:HLSErrorValidationMultipleErrors];
                 }
@@ -265,11 +259,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     for (UIView *subview in self.subviews) {
-        if (! [subview checkDisplayedValuesInViewController:viewController exhaustive:exhaustive withError:pError]) {
-            if (! exhaustive) {
-                return NO;
-            }
-            
+        if (! [subview checkDisplayedValuesInViewController:viewController withError:pError]) {
             success = NO;
         }
     }

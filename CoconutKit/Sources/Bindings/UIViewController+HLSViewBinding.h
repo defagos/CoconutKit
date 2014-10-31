@@ -16,7 +16,7 @@
 
 - (void)refreshBindingsForced:(BOOL)forced;
 
-- (BOOL)checkDisplayedValuesExhaustive:(BOOL)exhaustive withError:(NSError **)pError;
+- (BOOL)checkDisplayedValuesWithError:(NSError **)pError;
 
 - (BOOL)updateModelWithError:(NSError **)pError;
 
