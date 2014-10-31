@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSNumber *completion;
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSNumber *age;
 
 @end
 
@@ -48,6 +49,23 @@
 - (NSString *)greetings
 {
     return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), ([self.name length] != 0) ? self.name : NSLocalizedString(@"John Doe", nil)];
+}
+
+- (NSString *)ageEvaluation
+{
+    NSInteger age = [self.age integerValue];
+    if (age <= 0) {
+        return NSLocalizedString(@"You are not even born!", nil);
+    }
+    else if (age < 20) {
+        return NSLocalizedString(@"You are young", nil);
+    }
+    else if (age < 65) {
+        return NSLocalizedString(@"You are an adult", nil);
+    }
+    else {
+        return NSLocalizedString(@"You are old", nil);
+    }
 }
 
 - (NSString *)summary
