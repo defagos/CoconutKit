@@ -56,14 +56,8 @@
  */
 @interface UIView (HLSViewBindingUpdateImplementation)
 
-/**
- * View subclasses which want to provide update of bound values when the value they display change must call this
- * method in their implementation to update and check the underlying value (whether this actually happens depends
- * on the checkingDisplayedValueAutomatically and updatingModelAutomatically values)
- *
- * The methods returns YES iff the value could be updated and successfully checked. Errors are returned to the
- * binding delegate as well as to the caller. Update is made first. If it fails, then no check is made
- */
-- (BOOL)updateAndCheckModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError;
+- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
 
 @end

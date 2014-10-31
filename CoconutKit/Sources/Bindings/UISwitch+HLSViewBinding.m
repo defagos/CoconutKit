@@ -70,7 +70,7 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
 - (void)boundValueDidChange:(id)sender
 {
     id displayedValue = @(self.on);
-    [self updateAndCheckModelWithDisplayedValue:displayedValue error:NULL];
+    [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
 }
 
 @end
@@ -108,6 +108,6 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
     
     if (! objc_getAssociatedObject(self, s_lockKey)) {
         id displayedValue = @(on);
-        [self updateAndCheckModelWithDisplayedValue:displayedValue error:NULL];
+        [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
     }
 }

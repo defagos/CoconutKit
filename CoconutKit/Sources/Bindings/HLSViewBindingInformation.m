@@ -156,7 +156,25 @@
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
 {
     // TODO: Implement call to -check method as well, since cleaner syntax
-    return [self.object validateValue:&value forKeyPath:self.keyPath error:pError];
+    
+    NSError *error = nil;
+    if ([self.object validateValue:&value forKeyPath:self.keyPath error:&error]) {
+        if ([self.delegate respondsToSelector:@selector(view:checkDidSucceedForObject:keyPath:)]) {
+            [self.delegate view:self.view checkDidSucceedForObject:self.object keyPath:self.keyPath];
+        }
+        return YES;
+    }
+    else {
+        if ([self.delegate respondsToSelector:@selector(view:checkDidFailForObject:keyPath:withError:)]) {
+            [self.delegate view:self.view checkDidFailForObject:self.object keyPath:self.keyPath withError:error];
+        }
+        
+        if (pError) {
+            *pError = error;
+        }
+        
+        return NO;
+    }
 }
 
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError
@@ -168,14 +186,24 @@
         NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
                                              code:HLSErrorUpdateError
                              localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
+        
+        if ([self.delegate respondsToSelector:@selector(view:updateDidFailForObject:keyPath:withError:)]) {
+            [self.delegate view:self.view updateDidFailForObject:self.object keyPath:self.keyPath withError:error];
+        }
+        
         if (pError) {
             *pError = error;
         }
+        
         HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
         return NO;
     }
     
-    // Force a new verification (the value might have been nil, i.e. the information could not be verified, or
+    if ([self.delegate respondsToSelector:@selector(view:updateDidSucceedForObject:keyPath:)]) {
+        [self.delegate view:self.view updateDidSucceedForObject:self.object keyPath:self.keyPath];
+    }
+    
+    // Force a new binding verification (the value might have been nil, i.e. the information could not be verified, or
     // might have been set to nil)
     self.verified = [self verifyBindingInformation];
     

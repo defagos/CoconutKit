@@ -19,8 +19,6 @@
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindTransformerKey = &s_bindTransformerKey;
-static void *s_updatingModelAutomaticallyKey = &s_updatingModelAutomaticallyKey;
-static void *s_checkingDisplayedValueAutomaticallyKey = &s_checkingDisplayedValueAutomaticallyKey;
 static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
@@ -57,28 +55,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                                                                                  (IMP)swizzled_UIView__didMoveToWindow_Imp);
 }
 
-#pragma mark Accessors and mutators
-
-- (BOOL)isUpdatingModelAutomatically
-{
-    return [objc_getAssociatedObject(self, s_updatingModelAutomaticallyKey) boolValue];
-}
-
-- (void)setUpdatingModelAutomatically:(BOOL)updatingModelAutomatically
-{
-    objc_setAssociatedObject(self, s_updatingModelAutomaticallyKey, @(updatingModelAutomatically), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BOOL)isCheckingDisplayedValueAutomatically
-{
-    return [objc_getAssociatedObject(self, s_checkingDisplayedValueAutomaticallyKey) boolValue];
-}
-
-- (void)setCheckingDisplayedValueAutomatically:(BOOL)checkingDisplayedValueAutomatically
-{
-    objc_setAssociatedObject(self, s_checkingDisplayedValueAutomaticallyKey, @(checkingDisplayedValueAutomatically), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 #pragma mark Bindings
 
 - (void)bindToObject:(id)object
@@ -104,6 +80,38 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @end
 
 @implementation UIView (HLSViewBindingPrivate)
+
+#pragma mark Class methods
+
++ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError
+{
+    // If the caller is not interested in errors, nothing to do
+    if (! pExistingError) {
+        return nil;
+    }
+    
+    // If no new error, nothing to do
+    if (! newError) {
+        return *pExistingError;
+    }
+    
+    if (*pExistingError) {
+        if ([*pExistingError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
+            [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
+        }
+        else {
+            NSError *previousError = *pExistingError;
+            *pExistingError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorMultipleErrors];
+            [*pExistingError addObject:previousError forKey:HLSErrorMultipleErrors];
+            [*pExistingError addObject:newError forKey:HLSErrorMultipleErrors];
+        }
+    }
+    else {
+        *pExistingError = newError;
+    }
+    
+    return *pExistingError;
+}
 
 #pragma mark Accessors and mutators
 
@@ -244,23 +252,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         NSError *error = nil;
         if (! [self checkDisplayedValue:displayedValue withError:&error]) {
             success = NO;
-            
-            if (pError) {
-                if (*pError) {
-                    if ([*pError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
-                        [*pError addObject:error forKey:HLSDetailedErrorsKey];
-                    }
-                    else {
-                        NSError *previousError = *pError;
-                        *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                      code:HLSErrorMultipleErrors];
-                        [*pError addObject:previousError forKey:HLSErrorMultipleErrors];
-                    }
-                }
-                else {
-                    *pError = error;
-                }
-            }
+            [UIView combineError:error withError:pError];
         }
     }
     
@@ -288,23 +280,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         NSError *error = nil;
         if (! [self updateModelWithDisplayedValue:displayedValue error:&error]) {
             success = NO;
-            
-            if (pError) {
-                if (*pError) {
-                    if ([*pError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
-                        [*pError addObject:error forKey:HLSDetailedErrorsKey];
-                    }
-                    else {
-                        NSError *previousError = *pError;
-                        *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                      code:HLSErrorMultipleErrors];
-                        [*pError addObject:previousError forKey:HLSErrorMultipleErrors];
-                    }
-                }
-                else {
-                    *pError = error;
-                }
-            }
+            [UIView combineError:error withError:pError];
         }
     }
     
@@ -317,6 +293,10 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return success;
 }
 
+@end
+
+@implementation UIView (HLSViewBindingUpdateImplementation)
+
 - (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError
 {
     if (! self.bindingInformation) {
@@ -326,10 +306,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     
     id value = nil;
     NSError *error = nil;
-    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
-        if ([self.bindingInformation checkValue:value withError:&error]) {
-            return YES;
-        }
+    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]
+            && [self.bindingInformation checkValue:value withError:&error]) {
+        return YES;
     }
     
     if (pError) {
@@ -348,10 +327,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     
     id value = nil;
     NSError *error = nil;
-    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
-        if ([self.bindingInformation updateWithValue:value error:&error]) {
-            return YES;
-        }
+    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]
+            && [self.bindingInformation updateWithValue:value error:&error]) {
+        return YES;
     }
     
     if (pError) {
@@ -361,11 +339,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return NO;
 }
 
-@end
-
-@implementation UIView (HLSViewBindingUpdateImplementation)
-
-- (BOOL)updateAndCheckModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
         // No binding, nothing to do
@@ -373,12 +347,19 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     id value = nil;
+    BOOL success = YES;
     NSError *error = nil;
     if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
-        if (! self.updatingModelAutomatically || [self.bindingInformation updateWithValue:value error:&error]) {
-            if (! self.checkingDisplayedValueAutomatically || [self.bindingInformation checkValue:value withError:&error]) {
-                return YES;
-            }
+        NSError *checkError = nil;
+        if (! [self.bindingInformation checkValue:value withError:&checkError]) {
+            success = NO;
+            [UIView combineError:checkError withError:&error];
+        }
+        
+        NSError *updateError = nil;
+        if (! [self.bindingInformation updateWithValue:value error:&updateError]) {
+            success = NO;
+            [UIView combineError:updateError withError:&error];
         }
     }
     
@@ -386,7 +367,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         *pError = error;
     }
     
-    return NO;
+    return success;
 }
 
 @end

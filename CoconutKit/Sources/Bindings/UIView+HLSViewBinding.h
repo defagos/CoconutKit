@@ -168,26 +168,4 @@
  */
 - (BOOL)updateModelWithError:(NSError **)pError;
 
-/**
- * If this property has been set, the bound value is automatically updated when the value displayed by the view is
- * changed.
- *
- * The default value is NO. This provides for finer-grained control over when you want to check the model, which is
- * achieved by calling -updateModelWithError: on a top view. If you want the model object to be immediately updated
- * when the view contents change, set this property to YES. If this property is set to YES for all views, then calling
- * -updateModelWithError: is not needed
- */
-@property (nonatomic, assign, getter=isCheckingDisplayedValueAutomatically) BOOL checkingDisplayedValueAutomatically;
-
-/**
- * If this property has been set, the bound value is automatically updated when the value displayed by the view is
- * changed.
- *
- * The default value is NO. This provides for finer-grained control over when you want to update the model, which is
- * achieved by calling -checkDisplayedValues:withError: on a top view. If you want the model object to be immediately 
- * checked when the view contents change, set this property to YES. If this property is set to YES for all views, 
- * then calling -checkDisplayedValues:withError: is not needed
- */
-@property (nonatomic, assign, getter=isUpdatingModelAutomatically) BOOL updatingModelAutomatically;
-
 @end

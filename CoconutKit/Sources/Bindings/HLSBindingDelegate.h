@@ -12,7 +12,10 @@
 @protocol HLSBindingDelegate <NSObject>
 
 @optional
-- (void)view:(UIView *)view didValidateValue:(id)value forObject:(id)object keyPath:(NSString *)keyPath;
-- (void)view:(UIView *)view didFailValidationForValue:(id)value object:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
+- (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
+- (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
+
+- (void)view:(UIView *)view updateDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
+- (void)view:(UIView *)view updateDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
 
 @end

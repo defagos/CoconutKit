@@ -71,7 +71,7 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 - (void)boundValueDidChange:(id)sender
 {
     id displayedValue = @(self.selectedSegmentIndex);
-    [self updateAndCheckModelWithDisplayedValue:displayedValue error:NULL];
+    [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
 }
 
 @end
@@ -110,6 +110,6 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
     
     if (! objc_getAssociatedObject(self, s_lockKey)) {
         id displayedValue = @(selectedSegmentIndex);
-        [self updateAndCheckModelWithDisplayedValue:displayedValue error:NULL];
+        [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
     }
 }
