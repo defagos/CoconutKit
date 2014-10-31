@@ -8,7 +8,7 @@
 
 // TODO: Move elsewhere, in a binding-dedicated header file. Probably rename for consistency
 typedef NS_ENUM(NSInteger, HLSError) {
-    HLSErrorValidationMultipleErrors,
+    HLSErrorMultipleErrors,
     HLSErrorTransformationError,
     HLSErrorUnsupportedTypeError,
     HLSErrorUpdateError

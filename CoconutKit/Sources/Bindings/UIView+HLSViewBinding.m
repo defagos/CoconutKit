@@ -247,12 +247,18 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
             
             if (pError) {
                 if (*pError) {
-                    [*pError addObject:error forKey:HLSDetailedErrorsKey];
+                    if ([*pError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
+                        [*pError addObject:error forKey:HLSDetailedErrorsKey];
+                    }
+                    else {
+                        NSError *previousError = *pError;
+                        *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                      code:HLSErrorMultipleErrors];
+                        [*pError addObject:previousError forKey:HLSErrorMultipleErrors];
+                    }
                 }
                 else {
-                    // FIXME: Where is error????????
-                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSErrorValidationMultipleErrors];
+                    *pError = error;
                 }
             }
         }
@@ -281,17 +287,24 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         
         NSError *error = nil;
         if (! [self updateModelWithDisplayedValue:displayedValue error:&error]) {
+            success = NO;
+            
             if (pError) {
                 if (*pError) {
-                    [*pError addObject:error forKey:HLSDetailedErrorsKey];
+                    if ([*pError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
+                        [*pError addObject:error forKey:HLSDetailedErrorsKey];
+                    }
+                    else {
+                        NSError *previousError = *pError;
+                        *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                      code:HLSErrorMultipleErrors];
+                        [*pError addObject:previousError forKey:HLSErrorMultipleErrors];
+                    }
                 }
                 else {
-                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSErrorValidationMultipleErrors];
+                    *pError = error;
                 }
             }
-            
-            success = NO;
         }
     }
     
