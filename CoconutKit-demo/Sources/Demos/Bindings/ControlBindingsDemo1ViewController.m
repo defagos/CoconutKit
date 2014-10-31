@@ -38,6 +38,11 @@
     return @([self.completion floatValue] / 100.f);
 }
 
+- (NSString *)switchStatus
+{
+    return [self.switchEnabled boolValue] ? @"ON" : @"OFF";
+}
+
 - (NSString *)name
 {
     return @"CoconutKit";
