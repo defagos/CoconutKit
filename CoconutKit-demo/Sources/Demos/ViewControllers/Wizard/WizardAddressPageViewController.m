@@ -48,7 +48,7 @@
     
     _personInformation = personInformation;
     
-    [self reloadData];
+    [self refreshBindingsForced:YES];
 }
 
 #pragma mark View lifecycle
@@ -62,14 +62,14 @@
     self.stateTextField.delegate = self;
     self.countryTextField.delegate = self;
     
-    [self reloadData];
+    [self refreshBindingsForced:YES];
 }
 
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
 {    
-    return [self checkTextFields];
+    return [self checkDisplayedValuesWithError:NULL];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
@@ -110,35 +110,6 @@
     errorLabel.text = [error localizedDescription];
 }
 
-#pragma mark Updating the view
-
-- (void)reloadData
-{
-    [self.streetTextField bindToManagedObject:self.personInformation
-                                    fieldName:@"street"
-                                    formatter:nil
-                           validationDelegate:self];
-    [self.streetTextField setCheckingOnChange:YES];
-    [self.cityTextField bindToManagedObject:self.personInformation
-                                  fieldName:@"city"
-                                  formatter:nil
-                         validationDelegate:self];
-    [self.cityTextField setCheckingOnChange:YES];
-    [self.stateTextField bindToManagedObject:self.personInformation
-                                   fieldName:@"state"
-                                   formatter:nil
-                          validationDelegate:self];
-    [self.stateTextField setCheckingOnChange:YES];
-    [self.countryTextField bindToManagedObject:self.personInformation
-                                     fieldName:@"country"
-                                     formatter:nil
-                            validationDelegate:self];
-    [self.countryTextField setCheckingOnChange:YES];
-    
-    // Performs and initial complete validation
-    [self checkTextFields];
-}
-
 #pragma mark Retrieving the error label associated with a text field
 
 - (UILabel *)errorLabelForTextField:(UITextField *)textField
@@ -168,7 +139,7 @@
     [super localize];
         
     // Trigger a new validation to get localized error messages if any
-    [self checkTextFields];
+    [self checkDisplayedValuesWithError:NULL];
 }
 
 #pragma mark Event callbacks

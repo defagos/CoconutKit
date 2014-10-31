@@ -44,7 +44,6 @@ UISwitch+HLSViewBinding.m
 UITabBarController+HLSExtensions.m
 UITableView+HLSViewBinding.m
 UITextField+HLSExtensions.m
-UITextField+HLSValidation.m
 UITextField+HLSViewBinding.m
 UITextView+HLSCursorVisibility.m
 UITextView+HLSExtensions.m

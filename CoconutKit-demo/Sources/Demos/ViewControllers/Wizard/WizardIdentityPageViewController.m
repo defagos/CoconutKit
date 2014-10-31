@@ -88,14 +88,14 @@
     [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // Trigger a new validation to get localized error messages if any
-    [self checkTextFields];
+    [self checkDisplayedValuesWithError:NULL];
 }
 
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
 {
-    return [self checkTextFields];
+    return [self checkDisplayedValuesWithError:NULL];
 }
 
 #pragma mark UITextFieldDelegate protocol implementation
@@ -158,33 +158,6 @@
         [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         [s_numberFormatter setAllowsFloats:NO];
     });
-    
-    [self.firstNameTextField bindToManagedObject:self.personInformation
-                                       fieldName:@"firstName"
-                                       formatter:nil
-                              validationDelegate:self];
-    [self.lastNameTextField bindToManagedObject:self.personInformation
-                                      fieldName:@"lastName"
-                                      formatter:nil
-                             validationDelegate:self];
-    [self.emailTextField bindToManagedObject:self.personInformation
-                                   fieldName:@"email"
-                                   formatter:nil
-                          validationDelegate:self];
-    [self.emailTextField setCheckingOnChange:YES];
-    [self.birthdateTextField bindToManagedObject:self.personInformation
-                                       fieldName:@"birthdate"
-                                       formatter:self.dateFormatter
-                              validationDelegate:self];
-    [self.birthdateTextField setCheckingOnChange:YES];
-    [self.nbrChildrenTextField bindToManagedObject:self.personInformation
-                                         fieldName:@"nbrChildren"
-                                         formatter:s_numberFormatter
-                                validationDelegate:self];
-    [self.nbrChildrenTextField setCheckingOnChange:YES];
-    
-    // Perform an initial complete validation
-    [self checkTextFields];
 }
 
 #pragma mark Retrieving the error label associated with a text field
