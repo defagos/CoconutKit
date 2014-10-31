@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSNumber *category;
 @property (nonatomic, strong) NSNumber *completion;
 
+@property (nonatomic, strong) NSString *name;
+
 @end
 
 @implementation ControlBindingsDemo1ViewController
@@ -27,6 +29,7 @@
         self.switchEnabled = @YES;
         self.category = @1;
         self.completion = @60.f;
+        self.name = @"Tom";
     }
     return self;
 }
@@ -43,9 +46,9 @@
     return [self.switchEnabled boolValue] ? @"ON" : @"OFF";
 }
 
-- (NSString *)name
+- (NSString *)greetings
 {
-    return @"CoconutKit";
+    return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), self.name];
 }
 
 - (NSString *)summary
