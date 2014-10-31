@@ -160,20 +160,6 @@
     return YES;
 }
 
-- (void)notifySuccess:(BOOL)success withValue:(id)value error:(NSError *)error
-{
-    if (! self.delegate) {
-        return;
-    }
-    
-    if (success && [self.delegate respondsToSelector:@selector(view:didValidateValue:forObject:keyPath:)]) {
-        [self.delegate view:self.view didValidateValue:value forObject:self.object keyPath:self.keyPath];
-    }
-    else if (! success && [self.delegate respondsToSelector:@selector(view:didFailValidationForValue:object:keyPath:withError:)]) {
-        [self.delegate view:self.view didFailValidationForValue:value object:self.object keyPath:self.keyPath withError:error];
-    }
-}
-
 #pragma mark Binding
 
 // Return YES if the binding information can be verified (keypath is valid, and any required transformation

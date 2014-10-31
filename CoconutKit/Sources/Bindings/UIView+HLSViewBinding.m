@@ -315,7 +315,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     NSError *error = nil;
     if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
         if ([self.bindingInformation checkValue:value withError:&error]) {
-            [self.bindingInformation notifySuccess:YES withValue:value error:nil];
             return YES;
         }
     }
@@ -324,7 +323,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         *pError = error;
     }
     
-    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     return NO;
 }
 
@@ -339,7 +337,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     NSError *error = nil;
     if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
         if ([self.bindingInformation updateWithValue:value error:&error]) {
-            [self.bindingInformation notifySuccess:YES withValue:value error:nil];
             return YES;
         }
     }
@@ -348,7 +345,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         *pError = error;
     }
     
-    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     return NO;
 }
 
@@ -368,7 +364,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
         if (! self.updatingModelAutomatically || [self.bindingInformation updateWithValue:value error:&error]) {
             if (! self.checkingDisplayedValueAutomatically || [self.bindingInformation checkValue:value withError:&error]) {
-                [self.bindingInformation notifySuccess:YES withValue:value error:nil];
                 return YES;
             }
         }
@@ -378,7 +373,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         *pError = error;
     }
     
-    [self.bindingInformation notifySuccess:NO withValue:value error:error];
     return NO;
 }
 
