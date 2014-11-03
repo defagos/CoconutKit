@@ -115,8 +115,6 @@
     // FIXME: Does not work anymore
     self.personInformation.firstName = nil;
     self.personInformation.lastName = nil;
-    self.personInformation.firstName = nil;
-    self.personInformation.lastName = nil;
     self.personInformation.email = nil;
     self.personInformation.birthdate = nil;
     self.personInformation.nbrChildrenValue = 0;
