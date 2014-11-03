@@ -98,7 +98,11 @@
                                                                                style:UIBarButtonItemStyleBordered
                                                                               target:self
                                                                               action:@selector(showSettings:)];
-            demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem];
+            UIBarButtonItem *debugOverlayBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bindings", nil)
+                                                                                          style:UIBarButtonItemStyleBordered
+                                                                                         target:self
+                                                                                         action:@selector(showBindingDebugOverlay:)];
+            demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem, debugOverlayBarButtonItem];
         }
     }
     return self;
@@ -281,6 +285,11 @@
 - (void)showSettings:(id)sender
 {
     [[HLSLogger sharedLogger] showSettings];
+}
+
+- (IBAction)showBindingDebugOverlay:(id)sender
+{
+    [[self rootViewController] showBindingDebugOverlayViewRecursive:YES];
 }
 
 @end
