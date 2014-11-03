@@ -238,7 +238,7 @@
     __block id transformationTarget = nil;
     __block SEL transformationSelector = NULL;
     
-    if ([self.transformerName isFilled]) {
+    if ([self.transformerName isFilled] && ! self.transformationTarget) {
         // Check whether the transformer is a class method +[ClassName methodName]
         // Regex: ^\s*\+\s*\[(\w*)\s*(\w*)\]\s*$
         NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*)\\]\\s*$";
@@ -307,9 +307,17 @@
                 }
             }
         }
+        
+        self.transformationTarget = transformationTarget;
+        self.transformationSelector = transformationSelector;
     }
     
-    id displayedValue = [self transformValue:value withTransformationTarget:transformationTarget transformationSelector:transformationSelector];
+    // Locate the binding delegate, if any
+    if (! self.delegate) {
+        self.delegate = [HLSViewBindingInformation delegateForView:self.view];
+    }
+    
+    id displayedValue = [self transformValue:value withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
     
     // We cannot cache binding information if we cannot check the type of the value to be displayed for compatibility. Does not change
     // the status, a later check is required
@@ -318,7 +326,7 @@
     }
     
     if (! [self canDisplayValue:displayedValue]) {
-        if (transformationTarget) {
+        if (self.transformationTarget) {
             self.errorDescription = [NSString stringWithFormat:@"The transformer must return one of the following supported types: %@", [self supportedBindingClassesString]];
         }
         else {
@@ -329,12 +337,7 @@
     }
     
     // Cache the binding information we just verified
-    self.transformationTarget = transformationTarget;
-    self.transformationSelector = transformationSelector;
     self.errorDescription = nil;
-    
-    // Locate the binding delegate, if any
-    self.delegate = [HLSViewBindingInformation delegateForView:self.view];
     
     return YES;
 }
