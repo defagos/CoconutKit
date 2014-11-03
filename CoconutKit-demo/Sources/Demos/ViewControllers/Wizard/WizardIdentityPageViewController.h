@@ -6,5 +6,5 @@
 //  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
-@interface WizardIdentityPageViewController : HLSViewController <HLSBindingDelegate, HLSValidable, UITextFieldDelegate>
+@interface WizardIdentityPageViewController : HLSViewController <HLSBindingDelegate, HLSValidable>
 @end

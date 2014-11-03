@@ -7,18 +7,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardIdentityPageViewController">
             <connections>
-                <outlet property="birthdateErrorLabel" destination="93" id="102"/>
-                <outlet property="birthdateLabel" destination="38" id="103"/>
-                <outlet property="birthdateTextField" destination="39" id="104"/>
-                <outlet property="emailErrorLabel" destination="92" id="105"/>
-                <outlet property="emailTextField" destination="16" id="107"/>
-                <outlet property="firstNameErrorLabel" destination="90" id="108"/>
-                <outlet property="firstNameTextField" destination="14" id="110"/>
-                <outlet property="lastNameErrorLabel" destination="91" id="111"/>
-                <outlet property="lastNameTextField" destination="15" id="113"/>
-                <outlet property="nbrChildrenErrorLabel" destination="94" id="114"/>
-                <outlet property="nbrChildrenTextField" destination="68" id="116"/>
+                <outlet property="birthdateLabel" destination="38" id="VQO-kX-ILc"/>
                 <outlet property="view" destination="2" id="119"/>
+                <outletCollection property="textFields" destination="14" id="QrW-BR-6rX"/>
+                <outletCollection property="textFields" destination="15" id="hpk-nN-U8y"/>
+                <outletCollection property="textFields" destination="16" id="Vgp-Qd-w73"/>
+                <outletCollection property="textFields" destination="39" id="XOt-J1-K1G"/>
+                <outletCollection property="textFields" destination="68" id="YAh-dU-xc7"/>
+                <outletCollection property="errorLabels" destination="90" id="OHZ-uf-bEz"/>
+                <outletCollection property="errorLabels" destination="91" id="UMq-bT-jyl"/>
+                <outletCollection property="errorLabels" destination="92" id="T58-HQ-0SQ"/>
+                <outletCollection property="errorLabels" destination="93" id="UHs-oN-3fv"/>
+                <outletCollection property="errorLabels" destination="94" id="c1v-FL-TAb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

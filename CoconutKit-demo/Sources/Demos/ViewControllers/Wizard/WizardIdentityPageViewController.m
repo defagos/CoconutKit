@@ -14,17 +14,12 @@
 
 @property (nonatomic, strong) PersonInformation *personInformation;
 
-@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
-@property (nonatomic, weak) IBOutlet UILabel *firstNameErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
-@property (nonatomic, weak) IBOutlet UILabel *lastNameErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
-@property (nonatomic, weak) IBOutlet UILabel *emailErrorLabel;
 @property (nonatomic, weak) IBOutlet UILabel *birthdateLabel;
-@property (nonatomic, weak) IBOutlet UITextField *birthdateTextField;
-@property (nonatomic, weak) IBOutlet UILabel *birthdateErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *nbrChildrenTextField;
-@property (nonatomic, weak) IBOutlet UILabel *nbrChildrenErrorLabel;
+
+@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *errorLabels;
+
+@property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
 
 @end
 
@@ -58,31 +53,6 @@
     [self bindToObject:personInformation];
 }
 
-// This date formatter is localized!
-- (NSDateFormatter *)localizedDateFormatter
-{
-    static NSDateFormatter *s_dateFormatter = nil;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_dateFormatter = [[NSDateFormatter alloc] init];
-        [s_dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
-    });
-    return s_dateFormatter;
-}
-
-#pragma mark View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.firstNameTextField.delegate = self;
-    self.lastNameTextField.delegate = self;
-    self.emailTextField.delegate = self;
-    self.birthdateTextField.delegate = self;
-    self.nbrChildrenTextField.delegate = self;
-}
-
 #pragma mark Localization
 
 - (void)localize
@@ -90,6 +60,10 @@
     [super localize];
     
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
+    
+    // FIXME: Is not reflected by a value already displayed by the text field
+    self.localizedDateFormatter = [[NSDateFormatter alloc] init];
+    [self.localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // Trigger a new validation to get localized error messages if any
     [self checkDisplayedValuesWithError:NULL];
@@ -100,29 +74,6 @@
 - (BOOL)validate
 {
     return [self checkDisplayedValuesWithError:NULL];
-}
-
-#pragma mark UITextFieldDelegate protocol implementation
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == self.firstNameTextField) {
-        [self.lastNameTextField becomeFirstResponder];
-    }
-    else if (textField == self.lastNameTextField) {
-        [self.emailTextField becomeFirstResponder];
-    }
-    else if (textField == self.emailTextField) {
-        [self.birthdateTextField becomeFirstResponder];
-    }
-    else if (textField == self.birthdateTextField) {
-        [self.nbrChildrenTextField becomeFirstResponder];
-    }
-    else {
-        [textField resignFirstResponder];
-    }
-    
-    return YES;
 }
 
 #pragma mark HLSBindingDelegate protocol implementation
@@ -147,25 +98,13 @@
 
 - (UILabel *)errorLabelForView:(UIView *)view
 {
-    if (view == self.firstNameTextField) {
-        return self.firstNameErrorLabel;
-    }
-    else if (view == self.lastNameTextField) {
-        return self.lastNameErrorLabel;
-    }
-    else if (view == self.emailTextField) {
-        return self.emailErrorLabel;
-    }
-    else if (view == self.birthdateTextField) {
-        return self.birthdateErrorLabel;
-    }
-    else if (view == self.nbrChildrenTextField) {
-        return self.nbrChildrenErrorLabel;
-    }
-    else {
-        HLSLoggerError(@"Unknown view");
+    NSUInteger index = [self.textFields indexOfObject:view];
+    if (index == NSNotFound) {
         return nil;
     }
+    
+    NSAssert([self.textFields count] == [self.errorLabels count], @"Expect one label per text field");
+    return [self.errorLabels objectAtIndex:index];
 }
 
 #pragma mark Event callbacks
@@ -173,6 +112,7 @@
 - (IBAction)resetModel:(id)sender
 {
     // Reset the model programmatically. This shows that the text fields are updated accordingly
+    // FIXME: Does not work anymore
     self.personInformation.firstName = nil;
     self.personInformation.lastName = nil;
     self.personInformation.firstName = nil;
@@ -185,11 +125,10 @@
 - (IBAction)resetTextFields:(id)sender
 {
     // Reset text fields programmatically. This shows that the model is updated accordingly
-    self.firstNameTextField.text = nil;
-    self.lastNameTextField.text = nil;
-    self.emailTextField.text = nil;
-    self.birthdateTextField.text = nil;
-    self.nbrChildrenTextField.text = @"0";
+    // FIXME: Does not work anymore
+    for (UITextField *textField in self.textFields) {
+        textField.text = nil;
+    }
 }
 
 @end
