@@ -77,7 +77,12 @@
         return [self.object valueForKeyPath:self.keyPath];
     }
     @catch (NSException *exception) {
-        return nil;
+        if ([exception.name isEqualToString:NSUndefinedKeyException]) {
+            return nil;
+        }
+        else {
+            @throw;
+        }
     }
 }
 
@@ -174,20 +179,25 @@
         [self.object setValue:value forKeyPath:self.keyPath];
     }
     @catch (NSException *exception) {
-        NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                             code:HLSErrorUpdateError
-                             localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
-        
-        if ([self.delegate respondsToSelector:@selector(view:updateDidFailForObject:keyPath:withError:)]) {
-            [self.delegate view:self.view updateDidFailForObject:self.object keyPath:self.keyPath withError:error];
+        if ([exception.name isEqualToString:NSUndefinedKeyException]) {
+            NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                 code:HLSErrorUpdateError
+                                 localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
+            
+            if ([self.delegate respondsToSelector:@selector(view:updateDidFailForObject:keyPath:withError:)]) {
+                [self.delegate view:self.view updateDidFailForObject:self.object keyPath:self.keyPath withError:error];
+            }
+            
+            if (pError) {
+                *pError = error;
+            }
+            
+            HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
+            return NO;
         }
-        
-        if (pError) {
-            *pError = error;
+        else {
+            @throw;
         }
-        
-        HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
-        return NO;
     }
     
     if ([self.delegate respondsToSelector:@selector(view:updateDidSucceedForObject:keyPath:)]) {
@@ -220,8 +230,13 @@
             [self.object valueForKeyPath:self.keyPath];
         }
         @catch (NSException *exception) {
-            self.errorDescription = @"The specified keypath is invalid for the bound object";
-            return NO;
+            if ([exception.name isEqualToString:NSUndefinedKeyException]) {
+                self.errorDescription = @"The specified keypath is invalid for the bound object";
+                return NO;
+            }
+            else {
+                @throw;
+            }
         }
     }
     // No object provided. Walk along the responder chain to find a responder matching the keypath (might be nil)
@@ -465,12 +480,17 @@
             return responder;
         }
         @catch (NSException *exception) {
-            // Does not get higher than the receiver parent view controller, which defines the binding context
-            if ([responder isKindOfClass:[UIViewController class]]) {
-                return nil;
+            if ([exception.name isEqualToString:NSUndefinedKeyException]) {
+                // Does not get higher than the receiver parent view controller, which defines the binding context
+                if ([responder isKindOfClass:[UIViewController class]]) {
+                    return nil;
+                }
+                
+                responder = responder.nextResponder;
             }
-            
-            responder = responder.nextResponder;
+            else {
+                @throw;
+            }
         }
     }
     return nil;
