@@ -50,6 +50,11 @@
             return nil;
         }
         
+        if (! [view respondsToSelector:@selector(updateViewWithValue:)]) {
+            HLSLoggerError(@"The view does not support bindings");
+            return nil;
+        }
+        
         self.object = object;
         self.keyPath = keyPath;
         self.transformerName = transformerName;
@@ -263,7 +268,6 @@
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
     if (! self.synchronized && [self.keyPath rangeOfString:@"@"].length == 0) {
         [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(MAKVONotification *notification) {
-            // TODO: Better implementation
             id value = [self value];
             [self.view performSelector:@selector(updateViewWithValue:) withObject:value];
         }];
