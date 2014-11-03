@@ -125,53 +125,45 @@
     return YES;
 }
 
-#pragma mark HLSTextFieldValidationDelegate protocol implementation
+#pragma mark HLSBindingDelegate protocol implementation
 
-- (void)textFieldDidFailFormatting:(UITextField *)textField
+- (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
 {
-    textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    view.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
     
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = NSLocalizedString(@"Formatting error", nil);
-}
-
-- (void)textFieldDidPassValidation:(UITextField *)textField
-{
-    textField.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
-    
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
+    UILabel *errorLabel = [self errorLabelForView:view];
     errorLabel.text = nil;
 }
 
-- (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error
+- (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
 {
-    textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
+    UILabel *errorLabel = [self errorLabelForView:view];
     errorLabel.text = [error localizedDescription];
 }
 
-#pragma mark Retrieving the error label associated with a text field
+#pragma mark Retrieving the error label associated with a view
 
-- (UILabel *)errorLabelForTextField:(UITextField *)textField
+- (UILabel *)errorLabelForView:(UIView *)view
 {
-    if (textField == self.firstNameTextField) {
+    if (view == self.firstNameTextField) {
         return self.firstNameErrorLabel;
     }
-    else if (textField == self.lastNameTextField) {
+    else if (view == self.lastNameTextField) {
         return self.lastNameErrorLabel;
     }
-    else if (textField == self.emailTextField) {
+    else if (view == self.emailTextField) {
         return self.emailErrorLabel;
     }
-    else if (textField == self.birthdateTextField) {
+    else if (view == self.birthdateTextField) {
         return self.birthdateErrorLabel;
     }
-    else if (textField == self.nbrChildrenTextField) {
+    else if (view == self.nbrChildrenTextField) {
         return self.nbrChildrenErrorLabel;
     }
     else {
-        HLSLoggerError(@"Unknown text field");
+        HLSLoggerError(@"Unknown view");
         return nil;
     }
 }
