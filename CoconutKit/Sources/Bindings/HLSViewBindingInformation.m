@@ -407,9 +407,13 @@
 
 #pragma mark Context binding lookup
 
+// Always start, not with the view, but with its next responder. Binding namely makes sense with a parent context
+// (not in the context of the bound view itself). Moreover, this avoids collisions between the keypath to bind and
+// view properties bearing the same name (e.g. a property called 'text' bound to a text field would be trapped
+// otherwise be resolved on the text field itself)
 + (id<HLSBindingDelegate>)delegateForView:(UIView *)view
 {
-    UIResponder *responder = view;
+    UIResponder *responder = view.nextResponder;
     while (responder) {
         if ([responder conformsToProtocol:@protocol(HLSBindingDelegate)]) {
             return (id<HLSBindingDelegate>)responder;
@@ -428,7 +432,7 @@
 // Locate the target which implements the specified method. Stops at view controller boundaries
 + (id)bindingTargetForSelector:(SEL)selector view:(UIView *)view
 {
-    UIResponder *responder = view;
+    UIResponder *responder = view.nextResponder;
     while (responder) {
         // Instance method lookup first
         if ([responder respondsToSelector:selector]) {
@@ -453,7 +457,7 @@
 
 + (id)bindingTargetForKeyPath:(NSString *)keyPath view:(UIView *)view
 {
-    UIResponder *responder = view;
+    UIResponder *responder = view.nextResponder;
     while (responder) {
         @try {
             // Will throw an exception unless the keypath is valid

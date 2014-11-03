@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSNumber *age;
+@property (nonatomic, strong) NSString *text;
 
 @end
 
@@ -30,6 +31,7 @@
         self.switchEnabled = @YES;
         self.category = @1;
         self.completion = @60.f;
+        self.text = @"Hello, World!";
     }
     return self;
 }
@@ -68,9 +70,10 @@
     }
 }
 
-- (NSString *)summary
+- (NSString *)numberOfWords
 {
-    return @"CoconutKit is a library of high-quality iOS components written in my spare time. It includes several tools for dealing with view controllers, multi-threading, animations, as well as some new controls and various utility classes. These components are meant to make the life of an iOS programmer easier by reducing the boilerplate code written every day, improving code quality and enforcing solid application architecture.";
+    NSUInteger numberOfWords = [[self.text componentsSeparatedByString:@" "] count];
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
 }
 
 #pragma mark Orientation management
