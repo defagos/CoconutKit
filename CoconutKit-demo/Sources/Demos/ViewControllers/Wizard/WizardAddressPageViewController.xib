@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardAddressPageViewController">
@@ -37,9 +37,10 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="street"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;streetError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="58">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;streetError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="58">
                     <rect key="frame" x="392" y="230" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -60,9 +61,10 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="city"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;cityError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="59">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;cityError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="59">
                     <rect key="frame" x="392" y="296" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -83,9 +85,10 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="state"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;stateError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="60">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;stateError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="60">
                     <rect key="frame" x="392" y="362" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -106,9 +109,10 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="country"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;countryError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="61">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;countryError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="61">
                     <rect key="frame" x="392" y="428" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -139,9 +143,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
-            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="140" y="133"/>
         </view>
     </objects>

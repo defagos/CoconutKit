@@ -56,7 +56,7 @@
     
     _personInformation = personInformation;
     
-    [self reloadData];
+    [self bindToObject:personInformation];
 }
 
 #pragma mark View lifecycle
@@ -70,8 +70,6 @@
     self.emailTextField.delegate = self;
     self.birthdateTextField.delegate = self;
     self.nbrChildrenTextField.delegate = self;
-    
-    [self reloadData];
 }
 
 #pragma mark Localization
@@ -145,19 +143,6 @@
     
     UILabel *errorLabel = [self errorLabelForTextField:textField];
     errorLabel.text = [error localizedDescription];
-}
-
-#pragma mark Updating the view
-
-- (void)reloadData
-{
-    static NSNumberFormatter *s_numberFormatter = nil;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        [s_numberFormatter setAllowsFloats:NO];
-    });
 }
 
 #pragma mark Retrieving the error label associated with a text field

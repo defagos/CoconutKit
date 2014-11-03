@@ -32,8 +32,12 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.personInformation = [[PersonInformation allObjects] firstObject];
-        NSAssert(self.personInformation != nil, @"A person must be available");
+        // Only one person in the DB. If does not exist yet, create it
+        PersonInformation *personInformation = [[PersonInformation allObjects] firstObject];
+        if (! personInformation) {
+            personInformation = [PersonInformation insert];
+        }
+        self.personInformation = personInformation;
     }
     return self;
 }
@@ -48,7 +52,7 @@
     
     _personInformation = personInformation;
     
-    [self refreshBindingsForced:YES];
+    [self bindToObject:personInformation];
 }
 
 #pragma mark View lifecycle
@@ -61,8 +65,6 @@
     self.cityTextField.delegate = self;
     self.stateTextField.delegate = self;
     self.countryTextField.delegate = self;
-    
-    [self refreshBindingsForced:YES];
 }
 
 #pragma mark HLSValidable protocol implementation
