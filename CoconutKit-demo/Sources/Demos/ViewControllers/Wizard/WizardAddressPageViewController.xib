@@ -7,15 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardAddressPageViewController">
             <connections>
-                <outlet property="cityErrorLabel" destination="59" id="63"/>
-                <outlet property="cityTextField" destination="32" id="48"/>
-                <outlet property="countryErrorLabel" destination="61" id="65"/>
-                <outlet property="countryTextField" destination="36" id="47"/>
-                <outlet property="stateErrorLabel" destination="60" id="64"/>
-                <outlet property="stateTextField" destination="34" id="42"/>
-                <outlet property="streetErrorLabel" destination="58" id="62"/>
-                <outlet property="streetTextField" destination="30" id="38"/>
                 <outlet property="view" destination="2" id="18"/>
+                <outletCollection property="textFields" destination="30" id="n50-sV-6AD"/>
+                <outletCollection property="textFields" destination="32" id="na7-I6-qqB"/>
+                <outletCollection property="textFields" destination="34" id="SOQ-uP-L1u"/>
+                <outletCollection property="textFields" destination="36" id="pOu-ax-MCE"/>
+                <outletCollection property="errorLabels" destination="58" id="Ier-gY-3gH"/>
+                <outletCollection property="errorLabels" destination="59" id="Nw4-Rb-4zI"/>
+                <outletCollection property="errorLabels" destination="60" id="PJa-vF-2YR"/>
+                <outletCollection property="errorLabels" destination="61" id="kfc-WQ-Dpy"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
