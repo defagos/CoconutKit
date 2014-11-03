@@ -211,6 +211,9 @@
     // Just to visually check whether unnecessary verifications are made
     HLSLoggerDebug(@"Verifying binding information for %@", self);
     
+    // Reset error information
+    self.errorDescription = nil;
+    
     // An object has been provided. Check that the keypath is valid for it
     if (self.object) {
         @try {
@@ -335,9 +338,6 @@
         }
         return NO;
     }
-    
-    // Cache the binding information we just verified
-    self.errorDescription = nil;
     
     return YES;
 }
