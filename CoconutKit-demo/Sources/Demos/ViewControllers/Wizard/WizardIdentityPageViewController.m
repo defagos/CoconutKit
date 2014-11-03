@@ -13,7 +13,6 @@
 @interface WizardIdentityPageViewController ()
 
 @property (nonatomic, strong) PersonInformation *personInformation;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
 @property (nonatomic, weak) IBOutlet UILabel *firstNameErrorLabel;
@@ -59,6 +58,18 @@
     [self bindToObject:personInformation];
 }
 
+// This date formatter is localized!
+- (NSDateFormatter *)localizedDateFormatter
+{
+    static NSDateFormatter *s_dateFormatter = nil;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        [s_dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    });
+    return s_dateFormatter;
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad
@@ -79,11 +90,6 @@
     [super localize];
     
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
-    
-    // The date formatter is also localized!
-    // TODO: Does not work yet. Try to switch languages! Should probably rebind!
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     // Trigger a new validation to get localized error messages if any
     [self checkDisplayedValuesWithError:NULL];
