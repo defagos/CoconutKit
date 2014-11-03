@@ -65,7 +65,7 @@ static void swizzled_UITextField__dealloc_Imp(__unsafe_unretained UITextField *s
 
 #pragma mark Static functions
 
-static void commonInit(UIControl *self)
+static void commonInit(UITextField *self)
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textFieldDidChange:)
