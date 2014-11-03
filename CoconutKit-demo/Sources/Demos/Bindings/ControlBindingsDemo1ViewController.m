@@ -72,7 +72,11 @@
 
 - (NSString *)numberOfWords
 {
-    NSUInteger numberOfWords = [[self.text componentsSeparatedByString:@" "] count];
+    NSArray *words = [self.text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *word, NSDictionary *bindings) {
+        return [word isFilled];
+    }];
+    NSUInteger numberOfWords = [[words filteredArrayUsingPredicate:predicate] count];
     return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
 }
 
