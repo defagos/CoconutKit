@@ -16,6 +16,7 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
+#import "UIView+HLSViewBindingImplementation.h"
 
 #import <objc/runtime.h>
 
@@ -262,7 +263,9 @@
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
     if (! self.synchronized && [self.keyPath rangeOfString:@"@"].length == 0) {
         [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(MAKVONotification *notification) {
-            NSLog(@"---> Changed: %@", notification.keyPath);
+            // TODO: Better implementation
+            id value = [self value];
+            [self.view performSelector:@selector(updateViewWithValue:) withObject:value];
         }];
         
         // Has two purposes:

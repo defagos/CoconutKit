@@ -36,48 +36,58 @@
     return self;
 }
 
-#pragma mark Accessors and mutators
+#pragma mark Transformers
 
-- (NSNumber *)completionPercentage
+- (HLSBlockTransformer *)percentTransformer
 {
-    return @([self.completion floatValue] / 100.f);
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
+        return @([number floatValue] / 100.f);
+    } reverseBlock:nil];
 }
 
-- (NSString *)switchStatus
+- (HLSBlockTransformer *)statusTransformer
 {
-    return [self.switchEnabled boolValue] ? @"ON" : @"OFF";
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *statusNumber) {
+        return [statusNumber boolValue] ? @"ON" : @"OFF";
+    } reverseBlock:nil];
 }
 
-- (NSString *)greetings
+- (HLSBlockTransformer *)greetingsTransformer
 {
-    return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), ([self.name length] != 0) ? self.name : NSLocalizedString(@"John Doe", nil)];
+    return [HLSBlockTransformer blockTransformerWithBlock:^id(NSString *name) {
+        return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), ([name length] != 0) ? name : NSLocalizedString(@"John Doe", nil)];
+    } reverseBlock:nil];
 }
 
-- (NSString *)ageEvaluation
+- (HLSBlockTransformer *)ageEvaluationTransformer
 {
-    NSInteger age = [self.age integerValue];
-    if (age <= 0) {
-        return NSLocalizedString(@"You are not even born!", nil);
-    }
-    else if (age < 20) {
-        return NSLocalizedString(@"You are young", nil);
-    }
-    else if (age < 65) {
-        return NSLocalizedString(@"You are an adult", nil);
-    }
-    else {
-        return NSLocalizedString(@"You are old", nil);
-    }
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *ageNumber) {
+        NSInteger age = [ageNumber integerValue];
+        if (age <= 0) {
+            return NSLocalizedString(@"You are not even born!", nil);
+        }
+        else if (age < 20) {
+            return NSLocalizedString(@"You are young", nil);
+        }
+        else if (age < 65) {
+            return NSLocalizedString(@"You are an adult", nil);
+        }
+        else {
+            return NSLocalizedString(@"You are old", nil);
+        }
+    } reverseBlock:nil];
 }
 
-- (NSString *)numberOfWords
+- (HLSBlockTransformer *)wordCounterTransformer
 {
-    NSArray *words = [self.text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *word, NSDictionary *bindings) {
-        return [word isFilled];
-    }];
-    NSUInteger numberOfWords = [[words filteredArrayUsingPredicate:predicate] count];
-    return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSString *text) {
+        NSArray *words = [text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *word, NSDictionary *bindings) {
+            return [word isFilled];
+        }];
+        NSUInteger numberOfWords = [[words filteredArrayUsingPredicate:predicate] count];
+        return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
+    } reverseBlock:nil];
 }
 
 #pragma mark Orientation management

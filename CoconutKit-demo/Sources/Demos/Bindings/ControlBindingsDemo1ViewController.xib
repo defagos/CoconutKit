@@ -70,14 +70,16 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="switchStatus"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="switchEnabled"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="statusTransformer"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="7de-8Y-UNS">
                     <rect key="frame" x="129" y="320" width="314" height="2"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="completionPercentage"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="completion"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="percentTransformer"/>
                     </userDefinedRuntimeAttributes>
                 </progressView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="LS/Enter your name here" minimumFontSize="17" id="hNE-J8-lg6">
@@ -96,7 +98,8 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="greetings"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="name"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="greetingsTransformer"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="LS/Enter your age here" minimumFontSize="17" id="bDt-kQ-O0e">
@@ -109,14 +112,15 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoTransformer decimalNumberFormatter]"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;evaluation&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6LM-dB-qUT">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;age&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6LM-dB-qUT">
                     <rect key="frame" x="483" y="633" width="277" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="ageEvaluation"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="age"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="ageEvaluationTransformer"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qZZ-YH-lOD">
@@ -137,7 +141,8 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="numberOfWords"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="text"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="wordCounterTransformer"/>
                     </userDefinedRuntimeAttributes>
                 </label>
             </subviews>
