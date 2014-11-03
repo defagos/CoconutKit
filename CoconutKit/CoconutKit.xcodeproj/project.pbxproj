@@ -125,6 +125,8 @@
 		6FA5BDC115E34A8F00E5182E /* HLSLayerAnimationStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */; };
 		6FA624ED1A023B0E00133735 /* WKWebView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA624EB1A023B0E00133735 /* WKWebView+HLSViewBinding.h */; };
 		6FA624EE1A023B0E00133735 /* WKWebView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA624EC1A023B0E00133735 /* WKWebView+HLSViewBinding.m */; };
+		6FA625021A07B77800133735 /* MAKVONotificationCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA625001A07B77800133735 /* MAKVONotificationCenter.h */; };
+		6FA625031A07B77800133735 /* MAKVONotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA625011A07B77800133735 /* MAKVONotificationCenter.m */; };
 		6FA8913E179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FA8913C179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.h */; };
 		6FA8913F179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8913D179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.m */; };
 		6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */; };
@@ -442,6 +444,8 @@
 		6FA5BDBF15E34A8F00E5182E /* HLSLayerAnimationStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLayerAnimationStep.m; sourceTree = "<group>"; };
 		6FA624EB1A023B0E00133735 /* WKWebView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+HLSViewBinding.h"; sourceTree = "<group>"; };
 		6FA624EC1A023B0E00133735 /* WKWebView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+HLSViewBinding.m"; sourceTree = "<group>"; };
+		6FA625001A07B77800133735 /* MAKVONotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAKVONotificationCenter.h; sourceTree = "<group>"; };
+		6FA625011A07B77800133735 /* MAKVONotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAKVONotificationCenter.m; sourceTree = "<group>"; };
 		6FA8913C179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxy.h; sourceTree = "<group>"; };
 		6FA8913D179D95F000AB7BD4 /* HLSRestrictedInterfaceProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxy.m; sourceTree = "<group>"; };
 		6FAB921A16DA6FBA00599256 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -784,6 +788,15 @@
 			path = "../CoconutKit-resources/HTML";
 			sourceTree = "<group>";
 		};
+		6FA624FF1A07B77800133735 /* MAKVONotificationCenter-1f414de5 */ = {
+			isa = PBXGroup;
+			children = (
+				6FA625001A07B77800133735 /* MAKVONotificationCenter.h */,
+				6FA625011A07B77800133735 /* MAKVONotificationCenter.m */,
+			);
+			path = "MAKVONotificationCenter-1f414de5";
+			sourceTree = "<group>";
+		};
 		6FAB922416DA7F9100599256 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -1099,6 +1112,7 @@
 		6FFAB75719DD8DA800A91997 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				6FA624FF1A07B77800133735 /* MAKVONotificationCenter-1f414de5 */,
 				6FFAB75819DD8DA800A91997 /* MAZeroingWeakRef-75695a81 */,
 			);
 			name = Externals;
@@ -1261,6 +1275,7 @@
 				6FFAB76419DD8DA800A91997 /* HLSMANotificationCenterAdditions.h in Headers */,
 				6FF74C74177D469B00BD846D /* HLSApplicationInformation.h in Headers */,
 				6FA8913E179D95F100AB7BD4 /* HLSRestrictedInterfaceProxy.h in Headers */,
+				6FA625021A07B77800133735 /* MAKVONotificationCenter.h in Headers */,
 				6F10E388179FFE2B00BFEF42 /* HLSViewTouchDetector.h in Headers */,
 				6F6E814217CF05FF00CE578A /* HLSLoggerViewController.h in Headers */,
 				6F954F6517CF4707001E5F67 /* HLSLogger+Friend.h in Headers */,
@@ -1455,6 +1470,7 @@
 				6FADE5C414BA0494007EE121 /* NSDictionary+HLSExtensions.m in Sources */,
 				6F0CA8F119DD934300CBE2E1 /* UIView+HLSViewBinding.m in Sources */,
 				6FADE5C614BA0494007EE121 /* NSError+HLSExtensions.m in Sources */,
+				6FA625031A07B77800133735 /* MAKVONotificationCenter.m in Sources */,
 				6FAD1BD019F5287A00EA435A /* HLSGoogleChromeActivity.m in Sources */,
 				6FFAB76919DD8DA800A91997 /* HLSMAWeakDictionary.m in Sources */,
 				6FFAB76519DD8DA800A91997 /* HLSMANotificationCenterAdditions.m in Sources */,

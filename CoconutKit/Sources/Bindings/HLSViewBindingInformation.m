@@ -10,6 +10,7 @@
 
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
+#import "MAKVONotificationCenter.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
@@ -247,6 +248,14 @@
     if (! self.object) {
         self.errorDescription = @"No meaningful target was found along the responder chain for the specified keypath (stopping at view controller boundaries)";
         return NO;
+    }
+    
+    // Bug: Doing KVO on key paths containing keypath operators (which cannot be used with KVO) and catching the exception leads to retaining the
+    // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
+    if ([self.keyPath rangeOfString:@"@"].length == 0) {
+        [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(MAKVONotification *notification) {
+            NSLog(@"---> Changed: %@", notification.keyPath);
+        }];
     }
     
     // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
