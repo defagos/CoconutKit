@@ -33,6 +33,7 @@
 @property (nonatomic, weak) id<HLSBindingDelegate> delegate;
 
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
+@property (nonatomic, assign, getter=isSynchronized) BOOL synchronized;
 
 @end
 
@@ -54,6 +55,13 @@
         self.view = view;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    if (self.synchronized) {
+        [self removeObserver:self keyPath:self.keyPath];
+    }
 }
 
 #pragma mark Getting and setting values
@@ -252,10 +260,15 @@
     
     // Bug: Doing KVO on key paths containing keypath operators (which cannot be used with KVO) and catching the exception leads to retaining the
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
-    if ([self.keyPath rangeOfString:@"@"].length == 0) {
+    if (! self.synchronized && [self.keyPath rangeOfString:@"@"].length == 0) {
         [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(MAKVONotification *notification) {
             NSLog(@"---> Changed: %@", notification.keyPath);
         }];
+        
+        // Has two purposes:
+        //   - information about the binding (two-way)
+        //   - avoids registering several times for KVO (would lead to multiple events)
+        self.synchronized = YES;
     }
     
     // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object

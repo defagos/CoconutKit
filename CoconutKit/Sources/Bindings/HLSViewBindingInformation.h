@@ -99,6 +99,12 @@
  */
 @property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
 
+/**
+ * Return YES iff the binding can be automatically kept in sync with the underlying model. This is always the case
+ * except when the keypath contains operators
+ */
+@property (nonatomic, readonly, assign, getter=isSynchronized) BOOL synchronized;
+
 @end
 
 @interface HLSViewBindingInformation (UnavailableMethods)

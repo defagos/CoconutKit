@@ -60,7 +60,8 @@
                        CoconutKitLocalizedString(@"Raw value", nil),
                        CoconutKitLocalizedString(@"Resolved transformation target", nil),
                        CoconutKitLocalizedString(@"Resolved transformation selector", nil),
-                       CoconutKitLocalizedString(@"Can update bound object", nil)];
+                       CoconutKitLocalizedString(@"Can update bound object", nil),
+                       CoconutKitLocalizedString(@"Synchronized", nil)];
         
         NSString *statusString = nil;
         if (bindingInformation.verified) {
@@ -88,7 +89,8 @@
                          [HLSBindingInformationViewController identityStringForObject:[bindingInformation rawValue]],
                          [HLSBindingInformationViewController identityStringForObject:bindingInformation.transformationTarget],
                          transformationSelectorString,
-                         HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)])];
+                         HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)]),
+                         HLSStringFromBool(bindingInformation.synchronized)];
         
         NSAssert([self.names count] == [self.objects count], @"Expect the same number of names and objects");
     }
