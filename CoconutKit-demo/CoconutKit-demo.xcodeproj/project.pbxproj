@@ -2667,7 +2667,7 @@
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "CoconutKit-dev";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../CoconutKit/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../CoconutKit/Sources/**";
 			};
 			name = Debug;
 		};
@@ -2684,7 +2684,7 @@
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "CoconutKit-dev";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../CoconutKit/**";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../CoconutKit/Sources/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
