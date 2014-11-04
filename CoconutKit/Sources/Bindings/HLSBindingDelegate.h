@@ -12,6 +12,9 @@
 @protocol HLSBindingDelegate <NSObject>
 
 @optional
+- (void)view:(UIView *)view transformationDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
+- (void)view:(UIView *)view transformationDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
+
 - (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
 - (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
 

@@ -19,7 +19,10 @@
 
 @end
 
-@implementation WizardAddressPageViewController
+@implementation WizardAddressPageViewController {
+@private
+    BOOL _loadedOnce;
+}
 
 #pragma mark Object creation and destruction
 
@@ -47,6 +50,20 @@
     _personInformation = personInformation;
     
     [self bindToObject:personInformation];
+}
+
+#pragma mark View lifecycle
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    // Bindings are resolved at the last possible moment, when the view hierarchy is built. If we want to force an initial check,
+    // we need to do it afterwards
+    if (! _loadedOnce) {
+        [self checkDisplayedValuesWithError:NULL];
+        _loadedOnce = YES;
+    }
 }
 
 #pragma mark Localization

@@ -101,11 +101,14 @@
     }
 }
 
-#pragma mark Checking and updating values
+#pragma mark Checking and updating values (these operatoions notify the delegate about their status)
 
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
+    BOOL success = YES;
     id value = nil;
+    NSError *error = nil;
+    
     if (! self.transformationTarget) {
         value = transformedValue;
     }
@@ -120,26 +123,24 @@
         
         if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
             if (! [transformer respondsToSelector:@selector(getObject:fromObject:error:)]) {
-                if (pError) {
-                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSErrorTransformationError
-                                  localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
-                }
-                return NO;
+                success = NO;
+                
+                error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                            code:HLSErrorTransformationError
+                            localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
             }
             
-            if (! [transformer getObject:&value fromObject:transformedValue error:pError]) {
-                return NO;
+            if (! [transformer getObject:&value fromObject:transformedValue error:&error]) {
+                success = NO;
             }
         }
         else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
             if (! [[transformer class] allowsReverseTransformation]) {
-                if (pError) {
-                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSErrorTransformationError
-                                  localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
-                }
-                return NO;
+                success = NO;
+                
+                error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                            code:HLSErrorTransformationError
+                            localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
             }
             
             value = [transformer reverseTransformedValue:transformedValue];
@@ -147,21 +148,35 @@
         else {
             NSString *errorDescription = nil;
             if (! [transformer getObjectValue:&value forString:transformedValue errorDescription:&errorDescription]) {
-                if (pError) {
-                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSErrorTransformationError
-                                  localizedDescription:errorDescription];
-                }
-                return NO;
+                success = NO;
+                
+                error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                            code:HLSErrorTransformationError
+                            localizedDescription:errorDescription];
             }
         }
     }
     
-    if (pValue) {
-        *pValue = value;
+    if (success) {
+        if (pValue) {
+            *pValue = value;
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(view:transformationDidSucceedForObject:keyPath:)]) {
+            [self.delegate view:self.view transformationDidSucceedForObject:self.object keyPath:self.keyPath];
+        }
+    }
+    else {
+        if (pError) {
+            *pError = error;
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(view:transformationDidFailForObject:keyPath:withError:)]) {
+            [self.delegate view:self.view transformationDidFailForObject:self.object keyPath:self.keyPath withError:error];
+        }
     }
     
-    return YES;
+    return success;
 }
 
 - (BOOL)checkValue:(id)value withError:(NSError **)pError

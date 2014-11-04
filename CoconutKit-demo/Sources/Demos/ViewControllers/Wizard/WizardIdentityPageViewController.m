@@ -23,7 +23,10 @@
 
 @end
 
-@implementation WizardIdentityPageViewController
+@implementation WizardIdentityPageViewController {
+@private
+    BOOL _loadedOnce;
+}
 
 #pragma mark Object creation and destruction
 
@@ -53,6 +56,20 @@
     [self bindToObject:personInformation];
 }
 
+#pragma mark View lifecycle
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    // Bindings are resolved at the last possible moment, when the view hierarchy is built. If we want to force an initial check,
+    // we need to do it afterwards
+    if (! _loadedOnce) {
+        [self checkDisplayedValuesWithError:NULL];
+        _loadedOnce = YES;
+    }
+}
+
 #pragma mark Localization
 
 - (void)localize
@@ -77,6 +94,14 @@
 }
 
 #pragma mark HLSBindingDelegate protocol implementation
+
+- (void)view:(UIView *)view transformationDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
+{
+    view.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
+    
+    UILabel *errorLabel = [self errorLabelForView:view];
+    errorLabel.text = [error localizedDescription];
+}
 
 - (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
 {
