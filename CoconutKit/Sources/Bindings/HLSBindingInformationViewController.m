@@ -16,7 +16,6 @@
 #import "NSBundle+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIView+HLSViewBindingImplementation.h"
-#import "UIViewController+HLSExtensions.h"
 
 @interface HLSBindingInformationViewController ()
 
@@ -129,7 +128,7 @@
     HLSInfoTableViewCell *infoCell = (HLSInfoTableViewCell *)cell;
     infoCell.nameLabel.text = entry.name;
     infoCell.valueLabel.text = entry.text;
-    infoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    infoCell.selectionStyle = [entry canHighlight] ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,36 +137,12 @@
     return [HLSInfoTableViewCell heightForValue:entry.text];
 }
 
-// FIXME: Implement highlighting again
-#if 0
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIView *view = nil;
-    id object = [self.objects objectAtIndex:indexPath.row];
-    if ([object isKindOfClass:[UIView class]]) {
-        view = object;
-    }
-    else if ([object isKindOfClass:[UIViewController class]]) {
-        view = [object viewIfLoaded];
-    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (! view) {
-        return;
-    }
-    
-    // Highlight views
-    CGFloat alpha = view.alpha;
-    UIColor *backgroundColor = view.backgroundColor;
-    [UIView animateWithDuration:0.2 animations:^{
-        view.alpha = alpha / 2.f;
-        view.backgroundColor = [UIColor blueColor];
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2 animations:^{
-            view.alpha = alpha;
-            view.backgroundColor = backgroundColor;
-        }];
-    }];
+    HLSBindingInformationEntry *entry = [self.entries objectAtIndex:indexPath.row];
+    [entry highlight];
 }
-#endif
 
 @end

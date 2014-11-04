@@ -30,6 +30,16 @@
 @property (nonatomic, readonly, strong) NSString *text;
 @property (nonatomic, readonly, strong) id object;
 
+/**
+ * Return YES iff highlighting is possible
+ */
+- (BOOL)canHighlight;
+
+/**
+ * Highlight the object (if possible)
+ */
+- (void)highlight;
+
 @end
 
 @interface HLSBindingInformationEntry (UnavailableMethods)
