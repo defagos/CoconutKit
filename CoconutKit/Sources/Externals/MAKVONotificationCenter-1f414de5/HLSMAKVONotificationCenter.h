@@ -1,6 +1,6 @@
 //
-//  MAKVONotificationCenter.h
-//  MAKVONotificationCenter
+//  HLSMAKVONotificationCenter.h
+//  HLSMAKVONotificationCenter
 //
 //  Created by Michael Ash on 10/15/08.
 //
@@ -23,12 +23,12 @@ enum
     //	stardard KVO - deallocating the target or observer objects without
     //	removing the observation WILL throw KVO errors to the console and cause
     //	crashes!
-    MAKeyValueObservingOptionUnregisterManually		= 0x80000000,
+    HLSMAKeyValueObservingOptionUnregisterManually		= 0x80000000,
 };
 
 /******************************************************************************/
 // An object representing a (potentially) active observation.
-@protocol MAKVOObservation <NSObject>
+@protocol HLSMAKVOObservation <NSObject>
 
 @required
 - (BOOL)isValid;	// returns NO if the observation has been deregistered by any means
@@ -41,15 +41,15 @@ enum
 //	path returned from the required method will be observed. Strings, arrays,
 //	sets, and ordered sets automatically get this support, as does anything else
 //	that can be used with for (... in ...)
-@protocol MAKVOKeyPathSet <NSObject>
+@protocol HLSMAKVOKeyPathSet <NSObject>
 
 @required
-- (id<NSFastEnumeration>)ma_keyPathsAsSetOfStrings;
+- (id<NSFastEnumeration>)hlsma_keyPathsAsSetOfStrings;
 
 @end
 
 /******************************************************************************/
-@interface MAKVONotification : NSObject
+@interface HLSMAKVONotification : NSObject
 
 @property(copy,readonly)	NSString			*keyPath;
 @property(assign,readonly)	id					observer, target;
@@ -75,51 +75,51 @@ enum
 // -addObserver:keyPath:selector:userInfo:options: is exactly identical to
 //	-observeTarget:keyPath:selector:userInfo:options: with the sender and target
 //	switched; which you use is a matter of preference.
-@interface NSObject (MAKVONotification)
+@interface NSObject (HLSMAKVONotification)
 
-- (id<MAKVOObservation>)addObserver:(id)observer
-                            keyPath:(id<MAKVOKeyPathSet>)keyPath
+- (id<HLSMAKVOObservation>)addObserver:(id)observer
+                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                            selector:(SEL)selector
                            userInfo:(id)userInfo
                             options:(NSKeyValueObservingOptions)options;
 
-- (id<MAKVOObservation>)observeTarget:(id)target
-                              keyPath:(id<MAKVOKeyPathSet>)keyPath
+- (id<HLSMAKVOObservation>)observeTarget:(id)target
+                              keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                              selector:(SEL)selector
                              userInfo:(id)userInfo
                               options:(NSKeyValueObservingOptions)options;
 
 #if NS_BLOCKS_AVAILABLE
 
-- (id<MAKVOObservation>)addObservationKeyPath:(id<MAKVOKeyPathSet>)keyPath
+- (id<HLSMAKVOObservation>)addObservationKeyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                                       options:(NSKeyValueObservingOptions)options
-                                        block:(void (^)(MAKVONotification *notification))block;
+                                        block:(void (^)(HLSMAKVONotification *notification))block;
 
-- (id<MAKVOObservation>)addObserver:(id)observer
-                            keyPath:(id<MAKVOKeyPathSet>)keyPath
+- (id<HLSMAKVOObservation>)addObserver:(id)observer
+                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                             options:(NSKeyValueObservingOptions)options
-                              block:(void (^)(MAKVONotification *notification))block;
+                              block:(void (^)(HLSMAKVONotification *notification))block;
 
-- (id<MAKVOObservation>)observeTarget:(id)target
-                              keyPath:(id<MAKVOKeyPathSet>)keyPath
+- (id<HLSMAKVOObservation>)observeTarget:(id)target
+                              keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                               options:(NSKeyValueObservingOptions)options
-                                block:(void (^)(MAKVONotification *notification))block;
+                                block:(void (^)(HLSMAKVONotification *notification))block;
 
 #endif
 
 - (void)removeAllObservers;
 - (void)stopObservingAllTargets;
 
-- (void)removeObserver:(id)observer keyPath:(id<MAKVOKeyPathSet>)keyPath;
-- (void)stopObserving:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath;
+- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath;
+- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath;
 
-- (void)removeObserver:(id)observer keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector;
-- (void)stopObserving:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector;
+- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector;
+- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector;
 
 @end
 
 /******************************************************************************/
-@interface MAKVONotificationCenter : NSObject
+@interface HLSMAKVONotificationCenter : NSObject
 
 + (id)defaultCenter;
 
@@ -131,31 +131,31 @@ enum
 
 // If target is an NSArray, every object in the collection will be observed,
 //	per -addObserver:toObjectsAtIndexes:.
-- (id<MAKVOObservation>)addObserver:(id)observer
+- (id<HLSMAKVOObservation>)addObserver:(id)observer
                              object:(id)target
-                            keyPath:(id<MAKVOKeyPathSet>)keyPath
+                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                            selector:(SEL)selector
                            userInfo:(id)userInfo
                             options:(NSKeyValueObservingOptions)options;
 
 #if NS_BLOCKS_AVAILABLE
 
-- (id<MAKVOObservation>)addObserver:(id)observer
+- (id<HLSMAKVOObservation>)addObserver:(id)observer
                              object:(id)target
-                            keyPath:(id<MAKVOKeyPathSet>)keyPath
+                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                             options:(NSKeyValueObservingOptions)options
-                              block:(void (^)(MAKVONotification *notification))block;
+                              block:(void (^)(HLSMAKVONotification *notification))block;
 
 #endif
 
 // remove all observations registered by observer on target with keypath using
 //	selector. nil for any parameter is a wildcard. One of observer or target
 //	must be non-nil. The only way to deregister a specific block is to
-//	remove its particular MAKVOObservation.
-- (void)removeObserver:(id)observer object:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector;
+//	remove its particular HLSMAKVOObservation.
+- (void)removeObserver:(id)observer object:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector;
 
 // remove specific registered observation
-- (void)removeObservation:(id<MAKVOObservation>)observation;
+- (void)removeObservation:(id<HLSMAKVOObservation>)observation;
 
 @end
 
@@ -163,13 +163,13 @@ enum
 // Declarations to make the basic objects work as key paths; these are
 //	technically private, but need to be publically visible or the compiler will
 //	complain.
-@interface NSString (MAKeyPath) <MAKVOKeyPathSet>
+@interface NSString (HLSMAKeyPath) <HLSMAKVOKeyPathSet>
 @end
-@interface NSArray (MAKeyPath) <MAKVOKeyPathSet>
+@interface NSArray (HLSMAKeyPath) <HLSMAKVOKeyPathSet>
 @end
-@interface NSSet (MAKeyPath) <MAKVOKeyPathSet>
+@interface NSSet (HLSMAKeyPath) <HLSMAKVOKeyPathSet>
 @end
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0 || __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_7
-@interface NSOrderedSet (MAKeyPath) <MAKVOKeyPathSet>
+@interface NSOrderedSet (HLSMAKeyPath) <HLSMAKVOKeyPathSet>
 @end
 #endif

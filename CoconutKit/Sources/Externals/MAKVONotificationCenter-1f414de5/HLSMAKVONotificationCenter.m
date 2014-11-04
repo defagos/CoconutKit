@@ -1,26 +1,26 @@
 //
-//  MAKVONotificationCenter.m
-//  MAKVONotificationCenter
+//  HLSMAKVONotificationCenter.m
+//  HLSMAKVONotificationCenter
 //
 //  Created by Michael Ash on 10/15/08.
 //
 
-#import "MAKVONotificationCenter.h"
+#import "HLSMAKVONotificationCenter.h"
 #import <objc/message.h>
 #import <objc/runtime.h>
 
 /******************************************************************************/
 #if !__has_feature(objc_arc)	// Foundation already predefines __has_feature()
-#error "MAKVONotificationCenter is designed to be built with ARC and will not work otherwise. Clients of it do not have to use ARC."
+#error "HLSMAKVONotificationCenter is designed to be built with ARC and will not work otherwise. Clients of it do not have to use ARC."
 #endif
 
 /******************************************************************************/
-static const char			* const MAKVONotificationCenter_HelpersKey = "MAKVONotificationCenter_helpers";
+static const char			* const HLSMAKVONotificationCenter_HelpersKey = "HLSMAKVONotificationCenter_helpers";
 
-static NSMutableSet			*MAKVONotificationCenter_swizzledClasses = nil;
+static NSMutableSet			*HLSMAKVONotificationCenter_swizzledClasses = nil;
 
 /******************************************************************************/
-@interface MAKVONotification ()
+@interface HLSMAKVONotification ()
 {
     NSDictionary			*change;
 }
@@ -33,7 +33,7 @@ static NSMutableSet			*MAKVONotificationCenter_swizzledClasses = nil;
 @end
 
 /******************************************************************************/
-@implementation MAKVONotification
+@implementation HLSMAKVONotification
 
 @synthesize keyPath, observer, target;
 
@@ -58,9 +58,9 @@ static NSMutableSet			*MAKVONotificationCenter_swizzledClasses = nil;
 @end
 
 /******************************************************************************/
-@interface _MAKVONotificationHelper : NSObject <MAKVOObservation>
+@interface _HLSMAKVONotificationHelper : NSObject <HLSMAKVOObservation>
 {
-  @public		// for MAKVONotificationCenter
+  @public		// for HLSMAKVONotificationCenter
     id							__unsafe_unretained _observer;
     id							__unsafe_unretained _target;
     NSSet						*_keyPaths;
@@ -76,9 +76,9 @@ static NSMutableSet			*MAKVONotificationCenter_swizzledClasses = nil;
 @end
 
 /******************************************************************************/
-@implementation _MAKVONotificationHelper
+@implementation _HLSMAKVONotificationHelper
 
-static char MAKVONotificationHelperMagicContext = 0;
+static char HLSMAKVONotificationHelperMagicContext = 0;
 
 - (id)initWithObserver:(id)observer object:(id)target keyPaths:(NSSet *)keyPaths
               selector:(SEL)selector userInfo:(id)userInfo options:(NSKeyValueObservingOptions)options
@@ -93,33 +93,33 @@ static char MAKVONotificationHelperMagicContext = 0;
         _options = options;
         
         // Pass only Apple's options to Apple's code.
-        options &= ~(MAKeyValueObservingOptionUnregisterManually);
+        options &= ~(HLSMAKeyValueObservingOptionUnregisterManually);
         
         for (NSString *keyPath in _keyPaths)
         {
             if ([target isKindOfClass:[NSArray class]])
             {
                 [target addObserver:self toObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [(NSArray *)target count])]
-                         forKeyPath:keyPath options:options context:&MAKVONotificationHelperMagicContext];
+                         forKeyPath:keyPath options:options context:&HLSMAKVONotificationHelperMagicContext];
             }
             else
-                [target addObserver:self forKeyPath:keyPath options:options context:&MAKVONotificationHelperMagicContext];
+                [target addObserver:self forKeyPath:keyPath options:options context:&HLSMAKVONotificationHelperMagicContext];
         }
         
         NSMutableSet				*observerHelpers = nil, *targetHelpers = nil;
         if (_observer) {
             @synchronized (_observer)
             {
-                if (!(observerHelpers = objc_getAssociatedObject(_observer, &MAKVONotificationCenter_HelpersKey)))
-                    objc_setAssociatedObject(_observer, &MAKVONotificationCenter_HelpersKey, observerHelpers = [NSMutableSet set], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                if (!(observerHelpers = objc_getAssociatedObject(_observer, &HLSMAKVONotificationCenter_HelpersKey)))
+                    objc_setAssociatedObject(_observer, &HLSMAKVONotificationCenter_HelpersKey, observerHelpers = [NSMutableSet set], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
             }
             @synchronized (observerHelpers) { [observerHelpers addObject:self]; }
         }
         
         @synchronized (_target)
         {
-            if (!(targetHelpers = objc_getAssociatedObject(_target, &MAKVONotificationCenter_HelpersKey)))
-                objc_setAssociatedObject(_target, &MAKVONotificationCenter_HelpersKey, targetHelpers = [NSMutableSet set], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            if (!(targetHelpers = objc_getAssociatedObject(_target, &HLSMAKVONotificationCenter_HelpersKey)))
+                objc_setAssociatedObject(_target, &HLSMAKVONotificationCenter_HelpersKey, targetHelpers = [NSMutableSet set], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
         @synchronized (targetHelpers) { [targetHelpers addObject:self]; }
     }
@@ -128,7 +128,7 @@ static char MAKVONotificationHelperMagicContext = 0;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (context == &MAKVONotificationHelperMagicContext)
+    if (context == &HLSMAKVONotificationHelperMagicContext)
     {
         
 #if NS_BLOCKS_AVAILABLE
@@ -138,12 +138,12 @@ static char MAKVONotificationHelperMagicContext = 0;
 #if NS_BLOCKS_AVAILABLE
         else
         {
-            MAKVONotification		*notification = nil;
+            HLSMAKVONotification		*notification = nil;
 
             // Pass object instead of _target as the notification object so that
             //	array observations will work as expected.
-            notification = [[MAKVONotification alloc] initWithObserver:_observer object:object keyPath:keyPath change:change];
-            ((void (^)(MAKVONotification *))_userInfo)(notification);
+            notification = [[HLSMAKVONotification alloc] initWithObserver:_observer object:object keyPath:keyPath change:change];
+            ((void (^)(HLSMAKVONotification *))_userInfo)(notification);
         }
 #endif
     }
@@ -162,7 +162,7 @@ static char MAKVONotificationHelperMagicContext = 0;
         
         for (NSString *keyPath in _keyPaths)
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0 || __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_7
-            [_target removeObserver:self fromObjectsAtIndexes:idxSet forKeyPath:keyPath context:&MAKVONotificationHelperMagicContext];
+            [_target removeObserver:self fromObjectsAtIndexes:idxSet forKeyPath:keyPath context:&HLSMAKVONotificationHelperMagicContext];
 #else
             [_target removeObserver:self fromObjectsAtIndexes:idxSet forKeyPath:keyPath];
 #endif
@@ -171,7 +171,7 @@ static char MAKVONotificationHelperMagicContext = 0;
     {
         for (NSString *keyPath in _keyPaths)
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0 || __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_7
-            [_target removeObserver:self forKeyPath:keyPath context:&MAKVONotificationHelperMagicContext];
+            [_target removeObserver:self forKeyPath:keyPath context:&HLSMAKVONotificationHelperMagicContext];
 #else
             [_target removeObserver:self forKeyPath:keyPath];
 #endif
@@ -179,10 +179,10 @@ static char MAKVONotificationHelperMagicContext = 0;
 
     if (_observer)
     {
-        NSMutableSet			*observerHelpers = objc_getAssociatedObject(_observer, &MAKVONotificationCenter_HelpersKey);
+        NSMutableSet			*observerHelpers = objc_getAssociatedObject(_observer, &HLSMAKVONotificationCenter_HelpersKey);
         @synchronized (observerHelpers) { [observerHelpers removeObject:self]; }
     }
-    NSMutableSet			*targetHelpers = objc_getAssociatedObject(_target, &MAKVONotificationCenter_HelpersKey);
+    NSMutableSet			*targetHelpers = objc_getAssociatedObject(_target, &HLSMAKVONotificationCenter_HelpersKey);
     
 
     @synchronized (targetHelpers) { [targetHelpers removeObject:self]; } // if during dealloc, this will happen momentarily anyway
@@ -206,24 +206,24 @@ static char MAKVONotificationHelperMagicContext = 0;
 @end
 
 /******************************************************************************/
-@interface MAKVONotificationCenter ()
+@interface HLSMAKVONotificationCenter ()
 
 - (void)_swizzleObjectClassIfNeeded:(id)object;
 
 @end
 
-@implementation MAKVONotificationCenter
+@implementation HLSMAKVONotificationCenter
 
 + (void)initialize
 {
     static dispatch_once_t				onceToken = 0;
     
-    dispatch_once(&onceToken, ^ { MAKVONotificationCenter_swizzledClasses = [NSMutableSet set]; });
+    dispatch_once(&onceToken, ^ { HLSMAKVONotificationCenter_swizzledClasses = [NSMutableSet set]; });
 }
 
 + (id)defaultCenter
 {
-    static MAKVONotificationCenter		*center = nil;
+    static HLSMAKVONotificationCenter		*center = nil;
     static dispatch_once_t				onceToken = 0;
     
     // I really wanted to keep Mike's old way of doing this with
@@ -232,32 +232,32 @@ static char MAKVONotificationHelperMagicContext = 0;
     //	a matter of prudence, not that I can imagine the old way ever breaking.
     //	Also, this way is, while much less cool, a bit more readable.
     dispatch_once(&onceToken, ^ {
-        center = [[MAKVONotificationCenter alloc] init];
+        center = [[HLSMAKVONotificationCenter alloc] init];
     });
     return center;
 }
 
 #if NS_BLOCKS_AVAILABLE
 
-- (id<MAKVOObservation>)addObserver:(id)observer
+- (id<HLSMAKVOObservation>)addObserver:(id)observer
                              object:(id)target
-                            keyPath:(id<MAKVOKeyPathSet>)keyPath
+                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                             options:(NSKeyValueObservingOptions)options
-                              block:(void (^)(MAKVONotification *notification))block
+                              block:(void (^)(HLSMAKVONotification *notification))block
 {
     return [self addObserver:observer object:target keyPath:keyPath selector:NULL userInfo:[block copy] options:options];
 }
 
 #endif
 
-- (id<MAKVOObservation>)addObserver:(id)observer
+- (id<HLSMAKVOObservation>)addObserver:(id)observer
                              object:(id)target
-                            keyPath:(id<MAKVOKeyPathSet>)keyPath
+                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                            selector:(SEL)selector
                            userInfo:(id)userInfo
                             options:(NSKeyValueObservingOptions)options;
 {
-    if (!(options & MAKeyValueObservingOptionUnregisterManually))
+    if (!(options & HLSMAKeyValueObservingOptionUnregisterManually))
     {
         [self _swizzleObjectClassIfNeeded:observer];
         [self _swizzleObjectClassIfNeeded:target];
@@ -265,33 +265,33 @@ static char MAKVONotificationHelperMagicContext = 0;
     
     NSMutableSet				*keyPaths = [NSMutableSet set];
     
-    for (NSString *path in [keyPath ma_keyPathsAsSetOfStrings])
+    for (NSString *path in [keyPath hlsma_keyPathsAsSetOfStrings])
         [keyPaths addObject:path];
     
-    _MAKVONotificationHelper	*helper = [[_MAKVONotificationHelper alloc] initWithObserver:observer object:target keyPaths:keyPaths
+    _HLSMAKVONotificationHelper	*helper = [[_HLSMAKVONotificationHelper alloc] initWithObserver:observer object:target keyPaths:keyPaths
                                                                                     selector:selector userInfo:userInfo options:options];
     
     // RAIAIROFT: Resource Acquisition Is Allocation, Initialization, Registration, and Other Fun Tricks.
     return helper;
 }
 
-- (void)removeObserver:(id)observer object:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector
+- (void)removeObserver:(id)observer object:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector
 {
     NSParameterAssert(observer || target);	// at least one of observer or target must be non-nil
     
     @autoreleasepool
     {
-        NSMutableSet				*observerHelpers = objc_getAssociatedObject(observer, &MAKVONotificationCenter_HelpersKey) ?: [NSMutableSet set],
-                                    *targetHelpers = objc_getAssociatedObject(target, &MAKVONotificationCenter_HelpersKey) ?: [NSMutableSet set],
+        NSMutableSet				*observerHelpers = objc_getAssociatedObject(observer, &HLSMAKVONotificationCenter_HelpersKey) ?: [NSMutableSet set],
+                                    *targetHelpers = objc_getAssociatedObject(target, &HLSMAKVONotificationCenter_HelpersKey) ?: [NSMutableSet set],
                                     *allHelpers = [NSMutableSet set],
                                     *keyPaths = [NSMutableSet set];
     
-        for (NSString *path in [keyPath ma_keyPathsAsSetOfStrings])
+        for (NSString *path in [keyPath hlsma_keyPathsAsSetOfStrings])
             [keyPaths addObject:path];
         @synchronized (observerHelpers) { [allHelpers unionSet:observerHelpers]; }
         @synchronized (targetHelpers) { [allHelpers unionSet:targetHelpers]; }
         
-        for (_MAKVONotificationHelper *helper in allHelpers)
+        for (_HLSMAKVONotificationHelper *helper in allHelpers)
         {
             if ((!observer || helper->_observer == observer) &&
                 (!target || helper->_target == target) &&
@@ -304,7 +304,7 @@ static char MAKVONotificationHelperMagicContext = 0;
     }
 }
 
-- (void)removeObservation:(id<MAKVOObservation>)observation
+- (void)removeObservation:(id<HLSMAKVOObservation>)observation
 {
     [observation remove];
 }
@@ -313,11 +313,11 @@ static char MAKVONotificationHelperMagicContext = 0;
 {
     if (!object)
         return;
-    @synchronized (MAKVONotificationCenter_swizzledClasses)
+    @synchronized (HLSMAKVONotificationCenter_swizzledClasses)
     {
         Class			class = [object class];//object_getClass(object);
 
-        if ([MAKVONotificationCenter_swizzledClasses containsObject:class])
+        if ([HLSMAKVONotificationCenter_swizzledClasses containsObject:class])
             return;
 //NSLog(@"Swizzling class %@", class);
         SEL				deallocSel = NSSelectorFromString(@"dealloc");/*@selector(dealloc)*/
@@ -330,16 +330,16 @@ static char MAKVONotificationHelperMagicContext = 0;
         #endif
                                                               
         {
-//NSLog(@"Auto-deregistering any helpers (%@) on object %@ of class %@", objc_getAssociatedObject((__bridge id)obj, &MAKVONotificationCenter_HelpersKey), obj, class);
+//NSLog(@"Auto-deregistering any helpers (%@) on object %@ of class %@", objc_getAssociatedObject((__bridge id)obj, &HLSMAKVONotificationCenter_HelpersKey), obj, class);
             @autoreleasepool
             {
-                for (_MAKVONotificationHelper *observation in [objc_getAssociatedObject((__bridge id)obj, &MAKVONotificationCenter_HelpersKey) copy])
+                for (_HLSMAKVONotificationHelper *observation in [objc_getAssociatedObject((__bridge id)obj, &HLSMAKVONotificationCenter_HelpersKey) copy])
                 {
                     // It's necessary to check the option here, as a particular
                     //	observation may want manual deregistration while others
                     //	on objects of the same class (or even the same object)
                     //	don't.
-                    if (!(observation->_options & MAKeyValueObservingOptionUnregisterManually))
+                    if (!(observation->_options & HLSMAKeyValueObservingOptionUnregisterManually))
                         [observation deregister];
                 }
             }
@@ -348,104 +348,104 @@ static char MAKVONotificationHelperMagicContext = 0;
         
         class_replaceMethod(class, deallocSel, newImpl, method_getTypeEncoding(dealloc));
         
-        [MAKVONotificationCenter_swizzledClasses addObject:class];
+        [HLSMAKVONotificationCenter_swizzledClasses addObject:class];
     }
 }
 
 @end
 
 /******************************************************************************/
-@implementation NSObject (MAKVONotification)
+@implementation NSObject (HLSMAKVONotification)
 
-- (id<MAKVOObservation>)addObserver:(id)observer keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
+- (id<HLSMAKVOObservation>)addObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
                             options:(NSKeyValueObservingOptions)options
 {
-    return [[MAKVONotificationCenter defaultCenter] addObserver:observer object:self keyPath:keyPath selector:selector userInfo:userInfo options:options];
+    return [[HLSMAKVONotificationCenter defaultCenter] addObserver:observer object:self keyPath:keyPath selector:selector userInfo:userInfo options:options];
 }
 
-- (id<MAKVOObservation>)observeTarget:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
+- (id<HLSMAKVOObservation>)observeTarget:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
                               options:(NSKeyValueObservingOptions)options
 {
-    return [[MAKVONotificationCenter defaultCenter] addObserver:self object:target keyPath:keyPath selector:selector userInfo:userInfo options:options];
+    return [[HLSMAKVONotificationCenter defaultCenter] addObserver:self object:target keyPath:keyPath selector:selector userInfo:userInfo options:options];
 }
 
 #if NS_BLOCKS_AVAILABLE
 
-- (id<MAKVOObservation>)addObservationKeyPath:(id<MAKVOKeyPathSet>)keyPath
+- (id<HLSMAKVOObservation>)addObservationKeyPath:(id<HLSMAKVOKeyPathSet>)keyPath
                                       options:(NSKeyValueObservingOptions)options
-                                        block:(void (^)(MAKVONotification *notification))block
+                                        block:(void (^)(HLSMAKVONotification *notification))block
 {
-    return [[MAKVONotificationCenter defaultCenter] addObserver:nil object:self keyPath:keyPath options:options block:block];
+    return [[HLSMAKVONotificationCenter defaultCenter] addObserver:nil object:self keyPath:keyPath options:options block:block];
 }
 
-- (id<MAKVOObservation>)addObserver:(id)observer keyPath:(id<MAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
-                              block:(void (^)(MAKVONotification *notification))block
+- (id<HLSMAKVOObservation>)addObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
+                              block:(void (^)(HLSMAKVONotification *notification))block
 {
-    return [[MAKVONotificationCenter defaultCenter] addObserver:observer object:self keyPath:keyPath options:options block:block];
+    return [[HLSMAKVONotificationCenter defaultCenter] addObserver:observer object:self keyPath:keyPath options:options block:block];
 }
 
-- (id<MAKVOObservation>)observeTarget:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
-                                block:(void (^)(MAKVONotification *notification))block
+- (id<HLSMAKVOObservation>)observeTarget:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
+                                block:(void (^)(HLSMAKVONotification *notification))block
 {
-    return [[MAKVONotificationCenter defaultCenter] addObserver:self object:target keyPath:keyPath options:options block:block];
+    return [[HLSMAKVONotificationCenter defaultCenter] addObserver:self object:target keyPath:keyPath options:options block:block];
 }
 
 #endif
 
 - (void)removeAllObservers
 {
-    [[MAKVONotificationCenter defaultCenter] removeObserver:nil object:self keyPath:nil selector:NULL];
+    [[HLSMAKVONotificationCenter defaultCenter] removeObserver:nil object:self keyPath:nil selector:NULL];
 }
 
 - (void)stopObservingAllTargets
 {
-    [[MAKVONotificationCenter defaultCenter] removeObserver:self object:nil keyPath:nil selector:NULL];
+    [[HLSMAKVONotificationCenter defaultCenter] removeObserver:self object:nil keyPath:nil selector:NULL];
 }
 
-- (void)removeObserver:(id)observer keyPath:(id<MAKVOKeyPathSet>)keyPath
+- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
 {
-    [[MAKVONotificationCenter defaultCenter] removeObserver:observer object:self keyPath:keyPath selector:NULL];
+    [[HLSMAKVONotificationCenter defaultCenter] removeObserver:observer object:self keyPath:keyPath selector:NULL];
 }
 
-- (void)stopObserving:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath
+- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
 {
-    [[MAKVONotificationCenter defaultCenter] removeObserver:self object:target keyPath:keyPath selector:NULL];
+    [[HLSMAKVONotificationCenter defaultCenter] removeObserver:self object:target keyPath:keyPath selector:NULL];
 }
 
-- (void)removeObserver:(id)observer keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector
+- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector
 {
-    [[MAKVONotificationCenter defaultCenter] removeObserver:observer object:self keyPath:keyPath selector:selector];
+    [[HLSMAKVONotificationCenter defaultCenter] removeObserver:observer object:self keyPath:keyPath selector:selector];
 }
 
-- (void)stopObserving:(id)target keyPath:(id<MAKVOKeyPathSet>)keyPath selector:(SEL)selector
+- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector
 {
-    [[MAKVONotificationCenter defaultCenter] removeObserver:self object:target keyPath:keyPath selector:selector];
+    [[HLSMAKVONotificationCenter defaultCenter] removeObserver:self object:target keyPath:keyPath selector:selector];
 }
 
 @end
 
 /******************************************************************************/
-@implementation NSString (MAKeyPath)
+@implementation NSString (HLSMAKeyPath)
 
-- (id<NSFastEnumeration>)ma_keyPathsAsSetOfStrings
+- (id<NSFastEnumeration>)hlsma_keyPathsAsSetOfStrings
 {
     return [NSSet setWithObject:self];
 }
 
 @end
 
-@implementation NSArray (MAKeyPath)
+@implementation NSArray (HLSMAKeyPath)
 
-- (id<NSFastEnumeration>)ma_keyPathsAsSetOfStrings
+- (id<NSFastEnumeration>)hlsma_keyPathsAsSetOfStrings
 {
     return self;
 }
 
 @end
 
-@implementation NSSet (MAKeyPath)
+@implementation NSSet (HLSMAKeyPath)
 
-- (id<NSFastEnumeration>)ma_keyPathsAsSetOfStrings
+- (id<NSFastEnumeration>)hlsma_keyPathsAsSetOfStrings
 {
     return self;
 }
@@ -453,9 +453,9 @@ static char MAKVONotificationHelperMagicContext = 0;
 @end
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0 || __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_7
-@implementation NSOrderedSet (MAKeyPath)
+@implementation NSOrderedSet (HLSMAKeyPath)
 
-- (id<NSFastEnumeration>)ma_keyPathsAsSetOfStrings
+- (id<NSFastEnumeration>)hlsma_keyPathsAsSetOfStrings
 {
     return self;
 }

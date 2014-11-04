@@ -9,8 +9,8 @@
 #import "HLSViewBindingInformation.h"
 
 #import "HLSLogger.h"
+#import "HLSMAKVONotificationCenter.h"
 #import "HLSTransformer.h"
-#import "MAKVONotificationCenter.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
@@ -267,7 +267,7 @@
     // Bug: Doing KVO on key paths containing keypath operators (which cannot be used with KVO) and catching the exception leads to retaining the
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
     if (! self.synchronized && [self.keyPath rangeOfString:@"@"].length == 0) {
-        [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(MAKVONotification *notification) {
+        [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
             id value = [self value];
             [self.view performSelector:@selector(updateViewWithValue:) withObject:value];
         }];
