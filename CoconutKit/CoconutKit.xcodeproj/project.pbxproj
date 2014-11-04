@@ -58,6 +58,8 @@
 		6F2D46FA15761A8600EF5E4F /* NSSet+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */; };
 		6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */; };
 		6F2D46FE15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D46FC15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m */; };
+		6F2DACAC1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2DACAA1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.h */; };
+		6F2DACAD1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2DACAB1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m */; };
 		6F3B064514BC7D410026F512 /* UIWebView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */; };
 		6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3E3E8315A2277D007E78BD /* HLSApplicationPreloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3E3E8115A2277D007E78BD /* HLSApplicationPreloader.h */; };
@@ -371,6 +373,8 @@
 		6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D46FC15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+HLSExtensions.m"; sourceTree = "<group>"; };
+		6F2DACAA1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F2DACAB1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3E3E8115A2277D007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
@@ -718,6 +722,8 @@
 				6F0CA8BD19DD934300CBE2E1 /* HLSBindingInformationViewController.m */,
 				6F0CA8BE19DD934300CBE2E1 /* HLSViewBindingInformation.h */,
 				6F0CA8BF19DD934300CBE2E1 /* HLSViewBindingInformation.m */,
+				6F2DACAA1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.h */,
+				6F2DACAB1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m */,
 				6F0CA8C019DD934300CBE2E1 /* UILabel+HLSViewBinding.h */,
 				6F0CA8C119DD934300CBE2E1 /* UILabel+HLSViewBinding.m */,
 				6F0CA8C219DD934300CBE2E1 /* UIProgressView+HLSViewBinding.h */,
@@ -1250,6 +1256,7 @@
 				6F0CA8F619DD934300CBE2E1 /* UIViewController+HLSViewBindingFriend.h in Headers */,
 				6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimation.h in Headers */,
 				6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationStep.h in Headers */,
+				6F2DACAC1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.h in Headers */,
 				6FCFEA4915E37E25002CAF9E /* HLSAnimationStep.h in Headers */,
 				6FCFEA5915E390A6002CAF9E /* HLSObjectAnimation.h in Headers */,
 				6FCFEA6115E3AAC5002CAF9E /* HLSAnimationStep+Protected.h in Headers */,
@@ -1543,6 +1550,7 @@
 				6F6C7556162DC0550094B090 /* UITabBarController+HLSExtensions.m in Sources */,
 				6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
 				6F7A871116522C0A0030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
+				6F2DACAD1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m in Sources */,
 				6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */,
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,

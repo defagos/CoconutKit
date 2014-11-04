@@ -31,6 +31,7 @@ UIColor+HLSExtensions.m
 UIControl+HLSExclusiveTouch.m
 UIFont+HLSExtensions.m
 UIImage+HLSExtensions.m
+UIImageView+HLSViewBinding.m
 UILabel+HLSDynamicLocalization.m
 UILabel+HLSViewBinding.m
 UINavigationController+HLSExtensions.m
