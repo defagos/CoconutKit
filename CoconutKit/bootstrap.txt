@@ -29,6 +29,7 @@ NSURLRequest+HLSExtensions.m
 UIActivityIndicatorView+HLSViewBinding.m
 UIApplication+HLSExtensions.m
 UIColor+HLSExtensions.m
+UICollectionView+HLSViewBinding.m
 UIControl+HLSExclusiveTouch.m
 UIFont+HLSExtensions.m
 UIImage+HLSExtensions.m
