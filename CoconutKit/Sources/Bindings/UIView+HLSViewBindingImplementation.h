@@ -52,7 +52,8 @@
 
 /**
  * Methods meant to be called when implementing binding support for view subclasses which must be able to update the
- * underlying bound value
+ * underlying bound value. The -checkAndUpdateModelWithDisplayedValue:error: should also be called when the view
+ * gets updated programmatically, so that the model gets updated in all cases
  */
 @interface UIView (HLSViewBindingUpdateImplementation)
 
