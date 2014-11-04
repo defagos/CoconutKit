@@ -119,7 +119,6 @@
 - (IBAction)resetModel:(id)sender
 {
     // Reset the model programmatically. This shows that the text fields are updated accordingly
-    // FIXME: Does not work anymore
     self.personInformation.street = nil;
     self.personInformation.city = nil;
     self.personInformation.state = nil;
@@ -129,7 +128,6 @@
 - (IBAction)resetTextFields:(id)sender
 {
     // Reset text fields programmatically. This shows that the model is updated accordingly
-    // FIXME: Does not work anymore
     for (UITextField *textField in self.textFields) {
         textField.text = nil;
     }
