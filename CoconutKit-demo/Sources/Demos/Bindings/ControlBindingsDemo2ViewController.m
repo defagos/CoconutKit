@@ -11,6 +11,7 @@
 @interface ControlBindingsDemo2ViewController ()
 
 @property (nonatomic, strong) NSNumber *page;
+@property (nonatomic, strong) NSNumber *loading;
 
 @end
 

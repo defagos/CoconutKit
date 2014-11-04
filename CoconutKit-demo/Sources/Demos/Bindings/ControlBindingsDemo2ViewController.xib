@@ -42,6 +42,20 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoTransformer decimalNumberFormatter]"/>
                     </userDefinedRuntimeAttributes>
                 </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="x0l-Fu-dMy">
+                    <rect key="frame" x="221" y="306" width="51" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="loading"/>
+                    </userDefinedRuntimeAttributes>
+                </switch>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="b54-vl-jef">
+                    <rect key="frame" x="569" y="312" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="loading"/>
+                    </userDefinedRuntimeAttributes>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
