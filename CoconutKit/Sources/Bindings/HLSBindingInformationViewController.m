@@ -8,6 +8,7 @@
 
 #import "HLSBindingInformationViewController.h"
 
+#import "HLSBindingInformationEntry.h"
 #import "HLSInfoTableViewCell.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
@@ -19,49 +20,18 @@
 
 @interface HLSBindingInformationViewController ()
 
-@property (nonatomic, strong) NSArray *names;
-@property (nonatomic, strong) NSArray *objects;
+@property (nonatomic, strong) NSArray *entries;
 
 @end
 
 @implementation HLSBindingInformationViewController
-
-#pragma mark Class methods
-
-+ (NSString *)identityStringForObject:(id)object
-{
-    if (! object || object == [NSNull null]) {
-        return @"-";
-    }
-    
-    // Class objects: Display class name
-    if (hls_isClass(object)) {
-        return [NSString stringWithFormat:@"'%@' class", object];
-    }
-    else if ([object isKindOfClass:[UIViewController class]]) {
-        return [NSString stringWithFormat:@"%p (%@)", object, [object class]];
-    }
-    else {
-        return [NSString stringWithFormat:@"%@ (%@)", object, [object class]];
-    }
-}
 
 #pragma mark Object creation and destruction
 
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.names = @[CoconutKitLocalizedString(@"Binding status", nil),
-                       CoconutKitLocalizedString(@"Key path", nil),
-                       CoconutKitLocalizedString(@"Transformer name", nil),
-                       CoconutKitLocalizedString(@"Resolved bound object", nil),
-                       CoconutKitLocalizedString(@"Resolved binding delegate", nil),
-                       CoconutKitLocalizedString(@"Formatted value", nil),
-                       CoconutKitLocalizedString(@"Raw value", nil),
-                       CoconutKitLocalizedString(@"Resolved transformation target", nil),
-                       CoconutKitLocalizedString(@"Resolved transformation selector", nil),
-                       CoconutKitLocalizedString(@"Can update bound object", nil),
-                       CoconutKitLocalizedString(@"Synchronized", nil)];
+        NSMutableArray *entries= [NSMutableArray array];
         
         NSString *statusString = nil;
         if (bindingInformation.verified) {
@@ -70,6 +40,38 @@
         else {
             statusString = bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
         }
+        
+        HLSBindingInformationEntry *entry1 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)
+                                                                                         text:statusString];
+        [entries addObject:entry1];
+        
+        HLSBindingInformationEntry *entry2 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Key path", nil)
+                                                                                         text:bindingInformation.keyPath];
+        [entries addObject:entry2];
+        
+        HLSBindingInformationEntry *entry3 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Transformer name", nil)
+                                                                                         text:bindingInformation.transformerName];
+        [entries addObject:entry3];
+        
+        HLSBindingInformationEntry *entry4 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved bound object", nil)
+                                                                                       object:bindingInformation.object];
+        [entries addObject:entry4];
+        
+        HLSBindingInformationEntry *entry5 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved binding delegate", nil)
+                                                                                       object:bindingInformation.delegate];
+        [entries addObject:entry5];
+        
+        HLSBindingInformationEntry *entry6 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Formatted value", nil)
+                                                                                       object:[bindingInformation value]];
+        [entries addObject:entry6];
+        
+        HLSBindingInformationEntry *entry7 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Raw value", nil)
+                                                                                       object:[bindingInformation rawValue]];
+        [entries addObject:entry7];
+        
+        HLSBindingInformationEntry *entry8 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation target", nil)
+                                                                                       object:bindingInformation.transformationTarget];
+        [entries addObject:entry8];
         
         NSString *transformationSelectorString = nil;
         if (bindingInformation.transformationSelector) {
@@ -80,19 +82,19 @@
             transformationSelectorString = @"-";
         }
         
-        self.objects = @[statusString,
-                         bindingInformation.keyPath ?: @"-",
-                         bindingInformation.transformerName ?: @"-",
-                         [HLSBindingInformationViewController identityStringForObject:bindingInformation.object],
-                         [HLSBindingInformationViewController identityStringForObject:bindingInformation.delegate],
-                         [HLSBindingInformationViewController identityStringForObject:[bindingInformation value]],
-                         [HLSBindingInformationViewController identityStringForObject:[bindingInformation rawValue]],
-                         [HLSBindingInformationViewController identityStringForObject:bindingInformation.transformationTarget],
-                         transformationSelectorString,
-                         HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)]),
-                         HLSStringFromBool(bindingInformation.synchronized)];
+        HLSBindingInformationEntry *entry9 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation selector", nil)
+                                                                                         text:transformationSelectorString];
+        [entries addObject:entry9];
         
-        NSAssert([self.names count] == [self.objects count], @"Expect the same number of names and objects");
+        HLSBindingInformationEntry *entry10 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Can update bound object", nil)
+                                                                                          text:HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)])];
+        [entries addObject:entry10];
+        
+        HLSBindingInformationEntry *entry11 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Synchronized", nil)
+                                                                                          text:HLSStringFromBool(bindingInformation.synchronized)];
+        [entries addObject:entry11];
+        
+        self.entries = [NSArray arrayWithArray:entries];
     }
     return self;
 }
@@ -106,18 +108,11 @@
     self.preferredContentSize = CGSizeMake(320.f, 640.f);
 }
 
-#pragma mark Cell contents
-
-- (NSString *)valueAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self.objects objectAtIndex:indexPath.row];
-}
-
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.names count];
+    return [self.entries count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,16 +124,18 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    HLSBindingInformationEntry *entry = [self.entries objectAtIndex:indexPath.row];
+    
     HLSInfoTableViewCell *infoCell = (HLSInfoTableViewCell *)cell;
-    infoCell.nameLabel.text = [self.names objectAtIndex:indexPath.row];
-    infoCell.valueLabel.text = [self valueAtIndexPath:indexPath];
+    infoCell.nameLabel.text = entry.name;
+    infoCell.valueLabel.text = entry.text;
     infoCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *value = [self valueAtIndexPath:indexPath];
-    return [HLSInfoTableViewCell heightForValue:value];
+    HLSBindingInformationEntry *entry = [self.entries objectAtIndex:indexPath.row];
+    return [HLSInfoTableViewCell heightForValue:entry.text];
 }
 
 // FIXME: Implement highlighting again
