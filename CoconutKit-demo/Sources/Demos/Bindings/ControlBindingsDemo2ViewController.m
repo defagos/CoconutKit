@@ -10,8 +10,20 @@
 
 @interface ControlBindingsDemo2ViewController ()
 
+@property (nonatomic, strong) NSNumber *page;
+
 @end
 
 @implementation ControlBindingsDemo2ViewController
+
+#pragma mark Object creation and destruction
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.page = @3;
+    }
+    return self;
+}
 
 @end

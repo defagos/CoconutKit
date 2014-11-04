@@ -67,10 +67,9 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
 
 #pragma mark Actions
 
-- (void)boundValueDidChange:(id)sender
+- (void)stateDidChange:(id)sender
 {
-    id displayedValue = @(self.on);
-    [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
+    [self checkAndUpdateModelWithDisplayedValue:@(self.on) error:NULL];
 }
 
 @end
@@ -81,7 +80,7 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
 // events, we need to add an action for UIControlEventValueChanged
 static void commonInit(UISwitch *self)
 {
-    [self addTarget:self action:@selector(boundValueDidChange:) forControlEvents:UIControlEventValueChanged];
+    [self addTarget:self action:@selector(stateDidChange:) forControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark Swizzled method implementations
@@ -107,7 +106,6 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
     (*s_UISwitch__setOn_animated_Imp)(self, _cmd, on, animated);
     
     if (! objc_getAssociatedObject(self, s_lockKey)) {
-        id displayedValue = @(on);
-        [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
+        [self checkAndUpdateModelWithDisplayedValue:@(on) error:NULL];
     }
 }

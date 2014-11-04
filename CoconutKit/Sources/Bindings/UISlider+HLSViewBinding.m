@@ -93,7 +93,6 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
     (*s_UISlider__setValue_animated_Imp)(self, _cmd, value, animated);
 
     if (! objc_getAssociatedObject(self, s_lockKey)) {
-        id displayedValue = @(value);
-        [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
+        [self checkAndUpdateModelWithDisplayedValue:@(value) error:NULL];
     }
 }

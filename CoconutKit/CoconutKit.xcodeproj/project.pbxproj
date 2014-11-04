@@ -62,6 +62,8 @@
 		6F2DACAD1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2DACAB1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m */; };
 		6F2DACB01A08E1BC00FF0CC9 /* HLSBindingInformationEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2DACAE1A08E1BC00FF0CC9 /* HLSBindingInformationEntry.h */; };
 		6F2DACB11A08E1BC00FF0CC9 /* HLSBindingInformationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2DACAF1A08E1BC00FF0CC9 /* HLSBindingInformationEntry.m */; };
+		6F2DACB41A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F2DACB21A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.h */; };
+		6F2DACB51A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2DACB31A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.m */; };
 		6F3B064514BC7D410026F512 /* UIWebView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */; };
 		6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */; };
 		6F3E3E8315A2277D007E78BD /* HLSApplicationPreloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F3E3E8115A2277D007E78BD /* HLSApplicationPreloader.h */; };
@@ -379,6 +381,8 @@
 		6F2DACAB1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F2DACAE1A08E1BC00FF0CC9 /* HLSBindingInformationEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingInformationEntry.h; sourceTree = "<group>"; };
 		6F2DACAF1A08E1BC00FF0CC9 /* HLSBindingInformationEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingInformationEntry.m; sourceTree = "<group>"; };
+		6F2DACB21A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPageControl+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F2DACB31A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPageControl+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F3B064314BC7D410026F512 /* UIWebView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F3E3E8115A2277D007E78BD /* HLSApplicationPreloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSApplicationPreloader.h; sourceTree = "<group>"; };
@@ -732,6 +736,8 @@
 				6F2DACAB1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m */,
 				6F0CA8C019DD934300CBE2E1 /* UILabel+HLSViewBinding.h */,
 				6F0CA8C119DD934300CBE2E1 /* UILabel+HLSViewBinding.m */,
+				6F2DACB21A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.h */,
+				6F2DACB31A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.m */,
 				6F0CA8C219DD934300CBE2E1 /* UIProgressView+HLSViewBinding.h */,
 				6F0CA8C319DD934300CBE2E1 /* UIProgressView+HLSViewBinding.m */,
 				6F0CA8C419DD934300CBE2E1 /* UISegmentedControl+HLSViewBinding.h */,
@@ -1196,6 +1202,7 @@
 				6F0CA8E419DD934300CBE2E1 /* UISegmentedControl+HLSViewBinding.h in Headers */,
 				6FADE5CB14BA0494007EE121 /* NSTimeZone+HLSExtensions.h in Headers */,
 				6FADE5CD14BA0494007EE121 /* UIColor+HLSExtensions.h in Headers */,
+				6F2DACB41A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.h in Headers */,
 				6FADE5CF14BA0494007EE121 /* UIControl+HLSExclusiveTouch.h in Headers */,
 				6F0CA8DE19DD934300CBE2E1 /* HLSViewBindingInformation.h in Headers */,
 				6FADE5D114BA0494007EE121 /* UIImage+HLSExtensions.h in Headers */,
@@ -1499,6 +1506,7 @@
 				6F28D6191A00C29600564BD3 /* UITextView+HLSCursorVisibility.m in Sources */,
 				6FADE5D214BA0494007EE121 /* UIImage+HLSExtensions.m in Sources */,
 				6FADE5D714BA0494007EE121 /* HLSModelManager.m in Sources */,
+				6F2DACB51A091D8600FF0CC9 /* UIPageControl+HLSViewBinding.m in Sources */,
 				6FADE5D914BA0494007EE121 /* NSManagedObject+HLSExtensions.m in Sources */,
 				6FADE5DB14BA0494007EE121 /* NSManagedObject+HLSValidation.m in Sources */,
 				6FADE5DD14BA0494007EE121 /* HLSLogger.m in Sources */,

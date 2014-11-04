@@ -67,12 +67,10 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 
 #pragma mark Actions
 
-- (void)boundValueDidChange:(id)sender
+- (void)segmentDidChange:(id)sender
 {
-    id displayedValue = @(self.selectedSegmentIndex);
-    
     // FIXME: This call leads to two KVO change notifications. Should be better to have only one if possible
-    [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
+    [self checkAndUpdateModelWithDisplayedValue:@(self.selectedSegmentIndex) error:NULL];
 }
 
 @end
@@ -83,7 +81,7 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 // events, we need to add an action for UIControlEventValueChanged
 static void commonInit(UISegmentedControl *self)
 {
-    [self addTarget:self action:@selector(boundValueDidChange:) forControlEvents:UIControlEventValueChanged];
+    [self addTarget:self action:@selector(segmentDidChange:) forControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark Swizzled method implementations
@@ -110,7 +108,6 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
     (*s_UISegmentedControl__setSelectedSegmentIndex_Imp)(self, _cmd, selectedSegmentIndex);
     
     if (! objc_getAssociatedObject(self, s_lockKey)) {
-        id displayedValue = @(selectedSegmentIndex);
-        [self checkAndUpdateModelWithDisplayedValue:displayedValue error:NULL];
+        [self checkAndUpdateModelWithDisplayedValue:@(selectedSegmentIndex) error:NULL];
     }
 }

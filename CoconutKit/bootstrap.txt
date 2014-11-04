@@ -35,6 +35,7 @@ UIImageView+HLSViewBinding.m
 UILabel+HLSDynamicLocalization.m
 UILabel+HLSViewBinding.m
 UINavigationController+HLSExtensions.m
+UIPageControl+HLSViewBinding.m
 UIPopoverController+HLSExtensions.m
 UIProgressView+HLSViewBinding.m
 UIScrollView+HLSExtensions.m

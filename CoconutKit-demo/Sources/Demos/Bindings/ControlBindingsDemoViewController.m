@@ -25,12 +25,6 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *debugOverlayBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Debug", nil)
-                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                 target:self
-                                                                                 action:@selector(showBindingDebugOverlay:)];
-    self.navigationItem.rightBarButtonItems = [@[debugOverlayBarButtonItem] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
-    
     [self displayPageAtIndex:_currentPageIndex animated:NO];
 }
 
@@ -40,8 +34,8 @@
 {
     [super localize];
     
-    [self.segmentedControl setTitle:NSLocalizedString(@"Updating & validating", nil) forSegmentAtIndex:0];
-    [self.segmentedControl setTitle:NSLocalizedString(@"Incorrect bindings", nil) forSegmentAtIndex:1];
+    [self.segmentedControl setTitle:NSLocalizedString(@"Controls 1", nil) forSegmentAtIndex:0];
+    [self.segmentedControl setTitle:NSLocalizedString(@"Controls 2", nil) forSegmentAtIndex:1];
     
     self.title = NSLocalizedString(@"Controls", nil);
 }
@@ -79,11 +73,6 @@
 - (IBAction)changePage:(id)sender
 {
     [self displayPageAtIndex:self.segmentedControl.selectedSegmentIndex animated:YES];
-}
-
-- (IBAction)showBindingDebugOverlay:(id)sender
-{
-    [self showBindingDebugOverlayViewRecursive:YES];
 }
 
 @end
