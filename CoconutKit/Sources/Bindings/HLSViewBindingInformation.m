@@ -107,7 +107,7 @@
 {
     BOOL success = YES;
     id value = nil;
-    NSError *error = nil;
+    NSError *technicalError = nil;
     
     if (! self.transformationTarget) {
         value = transformedValue;
@@ -125,12 +125,12 @@
             if (! [transformer respondsToSelector:@selector(getObject:fromObject:error:)]) {
                 success = NO;
                 
-                error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                            code:HLSErrorTransformationError
-                            localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
+                technicalError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                     code:HLSErrorTransformationError
+                                     localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
             }
             
-            if (! [transformer getObject:&value fromObject:transformedValue error:&error]) {
+            if (! [transformer getObject:&value fromObject:transformedValue error:&technicalError]) {
                 success = NO;
             }
         }
@@ -138,21 +138,19 @@
             if (! [[transformer class] allowsReverseTransformation]) {
                 success = NO;
                 
-                error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                            code:HLSErrorTransformationError
-                            localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
+                technicalError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                     code:HLSErrorTransformationError
+                                     localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
             }
             
             value = [transformer reverseTransformedValue:transformedValue];
         }
         else {
-            NSString *errorDescription = nil;
-            if (! [transformer getObjectValue:&value forString:transformedValue errorDescription:&errorDescription]) {
+            NSString *technicalErrorDescription = nil;
+            if (! [transformer getObjectValue:&value forString:transformedValue errorDescription:&technicalErrorDescription]) {
                 success = NO;
                 
-                error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                            code:HLSErrorTransformationError
-                            localizedDescription:errorDescription];
+                technicalError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorTransformationError localizedDescription:technicalErrorDescription];
             }
         }
     }
@@ -167,6 +165,11 @@
         }
     }
     else {
+        NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                             code:HLSErrorUpdateError
+                             localizedDescription:NSLocalizedString(@"Incorrect format", nil)];
+        [error setUnderlyingError:technicalError];
+        
         if (pError) {
             *pError = error;
         }
