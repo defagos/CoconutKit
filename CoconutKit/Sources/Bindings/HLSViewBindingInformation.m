@@ -146,11 +146,18 @@
             value = [transformer reverseTransformedValue:transformedValue];
         }
         else {
-            NSString *technicalErrorDescription = nil;
-            if (! [transformer getObjectValue:&value forString:transformedValue errorDescription:&technicalErrorDescription]) {
-                success = NO;
-                
-                technicalError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorTransformationError localizedDescription:technicalErrorDescription];
+            // NSFormatters will crash for nil strings when calling -getObjectValue:forString:errorDescription:, but do not crash when calling
+            // the specific -numberFromString: and -dateFromString: methods (which return nil in such cases). Check first
+            if (transformedValue) {
+                NSString *technicalErrorDescription = nil;
+                if (! [transformer getObjectValue:&value forString:transformedValue errorDescription:&technicalErrorDescription]) {
+                    success = NO;
+                    
+                    technicalError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorTransformationError localizedDescription:technicalErrorDescription];
+                }
+            }
+            else {
+                value = nil;
             }
         }
     }
