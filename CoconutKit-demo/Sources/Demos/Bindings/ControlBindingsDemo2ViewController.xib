@@ -24,8 +24,15 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="page"/>
                     </userDefinedRuntimeAttributes>
                 </pageControl>
+                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="gJj-a6-GlX">
+                    <rect key="frame" x="203" y="203" width="94" height="29"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="page"/>
+                    </userDefinedRuntimeAttributes>
+                </stepper>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;page&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qFx-wv-2X5">
-                    <rect key="frame" x="561" y="94" width="59" height="21"/>
+                    <rect key="frame" x="550" y="153" width="59" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

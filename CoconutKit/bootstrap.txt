@@ -42,6 +42,7 @@ UIScrollView+HLSExtensions.m
 UISegmentedControl+HLSViewBinding.m
 UISlider+HLSViewBinding.m
 UISplitViewController+HLSExtensions.m
+UIStepper+HLSViewBinding.m
 UISwitch+HLSViewBinding.m
 UITabBarController+HLSExtensions.m
 UITableView+HLSViewBinding.m
