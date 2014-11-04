@@ -110,28 +110,29 @@
 
 - (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
 {
-    NSLog(@"Check did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
+    HLSLoggerInfo(@"Check did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
 }
 
 - (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
 {
-    NSLog(@"Check did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
+    HLSLoggerInfo(@"Check did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
 }
 
 - (void)view:(UIView *)view updateDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
 {
-    NSLog(@"Update did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
+    HLSLoggerInfo(@"Update did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
 }
 
 - (void)view:(UIView *)view updateDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
 {
-    NSLog(@"Update did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
+    HLSLoggerInfo(@"Update did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
 }
 
 #pragma mark Validation
 
 - (BOOL)validateSwitchEnabled:(NSNumber **)pSwitchEnabled error:(NSError **)pError
 {
+    HLSLoggerInfo(@"Called switch validation method");
     return YES;
 }
 
