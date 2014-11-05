@@ -12,6 +12,8 @@
 @protocol HLSBindingDelegate <NSObject>
 
 @optional
+
+// Only received if a transformation was performed
 - (void)view:(UIView *)view transformationDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
 - (void)view:(UIView *)view transformationDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
 

@@ -29,6 +29,8 @@
 
 @property (nonatomic, weak) id transformationTarget;
 @property (nonatomic, assign) SEL transformationSelector;
+@property (nonatomic, strong) id<HLSTransformer> transformer;
+
 @property (nonatomic, strong) NSString *errorDescription;
 
 @property (nonatomic, weak) id<HLSBindingDelegate> delegate;
@@ -83,7 +85,7 @@
     }
             
     id value = [self.object valueForKeyPath:self.keyPath];
-    return [self transformValue:value withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
+    return [self transformValue:value];
 }
 
 - (id)rawValue
@@ -101,92 +103,60 @@
     }
 }
 
-#pragma mark Checking and updating values (these operatoions notify the delegate about their status)
+#pragma mark Checking and updating values (these operations notify the delegate about their status)
 
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
-    BOOL success = YES;
-    id value = nil;
-    NSError *technicalError = nil;
-    
-    if (! self.transformationTarget) {
-        value = transformedValue;
-    }
-    else {
-        // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
-        // correct memory management
-        id (*methodImp)(id, SEL) = (id (*)(id, SEL))[self.transformationTarget methodForSelector:self.transformationSelector];
-        id transformer = methodImp(self.transformationTarget, self.transformationSelector);
-        NSAssert([transformer conformsToProtocol:@protocol(HLSTransformer)]
-                    || [transformer isKindOfClass:[NSFormatter class]]
-                    || [transformer isKindOfClass:[NSValueTransformer class]], @"Invalid transformer");
+    if (self.transformer) {
+        BOOL success = YES;
+        id value = nil;
         
-        if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-            if (! [transformer respondsToSelector:@selector(getObject:fromObject:error:)]) {
-                success = NO;
-                
-                technicalError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                     code:HLSErrorTransformationError
-                                     localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
-            }
-            
-            if (! [transformer getObject:&value fromObject:transformedValue error:&technicalError]) {
-                success = NO;
-            }
-        }
-        else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
-            if (! [[transformer class] allowsReverseTransformation]) {
-                success = NO;
-                
-                technicalError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                     code:HLSErrorTransformationError
-                                     localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"No reverse transformation is available for class %@", nil), [transformer class]]];
-            }
-            
-            value = [transformer reverseTransformedValue:transformedValue];
+        NSError *error = nil;
+        NSError *detailedError = nil;
+        
+        if ([self.transformer respondsToSelector:@selector(getObject:fromObject:error:)]) {
+            success = [self.transformer getObject:&value fromObject:transformedValue error:&detailedError];
         }
         else {
-            // NSFormatters will crash for nil strings when calling -getObjectValue:forString:errorDescription:, but do not crash when calling
-            // the specific -numberFromString: and -dateFromString: methods (which return nil in such cases). Check first
-            if (transformedValue) {
-                NSString *technicalErrorDescription = nil;
-                if (! [transformer getObjectValue:&value forString:transformedValue errorDescription:&technicalErrorDescription]) {
-                    success = NO;
-                    
-                    technicalError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorTransformationError localizedDescription:technicalErrorDescription];
-                }
-            }
-            else {
-                value = nil;
-            }
-        }
-    }
-    
-    if (success) {
-        if (pValue) {
-            *pValue = value;
+            detailedError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                code:HLSErrorTransformationError
+                                localizedDescription:CoconutKitLocalizedString(@"No reverse transformation is available", nil)];
+            success = NO;
         }
         
-        if ([self.delegate respondsToSelector:@selector(view:transformationDidSucceedForObject:keyPath:)]) {
-            [self.delegate view:self.view transformationDidSucceedForObject:self.object keyPath:self.keyPath];
+        if (success) {
+            if ([self.delegate respondsToSelector:@selector(view:transformationDidSucceedForObject:keyPath:)]) {
+                [self.delegate view:self.view transformationDidSucceedForObject:self.object keyPath:self.keyPath];
+            }
+            
+            if (pValue) {
+                *pValue = value;
+            }
         }
+        else {
+            error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                        code:HLSErrorTransformationError
+                        localizedDescription:NSLocalizedString(@"Incorrect format", nil)];
+            [error setUnderlyingError:detailedError];
+            
+            if ([self.delegate respondsToSelector:@selector(view:transformationDidFailForObject:keyPath:withError:)]) {
+                [self.delegate view:self.view transformationDidFailForObject:self.object keyPath:self.keyPath withError:error];
+            }
+            
+            if (pError) {
+                *pError = error;
+            }
+        }
+        
+        return success;
     }
     else {
-        NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                             code:HLSErrorUpdateError
-                             localizedDescription:NSLocalizedString(@"Incorrect format", nil)];
-        [error setUnderlyingError:technicalError];
-        
-        if (pError) {
-            *pError = error;
+        if (pValue) {
+            *pValue = transformedValue;
         }
         
-        if ([self.delegate respondsToSelector:@selector(view:transformationDidFailForObject:keyPath:withError:)]) {
-            [self.delegate view:self.view transformationDidFailForObject:self.object keyPath:self.keyPath withError:error];
-        }
+        return YES;
     }
-    
-    return success;
 }
 
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
@@ -307,10 +277,10 @@
     id value = [self.object valueForKeyPath:self.keyPath];
     
     // Transformer lookup
-    __block id transformationTarget = nil;
-    __block SEL transformationSelector = NULL;
-    
-    if ([self.transformerName isFilled] && ! self.transformationTarget) {
+    if ([self.transformerName isFilled] && ! self.transformer) {
+        __block id transformationTarget = nil;
+        __block SEL transformationSelector = NULL;
+
         // Check whether the transformer is a class method +[ClassName methodName]
         // Regex: ^\s*\+\s*\[(\w*)\s*(\w*)\]\s*$
         NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*)\\]\\s*$";
@@ -380,6 +350,25 @@
             }
         }
         
+        // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+        // correct memory management
+        id (*methodImp)(id, SEL) = (id (*)(id, SEL))[transformationTarget methodForSelector:transformationSelector];
+        id transformer = methodImp(transformationTarget, transformationSelector);
+        
+        if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
+            self.transformer = transformer;
+        }
+        else if ([transformer isKindOfClass:[NSFormatter class]]) {
+            self.transformer = [HLSBlockTransformer blockTransformerFromFormatter:transformer];
+        }
+        else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
+            self.transformer = [HLSBlockTransformer blockTransformerFromValueTransformer:transformer];
+        }
+        else {
+            self.errorDescription = [NSString stringWithFormat:@"Unsupported transformer class %@", [transformer class]];
+            return NO;
+        }
+        
         self.transformationTarget = transformationTarget;
         self.transformationSelector = transformationSelector;
     }
@@ -389,7 +378,7 @@
         self.delegate = [HLSViewBindingInformation delegateForView:self.view];
     }
     
-    id displayedValue = [self transformValue:value withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
+    id displayedValue = [self transformValue:value];
     
     // We cannot cache binding information if we cannot check the type of the value to be displayed for compatibility. Does not change
     // the status, a later check is required
@@ -398,7 +387,7 @@
     }
     
     if (! [self canDisplayValue:displayedValue]) {
-        if (self.transformationTarget) {
+        if (self.transformer) {
             self.errorDescription = [NSString stringWithFormat:@"The transformer must return one of the following supported types: %@", [self supportedBindingClassesString]];
         }
         else {
@@ -449,29 +438,9 @@
 
 #pragma mark Transformation
 
-- (id)transformValue:(id)value withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector
+- (id)transformValue:(id)value
 {
-    if (! transformationTarget) {
-        return value;
-    }
-    
-    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
-    // correct memory management
-    id (*methodImp)(id, SEL) = (id (*)(id, SEL))[transformationTarget methodForSelector:transformationSelector];
-    id transformer = methodImp(transformationTarget, transformationSelector);
-    if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-        return [transformer transformObject:value];
-    }
-    else if ([transformer isKindOfClass:[NSFormatter class]]) {
-        return [transformer stringForObjectValue:value];
-    }
-    else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
-        return [transformer transformedValue:value];
-    }
-    else {
-        HLSLoggerError(@"The value cannot be transformed");
-        return nil;
-    }
+    return self.transformer ? [self.transformer transformObject:value] : value;
 }
 
 #pragma mark Context binding lookup
