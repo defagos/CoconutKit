@@ -34,8 +34,8 @@
         NSMutableArray *entries = [NSMutableArray array];
         
         NSString *statusString = [HLSViewBindingNameForStatus(bindingInformation.status) capitalizedString];
-        if ([bindingInformation.errorDescription isFilled]) {
-            statusString = [statusString stringByAppendingFormat:@"\n\n%@", bindingInformation.errorDescription];
+        if ([bindingInformation.statusDescription isFilled]) {
+            statusString = [statusString stringByAppendingFormat:@"\n\n%@", bindingInformation.statusDescription];
         }
         
         HLSBindingInformationEntry *entry1 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)

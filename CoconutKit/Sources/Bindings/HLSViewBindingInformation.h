@@ -101,14 +101,14 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
 @property (nonatomic, readonly, weak) id<HLSBindingDelegate> delegate;
 
 /**
- * Return a message describing current issues with the binding, nil if none
- */
-@property (nonatomic, readonly, strong) NSString *errorDescription;
-
-/**
  * Return the current binding status
  */
 @property (nonatomic, readonly, assign) HLSViewBindingStatus status;
+
+/**
+ * Return a message describing the current status of the binding
+ */
+@property (nonatomic, readonly, strong) NSString *statusDescription;
 
 /**
  * Return YES iff the binding can be automatically kept in sync with the underlying model. This is always the case
