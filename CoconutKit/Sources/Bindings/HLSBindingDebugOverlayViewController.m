@@ -127,13 +127,21 @@ static UIWindow *s_previousKeyWindow = nil;
         UIButton *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         
         // iOS 8: Since no rotation is applied anymore, we must use another method to convert view frames
+        CGRect frame = CGRectZero;
         if ([view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-            overlayButton.frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
+            frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
         }
         // Pre-iOS 7: The usual conversion gives correct results for views, even in different windows
         else {
-            overlayButton.frame = [view convertRect:view.bounds toView:self.view];
+            frame = [view convertRect:view.bounds toView:self.view];
         }
+        
+        // Make the button frame surround the view
+        CGFloat borderWidth = bindingInformation.synchronized ? 3.f : 1.f;
+        overlayButton.frame = CGRectMake(CGRectGetMinX(frame) - borderWidth,
+                                         CGRectGetMinY(frame) - borderWidth,
+                                         CGRectGetWidth(frame) + 2 * borderWidth,
+                                         CGRectGetHeight(frame) + 2 * borderWidth);
         
         switch (bindingInformation.status) {
             case HLSViewBindingStatusUnverified: {
@@ -153,7 +161,7 @@ static UIWindow *s_previousKeyWindow = nil;
             }
         }
         
-        overlayButton.layer.borderWidth = 2.f;
+        overlayButton.layer.borderWidth = borderWidth;
         overlayButton.userInfo_hls = @{@"bindingInformation" : bindingInformation};
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:overlayButton];
