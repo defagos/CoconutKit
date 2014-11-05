@@ -56,6 +56,16 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="loading"/>
                     </userDefinedRuntimeAttributes>
                 </activityIndicatorView>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="4OL-QB-gxb">
+                    <rect key="frame" x="115" y="439" width="342" height="216"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <date key="date" timeIntervalSinceReferenceDate="436891830.10798103">
+                        <!--2014-11-05 14:50:30 +0000-->
+                    </date>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="date"/>
+                    </userDefinedRuntimeAttributes>
+                </datePicker>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>

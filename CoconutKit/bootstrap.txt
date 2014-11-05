@@ -33,6 +33,7 @@ UIApplication+HLSExtensions.m
 UIColor+HLSExtensions.m
 UICollectionView+HLSViewBinding.m
 UIControl+HLSExclusiveTouch.m
+UIDatePicker+HLSViewBinding.m
 UIFont+HLSExtensions.m
 UIImage+HLSExtensions.m
 UIImageView+HLSViewBinding.m

@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSNumber *page;
 @property (nonatomic, strong) NSNumber *loading;
+@property (nonatomic, strong) NSDate *date;
 
 @end
 
@@ -23,6 +24,8 @@
 {
     if (self = [super init]) {
         self.page = @3;
+        self.loading = @YES;
+        self.date = [NSDate dateWithTimeIntervalSince1970:0.];
     }
     return self;
 }

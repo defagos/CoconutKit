@@ -85,6 +85,8 @@
 		6F47EC511924EEEE00C5F6AC /* ButtonBarArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC481924EEEE00C5F6AC /* ButtonBarArrowRight.png */; };
 		6F47EC521924EEEE00C5F6AC /* ButtonBarArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC491924EEEE00C5F6AC /* ButtonBarArrowRight@2x.png */; };
 		6F47EC551924EEEE00C5F6AC /* CursorDefaultPointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F47EC4C1924EEEE00C5F6AC /* CursorDefaultPointer.png */; };
+		6F4808541A0A704500537F21 /* UIDatePicker+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F4808521A0A704500537F21 /* UIDatePicker+HLSViewBinding.h */; };
+		6F4808551A0A704500537F21 /* UIDatePicker+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4808531A0A704500537F21 /* UIDatePicker+HLSViewBinding.m */; };
 		6F4D3DD919F6576C009718E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DD819F6576C009718E4 /* WebKit.framework */; };
 		6F6010EB15AB1E2B00A9FEC5 /* HLSContainerStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6010E915AB1E2B00A9FEC5 /* HLSContainerStack.h */; };
 		6F6010EC15AB1E2B00A9FEC5 /* HLSContainerStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6010EA15AB1E2B00A9FEC5 /* HLSContainerStack.m */; };
@@ -412,6 +414,8 @@
 		6F47EC481924EEEE00C5F6AC /* ButtonBarArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarArrowRight.png; sourceTree = "<group>"; };
 		6F47EC491924EEEE00C5F6AC /* ButtonBarArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowRight@2x.png"; sourceTree = "<group>"; };
 		6F47EC4C1924EEEE00C5F6AC /* CursorDefaultPointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CursorDefaultPointer.png; sourceTree = "<group>"; };
+		6F4808521A0A704500537F21 /* UIDatePicker+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDatePicker+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F4808531A0A704500537F21 /* UIDatePicker+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDatePicker+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F4D3DD819F6576C009718E4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6F5D355719D59AF300DDE0EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../CoconutKit-resources/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6F5D355919D59B0300DDE0EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = "../CoconutKit-resources/fr.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -748,6 +752,8 @@
 				6FAA4B4B1A0927FA0065CCC9 /* UIActivityIndicatorView+HLSViewBinding.m */,
 				6FAA4B4E1A092B1E0065CCC9 /* UICollectionView+HLSViewBinding.h */,
 				6FAA4B4F1A092B1E0065CCC9 /* UICollectionView+HLSViewBinding.m */,
+				6F4808521A0A704500537F21 /* UIDatePicker+HLSViewBinding.h */,
+				6F4808531A0A704500537F21 /* UIDatePicker+HLSViewBinding.m */,
 				6F2DACAA1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.h */,
 				6F2DACAB1A08DAEB00FF0CC9 /* UIImageView+HLSViewBinding.m */,
 				6F0CA8C019DD934300CBE2E1 /* UILabel+HLSViewBinding.h */,
@@ -1273,6 +1279,7 @@
 				6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */,
 				6FDDEC1A1529778E00CED462 /* UITextField+HLSExtensions.h in Headers */,
 				6FDDEC1E1529780200CED462 /* UITextView+HLSExtensions.h in Headers */,
+				6F4808541A0A704500537F21 /* UIDatePicker+HLSViewBinding.h in Headers */,
 				6FFAB76C19DD8DA800A91997 /* HLSMAZeroingWeakRef.h in Headers */,
 				6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */,
 				6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */,
@@ -1496,6 +1503,7 @@
 				6FADE5AF14BA0494007EE121 /* HLSRuntime.m in Sources */,
 				6FADE5B114BA0494007EE121 /* HLSUserInterfaceLock.m in Sources */,
 				6F0CA8E519DD934300CBE2E1 /* UISegmentedControl+HLSViewBinding.m in Sources */,
+				6F4808551A0A704500537F21 /* UIDatePicker+HLSViewBinding.m in Sources */,
 				6F0CA8DF19DD934300CBE2E1 /* HLSViewBindingInformation.m in Sources */,
 				6FADE5B414BA0494007EE121 /* HLSValidators.m in Sources */,
 				6FADE5B614BA0494007EE121 /* NSArray+HLSExtensions.m in Sources */,
