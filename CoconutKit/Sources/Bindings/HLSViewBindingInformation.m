@@ -35,7 +35,7 @@
 
 @property (nonatomic, weak) id<HLSBindingDelegate> delegate;
 
-@property (nonatomic, assign, getter=isVerified) BOOL verified;
+@property (nonatomic, assign) HLSViewBindingStatus status;
 @property (nonatomic, assign, getter=isSynchronized) BOOL synchronized;
 
 @end
@@ -61,6 +61,7 @@
         self.keyPath = keyPath;
         self.transformerName = transformerName;
         self.view = view;
+        self.status = HLSViewBindingStatusUnverified;
     }
     return self;
 }
@@ -77,9 +78,9 @@
 - (id)value
 {
     // Lazily check and fill binding information
-    if (! self.verified) {
-        self.verified = [self verifyBindingInformation];
-        if (! self.verified) {
+    if (self.status != HLSViewBindingStatusValid) {
+        self.status = [self verifyBindingInformation];
+        if (self.status != HLSViewBindingStatusValid) {
             return nil;
         }
     }
@@ -216,17 +217,14 @@
     
     // Force a new binding verification (the value might have been nil, i.e. the information could not be verified, or
     // might have been set to nil)
-    self.verified = [self verifyBindingInformation];
+    self.status = [self verifyBindingInformation];
     
     return YES;
 }
 
 #pragma mark Binding
 
-// Return YES if the binding information can be verified (keypath is valid, and any required transformation
-// target and method could be located). If the information is valid but cannot not be fully checked (the keypath
-// is correct, but returns nil), or if it is invalid, returns NO
-- (BOOL)verifyBindingInformation
+- (HLSViewBindingStatus)verifyBindingInformation
 {
     // Just to visually check whether unnecessary verifications are made
     HLSLoggerDebug(@"Verifying binding information for %@", self);
@@ -242,7 +240,7 @@
         @catch (NSException *exception) {
             if ([exception.name isEqualToString:NSUndefinedKeyException]) {
                 self.errorDescription = @"The specified keypath is invalid for the bound object";
-                return NO;
+                return HLSViewBindingStatusInvalid;
             }
             else {
                 @throw;
@@ -256,7 +254,7 @@
     
     if (! self.object) {
         self.errorDescription = @"No meaningful target was found along the responder chain for the specified keypath (stopping at view controller boundaries)";
-        return NO;
+        return HLSViewBindingStatusInvalid;
     }
     
     // Bug: Doing KVO on key paths containing keypath operators (which cannot be used with KVO) and catching the exception leads to retaining the
@@ -329,7 +327,7 @@
             
             if (! transformationSelector) {
                 self.errorDescription = @"The transformer is not a valid method name";
-                return NO;
+                return HLSViewBindingStatusInvalid;
             }
             
             // Look along the responder chain first (most specific)
@@ -345,7 +343,7 @@
                 }
                 else {
                     self.errorDescription = @"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain (stopping at view controller boundaries)";
-                    return NO;
+                    return HLSViewBindingStatusInvalid;
                 }
             }
         }
@@ -366,7 +364,7 @@
         }
         else {
             self.errorDescription = [NSString stringWithFormat:@"Unsupported transformer class %@", [transformer class]];
-            return NO;
+            return HLSViewBindingStatusInvalid;
         }
         
         self.transformationTarget = transformationTarget;
@@ -383,7 +381,7 @@
     // We cannot cache binding information if we cannot check the type of the value to be displayed for compatibility. Does not change
     // the status, a later check is required
     if (! displayedValue) {
-        return NO;
+        return HLSViewBindingStatusUnverified;
     }
     
     if (! [self canDisplayValue:displayedValue]) {
@@ -394,10 +392,10 @@
             self.errorDescription = [NSString stringWithFormat:@"The keypath must return one of the following supported types: %@. Fix the return type "
                                      "or use a transformer", [self supportedBindingClassesString]];
         }
-        return NO;
+        return HLSViewBindingStatusInvalid;
     }
     
-    return YES;
+    return HLSViewBindingStatusValid;
 }
 
 #pragma mark Type checking
@@ -534,3 +532,17 @@
 }
 
 @end
+
+#pragma mark Functions
+
+NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status)
+{
+    static NSDictionary *s_statusToNameMap = nil;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_statusToNameMap = @{ @(HLSViewBindingStatusUnverified) : @"unverified",
+                               @(HLSViewBindingStatusValid) : @"valid",
+                               @(HLSViewBindingStatusInvalid) : @"invalid" };
+    });
+    return [s_statusToNameMap objectForKey:@(status)];
+}

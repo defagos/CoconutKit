@@ -135,9 +135,24 @@ static UIWindow *s_previousKeyWindow = nil;
             overlayButton.frame = [view convertRect:view.bounds toView:self.view];
         }
         
-        // TODO: Would be cool to display a status "Unresolved" in orange. Instead of changing verified to be an enum,
-        //       simply use another bool
-        overlayButton.layer.borderColor = bindingInformation.verified ? [UIColor greenColor].CGColor : [UIColor redColor].CGColor;
+        switch (bindingInformation.status) {
+            case HLSViewBindingStatusUnverified: {
+                overlayButton.layer.borderColor = [UIColor orangeColor].CGColor;
+                break;
+            }
+                
+            case HLSViewBindingStatusValid: {
+                overlayButton.layer.borderColor = [UIColor greenColor].CGColor;
+                break;
+            }
+                
+            case HLSViewBindingStatusInvalid:
+            default: {
+                overlayButton.layer.borderColor = [UIColor redColor].CGColor;
+                break;
+            }
+        }
+        
         overlayButton.layer.borderWidth = 2.f;
         overlayButton.userInfo_hls = @{@"bindingInformation" : bindingInformation};
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];

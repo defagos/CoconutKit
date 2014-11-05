@@ -14,6 +14,7 @@
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSString+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
@@ -30,14 +31,11 @@
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        NSMutableArray *entries= [NSMutableArray array];
+        NSMutableArray *entries = [NSMutableArray array];
         
-        NSString *statusString = nil;
-        if (bindingInformation.verified) {
-            statusString = CoconutKitLocalizedString(@"The binding has been successfully resolved", nil);
-        }
-        else {
-            statusString = bindingInformation.errorDescription ?: CoconutKitLocalizedString(@"The binding information cannot be verified (nil value)", nil);
+        NSString *statusString = [HLSViewBindingNameForStatus(bindingInformation.status) capitalizedString];
+        if ([bindingInformation.errorDescription isFilled]) {
+            statusString = [statusString stringByAppendingFormat:@"\n\n%@", bindingInformation.errorDescription];
         }
         
         HLSBindingInformationEntry *entry1 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)
