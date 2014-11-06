@@ -55,6 +55,13 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                                                                                  (IMP)swizzled_UIView__didMoveToWindow_Imp);
 }
 
+#pragma mark Accessors and mutators
+
+- (BOOL)isBindingSupported
+{
+    return [self respondsToSelector:@selector(updateViewWithValue:)];
+}
+
 #pragma mark Bindings
 
 - (void)bindToObject:(id)object
@@ -171,7 +178,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     self.boundObject = object;
     
     if (self.bindKeyPath) {
-        if ([self respondsToSelector:@selector(updateViewWithValue:)]) {
+        if (self.bindingSupported) {
             HLSLoggerDebug(@"Bind object %@ to view %@ with keyPath %@", object, self, self.bindKeyPath);
             
             self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
@@ -230,8 +237,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     if (! self.bindingInformation) {
         return;
     }
-    
-    NSAssert([self respondsToSelector:@selector(updateViewWithValue:)], @"Binding can only be made if -updateViewWithValue: is implemented");
     
     id value = [self.bindingInformation value];
     [self performSelector:@selector(updateViewWithValue:) withObject:value];

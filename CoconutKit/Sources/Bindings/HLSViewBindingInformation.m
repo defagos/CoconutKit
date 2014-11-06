@@ -52,7 +52,7 @@
             return nil;
         }
         
-        if (! [view respondsToSelector:@selector(updateViewWithValue:)]) {
+        if (! view.bindingSupported) {
             HLSLoggerError(@"The view does not support bindings");
             return nil;
         }

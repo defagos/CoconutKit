@@ -133,6 +133,11 @@
 @property (nonatomic, strong) IBInspectable NSString *bindTransformer;
 
 /**
+ * Return YES iff binding is possible against the receiver
+ */
+@property (nonatomic, readonly, assign, getter=isBindingSupported) BOOL bindingSupported;
+
+/**
  * Bind the view (and recursively the view hierarchy rooted at it) to a given object (can be nil). During view 
  * hierarchy traversal, keypaths and transformers set via user-defined runtime attributes will be used to automatically
  * fill those views which implement binding support
