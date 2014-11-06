@@ -168,7 +168,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
  * the running property documentation for more information about what "running" actually means)
  *
- * Default is NO
+ * Default is YES
  */
 @property (nonatomic, assign) BOOL lockingUI;
 
