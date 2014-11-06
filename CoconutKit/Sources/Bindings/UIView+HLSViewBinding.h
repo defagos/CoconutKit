@@ -93,6 +93,7 @@
  *
  * TODO: Document validation via -validate and soon-to-be-implemented -check methods
  * TODO: Document: Validation is always available, even if a view cannot update the underlying model object
+ * TODO: Document that bindings work with primitive types as well (automatic boxing / unboxing)
  *
  * Here is how UIKit view classes play with bindings:
  *   - UILabel: The label displays the value which the keypath points at. Bindings are not recursive. The only 

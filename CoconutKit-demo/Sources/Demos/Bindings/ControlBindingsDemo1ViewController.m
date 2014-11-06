@@ -10,13 +10,13 @@
 
 @interface ControlBindingsDemo1ViewController ()
 
-@property (nonatomic, strong) NSNumber *switchEnabled;
+@property (nonatomic, assign, getter=isSwitchEnabled) BOOL switchEnabled;
 
-@property (nonatomic, strong) NSNumber *category;
-@property (nonatomic, strong) NSNumber *completion;
+@property (nonatomic, assign) NSInteger category;
+@property (nonatomic, assign) float completion;
 
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSNumber *age;
+@property (nonatomic, assign) NSInteger age;
 @property (nonatomic, strong) NSString *text;
 
 @end
@@ -28,9 +28,9 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.switchEnabled = @YES;
-        self.category = @1;
-        self.completion = @60.f;
+        self.switchEnabled = YES;
+        self.category = 1;
+        self.completion = 60.f;
         self.text = @"Hello, World!";
     }
     return self;

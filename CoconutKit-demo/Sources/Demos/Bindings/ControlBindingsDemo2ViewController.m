@@ -10,8 +10,8 @@
 
 @interface ControlBindingsDemo2ViewController ()
 
-@property (nonatomic, strong) NSNumber *page;
-@property (nonatomic, strong) NSNumber *loading;
+@property (nonatomic, assign) NSUInteger page;
+@property (nonatomic, assign, getter=isLoading) BOOL loading;
 @property (nonatomic, strong) NSDate *date;
 
 @property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
@@ -25,8 +25,8 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.page = @3;
-        self.loading = @YES;
+        self.page = 3;
+        self.loading = YES;
         self.date = [NSDate dateWithTimeIntervalSince1970:0.];
     }
     return self;
