@@ -45,9 +45,9 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
     return @[[NSNumber class]];
 }
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
-    self.on = [value boolValue];
+    [self setOn:[value boolValue] animated:animated];
 }
 
 - (BOOL)bindsSubviewsRecursively

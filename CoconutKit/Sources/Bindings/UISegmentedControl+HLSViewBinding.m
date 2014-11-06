@@ -45,7 +45,7 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
     return @[[NSNumber class]];
 }
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
     self.selectedSegmentIndex = [value integerValue];
 }

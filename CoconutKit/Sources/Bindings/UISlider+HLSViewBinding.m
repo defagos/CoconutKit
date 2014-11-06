@@ -49,9 +49,9 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
     return @[[NSNumber class]];
 }
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
-    self.value = [value floatValue];
+    [self setValue:[value floatValue] animated:animated];
 }
 
 - (BOOL)bindsSubviewsRecursively

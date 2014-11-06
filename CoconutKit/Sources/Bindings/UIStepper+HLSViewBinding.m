@@ -34,7 +34,7 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
     return @[[NSNumber class]];
 }
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
     self.value = [value doubleValue];
 }

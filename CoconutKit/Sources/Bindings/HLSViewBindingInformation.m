@@ -26,6 +26,7 @@
 @property (nonatomic, weak) id objectTarget;
 @property (nonatomic, strong) NSString *keyPath;
 @property (nonatomic, strong) NSString *transformerName;
+@property (nonatomic, assign, getter=isUpdateAnimated) BOOL updateAnimated;
 @property (nonatomic, weak) UIView *view;
 
 @property (nonatomic, weak) id transformationTarget;
@@ -53,7 +54,11 @@
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view
+- (instancetype)initWithObject:(id)object
+                       keyPath:(NSString *)keyPath
+               transformerName:(NSString *)transformerName
+                updateAnimated:(BOOL)updateAnimated
+                          view:(UIView *)view
 {
     if (self = [super init]) {
         if (! [keyPath isFilled] || ! view) {
@@ -69,6 +74,7 @@
         self.object = object;
         self.keyPath = keyPath;
         self.transformerName = transformerName;
+        self.updateAnimated = updateAnimated;
         self.view = view;
         self.status = HLSViewBindingStatusUnverified;
         self.statusDescription = @"The binding has not been verified yet";
@@ -153,7 +159,10 @@
     }
     
     self.updatingView = YES;
-    [self.view performSelector:@selector(updateViewWithValue:) withObject:[self value]];
+    
+    void (*methodImp)(id, SEL, id, BOOL) = (void (*)(id, SEL, id, BOOL))[self.view methodForSelector:@selector(updateViewWithValue:animated:)];
+    (*methodImp)(self.view, @selector(updateViewWithValue:animated:), [self value], self.updateAnimated);
+    
     self.updatingView = NO;
 }
 

@@ -64,6 +64,7 @@
                     </date>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="date"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindUpdateAnimated" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </datePicker>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="7d0-0c-pdv">

@@ -12,7 +12,7 @@
 
 #pragma mark HLSViewBindingImplementation protocol implementation
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
     self.text = value;
 }

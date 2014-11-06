@@ -29,11 +29,11 @@
  * be sure to implement the +supportedBindingClasses method as well). If a UIView class does not implement this method,
  * bindings will not be available for it.
  *
- * You can call -bindToObject:, -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithValue:
+ * You can call -bindToObject:, -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithValue:animated:
  * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively) and
  * perform binding resolution for views deeper in its hierarchy, stopping at view controller boundaries
  */
-- (void)updateViewWithValue:(id)value;
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated;
 
 /**
  * UIView subclasses can implement this method to return YES if subviews must be bound recursively when the receiver is 

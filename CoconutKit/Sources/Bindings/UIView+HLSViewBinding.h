@@ -133,6 +133,7 @@
 
 @property (nonatomic, strong) IBInspectable NSString *bindKeyPath;
 @property (nonatomic, strong) IBInspectable NSString *bindTransformer;
+@property (nonatomic, assign, getter=isBindUpdateAnimated) IBInspectable BOOL bindUpdateAnimated;
 
 /**
  * Return YES iff binding is possible against the receiver

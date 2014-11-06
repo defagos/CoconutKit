@@ -17,9 +17,9 @@
     return @[[NSNumber class]];
 }
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
-    self.progress = [value floatValue];
+    [self setProgress:[value floatValue] animated:animated];
 }
 
 - (BOOL)bindsSubviewsRecursively

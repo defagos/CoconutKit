@@ -44,7 +44,7 @@ static void swizzled_UITextView__setText_Imp(UITextField *self, SEL _cmd, NSStri
 
 #pragma mark HLSViewBindingImplementation protocol implementation
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
     self.text = value;
 }

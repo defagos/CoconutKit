@@ -44,7 +44,7 @@ static void swizzled_UIPageControl__setCurrentPage_Imp(UIPageControl *self, SEL 
     return @[[NSNumber class]];
 }
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
     self.currentPage = [value integerValue];
 }

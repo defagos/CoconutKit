@@ -17,7 +17,7 @@
     return @[[NSNumber class]];
 }
 
-- (void)updateViewWithValue:(id)value
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
     if ([value boolValue]) {
         [self startAnimating];
