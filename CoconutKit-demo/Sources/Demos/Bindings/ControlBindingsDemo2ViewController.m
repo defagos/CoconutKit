@@ -45,4 +45,26 @@
     self.localizedDateFormatter = localizedDateFormatter;
 }
 
+#pragma mark HLSBindingDelegate protocol implementation
+
+- (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
+{
+    HLSLoggerInfo(@"Check did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
+}
+
+- (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
+{
+    HLSLoggerInfo(@"Check did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
+}
+
+- (void)view:(UIView *)view updateDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
+{
+    HLSLoggerInfo(@"Update did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
+}
+
+- (void)view:(UIView *)view updateDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
+{
+    HLSLoggerInfo(@"Update did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
+}
+
 @end
