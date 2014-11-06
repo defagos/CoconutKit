@@ -58,7 +58,7 @@
                                                                                        object:bindingInformation.delegate];
         [entries addObject:entry5];
         
-        HLSBindingInformationEntry *entry6 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Formatted value", nil)
+        HLSBindingInformationEntry *entry6 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Displayed value", nil)
                                                                                        object:[bindingInformation value]];
         [entries addObject:entry6];
         
