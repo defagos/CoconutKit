@@ -66,6 +66,16 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="date"/>
                     </userDefinedRuntimeAttributes>
                 </datePicker>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="7d0-0c-pdv">
+                    <rect key="frame" x="512" y="525" width="150" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="date"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="localizedDateFormatter"/>
+                    </userDefinedRuntimeAttributes>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>

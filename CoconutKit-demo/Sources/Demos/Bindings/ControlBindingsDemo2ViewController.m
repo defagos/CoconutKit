@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSNumber *loading;
 @property (nonatomic, strong) NSDate *date;
 
+@property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
+
 @end
 
 @implementation ControlBindingsDemo2ViewController
@@ -28,6 +30,18 @@
         self.date = [NSDate dateWithTimeIntervalSince1970:0.];
     }
     return self;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    // FIXME: Is not reflected by a value already displayed by the text field. Probably force a recursive update. Better: Have
+    //        bindings KVObserve date formatter changes
+    self.localizedDateFormatter = [[NSDateFormatter alloc] init];
+    [self.localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
 }
 
 @end
