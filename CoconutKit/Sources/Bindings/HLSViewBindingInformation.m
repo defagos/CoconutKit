@@ -38,6 +38,11 @@
 
 @property (nonatomic, assign, getter=isSynchronized) BOOL synchronized;
 
+// Used to prevent calls to checks / update methods when we are simply updating a view. Depending on how view update
+// is performed, we namely could end up triggering an update which would yield to a view updated, and therefore
+// to an infinite call chain
+@property (nonatomic, assign, getter=isUpdatingView) BOOL updatingView;
+
 @end
 
 @implementation HLSViewBindingInformation
@@ -105,10 +110,24 @@
     }
 }
 
+#pragma mark Updating the view
+
+- (void)updateView
+{
+    self.updatingView = YES;
+    [self.view performSelector:@selector(updateViewWithValue:) withObject:[self value]];
+    self.updatingView = NO;
+}
+
 #pragma mark Checking and updating values (these operations notify the delegate about their status)
 
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
 {
+    // Skip when triggered by view update implementations
+    if (self.updatingView) {
+        return YES;
+    }
+    
     if (self.transformer) {
         BOOL success = YES;
         id value = nil;
@@ -163,6 +182,11 @@
 
 - (BOOL)checkValue:(id)value withError:(NSError **)pError
 {
+    // Skip when triggered by view update implementations
+    if (self.updatingView) {
+        return YES;
+    }
+    
     // TODO: Implement call to -check method as well, since cleaner syntax
     
     NSError *error = nil;
@@ -187,6 +211,11 @@
 
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError
 {
+    // Skip when triggered by view update implementations
+    if (self.updatingView) {
+        return YES;
+    }
+    
     @try {
         [self.object setValue:value forKeyPath:self.keyPath];
     }
@@ -259,8 +288,7 @@
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
     if (! self.synchronized && [self.keyPath rangeOfString:@"@"].length == 0) {
         [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            id value = [self value];
-            [self.view performSelector:@selector(updateViewWithValue:) withObject:value];
+            [self updateView];
         }];
         
         // Has two purposes:
@@ -529,6 +557,83 @@
             self.transformerName,
             self.transformationTarget,
             NSStringFromSelector(self.transformationSelector)];
+}
+
+@end
+
+@implementation HLSViewBindingInformation (ConvenienceMethods)
+
+- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError
+{
+    // Skip when triggered by view update implementations
+    if (self.updatingView) {
+        return YES;
+    }
+    
+    id value = nil;
+    NSError *error = nil;
+    if ([self convertTransformedValue:displayedValue toValue:&value withError:&error]
+        && [self checkValue:value withError:&error]) {
+        return YES;
+    }
+    
+    if (pError) {
+        *pError = error;
+    }
+    
+    return NO;
+}
+
+- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+{
+    // Skip when triggered by view update implementations
+    if (self.updatingView) {
+        return YES;
+    }
+    
+    id value = nil;
+    NSError *error = nil;
+    if ([self convertTransformedValue:displayedValue toValue:&value withError:&error]
+        && [self updateWithValue:value error:&error]) {
+        return YES;
+    }
+    
+    if (pError) {
+        *pError = error;
+    }
+    
+    return NO;
+}
+
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+{
+    // Skip when triggered by view update implementations
+    if (self.updatingView) {
+        return YES;
+    }
+    
+    id value = nil;
+    BOOL success = YES;
+    NSError *error = nil;
+    if ([self convertTransformedValue:displayedValue toValue:&value withError:&error]) {
+        NSError *checkError = nil;
+        if (! [self checkValue:value withError:&checkError]) {
+            success = NO;
+            [NSError combineError:checkError withError:&error];
+        }
+        
+        NSError *updateError = nil;
+        if (! [self updateWithValue:value error:&updateError]) {
+            success = NO;
+            [NSError combineError:updateError withError:&error];
+        }
+    }
+    
+    if (pError) {
+        *pError = error;
+    }
+    
+    return success;
 }
 
 @end

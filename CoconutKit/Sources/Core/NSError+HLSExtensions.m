@@ -38,6 +38,36 @@ static Class subclass_class(id self, SEL _cmd);
     return [[[self class] alloc] initWithDomain:domain code:code userInfo:userInfo];
 }
 
++ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError
+{
+    // If the caller is not interested in errors, nothing to do
+    if (! pExistingError) {
+        return nil;
+    }
+    
+    // If no new error, nothing to do
+    if (! newError) {
+        return *pExistingError;
+    }
+    
+    if (*pExistingError) {
+        if ([*pExistingError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
+            [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
+        }
+        else {
+            NSError *previousError = *pExistingError;
+            *pExistingError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorMultipleErrors];
+            [*pExistingError addObject:previousError forKey:HLSErrorMultipleErrors];
+            [*pExistingError addObject:newError forKey:HLSErrorMultipleErrors];
+        }
+    }
+    else {
+        *pExistingError = newError;
+    }
+    
+    return *pExistingError;
+}
+
 #pragma mark Object creation and destruction
 
 - (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code

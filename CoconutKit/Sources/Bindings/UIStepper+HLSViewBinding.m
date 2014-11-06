@@ -10,9 +10,6 @@
 
 #import "HLSRuntime.h"
 
-// Associated object keys
-static void *s_lockKey = &s_lockKey;
-
 // Original implementation of the methods we swizzle
 static void (*s_UIStepper__setValue_Imp)(id, SEL, double) = NULL;
 
@@ -39,9 +36,7 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
 
 - (void)updateViewWithValue:(id)value
 {
-    objc_setAssociatedObject(self, s_lockKey, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.value = [value doubleValue];
-    objc_setAssociatedObject(self, s_lockKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)bindsSubviewsRecursively
@@ -62,7 +57,5 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
 {
     (*s_UIStepper__setValue_Imp)(self, _cmd, value);
     
-    if (! objc_getAssociatedObject(self, s_lockKey)) {
-        [self checkAndUpdateModelWithDisplayedValue:@(value) error:NULL];
-    }
+    [self checkAndUpdateModelWithDisplayedValue:@(value) error:NULL];
 }

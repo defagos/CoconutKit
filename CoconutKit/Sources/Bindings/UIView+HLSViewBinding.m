@@ -88,38 +88,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @implementation UIView (HLSViewBindingPrivate)
 
-#pragma mark Class methods
-
-+ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError
-{
-    // If the caller is not interested in errors, nothing to do
-    if (! pExistingError) {
-        return nil;
-    }
-    
-    // If no new error, nothing to do
-    if (! newError) {
-        return *pExistingError;
-    }
-    
-    if (*pExistingError) {
-        if ([*pExistingError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
-            [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
-        }
-        else {
-            NSError *previousError = *pExistingError;
-            *pExistingError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorMultipleErrors];
-            [*pExistingError addObject:previousError forKey:HLSErrorMultipleErrors];
-            [*pExistingError addObject:newError forKey:HLSErrorMultipleErrors];
-        }
-    }
-    else {
-        *pExistingError = newError;
-    }
-    
-    return *pExistingError;
-}
-
 #pragma mark Accessors and mutators
 
 - (NSString *)bindKeyPath
@@ -185,7 +153,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                                                                                 keyPath:self.bindKeyPath
                                                                         transformerName:self.bindTransformer
                                                                                    view:self];
-            [self updateViewValue];
+            [self updateView];
         }
         else {
             HLSLoggerWarn(@"A binding key path has been set for %@, but its class does not implement bindings", self);
@@ -212,7 +180,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         [self bindToObject:self.boundObject inViewController:viewController recursive:NO];
     }
     else {
-        [self updateViewValue];
+        [self updateView];
     }
     
     if (recursive) {
@@ -232,14 +200,13 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
 }
 
-- (void)updateViewValue
+- (void)updateView
 {
     if (! self.bindingInformation) {
         return;
     }
     
-    id value = [self.bindingInformation value];
-    [self performSelector:@selector(updateViewWithValue:) withObject:value];
+    [self.bindingInformation updateView];
 }
 
 - (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError
@@ -257,7 +224,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         NSError *error = nil;
         if (! [self checkDisplayedValue:displayedValue withError:&error]) {
             success = NO;
-            [UIView combineError:error withError:pError];
+            [NSError combineError:error withError:pError];
         }
     }
     
@@ -285,7 +252,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         NSError *error = nil;
         if (! [self updateModelWithDisplayedValue:displayedValue error:&error]) {
             success = NO;
-            [UIView combineError:error withError:pError];
+            [NSError combineError:error withError:pError];
         }
     }
     
@@ -309,18 +276,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
-    id value = nil;
-    NSError *error = nil;
-    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]
-            && [self.bindingInformation checkValue:value withError:&error]) {
-        return YES;
-    }
-    
-    if (pError) {
-        *pError = error;
-    }
-    
-    return NO;
+    return [self.bindingInformation checkDisplayedValue:displayedValue withError:pError];
 }
 
 - (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
@@ -330,18 +286,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
-    id value = nil;
-    NSError *error = nil;
-    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]
-            && [self.bindingInformation updateWithValue:value error:&error]) {
-        return YES;
-    }
-    
-    if (pError) {
-        *pError = error;
-    }
-    
-    return NO;
+    return [self.bindingInformation updateModelWithDisplayedValue:displayedValue error:pError];
 }
 
 - (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
@@ -351,28 +296,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
-    id value = nil;
-    BOOL success = YES;
-    NSError *error = nil;
-    if ([self.bindingInformation convertTransformedValue:displayedValue toValue:&value withError:&error]) {
-        NSError *checkError = nil;
-        if (! [self.bindingInformation checkValue:value withError:&checkError]) {
-            success = NO;
-            [UIView combineError:checkError withError:&error];
-        }
-        
-        NSError *updateError = nil;
-        if (! [self.bindingInformation updateWithValue:value error:&updateError]) {
-            success = NO;
-            [UIView combineError:updateError withError:&error];
-        }
-    }
-    
-    if (pError) {
-        *pError = error;
-    }
-    
-    return success;
+    return [self.bindingInformation checkAndUpdateModelWithDisplayedValue:displayedValue error:pError];
 }
 
 @end
@@ -406,7 +330,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
     //            [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
     //        }
     //        else if (self.bindingInformation) {
-    //            [self updateViewValue];
+    //            [self updateView];
     //        }
     //    }
     //    else {
@@ -426,7 +350,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
         }
         // Do not recalculate valid binding information, even if the window has changed
         else if (self.bindingInformation && self.bindingInformation.status != HLSViewBindingStatusValid) {
-            [self updateViewValue];
+            [self updateView];
         }        
     }
 }

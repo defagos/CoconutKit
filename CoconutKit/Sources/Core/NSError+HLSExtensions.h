@@ -52,6 +52,14 @@ extern NSString * const HLSDetailedErrorsKey;
 + (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
 
 /**
+ * Combine a given error with another existing one, passed by reference. For convenience of use, the resulting error is
+ * returned by reference, and also as method returned value. Multiple errors are combined as an HLSErrorMultipleErrors
+ * in the CoconutKitErrorDomain error domain. If no existing error is provided, the new resulting error is simply the
+ * new error provided
+ */
++ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError;
+
+/**
  * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to
  * add the information you need
  */

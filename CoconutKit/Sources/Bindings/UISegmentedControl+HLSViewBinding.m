@@ -10,9 +10,6 @@
 
 #import "HLSRuntime.h"
 
-// Associated object keys
-static void *s_lockKey = &s_lockKey;
-
 // Original implementation of the methods we swizzle
 static id (*s_UISegmentedControl__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
 static id (*s_UISegmentedControl__initWithCoder_Imp)(id, SEL, id) = NULL;
@@ -50,9 +47,7 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 
 - (void)updateViewWithValue:(id)value
 {
-    objc_setAssociatedObject(self, s_lockKey, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.selectedSegmentIndex = [value integerValue];
-    objc_setAssociatedObject(self, s_lockKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)bindsSubviewsRecursively
@@ -107,7 +102,5 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 {
     (*s_UISegmentedControl__setSelectedSegmentIndex_Imp)(self, _cmd, selectedSegmentIndex);
     
-    if (! objc_getAssociatedObject(self, s_lockKey)) {
-        [self checkAndUpdateModelWithDisplayedValue:@(selectedSegmentIndex) error:NULL];
-    }
+    [self checkAndUpdateModelWithDisplayedValue:@(selectedSegmentIndex) error:NULL];
 }

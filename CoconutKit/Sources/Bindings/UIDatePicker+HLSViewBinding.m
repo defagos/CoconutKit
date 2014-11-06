@@ -10,9 +10,6 @@
 
 #import "HLSRuntime.h"
 
-// Associated object keys
-static void *s_lockKey = &s_lockKey;
-
 // Original implementation of the methods we swizzle
 static id (*s_UIDatePicker__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
 static id (*s_UIDatePicker__initWithCoder_Imp)(id, SEL, id) = NULL;
@@ -58,9 +55,7 @@ static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL 
 {
     // Setting nil crashes the picker. Since the picker shows the current date by default,
     // we do the same when the associated value is nil
-    objc_setAssociatedObject(self, s_lockKey, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.date = value ?: [NSDate date];
-    objc_setAssociatedObject(self, s_lockKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)bindsSubviewsRecursively
@@ -113,16 +108,12 @@ static void swizzled_UIDatePicker__setDate_Imp(UIDatePicker *self, SEL _cmd, NSD
 {
     (*s_UIDatePicker__setDate_Imp)(self, _cmd, date);
     
-    if (! objc_getAssociatedObject(self, s_lockKey)) {
-        [self checkAndUpdateModelWithDisplayedValue:date error:NULL];
-    }
+    [self checkAndUpdateModelWithDisplayedValue:date error:NULL];
 }
 
 static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL _cmd, NSDate *date, BOOL animated)
 {
     (*s_UIDatePicker__setDate_animated_Imp)(self, _cmd, date, animated);
     
-    if (! objc_getAssociatedObject(self, s_lockKey)) {
-        [self checkAndUpdateModelWithDisplayedValue:date error:NULL];
-    }
+    [self checkAndUpdateModelWithDisplayedValue:date error:NULL];
 }

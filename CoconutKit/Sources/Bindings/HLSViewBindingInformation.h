@@ -44,6 +44,11 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
 - (id)rawValue;
 
 /**
+ * Update the view using the current underlying bound value
+ */
+- (void)updateView;
+
+/**
  * Try to transform back a value into a value which could be assigned to the key path. Return YES and the value iff the 
  * reverse transformation could be achieved, i.e. if a reverse transformation is available (if a transformer has been set)
  * and could be successfully applied. Errors are returned to the validation delegate (if any) and to the caller
@@ -56,7 +61,7 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
  *
  * Returns YES iff the check was successful
  */
-- (BOOL)checkValue:(id)displayedValue withError:(NSError **)pError;
+- (BOOL)checkValue:(id)value withError:(NSError **)pError;
 
 /**
  * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError: 
@@ -121,5 +126,13 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
 @interface HLSViewBindingInformation (UnavailableMethods)
 
 - (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+@interface HLSViewBindingInformation (ConvenienceMethods)
+
+- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError;
+- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
 
 @end

@@ -10,9 +10,6 @@
 
 #import "HLSRuntime.h"
 
-// Associated object keys
-static void *s_lockKey = &s_lockKey;
-
 // Original implementation of the methods we swizzle
 static id (*s_UITextField__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
 static id (*s_UITextField__initWithCoder_Imp)(id, SEL, id) = NULL;
@@ -49,9 +46,7 @@ static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSStr
 
 - (void)updateViewWithValue:(id)value
 {
-    objc_setAssociatedObject(self, s_lockKey, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.text = value;
-    objc_setAssociatedObject(self, s_lockKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)bindsSubviewsRecursively
@@ -113,7 +108,5 @@ static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSStr
 {
     (*s_UITextField__setText_Imp)(self, _cmd, text);
     
-    if (! objc_getAssociatedObject(self, s_lockKey)) {
-        [self checkAndUpdateModelWithDisplayedValue:text error:NULL];
-    }
+    [self checkAndUpdateModelWithDisplayedValue:text error:NULL];
 }

@@ -11,9 +11,6 @@
 #import "HLSRuntime.h"
 #import "UIView+HLSViewBinding.h"
 
-// Associated object keys
-static void *s_lockKey = &s_lockKey;
-
 // Original implementation of the methods we swizzle
 static id (*s_UISwitch__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
 static id (*s_UISwitch__initWithCoder_Imp)(id, SEL, id) = NULL;
@@ -50,9 +47,7 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
 
 - (void)updateViewWithValue:(id)value
 {
-    objc_setAssociatedObject(self, s_lockKey, @YES, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     self.on = [value boolValue];
-    objc_setAssociatedObject(self, s_lockKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)bindsSubviewsRecursively
@@ -105,7 +100,5 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
 {
     (*s_UISwitch__setOn_animated_Imp)(self, _cmd, on, animated);
     
-    if (! objc_getAssociatedObject(self, s_lockKey)) {
-        [self checkAndUpdateModelWithDisplayedValue:@(on) error:NULL];
-    }
+    [self checkAndUpdateModelWithDisplayedValue:@(on) error:NULL];
 }
