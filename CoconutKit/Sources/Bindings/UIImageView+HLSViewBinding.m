@@ -12,6 +12,25 @@
 
 #pragma mark HLSViewBindingImplementation protocol implementation
 
++ (NSArray *)supportedBindingClasses
+{
+    return @[[UIImage class], [NSString class]];
+}
+
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
+{
+    if ([value isKindOfClass:[UIImage class]]) {
+        self.image = value;
+    }
+    else {
+        UIImage *image = [UIImage imageNamed:value];
+        if (! image) {
+            image = [UIImage imageWithContentsOfFile:value];
+        }
+        self.image = image;
+    }
+}
+
 - (BOOL)bindsSubviewsRecursively
 {
     return NO;

@@ -32,6 +32,23 @@
     return self;
 }
 
+#pragma mark Accessors and mutators
+
+- (UIImage *)apple1Image
+{
+    return [UIImage imageNamed:@"img_apple1.jpg"];
+}
+
+- (NSString *)apple2ImageName
+{
+    return @"img_apple2.jpg";
+}
+
+- (NSString *)apple3ImagePath
+{
+    return [[NSBundle mainBundle] pathForResource:@"img_apple3" ofType:@"jpg"];
+}
+
 #pragma mark Localization
 
 - (void)localize
