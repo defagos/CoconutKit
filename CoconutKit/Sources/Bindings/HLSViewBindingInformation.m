@@ -265,7 +265,21 @@
     
     @try {
         self.updatingModel = YES;
-        [self.objectTarget setValue:value forKeyPath:self.keyPath];
+        
+        // Will throw when given nil for scalar values. Use 0 in such cases
+        // See https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Protocols/NSKeyValueCoding_Protocol/index.html#//apple_ref/occ/instm/NSObject/setNilValueForKey:
+        @try {
+            [self.objectTarget setValue:value forKeyPath:self.keyPath];
+        }
+        @catch (NSException *exception) {
+            if ([exception.name isEqualToString:NSInvalidArgumentException]) {
+                [self.objectTarget setValue:@0 forKeyPath:self.keyPath];
+            }
+            else {
+                @throw;
+            }
+        }
+        
         self.updatingModel = NO;
     }
     @catch (NSException *exception) {
