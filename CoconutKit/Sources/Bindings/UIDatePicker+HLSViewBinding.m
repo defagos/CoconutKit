@@ -55,7 +55,8 @@ static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL 
 {
     // Setting nil crashes the picker. Since the picker shows the current date by default,
     // we do the same when the associated value is nil
-    self.date = value ?: [NSDate date];
+    NSDate *date = value ?: [NSDate date];
+    [self setDate:date animated:NO];
 }
 
 - (BOOL)bindsSubviewsRecursively
