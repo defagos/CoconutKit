@@ -374,22 +374,9 @@
             }
         }
         
-        // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
-        // correct memory management
-        id (*methodImp)(id, SEL) = (id (*)(id, SEL))[transformationTarget methodForSelector:transformationSelector];
-        id transformer = methodImp(transformationTarget, transformationSelector);
-        
-        if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-            self.transformer = transformer;
-        }
-        else if ([transformer isKindOfClass:[NSFormatter class]]) {
-            self.transformer = [HLSBlockTransformer blockTransformerFromFormatter:transformer];
-        }
-        else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
-            self.transformer = [HLSBlockTransformer blockTransformerFromValueTransformer:transformer];
-        }
-        else {
-            self.statusDescription = [NSString stringWithFormat:@"Unsupported transformer class %@", [transformer class]];
+        self.transformer = [self transformerFromTransformationTarget:transformationTarget transformationSelector:transformationSelector];
+        if (! self.transformer) {
+            self.statusDescription = [NSString stringWithFormat:@"Unsupported transformer. Must be an HLSTransformer, NSFormatter or NSValueTransformer instance"];
             return HLSViewBindingStatusInvalid;
         }
         
@@ -424,6 +411,27 @@
     
     self.statusDescription = @"The binding information is correct";
     return HLSViewBindingStatusValid;
+}
+
+- (id<HLSTransformer>)transformerFromTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector
+{
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
+    // correct memory management
+    id (*methodImp)(id, SEL) = (id (*)(id, SEL))[transformationTarget methodForSelector:transformationSelector];
+    id transformer = methodImp(transformationTarget, transformationSelector);
+    
+    if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
+        return transformer;
+    }
+    else if ([transformer isKindOfClass:[NSFormatter class]]) {
+        return [HLSBlockTransformer blockTransformerFromFormatter:transformer];
+    }
+    else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
+        return [HLSBlockTransformer blockTransformerFromValueTransformer:transformer];
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark Type checking
