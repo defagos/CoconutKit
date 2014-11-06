@@ -64,12 +64,16 @@
         [entries addObject:delegateEntry];
         
         HLSBindingInformationEntry *displayedValueEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Displayed value", nil)
-                                                                                                    object:[bindingInformation value]];
+                                                                                                    object:[bindingInformation displayedValue]];
         [entries addObject:displayedValueEntry];
         
         HLSBindingInformationEntry *rawValueEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Raw value", nil)
                                                                                               object:[bindingInformation rawValue]];
         [entries addObject:rawValueEntry];
+        
+        HLSBindingInformationEntry *valueEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Formatter raw value", nil)
+                                                                                           object:[bindingInformation value]];
+        [entries addObject:valueEntry];
         
         HLSBindingInformationEntry *transformationTargetEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation target", nil)
                                                                                                           object:bindingInformation.transformationTarget];

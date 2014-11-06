@@ -113,6 +113,16 @@
     }
 }
 
+- (id)displayedValue
+{
+    if ([self.view respondsToSelector:@selector(displayedValue)]) {
+        return [self.view performSelector:@selector(displayedValue)];
+    }
+    else {
+        return nil;
+    }
+}
+
 - (void)setObjectTarget:(id)objectTarget
 {
     if (_objectTarget && self.synchronized) {

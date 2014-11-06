@@ -39,9 +39,14 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
 - (id)value;
 
 /**
- * The value corresponding to the keypath. No transformer is applied
+ * The value retrieved from the keypath. No transformer is applied
  */
 - (id)rawValue;
+
+/**
+ * The value currently displayed by the view
+ */
+- (id)displayedValue;
 
 /**
  * Update the view using the current underlying bound value
