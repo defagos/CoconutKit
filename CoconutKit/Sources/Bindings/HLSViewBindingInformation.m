@@ -621,7 +621,7 @@
     id value = nil;
     NSError *error = nil;
     if ([self convertTransformedValue:displayedValue toValue:&value withError:&error]
-        && [self updateWithValue:value error:&error]) {
+            && [self updateWithValue:value error:&error]) {
         return YES;
     }
     
@@ -640,9 +640,10 @@
     }
     
     id value = nil;
-    BOOL success = YES;
     NSError *error = nil;
-    if ([self convertTransformedValue:displayedValue toValue:&value withError:&error]) {
+    
+    BOOL success = [self convertTransformedValue:displayedValue toValue:&value withError:&error];
+    if (success) {
         NSError *checkError = nil;
         if (! [self checkValue:value withError:&checkError]) {
             success = NO;
