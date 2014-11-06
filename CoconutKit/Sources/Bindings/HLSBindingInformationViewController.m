@@ -38,37 +38,42 @@
             statusString = [statusString stringByAppendingFormat:@"\n\n%@", bindingInformation.statusDescription];
         }
         
-        HLSBindingInformationEntry *entry1 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)
-                                                                                         text:statusString];
-        [entries addObject:entry1];
+        HLSBindingInformationEntry *statusEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)
+                                                                                              text:statusString];
+        [entries addObject:statusEntry];
         
-        HLSBindingInformationEntry *entry2 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Key path", nil)
-                                                                                         text:bindingInformation.keyPath];
-        [entries addObject:entry2];
+        HLSBindingInformationEntry *objectEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Object", nil)
+                                                                                              text:@"Responder chain starting with the parent view"
+                                                                                            object:bindingInformation.object];
+        [entries addObject:objectEntry];
         
-        HLSBindingInformationEntry *entry3 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Transformer name", nil)
-                                                                                         text:bindingInformation.transformerName];
-        [entries addObject:entry3];
+        HLSBindingInformationEntry *keyPathEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Key path", nil)
+                                                                                               text:bindingInformation.keyPath];
+        [entries addObject:keyPathEntry];
         
-        HLSBindingInformationEntry *entry4 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved bound object", nil)
-                                                                                       object:bindingInformation.object];
-        [entries addObject:entry4];
+        HLSBindingInformationEntry *transformerNameEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Transformer name", nil)
+                                                                                                       text:bindingInformation.transformerName];
+        [entries addObject:transformerNameEntry];
         
-        HLSBindingInformationEntry *entry5 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved binding delegate", nil)
-                                                                                       object:bindingInformation.delegate];
-        [entries addObject:entry5];
+        HLSBindingInformationEntry *objectTargetEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved bound object", nil)
+                                                                                                  object:bindingInformation.objectTarget];
+        [entries addObject:objectTargetEntry];
         
-        HLSBindingInformationEntry *entry6 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Displayed value", nil)
-                                                                                       object:[bindingInformation value]];
-        [entries addObject:entry6];
+        HLSBindingInformationEntry *delegateEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved binding delegate", nil)
+                                                                                              object:bindingInformation.delegate];
+        [entries addObject:delegateEntry];
         
-        HLSBindingInformationEntry *entry7 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Raw value", nil)
-                                                                                       object:[bindingInformation rawValue]];
-        [entries addObject:entry7];
+        HLSBindingInformationEntry *displayedValueEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Displayed value", nil)
+                                                                                                    object:[bindingInformation value]];
+        [entries addObject:displayedValueEntry];
         
-        HLSBindingInformationEntry *entry8 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation target", nil)
-                                                                                       object:bindingInformation.transformationTarget];
-        [entries addObject:entry8];
+        HLSBindingInformationEntry *rawValueEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Raw value", nil)
+                                                                                              object:[bindingInformation rawValue]];
+        [entries addObject:rawValueEntry];
+        
+        HLSBindingInformationEntry *transformationTargetEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation target", nil)
+                                                                                                          object:bindingInformation.transformationTarget];
+        [entries addObject:transformationTargetEntry];
         
         NSString *transformationSelectorString = nil;
         if (bindingInformation.transformationSelector) {
@@ -79,17 +84,17 @@
             transformationSelectorString = @"-";
         }
         
-        HLSBindingInformationEntry *entry9 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation selector", nil)
-                                                                                         text:transformationSelectorString];
-        [entries addObject:entry9];
+        HLSBindingInformationEntry *transformationSelectorEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation selector", nil)
+                                                                                                              text:transformationSelectorString];
+        [entries addObject:transformationSelectorEntry];
         
-        HLSBindingInformationEntry *entry10 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Can update bound object", nil)
-                                                                                          text:HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)])];
-        [entries addObject:entry10];
+        HLSBindingInformationEntry *canUpdateEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Can update bound object", nil)
+                                                                                                 text:HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)])];
+        [entries addObject:canUpdateEntry];
         
-        HLSBindingInformationEntry *entry11 = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Synchronized", nil)
-                                                                                          text:HLSStringFromBool(bindingInformation.synchronized)];
-        [entries addObject:entry11];
+        HLSBindingInformationEntry *synchronizedEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Synchronized", nil)
+                                                                                                    text:HLSStringFromBool(bindingInformation.synchronized)];
+        [entries addObject:synchronizedEntry];
         
         self.entries = [NSArray arrayWithArray:entries];
     }

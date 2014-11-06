@@ -28,7 +28,7 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
  * Store view binding information. A keypath and a view are mandatory, otherwise the method returns nil. The object
  * parameter can be one of the following:
  *   - a non-nil object, which the keypath is applied to (binding to an object)
- *   - nil, in which case the keypath is applied to the responder chain starting with view
+ *   - nil, in which case the keypath is applied to the responder chain starting with view.superview
  */
 - (instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view NS_DESIGNATED_INITIALIZER;
 
@@ -71,7 +71,7 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError;
 
 /**
- * Return the object which has been bound, nil if none or not resolved yet
+ * Return the object upon which binding muts be made. Can be nil (meaning "responder chain")
  */
 @property (nonatomic, readonly, weak) id object;
 
@@ -89,6 +89,11 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
  * Return the transformer to use, nil if none
  */
 @property (nonatomic, readonly, strong) NSString *transformerName;
+
+/**
+ * Return the resolved bound object
+ */
+@property (nonatomic, readonly, weak) id objectTarget;
 
 /**
  * Return the object which the transformer will be called on, nil if none or not resolved yet

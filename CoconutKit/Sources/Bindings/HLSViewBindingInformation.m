@@ -23,6 +23,7 @@
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;
+@property (nonatomic, weak) id objectTarget;
 @property (nonatomic, strong) NSString *keyPath;
 @property (nonatomic, strong) NSString *transformerName;
 @property (nonatomic, weak) UIView *view;
@@ -74,12 +75,11 @@
 
 - (void)dealloc
 {
-    if (self.synchronized) {
-        [self removeObserver:self keyPath:self.keyPath];
-    }
+    // Unregister KVO
+    self.objectTarget = nil;
 }
 
-#pragma mark Getting and setting values
+#pragma mark Accessors and mutators
 
 - (id)value
 {
@@ -91,14 +91,14 @@
         }
     }
             
-    id value = [self.object valueForKeyPath:self.keyPath];
+    id value = [self.objectTarget valueForKeyPath:self.keyPath];
     return [self transformValue:value];
 }
 
 - (id)rawValue
 {
     @try {
-        return [self.object valueForKeyPath:self.keyPath];
+        return [self.objectTarget valueForKeyPath:self.keyPath];
     }
     @catch (NSException *exception) {
         if ([exception.name isEqualToString:NSUndefinedKeyException]) {
@@ -107,6 +107,27 @@
         else {
             @throw;
         }
+    }
+}
+
+- (void)setObjectTarget:(id)objectTarget
+{
+    if (_objectTarget && self.synchronized) {
+        [_objectTarget removeObserver:self keyPath:self.keyPath];
+        
+        self.synchronized = NO;
+    }
+    
+    _objectTarget = objectTarget;
+    
+    // KVO bug: Doing KVO on key paths containing keypath operators (which cannot be used with KVO) and catching the exception leads to retaining the
+    // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
+    if (objectTarget && [self.keyPath rangeOfString:@"@"].length == 0) {
+        [objectTarget addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+            [self updateView];
+        }];
+        
+        self.synchronized = YES;
     }
 }
 
@@ -147,7 +168,7 @@
         
         if (success) {
             if ([self.delegate respondsToSelector:@selector(view:transformationDidSucceedForObject:keyPath:)]) {
-                [self.delegate view:self.view transformationDidSucceedForObject:self.object keyPath:self.keyPath];
+                [self.delegate view:self.view transformationDidSucceedForObject:self.objectTarget keyPath:self.keyPath];
             }
             
             if (pValue) {
@@ -161,7 +182,7 @@
             [error setUnderlyingError:detailedError];
             
             if ([self.delegate respondsToSelector:@selector(view:transformationDidFailForObject:keyPath:withError:)]) {
-                [self.delegate view:self.view transformationDidFailForObject:self.object keyPath:self.keyPath withError:error];
+                [self.delegate view:self.view transformationDidFailForObject:self.objectTarget keyPath:self.keyPath withError:error];
             }
             
             if (pError) {
@@ -190,15 +211,15 @@
     // TODO: Implement call to -check method as well, since cleaner syntax
     
     NSError *error = nil;
-    if ([self.object validateValue:&value forKeyPath:self.keyPath error:&error]) {
+    if ([self.objectTarget validateValue:&value forKeyPath:self.keyPath error:&error]) {
         if ([self.delegate respondsToSelector:@selector(view:checkDidSucceedForObject:keyPath:)]) {
-            [self.delegate view:self.view checkDidSucceedForObject:self.object keyPath:self.keyPath];
+            [self.delegate view:self.view checkDidSucceedForObject:self.objectTarget keyPath:self.keyPath];
         }
         return YES;
     }
     else {
         if ([self.delegate respondsToSelector:@selector(view:checkDidFailForObject:keyPath:withError:)]) {
-            [self.delegate view:self.view checkDidFailForObject:self.object keyPath:self.keyPath withError:error];
+            [self.delegate view:self.view checkDidFailForObject:self.objectTarget keyPath:self.keyPath withError:error];
         }
         
         if (pError) {
@@ -217,7 +238,7 @@
     }
     
     @try {
-        [self.object setValue:value forKeyPath:self.keyPath];
+        [self.objectTarget setValue:value forKeyPath:self.keyPath];
     }
     @catch (NSException *exception) {
         if ([exception.name isEqualToString:NSUndefinedKeyException]) {
@@ -226,14 +247,14 @@
                                  localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
             
             if ([self.delegate respondsToSelector:@selector(view:updateDidFailForObject:keyPath:withError:)]) {
-                [self.delegate view:self.view updateDidFailForObject:self.object keyPath:self.keyPath withError:error];
+                [self.delegate view:self.view updateDidFailForObject:self.objectTarget keyPath:self.keyPath withError:error];
             }
             
             if (pError) {
                 *pError = error;
             }
             
-            HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.object, value, self.keyPath, exception);
+            HLSLoggerError(@"Cannot update object %@ with value %@ for key path %@: %@", self.objectTarget, value, self.keyPath, exception);
             return NO;
         }
         else {
@@ -242,7 +263,7 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(view:updateDidSucceedForObject:keyPath:)]) {
-        [self.delegate view:self.view updateDidSucceedForObject:self.object keyPath:self.keyPath];
+        [self.delegate view:self.view updateDidSucceedForObject:self.objectTarget keyPath:self.keyPath];
     }
     
     // Force a new binding verification (the value might have been nil, i.e. the information could not be verified, or
@@ -260,6 +281,7 @@
     HLSLoggerDebug(@"Verifying binding information for %@", self);
     
     // An object has been provided. Check that the keypath is valid for it
+    id objectTarget = nil;
     if (self.object) {
         @try {
             [self.object valueForKeyPath:self.keyPath];
@@ -273,32 +295,22 @@
                 @throw;
             }
         }
+        
+        objectTarget = self.object;
     }
     // No object provided. Walk along the responder chain to find a responder matching the keypath (might be nil)
     else {
-        self.object = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
+        objectTarget = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
     }
     
-    if (! self.object) {
-        self.statusDescription = @"No meaningful target was found along the responder chain for the specified keypath (stopping at view controller boundaries)";
+    if (! objectTarget) {
+        self.statusDescription = @"No meaningful object target was found along the responder chain for the specified keypath (stopping at view controller boundaries)";
         return HLSViewBindingStatusInvalid;
     }
-    
-    // Bug: Doing KVO on key paths containing keypath operators (which cannot be used with KVO) and catching the exception leads to retaining the
-    // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
-    if (! self.synchronized && [self.keyPath rangeOfString:@"@"].length == 0) {
-        [self.object addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            [self updateView];
-        }];
-        
-        // Has two purposes:
-        //   - information about the binding (two-way)
-        //   - avoids registering several times for KVO (would lead to multiple events)
-        self.synchronized = YES;
-    }
+    self.objectTarget = objectTarget;
     
     // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
-    id value = [self.object valueForKeyPath:self.keyPath];
+    id value = [self.objectTarget valueForKeyPath:self.keyPath];
     
     // Transformer lookup
     if ([self.transformerName isFilled] && ! self.transformer) {
@@ -360,12 +372,12 @@
             transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
             if (! transformationTarget) {
                 // Look for an instance method on the object
-                if ([self.object respondsToSelector:transformationSelector]) {
-                    transformationTarget = self.object;
+                if ([self.objectTarget respondsToSelector:transformationSelector]) {
+                    transformationTarget = self.objectTarget;
                 }
                 // Look for a class method on the object class itself (most generic)
-                else if ([[self.object class] respondsToSelector:transformationSelector]) {
-                    transformationTarget = [self.object class];
+                else if ([[self.objectTarget class] respondsToSelector:transformationSelector]) {
+                    transformationTarget = [self.objectTarget class];
                 }
                 else {
                     self.statusDescription = @"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain (stopping at view controller boundaries)";
@@ -557,10 +569,11 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; object: %@; keyPath: %@; transformerName: %@; transformationTarget: %@; transformationSelector:%@>",
+    return [NSString stringWithFormat:@"<%@: %p; object: %@; objectTarget: %@; keyPath: %@; transformerName: %@; transformationTarget: %@; transformationSelector:%@>",
             [self class],
             self,
             self.object,
+            self.objectTarget,
             self.keyPath,
             self.transformerName,
             self.transformationTarget,

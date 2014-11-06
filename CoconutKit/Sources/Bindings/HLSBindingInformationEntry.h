@@ -12,8 +12,8 @@
 @interface HLSBindingInformationEntry : NSObject
 
 /**
- * Create an entry with a given name (mandatory), text and object (optional). If no text is provided, a description
- * of the object is used instead, if available
+ * Create an entry with a given name (mandatory), text and object (optional). If an object is passed it will
+ * be used to generated a description text, otherwise the specified text will be used
  */
 - (instancetype)initWithName:(NSString *)name text:(NSString *)text object:(id)object NS_DESIGNATED_INITIALIZER;
 

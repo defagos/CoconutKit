@@ -53,7 +53,7 @@
         self.object = object;
         
         if (object) {
-            self.text = text ?: [HLSBindingInformationEntry identityStringForObject:object] ?: @"-";
+            self.text = [HLSBindingInformationEntry identityStringForObject:object] ?: @"-";
         }
         else {
             self.text = text ?: @"-";
