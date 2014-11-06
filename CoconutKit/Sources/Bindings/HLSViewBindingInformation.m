@@ -44,6 +44,9 @@
 // to an infinite call chain
 @property (nonatomic, assign, getter=isUpdatingView) BOOL updatingView;
 
+// Same as above, but when updating the model
+@property (nonatomic, assign, getter=isUpdatingModel) BOOL updatingModel;
+
 @end
 
 @implementation HLSViewBindingInformation
@@ -135,6 +138,10 @@
 
 - (void)updateView
 {
+    if (self.updatingModel) {
+        return;
+    }
+    
     self.updatingView = YES;
     [self.view performSelector:@selector(updateViewWithValue:) withObject:[self value]];
     self.updatingView = NO;
@@ -238,7 +245,9 @@
     }
     
     @try {
+        self.updatingModel = YES;
         [self.objectTarget setValue:value forKeyPath:self.keyPath];
+        self.updatingModel = NO;
     }
     @catch (NSException *exception) {
         if ([exception.name isEqualToString:NSUndefinedKeyException]) {
