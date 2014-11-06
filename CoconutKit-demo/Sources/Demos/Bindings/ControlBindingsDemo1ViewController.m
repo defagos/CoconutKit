@@ -36,6 +36,22 @@
     return self;
 }
 
+#pragma mark Orientation management
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Controls", nil);
+}
+
 #pragma mark Transformers
 
 - (HLSBlockTransformer *)percentTransformer
@@ -88,22 +104,6 @@
         NSUInteger numberOfWords = [[words filteredArrayUsingPredicate:predicate] count];
         return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
     } reverseBlock:nil];
-}
-
-#pragma mark Orientation management
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Controls", nil);
 }
 
 #pragma mark HLSBindingDelegate protocol implementation
