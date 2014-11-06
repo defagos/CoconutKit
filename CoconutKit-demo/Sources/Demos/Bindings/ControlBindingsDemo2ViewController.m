@@ -38,10 +38,11 @@
 {
     [super localize];
     
-    // FIXME: Is not reflected by a value already displayed by the text field. Probably force a recursive update. Better: Have
-    //        bindings KVObserve date formatter changes
-    self.localizedDateFormatter = [[NSDateFormatter alloc] init];
-    [self.localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    NSDateFormatter *localizedDateFormatter = [[NSDateFormatter alloc] init];
+    [localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    
+    // Changing the date formatter object automatically triggers a bound view update
+    self.localizedDateFormatter = localizedDateFormatter;
 }
 
 @end

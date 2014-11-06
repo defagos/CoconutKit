@@ -30,7 +30,7 @@
 
 @property (nonatomic, weak) id transformationTarget;
 @property (nonatomic, assign) SEL transformationSelector;
-@property (nonatomic, strong) id<HLSTransformer> transformer;
+@property (nonatomic, strong) NSObject<HLSTransformer> *transformer;
 
 @property (nonatomic, weak) id<HLSBindingDelegate> delegate;
 
@@ -394,6 +394,12 @@
         
         self.transformationTarget = transformationTarget;
         self.transformationSelector = transformationSelector;
+        
+        // Observe transformer updates, reload cached transformer and update view accordingly
+        [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+            self.transformer = [self transformerFromTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
+            [self updateView];
+        }];
     }
     
     // Locate the binding delegate, if any

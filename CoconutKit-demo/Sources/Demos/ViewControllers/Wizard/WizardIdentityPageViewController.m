@@ -78,10 +78,11 @@
     
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
     
-    // FIXME: Is not reflected by a value already displayed by the text field. Probably force a recursive update. Better: Have
-    //        bindings KVObserve date formatter changes
-    self.localizedDateFormatter = [[NSDateFormatter alloc] init];
-    [self.localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    NSDateFormatter *localizedDateFormatter = [[NSDateFormatter alloc] init];
+    [localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    
+    // Changing the date formatter object automatically triggers a bound view update
+    self.localizedDateFormatter = localizedDateFormatter;
     
     // Trigger a new validation to get localized error messages if any
     [self checkDisplayedValuesWithError:NULL];
