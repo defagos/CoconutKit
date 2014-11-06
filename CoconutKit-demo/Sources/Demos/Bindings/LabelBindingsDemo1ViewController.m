@@ -16,6 +16,9 @@
 @property (nonatomic, strong) NSArray *employees;
 @property (nonatomic, strong) Employee *randomEmployee;
 
+@property (nonatomic, strong) NSDate *currentDate;
+@property (nonatomic, strong) NSTimer *timer;
+
 @end
 
 @implementation LabelBindingsDemo1ViewController
@@ -39,20 +42,51 @@
         
         self.employees = @[employee1, employee2, employee3];
         self.randomEmployee = [self.employees objectAtIndex:arc4random_uniform((u_int32_t)[self.employees count])];
+        
+        self.currentDate = [NSDate date];
     }
     return self;
 }
 
+- (void)dealloc
+{
+    // Invalidate the timer
+    self.timer = nil;
+}
+
 #pragma mark Accessors and mutators
 
-- (NSString *)currentDateString
+- (NSString *)entryDateString
 {
     return [[DemoTransformer mediumDateFormatter] stringFromDate:[NSDate date]];
 }
 
-- (NSDate *)currentDate
+- (void)setTimer:(NSTimer *)timer
 {
-    return [NSDate date];
+    if (_timer) {
+        [_timer invalidate];
+    }
+    
+    _timer = timer;
+}
+
+#pragma mark View lifecycle
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1. target:self selector:@selector(tick:) userInfo:nil repeats:YES];
+    
+    // Force an initial refresh
+    [self.timer fire];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.timer = nil;
 }
 
 #pragma mark Transformers
@@ -79,6 +113,13 @@
 - (IBAction)refresh:(id)sender
 {
     [self refreshBindingsForced:NO];
+}
+
+#pragma mark Timer callbacks
+
+- (void)tick:(NSTimer *)timer
+{
+    self.currentDate = [NSDate date];
 }
 
 @end
