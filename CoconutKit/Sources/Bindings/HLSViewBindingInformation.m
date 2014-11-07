@@ -89,14 +89,10 @@
 
 - (id)value
 {
-    // Lazily check and fill binding information
     if (self.status != HLSViewBindingStatusValid) {
-        self.status = [self verifyBindingInformation];
-        if (self.status != HLSViewBindingStatusValid) {
-            return nil;
-        }
+        return nil;
     }
-            
+    
     id value = [self.objectTarget valueForKeyPath:self.keyPath];
     return [self transformValue:value];
 }
@@ -155,10 +151,26 @@
         return;
     }
     
+    // Lazily check and fill binding information
+    if (self.status != HLSViewBindingStatusValid) {
+        self.status = [self verifyBindingInformation];
+    }
+    
     self.updatingView = YES;
     
+    id value = nil;
+    if ([self canDisplayPlaceholder]) {
+        id rawValue = [self rawValue];
+        if (rawValue && (! [rawValue isKindOfClass:[NSNumber class]] || ! [rawValue isEqualToNumber:@0])) {
+            value = [self value];
+        }
+    }
+    else {
+        value = [self value];
+    }
+    
     void (*methodImp)(id, SEL, id, BOOL) = (void (*)(id, SEL, id, BOOL))[self.view methodForSelector:@selector(updateViewWithValue:animated:)];
-    (*methodImp)(self.view, @selector(updateViewWithValue:animated:), [self value], self.updateAnimated);
+    (*methodImp)(self.view, @selector(updateViewWithValue:animated:), value, self.updateAnimated);
     
     self.updatingView = NO;
 }
@@ -525,6 +537,18 @@
     }
     
     return NO;
+}
+
+- (BOOL)canDisplayPlaceholder
+{
+    Class viewClass = [self.view class];
+    
+    if ([viewClass respondsToSelector:@selector(canDisplayPlaceholder)]) {
+        return [viewClass canDisplayPlaceholder];
+    }
+    else {
+        return NO;
+    }
 }
 
 #pragma mark Transformation

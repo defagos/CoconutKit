@@ -24,6 +24,13 @@
 + (NSArray *)supportedBindingClasses;
 
 /**
+ * Should return YES iff the UIView subclass is able to display a placeholder. If not implemented, the default
+ * behavior is NO. For such classes, it will be ensured that for bound methods with primitive return types
+ * (int, float, etc.), the view displays nil instead of 0
+ */
++ (BOOL)canDisplayPlaceholder;
+
+/**
  * UIView subclasses which want to provide bindings MUST implement this method. Its implementation should update the
  * view according to the value which is received as parameter (if this value can be something else than an NSString,
  * be sure to implement the +supportedBindingClasses method as well). If a UIView class does not implement this method,
