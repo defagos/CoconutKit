@@ -171,7 +171,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
         // -dateFromString: (for NSDateFormatter) methods. Check and apply the same behavior as those specific methods here. Since
         // converting an empty string via NSNumberFormatter or NSDateFormatter returns YES -getObjectValue:forString:errorDescription:
         // (the object returned by reference is nil), we also consider the conversion successful here, which makes sense
-        if (! string) {
+        if ([string length] == 0) {
             if (pObject) {
                 *pObject = nil;
             }
