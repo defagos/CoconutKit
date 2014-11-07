@@ -26,7 +26,6 @@
 @property (nonatomic, weak) id objectTarget;
 @property (nonatomic, strong) NSString *keyPath;
 @property (nonatomic, strong) NSString *transformerName;
-@property (nonatomic, assign, getter=isUpdateAnimated) BOOL updateAnimated;
 @property (nonatomic, weak) UIView *view;
 
 @property (nonatomic, weak) id transformationTarget;
@@ -57,7 +56,6 @@
 - (instancetype)initWithObject:(id)object
                        keyPath:(NSString *)keyPath
                transformerName:(NSString *)transformerName
-                updateAnimated:(BOOL)updateAnimated
                           view:(UIView *)view
 {
     if (self = [super init]) {
@@ -74,7 +72,6 @@
         self.object = object;
         self.keyPath = keyPath;
         self.transformerName = transformerName;
-        self.updateAnimated = updateAnimated;
         self.view = view;
         self.status = HLSViewBindingStatusUnverified;
         self.statusDescription = @"The binding has not been verified yet";

@@ -33,8 +33,12 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
 - (instancetype)initWithObject:(id)object
                        keyPath:(NSString *)keyPath
                transformerName:(NSString *)transformerName
-                updateAnimated:(BOOL)updateAnimated
                           view:(UIView *)view NS_DESIGNATED_INITIALIZER;
+
+/**
+ * If set to YES, view updates will be animated if supported by the underlying view. Defaults to NO
+ */
+@property (nonatomic, assign, getter=isUpdateAnimated) BOOL updateAnimated;
 
 /**
  * Return the current value corresponding to the stored binding information (the transformer method is applied, if any). 

@@ -39,6 +39,7 @@
     [self.segmentedControl setTitle:NSLocalizedString(@"VC hierarchies", nil) forSegmentAtIndex:2];
     [self.segmentedControl setTitle:NSLocalizedString(@"Lookup failures", nil) forSegmentAtIndex:3];
     [self.segmentedControl setTitle:NSLocalizedString(@"Dangling views", nil) forSegmentAtIndex:4];
+    [self.segmentedControl setTitle:NSLocalizedString(@"Programmatic", nil) forSegmentAtIndex:5];
     
     self.title = NSLocalizedString(@"Labels", nil);
 }

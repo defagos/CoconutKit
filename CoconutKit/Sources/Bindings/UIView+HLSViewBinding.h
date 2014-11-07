@@ -131,8 +131,20 @@
  */
 @interface UIView (HLSViewBinding)
 
-@property (nonatomic, strong) IBInspectable NSString *bindKeyPath;
-@property (nonatomic, strong) IBInspectable NSString *bindTransformer;
+/**
+ * Programmatically bind the receiver to a keypath and transformer, for those who do not use Interface Builder
+ */
+- (void)bindToKeyPath:(NSString *)bindKeyPath withTransformer:(NSString *)bindTransformer;
+
+/**
+ * Primary binding parameters. Set using Interface Builder user-defined runtime attributes
+ */
+@property (nonatomic, readonly, strong) IBInspectable NSString *bindKeyPath;
+@property (nonatomic, readonly, strong) IBInspectable NSString *bindTransformer;
+
+/**
+ * Secondary binding parameters. Can be changed at runtime
+ */
 @property (nonatomic, assign, getter=isBindUpdateAnimated) IBInspectable BOOL bindUpdateAnimated;
 
 /**

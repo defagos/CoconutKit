@@ -16,6 +16,8 @@
 		6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE09163EED9F00420A5F /* RootSplitViewDemoController.xib */; };
 		6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */; };
 		6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
+		6F1894561A0C94B600A31817 /* LabelBindingsDemo6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */; };
+		6F1894591A0C94BE00A31817 /* LabelBindingsDemo6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */; };
 		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
 		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
@@ -519,6 +521,8 @@
 		6F0BFE0E163EEDAC00420A5F /* RootTabBarDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTabBarDemoViewController.h; sourceTree = "<group>"; };
 		6F0BFE0F163EEDAC00420A5F /* RootTabBarDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTabBarDemoViewController.m; sourceTree = "<group>"; };
 		6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabBarDemoViewController.xib; sourceTree = "<group>"; };
+		6F1894541A0C94B600A31817 /* LabelBindingsDemo6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo6ViewController.h; sourceTree = "<group>"; };
+		6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo6ViewController.m; sourceTree = "<group>"; };
 		6F1F4DEC15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4DF015A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
@@ -1834,6 +1838,8 @@
 				6FFAB7A219DD901A00A91997 /* YesterdayView.h */,
 				6FFAB7A319DD901A00A91997 /* YesterdayView.m */,
 				6FFAB7A419DD901A00A91997 /* YesterdayView.xib */,
+				6F1894541A0C94B600A31817 /* LabelBindingsDemo6ViewController.h */,
+				6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */,
 			);
 			path = Bindings;
 			sourceTree = "<group>";
@@ -2283,6 +2289,7 @@
 				6F9C468614C5C30C00824AB2 /* ProgrammaticTableViewCell.m in Sources */,
 				6F9C468714C5C30C00824AB2 /* TableViewCellsDemoViewController.m in Sources */,
 				6F9C468814C5C30C00824AB2 /* XibTableViewCell.m in Sources */,
+				6F1894591A0C94BE00A31817 /* LabelBindingsDemo6ViewController.m in Sources */,
 				6F9C468D14C5C30C00824AB2 /* WebViewDemoViewController.m in Sources */,
 				6FFAB7E019DD901A00A91997 /* TableViewBindingsDemoViewController.m in Sources */,
 				6F9C468F14C5C30C00824AB2 /* PlaceholderDemoViewController.m in Sources */,
@@ -2450,6 +2457,7 @@
 				6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */,
 				6FFAB7CB19DD901A00A91997 /* LabelBindingsDemo3ViewController.m in Sources */,
 				6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */,
+				6F1894561A0C94B600A31817 /* LabelBindingsDemo6ViewController.m in Sources */,
 				6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
 				6FCB4EB51926651F00047AD3 /* SegueLeftPanelDemoViewController.m in Sources */,
 				6FCB4EB61926651F00047AD3 /* SegueFirstRightPanelDemoViewController.m in Sources */,

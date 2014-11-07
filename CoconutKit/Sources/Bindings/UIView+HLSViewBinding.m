@@ -31,6 +31,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @interface UIView (HLSViewBindingPrivate)
 
+@property (nonatomic, strong) NSString *bindKeyPath;
+@property (nonatomic, strong) NSString *bindTransformer;
+
 @property (nonatomic, strong) id boundObject;
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
@@ -53,27 +56,18 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                                                                                  (IMP)swizzled_UIView__didMoveToWindow_Imp);
 }
 
+#pragma mark Object creation and destruction
+
+- (void)bindToKeyPath:(NSString *)bindKeyPath withTransformer:(NSString *)bindTransformer
+{
+    self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:self.boundObject
+                                                                        keyPath:bindKeyPath
+                                                                transformerName:bindTransformer
+                                                                           view:self];
+    [self refreshBindingsForced:NO];
+}
+
 #pragma mark Accessors and mutators
-
-- (NSString *)bindKeyPath
-{
-    return objc_getAssociatedObject(self, s_bindKeyPath);
-}
-
-- (void)setBindKeyPath:(NSString *)bindKeyPath
-{
-    objc_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSString *)bindTransformer
-{
-    return objc_getAssociatedObject(self, s_bindTransformerKey);
-}
-
-- (void)setBindTransformer:(NSString *)bindTransformer
-{
-    objc_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
 
 - (BOOL)isBindUpdateAnimated
 {
@@ -83,6 +77,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)setBindUpdateAnimated:(BOOL)bindUpdateAnimated
 {
     objc_setAssociatedObject(self, s_bindUpdateAnimatedKey, @(bindUpdateAnimated), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    self.bindingInformation.updateAnimated = bindUpdateAnimated;
 }
 
 - (BOOL)isBindingSupported
@@ -117,6 +113,27 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @implementation UIView (HLSViewBindingPrivate)
 
 #pragma mark Accessors and mutators
+
+- (NSString *)bindKeyPath
+{
+    return objc_getAssociatedObject(self, s_bindKeyPath);
+}
+
+- (void)setBindKeyPath:(NSString *)bindKeyPath
+{
+    objc_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSString *)bindTransformer
+{
+    return objc_getAssociatedObject(self, s_bindTransformerKey);
+}
+
+- (void)setBindTransformer:(NSString *)bindTransformer
+{
+    objc_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 
 - (id)boundObject
 {
@@ -160,8 +177,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
             self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
                                                                                 keyPath:self.bindKeyPath
                                                                         transformerName:self.bindTransformer
-                                                                         updateAnimated:self.bindUpdateAnimated
                                                                                    view:self];
+            self.bindingInformation.updateAnimated = self.bindUpdateAnimated;
             [self updateView];
         }
         else {
