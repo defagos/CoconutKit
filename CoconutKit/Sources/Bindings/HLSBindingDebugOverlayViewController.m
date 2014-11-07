@@ -144,7 +144,7 @@ static UIWindow *s_previousKeyWindow = nil;
                                          CGRectGetHeight(frame) + 2 * borderWidth);
         
         switch (bindingInformation.status) {
-            case HLSViewBindingStatusUnverified: {
+            case HLSViewBindingStatusNil: {
                 overlayButton.layer.borderColor = [UIColor orangeColor].CGColor;
                 break;
             }

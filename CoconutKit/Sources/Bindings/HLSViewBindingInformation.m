@@ -152,11 +152,7 @@
     }
     
     // Lazily check and fill binding information
-    if (self.status != HLSViewBindingStatusValid) {
-        self.status = [self verifyBindingInformation];
-    }
-    
-    self.updatingView = YES;
+    [self verifyBindingInformation];
     
     id value = nil;
     if ([self canDisplayPlaceholder]) {
@@ -168,6 +164,8 @@
     else {
         value = [self value];
     }
+    
+    self.updatingView = YES;
     
     void (*methodImp)(id, SEL, id, BOOL) = (void (*)(id, SEL, id, BOOL))[self.view methodForSelector:@selector(updateViewWithValue:animated:)];
     (*methodImp)(self.view, @selector(updateViewWithValue:animated:), value, self.updateAnimated);
@@ -317,18 +315,17 @@
         [self.delegate view:self.view updateDidSucceedForObject:self.objectTarget keyPath:self.keyPath];
     }
     
-    // Force a new binding verification (the value might have been nil, i.e. the information could not be verified, or
-    // might have been set to nil)
-    self.status = [self verifyBindingInformation];
-    
     return YES;
 }
 
 #pragma mark Binding
 
-- (HLSViewBindingStatus)verifyBindingInformation
+- (void)verifyBindingInformation
 {
-    // Just to visually check whether unnecessary verifications are made
+    if (self.status == HLSViewBindingStatusValid) {
+        return;
+    }
+    
     HLSLoggerDebug(@"Verifying binding information for %@", self);
     
     // An object has been provided. Check that the keypath is valid for it
@@ -339,8 +336,9 @@
         }
         @catch (NSException *exception) {
             if ([exception.name isEqualToString:NSUndefinedKeyException]) {
+                self.status = HLSViewBindingStatusInvalid;
                 self.statusDescription = @"The specified keypath is invalid for the bound object";
-                return HLSViewBindingStatusInvalid;
+                return;
             }
             else {
                 @throw;
@@ -355,8 +353,9 @@
     }
     
     if (! objectTarget) {
+        self.status = HLSViewBindingStatusInvalid;
         self.statusDescription = @"No meaningful object target was found along the responder chain for the specified keypath (stopping at view controller boundaries)";
-        return HLSViewBindingStatusInvalid;
+        return;
     }
     self.objectTarget = objectTarget;
     
@@ -415,8 +414,9 @@
             }
             
             if (! transformationSelector) {
+                self.status = HLSViewBindingStatusInvalid;
                 self.statusDescription = @"The transformer is not a valid method name";
-                return HLSViewBindingStatusInvalid;
+                return;
             }
             
             // Look along the responder chain first (most specific)
@@ -431,16 +431,18 @@
                     transformationTarget = [self.objectTarget class];
                 }
                 else {
+                    self.status = HLSViewBindingStatusInvalid;
                     self.statusDescription = @"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain (stopping at view controller boundaries)";
-                    return HLSViewBindingStatusInvalid;
+                    return;
                 }
             }
         }
         
         self.transformer = [self transformerFromTransformationTarget:transformationTarget transformationSelector:transformationSelector];
         if (! self.transformer) {
+            self.status = HLSViewBindingStatusInvalid;
             self.statusDescription = [NSString stringWithFormat:@"Unsupported transformer. Must be an HLSTransformer, NSFormatter or NSValueTransformer instance"];
-            return HLSViewBindingStatusInvalid;
+            return;
         }
         
         self.transformationTarget = transformationTarget;
@@ -463,11 +465,14 @@
     // We cannot cache binding information if we cannot check the type of the value to be displayed for compatibility. Does not change
     // the status, a later check is required
     if (! displayedValue) {
+        HLSLoggerDebug(@"Binding information cannot be fully verified for field keypath %@ and view %@", self.keyPath, self.view);
+        self.status = HLSViewBindingStatusNil;
         self.statusDescription = @"The value returned by the keypath is nil, its type cannot therefore be checked for compatibility yet";
-        return HLSViewBindingStatusUnverified;
+        return;
     }
     
     if (! [self canDisplayValue:displayedValue]) {
+        self.status = HLSViewBindingStatusInvalid;
         if (self.transformer) {
             self.statusDescription = [NSString stringWithFormat:@"The transformer must return one of the following supported types: %@", [self supportedBindingClassesString]];
         }
@@ -475,11 +480,12 @@
             self.statusDescription = [NSString stringWithFormat:@"The keypath must return one of the following supported types: %@. Fix the return type "
                                      "or use a transformer", [self supportedBindingClassesString]];
         }
-        return HLSViewBindingStatusInvalid;
+        return;
     }
     
+    HLSLoggerDebug(@"Binding information verified for field keypath %@ and view %@", self.keyPath, self.view);
+    self.status = HLSViewBindingStatusValid;
     self.statusDescription = @"The binding information is correct";
-    return HLSViewBindingStatusValid;
 }
 
 - (id<HLSTransformer>)transformerFromTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector
@@ -737,6 +743,7 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_statusToNameMap = @{ @(HLSViewBindingStatusUnverified) : @"unverified",
+                               @(HLSViewBindingStatusNil) : @"nil",
                                @(HLSViewBindingStatusValid) : @"valid",
                                @(HLSViewBindingStatusInvalid) : @"invalid" };
     });

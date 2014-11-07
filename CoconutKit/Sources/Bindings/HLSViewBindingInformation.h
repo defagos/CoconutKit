@@ -9,7 +9,8 @@
 #import "HLSBindingDelegate.h"
 
 typedef NS_ENUM(NSInteger, HLSViewBindingStatus) {
-    HLSViewBindingStatusUnverified,                 // The binding could not be fully verified yet
+    HLSViewBindingStatusUnverified,                 // The binding has not been verified yet
+    HLSViewBindingStatusNil,                        // The binding could not be fully verified because the value is nil
     HLSViewBindingStatusValid,                      // The binding is valid
     HLSViewBindingStatusInvalid                     // The binding is invalid
 };
