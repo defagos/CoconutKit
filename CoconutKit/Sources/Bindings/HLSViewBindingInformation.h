@@ -8,18 +8,6 @@
 
 #import "HLSBindingDelegate.h"
 
-typedef NS_ENUM(NSInteger, HLSViewBindingStatus) {
-    HLSViewBindingStatusUnverified,                 // The binding has not been verified yet
-    HLSViewBindingStatusNil,                        // The binding could not be fully verified because the value is nil
-    HLSViewBindingStatusValid,                      // The binding is valid
-    HLSViewBindingStatusInvalid                     // The binding is invalid
-};
-
-/**
- * Return a string describing the binding status
- */
-NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
-
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
  */
@@ -125,14 +113,15 @@ NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status);
 @property (nonatomic, readonly, weak) id<HLSBindingDelegate> delegate;
 
 /**
- * Return the current binding status
+ * Return YES iff the binding has been verified completely. If verified, check the error property to check whether
+ * the binding was successfully resolved or not
  */
-@property (nonatomic, readonly, assign) HLSViewBindingStatus status;
+@property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
 
 /**
- * Return a message describing the current status of the binding
+ * Reason why a verified binding failed, nil if the binding was successful
  */
-@property (nonatomic, readonly, strong) NSString *statusDescription;
+@property (nonatomic, readonly, strong) NSError *error;
 
 /**
  * Return YES iff the binding can be automatically kept in sync with the underlying model. This is always the case

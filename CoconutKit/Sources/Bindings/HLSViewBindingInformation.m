@@ -20,13 +20,29 @@
 
 #import <objc/runtime.h>
 
+typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
+    HLSViewBindingStatusUnverified = 0,
+    HLSViewBindingStatusObjectTargetResolved = (1 << 0),
+    HLSViewBindingStatusTransformerResolved = (1 << 1),
+    HLSViewBindingStatusDelegateResolved = (1 << 2),
+    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 3)
+};
+
+typedef NS_ENUM(NSInteger, HLSViewBindingError) {
+    HLSViewBindingErrorInvalidKeyPath,
+    HLSViewBindingErrorObjectTargetNotFound,
+    HLSViewBindingErrorInvalidTransformer,
+    HLSViewBindingErrorUnsupportedType,
+};
+
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, weak) id object;
-@property (nonatomic, weak) id objectTarget;
 @property (nonatomic, strong) NSString *keyPath;
 @property (nonatomic, strong) NSString *transformerName;
 @property (nonatomic, weak) UIView *view;
+
+@property (nonatomic, weak) id objectTarget;
 
 @property (nonatomic, weak) id transformationTarget;
 @property (nonatomic, assign) SEL transformationSelector;
@@ -35,7 +51,9 @@
 @property (nonatomic, weak) id<HLSBindingDelegate> delegate;
 
 @property (nonatomic, assign) HLSViewBindingStatus status;
-@property (nonatomic, strong) NSString *statusDescription;
+
+@property (nonatomic, assign, getter=isVerified) BOOL verified;
+@property (nonatomic, strong) NSError *error;
 
 @property (nonatomic, assign, getter=isSynchronized) BOOL synchronized;
 
@@ -74,7 +92,6 @@
         self.transformerName = transformerName;
         self.view = view;
         self.status = HLSViewBindingStatusUnverified;
-        self.statusDescription = @"The binding has not been verified yet";
     }
     return self;
 }
@@ -89,7 +106,7 @@
 
 - (id)value
 {
-    if (self.status != HLSViewBindingStatusValid) {
+    if (! self.verified || self.error) {
         return nil;
     }
     
@@ -320,14 +337,8 @@
 
 #pragma mark Binding
 
-- (void)verifyBindingInformation
+- (BOOL)resolveObjectTarget:(id *)pObjectTarget withError:(NSError **)pError
 {
-    if (self.status == HLSViewBindingStatusValid) {
-        return;
-    }
-    
-    HLSLoggerDebug(@"Verifying binding information for %@", self);
-    
     // An object has been provided. Check that the keypath is valid for it
     id objectTarget = nil;
     if (self.object) {
@@ -336,9 +347,12 @@
         }
         @catch (NSException *exception) {
             if ([exception.name isEqualToString:NSUndefinedKeyException]) {
-                self.status = HLSViewBindingStatusInvalid;
-                self.statusDescription = @"The specified keypath is invalid for the bound object";
-                return;
+                if (pError) {
+                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSViewBindingErrorInvalidKeyPath
+                                  localizedDescription:NSLocalizedString(@"The specified keypath is invalid", nil)];
+                }
+                return NO;
             }
             else {
                 @throw;
@@ -353,160 +367,272 @@
     }
     
     if (! objectTarget) {
-        self.status = HLSViewBindingStatusInvalid;
-        self.statusDescription = @"No meaningful object target was found along the responder chain for the specified keypath (stopping at view controller boundaries)";
-        return;
-    }
-    self.objectTarget = objectTarget;
-    
-    // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
-    id value = [self.objectTarget valueForKeyPath:self.keyPath];
-    
-    // Transformer lookup
-    if ([self.transformerName isFilled] && ! self.transformer) {
-        __block id transformationTarget = nil;
-        __block SEL transformationSelector = NULL;
-
-        // Check whether the transformer is a class method +[ClassName methodName]
-        // Regex: ^\s*\+\s*\[(\w*)\s*(\w*)\]\s*$
-        NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*)\\]\\s*$";
-        NSRegularExpression *classMethodRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
-                                                                                                      options:0
-                                                                                                        error:NULL];
-        
-        [classMethodRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-            // Extract capture group information
-            NSString *className = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
-            NSString *methodName = [self.transformerName substringWithRange:[result rangeAtIndex:2]];
-            
-            // Check
-            Class class = NSClassFromString(className);
-            if (! class) {
-                self.statusDescription = [NSString stringWithFormat:@"The specified global transformer points to an invalid class '%@'", className];
-                return;
-            }
-            
-            SEL selector = NSSelectorFromString(methodName);
-            if (! class_getClassMethod(class, selector)) {
-                self.statusDescription = [NSString stringWithFormat:@"The specified global transformer method '%@' does not exist for the class '%@'", methodName, className];
-                return;
-            }
-            
-            transformationTarget = class;
-            transformationSelector = selector;
-        }];
-        
-        // No class method transformer found yet
-        if (! transformationTarget) {
-            // Perform instance method lookup. First validate the method name
-            // Regex: ^\s*(\w*)\s*$
-            __block NSString *methodName = nil;
-            NSString *pattern = @"^\\s*(\\w*)\\s*$";
-            NSRegularExpression *methodNameRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
-                                                                                                         options:0
-                                                                                                           error:NULL];
-            [methodNameRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-                methodName = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
-            }];
-            
-            if ([methodName isFilled]) {
-                transformationSelector = NSSelectorFromString(methodName);
-            }
-            
-            if (! transformationSelector) {
-                self.status = HLSViewBindingStatusInvalid;
-                self.statusDescription = @"The transformer is not a valid method name";
-                return;
-            }
-            
-            // Look along the responder chain first (most specific)
-            transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
-            if (! transformationTarget) {
-                // Look for an instance method on the object
-                if ([self.objectTarget respondsToSelector:transformationSelector]) {
-                    transformationTarget = self.objectTarget;
-                }
-                // Look for a class method on the object class itself (most generic)
-                else if ([[self.objectTarget class] respondsToSelector:transformationSelector]) {
-                    transformationTarget = [self.objectTarget class];
-                }
-                else {
-                    self.status = HLSViewBindingStatusInvalid;
-                    self.statusDescription = @"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain (stopping at view controller boundaries)";
-                    return;
-                }
-            }
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorObjectTargetNotFound
+                          localizedDescription:NSLocalizedString(@"No meaningful object target was found along the responder chain for the specified keypath (stopping at view controller boundaries)", nil)];
         }
+        return NO;
+    }
+    
+    if (pObjectTarget) {
+        *pObjectTarget = objectTarget;
+    }
+    
+    return YES;
+}
+
+- (BOOL)resolveGlobalTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
+{
+    __block id transformationTarget = nil;
+    __block SEL transformationSelector = NULL;
+    
+    // Check whether the transformer is a global formatter (class method +[ClassName methodName])
+    // Regex: ^\s*\+\s*\[(\w*)\s*(\w*)\]\s*$
+    NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*)\\]\\s*$";
+    NSRegularExpression *classMethodRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
+                                                                                                  options:0
+                                                                                                    error:NULL];
+    __block NSError *error = nil;
+    [classMethodRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        // Extract capture group information
+        NSString *className = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
+        NSString *methodName = [self.transformerName substringWithRange:[result rangeAtIndex:2]];
         
-        self.transformer = [self transformerFromTransformationTarget:transformationTarget transformationSelector:transformationSelector];
-        if (! self.transformer) {
-            self.status = HLSViewBindingStatusInvalid;
-            self.statusDescription = [NSString stringWithFormat:@"Unsupported transformer. Must be an HLSTransformer, NSFormatter or NSValueTransformer instance"];
+        // Check existence
+        Class class = NSClassFromString(className);
+        if (! class) {
+            error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                        code:HLSViewBindingErrorInvalidTransformer
+                        localizedDescription:NSLocalizedString(@"The specified global transformer points to an invalid class", nil)];
             return;
         }
         
-        self.transformationTarget = transformationTarget;
-        self.transformationSelector = transformationSelector;
+        SEL selector = NSSelectorFromString(methodName);
+        if (! class_getClassMethod(class, selector)) {
+            error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                        code:HLSViewBindingErrorInvalidTransformer
+                        localizedDescription:NSLocalizedString(@"The specified global transformer method does not exist", nil)];
+            return;
+        }
         
-        // Observe transformer updates, reload cached transformer and update view accordingly
-        [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            self.transformer = [self transformerFromTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector];
-            [self updateView];
-        }];
-    }
+        transformationTarget = class;
+        transformationSelector = selector;
+    }];
     
-    // Locate the binding delegate, if any
-    if (! self.delegate) {
-        self.delegate = [HLSViewBindingInformation delegateForView:self.view];
-    }
-    
-    id displayedValue = [self transformValue:value];
-    
-    // We cannot cache binding information if we cannot check the type of the value to be displayed for compatibility. Does not change
-    // the status, a later check is required
-    if (! displayedValue) {
-        HLSLoggerDebug(@"Binding information cannot be fully verified for field keypath %@ and view %@", self.keyPath, self.view);
-        self.status = HLSViewBindingStatusNil;
-        self.statusDescription = @"The value returned by the keypath is nil, its type cannot therefore be checked for compatibility yet";
-        return;
-    }
-    
-    if (! [self canDisplayValue:displayedValue]) {
-        self.status = HLSViewBindingStatusInvalid;
-        if (self.transformer) {
-            self.statusDescription = [NSString stringWithFormat:@"The transformer must return one of the following supported types: %@", [self supportedBindingClassesString]];
+    // Test for global formatter lookup failure
+    if (error) {
+        if (pError) {
+            *pError = error;
         }
-        else {
-            self.statusDescription = [NSString stringWithFormat:@"The keypath must return one of the following supported types: %@. Fix the return type "
-                                     "or use a transformer", [self supportedBindingClassesString]];
-        }
-        return;
+        return NO;
     }
     
-    HLSLoggerDebug(@"Binding information verified for field keypath %@ and view %@", self.keyPath, self.view);
-    self.status = HLSViewBindingStatusValid;
-    self.statusDescription = @"The binding information is correct";
+    if (pTransformationTarget) {
+        *pTransformationTarget = transformationTarget;
+    }
+    
+    if (pTransformationSelector) {
+        *pTransformationSelector = transformationSelector;
+    }
+    
+    return YES;
 }
 
-- (id<HLSTransformer>)transformerFromTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector
+- (BOOL)resolveLocalTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
 {
-    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
-    // correct memory management
+    id transformationTarget = nil;
+    SEL transformationSelector = NULL;
+    
+    // Perform instance method lookup. First validate the method name
+    // Regex: ^\s*(\w*)\s*$
+    __block NSString *methodName = nil;
+    NSString *pattern = @"^\\s*(\\w*)\\s*$";
+    NSRegularExpression *methodNameRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
+    [methodNameRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        methodName = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
+    }];
+    
+    if ([methodName isFilled]) {
+        transformationSelector = NSSelectorFromString(methodName);
+    }
+    
+    if (! transformationSelector) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorInvalidTransformer
+                          localizedDescription:NSLocalizedString(@"Invalid method name", nil)];
+        }
+        return NO;
+    }
+    
+    // Look along the responder chain first (most specific)
+    transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
+    if (! transformationTarget) {
+        // Look for an instance method on the object
+        if ([self.objectTarget respondsToSelector:transformationSelector]) {
+            transformationTarget = self.objectTarget;
+        }
+        // Look for a class method on the object class itself (most generic)
+        else if ([[self.objectTarget class] respondsToSelector:transformationSelector]) {
+            transformationTarget = [self.objectTarget class];
+        }
+        else {
+            if (pError) {
+                *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                              code:HLSViewBindingErrorInvalidTransformer
+                              localizedDescription:NSLocalizedString(@"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain (stopping at view controller boundaries)", nil)];
+            }
+            return NO;
+        }
+    }
+    
+    if (pTransformationTarget) {
+        *pTransformationTarget = transformationTarget;
+    }
+    
+    if (pTransformationSelector) {
+        *pTransformationSelector = transformationSelector;
+    }
+    
+    return YES;
+}
+
+- (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
+{
+    if (! [self.transformerName isFilled]) {
+        return YES;
+    }
+    
+    if ([self resolveLocalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError]) {
+        return YES;
+    }
+    
+    return [self resolveGlobalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError];
+}
+
+- (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector error:(NSError **)pError
+{
+    if (! transformationTarget) {
+        return YES;
+    }
+    
+    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform correct memory management
     id (*methodImp)(id, SEL) = (id (*)(id, SEL))[transformationTarget methodForSelector:transformationSelector];
     id transformer = methodImp(transformationTarget, transformationSelector);
     
-    if ([transformer conformsToProtocol:@protocol(HLSTransformer)]) {
-        return transformer;
-    }
-    else if ([transformer isKindOfClass:[NSFormatter class]]) {
-        return [HLSBlockTransformer blockTransformerFromFormatter:transformer];
+    // Wrap native Foundation transformers into HLSTransformer instances
+    if ([transformer isKindOfClass:[NSFormatter class]]) {
+        transformer = [HLSBlockTransformer blockTransformerFromFormatter:transformer];
     }
     else if ([transformer isKindOfClass:[NSValueTransformer class]]) {
-        return [HLSBlockTransformer blockTransformerFromValueTransformer:transformer];
+        transformer = [HLSBlockTransformer blockTransformerFromValueTransformer:transformer];
     }
-    else {
-        return nil;
+    
+    if (! [transformer conformsToProtocol:@protocol(HLSTransformer)]) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorInvalidTransformer
+                          localizedDescription:NSLocalizedString(@"The specified transformer must either be an HLSTransformer, NSFormatter or NSValueTransformer instance", nil)];
+        }
+        return NO;
     }
+    
+    if (pTransformer) {
+        *pTransformer = transformer;
+    }
+    
+    return YES;
+}
+
+- (void)verifyBindingInformation
+{
+    if (self.verified) {
+        return;
+    }
+    
+    NSError *error = nil;
+    
+    if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
+        id objectTarget = nil;
+        
+        if ([self resolveObjectTarget:&objectTarget withError:&error]) {
+            self.status |= HLSViewBindingStatusObjectTargetResolved;
+            self.objectTarget = objectTarget;
+        }
+        else {
+            self.verified = YES;
+            self.error = error;
+            return;
+        }
+    }
+    
+    if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
+        id transformationTarget = nil;
+        SEL transformationSelector = NULL;
+        id<HLSTransformer> transformer = nil;
+        
+        if ([self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
+                && [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
+            self.status |= HLSViewBindingStatusTransformerResolved;
+            self.transformationTarget = transformationTarget;
+            self.transformationSelector = transformationSelector;
+            self.transformer = transformer;
+        }
+        else {
+            self.verified = YES;
+            self.error = error;
+            return;
+        }
+    }
+    
+    if ((self.status & HLSViewBindingStatusDelegateResolved) == 0) {
+        self.delegate = [HLSViewBindingInformation delegateForView:self.view];
+        self.status |= HLSViewBindingStatusDelegateResolved;
+    }
+    
+    if ((self.status & HLSViewBindingStatusTypeCompatibilityChecked) == 0) {
+        // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
+        id value = [self.objectTarget valueForKeyPath:self.keyPath];
+        id displayedValue = [self transformValue:value];
+        
+        if ([self canDisplayValue:displayedValue]) {
+            self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
+        }
+        else {
+            NSString *localizedDescription = nil;
+            
+            if (self.transformer) {
+                localizedDescription = [NSString stringWithFormat:NSLocalizedString(@"The transformer must return one of the following supported types: %@", nil),
+                                        [self supportedBindingClassesString]];
+            }
+            else {
+                localizedDescription = [NSString stringWithFormat:NSLocalizedString(@"The keypath must return one of the following supported types: %@. Fix the return type "
+                                                                                    "or use a transformer", nil), [self supportedBindingClassesString]];
+            }
+            
+            self.verified = YES;
+            self.error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                             code:HLSViewBindingErrorUnsupportedType
+                             localizedDescription:localizedDescription];
+            return;
+        }
+    }
+    
+    // Observe transformer updates, reload cached transformer and update view accordingly
+    [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+        id<HLSTransformer> transformer = nil;
+        NSError *error = nil;
+        
+        if ([self resolveTransformer:&transformer withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector error:&error]) {
+            self.verified = NO;
+            self.error = error;
+        }
+        
+        [self updateView];
+    }];
+    
+    self.verified = YES;
 }
 
 #pragma mark Type checking
@@ -734,18 +860,3 @@
 }
 
 @end
-
-#pragma mark Functions
-
-NSString *HLSViewBindingNameForStatus(HLSViewBindingStatus status)
-{
-    static NSDictionary *s_statusToNameMap = nil;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_statusToNameMap = @{ @(HLSViewBindingStatusUnverified) : @"unverified",
-                               @(HLSViewBindingStatusNil) : @"nil",
-                               @(HLSViewBindingStatusValid) : @"valid",
-                               @(HLSViewBindingStatusInvalid) : @"invalid" };
-    });
-    return [s_statusToNameMap objectForKey:@(status)];
-}

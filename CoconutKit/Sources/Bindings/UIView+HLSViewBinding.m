@@ -374,8 +374,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
             id boundObject = self.boundObject ?: nearestViewController.boundObject;
             [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
         }
-        // Do not recalculate valid binding information, even if the window has changed
-        else if (self.bindingInformation && self.bindingInformation.status != HLSViewBindingStatusValid) {
+        // Do not recalculate verified binding information, even if the window has changed
+        else if (self.bindingInformation && ! self.bindingInformation.verified) {
             [self updateView];
         }        
     }

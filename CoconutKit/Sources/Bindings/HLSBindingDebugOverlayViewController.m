@@ -143,22 +143,11 @@ static UIWindow *s_previousKeyWindow = nil;
                                          CGRectGetWidth(frame) + 2 * borderWidth,
                                          CGRectGetHeight(frame) + 2 * borderWidth);
         
-        switch (bindingInformation.status) {
-            case HLSViewBindingStatusNil: {
-                overlayButton.layer.borderColor = [UIColor orangeColor].CGColor;
-                break;
-            }
-                
-            case HLSViewBindingStatusValid: {
-                overlayButton.layer.borderColor = [UIColor greenColor].CGColor;
-                break;
-            }
-                
-            case HLSViewBindingStatusInvalid:
-            default: {
-                overlayButton.layer.borderColor = [UIColor redColor].CGColor;
-                break;
-            }
+        if (! bindingInformation.verified) {
+            overlayButton.layer.borderColor = [UIColor orangeColor].CGColor;
+        }
+        else {
+            overlayButton.layer.borderColor = bindingInformation.error ? [UIColor redColor].CGColor : [UIColor greenColor].CGColor;
         }
         
         overlayButton.layer.borderWidth = borderWidth;

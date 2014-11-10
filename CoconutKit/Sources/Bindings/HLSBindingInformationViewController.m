@@ -33,13 +33,8 @@
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
         NSMutableArray *entries = [NSMutableArray array];
         
-        NSString *statusString = [HLSViewBindingNameForStatus(bindingInformation.status) capitalizedString];
-        if ([bindingInformation.statusDescription isFilled]) {
-            statusString = [statusString stringByAppendingFormat:@"\n\n%@", bindingInformation.statusDescription];
-        }
-        
         HLSBindingInformationEntry *statusEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)
-                                                                                              text:statusString];
+                                                                                              text:@"TODO"];
         [entries addObject:statusEntry];
         
         HLSBindingInformationEntry *objectEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Object", nil)
