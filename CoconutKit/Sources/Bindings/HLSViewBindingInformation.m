@@ -553,6 +553,19 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             self.transformationTarget = transformationTarget;
             self.transformationSelector = transformationSelector;
             self.transformer = transformer;
+            
+            // Observe transformer updates, reload cached transformer and update view accordingly
+            [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                id<HLSTransformer> transformer = nil;
+                NSError *error = nil;
+                
+                if ([self resolveTransformer:&transformer withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector error:&error]) {
+                    self.verified = NO;
+                    self.error = error;
+                }
+                
+                [self updateView];
+            }];
         }
         else {
             self.verified = YES;
@@ -560,19 +573,6 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             return;
         }
     }
-    
-    // Observe transformer updates, reload cached transformer and update view accordingly
-    [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-        id<HLSTransformer> transformer = nil;
-        NSError *error = nil;
-        
-        if ([self resolveTransformer:&transformer withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector error:&error]) {
-            self.verified = NO;
-            self.error = error;
-        }
-        
-        [self updateView];
-    }];
     
     if ((self.status & HLSViewBindingStatusDelegateResolved) == 0) {
         self.delegate = [HLSViewBindingInformation delegateForView:self.view];
@@ -616,6 +616,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     }
     
     self.verified = YES;
+    self.error = nil;
 }
 
 #pragma mark Type checking
