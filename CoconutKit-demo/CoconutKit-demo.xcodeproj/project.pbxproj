@@ -384,38 +384,10 @@
 		6FFAB7C019DD901A00A91997 /* BindingsControlsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB78519DD901A00A91997 /* BindingsControlsDemoViewController.m */; };
 		6FFAB7C119DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB78619DD901A00A91997 /* BindingsControlsDemoViewController.xib */; };
 		6FFAB7C219DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB78619DD901A00A91997 /* BindingsControlsDemoViewController.xib */; };
-		6FFAB7C719DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB78B19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m */; };
-		6FFAB7C819DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB78B19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m */; };
-		6FFAB7C919DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB78C19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib */; };
-		6FFAB7CA19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB78C19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib */; };
-		6FFAB7CB19DD901A00A91997 /* LabelBindingsDemo3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB78E19DD901A00A91997 /* LabelBindingsDemo3ViewController.m */; };
-		6FFAB7CC19DD901A00A91997 /* LabelBindingsDemo3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB78E19DD901A00A91997 /* LabelBindingsDemo3ViewController.m */; };
-		6FFAB7CD19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB78F19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib */; };
-		6FFAB7CE19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB78F19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib */; };
-		6FFAB7CF19DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79119DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m */; };
-		6FFAB7D019DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79119DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m */; };
-		6FFAB7D119DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79219DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib */; };
-		6FFAB7D219DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79219DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib */; };
-		6FFAB7D319DD901A00A91997 /* LabelBindingsDemo4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79419DD901A00A91997 /* LabelBindingsDemo4ViewController.m */; };
-		6FFAB7D419DD901A00A91997 /* LabelBindingsDemo4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79419DD901A00A91997 /* LabelBindingsDemo4ViewController.m */; };
-		6FFAB7D519DD901A00A91997 /* LabelBindingsDemo4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79519DD901A00A91997 /* LabelBindingsDemo4ViewController.xib */; };
-		6FFAB7D619DD901A00A91997 /* LabelBindingsDemo4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79519DD901A00A91997 /* LabelBindingsDemo4ViewController.xib */; };
-		6FFAB7D719DD901A00A91997 /* LabelBindingsDemo5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79719DD901A00A91997 /* LabelBindingsDemo5ViewController.m */; };
-		6FFAB7D819DD901A00A91997 /* LabelBindingsDemo5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79719DD901A00A91997 /* LabelBindingsDemo5ViewController.m */; };
-		6FFAB7D919DD901A00A91997 /* LabelBindingsDemo5ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79819DD901A00A91997 /* LabelBindingsDemo5ViewController.xib */; };
-		6FFAB7DA19DD901A00A91997 /* LabelBindingsDemo5ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79819DD901A00A91997 /* LabelBindingsDemo5ViewController.xib */; };
 		6FFAB7DF19DD901A00A91997 /* BindingsViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79D19DD901A00A91997 /* BindingsViewsDemoViewController.m */; };
 		6FFAB7E019DD901A00A91997 /* BindingsViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB79D19DD901A00A91997 /* BindingsViewsDemoViewController.m */; };
 		6FFAB7E119DD901A00A91997 /* BindingsViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79E19DD901A00A91997 /* BindingsViewsDemoViewController.xib */; };
 		6FFAB7E219DD901A00A91997 /* BindingsViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB79E19DD901A00A91997 /* BindingsViewsDemoViewController.xib */; };
-		6FFAB7E319DD901A00A91997 /* TodayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A019DD901A00A91997 /* TodayView.m */; };
-		6FFAB7E419DD901A00A91997 /* TodayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A019DD901A00A91997 /* TodayView.m */; };
-		6FFAB7E519DD901A00A91997 /* TodayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A119DD901A00A91997 /* TodayView.xib */; };
-		6FFAB7E619DD901A00A91997 /* TodayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A119DD901A00A91997 /* TodayView.xib */; };
-		6FFAB7E719DD901A00A91997 /* YesterdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A319DD901A00A91997 /* YesterdayView.m */; };
-		6FFAB7E819DD901A00A91997 /* YesterdayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A319DD901A00A91997 /* YesterdayView.m */; };
-		6FFAB7E919DD901A00A91997 /* YesterdayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A419DD901A00A91997 /* YesterdayView.xib */; };
-		6FFAB7EA19DD901A00A91997 /* YesterdayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FFAB7A419DD901A00A91997 /* YesterdayView.xib */; };
 		6FFAB7EF19DD902A00A91997 /* DemoTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB7EE19DD902A00A91997 /* DemoTransformer.m */; };
 		6FFAB7F019DD902A00A91997 /* DemoTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB7EE19DD902A00A91997 /* DemoTransformer.m */; };
 /* End PBXBuildFile section */
@@ -796,30 +768,9 @@
 		6FFAB78419DD901A00A91997 /* BindingsControlsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsControlsDemoViewController.h; sourceTree = "<group>"; };
 		6FFAB78519DD901A00A91997 /* BindingsControlsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsControlsDemoViewController.m; sourceTree = "<group>"; };
 		6FFAB78619DD901A00A91997 /* BindingsControlsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsControlsDemoViewController.xib; sourceTree = "<group>"; };
-		6FFAB78A19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo3InsetViewController.h; sourceTree = "<group>"; };
-		6FFAB78B19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo3InsetViewController.m; sourceTree = "<group>"; };
-		6FFAB78C19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo3InsetViewController.xib; sourceTree = "<group>"; };
-		6FFAB78D19DD901A00A91997 /* LabelBindingsDemo3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo3ViewController.h; sourceTree = "<group>"; };
-		6FFAB78E19DD901A00A91997 /* LabelBindingsDemo3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo3ViewController.m; sourceTree = "<group>"; };
-		6FFAB78F19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo3ViewController.xib; sourceTree = "<group>"; };
-		6FFAB79019DD901A00A91997 /* LabelBindingsDemo4InsetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo4InsetViewController.h; sourceTree = "<group>"; };
-		6FFAB79119DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo4InsetViewController.m; sourceTree = "<group>"; };
-		6FFAB79219DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo4InsetViewController.xib; sourceTree = "<group>"; };
-		6FFAB79319DD901A00A91997 /* LabelBindingsDemo4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo4ViewController.h; sourceTree = "<group>"; };
-		6FFAB79419DD901A00A91997 /* LabelBindingsDemo4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo4ViewController.m; sourceTree = "<group>"; };
-		6FFAB79519DD901A00A91997 /* LabelBindingsDemo4ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo4ViewController.xib; sourceTree = "<group>"; };
-		6FFAB79619DD901A00A91997 /* LabelBindingsDemo5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo5ViewController.h; sourceTree = "<group>"; };
-		6FFAB79719DD901A00A91997 /* LabelBindingsDemo5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo5ViewController.m; sourceTree = "<group>"; };
-		6FFAB79819DD901A00A91997 /* LabelBindingsDemo5ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBindingsDemo5ViewController.xib; sourceTree = "<group>"; };
 		6FFAB79C19DD901A00A91997 /* BindingsViewsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsViewsDemoViewController.h; sourceTree = "<group>"; };
 		6FFAB79D19DD901A00A91997 /* BindingsViewsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsViewsDemoViewController.m; sourceTree = "<group>"; };
 		6FFAB79E19DD901A00A91997 /* BindingsViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsViewsDemoViewController.xib; sourceTree = "<group>"; };
-		6FFAB79F19DD901A00A91997 /* TodayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodayView.h; sourceTree = "<group>"; };
-		6FFAB7A019DD901A00A91997 /* TodayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodayView.m; sourceTree = "<group>"; };
-		6FFAB7A119DD901A00A91997 /* TodayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodayView.xib; sourceTree = "<group>"; };
-		6FFAB7A219DD901A00A91997 /* YesterdayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesterdayView.h; sourceTree = "<group>"; };
-		6FFAB7A319DD901A00A91997 /* YesterdayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesterdayView.m; sourceTree = "<group>"; };
-		6FFAB7A419DD901A00A91997 /* YesterdayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YesterdayView.xib; sourceTree = "<group>"; };
 		6FFAB7ED19DD902A00A91997 /* DemoTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTransformer.h; sourceTree = "<group>"; };
 		6FFAB7EE19DD902A00A91997 /* DemoTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTransformer.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -1767,29 +1718,8 @@
 				6FFAB78119DD901A00A91997 /* EmployeeView.h */,
 				6FFAB78219DD901A00A91997 /* EmployeeView.m */,
 				6FFAB78319DD901A00A91997 /* EmployeeView.xib */,
-				6FFAB78A19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.h */,
-				6FFAB78B19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m */,
-				6FFAB78C19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib */,
-				6FFAB78D19DD901A00A91997 /* LabelBindingsDemo3ViewController.h */,
-				6FFAB78E19DD901A00A91997 /* LabelBindingsDemo3ViewController.m */,
-				6FFAB78F19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib */,
-				6FFAB79019DD901A00A91997 /* LabelBindingsDemo4InsetViewController.h */,
-				6FFAB79119DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m */,
-				6FFAB79219DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib */,
-				6FFAB79319DD901A00A91997 /* LabelBindingsDemo4ViewController.h */,
-				6FFAB79419DD901A00A91997 /* LabelBindingsDemo4ViewController.m */,
-				6FFAB79519DD901A00A91997 /* LabelBindingsDemo4ViewController.xib */,
-				6FFAB79619DD901A00A91997 /* LabelBindingsDemo5ViewController.h */,
-				6FFAB79719DD901A00A91997 /* LabelBindingsDemo5ViewController.m */,
-				6FFAB79819DD901A00A91997 /* LabelBindingsDemo5ViewController.xib */,
 				6F1894541A0C94B600A31817 /* LabelBindingsDemo6ViewController.h */,
 				6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */,
-				6FFAB79F19DD901A00A91997 /* TodayView.h */,
-				6FFAB7A019DD901A00A91997 /* TodayView.m */,
-				6FFAB7A119DD901A00A91997 /* TodayView.xib */,
-				6FFAB7A219DD901A00A91997 /* YesterdayView.h */,
-				6FFAB7A319DD901A00A91997 /* YesterdayView.m */,
-				6FFAB7A419DD901A00A91997 /* YesterdayView.xib */,
 			);
 			path = Bindings;
 			sourceTree = "<group>";
@@ -1946,7 +1876,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FFAB7CE19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib in Resources */,
 				6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */,
 				6F9C465914C5C30C00824AB2 /* HeavyViewController.xib in Resources */,
 				6F9C465B14C5C30C00824AB2 /* LandscapeOnlyViewController.xib in Resources */,
@@ -1957,7 +1886,6 @@
 				6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
-				6FFAB7CA19DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
 				6FFAB7BA19DD901A00A91997 /* EmployeeTableViewCell.xib in Resources */,
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
@@ -1980,8 +1908,6 @@
 				6F9C46BA14C5C36300824AB2 /* ProximaNova-Regular.otf in Resources */,
 				6F9C46BB14C5C36300824AB2 /* sample_text.html in Resources */,
 				6F9C46BC14C5C36300824AB2 /* bkgr_bar.png in Resources */,
-				6FFAB7D219DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib in Resources */,
-				6FFAB7D619DD901A00A91997 /* LabelBindingsDemo4ViewController.xib in Resources */,
 				6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */,
 				6F96C83519D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6F9C46BD14C5C36300824AB2 /* cell_bkgr_brown_large.png in Resources */,
@@ -1999,7 +1925,6 @@
 				6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */,
 				6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */,
 				6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */,
-				6FFAB7DA19DD901A00A91997 /* LabelBindingsDemo5ViewController.xib in Resources */,
 				6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */,
 				6FA9B0A414F8E765008B6D5A /* img_apple1.jpg in Resources */,
 				6FA9B0A514F8E765008B6D5A /* img_apple2.jpg in Resources */,
@@ -2009,7 +1934,6 @@
 				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
 				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
-				6FFAB7EA19DD901A00A91997 /* YesterdayView.xib in Resources */,
 				6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */,
 				6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */,
 				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
@@ -2017,7 +1941,6 @@
 				6FFAB7C219DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 				6FFAB7B619DD901A00A91997 /* EmployeeHeaderView.xib in Resources */,
-				6FFAB7E619DD901A00A91997 /* TodayView.xib in Resources */,
 				6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
 				6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */,
 				6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
@@ -2068,7 +1991,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FFAB7CD19DD901A00A91997 /* LabelBindingsDemo3ViewController.xib in Resources */,
 				6FCB4ECB1926651F00047AD3 /* FixedSizeViewController.xib in Resources */,
 				6FCB4ECC1926651F00047AD3 /* HeavyViewController.xib in Resources */,
 				6FCB4ECD1926651F00047AD3 /* LandscapeOnlyViewController.xib in Resources */,
@@ -2079,7 +2001,6 @@
 				6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */,
 				6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */,
-				6FFAB7C919DD901A00A91997 /* LabelBindingsDemo3InsetViewController.xib in Resources */,
 				6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */,
 				6FFAB7B919DD901A00A91997 /* EmployeeTableViewCell.xib in Resources */,
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
@@ -2102,8 +2023,6 @@
 				6FCB4EE81926651F00047AD3 /* sample_text.html in Resources */,
 				6FCB4EE91926651F00047AD3 /* bkgr_bar.png in Resources */,
 				6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */,
-				6FFAB7D119DD901A00A91997 /* LabelBindingsDemo4InsetViewController.xib in Resources */,
-				6FFAB7D519DD901A00A91997 /* LabelBindingsDemo4ViewController.xib in Resources */,
 				6FCB4EEA1926651F00047AD3 /* cell_bkgr_brown_large.png in Resources */,
 				6FCB4EEB1926651F00047AD3 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6FCB4EED1926651F00047AD3 /* icn_bookmark.png in Resources */,
@@ -2121,7 +2040,6 @@
 				6FCB4EF61926651F00047AD3 /* parallax_demo_mountains_layer.png in Resources */,
 				6FCB4EF71926651F00047AD3 /* skyscraper.jpg in Resources */,
 				6FCB4EF81926651F00047AD3 /* ParallaxScrollingDemoViewController.xib in Resources */,
-				6FFAB7D919DD901A00A91997 /* LabelBindingsDemo5ViewController.xib in Resources */,
 				6FCB4EF91926651F00047AD3 /* img_apple1.jpg in Resources */,
 				6FCB4EFA1926651F00047AD3 /* img_apple2.jpg in Resources */,
 				6FCB4EFB1926651F00047AD3 /* img_apple3.jpg in Resources */,
@@ -2131,7 +2049,6 @@
 				6FCB4F001926651F00047AD3 /* SegueDemo.storyboard in Resources */,
 				6FCB4F021926651F00047AD3 /* ContainmentTestViewController.xib in Resources */,
 				6FCB4F031926651F00047AD3 /* AnimationDemoViewController.xib in Resources */,
-				6FFAB7E919DD901A00A91997 /* YesterdayView.xib in Resources */,
 				6FCB4F041926651F00047AD3 /* LayerPropertiesTestViewController.xib in Resources */,
 				6FCB4F051926651F00047AD3 /* RootNavigationDemoViewController.xib in Resources */,
 				6FCB4F061926651F00047AD3 /* RootSplitViewDemoController.xib in Resources */,
@@ -2139,7 +2056,6 @@
 				6FFAB7C119DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */,
 				6FCB4F071926651F00047AD3 /* RootTabBarDemoViewController.xib in Resources */,
 				6FFAB7B519DD901A00A91997 /* EmployeeHeaderView.xib in Resources */,
-				6FFAB7E519DD901A00A91997 /* TodayView.xib in Resources */,
 				6FCB4F081926651F00047AD3 /* Beon-Regular.otf in Resources */,
 				6FCB4F091926651F00047AD3 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6FCB4F0A1926651F00047AD3 /* FontsDemoViewController.xib in Resources */,
@@ -2225,7 +2141,6 @@
 				6F9C467C14C5C30C00824AB2 /* CursorSelectedFolderView.m in Sources */,
 				6F9C468214C5C30C00824AB2 /* FooterView.m in Sources */,
 				6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */,
-				6FFAB7E419DD901A00A91997 /* TodayView.m in Sources */,
 				6F9C468614C5C30C00824AB2 /* ProgrammaticTableViewCell.m in Sources */,
 				6F9C468714C5C30C00824AB2 /* TableViewCellsDemoViewController.m in Sources */,
 				6F9C468814C5C30C00824AB2 /* XibTableViewCell.m in Sources */,
@@ -2237,7 +2152,6 @@
 				6F9C469314C5C30C00824AB2 /* StackDemoViewController.m in Sources */,
 				6F9C469514C5C30C00824AB2 /* DeviceInfo.m in Sources */,
 				6F9C469614C5C30C00824AB2 /* TableSearchDisplayDemoViewController.m in Sources */,
-				6FFAB7E819DD901A00A91997 /* YesterdayView.m in Sources */,
 				6F9C469814C5C30C00824AB2 /* WizardAddressPageViewController.m in Sources */,
 				6FFAB7C019DD901A00A91997 /* BindingsControlsDemoViewController.m in Sources */,
 				6F9C469A14C5C30C00824AB2 /* WizardDemoViewController.m in Sources */,
@@ -2246,7 +2160,6 @@
 				6F9C469F14C5C30C00824AB2 /* DemoErrors.m in Sources */,
 				6F9C46A014C5C30C00824AB2 /* _PersonInformation.m in Sources */,
 				6F9C46A114C5C30C00824AB2 /* PersonInformation.m in Sources */,
-				6FFAB7C819DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m in Sources */,
 				6F9C46B814C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FFAB7B219DD901A00A91997 /* Employee.m in Sources */,
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
@@ -2258,14 +2171,11 @@
 				6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
 				6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
-				6FFAB7D419DD901A00A91997 /* LabelBindingsDemo4ViewController.m in Sources */,
 				6FFAB7F019DD902A00A91997 /* DemoTransformer.m in Sources */,
 				6FF3E71715D37FB900AB9A53 /* CustomTransitions.m in Sources */,
 				6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */,
-				6FFAB7D819DD901A00A91997 /* LabelBindingsDemo5ViewController.m in Sources */,
 				6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */,
 				6FFAB7BC19DD901A00A91997 /* EmployeeView.m in Sources */,
-				6FFAB7CC19DD901A00A91997 /* LabelBindingsDemo3ViewController.m in Sources */,
 				6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
 				6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
@@ -2275,7 +2185,6 @@
 				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
 				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
-				6FFAB7D019DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m in Sources */,
 				6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
 				6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
 				6FC378FD182D188900B55AF1 /* main.m in Sources */,
@@ -2345,20 +2254,16 @@
 				6FFAB7BB19DD901A00A91997 /* EmployeeView.m in Sources */,
 				6FCB4E8C1926651F00047AD3 /* LifeCycleTestViewController.m in Sources */,
 				6FFAB7B119DD901A00A91997 /* Employee.m in Sources */,
-				6FFAB7CF19DD901A00A91997 /* LabelBindingsDemo4InsetViewController.m in Sources */,
 				6FCB4E8D1926651F00047AD3 /* MemoryWarningTestCoverViewController.m in Sources */,
-				6FFAB7D719DD901A00A91997 /* LabelBindingsDemo5ViewController.m in Sources */,
 				6FCB4E8E1926651F00047AD3 /* PortraitOnlyViewController.m in Sources */,
 				6FCB4E8F1926651F00047AD3 /* StretchableViewController.m in Sources */,
 				6FCB4E901926651F00047AD3 /* TransparentViewController.m in Sources */,
 				6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */,
-				6FFAB7D319DD901A00A91997 /* LabelBindingsDemo4ViewController.m in Sources */,
 				6FFAB7BF19DD901A00A91997 /* BindingsControlsDemoViewController.m in Sources */,
 				6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */,
 				6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */,
 				6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */,
 				6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */,
-				6FFAB7C719DD901A00A91997 /* LabelBindingsDemo3InsetViewController.m in Sources */,
 				6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */,
 				6FFAB7EF19DD902A00A91997 /* DemoTransformer.m in Sources */,
 				6FCB4E991926651F00047AD3 /* CursorSelectedFolderView.m in Sources */,
@@ -2387,7 +2292,6 @@
 				6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */,
 				6FCB4EB01926651F00047AD3 /* LabelDemoViewController.m in Sources */,
 				6FCB4EB21926651F00047AD3 /* SeguePlaceholderInsetDemoViewController.m in Sources */,
-				6FFAB7CB19DD901A00A91997 /* LabelBindingsDemo3ViewController.m in Sources */,
 				6FCB4EB31926651F00047AD3 /* SegueStackOtherDemoViewController.m in Sources */,
 				6F1894561A0C94B600A31817 /* LabelBindingsDemo6ViewController.m in Sources */,
 				6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
@@ -2396,7 +2300,6 @@
 				6FCB4EB71926651F00047AD3 /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6FCB4EB91926651F00047AD3 /* CustomTransitions.m in Sources */,
 				6FCB4EBA1926651F00047AD3 /* ContainmentTestViewController.m in Sources */,
-				6FFAB7E719DD901A00A91997 /* YesterdayView.m in Sources */,
 				6FCB4EBB1926651F00047AD3 /* AnimationDemoViewController.m in Sources */,
 				6FCB4EBC1926651F00047AD3 /* LayerPropertiesTestViewController.m in Sources */,
 				6FCB4EBD1926651F00047AD3 /* RootNavigationDemoViewController.m in Sources */,
@@ -2405,7 +2308,6 @@
 				6FCB4EC01926651F00047AD3 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6FCB4EC11926651F00047AD3 /* FontsDemoViewController.m in Sources */,
 				6FCB4EC21926651F00047AD3 /* ViewEffectsDemoViewController.m in Sources */,
-				6FFAB7E319DD901A00A91997 /* TodayView.m in Sources */,
 				6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */,
 				6FCB4EC41926651F00047AD3 /* ConnectionDemoViewController.m in Sources */,
 				6FCB4EC51926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */,
