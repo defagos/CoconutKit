@@ -70,7 +70,7 @@
 
 - (IBAction)refresh:(id)sender
 {
-    [self refreshBindingsForced:NO];
+    [self refreshBindings];
 }
 
 @end

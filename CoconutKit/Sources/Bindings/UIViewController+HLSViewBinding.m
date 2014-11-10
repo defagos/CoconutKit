@@ -42,9 +42,9 @@ static void *s_boundObjectKey = &s_boundObjectKey;
     [[self viewIfLoaded] bindToObject:object];
 }
 
-- (void)refreshBindingsForced:(BOOL)forced
+- (void)refreshBindings
 {
-    [[self viewIfLoaded] refreshBindingsForced:forced];
+    [[self viewIfLoaded] refreshBindings];
 }
 
 - (BOOL)checkDisplayedValuesWithError:(NSError **)pError

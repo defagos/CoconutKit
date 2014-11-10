@@ -66,10 +66,10 @@
  * responder chain context is available. This information is then stored for efficient later use. The view is not
  * updated automatically when the underlying bound objects changes, this has to be done manually:
  *   - when the object is changed, call -bindToObject: to set bindings with the new object
- *   - if the object does not change but has different values for its bounds properties, simply call -refreshBindingsForced:
+ *   - if the object does not change but has different values for its bounds properties, simply call -refreshBindings
  *     to reflect the new values which are available
  *
- * It would be painful to call -bindToObject:, -refreshBindingsForced:, etc. on all views belonging to a view hierarchy
+ * It would be painful to call -bindToObject:, -refreshBindings, etc. on all views belonging to a view hierarchy
  * when bindings must be established or refreshed. For this reason, those calls are made recursively. This means you can 
  * simply call one of those methods at the top of the view hierarchy (or even on the view controller itself, see 
  * UIViewController+HLSViewBinding.h) to bind or refresh the whole associated view hierarchy. Note that each view class 
@@ -132,7 +132,7 @@
 @interface UIView (HLSViewBinding)
 
 /**
- * Programmatically bind the receiver to a keypath and transformer, for those who do not use Interface Builder
+ * Programmatically bind the receiver to a keypath and transformer, for people who do not use Interface Builder
  */
 - (void)bindToKeyPath:(NSString *)bindKeyPath withTransformer:(NSString *)bindTransformer;
 
@@ -153,7 +153,7 @@
 @property (nonatomic, readonly, assign, getter=isBindingSupported) BOOL bindingSupported;
 
 /**
- * Bind the view (and recursively the view hierarchy rooted at it) to a given object (can be nil). During view 
+ * Bind the view (and recursively the view hierarchy rooted at it) to a given object (can be nil). During view
  * hierarchy traversal, keypaths and transformers set via user-defined runtime attributes will be used to automatically
  * fill those views which implement binding support
  */
@@ -165,7 +165,7 @@
  * using information which has been cached the first time bindings were successfully checked. If you want to force bindings
  * to be checked again first (i.e. keypaths and transformers to be resolved again), set forced to YES
  */
-- (void)refreshBindingsForced:(BOOL)forced;
+- (void)refreshBindings;
 
 /**
  * Recursively check bound values, stopping at view controller boundaries. Errors are reported to the validation

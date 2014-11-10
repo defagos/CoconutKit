@@ -38,7 +38,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
-- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced;
+- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
 - (BOOL)bindsRecursively;
 - (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 - (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError;
@@ -54,17 +54,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     s_UIView__didMoveToWindow_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
                                                                                  @selector(didMoveToWindow),
                                                                                  (IMP)swizzled_UIView__didMoveToWindow_Imp);
-}
-
-#pragma mark Object creation and destruction
-
-- (void)bindToKeyPath:(NSString *)bindKeyPath withTransformer:(NSString *)bindTransformer
-{
-    self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:self.boundObject
-                                                                        keyPath:bindKeyPath
-                                                                transformerName:bindTransformer
-                                                                           view:self];
-    [self refreshBindingsForced:NO];
 }
 
 #pragma mark Accessors and mutators
@@ -93,9 +82,18 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self bindToObject:object inViewController:[self nearestViewController] recursive:[self bindsRecursively]];
 }
 
-- (void)refreshBindingsForced:(BOOL)forced
+- (void)bindToKeyPath:(NSString *)bindKeyPath withTransformer:(NSString *)bindTransformer
 {
-    [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively] forced:forced];
+    self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:self.boundObject
+                                                                        keyPath:bindKeyPath
+                                                                transformerName:bindTransformer
+                                                                           view:self];
+    [self refreshBindings];
+}
+
+- (void)refreshBindings
+{
+    [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively]];
 }
 
 - (BOOL)checkDisplayedValuesWithError:(NSError **)pError
@@ -133,7 +131,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 {
     objc_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
 
 - (id)boundObject
 {
@@ -193,7 +190,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
 }
 
-- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive forced:(BOOL)forced
+- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -201,17 +198,11 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    if (forced) {
-        // Not recursive here. Recursion is made below
-        [self bindToObject:self.boundObject inViewController:viewController recursive:NO];
-    }
-    else {
-        [self updateView];
-    }
+    [self updateView];
     
     if (recursive) {
         for (UIView *subview in self.subviews) {
-            [subview refreshBindingsInViewController:viewController recursive:recursive forced:forced];
+            [subview refreshBindingsInViewController:viewController recursive:recursive];
         }
     }
 }
@@ -365,7 +356,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
     //
     // 2) When the window changes (to != nil), we do not recalculate verified binding information. This does not automatically take into
     //    account transfers between view hierarchies, but avoids useless binding recalculations (in general, we only want to verify binding
-    //    information once). If recalculation is really needed, the -refreshBindingsForced: method can still be called. This is the approach
+    //    information once). If recalculation is really needed, the -refreshBindings method can still be called. This is the approach
     //    which has been retained here
     
     if (self.window) {

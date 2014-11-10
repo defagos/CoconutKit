@@ -14,7 +14,7 @@
 // Document: The object is retained
 - (void)bindToObject:(id)object;
 
-- (void)refreshBindingsForced:(BOOL)forced;
+- (void)refreshBindings;
 
 - (BOOL)checkDisplayedValuesWithError:(NSError **)pError;
 

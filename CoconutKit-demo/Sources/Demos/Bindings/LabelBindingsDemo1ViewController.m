@@ -112,7 +112,7 @@
 
 - (IBAction)refresh:(id)sender
 {
-    [self refreshBindingsForced:NO];
+    [self refreshBindings];
 }
 
 #pragma mark Timer callbacks
