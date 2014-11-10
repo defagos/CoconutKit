@@ -1,25 +1,25 @@
 //
-//  TableViewBindingsDemoViewController.m
+//  BindingsViewsDemoViewController.m
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 26.07.13.
 //  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
-#import "TableViewBindingsDemoViewController.h"
+#import "BindingsViewsDemoViewController.h"
 
 #import "Employee.h"
 #import "EmployeeHeaderView.h"
 #import "EmployeeTableViewCell.h"
 
-@interface TableViewBindingsDemoViewController ()
+@interface BindingsViewsDemoViewController ()
 
 @property (nonatomic, strong) NSArray *employees;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation TableViewBindingsDemoViewController
+@implementation BindingsViewsDemoViewController
 
 #pragma mark Object creation and destruction
 
@@ -63,12 +63,6 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
-    UIBarButtonItem *debugOverlayBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Debug", nil)
-                                                                                  style:UIBarButtonItemStyleBordered
-                                                                                 target:self
-                                                                                 action:@selector(showBindingDebugOverlay:)];
-    self.navigationItem.rightBarButtonItems = [@[debugOverlayBarButtonItem] arrayByAddingObjectsFromArray:self.navigationItem.rightBarButtonItems];
 }
 
 #pragma mark Localization
@@ -77,7 +71,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Table view", nil);
+    self.title = NSLocalizedString(@"Views", nil);
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -104,13 +98,6 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [EmployeeHeaderView view];
-}
-
-#pragma mark Action callbacks
-
-- (IBAction)showBindingDebugOverlay:(id)sender
-{
-    [self showBindingDebugOverlayViewRecursive:YES];
 }
 
 @end

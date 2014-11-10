@@ -141,6 +141,8 @@
 {
     [super localize];
     
+    self.title = NSLocalizedString(@"Controls", nil);
+    
     NSDateFormatter *localizedDateFormatter = [[NSDateFormatter alloc] init];
     [localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
     

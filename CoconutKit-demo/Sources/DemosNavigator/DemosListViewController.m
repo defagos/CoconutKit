@@ -9,6 +9,7 @@
 #import "DemosListViewController.h"
 
 #import "BindingsControlsDemoViewController.h"
+#import "BindingsViewsDemoViewController.h"
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
@@ -24,7 +25,7 @@
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
-#import "TableViewBindingsDemoViewController.h"
+#import "BindingsViewsDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
 #import "WebViewDemoViewController.h"
@@ -57,6 +58,7 @@ typedef NS_ENUM(NSInteger, AnimationDemoIndex) {
 typedef enum {
     BindingsDemoIndexEnumBegin = 0,
     BindingsDemoIndexControls = BindingsDemoIndexEnumBegin,
+    BindingsDemoIndexViews,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -277,6 +279,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
+                case BindingsDemoIndexViews: {
+                    cell.textLabel.text = NSLocalizedString(@"Views", nil);
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -463,6 +470,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             switch (indexPath.row) {
                 case BindingsDemoIndexControls: {
                     demoViewController = [[BindingsControlsDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexViews: {
+                    demoViewController = [[BindingsViewsDemoViewController alloc] init];
                     break;
                 }
                     
