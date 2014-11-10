@@ -8,15 +8,14 @@
 
 #import "DemosListViewController.h"
 
+#import "BindingsControlsDemoViewController.h"
 #import "ConnectionDemoViewController.h"
-#import "ControlBindingsDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "FontsDemoViewController.h"
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
 #import "LabelDemoViewController.h"
-#import "LabelBindingsDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
@@ -57,9 +56,7 @@ typedef NS_ENUM(NSInteger, AnimationDemoIndex) {
 // Demos for bindings
 typedef enum {
     BindingsDemoIndexEnumBegin = 0,
-    BindingsDemoIndexLabels = BindingsDemoIndexEnumBegin,
-    BindingsDemoIndexTableView,
-    BindingsDemoIndexControls,
+    BindingsDemoIndexControls = BindingsDemoIndexEnumBegin,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -275,16 +272,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             
         case DemoCategoryIndexBindings: {
             switch (indexPath.row) {
-                case BindingsDemoIndexLabels: {
-                    cell.textLabel.text = NSLocalizedString(@"Labels", nil);
-                    break;
-                }
-                    
-                case BindingsDemoIndexTableView: {
-                    cell.textLabel.text = NSLocalizedString(@"Table view", nil);
-                    break;
-                }
-                    
                 case BindingsDemoIndexControls: {
                     cell.textLabel.text = NSLocalizedString(@"Controls", nil);
                     break;
@@ -474,18 +461,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             
         case DemoCategoryIndexBindings: {
             switch (indexPath.row) {
-                case BindingsDemoIndexLabels: {
-                    demoViewController = [[LabelBindingsDemoViewController alloc] init];
-                    break;
-                }
-                    
-                case BindingsDemoIndexTableView: {
-                    demoViewController = [[TableViewBindingsDemoViewController alloc] init];
-                    break;
-                }
-                    
                 case BindingsDemoIndexControls: {
-                    demoViewController = [[ControlBindingsDemoViewController alloc] init];
+                    demoViewController = [[BindingsControlsDemoViewController alloc] init];
                     break;
                 }
                     
