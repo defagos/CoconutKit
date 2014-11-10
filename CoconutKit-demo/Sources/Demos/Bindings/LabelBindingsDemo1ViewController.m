@@ -108,13 +108,6 @@
     return s_transformer;
 }
 
-#pragma mark Action callbacks
-
-- (IBAction)refresh:(id)sender
-{
-    [self refreshBindings];
-}
-
 #pragma mark Timer callbacks
 
 - (void)tick:(NSTimer *)timer

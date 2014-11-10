@@ -33,8 +33,15 @@
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
         NSMutableArray *entries = [NSMutableArray array];
         
-        HLSBindingInformationEntry *statusEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)
-                                                                                              text:@"TODO"];
+        NSString *statusString = nil;
+        if (bindingInformation.verified) {
+            statusString = bindingInformation.error ? [bindingInformation.error localizedDescription] : CoconutKitLocalizedString(@"The binding information is valid", nil);
+        }
+        else {
+            statusString = CoconutKitLocalizedString(@"The binding information has not been fully verified yet", nil);
+        }
+        HLSBindingInformationEntry *statusEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Status", nil)
+                                                                                              text:statusString];
         [entries addObject:statusEntry];
                 
         HLSBindingInformationEntry *keyPathEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Key path", nil)

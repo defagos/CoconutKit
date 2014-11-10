@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         else {
             error = [NSError errorWithDomain:CoconutKitErrorDomain
                                         code:HLSErrorTransformationError
-                        localizedDescription:NSLocalizedString(@"Incorrect format", nil)];
+                        localizedDescription:CoconutKitLocalizedString(@"Incorrect format", nil)];
             [error setUnderlyingError:detailedError];
             
             if ([self.delegate respondsToSelector:@selector(view:transformationDidFailForObject:keyPath:withError:)]) {
@@ -341,7 +341,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                           code:HLSViewBindingErrorObjectTargetNotFound
-                          localizedDescription:NSLocalizedString(@"No meaningful object target was found along the responder chain for the specified keypath (stopping at view controller boundaries)", nil)];
+                          localizedDescription:CoconutKitLocalizedString(@"No meaningful object target was found along the responder chain for the specified keypath (stopping at view controller boundaries)", nil)];
         }
         return NO;
     }
@@ -375,7 +375,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         if (! class) {
             error = [NSError errorWithDomain:CoconutKitErrorDomain
                                         code:HLSViewBindingErrorInvalidTransformer
-                        localizedDescription:NSLocalizedString(@"The specified global transformer points to an invalid class", nil)];
+                        localizedDescription:CoconutKitLocalizedString(@"The specified global transformer points to an invalid class", nil)];
             return;
         }
         
@@ -383,7 +383,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         if (! class_getClassMethod(class, selector)) {
             error = [NSError errorWithDomain:CoconutKitErrorDomain
                                         code:HLSViewBindingErrorInvalidTransformer
-                        localizedDescription:NSLocalizedString(@"The specified global transformer method does not exist", nil)];
+                        localizedDescription:CoconutKitLocalizedString(@"The specified global transformer method does not exist", nil)];
             return;
         }
         
@@ -432,7 +432,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                           code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:NSLocalizedString(@"Invalid method name", nil)];
+                          localizedDescription:CoconutKitLocalizedString(@"Invalid method name", nil)];
         }
         return NO;
     }
@@ -452,7 +452,9 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             if (pError) {
                 *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                               code:HLSViewBindingErrorInvalidTransformer
-                              localizedDescription:NSLocalizedString(@"The specified transformer is neither a valid global transformer, nor could be resolved along the responder chain (stopping at view controller boundaries)", nil)];
+                              localizedDescription:CoconutKitLocalizedString(@"The specified transformer is neither a valid global transformer, "
+                                                                             "nor could be resolved along the responder chain (stopping at view "
+                                                                             "controller boundaries)", nil)];
             }
             return NO;
         }
@@ -504,7 +506,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                           code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:NSLocalizedString(@"The specified transformer must either be an HLSTransformer, NSFormatter or NSValueTransformer instance", nil)];
+                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer must either be an HLSTransformer, NSFormatter "
+                                                                         "or NSValueTransformer instance", nil)];
         }
         return NO;
     }
@@ -574,12 +577,12 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             NSString *localizedDescription = nil;
             
             if (self.transformer) {
-                localizedDescription = [NSString stringWithFormat:NSLocalizedString(@"The transformer must return one of the following supported types: %@", nil),
-                                        [self supportedBindingClassesString]];
+                localizedDescription = [NSString stringWithFormat:CoconutKitLocalizedString(@"The transformer must return one of the following "
+                                                                                            "supported types: %@", nil), [self supportedBindingClassesString]];
             }
             else {
-                localizedDescription = [NSString stringWithFormat:NSLocalizedString(@"The keypath must return one of the following supported types: %@. Fix the return type "
-                                                                                    "or use a transformer", nil), [self supportedBindingClassesString]];
+                localizedDescription = [NSString stringWithFormat:CoconutKitLocalizedString(@"The keypath must return one of the following supported types: %@. Fix the return type "
+                                                                                            "or use a transformer", nil), [self supportedBindingClassesString]];
             }
             
             self.verified = YES;
