@@ -567,6 +567,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
                     self.error = error;
                 }
                 
+                self.transformer = transformer;
                 [self updateView];
             }];
         }
