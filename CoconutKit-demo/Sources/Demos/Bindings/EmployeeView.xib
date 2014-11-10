@@ -25,7 +25,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="fullName"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="employee.fullName"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6">
@@ -42,7 +42,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="age"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="employee.age"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="decimalNumberFormatter"/>
                     </userDefinedRuntimeAttributes>
                 </label>
