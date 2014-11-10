@@ -269,6 +269,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
                 self.bindingInformation = [[HLSViewBindingInformation alloc] initWithKeyPath:self.bindKeyPath
                                                                              transformerName:self.bindTransformer
                                                                                         view:self];
+                self.bindingInformation.updateAnimated = self.bindUpdateAnimated;
             }
             [self updateView];
         }
