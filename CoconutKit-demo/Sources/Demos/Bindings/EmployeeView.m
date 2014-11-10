@@ -10,13 +10,4 @@
 
 @implementation EmployeeView
 
-#pragma mark Accessors and mutators
-
-- (void)setEmployee:(Employee *)employee
-{
-    _employee = employee;
-    
-    [self bindToObject:employee];
-}
-
 @end

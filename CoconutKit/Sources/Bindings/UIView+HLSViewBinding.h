@@ -132,11 +132,6 @@
 @interface UIView (HLSViewBinding)
 
 /**
- * Programmatically bind the receiver to a keypath and transformer, for people who do not use Interface Builder
- */
-- (void)bindToKeyPath:(NSString *)bindKeyPath withTransformer:(NSString *)bindTransformer;
-
-/**
  * Primary binding parameters. Set using Interface Builder user-defined runtime attributes
  */
 @property (nonatomic, readonly, strong) IBInspectable NSString *bindKeyPath;
@@ -151,13 +146,6 @@
  * Return YES iff binding is possible against the receiver
  */
 @property (nonatomic, readonly, assign, getter=isBindingSupported) BOOL bindingSupported;
-
-/**
- * Bind the view (and recursively the view hierarchy rooted at it) to a given object (can be nil). During view
- * hierarchy traversal, keypaths and transformers set via user-defined runtime attributes will be used to automatically
- * fill those views which implement binding support
- */
-- (void)bindToObject:(id)object;
 
 /**
  * Refresh the value displayed by the view, recursively traversing the view hierarchy rooted at it. If forced is set

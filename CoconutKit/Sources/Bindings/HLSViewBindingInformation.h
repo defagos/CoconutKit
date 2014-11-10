@@ -19,10 +19,9 @@
  *   - a non-nil object, which the keypath is applied to (binding to an object)
  *   - nil, in which case the keypath is applied to the responder chain starting with view.superview
  */
-- (instancetype)initWithObject:(id)object
-                       keyPath:(NSString *)keyPath
-               transformerName:(NSString *)transformerName
-                          view:(UIView *)view NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithKeyPath:(NSString *)keyPath
+                transformerName:(NSString *)transformerName
+                           view:(UIView *)view NS_DESIGNATED_INITIALIZER;
 
 /**
  * If set to YES, view updates will be animated if supported by the underlying view. Defaults to NO
@@ -71,11 +70,6 @@
  * are returned to the validation delegate (if any) and to the caller
  */
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError;
-
-/**
- * Return the object upon which binding muts be made. Can be nil (meaning "responder chain")
- */
-@property (nonatomic, readonly, weak) id object;
 
 /**
  * Return the keypath to which binding is made

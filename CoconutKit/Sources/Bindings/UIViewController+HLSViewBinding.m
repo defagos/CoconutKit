@@ -13,17 +13,6 @@
 #import "UIView+HLSViewBinding.h"
 #import "UIViewController+HLSExtensions.h"
 
-#import <objc/runtime.h>
-
-// Keys for associated objects
-static void *s_boundObjectKey = &s_boundObjectKey;
-
-@interface UIViewController (HLSViewBindingPrivate)
-
-@property (nonatomic, strong) id boundObject;
-
-@end
-
 @implementation UIViewController (HLSViewBinding)
 
 #pragma mark Overlay
@@ -34,13 +23,6 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 }
 
 #pragma mark Bindings
-
-- (void)bindToObject:(id)object
-{
-    self.boundObject = object;
-    
-    [[self viewIfLoaded] bindToObject:object];
-}
 
 - (void)refreshBindings
 {
@@ -55,22 +37,6 @@ static void *s_boundObjectKey = &s_boundObjectKey;
 - (BOOL)updateModelWithError:(NSError **)pError
 {
     return [[self viewIfLoaded] updateModelWithError:pError];
-}
-
-@end
-
-@implementation UIViewController (HLSViewBindingPrivate)
-
-#pragma mark Accessors and mutators
-
-- (id)boundObject
-{
-    return objc_getAssociatedObject(self, s_boundObjectKey);
-}
-
-- (void)setBoundObject:(id)boundObject
-{
-    objc_setAssociatedObject(self, s_boundObjectKey, boundObject, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

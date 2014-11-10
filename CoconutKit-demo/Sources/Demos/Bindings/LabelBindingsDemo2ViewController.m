@@ -10,14 +10,6 @@
 
 #import "Employee.h"
 
-@interface LabelBindingsDemo2ViewController ()
-
-@property (nonatomic, weak) IBOutlet UIView *firstSubview;
-@property (nonatomic, weak) IBOutlet UIView *secondSubview;
-@property (nonatomic, weak) IBOutlet UIView *subviewInSecondSubview;
-
-@end
-
 @implementation LabelBindingsDemo2ViewController
 
 #pragma mark Object creation and destruction
@@ -28,9 +20,6 @@
         Employee *employee1 = [[Employee alloc] init];
         employee1.fullName = @"Jesse Pinkman";
         employee1.age = @22;
-        
-        // Objects can be bound early (they are retained)
-        [self bindToObject:employee1];
     }
     return self;
 }
@@ -46,17 +35,14 @@
     Employee *employee2 = [[Employee alloc] init];
     employee2.fullName = @"Skyler White";
     employee2.age = @47;
-    [self.firstSubview bindToObject:employee2];
     
     Employee *employee3 = [[Employee alloc] init];
     employee3.fullName = @"Walter White Jr.";
     employee3.age = @17;
-    [self.secondSubview bindToObject:employee3];
     
     Employee *employee4 = [[Employee alloc] init];
     employee4.fullName = @"Hank Schrader";
     employee4.age = @45;
-    [self.subviewInSecondSubview bindToObject:employee4];
 }
 
 - (IBAction)refresh:(id)sender
@@ -70,7 +56,6 @@
     Employee *employee5 = [[Employee alloc] init];
     employee5.fullName = @"Marie Schrader";
     employee5.age = @52;
-    [self.secondSubview bindToObject:employee5];
 }
 
 @end

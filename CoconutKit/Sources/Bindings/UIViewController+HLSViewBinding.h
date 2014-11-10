@@ -11,9 +11,6 @@
 // If recursive set to YES, display binding information for child view controllers as well
 - (void)showBindingDebugOverlayViewRecursive:(BOOL)recursive;
 
-// Document: The object is retained
-- (void)bindToObject:(id)object;
-
 - (void)refreshBindings;
 
 - (BOOL)checkDisplayedValuesWithError:(NSError **)pError;

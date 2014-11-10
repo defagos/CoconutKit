@@ -24,7 +24,6 @@
         Employee *employee = [[Employee alloc] init];
         employee.fullName = @"Nate Fisher";
         employee.age = @40;
-        [self bindToObject:employee];
     }
     return self;
 }

@@ -36,12 +36,7 @@
         HLSBindingInformationEntry *statusEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Binding status", nil)
                                                                                               text:@"TODO"];
         [entries addObject:statusEntry];
-        
-        HLSBindingInformationEntry *objectEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Object", nil)
-                                                                                              text:@"Responder chain starting with the parent view"
-                                                                                            object:bindingInformation.object];
-        [entries addObject:objectEntry];
-        
+                
         HLSBindingInformationEntry *keyPathEntry = [[HLSBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Key path", nil)
                                                                                                text:bindingInformation.keyPath];
         [entries addObject:keyPathEntry];

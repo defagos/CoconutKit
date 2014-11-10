@@ -37,7 +37,6 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 @interface HLSViewBindingInformation ()
 
-@property (nonatomic, weak) id object;
 @property (nonatomic, strong) NSString *keyPath;
 @property (nonatomic, strong) NSString *transformerName;
 @property (nonatomic, weak) UIView *view;
@@ -71,10 +70,9 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithObject:(id)object
-                       keyPath:(NSString *)keyPath
-               transformerName:(NSString *)transformerName
-                          view:(UIView *)view
+- (instancetype)initWithKeyPath:(NSString *)keyPath
+                transformerName:(NSString *)transformerName
+                           view:(UIView *)view
 {
     if (self = [super init]) {
         if (! [keyPath isFilled] || ! view) {
@@ -87,7 +85,6 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             return nil;
         }
         
-        self.object = object;
         self.keyPath = keyPath;
         self.transformerName = transformerName;
         self.view = view;
@@ -339,33 +336,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 - (BOOL)resolveObjectTarget:(id *)pObjectTarget withError:(NSError **)pError
 {
-    // An object has been provided. Check that the keypath is valid for it
-    id objectTarget = nil;
-    if (self.object) {
-        @try {
-            [self.object valueForKeyPath:self.keyPath];
-        }
-        @catch (NSException *exception) {
-            if ([exception.name isEqualToString:NSUndefinedKeyException]) {
-                if (pError) {
-                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSViewBindingErrorInvalidKeyPath
-                                  localizedDescription:NSLocalizedString(@"The specified keypath is invalid", nil)];
-                }
-                return NO;
-            }
-            else {
-                @throw;
-            }
-        }
-        
-        objectTarget = self.object;
-    }
-    // No object provided. Walk along the responder chain to find a responder matching the keypath (might be nil)
-    else {
-        objectTarget = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
-    }
-    
+    id objectTarget = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
     if (! objectTarget) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
@@ -770,10 +741,9 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; object: %@; objectTarget: %@; keyPath: %@; transformerName: %@; transformationTarget: %@; transformationSelector:%@>",
+    return [NSString stringWithFormat:@"<%@: %p; objectTarget: %@; keyPath: %@; transformerName: %@; transformationTarget: %@; transformationSelector:%@>",
             [self class],
             self,
-            self.object,
             self.objectTarget,
             self.keyPath,
             self.transformerName,

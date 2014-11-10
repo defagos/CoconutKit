@@ -20,7 +20,6 @@
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindTransformerKey = &s_bindTransformerKey;
 static void *s_bindUpdateAnimatedKey = &s_bindUpdateAnimatedKey;
-static void *s_boundObjectKey = &s_boundObjectKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
 // Original implementation of the methods we swizzle
@@ -34,10 +33,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) NSString *bindKeyPath;
 @property (nonatomic, strong) NSString *bindTransformer;
 
-@property (nonatomic, strong) id boundObject;
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
-- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
 - (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
 - (BOOL)bindsRecursively;
 - (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
@@ -76,20 +73,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 }
 
 #pragma mark Bindings
-
-- (void)bindToObject:(id)object
-{
-    [self bindToObject:object inViewController:[self nearestViewController] recursive:[self bindsRecursively]];
-}
-
-- (void)bindToKeyPath:(NSString *)bindKeyPath withTransformer:(NSString *)bindTransformer
-{
-    self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:self.boundObject
-                                                                        keyPath:bindKeyPath
-                                                                transformerName:bindTransformer
-                                                                           view:self];
-    [self refreshBindings];
-}
 
 - (void)refreshBindings
 {
@@ -132,16 +115,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     objc_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (id)boundObject
-{
-    return objc_getAssociatedObject(self, s_boundObjectKey);
-}
-
-- (void)setBoundObject:(id)boundObject
-{
-    objc_setAssociatedObject(self, s_boundObjectKey, boundObject, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
 - (HLSViewBindingInformation *)bindingInformation
 {
     return objc_getAssociatedObject(self, s_bindingInformationKey);
@@ -153,42 +126,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 }
 
 #pragma mark Bindings
-
-// Bind to an object in the context of a view controller (might be nil). Stops at view controller boundaries. Correctly
-// deals with viewController = nil as well
-- (void)bindToObject:(id)object inViewController:(UIViewController *)viewController recursive:(BOOL)recursive
-{   
-    // Stop at view controller boundaries (correctly deals with viewController = nil)
-    UIViewController *nearestViewController = self.nearestViewController;
-    if (nearestViewController && nearestViewController != viewController) {
-        return;
-    }
-    
-    // Retain the object, so that view hierarchies can be bound to locally created objects assigned to them
-    self.boundObject = object;
-    
-    if (self.bindKeyPath) {
-        if (self.bindingSupported) {
-            HLSLoggerDebug(@"Bind object %@ to view %@ with keyPath %@", object, self, self.bindKeyPath);
-            
-            self.bindingInformation = [[HLSViewBindingInformation alloc] initWithObject:object
-                                                                                keyPath:self.bindKeyPath
-                                                                        transformerName:self.bindTransformer
-                                                                                   view:self];
-            self.bindingInformation.updateAnimated = self.bindUpdateAnimated;
-            [self updateView];
-        }
-        else {
-            HLSLoggerWarn(@"A binding key path has been set for %@, but its class does not implement bindings", self);
-        }
-    }
-    
-    if (recursive) {
-        for (UIView *subview in self.subviews) {
-            [subview bindToObject:object inViewController:viewController recursive:recursive];
-        }
-    }
-}
 
 - (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive
 {
@@ -326,48 +263,14 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
 {
     (*s_UIView__didMoveToWindow_Imp)(self, _cmd);
     
-    // This method is called every time the view has been added to a view hierarchy. When a view gets added to a view hierarchy, it gets
-    // called once with self.window != nil. When removing a view from its hierarchy, it gets called once with self.window == nil. When
-    // transferring a view between two view hierarchies, it gets called twice (once with self.window == nil for removal from the old
-    // hierarchy, and once with self.window != nil for the new view hierarchy)
-    //
-    // We can choose between two different strategies:
-    //
-    // 1) When the window changes (to != nil), invalidate the cached binding information. The binding context might namely change during
-    //    the process of transferring the view to a new hierarchy. More often than not, and though this is the most correct approach, this
-    //    might lead to unnecessary binding calculation (views can namely be transferred between view hierarchies without visible consequences,
-    //    and calculating the binding information in such cases usually lead to the same result).
-    //
-    //    The corresponding code would be:
-    //
-    //    if (self.window) {
-    //        if (self.bindKeyPath && ! self.bindingInformation) {
-    //            UIViewController *nearestViewController = self.nearestViewController;
-    //            id boundObject = self.boundObject ?: nearestViewController.boundObject;
-    //            [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
-    //        }
-    //        else if (self.bindingInformation) {
-    //            [self updateView];
-    //        }
-    //    }
-    //    else {
-    //        self.bindingInformation = nil;
-    //    }
-    //
-    // 2) When the window changes (to != nil), we do not recalculate verified binding information. This does not automatically take into
-    //    account transfers between view hierarchies, but avoids useless binding recalculations (in general, we only want to verify binding
-    //    information once). If recalculation is really needed, the -refreshBindings method can still be called. This is the approach
-    //    which has been retained here
-    
     if (self.window) {
-        if (self.bindKeyPath && ! self.bindingInformation) {
-            UIViewController *nearestViewController = self.nearestViewController;
-            id boundObject = self.boundObject ?: nearestViewController.boundObject;
-            [self bindToObject:boundObject inViewController:nearestViewController recursive:NO];
-        }
-        // Do not recalculate verified binding information, even if the window has changed
-        else if (self.bindingInformation && ! self.bindingInformation.verified) {
+        if (self.bindKeyPath) {
+            if (! self.bindingInformation) {
+                self.bindingInformation = [[HLSViewBindingInformation alloc] initWithKeyPath:self.bindKeyPath
+                                                                             transformerName:self.bindTransformer
+                                                                                        view:self];
+            }
             [self updateView];
-        }        
+        }
     }
 }

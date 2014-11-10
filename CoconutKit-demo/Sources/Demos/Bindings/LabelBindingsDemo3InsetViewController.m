@@ -16,10 +16,11 @@
 
 - (IBAction)change:(id)sender
 {
+    // TODO: FIXME
+    
     Employee *employee = [[Employee alloc] init];
     employee.fullName = @"David Fisher";
     employee.age = @35;
-    [self bindToObject:employee];
 }
 
 @end

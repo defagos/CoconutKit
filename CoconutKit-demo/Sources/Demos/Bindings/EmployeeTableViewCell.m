@@ -10,14 +10,6 @@
 
 @implementation EmployeeTableViewCell
 
-#pragma mark Accessors and mutators
-
-- (void)setEmployee:(Employee *)employee
-{
-    _employee = employee;
-    [self bindToObject:employee];
-}
-
 #pragma mark Transformers
 
 + (HLSBlockTransformer *)numberToAgeStringTransformer

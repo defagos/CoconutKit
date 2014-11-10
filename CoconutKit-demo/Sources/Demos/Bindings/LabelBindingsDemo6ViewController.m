@@ -27,6 +27,7 @@
 
 - (void)loadView
 {
+#if 0
     CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
     UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
     
@@ -46,6 +47,7 @@
     [view addSubview:progressView];
     
     self.view = view;
+#endif
 }
 
 @end

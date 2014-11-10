@@ -39,19 +39,6 @@
     return self;
 }
 
-#pragma mark Accessors and mutators
-
-- (void)setPersonInformation:(PersonInformation *)personInformation
-{
-    if (_personInformation == personInformation) {
-        return;
-    }
-    
-    _personInformation = personInformation;
-    
-    [self bindToObject:personInformation];
-}
-
 #pragma mark View lifecycle
 
 - (void)viewWillLayoutSubviews
