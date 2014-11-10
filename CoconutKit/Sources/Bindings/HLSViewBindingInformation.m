@@ -302,6 +302,9 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             }
         }
         
+        // We might now have enough information to fully verify binding information, if not already the case
+        [self verifyBindingInformation];
+        
         self.updatingModel = NO;
     }
     @catch (NSException *exception) {
