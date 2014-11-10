@@ -14,7 +14,10 @@
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
 
-@implementation HLSNibView
+@implementation HLSNibView {
+@private
+    BOOL _isPlaceholder;
+}
 
 #pragma mark Class methods for creation
 
@@ -69,17 +72,32 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     if (self = [super initWithCoder:aDecoder]) {
         // If no child views, consider we are deserializing a placeholder, and add a proper instance as subview
         if ([self.subviews count] == 0) {
+            _isPlaceholder = YES;
+            
             // Match frame and colors so that the placeholder view is visually replaced by a properly instantiated
             // view instance
-            UIView *view = [[self class] view];
+            HLSNibView *view = [[self class] view];
             view.frame = self.bounds;
-            view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             [self addSubview:view];
             
             self.backgroundColor = view.backgroundColor;
         }
     }
     return self;
+}
+
+#pragma mark Overrides
+
+- (void)didMoveToWindow
+{
+    [super didMoveToWindow];
+    
+    if (_isPlaceholder) {
+        UIView *firstSubview = [self.subviews firstObject];
+        firstSubview.frame = self.frame;
+        [self.superview insertSubview:firstSubview belowSubview:self];
+        [self removeFromSuperview];
+    }
 }
 
 #pragma mark Class methods for customisation
