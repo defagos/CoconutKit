@@ -32,7 +32,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     HLSViewBindingErrorInvalidKeyPath,
     HLSViewBindingErrorObjectTargetNotFound,
     HLSViewBindingErrorInvalidTransformer,
-    HLSViewBindingErrorUnsupportedType,
+    HLSViewBindingErrorNilValue,
+    HLSViewBindingErrorUnsupportedType
 };
 
 @interface HLSViewBindingInformation ()
@@ -560,6 +561,19 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         }
     }
     
+    // Observe transformer updates, reload cached transformer and update view accordingly
+    [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+        id<HLSTransformer> transformer = nil;
+        NSError *error = nil;
+        
+        if ([self resolveTransformer:&transformer withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector error:&error]) {
+            self.verified = NO;
+            self.error = error;
+        }
+        
+        [self updateView];
+    }];
+    
     if ((self.status & HLSViewBindingStatusDelegateResolved) == 0) {
         self.delegate = [HLSViewBindingInformation delegateForView:self.view];
         self.status |= HLSViewBindingStatusDelegateResolved;
@@ -569,6 +583,14 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
         id value = [self.objectTarget valueForKeyPath:self.keyPath];
         id displayedValue = [self transformValue:value];
+        
+        // Cannot verify further yet
+        if (! displayedValue) {
+            self.error = [NSError errorWithDomain:CoconutKitErrorDomain
+                                             code:HLSViewBindingErrorNilValue
+                             localizedDescription:CoconutKitLocalizedString(@"Type compliance cannot be verified yet since the value to display is nil", nil)];
+            return;
+        }
         
         if ([self canDisplayValue:displayedValue]) {
             self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
@@ -592,19 +614,6 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             return;
         }
     }
-    
-    // Observe transformer updates, reload cached transformer and update view accordingly
-    [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-        id<HLSTransformer> transformer = nil;
-        NSError *error = nil;
-        
-        if ([self resolveTransformer:&transformer withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector error:&error]) {
-            self.verified = NO;
-            self.error = error;
-        }
-        
-        [self updateView];
-    }];
     
     self.verified = YES;
 }

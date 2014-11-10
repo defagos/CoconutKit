@@ -108,12 +108,14 @@
 
 /**
  * Return YES iff the binding has been verified completely. If verified, check the error property to check whether
- * the binding was successfully resolved or not
+ * the binding was successfully resolved or not. If not verified, check the error property to retrieve information
+ * about why the binding could not be verified
  */
 @property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
 
 /**
- * Reason why a verified binding failed, nil if the binding was successful
+ * Reason why a binding cannot be completely verified yet (if verified = NO), why binding failed (if verified = NO),
+ * or nil if no information is available
  */
 @property (nonatomic, readonly, strong) NSError *error;
 
