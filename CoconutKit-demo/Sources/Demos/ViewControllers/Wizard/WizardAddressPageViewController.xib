@@ -37,7 +37,7 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="street"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.street"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;streetError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="58">
@@ -61,7 +61,7 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="city"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.city"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;cityError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="59">
@@ -85,7 +85,7 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="state"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.state"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;stateError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="60">
@@ -109,7 +109,7 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="country"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.country"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;countryError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="61">
