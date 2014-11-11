@@ -256,8 +256,6 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return YES;
     }
     
-    // TODO: Implement call to -check method as well, since cleaner syntax
-    
     NSError *error = nil;
     if ([self.objectTarget validateValue:&value forKeyPath:self.keyPath error:&error]) {
         if ([self.delegate respondsToSelector:@selector(boundView:checkDidSucceedWithObject:)]) {
