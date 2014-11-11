@@ -37,13 +37,13 @@
 
 #pragma mark Transformers
 
-- (id<HLSTransformer>)greetingsTransformer
+- (id<HLSTransformer>)uppercaseTransformer
 {
     return [HLSBlockTransformer blockTransformerWithBlock:^(NSString *name) {
         return [name uppercaseString];
-    } reverseBlock:^(__autoreleasing NSString **pName, NSString *greetings, NSError *__autoreleasing *pError) {
+    } reverseBlock:^(__autoreleasing NSString **pName, NSString *uppercaseName, NSError *__autoreleasing *pError) {
         if (pName) {
-            *pName = [greetings lowercaseString];
+            *pName = [uppercaseName lowercaseString];
         }
         return YES;
     }];
