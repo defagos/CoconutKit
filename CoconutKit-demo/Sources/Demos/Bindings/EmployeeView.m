@@ -10,14 +10,4 @@
 
 @implementation EmployeeView
 
-#pragma mark Object creation and destruction
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        self.backgroundColor = [UIColor redColor];
-    }
-    return self;
-}
-
 @end
