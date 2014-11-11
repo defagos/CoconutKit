@@ -24,6 +24,7 @@ static UIWindow *s_previousKeyWindow = nil;
 @property (nonatomic, assign, getter=isRecursive) BOOL recursive;
 
 @property (nonatomic, strong) UIPopoverController *bindingInformationPopoverController;
+@property (nonatomic, weak) HLSViewBindingInformationViewController *bindingInformationViewController;
 
 @end
 
@@ -79,13 +80,6 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
         self.recursive = recursive;
     }
     return self;
-}
-
-#pragma mark Accessors and mutators
-
-- (HLSViewBindingInformationViewController *)bindingInformationViewController
-{
-    return (HLSViewBindingInformationViewController *)self.bindingInformationPopoverController.contentViewController;
 }
 
 #pragma mark View lifecycle
@@ -205,7 +199,7 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
         // Track updates
         if ([bindingInformation.keyPath rangeOfString:@"@"].length == 0) {
             [bindingInformation.objectTarget addObserver:self keyPath:bindingInformation.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-                [[weakSelf bindingInformationViewController] reloadData];
+                [weakSelf.bindingInformationViewController reloadData];
             }];
         }
         
@@ -274,13 +268,16 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
         [self.navigationController pushViewController:bindingInformationViewController animated:YES];
     }
     else {
-        self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationViewController];
+        UINavigationController *bindingInformationNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingInformationViewController];
+        self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationNavigationController];
         self.bindingInformationPopoverController.delegate = self;
         [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
                                                                   inView:self.view
                                                 permittedArrowDirections:UIPopoverArrowDirectionAny
                                                                 animated:YES];
     }
+    
+    self.bindingInformationViewController = bindingInformationViewController;
 }
 
 @end
