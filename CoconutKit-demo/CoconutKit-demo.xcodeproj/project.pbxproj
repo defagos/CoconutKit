@@ -359,6 +359,10 @@
 		6FCB4F191926651F00047AD3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6FCB4F2D192667EE00047AD3 /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCB4F281926657B00047AD3 /* libCoconutKit.a */; };
 		6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB4F2F19266DE200047AD3 /* CoconutKit-resources.bundle */; };
+		6FCD33DC1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD33DA1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m */; };
+		6FCD33DD1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD33DA1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m */; };
+		6FCD33DE1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCD33DB1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib */; };
+		6FCD33DF1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCD33DB1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib */; };
 		6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
 		6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
 		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
@@ -746,6 +750,9 @@
 		6FCB4F211926657B00047AD3 /* CoconutKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoconutKit.xcodeproj; path = ../CoconutKit/CoconutKit.xcodeproj; sourceTree = "<group>"; };
 		6FCB4F2E192668B400047AD3 /* CoconutKit-dev-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-dev-Prefix.pch"; sourceTree = "<group>"; };
 		6FCB4F2F19266DE200047AD3 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CoconutKit-resources.bundle"; path = "../CoconutKit/CoconutKit-resources.bundle"; sourceTree = "<group>"; };
+		6FCD33D91A125ADA0002F478 /* BindingsPerformanceDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsPerformanceDemoViewController.h; sourceTree = "<group>"; };
+		6FCD33DA1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsPerformanceDemoViewController.m; sourceTree = "<group>"; };
+		6FCD33DB1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsPerformanceDemoViewController.xib; sourceTree = "<group>"; };
 		6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6FD0024C15D5463200375240 /* ContainmentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainmentTestViewController.h; sourceTree = "<group>"; };
 		6FD0024D15D5463200375240 /* ContainmentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainmentTestViewController.m; sourceTree = "<group>"; };
@@ -1708,6 +1715,9 @@
 				6FFAB78419DD901A00A91997 /* BindingsControlsDemoViewController.h */,
 				6FFAB78519DD901A00A91997 /* BindingsControlsDemoViewController.m */,
 				6FFAB78619DD901A00A91997 /* BindingsControlsDemoViewController.xib */,
+				6FCD33D91A125ADA0002F478 /* BindingsPerformanceDemoViewController.h */,
+				6FCD33DA1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m */,
+				6FCD33DB1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib */,
 				6FFAB79C19DD901A00A91997 /* BindingsViewsDemoViewController.h */,
 				6FFAB79D19DD901A00A91997 /* BindingsViewsDemoViewController.m */,
 				6FFAB79E19DD901A00A91997 /* BindingsViewsDemoViewController.xib */,
@@ -1942,6 +1952,7 @@
 				6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */,
 				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
+				6FCD33DF1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib in Resources */,
 				6FFAB7C219DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */,
 				6F1894D21A1201FC00A31817 /* Employees.plist in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
@@ -2058,6 +2069,7 @@
 				6FCB4F051926651F00047AD3 /* RootNavigationDemoViewController.xib in Resources */,
 				6FCB4F061926651F00047AD3 /* RootSplitViewDemoController.xib in Resources */,
 				6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
+				6FCD33DE1A125ADA0002F478 /* BindingsPerformanceDemoViewController.xib in Resources */,
 				6FFAB7C119DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */,
 				6F1894D11A1201FC00A31817 /* Employees.plist in Resources */,
 				6FCB4F071926651F00047AD3 /* RootTabBarDemoViewController.xib in Resources */,
@@ -2146,6 +2158,7 @@
 				6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */,
 				6F9C467C14C5C30C00824AB2 /* CursorSelectedFolderView.m in Sources */,
 				6F9C468214C5C30C00824AB2 /* FooterView.m in Sources */,
+				6FCD33DD1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m in Sources */,
 				6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */,
 				6F9C468614C5C30C00824AB2 /* ProgrammaticTableViewCell.m in Sources */,
 				6F9C468714C5C30C00824AB2 /* TableViewCellsDemoViewController.m in Sources */,
@@ -2256,6 +2269,7 @@
 				6FFAB7B719DD901A00A91997 /* EmployeeTableViewCell.m in Sources */,
 				6FCB4E891926651F00047AD3 /* FixedSizeViewController.m in Sources */,
 				6FCB4E8A1926651F00047AD3 /* HeavyViewController.m in Sources */,
+				6FCD33DC1A125ADA0002F478 /* BindingsPerformanceDemoViewController.m in Sources */,
 				6FCB4E8B1926651F00047AD3 /* LandscapeOnlyViewController.m in Sources */,
 				6FFAB7BB19DD901A00A91997 /* EmployeeView.m in Sources */,
 				6FCB4E8C1926651F00047AD3 /* LifeCycleTestViewController.m in Sources */,

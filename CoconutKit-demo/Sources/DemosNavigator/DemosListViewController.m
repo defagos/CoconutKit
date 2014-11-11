@@ -9,6 +9,7 @@
 #import "DemosListViewController.h"
 
 #import "BindingsControlsDemoViewController.h"
+#import "BindingsPerformanceDemoViewController.h"
 #import "BindingsViewsDemoViewController.h"
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
@@ -59,6 +60,7 @@ typedef enum {
     BindingsDemoIndexEnumBegin = 0,
     BindingsDemoIndexControls = BindingsDemoIndexEnumBegin,
     BindingsDemoIndexViews,
+    BindingsDemoIndexPerformance,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -284,6 +286,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
+                case BindingsDemoIndexPerformance: {
+                    cell.textLabel.text = NSLocalizedString(@"Performance", nil);
+                    break;
+                }
+                    
                 default: {
                     return nil;
                     break;
@@ -475,6 +482,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case BindingsDemoIndexViews: {
                     demoViewController = [[BindingsViewsDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexPerformance: {
+                    demoViewController = [[BindingsPerformanceDemoViewController alloc] init];
                     break;
                 }
                     
