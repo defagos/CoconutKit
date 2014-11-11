@@ -137,7 +137,7 @@ static UIWindow *s_previousKeyWindow = nil;
         }
         
         // Make the button frame surround the view
-        CGFloat borderWidth = bindingInformation.synchronized ? 3.f : 1.f;
+        CGFloat borderWidth = bindingInformation.updatedAutomatically ? 3.f : 1.f;
         overlayButton.frame = CGRectMake(CGRectGetMinX(frame) - borderWidth,
                                          CGRectGetMinY(frame) - borderWidth,
                                          CGRectGetWidth(frame) + 2 * borderWidth,

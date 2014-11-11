@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
 @property (nonatomic, strong) NSError *error;
 
-@property (nonatomic, assign, getter=isSynchronized) BOOL synchronized;
+@property (nonatomic, assign, getter=isUpdatedAutomatically) BOOL updatedAutomatically;
 
 // Used to prevent calls to checks / update methods when we are simply updating a view. Depending on how view update
 // is performed, we namely could end up triggering an update which would yield to a view updated, and therefore
@@ -139,10 +139,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 - (void)setObjectTarget:(id)objectTarget
 {
-    if (_objectTarget && self.synchronized) {
+    if (_objectTarget && self.updatedAutomatically) {
         [_objectTarget removeObserver:self keyPath:self.keyPath];
         
-        self.synchronized = NO;
+        self.updatedAutomatically = NO;
     }
     
     _objectTarget = objectTarget;
@@ -154,7 +154,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             [self updateView];
         }];
         
-        self.synchronized = YES;
+        self.updatedAutomatically = YES;
     }
 }
 

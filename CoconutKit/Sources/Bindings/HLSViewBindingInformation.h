@@ -120,10 +120,10 @@
 @property (nonatomic, readonly, strong) NSError *error;
 
 /**
- * Return YES iff the binding can be automatically kept in sync with the underlying model. This is always the case
- * except when the keypath contains operators
+ * Return YES iff the binding can be automatically kept in sync with the underlying model when the latter changes. This 
+ * is always the case except when the keypath contains operators
  */
-@property (nonatomic, readonly, assign, getter=isSynchronized) BOOL synchronized;
+@property (nonatomic, readonly, assign, getter=isUpdatedAutomatically) BOOL updatedAutomatically;
 
 @end
 

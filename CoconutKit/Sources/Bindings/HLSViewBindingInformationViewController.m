@@ -39,6 +39,10 @@
                                                                                                       text:statusString];
         [entries addObject:statusEntry];
         
+        HLSViewBindingInformationEntry *updatedAutomaticallyEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Updated automatically", nil)
+                                                                                                                    text:HLSStringFromBool(bindingInformation.updatedAutomatically)];
+        [entries addObject:updatedAutomaticallyEntry];
+        
         HLSViewBindingInformationEntry *keyPathEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Key path", nil)
                                                                                                        text:bindingInformation.keyPath];
         [entries addObject:keyPathEntry];
@@ -87,10 +91,6 @@
         HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Can update bound object", nil)
                                                                                                          text:HLSStringFromBool([bindingInformation.view respondsToSelector:@selector(displayedValue)])];
         [entries addObject:canUpdateEntry];
-        
-        HLSViewBindingInformationEntry *synchronizedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Synchronized", nil)
-                                                                                                            text:HLSStringFromBool(bindingInformation.synchronized)];
-        [entries addObject:synchronizedEntry];
         
         self.entries = [NSArray arrayWithArray:entries];
     }
