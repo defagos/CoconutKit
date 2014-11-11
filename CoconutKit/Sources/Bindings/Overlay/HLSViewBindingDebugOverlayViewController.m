@@ -126,23 +126,9 @@ static UIWindow *s_previousKeyWindow = nil;
     if (bindingInformation) {
         UIButton *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        // iOS 8: Since no rotation is applied anymore, we must use another method to convert view frames
-        CGRect frame = CGRectZero;
-        if ([view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-            frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
-        }
-        // Pre-iOS 7: The usual conversion gives correct results for views, even in different windows
-        else {
-            frame = [view convertRect:view.bounds toView:self.view];
-        }
-        
-        // Make the button frame surround the view
-        CGFloat borderWidth = bindingInformation.updatedAutomatically ? 3.f : 1.f;
-        overlayButton.frame = CGRectMake(CGRectGetMinX(frame) - borderWidth,
-                                         CGRectGetMinY(frame) - borderWidth,
-                                         CGRectGetWidth(frame) + 2 * borderWidth,
-                                         CGRectGetHeight(frame) + 2 * borderWidth);
-        
+        CGFloat borderWidth = view.bindingInformation.updatedAutomatically ? 3.f : 1.f;
+        overlayButton.frame = [self overlayViewFrameForView:view withBorderWith:borderWidth];
+                
         if (! bindingInformation.verified) {
             overlayButton.layer.borderColor = [UIColor orangeColor].CGColor;
         }
@@ -159,6 +145,25 @@ static UIWindow *s_previousKeyWindow = nil;
     for (UIView *subview in view.subviews) {
         [self displayDebugInformationForBindingsInView:subview debuggedViewController:debuggedViewController recursive:recursive];
     }
+}
+
+- (CGRect)overlayViewFrameForView:(UIView *)view withBorderWith:(CGFloat)borderWidth
+{
+    // iOS 8: Since no rotation is applied anymore, we must use another method to convert view frames
+    CGRect frame = CGRectZero;
+    if ([view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+        frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
+    }
+    // Pre-iOS 7: The usual conversion gives correct results for views, even in different windows
+    else {
+        frame = [view convertRect:view.bounds toView:self.view];
+    }
+    
+    // Make the button frame surround the view
+    return CGRectMake(CGRectGetMinX(frame) - borderWidth,
+                      CGRectGetMinY(frame) - borderWidth,
+                      CGRectGetWidth(frame) + 2 * borderWidth,
+                      CGRectGetHeight(frame) + 2 * borderWidth);
 }
 
 #pragma mark UIPopoverControllerDelegate protocol implementation
