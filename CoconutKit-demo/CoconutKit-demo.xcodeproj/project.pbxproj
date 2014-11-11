@@ -18,6 +18,8 @@
 		6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */; };
 		6F1894561A0C94B600A31817 /* LabelBindingsDemo6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */; };
 		6F1894591A0C94BE00A31817 /* LabelBindingsDemo6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */; };
+		6F1894D11A1201FC00A31817 /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F1894D01A1201FC00A31817 /* Employees.plist */; };
+		6F1894D21A1201FC00A31817 /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F1894D01A1201FC00A31817 /* Employees.plist */; };
 		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
 		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
@@ -475,6 +477,7 @@
 		6F0BFE10163EEDAC00420A5F /* RootTabBarDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootTabBarDemoViewController.xib; sourceTree = "<group>"; };
 		6F1894541A0C94B600A31817 /* LabelBindingsDemo6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo6ViewController.h; sourceTree = "<group>"; };
 		6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo6ViewController.m; sourceTree = "<group>"; };
+		6F1894D01A1201FC00A31817 /* Employees.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Employees.plist; sourceTree = "<group>"; };
 		6F1F4DEC15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4DF015A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
@@ -1562,6 +1565,7 @@
 				6F9C46A614C5C36300824AB2 /* Fonts */,
 				6F9C46A914C5C36300824AB2 /* HTML */,
 				6F9C46AB14C5C36300824AB2 /* Images */,
+				6F1894D01A1201FC00A31817 /* Employees.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1939,6 +1943,7 @@
 				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
 				6FFAB7C219DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */,
+				6F1894D21A1201FC00A31817 /* Employees.plist in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 				6FFAB7B619DD901A00A91997 /* EmployeeHeaderView.xib in Resources */,
 				6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
@@ -2054,6 +2059,7 @@
 				6FCB4F061926651F00047AD3 /* RootSplitViewDemoController.xib in Resources */,
 				6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
 				6FFAB7C119DD901A00A91997 /* BindingsControlsDemoViewController.xib in Resources */,
+				6F1894D11A1201FC00A31817 /* Employees.plist in Resources */,
 				6FCB4F071926651F00047AD3 /* RootTabBarDemoViewController.xib in Resources */,
 				6FFAB7B519DD901A00A91997 /* EmployeeHeaderView.xib in Resources */,
 				6FCB4F081926651F00047AD3 /* Beon-Regular.otf in Resources */,
