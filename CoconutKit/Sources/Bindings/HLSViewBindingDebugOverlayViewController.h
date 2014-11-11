@@ -1,5 +1,5 @@
 //
-//  HLSBindingDebugOverlayViewController.h
+//  HLSViewBindingDebugOverlayViewController.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 02/12/13.
@@ -11,7 +11,7 @@
 /**
  * Overlay view controller displaying binding debug information
  */
-@interface HLSBindingDebugOverlayViewController : HLSViewController <UIPopoverControllerDelegate>
+@interface HLSViewBindingDebugOverlayViewController : HLSViewController <UIPopoverControllerDelegate>
 
 /**
  * Show the overlay
@@ -20,7 +20,7 @@
 
 @end
 
-@interface HLSBindingDebugOverlayViewController (UnavailableMethods)
+@interface HLSViewBindingDebugOverlayViewController (UnavailableMethods)
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;

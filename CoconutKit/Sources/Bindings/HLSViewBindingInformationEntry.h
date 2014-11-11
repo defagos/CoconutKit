@@ -1,5 +1,5 @@
 //
-//  HLSBindingInformationEntry.h
+//  HLSViewBindingInformationEntry.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 04.11.14.
@@ -9,7 +9,7 @@
 /**
  * Contains information related to a binding entry
  */
-@interface HLSBindingInformationEntry : NSObject
+@interface HLSViewBindingInformationEntry : NSObject
 
 /**
  * Create an entry with a given name (mandatory), text and object (optional). If an object is passed it will
@@ -42,7 +42,7 @@
 
 @end
 
-@interface HLSBindingInformationEntry (UnavailableMethods)
+@interface HLSViewBindingInformationEntry (UnavailableMethods)
 
 - (instancetype)init NS_UNAVAILABLE;
 

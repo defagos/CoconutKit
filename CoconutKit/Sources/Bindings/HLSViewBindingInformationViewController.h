@@ -1,5 +1,5 @@
 //
-//  HLSBindingInformationViewController.h
+//  HLSViewBindingInformationViewController.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 03/12/13.
@@ -11,7 +11,7 @@
 /**
  * Display various informations about a binding
  */
-@interface HLSBindingInformationViewController : UITableViewController
+@interface HLSViewBindingInformationViewController : UITableViewController
 
 /**
  * Initialize for displaying the provided binding information
@@ -20,7 +20,7 @@
 
 @end
 
-@interface HLSBindingInformationViewController (UnavailableMethods)
+@interface HLSViewBindingInformationViewController (UnavailableMethods)
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;

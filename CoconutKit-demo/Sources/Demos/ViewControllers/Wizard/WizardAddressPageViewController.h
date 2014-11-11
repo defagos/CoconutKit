@@ -6,5 +6,5 @@
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
-@interface WizardAddressPageViewController : HLSViewController <HLSBindingDelegate, HLSValidable>
+@interface WizardAddressPageViewController : HLSViewController <HLSViewBindingDelegate, HLSValidable>
 @end

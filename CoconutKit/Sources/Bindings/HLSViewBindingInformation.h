@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
-#import "HLSBindingDelegate.h"
+#import "HLSViewBindingDelegate.h"
 
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
@@ -104,7 +104,7 @@
 /**
  * Return the object binding events will be sent to, nil if none or not resolved yet
  */
-@property (nonatomic, readonly, weak) id<HLSBindingDelegate> delegate;
+@property (nonatomic, readonly, weak) id<HLSViewBindingDelegate> delegate;
 
 /**
  * Return YES iff the binding has been verified completely. If verified, check the error property to check whether

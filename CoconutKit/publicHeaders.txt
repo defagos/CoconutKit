@@ -5,7 +5,6 @@ HLSAnimationStep.h
 HLSApplicationInformation.h
 HLSAssert.h
 HLSAutorotation.h
-HLSBindingDelegate.h
 HLSConnection.h
 HLSContainerStack.h
 HLSCursor.h
@@ -55,6 +54,7 @@ HLSValue2TableViewCell.h
 HLSVector.h
 HLSViewAnimation.h
 HLSViewAnimationStep.h
+HLSViewBindingDelegate.h
 HLSViewController.h
 HLSWebViewController.h
 HLSWizardViewController.h

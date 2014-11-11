@@ -1,18 +1,18 @@
 //
-//  HLSBindingInformationEntry.m
+//  HLSViewBindingInformationEntry.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 04.11.14.
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
-#import "HLSBindingInformationEntry.h"
+#import "HLSViewBindingInformationEntry.h"
 
 #import "HLSRuntime.h"
 #import "UIColor+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
-@interface HLSBindingInformationEntry ()
+@interface HLSViewBindingInformationEntry ()
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *text;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation HLSBindingInformationEntry
+@implementation HLSViewBindingInformationEntry
 
 #pragma mark Class methods
 
@@ -53,7 +53,7 @@
         self.object = object;
         
         if (object) {
-            self.text = [HLSBindingInformationEntry identityStringForObject:object] ?: @"-";
+            self.text = [HLSViewBindingInformationEntry identityStringForObject:object] ?: @"-";
         }
         else {
             self.text = text ?: @"-";

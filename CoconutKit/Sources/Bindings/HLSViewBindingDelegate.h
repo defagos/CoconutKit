@@ -1,5 +1,5 @@
 //
-//  HLSBindingDelegate.h
+//  HLSViewBindingDelegate.h
 //  CoconutKit
 //
 //  Created by Samuel Défago on 01/04/14.
@@ -9,7 +9,7 @@
 /**
  * Protocol implemented by object which want to be notified about binding events
  */
-@protocol HLSBindingDelegate <NSObject>
+@protocol HLSViewBindingDelegate <NSObject>
 
 @optional
 

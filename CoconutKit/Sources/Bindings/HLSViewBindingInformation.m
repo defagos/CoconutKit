@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 @property (nonatomic, assign) SEL transformationSelector;
 @property (nonatomic, strong) NSObject<HLSTransformer> *transformer;
 
-@property (nonatomic, weak) id<HLSBindingDelegate> delegate;
+@property (nonatomic, weak) id<HLSViewBindingDelegate> delegate;
 
 @property (nonatomic, assign) HLSViewBindingStatus status;
 
@@ -684,12 +684,12 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 // (not in the context of the bound view itself). Moreover, this avoids collisions between the keypath to bind and
 // view properties bearing the same name (e.g. a property called 'text' bound to a text field would be trapped
 // otherwise be resolved on the text field itself)
-+ (id<HLSBindingDelegate>)delegateForView:(UIView *)view
++ (id<HLSViewBindingDelegate>)delegateForView:(UIView *)view
 {
     UIResponder *responder = view.nextResponder;
     while (responder) {
-        if ([responder conformsToProtocol:@protocol(HLSBindingDelegate)]) {
-            return (id<HLSBindingDelegate>)responder;
+        if ([responder conformsToProtocol:@protocol(HLSViewBindingDelegate)]) {
+            return (id<HLSViewBindingDelegate>)responder;
         }
         
         // Does not get higher than the receiver parent view controller, which defines the binding context

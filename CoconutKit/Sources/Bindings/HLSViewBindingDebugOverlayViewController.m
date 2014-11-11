@@ -1,22 +1,22 @@
 //
-//  HLSBindingsDebugOverlayViewController.m
+//  HLSViewBindingsDebugOverlayViewController.m
 //  CoconutKit
 //
 //  Created by Samuel Défago on 02/12/13.
 //  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
-#import "HLSBindingDebugOverlayViewController.h"
+#import "HLSViewBindingDebugOverlayViewController.h"
 
-#import "HLSBindingInformationViewController.h"
 #import "HLSLogger.h"
+#import "HLSViewBindingInformationViewController.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
 
 static UIWindow *s_overlayWindow = nil;
 static UIWindow *s_previousKeyWindow = nil;
 
-@interface HLSBindingDebugOverlayViewController ()
+@interface HLSViewBindingDebugOverlayViewController ()
 
 @property (nonatomic, weak) UIViewController *debuggedViewController;
 @property (nonatomic, assign, getter=isRecursive) BOOL recursive;
@@ -25,7 +25,7 @@ static UIWindow *s_previousKeyWindow = nil;
 
 @end
 
-@implementation HLSBindingDebugOverlayViewController
+@implementation HLSViewBindingDebugOverlayViewController
 
 #pragma mark Class methods
 
@@ -43,7 +43,7 @@ static UIWindow *s_previousKeyWindow = nil;
     
     // Using a second window and setting our overlay as its root view controller ensures that rotation is dealt with correctly
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    s_overlayWindow.rootViewController = [[HLSBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
+    s_overlayWindow.rootViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
     [s_overlayWindow makeKeyAndVisible];
 }
 
@@ -184,7 +184,7 @@ static UIWindow *s_previousKeyWindow = nil;
     UIView *view = sender;
     HLSViewBindingInformation *bindingInformation = view.userInfo_hls[@"bindingInformation"];
     
-    HLSBindingInformationViewController *bindingInformationViewController = [[HLSBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
+    HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
     self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationViewController];
     [self.bindingInformationPopoverController presentPopoverFromRect:view.frame
                                                               inView:self.view
