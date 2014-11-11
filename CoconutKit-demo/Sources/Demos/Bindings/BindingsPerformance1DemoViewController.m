@@ -1,20 +1,20 @@
 //
-//  BindingsPerformanceDemoViewController.m
+//  BindingsPerformance1DemoViewController.m
 //  CoconutKit-demo
 //
 //  Created by Samuel Défago on 11.11.14.
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
-#import "BindingsPerformanceDemoViewController.h"
+#import "BindingsPerformance1DemoViewController.h"
 
-@interface BindingsPerformanceDemoViewController ()
+@interface BindingsPerformance1DemoViewController ()
 
 @property (nonatomic, strong) NSString *name;
 
 @end
 
-@implementation BindingsPerformanceDemoViewController
+@implementation BindingsPerformance1DemoViewController
 
 #pragma mark Object creation and destruction
 
@@ -32,7 +32,7 @@
 {
     [super localize];
     
-    self.title = NSLocalizedString(@"Performance", nil);
+    self.title = NSLocalizedString(@"Performance 1", nil);
 }
 
 @end

@@ -9,7 +9,8 @@
 #import "DemosListViewController.h"
 
 #import "BindingsControlsDemoViewController.h"
-#import "BindingsPerformanceDemoViewController.h"
+#import "BindingsPerformance1DemoViewController.h"
+#import "BindingsPerformance2DemoViewController.h"
 #import "BindingsViewsDemoViewController.h"
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
@@ -60,7 +61,8 @@ typedef enum {
     BindingsDemoIndexEnumBegin = 0,
     BindingsDemoIndexControls = BindingsDemoIndexEnumBegin,
     BindingsDemoIndexViews,
-    BindingsDemoIndexPerformance,
+    BindingsDemoIndexPerformance1,
+    BindingsDemoIndexPerformance2,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -286,8 +288,13 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case BindingsDemoIndexPerformance: {
-                    cell.textLabel.text = NSLocalizedString(@"Performance", nil);
+                case BindingsDemoIndexPerformance1: {
+                    cell.textLabel.text = NSLocalizedString(@"Performance 1", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexPerformance2: {
+                    cell.textLabel.text = NSLocalizedString(@"Performance 2", nil);
                     break;
                 }
                     
@@ -485,8 +492,13 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case BindingsDemoIndexPerformance: {
-                    demoViewController = [[BindingsPerformanceDemoViewController alloc] init];
+                case BindingsDemoIndexPerformance1: {
+                    demoViewController = [[BindingsPerformance1DemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexPerformance2: {
+                    demoViewController = [[BindingsPerformance2DemoViewController alloc] init];
                     break;
                 }
                     
