@@ -6,6 +6,6 @@
 //  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
-@interface BindingsControlsDemoViewController : HLSViewController
+@interface BindingsControlsDemoViewController : HLSViewController <HLSViewBindingDelegate>
 
 @end

@@ -14,13 +14,13 @@
 @optional
 
 // Only received if a transformation was performed
-- (void)view:(UIView *)view transformationDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
-- (void)view:(UIView *)view transformationDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
+- (void)boundView:(UIView *)boundView transformationDidSucceedWithObject:(id)object;
+- (void)boundView:(UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error;
 
-- (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
-- (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
+- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object;
+- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error;
 
-- (void)view:(UIView *)view updateDidSucceedForObject:(id)object keyPath:(NSString *)keyPath;
-- (void)view:(UIView *)view updateDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error;
+- (void)boundView:(UIView *)boundView updateDidSucceedWithObject:(id)object;
+- (void)boundView:(UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error;
 
 @end

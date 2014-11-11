@@ -237,26 +237,26 @@
     } reverseBlock:nil];
 }
 
-#pragma mark HLSBindingDelegate protocol implementation
+#pragma mark HLSViewBindingDelegate protocol implementation
 
-- (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
+- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object
 {
-    HLSLoggerInfo(@"Check did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
+    HLSLoggerInfo(@"Check did succeed for object %@ bound to view %@ with keypath %@", object, boundView, boundView.bindKeyPath);
 }
 
-- (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
+- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error
 {
-    HLSLoggerInfo(@"Check did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
+    HLSLoggerInfo(@"Check did fail for object %@ bound to view %@ with keypath %@; reason %@", object, boundView, boundView.bindKeyPath, error);
 }
 
-- (void)view:(UIView *)view updateDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
+- (void)boundView:(UIView *)boundView updateDidSucceedWithObject:(id)object
 {
-    HLSLoggerInfo(@"Update did succeed for object %@ bound to view %@ with keypath %@", object, view, keyPath);
+    HLSLoggerInfo(@"Update did succeed for object %@ bound to view %@ with keypath %@", object, boundView, boundView.bindKeyPath);
 }
 
-- (void)view:(UIView *)view updateDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
+- (void)boundView:(UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error
 {
-    HLSLoggerInfo(@"Update did fail for object %@ bound to view %@ with keypath %@; reason %@", object, view, keyPath, error);
+    HLSLoggerInfo(@"Update did fail for object %@ bound to view %@ with keypath %@; reason %@", object, boundView, boundView.bindKeyPath, error);
 }
 
 #pragma mark Validation

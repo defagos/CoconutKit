@@ -84,27 +84,27 @@
 
 #pragma mark HLSBindingDelegate protocol implementation
 
-- (void)view:(UIView *)view transformationDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
+- (void)boundView:(UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error
 {
-    view.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
+    boundView.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
     
-    UILabel *errorLabel = [self errorLabelForView:view];
+    UILabel *errorLabel = [self errorLabelForView:boundView];
     errorLabel.text = [error localizedDescription];
 }
 
-- (void)view:(UIView *)view checkDidSucceedForObject:(id)object keyPath:(NSString *)keyPath
+- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object
 {
-    view.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
+    boundView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
     
-    UILabel *errorLabel = [self errorLabelForView:view];
+    UILabel *errorLabel = [self errorLabelForView:boundView];
     errorLabel.text = nil;
 }
 
-- (void)view:(UIView *)view checkDidFailForObject:(id)object keyPath:(NSString *)keyPath withError:(NSError *)error
+- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error
 {
-    view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    boundView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     
-    UILabel *errorLabel = [self errorLabelForView:view];
+    UILabel *errorLabel = [self errorLabelForView:boundView];
     errorLabel.text = [error localizedDescription];
 }
 

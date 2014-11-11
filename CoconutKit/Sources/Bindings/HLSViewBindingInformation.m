@@ -215,8 +215,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         }
         
         if (success) {
-            if ([self.delegate respondsToSelector:@selector(view:transformationDidSucceedForObject:keyPath:)]) {
-                [self.delegate view:self.view transformationDidSucceedForObject:self.objectTarget keyPath:self.keyPath];
+            if ([self.delegate respondsToSelector:@selector(boundView:transformationDidSucceedWithObject:)]) {
+                [self.delegate boundView:self.view transformationDidSucceedWithObject:self.objectTarget];
             }
             
             if (pValue) {
@@ -229,8 +229,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
                         localizedDescription:CoconutKitLocalizedString(@"Incorrect format", nil)];
             [error setUnderlyingError:detailedError];
             
-            if ([self.delegate respondsToSelector:@selector(view:transformationDidFailForObject:keyPath:withError:)]) {
-                [self.delegate view:self.view transformationDidFailForObject:self.objectTarget keyPath:self.keyPath withError:error];
+            if ([self.delegate respondsToSelector:@selector(boundView:transformationDidFailWithObject:error:)]) {
+                [self.delegate boundView:self.view transformationDidFailWithObject:self.objectTarget error:error];
             }
             
             if (pError) {
@@ -260,14 +260,14 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     
     NSError *error = nil;
     if ([self.objectTarget validateValue:&value forKeyPath:self.keyPath error:&error]) {
-        if ([self.delegate respondsToSelector:@selector(view:checkDidSucceedForObject:keyPath:)]) {
-            [self.delegate view:self.view checkDidSucceedForObject:self.objectTarget keyPath:self.keyPath];
+        if ([self.delegate respondsToSelector:@selector(boundView:checkDidSucceedWithObject:)]) {
+            [self.delegate boundView:self.view checkDidSucceedWithObject:self.objectTarget];
         }
         return YES;
     }
     else {
-        if ([self.delegate respondsToSelector:@selector(view:checkDidFailForObject:keyPath:withError:)]) {
-            [self.delegate view:self.view checkDidFailForObject:self.objectTarget keyPath:self.keyPath withError:error];
+        if ([self.delegate respondsToSelector:@selector(boundView:checkDidFailWithObject:error:)]) {
+            [self.delegate boundView:self.view checkDidFailWithObject:self.objectTarget error:error];
         }
         
         if (pError) {
@@ -313,8 +313,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
                                                  code:HLSErrorUpdateError
                                  localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
             
-            if ([self.delegate respondsToSelector:@selector(view:updateDidFailForObject:keyPath:withError:)]) {
-                [self.delegate view:self.view updateDidFailForObject:self.objectTarget keyPath:self.keyPath withError:error];
+            if ([self.delegate respondsToSelector:@selector(boundView:updateDidFailWithObject:error:)]) {
+                [self.delegate boundView:self.view updateDidFailWithObject:self.objectTarget error:error];
             }
             
             if (pError) {
@@ -329,8 +329,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         }
     }
     
-    if ([self.delegate respondsToSelector:@selector(view:updateDidSucceedForObject:keyPath:)]) {
-        [self.delegate view:self.view updateDidSucceedForObject:self.objectTarget keyPath:self.keyPath];
+    if ([self.delegate respondsToSelector:@selector(boundView:updateDidSucceedWithObject:)]) {
+        [self.delegate boundView:self.view updateDidSucceedWithObject:self.objectTarget];
     }
     
     return YES;
