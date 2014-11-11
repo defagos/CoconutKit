@@ -9,6 +9,7 @@
 #import "HLSViewBindingDebugOverlayViewController.h"
 
 #import "HLSLogger.h"
+#import "HLSMAKVONotificationCenter.h"
 #import "HLSViewBindingInformationViewController.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
@@ -24,6 +25,8 @@ static UIWindow *s_previousKeyWindow = nil;
 @property (nonatomic, strong) UIPopoverController *bindingInformationPopoverController;
 
 @end
+
+static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bindingInformation);
 
 @implementation HLSViewBindingDebugOverlayViewController
 
@@ -45,6 +48,22 @@ static UIWindow *s_previousKeyWindow = nil;
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     s_overlayWindow.rootViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
     [s_overlayWindow makeKeyAndVisible];
+}
+
+#pragma mark Class methods
+
+// Recursively collect all scroll views in a given view
++ (NSArray *)scrollViewsInView:(UIView *)view
+{
+    if ([view isKindOfClass:[UIScrollView class]]) {
+        return @[view];
+    }
+    
+    NSMutableArray *scrollViews = [NSMutableArray array];
+    for (UIView *subview in view.subviews) {
+        [scrollViews addObjectsFromArray:[self scrollViewsInView:subview]];
+    }
+    return [NSArray arrayWithArray:scrollViews];
 }
 
 #pragma mark Object creation and destruction
@@ -78,15 +97,24 @@ static UIWindow *s_previousKeyWindow = nil;
     // Ensure correct orientation, even if the VC is presented while in landscape orientation
     
     // Since iOS 8: Rotation has completely changed (the view frame only is changed, no rotation transform is applied anymore).
+    UIView *previousWindowRootView = s_previousKeyWindow.rootViewController.view;
     if (! [self.view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
         // iOS 7: Apply the same transform as the previous key window
-        self.view.transform = s_previousKeyWindow.rootViewController.view.transform;
+        self.view.transform = previousWindowRootView.transform;
     }
     self.view.frame = [UIScreen mainScreen].bounds;
         
     [self displayDebugInformationForBindingsInView:self.debuggedViewController.view
                             debuggedViewController:self.debuggedViewController
                                          recursive:self.recursive];
+    
+    // Follow the motion of underlying views if a scroll view they are in is moved
+    NSArray *scrollViews = [HLSViewBindingDebugOverlayViewController scrollViewsInView:previousWindowRootView];
+    for (UIScrollView *scrollView in scrollViews) {
+        [scrollView addObserver:self keyPath:@"contentOffset" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+            [self updateButtonFrames];
+        }];
+    }
 }
 
 #pragma mark Rotation
@@ -125,9 +153,7 @@ static UIWindow *s_previousKeyWindow = nil;
     HLSViewBindingInformation *bindingInformation = view.bindingInformation;
     if (bindingInformation) {
         UIButton *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        CGFloat borderWidth = view.bindingInformation.updatedAutomatically ? 3.f : 1.f;
-        overlayButton.frame = [self overlayViewFrameForView:view withBorderWith:borderWidth];
+        overlayButton.frame = [self overlayViewFrameForView:view];
                 
         if (! bindingInformation.verified) {
             overlayButton.layer.borderColor = [UIColor orangeColor].CGColor;
@@ -136,9 +162,17 @@ static UIWindow *s_previousKeyWindow = nil;
             overlayButton.layer.borderColor = bindingInformation.error ? [UIColor redColor].CGColor : [UIColor greenColor].CGColor;
         }
         
+        CGFloat borderWidth = HLSBorderWidthForBindingInformation(view.bindingInformation);
         overlayButton.layer.borderWidth = borderWidth;
-        overlayButton.userInfo_hls = @{@"bindingInformation" : bindingInformation};
+        overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Track frame changes
+        __weak UIView *weakView = view;
+        [view addObserver:self keyPath:@"frame" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+            overlayButton.frame = [self overlayViewFrameForView:weakView];
+        }];
+        
         [self.view addSubview:overlayButton];
     }
     
@@ -147,7 +181,7 @@ static UIWindow *s_previousKeyWindow = nil;
     }
 }
 
-- (CGRect)overlayViewFrameForView:(UIView *)view withBorderWith:(CGFloat)borderWidth
+- (CGRect)overlayViewFrameForView:(UIView *)view
 {
     // iOS 8: Since no rotation is applied anymore, we must use another method to convert view frames
     CGRect frame = CGRectZero;
@@ -160,10 +194,19 @@ static UIWindow *s_previousKeyWindow = nil;
     }
     
     // Make the button frame surround the view
+    CGFloat borderWidth = HLSBorderWidthForBindingInformation(view.bindingInformation);
     return CGRectMake(CGRectGetMinX(frame) - borderWidth,
                       CGRectGetMinY(frame) - borderWidth,
                       CGRectGetWidth(frame) + 2 * borderWidth,
                       CGRectGetHeight(frame) + 2 * borderWidth);
+}
+
+- (void)updateButtonFrames
+{
+    for (UIButton *overlayButton in self.view.subviews) {
+        HLSViewBindingInformation *bindingInformation = [overlayButton.userInfo_hls objectForKey:@"bindingInformation"];
+        overlayButton.frame = [self overlayViewFrameForView:bindingInformation.view];
+    }
 }
 
 #pragma mark UIPopoverControllerDelegate protocol implementation
@@ -185,16 +228,23 @@ static UIWindow *s_previousKeyWindow = nil;
 
 - (void)showInfos:(id)sender
 {
-    NSAssert([sender isKindOfClass:[UIView class]], @"Expect a view");
-    UIView *view = sender;
-    HLSViewBindingInformation *bindingInformation = view.userInfo_hls[@"bindingInformation"];
+    NSAssert([sender isKindOfClass:[UIButton class]], @"Expect a button");
+    UIButton *overlayButton = sender;
+    HLSViewBindingInformation *bindingInformation = [overlayButton.userInfo_hls objectForKey:@"bindingInformation"];
     
     HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
     self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationViewController];
-    [self.bindingInformationPopoverController presentPopoverFromRect:view.frame
+    [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
                                                               inView:self.view
                                             permittedArrowDirections:UIPopoverArrowDirectionAny
                                                             animated:YES];
 }
 
 @end
+
+#pragma mark Static functions
+
+static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bindingInformation)
+{
+    return bindingInformation.updatedAutomatically ? 3.f : 1.f;
+}
