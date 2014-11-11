@@ -11,6 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSMAKVONotificationCenter.h"
 #import "HLSViewBindingInformationViewController.h"
+#import "UINavigationController+HLSExtensions.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
 
@@ -46,7 +47,10 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     
     // Using a second window and setting our overlay as its root view controller ensures that rotation is dealt with correctly
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    s_overlayWindow.rootViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
+    HLSViewBindingDebugOverlayViewController *bindingDebugOverlayViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
+    UINavigationController *bindingDebugNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingDebugOverlayViewController];
+    bindingDebugNavigationController.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
+    s_overlayWindow.rootViewController = bindingDebugNavigationController;
     [s_overlayWindow makeKeyAndVisible];
 }
 
@@ -124,6 +128,20 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
             [weakSelf updateButtonFrames];
         }];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 #pragma mark Rotation
@@ -251,12 +269,18 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     HLSViewBindingInformation *bindingInformation = [overlayButton.userInfo_hls objectForKey:@"bindingInformation"];
     
     HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
-    self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationViewController];
-    self.bindingInformationPopoverController.delegate = self;
-    [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
-                                                              inView:self.view
-                                            permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                            animated:YES];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self.navigationController pushViewController:bindingInformationViewController animated:YES];
+    }
+    else {
+        self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationViewController];
+        self.bindingInformationPopoverController.delegate = self;
+        [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
+                                                                  inView:self.view
+                                                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                                animated:YES];
+    }
 }
 
 @end

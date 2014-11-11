@@ -23,6 +23,8 @@
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 @property (nonatomic, strong) NSArray *entries;
 
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation HLSViewBindingInformationViewController
@@ -31,7 +33,7 @@
 
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
-    if (self = [super initWithStyle:UITableViewStyleGrouped]) {
+    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.bindingInformation = bindingInformation;
     }
     return self;
@@ -45,7 +47,19 @@
     
     self.preferredContentSize = CGSizeMake(320.f, 640.f);
     
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    
     [self reloadData];
+}
+
+#pragma mark Localization
+
+- (void)localize
+{
+    [super localize];
+    
+    self.title = NSLocalizedString(@"Properties", nil);
 }
 
 #pragma mark Data
