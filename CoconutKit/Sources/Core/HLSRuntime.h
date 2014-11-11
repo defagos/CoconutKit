@@ -116,3 +116,9 @@ BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass);
  * Return YES iff object is a class object
  */
 BOOL hls_isClass(id object);
+
+/**
+ * Replace all references to an object (replaced object), appearing in an object (object), by references to another object
+ * (replacingObject)
+ */
+void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject);

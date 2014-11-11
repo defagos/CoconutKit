@@ -9,6 +9,7 @@
 #import "HLSNibView.h"
 
 #import "HLSLogger.h"
+#import "HLSRuntime.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 
@@ -70,17 +71,16 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        // If no child views, consider we are deserializing a placeholder, and add a proper instance as subview
+        // If no child views, consider we are deserializing a placeholder, and add an instance deserizalized from the nib
+        // as subview. We cannot simply return this instance instead of self since decoding would otherwise throw an exception.
+        // The view hierarchy contains an extra view level (the placeholder) which can only be later removed. To be able to
+        // ensure outlet consistency, this must be made right after decoding, i.e. in -awakeFromNib
         if ([self.subviews count] == 0) {
             _isPlaceholder = YES;
             
-            // Match frame and colors so that the placeholder view is visually replaced by a properly instantiated
-            // view instance
-            HLSNibView *view = [[self class] view];
-            view.frame = self.bounds;
-            [self addSubview:view];
-            
-            self.backgroundColor = view.backgroundColor;
+            // The view we want to replace the placeholder with, which is complete since deserialized from its nib
+            HLSNibView *nibView = [[self class] view];
+            [self addSubview:nibView];
         }
     }
     return self;
@@ -88,14 +88,24 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 
 #pragma mark Overrides
 
-- (void)didMoveToWindow
+- (void)awakeFromNib
 {
-    [super didMoveToWindow];
+    [super awakeFromNib];
     
     if (_isPlaceholder) {
-        UIView *firstSubview = [self.subviews firstObject];
-        firstSubview.frame = self.frame;
-        [self.superview insertSubview:firstSubview belowSubview:self];
+        // Replace the placeholder with the nib-instantiated view it contains
+        UIView *nibView = [self.subviews firstObject];
+        
+        // Replace references to the placeholder with references to the nib-instantiated view
+        UIResponder *responder = self.superview;
+        while (responder) {
+            hls_object_replaceReferencesToObject(responder, self, nibView);
+            responder = responder.nextResponder;
+        }
+        
+        // Get rid of the placeholder and install the nib-instantiated view instead
+        nibView.frame = self.frame;
+        [self.superview insertSubview:nibView belowSubview:self];
         [self removeFromSuperview];
     }
 }
