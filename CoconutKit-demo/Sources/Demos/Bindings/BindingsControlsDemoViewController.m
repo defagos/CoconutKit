@@ -33,6 +33,9 @@
 
 @property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
 
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UIView *contentView;
+
 @end
 
 @implementation BindingsControlsDemoViewController
@@ -115,6 +118,14 @@
 }
 
 #pragma mark View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.scrollView.contentSize = self.contentView.bounds.size;
+    [self.scrollView addSubview:self.contentView];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
