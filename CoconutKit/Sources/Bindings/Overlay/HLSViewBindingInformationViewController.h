@@ -18,6 +18,11 @@
  */
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Reload the information currently displayed
+ */
+- (void)reloadData;
+
 @end
 
 @interface HLSViewBindingInformationViewController (UnavailableMethods)

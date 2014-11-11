@@ -77,6 +77,13 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     return self;
 }
 
+#pragma mark Accessors and mutators
+
+- (HLSViewBindingInformationViewController *)bindingInformationViewController
+{
+    return (HLSViewBindingInformationViewController *)self.bindingInformationPopoverController.contentViewController;
+}
+
 #pragma mark View lifecycle
 
 - (void)loadView
@@ -108,11 +115,13 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
                             debuggedViewController:self.debuggedViewController
                                          recursive:self.recursive];
     
+    __weak __typeof(self) weakSelf = self;
+    
     // Follow the motion of underlying views if a scroll view they are in is moved
     NSArray *scrollViews = [HLSViewBindingDebugOverlayViewController scrollViewsInView:previousWindowRootView];
     for (UIScrollView *scrollView in scrollViews) {
         [scrollView addObserver:self keyPath:@"contentOffset" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            [self updateButtonFrames];
+            [weakSelf updateButtonFrames];
         }];
     }
 }
@@ -166,12 +175,21 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
         overlayButton.layer.borderWidth = borderWidth;
         overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
+
+        __weak UIView *weakView = view;
+        __weak __typeof(self) weakSelf = self;
         
         // Track frame changes
-        __weak UIView *weakView = view;
         [view addObserver:self keyPath:@"frame" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            overlayButton.frame = [self overlayViewFrameForView:weakView];
+            overlayButton.frame = [weakSelf overlayViewFrameForView:weakView];
         }];
+        
+        // Track updates
+        if ([bindingInformation.keyPath rangeOfString:@"@"].length == 0) {
+            [bindingInformation.objectTarget addObserver:self keyPath:bindingInformation.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                [[weakSelf bindingInformationViewController] reloadData];
+            }];
+        }
         
         [self.view addSubview:overlayButton];
     }
@@ -234,6 +252,7 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     
     HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
     self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationViewController];
+    self.bindingInformationPopoverController.delegate = self;
     [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
                                                               inView:self.view
                                             permittedArrowDirections:UIPopoverArrowDirectionAny
