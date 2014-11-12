@@ -15,6 +15,7 @@
 #import "HLSViewBindingInformationEntry.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
+#import "UIPopoverController+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
@@ -53,6 +54,13 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    
+    if (! self.popoverController) {
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                              target:self
+                                                                                              action:@selector(close:)];
+    }
     
     [self reloadData];
 }
@@ -242,6 +250,13 @@
     
     HLSViewBindingInformationEntry *entry = [self entryAtIndexPath:indexPath];
     [entry highlight];
+}
+
+#pragma mark Actions
+
+- (void)close:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

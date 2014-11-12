@@ -11,6 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSMAKVONotificationCenter.h"
 #import "HLSViewBindingInformationViewController.h"
+#import "NSBundle+HLSExtensions.h"
 #import "UINavigationController+HLSExtensions.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
@@ -48,10 +49,7 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     
     // Using a second window and setting our overlay as its root view controller ensures that rotation is dealt with correctly
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    HLSViewBindingDebugOverlayViewController *bindingDebugOverlayViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
-    UINavigationController *bindingDebugNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingDebugOverlayViewController];
-    bindingDebugNavigationController.autorotationMode = HLSAutorotationModeContainerAndAllChildren;
-    s_overlayWindow.rootViewController = bindingDebugNavigationController;
+    s_overlayWindow.rootViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
     [s_overlayWindow makeKeyAndVisible];
 }
 
@@ -263,12 +261,13 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     HLSViewBindingInformation *bindingInformation = [overlayButton.userInfo_hls objectForKey:@"bindingInformation"];
     
     HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
+    UINavigationController *bindingInformationNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingInformationViewController];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self.navigationController pushViewController:bindingInformationViewController animated:YES];
+        [self presentViewController:bindingInformationNavigationController animated:YES completion:nil];
     }
     else {
-        UINavigationController *bindingInformationNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingInformationViewController];
+        
         self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationNavigationController];
         self.bindingInformationPopoverController.delegate = self;
         [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
