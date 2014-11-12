@@ -102,8 +102,12 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     // Since iOS 8: Rotation has completely changed (the view frame only is changed, no rotation transform is applied anymore).
     UIView *previousWindowRootView = s_previousKeyWindow.rootViewController.view;
     if (! [self.view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-        // iOS 7: Apply the same transform as the previous key window
-        self.view.transform = previousWindowRootView.transform;
+        // iOS 7: Apply the same transform as the previous key window. Also apply the device scale so that -convertRect:toView:
+        //        conversions of rects between views belonging to different views give correct results for Retina devices. This
+        //        trick is not needed with iOS 8 -convertRect:toCoordinateSpace:
+        CGFloat scale = [UIScreen mainScreen].scale;
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
+        self.view.transform = CGAffineTransformConcat(previousWindowRootView.transform, scaleTransform);
     }
     self.view.frame = [UIScreen mainScreen].bounds;
         
