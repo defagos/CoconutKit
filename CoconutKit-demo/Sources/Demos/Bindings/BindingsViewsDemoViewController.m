@@ -61,13 +61,6 @@
     [self changeEmployee];
 }
 
-#pragma mark Orientation management
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIInterfaceOrientationPortrait;
-}
-
 #pragma mark Localization
 
 - (void)localize

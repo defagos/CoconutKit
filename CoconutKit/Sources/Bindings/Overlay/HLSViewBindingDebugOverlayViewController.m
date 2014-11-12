@@ -102,15 +102,11 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     // Since iOS 8: Rotation has completely changed (the view frame only is changed, no rotation transform is applied anymore).
     UIView *previousWindowRootView = s_previousKeyWindow.rootViewController.view;
     if (! [self.view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-        // iOS 7: Apply the same transform as the previous key window. Also apply the device scale so that -convertRect:toView:
-        //        conversions of rects between views belonging to different views give correct results for Retina devices. This
-        //        trick is not needed with iOS 8 -convertRect:toCoordinateSpace:
-        CGFloat scale = [UIScreen mainScreen].scale;
-        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scale, scale);
-        self.view.transform = CGAffineTransformConcat(previousWindowRootView.transform, scaleTransform);
+        // iOS 7: Apply the same transform as the previous key window
+        self.view.transform = previousWindowRootView.transform;
     }
     self.view.frame = [UIScreen mainScreen].bounds;
-        
+    
     [self displayDebugInformationForBindingsInView:self.debuggedViewController.view
                             debuggedViewController:self.debuggedViewController
                                          recursive:self.recursive];
@@ -126,18 +122,11 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillLayoutSubviews
 {
-    [super viewWillAppear:animated];
+    [super viewWillLayoutSubviews];
     
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [self updateButtonFrames];
 }
 
 #pragma mark Rotation
@@ -220,7 +209,7 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     if ([view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
         frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
     }
-    // Pre-iOS 7: The usual conversion gives correct results for views, even in different windows
+    // Pre-iOS 8: The usual conversion gives correct results for views, even in different windows
     else {
         frame = [view convertRect:view.bounds toView:self.view];
     }
