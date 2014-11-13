@@ -1,5 +1,5 @@
 //
-//  LabelBindingsDemo6ViewController.h
+//  BindingsProgrammaticDemoViewController.h
 //  CoconutKit-demo
 //
 //  Created by Samuel Defago on 07/11/14.
@@ -8,6 +8,6 @@
 
 #import "HLSViewController.h"
 
-@interface LabelBindingsDemo6ViewController : HLSViewController
+@interface BindingsProgrammaticDemoViewController : HLSViewController
 
 @end

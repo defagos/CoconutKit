@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
+#import "HLSTransformer.h"
+
 /**
  * Usually, when you have to display or set some value on screen, and if you are using Interface Builder to design
  * your user interface, you have to create and bind an outlet. Though this process is completely straightforward,
@@ -175,5 +177,11 @@
  * not needed.
  */
 - (BOOL)updateModelWithError:(NSError **)pError;
+
+@end
+
+@interface UIView (HLSViewBindingProgrammatic)
+
+- (void)bindToKeyPath:(NSString *)keyPath withTransformer:(NSString *)transformer;
 
 @end

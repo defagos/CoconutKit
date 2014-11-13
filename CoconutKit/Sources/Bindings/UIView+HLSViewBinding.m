@@ -255,6 +255,25 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @end
 
+@implementation UIView (HLSViewBindingProgrammatic)
+
+- (void)bindToKeyPath:(NSString *)keyPath withTransformer:(NSString *)transformer
+{
+    self.bindKeyPath = keyPath;
+    self.bindTransformer = transformer;
+    
+    self.bindingInformation = [[HLSViewBindingInformation alloc] initWithKeyPath:keyPath
+                                                                 transformerName:transformer
+                                                                            view:self];
+    self.bindingInformation.updateAnimated = self.bindUpdateAnimated;
+    
+    if (self.window) {
+        [self updateView];
+    }
+}
+
+@end
+
 #pragma mark Swizzled method implementations
 
 // By swizzling -didMoveToWindow, we know that the view has been added to its view hierarchy. The responder chain is therefore
