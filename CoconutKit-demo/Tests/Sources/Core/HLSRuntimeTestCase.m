@@ -279,6 +279,160 @@
 
 @end
 
+@interface RuntimeTestClass10 : NSObject
+
+// Primitive integer type as return value
++ (NSInteger)classMagicalInteger;
+- (NSInteger)instanceMagicalInteger;
+
+// Primitive floating-point type as return value
++ (float)classMagicalFloat;
+- (float)instanceMagicalFloat;
+
+// Object as return value
++ (NSString *)classMagicalString;
+- (NSString *)instanceMagicalString;
+
+// Struct as return value
++ (CGPoint)classMagicalPoint;
+- (CGPoint)instanceMagicalPoint;
+
+// Parameters
+- (NSString *)instanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p;
+- (NSString *)instanceVariadicMethodJoiningStrings:(NSString *)firstString stringList:(va_list)stringList;
+- (NSString *)instanceVariadicMethodJoiningStrings:(NSString *)firstString, ... NS_REQUIRES_NIL_TERMINATION;
+
+@end
+
+@implementation RuntimeTestClass10
+
++ (NSInteger)classMagicalInteger
+{
+    return 420;
+}
+- (NSInteger)instanceMagicalInteger
+{
+    return 420;
+}
+
++ (float)classMagicalFloat
+{
+    return 420.f;
+}
+
+- (float)instanceMagicalFloat
+{
+    return 420.f;
+}
+
++ (NSString *)classMagicalString
+{
+    return @"Tom";
+}
+
+- (NSString *)instanceMagicalString
+{
+    return @"Tom";
+}
+
++ (CGPoint)classMagicalPoint
+{
+    return CGPointMake(420.f, 420.f);
+}
+- (CGPoint)instanceMagicalPoint
+{
+    return CGPointMake(420.f, 420.f);
+}
+
+- (NSString *)instanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p
+{
+    return [NSString stringWithFormat:@"%@,%@,%@,%@,%@", @(i), @(f), s, @(p.x), @(p.y)];
+}
+
+- (NSString *)instanceVariadicMethodJoiningStrings:(NSString *)firstString stringList:(va_list)stringList
+{
+    NSMutableArray *strings = [NSMutableArray arrayWithObject:firstString];
+    
+    NSString *string = va_arg(stringList, NSString *);
+    while (string) {
+        [strings addObject:string];
+        string = va_arg(stringList, NSString *);
+    }
+    
+    return [strings componentsJoinedByString:@","];
+}
+
+- (NSString *)instanceVariadicMethodJoiningStrings:(NSString *)firstString, ...
+{
+    va_list args;
+    
+    va_start(args, firstString);
+    NSString *string = [self instanceVariadicMethodJoiningStrings:firstString stringList:args];
+    va_end(args);
+    
+    return string;
+}
+
+@end
+
+@interface RuntimeTestClass10 (Swizzling)
+
+@end
+
+@implementation RuntimeTestClass10 (Swizzling)
+
++ (void)load
+{
+    // Swizzle to get 42 as a result
+    __block IMP originalClassMagicalIntegerImp = hls_class_swizzleClassSelector_block(self, @selector(classMagicalInteger), ^(id self_) {
+        return ((NSInteger (*)(id, SEL))originalClassMagicalIntegerImp)(self_, @selector(classMagicalInteger)) / 10;
+    });
+    __block IMP originalInstanceMagicalIntegerImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalInteger), ^(id self_) {
+        return ((NSInteger (*)(id, SEL))originalInstanceMagicalIntegerImp)(self_, @selector(instanceMagicalInteger)) / 10;
+    });
+    
+    __block IMP originalClassMagicalFloatImp = hls_class_swizzleClassSelector_block(self, @selector(classMagicalFloat), ^(id self_) {
+        return ((float (*)(id, SEL))originalClassMagicalFloatImp)(self_, @selector(classMagicalFloat)) / 10.f;
+    });
+    __block IMP originalInstanceMagicalFloatImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalFloat), ^(id self_) {
+        return ((float (*)(id, SEL))originalInstanceMagicalFloatImp)(self_, @selector(instanceMagicalFloat)) / 10.f;
+    });
+    
+    // Swizzle to uppercase
+    __block IMP originalClassMagicalStringImp = hls_class_swizzleClassSelector_block(self, @selector(classMagicalString), ^(id self_) {
+        return [((NSString *(*)(id, SEL))originalClassMagicalStringImp)(self_, @selector(classMagicalString)) uppercaseString];
+    });
+    __block IMP originalInstanceMagicalStringImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalString), ^(id self_) {
+        return [((NSString *(*)(id, SEL))originalInstanceMagicalStringImp)(self_, @selector(instanceMagicalInteger)) uppercaseString];
+    });
+    
+    // Swizzle to get (42, 42) as a result
+    __block IMP originalClassMagicalPointImp = hls_class_swizzleClassSelector_block(self, @selector(classMagicalPoint), ^(id self_) {
+        CGPoint point = ((CGPoint (*)(id, SEL))originalClassMagicalPointImp)(self_, @selector(classMagicalPoint));
+        return CGPointMake(point.x / 10.f, point.y / 10.f);
+    });
+    __block IMP originalInstanceMagicalPointImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalPoint), ^(id self_) {
+        CGPoint point = ((CGPoint (*)(id, SEL))originalInstanceMagicalPointImp)(self_, @selector(instanceMagicalInteger));
+        return CGPointMake(point.x / 10.f, point.y / 10.f);
+    });
+    
+    // Replace ',' with '.' as separator
+    __block IMP originalInstanceMethodJoiningIntegerFloatStringPointImp = hls_class_swizzleSelector_block(self, @selector(instanceMethodJoiningInteger:float:string:point:), ^(id self_, NSInteger i, float f, NSString *s, CGPoint p) {
+        NSString *joinedString = ((NSString *(*)(id, SEL, NSInteger, float, NSString *, CGPoint))originalInstanceMethodJoiningIntegerFloatStringPointImp)(self_, @selector(instanceMethodJoiningInteger:float:string:point:), i, f, s, p);
+        return [joinedString stringByReplacingOccurrencesOfString:@"," withString:@"."];
+    });
+    
+    // Cannot swizzle functions with ellipsis (cannot forward the call to the original implementation). Must swizzle the method with va_list if available (of course, here available :) )
+    __block IMP originalInstanceVariadicMethodJoiningStringsStringListImp = hls_class_swizzleSelector_block(self, @selector(instanceVariadicMethodJoiningStrings:stringList:), ^(id self_, NSString *firstString, va_list stringList) {
+        NSString *joinedString = ((NSString *(*)(id, SEL, NSString *, va_list))originalInstanceVariadicMethodJoiningStringsStringListImp)(self_, @selector(instanceVariadicMethodJoiningStrings:stringList:), firstString, stringList);
+        return [joinedString stringByReplacingOccurrencesOfString:@"," withString:@"."];
+    });
+}
+
+@end
+
+// TODO: Other tests: Swizzling in class hierarchies, mulitple swizzling, failures, dealloc swizzling
+
 #pragma mark Test case implementation
 
 @implementation HLSRuntimeTestCase
@@ -500,6 +654,30 @@
     GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalSubProtocolA)), nil);
     GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)), nil);
+}
+
+- (void)test_swizzling
+{
+    // Swizzling has been made in a +load. We here simply check that expected values after swizzling are correct
+    GHAssertEquals([RuntimeTestClass10 classMagicalInteger], 42, nil);
+    GHAssertEquals([[RuntimeTestClass10 new] instanceMagicalInteger], 42, nil);
+    
+    GHAssertEquals([RuntimeTestClass10 classMagicalFloat], 42.f, nil);
+    GHAssertEquals([[RuntimeTestClass10 new] instanceMagicalFloat], 42.f, nil);
+    
+    GHAssertEqualStrings([RuntimeTestClass10 classMagicalString], @"TOM", nil);
+    GHAssertEqualStrings([[RuntimeTestClass10 new] instanceMagicalString], @"TOM", nil);
+    
+    CGPoint expectedPoint = CGPointMake(42.f, 42.f);
+    GHAssertTrue(CGPointEqualToPoint([RuntimeTestClass10 classMagicalPoint], expectedPoint), nil);
+    GHAssertTrue(CGPointEqualToPoint([[RuntimeTestClass10 new] instanceMagicalPoint], expectedPoint), nil);
+    
+    GHAssertEqualStrings([[RuntimeTestClass10 new] instanceMethodJoiningInteger:42 float:42.f string:@"42" point:CGPointMake(42.f, 42.f)], @"42.42.42.42.42", nil);
+    
+    NSString *joinedString1 = [[RuntimeTestClass10 new] instanceVariadicMethodJoiningStrings:@"42", @"42", @"42", nil];
+    GHAssertEqualStrings(joinedString1, @"42.42.42", nil);
+    NSString *joinedString2 = [[RuntimeTestClass10 new] instanceVariadicMethodJoiningStrings:@"42", @"42", @"42", @"42", @"42", nil];
+    GHAssertEqualStrings(joinedString2, @"42.42.42.42.42", nil);
 }
 
 - (void)test_class_isSubclassOfClass
