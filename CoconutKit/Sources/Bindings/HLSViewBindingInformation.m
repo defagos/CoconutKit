@@ -410,9 +410,11 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     // Regex: ^\s*(\w*)\s*$
     __block NSString *methodName = nil;
     NSString *pattern = @"^\\s*(\\w*)\\s*$";
+    
+    __weak __typeof(self) weakSelf = self;
     NSRegularExpression *methodNameRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
     [methodNameRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-        methodName = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
+        methodName = [weakSelf.transformerName substringWithRange:[result rangeAtIndex:1]];
     }];
     
     if ([methodName isFilled]) {
@@ -545,17 +547,18 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             self.transformer = transformer;
             
             // Observe transformer updates, reload cached transformer and update view accordingly
+            __weak __typeof(self) weakSelf = self;
             [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
                 id<HLSTransformer> transformer = nil;
                 NSError *error = nil;
                 
-                if ([self resolveTransformer:&transformer withTransformationTarget:self.transformationTarget transformationSelector:self.transformationSelector error:&error]) {
-                    self.verified = NO;
-                    self.error = error;
+                if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakSelf.transformationTarget transformationSelector:weakSelf.transformationSelector error:&error]) {
+                    weakSelf.verified = NO;
+                    weakSelf.error = error;
                 }
                 
-                self.transformer = transformer;
-                [self updateView];
+                weakSelf.transformer = transformer;
+                [weakSelf updateView];
             }];
         }
         else {
