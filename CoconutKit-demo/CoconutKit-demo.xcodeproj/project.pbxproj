@@ -20,6 +20,7 @@
 		6F1894591A0C94BE00A31817 /* LabelBindingsDemo6ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */; };
 		6F1894D11A1201FC00A31817 /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F1894D01A1201FC00A31817 /* Employees.plist */; };
 		6F1894D21A1201FC00A31817 /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F1894D01A1201FC00A31817 /* Employees.plist */; };
+		6F1894DC1A148B5700A31817 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1894DB1A148B5700A31817 /* GHUnitIOS.framework */; };
 		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
 		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
@@ -130,7 +131,6 @@
 		6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
 		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
-		6F8CBE9C19DC2591003286F7 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */; };
 		6F8CC0C419DC2A8C003286F7 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */; };
 		6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */; };
 		6F8CC0C619DC2A8C003286F7 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */; };
@@ -488,6 +488,7 @@
 		6F1894541A0C94B600A31817 /* LabelBindingsDemo6ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelBindingsDemo6ViewController.h; sourceTree = "<group>"; };
 		6F1894551A0C94B600A31817 /* LabelBindingsDemo6ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelBindingsDemo6ViewController.m; sourceTree = "<group>"; };
 		6F1894D01A1201FC00A31817 /* Employees.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Employees.plist; sourceTree = "<group>"; };
+		6F1894DB1A148B5700A31817 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../Externals/GHUnitIOS.framework; sourceTree = "<group>"; };
 		6F1F4DEC15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueLeftPanelDemoViewController.h; sourceTree = "<group>"; };
 		6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegueLeftPanelDemoViewController.m; sourceTree = "<group>"; };
 		6F1F4DF015A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegueFirstRightPanelDemoViewController.h; sourceTree = "<group>"; };
@@ -608,7 +609,6 @@
 		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
-		6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../Externals/GHUnitIOS.framework; sourceTree = "<group>"; };
 		6F8CC0A519DC2A3D003286F7 /* version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
 		6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
@@ -823,8 +823,8 @@
 				6F2B305C1929BD78003D4C2C /* QuickLook.framework in Frameworks */,
 				6F2B305D1929BD78003D4C2C /* MobileCoreServices.framework in Frameworks */,
 				6F2B305E1929BD78003D4C2C /* CoreText.framework in Frameworks */,
+				6F1894DC1A148B5700A31817 /* GHUnitIOS.framework in Frameworks */,
 				6F2B305F1929BD78003D4C2C /* QuartzCore.framework in Frameworks */,
-				6F8CBE9C19DC2591003286F7 /* GHUnitIOS.framework in Frameworks */,
 				6F2B30601929BD78003D4C2C /* CoreData.framework in Frameworks */,
 				6F2B30611929BD78003D4C2C /* Foundation.framework in Frameworks */,
 				6F2B30621929BD78003D4C2C /* UIKit.framework in Frameworks */,
@@ -899,7 +899,7 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				6F22C75116A93DD20081A9A7 /* CoreText.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */,
+				6F1894DB1A148B5700A31817 /* GHUnitIOS.framework */,
 				6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */,
 				6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */,
 				6F63E7B917CF6BA1006322D9 /* QuickLook.framework */,
@@ -2487,7 +2487,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/defagos/Development/repositories/CoconutKit/Externals,
+					"$(PROJECT_DIR)/../Externals",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2514,7 +2514,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/defagos/Development/repositories/CoconutKit/Externals,
+					"$(PROJECT_DIR)/../Externals",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";
