@@ -267,6 +267,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
                                                                             view:self];
     self.bindingInformation.updateAnimated = self.bindUpdateAnimated;
     
+    // If the view is displayed, update it
     if (self.window) {
         [self updateView];
     }

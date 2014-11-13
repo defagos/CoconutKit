@@ -182,6 +182,7 @@
 
 @interface UIView (HLSViewBindingProgrammatic)
 
+// Can be used to rebind at a later time
 - (void)bindToKeyPath:(NSString *)keyPath withTransformer:(NSString *)transformer;
 
 @end
