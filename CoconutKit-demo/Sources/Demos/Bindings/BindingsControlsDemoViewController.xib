@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BindingsControlsDemoViewController">
             <connections>
                 <outlet property="contentView" destination="7jD-a7-myM" id="7t4-CE-DPJ"/>
+                <outlet property="cursor" destination="ucj-sI-5Sm" id="Z3z-oQ-BnR"/>
                 <outlet property="scrollView" destination="aH6-Kg-oza" id="1J1-WT-xfV"/>
                 <outlet property="view" destination="4" id="45"/>
             </connections>
@@ -30,7 +31,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="7jD-a7-myM">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1061"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Entry date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r73-BR-UtX">
@@ -334,13 +335,32 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="apple4ImageFileURL"/>
                     </userDefinedRuntimeAttributes>
                 </imageView>
+                <view contentMode="scaleToFill" id="ucj-sI-5Sm" customClass="HLSCursor">
+                    <rect key="frame" x="18" y="965" width="342" height="47"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.93577906468531469" alpha="1" colorSpace="calibratedWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="category"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;9&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q9O-l9-TU1">
+                    <rect key="frame" x="391" y="978" width="360" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="category"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="+[DemoTransformer decimalNumberFormatter]"/>
+                    </userDefinedRuntimeAttributes>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1094" y="510"/>
+            <point key="canvasLocation" x="1094" y="528.5"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

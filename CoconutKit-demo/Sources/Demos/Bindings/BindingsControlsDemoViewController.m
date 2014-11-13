@@ -36,6 +36,8 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
+@property (nonatomic, weak) IBOutlet HLSCursor *cursor;
+
 @end
 
 @implementation BindingsControlsDemoViewController
@@ -125,6 +127,8 @@
     
     self.scrollView.contentSize = self.contentView.bounds.size;
     [self.scrollView addSubview:self.contentView];
+    
+    self.cursor.dataSource = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -135,6 +139,13 @@
     
     // Force an initial refresh
     [self.timer fire];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.scrollView flashScrollIndicators];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -235,6 +246,18 @@
         NSUInteger numberOfWords = [[words filteredArrayUsingPredicate:predicate] count];
         return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
     } reverseBlock:nil];
+}
+
+#pragma mark HLSCursorDataSource protocol implementation
+
+- (NSUInteger)numberOfElementsForCursor:(HLSCursor *)cursor
+{
+    return 8;
+}
+
+- (NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index
+{
+    return [@(index) stringValue];
 }
 
 #pragma mark HLSViewBindingDelegate protocol implementation
