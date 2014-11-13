@@ -357,56 +357,45 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 - (BOOL)resolveGlobalTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
 {
-    __block id transformationTarget = nil;
-    __block SEL transformationSelector = NULL;
-    
-    // Check whether the transformer is a global formatter (class method +[ClassName methodName])
-    // Regex: ^\s*\+\s*\[(\w*)\s*(\w*)\]\s*$
-    NSString *pattern = @"^\\s*\\+\\s*\\[(\\w*)\\s*(\\w*)\\]\\s*$";
-    NSRegularExpression *classMethodRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern
-                                                                                                  options:0
-                                                                                                    error:NULL];
-    __block NSError *error = nil;
-    [classMethodRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-        // Extract capture group information
-        NSString *className = [self.transformerName substringWithRange:[result rangeAtIndex:1]];
-        NSString *methodName = [self.transformerName substringWithRange:[result rangeAtIndex:2]];
-        
-        // Check existence
-        Class class = NSClassFromString(className);
-        if (! class) {
-            error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                        code:HLSViewBindingErrorInvalidTransformer
-                        localizedDescription:CoconutKitLocalizedString(@"The specified global transformer points to an invalid class", nil)];
-            return;
-        }
-        
-        SEL selector = NSSelectorFromString(methodName);
-        if (! class_getClassMethod(class, selector)) {
-            error = [NSError errorWithDomain:CoconutKitErrorDomain
-                                        code:HLSViewBindingErrorInvalidTransformer
-                        localizedDescription:CoconutKitLocalizedString(@"The specified global transformer method does not exist", nil)];
-            return;
-        }
-        
-        transformationTarget = class;
-        transformationSelector = selector;
-    }];
-    
-    // Test for global formatter lookup failure
-    if (error) {
+    // Check whether the transformer is a global formatter (ClassName:formatterName)
+    NSArray *formatterComponents = [self.transformerName componentsSeparatedByString:@":"];
+    if ([formatterComponents count] != 2) {
         if (pError) {
-            *pError = error;
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingStatusTransformerResolved
+                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer is not a global transformer", nil)];
+        }
+        return NO;
+    }
+    
+    NSString *className = [formatterComponents firstObject];
+    Class class = NSClassFromString(className);
+    if (! class) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorInvalidTransformer
+                          localizedDescription:CoconutKitLocalizedString(@"The specified global transformer points to an invalid class", nil)];
+        }
+        return NO;
+    }
+    
+    NSString *methodName = [formatterComponents objectAtIndex:1];
+    SEL selector = NSSelectorFromString(methodName);
+    if (! class_getClassMethod(class, selector)) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorInvalidTransformer
+                          localizedDescription:CoconutKitLocalizedString(@"The specified global transformer method does not exist", nil)];
         }
         return NO;
     }
     
     if (pTransformationTarget) {
-        *pTransformationTarget = transformationTarget;
+        *pTransformationTarget = class;
     }
     
     if (pTransformationSelector) {
-        *pTransformationSelector = transformationSelector;
+        *pTransformationSelector = selector;
     }
     
     return YES;
@@ -479,11 +468,11 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return YES;
     }
     
-    if ([self resolveLocalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError]) {
+    if ([self resolveGlobalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError]) {
         return YES;
     }
     
-    return [self resolveGlobalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError];
+    return [self resolveLocalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError];
 }
 
 - (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector error:(NSError **)pError

@@ -33,7 +33,7 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, 200.f, 40.f)];
     label.center = CGPointMake(CGRectGetMidX(view.bounds), 200.f);
-    [label bindToKeyPath:@"date" withTransformer:@"+[DemoTransformer mediumDateFormatter]"];
+    [label bindToKeyPath:@"date" withTransformer:@"DemoTransformer:mediumDateFormatter"];
     [view addSubview:label];
     
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(0.f, 0.f, 200.f, 40.f)];

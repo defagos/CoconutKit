@@ -31,7 +31,7 @@
  *                      returning an HLSTransformer, NSFormatter or NSValueTransformer transforming the object 
  *                      into another one with supported type. These methods are looked up along the responder 
  *                      chain, as described below. Alternatively, you can provide a global class method 
- *                      '[SomeClass methodName]', returning either an HLSTransformer, NSFormatter or
+ *                      'SomeClass:methodName', returning either an HLSTransformer, NSFormatter or
  *                      NSValueTransformer object.
  *
  * Transformers are required when the type of the value returned by the key path does not match one of the supported
@@ -60,7 +60,7 @@
  *   - for each responder along the responder chain starting with the bound view:
  *       - instance method -methodName on the responder object
  *       - class method +methodName on the responder object
- * In addition, global transformer names can be provided in the form of class methods '+[SomeClass methodName]'
+ * In addition, global transformer names can be provided in the form of class methods 'SomeClass:methodName'
  *
  * The binding information is resolved as late as possible (usually when the view is displayed), i.e. when the whole
  * responder chain context is available. This information is then stored for efficient later use. The view is not
