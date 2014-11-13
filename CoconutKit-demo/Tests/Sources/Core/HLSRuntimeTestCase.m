@@ -779,8 +779,8 @@
 - (void)test_swizzling
 {
     // Swizzling has been made in a +load. We here simply check that expected values after swizzling are correct
-    GHAssertEquals([RuntimeTestClass10 classMagicalInteger], 42, nil);
-    GHAssertEquals([[RuntimeTestClass10 new] instanceMagicalInteger], 42, nil);
+    GHAssertEquals([RuntimeTestClass10 classMagicalInteger], (NSInteger)42, nil);
+    GHAssertEquals([[RuntimeTestClass10 new] instanceMagicalInteger], (NSInteger)42, nil);
     
     GHAssertEquals([RuntimeTestClass10 classMagicalFloat], 42.f, nil);
     GHAssertEquals([[RuntimeTestClass10 new] instanceMagicalFloat], 42.f, nil);
