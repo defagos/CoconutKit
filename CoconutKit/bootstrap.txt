@@ -30,6 +30,7 @@ NSTimeZone+HLSExtensions.m
 NSURLRequest+HLSExtensions.m
 UIActivityIndicatorView+HLSViewBinding.m
 UIApplication+HLSExtensions.m
+UIButton+HLSViewBinding.m
 UIColor+HLSExtensions.m
 UICollectionView+HLSViewBinding.m
 UIControl+HLSExclusiveTouch.m

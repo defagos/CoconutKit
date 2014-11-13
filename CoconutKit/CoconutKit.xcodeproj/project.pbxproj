@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F04E2C61A153FAB00C6C08B /* UIButton+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F04E2C41A153FAB00C6C08B /* UIButton+HLSViewBinding.h */; };
+		6F04E2C71A153FAB00C6C08B /* UIButton+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E2C51A153FAB00C6C08B /* UIButton+HLSViewBinding.m */; };
 		6F0CA8DB19DD934300CBE2E1 /* HLSViewBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0CA8BB19DD934300CBE2E1 /* HLSViewBindingDelegate.h */; };
 		6F0CA8DE19DD934300CBE2E1 /* HLSViewBindingInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0CA8BE19DD934300CBE2E1 /* HLSViewBindingInformation.h */; };
 		6F0CA8DF19DD934300CBE2E1 /* HLSViewBindingInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CA8BF19DD934300CBE2E1 /* HLSViewBindingInformation.m */; };
@@ -337,6 +339,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F04E2C41A153FAB00C6C08B /* UIButton+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HLSViewBinding.h"; sourceTree = "<group>"; };
+		6F04E2C51A153FAB00C6C08B /* UIButton+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6F0CA8BB19DD934300CBE2E1 /* HLSViewBindingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingDelegate.h; sourceTree = "<group>"; };
 		6F0CA8BE19DD934300CBE2E1 /* HLSViewBindingInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingInformation.h; sourceTree = "<group>"; };
 		6F0CA8BF19DD934300CBE2E1 /* HLSViewBindingInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewBindingInformation.m; sourceTree = "<group>"; };
@@ -1127,6 +1131,8 @@
 			children = (
 				6FCD33861A1216680002F478 /* UIActivityIndicatorView+HLSViewBinding.h */,
 				6FCD33871A1216680002F478 /* UIActivityIndicatorView+HLSViewBinding.m */,
+				6F04E2C41A153FAB00C6C08B /* UIButton+HLSViewBinding.h */,
+				6F04E2C51A153FAB00C6C08B /* UIButton+HLSViewBinding.m */,
 				6FCD33881A1216680002F478 /* UICollectionView+HLSViewBinding.h */,
 				6FCD33891A1216680002F478 /* UICollectionView+HLSViewBinding.m */,
 				6FCD338A1A1216680002F478 /* UIDatePicker+HLSViewBinding.h */,
@@ -1312,6 +1318,7 @@
 				6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */,
 				6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */,
 				6F8366061588CC690044E572 /* HLSVector.h in Headers */,
+				6F04E2C61A153FAB00C6C08B /* UIButton+HLSViewBinding.h in Headers */,
 				6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */,
 				6FCD33D51A1216E30002F478 /* HLSViewBindingInformationViewController.h in Headers */,
 				6F0F4DDB159CB75400277267 /* HLSPlaceholderInsetSegue.h in Headers */,
@@ -1564,6 +1571,7 @@
 				6F28D6191A00C29600564BD3 /* UITextView+HLSCursorVisibility.m in Sources */,
 				6FADE5D214BA0494007EE121 /* UIImage+HLSExtensions.m in Sources */,
 				6FADE5D714BA0494007EE121 /* HLSModelManager.m in Sources */,
+				6F04E2C71A153FAB00C6C08B /* UIButton+HLSViewBinding.m in Sources */,
 				6FCD33AD1A1216690002F478 /* UIDatePicker+HLSViewBinding.m in Sources */,
 				6FADE5D914BA0494007EE121 /* NSManagedObject+HLSExtensions.m in Sources */,
 				6FCD33BB1A1216690002F478 /* UISlider+HLSViewBinding.m in Sources */,
