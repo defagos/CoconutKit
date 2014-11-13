@@ -8,6 +8,11 @@
 
 #import "HLSRuntime.h"
 
+/**
+ * Remark: Unlike the documentation previously said, protocol_getMethodDescription also takes into account parent protocols
+ *         (see http://www.opensource.apple.com/source/objc4/objc4-532.2/runtime/objc-runtime-new.mm)
+ */
+
 #import <objc/message.h>
 
 static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImplementation);
