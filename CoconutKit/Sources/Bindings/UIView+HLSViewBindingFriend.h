@@ -19,4 +19,6 @@
  */
 @property (nonatomic, readonly, strong) HLSViewBindingInformation *bindingInformation;
 
+- (void)updateView;
+
 @end

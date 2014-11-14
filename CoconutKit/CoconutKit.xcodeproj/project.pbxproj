@@ -18,7 +18,6 @@
 		6F0CA8F319DD934300CBE2E1 /* UIView+HLSViewBindingImplementation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0CA8D319DD934300CBE2E1 /* UIView+HLSViewBindingImplementation.h */; };
 		6F0CA8F419DD934300CBE2E1 /* UIViewController+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0CA8D419DD934300CBE2E1 /* UIViewController+HLSViewBinding.h */; };
 		6F0CA8F519DD934300CBE2E1 /* UIViewController+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CA8D519DD934300CBE2E1 /* UIViewController+HLSViewBinding.m */; };
-		6F0CA8F619DD934300CBE2E1 /* UIViewController+HLSViewBindingFriend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0CA8D619DD934300CBE2E1 /* UIViewController+HLSViewBindingFriend.h */; };
 		6F0F4DDB159CB75400277267 /* HLSPlaceholderInsetSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0F4DD9159CB75400277267 /* HLSPlaceholderInsetSegue.h */; };
 		6F0F4DDC159CB75400277267 /* HLSPlaceholderInsetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */; };
 		6F10E388179FFE2B00BFEF42 /* HLSViewTouchDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F10E386179FFE2B00BFEF42 /* HLSViewTouchDetector.h */; };
@@ -350,7 +349,6 @@
 		6F0CA8D319DD934300CBE2E1 /* UIView+HLSViewBindingImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HLSViewBindingImplementation.h"; sourceTree = "<group>"; };
 		6F0CA8D419DD934300CBE2E1 /* UIViewController+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSViewBinding.h"; sourceTree = "<group>"; };
 		6F0CA8D519DD934300CBE2E1 /* UIViewController+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSViewBinding.m"; sourceTree = "<group>"; };
-		6F0CA8D619DD934300CBE2E1 /* UIViewController+HLSViewBindingFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSViewBindingFriend.h"; sourceTree = "<group>"; };
 		6F0F4DD9159CB75400277267 /* HLSPlaceholderInsetSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPlaceholderInsetSegue.h; sourceTree = "<group>"; };
 		6F0F4DDA159CB75400277267 /* HLSPlaceholderInsetSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderInsetSegue.m; sourceTree = "<group>"; };
 		6F10E386179FFE2B00BFEF42 /* HLSViewTouchDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewTouchDetector.h; sourceTree = "<group>"; };
@@ -760,7 +758,6 @@
 				6F0CA8D319DD934300CBE2E1 /* UIView+HLSViewBindingImplementation.h */,
 				6F0CA8D419DD934300CBE2E1 /* UIViewController+HLSViewBinding.h */,
 				6F0CA8D519DD934300CBE2E1 /* UIViewController+HLSViewBinding.m */,
-				6F0CA8D619DD934300CBE2E1 /* UIViewController+HLSViewBindingFriend.h */,
 			);
 			path = Bindings;
 			sourceTree = "<group>";
@@ -1328,7 +1325,6 @@
 				6FCD33BA1A1216690002F478 /* UISlider+HLSViewBinding.h in Headers */,
 				6F8C934815CEF0DB006D892C /* HLSContainerStackView.h in Headers */,
 				6FF3E6EF15D2E4C900AB9A53 /* HLSTransition.h in Headers */,
-				6F0CA8F619DD934300CBE2E1 /* UIViewController+HLSViewBindingFriend.h in Headers */,
 				6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimation.h in Headers */,
 				6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationStep.h in Headers */,
 				6FCD33BC1A1216690002F478 /* UIStepper+HLSViewBinding.h in Headers */,

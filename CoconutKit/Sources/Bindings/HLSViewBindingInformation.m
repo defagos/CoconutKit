@@ -16,6 +16,7 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
+#import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
 #import <objc/runtime.h>
@@ -151,7 +152,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
     if (objectTarget && [self.keyPath rangeOfString:@"@"].length == 0) {
         [objectTarget addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            [self updateView];
+            [self.view updateView];
         }];
         
         self.updatedAutomatically = YES;
@@ -160,7 +161,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 #pragma mark Updating the view
 
-- (void)updateView
+- (void)updateViewAnimated:(BOOL)animated
 {
     if (self.updatingModel) {
         return;
@@ -183,7 +184,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     self.updatingView = YES;
     
     void (*methodImp)(id, SEL, id, BOOL) = (void (*)(id, SEL, id, BOOL))[self.view methodForSelector:@selector(updateViewWithValue:animated:)];
-    (*methodImp)(self.view, @selector(updateViewWithValue:animated:), value, self.updateAnimated);
+    (*methodImp)(self.view, @selector(updateViewWithValue:animated:), value, animated);
     
     self.updatingView = NO;
 }
@@ -558,7 +559,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
                 }
                 
                 weakSelf.transformer = transformer;
-                [weakSelf updateView];
+                [weakSelf.view updateView];
             }];
         }
         else {

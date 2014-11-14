@@ -14,7 +14,6 @@
 #import "UIView+HLSViewBindingImplementation.h"
 #import "NSError+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
-#import "UIViewController+HLSViewBindingFriend.h"
 
 // Keys for associated objects
 static void *s_bindKeyPath = &s_bindKeyPath;
@@ -63,8 +62,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)setBindUpdateAnimated:(BOOL)bindUpdateAnimated
 {
     objc_setAssociatedObject(self, s_bindUpdateAnimatedKey, @(bindUpdateAnimated), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
-    self.bindingInformation.updateAnimated = bindUpdateAnimated;
 }
 
 - (BOOL)isBindingSupported
@@ -135,7 +132,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    [self updateView];
+    [self updateViewAnimated:YES];
     
     if (recursive) {
         for (UIView *subview in self.subviews) {
@@ -156,11 +153,16 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 - (void)updateView
 {
+    [self updateViewAnimated:self.bindUpdateAnimated];
+}
+
+- (void)updateViewAnimated:(BOOL)animated
+{
     if (! self.bindingInformation) {
         return;
     }
     
-    [self.bindingInformation updateView];
+    [self.bindingInformation updateViewAnimated:animated];
 }
 
 - (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError
@@ -265,11 +267,10 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     self.bindingInformation = [[HLSViewBindingInformation alloc] initWithKeyPath:keyPath
                                                                  transformerName:transformer
                                                                             view:self];
-    self.bindingInformation.updateAnimated = self.bindUpdateAnimated;
     
     // If the view is displayed, update it
     if (self.window) {
-        [self updateView];
+        [self updateViewAnimated:self.bindUpdateAnimated];
     }
 }
 
@@ -289,9 +290,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
                 self.bindingInformation = [[HLSViewBindingInformation alloc] initWithKeyPath:self.bindKeyPath
                                                                              transformerName:self.bindTransformer
                                                                                         view:self];
-                self.bindingInformation.updateAnimated = self.bindUpdateAnimated;
             }
-            [self updateView];
+            [self updateViewAnimated:NO];
         }
     }
 }

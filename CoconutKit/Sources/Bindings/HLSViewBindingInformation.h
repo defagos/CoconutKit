@@ -24,11 +24,6 @@
                            view:(UIView *)view NS_DESIGNATED_INITIALIZER;
 
 /**
- * If set to YES, view updates will be animated if supported by the underlying view. Defaults to NO
- */
-@property (nonatomic, assign, getter=isUpdateAnimated) BOOL updateAnimated;
-
-/**
  * Return the current value corresponding to the stored binding information (the transformer method is applied, if any). 
  * If keypath information is invalid, this method returns nil
  */
@@ -47,7 +42,7 @@
 /**
  * Update the view using the current underlying bound value
  */
-- (void)updateView;
+- (void)updateViewAnimated:(BOOL)animated;
 
 /**
  * Try to transform back a value into a value which could be assigned to the key path. Return YES and the value iff the 
