@@ -182,12 +182,12 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
         
         // Inner filled for normal fields, with stripes for fields enabled for input
         if ([bindingInformation.view respondsToSelector:@selector(displayedValue)]) {
+            overlayButton.backgroundColor = [color colorWithAlphaComponent:0.3f];
+        }
+        else {
             UIImage *stripesImage = [UIImage coconutKitImageNamed:@"BackgroundStripes.png"];
             UIImage *coloredStripesImage = [[[UIImage imageWithColor:color] imageScaledToSize:stripesImage.size] imageMaskedWithImage:stripesImage];
             overlayButton.backgroundColor = [[UIColor colorWithPatternImage:coloredStripesImage] colorWithAlphaComponent:0.3f];
-        }
-        else {
-            overlayButton.backgroundColor = [color colorWithAlphaComponent:0.3f];
         }
         
         overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
