@@ -19,6 +19,9 @@
  */
 @property (nonatomic, readonly, strong) HLSViewBindingInformation *bindingInformation;
 
+/**
+ * Update the view with the most recent value retrieved from the bound model object
+ */
 - (void)updateView;
 
 @end

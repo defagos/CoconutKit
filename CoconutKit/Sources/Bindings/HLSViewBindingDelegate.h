@@ -7,19 +7,29 @@
 //
 
 /**
- * Protocol implemented by object which want to be notified about binding events
+ * Protocol to be implemented by classes whose instances want to be notified about binding events. Information
+ * about the binding parameters can be obtained by accessing the bindingInformation property of the boundView
+ * parameter
  */
 @protocol HLSViewBindingDelegate <NSObject>
 
 @optional
 
-// Only received if a transformation was performed
+/**
+ * Transformation events. Only received when a transformation is actually required
+ */
 - (void)boundView:(UIView *)boundView transformationDidSucceedWithObject:(id)object;
 - (void)boundView:(UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error;
 
+/**
+ * Model check events
+ */
 - (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object;
 - (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error;
 
+/**
+ * Model update events
+ */
 - (void)boundView:(UIView *)boundView updateDidSucceedWithObject:(id)object;
 - (void)boundView:(UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error;
 

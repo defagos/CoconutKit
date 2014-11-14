@@ -9,15 +9,14 @@
 #import "HLSViewBindingDelegate.h"
 
 /**
- * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
+ * Private class encapsulating view binding information, and performing lazy binding parameter resolving, caching,
+ * and automatic synchronization via KVO when possible
  */
 @interface HLSViewBindingInformation : NSObject
 
 /**
- * Store view binding information. A keypath and a view are mandatory, otherwise the method returns nil. The object
- * parameter can be one of the following:
- *   - a non-nil object, which the keypath is applied to (binding to an object)
- *   - nil, in which case the keypath is applied to the responder chain starting with view.superview
+ * Store view binding information. A keypath and a view supporting bindings are mandatory, otherwise the method returns 
+ * nil. A transformer name is optional. All kinds of keypaths are supported, including those containing keypath operators
  */
 - (instancetype)initWithKeyPath:(NSString *)keyPath
                 transformerName:(NSString *)transformerName
@@ -30,39 +29,38 @@
 - (id)value;
 
 /**
- * The value retrieved from the keypath. No transformer is applied
+ * The plain value retrieved from the keypath. No transformer is applied
  */
 - (id)rawValue;
 
 /**
- * The value currently displayed by the view
+ * The value currently displayed by the view (if it implements -displayedValue, otherwise the method returns nil)
  */
 - (id)displayedValue;
 
 /**
- * Update the view using the current underlying bound value
+ * Update the view using the current underlying bound value. Then change can be animated if the view supports it
  */
 - (void)updateViewAnimated:(BOOL)animated;
 
 /**
- * Try to transform back a value into a value which could be assigned to the key path. Return YES and the value iff the 
- * reverse transformation could be achieved, i.e. if a reverse transformation is available (if a transformer has been set)
- * and could be successfully applied. Errors are returned to the validation delegate (if any) and to the caller
+ * Try to transform back a value into a value which is compatible with the keypath. Return YES and the value iff the 
+ * reverse transformation could be achieved (note that this is always the case if no transformer has been specified).
+ * Errors are returned to the binding delegate (if any) and to the caller
  */
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError;
 
 /**
- * Check whether a value is correct according to any validation which might have been set. Errors are returned to the 
- * validation delegate (if any) and to the caller
- *
- * Returns YES iff the check was successful
+ * Check whether a value is correct according to any validation which might have been set (validation is made through
+ * KVO, see NSKeyValueCoding category on NSObject. The method returns YES iff the check is successful, otherwise the
+ * method returns NO, in which case errors are returned to the binding delegate (if any) and to the caller
  */
 - (BOOL)checkValue:(id)value withError:(NSError **)pError;
 
 /**
  * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError: 
- * must be called first. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is available). Errors
- * are returned to the validation delegate (if any) and to the caller
+ * must be called for that purpose. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is 
+ * available). Errors are returned to the validation delegate (if any) and to the caller
  */
 - (BOOL)updateWithValue:(id)value error:(NSError **)pError;
 
@@ -77,17 +75,17 @@
 @property (nonatomic, readonly, weak) UIView *view;
 
 /**
- * Return the transformer to use, nil if none
+ * Return the transformer name specified during initialization
  */
 @property (nonatomic, readonly, strong) NSString *transformerName;
 
 /**
- * Return the resolved bound object
+ * Return the resolved bound object, nil if none or not resolved yet
  */
 @property (nonatomic, readonly, weak) id objectTarget;
 
 /**
- * Return the object which the transformer will be called on, nil if none or not resolved yet
+ * Return the object which the transformation selector will be called on, nil if none or not resolved yet
  */
 @property (nonatomic, readonly, weak) id transformationTarget;
 
@@ -102,14 +100,14 @@
 @property (nonatomic, readonly, weak) id<HLSViewBindingDelegate> delegate;
 
 /**
- * Return YES iff the binding has been verified completely. If verified, check the error property to check whether
- * the binding was successfully resolved or not. If not verified, check the error property to retrieve information
+ * Return YES iff the binding has been verified completely. If verified, use the error property to check whether
+ * the binding was successfully resolved or not. If not verified, use the error property to retrieve information
  * about why the binding could not be verified
  */
 @property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
 
 /**
- * Reason why a binding cannot be completely verified yet (if verified = NO), why binding failed (if verified = NO),
+ * Reason why a binding cannot be completely verified yet (if verified = NO), why binding failed (if verified = YES),
  * or nil if no information is available
  */
 @property (nonatomic, readonly, strong) NSError *error;
