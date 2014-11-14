@@ -129,6 +129,14 @@
                                                                                                            text:self.bindingInformation.transformerName];
     [parameterEntries addObject:transformerNameEntry];
     
+    HLSViewBindingInformationEntry *bindUpdateAnimatedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Animates updates", nil)
+                                                                                                              text:HLSStringFromBool(self.bindingInformation.view.bindUpdateAnimated)];
+    [parameterEntries addObject:bindUpdateAnimatedEntry];
+    
+    HLSViewBindingInformationEntry *bindInputCheckedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Automatically checks input", nil)
+                                                                                                            text:HLSStringFromBool(self.bindingInformation.view.bindInputChecked)];
+    [parameterEntries addObject:bindInputCheckedEntry];
+    
     return [NSArray arrayWithArray:parameterEntries];
 }
 
