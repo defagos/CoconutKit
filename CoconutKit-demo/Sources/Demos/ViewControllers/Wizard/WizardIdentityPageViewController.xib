@@ -41,6 +41,7 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.firstName"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;firstNameError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="90">
@@ -65,6 +66,7 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.lastName"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;lastNameError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="91">
@@ -89,6 +91,7 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.email"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;emailError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="92">
@@ -114,6 +117,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.birthdate"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="localizedDateFormatter"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;birthdateError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="93">
@@ -139,6 +143,7 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.nbrChildren"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="DemoTransformer:decimalNumberFormatter"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;nbrChildrenError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="94">

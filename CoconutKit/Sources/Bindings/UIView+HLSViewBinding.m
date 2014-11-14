@@ -19,6 +19,7 @@
 static void *s_bindKeyPath = &s_bindKeyPath;
 static void *s_bindTransformerKey = &s_bindTransformerKey;
 static void *s_bindUpdateAnimatedKey = &s_bindUpdateAnimatedKey;
+static void *s_bindInputCheckedKey = &s_bindInputCheckedKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
 // Original implementation of the methods we swizzle
@@ -62,6 +63,16 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)setBindUpdateAnimated:(BOOL)bindUpdateAnimated
 {
     objc_setAssociatedObject(self, s_bindUpdateAnimatedKey, @(bindUpdateAnimated), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isBindInputChecked
+{
+    return [objc_getAssociatedObject(self, s_bindInputCheckedKey) boolValue];
+}
+
+- (void)setBindInputChecked:(BOOL)bindInputChecked
+{
+    objc_setAssociatedObject(self, s_bindInputCheckedKey, @(bindInputChecked), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)isBindingSupported
@@ -174,11 +185,11 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     BOOL success = YES;
-    if ([self respondsToSelector:@selector(displayedValue)]) {
+    if (self.bindingInformation && [self respondsToSelector:@selector(displayedValue)]) {
         id displayedValue = [self performSelector:@selector(displayedValue)];
         
         NSError *error = nil;
-        if (! [self checkDisplayedValue:displayedValue withError:&error]) {
+        if (! [self.bindingInformation checkDisplayedValue:displayedValue withError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
@@ -202,11 +213,11 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     BOOL success = YES;
-    if ([self respondsToSelector:@selector(displayedValue)]) {
+    if (self.bindingInformation && [self respondsToSelector:@selector(displayedValue)]) {
         id displayedValue = [self performSelector:@selector(displayedValue)];
         
         NSError *error = nil;
-        if (! [self updateModelWithDisplayedValue:displayedValue error:&error]) {
+        if (! [self.bindingInformation updateModelWithDisplayedValue:displayedValue error:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
@@ -227,8 +238,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 - (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError
 {
-    if (! self.bindingInformation) {
-        // No binding, nothing to do
+    if (! self.bindingInformation || ! self.bindInputChecked) {
         return YES;
     }
     
@@ -238,7 +248,6 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
-        // No binding, nothing to do
         return YES;
     }
     
@@ -248,11 +257,15 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
-        // No binding, nothing to do
         return YES;
     }
     
-    return [self.bindingInformation checkAndUpdateModelWithDisplayedValue:displayedValue error:pError];
+    if (self.bindInputChecked) {
+        return [self.bindingInformation checkAndUpdateModelWithDisplayedValue:displayedValue error:pError];
+    }
+    else {
+        return [self.bindingInformation updateModelWithDisplayedValue:displayedValue error:pError];
+    }
 }
 
 @end

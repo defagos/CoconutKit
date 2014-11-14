@@ -134,15 +134,32 @@
 @interface UIView (HLSViewBinding)
 
 /**
- * Primary binding parameters. Set using Interface Builder user-defined runtime attributes
+ * The keypath to bind to (preferably set via Interface Builder, can also be set programmatically by calling
+ * -bindToKeyPath:withTransformer:)
  */
 @property (nonatomic, readonly, strong) IBInspectable NSString *bindKeyPath;
+
+/**
+ * The name of the transformer to apply (preferably set via Interface Builder, can also be set programmatically by 
+ * calling -bindToKeyPath:withTransformer:)
+ */
 @property (nonatomic, readonly, strong) IBInspectable NSString *bindTransformer;
 
 /**
- * Secondary binding parameters. Can be changed at runtime
+ * Set to YES iff updates made to the model object are reflected with an animation, provided the bound view can
+ * be updated using animations
+ *
+ * The default value is NO
  */
 @property (nonatomic, assign, getter=isBindUpdateAnimated) IBInspectable BOOL bindUpdateAnimated;
+
+/**
+ * Set to YES to perform validation when the bound view changes
+ *
+ * The default value is NO. Call -checkDisplayedValuesWithError: to manually trigger the check (the call can be made
+ * on a top view or view controller containing the receiver)
+ */
+@property (nonatomic, assign, getter=isBindInputChecked) IBInspectable BOOL bindInputChecked;
 
 /**
  * Return YES iff binding is possible against the receiver
