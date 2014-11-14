@@ -170,7 +170,7 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
         
         UIColor *color = nil;
         if (! bindingInformation.verified) {
-            color = [UIColor orangeColor];
+            color = [UIColor blueColor];
         }
         else {
             color = bindingInformation.error ? [UIColor redColor] : [UIColor greenColor];
