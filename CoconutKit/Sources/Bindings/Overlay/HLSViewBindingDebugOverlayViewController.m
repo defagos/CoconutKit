@@ -168,9 +168,11 @@ static UIWindow *s_previousKeyWindow = nil;
         overlayButton.frame = [self overlayViewFrameForView:view];
         
         // Border with appropriate color and width
-        overlayButton.layer.borderColor = HLSBorderColorForBindingInformation(bindingInformation).CGColor;
-        overlayButton.layer.borderWidth = HLSBorderWidthForBindingInformation(bindingInformation);
-        overlayButton.backgroundColor = HLSBackgroundColorForBindingInformation(bindingInformation);
+        overlayButton.layer.borderColor = HLSViewBindingDebugOverlayBorderColor(bindingInformation.verified, bindingInformation.error != nil).CGColor;
+        overlayButton.layer.borderWidth = HLSViewBindingDebugOverlayBorderWidth(bindingInformation.updatedAutomatically);
+        overlayButton.backgroundColor = HLSViewBindingDebugOverlayBackgroundColor(bindingInformation.verified,
+                                                                                  bindingInformation.error != nil,
+                                                                                  [bindingInformation.view respondsToSelector:@selector(displayedValue)]);
         
         overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
@@ -203,7 +205,7 @@ static UIWindow *s_previousKeyWindow = nil;
     }
     
     // Make the button frame surround the view
-    CGFloat borderWidth = HLSBorderWidthForBindingInformation(view.bindingInformation);
+    CGFloat borderWidth = HLSViewBindingDebugOverlayBorderWidth(view.bindingInformation.updatedAutomatically);
     return CGRectMake(CGRectGetMinX(frame) - borderWidth,
                       CGRectGetMinY(frame) - borderWidth,
                       CGRectGetWidth(frame) + 2 * borderWidth,

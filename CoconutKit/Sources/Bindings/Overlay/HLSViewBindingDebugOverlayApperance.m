@@ -11,31 +11,41 @@
 #import "UIImage+HLSExtensions.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
-CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bindingInformation)
+CGFloat HLSViewBindingDebugOverlayBorderWidth(BOOL updatedAutomatically)
 {
-    return bindingInformation.updatedAutomatically ? 3.f : 1.f;
+    return updatedAutomatically ? 3.f : 1.f;
 }
 
-UIColor *HLSBorderColorForBindingInformation(HLSViewBindingInformation *bindingInformation)
+UIColor *HLSViewBindingDebugOverlayBorderColor(BOOL isVerified, BOOL hasError)
 {
-    if (! bindingInformation.verified) {
+    if (! isVerified) {
         return [UIColor blueColor];
     }
     else {
-        return bindingInformation.error ? [UIColor redColor] : [UIColor greenColor];
+        return hasError ? [UIColor redColor] : [UIColor greenColor];
     }
 }
 
-UIColor *HLSBackgroundColorForBindingInformation(HLSViewBindingInformation *bindingInformation)
+UIColor *HLSViewBindingDebugOverlayBackgroundColor(BOOL isVerified, BOOL hasError, BOOL supportsInput)
 {
-    UIColor *color = [HLSBorderColorForBindingInformation(bindingInformation) colorWithAlphaComponent:0.3f];
+    UIColor *color = [HLSViewBindingDebugOverlayBorderColor(isVerified, hasError) colorWithAlphaComponent:HLSViewBindingDebugOverlayAlpha()];
     
-    if ([bindingInformation.view respondsToSelector:@selector(displayedValue)]) {
+    if (supportsInput) {
         return color;
     }
     else {
-        UIImage *stripesImage = [UIImage coconutKitImageNamed:@"BackgroundStripes.png"];
-        UIImage *coloredStripesImage = [[[UIImage imageWithColor:color] imageScaledToSize:stripesImage.size] imageMaskedWithImage:stripesImage];
-        return [UIColor colorWithPatternImage:coloredStripesImage];
+        UIImage *stripesPatternImage = HLSViewBindingDebugOverlayStripesPatternImage();
+        UIImage *coloredStripesPatternImage = [[[UIImage imageWithColor:color] imageScaledToSize:stripesPatternImage.size] imageMaskedWithImage:stripesPatternImage];
+        return [UIColor colorWithPatternImage:coloredStripesPatternImage];
     }
+}
+
+UIImage *HLSViewBindingDebugOverlayStripesPatternImage(void)
+{
+    return [UIImage coconutKitImageNamed:@"BackgroundStripes.png"];
+}
+
+CGFloat HLSViewBindingDebugOverlayAlpha(void)
+{
+    return 0.3f;
 }
