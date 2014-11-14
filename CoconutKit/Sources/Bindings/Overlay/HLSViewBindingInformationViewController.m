@@ -13,6 +13,7 @@
 #import "HLSMAKVONotificationCenter.h"
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"
+#import "HLSViewBindingHelpViewController.h"
 #import "HLSViewBindingInformationEntry.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
@@ -70,6 +71,11 @@
                                                                                               action:@selector(close:)];
     }
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", nil)
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(showHelp:)];
+    
     [self reloadData];
 }
 
@@ -81,15 +87,9 @@
     
     self.title = NSLocalizedString(@"Properties", nil);
     
-    self.headerTitles = [NSArray arrayWithObjects:NSLocalizedString(@"Status", nil),
-                         NSLocalizedString(@"Parameters", nil),
-                         NSLocalizedString(@"Resolved information", nil),
-                         NSLocalizedString(@"Values", nil), nil];
-    self.footerTitles = [NSArray arrayWithObjects:[NSNull null],
-                         [NSNull null],
-                         NSLocalizedString(@"Tap to highlight objects", nil),
-                         [NSNull null],
-                         nil];
+    self.headerTitles = @[NSLocalizedString(@"Status", nil), NSLocalizedString(@"Parameters", nil),
+                          NSLocalizedString(@"Resolved information", nil), NSLocalizedString(@"Values", nil)];
+    self.footerTitles = @[[NSNull null], [NSNull null], NSLocalizedString(@"Tap to highlight objects", nil), [NSNull null]];
     [self reloadEntries];
 }
 
@@ -273,6 +273,12 @@
 - (void)close:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showHelp:(id)sender
+{
+    HLSViewBindingHelpViewController *helpViewController = [[HLSViewBindingHelpViewController alloc] init];
+    [self.navigationController pushViewController:helpViewController animated:YES];
 }
 
 @end
