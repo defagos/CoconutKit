@@ -127,6 +127,7 @@
     
     self.scrollView.contentSize = self.contentView.bounds.size;
     [self.scrollView addSubview:self.contentView];
+    self.scrollView.canCancelContentTouches = NO;
     
     self.cursor.dataSource = self;
 }

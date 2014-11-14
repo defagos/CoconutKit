@@ -34,6 +34,9 @@
  *   - basic: You just set the text and basic text properties (font, colors, shadows)
  *   - custom: Each element is a view and can be customized using Interface Builder
  * Cursors using both ways of customisation can coexist in the same source file.
+ *
+ * Remark: If the cursor is placed inside a scroll view, you might need to set canCancelContentTouches on it so that
+ *         dragging the pointer view can work as expected
  */
 @interface HLSCursor : UIView <HLSAnimationDelegate>
 
