@@ -29,7 +29,6 @@ UIColor *HLSViewBindingDebugOverlayBorderColor(BOOL isVerified, BOOL hasError)
 UIColor *HLSViewBindingDebugOverlayBackgroundColor(BOOL isVerified, BOOL hasError, BOOL supportsInput)
 {
     UIColor *color = [HLSViewBindingDebugOverlayBorderColor(isVerified, hasError) colorWithAlphaComponent:HLSViewBindingDebugOverlayAlpha()];
-    
     if (supportsInput) {
         return color;
     }

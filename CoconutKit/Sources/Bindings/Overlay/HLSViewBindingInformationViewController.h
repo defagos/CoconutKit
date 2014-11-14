@@ -10,7 +10,7 @@
 #import "HLSViewController.h"
 
 /**
- * Display various informations about a binding
+ * Display various information about a binding
  */
 @interface HLSViewBindingInformationViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate>
 

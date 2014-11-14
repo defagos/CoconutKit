@@ -8,6 +8,9 @@
 
 #import "HLSViewController.h"
 
+/**
+ * View controller displaying help about bindings
+ */
 @interface HLSViewBindingHelpViewController : HLSViewController
 
 @end
