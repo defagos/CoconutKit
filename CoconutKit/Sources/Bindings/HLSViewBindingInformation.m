@@ -310,7 +310,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         if ([exception.name isEqualToString:NSUndefinedKeyException]) {
             NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
                                                  code:HLSErrorUpdateError
-                                 localizedDescription:CoconutKitLocalizedString(@"The value could not be updated", nil)];
+                                 localizedDescription:CoconutKitLocalizedString(@"The value cannot be updated", nil)];
             
             if ([self.delegate respondsToSelector:@selector(boundView:updateDidFailWithObject:error:)]) {
                 [self.delegate boundView:self.view updateDidFailWithObject:self.objectTarget error:error];

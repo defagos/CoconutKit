@@ -230,6 +230,10 @@
 		6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; };
 		6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */; };
+		6FC672EF1A160F47008BE139 /* BindingsFailuresDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC672ED1A160F47008BE139 /* BindingsFailuresDemoViewController.m */; };
+		6FC672F01A160F47008BE139 /* BindingsFailuresDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC672ED1A160F47008BE139 /* BindingsFailuresDemoViewController.m */; };
+		6FC672F11A160F47008BE139 /* BindingsFailuresDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC672EE1A160F47008BE139 /* BindingsFailuresDemoViewController.xib */; };
+		6FC672F21A160F47008BE139 /* BindingsFailuresDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC672EE1A160F47008BE139 /* BindingsFailuresDemoViewController.xib */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
 		6FCB4E871926651F00047AD3 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6FCB4E881926651F00047AD3 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
@@ -752,6 +756,9 @@
 		6FC5E8B214F380B500C01ABC /* ParallaxScrollingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxScrollingDemoViewController.h; sourceTree = "<group>"; };
 		6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxScrollingDemoViewController.m; sourceTree = "<group>"; };
 		6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallaxScrollingDemoViewController.xib; sourceTree = "<group>"; };
+		6FC672EC1A160F47008BE139 /* BindingsFailuresDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsFailuresDemoViewController.h; sourceTree = "<group>"; };
+		6FC672ED1A160F47008BE139 /* BindingsFailuresDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsFailuresDemoViewController.m; sourceTree = "<group>"; };
+		6FC672EE1A160F47008BE139 /* BindingsFailuresDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsFailuresDemoViewController.xib; sourceTree = "<group>"; };
 		6FC900F613D4662400834900 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6FCB4F1F1926651F00047AD3 /* CoconutKit-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoconutKit-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FCB4F211926657B00047AD3 /* CoconutKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoconutKit.xcodeproj; path = ../CoconutKit/CoconutKit.xcodeproj; sourceTree = "<group>"; };
@@ -1726,6 +1733,9 @@
 				6FFAB78419DD901A00A91997 /* BindingsControlsDemoViewController.h */,
 				6FFAB78519DD901A00A91997 /* BindingsControlsDemoViewController.m */,
 				6FFAB78619DD901A00A91997 /* BindingsControlsDemoViewController.xib */,
+				6FC672EC1A160F47008BE139 /* BindingsFailuresDemoViewController.h */,
+				6FC672ED1A160F47008BE139 /* BindingsFailuresDemoViewController.m */,
+				6FC672EE1A160F47008BE139 /* BindingsFailuresDemoViewController.xib */,
 				6FCD33D91A125ADA0002F478 /* BindingsPerformance1DemoViewController.h */,
 				6FCD33DA1A125ADA0002F478 /* BindingsPerformance1DemoViewController.m */,
 				6FCD33DB1A125ADA0002F478 /* BindingsPerformance1DemoViewController.xib */,
@@ -1975,6 +1985,7 @@
 				6FFAB7B619DD901A00A91997 /* EmployeeHeaderView.xib in Resources */,
 				6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
 				6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */,
+				6FC672F21A160F47008BE139 /* BindingsFailuresDemoViewController.xib in Resources */,
 				6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
@@ -2094,6 +2105,7 @@
 				6FFAB7B519DD901A00A91997 /* EmployeeHeaderView.xib in Resources */,
 				6FCB4F081926651F00047AD3 /* Beon-Regular.otf in Resources */,
 				6FCB4F091926651F00047AD3 /* DynamicLocalizationDemoViewController.xib in Resources */,
+				6FC672F11A160F47008BE139 /* BindingsFailuresDemoViewController.xib in Resources */,
 				6FCB4F0A1926651F00047AD3 /* FontsDemoViewController.xib in Resources */,
 				6FCB4F0B1926651F00047AD3 /* sample_text_with_custom_font.html in Resources */,
 				6FCB4F0C1926651F00047AD3 /* InnerFolder in Resources */,
@@ -2201,6 +2213,7 @@
 				6F9C46B814C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FFAB7B219DD901A00A91997 /* Employee.m in Sources */,
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
+				6FC672F01A160F47008BE139 /* BindingsFailuresDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
 				6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */,
 				6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */,
@@ -2346,6 +2359,7 @@
 				6FCB4EBE1926651F00047AD3 /* RootSplitViewDemoController.m in Sources */,
 				6FCB4EBF1926651F00047AD3 /* RootTabBarDemoViewController.m in Sources */,
 				6FCB4EC01926651F00047AD3 /* DynamicLocalizationDemoViewController.m in Sources */,
+				6FC672EF1A160F47008BE139 /* BindingsFailuresDemoViewController.m in Sources */,
 				6FCB4EC11926651F00047AD3 /* FontsDemoViewController.m in Sources */,
 				6FCB4EC21926651F00047AD3 /* ViewEffectsDemoViewController.m in Sources */,
 				6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */,
