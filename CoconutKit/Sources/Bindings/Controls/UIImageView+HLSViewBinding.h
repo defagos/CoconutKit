@@ -9,7 +9,10 @@
 #import "UIView+HLSViewBindingImplementation.h"
 
 /**
- * Private category implementing binding behavior for UIWebView
+ * Binding support for UIImageView:
+ *   - binds to UIImage, NSString (image name in bundle, or path to image) or NSURL model values (file URL to image)
+ *   - displays the underlying model value, but cannot update it
+ *   - does not animate updates
  */
 @interface UIImageView (HLSViewBinding) <HLSViewBindingImplementation>
 

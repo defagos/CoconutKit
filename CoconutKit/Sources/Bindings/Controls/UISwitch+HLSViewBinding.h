@@ -8,6 +8,12 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * Binding support for UISwitch:
+ *   - binds to NSNumber model values (booleans)
+ *   - displays and updates the underlying model value
+ *   - can animate updates
+ */
 @interface UISwitch (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

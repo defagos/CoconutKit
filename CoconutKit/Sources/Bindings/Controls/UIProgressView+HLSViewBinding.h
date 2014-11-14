@@ -8,6 +8,12 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * Binding support for UIProgressView:
+ *   - binds to NSNumber model values
+ *   - displays the underlying model value, but cannot update it
+ *   - can animate updates
+ */
 @interface UIProgressView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

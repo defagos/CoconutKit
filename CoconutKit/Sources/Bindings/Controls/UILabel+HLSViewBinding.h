@@ -9,7 +9,10 @@
 #import "UIView+HLSViewBindingImplementation.h"
 
 /**
- * Private category implementing binding behavior for UILabel
+ * Binding support for UILabel:
+ *   - binds to NSString model values
+ *   - displays the underlying model value, but cannot update it
+ *   - does not animate updates
  */
 @interface UILabel (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 

@@ -8,6 +8,9 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * UIButton does not support bindings
+ */
 @interface UIButton (HLSViewBinding) <HLSViewBindingImplementation>
 
 @end

@@ -8,6 +8,12 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * Binding support for UIPageControl:
+ *   - binds to NSNumber model values
+ *   - displays and updates the underlying model value
+ *   - does not animate updates
+ */
 @interface UIPageControl (HLSViewBinding) <HLSViewBindingImplementation>
 
 @end

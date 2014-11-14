@@ -8,6 +8,12 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * Binding support for UISlider:
+ *   - binds to NSNumber model values
+ *   - displays and updates the underlying model value
+ *   - can animate updates
+ */
 @interface UISlider (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

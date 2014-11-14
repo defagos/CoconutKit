@@ -8,6 +8,12 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * Binding support for UIStepper:
+ *   - binds to NSNumber model values
+ *   - displays and updates the underlying model value
+ *   - does not animate updates
+ */
 @interface UIStepper (HLSViewBinding) <HLSViewBindingImplementation>
 
 @end

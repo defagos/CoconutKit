@@ -64,7 +64,6 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 
 - (void)segmentDidChange:(id)sender
 {
-    // FIXME: This call leads to two KVO change notifications. Should be better to have only one if possible
     [self checkAndUpdateModelWithDisplayedValue:@(self.selectedSegmentIndex) error:NULL];
 }
 

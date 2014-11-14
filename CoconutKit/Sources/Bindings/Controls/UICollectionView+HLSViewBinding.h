@@ -8,6 +8,9 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * UICollectionView does not support bindings
+ */
 @interface UICollectionView (HLSViewBinding) <HLSViewBindingImplementation>
 
 @end

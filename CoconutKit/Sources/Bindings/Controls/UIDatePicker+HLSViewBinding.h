@@ -8,6 +8,12 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * Binding support for UIDatePicker:
+ *   - binds to NSDate model values
+ *   - displays and updates the underlying model value
+ *   - can animate updates
+ */
 @interface UIDatePicker (HLSViewBinding)
 
 @end

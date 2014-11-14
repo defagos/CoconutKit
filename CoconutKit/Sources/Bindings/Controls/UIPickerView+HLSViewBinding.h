@@ -8,6 +8,9 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * UIPickerView does not support bindings
+ */
 @interface UIPickerView (HLSViewBinding)
 
 @end

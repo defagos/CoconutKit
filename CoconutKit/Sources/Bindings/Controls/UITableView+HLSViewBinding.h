@@ -9,7 +9,7 @@
 #import "UIView+HLSViewBindingImplementation.h"
 
 /**
- * Private category implementing binding behavior for UITableView
+ * UITableView does not support bindings
  */
 @interface UITableView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 

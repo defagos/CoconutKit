@@ -8,6 +8,12 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+/**
+ * Binding support for UITextField:
+ *   - binds to NSString model values
+ *   - displays and updates the underlying model value
+ *   - does not animate updates
+ */
 @interface UITextField (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
 @end

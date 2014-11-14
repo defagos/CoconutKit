@@ -9,7 +9,7 @@
 #import "UIView+HLSViewBindingImplementation.h"
 
 /**
- * Private category implementing binding behavior for UIWebView
+ * UIWebView does not support bindings
  */
 @interface UIWebView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
