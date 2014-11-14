@@ -98,6 +98,7 @@
  * TODO: Document that bindings work with primitive types as well (automatic boxing / unboxing)
  * TODO: Document: Validation only performed when a value gets updated via a bound control
  * TODO: Document: If keypath is employee.name, associated fields are updated whether name or employee change
+ * TODO: Document: keyPath resolved along the responder chain only, formatter also investigates class methods
  *
  * Here is how UIKit view classes play with bindings:
  *   - UILabel: The label displays the value which the keypath points at. Bindings are not recursive. The only 

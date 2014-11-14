@@ -10,6 +10,7 @@
 
 #import "DemoTransformer.h"
 #import "Employee.h"
+#import "UppercaseValueTransformer.h"
 
 @interface BindingsControlsDemoViewController ()
 
@@ -117,6 +118,16 @@
     }
     
     _timer = timer;
+}
+
+- (NSNumber *)answerToEverything
+{
+    return @42;
+}
+
+- (NSString *)hello
+{
+    return @"Hello, world!";
 }
 
 #pragma mark View lifecycle
@@ -247,6 +258,16 @@
         NSUInteger numberOfWords = [[words filteredArrayUsingPredicate:predicate] count];
         return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
     } reverseBlock:nil];
+}
+
+- (NSNumberFormatter *)decimalNumberFormatter
+{
+    return [DemoTransformer decimalNumberFormatter];
+}
+
+- (NSValueTransformer *)uppercaseValueTransformer
+{
+    return [[UppercaseValueTransformer alloc] init];
 }
 
 #pragma mark HLSCursorDataSource protocol implementation

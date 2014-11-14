@@ -234,6 +234,8 @@
 		6FC672F01A160F47008BE139 /* BindingsFailuresDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC672ED1A160F47008BE139 /* BindingsFailuresDemoViewController.m */; };
 		6FC672F11A160F47008BE139 /* BindingsFailuresDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC672EE1A160F47008BE139 /* BindingsFailuresDemoViewController.xib */; };
 		6FC672F21A160F47008BE139 /* BindingsFailuresDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC672EE1A160F47008BE139 /* BindingsFailuresDemoViewController.xib */; };
+		6FC672F51A162CE7008BE139 /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC12F2E19E2B12D0008C961 /* UppercaseValueTransformer.m */; };
+		6FC672F61A162CE8008BE139 /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC12F2E19E2B12D0008C961 /* UppercaseValueTransformer.m */; };
 		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
 		6FCB4E871926651F00047AD3 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6FCB4E881926651F00047AD3 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
@@ -2206,6 +2208,7 @@
 				6FFAB7C019DD901A00A91997 /* BindingsControlsDemoViewController.m in Sources */,
 				6F9C469A14C5C30C00824AB2 /* WizardDemoViewController.m in Sources */,
 				6F9C469C14C5C30C00824AB2 /* WizardIdentityPageViewController.m in Sources */,
+				6FC672F51A162CE7008BE139 /* UppercaseValueTransformer.m in Sources */,
 				6F9C469E14C5C30C00824AB2 /* DemosListViewController.m in Sources */,
 				6F9C469F14C5C30C00824AB2 /* DemoErrors.m in Sources */,
 				6F9C46A014C5C30C00824AB2 /* _PersonInformation.m in Sources */,
@@ -2354,6 +2357,7 @@
 				6FCB4EB91926651F00047AD3 /* CustomTransitions.m in Sources */,
 				6FCB4EBA1926651F00047AD3 /* ContainmentTestViewController.m in Sources */,
 				6FCB4EBB1926651F00047AD3 /* AnimationDemoViewController.m in Sources */,
+				6FC672F61A162CE8008BE139 /* UppercaseValueTransformer.m in Sources */,
 				6FCB4EBC1926651F00047AD3 /* LayerPropertiesTestViewController.m in Sources */,
 				6FCB4EBD1926651F00047AD3 /* RootNavigationDemoViewController.m in Sources */,
 				6FCB4EBE1926651F00047AD3 /* RootSplitViewDemoController.m in Sources */,
