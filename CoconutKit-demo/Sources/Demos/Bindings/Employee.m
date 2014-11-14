@@ -37,7 +37,7 @@
 
 #pragma mark Transformers
 
-+ (NSNumberFormatter *)decimalNumberFormatter
++ (NSNumberFormatter *)employeeNumberFormatter
 {
     return [DemoTransformer decimalNumberFormatter];
 }

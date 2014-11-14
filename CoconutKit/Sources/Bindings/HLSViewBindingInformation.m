@@ -419,25 +419,56 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         // Look along the responder chain first (most specific)
         transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
         if (! transformationTarget) {
-            // Look for an instance method on the object
-            if ([self.objectTarget respondsToSelector:transformationSelector]) {
-                transformationTarget = self.objectTarget;
-            }
-            // Look for a class method on the object class itself (most generic)
-            else if ([[self.objectTarget class] respondsToSelector:transformationSelector]) {
-                transformationTarget = [self.objectTarget class];
-            }
-            else {
-                if (pError) {
-                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSViewBindingErrorInvalidTransformer
-                                  localizedDescription:CoconutKitLocalizedString(@"The specified transformer is neither a valid global transformer, "
-                                                                                 "nor could be resolved along the responder chain (stopping at view "
-                                                                                 "controller boundaries)", nil)];
+            // Keypath ending with objects.@operator.field. Extract the class of objects and look for a transformer on it
+            NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
+            if ([keyPathComponents count] >= 2 && [[keyPathComponents objectAtIndex:[keyPathComponents count] - 2] hasPrefix:@"@"]) {
+                NSMutableArray *objectsKeyPathComponents = [NSMutableArray arrayWithArray:keyPathComponents];
+                [objectsKeyPathComponents removeLastObject];
+                [objectsKeyPathComponents removeLastObject];
+                NSString *objectsKeyPath = [objectsKeyPathComponents componentsJoinedByString:@"."];
+                
+                // Only look for a class method since we have no single object here, but a collection. We assume that all
+                // objects in the collection have the type of the first one
+                id object = [[self.objectTarget valueForKeyPath:objectsKeyPath] firstObject];
+                if ([[object class] respondsToSelector:transformationSelector]) {
+                    transformationTarget = [object class];
                 }
-                return NO;
+            }
+            // Keypath ending with object.field (look for a transformer on 'object') or field (look for a transformer on 'objectTarget')
+            else {
+                NSMutableArray *objectKeyPathComponents = [NSMutableArray arrayWithArray:keyPathComponents];
+                [objectKeyPathComponents removeLastObject];
+                
+                id object = nil;
+                if ([objectKeyPathComponents count] == 0) {
+                    object = self.objectTarget;
+                }
+                else {
+                    NSString *objectKeyPath = [objectKeyPathComponents componentsJoinedByString:@"."];
+                    object = [self.objectTarget valueForKeyPath:objectKeyPath];
+                }
+                
+                // Look for an instance method on the object
+                if ([object respondsToSelector:transformationSelector]) {
+                    transformationTarget = object;
+                }
+                // Look for a class method on the object class itself (most generic)
+                else if ([[object class] respondsToSelector:transformationSelector]) {
+                    transformationTarget = [object class];
+                }
             }
         }
+    }
+    
+    if (! transformationTarget) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorInvalidTransformer
+                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer is neither a valid global transformer, "
+                                                                         "nor could be resolved along the responder chain (stopping at view "
+                                                                         "controller boundaries) or on the parent object", nil)];
+        }
+        return NO;
     }
     
     if (pTransformationTarget) {
