@@ -137,7 +137,7 @@
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="employees.@max.age"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="employeeNumberFormatter"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="employeeClassNumberFormatter"/>
                     </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="LS/Names of all employees" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ifn-P5-kf1">

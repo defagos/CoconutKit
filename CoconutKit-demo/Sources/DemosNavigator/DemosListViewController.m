@@ -13,6 +13,7 @@
 #import "BindingsPerformance1DemoViewController.h"
 #import "BindingsPerformance2DemoViewController.h"
 #import "BindingsProgrammaticDemoViewController.h"
+#import "BindingsTransformersViewController.h"
 #import "BindingsViewsDemoViewController.h"
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
@@ -62,11 +63,12 @@ typedef NS_ENUM(NSInteger, AnimationDemoIndex) {
 typedef enum {
     BindingsDemoIndexEnumBegin = 0,
     BindingsDemoIndexControls = BindingsDemoIndexEnumBegin,
-    BindingsDemoIndexFailures,
     BindingsDemoIndexViews,
+    BindingsDemoIndexTransformers,
     BindingsDemoIndexProgrammatic,
     BindingsDemoIndexPerformance1,
     BindingsDemoIndexPerformance2,
+    BindingsDemoIndexFailures,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -287,13 +289,13 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case BindingsDemoIndexFailures: {
-                    cell.textLabel.text = NSLocalizedString(@"Failures", nil);
+                case BindingsDemoIndexViews: {
+                    cell.textLabel.text = NSLocalizedString(@"Views", nil);
                     break;
                 }
                     
-                case BindingsDemoIndexViews: {
-                    cell.textLabel.text = NSLocalizedString(@"Views", nil);
+                case BindingsDemoIndexTransformers: {
+                    cell.textLabel.text = NSLocalizedString(@"Transformers", nil);
                     break;
                 }
                     
@@ -309,6 +311,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case BindingsDemoIndexPerformance2: {
                     cell.textLabel.text = NSLocalizedString(@"Performance 2", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexFailures: {
+                    cell.textLabel.text = NSLocalizedString(@"Failures", nil);
                     break;
                 }
                     
@@ -501,13 +508,13 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case BindingsDemoIndexFailures: {
-                    demoViewController = [[BindingsFailuresDemoViewController alloc] init];
+                case BindingsDemoIndexViews: {
+                    demoViewController = [[BindingsViewsDemoViewController alloc] init];
                     break;
                 }
                     
-                case BindingsDemoIndexViews: {
-                    demoViewController = [[BindingsViewsDemoViewController alloc] init];
+                case BindingsDemoIndexTransformers: {
+                    demoViewController = [[BindingsTransformersViewController alloc] init];
                     break;
                 }
                     
@@ -523,6 +530,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case BindingsDemoIndexPerformance2: {
                     demoViewController = [[BindingsPerformance2DemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexFailures: {
+                    demoViewController = [[BindingsFailuresDemoViewController alloc] init];
                     break;
                 }
                     
