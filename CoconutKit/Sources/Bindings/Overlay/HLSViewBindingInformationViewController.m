@@ -10,6 +10,7 @@
 
 #import "HLSInfoTableViewCell.h"
 #import "HLSLogger.h"
+#import "HLSMAKVONotificationCenter.h"
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"
 #import "HLSViewBindingInformationEntry.h"
@@ -40,6 +41,13 @@
 {
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.bindingInformation = bindingInformation;
+        
+        __weak __typeof(self) weakSelf = self;
+        if ([bindingInformation.keyPath rangeOfString:@"@"].length == 0) {
+            [bindingInformation.objectTarget addObserver:self keyPath:bindingInformation.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                [weakSelf reloadData];
+            }];
+        }
     }
     return self;
 }

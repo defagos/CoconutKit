@@ -178,21 +178,13 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
         overlayButton.layer.borderWidth = borderWidth;
         overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
-
-        __weak UIView *weakView = view;
-        __weak __typeof(self) weakSelf = self;
         
         // Track frame changes
+        __weak UIView *weakView = view;
+        __weak __typeof(self) weakSelf = self;
         [view addObserver:self keyPath:@"frame" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
             overlayButton.frame = [weakSelf overlayViewFrameForView:weakView];
         }];
-        
-        // Track updates
-        if ([bindingInformation.keyPath rangeOfString:@"@"].length == 0) {
-            [bindingInformation.objectTarget addObserver:self keyPath:bindingInformation.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-                [weakSelf.bindingInformationViewController reloadData];
-            }];
-        }
         
         [self.view addSubview:overlayButton];
     }
