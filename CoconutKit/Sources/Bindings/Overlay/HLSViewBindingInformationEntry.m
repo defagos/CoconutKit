@@ -34,8 +34,12 @@
     if (hls_isClass(object)) {
         return [NSString stringWithFormat:@"'%@' class", object];
     }
-    else {
+    // Objects resolved along the responder chain: Display minimal information
+    else if ([object isKindOfClass:[UIResponder class]]){
         return [NSString stringWithFormat:@"%p\n\n(%@)", object, [object class]];
+    }
+    else {
+        return [NSString stringWithFormat:@"%@\n\n(%@)", object, [object class]];
     }
 }
 
