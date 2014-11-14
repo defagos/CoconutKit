@@ -12,6 +12,7 @@
 #import "HLSMAKVONotificationCenter.h"
 #import "HLSViewBindingInformationViewController.h"
 #import "NSBundle+HLSExtensions.h"
+#import "UIImage+HLSExtensions.h"
 #import "UINavigationController+HLSExtensions.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
@@ -166,16 +167,29 @@ static CGFloat HLSBorderWidthForBindingInformation(HLSViewBindingInformation *bi
     if (bindingInformation) {
         UIButton *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
         overlayButton.frame = [self overlayViewFrameForView:view];
-                
+        
+        UIColor *color = nil;
         if (! bindingInformation.verified) {
-            overlayButton.layer.borderColor = [UIColor orangeColor].CGColor;
+            color = [UIColor orangeColor];
         }
         else {
-            overlayButton.layer.borderColor = bindingInformation.error ? [UIColor redColor].CGColor : [UIColor greenColor].CGColor;
+            color = bindingInformation.error ? [UIColor redColor] : [UIColor greenColor];
         }
         
-        CGFloat borderWidth = HLSBorderWidthForBindingInformation(view.bindingInformation);
-        overlayButton.layer.borderWidth = borderWidth;
+        // Border with appropriate color and width
+        overlayButton.layer.borderColor = color.CGColor;
+        overlayButton.layer.borderWidth = HLSBorderWidthForBindingInformation(view.bindingInformation);
+        
+        // Inner filled for normal fields, with stripes for fields enabled for input
+        if ([bindingInformation.view respondsToSelector:@selector(displayedValue)]) {
+            UIImage *stripesImage = [UIImage coconutKitImageNamed:@"BackgroundStripes.png"];
+            UIImage *coloredStripesImage = [[[UIImage imageWithColor:color] imageScaledToSize:stripesImage.size] imageMaskedWithImage:stripesImage];
+            overlayButton.backgroundColor = [[UIColor colorWithPatternImage:coloredStripesImage] colorWithAlphaComponent:0.3f];
+        }
+        else {
+            overlayButton.backgroundColor = [color colorWithAlphaComponent:0.3f];
+        }
+        
         overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
         
