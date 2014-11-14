@@ -356,101 +356,87 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return YES;
 }
 
-- (BOOL)resolveGlobalTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
+- (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
 {
+    if (! [self.transformerName isFilled]) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorInvalidTransformer
+                          localizedDescription:CoconutKitLocalizedString(@"No transformer has been specified", nil)];
+        }
+        return NO;
+    }
+    
     // Check whether the transformer is a global formatter (ClassName:formatterName)
-    NSArray *formatterComponents = [self.transformerName componentsSeparatedByString:@":"];
-    if ([formatterComponents count] != 2) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingStatusTransformerResolved
-                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer is not a global transformer", nil)];
-        }
-        return NO;
-    }
-    
-    NSString *className = [formatterComponents firstObject];
-    Class class = NSClassFromString(className);
-    if (! class) {
+    NSArray *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
+    if ([transformerComponents count] > 2) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                           code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:CoconutKitLocalizedString(@"The specified global transformer points to an invalid class", nil)];
+                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer name syntax is invalid", nil)];
         }
         return NO;
     }
     
-    NSString *methodName = [formatterComponents objectAtIndex:1];
-    SEL selector = NSSelectorFromString(methodName);
-    if (! class_getClassMethod(class, selector)) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:CoconutKitLocalizedString(@"The specified global transformer method does not exist", nil)];
-        }
-        return NO;
-    }
-    
-    if (pTransformationTarget) {
-        *pTransformationTarget = class;
-    }
-    
-    if (pTransformationSelector) {
-        *pTransformationSelector = selector;
-    }
-    
-    return YES;
-}
-
-- (BOOL)resolveLocalTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
-{
     id transformationTarget = nil;
     SEL transformationSelector = NULL;
     
-    // Perform instance method lookup. First validate the method name
-    // Regex: ^\s*(\w*)\s*$
-    __block NSString *methodName = nil;
-    NSString *pattern = @"^\\s*(\\w*)\\s*$";
-    
-    __weak __typeof(self) weakSelf = self;
-    NSRegularExpression *methodNameRegularExpression = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
-    [methodNameRegularExpression enumerateMatchesInString:self.transformerName options:0 range:NSMakeRange(0, [self.transformerName length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-        methodName = [weakSelf.transformerName substringWithRange:[result rangeAtIndex:1]];
-    }];
-    
-    if ([methodName isFilled]) {
-        transformationSelector = NSSelectorFromString(methodName);
-    }
-    
-    if (! transformationSelector) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:CoconutKitLocalizedString(@"Invalid method name", nil)];
-        }
-        return NO;
-    }
-    
-    // Look along the responder chain first (most specific)
-    transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
-    if (! transformationTarget) {
-        // Look for an instance method on the object
-        if ([self.objectTarget respondsToSelector:transformationSelector]) {
-            transformationTarget = self.objectTarget;
-        }
-        // Look for a class method on the object class itself (most generic)
-        else if ([[self.objectTarget class] respondsToSelector:transformationSelector]) {
-            transformationTarget = [self.objectTarget class];
-        }
-        else {
+    // Global formatter syntax used
+    if ([transformerComponents count] == 2) {
+        Class class = NSClassFromString([transformerComponents firstObject]);
+        if (! class) {
             if (pError) {
                 *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                               code:HLSViewBindingErrorInvalidTransformer
-                              localizedDescription:CoconutKitLocalizedString(@"The specified transformer is neither a valid global transformer, "
-                                                                             "nor could be resolved along the responder chain (stopping at view "
-                                                                             "controller boundaries)", nil)];
+                              localizedDescription:CoconutKitLocalizedString(@"The specified transformer name points to an invalid class", nil)];
             }
             return NO;
+        }
+        transformationTarget = class;
+        
+        transformationSelector = NSSelectorFromString([transformerComponents objectAtIndex:1]);
+        if (! transformationSelector || ! class_getClassMethod(class, transformationSelector)) {
+            if (pError) {
+                *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                              code:HLSViewBindingErrorInvalidTransformer
+                              localizedDescription:CoconutKitLocalizedString(@"The specified global transformer method does not exist", nil)];
+            }
+            return NO;
+        }
+    }
+    // Local formatter specified
+    else {
+        transformationSelector = NSSelectorFromString(self.transformerName);
+        if (! transformationSelector) {
+            if (pError) {
+                *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                              code:HLSViewBindingErrorInvalidTransformer
+                              localizedDescription:CoconutKitLocalizedString(@"The specified transformer method name is invalid", nil)];
+            }
+            return NO;
+        }
+        
+        // Look along the responder chain first (most specific)
+        transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
+        if (! transformationTarget) {
+            // Look for an instance method on the object
+            if ([self.objectTarget respondsToSelector:transformationSelector]) {
+                transformationTarget = self.objectTarget;
+            }
+            // Look for a class method on the object class itself (most generic)
+            else if ([[self.objectTarget class] respondsToSelector:transformationSelector]) {
+                transformationTarget = [self.objectTarget class];
+            }
+            else {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSViewBindingErrorInvalidTransformer
+                                  localizedDescription:CoconutKitLocalizedString(@"The specified transformer is neither a valid global transformer, "
+                                                                                 "nor could be resolved along the responder chain (stopping at view "
+                                                                                 "controller boundaries)", nil)];
+                }
+                return NO;
+            }
         }
     }
     
@@ -461,21 +447,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     if (pTransformationSelector) {
         *pTransformationSelector = transformationSelector;
     }
-    
-    return YES;
-}
 
-- (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
-{
-    if (! [self.transformerName isFilled]) {
-        return YES;
-    }
-    
-    if ([self resolveGlobalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError]) {
-        return YES;
-    }
-    
-    return [self resolveLocalTransformationTarget:pTransformationTarget transformationSelector:pTransformationSelector withError:pError];
+    return YES;
 }
 
 - (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector error:(NSError **)pError
@@ -535,7 +508,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         }
     }
     
-    if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
+    if ([self.transformerName isFilled] && (self.status & HLSViewBindingStatusTransformerResolved) == 0) {
         id transformationTarget = nil;
         SEL transformationSelector = NULL;
         id<HLSTransformer> transformer = nil;
