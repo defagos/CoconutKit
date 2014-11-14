@@ -22,9 +22,4 @@
     [self setProgress:[value floatValue] animated:animated];
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 @end

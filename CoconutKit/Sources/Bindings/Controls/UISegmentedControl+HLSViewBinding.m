@@ -50,11 +50,6 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
     self.selectedSegmentIndex = [value integerValue];
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 - (id)displayedValue
 {
     return @(self.selectedSegmentIndex);

@@ -39,11 +39,6 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
     self.value = [value doubleValue];
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 - (id)displayedValue
 {
     return @(self.value);

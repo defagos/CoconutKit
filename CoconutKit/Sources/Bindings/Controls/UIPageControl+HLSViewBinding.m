@@ -49,11 +49,6 @@ static void swizzled_UIPageControl__setCurrentPage_Imp(UIPageControl *self, SEL 
     self.currentPage = [value integerValue];
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 - (id)displayedValue
 {
     return @(self.currentPage);

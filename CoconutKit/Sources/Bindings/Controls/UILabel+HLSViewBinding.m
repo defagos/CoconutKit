@@ -17,9 +17,4 @@
     self.text = value;
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 @end

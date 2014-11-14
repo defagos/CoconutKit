@@ -59,11 +59,6 @@ static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL 
     [self setDate:date animated:animated];
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 - (id)displayedValue
 {
     return self.date;

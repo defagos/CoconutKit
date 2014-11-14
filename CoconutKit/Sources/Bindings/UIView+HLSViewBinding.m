@@ -35,8 +35,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
-- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive;
-- (BOOL)bindsRecursively;
+- (void)refreshBindingsInViewController:(UIViewController *)viewController;
 - (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 - (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 
@@ -84,7 +83,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 - (void)refreshBindings
 {
-    [self refreshBindingsInViewController:[self nearestViewController] recursive:[self bindsRecursively]];
+    [self refreshBindingsInViewController:[self nearestViewController]];
 }
 
 - (BOOL)checkDisplayedValuesWithError:(NSError **)pError
@@ -135,7 +134,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 #pragma mark Bindings
 
-- (void)refreshBindingsInViewController:(UIViewController *)viewController recursive:(BOOL)recursive
+- (void)refreshBindingsInViewController:(UIViewController *)viewController
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -145,20 +144,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     
     [self updateViewAnimated:YES];
     
-    if (recursive) {
-        for (UIView *subview in self.subviews) {
-            [subview refreshBindingsInViewController:viewController recursive:recursive];
-        }
-    }
-}
-
-- (BOOL)bindsRecursively
-{
-    if ([self respondsToSelector:@selector(bindsSubviewsRecursively)]) {
-        return [[self performSelector:@selector(bindsSubviewsRecursively)] boolValue];
-    }
-    else {
-        return YES;
+    for (UIView *subview in self.subviews) {
+        [subview refreshBindingsInViewController:viewController];
     }
 }
 

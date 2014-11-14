@@ -27,9 +27,4 @@
     }
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 @end

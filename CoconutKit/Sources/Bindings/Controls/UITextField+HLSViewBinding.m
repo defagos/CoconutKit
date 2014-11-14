@@ -54,11 +54,6 @@ static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSStr
     self.text = value;
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 - (id)displayedValue
 {
     return self.text;

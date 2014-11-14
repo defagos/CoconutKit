@@ -39,12 +39,6 @@
 - (void)updateViewWithValue:(id)value animated:(BOOL)animated;
 
 /**
- * UIView subclasses can implement this method to return YES if subviews must be traversed recursively when a binding
- * operation is applied on the receiver, When not implemented, the default behavior is YES
- */
-- (BOOL)bindsSubviewsRecursively;
-
-/**
  * UIView subclasses which want to be able to update the underlying model MUST implement this method, returning
  * the currently displayed value. The type of the returned value must be one of the classes declared by
  * +supportedBindingClasses

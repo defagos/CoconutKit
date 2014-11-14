@@ -78,8 +78,6 @@ NSTimeZone+HLSExtensions.h
 UIActionSheet+HLSExtensions.h
 UIActivityIndicatorView+HLSViewBinding.h
 UIApplication+HLSExtensions.h
-UIButton+HLSViewBinding.h
-UICollectionView+HLSViewBinding.h
 UIColor+HLSExtensions.h
 UIControl+HLSExclusiveTouch.h
 UIDatePicker+HLSViewBinding.h
@@ -90,7 +88,6 @@ UILabel+HLSDynamicLocalization.h
 UILabel+HLSViewBinding.h
 UINavigationController+HLSExtensions.h
 UIPageControl+HLSViewBinding.h
-UIPickerView+HLSViewBinding.h
 UIPopoverController+HLSExtensions.h
 UIProgressView+HLSViewBinding.h
 UIScrollView+HLSExtensions.h
@@ -100,7 +97,6 @@ UISplitViewController+HLSExtensions.h
 UIStepper+HLSViewBinding.h
 UISwitch+HLSViewBinding.h
 UITabBarController+HLSExtensions.h
-UITableView+HLSViewBinding.h
 UITextField+HLSExtensions.h
 UITextField+HLSViewBinding.h
 UITextView+HLSCursorVisibility.h

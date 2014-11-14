@@ -13,7 +13,6 @@
 #import "HLSLogger.h"
 #import "UIImage+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
-#import "UIView+HLSViewBindingImplementation.h"
 
 static const NSTimeInterval kSlideshowDefaultImageDuration = 4.;
 static const NSTimeInterval kSlideshowDefaultTransitionDuration = 3.;
@@ -21,7 +20,7 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 static const NSInteger kSlideshowNoIndex = -1;
 
-@interface HLSSlideshow () <HLSAnimationDelegate, HLSViewBindingImplementation>
+@interface HLSSlideshow () <HLSAnimationDelegate>
 
 @property (nonatomic, strong) NSArray *imageViews;
 @property (nonatomic, strong) HLSAnimation *animation;
@@ -804,13 +803,6 @@ static const NSInteger kSlideshowNoIndex = -1;
     if (! animation.terminating) {
         [self playNextAnimation];
     }
-}
-
-#pragma mark HLSViewBindingImplementation protocol
-
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
 }
 
 @end

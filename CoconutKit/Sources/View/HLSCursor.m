@@ -647,11 +647,6 @@
     [self setSelectedIndex:[value unsignedIntegerValue] animated:animated];
 }
 
-- (BOOL)bindsSubviewsRecursively
-{
-    return NO;
-}
-
 - (id)displayedValue
 {
     return @(self.selectedIndex);
