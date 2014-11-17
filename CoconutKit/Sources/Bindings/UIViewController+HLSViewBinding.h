@@ -14,4 +14,6 @@
 
 - (BOOL)updateModelWithError:(NSError **)pError;
 
+- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError **)pError;
+
 @end

@@ -31,4 +31,9 @@
     return [[self viewIfLoaded] updateModelWithError:pError];
 }
 
+- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError *__autoreleasing *)pError
+{
+    return [[self viewIfLoaded] checkAndUpdateModelWithInputValuesError:pError];
+}
+
 @end

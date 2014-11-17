@@ -39,6 +39,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (void)refreshBindingsInViewController:(UIViewController *)viewController;
 - (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 - (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError **)pError;
 
 @end
 
@@ -100,6 +101,11 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 - (BOOL)updateModelWithError:(NSError **)pError
 {
     return [self updateModelInViewController:[self nearestViewController] withError:pError];
+}
+
+- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError **)pError
+{
+    return [self checkAndUpdateModelWithInputValuesInViewController:[self nearestViewController] error:pError];
 }
 
 @end
@@ -209,6 +215,38 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         if (! [self.bindingInformation updateModelWithInputValueError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
+        }
+    }
+    
+    for (UIView *subview in self.subviews) {
+        if (! [subview updateModelInViewController:viewController withError:pError]) {
+            success = NO;
+        }
+    }
+    
+    return success;
+}
+
+- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError **)pError
+{
+    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
+    UIViewController *nearestViewController = self.nearestViewController;
+    if (nearestViewController && nearestViewController != viewController) {
+        return YES;
+    }
+    
+    BOOL success = YES;
+    if (self.bindingInformation) {
+        NSError *checkError = nil;
+        if (! [self.bindingInformation checkInputValueWithError:&checkError]) {
+            success = NO;
+            [NSError combineError:checkError withError:pError];
+        }
+        
+        NSError *updateError = nil;
+        if (! [self.bindingInformation updateModelWithInputValueError:&updateError]) {
+            success = NO;
+            [NSError combineError:updateError withError:pError];
         }
     }
     
