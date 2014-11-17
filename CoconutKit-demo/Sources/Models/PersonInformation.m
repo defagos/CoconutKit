@@ -6,7 +6,7 @@
 
 #pragma mark Individudal validation methods
 
-- (BOOL)checkFirstName:(NSString *)firstName error:(NSError **)pError
+- (BOOL)checkFirstName:(NSString *)firstName error:(NSError *__autoreleasing *)pError
 {
     if (! [firstName isFilled]) {
         if (pError) {
@@ -20,7 +20,7 @@
     return YES;
 }
 
-- (BOOL)checkLastName:(NSString *)lastName error:(NSError **)pError
+- (BOOL)checkLastName:(NSString *)lastName error:(NSError *__autoreleasing *)pError
 {
     if (! [lastName isFilled]) {
         if (pError) {
@@ -34,7 +34,7 @@
     return YES;
 }
 
-- (BOOL)checkEmail:(NSString *)email error:(NSError **)pError
+- (BOOL)checkEmail:(NSString *)email error:(NSError *__autoreleasing *)pError
 {
     // Optional
     if (! [email isFilled]) {
@@ -53,7 +53,7 @@
     return YES;
 }
 
-- (BOOL)checkNbrChildren:(NSNumber *)nbrChildren error:(NSError **)pError
+- (BOOL)checkNbrChildren:(NSNumber *)nbrChildren error:(NSError *__autoreleasing *)pError
 {
     if ([nbrChildren integerValue] < 0) {
         if (pError) {
@@ -67,13 +67,13 @@
     return YES;
 }
 
-- (BOOL)checkStreet:(NSString *)street error:(NSError **)pError
+- (BOOL)checkStreet:(NSString *)street error:(NSError *__autoreleasing *)pError
 {
     // Optional
     return YES;
 }
 
-- (BOOL)checkCity:(NSString *)city error:(NSError **)pError
+- (BOOL)checkCity:(NSString *)city error:(NSError *__autoreleasing *)pError
 {
     if (! [city isFilled]) {
         if (pError) {
@@ -87,13 +87,13 @@
     return YES;
 }
 
-- (BOOL)checkState:(NSString *)state error:(NSError **)pError
+- (BOOL)checkState:(NSString *)state error:(NSError *__autoreleasing *)pError
 {
     // Optional
     return YES;
 }
 
-- (BOOL)checkCountry:(NSString *)country error:(NSError **)pError
+- (BOOL)checkCountry:(NSString *)country error:(NSError *__autoreleasing *)pError
 {
     if (! [country isFilled]) {
         if (pError) {

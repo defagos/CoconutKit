@@ -49,7 +49,7 @@
  * reverse transformation could be achieved (the method always succeeds if no transformer has been specified).
  * Errors are returned to the binding delegate (if any) and to the caller
  */
-- (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError;
+- (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError *__autoreleasing *)pError;
 
 /**
  * Check whether a value is correct according to any validation which might have been set (validation is made through
@@ -57,14 +57,14 @@
  * successful, otherwise the method returns NO, in which case errors are returned to the binding delegate (if any) and 
  * to the caller
  */
-- (BOOL)checkValue:(id)value withError:(NSError **)pError;
+- (BOOL)checkValue:(id)value withError:(NSError *__autoreleasing *)pError;
 
 /**
  * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError: 
  * must be called for that purpose. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is 
  * available). Errors are returned to the validation delegate (if any) and to the caller
  */
-- (BOOL)updateWithValue:(id)value error:(NSError **)pError;
+- (BOOL)updateWithValue:(id)value error:(NSError *__autoreleasing *)pError;
 
 /**
  * Return the keypath to which binding is made
@@ -139,12 +139,12 @@
 
 @interface HLSViewBindingInformation (ConvenienceMethods)
 
-- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError;
-- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError;
-- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError;
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError;
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 
-- (BOOL)checkInputValueWithError:(NSError **)pError;
-- (BOOL)updateModelWithInputValueError:(NSError **)pError;
-- (BOOL)checkAndUpdateModelWithInputValueError:(NSError **)pError;
+- (BOOL)checkInputValueWithError:(NSError *__autoreleasing *)pError;
+- (BOOL)updateModelWithInputValueError:(NSError *__autoreleasing *)pError;
+- (BOOL)checkAndUpdateModelWithInputValueError:(NSError *__autoreleasing *)pError;
 
 @end

@@ -47,7 +47,7 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
  * Reverse transform the provided object of class B into another one of class A. Check for existence before calling
  */
 @optional
-- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError **)pError;
+- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError *__autoreleasing *)pError;
 
 @end
 

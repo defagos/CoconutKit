@@ -9,7 +9,7 @@
 // noValidationStringA: No validation constraints, neither in the code, nor in the xcdatamodel
 
 // codeMandatoryNotEmptyStringA: Validation entirely defined in code
-- (BOOL)checkCodeMandatoryNotEmptyStringA:(NSString *)codeMandatoryNotEmptyStringA error:(NSError **)pError
+- (BOOL)checkCodeMandatoryNotEmptyStringA:(NSString *)codeMandatoryNotEmptyStringA error:(NSError *__autoreleasing *)pError
 {
     if (! codeMandatoryNotEmptyStringA) {
         if (pError) {
@@ -32,7 +32,7 @@
 
 #pragma mark Consistency validation
 
-- (BOOL)checkForConsistency:(NSError **)pError
+- (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
 {
     if ([self.noValidationStringA isFilled] && ! [self.noValidationStringA isEqualToString:@"Consistency check"]) {
         if (pError) {

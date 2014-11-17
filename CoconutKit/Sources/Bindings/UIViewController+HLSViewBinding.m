@@ -21,12 +21,12 @@
     [[self viewIfLoaded] refreshBindings];
 }
 
-- (BOOL)checkInputValuesWithError:(NSError **)pError
+- (BOOL)checkInputValuesWithError:(NSError *__autoreleasing *)pError
 {
     return [[self viewIfLoaded] checkInputValuesWithError:pError];
 }
 
-- (BOOL)updateModelWithError:(NSError **)pError
+- (BOOL)updateModelWithError:(NSError *__autoreleasing *)pError
 {
     return [[self viewIfLoaded] updateModelWithError:pError];
 }

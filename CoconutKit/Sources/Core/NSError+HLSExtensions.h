@@ -57,7 +57,7 @@ extern NSString * const HLSDetailedErrorsKey;
  * in the CoconutKitErrorDomain error domain. If no existing error is provided, the new resulting error is simply the
  * new error provided
  */
-+ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError;
++ (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError;
 
 /**
  * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to

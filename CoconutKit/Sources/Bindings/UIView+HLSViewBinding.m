@@ -37,9 +37,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (void)refreshBindingsInViewController:(UIViewController *)viewController;
-- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
-- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError;
-- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError **)pError;
+- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
+- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
+- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError;
 
 @end
 
@@ -93,17 +93,17 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self refreshBindingsInViewController:[self nearestViewController]];
 }
 
-- (BOOL)checkInputValuesWithError:(NSError **)pError
+- (BOOL)checkInputValuesWithError:(NSError *__autoreleasing *)pError
 {
     return [self checkInputValuesInViewController:[self nearestViewController] withError:pError];
 }
 
-- (BOOL)updateModelWithError:(NSError **)pError
+- (BOOL)updateModelWithError:(NSError *__autoreleasing *)pError
 {
     return [self updateModelInViewController:[self nearestViewController] withError:pError];
 }
 
-- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError *__autoreleasing *)pError
 {
     return [self checkAndUpdateModelWithInputValuesInViewController:[self nearestViewController] error:pError];
 }
@@ -175,7 +175,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self.bindingInformation updateViewAnimated:animated];
 }
 
-- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError
+- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -201,7 +201,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return success;
 }
 
-- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError
+- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -227,7 +227,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return success;
 }
 
-- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -263,7 +263,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @implementation UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError
 {
     if (! self.bindingInformation || ! self.bindInputChecked) {
         return YES;
@@ -272,7 +272,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return [self.bindingInformation checkInputValue:inputValue withError:pError];
 }
 
-- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     if (! self.bindingInformation) {
         return YES;
@@ -281,7 +281,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     return [self.bindingInformation updateModelWithInputValue:inputValue error:pError];
 }
 
-- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     if (! self.bindingInformation) {
         return YES;

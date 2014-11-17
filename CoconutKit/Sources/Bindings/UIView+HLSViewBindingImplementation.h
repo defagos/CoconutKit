@@ -54,8 +54,8 @@
  */
 @interface UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError;
-- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError;
-- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError;
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError;
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 
 @end

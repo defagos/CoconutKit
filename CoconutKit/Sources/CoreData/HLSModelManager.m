@@ -186,7 +186,7 @@
     return [self currentModelManager].managedObjectContext;
 }
 
-+ (BOOL)saveCurrentModelContext:(NSError **)pError
++ (BOOL)saveCurrentModelContext:(NSError *__autoreleasing *)pError
 {
     NSManagedObjectContext *currentModelContext = [self currentModelContext];
     if (! currentModelContext) {
@@ -347,7 +347,7 @@
     return modelManager;
 }
 
-- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError **)pError
+- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError *__autoreleasing *)pError
 {
     NSPersistentStore *persistentStore = [[self.persistentStoreCoordinator persistentStores] firstObject];
     return [self.persistentStoreCoordinator migratePersistentStore:persistentStore toURL:url options:nil withType:storeType error:pError] != nil;

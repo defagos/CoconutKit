@@ -133,7 +133,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
     return self.transformerBlock(object);
 }
 
-- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError **)pError
+- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError *__autoreleasing *)pError
 {
     if (! self.reverseBlock) {
         [self doesNotRecognizeSelector:_cmd];

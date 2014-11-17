@@ -306,7 +306,7 @@
 
 #pragma mark Validation
 
-- (BOOL)validateSwitchEnabled:(NSNumber **)pSwitchEnabled error:(NSError **)pError
+- (BOOL)validateSwitchEnabled:(NSNumber **)pSwitchEnabled error:(NSError *__autoreleasing *)pError
 {
     HLSLoggerInfo(@"Called switch validation method");
     return YES;

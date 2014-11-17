@@ -186,7 +186,7 @@
  *
  * The method returns YES iff all checks have been successful
  */
-- (BOOL)checkInputValuesWithError:(NSError **)pError;
+- (BOOL)checkInputValuesWithError:(NSError *__autoreleasing *)pError;
 
 /**
  * Trigger a recursive update of the model for those views which can change their underlying value. The view hierarchy
@@ -198,9 +198,9 @@
  * If all views to be updated have updatingModelAutomatically set to YES, calling this method is redundant and therefore
  * not needed.
  */
-- (BOOL)updateModelWithError:(NSError **)pError;
+- (BOOL)updateModelWithError:(NSError *__autoreleasing *)pError;
 
-- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError *__autoreleasing *)pError;
 
 @end
 

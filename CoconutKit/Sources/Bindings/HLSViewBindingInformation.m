@@ -196,7 +196,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 #pragma mark Checking and updating values (these operations notify the delegate about their status)
 
-- (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError
+- (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -255,7 +255,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     }
 }
 
-- (BOOL)checkValue:(id)value withError:(NSError **)pError
+- (BOOL)checkValue:(id)value withError:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -282,7 +282,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     }
 }
 
-- (BOOL)updateWithValue:(id)value error:(NSError **)pError
+- (BOOL)updateWithValue:(id)value error:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -342,7 +342,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 #pragma mark Binding
 
-- (BOOL)resolveObjectTarget:(id *)pObjectTarget withError:(NSError **)pError
+- (BOOL)resolveObjectTarget:(id *)pObjectTarget withError:(NSError *__autoreleasing *)pError
 {
     id objectTarget = [HLSViewBindingInformation bindingTargetForKeyPath:self.keyPath view:self.view];
     if (! objectTarget) {
@@ -384,7 +384,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return YES;
 }
 
-- (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError **)pError
+- (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError *__autoreleasing *)pError
 {
     if (! [self.transformerName isFilled]) {
         if (pError) {
@@ -506,7 +506,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return YES;
 }
 
-- (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector error:(NSError **)pError
+- (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector error:(NSError *__autoreleasing *)pError
 {
     if (! transformationTarget) {
         return YES;
@@ -791,7 +791,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 @implementation HLSViewBindingInformation (ConvenienceMethods)
 
-- (BOOL)checkInputValueWithError:(NSError **)pError
+- (BOOL)checkInputValueWithError:(NSError *__autoreleasing *)pError
 {
     if (! self.supportingInput) {
         if (pError) {
@@ -805,7 +805,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return [self checkInputValue:[self inputValue] withError:pError];
 }
 
-- (BOOL)updateModelWithInputValueError:(NSError **)pError
+- (BOOL)updateModelWithInputValueError:(NSError *__autoreleasing *)pError
 {
     if (! self.supportingInput) {
         if (pError) {
@@ -828,7 +828,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return [self updateModelWithInputValue:[self inputValue] error:pError];
 }
 
-- (BOOL)checkAndUpdateModelWithInputValueError:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValueError:(NSError *__autoreleasing *)pError
 {
     if (! self.supportingInput) {
         if (pError) {
@@ -851,7 +851,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return [self checkAndUpdateModelWithInputValue:[self inputValue] error:pError];
 }
 
-- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -872,7 +872,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return NO;
 }
 
-- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -893,7 +893,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return NO;
 }
 
-- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {

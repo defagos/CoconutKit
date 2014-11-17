@@ -38,7 +38,7 @@ static Class subclass_class(id self, SEL _cmd);
     return [[[self class] alloc] initWithDomain:domain code:code userInfo:userInfo];
 }
 
-+ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError
++ (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError
 {
     // If the caller is not interested in errors, nothing to do
     if (! pExistingError) {
