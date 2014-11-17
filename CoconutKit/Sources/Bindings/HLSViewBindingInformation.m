@@ -819,7 +819,17 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    return [self checkInputValue:[self inputValue] withError:pError];
+    id inputValue = [self inputValue];
+    if (! [self canDisplayValue:inputValue]) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSErrorUnsupportedTypeError
+                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
+        }
+        return NO;
+    }
+    
+    return [self checkInputValue:inputValue withError:pError];
 }
 
 - (BOOL)updateModelWithInputValueError:(NSError *__autoreleasing *)pError
@@ -842,7 +852,17 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    return [self updateModelWithInputValue:[self inputValue] error:pError];
+    id inputValue = [self inputValue];
+    if (! [self canDisplayValue:inputValue]) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSErrorUnsupportedTypeError
+                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
+        }
+        return NO;
+    }
+    
+    return [self updateModelWithInputValue:inputValue error:pError];
 }
 
 - (BOOL)checkAndUpdateModelWithInputValueError:(NSError *__autoreleasing *)pError
@@ -865,7 +885,17 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    return [self checkAndUpdateModelWithInputValue:[self inputValue] error:pError];
+    id inputValue = [self inputValue];
+    if (! [self canDisplayValue:inputValue]) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSErrorUnsupportedTypeError
+                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
+        }
+        return NO;
+    }
+    
+    return [self checkAndUpdateModelWithInputValue:inputValue error:pError];
 }
 
 - (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError
