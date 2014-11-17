@@ -10,7 +10,7 @@
 
 - (void)refreshBindings;
 
-- (BOOL)checkDisplayedValuesWithError:(NSError **)pError;
+- (BOOL)checkInputValuesWithError:(NSError **)pError;
 
 - (BOOL)updateModelWithError:(NSError **)pError;
 

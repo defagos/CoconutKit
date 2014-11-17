@@ -49,7 +49,7 @@ static void swizzled_UIPageControl__setCurrentPage_Imp(UIPageControl *self, SEL 
     self.currentPage = [value integerValue];
 }
 
-- (id)displayedValue
+- (id)inputValue
 {
     return @(self.currentPage);
 }

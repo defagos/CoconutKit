@@ -50,7 +50,7 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
     self.selectedSegmentIndex = [value integerValue];
 }
 
-- (id)displayedValue
+- (id)inputValue
 {
     return @(self.selectedSegmentIndex);
 }

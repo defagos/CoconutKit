@@ -37,7 +37,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (void)refreshBindingsInViewController:(UIViewController *)viewController;
-- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
+- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 - (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError **)pError;
 
 @end
@@ -92,9 +92,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self refreshBindingsInViewController:[self nearestViewController]];
 }
 
-- (BOOL)checkDisplayedValuesWithError:(NSError **)pError
+- (BOOL)checkInputValuesWithError:(NSError **)pError
 {
-    return [self checkDisplayedValuesInViewController:[self nearestViewController] withError:pError];
+    return [self checkInputValuesInViewController:[self nearestViewController] withError:pError];
 }
 
 - (BOOL)updateModelWithError:(NSError **)pError
@@ -169,7 +169,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self.bindingInformation updateViewAnimated:animated];
 }
 
-- (BOOL)checkDisplayedValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError
+- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError **)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -180,14 +180,14 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     BOOL success = YES;
     if (self.bindingInformation) {
         NSError *error = nil;
-        if (! [self.bindingInformation checkDisplayedValueWithError:&error]) {
+        if (! [self.bindingInformation checkInputValueWithError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
     }
     
     for (UIView *subview in self.subviews) {
-        if (! [subview checkDisplayedValuesInViewController:viewController withError:pError]) {
+        if (! [subview checkInputValuesInViewController:viewController withError:pError]) {
             success = NO;
         }
     }
@@ -206,7 +206,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     BOOL success = YES;
     if (self.bindingInformation) {
         NSError *error = nil;
-        if (! [self.bindingInformation updateModelWithDisplayedValueError:&error]) {
+        if (! [self.bindingInformation updateModelWithInputValueError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }

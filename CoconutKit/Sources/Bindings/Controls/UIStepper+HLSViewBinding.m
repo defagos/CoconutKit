@@ -39,7 +39,7 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
     self.value = [value doubleValue];
 }
 
-- (id)displayedValue
+- (id)inputValue
 {
     return @(self.value);
 }

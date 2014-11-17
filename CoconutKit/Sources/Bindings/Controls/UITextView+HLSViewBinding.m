@@ -49,7 +49,7 @@ static void swizzled_UITextView__setText_Imp(UITextField *self, SEL _cmd, NSStri
     self.text = value;
 }
 
-- (id)displayedValue
+- (id)inputValue
 {
     return self.text;
 }

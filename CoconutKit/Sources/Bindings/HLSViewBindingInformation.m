@@ -95,7 +95,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         self.transformerName = transformerName;
         self.view = view;
         self.status = HLSViewBindingStatusUnverified;
-        self.supportingInput = [view respondsToSelector:@selector(displayedValue)];
+        self.supportingInput = [view respondsToSelector:@selector(inputValue)];
     }
     return self;
 }
@@ -133,10 +133,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     }
 }
 
-- (id)displayedValue
+- (id)inputValue
 {
-    if ([self.view respondsToSelector:@selector(displayedValue)]) {
-        return [self.view performSelector:@selector(displayedValue)];
+    if ([self.view respondsToSelector:@selector(inputValue)]) {
+        return [self.view performSelector:@selector(inputValue)];
     }
     else {
         return nil;
@@ -605,17 +605,17 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     if ((self.status & HLSViewBindingStatusTypeCompatibilityChecked) == 0) {
         // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
         id value = [self.objectTarget valueForKeyPath:self.keyPath];
-        id displayedValue = [self transformValue:value];
+        id inputValue = [self transformValue:value];
         
         // Cannot verify further yet
-        if (! displayedValue) {
+        if (! inputValue) {
             self.error = [NSError errorWithDomain:CoconutKitErrorDomain
                                              code:HLSViewBindingErrorNilValue
                              localizedDescription:CoconutKitLocalizedString(@"Type compliance cannot be verified yet since the value to display is nil", nil)];
             return;
         }
         
-        if ([self canDisplayValue:displayedValue]) {
+        if ([self canDisplayValue:inputValue]) {
             self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
         }
         else {
@@ -791,7 +791,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 @implementation HLSViewBindingInformation (ConvenienceMethods)
 
-- (BOOL)checkDisplayedValueWithError:(NSError **)pError
+- (BOOL)checkInputValueWithError:(NSError **)pError
 {
     if (! self.supportingInput) {
         if (pError) {
@@ -802,10 +802,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    return [self checkInputValue:[self displayedValue] withError:pError];
+    return [self checkInputValue:[self inputValue] withError:pError];
 }
 
-- (BOOL)updateModelWithDisplayedValueError:(NSError **)pError
+- (BOOL)updateModelWithInputValueError:(NSError **)pError
 {
     if (! self.supportingInput) {
         if (pError) {
@@ -825,10 +825,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    return [self updateModelWithInputValue:[self displayedValue] error:pError];
+    return [self updateModelWithInputValue:[self inputValue] error:pError];
 }
 
-- (BOOL)checkAndUpdateModelWithDisplayedValueError:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValueError:(NSError **)pError
 {
     if (! self.supportingInput) {
         if (pError) {
@@ -848,7 +848,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    return [self checkAndUpdateModelWithInputValue:[self displayedValue] error:pError];
+    return [self checkAndUpdateModelWithInputValue:[self inputValue] error:pError];
 }
 
 - (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError

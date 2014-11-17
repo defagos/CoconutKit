@@ -180,9 +180,9 @@
 {
     NSMutableArray *valueEntries = [NSMutableArray array];
     
-    HLSViewBindingInformationEntry *displayedValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Input value", nil)
-                                                                                                        object:[self.bindingInformation displayedValue]];
-    [valueEntries addObject:displayedValueEntry];
+    HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Input value", nil)
+                                                                                                    object:[self.bindingInformation inputValue]];
+    [valueEntries addObject:inputValueEntry];
     
     HLSViewBindingInformationEntry *rawValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Raw value", nil)
                                                                                                   object:[self.bindingInformation rawValue]];

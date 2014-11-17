@@ -89,7 +89,7 @@
  * either manually by calling -updateModelWithError: on a top view, or automatically by setting the updatingModelAutomatically 
  * property to YES (the default value is NO). As for display, a required attached transformer might be needed if the value 
  * to be displayed is not natively supported by the view (+supportedBindingClasses method). Bound fields can also be 
- * validated by calling -checkDisplayedValues:withError: on a top view. Update and check status (including any
+ * validated by calling -checkInputValues:withError: on a top view. Update and check status (including any
  * errors which might be encountered) are reported to a binding delegate. The binding delegate of a bound view is resolved 
  * by looking along the responder chain starting with the view for a class conforming to the HLSBindingDelegate protocol.
  *
@@ -99,6 +99,7 @@
  * TODO: Document: Validation only performed when a value gets updated via a bound control
  * TODO: Document: If keypath is employee.name, associated fields are updated whether name or employee change
  * TODO: Document: keyPath resolved along the responder chain only, formatter also investigates class methods
+ * TODO: Document: Must be KVO-compliant
  *
  * Here is how UIKit view classes play with bindings:
  *   - UILabel: The label displays the value which the keypath points at. Bindings are not recursive. The only 
@@ -185,7 +186,7 @@
  *
  * The method returns YES iff all checks have been successful
  */
-- (BOOL)checkDisplayedValuesWithError:(NSError **)pError;
+- (BOOL)checkInputValuesWithError:(NSError **)pError;
 
 /**
  * Trigger a recursive update of the model for those views which can change their underlying value. The view hierarchy

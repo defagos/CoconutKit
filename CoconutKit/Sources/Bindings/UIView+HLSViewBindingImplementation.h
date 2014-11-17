@@ -43,7 +43,7 @@
  * the currently displayed value. The type of the returned value must be one of the classes declared by
  * +supportedBindingClasses
  */
-- (id)displayedValue;
+- (id)inputValue;
 
 @end
 

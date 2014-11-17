@@ -34,9 +34,10 @@
 - (id)rawValue;
 
 /**
- * The value currently displayed by the view (if it implements -displayedValue, otherwise the method returns nil)
+ * The value currently displayed by the view. If the view does not support input (supportingInput = NO), the method
+ * returns nil
  */
-- (id)displayedValue;
+- (id)inputValue;
 
 /**
  * Update the view using the current underlying bound value. Then change can be animated if the view supports it
@@ -45,15 +46,16 @@
 
 /**
  * Try to transform back a value into a value which is compatible with the keypath. Return YES and the value iff the 
- * reverse transformation could be achieved (note that this is always the case if no transformer has been specified).
+ * reverse transformation could be achieved (the method always succeeds if no transformer has been specified).
  * Errors are returned to the binding delegate (if any) and to the caller
  */
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError;
 
 /**
  * Check whether a value is correct according to any validation which might have been set (validation is made through
- * KVO, see NSKeyValueCoding category on NSObject. The method returns YES iff the check is successful, otherwise the
- * method returns NO, in which case errors are returned to the binding delegate (if any) and to the caller
+ * KVO, see NSKeyValueCoding category on NSObject for more information). The method returns YES iff the check is 
+ * successful, otherwise the method returns NO, in which case errors are returned to the binding delegate (if any) and 
+ * to the caller
  */
 - (BOOL)checkValue:(id)value withError:(NSError **)pError;
 
@@ -141,8 +143,8 @@
 - (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError;
 - (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError;
 
-- (BOOL)checkDisplayedValueWithError:(NSError **)pError;
-- (BOOL)updateModelWithDisplayedValueError:(NSError **)pError;
-- (BOOL)checkAndUpdateModelWithDisplayedValueError:(NSError **)pError;
+- (BOOL)checkInputValueWithError:(NSError **)pError;
+- (BOOL)updateModelWithInputValueError:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithInputValueError:(NSError **)pError;
 
 @end

@@ -21,9 +21,9 @@
     [[self viewIfLoaded] refreshBindings];
 }
 
-- (BOOL)checkDisplayedValuesWithError:(NSError **)pError
+- (BOOL)checkInputValuesWithError:(NSError **)pError
 {
-    return [[self viewIfLoaded] checkDisplayedValuesWithError:pError];
+    return [[self viewIfLoaded] checkInputValuesWithError:pError];
 }
 
 - (BOOL)updateModelWithError:(NSError **)pError

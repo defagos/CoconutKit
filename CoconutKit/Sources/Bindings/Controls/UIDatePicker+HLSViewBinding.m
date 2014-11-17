@@ -59,7 +59,7 @@ static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL 
     [self setDate:date animated:animated];
 }
 
-- (id)displayedValue
+- (id)inputValue
 {
     return self.date;
 }
