@@ -35,6 +35,11 @@
     } reverseBlock:nil];
 }
 
+- (NSString *)invalidTransformer
+{
+    return @"invalid";
+}
+
 #pragma mark Localization
 
 - (void)localize

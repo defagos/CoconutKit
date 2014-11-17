@@ -177,13 +177,13 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     
     self.updatingView = YES;
     
-    void (*methodImp)(id, SEL, id, BOOL) = (void (*)(id, SEL, id, BOOL))[self.view methodForSelector:@selector(updateViewWithValue:animated:)];
+    void (*methodImp)(id, SEL, id, BOOL) = (__typeof(methodImp))[self.view methodForSelector:@selector(updateViewWithValue:animated:)];
     (*methodImp)(self.view, @selector(updateViewWithValue:animated:), value, animated);
     
     self.updatingView = NO;
 }
 
-#pragma mark Checking and updating values (these operations notify the delegate about their status)
+#pragma mark Transforming, checking and updating values (these operations notify the delegate about their status)
 
 /**
  * Try to transform back a value into a value which is compatible with the keypath. Return YES and the value iff the
@@ -283,9 +283,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 }
 
 /**
- * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError:
- * must be called for that purpose. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is
- * available). Errors are returned to the validation delegate (if any) and to the caller
+ * Update the value which the key path points at with another value. Returns YES iff the value could be updated, NO 
+ * otherwise (e.g. if no setter is available). Errors are returned to the validation delegate (if any) and to the caller
  */
 - (BOOL)updateWithValue:(id)value error:(NSError *__autoreleasing *)pError
 {
@@ -327,7 +326,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
                                                  code:HLSErrorUpdateError
                                  localizedDescription:CoconutKitLocalizedString(@"The value cannot be updated", nil)];
-            
             NSError *detailedError = [NSError errorWithDomain:CoconutKitErrorDomain
                                                          code:HLSErrorUpdateError
                                          localizedDescription:exception.reason];
@@ -402,14 +400,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError *__autoreleasing *)pError
 {
-    if (! [self.transformerName isFilled]) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:CoconutKitLocalizedString(@"No transformer has been specified", nil)];
-        }
-        return NO;
-    }
+    NSAssert([self.transformerName isFilled], @"A transformer name must be specified");
     
     // Check whether the transformer is a global formatter (ClassName:formatterName)
     NSArray *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
@@ -461,7 +452,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
         
         // Look along the responder chain first (most specific)
-        transformationTarget = [HLSViewBindingInformation bindingTargetForSelector:transformationSelector view:self.view];
+        transformationTarget = [HLSViewBindingInformation transformationTargetForSelector:transformationSelector view:self.view];
         if (! transformationTarget) {
             // Keypath ending with objects.@operator.field. Extract the class of objects and look for a transformer on it
             NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
@@ -524,12 +515,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector error:(NSError *__autoreleasing *)pError
 {
-    if (! transformationTarget) {
-        return YES;
-    }
+    NSAssert(transformationTarget != nil && transformationSelector != NULL, @"A transformation target and / or selector must be specified");
     
     // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform correct memory management
-    id (*methodImp)(id, SEL) = (id (*)(id, SEL))[transformationTarget methodForSelector:transformationSelector];
+    id (*methodImp)(id, SEL) = (__typeof(methodImp))[transformationTarget methodForSelector:transformationSelector];
     id transformer = methodImp(transformationTarget, transformationSelector);
     
     // Wrap native Foundation transformers into HLSTransformer instances
@@ -563,10 +552,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         return;
     }
     
-    NSError *error = nil;
-    
     if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
         id objectTarget = nil;
+        NSError *error = nil;
         
         if ([self resolveObjectTarget:&objectTarget withError:&error]) {
             self.status |= HLSViewBindingStatusObjectTargetResolved;
@@ -584,9 +572,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             id transformationTarget = nil;
             SEL transformationSelector = NULL;
             id<HLSTransformer> transformer = nil;
+            NSError *error = nil;
             
             if ([self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
-                && [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
+                    && [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
                 self.status |= HLSViewBindingStatusTransformerResolved;
                 self.transformationTarget = transformationTarget;
                 self.transformationSelector = transformationSelector;
@@ -718,12 +707,15 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return self.transformer ? [self.transformer transformObject:value] : value;
 }
 
-#pragma mark Context binding lookup
+#pragma mark Context binding lookup along the responder chain
 
-// Always start, not with the view, but with its next responder. Binding namely makes sense with a parent context
-// (not in the context of the bound view itself). Moreover, this avoids collisions between the keypath to bind and
-// view properties bearing the same name (e.g. a property called 'text' bound to a text field would be trapped
-// otherwise be resolved on the text field itself)
+/**
+ * Locate the binding delegate along the responder chain. Always start, not with the view, but with its next 
+ * responder. Binding namely makes sense with a parent context (not in the context of the bound view itself). 
+ * Moreover, this avoids collisions between the keypath to bind and view properties bearing the same name 
+ * (e.g. a property called 'text' bound to a text field would be trapped by the text field text property).
+ * Lookup stops at view controller boundaries
+ */
 + (id<HLSViewBindingDelegate>)delegateForView:(UIView *)view
 {
     UIResponder *responder = view.nextResponder;
@@ -742,8 +734,11 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return nil;
 }
 
-// Locate the target which implements the specified method. Stops at view controller boundaries
-+ (id)bindingTargetForSelector:(SEL)selector view:(UIView *)view
+/**
+ * Locate a transformation target along the responder chain. The transformation selector can either be a class or
+ * instance method. Lookup stops at view controller boundaries
+ */
++ (id)transformationTargetForSelector:(SEL)selector view:(UIView *)view
 {
     UIResponder *responder = view.nextResponder;
     while (responder) {
@@ -768,6 +763,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return nil;
 }
 
+/**
+ * Locate an object binding to the specified key path along the responder chain. Lookup stops at view controller
+ * boundaries
+ */
 + (id)bindingTargetForKeyPath:(NSString *)keyPath view:(UIView *)view
 {
     UIResponder *responder = view.nextResponder;
