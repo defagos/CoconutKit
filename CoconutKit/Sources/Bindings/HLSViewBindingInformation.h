@@ -10,7 +10,7 @@
 
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter resolving, caching,
- * and automatic synchronization via KVO when possible
+ * and automatic synchronization via KVO when possible. The bound object is resolved automatically at runtime
  */
 @interface HLSViewBindingInformation : NSObject
 
@@ -24,18 +24,18 @@
 
 /**
  * Return the current value corresponding to the stored binding information (the transformer method is applied, if any). 
- * If keypath information is invalid, this method returns nil
+ * If keypath information is unverified or invalid, the method returns nil
  */
 - (id)value;
 
 /**
- * The plain value retrieved from the keypath. No transformer is applied
+ * The plain value retrieved from the bound object, without any transformation
  */
 - (id)rawValue;
 
 /**
- * The value currently displayed by the view. If the view does not support input (supportingInput = NO), the method
- * returns nil
+ * The value currently made available for input by the view. If the view does not support input (supportingInput = NO), 
+ * the method returns nil
  */
 - (id)inputValue;
 
