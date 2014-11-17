@@ -309,6 +309,12 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     @try {
         self.updatingModel = YES;
         
+        if (! self.modelAutomaticallyUpdated) {
+            @throw [NSException exceptionWithName:NSUndefinedKeyException
+                                           reason:CoconutKitLocalizedString(@"The model does not support updates", nil)
+                                         userInfo:nil];
+        }
+        
         // Will throw when given nil for scalar values. Use 0 in such cases
         // See https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Protocols/NSKeyValueCoding_Protocol/index.html#//apple_ref/occ/instm/NSObject/setNilValueForKey:
         @try {
@@ -333,6 +339,11 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             NSError *error = [NSError errorWithDomain:CoconutKitErrorDomain
                                                  code:HLSErrorUpdateError
                                  localizedDescription:CoconutKitLocalizedString(@"The value cannot be updated", nil)];
+            
+            NSError *detailedError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                         code:HLSErrorUpdateError
+                                         localizedDescription:exception.reason];
+            [error setUnderlyingError:detailedError];
             
             if ([self.delegate respondsToSelector:@selector(boundView:updateDidFailWithObject:error:)]) {
                 [self.delegate boundView:self.view updateDidFailWithObject:self.objectTarget error:error];
