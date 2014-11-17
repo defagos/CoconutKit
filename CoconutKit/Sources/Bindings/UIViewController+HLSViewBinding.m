@@ -8,19 +8,11 @@
 
 #import "UIViewController+HLSViewBinding.h"
 
-#import "HLSViewBindingDebugOverlayViewController.h"
 #import "UIView+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIViewController+HLSExtensions.h"
 
 @implementation UIViewController (HLSViewBinding)
-
-#pragma mark Overlay
-
-- (void)showBindingDebugOverlayViewRecursive:(BOOL)recursive
-{
-    [HLSViewBindingDebugOverlayViewController showForDebuggedViewController:self recursive:recursive];
-}
 
 #pragma mark Bindings
 

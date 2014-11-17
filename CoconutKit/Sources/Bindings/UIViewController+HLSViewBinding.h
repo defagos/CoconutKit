@@ -8,9 +8,6 @@
 
 @interface UIViewController (HLSViewBinding)
 
-// If recursive set to YES, display binding information for child view controllers as well
-- (void)showBindingDebugOverlayViewRecursive:(BOOL)recursive;
-
 - (void)refreshBindings;
 
 - (BOOL)checkDisplayedValuesWithError:(NSError **)pError;

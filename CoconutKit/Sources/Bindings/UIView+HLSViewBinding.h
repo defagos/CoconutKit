@@ -135,6 +135,8 @@
  */
 @interface UIView (HLSViewBinding)
 
++ (void)debugBindings;
+
 /**
  * The keypath to bind to (preferably set via Interface Builder, can also be set programmatically by calling
  * -bindToKeyPath:withTransformer:)

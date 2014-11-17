@@ -23,8 +23,7 @@ static UIWindow *s_previousKeyWindow = nil;
 
 @interface HLSViewBindingDebugOverlayViewController ()
 
-@property (nonatomic, weak) UIViewController *debuggedViewController;
-@property (nonatomic, assign, getter=isRecursive) BOOL recursive;
+@property (nonatomic, weak) UIWindow *debuggedWindow;
 
 @property (nonatomic, strong) UIPopoverController *bindingInformationPopoverController;
 @property (nonatomic, weak) HLSViewBindingInformationViewController *bindingInformationViewController;
@@ -35,7 +34,7 @@ static UIWindow *s_previousKeyWindow = nil;
 
 #pragma mark Class methods
 
-+ (void)showForDebuggedViewController:(UIViewController *)debuggedViewController recursive:(BOOL)recursive
++ (void)show
 {
     if (s_overlayWindow) {
         HLSLoggerWarn(@"An overlay is already being displayed");
@@ -49,7 +48,7 @@ static UIWindow *s_previousKeyWindow = nil;
     
     // Using a second window and setting our overlay as its root view controller ensures that rotation is dealt with correctly
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    s_overlayWindow.rootViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedViewController:debuggedViewController recursive:recursive];
+    s_overlayWindow.rootViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedWindow:s_previousKeyWindow];
     [s_overlayWindow makeKeyAndVisible];
 }
 
@@ -71,11 +70,10 @@ static UIWindow *s_previousKeyWindow = nil;
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithDebuggedViewController:(UIViewController *)debuggedViewController recursive:(BOOL)recursive
+- (instancetype)initWithDebuggedWindow:(UIWindow *)debuggedWindow
 {
     if (self = [super init]) {
-        self.debuggedViewController = debuggedViewController;
-        self.recursive = recursive;
+        self.debuggedWindow = debuggedWindow;
     }
     return self;
 }
@@ -107,9 +105,7 @@ static UIWindow *s_previousKeyWindow = nil;
     }
     self.view.frame = [UIScreen mainScreen].bounds;
     
-    [self displayDebugInformationForBindingsInView:self.debuggedViewController.view
-                            debuggedViewController:self.debuggedViewController
-                                         recursive:self.recursive];
+    [self displayDebugInformationForBindingsInView:self.debuggedWindow];
     
     __weak __typeof(self) weakSelf = self;
     
@@ -133,7 +129,7 @@ static UIWindow *s_previousKeyWindow = nil;
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return [super supportedInterfaceOrientations] & [self.debuggedViewController supportedInterfaceOrientations];
+    return [super supportedInterfaceOrientations] & [self.debuggedWindow.rootViewController supportedInterfaceOrientations];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -155,13 +151,7 @@ static UIWindow *s_previousKeyWindow = nil;
 #pragma mark Debug information display
 
 - (void)displayDebugInformationForBindingsInView:(UIView *)view
-                          debuggedViewController:(UIViewController *)debuggedViewController
-                                       recursive:(BOOL)recursive
 {
-    if (! recursive && view.nearestViewController != debuggedViewController) {
-        return;
-    }
-    
     HLSViewBindingInformation *bindingInformation = view.bindingInformation;
     if (bindingInformation) {
         UIButton *overlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -188,7 +178,7 @@ static UIWindow *s_previousKeyWindow = nil;
     }
     
     for (UIView *subview in view.subviews) {
-        [self displayDebugInformationForBindingsInView:subview debuggedViewController:debuggedViewController recursive:recursive];
+        [self displayDebugInformationForBindingsInView:subview];
     }
 }
 

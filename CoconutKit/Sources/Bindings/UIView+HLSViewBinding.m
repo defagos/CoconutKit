@@ -10,6 +10,7 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "HLSViewBindingDebugOverlayViewController.h"
 #import "HLSViewBindingInformation.h"
 #import "UIView+HLSViewBindingImplementation.h"
 #import "NSError+HLSExtensions.h"
@@ -50,6 +51,11 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     s_UIView__didMoveToWindow_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
                                                                                  @selector(didMoveToWindow),
                                                                                  (IMP)swizzled_UIView__didMoveToWindow_Imp);
+}
+
++ (void)debugBindings
+{
+    [HLSViewBindingDebugOverlayViewController show];
 }
 
 #pragma mark Accessors and mutators

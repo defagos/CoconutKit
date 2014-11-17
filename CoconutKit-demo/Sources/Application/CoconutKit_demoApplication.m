@@ -289,7 +289,7 @@
 
 - (IBAction)showBindingDebugOverlay:(id)sender
 {
-    [[self rootViewController] showBindingDebugOverlayViewRecursive:YES];
+    [UIView debugBindings];
 }
 
 @end

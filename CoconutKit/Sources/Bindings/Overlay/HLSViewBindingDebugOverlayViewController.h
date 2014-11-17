@@ -14,10 +14,9 @@
 @interface HLSViewBindingDebugOverlayViewController : HLSViewController <UIPopoverControllerDelegate>
 
 /**
- * Show the overlay, displaying bound fields in the specified view controller. If recursive is set to YES, fields
- * located in child view controllers will be displayed as well
+ * Show an overlay displaying bound fields in the current key window
  */
-+ (void)showForDebuggedViewController:(UIViewController *)debuggedViewController recursive:(BOOL)recursive;
++ (void)show;
 
 @end
 
