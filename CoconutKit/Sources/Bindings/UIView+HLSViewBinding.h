@@ -130,6 +130,18 @@
  */
 
 /**
+ * View bindings error codes. Errors are in the CoconutKitErrorDomain domain
+ */
+typedef NS_ENUM(NSInteger, HLSViewBindingError) {
+    HLSViewBindingErrorInvalidKeyPath,                  // The key path is incorrect
+    HLSViewBindingErrorObjectTargetNotFound,            // No meaningful target could be found for the key path
+    HLSViewBindingErrorInvalidTransformer,              // The transformer is invalid or could not be resolved
+    HLSViewBindingErrorNilValue,                        // The value retrieved from the key path is nil
+    HLSViewBindingErrorUnsupportedType,                 // The view cannot display the value
+    HLSViewBindingErrorUnsupportedOperation             // The operation (e.g. update) is not supported
+};
+
+/**
  * View binding additions. All methods can be called whether a view implements binding support or not. When calling
  * one of those methods on a view, the view hierarchy rooted at it is traversed, until views which do not support
  * recursion are found (see HLSViewBinding protocol), or until a view controller boundary is reached

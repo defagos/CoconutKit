@@ -33,15 +33,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     HLSViewBindingStatusTypeCompatibilityChecked = (1 << 3)             // Type compatibility with the view has been checked
 };
 
-typedef NS_ENUM(NSInteger, HLSViewBindingError) {
-    HLSViewBindingErrorInvalidKeyPath,
-    HLSViewBindingErrorObjectTargetNotFound,
-    HLSViewBindingErrorInvalidTransformer,
-    HLSViewBindingErrorNilValue,
-    HLSViewBindingErrorUnsupportedType,
-    HLSViewBindingErrorUnsupportedOperation
-};
-
 @interface HLSViewBindingInformation ()
 
 @property (nonatomic, strong) NSString *keyPath;
@@ -61,14 +52,14 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
 @property (nonatomic, strong) NSError *error;
 
-@property (nonatomic, assign, getter=isCheckingAutomatically) BOOL supportingInput;
+@property (nonatomic, assign, getter=isSupportingInput) BOOL supportingInput;
 
 @property (nonatomic, assign, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
 @property (nonatomic, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
 
-// Used to prevent calls to checks / update methods when we are simply updating a view. Depending on how view update
-// is performed, we namely could end up triggering an update which would yield to a view updated, and therefore
-// to an infinite call chain
+// Used to prevent recursive calls to checks / update methods when we are simply updating a view. Depending on how view update
+// is performed, we namely could end up triggering an update which would yield to a view updated, and therefore to an infinite
+// call chain
 @property (nonatomic, assign, getter=isUpdatingView) BOOL updatingView;
 
 // Same as above, but when updating the model
@@ -124,17 +115,11 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 - (id)rawValue
 {
-    @try {
-        return [self.objectTarget valueForKeyPath:self.keyPath];
+    if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
+        return nil;
     }
-    @catch (NSException *exception) {
-        if ([exception.name isEqualToString:NSUndefinedKeyException]) {
-            return nil;
-        }
-        else {
-            @throw;
-        }
-    }
+    
+    return [self.objectTarget valueForKeyPath:self.keyPath];
 }
 
 - (id)inputValue

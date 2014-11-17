@@ -31,7 +31,8 @@
 - (id)value;
 
 /**
- * The plain value retrieved from the bound object, without any transformation
+ * The plain value retrieved from the bound object, without any transformation, nil if the bound object has not been
+ * resolved yet
  */
 - (id)rawValue;
 
