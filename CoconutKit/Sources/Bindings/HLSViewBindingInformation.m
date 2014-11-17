@@ -22,12 +22,15 @@
 
 #import <objc/runtime.h>
 
+/**
+ * Internal status flag. Use to avoid performing already successful binding verification steps
+ */
 typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
-    HLSViewBindingStatusUnverified = 0,
-    HLSViewBindingStatusObjectTargetResolved = (1 << 0),
-    HLSViewBindingStatusTransformerResolved = (1 << 1),
-    HLSViewBindingStatusDelegateResolved = (1 << 2),
-    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 3)
+    HLSViewBindingStatusUnverified = 0,                                 // Binding never verified
+    HLSViewBindingStatusObjectTargetResolved = (1 << 0),                // Binding target resolution has been successfully made
+    HLSViewBindingStatusTransformerResolved = (1 << 1),                 // Binding transformer resolution has been successfully made (might have found nothing)
+    HLSViewBindingStatusDelegateResolved = (1 << 2),                    // Binding delegate resoution has been successfully made (might have found nothing)
+    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 3)             // Type compatibility with the view has been checked
 };
 
 typedef NS_ENUM(NSInteger, HLSViewBindingError) {
@@ -591,37 +594,42 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         }
     }
     
-    if ([self.transformerName isFilled] && (self.status & HLSViewBindingStatusTransformerResolved) == 0) {
-        id transformationTarget = nil;
-        SEL transformationSelector = NULL;
-        id<HLSTransformer> transformer = nil;
-        
-        if ([self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
-                && [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
-            self.status |= HLSViewBindingStatusTransformerResolved;
-            self.transformationTarget = transformationTarget;
-            self.transformationSelector = transformationSelector;
-            self.transformer = transformer;
+    if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
+        if ([self.transformerName isFilled]) {
+            id transformationTarget = nil;
+            SEL transformationSelector = NULL;
+            id<HLSTransformer> transformer = nil;
             
-            // Observe transformer updates, reload cached transformer and update view accordingly
-            __weak __typeof(self) weakSelf = self;
-            [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-                id<HLSTransformer> transformer = nil;
-                NSError *error = nil;
+            if ([self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
+                && [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
+                self.status |= HLSViewBindingStatusTransformerResolved;
+                self.transformationTarget = transformationTarget;
+                self.transformationSelector = transformationSelector;
+                self.transformer = transformer;
                 
-                if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakSelf.transformationTarget transformationSelector:weakSelf.transformationSelector error:&error]) {
-                    weakSelf.verified = NO;
-                    weakSelf.error = error;
-                }
-                
-                weakSelf.transformer = transformer;
-                [weakSelf.view updateView];
-            }];
+                // Observe transformer updates, reload cached transformer and update view accordingly
+                __weak __typeof(self) weakSelf = self;
+                [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                    id<HLSTransformer> transformer = nil;
+                    NSError *error = nil;
+                    
+                    if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakSelf.transformationTarget transformationSelector:weakSelf.transformationSelector error:&error]) {
+                        weakSelf.verified = NO;
+                        weakSelf.error = error;
+                    }
+                    
+                    weakSelf.transformer = transformer;
+                    [weakSelf.view updateView];
+                }];
+            }
+            else {
+                self.verified = YES;
+                self.error = error;
+                return;
+            }
         }
         else {
-            self.verified = YES;
-            self.error = error;
-            return;
+            self.status |= HLSViewBindingStatusTransformerResolved;
         }
     }
     

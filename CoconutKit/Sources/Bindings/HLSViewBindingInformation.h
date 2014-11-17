@@ -11,7 +11,7 @@
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter resolving, caching,
  * and automatic synchronization via KVO when possible. The bound object is resolved automatically at runtime. There
- * is no way to change or recalculate binding information. If binding information changes for some view, create a 
+ * is no way to change or recalculate binding information: If binding information changes for some view, create a
  * new instance and replace the previous one with it
  */
 @interface HLSViewBindingInformation : NSObject
@@ -111,15 +111,23 @@
 
 @end
 
-@interface HLSViewBindingInformation (UnavailableMethods)
+@interface HLSViewBindingInformation (ConvenienceMethods)
 
-- (instancetype)init NS_UNAVAILABLE;
+/**
+ * Check and / or update the model using current input value, as returned by -inputValue. Return YES iff successful,
+ * otherwise NO and error information
+ */
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError;
+
+/**
+ * Check and / or update the model using the specified value. Return YES iff successful, otherwise NO and error information
+ */
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 
 @end
 
-@interface HLSViewBindingInformation (ConvenienceMethods)
+@interface HLSViewBindingInformation (UnavailableMethods)
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError;
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
