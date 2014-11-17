@@ -110,18 +110,17 @@
  */
 @property (nonatomic, readonly, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
 
-@end
-
-@interface HLSViewBindingInformation (ConvenienceMethods)
-
 /**
  * Check and / or update the model using current input value, as returned by -inputValue. Return YES iff successful,
- * otherwise NO and error information
+ * otherwise NO and error information. Fails if the view does not support input (supportingInput = NO). If both
+ * check and update are made, failure to perform one does not prevent the other from being attempted
  */
 - (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError;
 
 /**
- * Check and / or update the model using the specified value. Return YES iff successful, otherwise NO and error information
+ * Check and / or update the model using the specified value. Return YES iff successful, otherwise NO and error information.
+ * Fails if the view does not support input (supportingInput = NO). If both check and update are made, failure to perform 
+ * one does not prevent the other from being attempted
  */
 - (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 

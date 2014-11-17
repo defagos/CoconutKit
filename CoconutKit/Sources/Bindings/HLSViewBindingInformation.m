@@ -354,6 +354,61 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError
+{
+    return [self check:check andUpdate:update withInputValue:[self inputValue] error:pError];
+}
+
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
+{
+    // Skip when triggered by view update implementations
+    if (self.updatingView) {
+        return YES;
+    }
+    
+    if (! self.supportingInput) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorUnsupportedOperation
+                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
+        }
+        return NO;
+    }
+    
+    if (! [self canDisplayValue:inputValue]) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSErrorUnsupportedTypeError
+                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
+        }
+        return NO;
+    }
+    
+    id value = nil;
+    NSError *error = nil;
+    
+    BOOL success = [self convertTransformedValue:inputValue toValue:&value withError:&error];
+    if (success) {
+        NSError *checkError = nil;
+        if (check && ! [self checkValue:value withError:&checkError]) {
+            success = NO;
+            [NSError combineError:checkError withError:&error];
+        }
+        
+        NSError *updateError = nil;
+        if (update && ! [self updateWithValue:value error:&updateError]) {
+            success = NO;
+            [NSError combineError:updateError withError:&error];
+        }
+    }
+    
+    if (pError) {
+        *pError = error;
+    }
+    
+    return success;
+}
+
 #pragma mark Binding
 
 - (BOOL)resolveObjectTarget:(id *)pObjectTarget withError:(NSError *__autoreleasing *)pError
@@ -805,65 +860,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             self.transformerName,
             self.transformationTarget,
             NSStringFromSelector(self.transformationSelector)];
-}
-
-@end
-
-@implementation HLSViewBindingInformation (ConvenienceMethods)
-
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError
-{
-    return [self check:check andUpdate:update withInputValue:[self inputValue] error:pError];
-}
-
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
-{
-    // Skip when triggered by view update implementations
-    if (self.updatingView) {
-        return YES;
-    }
-    
-    if (! self.supportingInput) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingErrorUnsupportedOperation
-                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
-        }
-        return NO;
-    }
-    
-    if (! [self canDisplayValue:inputValue]) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSErrorUnsupportedTypeError
-                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
-        }
-        return NO;
-    }
-    
-    id value = nil;
-    NSError *error = nil;
-    
-    BOOL success = [self convertTransformedValue:inputValue toValue:&value withError:&error];
-    if (success) {
-        NSError *checkError = nil;
-        if (check && ! [self checkValue:value withError:&checkError]) {
-            success = NO;
-            [NSError combineError:checkError withError:&error];
-        }
-        
-        NSError *updateError = nil;
-        if (update && ! [self updateWithValue:value error:&updateError]) {
-            success = NO;
-            [NSError combineError:updateError withError:&error];
-        }
-    }
-    
-    if (pError) {
-        *pError = error;
-    }
-    
-    return success;
 }
 
 @end
