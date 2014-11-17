@@ -37,9 +37,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (void)refreshBindingsInViewController:(UIViewController *)viewController;
-- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
-- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
-- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError;
 
 @end
 
@@ -93,19 +91,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self refreshBindingsInViewController:[self nearestViewController]];
 }
 
-- (BOOL)checkInputValuesWithError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
 {
-    return [self checkInputValuesInViewController:[self nearestViewController] withError:pError];
-}
-
-- (BOOL)updateModelWithError:(NSError *__autoreleasing *)pError
-{
-    return [self updateModelInViewController:[self nearestViewController] withError:pError];
-}
-
-- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError *__autoreleasing *)pError
-{
-    return [self checkAndUpdateModelWithInputValuesInViewController:[self nearestViewController] error:pError];
+    return [self check:check andUpdate:update withCurrentInputValuesInViewController:[self nearestViewController] error:pError];
 }
 
 @end
@@ -175,7 +163,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self.bindingInformation updateViewAnimated:animated];
 }
 
-- (BOOL)checkInputValuesInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -186,72 +174,14 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     BOOL success = YES;
     if (self.bindingInformation) {
         NSError *error = nil;
-        if (! [self.bindingInformation checkInputValueWithError:&error]) {
+        if (! [self.bindingInformation check:check andUpdate:update withCurrentInputValueError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
     }
     
     for (UIView *subview in self.subviews) {
-        if (! [subview checkInputValuesInViewController:viewController withError:pError]) {
-            success = NO;
-        }
-    }
-    
-    return success;
-}
-
-- (BOOL)updateModelInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError
-{
-    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
-    UIViewController *nearestViewController = self.nearestViewController;
-    if (nearestViewController && nearestViewController != viewController) {
-        return YES;
-    }
-    
-    BOOL success = YES;
-    if (self.bindingInformation) {
-        NSError *error = nil;
-        if (! [self.bindingInformation updateModelWithInputValueError:&error]) {
-            success = NO;
-            [NSError combineError:error withError:pError];
-        }
-    }
-    
-    for (UIView *subview in self.subviews) {
-        if (! [subview updateModelInViewController:viewController withError:pError]) {
-            success = NO;
-        }
-    }
-    
-    return success;
-}
-
-- (BOOL)checkAndUpdateModelWithInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError
-{
-    // Stop at view controller boundaries. The following also correctly deals with viewController = nil
-    UIViewController *nearestViewController = self.nearestViewController;
-    if (nearestViewController && nearestViewController != viewController) {
-        return YES;
-    }
-    
-    BOOL success = YES;
-    if (self.bindingInformation) {
-        NSError *checkError = nil;
-        if (! [self.bindingInformation checkInputValueWithError:&checkError]) {
-            success = NO;
-            [NSError combineError:checkError withError:pError];
-        }
-        
-        NSError *updateError = nil;
-        if (! [self.bindingInformation updateModelWithInputValueError:&updateError]) {
-            success = NO;
-            [NSError combineError:updateError withError:pError];
-        }
-    }
-    
-    for (UIView *subview in self.subviews) {
-        if (! [subview updateModelInViewController:viewController withError:pError]) {
+        if (! [subview check:check andUpdate:update withCurrentInputValuesInViewController:viewController error:pError]) {
             success = NO;
         }
     }
@@ -263,36 +193,13 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @implementation UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError
-{
-    if (! self.bindingInformation || ! self.bindInputChecked) {
-        return YES;
-    }
-    
-    return [self.bindingInformation checkInputValue:inputValue withError:pError];
-}
-
-- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     if (! self.bindingInformation) {
         return YES;
     }
     
-    return [self.bindingInformation updateModelWithInputValue:inputValue error:pError];
-}
-
-- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
-{
-    if (! self.bindingInformation) {
-        return YES;
-    }
-    
-    if (self.bindInputChecked) {
-        return [self.bindingInformation checkAndUpdateModelWithInputValue:inputValue error:pError];
-    }
-    else {
-        return [self.bindingInformation updateModelWithInputValue:inputValue error:pError];
-    }
+    return [self.bindingInformation check:self.bindInputChecked andUpdate:update withInputValue:inputValue error:pError];
 }
 
 @end

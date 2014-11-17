@@ -10,10 +10,6 @@
 
 - (void)refreshBindings;
 
-- (BOOL)checkInputValuesWithError:(NSError *__autoreleasing *)pError;
-
-- (BOOL)updateModelWithError:(NSError *__autoreleasing *)pError;
-
-- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError;
 
 @end

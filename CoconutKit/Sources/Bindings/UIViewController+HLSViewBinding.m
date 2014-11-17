@@ -21,19 +21,9 @@
     [[self viewIfLoaded] refreshBindings];
 }
 
-- (BOOL)checkInputValuesWithError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
 {
-    return [[self viewIfLoaded] checkInputValuesWithError:pError];
-}
-
-- (BOOL)updateModelWithError:(NSError *__autoreleasing *)pError
-{
-    return [[self viewIfLoaded] updateModelWithError:pError];
-}
-
-- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError *__autoreleasing *)pError
-{
-    return [[self viewIfLoaded] checkAndUpdateModelWithInputValuesError:pError];
+    return [[self viewIfLoaded] check:check andUpdate:update withCurrentInputValuesError:pError];
 }
 
 @end

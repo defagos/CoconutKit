@@ -52,7 +52,7 @@
     // Bindings are resolved at the last possible moment, when the view hierarchy is built. If we want to force an initial check,
     // we need to do it afterwards
     if (! _loadedOnce) {
-        [self checkInputValuesWithError:NULL];
+        [self check:YES andUpdate:NO withCurrentInputValuesError:NULL];
         _loadedOnce = YES;
     }
 }
@@ -72,14 +72,14 @@
     self.localizedDateFormatter = localizedDateFormatter;
     
     // Trigger a new validation to get localized error messages if any
-    [self checkInputValuesWithError:NULL];
+    [self check:YES andUpdate:NO withCurrentInputValuesError:NULL];
 }
 
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
 {
-    return [self checkInputValuesWithError:NULL];
+    return [self check:YES andUpdate:NO withCurrentInputValuesError:NULL];
 }
 
 #pragma mark HLSBindingDelegate protocol implementation

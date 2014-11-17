@@ -119,12 +119,7 @@
 
 @interface HLSViewBindingInformation (ConvenienceMethods)
 
-- (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError;
-- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
-- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
-
-- (BOOL)checkInputValueWithError:(NSError *__autoreleasing *)pError;
-- (BOOL)updateModelWithInputValueError:(NSError *__autoreleasing *)pError;
-- (BOOL)checkAndUpdateModelWithInputValueError:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 
 @end

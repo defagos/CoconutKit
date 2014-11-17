@@ -59,7 +59,7 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
 
 - (void)stateDidChange:(id)sender
 {
-    [self checkAndUpdateModelWithInputValue:@(self.on) error:NULL];
+    [self check:YES andUpdate:YES withInputValue:@(self.on) error:NULL];
 }
 
 @end
@@ -95,5 +95,5 @@ static void swizzled_UISwitch__setOn_animated_Imp(UISwitch *self, SEL _cmd, BOOL
 {
     (*s_UISwitch__setOn_animated_Imp)(self, _cmd, on, animated);
     
-    [self checkAndUpdateModelWithInputValue:@(on) error:NULL];
+    [self check:YES andUpdate:YES withInputValue:@(on) error:NULL];
 }

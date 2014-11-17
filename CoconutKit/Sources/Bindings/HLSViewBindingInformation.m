@@ -808,7 +808,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 @implementation HLSViewBindingInformation (ConvenienceMethods)
 
-- (BOOL)checkInputValueWithError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError
 {
     if (! self.supportingInput) {
         if (pError) {
@@ -819,31 +819,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    id inputValue = [self inputValue];
-    if (! [self canDisplayValue:inputValue]) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSErrorUnsupportedTypeError
-                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
-        }
-        return NO;
-    }
-    
-    return [self checkInputValue:inputValue withError:pError];
-}
-
-- (BOOL)updateModelWithInputValueError:(NSError *__autoreleasing *)pError
-{
-    if (! self.supportingInput) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingErrorUnsupportedOperation
-                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
-        }
-        return NO;
-    }
-    
-    if (! self.modelAutomaticallyUpdated) {
+    if (update && ! self.modelAutomaticallyUpdated) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                           code:HLSViewBindingErrorUnsupportedOperation
@@ -862,85 +838,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    return [self updateModelWithInputValue:inputValue error:pError];
+    return [self check:check andUpdate:update withInputValue:inputValue error:pError];
 }
 
-- (BOOL)checkAndUpdateModelWithInputValueError:(NSError *__autoreleasing *)pError
-{
-    if (! self.supportingInput) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingErrorUnsupportedOperation
-                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
-        }
-        return NO;
-    }
-    
-    if (! self.modelAutomaticallyUpdated) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSViewBindingErrorUnsupportedOperation
-                          localizedDescription:CoconutKitLocalizedString(@"The model cannot be updated automatically", nil)];
-        }
-        return NO;
-    }
-    
-    id inputValue = [self inputValue];
-    if (! [self canDisplayValue:inputValue]) {
-        if (pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSErrorUnsupportedTypeError
-                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
-        }
-        return NO;
-    }
-    
-    return [self checkAndUpdateModelWithInputValue:inputValue error:pError];
-}
-
-- (BOOL)checkInputValue:(id)inputValue withError:(NSError *__autoreleasing *)pError
-{
-    // Skip when triggered by view update implementations
-    if (self.updatingView) {
-        return YES;
-    }
-    
-    id value = nil;
-    NSError *error = nil;
-    if ([self convertTransformedValue:inputValue toValue:&value withError:&error]
-            && [self checkValue:value withError:&error]) {
-        return YES;
-    }
-    
-    if (pError) {
-        *pError = error;
-    }
-    
-    return NO;
-}
-
-- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
-{
-    // Skip when triggered by view update implementations
-    if (self.updatingView) {
-        return YES;
-    }
-    
-    id value = nil;
-    NSError *error = nil;
-    if ([self convertTransformedValue:inputValue toValue:&value withError:&error]
-            && [self updateWithValue:value error:&error]) {
-        return YES;
-    }
-    
-    if (pError) {
-        *pError = error;
-    }
-    
-    return NO;
-}
-
-- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -953,13 +854,13 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     BOOL success = [self convertTransformedValue:inputValue toValue:&value withError:&error];
     if (success) {
         NSError *checkError = nil;
-        if (! [self checkValue:value withError:&checkError]) {
+        if (check && ! [self checkValue:value withError:&checkError]) {
             success = NO;
             [NSError combineError:checkError withError:&error];
         }
         
         NSError *updateError = nil;
-        if (! [self updateWithValue:value error:&updateError]) {
+        if (update && ! [self updateWithValue:value error:&updateError]) {
             success = NO;
             [NSError combineError:updateError withError:&error];
         }

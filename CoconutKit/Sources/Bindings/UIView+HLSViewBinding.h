@@ -186,21 +186,7 @@
  *
  * The method returns YES iff all checks have been successful
  */
-- (BOOL)checkInputValuesWithError:(NSError *__autoreleasing *)pError;
-
-/**
- * Trigger a recursive update of the model for those views which can change their underlying value. The view hierarchy
- * is traversed up to view controller boundaries. No rollback mechanism is provided; if you need one, you need to implement 
- * it yourself or use objects supporting rollback natively, e.g. Core Data objects.
- *
- * The method returns YES iff all bound values were correctly updated, otherwise NO and errors to the caller
- *
- * If all views to be updated have updatingModelAutomatically set to YES, calling this method is redundant and therefore
- * not needed.
- */
-- (BOOL)updateModelWithError:(NSError *__autoreleasing *)pError;
-
-- (BOOL)checkAndUpdateModelWithInputValuesError:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError;
 
 @end
 

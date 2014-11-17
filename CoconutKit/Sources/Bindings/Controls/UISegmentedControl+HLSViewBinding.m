@@ -59,7 +59,7 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 
 - (void)segmentDidChange:(id)sender
 {
-    [self checkAndUpdateModelWithInputValue:@(self.selectedSegmentIndex) error:NULL];
+    [self check:YES andUpdate:YES withInputValue:@(self.selectedSegmentIndex) error:NULL];
 }
 
 @end
@@ -96,5 +96,5 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 {
     (*s_UISegmentedControl__setSelectedSegmentIndex_Imp)(self, _cmd, selectedSegmentIndex);
     
-    [self checkAndUpdateModelWithInputValue:@(selectedSegmentIndex) error:NULL];
+    [self check:YES andUpdate:YES withInputValue:@(selectedSegmentIndex) error:NULL];
 }

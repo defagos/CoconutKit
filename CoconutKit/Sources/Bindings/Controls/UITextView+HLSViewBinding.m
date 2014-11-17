@@ -58,7 +58,7 @@ static void swizzled_UITextView__setText_Imp(UITextField *self, SEL _cmd, NSStri
 
 - (void)textViewDidChange:(NSNotification *)notification
 {
-    [self checkAndUpdateModelWithInputValue:self.text error:NULL];
+    [self check:YES andUpdate:YES withInputValue:self.text error:NULL];
 }
 
 @end
@@ -103,6 +103,6 @@ static void swizzled_UITextView__setText_Imp(UITextField *self, SEL _cmd, NSStri
 {
     (*s_UITextView__setText_Imp)(self, _cmd, text);
     
-    [self checkAndUpdateModelWithInputValue:text error:NULL];
+    [self check:YES andUpdate:YES withInputValue:text error:NULL];
 }
 
