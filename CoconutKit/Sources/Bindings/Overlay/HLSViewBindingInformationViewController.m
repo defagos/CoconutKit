@@ -137,9 +137,11 @@
                                                                                                               text:HLSStringFromBool(self.bindingInformation.view.bindUpdateAnimated)];
     [parameterEntries addObject:bindUpdateAnimatedEntry];
     
-    HLSViewBindingInformationEntry *bindInputCheckedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Automatically checks input", nil)
-                                                                                                            text:HLSStringFromBool(self.bindingInformation.view.bindInputChecked)];
-    [parameterEntries addObject:bindInputCheckedEntry];
+    if (self.bindingInformation.supportingInput) {
+        HLSViewBindingInformationEntry *bindInputCheckedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Automatically checks input", nil)
+                                                                                                                text:HLSStringFromBool(self.bindingInformation.view.bindInputChecked)];
+        [parameterEntries addObject:bindInputCheckedEntry];
+    }
     
     return [NSArray arrayWithArray:parameterEntries];
 }
@@ -156,22 +158,24 @@
                                                                                                   object:self.bindingInformation.delegate];
     [resolvedInformationEntries addObject:delegateEntry];
 
-    HLSViewBindingInformationEntry *transformationTargetEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation target", nil)
-                                                                                                              object:self.bindingInformation.transformationTarget];
-    [resolvedInformationEntries addObject:transformationTargetEntry];
-    
-    NSString *transformationSelectorString = nil;
-    if (self.bindingInformation.transformationSelector) {
-        transformationSelectorString = [NSString stringWithFormat:@"%@%@", hls_isClass(self.bindingInformation.transformationTarget) ? @"+" : @"-",
-                                        NSStringFromSelector(self.bindingInformation.transformationSelector)];
+    if (self.bindingInformation.transformerName) {
+        HLSViewBindingInformationEntry *transformationTargetEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation target", nil)
+                                                                                                                  object:self.bindingInformation.transformationTarget];
+        [resolvedInformationEntries addObject:transformationTargetEntry];
+        
+        NSString *transformationSelectorString = nil;
+        if (self.bindingInformation.transformationSelector) {
+            transformationSelectorString = [NSString stringWithFormat:@"%@%@", hls_isClass(self.bindingInformation.transformationTarget) ? @"+" : @"-",
+                                            NSStringFromSelector(self.bindingInformation.transformationSelector)];
+        }
+        else {
+            transformationSelectorString = @"-";
+        }
+        
+        HLSViewBindingInformationEntry *transformationSelectorEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation selector", nil)
+                                                                                                                      text:transformationSelectorString];
+        [resolvedInformationEntries addObject:transformationSelectorEntry];
     }
-    else {
-        transformationSelectorString = @"-";
-    }
-    
-    HLSViewBindingInformationEntry *transformationSelectorEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation selector", nil)
-                                                                                                                  text:transformationSelectorString];
-    [resolvedInformationEntries addObject:transformationSelectorEntry];
     
     return [NSArray arrayWithArray:resolvedInformationEntries];
 }
@@ -180,15 +184,17 @@
 {
     NSMutableArray *valueEntries = [NSMutableArray array];
     
-    HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Input value", nil)
-                                                                                                    object:[self.bindingInformation inputValue]];
-    [valueEntries addObject:inputValueEntry];
+    if (self.bindingInformation.supportingInput) {
+        HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Input value", nil)
+                                                                                                        object:[self.bindingInformation inputValue]];
+        [valueEntries addObject:inputValueEntry];
+    }
     
     HLSViewBindingInformationEntry *rawValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Raw value", nil)
                                                                                                   object:[self.bindingInformation rawValue]];
     [valueEntries addObject:rawValueEntry];
     
-    HLSViewBindingInformationEntry *valueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Formatted value", nil)
+    HLSViewBindingInformationEntry *valueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Transformed value", nil)
                                                                                                object:[self.bindingInformation value]];
     [valueEntries addObject:valueEntry];
     
