@@ -9,7 +9,6 @@
 #import "HLSViewBindingInformationEntry.h"
 
 #import "HLSRuntime.h"
-#import "UIColor+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
 @interface HLSViewBindingInformationEntry ()
@@ -75,7 +74,7 @@
 
 #pragma mark Highlighting
 
-- (UIView *)highlightedView
+- (UIView *)view
 {
     if ([self.object isKindOfClass:[UIView class]]) {
         return self.object;
@@ -86,33 +85,6 @@
     else {
         return nil;
     }
-}
-
-- (BOOL)canHighlight
-{
-    return [self highlightedView] != nil;
-}
-
-- (void)highlight
-{
-    UIView *highlightedView = [self highlightedView];
-    if (! highlightedView) {
-        return;
-    }
-    
-    // Highlight views
-    CGFloat alpha = highlightedView.alpha;
-    UIColor *backgroundColor = highlightedView.backgroundColor;
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        highlightedView.alpha = alpha / 2.f;
-        highlightedView.backgroundColor = [backgroundColor invertedColor];
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.4 animations:^{
-            highlightedView.alpha = alpha;
-            highlightedView.backgroundColor = backgroundColor;
-        }];
-    }];
 }
 
 @end

@@ -13,6 +13,7 @@
 #import "HLSMAKVONotificationCenter.h"
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"
+#import "HLSViewBindingDebugOverlayViewController.h"
 #import "HLSViewBindingHelpViewController.h"
 #import "HLSViewBindingInformationEntry.h"
 #import "NSBundle+HLSExtensions.h"
@@ -271,7 +272,7 @@
     HLSInfoTableViewCell *infoCell = (HLSInfoTableViewCell *)cell;
     infoCell.nameLabel.text = entry.name;
     infoCell.valueLabel.text = entry.text;
-    infoCell.selectionStyle = [entry canHighlight] ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
+    infoCell.selectionStyle = [entry view] ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -285,7 +286,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     HLSViewBindingInformationEntry *entry = [self entryAtIndexPath:indexPath];
-    [entry highlight];
+    [[HLSViewBindingDebugOverlayViewController currentBindingDebugOverlayViewController] highlightView:[entry view]];
 }
 
 #pragma mark Actions

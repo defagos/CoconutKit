@@ -13,6 +13,7 @@
 #import "HLSViewBindingDebugOverlayApperance.h"
 #import "HLSViewBindingInformationViewController.h"
 #import "NSBundle+HLSExtensions.h"
+#import "UIColor+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
 #import "UINavigationController+HLSExtensions.h"
 #import "UIView+HLSViewBindingFriend.h"
@@ -20,6 +21,8 @@
 
 static UIWindow *s_overlayWindow = nil;
 static UIWindow *s_previousKeyWindow = nil;
+
+static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyingView";
 
 @interface HLSViewBindingDebugOverlayViewController ()
 
@@ -50,6 +53,11 @@ static UIWindow *s_previousKeyWindow = nil;
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     s_overlayWindow.rootViewController = [[HLSViewBindingDebugOverlayViewController alloc] initWithDebuggedWindow:s_previousKeyWindow];
     [s_overlayWindow makeKeyAndVisible];
+}
+
++ (HLSViewBindingDebugOverlayViewController *)currentBindingDebugOverlayViewController
+{
+    return (HLSViewBindingDebugOverlayViewController *)s_overlayWindow.rootViewController;
 }
 
 #pragma mark Class methods
@@ -113,7 +121,7 @@ static UIWindow *s_previousKeyWindow = nil;
     NSArray *scrollViews = [HLSViewBindingDebugOverlayViewController scrollViewsInView:previousWindowRootView];
     for (UIScrollView *scrollView in scrollViews) {
         [scrollView addObserver:self keyPath:@"contentOffset" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            [weakSelf updateButtonFrames];
+            [weakSelf updateOverlayViewFrames];
         }];
     }
 }
@@ -122,7 +130,7 @@ static UIWindow *s_previousKeyWindow = nil;
 {
     [super viewWillLayoutSubviews];
     
-    [self updateButtonFrames];
+    [self updateOverlayViewFrames];
 }
 
 #pragma mark Rotation
@@ -164,7 +172,7 @@ static UIWindow *s_previousKeyWindow = nil;
                                                                                   bindingInformation.error != nil,
                                                                                   bindingInformation.modelAutomaticallyUpdated);
         
-        overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
+        overlayButton.userInfo_hls = @{ HLSViewBindingDebugOverlayUnderlyingViewKey : view };
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];
         
         // Track frame changes
@@ -182,7 +190,7 @@ static UIWindow *s_previousKeyWindow = nil;
     }
 }
 
-- (CGRect)overlayViewFrameForView:(UIView *)view
+- (CGRect)overlayViewFrameForView:(UIView *)view margin:(CGFloat)margin
 {
     // iOS 8: Since no rotation is applied anymore, we must use another method to convert view frames
     CGRect frame = CGRectZero;
@@ -195,19 +203,59 @@ static UIWindow *s_previousKeyWindow = nil;
     }
     
     // Make the button frame surround the view
-    CGFloat borderWidth = HLSViewBindingDebugOverlayBorderWidth(view.bindingInformation.viewAutomaticallyUpdated);
-    return CGRectMake(CGRectGetMinX(frame) - borderWidth,
-                      CGRectGetMinY(frame) - borderWidth,
-                      CGRectGetWidth(frame) + 2 * borderWidth,
-                      CGRectGetHeight(frame) + 2 * borderWidth);
+    return CGRectMake(CGRectGetMinX(frame) - margin,
+                      CGRectGetMinY(frame) - margin,
+                      CGRectGetWidth(frame) + 2 * margin,
+                      CGRectGetHeight(frame) + 2 * margin);
 }
 
-- (void)updateButtonFrames
+- (CGRect)overlayViewFrameForView:(UIView *)view
 {
-    for (UIButton *overlayButton in self.view.subviews) {
-        HLSViewBindingInformation *bindingInformation = [overlayButton.userInfo_hls objectForKey:@"bindingInformation"];
-        overlayButton.frame = [self overlayViewFrameForView:bindingInformation.view];
+    if (view.bindingInformation) {
+        return [self overlayViewFrameForView:view margin:HLSViewBindingDebugOverlayBorderWidth(view.bindingInformation.viewAutomaticallyUpdated)];
     }
+    else {
+        return [self overlayViewFrameForView:view margin:0.f];
+    }
+}
+
+- (void)updateOverlayViewFrames
+{
+    for (UIView *overlayView in self.view.subviews) {
+        UIView *underlyingView = [overlayView.userInfo_hls objectForKey:HLSViewBindingDebugOverlayUnderlyingViewKey];
+        if (! underlyingView) {
+            HLSLoggerWarn(@"The view %@ has no underlying view. Its frame will not be correctly updated", overlayView);
+            continue;
+        }
+        
+        overlayView.frame = [self overlayViewFrameForView:underlyingView];
+    }
+}
+
+#pragma mark Highlighting
+
+- (void)highlightView:(UIView *)view
+{
+    if (! view) {
+        return;
+    }
+    
+    CGRect frame = [self overlayViewFrameForView:view margin:0.f];
+    UIView *highlightOverlayView = [[UIView alloc] initWithFrame:frame];
+    highlightOverlayView.userInfo_hls = @{ HLSViewBindingDebugOverlayUnderlyingViewKey : view };
+    highlightOverlayView.backgroundColor = [UIColor yellowColor];
+    highlightOverlayView.alpha = 0.f;
+    [self.view addSubview:highlightOverlayView];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        highlightOverlayView.alpha = 0.5f;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            highlightOverlayView.alpha = 0.f;
+        } completion:^(BOOL finished) {
+            [highlightOverlayView removeFromSuperview];
+        }];
+    }];
 }
 
 #pragma mark UIPopoverControllerDelegate protocol implementation
@@ -231,7 +279,11 @@ static UIWindow *s_previousKeyWindow = nil;
 {
     NSAssert([sender isKindOfClass:[UIButton class]], @"Expect a button");
     UIButton *overlayButton = sender;
-    HLSViewBindingInformation *bindingInformation = [overlayButton.userInfo_hls objectForKey:@"bindingInformation"];
+    UIView *underlyingView = [overlayButton.userInfo_hls objectForKey:HLSViewBindingDebugOverlayUnderlyingViewKey];
+    HLSViewBindingInformation *bindingInformation = underlyingView.bindingInformation;
+    if (! bindingInformation) {
+        return;
+    }
     
     HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
     UINavigationController *bindingInformationNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingInformationViewController];

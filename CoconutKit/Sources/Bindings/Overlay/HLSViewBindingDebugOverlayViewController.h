@@ -18,6 +18,16 @@
  */
 + (void)show;
 
+/**
+ * Return the current overlay, nil if none
+ */
++ (HLSViewBindingDebugOverlayViewController *)currentBindingDebugOverlayViewController;
+
+/**
+ * Animate a frame to highlight a given view on the overlay
+ */
+- (void)highlightView:(UIView *)view;
+
 @end
 
 @interface HLSViewBindingDebugOverlayViewController (UnavailableMethods)

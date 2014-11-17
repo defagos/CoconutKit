@@ -31,14 +31,9 @@
 @property (nonatomic, readonly, strong) id object;
 
 /**
- * Return YES iff highlighting is possible
+ * Return a view if there is a view associated with the entry, nil if none
  */
-- (BOOL)canHighlight;
-
-/**
- * Highlight the object (if possible)
- */
-- (void)highlight;
+- (UIView *)view;
 
 @end
 
