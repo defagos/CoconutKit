@@ -82,5 +82,5 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
 {
     (*s_UISlider__setValue_animated_Imp)(self, _cmd, value, animated);
     
-    [self checkAndUpdateModelWithDisplayedValue:@(value) error:NULL];
+    [self checkAndUpdateModelWithInputValue:@(value) error:NULL];
 }

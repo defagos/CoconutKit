@@ -178,11 +178,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     BOOL success = YES;
-    if (self.bindingInformation && [self respondsToSelector:@selector(displayedValue)]) {
-        id displayedValue = [self performSelector:@selector(displayedValue)];
-        
+    if (self.bindingInformation) {
         NSError *error = nil;
-        if (! [self.bindingInformation checkDisplayedValue:displayedValue withError:&error]) {
+        if (! [self.bindingInformation checkDisplayedValueWithError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
@@ -206,11 +204,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     }
     
     BOOL success = YES;
-    if (self.bindingInformation && [self respondsToSelector:@selector(displayedValue)]) {
-        id displayedValue = [self performSelector:@selector(displayedValue)];
-        
+    if (self.bindingInformation) {
         NSError *error = nil;
-        if (! [self.bindingInformation updateModelWithDisplayedValue:displayedValue error:&error]) {
+        if (! [self.bindingInformation updateModelWithDisplayedValueError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
@@ -229,35 +225,35 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @implementation UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError
 {
     if (! self.bindingInformation || ! self.bindInputChecked) {
         return YES;
     }
     
-    return [self.bindingInformation checkDisplayedValue:displayedValue withError:pError];
+    return [self.bindingInformation checkInputValue:inputValue withError:pError];
 }
 
-- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
         return YES;
     }
     
-    return [self.bindingInformation updateModelWithDisplayedValue:displayedValue error:pError];
+    return [self.bindingInformation updateModelWithInputValue:inputValue error:pError];
 }
 
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError
 {
     if (! self.bindingInformation) {
         return YES;
     }
     
     if (self.bindInputChecked) {
-        return [self.bindingInformation checkAndUpdateModelWithDisplayedValue:displayedValue error:pError];
+        return [self.bindingInformation checkAndUpdateModelWithInputValue:inputValue error:pError];
     }
     else {
-        return [self.bindingInformation updateModelWithDisplayedValue:displayedValue error:pError];
+        return [self.bindingInformation updateModelWithInputValue:inputValue error:pError];
     }
 }
 

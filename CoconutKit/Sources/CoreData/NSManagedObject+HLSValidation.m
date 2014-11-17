@@ -430,7 +430,6 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     }
 }
 
-
 #pragma mark Swizzled method implementations
 
 /**

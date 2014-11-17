@@ -162,7 +162,7 @@ static UIWindow *s_previousKeyWindow = nil;
         overlayButton.layer.borderWidth = HLSViewBindingDebugOverlayBorderWidth(bindingInformation.updatedAutomatically);
         overlayButton.backgroundColor = HLSViewBindingDebugOverlayBackgroundColor(bindingInformation.verified,
                                                                                   bindingInformation.error != nil,
-                                                                                  [bindingInformation.view respondsToSelector:@selector(displayedValue)]);
+                                                                                  bindingInformation.updatingAutomatically);
         
         overlayButton.userInfo_hls = @{ @"bindingInformation" : bindingInformation };
         [overlayButton addTarget:self action:@selector(showInfos:) forControlEvents:UIControlEventTouchUpInside];

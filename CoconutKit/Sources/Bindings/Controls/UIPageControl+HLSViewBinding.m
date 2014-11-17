@@ -58,7 +58,7 @@ static void swizzled_UIPageControl__setCurrentPage_Imp(UIPageControl *self, SEL 
 
 - (void)currentPageDidChange:(id)sender
 {
-    [self checkAndUpdateModelWithDisplayedValue:@(self.currentPage) error:NULL];
+    [self checkAndUpdateModelWithInputValue:@(self.currentPage) error:NULL];
 }
 
 @end
@@ -94,5 +94,5 @@ static void swizzled_UIPageControl__setCurrentPage_Imp(UIPageControl *self, SEL 
 {
     (*s_UIPageControl__setCurrentPage_Imp)(self, _cmd, currentPage);
     
-    [self checkAndUpdateModelWithDisplayedValue:@(currentPage) error:NULL];
+    [self checkAndUpdateModelWithInputValue:@(currentPage) error:NULL];
 }

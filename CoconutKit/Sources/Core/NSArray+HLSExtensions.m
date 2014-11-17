@@ -10,6 +10,13 @@
 
 @implementation NSArray (HLSExtensions)
 
+- (NSArray *)arrayByRemovingLastObject
+{
+    NSMutableArray *array = [NSMutableArray arrayWithArray:self];
+    [array removeLastObject];
+    return [NSArray arrayWithArray:array];
+}
+
 - (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfObjects
 {
     if (numberOfObjects == 0) {

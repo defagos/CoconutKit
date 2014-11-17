@@ -110,8 +110,12 @@
                                                                                                                 text:HLSStringFromBool(self.bindingInformation.updatedAutomatically)];
     [statusEntries addObject:updatedAutomaticallyEntry];
     
+    HLSViewBindingInformationEntry *supportingInputEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Supports input", nil)
+                                                                                                           text:HLSStringFromBool(self.bindingInformation.supportingInput)];
+    [statusEntries addObject:supportingInputEntry];
+    
     HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Can update the model", nil)
-                                                                                                     text:HLSStringFromBool([self.bindingInformation.view respondsToSelector:@selector(displayedValue)])];
+                                                                                                     text:HLSStringFromBool(self.bindingInformation.updatingAutomatically)];
     [statusEntries addObject:canUpdateEntry];
     
     return [NSArray arrayWithArray:statusEntries];

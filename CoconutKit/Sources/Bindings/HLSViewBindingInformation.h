@@ -113,10 +113,19 @@
 @property (nonatomic, readonly, strong) NSError *error;
 
 /**
- * Return YES iff the binding can be automatically kept in sync with the underlying model when the latter changes. This 
- * is always the case except when the keypath contains operators
+ * Return YES iff the view is automatically updated when the underlying model changes
  */
 @property (nonatomic, readonly, assign, getter=isUpdatedAutomatically) BOOL updatedAutomatically;
+
+/**
+ * Return YES iff the view supports input
+ */
+@property (nonatomic, readonly, assign, getter=isSupportingInput) BOOL supportingInput;
+
+/**
+ * Return YES iff the model is automatically updated when the view changes
+ */
+@property (nonatomic, readonly, assign, getter=isUpdatingAutomatically) BOOL updatingAutomatically;
 
 @end
 
@@ -128,8 +137,12 @@
 
 @interface HLSViewBindingInformation (ConvenienceMethods)
 
-- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError;
-- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError;
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError;
+
+- (BOOL)checkDisplayedValueWithError:(NSError **)pError;
+- (BOOL)updateModelWithDisplayedValueError:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithDisplayedValueError:(NSError **)pError;
 
 @end

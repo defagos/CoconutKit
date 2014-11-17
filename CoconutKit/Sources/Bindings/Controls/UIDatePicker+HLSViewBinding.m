@@ -68,7 +68,7 @@ static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL 
 
 - (IBAction)dateDidChange:(id)sender
 {
-    [self checkAndUpdateModelWithDisplayedValue:self.date error:NULL];
+    [self checkAndUpdateModelWithInputValue:self.date error:NULL];
 }
 
 @end
@@ -104,12 +104,12 @@ static void swizzled_UIDatePicker__setDate_Imp(UIDatePicker *self, SEL _cmd, NSD
 {
     (*s_UIDatePicker__setDate_Imp)(self, _cmd, date);
     
-    [self checkAndUpdateModelWithDisplayedValue:date error:NULL];
+    [self checkAndUpdateModelWithInputValue:date error:NULL];
 }
 
 static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL _cmd, NSDate *date, BOOL animated)
 {
     (*s_UIDatePicker__setDate_animated_Imp)(self, _cmd, date, animated);
     
-    [self checkAndUpdateModelWithDisplayedValue:date error:NULL];
+    [self checkAndUpdateModelWithInputValue:date error:NULL];
 }

@@ -11,6 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSMAKVONotificationCenter.h"
 #import "HLSTransformer.h"
+#import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
@@ -34,7 +35,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     HLSViewBindingErrorObjectTargetNotFound,
     HLSViewBindingErrorInvalidTransformer,
     HLSViewBindingErrorNilValue,
-    HLSViewBindingErrorUnsupportedType
+    HLSViewBindingErrorUnsupportedType,
+    HLSViewBindingErrorUnsupportedOperation
 };
 
 @interface HLSViewBindingInformation ()
@@ -57,6 +59,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 @property (nonatomic, strong) NSError *error;
 
 @property (nonatomic, assign, getter=isUpdatedAutomatically) BOOL updatedAutomatically;
+@property (nonatomic, assign, getter=isCheckingAutomatically) BOOL supportingInput;
+@property (nonatomic, assign, getter=isUpdatingAutomatically) BOOL updatingAutomatically;
 
 // Used to prevent calls to checks / update methods when we are simply updating a view. Depending on how view update
 // is performed, we namely could end up triggering an update which would yield to a view updated, and therefore
@@ -91,6 +95,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         self.transformerName = transformerName;
         self.view = view;
         self.status = HLSViewBindingStatusUnverified;
+        self.supportingInput = [view respondsToSelector:@selector(displayedValue)];
     }
     return self;
 }
@@ -349,6 +354,29 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
+    // Verify setter existence (-set<name> according to KVO compliance rules). Keypaths containing operators cannot
+    // be set
+    // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
+    if (self.supportingInput) {
+        if ([self.keyPath rangeOfString:@"@"].length == 0) {
+            id setterObject = nil;
+            NSString *setterName = nil;
+            
+            NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
+            if ([keyPathComponents count] > 1) {
+                NSString *setObjectKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
+                setterObject = [objectTarget valueForKeyPath:setObjectKeyPath];
+                setterName = [keyPathComponents lastObject];
+            }
+            else {
+                setterObject = objectTarget;
+                setterName = [NSString stringWithFormat:@"set%@:", [self.keyPath stringByReplacingCharactersInRange:NSMakeRange(0, 1)
+                                                                                                         withString:[[self.keyPath substringToIndex:1] uppercaseString]]];
+            }
+            self.updatingAutomatically = [setterObject respondsToSelector:NSSelectorFromString(setterName)];
+        }
+    }
+    
     if (pObjectTarget) {
         *pObjectTarget = objectTarget;
     }
@@ -422,10 +450,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             // Keypath ending with objects.@operator.field. Extract the class of objects and look for a transformer on it
             NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
             if ([keyPathComponents count] >= 2 && [[keyPathComponents objectAtIndex:[keyPathComponents count] - 2] hasPrefix:@"@"]) {
-                NSMutableArray *objectsKeyPathComponents = [NSMutableArray arrayWithArray:keyPathComponents];
-                [objectsKeyPathComponents removeLastObject];
-                [objectsKeyPathComponents removeLastObject];
-                NSString *objectsKeyPath = [objectsKeyPathComponents componentsJoinedByString:@"."];
+                NSString *objectsKeyPath = [[[keyPathComponents arrayByRemovingLastObject] arrayByRemovingLastObject] componentsJoinedByString:@"."];
                 
                 // Only look for a class method since we have no single object here, but a collection. We assume that all
                 // objects in the collection have the type of the first one
@@ -436,8 +461,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             }
             // Keypath ending with object.field (look for a transformer on 'object') or field (look for a transformer on 'objectTarget')
             else {
-                NSMutableArray *objectKeyPathComponents = [NSMutableArray arrayWithArray:keyPathComponents];
-                [objectKeyPathComponents removeLastObject];
+                NSArray *objectKeyPathComponents = [keyPathComponents arrayByRemovingLastObject];
                 
                 id object = nil;
                 if ([objectKeyPathComponents count] == 0) {
@@ -767,7 +791,67 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 @implementation HLSViewBindingInformation (ConvenienceMethods)
 
-- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError
+- (BOOL)checkDisplayedValueWithError:(NSError **)pError
+{
+    if (! self.supportingInput) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorUnsupportedOperation
+                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
+        }
+        return NO;
+    }
+    
+    return [self checkInputValue:[self displayedValue] withError:pError];
+}
+
+- (BOOL)updateModelWithDisplayedValueError:(NSError **)pError
+{
+    if (! self.supportingInput) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorUnsupportedOperation
+                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
+        }
+        return NO;
+    }
+    
+    if (! self.updatingAutomatically) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorUnsupportedOperation
+                          localizedDescription:CoconutKitLocalizedString(@"The model cannot be updated automatically", nil)];
+        }
+        return NO;
+    }
+    
+    return [self updateModelWithInputValue:[self displayedValue] error:pError];
+}
+
+- (BOOL)checkAndUpdateModelWithDisplayedValueError:(NSError **)pError
+{
+    if (! self.supportingInput) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorUnsupportedOperation
+                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
+        }
+        return NO;
+    }
+    
+    if (! self.updatingAutomatically) {
+        if (pError) {
+            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                          code:HLSViewBindingErrorUnsupportedOperation
+                          localizedDescription:CoconutKitLocalizedString(@"The model cannot be updated automatically", nil)];
+        }
+        return NO;
+    }
+    
+    return [self checkAndUpdateModelWithInputValue:[self displayedValue] error:pError];
+}
+
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -776,8 +860,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     
     id value = nil;
     NSError *error = nil;
-    if ([self convertTransformedValue:displayedValue toValue:&value withError:&error]
-        && [self checkValue:value withError:&error]) {
+    if ([self convertTransformedValue:inputValue toValue:&value withError:&error]
+            && [self checkValue:value withError:&error]) {
         return YES;
     }
     
@@ -788,7 +872,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return NO;
 }
 
-- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -797,7 +881,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     
     id value = nil;
     NSError *error = nil;
-    if ([self convertTransformedValue:displayedValue toValue:&value withError:&error]
+    if ([self convertTransformedValue:inputValue toValue:&value withError:&error]
             && [self updateWithValue:value error:&error]) {
         return YES;
     }
@@ -809,7 +893,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     return NO;
 }
 
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {
@@ -819,7 +903,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     id value = nil;
     NSError *error = nil;
     
-    BOOL success = [self convertTransformedValue:displayedValue toValue:&value withError:&error];
+    BOOL success = [self convertTransformedValue:inputValue toValue:&value withError:&error];
     if (success) {
         NSError *checkError = nil;
         if (! [self checkValue:value withError:&checkError]) {

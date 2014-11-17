@@ -49,13 +49,13 @@
 
 /**
  * Methods meant to be called when implementing binding support for view subclasses which must be able to update the
- * underlying bound value. The -checkAndUpdateModelWithDisplayedValue:error: should also be called when the view
+ * underlying bound value. The -checkAndUpdateModelWithInputValue:error: should also be called when the view
  * gets updated programmatically, so that the model gets updated in all cases
  */
 @interface UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)checkDisplayedValue:(id)displayedValue withError:(NSError **)pError;
-- (BOOL)updateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
-- (BOOL)checkAndUpdateModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)checkInputValue:(id)inputValue withError:(NSError **)pError;
+- (BOOL)updateModelWithInputValue:(id)inputValue error:(NSError **)pError;
+- (BOOL)checkAndUpdateModelWithInputValue:(id)inputValue error:(NSError **)pError;
 
 @end
