@@ -87,9 +87,9 @@
     
     self.title = NSLocalizedString(@"Properties", nil);
     
-    self.headerTitles = @[NSLocalizedString(@"Status", nil), NSLocalizedString(@"Parameters", nil),
+    self.headerTitles = @[NSLocalizedString(@"Status", nil), NSLocalizedString(@"Capabilities", nil), NSLocalizedString(@"Parameters", nil),
                           NSLocalizedString(@"Resolved information", nil), NSLocalizedString(@"Values", nil)];
-    self.footerTitles = @[[NSNull null], [NSNull null], NSLocalizedString(@"Tap to highlight objects", nil), [NSNull null]];
+    self.footerTitles = @[[NSNull null], [NSNull null], [NSNull null], NSLocalizedString(@"Tap to highlight objects", nil), [NSNull null]];
     [self reloadEntries];
 }
 
@@ -106,19 +106,28 @@
                                                                                                   text:statusString];
     [statusEntries addObject:statusEntry];
     
-    HLSViewBindingInformationEntry *viewUpdatedAutomaticallyEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"View updated automatically", nil)
-                                                                                                                    text:HLSStringFromBool(self.bindingInformation.viewAutomaticallyUpdated)];
-    [statusEntries addObject:viewUpdatedAutomaticallyEntry];
+    return [NSArray arrayWithArray:statusEntries];
+}
+
+- (NSArray *)capabilitiesEntries
+{
+    NSMutableArray *capabilitiesEntries = [NSMutableArray array];
     
     HLSViewBindingInformationEntry *supportingInputEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Supports input", nil)
                                                                                                            text:HLSStringFromBool(self.bindingInformation.supportingInput)];
-    [statusEntries addObject:supportingInputEntry];
+    [capabilitiesEntries addObject:supportingInputEntry];
     
-    HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Model updated automatically", nil)
-                                                                                                     text:HLSStringFromBool(self.bindingInformation.modelAutomaticallyUpdated)];
-    [statusEntries addObject:canUpdateEntry];
+    HLSViewBindingInformationEntry *viewUpdatedAutomaticallyEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"View updated automatically", nil)
+                                                                                                                    text:HLSStringFromBool(self.bindingInformation.viewAutomaticallyUpdated)];
+    [capabilitiesEntries addObject:viewUpdatedAutomaticallyEntry];
     
-    return [NSArray arrayWithArray:statusEntries];
+    if (self.bindingInformation.supportingInput) {
+        HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Model updated automatically", nil)
+                                                                                                         text:HLSStringFromBool(self.bindingInformation.modelAutomaticallyUpdated)];
+        [capabilitiesEntries addObject:canUpdateEntry];
+    }
+    
+    return [NSArray arrayWithArray:capabilitiesEntries];
 }
 
 - (NSArray *)parameterEntries
@@ -205,6 +214,7 @@
 {
     NSMutableArray *entries = [NSMutableArray array];
     [entries addObject:[self statusEntries]];
+    [entries addObject:[self capabilitiesEntries]];
     [entries addObject:[self parameterEntries]];
     [entries addObject:[self resolvedInformationEntries]];
     [entries addObject:[self valueEntries]];
