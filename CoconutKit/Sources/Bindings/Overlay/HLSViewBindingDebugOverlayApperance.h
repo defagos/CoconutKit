@@ -9,9 +9,9 @@
 /**
  * Appearance settings for binding debugging overlay buttons
  */
-CGFloat HLSViewBindingDebugOverlayBorderWidth(BOOL isUpdatedAutomatically);
+CGFloat HLSViewBindingDebugOverlayBorderWidth(BOOL isViewAutomaticallyUpdated);
 UIColor *HLSViewBindingDebugOverlayBorderColor(BOOL isVerified, BOOL hasError);
-UIColor *HLSViewBindingDebugOverlayBackgroundColor(BOOL isVerified, BOOL hasError, BOOL isUpdatingAutomatically);
+UIColor *HLSViewBindingDebugOverlayBackgroundColor(BOOL isVerified, BOOL hasError, BOOL isModelAutomaticallyUpdated);
 
 /**
  * Basic apperance settings for binding debugging overlay buttons

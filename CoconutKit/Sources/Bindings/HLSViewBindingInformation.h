@@ -10,7 +10,9 @@
 
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter resolving, caching,
- * and automatic synchronization via KVO when possible. The bound object is resolved automatically at runtime
+ * and automatic synchronization via KVO when possible. The bound object is resolved automatically at runtime. There
+ * is no way to change or recalculate binding information. If binding information changes for some view, create a 
+ * new instance and replace the previous one with it
  */
 @interface HLSViewBindingInformation : NSObject
 
@@ -45,28 +47,6 @@
 - (void)updateViewAnimated:(BOOL)animated;
 
 /**
- * Try to transform back a value into a value which is compatible with the keypath. Return YES and the value iff the 
- * reverse transformation could be achieved (the method always succeeds if no transformer has been specified).
- * Errors are returned to the binding delegate (if any) and to the caller
- */
-- (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError *__autoreleasing *)pError;
-
-/**
- * Check whether a value is correct according to any validation which might have been set (validation is made through
- * KVO, see NSKeyValueCoding category on NSObject for more information). The method returns YES iff the check is 
- * successful, otherwise the method returns NO, in which case errors are returned to the binding delegate (if any) and 
- * to the caller
- */
-- (BOOL)checkValue:(id)value withError:(NSError *__autoreleasing *)pError;
-
-/**
- * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError: 
- * must be called for that purpose. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is 
- * available). Errors are returned to the validation delegate (if any) and to the caller
- */
-- (BOOL)updateWithValue:(id)value error:(NSError *__autoreleasing *)pError;
-
-/**
  * Return the keypath to which binding is made
  */
 @property (nonatomic, readonly, strong) NSString *keyPath;
@@ -92,7 +72,7 @@
 @property (nonatomic, readonly, weak) id transformationTarget;
 
 /**
- * Return the selector which will be called on the transformation target, nil if none or not resolved yet
+ * Return the selector which will be called on the transformation target, NULL if none or not resolved yet
  */
 @property (nonatomic, readonly, assign) SEL transformationSelector;
 
@@ -115,19 +95,19 @@
 @property (nonatomic, readonly, strong) NSError *error;
 
 /**
- * Return YES iff the view is automatically updated when the underlying model changes
- */
-@property (nonatomic, readonly, assign, getter=isUpdatedAutomatically) BOOL updatedAutomatically;
-
-/**
  * Return YES iff the view supports input
  */
 @property (nonatomic, readonly, assign, getter=isSupportingInput) BOOL supportingInput;
 
 /**
+ * Return YES iff the view is automatically updated when the underlying model changes
+ */
+@property (nonatomic, readonly, assign, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
+
+/**
  * Return YES iff the model is automatically updated when the view changes
  */
-@property (nonatomic, readonly, assign, getter=isUpdatingAutomatically) BOOL updatingAutomatically;
+@property (nonatomic, readonly, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
 
 @end
 

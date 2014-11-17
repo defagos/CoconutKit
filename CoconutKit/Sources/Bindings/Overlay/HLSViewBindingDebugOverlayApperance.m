@@ -11,9 +11,9 @@
 #import "UIImage+HLSExtensions.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
-CGFloat HLSViewBindingDebugOverlayBorderWidth(BOOL isUpdatedAutomatically)
+CGFloat HLSViewBindingDebugOverlayBorderWidth(BOOL isViewAutomaticallyUpdated)
 {
-    return isUpdatedAutomatically ? 3.f : 1.f;
+    return isViewAutomaticallyUpdated ? 3.f : 1.f;
 }
 
 UIColor *HLSViewBindingDebugOverlayBorderColor(BOOL isVerified, BOOL hasError)
@@ -26,10 +26,10 @@ UIColor *HLSViewBindingDebugOverlayBorderColor(BOOL isVerified, BOOL hasError)
     }
 }
 
-UIColor *HLSViewBindingDebugOverlayBackgroundColor(BOOL isVerified, BOOL hasError, BOOL isUpdatingAutomatically)
+UIColor *HLSViewBindingDebugOverlayBackgroundColor(BOOL isVerified, BOOL hasError, BOOL isModelAutomaticallyUpdated)
 {
     UIColor *color = [HLSViewBindingDebugOverlayBorderColor(isVerified, hasError) colorWithAlphaComponent:HLSViewBindingDebugOverlayAlpha()];
-    if (isUpdatingAutomatically) {
+    if (isModelAutomaticallyUpdated) {
         return color;
     }
     else {

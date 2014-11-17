@@ -58,9 +58,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 @property (nonatomic, assign, getter=isVerified) BOOL verified;
 @property (nonatomic, strong) NSError *error;
 
-@property (nonatomic, assign, getter=isUpdatedAutomatically) BOOL updatedAutomatically;
 @property (nonatomic, assign, getter=isCheckingAutomatically) BOOL supportingInput;
-@property (nonatomic, assign, getter=isUpdatingAutomatically) BOOL updatingAutomatically;
+
+@property (nonatomic, assign, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
+@property (nonatomic, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
 
 // Used to prevent calls to checks / update methods when we are simply updating a view. Depending on how view update
 // is performed, we namely could end up triggering an update which would yield to a view updated, and therefore
@@ -145,10 +146,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 - (void)setObjectTarget:(id)objectTarget
 {
-    if (_objectTarget && self.updatedAutomatically) {
+    if (_objectTarget && self.viewAutomaticallyUpdated) {
         [_objectTarget removeObserver:self keyPath:self.keyPath];
         
-        self.updatedAutomatically = NO;
+        self.viewAutomaticallyUpdated = NO;
     }
     
     _objectTarget = objectTarget;
@@ -160,7 +161,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
             [self.view updateView];
         }];
         
-        self.updatedAutomatically = YES;
+        self.viewAutomaticallyUpdated = YES;
     }
 }
 
@@ -196,6 +197,11 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 
 #pragma mark Checking and updating values (these operations notify the delegate about their status)
 
+/**
+ * Try to transform back a value into a value which is compatible with the keypath. Return YES and the value iff the
+ * reverse transformation could be achieved (the method always succeeds if no transformer has been specified).
+ * Errors are returned to the binding delegate (if any) and to the caller
+ */
 - (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
@@ -255,6 +261,12 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     }
 }
 
+/**
+ * Check whether a value is correct according to any validation which might have been set (validation is made through
+ * KVO, see NSKeyValueCoding category on NSObject for more information). The method returns YES iff the check is
+ * successful, otherwise the method returns NO, in which case errors are returned to the binding delegate (if any) and
+ * to the caller
+ */
 - (BOOL)checkValue:(id)value withError:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
@@ -282,6 +294,11 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     }
 }
 
+/**
+ * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError:
+ * must be called for that purpose. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is
+ * available). Errors are returned to the validation delegate (if any) and to the caller
+ */
 - (BOOL)updateWithValue:(id)value error:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
@@ -373,7 +390,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
                 setterName = [NSString stringWithFormat:@"set%@:", [self.keyPath stringByReplacingCharactersInRange:NSMakeRange(0, 1)
                                                                                                          withString:[[self.keyPath substringToIndex:1] uppercaseString]]];
             }
-            self.updatingAutomatically = [setterObject respondsToSelector:NSSelectorFromString(setterName)];
+            self.modelAutomaticallyUpdated = [setterObject respondsToSelector:NSSelectorFromString(setterName)];
         }
     }
     
@@ -816,7 +833,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    if (! self.updatingAutomatically) {
+    if (! self.modelAutomaticallyUpdated) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                           code:HLSViewBindingErrorUnsupportedOperation
@@ -839,7 +856,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
         return NO;
     }
     
-    if (! self.updatingAutomatically) {
+    if (! self.modelAutomaticallyUpdated) {
         if (pError) {
             *pError = [NSError errorWithDomain:CoconutKitErrorDomain
                                           code:HLSViewBindingErrorUnsupportedOperation

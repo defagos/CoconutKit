@@ -106,16 +106,16 @@
                                                                                                   text:statusString];
     [statusEntries addObject:statusEntry];
     
-    HLSViewBindingInformationEntry *updatedAutomaticallyEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"View updated automatically", nil)
-                                                                                                                text:HLSStringFromBool(self.bindingInformation.updatedAutomatically)];
-    [statusEntries addObject:updatedAutomaticallyEntry];
+    HLSViewBindingInformationEntry *viewUpdatedAutomaticallyEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"View updated automatically", nil)
+                                                                                                                    text:HLSStringFromBool(self.bindingInformation.viewAutomaticallyUpdated)];
+    [statusEntries addObject:viewUpdatedAutomaticallyEntry];
     
     HLSViewBindingInformationEntry *supportingInputEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Supports input", nil)
                                                                                                            text:HLSStringFromBool(self.bindingInformation.supportingInput)];
     [statusEntries addObject:supportingInputEntry];
     
-    HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Can update the model", nil)
-                                                                                                     text:HLSStringFromBool(self.bindingInformation.updatingAutomatically)];
+    HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Model updated automatically", nil)
+                                                                                                     text:HLSStringFromBool(self.bindingInformation.modelAutomaticallyUpdated)];
     [statusEntries addObject:canUpdateEntry];
     
     return [NSArray arrayWithArray:statusEntries];
