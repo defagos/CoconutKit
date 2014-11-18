@@ -212,6 +212,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="switchEnabled"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </switch>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="Ijn-2R-u1p">
