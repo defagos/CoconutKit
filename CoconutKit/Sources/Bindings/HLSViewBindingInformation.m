@@ -494,7 +494,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             return NO;
         }
     }
-    // Local formatter specified
+    // Local transformer specified
     else {
         transformationSelector = NSSelectorFromString(self.transformerName);
         if (! transformationSelector) {
