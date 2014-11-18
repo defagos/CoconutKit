@@ -36,7 +36,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
-- (void)refreshBindingsInViewController:(UIViewController *)viewController;
+- (void)updateBoundViewsAnimated:(BOOL)animated inViewController:(UIViewController *)viewController;
 - (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError;
 
 @end
@@ -86,9 +86,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 #pragma mark Bindings
 
-- (void)refreshBindings
+- (void)updateBoundViewsAnimated:(BOOL)animated
 {
-    [self refreshBindingsInViewController:[self nearestViewController]];
+    [self updateBoundViewsAnimated:animated inViewController:[self nearestViewController]];
 }
 
 - (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
@@ -134,7 +134,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 #pragma mark Bindings
 
-- (void)refreshBindingsInViewController:(UIViewController *)viewController
+- (void)updateBoundViewsAnimated:(BOOL)animated inViewController:(UIViewController *)viewController
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -142,10 +142,10 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    [self updateViewAnimated:YES];
+    [self updateViewAnimated:animated];
     
     for (UIView *subview in self.subviews) {
-        [subview refreshBindingsInViewController:viewController];
+        [subview updateBoundViewsAnimated:animated inViewController:viewController];
     }
 }
 

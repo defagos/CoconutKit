@@ -8,7 +8,7 @@
 
 @interface UIViewController (HLSViewBinding)
 
-- (void)refreshBindings;
+- (void)updateBoundViewsAnimated:(BOOL)animated;
 
 - (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError;
 

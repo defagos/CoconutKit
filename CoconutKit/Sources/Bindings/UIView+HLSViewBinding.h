@@ -68,10 +68,10 @@
  * responder chain context is available. This information is then stored for efficient later use. The view is not
  * updated automatically when the underlying bound objects changes, this has to be done manually:
  *   - when the object is changed, call -bindToObject: to set bindings with the new object
- *   - if the object does not change but has different values for its bounds properties, simply call -refreshBindings
+ *   - if the object does not change but has different values for its bounds properties, simply call -updateBoundViews:animated:
  *     to reflect the new values which are available
  *
- * It would be painful to call -bindToObject:, -refreshBindings, etc. on all views belonging to a view hierarchy
+ * It would be painful to call -bindToObject:, -updateBoundViewsAnimated:, etc. on all views belonging to a view hierarchy
  * when bindings must be established or refreshed. For this reason, those calls are made recursively. This means you can 
  * simply call one of those methods at the top of the view hierarchy (or even on the view controller itself, see 
  * UIViewController+HLSViewBinding.h) to bind or refresh the whole associated view hierarchy. Note that each view class 
@@ -189,7 +189,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * using information which has been cached the first time bindings were successfully checked. If you want to force bindings
  * to be checked again first (i.e. keypaths and transformers to be resolved again), set forced to YES
  */
-- (void)refreshBindings;
+- (void)updateBoundViewsAnimated:(BOOL)animated;
 
 /**
  * Recursively check bound values, stopping at view controller boundaries. Errors are reported to the validation

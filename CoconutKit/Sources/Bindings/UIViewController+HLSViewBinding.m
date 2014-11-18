@@ -16,9 +16,9 @@
 
 #pragma mark Bindings
 
-- (void)refreshBindings
+- (void)updateBoundViewsAnimated:(BOOL)animated
 {
-    [[self viewIfLoaded] refreshBindings];
+    [[self viewIfLoaded] updateBoundViewsAnimated:animated];
 }
 
 - (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
