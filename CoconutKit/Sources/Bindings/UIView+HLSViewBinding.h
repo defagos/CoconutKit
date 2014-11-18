@@ -45,8 +45,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * path and transformers are in fact required to define a properly working binding.
  *
  * During binding resolution, each bound view is assigned a status. This status can be examined using an in-app 
- * debugging interface, making programmer error detection easy. On the other hand, status information related to
- * validation or model updates can be caught by a binding delegate.
+ * debugging interface, making programmer error detection easy.
  *
  *
  *
@@ -175,16 +174,17 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * is available, CoconutKit bindings encure that interacting with such views automatically updates the underlying model.
  *
  * Unlike display, though, input is error-prone. A value might need to be transformed but transformation can fail due to
- * incorrect input. Even if correctly transformed, the resulting value might be incorrect according to some model rules. 
- * Even updating the model objet can fail. All these events can be caught by a binding delegate.
+ * incorrect input. Even if correctly transformed, the resulting value might be incorrect according to some model validation
+ * rules. Even updating the model objet can fail. All these events can be caught by a binding delegate.
  *
  *
  * 5.1. Binding delegate
- * --------------------
+ * ---------------------
  *
  * As for the key path, binding delegate resolution is performed along the responder chain, starting from the bound view
  * parent, and stopping at view controller boundaries. The first instance of a class conforming to the HLSViewBindingDelegate
- * protocol is automatically set to be the delegate of the bound view.
+ * protocol is automatically set to be the delegate of the bound view, and will receive success and failure events, depending
+ * on which protocol methods are implemented.
  *
  *
  * 5.2. Validation and update
@@ -193,18 +193,20 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  *
  *
  *
- 
- 
  *
- * - transformers / NSFormatter / NSValueTransformer
- * - output / input
- * - delegate
- * - keypaths, complex, operators, limitations, read-only accessors, mutators
- * - resolving and debugging
- * - performance / resolving once & cached / table views e.g.
- * - validation and update
- * - natively supported views
- * - bindings for your own views
+ *
+ * 7. Natively supported views
+ * ---------------------------
+ *
+ *
+ * 8. Bindings for custom views
+ * ----------------------------
+ *
+ *
+ *
+ * 9. Debugging bindings
+ * ---------------------
+ *
  *
  */
 @interface UIView (HLSViewBinding)
