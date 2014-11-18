@@ -211,7 +211,8 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return YES;
     }
     
-    return [self.bindingInformation check:self.bindInputChecked update:update withInputValue:inputValue error:pError];
+    // The check parameter can be used to override the default behavior
+    return [self.bindingInformation check:check && self.bindInputChecked update:update withInputValue:inputValue error:pError];
 }
 
 @end
