@@ -7,6 +7,7 @@ HLSAssert.h
 HLSAutorotation.h
 HLSConnection.h
 HLSContainerStack.h
+HLSCoreError.h
 HLSCursor.h
 HLSFakeConnection.h
 HLSFileManager.h
@@ -55,6 +56,7 @@ HLSVector.h
 HLSViewAnimation.h
 HLSViewAnimationStep.h
 HLSViewBindingDelegate.h
+HLSViewBindingError.h
 HLSViewController.h
 HLSWebViewController.h
 HLSWizardViewController.h

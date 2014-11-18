@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F04E2D01A1BA3FB00C6C08B /* HLSCoreError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F04E2CE1A1BA3FB00C6C08B /* HLSCoreError.h */; };
+		6F04E2D11A1BA3FB00C6C08B /* HLSCoreError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E2CF1A1BA3FB00C6C08B /* HLSCoreError.m */; };
+		6F04E2D81A1BA61500C6C08B /* HLSViewBindingError.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F04E2D61A1BA61500C6C08B /* HLSViewBindingError.h */; };
+		6F04E2D91A1BA61500C6C08B /* HLSViewBindingError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E2D71A1BA61500C6C08B /* HLSViewBindingError.m */; };
 		6F0CA8DB19DD934300CBE2E1 /* HLSViewBindingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0CA8BB19DD934300CBE2E1 /* HLSViewBindingDelegate.h */; };
 		6F0CA8DE19DD934300CBE2E1 /* HLSViewBindingInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F0CA8BE19DD934300CBE2E1 /* HLSViewBindingInformation.h */; };
 		6F0CA8DF19DD934300CBE2E1 /* HLSViewBindingInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CA8BF19DD934300CBE2E1 /* HLSViewBindingInformation.m */; };
@@ -333,6 +337,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F04E2CE1A1BA3FB00C6C08B /* HLSCoreError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCoreError.h; sourceTree = "<group>"; };
+		6F04E2CF1A1BA3FB00C6C08B /* HLSCoreError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCoreError.m; sourceTree = "<group>"; };
+		6F04E2D61A1BA61500C6C08B /* HLSViewBindingError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HLSViewBindingError.h; path = Sources/Bindings/HLSViewBindingError.h; sourceTree = SOURCE_ROOT; };
+		6F04E2D71A1BA61500C6C08B /* HLSViewBindingError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HLSViewBindingError.m; path = Sources/Bindings/HLSViewBindingError.m; sourceTree = SOURCE_ROOT; };
 		6F0CA8BB19DD934300CBE2E1 /* HLSViewBindingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingDelegate.h; sourceTree = "<group>"; };
 		6F0CA8BE19DD934300CBE2E1 /* HLSViewBindingInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingInformation.h; sourceTree = "<group>"; };
 		6F0CA8BF19DD934300CBE2E1 /* HLSViewBindingInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewBindingInformation.m; sourceTree = "<group>"; };
@@ -741,6 +749,8 @@
 				6FCD33851A1216680002F478 /* Controls */,
 				6FCD33CA1A1216E30002F478 /* Overlay */,
 				6F0CA8BB19DD934300CBE2E1 /* HLSViewBindingDelegate.h */,
+				6F04E2D61A1BA61500C6C08B /* HLSViewBindingError.h */,
+				6F04E2D71A1BA61500C6C08B /* HLSViewBindingError.m */,
 				6F0CA8BE19DD934300CBE2E1 /* HLSViewBindingInformation.h */,
 				6F0CA8BF19DD934300CBE2E1 /* HLSViewBindingInformation.m */,
 				6F0CA8D019DD934300CBE2E1 /* UIView+HLSViewBinding.h */,
@@ -874,6 +884,8 @@
 				6F3E3E8215A2277D007E78BD /* HLSApplicationPreloader.m */,
 				6FADE51914BA0494007EE121 /* HLSAssert.h */,
 				6FADE51A14BA0494007EE121 /* HLSAssert.m */,
+				6F04E2CE1A1BA3FB00C6C08B /* HLSCoreError.h */,
+				6F04E2CF1A1BA3FB00C6C08B /* HLSCoreError.m */,
 				6FCA2DD11679E36D0011CFDA /* HLSFileManager.h */,
 				6FCA2DD21679E36D0011CFDA /* HLSFileManager.m */,
 				6FB007DB1952D09B0082D915 /* HLSGeometry.h */,
@@ -1309,9 +1321,11 @@
 				6FF3E6EF15D2E4C900AB9A53 /* HLSTransition.h in Headers */,
 				6FA5BD9A15E28CBB00E5182E /* HLSLayerAnimation.h in Headers */,
 				6FA5BDC015E34A8F00E5182E /* HLSLayerAnimationStep.h in Headers */,
+				6F04E2D81A1BA61500C6C08B /* HLSViewBindingError.h in Headers */,
 				6FCD33BC1A1216690002F478 /* UIStepper+HLSViewBinding.h in Headers */,
 				6FCFEA4915E37E25002CAF9E /* HLSAnimationStep.h in Headers */,
 				6FCFEA5915E390A6002CAF9E /* HLSObjectAnimation.h in Headers */,
+				6F04E2D01A1BA3FB00C6C08B /* HLSCoreError.h in Headers */,
 				6FCFEA6115E3AAC5002CAF9E /* HLSAnimationStep+Protected.h in Headers */,
 				6F41D22B15E6A527009A2384 /* CALayer+HLSExtensions.h in Headers */,
 				6F41D23F15E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.h in Headers */,
@@ -1531,6 +1545,7 @@
 				6FADE5BC14BA0494007EE121 /* NSCalendar+HLSExtensions.m in Sources */,
 				6FADE5BE14BA0494007EE121 /* NSData+HLSExtensions.m in Sources */,
 				6FADE5C014BA0494007EE121 /* NSDate+HLSExtensions.m in Sources */,
+				6F04E2D11A1BA3FB00C6C08B /* HLSCoreError.m in Sources */,
 				6FADE5C214BA0494007EE121 /* NSDateFormatter+HLSExtensions.m in Sources */,
 				6F8B185119DD8B6D00A06F2B /* HLSInfoTableViewCell.m in Sources */,
 				6FADE5C414BA0494007EE121 /* NSDictionary+HLSExtensions.m in Sources */,
@@ -1580,6 +1595,7 @@
 				6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */,
 				6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */,
 				6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */,
+				6F04E2D91A1BA61500C6C08B /* HLSViewBindingError.m in Sources */,
 				6FCD33A91A1216690002F478 /* UIActivityIndicatorView+HLSViewBinding.m in Sources */,
 				6FADE9EF14BA3AA0007EE121 /* UILabel+HLSDynamicLocalization.m in Sources */,
 				6F3B064614BC7D410026F512 /* UIWebView+HLSExtensions.m in Sources */,

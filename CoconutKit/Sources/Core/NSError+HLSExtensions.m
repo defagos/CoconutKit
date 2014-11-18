@@ -9,13 +9,13 @@
 #import "NSError+HLSExtensions.h"
 
 #import "HLSAssert.h"
+#import "HLSCoreError.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSDictionary+HLSExtensions.h"
 
 #import <objc/runtime.h>
 
-NSString * const CoconutKitErrorDomain = @"ch.defagos.coconutkit";
 NSString * const HLSDetailedErrorsKey = @"HLSDetailedErrorsKey";
 
 static void *s_mutableUserInfoKey = &s_mutableUserInfoKey;
@@ -52,13 +52,13 @@ static Class subclass_class(id self, SEL _cmd);
     }
     
     if (*pExistingError) {
-        if ([*pExistingError hasCode:HLSErrorMultipleErrors withinDomain:CoconutKitErrorDomain]) {
+        if ([*pExistingError hasCode:HLSCoreErrorMultipleErrors withinDomain:HLSCoreErrorDomain]) {
             [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
         }
         else {
             NSError *previousError = *pExistingError;
-            *pExistingError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                                  code:HLSErrorMultipleErrors
+            *pExistingError = [NSError errorWithDomain:HLSCoreErrorDomain
+                                                  code:HLSCoreErrorMultipleErrors
                                   localizedDescription:CoconutKitLocalizedString(@"Multiple errors have been encountered", nil)];
             [*pExistingError addObject:previousError forKey:HLSDetailedErrorsKey];
             [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];

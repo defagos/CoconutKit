@@ -8,6 +8,7 @@
 
 #import "HLSTransformer.h"
 
+#import "HLSCoreError.h"
 #import "HLSLogger.h"
 #import "NSError+HLSExtensions.h"
 
@@ -181,8 +182,8 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
         NSString *errorDescription = nil;
         BOOL result = [formatter getObjectValue:pObject forString:string errorDescription:&errorDescription];
         if (! result && pError) {
-            *pError = [NSError errorWithDomain:CoconutKitErrorDomain
-                                          code:HLSErrorTransformationError
+            *pError = [NSError errorWithDomain:HLSCoreErrorDomain
+                                          code:HLSCoreErrorTransformation
                           localizedDescription:errorDescription];
             
         }
