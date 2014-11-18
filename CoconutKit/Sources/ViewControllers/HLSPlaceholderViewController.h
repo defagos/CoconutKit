@@ -161,6 +161,14 @@
  */
 @property (nonatomic, weak) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 
+/**
+ * If set to YES, the user interface interaction is blocked during the time the animation is running (see
+ * the running property documentation for more information about what "running" actually means)
+ *
+ * Default is NO
+ */
+@property (nonatomic, assign) BOOL lockingUI;
+
 @end
 
 @protocol HLSPlaceholderViewControllerDelegate <NSObject>

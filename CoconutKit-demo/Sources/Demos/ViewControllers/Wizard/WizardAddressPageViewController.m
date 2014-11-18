@@ -14,150 +14,42 @@
 
 @property (nonatomic, strong) PersonInformation *personInformation;
 
-@property (nonatomic, weak) IBOutlet UITextField *streetTextField;
-@property (nonatomic, weak) IBOutlet UILabel *streetErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *cityTextField;
-@property (nonatomic, weak) IBOutlet UILabel *cityErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *stateTextField;
-@property (nonatomic, weak) IBOutlet UILabel *stateErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *countryTextField;
-@property (nonatomic, weak) IBOutlet UILabel *countryErrorLabel;
+@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *errorLabels;
 
 @end
 
-@implementation WizardAddressPageViewController
+@implementation WizardAddressPageViewController {
+@private
+    BOOL _loadedOnce;
+}
 
 #pragma mark Object creation and destruction
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
-        self.personInformation = [[PersonInformation allObjects] firstObject];
-        NSAssert(self.personInformation != nil, @"A person must be available");
+    if (self = [super init]) {
+        // Only one person in the DB. If does not exist yet, create it
+        PersonInformation *personInformation = [[PersonInformation allObjects] firstObject];
+        if (! personInformation) {
+            personInformation = [PersonInformation insert];
+        }
+        self.personInformation = personInformation;
     }
     return self;
 }
 
-#pragma mark Accessors and mutators
-
-- (void)setPersonInformation:(PersonInformation *)personInformation
-{
-    if (_personInformation == personInformation) {
-        return;
-    }
-    
-    _personInformation = personInformation;
-    
-    [self reloadData];
-}
-
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
+- (void)viewWillLayoutSubviews
 {
-    [super viewDidLoad];
+    [super viewWillLayoutSubviews];
     
-    self.streetTextField.delegate = self;
-    self.cityTextField.delegate = self;
-    self.stateTextField.delegate = self;
-    self.countryTextField.delegate = self;
-    
-    [self reloadData];
-}
-
-#pragma mark HLSValidable protocol implementation
-
-- (BOOL)validate
-{    
-    return [self checkTextFields];
-}
-
-#pragma mark UITextFieldDelegate protocol implementation
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == self.streetTextField) {
-        [self.cityTextField becomeFirstResponder];
-    }
-    else if (textField == self.cityTextField) {
-        [self.stateTextField becomeFirstResponder];
-    }
-    else if (textField == self.stateTextField) {
-        [self.countryTextField becomeFirstResponder];
-    }
-    else {
-        [textField resignFirstResponder];
-    }
-    
-    return YES;
-}
-
-#pragma mark HLSTextFieldValidationDelegate protocol implementation
-
-- (void)textFieldDidPassValidation:(UITextField *)textField
-{
-    textField.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
-    
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = nil;
-}
-
-- (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error
-{
-    textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
-    
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = [error localizedDescription];
-}
-
-#pragma mark Updating the view
-
-- (void)reloadData
-{
-    [self.streetTextField bindToManagedObject:self.personInformation
-                                    fieldName:@"street"
-                                    formatter:nil
-                           validationDelegate:self];
-    [self.streetTextField setCheckingOnChange:YES];
-    [self.cityTextField bindToManagedObject:self.personInformation
-                                  fieldName:@"city"
-                                  formatter:nil
-                         validationDelegate:self];
-    [self.cityTextField setCheckingOnChange:YES];
-    [self.stateTextField bindToManagedObject:self.personInformation
-                                   fieldName:@"state"
-                                   formatter:nil
-                          validationDelegate:self];
-    [self.stateTextField setCheckingOnChange:YES];
-    [self.countryTextField bindToManagedObject:self.personInformation
-                                     fieldName:@"country"
-                                     formatter:nil
-                            validationDelegate:self];
-    [self.countryTextField setCheckingOnChange:YES];
-    
-    // Performs and initial complete validation
-    [self checkTextFields];
-}
-
-#pragma mark Retrieving the error label associated with a text field
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField
-{
-    if (textField == self.streetTextField) {
-        return self.streetErrorLabel;
-    }
-    else if (textField == self.cityTextField) {
-        return self.cityErrorLabel;
-    }
-    else if (textField == self.stateTextField) {
-        return self.stateErrorLabel;
-    }
-    else if (textField == self.countryTextField) {
-        return self.countryErrorLabel;
-    }
-    else {
-        HLSLoggerError(@"Unknown text field");
-        return nil;
+    // Bindings are resolved at the last possible moment, when the view hierarchy is built. If we want to force an initial check,
+    // we need to do it afterwards
+    if (! _loadedOnce) {
+        [self checkBoundViewHierarchyWithError:NULL];
+        _loadedOnce = YES;
     }
 }
 
@@ -166,9 +58,47 @@
 - (void)localize
 {
     [super localize];
-        
+    
     // Trigger a new validation to get localized error messages if any
-    [self checkTextFields];
+    [self checkBoundViewHierarchyWithError:NULL];
+}
+
+#pragma mark HLSValidable protocol implementation
+
+- (BOOL)validate
+{    
+    return [self checkBoundViewHierarchyWithError:NULL];
+}
+
+#pragma mark HLSBindingDelegate protocol implementation
+
+- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object
+{
+    boundView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
+    
+    UILabel *errorLabel = [self errorLabelForView:boundView];
+    errorLabel.text = nil;
+}
+
+- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error
+{
+    boundView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    
+    UILabel *errorLabel = [self errorLabelForView:boundView];
+    errorLabel.text = [error localizedDescription];
+}
+
+#pragma mark Retrieving the error label associated with a view
+
+- (UILabel *)errorLabelForView:(UIView *)view
+{
+    NSUInteger index = [self.textFields indexOfObject:view];
+    if (index == NSNotFound) {
+        return nil;
+    }
+    
+    NSAssert([self.textFields count] == [self.errorLabels count], @"Expect one label per text field");
+    return [self.errorLabels objectAtIndex:index];
 }
 
 #pragma mark Event callbacks
@@ -185,10 +115,9 @@
 - (IBAction)resetTextFields:(id)sender
 {
     // Reset text fields programmatically. This shows that the model is updated accordingly
-    self.streetTextField.text = nil;
-    self.cityTextField.text = nil;
-    self.stateTextField.text = nil;
-    self.countryTextField.text = nil;
+    for (UITextField *textField in self.textFields) {
+        textField.text = nil;
+    }
 }
 
 @end

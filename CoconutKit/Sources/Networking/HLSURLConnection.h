@@ -34,3 +34,10 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 @property (nonatomic, copy) HLSURLConnectionAuthenticationChallengeBlock authenticationChallengeBlock;
 
 @end
+
+@interface HLSURLConnection (UnavailableMethods)
+
+- (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

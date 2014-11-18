@@ -20,16 +20,6 @@
 #define HLSStaticAssert(expr)                   {typedef char static_assertion_failure[(expr) ? 1 : -1];}
 
 /**
- * Insert this macro in the implementation of a method which is inherited but does not have any meaning for the class
- * you are implementing. This can e.g. be helpful to disable the init NSObject inherited method (which sometimes is
- * not meaningful)
- */
-#define HLSForbiddenInheritedMethod()            NSAssert(NO, @"Forbidden inherited method call. This method has "      \
-                                                               "been inherited from a parent class but could not "      \
-                                                               "be meaningfully overridden. It cannot therefore "       \
-                                                               "be called")
-
-/**
  * Insert this macro in methods which must be implemented. This can be useful in the following cases:
  *   - during development, to mark methods you have not implemented yet (but which must be)
  *   - in class design: to mark methods for which a class cannot provide a meaningful implementation, which must be
@@ -82,7 +72,6 @@
 
 #define HLSStaticAssert(expr)
 
-#define HLSForbiddenInheritedMethod()
 #define HLSMissingMethodImplementation()
 
 #define HLSAssertObjectsInEnumerationAreKindOfClass(enumeration, objectClass)

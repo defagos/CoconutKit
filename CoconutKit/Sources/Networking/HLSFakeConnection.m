@@ -21,7 +21,7 @@
 
 - (instancetype)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
-    if ((self = [super initWithCompletionBlock:completionBlock])) {
+    if (self = [super initWithCompletionBlock:completionBlock]) {
         self.responseObject = responseObject;
         self.error = error;
     }
@@ -31,6 +31,11 @@
 - (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     return [self initWithResponseObject:nil error:nil completionBlock:completionBlock];
+}
+
+- (instancetype)init
+{
+    return [self initWithCompletionBlock:nil];
 }
 
 #pragma mark HLSConnectionAbstract protocol implementation

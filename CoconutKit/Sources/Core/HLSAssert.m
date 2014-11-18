@@ -27,7 +27,7 @@
                         lineNumber:(NSInteger)line
 {
     if (! [NSAssertionHandler enumeration:enumeration containsOnlyObjectsOfClass:objectClass strict:strict]) {
-        NSString *description = [NSString stringWithFormat:@"Only objects of %@type %@ are expected in the collection %@",
+        NSString *description = [NSString stringWithFormat:@"Only objects of %@ type %@ are expected in the collection %@",
                                  strict? @"*exact* " : @"",
                                  objectClass, 
                                  enumeration];
@@ -47,7 +47,7 @@
                         lineNumber:(NSInteger)line
 {
     if (! [NSAssertionHandler enumeration:enumeration containsOnlyObjectsOfClass:objectClass strict:strict]) {
-        NSString *description = [NSString stringWithFormat:@"Only objects of %@type %@ are expected in the collection %@",
+        NSString *description = [NSString stringWithFormat:@"Only objects of %@ type %@ are expected in the collection %@",
                                  strict? @"*exact* " : @"",
                                  objectClass,
                                  enumeration];

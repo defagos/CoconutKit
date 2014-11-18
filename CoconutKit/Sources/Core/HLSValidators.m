@@ -8,8 +8,6 @@
 
 #import "HLSValidators.h"
 
-#import "HLSAssert.h"
-
 @implementation HLSValidators
 
 + (BOOL)validateEmailAddress:(NSString *)emailAddress
@@ -22,14 +20,6 @@
     
     NSPredicate *emailPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex]; 
     return [emailPredicate evaluateWithObject:emailAddress];
-}
-
-#pragma mark Object creation and destruction
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return nil;
 }
 
 @end

@@ -26,3 +26,9 @@ typedef NS_ENUM(NSInteger, DeviceType) {
 @property (nonatomic, readonly, assign) DeviceType type;
 
 @end
+
+@interface DeviceInfo (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

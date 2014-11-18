@@ -1,10 +1,19 @@
 //
 //  TestErrors.h
-//  CoconutKit-test
+//  CoconutKit-demo
 //
 //  Created by Samuel Défago on 09.12.11.
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
+
+/**
+ * Common errors
+ */
+extern NSString * const TestErrorDomain;
+
+typedef NS_ENUM(NSInteger, TestError) {
+    TestErrorIncorrectValueError,
+};
 
 /**
  * Validation errors
@@ -20,4 +29,3 @@ typedef NS_ENUM(NSInteger, TestValidation) {
     TestValidationEnumEnd,
     TestValidationEnumSize = TestValidationEnumEnd - TestValidationEnumBegin
 };
-

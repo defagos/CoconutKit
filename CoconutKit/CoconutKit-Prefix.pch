@@ -8,4 +8,5 @@
     #import <UIKit/UIKit.h>
     #import <MessageUI/MessageUI.h>
     #import <MobileCoreServices/MobileCoreServices.h>
+    #import <WebKit/WebKit.h>
 #endif

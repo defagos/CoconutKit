@@ -31,7 +31,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         _useCount = 0;
     }
     return self;

@@ -29,6 +29,8 @@
 		<string>ProximaNova-Regular.otf</string>
 		<string>ProximaNova-Bold.otf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

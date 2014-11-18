@@ -8,7 +8,6 @@
 
 #import "HLSGeometry.h"
 
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 
 CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentMode contentMode)
@@ -124,7 +123,7 @@ CGSize HLSSizeForAspectFittingInSize(CGSize size, CGSize targetSize)
     CGFloat targetRatio = targetSize.width / targetSize.height;
     CGFloat ratio = size.width / size.height;
     
-    CGFloat scale = floatge(ratio, targetRatio) ? targetSize.width / size.width : targetSize.height / size.height;
+    CGFloat scale = isgreaterequal(ratio, targetRatio) ? targetSize.width / size.width : targetSize.height / size.height;
     return CGSizeMake(size.width * scale, size.height * scale);
 }
 
@@ -133,6 +132,6 @@ CGSize HLSSizeForAspectFillingInSize(CGSize size, CGSize targetSize)
     CGFloat targetRatio = targetSize.width / targetSize.height;
     CGFloat ratio = size.width / size.height;
     
-    CGFloat scale = floatge(ratio, targetRatio) ? targetSize.height / size.height : targetSize.width / size.width;
+    CGFloat scale = isgreaterequal(ratio, targetRatio) ? targetSize.height / size.height : targetSize.width / size.width;
     return CGSizeMake(size.width * scale, size.height * scale);
 }

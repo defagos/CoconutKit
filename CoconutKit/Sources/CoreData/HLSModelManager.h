@@ -124,7 +124,7 @@
  * Convenience methods to work with the current model manager context
  */
 + (NSManagedObjectContext *)currentModelContext;
-+ (BOOL)saveCurrentModelContext:(NSError **)pError;
++ (BOOL)saveCurrentModelContext:(NSError *__autoreleasing *)pError;
 + (void)rollbackCurrentModelContext;
 + (void)deleteObjectFromCurrentModelContext:(NSManagedObject *)managedObject;
 
@@ -160,7 +160,7 @@
  * for more information. Due to implementation constraints, migration can only be performed to a file URL, no arbitrary
  * file manager can be specified
  */
-- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError **)pError;
+- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError *__autoreleasing *)pError;
 
 /**
  * Access to Core Data internals
@@ -168,5 +168,11 @@
 @property (nonatomic, readonly, strong) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, readonly, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
+
+@end
+
+@interface HLSModelManager (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end

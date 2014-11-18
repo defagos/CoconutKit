@@ -9,35 +9,35 @@
 // noValidationStringA: No validation constraints, neither in the code, nor in the xcdatamodel
 
 // codeMandatoryNotEmptyStringA: Validation entirely defined in code
-- (BOOL)checkCodeMandatoryNotEmptyStringA:(NSString *)codeMandatoryNotEmptyStringA error:(NSError **)pError
+- (BOOL)checkCodeMandatoryNotEmptyStringA:(NSString *)codeMandatoryNotEmptyStringA error:(NSError *__autoreleasing *)pError
 {
     if (! codeMandatoryNotEmptyStringA) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationMandatoryValueError];
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationMandatoryValueError];
         }
         return NO;
     }
     
     if (! [codeMandatoryNotEmptyStringA isFilled]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationIncorrectValueError];
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationIncorrectValueError];
         }
         return NO;
     }
     
-    return YES;
+    return YES;      
 }
 
 #pragma mark Consistency validation
 
-- (BOOL)checkForConsistency:(NSError **)pError
+- (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
 {
     if ([self.noValidationStringA isFilled] && ! [self.noValidationStringA isEqualToString:@"Consistency check"]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:TestValidationErrorDomain
-                                           code:TestValidationInconsistencyError];            
+            *pError = [NSError errorWithDomain:TestValidationErrorDomain
+                                          code:TestValidationInconsistencyError];
         }
         return NO;
     }

@@ -8,10 +8,8 @@
 
 #import "HLSContainerStack.h"
 
-#import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSContainerStackView.h"
-#import "HLSFloat.h"
 #import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
@@ -54,7 +52,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                        behavior:(HLSContainerStackBehavior)behavior
                                        capacity:(NSUInteger)capacity
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! containerViewController) {
             HLSLoggerError(@"Missing container view controller");
             return nil;
@@ -64,15 +62,10 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.containerContents = [NSMutableArray array];
         _behavior = behavior;
         self.capacity = capacity;
+        self.lockingUI = YES;
         _autorotationMode = HLSAutorotationModeContainer;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithContainerViewController:nil behavior:HLSContainerStackBehaviorDefault capacity:0];
 }
 
 - (void)dealloc
@@ -467,7 +460,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             //
             // Same remark as in -addViewForContainerContent:inserting:animated: regarding animations in nested containers
             reverseAnimation.tag = @"pop_animation";
-            reverseAnimation.lockingUI = YES;
+            reverseAnimation.lockingUI = self.lockingUI;
             [reverseAnimation playAnimated:animated];
             
             // Check the animation callback implementations for what happens next
@@ -898,7 +891,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Some more work has to be done for push animations in the animation begin / end callbacks. To identify such animations,
         // we give them a tag which we can test in those callbacks
         animation.tag = @"push_animation";
-        animation.lockingUI = YES;
+        animation.lockingUI = self.lockingUI;
         [animation playAnimated:animated];
         
         // Check the animation callback implementations for what happens next

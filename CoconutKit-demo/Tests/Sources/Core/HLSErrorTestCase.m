@@ -1,6 +1,6 @@
 //
 //  HLSErrorTestCase.m
-//  CoconutKit-test
+//  CoconutKit-demo
 //
 //  Created by Samuel Défago on 10.12.11.
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
@@ -10,11 +10,11 @@
 
 @interface HLSErrorTestCase ()
 
-@property (nonatomic, strong) HLSError *error1;
-@property (nonatomic, strong) HLSError *error2;
-@property (nonatomic, strong) HLSError *error3;
-@property (nonatomic, strong) HLSError *error4;
-@property (nonatomic, strong) HLSError *error5;
+@property (nonatomic, strong) NSError *error1;
+@property (nonatomic, strong) NSError *error2;
+@property (nonatomic, strong) NSError *error3;
+@property (nonatomic, strong) NSError *error4;
+@property (nonatomic, strong) NSError *error5;
 
 @end
 
@@ -27,13 +27,13 @@
     [super setUpClass];
     
     // Error 1
-    self.error1 = [HLSError errorWithDomain:@"ch.defagos.CoconutKit-test" 
-                                       code:1012];
+    self.error1 = [NSError errorWithDomain:@"ch.defagos.CoconutKit-test"
+                                      code:1012];
     
     // Error 2
-    self.error2 = [HLSError errorWithDomain:@"ch.defagos.CoconutKit-test"
-                                       code:1013 
-                       localizedDescription:@"Localized description"];
+    self.error2 = [NSError errorWithDomain:@"ch.defagos.CoconutKit-test"
+                                      code:1013
+                      localizedDescription:@"Localized description"];
     [self.error2 setLocalizedFailureReason:@"Localized failure reason"];
     [self.error2 setLocalizedRecoverySuggestion:@"Localized recovery suggestion"];
     [self.error2 setLocalizedRecoveryOptions:@[@"LocalizedRecoveryOption1", @"LocalizedRecoveryOption2", @"LocalizedRecoveryOption3"]];
@@ -44,14 +44,14 @@
     [self.error2 setObject:@"Additional information 3" forKey:@"AdditionalInfo3"];
     
     // Error 3
-    self.error3 = [HLSError errorWithDomain:@"ch.defagos.CoconutKit-test"
-                                       code:1013];
+    self.error3 = [NSError errorWithDomain:@"ch.defagos.CoconutKit-test"
+                                      code:1013];
     
     // Error 4
-    self.error4 = [HLSError errorWithDomain:@"com.domain.other" code:1013];
+    self.error4 = [NSError errorWithDomain:@"com.domain.other" code:1013];
     
     // Error 5
-    self.error5 = [HLSError errorWithDomain:@"ch.defagos.CoconutKit-test" code:7];
+    self.error5 = [NSError errorWithDomain:@"ch.defagos.CoconutKit-test" code:7];
 }
 
 #pragma mark Tests

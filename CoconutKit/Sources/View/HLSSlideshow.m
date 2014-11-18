@@ -9,7 +9,6 @@
 #import "HLSSlideshow.h"
 
 #import "HLSAssert.h"
-#import "HLSFloat.h"
 #import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "UIImage+HLSExtensions.h"
@@ -39,7 +38,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame])) {
+    if (self = [super initWithFrame:frame]) {
         [self hlsSlideshowInit];
     }
     return self;
@@ -47,7 +46,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self hlsSlideshowInit];
     }
     return self;
@@ -124,7 +123,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)setImageDuration:(NSTimeInterval)imageDuration
 {
-    if (doublele(imageDuration, 0.)) {
+    if (islessequal(imageDuration, 0.)) {
         HLSLoggerWarn(@"Image duration must be > 0; fixed to default value");
         imageDuration = kSlideshowDefaultImageDuration;
     }
@@ -134,7 +133,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)setTransitionDuration:(NSTimeInterval)transitionDuration
 {
-    if (doublelt(transitionDuration, 0.)) {
+    if (isless(transitionDuration, 0.)) {
         HLSLoggerWarn(@"Transition duration must be >= 0; fixed to 0");
         transitionDuration = 0.;
     }
@@ -315,7 +314,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat imageRatio = image.size.width / image.size.height;
     if (self.effect == HLSSlideshowEffectNone || self.effect == HLSSlideshowEffectCrossDissolve) {
         // The image is more portrait-shaped than self
-        if (floatlt(imageRatio, frameRatio)) {
+        if (isless(imageRatio, frameRatio)) {
             zoomScale = CGRectGetHeight(self.frame) / image.size.height;
         }
         // The image is more landscape-shaped than self
@@ -326,7 +325,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     // Calculate the scale which needs to be applied to get aspect fit behavior for the image view
     else {
         // The image is more portrait-shaped than self
-        if (floatlt(imageRatio, frameRatio)) {
+        if (isless(imageRatio, frameRatio)) {
             zoomScale = CGRectGetWidth(self.frame) / image.size.width;
         }
         // The image is more landscape-shaped than self
@@ -367,7 +366,7 @@ static const NSInteger kSlideshowNoIndex = -1;
                               yOffset:(CGFloat *)pYOffset
 {
     // Pick up a random initial scale factor. Must be >= 1, and not too large. Use random factor in [0;1]
-    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat scaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * arc4random_uniform(1001) / 1000.f;
     
     // The image is centered in the image view. Calculate the maximum translation offsets we can apply for the selected
     // scale factor so that the image view still covers self
@@ -375,15 +374,15 @@ static const NSInteger kSlideshowNoIndex = -1;
     CGFloat maxYOffset = (scaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
     
     // Pick up some random offsets. Use random factor in [-1;1]
-    CGFloat xOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxXOffset;
-    CGFloat yOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxYOffset;
+    CGFloat xOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxXOffset;
+    CGFloat yOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxYOffset;
     
     // Pick up random scale factor to reach at the end of the animation. Same constraints as above
-    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * (arc4random() % 1001) / 1000.f;
+    CGFloat finalScaleFactor = 1.f + kKenBurnsSlideshowMaxScaleFactorDelta * arc4random_uniform(1001) / 1000.f;
     CGFloat maxFinalXOffset = (finalScaleFactor * CGRectGetWidth(imageView.frame) - CGRectGetWidth(self.frame)) / 2.f;
     CGFloat maxFinalYOffset = (finalScaleFactor * CGRectGetHeight(imageView.frame) - CGRectGetHeight(self.frame)) / 2.f;
-    CGFloat finalXOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalXOffset;
-    CGFloat finalYOffset = 2 * ((arc4random() % 1001) / 1000.f - 0.5f) * maxFinalYOffset;
+    CGFloat finalXOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxFinalXOffset;
+    CGFloat finalYOffset = 2 * (arc4random_uniform(1001) / 1000.f - 0.5f) * maxFinalYOffset;
     
     // Apply initial transform to set initial image view position
     imageView.layer.transform = CATransform3DConcat(CATransform3DMakeScale(scaleFactor, scaleFactor, 1.f),
@@ -762,7 +761,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 {
     NSInteger randomIndex;
     do {
-        randomIndex = arc4random() % upperBound;
+        randomIndex = arc4random_uniform((u_int32_t)upperBound);
     } while (randomIndex == forbiddenIndex);
     return randomIndex;
 }

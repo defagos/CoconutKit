@@ -41,9 +41,9 @@
  * When HLSValidation extensions have been enabled, model object validation must be implemented in a 
  * different way:
  *   - instead of implementing 
- *         - (BOOL)validate<fieldName>:(<class> *)pValue error:(NSError **)pError
+ *         - (BOOL)validate<fieldName>:(<class> *)pValue error:(NSError *__autoreleasing *)pError
  *     for each model field to validate, you now implement methods with signature
- *         - (BOOL)check<fieldName>:(<class>)value error:(NSError **)pError
+ *         - (BOOL)check<fieldName>:(<class>)value error:(NSError *__autoreleasing *)pError
  *     (value can never be of a primitive type here)
  *     As for the 'validate' methods, the 'check' methods are not meant to be called directly (i.e. public)
  *     and should remain hidden in the model object implementation file. If you need to call a validation
@@ -58,10 +58,10 @@
  *     individual validations, pError is guaranteed to be valid (with *pError = nil upon method entry), you
  *     therefore do not need to check the pointer before dereferencing it (read remark above, though). Moreover, 
  *     error-chaining will be performed for you. The signature of this method must be
- *         - (BOOL)checkForConsistency:(NSError **)pError
+ *         - (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
  *   - similarly, instead of implementing the -validateForDelete: method to perform checks when deleting
  *     an object, you now must implement a 'check' method with the following signature:
- *         - (BOOL)checkForDelete:(NSError **)pError
+ *         - (BOOL)checkForDelete:(NSError *__autoreleasing *)pError
  * UITextField leverage this new set of validation methods by providing binding with model object fields. This 
  * makes synchronization and validation of forms very easy to implement. Refer to UITextField+HLSValidation.h
  * for more information.
@@ -98,7 +98,7 @@
  * Enable the validation extensions of NSManagedObject (disabled by default). You should not call this method
  * directly, use the HLSEnableNSManagedObjectValidation macro instead (see HLSOptionalFeatures.h)
  */
-+ (void)enable;
++ (void)enableObjectValidation;
 
 /**
  * Check that a given value is valid for a specific field. The validation logic can be implemented in the 
@@ -106,12 +106,12 @@
  *
  * If the key does not exist, the method returns YES and no error (as -validateValue:forKey:error does)
  */
-- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError;
+- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError *__autoreleasing *)pError;
 
 /**
  * Check the object as a whole (i.e. individual and consistency validations)
  */
-- (BOOL)check:(NSError **)pError;
+- (BOOL)check:(NSError *__autoreleasing *)pError;
 
 /**
  * Subclasses of NSManagedObject can override this method to perform additional consistency validations when
@@ -120,11 +120,11 @@
  *
  * When implementing this method, you do not have to (and should not) call the method on super first.
  */
-- (BOOL)checkForConsistency:(NSError **)pError;
+- (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError;
 
 /**
  * Same as -checkForConsistency: (see above), but when an object deletion is committed
  */
-- (BOOL)checkForDelete:(NSError **)pError;
+- (BOOL)checkForDelete:(NSError *__autoreleasing *)pError;
 
 @end

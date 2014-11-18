@@ -80,6 +80,9 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
  */
 @property (nonatomic, assign) BOOL random;
 
+/**
+ * The slideshow delegate
+ */
 @property (nonatomic, weak) id<HLSSlideshowDelegate> delegate;
 
 /**

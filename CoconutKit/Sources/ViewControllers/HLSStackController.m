@@ -8,7 +8,6 @@
 
 #import "HLSStackController.h"
 
-#import "HLSAssert.h"
 #import "HLSContainerContent.h"
 #import "HLSLogger.h"
 #import "HLSStackPushSegue.h"
@@ -29,7 +28,7 @@
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.autorotationMode = HLSAutorotationModeContainer;
         
         self.containerStack = [[HLSContainerStack alloc] initWithContainerViewController:self
@@ -55,7 +54,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         self.capacity = HLSContainerStackDefaultCapacity;
         self.autorotationMode = HLSAutorotationModeContainer;
     }
@@ -63,12 +62,6 @@
 }
 
 #pragma clang diagnostic pop
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithRootViewController:nil capacity:0];
-}
 
 - (void)awakeFromNib
 {
@@ -143,6 +136,16 @@
 - (NSUInteger)count
 {
     return [self.containerStack count];
+}
+
+- (void)setLockingUI:(BOOL)lockingUI
+{
+    self.containerStack.lockingUI = lockingUI;
+}
+
+- (BOOL)lockingUI
+{
+    return self.containerStack.lockingUI;
 }
 
 #pragma mark View lifecycle

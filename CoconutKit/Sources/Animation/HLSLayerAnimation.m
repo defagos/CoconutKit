@@ -8,7 +8,6 @@
 
 #import "HLSLayerAnimation.h"
 
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSObjectAnimation+Friend.h"
 #import "HLSVector.h"
@@ -55,7 +54,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         // Default: No change
         self.rotationParameters = HLSVector4Make(0.f, 1.f, 0.f, 0.f);
         self.scaleParameters = HLSVector3Make(1.f, 1.f, 1.f);
@@ -225,11 +224,11 @@
 - (void)addToOpacity:(CGFloat)opacityIncrement
 {
     // Sanitize input
-    if (floatlt(opacityIncrement, -1.f)) {
+    if (isless(opacityIncrement, -1.f)) {
         HLSLoggerWarn(@"Opacity increment cannot be smaller than -1. Fixed to -1");
         _opacityIncrement = -1.f;
     }
-    else if (floatgt(opacityIncrement, 1.f)) {
+    else if (isgreater(opacityIncrement, 1.f)) {
         HLSLoggerWarn(@"Opacity increment cannot be larger than 1. Fixed to 1");
         _opacityIncrement = 1.f;
     }

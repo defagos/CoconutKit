@@ -8,10 +8,10 @@
 
 #import "HLSStandardFileManager.h"
 
-#import "HLSError.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 
 @interface HLSStandardFileManager ()
 
@@ -75,13 +75,13 @@
 
 #pragma mark Helpers
 
-- (NSString *)fullPathForPath:(NSString *)path withError:(NSError **)pError
+- (NSString *)fullPathForPath:(NSString *)path withError:(NSError *__autoreleasing *)pError
 {
     if (! [path hasPrefix:@"/"]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"Invalid file path", nil)];
         }
         return nil;
     }
@@ -91,7 +91,7 @@
 
 #pragma mark HLSFileManagerAbstract protocol implementation
 
-- (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError
+- (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {
@@ -101,14 +101,14 @@
     return [NSData dataWithContentsOfFile:fullPath options:NSDataReadingMappedIfSafe error:pError];
 }
 
-- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
+- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError *__autoreleasing *)pError
 {
     // NSFileManager returns NO but no error when contents == nil
     if (! contents) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileWriteUnknownError
-                           localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileWriteUnknownError
+                          localizedDescription:CoconutKitLocalizedString(@"No data has been provided", nil)];
         }
         return NO;
     }
@@ -122,7 +122,7 @@
     return [contents writeToFile:fullPath options:NSDataWritingAtomic error:pError];
 }
 
-- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError
+- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {
@@ -133,7 +133,7 @@
     return [[NSFileManager defaultManager] createDirectoryAtPath:fullPath withIntermediateDirectories:withIntermediateDirectories attributes:nil error:pError];
 }
 
-- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError
+- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {
@@ -153,14 +153,14 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:pIsDirectory];
 }
 
-- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
+- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
 {
     // Prevent recursive copy
     if ([destinationPath hasPrefix:sourcePath]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
         }
         return NO;
     }
@@ -178,14 +178,14 @@
     return [[NSFileManager defaultManager] copyItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
-- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
+- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
 {
     // Prevent recursive move
     if ([destinationPath hasPrefix:sourcePath]) {
         if (pError) {
-            *pError = [HLSError errorWithDomain:NSCocoaErrorDomain
-                                           code:NSFileReadInvalidFileNameError
-                           localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
+            *pError = [NSError errorWithDomain:NSCocoaErrorDomain
+                                          code:NSFileReadInvalidFileNameError
+                          localizedDescription:CoconutKitLocalizedString(@"The destination cannot be contained in the source", nil)];
         }
         return NO;
     }
@@ -203,7 +203,7 @@
     return [[NSFileManager defaultManager] moveItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
-- (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError
+- (BOOL)removeItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {

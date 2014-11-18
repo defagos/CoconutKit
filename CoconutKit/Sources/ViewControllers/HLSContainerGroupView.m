@@ -8,7 +8,6 @@
 
 #import "HLSContainerGroupView.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "NSArray+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
@@ -19,7 +18,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView
 {
-    if ((self = [super initWithFrame:frame])) {
+    if (self = [super initWithFrame:frame]) {
         if (! frontContentView) {
             HLSLoggerError(@"A front content view is mandatory");
             return nil;
@@ -42,12 +41,6 @@
         [self addSubview:frontView];
     }
     return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithFrame:CGRectZero frontContentView:nil];
 }
 
 #pragma mark Accessors and mutators

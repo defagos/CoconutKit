@@ -11,6 +11,8 @@
 #import "HLSRuntime.h"
 #import "UIViewController+HLSExtensions.h"
 
+// TODO: Remove when CoconutKit requires iOS >= 8 (which introdueced -popoverPresentationController)
+
 // Associated object keys
 static void *s_popoverControllerKey = &s_popoverControllerKey;
 

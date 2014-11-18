@@ -8,11 +8,9 @@
 
 #import "HLSContainerContent.h"
 
-#import "HLSAssert.h"
-#import "HLSConverters.h"
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
+#import "HLSTransformer.h"
 #import "HLSTransition.h"
 #import "UIView+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
@@ -76,7 +74,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
                        transitionClass:(Class)transitionClass
                               duration:(NSTimeInterval)duration
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! viewController) {
             HLSLoggerError(@"A view controller is mandatory");
             return nil;
@@ -140,12 +138,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
     return self;
 }
 
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithViewController:nil containerViewController:nil transitionClass:Nil duration:0.];
-}
-
 - (void)dealloc
 {
     // Remove the view from the stack (this does NOT set viewController.view to nil to allow view caching)
@@ -164,7 +156,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 - (void)setDuration:(NSTimeInterval)duration
 {
     // Sanitize input
-    if (doublelt(duration, 0.) && ! doubleeq(duration, kAnimationTransitionDefaultDuration)) {
+    if (isless(duration, 0.) && duration != kAnimationTransitionDefaultDuration) {
         HLSLoggerWarn(@"Duration must be non-negative or the default duration %.2f. Fixed to the default duration", kAnimationTransitionDefaultDuration);
         _duration = kAnimationTransitionDefaultDuration;
     }

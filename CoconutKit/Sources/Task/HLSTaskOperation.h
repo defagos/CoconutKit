@@ -33,3 +33,9 @@
 @property (nonatomic, readonly, weak) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
 
 @end
+
+@interface HLSTaskOperation (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

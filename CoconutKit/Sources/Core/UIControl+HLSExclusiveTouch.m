@@ -23,7 +23,7 @@ static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCod
 
 #pragma mark Class methods
 
-+ (void)enable
++ (void)enableExclusiveTouch
 {
     static BOOL s_injected = NO;
     if (s_injected) {
@@ -44,12 +44,17 @@ static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCod
 
 @end
 
-#pragma mark Swizzled method implementations
+#pragma mark Static functions
+
+static void commonInit(UIControl *self)
+{
+    self.exclusiveTouch = YES;
+}
 
 static id swizzled_UIControl__initWithFrame_Imp(UIControl *self, SEL _cmd, CGRect frame)
 {
     if ((self = (*s_UIControl__initWithFrame_Imp)(self, _cmd, frame))) {
-        self.exclusiveTouch = YES;
+        commonInit(self);
     }
     return self;
 }
@@ -57,7 +62,7 @@ static id swizzled_UIControl__initWithFrame_Imp(UIControl *self, SEL _cmd, CGRec
 static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCoder *aDecoder)
 {
     if ((self = (*s_UIControl__initWithCoder_Imp)(self, _cmd, aDecoder))) {
-        self.exclusiveTouch = YES;
+        commonInit(self);
     }
     return self;
 }

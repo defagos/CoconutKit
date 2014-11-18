@@ -8,7 +8,6 @@
 
 #import "HLSTaskGroup.h"
 
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSTask+Friend.h"
 #import "NSBundle+HLSExtensions.h"
@@ -52,7 +51,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.taskSet = [NSMutableSet set];
         self.weakTaskDependencyMap = [NSMutableDictionary dictionary];
         self.strongTaskDependencyMap = [NSMutableDictionary dictionary];
@@ -73,13 +72,13 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 - (void)setFullProgress:(float)fullProgress
 {
     // If the value has not changed, nothing to do
-    if (floateq(fullProgress, _fullProgress)) {
+    if (fullProgress == _fullProgress) {
         return;
     }
     
     // Sanitize input
-    if (floatlt(fullProgress, 0.f) || floatgt(fullProgress, 1.f)) {
-        if (floatlt(fullProgress, 0.f)) {
+    if (isless(fullProgress, 0.f) || isgreater(fullProgress, 1.f)) {
+        if (isless(fullProgress, 0.f)) {
             _fullProgress = 0.f;
         }
         else {
@@ -108,7 +107,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     if (_fullProgressStepsCounter > kFullProgressStepsCounterThreshold) {
         // Calculate estimate based on velocity during previous step
         double fullProgressSinceLastEstimate = fullProgress - _lastEstimateFullProgress;
-        if (! doubleeq(fullProgressSinceLastEstimate, 0.)) {
+        if (fullProgressSinceLastEstimate != 0.) {
             self.remainingTimeIntervalEstimate = (elapsedTimeIntervalSinceLastEstimate / fullProgressSinceLastEstimate) * (1 - fullProgress);
             
             // Get ready for next estimate

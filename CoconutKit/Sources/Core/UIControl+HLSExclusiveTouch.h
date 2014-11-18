@@ -15,6 +15,6 @@
  * Call this method as soon as possible if you want to prevent quasi-simultaneous taps for your whole application. For 
  * simplicity you should use the HLSEnableUIControlExclusiveTouch convenience macro instead (see HLSOptionalFeatures.h)
  */
-+ (void)enable;
++ (void)enableExclusiveTouch;
 
 @end

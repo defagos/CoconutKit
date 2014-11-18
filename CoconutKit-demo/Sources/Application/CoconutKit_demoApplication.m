@@ -27,7 +27,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(currentLocalizationDidChange:) 
                                                      name:HLSCurrentLocalizationDidChangeNotification 
@@ -94,11 +94,15 @@
                                                                                        style:UIBarButtonItemStyleBordered 
                                                                                       target:self 
                                                                                       action:@selector(toggleLanguageSheet:)];
-            UIBarButtonItem *logsButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nik)
-                                                                                style:UIBarButtonItemStyleBordered
-                                                                               target:self
-                                                                               action:@selector(showSettings:)];
-            demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem];
+            UIBarButtonItem *logsButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nil)
+                                                                               style:UIBarButtonItemStyleBordered
+                                                                              target:self
+                                                                              action:@selector(showSettings:)];
+            UIBarButtonItem *debugOverlayBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bindings", nil)
+                                                                                          style:UIBarButtonItemStyleBordered
+                                                                                         target:self
+                                                                                         action:@selector(showBindingDebugOverlay:)];
+            demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem, debugOverlayBarButtonItem];
         }
     }
     return self;
@@ -281,6 +285,11 @@
 - (void)showSettings:(id)sender
 {
     [[HLSLogger sharedLogger] showSettings];
+}
+
+- (IBAction)showBindingDebugOverlay:(id)sender
+{
+    [UIView showBindingsDebugOverlay];
 }
 
 @end

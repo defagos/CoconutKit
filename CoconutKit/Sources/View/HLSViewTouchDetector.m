@@ -23,7 +23,7 @@
 {
     NSAssert(beginNotificationName && endNotificationName, @"Notifications required");
     
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.view = view;
         
         // Create a gesture recognizer capturing taps on the whole window
@@ -60,12 +60,12 @@
 
 - (void)viewDidBeginEditing:(NSNotification *)notification
 {
-    [[[UIApplication sharedApplication] keyWindow] addGestureRecognizer:self.gestureRecognizer];
+    [[UIApplication sharedApplication].keyWindow addGestureRecognizer:self.gestureRecognizer];
 }
 
 - (void)viewDidEndEditing:(NSNotification *)notification
 {
-    [[[UIApplication sharedApplication] keyWindow] removeGestureRecognizer:self.gestureRecognizer];
+    [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:self.gestureRecognizer];
 }
 
 #pragma mark Event callbacks

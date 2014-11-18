@@ -10,12 +10,11 @@
 
 #import "HLSAnimationStep+Friend.h"
 #import "HLSAssert.h"
-#import "HLSConverters.h"
-#import "HLSFloat.h"
 #import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
+#import "HLSTransformer.h"
 #import "HLSUserInterfaceLock.h"
-#import "HLSZeroingWeakRef.h"
+#import "HLSMAZeroingWeakRef.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
@@ -48,7 +47,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 @property (nonatomic, assign, getter=isStarted) BOOL started;
 @property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, assign, getter=isTerminating) BOOL terminating;
-@property (nonatomic, strong) HLSZeroingWeakRef *delegateZeroingWeakRef;
+@property (nonatomic, strong) HLSMAZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 
@@ -83,7 +82,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (instancetype)initWithAnimationSteps:(NSArray *)animationSteps
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         if (! animationSteps) {
             self.animationSteps = @[];
         }
@@ -102,12 +101,6 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                                                    object:nil];
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithAnimationSteps:nil];
 }
 
 - (void)dealloc
@@ -131,13 +124,17 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (id<HLSAnimationDelegate>)delegate
 {
-    return self.delegateZeroingWeakRef.object;
+    return [self.delegateZeroingWeakRef target];
 }
 
 - (void)setDelegate:(id<HLSAnimationDelegate>)delegate
 {
-    self.delegateZeroingWeakRef = [[HLSZeroingWeakRef alloc] initWithObject:delegate];
-    [self.delegateZeroingWeakRef addCleanupAction:@selector(cancel) onTarget:self];
+    self.delegateZeroingWeakRef = [HLSMAZeroingWeakRef refWithTarget:delegate];
+    
+    __weak __typeof(self) weakSelf = self;
+    [self.delegateZeroingWeakRef setCleanupBlock:^(id target) {
+        [weakSelf cancel];
+    }];
 }
 
 - (NSTimeInterval)duration
@@ -197,23 +194,23 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         return;
     }
     
-    if (! animated && ! doubleeq(delay, 0.)) {
+    if (! animated && delay != 0.) {
         HLSLoggerWarn(@"A delay has been defined, but the animation is played non-animated. The delay will be ignored");
         delay = 0.;
     }
         
-    if (floatlt(delay, 0.)) {
+    if (isless(delay, 0.)) {
         delay = 0;
         HLSLoggerWarn(@"Negative delay. Fixed to 0");
     }
     
-    if (doublelt(startTime, 0.)) {
+    if (isless(startTime, 0.)) {
         HLSLoggerWarn(@"The start time cannot be negative. Fixed to 0");
         startTime = 0.;
     }
     
     NSTimeInterval totalDuration = repeatCount * [self duration];
-    if (doublegt(startTime, totalDuration)) {
+    if (isgreater(startTime, totalDuration)) {
         HLSLoggerWarn(@"The start time %.2f is larger than the total animation duration %.2f (including repeats). Set to the total duration",
                       startTime, totalDuration);
         startTime = repeatCount * [self duration];
@@ -270,7 +267,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     // Instantaneously play all animation steps which complete before the start time. The value of _remainingTimeBeforeStart
     // is updated before the animation is played (so that it can be used as a criterium to guess whether we are playing
     // animation steps instantaneously to reach the start time)
-    if (doublegt(_remainingTimeBeforeStart, animationStep.duration)) {
+    if (isgreater(_remainingTimeBeforeStart, animationStep.duration)) {
         _remainingTimeBeforeStart -= animationStep.duration;
         [animationStep playWithDelegate:self startTime:0. animated:NO];
     }
@@ -413,7 +410,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (HLSAnimation *)animationWithDuration:(NSTimeInterval)duration
 {
-    if (doublelt(duration, 0.f)) {
+    if (isless(duration, 0.f)) {
         HLSLoggerError(@"The duration cannot be negative");
         return nil;
     }
@@ -477,7 +474,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 {
     // Still send all delegate notifications if terminating and if not playing animation steps instantaneously
     // when a start time has been set
-    if (! self.cancelling && doubleeq(_remainingTimeBeforeStart, 0.)) {
+    if (! self.cancelling && _remainingTimeBeforeStart == 0.) {
         // Notify that the animation begins when the initial delay animation (always played) ends. This way
         // we get rid of subtle differences which might arise with animation steps only being able to notify
         // when they did start, rather than when they will
@@ -507,7 +504,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     // Play the next step (or the first step if the initial delay animation step has ended(), but non-animated if the
     // animation did not reach completion normally. Moreover, if some animation steps are played non-animated because
     // a start time has been set, we must override animated = NO with the original _animated value of the animation
-    [self playNextAnimationStepAnimated:finished ? (! doubleeq(_remainingTimeBeforeStart, 0.) ? _animated : animated) : NO];
+    [self playNextAnimationStepAnimated:finished ? (_remainingTimeBeforeStart != 0. ? _animated : animated) : NO];
 }
 
 #pragma mark NSCopying protocol implementation

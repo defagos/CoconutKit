@@ -238,6 +238,12 @@
 
 @end
 
+@interface HLSAnimation (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
 @protocol HLSAnimationDelegate <NSObject>
 @optional
 

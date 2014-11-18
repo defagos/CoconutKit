@@ -11,7 +11,6 @@
 #import "CALayer+HLSExtensions.h"
 #import "CAMediaTimingFunction+HLSExtensions.h"
 #import "HLSAnimationStep+Protected.h"
-#import "HLSFloat.h"
 #import "HLSLayerAnimation+Friend.h"
 #import "HLSLogger.h"
 
@@ -49,7 +48,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];        
     }
     return self;
@@ -69,7 +68,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (void)playAnimationWithStartTime:(NSTimeInterval)startTime animated:(BOOL)animated
 {
-    NSAssert(doublele(startTime, self.duration), @"The start time of a step cannot be greater than its duration");
+    NSAssert(islessequal(startTime, self.duration), @"The start time of a step cannot be greater than its duration");
     
     NSTimeInterval duration = self.duration;
     if (animated) {
@@ -123,11 +122,11 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         
         // Opacity animation (opacity must always lie between 0.f and 1.f)
         CGFloat opacity = layer.opacity + layerAnimation.opacityIncrement;
-        if (floatlt(opacity, -1.f)) {
+        if (isless(opacity, -1.f)) {
             HLSLoggerWarn(@"Layer animations adding to an opacity value larger than -1 for layer %@. Fixed to -1, but your animation is incorrect", layer);
             opacity = -1.f;
         }
-        else if (floatgt(opacity, 1.f)) {
+        else if (isgreater(opacity, 1.f)) {
             HLSLoggerWarn(@"Layer animations adding to an opacity value larger than 1 for layer %@. Fixed to 1, but your animation is incorrect", layer);
             opacity = 1.f;
         }
@@ -213,7 +212,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             sublayerCameraZPosition = [sublayerCameraZPositionNumber floatValue];
         }
         else {
-            sublayerCameraZPosition = floateq(layer.sublayerTransform.m34, 0.f) ? 0.f : 1.f / layer.sublayerTransform.m34;
+            sublayerCameraZPosition = (layer.sublayerTransform.m34 == 0.f) ? 0.f : 1.f / layer.sublayerTransform.m34;
         }
         
         // Calculate the sublayer transform (without perspective component)
@@ -231,7 +230,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         
         // Create the perspective matrix (see http://en.wikipedia.org/wiki/3D_projection#Perspective_projection)
         CATransform3D perspectiveProjectionTransform = CATransform3DIdentity;
-        if (! floateq(sublayerCameraZPosition, 0.f)) {
+        if (sublayerCameraZPosition != 0.f) {
             perspectiveProjectionTransform.m34 = -1.f / sublayerCameraZPosition;
         }
         
@@ -336,7 +335,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 - (NSTimeInterval)elapsedTime
 {
     NSTimeInterval currentPauseDuration = 0.;
-    if (! doubleeq(_pauseTime, 0.)) {
+    if (_pauseTime != 0.) {
         currentPauseDuration = CACurrentMediaTime() - _pauseTime;
     }
     

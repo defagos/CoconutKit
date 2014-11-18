@@ -8,8 +8,6 @@
 
 #import "HLSPreviewItem.h"
 
-#import "HLSAssert.h"
-
 @interface HLSPreviewItem ()
 
 @property (nonatomic, strong) NSURL *previewItemURL;
@@ -33,12 +31,6 @@
 - (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL
 {
     return [self initWithPreviewItemURL:previewItemURL previewItemTitle:nil];
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithPreviewItemURL:nil previewItemTitle:nil];
 }
 
 @end

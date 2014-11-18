@@ -1,6 +1,6 @@
 //
 //  CAMediaTimingFunction+HLExtensionsTestCase.m
-//  CoconutKit-test
+//  CoconutKit-demo
 //
 //  Created by Samuel Défago on 9/7/12.
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
@@ -45,8 +45,8 @@
         memset(easeOutValues, 0, sizeof(easeOutValues));
         [easeOutTimingFunction getControlPointAtIndex:i values:easeOutValues];
         
-        GHAssertTrue(floateq(inverseEaseInValues[0], easeOutValues[0]), nil);
-        GHAssertTrue(floateq(inverseEaseInValues[1], easeOutValues[1]), nil);
+        GHAssertEquals(inverseEaseInValues[0], easeOutValues[0], nil);
+        GHAssertEquals(inverseEaseInValues[1], easeOutValues[1], nil);
     }
 }
 
@@ -59,7 +59,7 @@
     // Check that built-in results and custom implementation match to at least 4 digits
     for (NSUInteger i = 0; i < kNumberOfSamples; ++i) {
         float time = (float)i / (kNumberOfSamples - 1);
-        GHAssertTrue(floatlt(fabsf([timingFunction valueForNormalizedTime:time] - [timingFunction _solveForInput:time]), 1e-4), nil);
+        GHAssertTrue(isless(fabsf([timingFunction valueForNormalizedTime:time] - [timingFunction _solveForInput:time]), 1e-4), nil);
     }
 }
 

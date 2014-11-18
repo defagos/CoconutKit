@@ -9,7 +9,6 @@
 #import "UIView+HLSExtensions.h"
 
 #import "CALayer+HLSExtensions.h"
-#import "HLSFloat.h"
 #import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
@@ -35,6 +34,28 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 }
 
 #pragma mark Accessors and mutators
+
+- (UIViewController *)viewController
+{
+    if ([self.nextResponder isKindOfClass:[UIViewController class]]) {
+        return (UIViewController *)self.nextResponder;
+    }
+    else {
+        return nil;
+    }
+}
+
+- (UIViewController *)nearestViewController
+{
+    UIResponder *responder = self.nextResponder;
+    while (responder) {
+        if ([responder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)responder;
+        }
+        responder = responder.nextResponder;
+    }
+    return nil;
+}
 
 - (NSString *)tag_hls
 {
@@ -81,7 +102,7 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 - (void)fadeLeft:(CGFloat)left right:(CGFloat)right
 {
-    if (floatlt(left, 0.f) || floatlt(right, 0.f) || floatgt(left + right, 1.f)) {
+    if (isless(left, 0.f) || isless(right, 0.f) || isgreater(left + right, 1.f)) {
         HLSLoggerWarn(@"Invalid values for fading parameters. Must be >= 0 and must not add up to a value larger than 1");
         return;
     }
@@ -95,7 +116,7 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 - (void)fadeTop:(CGFloat)top bottom:(CGFloat)bottom
 {
-    if (floatlt(top, 0.f) || floatlt(bottom, 0.f) || floatgt(top + bottom, 1.f)) {
+    if (isless(top, 0.f) || isless(bottom, 0.f) || isgreater(top + bottom, 1.f)) {
         HLSLoggerWarn(@"Invalid values for fading parameters. Must be >= 0 and must not add up to a value larger than 1");
         return;
     }

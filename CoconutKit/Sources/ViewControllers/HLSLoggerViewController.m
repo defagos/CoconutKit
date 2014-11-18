@@ -8,7 +8,6 @@
 
 #import "HLSLoggerViewController.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSLogger+Friend.h"
 #import "HLSPreviewItem.h"
@@ -44,12 +43,6 @@
         self.logger = logger;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithLogger:nil];
 }
 
 #pragma mark View lifecycle

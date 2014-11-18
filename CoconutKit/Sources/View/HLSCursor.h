@@ -7,6 +7,7 @@
 //
 
 #import "HLSAnimation.h"
+#import "UIView+HLSViewBindingImplementation.h"
 
 // Macros
 #define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
@@ -34,11 +35,20 @@
  *   - basic: You just set the text and basic text properties (font, colors, shadows)
  *   - custom: Each element is a view and can be customized using Interface Builder
  * Cursors using both ways of customisation can coexist in the same source file.
+ *
+ * Remark: If the cursor is placed inside a scroll view, you might need to set canCancelContentTouches on it so that
+ *         dragging the pointer view can work as expected
+ *
+ * Binding support for HLSCursor:
+ *   - binds to NSNumber model values
+ *   - displays and updates the underlying model value
+ *   - can animate updates
+ *
  */
-@interface HLSCursor : UIView <HLSAnimationDelegate>
+@interface HLSCursor : UIView <HLSAnimationDelegate, HLSViewBindingImplementation>
 
 /**
- * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.
+ * The pointer view, which can either be set programmatically or using a xib. If nil, the default pointer will be used.
  * If you use a custom view, be sure it can stretch properly since the pointer view frame will be adjusted depending
  * on the element it is on. In general, your custom pointer view is likely to be transparent so that the element
  * below it can be seen.

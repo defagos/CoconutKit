@@ -9,7 +9,6 @@
 #import "HLSLogger.h"
 
 #import "HLSApplicationInformation.h"
-#import "HLSAssert.h"
 #import "HLSLogger+Friend.h"
 #import "HLSLoggerViewController.h"
 #import "NSBundle+HLSExtensions.h"
@@ -58,7 +57,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 - (instancetype)initWithLogDirectoryPath:(NSString *)logDirectoryPath
 {
-	if ((self = [super init])) {
+	if (self = [super init]) {
         if (! [logDirectoryPath isFilled]) {
             NSLog(@"A log directory is mandatory");
             return nil;
@@ -73,12 +72,6 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
         _fileLoggingEnabled = fileLoggingEnabled ? [fileLoggingEnabled integerValue] : NO;
 	}
 	return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithLogDirectoryPath:nil];
 }
 
 #pragma mark Accessors and mutators

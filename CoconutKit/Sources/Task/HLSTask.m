@@ -8,7 +8,6 @@
 
 #import "HLSTask.h"
 
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSTaskGroup.h"
 #import "NSBundle+HLSExtensions.h"
@@ -39,7 +38,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 
 - (instancetype)init
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         [self reset];
     }
     return self;
@@ -56,13 +55,13 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 - (void)setProgress:(float)progress
 {
     // If the value has not changed, nothing to do
-    if (floateq(progress, _progress)) {
+    if (progress == _progress) {
         return;
     }
     
     // Sanitize input
-    if (floatlt(progress, 0.f) || floatgt(progress, 1.f)) {
-        if (floatlt(progress, 0.f)) {
+    if (isless(progress, 0.f) || isgreater(progress, 1.f)) {
+        if (isless(progress, 0.f)) {
             _progress = 0.f;
         }
         else {
@@ -91,7 +90,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     if (_progressStepsCounter > kProgressStepsCounterThreshold) {
         // Calculate estimate based on velocity during previous step (never 0 since this method returns if progress does not change)
         double progressSinceLastEstimate = progress - _lastEstimateProgress;
-        if (! doubleeq(progressSinceLastEstimate, 0.)) {
+        if (progressSinceLastEstimate != 0.) {
             self.remainingTimeIntervalEstimate = (elapsedTimeIntervalSinceLastEstimate / progressSinceLastEstimate) * (1 - progress);
             
             // Get ready for next estimate

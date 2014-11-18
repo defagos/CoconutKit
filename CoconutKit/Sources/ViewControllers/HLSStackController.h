@@ -95,6 +95,14 @@
 @property (nonatomic, weak) id<HLSStackControllerDelegate> delegate;
 
 /**
+ * If set to YES, the user interface interaction is blocked during the time the animation is running (see
+ * the running property documentation for more information about what "running" actually means)
+ *
+ * Default is NO
+ */
+@property (nonatomic, assign) BOOL lockingUI;
+
+/**
  * Return the view controller at the bottom
  */
 - (UIViewController *)rootViewController;
@@ -224,6 +232,15 @@
 
 @end
 
+@interface HLSStackController (UnavailableMethods)
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithBundle NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
 /**
  * This protocol offers more methods than the equivalent protocol of UINavigationController. This provides much
  * more information about appearance and disappearance events (and especially since HLSStackController allows
@@ -300,6 +317,18 @@
    didPopViewController:(UIViewController *)poppedViewController
    revealViewController:(UIViewController *)revealedViewController
                animated:(BOOL)animated;
+
+@end
+
+/**
+ * User-defined runtime attributes exposed in the attributes inspector. Not meant to be set in code
+ */
+@interface HLSStackController (HLSInspectables)
+
+/**
+ * The maximum number of views loaded at any time in the stack
+ */
+@property (nonatomic, readonly, assign) IBInspectable NSUInteger capacity;
 
 @end
 

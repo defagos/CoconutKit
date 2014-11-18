@@ -8,7 +8,6 @@
 
 #import "HLSInMemoryCacheEntry.h"
 
-#import "HLSAssert.h"
 #import "HLSLogger.h"
 
 @interface HLSInMemoryCacheEntry ()
@@ -38,12 +37,6 @@
         self.data = data;
     }
     return self;
-}
-
-- (instancetype)init
-{
-    HLSForbiddenInheritedMethod();
-    return [self initWithParentItems:nil name:nil data:nil];
 }
 
 #pragma mark Accessors and mutators

@@ -50,3 +50,9 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
 - (NSString *)localizedText;
 
 @end
+
+@interface HLSLabelLocalizationInfo (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

@@ -9,12 +9,12 @@
 #import "HLSCursor.h"
 
 #import "HLSAnimation.h"
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "HLSViewAnimationStep.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
+#import "UIView+HLSViewBindingImplementation.h"
 #import "UIView+HLSExtensions.h"
 
 @interface HLSCursor ()
@@ -44,7 +44,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame])) {
+    if (self = [super initWithFrame:frame]) {
         [self hlsCursorInit];
     }
     return self;
@@ -52,7 +52,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if ((self = [super initWithCoder:aDecoder])) {
+    if (self = [super initWithCoder:aDecoder]) {
         [self hlsCursorInit];
     }
     return self;
@@ -107,21 +107,21 @@
     }
     
     // Calculate the needed total size to display all elements
-    CGFloat requiredWidth = floatmax(-self.pointerViewTopLeftOffset.width, 0.f) + floatmax(self.pointerViewBottomRightOffset.width, 0.f);
+    CGFloat requiredWidth = fmaxf(-self.pointerViewTopLeftOffset.width, 0.f) + fmaxf(self.pointerViewBottomRightOffset.width, 0.f);
     CGFloat requiredHeight = 0.f;
     for (NSValue *elementWrapperViewSizeValue in self.elementWrapperViewSizeValues) {
         CGSize elementWrapperViewSize = [elementWrapperViewSizeValue CGSizeValue];
         requiredWidth += elementWrapperViewSize.width;
         
-        if (floatgt(elementWrapperViewSize.height, requiredHeight)) {
+        if (isgreater(elementWrapperViewSize.height, requiredHeight)) {
             requiredHeight = elementWrapperViewSize.height;
         }
     }
-    requiredHeight += floatmax(-self.pointerViewTopLeftOffset.height, 0.f) + floatmax(self.pointerViewBottomRightOffset.height, 0.f);
+    requiredHeight += fmaxf(-self.pointerViewTopLeftOffset.height, 0.f) + fmaxf(self.pointerViewBottomRightOffset.height, 0.f);
     
     // Cursor large enough so that everything fits in: Add space between elements
     CGFloat widthScaleFactor = 1.f;
-    if (floatle(requiredWidth, CGRectGetWidth(self.frame))) {
+    if (islessequal(requiredWidth, CGRectGetWidth(self.frame))) {
         _spacing = (CGRectGetWidth(self.frame) - requiredWidth) / ([self.elementWrapperViews count] - 1);
     }
     // Not large enough: Scale all views so that they can fit with no space in between
@@ -132,12 +132,12 @@
     
     // Cursor not tall enough: Scale all views so that they can fit vertically
     CGFloat heightScaleFactor = 1.f;
-    if (floatgt(requiredHeight, CGRectGetHeight(self.frame))) {
+    if (isgreater(requiredHeight, CGRectGetHeight(self.frame))) {
         heightScaleFactor = CGRectGetHeight(self.frame) / requiredHeight;
     }
     
     // Adjust individual frames so that the element views are centered within the available frame
-    CGFloat xPos = floatmax(-self.pointerViewTopLeftOffset.width, 0.f);
+    CGFloat xPos = fmaxf(-self.pointerViewTopLeftOffset.width, 0.f);
     NSUInteger i = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
         CGSize elementWrapperViewSize = [[self.elementWrapperViewSizeValues objectAtIndex:i] CGSizeValue];
@@ -253,8 +253,8 @@
         CGSize otherTitleSize = [title sizeWithAttributes:@{ NSFontAttributeName : otherFont }];
         UILabel *elementLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f,
                                                                           0.f,
-                                                                          floatmax(titleSize.width, otherTitleSize.width),
-                                                                          floatmax(titleSize.height, otherTitleSize.height))];
+                                                                          fmaxf(titleSize.width, otherTitleSize.width),
+                                                                          fmaxf(titleSize.height, otherTitleSize.height))];
         elementLabel.text = title;
         elementLabel.backgroundColor = [UIColor clearColor];
         elementLabel.font = font;
@@ -285,8 +285,8 @@
     
     UIView *wrapperView = [[UIView alloc] initWithFrame:CGRectMake(0.f,
                                                                    0.f,
-                                                                   floatmax(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame)),
-                                                                   floatmax(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame)))];
+                                                                   fmaxf(CGRectGetWidth(elementView.frame), CGRectGetWidth(selectedElementView.frame)),
+                                                                   fmaxf(CGRectGetHeight(elementView.frame), CGRectGetHeight(selectedElementView.frame)))];
     wrapperView.backgroundColor = [UIColor clearColor];
     
     [wrapperView addSubview:elementView];
@@ -370,8 +370,8 @@
 {
     NSUInteger index = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        if (floatge(xPos, CGRectGetMinX(elementWrapperView.frame) - _spacing / 2.f)
-            && floatle(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + _spacing / 2.f)) {
+        if (isgreaterequal(xPos, CGRectGetMinX(elementWrapperView.frame) - _spacing / 2.f)
+            && islessequal(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + _spacing / 2.f)) {
             return index;
         }
         ++index;
@@ -379,7 +379,7 @@
     
     // No match found; return leftmost or rightmost element view
     UIView *firstElementWrapperView = [self.elementWrapperViews firstObject];
-    if (floatlt(xPos, CGRectGetMinX(firstElementWrapperView.frame) - _spacing / 2.f)) {
+    if (isless(xPos, CGRectGetMinX(firstElementWrapperView.frame) - _spacing / 2.f)) {
         return 0;
     }
     else {
@@ -399,7 +399,7 @@
     // Find the index of the element view whose x center coordinate is the first >= xPos along the x axis
     NSUInteger index = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        if (floatle(xPos, elementWrapperView.center.x)) {
+        if (islessequal(xPos, elementWrapperView.center.x)) {
             break;
         }
         ++index;
@@ -556,6 +556,7 @@
             else {
                 _selectedIndex = [self indexForXPos:self.pointerContainerView.center.x];
             }
+            [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
             
@@ -607,6 +608,7 @@
         // If the finger has been released during the move animation, update the selected index and notify
         if (! _holding) {
             _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+            [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
             
@@ -619,6 +621,7 @@
     }
     else if ([animation.tag isEqualToString:@"snap"]) {
         _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+        [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
         
         [self showElementViewAtIndex:_selectedIndex selected:YES];
         
@@ -630,6 +633,23 @@
         _dragging = NO;
         _moved = NO;
     }
+}
+
+#pragma mark HLSViewBindingImplementation protocol implementation
+
++ (NSArray *)supportedBindingClasses
+{
+    return @[[NSNumber class]];
+}
+
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
+{
+    [self setSelectedIndex:[value unsignedIntegerValue] animated:animated];
+}
+
+- (id)inputValue
+{
+    return @(self.selectedIndex);
 }
 
 @end

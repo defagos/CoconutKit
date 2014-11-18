@@ -8,7 +8,6 @@
 
 #import "HLSLabel.h"
 
-#import "HLSFloat.h"
 #import "HLSLogger.h"
 #import "NSString+HLSExtensions.h"
 

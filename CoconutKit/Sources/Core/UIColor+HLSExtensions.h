@@ -39,22 +39,24 @@
  * to an application, without binding any outlet.
  *
  * This mechanism is implemented for the whole UIView class hierarchy, and as follows: For all UIView subclasses,
- * each writable KVC-compliant color setter of the form -setSomeNameColor: is associated with a corresponding
- * setter -setHlsSomeNameColor:, which can be set through user-defined runtime attributes. In other words, 
- * anywhere you set someNameColor, you can set an hlsSomeColorName attribute instead. For example, the 
- * backgroundColor property has an associated hlsBackgroundColor attribute, textColor has a corresponding 
- * hlsTextColor attribute, and so on. The color set using attributes will replace the one defined in the
- * nib (except if the color is not found, in which case the original color is kept).
+ * each writable KVC-compliant color setter of the form -setPropertyColor: is provided with a corresponding
+ * setter -setPropertyColorName:, which can be set through user-defined runtime attributes. In other words,
+ * anywhere you set propertyColor, you can set the propertyColorName attribute instead. For example, the
+ * backgroundColor property has an associated backgroundColorName attribute, textColor has a corresponding 
+ * textColorName attribute, and so on. The color set using attributes will replace the one defined in the
+ * nib (except if the color is not found, in which case the original color is kept). For convenience, most
+ * UIKit views color attributes have been exposed through dedicated inspectable properties.
  *
- * The values of these user-defined runtime attributes must be strings of the form 'colorClassName:colorName', 
- * where 'colorClassName' is the name of the class on which the color is defined, and 'colorName' is the color 
- * name. The shorter syntax 'colorName' can also be used, in which case lookup will be performed on UIColor
+ * The values of these user-defined runtime attributes must be strings of the form 'ColorClassName:colorName',
+ * where 'ColorClassName' is the name of the class on which the color is defined, and 'ColorName' is the color
+ * name. The shorter syntax 'ColorName' can also be used, in which case lookup will be performed on UIColor
  * and associated categories.
  *
  * For example, if you have defined a color +[UIColor(SomeCategory) corporateColor], you can set the text
- * color of a UILabel by adding a user-defined runtime attribute called 'hlsTextColor', setting its value
- * to 'corporate'. If the color is defined on a UIColor subclass, say +[SomeColor corporateColor] color, 
- * then set the 'hlsTextColor' value to 'SomeColor:corporate'
+ * color of a UILabel by adding a user-defined runtime attribute called 'textColorName' (or editing the
+ * associated property exposed in the property inspector), setting its value to 'corporate'. If the color 
+ * is defined on a UIColor subclass, say +[SomeColor corporateColor] color, then set the 'textColorName' 
+ * value to 'SomeColor:corporate'
  */
 + (instancetype)colorWithName:(NSString *)name;
 
@@ -78,3 +80,40 @@
 - (CGFloat)normalizedBlueComponent;
 
 @end
+
+/**
+ * User-defined runtime attributes exposed in the attributes inspector. Not meant to be set in code
+ */
+@interface UIView (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *backgroundColorName;
+@property (nonatomic, readonly, assign) IBInspectable NSString *tintColorName;
+
+@end
+
+@interface UILabel (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *textColorName;
+@property (nonatomic, readonly, assign) IBInspectable NSString *shadowColorName;
+@property (nonatomic, readonly, assign) IBInspectable NSString *highlightedTextColorName;
+
+@end
+
+@interface UITextView (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *textColorName;
+
+@end
+
+@interface UITextField (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *textColorName;
+
+@end
+
+@interface UISearchBar (HLSColorInspectables)
+
+@property (nonatomic, readonly, assign) IBInspectable NSString *barTintColorName;
+
+@end
+

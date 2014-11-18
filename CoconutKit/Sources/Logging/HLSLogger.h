@@ -104,3 +104,9 @@ typedef NS_ENUM(NSInteger, HLSLoggerLevel) {
 - (void)showSettings;
 
 @end
+
+@interface HLSLogger (UnavailableMethods)
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end

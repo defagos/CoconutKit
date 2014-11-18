@@ -19,7 +19,7 @@
 
 - (instancetype)initWithSecondsToSleep:(NSUInteger)secondsToSleep
 {
-    if ((self = [super init])) {
+    if (self = [super init]) {
         _secondsToSleep = secondsToSleep;
     }
     return self;
