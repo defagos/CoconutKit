@@ -148,7 +148,10 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  */
 @interface UIView (HLSViewBinding)
 
-+ (void)debugBindings;
+/**
+ *
+ */
++ (void)showBindingsDebugOverlay;
 
 /**
  * The keypath to bind to (preferably set via Interface Builder, can also be set programmatically by calling

@@ -289,7 +289,7 @@
 
 - (IBAction)showBindingDebugOverlay:(id)sender
 {
-    [UIView debugBindings];
+    [UIView showBindingsDebugOverlay];
 }
 
 @end

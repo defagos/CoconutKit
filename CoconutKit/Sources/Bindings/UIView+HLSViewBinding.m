@@ -47,12 +47,12 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIView__didMoveToWindow_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                 @selector(didMoveToWindow),
-                                                                                 (IMP)swizzled_UIView__didMoveToWindow_Imp);
+    s_UIView__didMoveToWindow_Imp = (__typeof(s_UIView__didMoveToWindow_Imp))hls_class_swizzleSelector(self,
+                                                                                                       @selector(didMoveToWindow),
+                                                                                                       (IMP)swizzled_UIView__didMoveToWindow_Imp);
 }
 
-+ (void)debugBindings
++ (void)showBindingsDebugOverlay
 {
     [HLSViewBindingDebugOverlayViewController show];
 }
@@ -142,25 +142,25 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
         return;
     }
     
-    [self updateViewAnimated:animated];
+    [self updateBoundViewAnimated:animated];
     
     for (UIView *subview in self.subviews) {
         [subview updateBoundViewsAnimated:animated inViewController:viewController];
     }
 }
 
-- (void)updateView
-{
-    [self updateViewAnimated:self.bindUpdateAnimated];
-}
-
-- (void)updateViewAnimated:(BOOL)animated
+- (void)updateBoundViewAnimated:(BOOL)animated
 {
     if (! self.bindingInformation) {
         return;
     }
     
     [self.bindingInformation updateViewAnimated:animated];
+}
+
+- (void)updateView
+{
+    [self updateBoundViewAnimated:self.bindUpdateAnimated];
 }
 
 - (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError
@@ -217,7 +217,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     
     // If the view is displayed, update it
     if (self.window) {
-        [self updateViewAnimated:self.bindUpdateAnimated];
+        [self updateBoundViewAnimated:self.bindUpdateAnimated];
     }
 }
 
@@ -238,7 +238,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
                                                                              transformerName:self.bindTransformer
                                                                                         view:self];
             }
-            [self updateViewAnimated:NO];
+            [self updateBoundViewAnimated:NO];
         }
     }
 }
