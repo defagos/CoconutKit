@@ -10,6 +10,7 @@
 
 #import "HLSAssert.h"
 #import "HLSLogger.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSDictionary+HLSExtensions.h"
 
 #import <objc/runtime.h>
@@ -56,7 +57,9 @@ static Class subclass_class(id self, SEL _cmd);
         }
         else {
             NSError *previousError = *pExistingError;
-            *pExistingError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorMultipleErrors];
+            *pExistingError = [NSError errorWithDomain:CoconutKitErrorDomain
+                                                  code:HLSErrorMultipleErrors
+                                  localizedDescription:CoconutKitLocalizedString(@"Multiple errors have been encountered", nil)];
             [*pExistingError addObject:previousError forKey:HLSDetailedErrorsKey];
             [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
         }
