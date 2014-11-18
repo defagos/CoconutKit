@@ -57,8 +57,8 @@ static Class subclass_class(id self, SEL _cmd);
         else {
             NSError *previousError = *pExistingError;
             *pExistingError = [NSError errorWithDomain:CoconutKitErrorDomain code:HLSErrorMultipleErrors];
-            [*pExistingError addObject:previousError forKey:HLSErrorMultipleErrors];
-            [*pExistingError addObject:newError forKey:HLSErrorMultipleErrors];
+            [*pExistingError addObject:previousError forKey:HLSDetailedErrorsKey];
+            [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
         }
     }
     else {
