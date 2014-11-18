@@ -113,6 +113,14 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="invalidTransformer"/>
                     </userDefinedRuntimeAttributes>
                 </label>
+                <view contentMode="scaleToFill" id="Xx6-43-BIv">
+                    <rect key="frame" x="235" y="764" width="298" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.92000000000000004" alpha="1" colorSpace="calibratedWhite"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="date"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

@@ -146,7 +146,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
     if (objectTarget && [self.keyPath rangeOfString:@"@"].length == 0) {
         [objectTarget addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-            [self.view updateView];
+            [self.view updateBoundView];
         }];
         
         self.viewAutomaticallyUpdated = YES;
@@ -354,7 +354,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
-- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update withError:(NSError *__autoreleasing *)pError
 {
     return [self check:check update:update withInputValue:[self inputValue] error:pError];
 }
@@ -648,7 +648,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                     }
                     
                     weakSelf.transformer = transformer;
-                    [weakSelf.view updateView];
+                    [weakSelf.view updateBoundView];
                 }];
             }
             else {

@@ -16,14 +16,14 @@
 
 #pragma mark Bindings
 
-- (void)updateBoundViewsAnimated:(BOOL)animated
+- (void)updateBoundViewHierarchyAnimated:(BOOL)animated
 {
-    [[self viewIfLoaded] updateBoundViewsAnimated:animated];
+    [[self viewIfLoaded] updateBoundViewHierarchyAnimated:animated];
 }
 
-- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update boundViewHierarchyWithError:(NSError *__autoreleasing *)pError
 {
-    return [[self viewIfLoaded] check:check update:update withCurrentInputValuesError:pError];
+    return [[self viewIfLoaded] check:check update:update boundViewHierarchyWithError:pError];
 }
 
 @end
