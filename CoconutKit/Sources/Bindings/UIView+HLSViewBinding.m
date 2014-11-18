@@ -37,7 +37,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (void)updateBoundViewsAnimated:(BOOL)animated inViewController:(UIViewController *)viewController;
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError;
 
 @end
 
@@ -91,9 +91,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self updateBoundViewsAnimated:animated inViewController:[self nearestViewController]];
 }
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
 {
-    return [self check:check andUpdate:update withCurrentInputValuesInViewController:[self nearestViewController] error:pError];
+    return [self check:check update:update withCurrentInputValuesInViewController:[self nearestViewController] error:pError];
 }
 
 @end
@@ -163,7 +163,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self updateBoundViewAnimated:self.bindUpdateAnimated];
 }
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValuesInViewController:(UIViewController *)viewController error:(NSError *__autoreleasing *)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -174,14 +174,14 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     BOOL success = YES;
     if (self.bindingInformation) {
         NSError *error = nil;
-        if (! [self.bindingInformation check:check andUpdate:update withCurrentInputValueError:&error]) {
+        if (! [self.bindingInformation check:check update:update withCurrentInputValueError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
     }
     
     for (UIView *subview in self.subviews) {
-        if (! [subview check:check andUpdate:update withCurrentInputValuesInViewController:viewController error:pError]) {
+        if (! [subview check:check update:update withCurrentInputValuesInViewController:viewController error:pError]) {
             success = NO;
         }
     }
@@ -193,13 +193,13 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 @implementation UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     if (! self.bindingInformation) {
         return YES;
     }
     
-    return [self.bindingInformation check:self.bindInputChecked andUpdate:update withInputValue:inputValue error:pError];
+    return [self.bindingInformation check:self.bindInputChecked update:update withInputValue:inputValue error:pError];
 }
 
 @end

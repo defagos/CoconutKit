@@ -10,6 +10,6 @@
 
 - (void)updateBoundViewsAnimated:(BOOL)animated;
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError;
 
 @end

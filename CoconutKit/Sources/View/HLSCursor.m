@@ -556,7 +556,7 @@
             else {
                 _selectedIndex = [self indexForXPos:self.pointerContainerView.center.x];
             }
-            [self check:YES andUpdate:YES withInputValue:@(_selectedIndex) error:NULL];
+            [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
             
@@ -608,7 +608,7 @@
         // If the finger has been released during the move animation, update the selected index and notify
         if (! _holding) {
             _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
-            [self check:YES andUpdate:YES withInputValue:@(_selectedIndex) error:NULL];
+            [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
             
@@ -621,7 +621,7 @@
     }
     else if ([animation.tag isEqualToString:@"snap"]) {
         _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
-        [self check:YES andUpdate:YES withInputValue:@(_selectedIndex) error:NULL];
+        [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
         
         [self showElementViewAtIndex:_selectedIndex selected:YES];
         

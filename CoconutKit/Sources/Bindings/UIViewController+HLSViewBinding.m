@@ -21,9 +21,9 @@
     [[self viewIfLoaded] updateBoundViewsAnimated:animated];
 }
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValuesError:(NSError *__autoreleasing *)pError
 {
-    return [[self viewIfLoaded] check:check andUpdate:update withCurrentInputValuesError:pError];
+    return [[self viewIfLoaded] check:check update:update withCurrentInputValuesError:pError];
 }
 
 @end

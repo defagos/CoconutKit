@@ -354,12 +354,12 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update withCurrentInputValueError:(NSError *__autoreleasing *)pError
 {
-    return [self check:check andUpdate:update withInputValue:[self inputValue] error:pError];
+    return [self check:check update:update withInputValue:[self inputValue] error:pError];
 }
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
     // Skip when triggered by view update implementations
     if (self.updatingView) {

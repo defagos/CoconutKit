@@ -52,5 +52,5 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
 {
     (*s_UIStepper__setValue_Imp)(self, _cmd, value);
     
-    [self check:YES andUpdate:YES withInputValue:@(value) error:NULL];
+    [self check:YES update:YES withInputValue:@(value) error:NULL];
 }

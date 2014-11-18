@@ -49,11 +49,11 @@
 
 /**
  * Methods meant to be called when implementing binding support for view subclasses which must be able to update the
- * underlying bound value. The -checkAndUpdateModelWithInputValue:error: should also be called when the view
+ * underlying bound value. The -checkupdateModelWithInputValue:error: should also be called when the view
  * gets updated programmatically, so that the model gets updated in all cases
  */
 @interface UIView (HLSViewBindingUpdateImplementation)
 
-- (BOOL)check:(BOOL)check andUpdate:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 
 @end
