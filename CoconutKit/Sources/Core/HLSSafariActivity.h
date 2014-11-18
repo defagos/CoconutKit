@@ -11,5 +11,4 @@
  * is the URL to open
  */
 @interface HLSSafariActivity : UIActivity
-
 @end

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WizardIdentityPageViewController">
             <connections>
-                <outlet property="birthdateErrorLabel" destination="93" id="102"/>
-                <outlet property="birthdateLabel" destination="38" id="103"/>
-                <outlet property="birthdateTextField" destination="39" id="104"/>
-                <outlet property="emailErrorLabel" destination="92" id="105"/>
-                <outlet property="emailTextField" destination="16" id="107"/>
-                <outlet property="firstNameErrorLabel" destination="90" id="108"/>
-                <outlet property="firstNameTextField" destination="14" id="110"/>
-                <outlet property="lastNameErrorLabel" destination="91" id="111"/>
-                <outlet property="lastNameTextField" destination="15" id="113"/>
-                <outlet property="nbrChildrenErrorLabel" destination="94" id="114"/>
-                <outlet property="nbrChildrenTextField" destination="68" id="116"/>
+                <outlet property="birthdateLabel" destination="38" id="VQO-kX-ILc"/>
                 <outlet property="view" destination="2" id="119"/>
+                <outletCollection property="textFields" destination="14" id="QrW-BR-6rX"/>
+                <outletCollection property="textFields" destination="15" id="hpk-nN-U8y"/>
+                <outletCollection property="textFields" destination="16" id="Vgp-Qd-w73"/>
+                <outletCollection property="textFields" destination="39" id="XOt-J1-K1G"/>
+                <outletCollection property="textFields" destination="68" id="YAh-dU-xc7"/>
+                <outletCollection property="errorLabels" destination="90" id="OHZ-uf-bEz"/>
+                <outletCollection property="errorLabels" destination="91" id="UMq-bT-jyl"/>
+                <outletCollection property="errorLabels" destination="92" id="T58-HQ-0SQ"/>
+                <outletCollection property="errorLabels" destination="93" id="UHs-oN-3fv"/>
+                <outletCollection property="errorLabels" destination="94" id="c1v-FL-TAb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -40,9 +40,11 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.firstName"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;firstNameError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="90">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;firstNameError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="90">
                     <rect key="frame" x="392" y="230" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -63,9 +65,11 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.lastName"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;lastNameError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="91">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;lastNameError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="91">
                     <rect key="frame" x="392" y="296" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -86,16 +90,18 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.email"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;emailError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="92">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;emailError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="92">
                     <rect key="frame" x="392" y="362" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.82352941180000006" green="0.1333333333" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;birthdate>" lineBreakMode="tailTruncation" minimumFontSize="10" id="38">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;birthdate&gt;" lineBreakMode="tailTruncation" minimumFontSize="10" id="38">
                     <rect key="frame" x="66" y="403" width="318" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -109,9 +115,12 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.birthdate"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="localizedDateFormatter"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;birthdateError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="93">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;birthdateError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="93">
                     <rect key="frame" x="392" y="428" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -132,9 +141,12 @@
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="resigningFirstResponderOnTap" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindKeyPath" value="personInformation.nbrChildren"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bindTransformer" value="DemoTransformer:decimalNumberFormatter"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="bindInputChecked" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;nbrChildrenError>" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="94">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="&lt;nbrChildrenError&gt;" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="94">
                     <rect key="frame" x="392" y="494" width="271" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>

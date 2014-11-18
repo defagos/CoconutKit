@@ -65,9 +65,16 @@
 
 @end
 
+// Can be overridden in subclasses but not intended to be called directly
 @interface HLSNibView (UnavailableMethods)
 
-- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE NS_REQUIRES_SUPER;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE NS_REQUIRES_SUPER;
+
+@end
+
+@interface HLSNibView (RequiresSuper)
+
+- (void)awakeFromNib NS_REQUIRES_SUPER;
 
 @end

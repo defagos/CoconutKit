@@ -15,7 +15,7 @@
 
 @implementation NSInputStream (HLSExtensions)
 
-- (BOOL)writeToOutputStream:(NSOutputStream *)outputStream error:(NSError **)pError
+- (BOOL)writeToOutputStream:(NSOutputStream *)outputStream error:(NSError *__autoreleasing *)pError
 {
     if (self.streamStatus != NSStreamStatusNotOpen && self.streamStatus != NSStreamStatusClosed
             && outputStream.streamStatus != NSStreamStatusNotOpen && outputStream.streamStatus != NSStreamStatusClosed) {

@@ -8,6 +8,11 @@
 
 #import "HLSRuntime.h"
 
+/**
+ * Remark: Unlike the documentation previously said, protocol_getMethodDescription also takes into account parent protocols
+ *         (see http://www.opensource.apple.com/source/objc4/objc4-532.2/runtime/objc-runtime-new.mm)
+ */
+
 #import <objc/message.h>
 
 static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImplementation);
@@ -282,4 +287,27 @@ BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass)
 BOOL hls_isClass(id object)
 {
     return class_isMetaClass(object_getClass(object));
+}
+
+void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject)
+{
+    unsigned int numberOfIvars = 0;
+    Ivar *ivars = class_copyIvarList([object class], &numberOfIvars);
+    for (unsigned int i = 0; i < numberOfIvars; ++i) {
+        Ivar ivar = ivars[i];
+        
+        // Check type encoding first
+        // Remark: Without proper casting, calling ivar_getName on ivar storing a primitive type can lead to crashes due
+        //         to ncorrect ARC memory management. This is not an issue here since this function is restricted to ivars
+        // storing objects
+        if (*ivar_getTypeEncoding(ivar) != *@encode(id)) {
+            continue;
+        }
+        
+        // Replace the object
+        if (object_getIvar(object, ivar) == replacedObject) {
+            object_setIvar(object, ivar, replacingObject);
+        }
+    }
+    free(ivars);
 }

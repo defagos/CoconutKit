@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 04/12/13.
-//  Copyright (c) 2013 Hortis. All rights reserved.
+//  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
 #import "HLSLabel.h"

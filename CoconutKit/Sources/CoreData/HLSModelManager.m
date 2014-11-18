@@ -186,7 +186,7 @@
     return [self currentModelManager].managedObjectContext;
 }
 
-+ (BOOL)saveCurrentModelContext:(NSError **)pError
++ (BOOL)saveCurrentModelContext:(NSError *__autoreleasing *)pError
 {
     NSManagedObjectContext *currentModelContext = [self currentModelContext];
     if (! currentModelContext) {
@@ -339,7 +339,7 @@
 - (HLSModelManager *)duplicate
 {
     // Duplicate the context, the rest is the same
-    HLSModelManager *modelManager = [[HLSModelManager alloc] init];
+    HLSModelManager *modelManager = [[[self class] alloc] init];
     modelManager.managedObjectContext = [self managedObjectContextForPersistentStoreCoordinator:self.persistentStoreCoordinator];
     modelManager.managedObjectModel = self.managedObjectModel;
     modelManager.persistentStoreCoordinator = self.persistentStoreCoordinator;
@@ -347,7 +347,7 @@
     return modelManager;
 }
 
-- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError **)pError
+- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError *__autoreleasing *)pError
 {
     NSPersistentStore *persistentStore = [[self.persistentStoreCoordinator persistentStores] firstObject];
     return [self.persistentStoreCoordinator migratePersistentStore:persistentStore toURL:url options:nil withType:storeType error:pError] != nil;

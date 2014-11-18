@@ -10,7 +10,7 @@
 
 #pragma mark Consistency validations
 
-- (BOOL)checkForDelete:(NSError **)pError
+- (BOOL)checkForDelete:(NSError *__autoreleasing *)pError
 {
     if ([self.noValidationStringD isEqualToString:@"LOCKED"]) {
         if (pError) {

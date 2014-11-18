@@ -20,7 +20,7 @@
  * Lookup is performed in the Localizable.strings file of the main bundle. If you need lookup to be performed 
  * in another table, respectively another bundle, set the following user-defined runtime attributes on the 
  * label or button you want to localize:
- *   - locTable: The name of the localization table to use (without the .strings extension). If not set 
+ *   - locTable: The name of the localization table to use (without the .strings extension). If not set
  *               defaults to Localizable
  *   - locBundle: The name of the bundle to search into (without the .bundle extension). Bundles are searched
  *                recursively in the main bundle, and if locBundle is not set the main bundle is used
@@ -72,3 +72,22 @@
 + (BOOL)missingLocalizationsVisible;
 
 @end
+
+/**
+ * User-defined runtime attributes exposed in the attributes inspector. Not meant to be set in code
+ */
+@interface UIView (HLSDynamicLocalization)
+
+/**
+ * The name of the localization table to use (without the .strings extension). If not set defaults to Localizable
+ */
+@property (nonatomic, readonly, strong) IBInspectable NSString *locTable;
+
+/**
+ * The name of the bundle to search into (without the .bundle extension). Bundles are searched recursively in the 
+ * main bundle, and if locBundle is not set the main bundle is used
+ */
+@property (nonatomic, readonly, strong) IBInspectable NSString *locBundle;
+
+@end
+

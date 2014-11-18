@@ -10,7 +10,7 @@
 // modelMandatoryBoundedPatternStringC: Validation logic entirely in the xcdatamodel (mandatory, max length and matching to a pattern)
 
 // codeMandatoryStringC: Validation entirely defined in code
-- (BOOL)checkCodeMandatoryStringC:(NSString *)codeMandatoryStringC error:(NSError **)pError
+- (BOOL)checkCodeMandatoryStringC:(NSString *)codeMandatoryStringC error:(NSError *__autoreleasing *)pError
 {
     if (! codeMandatoryStringC) {
         if (pError) {
@@ -25,7 +25,7 @@
 
 #pragma mark Global validations
 
-- (BOOL)checkForConsistency:(NSError **)pError
+- (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
 {
     if ([self.noValidationStringA isFilled] && ! self.noValidationNumberC) {
         if (pError) {

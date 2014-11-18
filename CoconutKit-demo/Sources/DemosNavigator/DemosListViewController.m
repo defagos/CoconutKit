@@ -8,15 +8,20 @@
 
 #import "DemosListViewController.h"
 
+#import "BindingsControlsDemoViewController.h"
+#import "BindingsFailuresDemoViewController.h"
+#import "BindingsPerformance1DemoViewController.h"
+#import "BindingsPerformance2DemoViewController.h"
+#import "BindingsProgrammaticDemoViewController.h"
+#import "BindingsTransformersViewController.h"
+#import "BindingsViewsDemoViewController.h"
 #import "ConnectionDemoViewController.h"
-#import "ControlBindingsDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
 #import "FontsDemoViewController.h"
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
 #import "LabelDemoViewController.h"
-#import "LabelBindingsDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
@@ -25,7 +30,7 @@
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
 #import "TableSearchDisplayDemoViewController.h"
-#import "TableViewBindingsDemoViewController.h"
+#import "BindingsViewsDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
 #import "WebViewDemoViewController.h"
@@ -57,9 +62,13 @@ typedef NS_ENUM(NSInteger, AnimationDemoIndex) {
 // Demos for bindings
 typedef enum {
     BindingsDemoIndexEnumBegin = 0,
-    BindingsDemoIndexLabels = BindingsDemoIndexEnumBegin,
-    BindingsDemoIndexTableView,
-    BindingsDemoIndexControls,
+    BindingsDemoIndexControls = BindingsDemoIndexEnumBegin,
+    BindingsDemoIndexViews,
+    BindingsDemoIndexTransformers,
+    BindingsDemoIndexProgrammatic,
+    BindingsDemoIndexPerformance1,
+    BindingsDemoIndexPerformance2,
+    BindingsDemoIndexFailures,
     BindingsDemoIndexEnumEnd,
     BindingsDemoIndexEnumSize = BindingsDemoIndexEnumEnd - BindingsDemoIndexEnumBegin
 } BindingsDemoIndex;
@@ -275,18 +284,38 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             
         case DemoCategoryIndexBindings: {
             switch (indexPath.row) {
-                case BindingsDemoIndexLabels: {
-                    cell.textLabel.text = NSLocalizedString(@"Labels", nil);
-                    break;
-                }
-                    
-                case BindingsDemoIndexTableView: {
-                    cell.textLabel.text = NSLocalizedString(@"Table view", nil);
-                    break;
-                }
-                    
                 case BindingsDemoIndexControls: {
                     cell.textLabel.text = NSLocalizedString(@"Controls", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexViews: {
+                    cell.textLabel.text = NSLocalizedString(@"Views", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexTransformers: {
+                    cell.textLabel.text = NSLocalizedString(@"Transformers", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexProgrammatic: {
+                    cell.textLabel.text = NSLocalizedString(@"Programmatic", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexPerformance1: {
+                    cell.textLabel.text = NSLocalizedString(@"Performance 1", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexPerformance2: {
+                    cell.textLabel.text = NSLocalizedString(@"Performance 2", nil);
+                    break;
+                }
+                    
+                case BindingsDemoIndexFailures: {
+                    cell.textLabel.text = NSLocalizedString(@"Failures", nil);
                     break;
                 }
                     
@@ -474,18 +503,38 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             
         case DemoCategoryIndexBindings: {
             switch (indexPath.row) {
-                case BindingsDemoIndexLabels: {
-                    demoViewController = [[LabelBindingsDemoViewController alloc] init];
-                    break;
-                }
-                    
-                case BindingsDemoIndexTableView: {
-                    demoViewController = [[TableViewBindingsDemoViewController alloc] init];
-                    break;
-                }
-                    
                 case BindingsDemoIndexControls: {
-                    demoViewController = [[ControlBindingsDemoViewController alloc] init];
+                    demoViewController = [[BindingsControlsDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexViews: {
+                    demoViewController = [[BindingsViewsDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexTransformers: {
+                    demoViewController = [[BindingsTransformersViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexProgrammatic: {
+                    demoViewController = [[BindingsProgrammaticDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexPerformance1: {
+                    demoViewController = [[BindingsPerformance1DemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexPerformance2: {
+                    demoViewController = [[BindingsPerformance2DemoViewController alloc] init];
+                    break;
+                }
+                    
+                case BindingsDemoIndexFailures: {
+                    demoViewController = [[BindingsFailuresDemoViewController alloc] init];
                     break;
                 }
                     

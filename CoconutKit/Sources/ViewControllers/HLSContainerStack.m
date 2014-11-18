@@ -62,6 +62,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         self.containerContents = [NSMutableArray array];
         _behavior = behavior;
         self.capacity = capacity;
+        self.lockingUI = YES;
         _autorotationMode = HLSAutorotationModeContainer;
     }
     return self;

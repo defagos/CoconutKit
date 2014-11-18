@@ -6,17 +6,7 @@
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
-// TODO: Move elsewhere, in a binding-dedicated header file. Probably rename for consistency
-typedef NS_ENUM(NSInteger, HLSError) {
-    HLSErrorValidationMultipleErrors,
-    HLSErrorTransformationError,
-    HLSErrorUnsupportedTypeError,
-    HLSErrorUpdateError
-};
-
-extern NSString * const CoconutKitErrorDomain;
-
-extern NSString * const HLSDetailedErrorsKey;
+extern NSString * const HLSDetailedErrorsKey;           // Key for storing the multiple error list in the user info dictionary
 
 /**
  * Extensions to NSError providing a convenient way to create errors. Mutability methods have been implemented so that
@@ -50,6 +40,14 @@ extern NSString * const HLSDetailedErrorsKey;
  */
 // FIXME: Warning: This method already exists elsewhere! Check class dump!
 + (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
+
+/**
+ * Combine a given error with another existing one, passed by reference. For convenience of use, the resulting error is
+ * returned by reference, and also as method returned value. Multiple errors are combined as an HLSCoreErrorMultipleErrors
+ * in the CoconutKitErrorDomain error domain. If no existing error is provided, the new resulting error is simply the
+ * new error provided
+ */
++ (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError;
 
 /**
  * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to

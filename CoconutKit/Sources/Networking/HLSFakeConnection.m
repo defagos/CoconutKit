@@ -33,6 +33,11 @@
     return [self initWithResponseObject:nil error:nil completionBlock:completionBlock];
 }
 
+- (instancetype)init
+{
+    return [self initWithCompletionBlock:nil];
+}
+
 #pragma mark HLSConnectionAbstract protocol implementation
 
 - (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes

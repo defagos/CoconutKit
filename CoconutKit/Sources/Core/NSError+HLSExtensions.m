@@ -9,12 +9,13 @@
 #import "NSError+HLSExtensions.h"
 
 #import "HLSAssert.h"
+#import "HLSCoreError.h"
 #import "HLSLogger.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSDictionary+HLSExtensions.h"
 
 #import <objc/runtime.h>
 
-NSString * const CoconutKitErrorDomain = @"ch.hortis.coconutkit";
 NSString * const HLSDetailedErrorsKey = @"HLSDetailedErrorsKey";
 
 static void *s_mutableUserInfoKey = &s_mutableUserInfoKey;
@@ -36,6 +37,38 @@ static Class subclass_class(id self, SEL _cmd);
 {
     NSDictionary *userInfo = localizedDescription ? @{ NSLocalizedDescriptionKey : localizedDescription} : nil;
     return [[[self class] alloc] initWithDomain:domain code:code userInfo:userInfo];
+}
+
++ (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError
+{
+    // If the caller is not interested in errors, nothing to do
+    if (! pExistingError) {
+        return nil;
+    }
+    
+    // If no new error, nothing to do
+    if (! newError) {
+        return *pExistingError;
+    }
+    
+    if (*pExistingError) {
+        if ([*pExistingError hasCode:HLSCoreErrorMultipleErrors withinDomain:HLSCoreErrorDomain]) {
+            [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
+        }
+        else {
+            NSError *previousError = *pExistingError;
+            *pExistingError = [NSError errorWithDomain:HLSCoreErrorDomain
+                                                  code:HLSCoreErrorMultipleErrors
+                                  localizedDescription:CoconutKitLocalizedString(@"Multiple errors have been encountered", nil)];
+            [*pExistingError addObject:previousError forKey:HLSDetailedErrorsKey];
+            [*pExistingError addObject:newError forKey:HLSDetailedErrorsKey];
+        }
+    }
+    else {
+        *pExistingError = newError;
+    }
+    
+    return *pExistingError;
 }
 
 #pragma mark Object creation and destruction

@@ -8,15 +8,8 @@
 
 #import <objc/runtime.h> 
 
-// TODO: Add swizzling helpers for methods returning structs, floats (see runtime headers). Add test cases to cover
-//       all cases and potential issues
-
 /**
  * The following methods can be safely used in pure C code
- *
- * Remark: Unlike the documentation says, protocol_getMethodDescription also takes into account parent protocols
- *         (see http://www.opensource.apple.com/source/objc4/objc4-532.2/runtime/objc-runtime-new.mm). There is
- *         therefore no need for an hls_protocol_getMethodDescription function
  */
 
 /**
@@ -75,8 +68,8 @@ BOOL hls_class_conformsToInformalProtocol(Class cls, Protocol *protocol);
 BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol);
 
 /**
- * Check that a class (taking into account its superclasses) implements methods of a given protocol
- * (taking into account methods defined by parent protocols). Two boolean values control which methods
+ * Check that a class (taking into account its superclasses) implements methods of a given protocol,
+ * taking into account methods defined by parent protocols. Two boolean values control which methods
  * are checked:
  *   - isRequiredMethod: If YES, checks @required methods only, otherwise @optional methods only
  *   - isInstanceMethod: If YES, checks instance methods only, otherwise class methods only
@@ -85,24 +78,35 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
 
 /**
  * Replace the implementation of a class method, given its selector. Return the original implementation,
- * or NULL if not found
+ * or NULL if not found. You should save the original implementation pointer somewhere and call it from
+ * the new implementation to preserve existing behavior. When calling the original implenentation, be sure 
+ * to cast the IMP pointer to the proper signature (the first arguments of a method implementation signature 
+ * are always self (of type id) and the selector (of type SEL), followed by the method arguments
  */
 IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
 
-IMP hls_class_swizzleClassSelector_block(Class clazz, SEL selector, id newImplementationBlock);
-
 /**
  * Replace the implementation of an instance method, given its selector. Return the original implementation,
- * or NULL if not found
+ * or NULL if not found. You should save the original implementation pointer somewhere and call it from
+ * the new implementation to preserve existing behavior. When calling the original implenentation, be sure
+ * to cast the IMP pointer to the proper signature (the first arguments of a method implementation signature
+ * are always self (of type id) and the selector (of type SEL), followed by the method arguments
  */
 IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
 
 /**
- * Example:
- *     __block IMP originalIMP = hls_class_swizzleSelector_block(self, @selector(awakeFromNib), ^(UIView *self_) {
- *         NSLog(@"Swizzled -[UIView awakeFromNib] for %@", self_);
- *         ((void (*)(id, SEL))originalIMP)(self_, @selector(awakeFromNib));
- *     });
+ * Replace the implementation of a class method using the provided implementation block (see imp_implementationWithBlock
+ * documemtation for information about valid block signatures). Return the original implementation, or NULL if not found. 
+ * You should store this original implementation in a __block variable and call it from the implementation block to
+ * preserve existing behavior
+ */
+IMP hls_class_swizzleClassSelector_block(Class clazz, SEL selector, id newImplementationBlock);
+
+/**
+ * Replace the implementation of an instance method using the provided implementation block (see imp_implementationWithBlock
+ * documemtation for information about valid block signatures). Return the original implementation, or NULL if not found. 
+ * You should store this original implementation in a __block variable and call it from the implementation block to
+ * preserve existing behavior
  */
 IMP hls_class_swizzleSelector_block(Class clazz, SEL selector, id newImplementationBlock);
 
@@ -116,3 +120,9 @@ BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass);
  * Return YES iff object is a class object
  */
 BOOL hls_isClass(id object);
+
+/**
+ * Replace all references to an object (replaced object), appearing in an object (object), by references to another object
+ * (replacingObject)
+ */
+void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject);

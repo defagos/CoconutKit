@@ -15,6 +15,8 @@
 #import "UITextView+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
 
+// TODO: When CoconutKit requires iOS >= 8, completely update rotation code. Yeah, this is going to be a lot of work...
+
 // Associated object keys
 static void *s_lifeCyclePhaseKey = &s_lifeCyclePhaseKey;
 static void *s_createdViewSizeKey = &s_createdViewSizeKey;

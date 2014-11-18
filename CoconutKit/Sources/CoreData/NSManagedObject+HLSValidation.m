@@ -15,7 +15,6 @@
 #import "NSDictionary+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
-#import "UITextField+HLSValidation.h"
 
 #import <objc/runtime.h>
 
@@ -43,7 +42,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 
 @interface NSManagedObject (HLSValidationPrivate)
 
-+ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError;
++ (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError;
 
 + (NSError *)flattenHiearchyForError:(NSError *)error;
 
@@ -72,7 +71,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 
 #pragma mark Checking the object
 
-- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError **)pError
+- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError *__autoreleasing *)pError
 {
     NSAssert(injectedManagedObjectValidation(), @"Managed object validation not injected. Call HLSEnableNSManagedObjectValidation first");
     
@@ -83,19 +82,19 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     return [self validateValue:&value forKey:key error:pError];
 }
 
-- (BOOL)check:(NSError **)pError
+- (BOOL)check:(NSError *__autoreleasing *)pError
 {
     return [self validateForInsert:pError];
 }
 
 #pragma mark Global validation method stubs
 
-- (BOOL)checkForConsistency:(NSError **)pError
+- (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
 {
     return YES;
 }
 
-- (BOOL)checkForDelete:(NSError **)pError
+- (BOOL)checkForDelete:(NSError *__autoreleasing *)pError
 {
     return YES;
 }
@@ -126,7 +125,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  *
  * The method returns the combined error both by reference as well as return value.
  */
-+ (NSError *)combineError:(NSError *)newError withError:(NSError **)pExistingError
++ (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError
 {    
     // If the caller is not interested in errors, nothing to do
     if (! pExistingError) {
@@ -431,7 +430,6 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     }
 }
 
-
 #pragma mark Swizzled method implementations
 
 /**
@@ -477,7 +475,7 @@ static void swizzled_NSManagedObject__initialize_Imp(Class self, SEL _cmd)
         }
         
         // Add the validation method Core Data expects for this field. Signature is
-        //   - (BOOL)validate<fieldName>:(id *)pValue error:(NSError **)pError
+        //   - (BOOL)validate<fieldName>:(id *)pValue error:(NSError *__autoreleasing *)pError
         NSString *validationSelectorName = [NSString stringWithFormat:@"validate%@%@:error:", [[propertyName substringToIndex:1] uppercaseString], 
                                             [propertyName substringFromIndex:1]];
         if (! class_addMethod(self, 

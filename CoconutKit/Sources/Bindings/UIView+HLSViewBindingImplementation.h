@@ -3,17 +3,30 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 22/04/14.
-//  Copyright (c) 2014 Hortis. All rights reserved.
+//  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
 /**
- * UIView subclasses must use the protocol and category below to implement binding behavior
+ * CoconutKit bindings for custom view classes
+ * -------------------------------------------
+ *
+ * To implement bindings for your own view class:
+ *   - Have your view class conform to the HLSViewBindingImplementation protocol
+ *   - In your implementation, be sure to use the HLSViewBindingUpdateImplementation category when implementing
+ *     update operations
  */
 
-/**
- * This protocol can be implemented by UIView subclasses to customize binding behavior
- */
 @protocol HLSViewBindingImplementation <NSObject>
+
+@required
+
+/**
+ * UIView subclasses which want to provide bindings MUST implement this method. Its implementation should update the
+ * view according to the value which is received as parameter (if this value can be something else than an NSString,
+ * be sure to implement the +supportedBindingClasses method accordingly). If a UIView class does not implement this
+ * method, bindings will not be available for it
+ */
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated;
 
 @optional
 
@@ -24,49 +37,42 @@
 + (NSArray *)supportedBindingClasses;
 
 /**
- * UIView subclasses which want to provide bindings MUST implement this method. Its implementation should update the
- * view according to the value which is received as parameter (if this value can be something else than an NSString,
- * be sure to implement the +supportedBindingClasses method as well). If a UIView class does not implement this method,
- * bindings will not be available for it.
- *
- * You can call -bindToObject:, -refreshBindings:, etc. on any view, whether it actually implement -updateViewWithValue:
- * or not. This will recursively traverse its view hierarchy wherever possible (see -bindsSubviewsRecursively) and
- * perform binding resolution for views deeper in its hierarchy, stopping at view controller boundaries
+ * Should return YES iff the UIView subclass is able to display a placeholder. If not implemented, the default
+ * behavior is NO. For classes which can display a placeholder, it will be ensured that for bound methods with 
+ * primitive return types (int, float, etc.), the view displays nil instead of 0, so that the placeholder can
+ * be seen
  */
-- (void)updateViewWithValue:(id)value;
-
-/**
- * UIView subclasses can implement this method to return YES if subviews must be updated recursively when the
- * receiver is updated. When not implemented, the default behavior is YES
- */
-- (BOOL)bindsSubviewsRecursively;
++ (BOOL)canDisplayPlaceholder;
 
 /**
  * UIView subclasses which want to be able to update the underlying model MUST implement this method, returning
  * the currently displayed value. The type of the returned value must be one of the classes declared by
  * +supportedBindingClasses
  */
-- (id)displayedValue;
+- (id)inputValue;
 
 @end
 
 /**
  * Methods meant to be called when implementing binding support for view subclasses which must be able to update the
- * underlying bound value. Two methods have been provided, one which does not update the underlying value but performs
- * checks, the other one checking and updating the value if valid. In general, you want to call the latter in your
- * own implementation, except if you intend to implement some kind of on-the-fly validation while a value is being
- * entered (e.g. validating user input in some kind of text field while the user is typing)
+ * underlying bound value. The -checkupdateModelWithInputValue:error: should also be called when the view
+ * gets updated programmatically, so that the model gets updated in all cases
  */
-@interface UIView (HLSViewBindingImplementation)
+
+@interface UIView (HLSViewBindingUpdateImplementation)
 
 /**
- * View subclasses which want to provide update of bound values when the value they display change must call this
- * method in their implementation to update and check the underlying value (whether this actually happens depends
- * on the checkingDisplayedValueAutomatically and updatingModelAutomatically values)
+ * When implementing a class supporting bindings, call this method when the value displayed by the view is changed,
+ * whether interactively or programmatically. You can only check, only update, or both (calling the method with
+ * NO for both values raises an assertion). This makes it possible to implement bindings where check / updates are
+ * made at very specific times. You could for example imagine some text field where no check is performed during
+ * input, only when leaving edit mode
  *
- * The methods returns YES iff the value could be updated and successfully checked. Errors are returned to the
- * binding delegate as well as to the caller. Update is made first. If it fails, then no check is made
+ * The method returns YES on success, NO and error information on failure
+ *
+ * Remark: Setting check = YES does not necessary leads to a check if the view has its bindInputChecked property
+ *         set to NO. Setting check to NO, however, disables checks in all cases
  */
-- (BOOL)updateAndCheckModelWithDisplayedValue:(id)displayedValue error:(NSError **)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 
 @end

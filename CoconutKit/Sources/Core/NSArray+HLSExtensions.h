@@ -9,7 +9,13 @@
 @interface NSArray (HLSExtensions)
 
 /**
- * Rotate array elements left or right (elements disappearing at an end are moved to the other end)
+ * Return the array obtained by removing the last object
+ */
+- (NSArray *)arrayByRemovingLastObject;
+
+/**
+ * Return the array obtained by rotating receiver elements left or right (elements disappearing at an end are moved to 
+ * the other end)
  */
 - (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfElements;
 - (NSArray *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;

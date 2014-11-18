@@ -14,13 +14,15 @@
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSDictionary+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
-#import "UIView+HLSRuntimeAttributes.h"
 
 static BOOL s_missingLocalizationsVisible = NO;
 
 // Keys for associated objects
 static void *s_localizationInfosKey = &s_localizationInfosKey;
 static void *s_originalBackgroundColorKey = &s_originalBackgroundColorKey;
+
+static void *s_localizationTableNameKey = &s_localizationTableNameKey;
+static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_UILabel__dealloc_Imp)(__unsafe_unretained id, SEL) = NULL;
@@ -43,6 +45,13 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
+
+@end
+
+@interface UIView (HLSDynamicLocalizationPrivate)
+
+@property (nonatomic, strong) NSString *locTable;
+@property (nonatomic, strong) NSString *locBundle;
 
 @end
 
@@ -239,6 +248,32 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     if ([localizationInfo isLocalized]) {
         [self localizeTextWithLocalizationInfo:localizationInfo];
     }
+}
+
+@end
+
+@implementation UIView (HLSDynamicLocalizationPrivate)
+
+#pragma mark Accessors and mutators
+
+- (NSString *)locTable
+{
+    return objc_getAssociatedObject(self, s_localizationTableNameKey);
+}
+
+- (void)setLocTable:(NSString *)locTable
+{
+    objc_setAssociatedObject(self, s_localizationTableNameKey, locTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSString *)locBundle
+{
+    return objc_getAssociatedObject(self, s_localizationBundleNameKey);
+}
+
+- (void)setLocBundle:(NSString *)locBundle
+{
+    objc_setAssociatedObject(self, s_localizationBundleNameKey, locBundle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

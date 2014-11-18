@@ -14,6 +14,7 @@
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
+#import "UIView+HLSViewBindingImplementation.h"
 #import "UIView+HLSExtensions.h"
 
 @interface HLSCursor ()
@@ -555,6 +556,7 @@
             else {
                 _selectedIndex = [self indexForXPos:self.pointerContainerView.center.x];
             }
+            [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
             
@@ -606,6 +608,7 @@
         // If the finger has been released during the move animation, update the selected index and notify
         if (! _holding) {
             _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+            [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
             
@@ -618,6 +621,7 @@
     }
     else if ([animation.tag isEqualToString:@"snap"]) {
         _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+        [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
         
         [self showElementViewAtIndex:_selectedIndex selected:YES];
         
@@ -629,6 +633,23 @@
         _dragging = NO;
         _moved = NO;
     }
+}
+
+#pragma mark HLSViewBindingImplementation protocol implementation
+
++ (NSArray *)supportedBindingClasses
+{
+    return @[[NSNumber class]];
+}
+
+- (void)updateViewWithValue:(id)value animated:(BOOL)animated
+{
+    [self setSelectedIndex:[value unsignedIntegerValue] animated:animated];
+}
+
+- (id)inputValue
+{
+    return @(self.selectedIndex);
 }
 
 @end

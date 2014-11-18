@@ -11,5 +11,4 @@
  * is the URL to open
  */
 @interface HLSGoogleChromeActivity : UIActivity
-
 @end

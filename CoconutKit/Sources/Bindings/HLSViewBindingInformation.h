@@ -3,97 +3,126 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 18.06.13.
-//  Copyright (c) 2013 Hortis. All rights reserved.
+//  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
-#import "HLSBindingDelegate.h"
+#import "HLSViewBindingDelegate.h"
 
 /**
- * Private class encapsulating view binding information, and performing lazy binding parameter validation and caching
+ * Private class encapsulating view binding information, and performing lazy binding parameter resolving, caching,
+ * and automatic synchronization via KVO when possible. The bound object is resolved automatically at runtime. There
+ * is no way to change or recalculate binding information: If binding information changes for some view, create a
+ * new instance and replace the previous one with it
  */
 @interface HLSViewBindingInformation : NSObject
 
 /**
- * Store view binding information. A keypath and a view are mandatory, otherwise the method returns nil. The object
- * parameter can be one of the following:
- *   - a non-nil object, which the keypath is applied to (binding to an object)
- *   - nil, in which case the keypath is applied to the responder chain starting with view
+ * Store view binding information. A keypath and a view supporting bindings are mandatory, otherwise the method returns 
+ * nil. A transformer name is optional. All kinds of keypaths are supported, including those containing keypath operators
  */
-- (instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath transformerName:(NSString *)transformerName view:(UIView *)view NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithKeyPath:(NSString *)keyPath
+                transformerName:(NSString *)transformerName
+                           view:(UIView *)view NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return the current value corresponding to the stored binding information (the transformer method is applied, if any). 
- * If keypath information is invalid, this method returns nil
+ * If keypath information is unverified or invalid, the method returns nil
  */
 - (id)value;
 
+/**
+ * The plain value retrieved from the bound object, without any transformation, nil if the bound object has not been
+ * resolved yet
+ */
 - (id)rawValue;
 
 /**
- * Try to transform back a value into a value which could be assigned to the key path. Return YES and the value iff the 
- * reverse transformation could be achieved, i.e. if a reverse transformation is available (if a transformer has been set)
- * and could be successfully applied. Errors are returned to the validation delegate (if any) and to the caller
+ * The value currently made available for input by the view. If the view does not support input (supportingInput = NO), 
+ * the method returns nil
  */
-- (BOOL)convertTransformedValue:(id)transformedValue toValue:(id *)pValue withError:(NSError **)pError;
+- (id)inputValue;
 
 /**
- * Check whether a value is correct according to any validation which might have been set. Errors are returned to the 
- * validation delegate (if any) and to the caller
- *
- * Returns YES iff the check was successful
+ * Update the view using the current underlying bound value. Then change can be animated if the view supports it
  */
-- (BOOL)checkValue:(id)displayedValue withError:(NSError **)pError;
-
-/**
- * Update the value which the key path points at with another value. Does not perform any check, -checkValue:withError: 
- * must be called first. Returns YES iff the value could be updated, NO otherwise (e.g. if no setter is available). Errors
- * are returned to the validation delegate (if any) and to the caller
- */
-- (BOOL)updateWithValue:(id)value error:(NSError **)pError;
-
-- (void)notifySuccess:(BOOL)success withValue:(id)value error:(NSError *)error;
-
-/**
- * Return the object which has been bound, nil if none or not resolved yet
- */
-@property (nonatomic, readonly, weak) id object;
+- (void)updateViewAnimated:(BOOL)animated;
 
 /**
  * Return the keypath to which binding is made
  */
 @property (nonatomic, readonly, strong) NSString *keyPath;
 
+/**
+ * The bound view
+ */
 @property (nonatomic, readonly, weak) UIView *view;
 
 /**
- * Return the transformer to use, nil if none
+ * Return the transformer name specified during initialization
  */
 @property (nonatomic, readonly, strong) NSString *transformerName;
 
 /**
- * Return the object which the transformer will be called on, nil if none or not resolved yet
+ * Return the resolved bound object, nil if none or not resolved yet
+ */
+@property (nonatomic, readonly, weak) id objectTarget;
+
+/**
+ * Return the object which the transformation selector will be called on, nil if none or not resolved yet
  */
 @property (nonatomic, readonly, weak) id transformationTarget;
 
 /**
- * Return the selector which will be called on the transformation target, nil if none or not resolved yet
+ * Return the selector which will be called on the transformation target, NULL if none or not resolved yet
  */
 @property (nonatomic, readonly, assign) SEL transformationSelector;
 
 /**
  * Return the object binding events will be sent to, nil if none or not resolved yet
  */
-@property (nonatomic, readonly, weak) id<HLSBindingDelegate> delegate;
+@property (nonatomic, readonly, weak) id<HLSViewBindingDelegate> delegate;
 
 /**
- * Return a message describing current issues with the binding, nil if none
- */
-@property (nonatomic, readonly, strong) NSString *errorDescription;
-
-/**
- * Return YES iff the binding has been verified once
+ * Return YES iff the binding has been verified completely. If verified, use the error property to check whether
+ * the binding was successfully resolved or not. If not verified, use the error property to retrieve information
+ * about why the binding could not be verified
  */
 @property (nonatomic, readonly, assign, getter=isVerified) BOOL verified;
+
+/**
+ * Reason why a binding cannot be completely verified yet (if verified = NO), why binding failed (if verified = YES),
+ * or nil if no information is available
+ */
+@property (nonatomic, readonly, strong) NSError *error;
+
+/**
+ * Return YES iff the view supports input
+ */
+@property (nonatomic, readonly, assign, getter=isSupportingInput) BOOL supportingInput;
+
+/**
+ * Return YES iff the view is automatically updated when the underlying model changes
+ */
+@property (nonatomic, readonly, assign, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
+
+/**
+ * Return YES iff the model is automatically updated when the view changes
+ */
+@property (nonatomic, readonly, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
+
+/**
+ * Check and / or update the model using the current input value, as returned by -inputValue. Return YES iff successful,
+ * otherwise NO and error information. Fails if the view does not support input (supportingInput = NO). If both
+ * check and update are made, failure to perform one does not prevent the other from being attempted
+ */
+- (BOOL)check:(BOOL)check update:(BOOL)update withError:(NSError *__autoreleasing *)pError;
+
+/**
+ * Check and / or update the model using the specified value. Return YES iff successful, otherwise NO and error information.
+ * Fails if the view does not support input (supportingInput = NO). If both check and update are made, failure to perform 
+ * one does not prevent the other from being attempted
+ */
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
 
 @end
 

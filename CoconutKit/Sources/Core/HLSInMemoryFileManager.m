@@ -67,7 +67,7 @@
  *
  * Intermediate directories are created if they do not exist. If data is nil, a folder is added, otherwise a file
  */
-- (BOOL)addObjectAtPath:(NSString *)path withData:(NSData *)data error:(NSError **)pError
+- (BOOL)addObjectAtPath:(NSString *)path withData:(NSData *)data error:(NSError *__autoreleasing *)pError
 {
     if (! [path hasPrefix:@"/"]) {
         if (pError) {
@@ -81,7 +81,7 @@
     return [self addObjectAtPath:path toItems:self.rootItems withData:data error:pError];
 }
 
-- (BOOL)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary *)items withData:(NSData *)data error:(NSError **)pError
+- (BOOL)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary *)items withData:(NSData *)data error:(NSError *__autoreleasing *)pError
 {
     NSArray *pathComponents = [path pathComponents];
     if ([pathComponents count] == 0) {
@@ -145,7 +145,7 @@
                    inItems:(NSDictionary *)sourceItems
           toObjectWithName:(NSString *)destinationObjectName
                    inItems:(NSMutableDictionary *)destinationItems
-                     error:(NSError **)pError
+                     error:(NSError *__autoreleasing *)pError
 {
     // Retrieve the source content
     id sourceContent = [sourceItems objectForKey:sourceObjectName];
@@ -202,7 +202,7 @@
                    inItems:(NSMutableDictionary *)sourceItems
           toObjectWithName:(NSString *)destinationObjectName
                    inItems:(NSMutableDictionary *)destinationItems
-                     error:(NSError **)pError
+                     error:(NSError *__autoreleasing *)pError
 {
     // Retrieve the source content
     id sourceContent = [sourceItems objectForKey:sourceObjectName];
@@ -254,7 +254,7 @@
     }  
 }
 
-- (BOOL)removeItemWithName:(NSString *)name inItems:(NSMutableDictionary *)items error:(NSError **)pError
+- (BOOL)removeItemWithName:(NSString *)name inItems:(NSMutableDictionary *)items error:(NSError *__autoreleasing *)pError
 {
     id content = [items objectForKey:name];
     if (! content) {
@@ -283,7 +283,7 @@
     return YES;
 }
 
-- (BOOL)checkParentDirectoryForPath:(NSString *)path error:(NSError **)pError
+- (BOOL)checkParentDirectoryForPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     BOOL isDirectory = NO;
     NSString *parentPath = [path stringByDeletingLastPathComponent];    
@@ -301,7 +301,7 @@
 
 #pragma mark HLSFileManagerAbstract protocol implementation
 
-- (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError **)pError
+- (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     id content = [self contentAtPath:path forItems:self.rootItems];
     if (! content || ! [content isKindOfClass:[NSString class]]) {
@@ -317,7 +317,7 @@
     return cacheEntry.data;
 }
 
-- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError **)pError
+- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError *__autoreleasing *)pError
 {
     if (! contents) {
         if (pError) {
@@ -336,7 +336,7 @@
     return [self addObjectAtPath:path withData:contents error:pError];
 }
 
-- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError **)pError
+- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError *__autoreleasing *)pError
 {
     if (! withIntermediateDirectories) {
         if (! [self checkParentDirectoryForPath:path error:pError]) {
@@ -347,7 +347,7 @@
     return [self addObjectAtPath:path withData:nil error:pError];
 }
 
-- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError **)pError
+- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     id subitems = [self contentAtPath:path forItems:self.rootItems];
     if (! [subitems isKindOfClass:[NSDictionary class]]) {
@@ -377,7 +377,7 @@
     return YES;
 }
 
-- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
+- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
 {
     // Prevent recursive copy
     if ([destinationPath hasPrefix:sourcePath]) {
@@ -418,7 +418,7 @@
                               error:pError];
 }
 
-- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError **)pError
+- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
 {
     // Prevent recursive move
     if ([destinationPath hasPrefix:sourcePath]) {
@@ -459,7 +459,7 @@
                                error:pError];
 }
 
-- (BOOL)removeItemAtPath:(NSString *)path error:(NSError **)pError
+- (BOOL)removeItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     // Get the directory in which the element to delete is located
     id content = [self contentAtPath:[path stringByDeletingLastPathComponent] forItems:self.rootItems];

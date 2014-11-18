@@ -3,7 +3,7 @@
 //  CoconutKit
 //
 //  Created by Samuel Défago on 20/03/14.
-//  Copyright (c) 2014 Hortis. All rights reserved.
+//  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
 /**
@@ -23,17 +23,18 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 /**
  * A protocol to define transformations between objects. Transformations in forward direction are mandatory and
  * can never fail (most probably they correspond to some kind of formatting), while transformations in reverse
- * direction are optional and might fail, in which case a corresponding error must be returned (most probably 
+ * direction are optional and might fail, in which case a corresponding error should be returned (most probably
  * they correspond to some kind of parsing)
  *
- * Tranformers can be seen as a more general NSFormatter, though they are not limited to formatting / parsing.
+ * Transformers can be seen as a more general NSFormatter, though they are not limited to formatting / parsing.
  * For example, you can define an NSNumber to NSNumber transformer applying some kind of calculation to it. During
  * forward transformation, some information might get lost (e.g. through rounding), in which case implementing
  * a reverse transformation does not make sense. In other cases (e.g. multiplication with a constant factor), the
  * reverse transformation can be meaningfully implemented. The rule should be that applying the transform and 
  * reverse transform to some object should return an object equal to it
  *
- * Remark: Foundation provides NSValueFormatter, which provides a similar kind of functionality
+ * Remark: Foundation provides NSValueTransformer, which provides a similar kind of functionality, but requires
+ *         subclassing
  */
 @protocol HLSTransformer <NSObject>
 
@@ -43,14 +44,12 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 - (id)transformObject:(id)object;
 
 /**
- * Reverse transform the provided object of class B into another one of class A
+ * Reverse transform the provided object of class B into another one of class A. Check for existence before calling
  */
 @optional
-- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError **)pError;
+- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError *__autoreleasing *)pError;
 
 @end
-
-// TODO: Add a formatter transformer (with +transformerWithFormatter: convenience method)
 
 /**
  * A convenience transformer class which makes it easy to define transformations using blocks
@@ -77,5 +76,19 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 @interface HLSBlockTransformer (UnavailableMethods)
 
 - (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+@interface HLSBlockTransformer (Adapters)
+
+/**
+ * Create a block transformer from a standard NSFormatter
+ */
++ (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter;
+
+/**
+ * Create a block transformer from a standard NSValueFormatter
+ */
++ (instancetype)blockTransformerFromValueTransformer:(NSValueTransformer *)valueTransformer;
 
 @end

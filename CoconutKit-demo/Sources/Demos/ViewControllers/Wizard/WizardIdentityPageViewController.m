@@ -13,23 +13,20 @@
 @interface WizardIdentityPageViewController ()
 
 @property (nonatomic, strong) PersonInformation *personInformation;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
-@property (nonatomic, weak) IBOutlet UITextField *firstNameTextField;
-@property (nonatomic, weak) IBOutlet UILabel *firstNameErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *lastNameTextField;
-@property (nonatomic, weak) IBOutlet UILabel *lastNameErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *emailTextField;
-@property (nonatomic, weak) IBOutlet UILabel *emailErrorLabel;
 @property (nonatomic, weak) IBOutlet UILabel *birthdateLabel;
-@property (nonatomic, weak) IBOutlet UITextField *birthdateTextField;
-@property (nonatomic, weak) IBOutlet UILabel *birthdateErrorLabel;
-@property (nonatomic, weak) IBOutlet UITextField *nbrChildrenTextField;
-@property (nonatomic, weak) IBOutlet UILabel *nbrChildrenErrorLabel;
+
+@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *errorLabels;
+
+@property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
 
 @end
 
-@implementation WizardIdentityPageViewController
+@implementation WizardIdentityPageViewController {
+@private
+    BOOL _loadedOnce;
+}
 
 #pragma mark Object creation and destruction
 
@@ -46,32 +43,18 @@
     return self;
 }
 
-#pragma mark Accessors and mutators
-
-- (void)setPersonInformation:(PersonInformation *)personInformation
-{
-    if (_personInformation == personInformation) {
-        return;
-    }
-    
-    _personInformation = personInformation;
-    
-    [self reloadData];
-}
-
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
+- (void)viewWillLayoutSubviews
 {
-    [super viewDidLoad];
+    [super viewWillLayoutSubviews];
     
-    self.firstNameTextField.delegate = self;
-    self.lastNameTextField.delegate = self;
-    self.emailTextField.delegate = self;
-    self.birthdateTextField.delegate = self;
-    self.nbrChildrenTextField.delegate = self;
-    
-    [self reloadData];
+    // Bindings are resolved at the last possible moment, when the view hierarchy is built. If we want to force an initial check,
+    // we need to do it afterwards
+    if (! _loadedOnce) {
+        [self checkBoundViewHierarchyWithError:NULL];
+        _loadedOnce = YES;
+    }
 }
 
 #pragma mark Localization
@@ -82,134 +65,60 @@
     
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
     
-    // The date formatter is also localized!
-    // TODO: Does not work yet. Try to switch languages! Should probably rebind!
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    NSDateFormatter *localizedDateFormatter = [[NSDateFormatter alloc] init];
+    [localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    
+    // Changing the date formatter object automatically triggers a bound view update
+    self.localizedDateFormatter = localizedDateFormatter;
     
     // Trigger a new validation to get localized error messages if any
-    [self checkTextFields];
+    [self checkBoundViewHierarchyWithError:NULL];
 }
 
 #pragma mark HLSValidable protocol implementation
 
 - (BOOL)validate
 {
-    return [self checkTextFields];
+    return [self checkBoundViewHierarchyWithError:NULL];
 }
 
-#pragma mark UITextFieldDelegate protocol implementation
+#pragma mark HLSBindingDelegate protocol implementation
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (void)boundView:(UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error
 {
-    if (textField == self.firstNameTextField) {
-        [self.lastNameTextField becomeFirstResponder];
-    }
-    else if (textField == self.lastNameTextField) {
-        [self.emailTextField becomeFirstResponder];
-    }
-    else if (textField == self.emailTextField) {
-        [self.birthdateTextField becomeFirstResponder];
-    }
-    else if (textField == self.birthdateTextField) {
-        [self.nbrChildrenTextField becomeFirstResponder];
-    }
-    else {
-        [textField resignFirstResponder];
-    }
+    boundView.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
     
-    return YES;
-}
-
-#pragma mark HLSTextFieldValidationDelegate protocol implementation
-
-- (void)textFieldDidFailFormatting:(UITextField *)textField
-{
-    textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
-    
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = NSLocalizedString(@"Formatting error", nil);
-}
-
-- (void)textFieldDidPassValidation:(UITextField *)textField
-{
-    textField.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
-    
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
-    errorLabel.text = nil;
-}
-
-- (void)textField:(UITextField *)textField didFailValidationWithError:(NSError *)error
-{
-    textField.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
-    
-    UILabel *errorLabel = [self errorLabelForTextField:textField];
+    UILabel *errorLabel = [self errorLabelForView:boundView];
     errorLabel.text = [error localizedDescription];
 }
 
-#pragma mark Updating the view
-
-- (void)reloadData
+- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object
 {
-    static NSNumberFormatter *s_numberFormatter = nil;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-        [s_numberFormatter setAllowsFloats:NO];
-    });
+    boundView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
     
-    [self.firstNameTextField bindToManagedObject:self.personInformation
-                                       fieldName:@"firstName"
-                                       formatter:nil
-                              validationDelegate:self];
-    [self.lastNameTextField bindToManagedObject:self.personInformation
-                                      fieldName:@"lastName"
-                                      formatter:nil
-                             validationDelegate:self];
-    [self.emailTextField bindToManagedObject:self.personInformation
-                                   fieldName:@"email"
-                                   formatter:nil
-                          validationDelegate:self];
-    [self.emailTextField setCheckingOnChange:YES];
-    [self.birthdateTextField bindToManagedObject:self.personInformation
-                                       fieldName:@"birthdate"
-                                       formatter:self.dateFormatter
-                              validationDelegate:self];
-    [self.birthdateTextField setCheckingOnChange:YES];
-    [self.nbrChildrenTextField bindToManagedObject:self.personInformation
-                                         fieldName:@"nbrChildren"
-                                         formatter:s_numberFormatter
-                                validationDelegate:self];
-    [self.nbrChildrenTextField setCheckingOnChange:YES];
-    
-    // Perform an initial complete validation
-    [self checkTextFields];
+    UILabel *errorLabel = [self errorLabelForView:boundView];
+    errorLabel.text = nil;
 }
 
-#pragma mark Retrieving the error label associated with a text field
-
-- (UILabel *)errorLabelForTextField:(UITextField *)textField
+- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error
 {
-    if (textField == self.firstNameTextField) {
-        return self.firstNameErrorLabel;
-    }
-    else if (textField == self.lastNameTextField) {
-        return self.lastNameErrorLabel;
-    }
-    else if (textField == self.emailTextField) {
-        return self.emailErrorLabel;
-    }
-    else if (textField == self.birthdateTextField) {
-        return self.birthdateErrorLabel;
-    }
-    else if (textField == self.nbrChildrenTextField) {
-        return self.nbrChildrenErrorLabel;
-    }
-    else {
-        HLSLoggerError(@"Unknown text field");
+    boundView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    
+    UILabel *errorLabel = [self errorLabelForView:boundView];
+    errorLabel.text = [error localizedDescription];
+}
+
+#pragma mark Retrieving the error label associated with a view
+
+- (UILabel *)errorLabelForView:(UIView *)view
+{
+    NSUInteger index = [self.textFields indexOfObject:view];
+    if (index == NSNotFound) {
         return nil;
     }
+    
+    NSAssert([self.textFields count] == [self.errorLabels count], @"Expect one label per text field");
+    return [self.errorLabels objectAtIndex:index];
 }
 
 #pragma mark Event callbacks
@@ -217,8 +126,6 @@
 - (IBAction)resetModel:(id)sender
 {
     // Reset the model programmatically. This shows that the text fields are updated accordingly
-    self.personInformation.firstName = nil;
-    self.personInformation.lastName = nil;
     self.personInformation.firstName = nil;
     self.personInformation.lastName = nil;
     self.personInformation.email = nil;
@@ -229,11 +136,9 @@
 - (IBAction)resetTextFields:(id)sender
 {
     // Reset text fields programmatically. This shows that the model is updated accordingly
-    self.firstNameTextField.text = nil;
-    self.lastNameTextField.text = nil;
-    self.emailTextField.text = nil;
-    self.birthdateTextField.text = nil;
-    self.nbrChildrenTextField.text = @"0";
+    for (UITextField *textField in self.textFields) {
+        textField.text = nil;
+    }
 }
 
 @end

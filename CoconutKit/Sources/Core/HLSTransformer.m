@@ -8,7 +8,9 @@
 
 #import "HLSTransformer.h"
 
+#import "HLSCoreError.h"
 #import "HLSLogger.h"
+#import "NSError+HLSExtensions.h"
 
 NSString *HLSStringFromBool(BOOL yesOrNo)
 {
@@ -132,7 +134,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
     return self.transformerBlock(object);
 }
 
-- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError **)pError
+- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError *__autoreleasing *)pError
 {
     if (! self.reverseBlock) {
         [self doesNotRecognizeSelector:_cmd];
@@ -145,7 +147,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 
 - (BOOL)respondsToSelector:(SEL)selector
 {
-    // Optional reverse transformation: Does not response if no available block
+    // Optional reverse transformation: Does not respond if no available block
     if (selector == @selector(getObject:fromObject:error:)) {
         return self.reverseBlock != nil;
     }
@@ -153,6 +155,58 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
     else {
         // See -[NSObject respondsToSelector:] documentation
         return [[self class] instancesRespondToSelector:selector];
+    }
+}
+
+@end
+
+@implementation HLSBlockTransformer (Adapters)
+
++ (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter
+{
+    return [self blockTransformerWithBlock:^(id object) {
+        return [formatter stringForObjectValue:object];
+    } reverseBlock:^(__autoreleasing id *pObject, NSString *string, NSError *__autoreleasing *pError) {
+        // For NSFormatter subclassess, calling -getObjectValue:forString:errorDescription: will crash for nil input strings, but
+        // interestingly do not crash and return nil when calling their specific -numberFromString: (for NSNumberFormatter) and
+        // -dateFromString: (for NSDateFormatter) methods. Check and apply the same behavior as those specific methods here. Since
+        // converting an empty string via NSNumberFormatter or NSDateFormatter returns YES -getObjectValue:forString:errorDescription:
+        // (the object returned by reference is nil), we also consider the conversion successful here, which makes sense
+        if ([string length] == 0) {
+            if (pObject) {
+                *pObject = nil;
+            }
+            return YES;
+        }
+        
+        NSString *errorDescription = nil;
+        BOOL result = [formatter getObjectValue:pObject forString:string errorDescription:&errorDescription];
+        if (! result && pError) {
+            *pError = [NSError errorWithDomain:HLSCoreErrorDomain
+                                          code:HLSCoreErrorTransformation
+                          localizedDescription:errorDescription];
+            
+        }
+        return result;
+    }];
+}
+
++ (instancetype)blockTransformerFromValueTransformer:(NSValueTransformer *)valueTransformer
+{
+    HLSTransformerBlock block = ^(id object) {
+        return [valueTransformer transformedValue:object];
+    };
+    
+    if ( [[valueTransformer class] allowsReverseTransformation]) {
+        return [HLSBlockTransformer blockTransformerWithBlock:block reverseBlock:^(__autoreleasing id *pObject, id fromObject, NSError *__autoreleasing *pError) {
+            if (pObject) {
+                *pObject = [valueTransformer reverseTransformedValue:fromObject];
+            }
+            return YES;
+        }];
+    }
+    else {
+        return [HLSBlockTransformer blockTransformerWithBlock:block reverseBlock:nil];
     }
 }
 
