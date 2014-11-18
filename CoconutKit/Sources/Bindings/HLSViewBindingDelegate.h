@@ -7,9 +7,8 @@
 //
 
 /**
- * Protocol to be implemented by classes whose instances want to be notified about binding events. Information
- * about the binding parameters can be obtained by accessing the bindingInformation property of the boundView
- * parameter
+ * Protocol to be implemented by classes whose instances want to show interest in receiving binding events. Information 
+ * about the binding arameters can be obtained by accessing the bindingInformation property of the boundView parameter
  */
 @protocol HLSViewBindingDelegate <NSObject>
 

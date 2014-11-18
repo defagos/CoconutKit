@@ -13,6 +13,7 @@
  *   - binds to NSNumber model values (booleans)
  *   - displays and updates the underlying model value
  *   - can animate updates
+ *   - check (if not disabled via bindInputChecked) and update the value each time it is changed
  */
 @interface UISwitch (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 

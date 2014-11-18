@@ -361,6 +361,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
 {
+    NSAssert(check || update, @"The method should at least check or update");
+        
     // Skip when triggered by view update implementations
     if (self.updatingView) {
         return YES;

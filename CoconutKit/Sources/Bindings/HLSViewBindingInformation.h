@@ -111,7 +111,7 @@
 @property (nonatomic, readonly, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
 
 /**
- * Check and / or update the model using current input value, as returned by -inputValue. Return YES iff successful,
+ * Check and / or update the model using the current input value, as returned by -inputValue. Return YES iff successful,
  * otherwise NO and error information. Fails if the view does not support input (supportingInput = NO). If both
  * check and update are made, failure to perform one does not prevent the other from being attempted
  */

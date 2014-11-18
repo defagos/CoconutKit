@@ -59,11 +59,11 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  *     pre-processed first (e.g. rounded), a transformer can optionally be provided (bindTransformer)
  *
  * These two string properties can be set either using Interface Builder (by far the recommended, most efficient way) or
- * programatically (for those who do not use Interface Builder):
+ * programmatically (for those who do not use Interface Builder):
  *   - Using Interface Builder: Select the view to bind, open its Attributes inspector, and set the 'Bind Key Path' and 
  *     'Bind Transformer' custom attributes. If you are using Interface Builder, you can literally bind a whole screen
  *     without the need to bind a single outlet!
- *   - Programatically : After having instantiated the view to bind, call -bindToKeyPath:withTransformer: on it
+ *   - programmatically : After having instantiated the view to bind, call -bindToKeyPath:withTransformer: on it
  *
  * To understand how to set these two properties, it is crucial to understand how binding information is resolved at 
  * runtime.

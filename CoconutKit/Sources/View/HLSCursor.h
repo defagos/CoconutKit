@@ -48,7 +48,7 @@
 @interface HLSCursor : UIView <HLSAnimationDelegate, HLSViewBindingImplementation>
 
 /**
- * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.
+ * The pointer view, which can either be set programmatically or using a xib. If nil, the default pointer will be used.
  * If you use a custom view, be sure it can stretch properly since the pointer view frame will be adjusted depending
  * on the element it is on. In general, your custom pointer view is likely to be transparent so that the element
  * below it can be seen.
