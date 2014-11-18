@@ -299,14 +299,14 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 /**
  * Set to YES to perform validation when the bound view content is changed
  *
- * The default value is NO. In this case, call -check:update:withCurrentinputValue:error: to manually trigger the check when
- * needed (the call can be made on a top view or view controller containing the receiver)
+ * The default value is NO. In this case, call -checkBoundViewHierarchyWithError: to manually trigger a check when
+ * needed
  */
 @property (nonatomic, assign, getter=isBindInputChecked) IBInspectable BOOL bindInputChecked;
 
 /**
  * Return YES iff binding is possible against the receiver. This method is provided for information purposes, trying
- * to bind a view which does not support bindings is safe but does not work
+ * to bind a view which does not support bindings is safe (i.e. won't crash) but does nothing
  */
 @property (nonatomic, readonly, assign, getter=isBindingSupported) BOOL bindingSupported;
 
@@ -324,9 +324,9 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 - (void)updateBoundViewHierarchy;
 
 /**
- * Check and / or update the value attached to the receiver and the whole view hierarchy rooted at it, stopping
- * at view controller boundaries. Errors are individually reported to the validation delegate, and chained as
- * a single error returned to the caller as well. The method returns YES iff all operations have been successful
+ * Check the value displayed by the receiver and the whole view hierarchy rooted at it, stopping at view controller
+ * boundaries. Errors are individually reported to the validation delegate, and chained as a single error returned 
+ * to the caller as well. The method returns YES iff all operations have been successful
  */
 - (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
 
@@ -335,8 +335,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 @interface UIView (HLSViewBindingProgrammatic)
 
 /**
- * Programmatically bind a view to a given keypath with a given transformer. This method can also be used
- * to change an existing binding (if the view is displayed, it will automatically be updated)
+ * Programmatically bind a view to a given keypath with a given transformer. This method can also be used to change 
+ * an existing binding (if the view is displayed, it will automatically be updated)
  */
 - (void)bindToKeyPath:(NSString *)keyPath withTransformer:(NSString *)transformer;
 
