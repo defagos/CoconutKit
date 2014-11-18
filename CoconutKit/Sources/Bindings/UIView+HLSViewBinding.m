@@ -37,7 +37,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 @property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
 
 - (void)updateBoundViewHierarchyAnimated:(NSNumber *)animated inViewController:(UIViewController *)viewController;
-- (BOOL)check:(BOOL)check update:(BOOL)update boundViewHierarchyInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
+- (BOOL)checkBoundViewHierarchyInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
 
 @end
 
@@ -96,9 +96,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self updateBoundViewHierarchyAnimated:nil inViewController:[self nearestViewController]];
 }
 
-- (BOOL)check:(BOOL)check update:(BOOL)update boundViewHierarchyWithError:(NSError *__autoreleasing *)pError
+- (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError
 {
-    return [self check:check update:update boundViewHierarchyInViewController:[self nearestViewController] withError:pError];
+    return [self checkBoundViewHierarchyInViewController:[self nearestViewController] withError:pError];
 }
 
 @end
@@ -175,7 +175,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     [self updateBoundViewAnimated:self.bindUpdateAnimated];
 }
 
-- (BOOL)check:(BOOL)check update:(BOOL)update boundViewHierarchyInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError
+- (BOOL)checkBoundViewHierarchyInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError
 {
     // Stop at view controller boundaries. The following also correctly deals with viewController = nil
     UIViewController *nearestViewController = self.nearestViewController;
@@ -186,14 +186,14 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
     BOOL success = YES;
     if (self.bindingInformation) {
         NSError *error = nil;
-        if (! [self.bindingInformation check:check update:update withError:&error]) {
+        if (! [self.bindingInformation check:YES update:NO withError:&error]) {
             success = NO;
             [NSError combineError:error withError:pError];
         }
     }
     
     for (UIView *subview in self.subviews) {
-        if (! [subview check:check update:update boundViewHierarchyInViewController:viewController withError:pError]) {
+        if (! [subview checkBoundViewHierarchyInViewController:viewController withError:pError]) {
             success = NO;
         }
     }

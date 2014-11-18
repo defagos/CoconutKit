@@ -270,7 +270,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * at view controller boundaries. Errors are individually reported to the validation delegate, and chained as
  * a single error returned to the caller as well. The method returns YES iff all operations have been successful
  */
-- (BOOL)check:(BOOL)check update:(BOOL)update boundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
+- (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
 
 @end
 

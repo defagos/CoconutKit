@@ -21,9 +21,9 @@
     [[self viewIfLoaded] updateBoundViewHierarchyAnimated:animated];
 }
 
-- (BOOL)check:(BOOL)check update:(BOOL)update boundViewHierarchyWithError:(NSError *__autoreleasing *)pError
+- (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError
 {
-    return [[self viewIfLoaded] check:check update:update boundViewHierarchyWithError:pError];
+    return [[self viewIfLoaded] checkBoundViewHierarchyWithError:pError];
 }
 
 @end

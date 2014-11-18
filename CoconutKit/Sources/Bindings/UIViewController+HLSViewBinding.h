@@ -10,6 +10,6 @@
 
 - (void)updateBoundViewHierarchyAnimated:(BOOL)animated;
 
-- (BOOL)check:(BOOL)check update:(BOOL)update boundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
+- (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
 
 @end
