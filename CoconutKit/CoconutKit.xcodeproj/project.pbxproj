@@ -283,10 +283,6 @@
 		6FCD33C31A1216690002F478 /* UITextField+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD33A11A1216690002F478 /* UITextField+HLSViewBinding.m */; };
 		6FCD33C41A1216690002F478 /* UITextView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCD33A21A1216690002F478 /* UITextView+HLSViewBinding.h */; };
 		6FCD33C51A1216690002F478 /* UITextView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD33A31A1216690002F478 /* UITextView+HLSViewBinding.m */; };
-		6FCD33C61A1216690002F478 /* UIWebView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCD33A41A1216690002F478 /* UIWebView+HLSViewBinding.h */; };
-		6FCD33C71A1216690002F478 /* UIWebView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD33A51A1216690002F478 /* UIWebView+HLSViewBinding.m */; };
-		6FCD33C81A1216690002F478 /* WKWebView+HLSViewBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCD33A61A1216690002F478 /* WKWebView+HLSViewBinding.h */; };
-		6FCD33C91A1216690002F478 /* WKWebView+HLSViewBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD33A71A1216690002F478 /* WKWebView+HLSViewBinding.m */; };
 		6FCD33D11A1216E30002F478 /* HLSViewBindingDebugOverlayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCD33CB1A1216E30002F478 /* HLSViewBindingDebugOverlayViewController.h */; };
 		6FCD33D21A1216E30002F478 /* HLSViewBindingDebugOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCD33CC1A1216E30002F478 /* HLSViewBindingDebugOverlayViewController.m */; };
 		6FCD33D31A1216E30002F478 /* HLSViewBindingInformationEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCD33CD1A1216E30002F478 /* HLSViewBindingInformationEntry.h */; };
@@ -620,10 +616,6 @@
 		6FCD33A11A1216690002F478 /* UITextField+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6FCD33A21A1216690002F478 /* UITextView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSViewBinding.h"; sourceTree = "<group>"; };
 		6FCD33A31A1216690002F478 /* UITextView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+HLSViewBinding.m"; sourceTree = "<group>"; };
-		6FCD33A41A1216690002F478 /* UIWebView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+HLSViewBinding.h"; sourceTree = "<group>"; };
-		6FCD33A51A1216690002F478 /* UIWebView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+HLSViewBinding.m"; sourceTree = "<group>"; };
-		6FCD33A61A1216690002F478 /* WKWebView+HLSViewBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+HLSViewBinding.h"; sourceTree = "<group>"; };
-		6FCD33A71A1216690002F478 /* WKWebView+HLSViewBinding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+HLSViewBinding.m"; sourceTree = "<group>"; };
 		6FCD33CB1A1216E30002F478 /* HLSViewBindingDebugOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingDebugOverlayViewController.h; sourceTree = "<group>"; };
 		6FCD33CC1A1216E30002F478 /* HLSViewBindingDebugOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewBindingDebugOverlayViewController.m; sourceTree = "<group>"; };
 		6FCD33CD1A1216E30002F478 /* HLSViewBindingInformationEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewBindingInformationEntry.h; sourceTree = "<group>"; };
@@ -677,7 +669,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F4D3DD919F6576C009718E4 /* WebKit.framework in Frameworks */,
 				6F63E7B617CF6B80006322D9 /* QuickLook.framework in Frameworks */,
 				6FAB921B16DA6FBA00599256 /* MobileCoreServices.framework in Frameworks */,
 				6F22C74D16A93D8C0081A9A7 /* CoreText.framework in Frameworks */,
@@ -686,6 +677,7 @@
 				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
 				6F8D0976123F53F500FCF2AF /* CoreGraphics.framework in Frameworks */,
 				6F8D09A1123F545D00FCF2AF /* UIKit.framework in Frameworks */,
+				6F4D3DD919F6576C009718E4 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1153,10 +1145,6 @@
 				6FCD33A11A1216690002F478 /* UITextField+HLSViewBinding.m */,
 				6FCD33A21A1216690002F478 /* UITextView+HLSViewBinding.h */,
 				6FCD33A31A1216690002F478 /* UITextView+HLSViewBinding.m */,
-				6FCD33A41A1216690002F478 /* UIWebView+HLSViewBinding.h */,
-				6FCD33A51A1216690002F478 /* UIWebView+HLSViewBinding.m */,
-				6FCD33A61A1216690002F478 /* WKWebView+HLSViewBinding.h */,
-				6FCD33A71A1216690002F478 /* WKWebView+HLSViewBinding.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -1228,7 +1216,6 @@
 				6FAD1BB719F4FAA200EA435A /* HLSSafariActivity.h in Headers */,
 				6FADE5A814BA0494007EE121 /* HLSKeyboardInformation.h in Headers */,
 				6FADE5AA14BA0494007EE121 /* HLSNotifications.h in Headers */,
-				6FCD33C81A1216690002F478 /* WKWebView+HLSViewBinding.h in Headers */,
 				6FADE5AE14BA0494007EE121 /* HLSRuntime.h in Headers */,
 				6FADE5B014BA0494007EE121 /* HLSUserInterfaceLock.h in Headers */,
 				6FADE5B214BA0494007EE121 /* HLSValidable.h in Headers */,
@@ -1281,7 +1268,6 @@
 				6FADE5F414BA0494007EE121 /* HLSTableViewCell+Protected.h in Headers */,
 				6FCD33B21A1216690002F478 /* UIPageControl+HLSViewBinding.h in Headers */,
 				6FADE5F514BA0494007EE121 /* HLSTableViewCell.h in Headers */,
-				6FCD33C61A1216690002F478 /* UIWebView+HLSViewBinding.h in Headers */,
 				6FADE5FD14BA0494007EE121 /* HLSValue1TableViewCell.h in Headers */,
 				6FADE5FF14BA0494007EE121 /* HLSValue2TableViewCell.h in Headers */,
 				6FADE60514BA0494007EE121 /* UIView+HLSExtensions.h in Headers */,
@@ -1630,10 +1616,8 @@
 				6FC40C591641D02A00398242 /* UISplitViewController+HLSExtensions.m in Sources */,
 				6F7A871116522C0A0030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */,
-				6FCD33C91A1216690002F478 /* WKWebView+HLSViewBinding.m in Sources */,
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,
-				6FCD33C71A1216690002F478 /* UIWebView+HLSViewBinding.m in Sources */,
 				6FFAB76D19DD8DA800A91997 /* HLSMAZeroingWeakRef.m in Sources */,
 				6FAB922A16DA7F9100599256 /* HLSFileURLConnection.m in Sources */,
 				6FB007DE1952D09B0082D915 /* HLSGeometry.m in Sources */,

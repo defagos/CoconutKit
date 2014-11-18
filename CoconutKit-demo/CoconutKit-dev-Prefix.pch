@@ -124,9 +124,7 @@
     #import "UIViewController+HLSExtensions.h"
     #import "UIViewController+HLSViewBinding.h"
     #import "UIWebView+HLSExtensions.h"
-    #import "UIWebView+HLSViewBinding.h"
     #import "UIWindow+HLSExtensions.h"
-    #import "WKWebView+HLSViewBinding.h"
 
     // Additional headers for the test target
 #ifdef COCONUTKIT_TESTS

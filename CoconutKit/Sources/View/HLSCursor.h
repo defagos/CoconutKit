@@ -7,6 +7,7 @@
 //
 
 #import "HLSAnimation.h"
+#import "UIView+HLSViewBindingImplementation.h"
 
 // Macros
 #define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
@@ -37,8 +38,14 @@
  *
  * Remark: If the cursor is placed inside a scroll view, you might need to set canCancelContentTouches on it so that
  *         dragging the pointer view can work as expected
+ *
+ * Binding support for HLSCursor:
+ *   - binds to NSNumber model values
+ *   - displays and updates the underlying model value
+ *   - can animate updates
+ *
  */
-@interface HLSCursor : UIView <HLSAnimationDelegate>
+@interface HLSCursor : UIView <HLSAnimationDelegate, HLSViewBindingImplementation>
 
 /**
  * The pointer view, which can either be set programatically or using a xib. If nil, the default pointer will be used.

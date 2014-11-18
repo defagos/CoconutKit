@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 };
 
 /**
- * This category adds Cocoa-inspired bindings to iOS
+ * Cocoa-inspired bindings on iOS
+ * ------------------------------
  *
  * CoconutKit bindings provide a convenient and efficient way to bind (thus the name) a view displayed on screen to 
  * an underlying model object, connected to it by a given key path. With no or very few lines of code, bindings 
@@ -41,27 +42,28 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * conversion of values, for display and / or input reading.
  *
  * One of the primary goals of CoconutKit bindings is to be able to define a binding with as few information as
- * possible. The remaining of the bindings properties is resolved and checked at runtime. This is why only key
- * path and transformers are in fact required to define a properly working binding.
+ * possible. The remaining of the bindings properties is resolved and checked at runtime. During binding resolution, 
+ * each bound view is assigned a status. This status can be examined using an in-app debugging interface, making 
+ * programmer error detection easy.
  *
- * During binding resolution, each bound view is assigned a status. This status can be examined using an in-app 
- * debugging interface, making programmer error detection easy.
+ * The next sections describe all aspects of bindings in more detail.
  *
  *
  *
  * 1. Binding definition
  * ---------------------
  * 
- * To define a binding, only two pieces of information are required:
- *   - The keypath to bind the view to (bindKeyPath)
- *   - If the value returned by the key path is not natively supported by the view, or if the value must be somehow
+ * To define a binding, only two pieces of information are needed:
+ *   - The keypath to bind the view to (bindKeyPath), which is required
+ *   - If the value returned by the key path is not natively supported by the view, or if the value must somehow be
  *     pre-processed first (e.g. rounded), a transformer can optionally be provided (bindTransformer)
  *
  * These two string properties can be set either using Interface Builder (by far the recommended, most efficient way) or
- * in code (for those who do not use Interface Builder):
+ * programatically (for those who do not use Interface Builder):
  *   - Using Interface Builder: Select the view to bind, open its Attributes inspector, and set the 'Bind Key Path' and 
- *     'Bind Transformer' custom attributes
- *   - In code: After having instantiated the view to bind, call -bindToKeyPath:withTransformer: on it
+ *     'Bind Transformer' custom attributes. If you are using Interface Builder, you can literally bind a whole screen
+ *     without the need to bind a single outlet!
+ *   - Programatically : After having instantiated the view to bind, call -bindToKeyPath:withTransformer: on it
  *
  * To understand how to set these two properties, it is crucial to understand how binding information is resolved at 
  * runtime.
@@ -89,7 +91,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  *
  * To ensure the lookup process can access the complete responder chain, bindings are resolved just after the view 
  * hierarchy has been built. The resolution process itself is made once for obvious performance reasons, and
- * its results are cached.
+ * its results are cached until the view is destroyed.
  *
  *
  *
@@ -107,7 +109,7 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * Note that keypaths containing operators are not KVO-compliant. If one or several of the underlying objects change,
  * associated bound views must be updated manually by calling -updateBoundViewHierarchy:. As its name suggests, this
  * method recursively traverses the view hierarchy, again stopping at view controller boundaries, to update the
- * all bound views located in it.
+ * value displayed by all bound views located in it.
  *
  *
  *
@@ -138,42 +140,51 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * A local transformer is specified by its method name, e.g. 'decimalNumberFormatter'. As for key path resolution, no
  * target onto which the method must be called is specified. Unlike key path resolution, though, local formatter 
  * resolution explores a slightly broader context, always from the most specific to the most generic:
- *   - The responder chain starting with the bound view parent, and stopping at view controller boundaries. At each 
- *     step instance methods are searched first, then class methods
- *   - If no match is found, the key path is examined to find where the end value comes from, which depends on the
- *     keypath syntax:
-         * Simple keypath 'name': The object found by key path resolving supplies the value. The transformer method
+ *   - First the responder chain starting with the bound view parent, and stopping at view controller boundaries. For 
+ *     each responder along the chain, a match is searched among instance methods first, then among class methods
+ *   - If no match is found, the key path is examined to perform lookup where the end value comes from. This depends 
+ *     on the keypath syntax:
+ *       * Simple keypath 'name': The object found by key path resolving supplies the value. The transformer method
  *         is searched among its instance methods, then among its class methods
  *       * Composed keypath 'object1.object2.name': Since object2 ultimately supplies the value, a transformer method
  *         is searched among its instance methods, then among its class methods
  *       * Keypath ending with an operator 'objects.@operator.name': Lookup extracts the first object from the objects
- *         list, and search the transformer method in its class methods only. It namely does not make sense to search
- *         for instance methods since objects in the collection are different. Moreover, lookup assumes that all 
- *         objects are instances of the same class
+ *         list, and searches the transformer method in its class methods only. It namely does not make sense to search
+ *         for instance methods since objects in the collection are different. Note that lookup assumes that all objects
+ *         are instances of the same class
  *
  * Rules for local transformer resolution are more complicated than the ones for key path resolution. In general,
  * though, you should simply remember them as follows:
  *   - Responder chain lookup, instance methods first, then class methods
  *   - Object supplying the end value, instance methods first (if applicable), then class methods
  *
- * For example, if the keypath is 'employee.birthdate', lookup looks along the responder chain first (class, then instance
- * methods), then on employee (class, then instance methods).
+ * For example:
+ *   - If the key path is 'age' and a local number transformer 'decimalNumberFormatter' is provided, lookup is made 
+ *     along the responder chain first, then on the object to which the key path has been bound (instance, then class 
+ *     methods)
+ *   - If the key path is 'employee.birthdate' and a local date transformer 'shortDateFormatter' is provided, lookup 
+ *     is made along the responder chain first (instance, then class methods), then on employee (instance, then class
+ *     methods)
+ *   - If the key path is 'company.employees.@avg.age' and a local number transformer 'decimalNumberFormatter 'is 
+ *     provided, lookup is made along the responder chain first (instance, then class methods), then on the first 
+ *     collection object, an employee (class methods only)
  *
  *
  * 4.2. Global transformer
  * -----------------------
  *
- * A global transformer is a class method of the form 'ClassName:methodName', e.g. 'GlobalTransformer:shortDateTransformer'
+ * A global transformer is a class name followed by a method name, separated by a colon, for example e.g. 
+ * 'GlobalTransformer:shortDateTransformer'. No resolution mechanism is needed, the method is simply checked for existence.
  *
  *
  *
- * 5. Bound views supporting input
- * -------------------------------
+ * 5. Input and validation
+ * -----------------------
  *
  * Some classes, e.g. UITextField or UISlider, naturally accepts user input. If bound to a key paths for which a setter
- * is available, CoconutKit bindings encure that interacting with such views automatically updates the underlying model.
+ * is available, CoconutKit bindings ensure that interacting with such views automatically updates the underlying model.
  *
- * Unlike display, though, input is error-prone. A value might need to be transformed but transformation can fail due to
+ * Unlike display, though, input is error-prone. A value might need to be transformed but transformation could fail due to
  * incorrect input. Even if correctly transformed, the resulting value might be incorrect according to some model validation
  * rules. Even updating the model objet can fail. All these events can be caught by a binding delegate.
  *
@@ -181,32 +192,79 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * 5.1. Binding delegate
  * ---------------------
  *
+ * A binding delegate must conform to the HLSViewBindingDelegate protocol, by which it shows interest in receiving binding
+ * events.
+ *
  * As for the key path, binding delegate resolution is performed along the responder chain, starting from the bound view
- * parent, and stopping at view controller boundaries. The first instance of a class conforming to the HLSViewBindingDelegate
- * protocol is automatically set to be the delegate of the bound view, and will receive success and failure events, depending
- * on which protocol methods are implemented.
+ * parent, and stopping at view controller boundaries. Along the way, the first object conforming to HLSViewBindingDelegate
+ * will be the binding delegate of the bound view.
  *
  *
- * 5.2. Validation and update
- * --------------------------
+ * 5.2. Validation
+ * ---------------
+ *
+ * Validation follows KVC conventions, and can be manually triggered by calling -[UIView checkBoundViewHierarchyWithError:]
+ * on a view. As its name suggests, this method validates all bound views located in the view hierarchy of the receiver. If
+ * the key path associated with a bound view points at an object / field pair for which a method
+ *
+ *    - (BOOL)validate<fieldName>:(<class> *)pValue error:(NSError *__autoreleasing *)pError
+ *
+ * is available, it will be automatically invoked. Validation events are received by a binding delegate (if any), which
+ * makes it possible to update the user interface appropriately, e.g. by displaying a message to the user.
+ *
+ * By default, validation must be triggered manually. By setting the bindInputChecked to YES on a bound view, though, input 
+ * can be validated automatically when the view changes.
  *
  *
  *
- *
- *
- *
- * 7. Natively supported views
+ * 6. Natively supported views
  * ---------------------------
+ * 
+ * Bindings are available for most UIKit classes:
+ *
+ *     UIActivityIndicatorView              UIPageControl                           UIStepper
+ *     UIDatePicker                         UIProgressView                          UISwitch
+ *     UIImageView                          UISegmentedControl                      UITextField
+ *     UILabel                              UISlider                                UITextView
+ *
+ * Refer to the corresponding <ClassName>+HLSViewBinding.h header file for more information about how these views
+ * support bindings.
+ *
+ * Moreover, CoconutKit HLSCursor supports bindings as well.
+ *
  *
  *
  * 8. Bindings for custom views
  * ----------------------------
+ *
+ * CoconutKit bindings can be enabled for your own classes with very little effort.
+ *
+ * See UIView+HLSViewBindingImplementation.h for more information
  *
  *
  *
  * 9. Debugging bindings
  * ---------------------
  *
+ * To identify bindings issues, a debugging overlay has been provided. This overlay can be displayed by calling the
+ * +[UIView showBindingsDebugOverlay] method. Either provide a button somewhere in your debug builds or pause the
+ * debugger and issue the following command:
+ *
+ *     (lldb) expr (void)[UIView showBindingsDebugOverlay]
+ *
+ * then resume the execution.
+ *
+ *
+ *
+ * 10. Performance considerations
+ * ------------------------------
+ *
+ * Binding resolution is kept minimal, but of course incurs an overhead I tried to keep small. For very deep view 
+ * hierarchies and a large number of fields to bind, the performance cost cannot be neglected, but in most practical 
+ * cases using bindings should not be a performance issue.
+ *
+ * Bindings can also be defined within collection or table view cells: When properly reused, only the few reused cells
+ * are initially bound. Cached information is then reused for fast updates during scrolling.
  *
  */
 @interface UIView (HLSViewBinding)
