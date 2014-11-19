@@ -163,7 +163,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     // Lazily check and fill binding information
-    [self verifyBindingInformation];
+    [self verify];
     
     id value = nil;
     if ([self canDisplayPlaceholder]) {
@@ -318,7 +318,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
         
         // We might now have enough information to fully verify binding information, if not already the case
-        [self verifyBindingInformation];
+        [self verify];
         
         self.updatingModel = NO;
     }
@@ -604,7 +604,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
-- (void)verifyBindingInformation
+- (void)verify
 {
     if (self.verified) {
         return;
