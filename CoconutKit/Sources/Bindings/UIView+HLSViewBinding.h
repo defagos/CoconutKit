@@ -107,8 +107,8 @@
  * the model and the bound view.
  *
  * Views namely define the set of types they want to natively support. For example, UILabel supports only NSString,
- * whereas UISlider can only work with NSNumber. UIImageView, on the other hand, supports UIImage, but also NSString
- * (image names or file paths) and NSURL (file paths).
+ * whereas UISlider can only work with NSNumber (and primitive types). UIImageView, on the other hand, supports 
+ * UIImage, but also NSString (image names or file paths) and NSURL (file paths).
  *
  * If the key path connecting the bound view to its underlying model returns a value with non-supported type, you 
  * must provide a transformer. A transformer is a method with no parameters returning an instance of either:

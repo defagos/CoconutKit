@@ -10,7 +10,7 @@
 
 /**
  * Binding support for UIProgressView:
- *   - binds to NSNumber model values
+ *   - binds to NSNumber (float) or float model values
  *   - displays the underlying model value, but cannot update it
  *   - can animate updates
  */
