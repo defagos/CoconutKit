@@ -289,10 +289,9 @@
     NSString *parentPath = [path stringByDeletingLastPathComponent];    
     if (! [self fileExistsAtPath:parentPath isDirectory:&isDirectory] || ! isDirectory) {
         if (pError) {
-            NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", parentPath];
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
                                           code:NSFileNoSuchFileError
-                          localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
+                          localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"The directory %@ does not exist", nil), parentPath]];
         }
         return NO;
     }
@@ -352,10 +351,9 @@
     id subitems = [self contentAtPath:path forItems:self.rootItems];
     if (! [subitems isKindOfClass:[NSDictionary class]]) {
         if (pError) {
-            NSString *errorMessage = [NSString stringWithFormat:@"The directory %@ does not exist", path];
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
                                           code:NSFileNoSuchFileError
-                          localizedDescription:CoconutKitLocalizedString(errorMessage, nil)];
+                          localizedDescription:[NSString stringWithFormat:CoconutKitLocalizedString(@"The directory %@ does not exist", nil), path]];
         }
         return nil;
     }

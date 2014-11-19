@@ -421,7 +421,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorObjectTargetNotFound
-                          localizedDescription:CoconutKitLocalizedString(@"No meaningful object target was found along the responder chain for the specified keypath (stopping at view controller boundaries)", nil)];
+                          localizedDescription:CoconutKitLocalizedString(@"No meaningful object target was found along the responder chain for the specified key path (stopping at view controller boundaries)", nil)];
         }
         return NO;
     }
