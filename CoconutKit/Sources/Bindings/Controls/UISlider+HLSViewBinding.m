@@ -19,8 +19,6 @@ static void (*s_UISlider__setValue_animated_Imp)(id, SEL, float, BOOL) = NULL;
 static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
 static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, float value, BOOL animated);
 
-// FIXME: Updates trigger two KVO change notifications. Should be better to have only one if possible
-
 @implementation UISlider (HLSViewBindingImplementation)
 
 #pragma mark Class methods
