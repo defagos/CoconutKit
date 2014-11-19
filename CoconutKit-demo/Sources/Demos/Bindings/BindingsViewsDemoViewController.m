@@ -41,7 +41,7 @@
 
 - (NSString *)numberOfEmployeesString
 {
-    return [NSString stringWithFormat:NSLocalizedString(@"%d employees", nil), [self.employees count]];
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ employees", nil), @([self.employees count])];
 }
 
 #pragma mark View lifecycle
