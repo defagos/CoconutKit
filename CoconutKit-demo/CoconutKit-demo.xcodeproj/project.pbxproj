@@ -57,6 +57,10 @@
 		6F04E3A81A1C885900C6C08B /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3A51A1C885900C6C08B /* UppercaseValueTransformer.m */; };
 		6F04E3AA1A1C886D00C6C08B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F04E3A91A1C886D00C6C08B /* WebKit.framework */; };
 		6F04E3AB1A1C888B00C6C08B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F04E3A91A1C886D00C6C08B /* WebKit.framework */; };
+		6F04E3AD1A1C8D1700C6C08B /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3AC1A1C8D1700C6C08B /* Employees.plist */; };
+		6F04E3AE1A1C8D1700C6C08B /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3AC1A1C8D1700C6C08B /* Employees.plist */; };
+		6F04E3B01A1C8D2100C6C08B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3AF1A1C8D2100C6C08B /* Launch Screen.xib */; };
+		6F04E3B11A1C8D2100C6C08B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3AF1A1C8D2100C6C08B /* Launch Screen.xib */; };
 		6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */; };
 		6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */; };
 		6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0BFE08163EED9F00420A5F /* RootSplitViewDemoController.m */; };
@@ -520,6 +524,8 @@
 		6F04E3A41A1C885900C6C08B /* UppercaseValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UppercaseValueTransformer.h; sourceTree = "<group>"; };
 		6F04E3A51A1C885900C6C08B /* UppercaseValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UppercaseValueTransformer.m; sourceTree = "<group>"; };
 		6F04E3A91A1C886D00C6C08B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		6F04E3AC1A1C8D1700C6C08B /* Employees.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Employees.plist; sourceTree = "<group>"; };
+		6F04E3AF1A1C8D2100C6C08B /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		6F0BFE00163EED8900420A5F /* RootNavigationDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationDemoViewController.h; sourceTree = "<group>"; };
 		6F0BFE01163EED8900420A5F /* RootNavigationDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationDemoViewController.m; sourceTree = "<group>"; };
 		6F0BFE02163EED8900420A5F /* RootNavigationDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootNavigationDemoViewController.xib; sourceTree = "<group>"; };
@@ -1630,6 +1636,7 @@
 		6F9C46A214C5C36300824AB2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6F04E3AF1A1C8D2100C6C08B /* Launch Screen.xib */,
 				6F468CAC19D2E7920021B95D /* DemoTable.strings */,
 				6F468CAE19D2E7920021B95D /* Localizable.strings */,
 				6F9C46A314C5C36300824AB2 /* Data */,
@@ -1643,6 +1650,7 @@
 		6F9C46A314C5C36300824AB2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				6F04E3AC1A1C8D1700C6C08B /* Employees.plist */,
 				6F9C46A414C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld */,
 			);
 			path = Data;
@@ -1924,6 +1932,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F04E3AE1A1C8D1700C6C08B /* Employees.plist in Resources */,
 				6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */,
 				6F9C465914C5C30C00824AB2 /* HeavyViewController.xib in Resources */,
 				6F9C465B14C5C30C00824AB2 /* LandscapeOnlyViewController.xib in Resources */,
@@ -1952,6 +1961,7 @@
 				6F04E3811A1C864000C6C08B /* BindingsPerformance1DemoViewController.xib in Resources */,
 				6F9C469914C5C30C00824AB2 /* WizardAddressPageViewController.xib in Resources */,
 				6F9C469D14C5C30C00824AB2 /* WizardIdentityPageViewController.xib in Resources */,
+				6F04E3B11A1C8D2100C6C08B /* Launch Screen.xib in Resources */,
 				6F9C46B914C5C36300824AB2 /* ProximaNova-Bold.otf in Resources */,
 				6F9C46BA14C5C36300824AB2 /* ProximaNova-Regular.otf in Resources */,
 				6F04E39D1A1C864000C6C08B /* EmployeeView.xib in Resources */,
@@ -2043,6 +2053,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F04E3AD1A1C8D1700C6C08B /* Employees.plist in Resources */,
 				6FCB4ECB1926651F00047AD3 /* FixedSizeViewController.xib in Resources */,
 				6FCB4ECC1926651F00047AD3 /* HeavyViewController.xib in Resources */,
 				6FCB4ECD1926651F00047AD3 /* LandscapeOnlyViewController.xib in Resources */,
@@ -2071,6 +2082,7 @@
 				6F04E3801A1C864000C6C08B /* BindingsPerformance1DemoViewController.xib in Resources */,
 				6FCB4EE51926651F00047AD3 /* WizardIdentityPageViewController.xib in Resources */,
 				6FCB4EE61926651F00047AD3 /* ProximaNova-Bold.otf in Resources */,
+				6F04E3B01A1C8D2100C6C08B /* Launch Screen.xib in Resources */,
 				6FCB4EE71926651F00047AD3 /* ProximaNova-Regular.otf in Resources */,
 				6FCB4EE81926651F00047AD3 /* sample_text.html in Resources */,
 				6F04E39C1A1C864000C6C08B /* EmployeeView.xib in Resources */,
