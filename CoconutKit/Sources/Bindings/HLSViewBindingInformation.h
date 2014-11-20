@@ -26,13 +26,13 @@
 
 /**
  * Return the current value corresponding to the stored binding information (the transformer method is applied, if any). 
- * If keypath information is unverified or invalid, the method returns nil
+ * The method returns nil if the bound object has not been resolved yet
  */
 - (id)value;
 
 /**
  * The plain value retrieved from the bound object, without any transformation, nil if the bound object has not been
- * resolved yet
+ * resolved yet, or if the view cannot display it
  */
 - (id)rawValue;
 

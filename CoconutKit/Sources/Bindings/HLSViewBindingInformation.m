@@ -107,12 +107,13 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (id)value
 {
-    if (! self.verified || self.error) {
+    if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
         return nil;
     }
     
-    id value = [self.objectTarget valueForKeyPath:self.keyPath];
-    return self.transformer ? [self.transformer transformObject:value] : value;
+    id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
+    id value = self.transformer ? [self.transformer transformObject:rawValue] : rawValue;
+    return [self canDisplayValue:value] ? value : nil;
 }
 
 - (id)rawValue
