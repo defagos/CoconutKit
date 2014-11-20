@@ -39,6 +39,8 @@
 
 @property (nonatomic, weak) IBOutlet HLSCursor *cursor;
 
+@property (nonatomic, readonly, strong) UIImage *apple1Image;
+
 @end
 
 @implementation BindingsControlsDemoViewController

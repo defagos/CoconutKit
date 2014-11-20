@@ -720,7 +720,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                     // Even if the view is compatible, we have no way to tell a transformer is not missing
                     self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                                      code:HLSViewBindingErrorMissingType
-                                     localizedDescription:@"Type information is not available. Cannot tell if a transformer is missing, "
+                                     localizedDescription:@"Type information is not available. We cannot tell if a transformer is missing, "
                                   "be careful. If you can, bind to a property instead of a getter / setter pair to get reliable type checking"];
                     return;
                 }
