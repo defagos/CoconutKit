@@ -44,6 +44,11 @@
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.bindingInformation = bindingInformation;
         
+        self.title = @"Properties";
+        
+        self.headerTitles = @[@"Status", @"Capabilities", @"Parameters", @"Resolved information", @"Values"];
+        self.footerTitles = @[[NSNull null], [NSNull null], [NSNull null], @"Tap to highlight objects", [NSNull null]];
+        
         __weak __typeof(self) weakSelf = self;
         if ([bindingInformation.keyPath rangeOfString:@"@"].length == 0) {
             [bindingInformation.objectTarget addObserver:self keyPath:bindingInformation.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
@@ -65,33 +70,18 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    
     if (! self.popoverController) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                               target:self
                                                                                               action:@selector(close:)];
     }
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Help", nil)
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Help"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(showHelp:)];
     
     [self reloadData];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Properties", nil);
-    
-    self.headerTitles = @[NSLocalizedString(@"Status", nil), NSLocalizedString(@"Capabilities", nil), NSLocalizedString(@"Parameters", nil),
-                          NSLocalizedString(@"Resolved information", nil), NSLocalizedString(@"Values", nil)];
-    self.footerTitles = @[[NSNull null], [NSNull null], [NSNull null], NSLocalizedString(@"Tap to highlight objects", nil), [NSNull null]];
-    [self reloadEntries];
 }
 
 #pragma mark Data
@@ -100,10 +90,10 @@
 {
     NSMutableArray *statusEntries = [NSMutableArray array];
     
-    NSString *defaultStatusString = self.bindingInformation.verified ? CoconutKitLocalizedString(@"The binding information is valid", nil) : CoconutKitLocalizedString(@"The binding information has not been fully verified yet", nil);
+    NSString *defaultStatusString = self.bindingInformation.verified ? @"The binding information is valid" : @"The binding information has not been fully verified yet";
     NSString *statusString = self.bindingInformation.error ? [self.bindingInformation.error localizedDescription] : defaultStatusString;
     
-    HLSViewBindingInformationEntry *statusEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Status", nil)
+    HLSViewBindingInformationEntry *statusEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Status"
                                                                                                   text:statusString];
     [statusEntries addObject:statusEntry];
     
@@ -114,16 +104,16 @@
 {
     NSMutableArray *capabilitiesEntries = [NSMutableArray array];
     
-    HLSViewBindingInformationEntry *supportingInputEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Supports input", nil)
+    HLSViewBindingInformationEntry *supportingInputEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Supports input"
                                                                                                            text:HLSStringFromBool(self.bindingInformation.supportingInput)];
     [capabilitiesEntries addObject:supportingInputEntry];
     
-    HLSViewBindingInformationEntry *viewUpdatedAutomaticallyEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"View updated automatically", nil)
+    HLSViewBindingInformationEntry *viewUpdatedAutomaticallyEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"View updated automatically"
                                                                                                                     text:HLSStringFromBool(self.bindingInformation.viewAutomaticallyUpdated)];
     [capabilitiesEntries addObject:viewUpdatedAutomaticallyEntry];
     
     if (self.bindingInformation.supportingInput) {
-        HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Model updated automatically", nil)
+        HLSViewBindingInformationEntry *canUpdateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Model updated automatically"
                                                                                                          text:HLSStringFromBool(self.bindingInformation.modelAutomaticallyUpdated)];
         [capabilitiesEntries addObject:canUpdateEntry];
     }
@@ -135,20 +125,20 @@
 {
     NSMutableArray *parameterEntries = [NSMutableArray array];
     
-    HLSViewBindingInformationEntry *keyPathEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Key path", nil)
+    HLSViewBindingInformationEntry *keyPathEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Key path"
                                                                                                    text:self.bindingInformation.keyPath];
     [parameterEntries addObject:keyPathEntry];
     
-    HLSViewBindingInformationEntry *transformerNameEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Transformer name", nil)
+    HLSViewBindingInformationEntry *transformerNameEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Transformer name"
                                                                                                            text:self.bindingInformation.transformerName];
     [parameterEntries addObject:transformerNameEntry];
     
-    HLSViewBindingInformationEntry *bindUpdateAnimatedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Animates updates", nil)
+    HLSViewBindingInformationEntry *bindUpdateAnimatedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Animates updates"
                                                                                                               text:HLSStringFromBool(self.bindingInformation.view.bindUpdateAnimated)];
     [parameterEntries addObject:bindUpdateAnimatedEntry];
     
     if (self.bindingInformation.supportingInput) {
-        HLSViewBindingInformationEntry *bindInputCheckedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Automatically checks input", nil)
+        HLSViewBindingInformationEntry *bindInputCheckedEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Automatically checks input"
                                                                                                                 text:HLSStringFromBool(self.bindingInformation.view.bindInputChecked)];
         [parameterEntries addObject:bindInputCheckedEntry];
     }
@@ -160,16 +150,16 @@
 {
     NSMutableArray *resolvedInformationEntries = [NSMutableArray array];
     
-    HLSViewBindingInformationEntry *objectTargetEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved bound object", nil)
+    HLSViewBindingInformationEntry *objectTargetEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Resolved bound object"
                                                                                                       object:self.bindingInformation.objectTarget];
     [resolvedInformationEntries addObject:objectTargetEntry];
     
-    HLSViewBindingInformationEntry *delegateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved binding delegate", nil)
+    HLSViewBindingInformationEntry *delegateEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Resolved binding delegate"
                                                                                                   object:self.bindingInformation.delegate];
     [resolvedInformationEntries addObject:delegateEntry];
 
     if (self.bindingInformation.transformerName) {
-        HLSViewBindingInformationEntry *transformationTargetEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation target", nil)
+        HLSViewBindingInformationEntry *transformationTargetEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Resolved transformation target"
                                                                                                                   object:self.bindingInformation.transformationTarget];
         [resolvedInformationEntries addObject:transformationTargetEntry];
         
@@ -182,7 +172,7 @@
             transformationSelectorString = @"-";
         }
         
-        HLSViewBindingInformationEntry *transformationSelectorEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Resolved transformation selector", nil)
+        HLSViewBindingInformationEntry *transformationSelectorEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Resolved transformation selector"
                                                                                                                       text:transformationSelectorString];
         [resolvedInformationEntries addObject:transformationSelectorEntry];
     }
@@ -195,16 +185,16 @@
     NSMutableArray *valueEntries = [NSMutableArray array];
     
     if (self.bindingInformation.supportingInput) {
-        HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Input value", nil)
+        HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Input value"
                                                                                                         object:[self.bindingInformation inputValue]];
         [valueEntries addObject:inputValueEntry];
     }
     
-    HLSViewBindingInformationEntry *rawValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Raw value", nil)
+    HLSViewBindingInformationEntry *rawValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Raw value"
                                                                                                   object:[self.bindingInformation rawValue]];
     [valueEntries addObject:rawValueEntry];
     
-    HLSViewBindingInformationEntry *valueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:CoconutKitLocalizedString(@"Transformed value", nil)
+    HLSViewBindingInformationEntry *valueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Transformed value"
                                                                                                object:[self.bindingInformation value]];
     [valueEntries addObject:valueEntry];
     

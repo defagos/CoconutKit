@@ -34,7 +34,10 @@
 
 - (instancetype)init
 {
-    return [self initWithBundle:[NSBundle coconutKitBundle]];
+    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
+        self.title = @"Help";
+    }
+    return self;
 }
 
 #pragma mark View lifecycle
@@ -67,15 +70,6 @@
     [super viewDidAppear:animated];
     
     [self.scrollView flashScrollIndicators];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = NSLocalizedString(@"Help", nil);
 }
 
 @end

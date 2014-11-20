@@ -211,7 +211,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         else {
             detailedError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                                 code:HLSViewBindingErrorTransformation
-                                localizedDescription:CoconutKitLocalizedString(@"No reverse transformation is available", nil)];
+                                localizedDescription:@"No reverse transformation is available"];
             success = NO;
         }
         
@@ -227,7 +227,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         else {
             error = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                         code:HLSViewBindingErrorTransformation
-                        localizedDescription:CoconutKitLocalizedString(@"Incorrect format", nil)];
+                        localizedDescription:@"Incorrect format"];
             [error setUnderlyingError:detailedError];
             
             if ([self.delegate respondsToSelector:@selector(boundView:transformationDidFailWithObject:error:)]) {
@@ -299,7 +299,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         
         if (! self.modelAutomaticallyUpdated) {
             @throw [NSException exceptionWithName:NSUndefinedKeyException
-                                           reason:CoconutKitLocalizedString(@"The model does not support updates", nil)
+                                           reason:@"The model does not support updates"
                                          userInfo:nil];
         }
         
@@ -326,7 +326,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if ([exception.name isEqualToString:NSUndefinedKeyException]) {
             NSError *error = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                                  code:HLSViewBindingErrorUnsupportedOperation
-                                 localizedDescription:CoconutKitLocalizedString(@"The value cannot be updated", nil)];
+                                 localizedDescription:@"The value cannot be updated"];
             NSError *detailedError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                                          code:HLSViewBindingErrorUnsupportedOperation
                                          localizedDescription:exception.reason];
@@ -373,7 +373,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorUnsupportedOperation
-                          localizedDescription:CoconutKitLocalizedString(@"The view does not support input", nil)];
+                          localizedDescription:@"The view does not support input"];
         }
         return NO;
     }
@@ -382,7 +382,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorUnsupportedType
-                          localizedDescription:CoconutKitLocalizedString(@"The type of the input value is not supported", nil)];
+                          localizedDescription:@"The type of the input value is not supported"];
         }
         return NO;
     }
@@ -421,7 +421,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorObjectTargetNotFound
-                          localizedDescription:CoconutKitLocalizedString(@"No meaningful object target was found along the responder chain for the specified key path (stopping at view controller boundaries)", nil)];
+                          localizedDescription:@"No meaningful object target was found along the responder chain for "
+                       "the specified key path (stopping at view controller boundaries)"];
         }
         return NO;
     }
@@ -466,7 +467,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer name syntax is invalid", nil)];
+                          localizedDescription:@"The specified transformer name syntax is invalid"];
         }
         return NO;
     }
@@ -481,7 +482,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                               code:HLSViewBindingErrorInvalidTransformer
-                              localizedDescription:CoconutKitLocalizedString(@"The specified transformer name points to an invalid class", nil)];
+                              localizedDescription:@"The specified transformer name points to an invalid class"];
             }
             return NO;
         }
@@ -492,7 +493,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                               code:HLSViewBindingErrorInvalidTransformer
-                              localizedDescription:CoconutKitLocalizedString(@"The specified global transformer method does not exist", nil)];
+                              localizedDescription:@"The specified global transformer method does not exist"];
             }
             return NO;
         }
@@ -504,7 +505,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                               code:HLSViewBindingErrorInvalidTransformer
-                              localizedDescription:CoconutKitLocalizedString(@"The specified transformer method name is invalid", nil)];
+                              localizedDescription:@"The specified transformer method name is invalid"];
             }
             return NO;
         }
@@ -557,9 +558,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer is neither a valid global transformer, "
-                                                                         "nor could be resolved along the responder chain (stopping at view "
-                                                                         "controller boundaries) or on the parent object", nil)];
+                          localizedDescription:@"The specified transformer is neither a valid global transformer, "
+                       "nor could be resolved along the responder chain (stopping at view controller boundaries) or on "
+                       "the parent object"];
         }
         return NO;
     }
@@ -595,8 +596,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorInvalidTransformer
-                          localizedDescription:CoconutKitLocalizedString(@"The specified transformer must either be an HLSTransformer, NSFormatter "
-                                                                         "or NSValueTransformer instance", nil)];
+                          localizedDescription:@"The specified transformer must either be an HLSTransformer, NSFormatter "
+                       "or NSValueTransformer instance"];
         }
         return NO;
     }
@@ -683,7 +684,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (! inputValue) {
             self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                              code:HLSViewBindingErrorNilValue
-                             localizedDescription:CoconutKitLocalizedString(@"Type compliance cannot be verified yet since the value to display is nil", nil)];
+                             localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
             return;
         }
         
@@ -691,21 +692,21 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
         }
         else {
-            NSString *localizedDescription = nil;
+            NSString *description = nil;
             
             if (self.transformer) {
-                localizedDescription = [NSString stringWithFormat:CoconutKitLocalizedString(@"The transformer must return one of the following "
-                                                                                            "supported types: %@", nil), [self supportedBindingClassesString]];
+                description = [NSString stringWithFormat:@"The transformer must return one of the following "
+                               "supported types: %@", [self supportedBindingClassesString]];
             }
             else {
-                localizedDescription = [NSString stringWithFormat:CoconutKitLocalizedString(@"The keypath must return one of the following supported types: %@. Fix the return type "
-                                                                                            "or use a transformer", nil), [self supportedBindingClassesString]];
+                description = [NSString stringWithFormat:@"The keypath must return one of the following supported "
+                               "types: %@. Fix the return type or use a transformer", [self supportedBindingClassesString]];
             }
             
             self.verified = YES;
             self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                              code:HLSViewBindingErrorUnsupportedType
-                             localizedDescription:localizedDescription];
+                             localizedDescription:description];
             return;
         }
     }
