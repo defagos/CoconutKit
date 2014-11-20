@@ -427,29 +427,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         return NO;
     }
     
-    // Verify setter existence (-set<name> according to KVO compliance rules). Keypaths containing operators cannot
-    // be set
-    // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
-    if (self.supportingInput) {
-        if ([self.keyPath rangeOfString:@"@"].length == 0) {
-            id setterObject = nil;
-            NSString *setterName = nil;
-            
-            NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
-            if ([keyPathComponents count] > 1) {
-                NSString *setObjectKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
-                setterObject = [objectTarget valueForKeyPath:setObjectKeyPath];
-                setterName = [keyPathComponents lastObject];
-            }
-            else {
-                setterObject = objectTarget;
-                setterName = [NSString stringWithFormat:@"set%@:", [self.keyPath stringByReplacingCharactersInRange:NSMakeRange(0, 1)
-                                                                                                         withString:[[self.keyPath substringToIndex:1] uppercaseString]]];
-            }
-            self.modelAutomaticallyUpdated = [setterObject respondsToSelector:NSSelectorFromString(setterName)];
-        }
-    }
-    
     if (pObjectTarget) {
         *pObjectTarget = objectTarget;
     }
@@ -622,6 +599,29 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if ([self resolveObjectTarget:&objectTarget withError:&error]) {
             self.status |= HLSViewBindingStatusObjectTargetResolved;
             self.objectTarget = objectTarget;
+            
+            // Verify setter existence (-set<name> according to KVO compliance rules). Keypaths containing operators cannot
+            // be set
+            // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
+            if (self.supportingInput) {
+                if ([self.keyPath rangeOfString:@"@"].length == 0) {
+                    id setterObject = nil;
+                    NSString *setterName = nil;
+                    
+                    NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
+                    if ([keyPathComponents count] > 1) {
+                        NSString *setObjectKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
+                        setterObject = [objectTarget valueForKeyPath:setObjectKeyPath];
+                        setterName = [keyPathComponents lastObject];
+                    }
+                    else {
+                        setterObject = objectTarget;
+                        setterName = [NSString stringWithFormat:@"set%@:", [self.keyPath stringByReplacingCharactersInRange:NSMakeRange(0, 1)
+                                                                                                                 withString:[[self.keyPath substringToIndex:1] uppercaseString]]];
+                    }
+                    self.modelAutomaticallyUpdated = [setterObject respondsToSelector:NSSelectorFromString(setterName)];
+                }
+            }
         }
         else {
             self.verified = YES;
@@ -695,12 +695,12 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             NSString *description = nil;
             
             if (self.transformer) {
-                description = [NSString stringWithFormat:@"The transformer must return one of the following "
-                               "supported types: %@", [self supportedBindingClassesString]];
+                description = [NSString stringWithFormat:@"The transformer must return one of the following supported "
+                               "types: %@", [self supportedBindingClassesString]];
             }
             else {
-                description = [NSString stringWithFormat:@"The keypath must return one of the following supported "
-                               "types: %@. Fix the return type or use a transformer", [self supportedBindingClassesString]];
+                description = [NSString stringWithFormat:@"The keypath must return one of the following supported types: "
+                               "%@. Fix the return type or use a transformer", [self supportedBindingClassesString]];
             }
             
             self.verified = YES;
