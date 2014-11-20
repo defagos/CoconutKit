@@ -513,17 +513,33 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         transformationTarget = [HLSViewBindingInformation transformationTargetForSelector:transformationSelector view:self.view];
         if (! transformationTarget) {
             // Locate the last object in the key path
-            id lastKeyPathObject = nil;
-            [self lastKeyPathObject:&lastKeyPathObject methodName:NULL];
+            NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
             
+            // Simple key path field
+            id lastKeyPathObject = nil;
+            if ([keyPathComponents count] == 1) {
+                lastKeyPathObject = self.objectTarget;
+            }
+            // Key path ending with an operator. Extract objects onto which the key path is applied
+            else if ([keyPathComponents count] >= 2 && [[keyPathComponents objectAtIndex:[keyPathComponents count] - 2] hasPrefix:@"@"]) {
+                NSString *lastObjectsKeyPath = [[[keyPathComponents arrayByRemovingLastObject] arrayByRemovingLastObject] componentsJoinedByString:@"."];
+                lastKeyPathObject = [self.objectTarget valueForKeyPath:lastObjectsKeyPath];
+            }
+            // Composed key path object1.object2.(...).field
+            else {
+                NSString *lastObjectsKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
+                lastKeyPathObject = [self.objectTarget valueForKeyPath:lastObjectsKeyPath];
+            }
+            
+            // Last key path points to an object collection. Assume all objects in the collection have the same type.
+            // Since we have no outstanding object, we only look at class methods
             if ([lastKeyPathObject respondsToSelector:@selector(objectEnumerator)]) {
-                // Only look for a class method since we have no single object here, but a collection. We assume that all
-                // objects in the collection have the same type
                 id object = [[lastKeyPathObject objectEnumerator] nextObject];
                 if ([[object class] respondsToSelector:transformationSelector]) {
                     transformationTarget = [object class];
                 }
             }
+            // Last key path points to a single object
             else {
                 // Look for an instance method on the object
                 if ([lastKeyPathObject respondsToSelector:transformationSelector]) {
@@ -837,36 +853,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
     }
     return nil;
-}
-
-#pragma mark Key path last target extraction
-
-- (void)lastKeyPathObject:(id *)pLastKeyPathObject methodName:(NSString **)pMethodName
-{
-    NSAssert(self.objectTarget != nil, @"Object target must be resolved first");
-    
-    NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
-    
-    if (pLastKeyPathObject) {
-        // Simple key path field
-        if ([keyPathComponents count] == 1) {
-            *pLastKeyPathObject = self.objectTarget;
-        }
-        // Key path ending with an operator. Extract objects onto which the key path is applied
-        else if ([keyPathComponents count] >= 2 && [[keyPathComponents objectAtIndex:[keyPathComponents count] - 2] hasPrefix:@"@"]) {
-            NSString *lastObjectsKeyPath = [[[keyPathComponents arrayByRemovingLastObject] arrayByRemovingLastObject] componentsJoinedByString:@"."];
-            *pLastKeyPathObject = [self.objectTarget valueForKeyPath:lastObjectsKeyPath];
-        }
-        // Composed key path object1.object2.(...).field
-        else {
-            NSString *lastObjectsKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
-            *pLastKeyPathObject = [self.objectTarget valueForKeyPath:lastObjectsKeyPath];
-        }
-    }
-    
-    if (pMethodName) {
-        *pMethodName = [keyPathComponents lastObject];
-    }
 }
 
 #pragma mark Description
