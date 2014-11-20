@@ -28,10 +28,10 @@
 		6F04E3851A1C864000C6C08B /* BindingsPerformance2DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3621A1C864000C6C08B /* BindingsPerformance2DemoViewController.xib */; };
 		6F04E3861A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3641A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m */; };
 		6F04E3871A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3641A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m */; };
-		6F04E3881A1C864000C6C08B /* BindingsTransformersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3661A1C864000C6C08B /* BindingsTransformersViewController.m */; };
-		6F04E3891A1C864000C6C08B /* BindingsTransformersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3661A1C864000C6C08B /* BindingsTransformersViewController.m */; };
-		6F04E38A1A1C864000C6C08B /* BindingsTransformersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3671A1C864000C6C08B /* BindingsTransformersViewController.xib */; };
-		6F04E38B1A1C864000C6C08B /* BindingsTransformersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3671A1C864000C6C08B /* BindingsTransformersViewController.xib */; };
+		6F04E3881A1C864000C6C08B /* BindingsTransformersDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3661A1C864000C6C08B /* BindingsTransformersDemoViewController.m */; };
+		6F04E3891A1C864000C6C08B /* BindingsTransformersDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3661A1C864000C6C08B /* BindingsTransformersDemoViewController.m */; };
+		6F04E38A1A1C864000C6C08B /* BindingsTransformersDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3671A1C864000C6C08B /* BindingsTransformersDemoViewController.xib */; };
+		6F04E38B1A1C864000C6C08B /* BindingsTransformersDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3671A1C864000C6C08B /* BindingsTransformersDemoViewController.xib */; };
 		6F04E38C1A1C864000C6C08B /* BindingsViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3691A1C864000C6C08B /* BindingsViewsDemoViewController.m */; };
 		6F04E38D1A1C864000C6C08B /* BindingsViewsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3691A1C864000C6C08B /* BindingsViewsDemoViewController.m */; };
 		6F04E38E1A1C864000C6C08B /* BindingsViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E36A1A1C864000C6C08B /* BindingsViewsDemoViewController.xib */; };
@@ -502,9 +502,9 @@
 		6F04E3621A1C864000C6C08B /* BindingsPerformance2DemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsPerformance2DemoViewController.xib; sourceTree = "<group>"; };
 		6F04E3631A1C864000C6C08B /* BindingsProgrammaticDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsProgrammaticDemoViewController.h; sourceTree = "<group>"; };
 		6F04E3641A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsProgrammaticDemoViewController.m; sourceTree = "<group>"; };
-		6F04E3651A1C864000C6C08B /* BindingsTransformersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsTransformersViewController.h; sourceTree = "<group>"; };
-		6F04E3661A1C864000C6C08B /* BindingsTransformersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsTransformersViewController.m; sourceTree = "<group>"; };
-		6F04E3671A1C864000C6C08B /* BindingsTransformersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsTransformersViewController.xib; sourceTree = "<group>"; };
+		6F04E3651A1C864000C6C08B /* BindingsTransformersDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsTransformersDemoViewController.h; sourceTree = "<group>"; };
+		6F04E3661A1C864000C6C08B /* BindingsTransformersDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsTransformersDemoViewController.m; sourceTree = "<group>"; };
+		6F04E3671A1C864000C6C08B /* BindingsTransformersDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsTransformersDemoViewController.xib; sourceTree = "<group>"; };
 		6F04E3681A1C864000C6C08B /* BindingsViewsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsViewsDemoViewController.h; sourceTree = "<group>"; };
 		6F04E3691A1C864000C6C08B /* BindingsViewsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsViewsDemoViewController.m; sourceTree = "<group>"; };
 		6F04E36A1A1C864000C6C08B /* BindingsViewsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsViewsDemoViewController.xib; sourceTree = "<group>"; };
@@ -948,9 +948,9 @@
 				6F04E3621A1C864000C6C08B /* BindingsPerformance2DemoViewController.xib */,
 				6F04E3631A1C864000C6C08B /* BindingsProgrammaticDemoViewController.h */,
 				6F04E3641A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m */,
-				6F04E3651A1C864000C6C08B /* BindingsTransformersViewController.h */,
-				6F04E3661A1C864000C6C08B /* BindingsTransformersViewController.m */,
-				6F04E3671A1C864000C6C08B /* BindingsTransformersViewController.xib */,
+				6F04E3651A1C864000C6C08B /* BindingsTransformersDemoViewController.h */,
+				6F04E3661A1C864000C6C08B /* BindingsTransformersDemoViewController.m */,
+				6F04E3671A1C864000C6C08B /* BindingsTransformersDemoViewController.xib */,
 				6F04E3681A1C864000C6C08B /* BindingsViewsDemoViewController.h */,
 				6F04E3691A1C864000C6C08B /* BindingsViewsDemoViewController.m */,
 				6F04E36A1A1C864000C6C08B /* BindingsViewsDemoViewController.xib */,
@@ -1987,7 +1987,7 @@
 				6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */,
 				6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */,
 				6FA9B0A414F8E765008B6D5A /* img_apple1.jpg in Resources */,
-				6F04E38B1A1C864000C6C08B /* BindingsTransformersViewController.xib in Resources */,
+				6F04E38B1A1C864000C6C08B /* BindingsTransformersDemoViewController.xib in Resources */,
 				6F04E37D1A1C864000C6C08B /* BindingsFailuresDemoViewController.xib in Resources */,
 				6FA9B0A514F8E765008B6D5A /* img_apple2.jpg in Resources */,
 				6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */,
@@ -2108,7 +2108,7 @@
 				6FCB4EF81926651F00047AD3 /* ParallaxScrollingDemoViewController.xib in Resources */,
 				6FCB4EF91926651F00047AD3 /* img_apple1.jpg in Resources */,
 				6FCB4EFA1926651F00047AD3 /* img_apple2.jpg in Resources */,
-				6F04E38A1A1C864000C6C08B /* BindingsTransformersViewController.xib in Resources */,
+				6F04E38A1A1C864000C6C08B /* BindingsTransformersDemoViewController.xib in Resources */,
 				6F04E37C1A1C864000C6C08B /* BindingsFailuresDemoViewController.xib in Resources */,
 				6FCB4EFB1926651F00047AD3 /* img_apple3.jpg in Resources */,
 				6FCB4EFC1926651F00047AD3 /* img_apple4.jpg in Resources */,
@@ -2199,7 +2199,7 @@
 				6F04E3771A1C864000C6C08B /* BindingsControlsDemoViewController.m in Sources */,
 				6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */,
 				6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */,
-				6F04E3891A1C864000C6C08B /* BindingsTransformersViewController.m in Sources */,
+				6F04E3891A1C864000C6C08B /* BindingsTransformersDemoViewController.m in Sources */,
 				6F04E3A31A1C865E00C6C08B /* DemoTransformer.m in Sources */,
 				6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */,
 				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
@@ -2334,7 +2334,7 @@
 				6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */,
 				6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */,
 				6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */,
-				6F04E3881A1C864000C6C08B /* BindingsTransformersViewController.m in Sources */,
+				6F04E3881A1C864000C6C08B /* BindingsTransformersDemoViewController.m in Sources */,
 				6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */,
 				6FCB4E991926651F00047AD3 /* CursorSelectedFolderView.m in Sources */,
 				6FCB4E9B1926651F00047AD3 /* FooterView.m in Sources */,

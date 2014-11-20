@@ -615,9 +615,21 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, [returnInformationString length] - 4)];
                 self.rawClass = NSClassFromString(rawClassName);
             }
-            // Primitive types corresponding to numbers
-            else if ([@"cdfiIls" rangeOfString:type].length != 0) {
+            // Primitive types are boxed as NSNumber using KVC
+            else if ([@"cdfilsBCILQS" rangeOfString:type].length != 0) {
                 self.rawClass = [NSNumber class];
+            }
+            // Structs are boxed as NSValue
+            else if ([type isEqualToString:@"{"]) {
+                self.rawClass = [NSValue class];
+            }
+            // Other types (e.g. blocks, C pointers, void) are not supported
+            else {
+                self.verified = YES;
+                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                 code:HLSViewBindingErrorUnsupportedType
+                                 localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. can be bound)"];
+                return;
             }
         }
         

@@ -13,7 +13,7 @@
 #import "BindingsPerformance1DemoViewController.h"
 #import "BindingsPerformance2DemoViewController.h"
 #import "BindingsProgrammaticDemoViewController.h"
-#import "BindingsTransformersViewController.h"
+#import "BindingsTransformersDemoViewController.h"
 #import "BindingsViewsDemoViewController.h"
 #import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
@@ -514,7 +514,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                     
                 case BindingsDemoIndexTransformers: {
-                    demoViewController = [[BindingsTransformersViewController alloc] init];
+                    demoViewController = [[BindingsTransformersDemoViewController alloc] init];
                     break;
                 }
                     
