@@ -68,6 +68,11 @@
 @property (nonatomic, readonly, weak) id objectTarget;
 
 /**
+ * The expected class for the raw model value, nil if it cannot be reliably determined
+ */
+@property (nonatomic, readonly, assign) Class rawClass;
+
+/**
  * Return the object which the transformation selector will be called on, nil if none or not resolved yet
  */
 @property (nonatomic, readonly, weak) id transformationTarget;

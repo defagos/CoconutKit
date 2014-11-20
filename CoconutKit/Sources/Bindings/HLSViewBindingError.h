@@ -15,7 +15,8 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
     HLSViewBindingErrorInvalidTransformer,              // The transformer is invalid or could not be resolved
     HLSViewBindingErrorTransformation,                  // Transformation error
     HLSViewBindingErrorNilValue,                        // The value retrieved from the key path is nil
-    HLSViewBindingErrorUnsupportedType,                 // The view cannot display the value
+    HLSViewBindingErrorMissingType,                     // The object type is unknown
+    HLSViewBindingErrorUnsupportedType,                 // The object type is unsupported
     HLSViewBindingErrorUnsupportedOperation             // The operation (e.g. update) is not supported
 };
 

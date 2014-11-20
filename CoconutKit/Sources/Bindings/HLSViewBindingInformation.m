@@ -10,6 +10,7 @@
 
 #import "HLSLogger.h"
 #import "HLSMAKVONotificationCenter.h"
+#import "HLSRuntime.h"
 #import "HLSTransformer.h"
 #import "HLSViewBindingError.h"
 #import "NSArray+HLSExtensions.h"
@@ -21,17 +22,16 @@
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
-#import <objc/runtime.h>
-
 /**
  * Internal status flag. Use to avoid performing already successful binding verification steps
  */
 typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     HLSViewBindingStatusUnverified = 0,                                 // Binding never verified
-    HLSViewBindingStatusObjectTargetResolved = (1 << 0),                // Binding target resolution has been successfully made
-    HLSViewBindingStatusTransformerResolved = (1 << 1),                 // Binding transformer resolution has been successfully made (might have found nothing)
-    HLSViewBindingStatusDelegateResolved = (1 << 2),                    // Binding delegate resoution has been successfully made (might have found nothing)
-    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 3)             // Type compatibility with the view has been checked
+    HLSViewBindingStatusTypeResolved = (1 << 0),                        // Type has been resolved (might have found nothing reliable)
+    HLSViewBindingStatusObjectTargetResolved = (1 << 1),                // Binding target resolution has been successfully made
+    HLSViewBindingStatusTransformerResolved = (1 << 2),                 // Binding transformer resolution has been successfully made (might have found nothing)
+    HLSViewBindingStatusDelegateResolved = (1 << 3),                    // Binding delegate resoution has been successfully made (might have found nothing)
+    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 4)             // Type compatibility with the view has been checked
 };
 
 @interface HLSViewBindingInformation ()
@@ -41,6 +41,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 @property (nonatomic, weak) UIView *view;
 
 @property (nonatomic, weak) id objectTarget;
+@property (nonatomic, assign) Class rawClass;
 
 @property (nonatomic, weak) id transformationTarget;
 @property (nonatomic, assign) SEL transformationSelector;
@@ -111,7 +112,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     id value = [self.objectTarget valueForKeyPath:self.keyPath];
-    return [self transformValue:value];
+    return self.transformer ? [self.transformer transformObject:value] : value;
 }
 
 - (id)rawValue
@@ -490,42 +491,14 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         // Look along the responder chain first (most specific)
         transformationTarget = [HLSViewBindingInformation transformationTargetForSelector:transformationSelector view:self.view];
         if (! transformationTarget) {
-            // Locate the last object in the key path
-            NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
-            
-            // Simple key path field
-            id lastKeyPathObject = nil;
-            if ([keyPathComponents count] == 1) {
-                lastKeyPathObject = self.objectTarget;
+            id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+            if ([lastTargetInKeyPath respondsToSelector:transformationSelector]) {
+                transformationTarget = lastTargetInKeyPath;
             }
-            // Key path ending with an operator. Extract objects onto which the key path is applied
-            else if ([keyPathComponents count] >= 2 && [[keyPathComponents objectAtIndex:[keyPathComponents count] - 2] hasPrefix:@"@"]) {
-                NSString *lastObjectsKeyPath = [[[keyPathComponents arrayByRemovingLastObject] arrayByRemovingLastObject] componentsJoinedByString:@"."];
-                lastKeyPathObject = [self.objectTarget valueForKeyPath:lastObjectsKeyPath];
-            }
-            // Composed key path object1.object2.(...).field
-            else {
-                NSString *lastObjectsKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
-                lastKeyPathObject = [self.objectTarget valueForKeyPath:lastObjectsKeyPath];
-            }
-            
-            // Last key path points to an object collection. Assume all objects in the collection have the same type.
-            // Since we have no outstanding object, we only look at class methods
-            if ([lastKeyPathObject respondsToSelector:@selector(objectEnumerator)]) {
-                id object = [[lastKeyPathObject objectEnumerator] nextObject];
-                if ([[object class] respondsToSelector:transformationSelector]) {
-                    transformationTarget = [object class];
-                }
-            }
-            // Last key path points to a single object
-            else {
-                // Look for an instance method on the object
-                if ([lastKeyPathObject respondsToSelector:transformationSelector]) {
-                    transformationTarget = lastKeyPathObject;
-                }
-                // Look for a class method on the object class itself (most generic)
-                else if ([[lastKeyPathObject class] respondsToSelector:transformationSelector]) {
-                    transformationTarget = [lastKeyPathObject class];
+            else if (! hls_isClass(lastTargetInKeyPath)) {
+                Class lastTargetInKeyPathClass = [lastTargetInKeyPath class];
+                if ([lastTargetInKeyPathClass respondsToSelector:transformationSelector]) {
+                    transformationTarget = lastTargetInKeyPathClass;
                 }
             }
         }
@@ -599,35 +572,55 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if ([self resolveObjectTarget:&objectTarget withError:&error]) {
             self.status |= HLSViewBindingStatusObjectTargetResolved;
             self.objectTarget = objectTarget;
-            
-            // Verify setter existence (-set<name> according to KVO compliance rules). Keypaths containing operators cannot
-            // be set
-            // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
-            if (self.supportingInput) {
-                if ([self.keyPath rangeOfString:@"@"].length == 0) {
-                    id setterObject = nil;
-                    NSString *setterName = nil;
-                    
-                    NSArray *keyPathComponents = [self.keyPath componentsSeparatedByString:@"."];
-                    if ([keyPathComponents count] > 1) {
-                        NSString *setObjectKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
-                        setterObject = [objectTarget valueForKeyPath:setObjectKeyPath];
-                        setterName = [keyPathComponents lastObject];
-                    }
-                    else {
-                        setterObject = objectTarget;
-                        setterName = [NSString stringWithFormat:@"set%@:", [self.keyPath stringByReplacingCharactersInRange:NSMakeRange(0, 1)
-                                                                                                                 withString:[[self.keyPath substringToIndex:1] uppercaseString]]];
-                    }
-                    self.modelAutomaticallyUpdated = [setterObject respondsToSelector:NSSelectorFromString(setterName)];
-                }
-            }
         }
         else {
             self.verified = YES;
             self.error = error;
             return;
         }
+        
+        // Verify setter existence (-set<name> according to KVO compliance rules). Keypaths containing operators cannot
+        // be set
+        // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
+        if (self.supportingInput) {
+            id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+            if (! hls_isClass(lastTargetInKeyPath)) {
+                NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+                NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
+                                                                                                                 withString:[[methodName substringToIndex:1] uppercaseString]]];
+                self.modelAutomaticallyUpdated = [lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)];
+            }
+        }
+    }
+    
+    if ((self.status & HLSViewBindingStatusTypeResolved) == 0) {
+        id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+        NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+        
+        Class lastTargetInKeyPathClass = hls_isClass(lastTargetInKeyPath) ? lastTargetInKeyPath : [lastTargetInKeyPath class];
+        objc_property_t property = class_getProperty(lastTargetInKeyPathClass, [methodName UTF8String]);
+        
+        // If the method name corresponds to a property, reliable return type information can be obtained from the runtime. No such information
+        // can be obtained for a getter or a getter / setter pair
+        // See https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html
+        if (property) {
+            const char *propertyAttributes = property_getAttributes(property);
+            NSString *returnInformationString = [[[NSString stringWithUTF8String:propertyAttributes] componentsSeparatedByString:@","] firstObject];
+            
+            NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
+            
+            // Objects with a specified class
+            if ([type isEqualToString:@"@"] && [returnInformationString length] > 2) {
+                NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, [returnInformationString length] - 4)];
+                self.rawClass = NSClassFromString(rawClassName);
+            }
+            // Primitive types corresponding to numbers
+            else if ([@"cdfiIls" rangeOfString:type].length != 0) {
+                self.rawClass = [NSNumber class];
+            }
+        }
+        
+        self.status |= HLSViewBindingStatusTypeResolved;
     }
     
     if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
@@ -677,38 +670,69 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     
     if ((self.status & HLSViewBindingStatusTypeCompatibilityChecked) == 0) {
         // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
-        id value = [self.objectTarget valueForKeyPath:self.keyPath];
-        id inputValue = [self transformValue:value];
+        id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
         
-        // Cannot verify further yet
-        if (! inputValue) {
-            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                             code:HLSViewBindingErrorNilValue
-                             localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
-            return;
-        }
-        
-        if ([self canDisplayValue:inputValue]) {
-            self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
+        if (self.transformer) {
+            id value = [self.transformer transformObject:rawValue];
+            
+            // Cannot verify further
+            if (! value) {
+                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                 code:HLSViewBindingErrorNilValue
+                                 localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
+                return;
+            }
+            
+            if (! [self canDisplayValue:value]) {
+                self.verified = YES;
+                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                 code:HLSViewBindingErrorUnsupportedType
+                                 localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
+                                                       "types: %@", [self supportedBindingClassesString]]];
+                return;
+            }
         }
         else {
-            NSString *description = nil;
-            
-            if (self.transformer) {
-                description = [NSString stringWithFormat:@"The transformer must return one of the following supported "
-                               "types: %@", [self supportedBindingClassesString]];
+            // Reliable type information available. Check
+            if (self.rawClass) {
+                if (! [self canDisplayClass:self.rawClass]) {
+                    self.verified = YES;
+                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                     code:HLSViewBindingErrorUnsupportedType
+                                     localizedDescription:[NSString stringWithFormat:@"A transformer is required to transform %@ into "
+                                                           "one of the following types: %@", self.rawClass, [self supportedBindingClassesString]]];
+                    return;
+                }
             }
             else {
-                description = [NSString stringWithFormat:@"The keypath must return one of the following supported types: "
-                               "%@. Fix the return type or use a transformer", [self supportedBindingClassesString]];
+                // Cannot verify further
+                if (rawValue) {
+                    if (! [self canDisplayValue:rawValue]) {
+                        self.verified = YES;
+                        self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                         code:HLSViewBindingErrorUnsupportedType
+                                         localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
+                                                               "types: %@", [self supportedBindingClassesString]]];
+                        return;
+                    }
+                    
+                    // Even if the view is compatible, we have no way to tell a transformer is not missing
+                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                     code:HLSViewBindingErrorMissingType
+                                     localizedDescription:@"Type information is not available. Cannot tell if a transformer is missing, "
+                                  "be careful. If you can, bind to a property instead of a getter / setter pair to get reliable type checking"];
+                    return;
+                }
+                else {
+                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                     code:HLSViewBindingErrorNilValue
+                                     localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
+                    return;
+                }
             }
-            
-            self.verified = YES;
-            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                             code:HLSViewBindingErrorUnsupportedType
-                             localizedDescription:description];
-            return;
         }
+        
+        self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
     }
     
     self.verified = YES;
@@ -747,7 +771,17 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             return YES;
         }
     }
-    
+    return NO;
+}
+
+- (BOOL)canDisplayClass:(Class)class
+{
+    NSArray *supportedBindingClasses = [self supportedBindingClasses];
+    for (Class supportedBindingClass in supportedBindingClasses) {
+        if (hls_class_isSubclassOfClass(class, supportedBindingClass)) {
+            return YES;
+        }
+    }
     return NO;
 }
 
@@ -761,13 +795,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     else {
         return NO;
     }
-}
-
-#pragma mark Transformation
-
-- (id)transformValue:(id)value
-{
-    return self.transformer ? [self.transformer transformObject:value] : value;
 }
 
 #pragma mark Context binding lookup along the responder chain
@@ -854,6 +881,46 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
     }
     return nil;
+}
+
+#pragma mark Key path information extraction
+
+// Return the last object designated by a key path (before the final field)
++ (id)lastObjectInKeyPath:(NSString *)keyPath withObject:(id)object
+{
+    NSArray *keyPathComponents = [keyPath componentsSeparatedByString:@"."];
+    
+    // Simple key path field
+    if ([keyPathComponents count] == 1) {
+        return object;
+    }
+    // Key path ending with an operator. Extract objects onto which the key path is applied
+    else if ([keyPathComponents count] >= 2 && [[keyPathComponents objectAtIndex:[keyPathComponents count] - 2] hasPrefix:@"@"]) {
+        NSString *lastObjectsKeyPath = [[[keyPathComponents arrayByRemovingLastObject] arrayByRemovingLastObject] componentsJoinedByString:@"."];
+        return [object valueForKeyPath:lastObjectsKeyPath];
+    }
+    // Composed key path object1.object2.(...).field
+    else {
+        NSString *lastObjectKeyPath = [[keyPathComponents arrayByRemovingLastObject] componentsJoinedByString:@"."];
+        return [object valueForKeyPath:lastObjectKeyPath];
+    }
+}
+
+// Return the last object designated by a key path (before the final field), or a class if it is a collection (the method
+// assumes all objects have the same type and return the class of one of them)
++ (id)lastTargetInKeyPath:(NSString *)keyPath withObject:(id)object
+{
+    id lastObjectInKeyPath = [self lastObjectInKeyPath:keyPath withObject:object];
+    
+    // Collection
+    if ([lastObjectInKeyPath respondsToSelector:@selector(objectEnumerator)]) {
+        id collectionObject = [[lastObjectInKeyPath objectEnumerator] nextObject];
+        return [collectionObject class];
+    }
+    // Single object
+    else {
+        return lastObjectInKeyPath;
+    }
 }
 
 #pragma mark Description
