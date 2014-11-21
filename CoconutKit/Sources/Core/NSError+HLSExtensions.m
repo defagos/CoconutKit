@@ -11,10 +11,9 @@
 #import "HLSAssert.h"
 #import "HLSCoreError.h"
 #import "HLSLogger.h"
+#import "HLSRuntime.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSDictionary+HLSExtensions.h"
-
-#import <objc/runtime.h>
 
 NSString * const HLSDetailedErrorsKey = @"HLSDetailedErrorsKey";
 
@@ -125,7 +124,7 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (NSMutableDictionary *)mutableUserInfo
 {
-    NSMutableDictionary *mutableUserInfo = objc_getAssociatedObject(self, s_mutableUserInfoKey);
+    NSMutableDictionary *mutableUserInfo = hls_getAssociatedObject(self, s_mutableUserInfoKey);
     if (! mutableUserInfo) {
         mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
         
@@ -160,7 +159,7 @@ static Class subclass_class(id self, SEL _cmd);
             object_setClass(self, subclass);
         }
         
-        objc_setAssociatedObject(self, s_mutableUserInfoKey, mutableUserInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(self, s_mutableUserInfoKey, mutableUserInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return mutableUserInfo;
 }

@@ -6,11 +6,20 @@
 //  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
-#import <objc/runtime.h> 
+#import <objc/runtime.h>
 
 /**
- * The following methods can be safely used in pure C code
+ * Policies for associated objects
  */
+typedef NS_ENUM(uintptr_t, hls_AssociationPolicy) {
+    HLS_ASSOCIATION_ASSIGN = OBJC_ASSOCIATION_ASSIGN,
+    HLS_ASSOCIATION_STRONG_NONATOMIC = OBJC_ASSOCIATION_RETAIN_NONATOMIC,
+    HLS_ASSOCIATION_COPY_NONATOMIC = OBJC_ASSOCIATION_COPY_NONATOMIC,
+    HLS_ASSOCIATION_STRONG = OBJC_ASSOCIATION_RETAIN,
+    HLS_ASSOCIATION_COPY = OBJC_ASSOCIATION_COPY,
+    HLS_ASSOCIATION_WEAK,
+    HLS_ASSOCIATION_WEAK_NONATOMIC
+};
 
 /**
  * Enable or disable logging of the messages sent through objc_msgSend. Messages are logged to
@@ -126,3 +135,13 @@ BOOL hls_isClass(id object);
  * (replacingObject)
  */
 void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject);
+
+/**
+ * Same as objc_setAssociatedObject, but with support for weak references
+ */
+void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy);
+
+/**
+ * Same as objc_setAssociatedObject, but with support for weak references
+ */
+id hls_getAssociatedObject(id object, const void *key);

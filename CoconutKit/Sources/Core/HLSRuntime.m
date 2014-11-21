@@ -9,6 +9,16 @@
 #import "HLSRuntime.h"
 
 /**
+ * This file must not be compiled with ARC. Automated memory management calls can lead to subtle issues, and this is
+ * dangerous in a file mainly concerned with low-level issues
+ */
+#if __has_feature(objc_arc)
+    #error "This file cannot be compiled with ARC"
+#endif
+
+#import "HLSWeakObjectWrapper.h"
+
+/**
  * Remark: Unlike the documentation previously said, protocol_getMethodDescription also takes into account parent protocols
  *         (see http://www.opensource.apple.com/source/objc4/objc4-532.2/runtime/objc-runtime-new.mm)
  */
@@ -247,7 +257,7 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
     // The following only adds a method implementation if the class does not implement it itself (block implementations
     // sigatures must not have a SEL argument). The added method only calls the super counterpart, see explanation above
     const char *types = method_getTypeEncoding(method);
-    class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
+    class_addMethod(clazz, selector, imp_implementationWithBlock(^(id self, va_list argp) {
         struct objc_super super = {
             .receiver = self,
             .super_class = class_getSuperclass(clazz)
@@ -310,4 +320,21 @@ void hls_object_replaceReferencesToObject(id object, id replacedObject, id repla
         }
     }
     free(ivars);
+}
+
+void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy)
+{
+    if (policy == HLS_ASSOCIATION_WEAK || policy == HLS_ASSOCIATION_WEAK_NONATOMIC) {
+        HLSWeakObjectWrapper *weakObjectWrapper = [[[HLSWeakObjectWrapper alloc] initWithObject:value] autorelease];
+        objc_setAssociatedObject(object, key, weakObjectWrapper, (policy == HLS_ASSOCIATION_WEAK) ? OBJC_ASSOCIATION_RETAIN : OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    else {
+        objc_setAssociatedObject(object, key, value, policy);
+    }
+}
+
+id hls_getAssociatedObject(id object, const void *key)
+{
+    id associatedObject = objc_getAssociatedObject(object, key);
+    return [associatedObject isKindOfClass:[HLSWeakObjectWrapper class]] ? ((HLSWeakObjectWrapper *)associatedObject).object : associatedObject;
 }

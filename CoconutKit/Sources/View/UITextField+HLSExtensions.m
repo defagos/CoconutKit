@@ -62,12 +62,12 @@ static id swizzled_UITextField__initWithCoder_Imp(UITextField *self, SEL _cmd, N
 
 - (HLSViewTouchDetector *)touchDetector
 {
-    return objc_getAssociatedObject(self, s_touchDetectorKey);
+    return hls_getAssociatedObject(self, s_touchDetectorKey);
 }
 
 - (void)setTouchDetector:(HLSViewTouchDetector *)touchDetector
 {
-    objc_setAssociatedObject(self, s_touchDetectorKey, touchDetector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_touchDetectorKey, touchDetector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

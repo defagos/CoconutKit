@@ -55,7 +55,7 @@ static void swizzled_UIPopoverController__setContentViewController_animated_Imp(
 
 - (UIPopoverController *)popoverController
 {
-    UIPopoverController *popoverController = objc_getAssociatedObject(self, s_popoverControllerKey);
+    UIPopoverController *popoverController = hls_getAssociatedObject(self, s_popoverControllerKey);
     if (popoverController) {
         return popoverController;
     }
@@ -71,14 +71,14 @@ static id swizzled_UIPopoverController__initWithContentViewController_Imp(UIPopo
     // The -viewDidLoad method is triggered from the -initWithContentViewController method. If we want the parent information to be available
     // also in -viewDidLoad, we need to set the parent-child relationship early. No need to remove on -init failure, this will be done in
     // -dealloc
-    objc_setAssociatedObject(viewController, s_popoverControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(viewController, s_popoverControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
     return (*s_UIPopoverController__initWithContentViewController_Imp)(self, _cmd, viewController);
 }
 
 // Marked as __unsafe_unretained to avoid ARC inserting incorrect memory management calls leading to crashes for -dealloc
 static void swizzled_UIPopoverController__dealloc_Imp(__unsafe_unretained UIPopoverController *self, SEL _cmd)
 {
-    objc_setAssociatedObject(self.contentViewController, s_popoverControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self.contentViewController, s_popoverControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
     (*s_UIPopoverController__dealloc_Imp)(self, _cmd);
 }
@@ -86,7 +86,7 @@ static void swizzled_UIPopoverController__dealloc_Imp(__unsafe_unretained UIPopo
 static void swizzled_UIPopoverController__setContentViewController_animated_Imp(UIPopoverController *self, SEL _cmd, UIViewController *viewController, BOOL animated)
 {
     // Remove the old association before creating the new one
-    objc_setAssociatedObject(self.contentViewController, s_popoverControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self.contentViewController, s_popoverControllerKey, nil, OBJC_ASSOCIATION_ASSIGN);
     (*s_UIPopoverController__setContentViewController_animated_Imp)(self, _cmd, viewController, animated);
-    objc_setAssociatedObject(viewController, s_popoverControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(viewController, s_popoverControllerKey, self, OBJC_ASSOCIATION_ASSIGN);
 }

@@ -103,7 +103,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         UIButton *button = (UIButton *)self.superview;
         
         // Get localization info for all states. Attached to the button (because it carries the states)
-        NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
+        NSDictionary *buttonStateToLocalizationInfoMap = hls_getAssociatedObject(button, s_localizationInfosKey);
         if (! buttonStateToLocalizationInfoMap) {
             return nil;
         }
@@ -114,7 +114,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     }
     // Standalone label
     else {
-        return objc_getAssociatedObject(self, s_localizationInfosKey);
+        return hls_getAssociatedObject(self, s_localizationInfosKey);
     }
 }
 
@@ -125,7 +125,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         UIButton *button = (UIButton *)self.superview;
         
         // Get localization info for all states (lazily added if needed). Attached to the button (because it carries the states)
-        NSDictionary *buttonStateToLocalizationInfoMap = objc_getAssociatedObject(button, s_localizationInfosKey);
+        NSDictionary *buttonStateToLocalizationInfoMap = hls_getAssociatedObject(button, s_localizationInfosKey);
         if (! buttonStateToLocalizationInfoMap) {
             buttonStateToLocalizationInfoMap = @{};
         }
@@ -135,11 +135,11 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         buttonStateToLocalizationInfoMap = [buttonStateToLocalizationInfoMap dictionaryBySettingObject:localizationInfo 
                                                                                                 forKey:buttonStateKey];
         
-        objc_setAssociatedObject(button, s_localizationInfosKey, buttonStateToLocalizationInfoMap, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(button, s_localizationInfosKey, buttonStateToLocalizationInfoMap, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     // Standalone label
     else {
-        objc_setAssociatedObject(self, s_localizationInfosKey, localizationInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(self, s_localizationInfosKey, localizationInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 }
 
@@ -228,7 +228,7 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     }
     
     // Restore the original background color if it had been altered
-    UIColor *originalBackgroundColor = objc_getAssociatedObject(self, s_originalBackgroundColorKey);
+    UIColor *originalBackgroundColor = hls_getAssociatedObject(self, s_originalBackgroundColorKey);
     (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), originalBackgroundColor);
     
     // Make labels with missing localizations visible (saving the original color first)
@@ -258,22 +258,22 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 
 - (NSString *)locTable
 {
-    return objc_getAssociatedObject(self, s_localizationTableNameKey);
+    return hls_getAssociatedObject(self, s_localizationTableNameKey);
 }
 
 - (void)setLocTable:(NSString *)locTable
 {
-    objc_setAssociatedObject(self, s_localizationTableNameKey, locTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_localizationTableNameKey, locTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSString *)locBundle
 {
-    return objc_getAssociatedObject(self, s_localizationBundleNameKey);
+    return hls_getAssociatedObject(self, s_localizationBundleNameKey);
 }
 
 - (void)setLocBundle:(NSString *)locBundle
 {
-    objc_setAssociatedObject(self, s_localizationBundleNameKey, locBundle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_localizationBundleNameKey, locBundle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -310,5 +310,5 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     // The background color is stored as separate associated object, not in the HLSLabelLocalizationInfo object. The reason
     // is that the HLSLabelLocalizationInfo is only attached when the text is first set, while the background color is
     // usually set earlier (i.e. when this object is not available)
-    objc_setAssociatedObject(self, s_originalBackgroundColorKey, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_originalBackgroundColorKey, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }

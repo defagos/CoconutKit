@@ -120,13 +120,11 @@
 		6F2B30C71929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30751929BE4A003D4C2C /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
 		6F2B30C81929BE4A003D4C2C /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30771929BE4A003D4C2C /* HLSErrorTestCase.m */; };
 		6F2B30C91929BE4A003D4C2C /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */; };
-		6F2B30CA1929BE4A003D4C2C /* HLSFloatTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */; };
 		6F2B30CB1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307D1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m */; };
 		6F2B30CC1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B307F1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.m */; };
 		6F2B30CD1929BE4A003D4C2C /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30811929BE4A003D4C2C /* HLSRuntimeTestCase.m */; };
 		6F2B30CE1929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30831929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m */; };
 		6F2B30CF1929BE4A003D4C2C /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30851929BE4A003D4C2C /* HLSValidatorsTestCase.m */; };
-		6F2B30D01929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30871929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.m */; };
 		6F2B30D11929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B30891929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m */; };
 		6F2B30D21929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B308B1929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.m */; };
 		6F2B30D31929BE4A003D4C2C /* NSData+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2B308D1929BE4A003D4C2C /* NSData+HLSExtensionsTestCase.m */; };
@@ -164,6 +162,10 @@
 		6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
 		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
+		6F54E2E61A1F2670000028E1 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F54E2E51A1F2670000028E1 /* GHUnitIOS.framework */; };
+		6F54E2EB1A1F26A3000028E1 /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E2E81A1F26A3000028E1 /* HLSTransformerTestCase.m */; };
+		6F54E2EC1A1F26A3000028E1 /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E2EA1A1F26A3000028E1 /* NSBundle+HLSDynamicLocalizationTestCase.m */; };
+		6F54E2ED1A1F279F000028E1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F04E3A91A1C886D00C6C08B /* WebKit.framework */; };
 		6F58C53A17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */; };
 		6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
 		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
@@ -174,7 +176,6 @@
 		6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
 		6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */; };
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
-		6F8CBE9C19DC2591003286F7 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */; };
 		6F8CC0C419DC2A8C003286F7 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */; };
 		6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */; };
 		6F8CC0C619DC2A8C003286F7 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */; };
@@ -561,8 +562,6 @@
 		6F2B30771929BE4A003D4C2C /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
 		6F2B30781929BE4A003D4C2C /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
 		6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManagerTestCase.m; sourceTree = "<group>"; };
-		6F2B307A1929BE4A003D4C2C /* HLSFloatTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFloatTestCase.h; sourceTree = "<group>"; };
-		6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFloatTestCase.m; sourceTree = "<group>"; };
 		6F2B307C1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManagerTestCase.h; sourceTree = "<group>"; };
 		6F2B307D1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManagerTestCase.m; sourceTree = "<group>"; };
 		6F2B307E1929BE4A003D4C2C /* HLSRestrictedInterfaceProxyTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxyTestCase.h; sourceTree = "<group>"; };
@@ -573,8 +572,6 @@
 		6F2B30831929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManagerTestCase.m; sourceTree = "<group>"; };
 		6F2B30841929BE4A003D4C2C /* HLSValidatorsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidatorsTestCase.h; sourceTree = "<group>"; };
 		6F2B30851929BE4A003D4C2C /* HLSValidatorsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidatorsTestCase.m; sourceTree = "<group>"; };
-		6F2B30861929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSZeroingWeakRefTestCase.h; sourceTree = "<group>"; };
-		6F2B30871929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSZeroingWeakRefTestCase.m; sourceTree = "<group>"; };
 		6F2B30881929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
 		6F2B30891929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 		6F2B308A1929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
@@ -641,6 +638,11 @@
 		6F4F84AA136E8BA4007D027B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		6F53B63316FA321000E01781 /* DemoColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColors.h; sourceTree = "<group>"; };
 		6F53B63416FA321000E01781 /* DemoColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoColors.m; sourceTree = "<group>"; };
+		6F54E2E51A1F2670000028E1 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../Externals/GHUnitIOS.framework; sourceTree = "<group>"; };
+		6F54E2E71A1F26A3000028E1 /* HLSTransformerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformerTestCase.h; sourceTree = "<group>"; };
+		6F54E2E81A1F26A3000028E1 /* HLSTransformerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformerTestCase.m; sourceTree = "<group>"; };
+		6F54E2E91A1F26A3000028E1 /* NSBundle+HLSDynamicLocalizationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSDynamicLocalizationTestCase.h"; sourceTree = "<group>"; };
+		6F54E2EA1A1F26A3000028E1 /* NSBundle+HLSDynamicLocalizationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalizationTestCase.m"; sourceTree = "<group>"; };
 		6F58C53717944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardAvoidingScrollViewDemoViewController.h; sourceTree = "<group>"; };
 		6F58C53817944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardAvoidingScrollViewDemoViewController.m; sourceTree = "<group>"; };
 		6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardAvoidingScrollViewDemoViewController.xib; sourceTree = "<group>"; };
@@ -656,7 +658,6 @@
 		6F89149D15790DDE009FCC78 /* LabelDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelDemoViewController.h; sourceTree = "<group>"; };
 		6F89149E15790DDE009FCC78 /* LabelDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelDemoViewController.m; sourceTree = "<group>"; };
 		6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelDemoViewController.xib; sourceTree = "<group>"; };
-		6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../Externals/GHUnitIOS.framework; sourceTree = "<group>"; };
 		6F8CC0A519DC2A3D003286F7 /* version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoconutKit_bootstrap.m; sourceTree = "<group>"; };
 		6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = "<group>"; };
@@ -838,12 +839,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F54E2ED1A1F279F000028E1 /* WebKit.framework in Frameworks */,
 				6F2B305B1929BD78003D4C2C /* libCoconutKit.a in Frameworks */,
 				6F2B305C1929BD78003D4C2C /* QuickLook.framework in Frameworks */,
 				6F2B305D1929BD78003D4C2C /* MobileCoreServices.framework in Frameworks */,
 				6F2B305E1929BD78003D4C2C /* CoreText.framework in Frameworks */,
 				6F2B305F1929BD78003D4C2C /* QuartzCore.framework in Frameworks */,
-				6F8CBE9C19DC2591003286F7 /* GHUnitIOS.framework in Frameworks */,
+				6F54E2E61A1F2670000028E1 /* GHUnitIOS.framework in Frameworks */,
 				6F2B30601929BD78003D4C2C /* CoreData.framework in Frameworks */,
 				6F2B30611929BD78003D4C2C /* Foundation.framework in Frameworks */,
 				6F2B30621929BD78003D4C2C /* UIKit.framework in Frameworks */,
@@ -920,7 +922,7 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				6F22C75116A93DD20081A9A7 /* CoreText.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				6F8CBE9B19DC2591003286F7 /* GHUnitIOS.framework */,
+				6F54E2E51A1F2670000028E1 /* GHUnitIOS.framework */,
 				6F4F84AA136E8BA4007D027B /* MessageUI.framework */,
 				6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */,
 				6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */,
@@ -1068,8 +1070,6 @@
 				6F2B30771929BE4A003D4C2C /* HLSErrorTestCase.m */,
 				6F2B30781929BE4A003D4C2C /* HLSFileManagerTestCase.h */,
 				6F2B30791929BE4A003D4C2C /* HLSFileManagerTestCase.m */,
-				6F2B307A1929BE4A003D4C2C /* HLSFloatTestCase.h */,
-				6F2B307B1929BE4A003D4C2C /* HLSFloatTestCase.m */,
 				6FB007DF195304360082D915 /* HLSGeometryTestCase.h */,
 				6FB007E0195304360082D915 /* HLSGeometryTestCase.m */,
 				6F2B307C1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.h */,
@@ -1080,12 +1080,14 @@
 				6F2B30811929BE4A003D4C2C /* HLSRuntimeTestCase.m */,
 				6F2B30821929BE4A003D4C2C /* HLSStandardFileManagerTestCase.h */,
 				6F2B30831929BE4A003D4C2C /* HLSStandardFileManagerTestCase.m */,
+				6F54E2E71A1F26A3000028E1 /* HLSTransformerTestCase.h */,
+				6F54E2E81A1F26A3000028E1 /* HLSTransformerTestCase.m */,
 				6F2B30841929BE4A003D4C2C /* HLSValidatorsTestCase.h */,
 				6F2B30851929BE4A003D4C2C /* HLSValidatorsTestCase.m */,
-				6F2B30861929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.h */,
-				6F2B30871929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.m */,
 				6F2B30881929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.h */,
 				6F2B30891929BE4A003D4C2C /* NSArray+HLSExtensionsTestCase.m */,
+				6F54E2E91A1F26A3000028E1 /* NSBundle+HLSDynamicLocalizationTestCase.h */,
+				6F54E2EA1A1F26A3000028E1 /* NSBundle+HLSDynamicLocalizationTestCase.m */,
 				6F2B308A1929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.h */,
 				6F2B308B1929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.m */,
 				6F2B308C1929BE4A003D4C2C /* NSData+HLSExtensionsTestCase.h */,
@@ -2271,7 +2273,6 @@
 				6F2B30E41929BE4A003D4C2C /* _BankAccount.m in Sources */,
 				6F2B30CB1929BE4A003D4C2C /* HLSInMemoryFileManagerTestCase.m in Sources */,
 				6F2B30EB1929BE4A003D4C2C /* Person.m in Sources */,
-				6F2B30CA1929BE4A003D4C2C /* HLSFloatTestCase.m in Sources */,
 				6F2B30D91929BE4A003D4C2C /* NSString+HLSExtensionsTestCase.m in Sources */,
 				6F2B30DC1929BE4A003D4C2C /* NSManagedObject+HLSValidationTestCase.m in Sources */,
 				6F2B30DD1929BE4A003D4C2C /* TestErrors.m in Sources */,
@@ -2288,6 +2289,7 @@
 				6F2B30E61929BE4A003D4C2C /* _ConcreteSubclassB.m in Sources */,
 				6F2B30E11929BE4A003D4C2C /* ConcreteSubclassB.m in Sources */,
 				6F2B30EA1929BE4A003D4C2C /* House.m in Sources */,
+				6F54E2EB1A1F26A3000028E1 /* HLSTransformerTestCase.m in Sources */,
 				6F2B30D31929BE4A003D4C2C /* NSData+HLSExtensionsTestCase.m in Sources */,
 				6F2B30DB1929BE4A003D4C2C /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
 				6F2B30CF1929BE4A003D4C2C /* HLSValidatorsTestCase.m in Sources */,
@@ -2301,6 +2303,7 @@
 				6F2B30D21929BE4A003D4C2C /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
 				6F2B30F11929BF74003D4C2C /* main.m in Sources */,
 				6F2B30D81929BE4A003D4C2C /* NSStream+HLSExtensionsTestCase.m in Sources */,
+				6F54E2EC1A1F26A3000028E1 /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */,
 				6F2B30E51929BE4A003D4C2C /* _ConcreteClassD.m in Sources */,
 				6FB007E1195304360082D915 /* HLSGeometryTestCase.m in Sources */,
 				6F2B30E01929BE4A003D4C2C /* ConcreteClassD.m in Sources */,
@@ -2309,7 +2312,6 @@
 				6F2B30D71929BE4A003D4C2C /* NSObject+HLSExtensionsTestCase.m in Sources */,
 				6F2B30D41929BE4A003D4C2C /* NSDate+HLSExtensionsTestCase.m in Sources */,
 				6F2B30D61929BE4A003D4C2C /* NSNumber+HLSExtensionsTestCase.m in Sources */,
-				6F2B30D01929BE4A003D4C2C /* HLSZeroingWeakRefTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2522,7 +2524,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/defagos/Development/repositories/CoconutKit/Externals,
+					"$(PROJECT_DIR)/../Externals",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2548,7 +2550,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/defagos/Development/repositories/CoconutKit/Externals,
+					"$(PROJECT_DIR)/../Externals",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-dev-Prefix.pch";

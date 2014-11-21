@@ -10,7 +10,7 @@
 
 #import "HLSApplicationPreloader.h"
 #import "HLSLogger.h"
-#import <objc/runtime.h>
+#import "HLSRuntime.h"
 
 // Associated object keys
 static void *s_applicationPreloaderKey = &s_applicationPreloaderKey;
@@ -21,7 +21,7 @@ static void *s_applicationPreloaderKey = &s_applicationPreloaderKey;
 
 - (void)preload
 {
-    HLSApplicationPreloader *applicationPreloader = objc_getAssociatedObject(self, s_applicationPreloaderKey);
+    HLSApplicationPreloader *applicationPreloader = hls_getAssociatedObject(self, s_applicationPreloaderKey);
     if (applicationPreloader) {
         HLSLoggerInfo(@"Preloading has already been made");
         return;
@@ -29,7 +29,7 @@ static void *s_applicationPreloaderKey = &s_applicationPreloaderKey;
     
     // The preloader object is retained since it might involve asychronous processes
     applicationPreloader = [[HLSApplicationPreloader alloc] initWithApplication:self];
-    objc_setAssociatedObject(self, s_applicationPreloaderKey, applicationPreloader, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_applicationPreloaderKey, applicationPreloader, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [applicationPreloader preload];
 }
 
