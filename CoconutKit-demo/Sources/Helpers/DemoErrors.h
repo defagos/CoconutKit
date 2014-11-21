@@ -6,16 +6,10 @@
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
-/**
- * Validation errors
- */
-extern NSString * const DemoValidationErrorDomain;
-
-typedef NS_ENUM(NSInteger, DemoValidation) {
-    DemoValidationEnumBegin = 0,
-    DemoValidationMandatoryError = DemoValidationEnumBegin,
-    DemoValidationIncorrectError,
-    DemoValidationEnumEnd,
-    DemoValidationEnumSize = DemoValidationEnumEnd - DemoValidationEnumBegin
+typedef NS_ENUM(NSInteger, DemoError) {
+    DemoMandatoryError,
+    DemoIncorrectError,
+    DemoInputError
 };
 
+extern NSString * const DemoErrorDomain;
