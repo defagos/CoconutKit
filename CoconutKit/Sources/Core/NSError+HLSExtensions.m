@@ -205,7 +205,6 @@ static Class subclass_class(id self, SEL _cmd);
 - (void)setObject:(id)object forKey:(NSString *)key
 {
     if (! key || ! object) {
-        HLSLoggerError(@"Missing key or object");
         return;
     }
     
@@ -220,7 +219,6 @@ static Class subclass_class(id self, SEL _cmd);
 - (void)addObject:(id)object forKey:(NSString *)key
 {
     if (! key || ! object) {
-        HLSLoggerError(@"Missing key or object");
         return;
     }
     
@@ -230,7 +228,6 @@ static Class subclass_class(id self, SEL _cmd);
 - (void)addObjects:(NSArray *)objects forKey:(NSString *)key
 {
     if ([objects count] == 0 || ! key) {
-        HLSLoggerError(@"Missing key or objects");
         return;
     }
     
