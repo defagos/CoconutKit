@@ -663,37 +663,35 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             id<HLSTransformer> transformer = nil;
             NSError *error = nil;
             
-            if ([self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
-                    && [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
-                self.status |= HLSViewBindingStatusTransformerResolved;
-                self.transformationTarget = transformationTarget;
-                self.transformationSelector = transformationSelector;
-                self.transformer = transformer;
-                
-                // Observe transformer updates, reload cached transformer and update view accordingly
-                __weak __typeof(self) weakSelf = self;
-                [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-                    id<HLSTransformer> transformer = nil;
-                    NSError *error = nil;
-                    
-                    if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakSelf.transformationTarget transformationSelector:weakSelf.transformationSelector error:&error]) {
-                        weakSelf.verified = NO;
-                        weakSelf.error = error;
-                    }
-                    
-                    weakSelf.transformer = transformer;
-                    [weakSelf.view updateBoundView];
-                }];
-            }
-            else {
+            if (! [self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
+                    || ! [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
                 self.verified = YES;
                 self.error = error;
                 return;
             }
+            
+            // Observe transformer updates, reload cached transformer and update view accordingly
+            __weak __typeof(self) weakSelf = self;
+            __weak __typeof(self) weakTransformationTarget = transformationTarget;
+            [transformationTarget addObserver:self keyPath:NSStringFromSelector(transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                id<HLSTransformer> transformer = nil;
+                NSError *error = nil;
+                
+                if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakTransformationTarget transformationSelector:transformationSelector error:&error]) {
+                    weakSelf.verified = YES;
+                    weakSelf.error = error;
+                }
+                
+                weakSelf.transformer = transformer;
+                [weakSelf.view updateBoundView];
+            }];
+            
+            self.transformationTarget = transformationTarget;
+            self.transformationSelector = transformationSelector;
+            self.transformer = transformer;
         }
-        else {
-            self.status |= HLSViewBindingStatusTransformerResolved;
-        }
+        
+        self.status |= HLSViewBindingStatusTransformerResolved;
     }
     
     if ((self.status & HLSViewBindingStatusDelegateResolved) == 0) {
