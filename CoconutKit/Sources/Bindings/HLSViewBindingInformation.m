@@ -27,8 +27,8 @@
  */
 typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     HLSViewBindingStatusUnverified = 0,                                 // Binding never verified
-    HLSViewBindingStatusTypeResolved = (1 << 0),                        // Type has been resolved (might have found nothing reliable)
-    HLSViewBindingStatusObjectTargetResolved = (1 << 1),                // Binding target resolution has been successfully made
+    HLSViewBindingStatusObjectTargetResolved = (1 << 0),                // Binding target resolution has been successfully made
+    HLSViewBindingStatusTypeResolved = (1 << 1),                        // Type has been resolved (might have found nothing reliable)
     HLSViewBindingStatusTransformerResolved = (1 << 2),                 // Binding transformer resolution has been successfully made (might have found nothing)
     HLSViewBindingStatusDelegateResolved = (1 << 3),                    // Binding delegate resoution has been successfully made (might have found nothing)
     HLSViewBindingStatusTypeCompatibilityChecked = (1 << 4)             // Type compatibility with the view has been checked
@@ -609,6 +609,70 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
+- (BOOL)checkTypePendingWithReason:(NSString *__autoreleasing *)pPendingReason error:(NSError *__autoreleasing *)pError
+{
+    NSString *pendingReason = nil;
+    
+    id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
+    if (self.transformer) {
+        id value = [self.transformer transformObject:rawValue];
+        if (value) {
+            if (! [self canDisplayValue:value]) {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                  code:HLSViewBindingErrorUnsupportedType
+                                  localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
+                                                        "types: %@", [self supportedBindingClassesString]]];
+                }
+                return NO;
+            }
+        }
+        else {
+            pendingReason = @"Type compliance cannot be verified yet since the value to display is nil";
+        }
+    }
+    else {
+        // Reliable type information available. Check
+        if (self.rawClass) {
+            if (! [self canDisplayClass:self.rawClass]) {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                  code:HLSViewBindingErrorUnsupportedType
+                                  localizedDescription:[NSString stringWithFormat:@"A transformer is required to transform %@ into "
+                                                        "one of the following types: %@", self.rawClass, [self supportedBindingClassesString]]];
+                }
+                return NO;
+            }
+        }
+        // No type information available
+        else {
+            if (rawValue) {
+                if (! [self canDisplayValue:rawValue]) {
+                    if (pError) {
+                        *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorUnsupportedType
+                                      localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
+                                                            "types: %@", [self supportedBindingClassesString]]];
+                    }
+                    return NO;
+                }
+                
+                pendingReason = @"Type information is not available. We cannot tell if a transformer is missing, you should therefore"
+                    "be careful. If possible, bind the field a property of a getter / setter pair to get reliable type checking";
+            }
+            else {
+                pendingReason = @"Type compliance cannot be verified yet since the value to display is nil";
+            }
+        }
+    }
+    
+    if (pPendingReason) {
+        *pPendingReason = pendingReason;
+    }
+    
+    return YES;
+}
+
 - (void)verify
 {
     if (self.verified) {
@@ -700,74 +764,27 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     if ((self.status & HLSViewBindingStatusTypeCompatibilityChecked) == 0) {
-        // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
-        id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
+        NSString *pendingReason = nil;
+        NSError *error = nil;
         
-        if (self.transformer) {
-            id value = [self.transformer transformObject:rawValue];
-            
-            // Cannot verify further
-            if (! value) {
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorNilValue
-                                 localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
-                return;
-            }
-            
-            if (! [self canDisplayValue:value]) {
-                self.verified = YES;
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorUnsupportedType
-                                 localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
-                                                       "types: %@", [self supportedBindingClassesString]]];
-                return;
-            }
+        if (! [self checkTypePendingWithReason:&pendingReason error:&error]) {
+            self.verified = YES;
+            self.error = error;
+            return;
         }
-        else {
-            // Reliable type information available. Check
-            if (self.rawClass) {
-                if (! [self canDisplayClass:self.rawClass]) {
-                    self.verified = YES;
-                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                     code:HLSViewBindingErrorUnsupportedType
-                                     localizedDescription:[NSString stringWithFormat:@"A transformer is required to transform %@ into "
-                                                           "one of the following types: %@", self.rawClass, [self supportedBindingClassesString]]];
-                    return;
-                }
-            }
-            else {
-                // Cannot verify further
-                if (rawValue) {
-                    if (! [self canDisplayValue:rawValue]) {
-                        self.verified = YES;
-                        self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                         code:HLSViewBindingErrorUnsupportedType
-                                         localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
-                                                               "types: %@", [self supportedBindingClassesString]]];
-                        return;
-                    }
-                    
-                    // Even if the view is compatible, we have no way to tell a transformer is not missing
-                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                     code:HLSViewBindingErrorMissingType
-                                     localizedDescription:@"Type information is not available. We cannot tell if a transformer is missing, "
-                                  "be careful. If you can, bind to a property instead of a getter / setter pair to get reliable type checking"];
-                    return;
-                }
-                else {
-                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                     code:HLSViewBindingErrorNilValue
-                                     localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
-                    return;
-                }
-            }
+        
+        if (pendingReason) {
+            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                             code:HLSViewBindingErrorPending
+                             localizedDescription:pendingReason];
+            return;
         }
         
         self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
     }
     
-    self.verified = YES;
     self.error = nil;
+    self.verified = YES;
 }
 
 #pragma mark Type checking
