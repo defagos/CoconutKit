@@ -243,7 +243,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     CGRect frame = [self overlayViewFrameForView:view margin:0.f];
     UIView *highlightOverlayView = [[UIView alloc] initWithFrame:frame];
     highlightOverlayView.userInfo_hls = @{ HLSViewBindingDebugOverlayUnderlyingViewKey : view };
-    highlightOverlayView.backgroundColor = [UIColor yellowColor];
+    highlightOverlayView.backgroundColor = [UIColor blueColor];
     highlightOverlayView.alpha = 0.f;
     [self.view addSubview:highlightOverlayView];
     

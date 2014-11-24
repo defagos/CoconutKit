@@ -8,6 +8,7 @@
 
 #import "HLSViewBindingDebugOverlayApperance.h"
 
+#import "UIColor+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
@@ -19,10 +20,10 @@ CGFloat HLSViewBindingDebugOverlayBorderWidth(BOOL isViewAutomaticallyUpdated)
 UIColor *HLSViewBindingDebugOverlayBorderColor(BOOL isVerified, BOOL hasError)
 {
     if (! isVerified) {
-        return [UIColor blueColor];
+        return [UIColor yellowColor];
     }
     else {
-        return hasError ? [UIColor redColor] : [UIColor greenColor];
+        return hasError ? [UIColor redColor] : [UIColor colorWithNonNormalizedRed:0 green:192 blue:0 alpha:1.f];
     }
 }
 
@@ -46,5 +47,5 @@ UIImage *HLSViewBindingDebugOverlayStripesPatternImage(void)
 
 CGFloat HLSViewBindingDebugOverlayAlpha(void)
 {
-    return 0.3f;
+    return 0.4f;
 }
