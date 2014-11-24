@@ -436,6 +436,55 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
+- (BOOL)resolveRawClass:(Class *)pRawClass withError:(NSError *__autoreleasing *)pError
+{
+    id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+    NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+    
+    Class lastTargetInKeyPathClass = hls_isClass(lastTargetInKeyPath) ? lastTargetInKeyPath : [lastTargetInKeyPath class];
+    objc_property_t property = class_getProperty(lastTargetInKeyPathClass, [methodName UTF8String]);
+    
+    // If the method name corresponds to a property, reliable return type information can be obtained from the runtime. No such information
+    // can be obtained for a getter or a getter / setter pair
+    // See https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html
+    Class rawClass = Nil;
+    if (property) {
+        const char *propertyAttributes = property_getAttributes(property);
+        NSString *returnInformationString = [[[NSString stringWithUTF8String:propertyAttributes] componentsSeparatedByString:@","] firstObject];
+        
+        NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
+        
+        // Objects with a specified class
+        if ([type isEqualToString:@"@"] && [returnInformationString length] > 2) {
+            NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, [returnInformationString length] - 4)];
+            rawClass = NSClassFromString(rawClassName);
+        }
+        // Primitive types are boxed as NSNumber using KVC
+        else if ([@"cdfilsBCILQS" rangeOfString:type].length != 0) {
+            rawClass = [NSNumber class];
+        }
+        // Structs are boxed as NSValue
+        else if ([type isEqualToString:@"{"]) {
+            rawClass = [NSValue class];
+        }
+        // Other types (e.g. blocks, C pointers, void) are not supported
+        else {
+            if (pError) {
+                *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                              code:HLSViewBindingErrorUnsupportedType
+                              localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. can be bound)"];
+            }
+            return NO;
+        }
+    }
+    
+    if (pRawClass) {
+        *pRawClass = rawClass;
+    }
+    
+    return YES;
+}
+
 - (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError *__autoreleasing *)pError
 {
     NSAssert([self.transformerName isFilled], @"A transformer name must be specified");
@@ -570,11 +619,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         id objectTarget = nil;
         NSError *error = nil;
         
-        if ([self resolveObjectTarget:&objectTarget withError:&error]) {
-            self.status |= HLSViewBindingStatusObjectTargetResolved;
-            self.objectTarget = objectTarget;
-        }
-        else {
+        if (! [self resolveObjectTarget:&objectTarget withError:&error]) {
             self.verified = YES;
             self.error = error;
             return;
@@ -584,7 +629,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         // be set
         // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
         if (self.supportingInput) {
-            id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+            id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:objectTarget];
             if (! hls_isClass(lastTargetInKeyPath)) {
                 NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
                 NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
@@ -592,47 +637,22 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 self.modelAutomaticallyUpdated = [lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)];
             }
         }
+        
+        self.objectTarget = objectTarget;
+        self.status |= HLSViewBindingStatusObjectTargetResolved;
     }
     
     if ((self.status & HLSViewBindingStatusTypeResolved) == 0) {
-        id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
-        NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+        Class rawClass = Nil;
+        NSError *error = nil;
         
-        Class lastTargetInKeyPathClass = hls_isClass(lastTargetInKeyPath) ? lastTargetInKeyPath : [lastTargetInKeyPath class];
-        objc_property_t property = class_getProperty(lastTargetInKeyPathClass, [methodName UTF8String]);
-        
-        // If the method name corresponds to a property, reliable return type information can be obtained from the runtime. No such information
-        // can be obtained for a getter or a getter / setter pair
-        // See https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html
-        if (property) {
-            const char *propertyAttributes = property_getAttributes(property);
-            NSString *returnInformationString = [[[NSString stringWithUTF8String:propertyAttributes] componentsSeparatedByString:@","] firstObject];
-            
-            NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
-            
-            // Objects with a specified class
-            if ([type isEqualToString:@"@"] && [returnInformationString length] > 2) {
-                NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, [returnInformationString length] - 4)];
-                self.rawClass = NSClassFromString(rawClassName);
-            }
-            // Primitive types are boxed as NSNumber using KVC
-            else if ([@"cdfilsBCILQS" rangeOfString:type].length != 0) {
-                self.rawClass = [NSNumber class];
-            }
-            // Structs are boxed as NSValue
-            else if ([type isEqualToString:@"{"]) {
-                self.rawClass = [NSValue class];
-            }
-            // Other types (e.g. blocks, C pointers, void) are not supported
-            else {
-                self.verified = YES;
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorUnsupportedType
-                                 localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. can be bound)"];
-                return;
-            }
+        if (! [self resolveRawClass:&rawClass withError:&error]) {
+            self.verified = YES;
+            self.error = error;
+            return;
         }
         
+        self.rawClass = rawClass;
         self.status |= HLSViewBindingStatusTypeResolved;
     }
     
