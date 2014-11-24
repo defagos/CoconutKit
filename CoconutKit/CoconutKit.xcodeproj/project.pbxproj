@@ -146,7 +146,7 @@
 		6FADE5AA14BA0494007EE121 /* HLSNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE52414BA0494007EE121 /* HLSNotifications.h */; };
 		6FADE5AB14BA0494007EE121 /* HLSNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE52514BA0494007EE121 /* HLSNotifications.m */; };
 		6FADE5AE14BA0494007EE121 /* HLSRuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE52814BA0494007EE121 /* HLSRuntime.h */; };
-		6FADE5AF14BA0494007EE121 /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE52914BA0494007EE121 /* HLSRuntime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6FADE5AF14BA0494007EE121 /* HLSRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE52914BA0494007EE121 /* HLSRuntime.m */; };
 		6FADE5B014BA0494007EE121 /* HLSUserInterfaceLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE52A14BA0494007EE121 /* HLSUserInterfaceLock.h */; };
 		6FADE5B114BA0494007EE121 /* HLSUserInterfaceLock.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE52B14BA0494007EE121 /* HLSUserInterfaceLock.m */; };
 		6FADE5B214BA0494007EE121 /* HLSValidable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE52C14BA0494007EE121 /* HLSValidable.h */; };

@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit', 'WebKit'
 
   # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
-  non_arc_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}, CoconutKit/Sources/Core/HLSRuntime.{h,m}'
+  non_arc_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}'
 
   # ARC source files
   s.requires_arc = true
