@@ -20,7 +20,8 @@
 @property (nonatomic, strong) NSDate *currentDate;
 @property (nonatomic, strong) NSTimer *timer;
 
-@property (nonatomic, assign, getter=isSwitchEnabled) BOOL switchEnabled;
+// Custom getter / setter names, not necessarily those expected according to KVC conventions
+@property (nonatomic, assign, getter=isThisSwitchEnabled, setter=setThisSwitchEnabled:) BOOL switchEnabled;
 
 @property (nonatomic, assign) NSInteger category;
 @property (nonatomic, assign) float completion;

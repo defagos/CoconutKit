@@ -452,8 +452,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     // See https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html
     Class rawClass = Nil;
     if (property) {
-        const char *propertyAttributes = property_getAttributes(property);
-        NSString *returnInformationString = [[[NSString stringWithUTF8String:propertyAttributes] componentsSeparatedByString:@","] firstObject];
+        NSString *propertyAttributesString = [NSString stringWithUTF8String:property_getAttributes(property)];
+        NSString *returnInformationString = [[propertyAttributesString componentsSeparatedByString:@","] firstObject];
         
         NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
         
@@ -707,16 +707,28 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             return;
         }
         
-        // Verify setter existence (-set<name> according to KVO compliance rules). Keypaths containing operators cannot
-        // be set
+        // Verify setter existence. Keypaths containing operators cannot be set
         // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
         if (self.supportingInput) {
             id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:objectTarget];
             if (! hls_isClass(lastTargetInKeyPath)) {
                 NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
-                NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
-                                                                                                                 withString:[[methodName substringToIndex:1] uppercaseString]]];
-                self.modelAutomaticallyUpdated = [lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)];
+                
+                // If the key path ends with a property, extract its attributes and ensure there is no readonly attribute set
+                objc_property_t property = class_getProperty([lastTargetInKeyPath class], [methodName UTF8String]);
+                if (property) {
+                    NSString *propertyAttributesString = [NSString stringWithUTF8String:property_getAttributes(property)];
+                    NSArray *propertyAttributes = [propertyAttributesString componentsSeparatedByString:@","];
+                    self.modelAutomaticallyUpdated = ! [propertyAttributes containsObject:@"R"];
+                }
+                // Otherwise look for a -set<name>: method according to KVO compliance rules
+                else {
+                    NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
+                                                                                                                     withString:[[methodName substringToIndex:1] uppercaseString]]];
+                    if ([lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)]) {
+                        self.modelAutomaticallyUpdated = YES;
+                    }
+                }
             }
         }
         
