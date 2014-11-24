@@ -27,8 +27,8 @@
  */
 typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     HLSViewBindingStatusUnverified = 0,                                 // Binding never verified
-    HLSViewBindingStatusTypeResolved = (1 << 0),                        // Type has been resolved (might have found nothing reliable)
-    HLSViewBindingStatusObjectTargetResolved = (1 << 1),                // Binding target resolution has been successfully made
+    HLSViewBindingStatusObjectTargetResolved = (1 << 0),                // Binding target resolution has been successfully made
+    HLSViewBindingStatusTypeResolved = (1 << 1),                        // Type has been resolved (might have found nothing reliable)
     HLSViewBindingStatusTransformerResolved = (1 << 2),                 // Binding transformer resolution has been successfully made (might have found nothing)
     HLSViewBindingStatusDelegateResolved = (1 << 3),                    // Binding delegate resoution has been successfully made (might have found nothing)
     HLSViewBindingStatusTypeCompatibilityChecked = (1 << 4)             // Type compatibility with the view has been checked
@@ -436,9 +436,61 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
+- (BOOL)resolveRawClass:(Class *)pRawClass withError:(NSError *__autoreleasing *)pError
+{
+    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
+    
+    id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+    NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+    
+    Class lastTargetInKeyPathClass = hls_isClass(lastTargetInKeyPath) ? lastTargetInKeyPath : [lastTargetInKeyPath class];
+    objc_property_t property = class_getProperty(lastTargetInKeyPathClass, [methodName UTF8String]);
+    
+    // If the method name corresponds to a property, reliable return type information can be obtained from the runtime. No such information
+    // can be obtained for a getter or a getter / setter pair
+    // See https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html
+    Class rawClass = Nil;
+    if (property) {
+        const char *propertyAttributes = property_getAttributes(property);
+        NSString *returnInformationString = [[[NSString stringWithUTF8String:propertyAttributes] componentsSeparatedByString:@","] firstObject];
+        
+        NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
+        
+        // Objects with a specified class
+        if ([type isEqualToString:@"@"] && [returnInformationString length] > 2) {
+            NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, [returnInformationString length] - 4)];
+            rawClass = NSClassFromString(rawClassName);
+        }
+        // Primitive types are boxed as NSNumber using KVC
+        else if ([@"cdfilsBCILQS" rangeOfString:type].length != 0) {
+            rawClass = [NSNumber class];
+        }
+        // Structs are boxed as NSValue
+        else if ([type isEqualToString:@"{"]) {
+            rawClass = [NSValue class];
+        }
+        // Other types (e.g. blocks, C pointers, void) are not supported
+        else {
+            if (pError) {
+                *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                              code:HLSViewBindingErrorUnsupportedType
+                              localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. can be bound)"];
+            }
+            return NO;
+        }
+    }
+    
+    if (pRawClass) {
+        *pRawClass = rawClass;
+    }
+    
+    return YES;
+}
+
 - (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError *__autoreleasing *)pError
 {
     NSAssert([self.transformerName isFilled], @"A transformer name must be specified");
+    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
     
     // Check whether the transformer is a global formatter (ClassName:formatterName)
     NSArray *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
@@ -560,6 +612,74 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
+- (BOOL)checkTypePendingWithReason:(NSString *__autoreleasing *)pPendingReason error:(NSError *__autoreleasing *)pError
+{
+    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
+    NSAssert(self.status & HLSViewBindingStatusTypeResolved, @"The type must be resolved");
+    
+    NSString *pendingReason = nil;
+    
+    id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
+    if (self.transformer) {
+        id value = [self.transformer transformObject:rawValue];
+        if (value) {
+            if (! [self canDisplayValue:value]) {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                  code:HLSViewBindingErrorUnsupportedType
+                                  localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
+                                                        "types: %@", [self supportedBindingClassesString]]];
+                }
+                return NO;
+            }
+        }
+        else {
+            pendingReason = @"Type compliance cannot be verified since the value to display is nil";
+        }
+    }
+    else {
+        // Reliable type information available. Check
+        if (self.rawClass) {
+            if (! [self canDisplayClass:self.rawClass]) {
+                if (pError) {
+                    *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                  code:HLSViewBindingErrorUnsupportedType
+                                  localizedDescription:[NSString stringWithFormat:@"A transformer is required to transform %@ into "
+                                                        "one of the following types: %@", self.rawClass, [self supportedBindingClassesString]]];
+                }
+                return NO;
+            }
+        }
+        // No type information available
+        else {
+            if (rawValue) {
+                if (! [self canDisplayValue:rawValue]) {
+                    if (pError) {
+                        *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorUnsupportedType
+                                      localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
+                                                            "types: %@", [self supportedBindingClassesString]]];
+                    }
+                    return NO;
+                }
+                
+                pendingReason = @"Type information is not available. It is therefore not possible to check if a transformer is missing. You should "
+                    "carefully check that the raw type is correct. If possible, bind the field to a property instead of a getter / setter pair to "
+                    "get reliable type checking";
+            }
+            else {
+                pendingReason = @"Type compliance cannot be verified since the value to display is nil";
+            }
+        }
+    }
+    
+    if (pPendingReason) {
+        *pPendingReason = pendingReason;
+    }
+    
+    return YES;
+}
+
 - (void)verify
 {
     if (self.verified) {
@@ -570,11 +690,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         id objectTarget = nil;
         NSError *error = nil;
         
-        if ([self resolveObjectTarget:&objectTarget withError:&error]) {
-            self.status |= HLSViewBindingStatusObjectTargetResolved;
-            self.objectTarget = objectTarget;
-        }
-        else {
+        if (! [self resolveObjectTarget:&objectTarget withError:&error]) {
             self.verified = YES;
             self.error = error;
             return;
@@ -584,7 +700,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         // be set
         // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
         if (self.supportingInput) {
-            id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+            id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:objectTarget];
             if (! hls_isClass(lastTargetInKeyPath)) {
                 NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
                 NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
@@ -592,47 +708,22 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 self.modelAutomaticallyUpdated = [lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)];
             }
         }
+        
+        self.objectTarget = objectTarget;
+        self.status |= HLSViewBindingStatusObjectTargetResolved;
     }
     
     if ((self.status & HLSViewBindingStatusTypeResolved) == 0) {
-        id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
-        NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+        Class rawClass = Nil;
+        NSError *error = nil;
         
-        Class lastTargetInKeyPathClass = hls_isClass(lastTargetInKeyPath) ? lastTargetInKeyPath : [lastTargetInKeyPath class];
-        objc_property_t property = class_getProperty(lastTargetInKeyPathClass, [methodName UTF8String]);
-        
-        // If the method name corresponds to a property, reliable return type information can be obtained from the runtime. No such information
-        // can be obtained for a getter or a getter / setter pair
-        // See https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html
-        if (property) {
-            const char *propertyAttributes = property_getAttributes(property);
-            NSString *returnInformationString = [[[NSString stringWithUTF8String:propertyAttributes] componentsSeparatedByString:@","] firstObject];
-            
-            NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
-            
-            // Objects with a specified class
-            if ([type isEqualToString:@"@"] && [returnInformationString length] > 2) {
-                NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, [returnInformationString length] - 4)];
-                self.rawClass = NSClassFromString(rawClassName);
-            }
-            // Primitive types are boxed as NSNumber using KVC
-            else if ([@"cdfilsBCILQS" rangeOfString:type].length != 0) {
-                self.rawClass = [NSNumber class];
-            }
-            // Structs are boxed as NSValue
-            else if ([type isEqualToString:@"{"]) {
-                self.rawClass = [NSValue class];
-            }
-            // Other types (e.g. blocks, C pointers, void) are not supported
-            else {
-                self.verified = YES;
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorUnsupportedType
-                                 localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. can be bound)"];
-                return;
-            }
+        if (! [self resolveRawClass:&rawClass withError:&error]) {
+            self.verified = YES;
+            self.error = error;
+            return;
         }
         
+        self.rawClass = rawClass;
         self.status |= HLSViewBindingStatusTypeResolved;
     }
     
@@ -643,37 +734,35 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             id<HLSTransformer> transformer = nil;
             NSError *error = nil;
             
-            if ([self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
-                    && [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
-                self.status |= HLSViewBindingStatusTransformerResolved;
-                self.transformationTarget = transformationTarget;
-                self.transformationSelector = transformationSelector;
-                self.transformer = transformer;
-                
-                // Observe transformer updates, reload cached transformer and update view accordingly
-                __weak __typeof(self) weakSelf = self;
-                [self.transformationTarget addObserver:self keyPath:NSStringFromSelector(self.transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-                    id<HLSTransformer> transformer = nil;
-                    NSError *error = nil;
-                    
-                    if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakSelf.transformationTarget transformationSelector:weakSelf.transformationSelector error:&error]) {
-                        weakSelf.verified = NO;
-                        weakSelf.error = error;
-                    }
-                    
-                    weakSelf.transformer = transformer;
-                    [weakSelf.view updateBoundView];
-                }];
-            }
-            else {
+            if (! [self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
+                    || ! [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
                 self.verified = YES;
                 self.error = error;
                 return;
             }
+            
+            // Observe transformer updates, reload cached transformer and update view accordingly
+            __weak __typeof(self) weakSelf = self;
+            __weak __typeof(self) weakTransformationTarget = transformationTarget;
+            [transformationTarget addObserver:self keyPath:NSStringFromSelector(transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                id<HLSTransformer> transformer = nil;
+                NSError *error = nil;
+                
+                if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakTransformationTarget transformationSelector:transformationSelector error:&error]) {
+                    weakSelf.verified = YES;
+                    weakSelf.error = error;
+                }
+                
+                weakSelf.transformer = transformer;
+                [weakSelf.view updateBoundView];
+            }];
+            
+            self.transformationTarget = transformationTarget;
+            self.transformationSelector = transformationSelector;
+            self.transformer = transformer;
         }
-        else {
-            self.status |= HLSViewBindingStatusTransformerResolved;
-        }
+        
+        self.status |= HLSViewBindingStatusTransformerResolved;
     }
     
     if ((self.status & HLSViewBindingStatusDelegateResolved) == 0) {
@@ -682,67 +771,21 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     if ((self.status & HLSViewBindingStatusTypeCompatibilityChecked) == 0) {
-        // No need to check for exceptions here, the keypath is here guaranteed to be valid for the object
-        id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
+        NSString *pendingReason = nil;
+        NSError *error = nil;
         
-        if (self.transformer) {
-            id value = [self.transformer transformObject:rawValue];
-            
-            // Cannot verify further
-            if (! value) {
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorNilValue
-                                 localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
-                return;
-            }
-            
-            if (! [self canDisplayValue:value]) {
-                self.verified = YES;
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorUnsupportedType
-                                 localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
-                                                       "types: %@", [self supportedBindingClassesString]]];
-                return;
-            }
+        if (! [self checkTypePendingWithReason:&pendingReason error:&error]) {
+            self.verified = YES;
+            self.error = error;
+            return;
         }
-        else {
-            // Reliable type information available. Check
-            if (self.rawClass) {
-                if (! [self canDisplayClass:self.rawClass]) {
-                    self.verified = YES;
-                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                     code:HLSViewBindingErrorUnsupportedType
-                                     localizedDescription:[NSString stringWithFormat:@"A transformer is required to transform %@ into "
-                                                           "one of the following types: %@", self.rawClass, [self supportedBindingClassesString]]];
-                    return;
-                }
-            }
-            else {
-                // Cannot verify further
-                if (rawValue) {
-                    if (! [self canDisplayValue:rawValue]) {
-                        self.verified = YES;
-                        self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                         code:HLSViewBindingErrorUnsupportedType
-                                         localizedDescription:[NSString stringWithFormat:@"The transformer must return one of the following supported "
-                                                               "types: %@", [self supportedBindingClassesString]]];
-                        return;
-                    }
-                    
-                    // Even if the view is compatible, we have no way to tell a transformer is not missing
-                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                     code:HLSViewBindingErrorMissingType
-                                     localizedDescription:@"Type information is not available. We cannot tell if a transformer is missing, "
-                                  "be careful. If you can, bind to a property instead of a getter / setter pair to get reliable type checking"];
-                    return;
-                }
-                else {
-                    self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                     code:HLSViewBindingErrorNilValue
-                                     localizedDescription:@"Type compliance cannot be verified yet since the value to display is nil"];
-                    return;
-                }
-            }
+        
+        // Cannot be fully verified yet
+        if (pendingReason) {
+            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                             code:HLSViewBindingErrorPending
+                             localizedDescription:pendingReason];
+            return;
         }
         
         self.status |= HLSViewBindingStatusTypeCompatibilityChecked;

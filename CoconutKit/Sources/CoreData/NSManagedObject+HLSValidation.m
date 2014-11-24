@@ -332,7 +332,7 @@ static BOOL validateProperty(id self, SEL sel, id *pValue, NSError **pError)
     }
     
     // Get the check method implementation
-    BOOL (*checkImp)(id, SEL, id, NSError **) = (BOOL (*)(id, SEL, id, NSError **))method_getImplementation(method);
+    BOOL (*checkImp)(id, SEL, id, NSError *__autoreleasing *) = (BOOL (*)(id, SEL, id, NSError *__autoreleasing *))method_getImplementation(method);
     
     // Check
     NSError *newError = nil;
@@ -378,7 +378,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     // Top of the managed object hierarchy
     if (class == [NSManagedObject class]) {
         // Get the implementation. This method exists on NSManagedObject, no need to test if responding to selector
-        BOOL (*imp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))class_getMethodImplementation(class, sel);
+        BOOL (*imp)(id, SEL, NSError *__autoreleasing *) = (BOOL (*)(id, SEL, NSError *__autoreleasing *))class_getMethodImplementation(class, sel);
         
         // Validate. This is where individual validations are triggered
         NSError *newError = nil;
@@ -412,7 +412,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         }
         
         // A check method has been found. Call the underlying check method implementation
-        BOOL (*checkImp)(id, SEL, NSError **) = (BOOL (*)(id, SEL, NSError **))method_getImplementation(method);
+        BOOL (*checkImp)(id, SEL, NSError *__autoreleasing *) = (BOOL (*)(id, SEL, NSError *__autoreleasing *))method_getImplementation(method);
         NSError *newCheckError = nil;
         if (! (*checkImp)(self, checkSel, &newCheckError)) {
             if (! newCheckError) {
