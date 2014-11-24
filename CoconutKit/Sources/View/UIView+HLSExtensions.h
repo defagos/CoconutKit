@@ -52,3 +52,17 @@
 - (UIView *)firstResponderView;
 
 @end
+
+#ifdef DEBUG
+
+@interface UIView (HLSDebugging)
+
+/**
+ * Private method printing the receiver view hierarchy recursively. Only use for debugging purposes
+ */
+- (void)printRecursiveDescription;
+
+@end
+
+#endif
+

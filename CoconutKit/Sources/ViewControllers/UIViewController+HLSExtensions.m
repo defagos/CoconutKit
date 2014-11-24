@@ -222,6 +222,19 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
 
 @end
 
+#ifdef DEBUG
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
+@implementation UIViewController (HLSDebugging)
+
+@end
+
+#pragma clang diagnostic pop
+
+#endif
+
 #pragma mark Swizzled method implementations
 
 static id swizzled_UIViewController__initWithNibName_bundle_Imp(UIViewController *self, SEL _cmd, NSString *nibName, NSBundle *bundle)

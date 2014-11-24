@@ -102,3 +102,16 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
 - (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController;
 
 @end
+
+#ifdef DEBUG
+
+@interface UIViewController (HLSDebugging)
+
+/**
+ * Private method printing the receiver view controller hierarchy recursively. Only use for debugging purposes
+ */
+- (void)_printHierarchy;
+
+@end
+
+#endif

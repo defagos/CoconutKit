@@ -180,3 +180,16 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd)
     
     return (*s_UIView_becomeFirstResponder)(self, _cmd);
 }
+
+#ifdef DEBUG
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
+@implementation UIView (HLSDebugging)
+
+@end
+
+#pragma clang diagnostic pop
+
+#endif
