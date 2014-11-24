@@ -137,11 +137,13 @@ BOOL hls_isClass(id object);
 void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject);
 
 /**
- * Same as objc_setAssociatedObject, but with support for weak references
+ * Same as objc_setAssociatedObject, but with support for weak references. Objects associated using hls_setAssociatedObject
+ * can only be retrieved using hls_getAssociatedObject, not using objc_getAssociatedObject
  */
 void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy);
 
 /**
- * Same as objc_setAssociatedObject, but with support for weak references
+ * Same as objc_setAssociatedObject, but with support for weak references. Only retrieves objects associated using
+ * hls_setAssociatedObject, not objc_setAssociatedObject
  */
 id hls_getAssociatedObject(id object, const void *key);

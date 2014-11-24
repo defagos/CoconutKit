@@ -864,6 +864,19 @@
     // the autorelease pool drain, but the reference is weak and has been nilled
     GHAssertNil(hls_getAssociatedObject(self, kAssociatedObject2Key), nil);
     
+    // Check that objc_ and hls_ functions are indenpendent
+    static void *kAssociatedObject3Key = &kAssociatedObject3Key;
+    NSObject *object3 = [[NSObject alloc] init];
+    objc_setAssociatedObject(self, kAssociatedObject3Key, object3, OBJC_ASSOCIATION_RETAIN);
+    GHAssertNotNil(objc_getAssociatedObject(self, kAssociatedObject3Key), nil);
+    GHAssertNil(hls_getAssociatedObject(self, kAssociatedObject3Key), nil);
+    
+    static void *kAssociatedObject4Key = &kAssociatedObject4Key;
+    NSObject *object4 = [[NSObject alloc] init];
+    hls_setAssociatedObject(self, kAssociatedObject4Key, object4, HLS_ASSOCIATION_STRONG);
+    GHAssertNotNil(hls_getAssociatedObject(self, kAssociatedObject4Key), nil);
+    GHAssertNil(objc_getAssociatedObject(self, kAssociatedObject4Key), nil);
+    
     objc_removeAssociatedObjects(self);
 }
 
