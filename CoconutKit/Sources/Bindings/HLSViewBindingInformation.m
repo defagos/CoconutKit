@@ -628,7 +628,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             }
         }
         else {
-            pendingReason = @"Type compliance cannot be verified yet since the value to display is nil";
+            pendingReason = @"Type compliance cannot be verified since the value to display is nil";
         }
     }
     else {
@@ -657,11 +657,12 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                     return NO;
                 }
                 
-                pendingReason = @"Type information is not available. We cannot tell if a transformer is missing, you should therefore"
-                    "be careful. If possible, bind the field a property of a getter / setter pair to get reliable type checking";
+                pendingReason = @"Type information is not available. It is therefore not possible to check if a transformer is missing. You should "
+                    "carefully check that the raw type is correct. If possible, bind the field to a property instead of a getter / setter pair to "
+                    "get reliable type checking";
             }
             else {
-                pendingReason = @"Type compliance cannot be verified yet since the value to display is nil";
+                pendingReason = @"Type compliance cannot be verified since the value to display is nil";
             }
         }
     }
@@ -773,6 +774,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             return;
         }
         
+        // Cannot be fully verified yet
         if (pendingReason) {
             self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                              code:HLSViewBindingErrorPending
@@ -783,8 +785,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
     }
     
-    self.error = nil;
     self.verified = YES;
+    self.error = nil;
 }
 
 #pragma mark Type checking
