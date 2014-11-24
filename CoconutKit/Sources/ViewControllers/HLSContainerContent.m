@@ -114,7 +114,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
             HLSLoggerError(@"A view controller can only be associated with one container");
             return nil;
         }
-        hls_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
+        hls_setAssociatedObject(viewController, s_containerContentKey, self, HLS_ASSOCIATION_WEAK_NONATOMIC);
         
         // We MUST use the UIViewController containment API to declare each view controller we insert into it as child.
         //
@@ -142,10 +142,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 {
     // Remove the view from the stack (this does NOT set viewController.view to nil to allow view caching)
     [self removeViewFromContainerStackView];
-        
-    // Remove the association of the view controller with its content container object
-    NSAssert(hls_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
-    hls_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
     // We must remove the parent - child relationship, see comment in -initWithViewController:containerViewController:transitionStyle:duration:
     [self.viewController removeFromParentViewController];
