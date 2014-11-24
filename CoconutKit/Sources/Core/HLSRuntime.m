@@ -325,8 +325,10 @@ void hls_object_replaceReferencesToObject(id object, id replacedObject, id repla
 void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy)
 {
     if (policy == HLS_ASSOCIATION_WEAK || policy == HLS_ASSOCIATION_WEAK_NONATOMIC) {
+        objc_AssociationPolicy objc_policy = (policy == HLS_ASSOCIATION_WEAK) ? OBJC_ASSOCIATION_RETAIN : OBJC_ASSOCIATION_RETAIN_NONATOMIC;
+        
         HLSWeakObjectWrapper *weakObjectWrapper = [[[HLSWeakObjectWrapper alloc] initWithObject:value] autorelease];
-        objc_setAssociatedObject(object, key, weakObjectWrapper, (policy == HLS_ASSOCIATION_WEAK) ? OBJC_ASSOCIATION_RETAIN : OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(object, key, weakObjectWrapper, objc_policy);
     }
     else {
         objc_setAssociatedObject(object, key, value, policy);
@@ -334,7 +336,13 @@ void hls_setAssociatedObject(id object, const void *key, id value, hls_Associati
 }
 
 id hls_getAssociatedObject(id object, const void *key)
-{
+{    
     id associatedObject = objc_getAssociatedObject(object, key);
-    return [associatedObject isKindOfClass:[HLSWeakObjectWrapper class]] ? ((HLSWeakObjectWrapper *)associatedObject).object : associatedObject;
+    if ([associatedObject isKindOfClass:[HLSWeakObjectWrapper class]]) {
+        HLSWeakObjectWrapper *weakObjectWrapper = (HLSWeakObjectWrapper *)associatedObject;
+        return weakObjectWrapper.object;
+    }
+    else {
+        return associatedObject;
+    }
 }
