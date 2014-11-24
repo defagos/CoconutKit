@@ -823,12 +823,12 @@
 
 - (void)testAssociatedObjects
 {
-    // assign is not weak, as for the usual objc_setAssociatedObject
+    // ASSIGN is not weak, as for the usual objc_setAssociatedObject
     static void *kAssociatedObject1Key = &kAssociatedObject1Key;
     NSObject *object1 = [[NSObject alloc] init];
     __weak NSObject *weakObject1 = object1;
 
-    // Eliminate potential deferred deallocations (i.e. fore an update of weak references to their final values)
+    // Used to update weak references to their final values
     @autoreleasepool {
         GHAssertNotNil(weakObject1, nil);
         
@@ -836,27 +836,32 @@
         GHAssertNotNil(hls_getAssociatedObject(self, kAssociatedObject1Key), nil);
         
         object1 = nil;
+        
+        // Cannot access hls_getAssociatedObject(self, kAssociatedObject1Key) since this would most probably crash!
+        // Accessing a deallocated associated object namely crashes, exactly like calling a selector on a deallocated object
     }
     
     GHAssertNil(weakObject1, nil);
-    GHAssertNotNil(hls_getAssociatedObject(self, kAssociatedObject1Key), nil);
     
-    // weak
+    // WEAK
     static void *kAssociatedObject2Key = &kAssociatedObject2Key;
-    NSObject *object2 = [[RuntimeTestClass11 alloc] init];
+    NSObject *object2 = [[NSObject alloc] init];
     __weak NSObject *weakObject2 = object2;
 
-    // Eliminate potential deferred deallocations (i.e. fore an update of weak references to their final values)
+    // Used to update weak references to their final values
     @autoreleasepool {
         GHAssertNotNil(weakObject2, nil);
     
         hls_setAssociatedObject(self, kAssociatedObject2Key, object2, HLS_ASSOCIATION_WEAK);
         GHAssertNotNil(hls_getAssociatedObject(self, kAssociatedObject2Key), nil);
     
-        object2 = nil;
+        object2 = nil;        
     }
     
     GHAssertNil(weakObject2, nil);
+    
+    // Can safely access hls_getAssociatedObject(self, kAssociatedObject2Key). object2 is now deallocated because of
+    // the autorelease pool drain, but the reference is weak and has been nilled
     GHAssertNil(hls_getAssociatedObject(self, kAssociatedObject2Key), nil);
     
     objc_removeAssociatedObjects(self);
