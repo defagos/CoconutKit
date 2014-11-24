@@ -108,12 +108,12 @@
     return [[NSCalendar currentCalendar] ordinalityOfUnit:smaller inUnit:larger forDate:date inTimeZone:timeZone];
 }
 
-+ (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date
++ (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate *__autoreleasing *)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date
 {
     return [[NSCalendar currentCalendar] rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:date];
 }
 
-+ (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
++ (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate *__autoreleasing *)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
     return [[NSCalendar currentCalendar] rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:date inTimeZone:timeZone];
 }
@@ -295,7 +295,7 @@
     return [self ordinalityOfUnit:smaller inUnit:larger forDate:dateInCalendarTimeZone];
 }
 
-- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate **)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
+- (BOOL)rangeOfUnit:(NSCalendarUnit)unit startDate:(NSDate *__autoreleasing *)pStartDate interval:(NSTimeInterval *)pInterval forDate:(NSDate *)date inTimeZone:(NSTimeZone *)timeZone
 {
     if (! timeZone) {
         return [self rangeOfUnit:unit startDate:pStartDate interval:pInterval forDate:date];
