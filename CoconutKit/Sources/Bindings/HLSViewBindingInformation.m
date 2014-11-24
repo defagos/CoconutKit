@@ -42,6 +42,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 @property (nonatomic, weak) id objectTarget;
 @property (nonatomic, assign) Class rawClass;
+@property (nonatomic, assign) Class inputClass;
 
 @property (nonatomic, weak) id transformationTarget;
 @property (nonatomic, assign) SEL transformationSelector;
@@ -92,7 +93,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         self.transformerName = transformerName;
         self.view = view;
         self.status = HLSViewBindingStatusUnverified;
-        self.supportingInput = [view respondsToSelector:@selector(inputValue)];
+        self.supportingInput = [view respondsToSelector:@selector(inputValueWithClass:)];
     }
     return self;
 }
@@ -127,8 +128,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (id)inputValue
 {
-    if ([self.view respondsToSelector:@selector(inputValue)]) {
-        return [self.view performSelector:@selector(inputValue)];
+    if ([self.view respondsToSelector:@selector(inputValueWithClass:)] || ! self.inputClass) {
+        return [self.view performSelector:@selector(inputValueWithClass:) withObject:self.inputClass];
     }
     else {
         return nil;
@@ -612,12 +613,13 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
-- (BOOL)checkTypePendingWithReason:(NSString *__autoreleasing *)pPendingReason error:(NSError *__autoreleasing *)pError
+- (BOOL)checkTypePendingWithReason:(NSString *__autoreleasing *)pPendingReason inputClass:(Class *)pInputClass error:(NSError *__autoreleasing *)pError
 {
     NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
     NSAssert(self.status & HLSViewBindingStatusTypeResolved, @"The type must be resolved");
     
     NSString *pendingReason = nil;
+    Class inputClass = Nil;
     
     id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
     if (self.transformer) {
@@ -632,6 +634,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 }
                 return NO;
             }
+            
+            inputClass = [value class];
         }
         else {
             pendingReason = @"Type compliance cannot be verified since the value to display is nil";
@@ -649,6 +653,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 }
                 return NO;
             }
+            
+            inputClass = self.rawClass;
         }
         // No type information available
         else {
@@ -666,6 +672,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 pendingReason = @"Type information is not available. It is therefore not possible to check if a transformer is missing. You should "
                     "carefully check that the raw type is correct. If possible, bind the field to a property instead of a getter / setter pair to "
                     "get reliable type checking";
+                inputClass = [rawValue class];
             }
             else {
                 pendingReason = @"Type compliance cannot be verified since the value to display is nil";
@@ -675,6 +682,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     
     if (pPendingReason) {
         *pPendingReason = pendingReason;
+    }
+    
+    if (pInputClass) {
+        *pInputClass = inputClass;
     }
     
     return YES;
@@ -772,9 +783,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     
     if ((self.status & HLSViewBindingStatusTypeCompatibilityChecked) == 0) {
         NSString *pendingReason = nil;
+        Class inputClass = Nil;
         NSError *error = nil;
         
-        if (! [self checkTypePendingWithReason:&pendingReason error:&error]) {
+        if (! [self checkTypePendingWithReason:&pendingReason inputClass:&inputClass error:&error]) {
             self.verified = YES;
             self.error = error;
             return;
@@ -788,6 +800,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             return;
         }
         
+        self.inputClass = inputClass;
         self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
     }
     

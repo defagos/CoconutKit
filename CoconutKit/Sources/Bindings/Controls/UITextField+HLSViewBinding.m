@@ -54,7 +54,7 @@ static void swizzled_UITextField__setText_Imp(UITextField *self, SEL _cmd, NSStr
     self.text = value;
 }
 
-- (id)inputValue
+- (id)inputValueWithClass:(Class)inputClass
 {
     return self.text;
 }

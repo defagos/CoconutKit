@@ -177,6 +177,16 @@
         [resolvedInformationEntries addObject:transformationSelectorEntry];
     }
     
+    if (self.bindingInformation.supportingInput) {
+        HLSViewBindingInformationEntry *inputClassEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Resolved input value class (view)"
+                                                                                                          text:NSStringFromClass(self.bindingInformation.inputClass)];
+        [resolvedInformationEntries addObject:inputClassEntry];
+    }
+    
+    HLSViewBindingInformationEntry *rawClassEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Resolved raw value class (model)"
+                                                                                                    text:NSStringFromClass(self.bindingInformation.rawClass)];
+    [resolvedInformationEntries addObject:rawClassEntry];
+    
     return [NSArray arrayWithArray:resolvedInformationEntries];
 }
 
@@ -185,12 +195,12 @@
     NSMutableArray *valueEntries = [NSMutableArray array];
     
     if (self.bindingInformation.supportingInput) {
-        HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Input value"
+        HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Input value (view)"
                                                                                                         object:[self.bindingInformation inputValue]];
         [valueEntries addObject:inputValueEntry];
     }
     
-    HLSViewBindingInformationEntry *rawValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Raw value"
+    HLSViewBindingInformationEntry *rawValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Raw value (model)"
                                                                                                   object:[self.bindingInformation rawValue]];
     [valueEntries addObject:rawValueEntry];
     

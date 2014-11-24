@@ -46,10 +46,11 @@
 
 /**
  * UIView subclasses which want to be able to update the underlying model MUST implement this method, returning
- * the currently displayed value. The type of the returned value must be one of the classes declared by
- * +supportedBindingClasses
+ * the currently displayed value, as an instance of the class provided as parameter. The provided class is always
+ * one of the classes returned by +supportedBindingClasses. If your view binds only to one type, you can ignore
+ * this parameter and return an object with the according class
  */
-- (id)inputValue;
+- (id)inputValueWithClass:(Class)inputClass;
 
 @end
 

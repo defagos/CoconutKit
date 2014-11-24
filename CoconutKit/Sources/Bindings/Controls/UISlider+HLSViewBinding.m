@@ -52,7 +52,7 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
     [self setValue:[value floatValue] animated:animated];
 }
 
-- (id)inputValue
+- (id)inputValueWithClass:(Class)inputClass
 {
     return @(self.value);
 }
