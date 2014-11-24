@@ -438,6 +438,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)resolveRawClass:(Class *)pRawClass withError:(NSError *__autoreleasing *)pError
 {
+    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
+    
     id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
     NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
     
@@ -488,6 +490,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 - (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError *__autoreleasing *)pError
 {
     NSAssert([self.transformerName isFilled], @"A transformer name must be specified");
+    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
     
     // Check whether the transformer is a global formatter (ClassName:formatterName)
     NSArray *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
@@ -611,6 +614,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)checkTypePendingWithReason:(NSString *__autoreleasing *)pPendingReason error:(NSError *__autoreleasing *)pError
 {
+    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
+    NSAssert(self.status & HLSViewBindingStatusTypeResolved, @"The type must be resolved");
+    
     NSString *pendingReason = nil;
     
     id rawValue = [self.objectTarget valueForKeyPath:self.keyPath];
