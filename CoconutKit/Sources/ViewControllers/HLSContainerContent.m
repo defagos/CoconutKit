@@ -53,7 +53,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 + (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass
                                        forViewController:(UIViewController *)viewController
 {
-    HLSContainerContent *containerContent = objc_getAssociatedObject(viewController, s_containerContentKey);
+    HLSContainerContent *containerContent = hls_getAssociatedObject(viewController, s_containerContentKey);
     if (containerViewControllerClass) {
         if ([containerContent.containerViewController isKindOfClass:containerViewControllerClass]) {
             return containerContent.containerViewController;
@@ -110,11 +110,11 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
         }
         
         // Associate the view controller with its container content object        
-        if (objc_getAssociatedObject(viewController, s_containerContentKey)) {
+        if (hls_getAssociatedObject(viewController, s_containerContentKey)) {
             HLSLoggerError(@"A view controller can only be associated with one container");
             return nil;
         }
-        objc_setAssociatedObject(viewController, s_containerContentKey, self, OBJC_ASSOCIATION_ASSIGN);
+        hls_setAssociatedObject(viewController, s_containerContentKey, self, HLS_ASSOCIATION_WEAK_NONATOMIC);
         
         // We MUST use the UIViewController containment API to declare each view controller we insert into it as child.
         //
@@ -142,10 +142,6 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 {
     // Remove the view from the stack (this does NOT set viewController.view to nil to allow view caching)
     [self removeViewFromContainerStackView];
-        
-    // Remove the association of the view controller with its content container object
-    NSAssert(objc_getAssociatedObject(self.viewController, s_containerContentKey), @"The view controller was not associated with a content container");
-    objc_setAssociatedObject(self.viewController, s_containerContentKey, nil, OBJC_ASSOCIATION_ASSIGN);
     
     // We must remove the parent - child relationship, see comment in -initWithViewController:containerViewController:transitionStyle:duration:
     [self.viewController removeFromParentViewController];
@@ -381,7 +377,7 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 
 static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)
 {
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    HLSContainerContent *containerContent = hls_getAssociatedObject(self, s_containerContentKey);
     if (containerContent) {
         return containerContent.movingToParentViewController;
     }
@@ -392,7 +388,7 @@ static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIView
 
 static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd)
 {
-    HLSContainerContent *containerContent = objc_getAssociatedObject(self, s_containerContentKey);
+    HLSContainerContent *containerContent = hls_getAssociatedObject(self, s_containerContentKey);
     if (containerContent) {
         return containerContent.movingFromParentViewController;
     }

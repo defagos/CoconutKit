@@ -20,7 +20,8 @@
 @property (nonatomic, strong) NSDate *currentDate;
 @property (nonatomic, strong) NSTimer *timer;
 
-@property (nonatomic, assign, getter=isSwitchEnabled) BOOL switchEnabled;
+// Custom getter / setter names, not necessarily those expected according to KVC conventions
+@property (nonatomic, assign, getter=isThisSwitchEnabled, setter=setThisSwitchEnabled:) BOOL switchEnabled;
 
 @property (nonatomic, assign) NSInteger category;
 @property (nonatomic, assign) float completion;
@@ -38,6 +39,8 @@
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
 @property (nonatomic, weak) IBOutlet HLSCursor *cursor;
+
+@property (nonatomic, readonly, strong) UIImage *apple1Image;
 
 @end
 
@@ -306,7 +309,7 @@
 
 #pragma mark Validation
 
-- (BOOL)validateSwitchEnabled:(NSNumber **)pSwitchEnabled error:(NSError *__autoreleasing *)pError
+- (BOOL)validateSwitchEnabled:(NSNumber *__autoreleasing *)pSwitchEnabled error:(NSError *__autoreleasing *)pError
 {
     HLSLoggerInfo(@"Called switch validation method");
     return YES;

@@ -10,7 +10,7 @@
 
 /**
  * Binding support for UIActivityIndicatorView:
- *   - binds to NSNumber model values (boolean)
+ *   - binds to NSNumber (boolean) or BOOL model values
  *   - displays the underlying model value, but cannot update it
  *   - does not animate updates
  */

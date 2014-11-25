@@ -59,22 +59,22 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 - (NSString *)tag_hls
 {
-    return objc_getAssociatedObject(self, s_tagKey);
+    return hls_getAssociatedObject(self, s_tagKey);
 }
 
 - (void)setTag_hls:(NSString *)tag_hls
 {
-    objc_setAssociatedObject(self, s_tagKey, tag_hls, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_tagKey, tag_hls, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSDictionary *)userInfo_hls
 {
-    return objc_getAssociatedObject(self, s_userInfoKey);
+    return hls_getAssociatedObject(self, s_userInfoKey);
 }
 
 - (void)setUserInfo_hls:(NSDictionary *)userInfo_hls
 {
-    objc_setAssociatedObject(self, s_userInfoKey, userInfo_hls, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_userInfoKey, userInfo_hls, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIImage *)flattenedImage
@@ -180,3 +180,16 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd)
     
     return (*s_UIView_becomeFirstResponder)(self, _cmd);
 }
+
+#ifdef DEBUG
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
+@implementation UIView (HLSDebugging)
+
+@end
+
+#pragma clang diagnostic pop
+
+#endif

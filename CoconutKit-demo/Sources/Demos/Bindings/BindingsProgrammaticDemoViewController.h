@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
-#import "HLSViewController.h"
-
 @interface BindingsProgrammaticDemoViewController : HLSViewController
 
 @end

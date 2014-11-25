@@ -29,7 +29,7 @@
  * conversion of values, for display and / or input reading.
  *
  * One of the primary goals of CoconutKit bindings is to be able to define a binding with as few information as
- * possible. The remaining of the bindings properties is resolved and checked at runtime. During binding resolution, 
+ * possible. The remaining of the binding properties is resolved and checked at runtime. During binding resolution,
  * each bound view is assigned a status. This status can be examined using an in-app debugging interface, making 
  * programmer error detection easy.
  *
@@ -37,31 +37,76 @@
  *
  *
  *
- * 1. Binding definition
+ * 1. Bindings in practice
+ * ------------------------
+ *
+ * Usually, when you have to display some information or grab some input from the user, you first start by creating
+ * a dedicated view controller, which usually provides a self-contained, reusable functional unit. 
+ *
+ * If you are using Interface Builder, you probably proceed as follows:
+ *   - You attach a model object to the view controller. The model object will provide values to be displayed,
+ *     and receive values provided interactively
+ *   - In the xib or storyboard file, you drop a few labels and text fields on the view controller view
+ *   - Switching to the view controller implementation, you add the corresponding outlets, which you carefully bind
+ *     to the labels and text fields in the xib, one by one
+ *   - To update labels and provide text fields with their initial value, you write some kind of reload method,
+ *     which assigns to each label and text field the appropriate value. Depending on the value, e.g. dates,
+ *     some formatting might be needed, usually achieved by applying an NSFormatter
+ *   - You ensure that if the object changes reloading of the labels and text fields is properly made. Usually 
+ *     calling the reload method when appropriate suffices, but you can also use KVO to be notified about changes 
+ *     automatically. Of course, if you use KVO, you implement the corresponding observation methods, with an
+ *     appropriate context, and you do not forget to unregister the view controller when it gets deallocated
+ *   - You grab changes from text fields and update the underlying model object accordingly. This usually means
+ *     setting the view controller as delegate of each text field, or listening to change notifications
+ *   - Some text fields might allow entering a formatted date. In such cases, you need to parse the input first 
+ *     (using an NSFormatter) before updating the model
+ *   - You add some validation methods (e.g. to check for negative ages), and you call them where appropriate
+ *     to ensure data correctness
+ *   - You spend some time fixing issues (incorrectly bound outlets, missing displayed values, incorrectly updated
+ *     model) until your screen works as expected
+ *
+ * Using CoconutKit bindings, this tedious process is made a lot easier:
+ *   - You attach a model object to the view controller. The model object will provide values to be displayed,
+ *     and receive values provided interactively
+ *   - In the xib or storyboard file, you drop a few labels and text fields on the view controller view. For each
+ *     one, you specify a key path to bind to, e.g. 'employee.firstName', 'employee.age' or 'employee.birthdate', 
+ *     assuming your model object is made available as a view controller 'employee' property
+ *   - For each value which requires formatting for display or which needs to be parsed, you implement a date formatter,
+ *     either on the view controller, the model class, or somewhere at global scope. In the xib, you provide for
+ *     each view which requires formatting the name of this date formatter
+ *   - You write KVC-compliant validation methods on your model object, and make the view controller inherit from
+ *     a binding delegation protocol to catch validation events. With a single call, you trigger a validation for
+ *     all text fields when needed
+ *   - You build and run your application. All fields are kept synchronized, even if the model object changes
+ *   - If you find some issues, you fire up an in-app debugging interface, locate the issues, and fix them in a snap
+ *
+ *
+ *
+ * 2. Binding definition
  * ---------------------
  * 
  * To define a binding, only two pieces of information are needed:
- *   - The keypath to bind the view to (bindKeyPath), which is required
- *   - If the value returned by the key path is not natively supported by the view, or if the value must somehow be
- *     pre-processed first (e.g. rounded), a transformer can optionally be provided (bindTransformer)
+ *   - bindKeyPath: The keypath to bind the view to, which is required
+ *   - bindTransformer: If the value returned by the key path is not natively supported by the view, or if the value 
+ *     must somehow be pre-processed first (e.g. rounded), a transformer can optionally be provided
  *
  * These two string properties can be set either using Interface Builder (by far the recommended, most efficient way) or
  * programmatically (for those who do not use Interface Builder):
  *   - Using Interface Builder: Select the view to bind, open its Attributes inspector, and set the 'Bind Key Path' and 
  *     'Bind Transformer' custom attributes. If you are using Interface Builder, you can literally bind a whole screen
- *     without the need to bind a single outlet!
- *   - programmatically : After having instantiated the view to bind, call -bindToKeyPath:withTransformer: on it
+ *     without the need to add a single outlet!
+ *   - Programmatically : After having instantiated the view to bind, call -bindToKeyPath:withTransformer: on it
  *
  * To understand how to set these two properties, it is crucial to understand how binding information is resolved at 
  * runtime.
  *
  *
  *
- * 2. Keypath resolution
+ * 3. Keypath resolution
  * ---------------------
  *
  * The bindKeyPath property is a string describing which key path has to be called. The target onto which the call is
- * actually be made is unspecified by bindKeyPath and resolved at runtime.
+ * actually made is unspecified by bindKeyPath and resolved at runtime.
  *
  * To efficiently restrict where to look for a target, binding resolution needs context. A view naturally belongs to
  * some technical context, whether it is the one of its view hierarchy, or the one of an enclosing view controller. 
@@ -82,7 +127,7 @@
  *
  *
  *
- * 3. Keypath syntax
+ * 4. Keypath syntax
  * -----------------
  *
  * CoconutKit bindings are compatible with all kinds of keypaths, including those containing operators. For example:
@@ -98,17 +143,28 @@
  * method recursively traverses the view hierarchy, again stopping at view controller boundaries, to update the
  * value displayed by all bound views located in it.
  *
+ * If the last key path component (in the examples above, name and age respectively) corresponds to a property,
+ * type information can be extracted and the correctness of bindings can be asserted. If the last path key component
+ * corresponds to a getter (and maybe an associated setter), no such information can be retrieved. In this case, 
+ * be careful about possible type mismatches or missing transformers. The debugging information (see 9.) displays
+ * these fields in yellow. If you can, replace them with properties so that correct types can be enforced.
+ *
+ * Currently, bindings can be made with values having the following types:
+ *   - All primitive types (NSInteger, float, CGFloat, etc.)
+ *   - Objects
+ *   - Structs
  *
  *
- * 4. Transformers
+ *
+ * 5. Transformers
  * ---------------
  *
  * The bindTransformer property is a string describing which transformer must be used to pre-process values between 
  * the model and the bound view.
  *
  * Views namely define the set of types they want to natively support. For example, UILabel supports only NSString,
- * whereas UISlider can only work with NSNumber. UIImageView, on the other hand, supports UIImage, but also NSString
- * (image names or file paths) and NSURL (file paths).
+ * whereas UISlider can only work with NSNumber (and primitive types). UIImageView, on the other hand, supports 
+ * UIImage, but also NSString (image names or file paths) and NSURL (file paths).
  *
  * If the key path connecting the bound view to its underlying model returns a value with non-supported type, you 
  * must provide a transformer. A transformer is a method with no parameters returning an instance of either:
@@ -121,7 +177,7 @@
  * local and global ones.
  *
  *
- * 4.1. Local transformer
+ * 5.1. Local transformer
  * ----------------------
  *
  * A local transformer is specified by its method name, e.g. 'decimalNumberFormatter'. As for key path resolution, no
@@ -157,7 +213,7 @@
  *     collection object, an employee (class methods only)
  *
  *
- * 4.2. Global transformer
+ * 5.2. Global transformer
  * -----------------------
  *
  * A global transformer is a class name followed by a method name, separated by a colon, for example e.g. 
@@ -165,7 +221,7 @@
  *
  *
  *
- * 5. Input and validation
+ * 6. Input and validation
  * -----------------------
  *
  * Some classes, e.g. UITextField or UISlider, naturally accepts user input. If bound to a key paths for which a setter
@@ -176,7 +232,7 @@
  * rules. Even updating the model objet can fail. All these events can be caught by a binding delegate.
  *
  *
- * 5.1. Binding delegate
+ * 6.1. Binding delegate
  * ---------------------
  *
  * A binding delegate must conform to the HLSViewBindingDelegate protocol, by which it shows interest in receiving binding
@@ -187,7 +243,7 @@
  * will be the binding delegate of the bound view.
  *
  *
- * 5.2. Validation
+ * 6.2. Validation
  * ---------------
  *
  * Validation follows KVC conventions, and can be manually triggered by calling -[UIView checkBoundViewHierarchyWithError:]
@@ -204,7 +260,7 @@
  *
  *
  *
- * 6. Natively supported views
+ * 7. Natively supported views
  * ---------------------------
  * 
  * Bindings are available for most UIKit classes:

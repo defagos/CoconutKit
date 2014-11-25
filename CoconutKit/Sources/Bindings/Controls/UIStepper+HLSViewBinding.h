@@ -10,7 +10,7 @@
 
 /**
  * Binding support for UIStepper:
- *   - binds to NSNumber model values
+ *   - binds to NSNumber (double) or double model values
  *   - displays and updates the underlying model value
  *   - does not animate updates
  *   - check (if not disabled via bindInputChecked) and update the value each time it is changed

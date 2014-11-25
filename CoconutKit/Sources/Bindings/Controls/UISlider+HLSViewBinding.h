@@ -10,7 +10,7 @@
 
 /**
  * Binding support for UISlider:
- *   - binds to NSNumber model values
+ *   - binds to NSNumber (float) or float model values
  *   - displays and updates the underlying model value
  *   - can animate updates
  *   - check (if not disabled via bindInputChecked) and update the value each time it is changed

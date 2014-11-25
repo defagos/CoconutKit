@@ -10,8 +10,8 @@
 {
     if (! [firstName isFilled]) {
         if (pError) {
-            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
-                                          code:DemoValidationMandatoryError
+            *pError = [NSError errorWithDomain:DemoErrorDomain
+                                          code:DemoMandatoryError
                           localizedDescription:NSLocalizedString(@"Missing first name", nil)];
         }
         return NO;
@@ -24,8 +24,8 @@
 {
     if (! [lastName isFilled]) {
         if (pError) {
-            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
-                                          code:DemoValidationMandatoryError
+            *pError = [NSError errorWithDomain:DemoErrorDomain
+                                          code:DemoMandatoryError
                           localizedDescription:NSLocalizedString(@"Missing last name", nil)];
         }
         return NO;
@@ -43,8 +43,8 @@
     
     if (! [HLSValidators validateEmailAddress:email]) {
         if (pError) {
-            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
-                                          code:DemoValidationIncorrectError
+            *pError = [NSError errorWithDomain:DemoErrorDomain
+                                          code:DemoIncorrectError
                           localizedDescription:NSLocalizedString(@"Invalid email address", nil)];
         }
         return NO;
@@ -57,8 +57,8 @@
 {
     if ([nbrChildren integerValue] < 0) {
         if (pError) {
-            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
-                                          code:DemoValidationIncorrectError
+            *pError = [NSError errorWithDomain:DemoErrorDomain
+                                          code:DemoIncorrectError
                           localizedDescription:NSLocalizedString(@"This value cannot be negative", nil)];
         }
         return NO;
@@ -77,8 +77,8 @@
 {
     if (! [city isFilled]) {
         if (pError) {
-            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
-                                          code:DemoValidationMandatoryError
+            *pError = [NSError errorWithDomain:DemoErrorDomain
+                                          code:DemoMandatoryError
                           localizedDescription:NSLocalizedString(@"Missing city", nil)];
         }
         return NO;
@@ -97,8 +97,8 @@
 {
     if (! [country isFilled]) {
         if (pError) {
-            *pError = [NSError errorWithDomain:DemoValidationErrorDomain
-                                          code:DemoValidationMandatoryError
+            *pError = [NSError errorWithDomain:DemoErrorDomain
+                                          code:DemoMandatoryError
                           localizedDescription:NSLocalizedString(@"Missing country", nil)];
         }
         return NO;

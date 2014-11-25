@@ -559,7 +559,7 @@
 
 #pragma mark Tests
 
-- (void)test_protocol_copyMethodDescriptionList
+- (void)testProtocol_copyMethodDescriptionList
 {
     unsigned int NSObject_numberOfRequiredClassMethods = 0;
     struct objc_method_description *NSObject_requiredClassMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), YES, NO, &NSObject_numberOfRequiredClassMethods);
@@ -622,7 +622,7 @@
     free(RuntimeTestCompositeProtocol_optionalInstanceMethodDescriptions);
 }
 
-- (void)test_class_conformsToProtocol
+- (void)testClass_conformsToProtocol
 {
     GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass1 class], @protocol(NSObject)), nil);
     GHAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestFormalProtocolA)), nil);
@@ -691,7 +691,7 @@
     GHAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)), nil);
 }
 
-- (void)test_class_conformsToInformalProtocol
+- (void)testClass_conformsToInformalProtocol
 {
     GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestInformalProtocolA)), nil);
     GHAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestSubclass11 class], @protocol(RuntimeTestInformalProtocolA)), nil);
@@ -707,7 +707,7 @@
 }
 
 // This tests hls_class_implementsProtocolMethods as well
-- (void)test_class_implementsProtocol
+- (void)testClass_implementsProtocol
 {
     GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(NSObject)), nil);
     GHAssertTrue(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestFormalProtocolA)), nil);
@@ -776,7 +776,7 @@
     GHAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)), nil);
 }
 
-- (void)test_swizzling
+- (void)testSwizzling
 {
     // Swizzling has been made in a +load. We here simply check that expected values after swizzling are correct
     GHAssertEquals([RuntimeTestClass10 classMagicalInteger], (NSInteger)42, nil);
@@ -813,12 +813,71 @@
     GHAssertNULL(hls_class_swizzleSelector([RuntimeTestClass11 class], NSSelectorFromString(@"unknownSelector"), nil), nil);
 }
 
-- (void)test_class_isSubclassOfClass
+- (void)testClass_isSubclassOfClass
 {
     GHAssertTrue(hls_class_isSubclassOfClass([UIView class], [NSObject class]), nil);
     GHAssertTrue(hls_class_isSubclassOfClass([UIView class], [UIView class]), nil);
     GHAssertFalse(hls_class_isSubclassOfClass([NSObject class], [UIView class]), nil);
     GHAssertFalse(hls_class_isSubclassOfClass([UIView class], [UIViewController class]), nil);
+}
+
+- (void)testAssociatedObjects
+{
+    // ASSIGN is not weak, as for the usual objc_setAssociatedObject
+    static void *kAssociatedObject1Key = &kAssociatedObject1Key;
+    NSObject *object1 = [[NSObject alloc] init];
+    __weak NSObject *weakObject1 = object1;
+
+    // Used to update weak references to their final values
+    @autoreleasepool {
+        GHAssertNotNil(weakObject1, nil);
+        
+        hls_setAssociatedObject(self, kAssociatedObject1Key, object1, HLS_ASSOCIATION_ASSIGN);
+        GHAssertNotNil(hls_getAssociatedObject(self, kAssociatedObject1Key), nil);
+        
+        object1 = nil;
+        
+        // Cannot access hls_getAssociatedObject(self, kAssociatedObject1Key) since this would most probably crash!
+        // Accessing a deallocated associated object namely crashes, exactly like calling a selector on a deallocated object
+    }
+    
+    GHAssertNil(weakObject1, nil);
+    
+    // WEAK
+    static void *kAssociatedObject2Key = &kAssociatedObject2Key;
+    NSObject *object2 = [[NSObject alloc] init];
+    __weak NSObject *weakObject2 = object2;
+
+    // Used to update weak references to their final values
+    @autoreleasepool {
+        GHAssertNotNil(weakObject2, nil);
+    
+        hls_setAssociatedObject(self, kAssociatedObject2Key, object2, HLS_ASSOCIATION_WEAK);
+        GHAssertNotNil(hls_getAssociatedObject(self, kAssociatedObject2Key), nil);
+    
+        object2 = nil;        
+    }
+    
+    GHAssertNil(weakObject2, nil);
+    
+    // Can safely access hls_getAssociatedObject(self, kAssociatedObject2Key). object2 is now deallocated because of
+    // the autorelease pool drain, but the reference is weak and has been nilled
+    GHAssertNil(hls_getAssociatedObject(self, kAssociatedObject2Key), nil);
+    
+    // Check that objc_ and hls_ functions are indenpendent
+    static void *kAssociatedObject3Key = &kAssociatedObject3Key;
+    NSObject *object3 = [[NSObject alloc] init];
+    objc_setAssociatedObject(self, kAssociatedObject3Key, object3, OBJC_ASSOCIATION_RETAIN);
+    GHAssertNotNil(objc_getAssociatedObject(self, kAssociatedObject3Key), nil);
+    GHAssertNil(hls_getAssociatedObject(self, kAssociatedObject3Key), nil);
+    
+    static void *kAssociatedObject4Key = &kAssociatedObject4Key;
+    NSObject *object4 = [[NSObject alloc] init];
+    hls_setAssociatedObject(self, kAssociatedObject4Key, object4, HLS_ASSOCIATION_STRONG);
+    GHAssertNotNil(hls_getAssociatedObject(self, kAssociatedObject4Key), nil);
+    GHAssertNil(objc_getAssociatedObject(self, kAssociatedObject4Key), nil);
+    
+    objc_removeAssociatedObjects(self);
 }
 
 @end

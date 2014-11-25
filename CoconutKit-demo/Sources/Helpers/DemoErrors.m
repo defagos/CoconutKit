@@ -8,4 +8,4 @@
 
 #import "DemoErrors.h"
 
-NSString * const DemoValidationErrorDomain = @"ch.defagos.CoconutKit-demo.validation";
+NSString * const DemoErrorDomain = @"ch.defagos.CoconutKit-demo";

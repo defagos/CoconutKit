@@ -5,12 +5,18 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Samuel Défago. All rights reserved.
  */
+"%@ employees"="%@ employés";
+"%@ words"="%@ mots";
+"Age"="Age";
+"Age of the first employee"="Age du premier employé";
 "All"="Tous";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternez entre les champs textuels et tournez l'appareil (même avec le clavier affiché) pour contrôler que le comportement est correct";
 "Animated"="Animé";
 "Animation"="Animation";
+"Answer to everything"="Réponse universelle";
 "Apples & Coconut"="Pommes & noix de coco";
 "Autorotation"="Autorotation";
+"Average age"="Age moyen";
 "Baseline adjustment"="Ajustement de la ligne de base";
 "Baselines"="Lignes";
 "Bindings"="Bindings";
@@ -35,6 +41,7 @@
 "Colors defined via user-defined runtime attributes, colors from UIColor subclass"="Couleurs définies via user-defined runtime attributes, couleurs définies dans une sous-classe de UIColor";
 "Container"="Conteneur";
 "Containment test"="Test d'appartenance";
+"Controls"="Contrôles";
 "Core"="Core";
 "Country"="Pays";
 "Cover from top"="Cover depuis le haut";
@@ -53,19 +60,25 @@
 "E-mail"="E-mail";
 "Effects"="Effets";
 "Enter a search criterium"="Entrez un critère de recherche";
+"Enter your age here"="Entrez votre âge ici";
+"Enter your name here"="Entrez votre nom ici";
+"Entry date"="Date d'entrée";
 "Error"="Erreur";
 "Expand"="Etirer";
+"Failures"="Erreurs";
 "First name"="Prénom";
 "Fixed size"="Taille fixe";
 "Font"="Police";
 "Font size"="Taille de la police";
 "Fonts"="Polices";
 "Formatting error"="Erreur de formattage";
+"Full name"="Nom complet";
 "Header: custom cells"="En-tête: cellules personnalisées";
 "Header: simple cells"="En-tête: cellules basiques";
 "Heavy view"="Vue lourde";
 "Heavy view (cached)"="Vue lourde (mise en cache)";
 "Height"="Hauteur";
+"Hello, %@!"="Bonjour, %@!";
 "Hide with modal"="Masquer avec modale";
 "Houston, we've got a problem"="Houston, nous avons un problème";
 "Image set"="Images";
@@ -86,8 +99,10 @@
 "Layer properties test (not a CoconutKit component)"="Test des propriétés d'un layer (pas un composant CoconutKit)";
 "Lifecycle test"="Test du cycle de vie";
 "Line break mode"="Mode saut de ligne";
+"Log"="Journal";
 "Looping"="Boucle";
 "Lowercase string in Localizable.strings"="Chaîne de Localizable.strings en minuscules";
+"Max age"="Age maximum";
 "Middle"="Milieu";  
 "Missing city"="Ville manquante";
 "Missing country"="Pays manquant";
@@ -97,16 +112,21 @@
 "Month"="Mois";
 "Multiple view animation"="Animation de plusieurs vues";
 "Music players"="Baladeurs";
+"Names of all employees"="Nom des employés";
 "Next"="Suivant";
 "No children"="Aucun enfant";
 "None"="Aucun";
+"Now"="Maintenant";
 "Number of children"="Nombre d'enfants";
 "Number of lines"="Nombre de lignes";
+"Oldest employee age"="Age du plus vieil employé";
 "Other view controller"="Autre view controller";
 "Parallax scrolling"="Défilement parallaxe";
 "Parallel processing"="Calculs en parallèle";
 "Parameters for the HLSLabel and UILabel above"="Paramètres pour les HLSLabel et UILabel ci-dessus";
 "Pause"="Pause";
+"Performance 1"="Performance 1";
+"Performance 2"="Performance 2";
 "Phones"="Téléphones";
 "Play"="Jouer";
 "Pop"="Pop";
@@ -118,12 +138,16 @@
 "Portrait upside down"="Portrait à l'envers";
 "Presents the modal"="Affiche la modale";
 "Previous"="Précédent";
+"Programmatic"="Via le code";
+"Programming, 101"="Programming, 101";
 "Push"="Push";
 "Push from bottom"="Push depuis le bas";
 "Push non-animated"="Push non-animé";
 "Push UINavigationController"="Push UINavigationController";
 "Push UITabBarController"="Push UITabBarController";
 "Random"="Aléatoire";
+"Random employee name"="Nom d'employé aléatoire";
+"Rebind"="Lier à nouveau";
 "Reload"="Recharger";
 "Remaining time estimate"="Temps restant estimé";
 "Removal index: %d"="Index de retrait: %d";
@@ -155,6 +179,7 @@
 "Tablets"="Tablettes";
 "Task"="Tâche";
 "Task group"="Tâche groupée";
+"Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong"="Appuyez sur le bouton bindings en haut à droite et interagissez avec les champs pour découvrir ce qui n'a pas fonctionné";
 "Tasks"="Tâches";
 "Terminate"="Terminer";
 "Test in modal"="Test dans modale";
@@ -166,6 +191,7 @@
 "This field exits edit mode when the user taps outside it"="Ce champ perd le focus lorsque l'utilisateur tape à côté";
 "This value cannot be negative"="Cette valeur ne peut être négative";
 "Top"="Haut";
+"Transformers"="Convertisseurs";
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Uppercase string in Localizable.strings"="Chaîne de Localizable.strings en majuscules";
@@ -179,4 +205,8 @@
 "Wrapped into UINavigationController"="Inséré dans un UINavigationController";
 "Wrapped into UITabBarController"="Inséré dans un UITabBarController";
 "Year"="Année";
+"You are an adult"="Vous êtes un adulte";
+"You are not even born!"="Vous n'êtes même pas né!";
+"You are old"="Vous êtes vieux";
+"You are young"="Vous êtes jeune";
 "yyyy/MM/dd"="dd.MM.yyyy";

@@ -647,7 +647,7 @@
     [self setSelectedIndex:[value unsignedIntegerValue] animated:animated];
 }
 
-- (id)inputValue
+- (id)inputValueWithClass:(Class)inputClass
 {
     return @(self.selectedIndex);
 }

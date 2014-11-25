@@ -5,12 +5,18 @@
    Created by Samuel Défago on 2/10/11.
    Copyright 2011 Samuel Défago. All rights reserved.
  */
+"%@ employees"="%@ employees";
+"%@ words"="%@ words";
+"Age"="Age";
+"Age of the first employee"="Age of the first employee";
 "All"="All";
 "Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct"="Alternate between text fields and rotate the device (even with the keyboard displayed) to check that the behavior is correct";
 "Animated"="Animated";
 "Animation"="Animation";
+"Answer to everything"="Answer to everything";
 "Autorotation"="Autorotation";
 "Apples & Coconut"="Apples & Coconut";
+"Average age"="Average age";
 "Baseline adjustment"="Baseline adjustment";
 "Baselines"="Baselines";
 "Bindings"="Bindings";
@@ -35,6 +41,7 @@
 "Colors defined via user-defined runtime attributes, color from UIColor subclass"="Colors defined via user-defined runtime attributes, color from UIColor subclass";
 "Container"="Container";
 "Containment test"="Containment test";
+"Controls"="Controls";
 "Core"="Core";
 "Country"="Country";
 "Cover from top"="Cover from top";
@@ -53,10 +60,15 @@
 "E-mail"="E-mail";
 "Effects"="Effects";
 "Enter a search criterium"="Enter a search criterium";
+"Enter your age here"="Enter your age here";
+"Enter your name here"="Enter your name here";
+"Entry date"="Entry date";
 "Error"="Error";
 "Expand"="Expand";
+"Failures"="Failures";
 "First name"="First name";
 "Fixed size"="Fixed size";
+"Full name"="Full name";
 "Font"="Font";
 "Font size"="Font size";
 "Fonts"="Fonts";
@@ -66,6 +78,7 @@
 "Heavy view"="Heavy view";
 "Heavy view (cached)"="Heavy view (cached)";
 "Height"="Height";
+"Hello, %@!"="Hello, %@!";
 "Hide with modal"="Hide with modal";
 "Houston, we've got a problem"="Houston, we've got a problem";
 "Image set"="Image set";
@@ -87,8 +100,10 @@
 "Layer properties test (not a CoconutKit component)"="Layer properties test (not a CoconutKit component)";
 "Lifecycle test"="Lifecycle test";
 "Line break mode"="Line break mode";
+"Log"="Log";
 "Looping"="Looping";
 "Lowercase string in Localizable.strings"="Lowercase string in Localizable.strings";
+"Max age"="Max age";
 "Middle"="Middle";
 "Missing city"="Missing city";
 "Missing country"="Missing country";
@@ -97,17 +112,22 @@
 "Missing localization visibility"="Missing localization visibility";
 "Month"="Month";
 "Multiple view animation"="Multiple view animation";
+"Names of all employees"="Names of all employees";
 "Next"="Next";
 "No children"="No children";
 "None"="None";
+"Now"="Now";
 "Number of children"="Number of children";
 "Number of lines"="Number of lines";
 "Music players"="Music players";
+"Oldest employee age"="Oldest employee age";
 "Other view controller"="Other view controller";
 "Parallax scrolling"="Parallax scrolling";
 "Parallel processing"="Parallel processing";
 "Parameters for the HLSLabel and UILabel above"="Parameters for the HLSLabel and UILabel above";
 "Pause"="Pause";
+"Performance 1"="Performance 1";
+"Performance 2"="Performance 2";
 "Phones"="Phones";
 "Play"="Play";
 "Pop"="Pop";
@@ -119,12 +139,16 @@
 "Portrait upside down"="Portrait upside down";
 "Presents the modal"="Presents the modal";
 "Previous"="Previous";
+"Programmatic"="Programmatic";
+"Programming, 101"="Ba-ba de la programmation";
 "Push"="Push";
 "Push from bottom"="Push from bottom";
 "Push non-animated"="Push non-animated";
 "Push UINavigationController"="Push UINavigationController";
 "Push UITabBarController"="Push UITabBarController";
 "Random"="Random";
+"Random employee name"="Random employee name";
+"Rebind"="Rebind";
 "Reload"="Reload";
 "Remaining time estimate"="Remaining time estimate";
 "Removal index: %d"="Removal index: %d";
@@ -156,6 +180,7 @@
 "Tablets"="Tablets";
 "Task"="Task";
 "Task group"="Task group";
+"Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong"="Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong";
 "Tasks"="Tasks";
 "Terminate"="Terminate";
 "Test in modal"="Test in modal";
@@ -168,6 +193,7 @@
 "This field exits edit mode when the user taps outside it"="This field exits edit mode when the user taps outside it";
 "This value cannot be negative"="This value cannot be negative";
 "Top"="Top";
+"Transformers"="Transformers";
 "Transition"="Transition";
 "Transparent"="Transparent";
 "Uppercase string in Localizable.strings"="Uppercase string in Localizable.strings";
@@ -181,4 +207,8 @@
 "Wrapped into UINavigationController"="Wrapped into UINavigationController";
 "Wrapped into UITabBarController"="Wrapped into UITabBarController";
 "Year"="Year";
+"You are an adult"="You are an adult";
+"You are not even born!"="You are not even born!";
+"You are old"="You are old";
+"You are young"="You are young";
 "yyyy/MM/dd"="yyyy/MM/dd";

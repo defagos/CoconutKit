@@ -59,7 +59,7 @@ static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(U
 
 - (id)owner
 {
-    return objc_getAssociatedObject(self, s_ownerKey);
+    return hls_getAssociatedObject(self, s_ownerKey);
 }
 
 @end
@@ -68,31 +68,31 @@ static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(U
 
 static void swizzled_UIActionSheet__showFromToolbar_Imp(UIActionSheet *self, SEL _cmd, UIToolbar *toolbar)
 {
-    objc_setAssociatedObject(self, s_ownerKey, toolbar, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self, s_ownerKey, toolbar, HLS_ASSOCIATION_WEAK_NONATOMIC);
     (*s_UIActionSheet__showFromToolbar_Imp)(self, _cmd, toolbar);
 }
 
 static void swizzled_UIActionSheet__showFromTabBar_Imp(UIActionSheet *self, SEL _cmd, UITabBar *tabBar)
 {
-    objc_setAssociatedObject(self, s_ownerKey, tabBar, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self, s_ownerKey, tabBar, HLS_ASSOCIATION_WEAK_NONATOMIC);
     (*s_UIActionSheet__showFromTabBar_Imp)(self, _cmd, tabBar);
 }
 
 static void swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp(UIActionSheet *self, SEL _cmd, UIBarButtonItem *barButtonItem, BOOL animated)
 {
-    objc_setAssociatedObject(self, s_ownerKey, barButtonItem, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self, s_ownerKey, barButtonItem, HLS_ASSOCIATION_WEAK_NONATOMIC);
     (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(self, _cmd, barButtonItem, animated);
 }
 
 static void swizzled_UIActionSheet__showFromRect_inView_animated_Imp(UIActionSheet *self, SEL _cmd, CGRect rect, UIView *view, BOOL animated)
 {
-    objc_setAssociatedObject(self, s_ownerKey, view, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self, s_ownerKey, view, HLS_ASSOCIATION_WEAK_NONATOMIC);
     (*s_UIActionSheet__showFromRect_inView_animated_Imp)(self, _cmd, rect, view, animated);
 }
 
 static void swizzled_UIActionSheet__showInView_Imp(UIActionSheet *self, SEL _cmd, UIView *view)
 {
-    objc_setAssociatedObject(self, s_ownerKey, view, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self, s_ownerKey, view, HLS_ASSOCIATION_WEAK_NONATOMIC);
     (*s_UIActionSheet__showInView_Imp)(self, _cmd, view);
 }
 
@@ -101,5 +101,5 @@ static void swizzled_UIActionSheet__showInView_Imp(UIActionSheet *self, SEL _cmd
 static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(UIActionSheet *self, SEL _cmd, NSInteger buttonIndex, BOOL animated)
 {
     (*s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp)(self, _cmd, buttonIndex, animated);
-    objc_setAssociatedObject(self, s_ownerKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    hls_setAssociatedObject(self, s_ownerKey, nil, HLS_ASSOCIATION_WEAK_NONATOMIC);
 }

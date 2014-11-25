@@ -10,8 +10,8 @@
  * CoconutKit core error codes
  */
 typedef NS_ENUM(NSInteger, HLSCoreError) {
-    HLSCoreErrorMultipleErrors,
-    HLSCoreErrorTransformation
+    HLSCoreErrorMultipleErrors,                 // Several errors have been encountered
+    HLSCoreErrorTransformation                  // Transformation error (e.g. because of bad input)
 };
 
 /**

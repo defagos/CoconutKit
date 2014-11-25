@@ -10,9 +10,14 @@
 
 @interface BindingsFailuresDemoViewController ()
 
+@property (nonatomic, strong) NSNumber *number;
+
 @end
 
-@implementation BindingsFailuresDemoViewController
+@implementation BindingsFailuresDemoViewController {
+@private
+    NSNumber *_otherNumber;
+}
 
 #pragma mark Accessors and mutators
 
@@ -24,6 +29,16 @@
 - (NSDate *)date
 {
     return [NSDate date];
+}
+
+- (NSNumber *)otherNumber
+{
+    return _otherNumber;
+}
+
+- (void)setOtherNumber:(NSNumber *)otherNumber
+{
+    _otherNumber = otherNumber;
 }
 
 #pragma mark Transformers

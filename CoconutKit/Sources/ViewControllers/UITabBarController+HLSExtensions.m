@@ -39,7 +39,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
 
 - (HLSAutorotationMode)autorotationMode
 {
-    NSNumber *autorotationModeNumber = objc_getAssociatedObject(self, s_autorotationModeKey);
+    NSNumber *autorotationModeNumber = hls_getAssociatedObject(self, s_autorotationModeKey);
     if (! autorotationModeNumber) {
         return HLSAutorotationModeContainer;
     }
@@ -50,7 +50,7 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {
-    objc_setAssociatedObject(self, s_autorotationModeKey, @(autorotationMode), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_autorotationModeKey, @(autorotationMode), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

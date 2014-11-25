@@ -45,7 +45,7 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
 
 - (HLSViewControllerLifeCyclePhase)lifeCyclePhase
 {
-    return [objc_getAssociatedObject(self, s_lifeCyclePhaseKey) intValue];
+    return [hls_getAssociatedObject(self, s_lifeCyclePhaseKey) intValue];
 }
 
 - (UIView *)viewIfLoaded
@@ -67,7 +67,7 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
 
 - (CGSize)createdViewSize
 {
-    NSValue *createdViewSizeValue = objc_getAssociatedObject(self, s_createdViewSizeKey);
+    NSValue *createdViewSizeValue = hls_getAssociatedObject(self, s_createdViewSizeKey);
     if (createdViewSizeValue) {
         return [createdViewSizeValue CGSizeValue];
     }
@@ -217,10 +217,23 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
 
 - (void)setLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase
 {
-    objc_setAssociatedObject(self, s_lifeCyclePhaseKey, [NSNumber numberWithInt:lifeCyclePhase], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_lifeCyclePhaseKey, [NSNumber numberWithInt:lifeCyclePhase], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
+
+#ifdef DEBUG
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
+@implementation UIViewController (HLSDebugging)
+
+@end
+
+#pragma clang diagnostic pop
+
+#endif
 
 #pragma mark Swizzled method implementations
 
@@ -248,7 +261,7 @@ static void swizzled_UIViewController__viewDidLoad_Imp(UIViewController *self, S
                                      userInfo:nil];
     }
     
-    objc_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.view.bounds.size], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.view.bounds.size], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     (*s_UIViewController__viewDidLoad_Imp)(self, _cmd);
     

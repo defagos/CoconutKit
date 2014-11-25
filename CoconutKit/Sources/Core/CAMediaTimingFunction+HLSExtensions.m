@@ -9,7 +9,7 @@
 #import "CAMediaTimingFunction+HLSExtensions.h"
 
 #import "HLSLogger.h"
-#import <objc/runtime.h>
+#import "HLSRuntime.h"
 
 // Associated object keys
 static void *s_polynomialCoefficientsKey = &s_polynomialCoefficientsKey;
@@ -55,7 +55,7 @@ static const float kEpsilon = 1e-5f;
 // Compute and cache polynomial coefficients
 - (PolynomialCoefficients)polynomialCoefficients
 {
-    NSValue *coeffsValue = objc_getAssociatedObject(self, s_polynomialCoefficientsKey);
+    NSValue *coeffsValue = hls_getAssociatedObject(self, s_polynomialCoefficientsKey);
     if (! coeffsValue) {
         float p1[2];
         memset(p1, 0, sizeof(p1));
@@ -78,7 +78,7 @@ static const float kEpsilon = 1e-5f;
         coeffs.ay = 1.f - coeffs.cy - coeffs.by;
         
         coeffsValue = [NSValue value:&coeffs withObjCType:@encode(PolynomialCoefficients)];
-        objc_setAssociatedObject(self, s_polynomialCoefficientsKey, coeffsValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(self, s_polynomialCoefficientsKey, coeffsValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         
         return coeffs;
     }

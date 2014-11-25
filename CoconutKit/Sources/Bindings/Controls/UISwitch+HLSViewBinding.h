@@ -10,7 +10,7 @@
 
 /**
  * Binding support for UISwitch:
- *   - binds to NSNumber model values (booleans)
+ *   - binds to NSNumber (boolean) or BOOL model values
  *   - displays and updates the underlying model value
  *   - can animate updates
  *   - check (if not disabled via bindInputChecked) and update the value each time it is changed

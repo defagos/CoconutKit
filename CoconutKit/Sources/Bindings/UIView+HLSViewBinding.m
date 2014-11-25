@@ -61,22 +61,22 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 - (BOOL)isBindUpdateAnimated
 {
-    return [objc_getAssociatedObject(self, s_bindUpdateAnimatedKey) boolValue];
+    return [hls_getAssociatedObject(self, s_bindUpdateAnimatedKey) boolValue];
 }
 
 - (void)setBindUpdateAnimated:(BOOL)bindUpdateAnimated
 {
-    objc_setAssociatedObject(self, s_bindUpdateAnimatedKey, @(bindUpdateAnimated), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindUpdateAnimatedKey, @(bindUpdateAnimated), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)isBindInputChecked
 {
-    return [objc_getAssociatedObject(self, s_bindInputCheckedKey) boolValue];
+    return [hls_getAssociatedObject(self, s_bindInputCheckedKey) boolValue];
 }
 
 - (void)setBindInputChecked:(BOOL)bindInputChecked
 {
-    objc_setAssociatedObject(self, s_bindInputCheckedKey, @(bindInputChecked), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindInputCheckedKey, @(bindInputChecked), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (BOOL)isBindingSupported
@@ -109,32 +109,32 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 - (NSString *)bindKeyPath
 {
-    return objc_getAssociatedObject(self, s_bindKeyPath);
+    return hls_getAssociatedObject(self, s_bindKeyPath);
 }
 
 - (void)setBindKeyPath:(NSString *)bindKeyPath
 {
-    objc_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSString *)bindTransformer
 {
-    return objc_getAssociatedObject(self, s_bindTransformerKey);
+    return hls_getAssociatedObject(self, s_bindTransformerKey);
 }
 
 - (void)setBindTransformer:(NSString *)bindTransformer
 {
-    objc_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (HLSViewBindingInformation *)bindingInformation
 {
-    return objc_getAssociatedObject(self, s_bindingInformationKey);
+    return hls_getAssociatedObject(self, s_bindingInformationKey);
 }
 
 - (void)setBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
-    objc_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Bindings

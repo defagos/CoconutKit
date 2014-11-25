@@ -44,25 +44,25 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 - (BOOL)isAvoidingKeyboard
 {
-    return [objc_getAssociatedObject(self, s_avoidingKeyboardKey) boolValue];
+    return [hls_getAssociatedObject(self, s_avoidingKeyboardKey) boolValue];
 }
 
 - (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
 {
-    objc_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (CGFloat)keyboardDistance
 {
     static const CGFloat HLSDefaultKeyboardDistance = 10.f;
     
-    NSNumber *keyboardDistanceNumber = objc_getAssociatedObject(self, s_keyboardDistanceKey);
+    NSNumber *keyboardDistanceNumber = hls_getAssociatedObject(self, s_keyboardDistanceKey);
     return keyboardDistanceNumber ? [keyboardDistanceNumber floatValue] : HLSDefaultKeyboardDistance;
 }
 
 - (void)setKeyboardDistance:(CGFloat)keyboardDistance
 {
-    objc_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark Synchronizing scroll views
@@ -81,14 +81,14 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         return;
     }
     
-    objc_setAssociatedObject(self, s_synchronizedScrollViewsKey, scrollViews, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(self, s_parallaxBouncesKey, @(bounces), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_synchronizedScrollViewsKey, scrollViews, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_parallaxBouncesKey, @(bounces), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)removeSynchronization
 {
-    objc_setAssociatedObject(self, s_synchronizedScrollViewsKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(self, s_parallaxBouncesKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_synchronizedScrollViewsKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_parallaxBouncesKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -108,7 +108,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 - (void)synchronizeScrolling
 {
-    NSArray *synchronizedScrollViews = objc_getAssociatedObject(self, s_synchronizedScrollViewsKey);
+    NSArray *synchronizedScrollViews = hls_getAssociatedObject(self, s_synchronizedScrollViewsKey);
     if (! synchronizedScrollViews) {
         return;
     }
@@ -132,7 +132,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
     
     // If reaching the top or the bottom of the master scroll view, prevent the other scroll views from
     // scrolling further (if enabled)
-    BOOL bounces = [objc_getAssociatedObject(self, s_parallaxBouncesKey) boolValue];
+    BOOL bounces = [hls_getAssociatedObject(self, s_parallaxBouncesKey) boolValue];
     if (! bounces) {
         if (isless(relativeXPos, 0.f)) {
             relativeXPos = 0.f;

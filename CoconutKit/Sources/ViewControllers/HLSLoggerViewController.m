@@ -41,6 +41,8 @@
         }
         
         self.logger = logger;
+        
+        self.title = @"Logging controls";
     }
     return self;
 }
@@ -66,15 +68,6 @@
                                                                                           action:@selector(close:)];
     
     [self reloadData];
-}
-
-#pragma mark Localization
-
-- (void)localize
-{
-    [super localize];
-    
-    self.title = CoconutKitLocalizedString(@"Logging controls", nil);
 }
 
 #pragma mark Reloading the screen
