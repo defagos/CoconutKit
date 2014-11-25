@@ -51,18 +51,18 @@
  *     to the labels and text fields in the xib, one by one
  *   - To update labels and provide text fields with their initial value, you write some kind of reload method,
  *     which assigns to each label and text field the appropriate value. Depending on the value, e.g. dates,
- *     some formatting might be needed
+ *     some formatting might be needed, usually achieved by applying an NSFormatter
  *   - You ensure that if the object changes reloading of the labels and text fields is properly made. Usually 
  *     calling the reload method when appropriate suffices, but you can also use KVO to be notified about changes 
  *     automatically. Of course, if you use KVO, you implement the corresponding observation methods, with an
  *     appropriate context, and you do not forget to unregister the view controller when it gets deallocated
  *   - You grab changes from text fields and update the underlying model object accordingly. This usually means
  *     setting the view controller as delegate of each text field, or listening to change notifications
- *   - Some text fields might allow entering a formatted date. In such cases, you need to parse the date (using
- *     an NSDateFormatter) before updating the model
+ *   - Some text fields might allow entering a formatted date. In such cases, you need to parse the input first 
+ *     (using an NSFormatter) before updating the model
  *   - You add some validation methods (e.g. to check for negative ages), and you call them where appropriate
  *     to ensure data correctness
- *   - You spend some time fixing issues (incorrectly bound outlets, missing displayed values, imcorrectly updated
+ *   - You spend some time fixing issues (incorrectly bound outlets, missing displayed values, incorrectly updated
  *     model) until your screen works as expected
  *
  * Using CoconutKit bindings, this tedious process is made a lot easier:
@@ -73,7 +73,7 @@
  *     assuming your model object is made available as a view controller 'employee' property
  *   - For each value which requires formatting for display or which needs to be parsed, you implement a date formatter,
  *     either on the view controller, the model class, or somewhere at global scope. In the xib, you provide for
- *     each view requires formatting the name of this date formatter
+ *     each view which requires formatting the name of this date formatter
  *   - You write KVC-compliant validation methods on your model object, and make the view controller inherit from
  *     a binding delegation protocol to catch validation events. With a single call, you trigger a validation for
  *     all text fields when needed
@@ -143,6 +143,11 @@
  * method recursively traverses the view hierarchy, again stopping at view controller boundaries, to update the
  * value displayed by all bound views located in it.
  *
+ * If the last key path component (in the examples above, name and age respectively) corresponds to a property,
+ * type information can be extracted and the correctness of bindings can be asserted. If the last path key component
+ * corresponds to a getter (and maybe an associated setter), no such information can be retrieved. In this case, 
+ * be careful about possible type mismatches or missing transformers. The debugging information (see 9.) displays
+ * these fields in yellow. If you can, replace them with properties so that correct types can be enforced.
  *
  *
  * 5. Transformers
