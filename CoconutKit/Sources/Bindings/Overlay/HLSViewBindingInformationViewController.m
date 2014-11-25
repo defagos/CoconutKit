@@ -8,6 +8,7 @@
 
 #import "HLSViewBindingInformationViewController.h"
 
+#import "HLSCoreError.h"
 #import "HLSInfoTableViewCell.h"
 #import "HLSLogger.h"
 #import "HLSMAKVONotificationCenter.h"
@@ -17,6 +18,7 @@
 #import "HLSViewBindingHelpViewController.h"
 #import "HLSViewBindingInformationEntry.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSError+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import "UIPopoverController+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
@@ -90,8 +92,20 @@
 {
     NSMutableArray *statusEntries = [NSMutableArray array];
     
-    NSString *defaultStatusString = self.bindingInformation.verified ? @"The binding information is valid" : @"The binding information has not been fully verified yet";
-    NSString *statusString = self.bindingInformation.error ? [self.bindingInformation.error localizedDescription] : defaultStatusString;
+    NSString *statusString = nil;
+    if (! self.bindingInformation.error) {
+        statusString = self.bindingInformation.verified ? @"The binding information is valid" : @"The binding information has not been fully verified yet";
+    }
+    else {
+        if ([self.bindingInformation.error hasCode:HLSCoreErrorMultipleErrors withinDomain:HLSCoreErrorDomain]) {
+            NSArray *errors = [self.bindingInformation.error objectForKey:HLSDetailedErrorsKey];
+            NSArray *localizedDescriptions = [errors valueForKeyPath:@"@distinctUnionOfObjects.localizedDescription"];
+            statusString = [localizedDescriptions componentsJoinedByString:@"\n\n"];
+        }
+        else {
+            statusString = [self.bindingInformation.error localizedDescription];
+        }
+    }
     
     HLSViewBindingInformationEntry *statusEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Status"
                                                                                                   text:statusString];

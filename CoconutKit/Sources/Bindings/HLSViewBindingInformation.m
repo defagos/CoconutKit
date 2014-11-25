@@ -29,10 +29,14 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     HLSViewBindingStatusUnverified = 0,                                 // Binding never verified
     HLSViewBindingStatusObjectTargetResolved = (1 << 0),                // Binding target resolution has been successfully made
     HLSViewBindingStatusTypeResolved = (1 << 1),                        // Type has been resolved (might have found nothing reliable)
-    HLSViewBindingStatusTransformerResolved = (1 << 2),                 // Binding transformer resolution has been successfully made (might have found nothing)
-    HLSViewBindingStatusDelegateResolved = (1 << 3),                    // Binding delegate resoution has been successfully made (might have found nothing)
-    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 4),            // Type compatibility with the view has been checked
-    HLSViewBindingStatusAutomaticUpdatesResolved = (1 << 5)             // Ability to perform automatic updates has been resolved
+    HLSViewBindingStatusTransformationTargetResolved = (1 << 2),        // Binding transformer resolution has been successfully made (might have found nothing)
+    HLSViewBindingStatusTransformerResolved = (1 << 3),                 // Binding transformer resolution has been successfully made (might have found nothing)
+    HLSViewBindingStatusDelegateResolved = (1 << 4),                    // Binding delegate resoution has been successfully made (might have found nothing)
+    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 5),            // Type compatibility with the view has been checked
+    HLSViewBindingStatusAutomaticUpdatesResolved = (1 << 6),            // Ability to perform automatic updates has been resolved
+    HLSViewBindingStatusVerified = (HLSViewBindingStatusObjectTargetResolved | HLSViewBindingStatusTypeResolved | HLSViewBindingStatusTransformationTargetResolved
+                                    | HLSViewBindingStatusTransformerResolved | HLSViewBindingStatusDelegateResolved | HLSViewBindingStatusTypeCompatibilityChecked
+                                    | HLSViewBindingStatusAutomaticUpdatesResolved)
 };
 
 @interface HLSViewBindingInformation ()
@@ -53,7 +57,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 @property (nonatomic, assign) HLSViewBindingStatus status;
 
-@property (nonatomic, assign, getter=isVerified) BOOL verified;
 @property (nonatomic, strong) NSError *error;
 
 @property (nonatomic, assign, getter=isSupportingInput) BOOL supportingInput;
@@ -156,6 +159,11 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         
         self.viewAutomaticallyUpdated = YES;
     }
+}
+
+- (BOOL)isVerified
+{
+    return self.status == HLSViewBindingStatusVerified;
 }
 
 #pragma mark Updating the view
@@ -438,11 +446,23 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
-- (BOOL)resolveRawClass:(Class *)pRawClass withError:(NSError *__autoreleasing *)pError
+- (BOOL)resolveRawClass:(Class *)pRawClass pendingWithReason:(NSString **)pPendingReason error:(NSError *__autoreleasing *)pError
 {
-    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
+    if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
+        if (pPendingReason) {
+            *pPendingReason = @"The bound object has not been resolved yet";
+        }
+        return YES;
+    }
     
     id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+    if (! lastTargetInKeyPath) {
+        if (pPendingReason) {
+            *pPendingReason = @"The last object in the key path is nil. Type information cannot be determined yet";
+        }
+        return YES;
+    }
+    
     NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
     
     Class lastTargetInKeyPathClass = hls_isClass(lastTargetInKeyPath) ? lastTargetInKeyPath : [lastTargetInKeyPath class];
@@ -489,10 +509,12 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
-- (BOOL)resolveTransformationTarget:(id *)pTransformationTarget transformationSelector:(SEL *)pTransformationSelector withError:(NSError *__autoreleasing *)pError
+- (BOOL)resolveTransformationTarget:(id *)pTransformationTarget
+             transformationSelector:(SEL *)pTransformationSelector
+                  withPendingReason:(NSString **)pPendingReason
+                              error:(NSError *__autoreleasing *)pError
 {
-    NSAssert([self.transformerName isFilled], @"A transformer name must be specified");
-    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
+    NSAssert([self.transformerName isFilled], @"A transformer name is mandatory");
     
     // Check whether the transformer is a global formatter (ClassName:formatterName)
     NSArray *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
@@ -546,7 +568,21 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         // Look along the responder chain first (most specific)
         transformationTarget = [HLSViewBindingInformation transformationTargetForSelector:transformationSelector view:self.view];
         if (! transformationTarget) {
+            if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
+                if (pPendingReason) {
+                    *pPendingReason = @"The bound object has not been resolved yet. Cannot look for transformers";
+                }
+                return YES;
+            }
+            
             id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+            if (! lastTargetInKeyPath) {
+                if (pPendingReason) {
+                    *pPendingReason = @"The last object in the key path is nil. Transformer lookup cannot be performed on it yet";
+                }
+                return YES;
+            }
+            
             if ([lastTargetInKeyPath respondsToSelector:transformationSelector]) {
                 transformationTarget = lastTargetInKeyPath;
             }
@@ -581,13 +617,18 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
-- (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer withTransformationTarget:(id)transformationTarget transformationSelector:(SEL)transformationSelector error:(NSError *__autoreleasing *)pError
+- (BOOL)resolveTransformer:(id<HLSTransformer> *)pTransformer pendingWithReason:(NSString **)pPendingReason error:(NSError *__autoreleasing *)pError
 {
-    NSAssert(transformationTarget != nil && transformationSelector != NULL, @"A transformation target and / or selector must be specified");
+    if ((self.status & HLSViewBindingStatusTransformationTargetResolved) == 0) {
+        if (pPendingReason) {
+            *pPendingReason = @"The transformation target has not been resolved yet";
+        }
+        return YES;
+    }
     
     // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform correct memory management
-    id (*methodImp)(id, SEL) = (__typeof(methodImp))[transformationTarget methodForSelector:transformationSelector];
-    id transformer = methodImp(transformationTarget, transformationSelector);
+    id (*methodImp)(id, SEL) = (__typeof(methodImp))[self.transformationTarget methodForSelector:self.transformationSelector];
+    id transformer = methodImp(self.transformationTarget, self.transformationSelector);
     
     // Wrap native Foundation transformers into HLSTransformer instances
     if ([transformer isKindOfClass:[NSFormatter class]]) {
@@ -616,8 +657,19 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)checkTypePendingWithReason:(NSString *__autoreleasing *)pPendingReason inputClass:(Class *)pInputClass error:(NSError *__autoreleasing *)pError
 {
-    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
-    NSAssert(self.status & HLSViewBindingStatusTypeResolved, @"The type must be resolved");
+    if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
+        if (pPendingReason) {
+            *pPendingReason = @"The bound object has not been resolved yet";
+        }
+        return YES;
+    }
+    
+    if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
+        if (pPendingReason) {
+            *pPendingReason = @"The transformer has not been resolved yet";
+        }
+        return YES;
+    }
     
     NSString *pendingReason = nil;
     Class inputClass = Nil;
@@ -643,6 +695,13 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
     }
     else {
+        if ((self.status & HLSViewBindingStatusTypeResolved) == 0) {
+            if (pPendingReason) {
+                *pPendingReason = @"Type information is not available yet";
+            }
+            return YES;
+        }
+        
         // Reliable type information available. Check
         if (self.rawClass) {
             if (! [self canDisplayClass:self.rawClass]) {
@@ -694,10 +753,15 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)isModelAutomaticallyUpdatedPendingWithReason:(NSString **)pPendingReason
 {
-    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
-    
     if (! self.supportingInput) {
         return NO;
+    }
+    
+    if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
+        if (pPendingReason) {
+            *pPendingReason = @"The bound object has not been resolved yet";
+        }
+        return YES;
     }
     
     id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
@@ -705,7 +769,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         if (pPendingReason) {
             *pPendingReason = @"The last object in the key path is nil. Check for automatic updates cannot be made yet";
         }
-        return NO;
+        return YES;
     }
     
     if (hls_isClass(lastTargetInKeyPath)) {
@@ -735,12 +799,14 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         return;
     }
     
+    NSError *pendingReasonsError = nil;
+    
     if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
         id objectTarget = nil;
         NSError *error = nil;
         
         if (! [self resolveObjectTarget:&objectTarget withError:&error]) {
-            self.verified = YES;
+            self.status = HLSViewBindingStatusVerified;
             self.error = error;
             return;
         }
@@ -749,56 +815,110 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         self.status |= HLSViewBindingStatusObjectTargetResolved;
     }
     
+    if ((self.status & HLSViewBindingStatusAutomaticUpdatesResolved) == 0) {
+        NSString *pendingReason = nil;
+        
+        self.modelAutomaticallyUpdated = [self isModelAutomaticallyUpdatedPendingWithReason:&pendingReason];
+        
+        if (! pendingReason) {
+            self.status |= HLSViewBindingStatusAutomaticUpdatesResolved;
+        }
+        else {
+            [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorPending
+                                      localizedDescription:pendingReason]
+                        withError:&pendingReasonsError];
+        }
+    }
+    
     if ((self.status & HLSViewBindingStatusTypeResolved) == 0) {
         Class rawClass = Nil;
+        NSString *pendingReason = nil;
         NSError *error = nil;
         
-        if (! [self resolveRawClass:&rawClass withError:&error]) {
-            self.verified = YES;
+        if (! [self resolveRawClass:&rawClass pendingWithReason:&pendingReason error:&error]) {
+            self.status = HLSViewBindingStatusVerified;
             self.error = error;
             return;
         }
         
-        self.rawClass = rawClass;
-        self.status |= HLSViewBindingStatusTypeResolved;
+        if (! pendingReason) {
+            self.rawClass = rawClass;
+            self.status |= HLSViewBindingStatusTypeResolved;
+        }
+        else {
+            [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorPending
+                                      localizedDescription:pendingReason]
+                        withError:&pendingReasonsError];
+        }
     }
     
-    if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
+    if ((self.status & HLSViewBindingStatusTransformationTargetResolved) == 0) {
         if ([self.transformerName isFilled]) {
             id transformationTarget = nil;
             SEL transformationSelector = NULL;
-            id<HLSTransformer> transformer = nil;
+            NSString *pendingReason = nil;
             NSError *error = nil;
             
-            if (! [self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withError:&error]
-                    || ! [self resolveTransformer:&transformer withTransformationTarget:transformationTarget transformationSelector:transformationSelector error:&error]) {
-                self.verified = YES;
+            if (! [self resolveTransformationTarget:&transformationTarget transformationSelector:&transformationSelector withPendingReason:&pendingReason error:&error]) {
+                self.status = HLSViewBindingStatusVerified;
                 self.error = error;
                 return;
             }
             
-            // Observe transformer updates, reload cached transformer and update view accordingly
-            __weak __typeof(self) weakSelf = self;
-            __weak __typeof(self) weakTransformationTarget = transformationTarget;
-            [transformationTarget addObserver:self keyPath:NSStringFromSelector(transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
-                id<HLSTransformer> transformer = nil;
-                NSError *error = nil;
+            if (! pendingReason) {
+                // Observe transformer updates, reload cached transformer and update view accordingly
+                __weak __typeof(self) weakSelf = self;
+                [transformationTarget addObserver:self keyPath:NSStringFromSelector(transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                    // Clear the flag and force an update (will trigger the corresponding resolution mechanism again and upate views)
+                    weakSelf.status &= ~HLSViewBindingStatusTransformerResolved;
+                    [weakSelf.view updateBoundView];
+                }];
                 
-                if ([weakSelf resolveTransformer:&transformer withTransformationTarget:weakTransformationTarget transformationSelector:transformationSelector error:&error]) {
-                    weakSelf.verified = YES;
-                    weakSelf.error = error;
-                }
+                self.transformationTarget = transformationTarget;
+                self.transformationSelector = transformationSelector;
                 
-                weakSelf.transformer = transformer;
-                [weakSelf.view updateBoundView];
-            }];
-            
-            self.transformationTarget = transformationTarget;
-            self.transformationSelector = transformationSelector;
-            self.transformer = transformer;
+                self.status |= HLSViewBindingStatusTransformationTargetResolved;
+            }
+            else {
+                [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                          code:HLSViewBindingErrorPending
+                                          localizedDescription:pendingReason]
+                            withError:&pendingReasonsError];
+            }
         }
-        
-        self.status |= HLSViewBindingStatusTransformerResolved;
+        else {
+            self.status |= HLSViewBindingStatusTransformationTargetResolved;
+        }
+    }
+    
+    if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
+        if ([self.transformerName isFilled]) {
+            id<HLSTransformer> transformer = nil;
+            NSString *pendingReason = nil;
+            NSError *error = nil;
+            
+            if (! [self resolveTransformer:&transformer pendingWithReason:&pendingReason error:&error]) {
+                self.status = HLSViewBindingStatusVerified;
+                self.error = error;
+                return;
+            }
+            
+            if (! pendingReason) {
+                self.transformer = transformer;
+                self.status |= HLSViewBindingStatusTransformerResolved;
+            }
+            else {
+                [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                          code:HLSViewBindingErrorPending
+                                          localizedDescription:pendingReason]
+                            withError:&pendingReasonsError];
+            }
+        }
+        else {
+            self.status |= HLSViewBindingStatusTransformerResolved;
+        }
     }
     
     if ((self.status & HLSViewBindingStatusDelegateResolved) == 0) {
@@ -812,41 +932,24 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         NSError *error = nil;
         
         if (! [self checkTypePendingWithReason:&pendingReason inputClass:&inputClass error:&error]) {
-            self.verified = YES;
+            self.status = HLSViewBindingStatusVerified;
             self.error = error;
             return;
         }
         
-        // Cannot be fully verified yet
-        if (pendingReason) {
-            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                             code:HLSViewBindingErrorPending
-                             localizedDescription:pendingReason];
-            return;
+        if (! pendingReason) {
+            self.inputClass = inputClass;
+            self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
         }
-        
-        self.inputClass = inputClass;
-        self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
+        else {
+            [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorPending
+                                      localizedDescription:pendingReason]
+                        withError:&pendingReasonsError];
+        }
     }
     
-    if ((self.status & HLSViewBindingStatusAutomaticUpdatesResolved) == 0) {
-        NSString *pendingReason = nil;
-        
-        self.modelAutomaticallyUpdated = [self isModelAutomaticallyUpdatedPendingWithReason:&pendingReason];
-        
-        // Cannot be fully verified yet
-        if (pendingReason) {
-            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                             code:HLSViewBindingErrorPending
-                             localizedDescription:pendingReason];
-            return;
-        }
-        
-        self.status |= HLSViewBindingStatusAutomaticUpdatesResolved;
-    }
-    
-    self.verified = YES;
-    self.error = nil;
+    self.error = pendingReasonsError;
 }
 
 #pragma mark Type checking
