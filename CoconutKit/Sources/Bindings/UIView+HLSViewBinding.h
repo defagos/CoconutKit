@@ -149,6 +149,12 @@
  * be careful about possible type mismatches or missing transformers. The debugging information (see 9.) displays
  * these fields in yellow. If you can, replace them with properties so that correct types can be enforced.
  *
+ * Currently, bindings can be made with values having the following types:
+ *   - All primitive types (NSInteger, float, CGFloat, etc.)
+ *   - Objects
+ *   - Structs
+ *
+ *
  *
  * 5. Transformers
  * ---------------
