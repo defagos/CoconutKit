@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'CoconutKit'
-  s.version = '3.0.rc1'
+  s.version = '3.0.rc2'
   s.license = 'MIT'
   s.summary = 'CoconutKit is a library of high-quality iOS components.'
   s.homepage = 'https://github.com/defagos/CoconutKit'
