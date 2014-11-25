@@ -31,7 +31,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     HLSViewBindingStatusTypeResolved = (1 << 1),                        // Type has been resolved (might have found nothing reliable)
     HLSViewBindingStatusTransformerResolved = (1 << 2),                 // Binding transformer resolution has been successfully made (might have found nothing)
     HLSViewBindingStatusDelegateResolved = (1 << 3),                    // Binding delegate resoution has been successfully made (might have found nothing)
-    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 4)             // Type compatibility with the view has been checked
+    HLSViewBindingStatusTypeCompatibilityChecked = (1 << 4),            // Type compatibility with the view has been checked
+    HLSViewBindingStatusAutomaticUpdatesResolved = (1 << 5)             // Ability to perform automatic updates has been resolved
 };
 
 @interface HLSViewBindingInformation ()
@@ -691,6 +692,43 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return YES;
 }
 
+- (BOOL)isModelAutomaticallyUpdatedPendingWithReason:(NSString **)pPendingReason
+{
+    NSAssert(self.status & HLSViewBindingStatusObjectTargetResolved, @"The target must be resolved");
+    
+    if (! self.supportingInput) {
+        return NO;
+    }
+    
+    id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:self.objectTarget];
+    if (! lastTargetInKeyPath) {
+        if (pPendingReason) {
+            *pPendingReason = @"The last object in the key path is nil. Check for automatic updates cannot be made yet";
+        }
+        return NO;
+    }
+    
+    if (hls_isClass(lastTargetInKeyPath)) {
+        return NO;
+    }
+    
+    // If the key path ends with a property, extract its attributes and ensure there is no readonly attribute set
+    NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+    objc_property_t property = class_getProperty([lastTargetInKeyPath class], [methodName UTF8String]);
+    if (property) {
+        NSString *propertyAttributesString = [NSString stringWithUTF8String:property_getAttributes(property)];
+        NSArray *propertyAttributes = [propertyAttributesString componentsSeparatedByString:@","];
+        return ! [propertyAttributes containsObject:@"R"];
+    }
+    // Otherwise look for a -set<name>: method according to KVO compliance rules
+    // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
+    else {
+        NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
+                                                                                                         withString:[[methodName substringToIndex:1] uppercaseString]]];
+        return [lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)];
+    }
+}
+
 - (void)verify
 {
     if (self.verified) {
@@ -705,31 +743,6 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             self.verified = YES;
             self.error = error;
             return;
-        }
-        
-        // Verify setter existence. Keypaths containing operators cannot be set
-        // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
-        if (self.supportingInput) {
-            id lastTargetInKeyPath = [HLSViewBindingInformation lastTargetInKeyPath:self.keyPath withObject:objectTarget];
-            if (! hls_isClass(lastTargetInKeyPath)) {
-                NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
-                
-                // If the key path ends with a property, extract its attributes and ensure there is no readonly attribute set
-                objc_property_t property = class_getProperty([lastTargetInKeyPath class], [methodName UTF8String]);
-                if (property) {
-                    NSString *propertyAttributesString = [NSString stringWithUTF8String:property_getAttributes(property)];
-                    NSArray *propertyAttributes = [propertyAttributesString componentsSeparatedByString:@","];
-                    self.modelAutomaticallyUpdated = ! [propertyAttributes containsObject:@"R"];
-                }
-                // Otherwise look for a -set<name>: method according to KVO compliance rules
-                else {
-                    NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
-                                                                                                                     withString:[[methodName substringToIndex:1] uppercaseString]]];
-                    if ([lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)]) {
-                        self.modelAutomaticallyUpdated = YES;
-                    }
-                }
-            }
         }
         
         self.objectTarget = objectTarget;
@@ -814,6 +827,22 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         
         self.inputClass = inputClass;
         self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
+    }
+    
+    if ((self.status & HLSViewBindingStatusAutomaticUpdatesResolved) == 0) {
+        NSString *pendingReason = nil;
+        
+        self.modelAutomaticallyUpdated = [self isModelAutomaticallyUpdatedPendingWithReason:&pendingReason];
+        
+        // Cannot be fully verified yet
+        if (pendingReason) {
+            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
+                                             code:HLSViewBindingErrorPending
+                             localizedDescription:pendingReason];
+            return;
+        }
+        
+        self.status |= HLSViewBindingStatusAutomaticUpdatesResolved;
     }
     
     self.verified = YES;
