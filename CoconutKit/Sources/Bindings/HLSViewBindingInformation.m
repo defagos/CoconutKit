@@ -799,8 +799,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         return;
     }
     
-    // Reset errors first
-    self.error = nil;
+    NSError *pendingReasonsError = nil;
     
     if ((self.status & HLSViewBindingStatusObjectTargetResolved) == 0) {
         id objectTarget = nil;
@@ -825,9 +824,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             self.status |= HLSViewBindingStatusAutomaticUpdatesResolved;
         }
         else {
-            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                             code:HLSViewBindingErrorPending
-                             localizedDescription:pendingReason];
+            [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorPending
+                                      localizedDescription:pendingReason]
+                        withError:&pendingReasonsError];
         }
     }
     
@@ -847,9 +847,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             self.status |= HLSViewBindingStatusTypeResolved;
         }
         else {
-            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                             code:HLSViewBindingErrorPending
-                             localizedDescription:pendingReason];
+            [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorPending
+                                      localizedDescription:pendingReason]
+                        withError:&pendingReasonsError];
         }
     }
     
@@ -881,9 +882,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 self.status |= HLSViewBindingStatusTransformationTargetResolved;
             }
             else {
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorPending
-                                 localizedDescription:pendingReason];
+                [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                          code:HLSViewBindingErrorPending
+                                          localizedDescription:pendingReason]
+                            withError:&pendingReasonsError];
             }
         }
         else {
@@ -908,9 +910,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                 self.status |= HLSViewBindingStatusTransformerResolved;
             }
             else {
-                self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                                 code:HLSViewBindingErrorPending
-                                 localizedDescription:pendingReason];
+                [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                          code:HLSViewBindingErrorPending
+                                          localizedDescription:pendingReason]
+                            withError:&pendingReasonsError];
             }
         }
         else {
@@ -939,11 +942,14 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             self.status |= HLSViewBindingStatusTypeCompatibilityChecked;
         }
         else {
-            self.error = [NSError errorWithDomain:HLSViewBindingErrorDomain
-                                             code:HLSViewBindingErrorPending
-                             localizedDescription:pendingReason];
+            [NSError combineError:[NSError errorWithDomain:HLSViewBindingErrorDomain
+                                                      code:HLSViewBindingErrorPending
+                                      localizedDescription:pendingReason]
+                        withError:&pendingReasonsError];
         }
     }
+    
+    self.error = pendingReasonsError;
 }
 
 #pragma mark Type checking

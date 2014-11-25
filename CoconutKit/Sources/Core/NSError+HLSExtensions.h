@@ -45,7 +45,7 @@ extern NSString * const HLSDetailedErrorsKey;           // Key for storing the m
  * Combine a given error with another existing one, passed by reference. For convenience of use, the resulting error is
  * returned by reference, and also as method returned value. Multiple errors are combined as an HLSCoreErrorMultipleErrors
  * in the CoconutKitErrorDomain error domain. If no existing error is provided, the new resulting error is simply the
- * new error provided
+ * new error provided. Wrapped errors can be retrieved by from the HLSDetailedErrorsKey
  */
 + (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError;
 
