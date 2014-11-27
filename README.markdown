@@ -35,9 +35,6 @@ To make it easy to create reusable, smaller view controllers with shorter implem
 CoconutKit makes it easy to divide your application into independent, reusable view controllers, by providing **UIKit-like containers** for view controller composition and stacking. Combined with the usual UIKit containers, several built-in transition animations and the possibility to write custom transitions, you will be able to reorder screens and change how they are presented in a few keystrokes. Storyboard support included.
 
 ![Containers](README-images/containers.jpg)
-
-And the result at runtime:
-
 ![Containers](README-images/containers.gif)
 
 ### Bindings
@@ -51,15 +48,45 @@ Were you longing for those **bindings** available when writing Mac applications?
 
 All this magic happens without the need for outlets, and **most of the time without even writing a single line of code**.
 
-**image**
+![Containers](README-images/bindings.jpg)
+![Containers](README-images/bindings.gif)
 
 For screens containing a lot of text fields, CoconutKit also provides reliable automatic keyboard management.
 
 ### Declarative animations
 
-Also say goodbye to the spaghetti code mess usually associated with animations. CoconutKit lets you **create animations in a declarative way**. These animations can be easily stored for later use, reversed, paused and resumed. Best of all, they work with Core Animation too!
+Also say goodbye to the spaghetti code mess usually associated with animations. CoconutKit lets you **create animations in a declarative way**. These animations can be easily stored for later use, reversed, repeated, paused, resumed and canceled. Best of all, they work with Core Animation too!
 
-**image**
+Here is for example the code for a pulse animation:
+
+```objective-c
+// Increase size while decreasing opacity
+HLSLayerAnimation *pulseLayerAnimation1 = [HLSLayerAnimation animation];
+[pulseLayerAnimation1 scaleWithXFactor:2.f yFactor:2.f];
+[pulseLayerAnimation1 addToOpacity:-1.f];
+HLSLayerAnimationStep *pulseLayerAnimationStep1 = [HLSLayerAnimationStep animationStep];
+pulseLayerAnimationStep1.duration = 0.8;
+pulseLayerAnimationStep1.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+[pulseLayerAnimationStep1 addLayerAnimation:pulseLayerAnimation1 forView:view];
+    
+// Wait
+HLSLayerAnimationStep *pulseLayerAnimationStep2 = [HLSLayerAnimationStep animationStep];
+pulseLayerAnimationStep2.duration = 0.5;
+
+// Instantly bring back the view to its initial state
+HLSLayerAnimation *pulseLayerAnimation3 = [HLSLayerAnimation animation];
+[pulseLayerAnimation3 scaleWithXFactor:1.f / 2.f yFactor:1.f / 2.f];
+[pulseLayerAnimation3 addToOpacity:1.f];
+HLSLayerAnimationStep *pulseLayerAnimationStep3 = [HLSLayerAnimationStep animationStep];
+pulseLayerAnimationStep3.duration = 0.;
+[pulseLayerAnimationStep3 addLayerAnimation:pulseLayerAnimation3 forView:view];
+
+// Create and play the animation
+HLSAnimation *pulseAnimation = [HLSAnimation animationWithAnimationSteps:@[pulseLayerAnimationStep1, pulseLayerAnimationStep2, pulseLayerAnimationStep3]];
+[pulseAnimation playWithRepeatCount:NSUIntegerMax animated:YES];
+```
+
+![Containers](README-images/animations.gif)
 
 ### Localization
 
