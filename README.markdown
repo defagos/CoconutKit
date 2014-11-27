@@ -48,8 +48,8 @@ Were you longing for those **bindings** available when writing Mac applications?
 
 All this magic happens without the need for outlets, and **most of the time without even writing a single line of code**.
 
-![Containers](README-images/bindings.jpg)
-![Containers](README-images/bindings.gif)
+![Bindings](README-images/bindings.jpg)
+![Bindings](README-images/bindings.gif)
 
 For screens containing a lot of text fields, CoconutKit also provides reliable automatic keyboard management.
 
@@ -86,15 +86,17 @@ HLSAnimation *pulseAnimation = [HLSAnimation animationWithAnimationSteps:@[pulse
 [pulseAnimation playWithRepeatCount:NSUIntegerMax animated:YES];
 ```
 
-![Containers](README-images/animations.gif)
+![Animations](README-images/animations.gif)
 
 ### Localization
 
 Localizing the interface of your application is usually tedious and requires a lot of boilerplate code. With CoconutKit, you can **localize labels and buttons directly in Interface Builder**, without the need for outlets.
 
-**image**
+![Bindings](README-images/localization.jpg)
 
 You can also change the language of your application while it is running, for free!
+
+![Bindings](README-images/localization.gif)
 
 ## Compatibility
 
