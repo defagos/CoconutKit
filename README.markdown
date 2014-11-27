@@ -1,4 +1,4 @@
-![Header](README-images/coconutkit_header.png)
+<div style="text-align:center"><img src="README-images/coconutkit_header.png"/></div>
 
 CoconutKit is a **productivity framework for iOS**, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
 
@@ -6,7 +6,6 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg?style=flat)](http://cocoadocs.org/docsets/XCDYouTubeKit/)
 [![License](https://img.shields.io/cocoapods/l/CoconutKit.svg?style=flat)](LICENSE)
 [![Donate to author](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=3V35ZXWYXGAYG&lc=CH&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
-
 
 ## About
 
@@ -34,8 +33,8 @@ To make it easy to create reusable, smaller view controllers with shorter implem
 
 CoconutKit makes it easy to divide your application into independent, reusable view controllers, by providing **UIKit-like containers** for view controller composition and stacking. Combined with the usual UIKit containers, several built-in transition animations and the possibility to write custom transitions, you will be able to reorder screens and change how they are presented in a few keystrokes. Storyboard support included.
 
-![Containers](README-images/containers.jpg)
-![Containers](README-images/containers.gif)
+<div style="text-align:center"><img src="README-images/containers.jpg"/></div>
+<div style="text-align:center"><img src="README-images/containers.gif"/></div>
 
 ### Bindings
 
@@ -48,8 +47,8 @@ Were you longing for those **bindings** available when writing Mac applications?
 
 All this magic happens without the need for outlets, and **most of the time without even writing a single line of code**.
 
-![Bindings](README-images/bindings.jpg)
-![Bindings](README-images/bindings.gif)
+<div style="text-align:center"><img src="README-images/bindings.jpg"/></div>
+<div style="text-align:center"><img src="README-images/bindings.gif"/></div>
 
 For screens containing a lot of text fields, CoconutKit also provides reliable automatic keyboard management.
 
@@ -86,17 +85,17 @@ HLSAnimation *pulseAnimation = [HLSAnimation animationWithAnimationSteps:@[pulse
 [pulseAnimation playWithRepeatCount:NSUIntegerMax animated:YES];
 ```
 
-![Animations](README-images/animations.gif)
+<div style="text-align:center"><img src="README-images/animations.gif"/></div>
 
 ### Localization
 
 Localizing the interface of your application is usually tedious and requires a lot of boilerplate code. With CoconutKit, you can **localize labels and buttons directly in Interface Builder**, without the need for outlets.
 
-![Bindings](README-images/localization.jpg)
+<div style="text-align:center"><img src="README-images/localization.jpg" width="512"/></div>
 
 You can also change the language of your application while it is running, for free!
 
-![Bindings](README-images/localization.gif)
+<div style="text-align:center"><img src="README-images/localization.gif" width="512"/></div>
 
 ## Compatibility
 
