@@ -34,7 +34,11 @@ To make it easy to create reusable, smaller view controllers with shorter implem
 
 CoconutKit makes it easy to divide your application into independent, reusable view controllers, by providing **UIKit-like containers** for view controller composition and stacking. Combined with the usual UIKit containers, several built-in transition animations and the possibility to write custom transitions, you will be able to reorder screens and change how they are presented in a few keystrokes. Storyboard support included.
 
-**image (view controller hierarchy & result)**
+![Containers](README-images/containers.jpg)
+
+And the result at runtime:
+
+![Containers](README-images/containers.gif)
 
 ### Bindings
 
