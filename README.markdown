@@ -7,6 +7,8 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 [![License](https://img.shields.io/cocoapods/l/CoconutKit.svg?style=flat)](LICENSE)
 [![Donate to author](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=3V35ZXWYXGAYG&lc=CH&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
+_Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
+
 ## About
 
 Unlike most libraries which focus on a specific task, like networking or image processing, CoconutKit addresses **developer productivity in general**. As an iOS developer, you namely face the same issues on each project you work on:
