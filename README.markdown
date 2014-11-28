@@ -9,7 +9,7 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 
 ## About
 
-Unlike most libraries which focus on a specific task, like networking or image processing, CoconutKit addresses **developer productivity in general**. As an iOS developer, you namely more or less face the same issues on each project you work on:
+Unlike most libraries which focus on a specific task, like networking or image processing, CoconutKit addresses **developer productivity in general**. As an iOS developer, you namely face the same issues on each project you work on:
 
 * Changes due to fast-paced iterative development, stakeholder indecision or design changes
 * Presenting data and gathering user input
@@ -19,15 +19,15 @@ Most of the code related to these issues is written in view controllers, and clu
 
 CoconutKit provides a set of tools to **tackle the problem of fat view controller** classes by:
 
-* **Eliminating boilerplate code** and decluttering view controller implementations
+* Helping your **eliminate boilerplate code** and decluttering view controller implementations
 * Making it easier to **decompose your application in smaller view controllers** with well-defined responsibilities
 * Letting you **assemble and reorganize view controllers** effortlessly
 
-Unlike approaches which apply patterns like [MVVM](http://www.objc.io/issue-13/mvvm.html), CoconutKit does not require any major changes to your code or to the way you work or think, only the good ol' language and patterns you are comfortable with.
+Unlike approaches which apply patterns like [MVVM](http://www.objc.io/issue-13/mvvm.html), CoconutKit does not require any major changes to your code or to the way you work or think. You only need the good ol' language and patterns you are comfortable with.
 
 ## Features
 
-To make it easy to create reusable, smaller view controllers with shorter implementations, CoconutKit provides a set of tools addressing many related issues.
+The following is a brief introduction to various tools and component available in CoconutKit. More information is available on the [wiki](https://github.com/defagos/CoconutKit/wiki).
 
 ### Containers
 
@@ -45,18 +45,18 @@ Were you longing for those **bindings** available when writing Mac applications?
 * Parsing user input
 * Validating values
 
-All this magic happens without the need for outlets, and **most of the time without even writing a single line of code**.
+All this magic happens without the need for outlets, and most of the time **without even writing a single line of code**. Most UIKit controls are supported, and you ca add support for bindings to your own controls as well.
 
 <p align="center"><img src="README-images/bindings.jpg"/></p>
 <p align="center"><img src="README-images/bindings.gif"/></p>
 
-For screens containing a lot of text fields, CoconutKit also provides reliable automatic keyboard management.
+For screens containing a lot of text fields, CoconutKit also provides reliable automatic keyboard management, so that the keyboard never gets in the way.
 
 ### Declarative animations
 
-Also say goodbye to the spaghetti code mess usually associated with animations. CoconutKit lets you **create animations in a declarative way**. These animations can be easily stored for later use, reversed, repeated, paused, resumed and canceled. Best of all, they work with Core Animation too!
+Also say goodbye to the spaghetti code mess usually associated with animations. CoconutKit lets you **create animations in a declarative way**. These animations can be easily stored for later use, reversed, repeated, paused, resumed and canceled. Best of all, they can involve as many views as you want, and work with Core Animation too!
 
-Here is for example the code for a pulse animation:
+Here is for example how a pulse animation could be defined:
 
 ```objective-c
 // Increase size while decreasing opacity
@@ -80,7 +80,7 @@ HLSLayerAnimationStep *pulseLayerAnimationStep3 = [HLSLayerAnimationStep animati
 pulseLayerAnimationStep3.duration = 0.;
 [pulseLayerAnimationStep3 addLayerAnimation:pulseLayerAnimation3 forView:view];
 
-// Create and play the animation
+// Create and repeat the animation forever
 HLSAnimation *pulseAnimation = [HLSAnimation animationWithAnimationSteps:@[pulseLayerAnimationStep1, pulseLayerAnimationStep2, pulseLayerAnimationStep3]];
 [pulseAnimation playWithRepeatCount:NSUIntegerMax animated:YES];
 ```
@@ -89,13 +89,67 @@ HLSAnimation *pulseAnimation = [HLSAnimation animationWithAnimationSteps:@[pulse
 
 ### Localization
 
-Localizing the interface of your application is usually tedious and requires a lot of boilerplate code. With CoconutKit, you can **localize labels and buttons directly in Interface Builder**, without the need for outlets.
+Localizing the interface of your application is usually tedious and requires a lot of boilerplate code. With CoconutKit, **localize labels and buttons directly in Interface Builder**, without the need for outlets, by using a prefix followed by your localization key. Several prefixes are available to automatically convert a localized strings to their uppercase, lowercase or capitalized counterparts.
 
 <p align="center"><img src="README-images/localization.jpg" width="512"/></p>
 
-You can also change the language of your application while it is running, for free!
+You can also change the language of your application with a single method call.
 
 <p align="center"><img src="README-images/localization.gif" width="512"/></p>
+
+### Easy view instantiation from nib files
+
+To help you further decompose your view hierarchies, CoconutKit provides easy view instantiation from nib files. This way, you can design views separately, and simply aggregate them by adding a view and setting its type in Interface Builder.
+
+
+Easy table view cell instantiation is available as well.
+
+### Web browser
+
+A web browser is available when you have to display some web site within your application.
+
+### Slideshow
+
+Ever wanted to present images or backgrounds as an animated gallery? CoconutKit slideshow makes it possible in a snap. You can choose among several transition animations, ranging from the simple cross-dissolve to Ken Burns random zooming and panning.
+
+### Cursor
+
+Tired of the segmented control? Then use CoconutKit cursor, which can be customized to match your needs.
+
+### Parallax scrolling
+
+Add parallax scrolling to your application by synchronizing scroll views with a single method call.
+
+### Simple Core Data management
+
+To avoid clutter ususally associated with Core Data projects, you can create all necessary contexts and stores with a single model manager instantiation, pushed to make it the current one:
+
+```objective-c
+HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"Company"
+                                                                       inBundle:nil
+                                                                  configuration:nil 
+                                                                 storeDirectory:HLSApplicationDocumentDirectoryPath()
+                                                                    fileManager:nil
+                                                                        options:HLSModelManagerLightweightMigrationOptions];
+[HLSModelManager pushModelManager:modelManager];
+```
+
+Usual Core Data applications do not need to play with Core Data contexts anymore, operations are applied on the topmost model manager:
+
+```objective-c
+Employee *employee = [Employee insert];
+employee.firstName = @"John";
+employee.lastName = @"Doe";
+
+NSError *error = nil;
+if (! [HLSModelManager saveCurrentModelContext:&error]) {
+    [HLSModelManager rollbackCurrentModelContext];
+    
+    // Deal with the error
+}
+```
+
+Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model file generation and CoconutKit bindings for data display and edition, creating a Core Data powered application is easy as pie.
 
 ## Compatibility
 
@@ -152,9 +206,9 @@ Add the `.staticframework` to your project and select the `CoconutKit.xcconfig` 
 
 ## Usage
 
-A global `CoconutKit.h` header file is provided. You can individually import public header files if you prefer, though.
+A global `CoconutKit.h` header file is provided. You can of course individually import public header files if you prefer, though.
 
-### Use in Objective-C
+### Objective-C
 
 Import the global header file using
 
@@ -176,7 +230,7 @@ It you use the framework, it is also possible to import the CoconutKit module it
 @import CoconutKit
 ```
 
-### Use in Swift
+### Swift
 
 If you installed CoconutKit with CocoaPods, import the global header from a bridging header:
 
@@ -197,6 +251,10 @@ The CoconutKit workspace contains a demo project, also used for development. Sim
 ## Documentation
 
 Head over to the [wiki](https://github.com/defagos/CoconutKit/wiki) for documentation, tutorials and guidelines for contributors. If you want to learn more about a component in particular, have a look at the corresponding header documentation.
+
+## Contact
+
+[Samuel Défago](https://github.com/defagos) ([@defagos](https://twitter.com/defagos))
 
 ## License
 
