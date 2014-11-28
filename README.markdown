@@ -11,7 +11,7 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 
 Unlike most libraries which focus on a specific task, like networking or image processing, CoconutKit addresses **developer productivity in general**. As an iOS developer, you namely face the same issues on each project you work on:
 
-* Changes due to fast-paced iterative development, stakeholder indecision or design changes
+* Changes due to fast-paced iterative development, stakeholder indecision or design modifications
 * Presenting data and gathering user input
 * Localization
 
@@ -20,7 +20,7 @@ Most of the code related to these issues is written in view controllers, and clu
 CoconutKit provides a set of tools to **tackle the problem of fat view controller** classes by:
 
 * Helping your **eliminate boilerplate code** and decluttering view controller implementations
-* Making it easier to **decompose your application in smaller view controllers** with well-defined responsibilities
+* Making it easier to **decompose your application into smaller view controllers** with well-defined responsibilities
 * Letting you **assemble and reorganize view controllers** effortlessly
 
 Unlike approaches which apply patterns like [MVVM](http://www.objc.io/issue-13/mvvm.html), CoconutKit does not require any major changes to your code or to the way you work or think. You only need the good ol' language and patterns you are comfortable with.
@@ -38,7 +38,7 @@ CoconutKit makes it easy to divide your application into independent, reusable v
 
 ### Bindings
 
-Were you longing for those **bindings** available when writing Mac applications? Well, now simply associate a view with a key path, set a formatter if required, and you are done. CoconutKit takes care of the rest:
+Were you longing for those **bindings** available when [writing Mac applications](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CocoaBindings/Concepts/WhatAreBindings.html)? Well, now simply associate a view with a key path, set a formatter if required, and you are done. CoconutKit takes care of the rest:
 
 * Keeping model and view synchronized
 * Formatting data before display
@@ -125,7 +125,7 @@ Ever wanted to present images or backgrounds as an animated gallery? CoconutKit 
 
 ### Cursor
 
-Tired of the segmented control? Then use CoconutKit cursor, which can be customized to match your needs.
+Tired of segmented controls? Then use CoconutKit cursor, which can be customized to match your needs.
 
 <p align="center"><img src="README-images/cursor.gif"/></p>
 
@@ -191,7 +191,7 @@ CoconutKit can be used both from Objective-C or Swift files. It does not contain
 
 ## Installation
 
-CoconutKit can either be installed with CocoaPods or as a compiled framework.
+CoconutKit can either be installed with [CocoaPods](http://cocoapods.org/) or as a compiled framework.
 
 ### Installation with CocoaPods
 
@@ -207,7 +207,7 @@ For more information about CocoaPods and the `Podfile`, please refer to the [off
 
 ### Framework
 
-Checkout CoconutKit source code from the command-line and update associated submodules:
+Checkout CoconutKit source code from the command-line:
 
 ```
 $ git clone --recursive https://github.com/defagos/CoconutKit.git
