@@ -103,6 +103,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             responder = responder.nextResponder;
         }
         
+        // FIXME: Issue with constraints. The original constraints should be preserved and copied
+        //        over from self to nibView. To test:
+        //           - create a layout with a centered placeholder
+        //           - run and rotate the view to check behavior
+        //           - set view class to an NLSNibView subclass
+        //           - check behavior again, should be incorrect
+        
         // Get rid of the placeholder and install the nib-instantiated view instead
         nibView.frame = self.frame;
         [self.superview insertSubview:nibView belowSubview:self];

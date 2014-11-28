@@ -190,6 +190,9 @@
     
     // Changing the date formatter object automatically triggers a bound view update
     self.localizedDateFormatter = localizedDateFormatter;
+    
+    // Ensure that all displayed values are correctly localized
+    [self updateBoundViewHierarchy];
 }
 
 #pragma mark Transformers

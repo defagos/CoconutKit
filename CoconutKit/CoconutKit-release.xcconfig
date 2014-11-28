@@ -1,0 +1,5 @@
+//
+//  CoconutKit.xcconfig
+//
+
+OTHER_LDFLAGS=$(inherited) -framework CoconutKit -framework CoreData -framework CoreGraphics -framework CoreText -framework Foundation -framework MobileCoreServices -framework QuartzCore -framework QuickLook -framework UIKit -framework WebKit
