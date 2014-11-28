@@ -38,14 +38,14 @@ CoconutKit makes it easy to divide your application into independent, reusable v
 
 ### Bindings
 
-Were you longing for those **bindings** available when writing Mac applications? Well, using CoconutKit, simply associate a view with a key path, set a formatter if required, and you are done. CoconutKit takes care of the rest:
+Were you longing for those **bindings** available when writing Mac applications? Well, now simply associate a view with a key path, set a formatter if required, and you are done. CoconutKit takes care of the rest:
 
 * Keeping model and view synchronized
 * Formatting data before display
 * Parsing user input
 * Validating values
 
-All this magic happens without the need for outlets, and most of the time **without even writing a single line of code**. Most UIKit controls are supported, and you ca add support for bindings to your own controls as well.
+All this magic happens without the need for outlets, and most of the time **without even writing a single line of code**. Most UIKit controls can be used with bindings, and you can add support for bindings to your own controls as well.
 
 <p align="center"><img src="README-images/bindings.jpg"/></p>
 <p align="center"><img src="README-images/bindings.gif"/></p>
@@ -89,7 +89,7 @@ HLSAnimation *pulseAnimation = [HLSAnimation animationWithAnimationSteps:@[pulse
 
 ### Localization
 
-Localizing the interface of your application is usually tedious and requires a lot of boilerplate code. With CoconutKit, **localize labels and buttons directly in Interface Builder**, without the need for outlets, by using a prefix followed by your localization key. Several prefixes are available to automatically convert a localized strings to their uppercase, lowercase or capitalized counterparts.
+Localizing the interface of your application is usually tedious and requires a lot of boilerplate code. With CoconutKit, **localize labels and buttons directly in Interface Builder**, without the need for outlets, by using a prefix followed by your localization key. Several prefixes are available to automatically convert localized strings to their uppercase, lowercase or capitalized counterparts.
 
 <p align="center"><img src="README-images/localization.jpg" width="512"/></p>
 
@@ -134,7 +134,7 @@ Tired of the segmented control? Then use CoconutKit cursor, which can be customi
 Add parallax scrolling to your application by synchronizing scroll views with a single method call.
 
 ```objective-c
-[self.treesScrollView synchronizeWithScrollViews:@[self.skyScrollView, self.mountainsScrollView, self.grassScrollView] bounces:NO];
+[treesScrollView synchronizeWithScrollViews:@[skyScrollView, mountainsScrollView, grassScrollView] bounces:NO];
 ```
 
 <p align="center"><img src="README-images/parallax.gif"/></p>
@@ -153,7 +153,7 @@ HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:
 [HLSModelManager pushModelManager:modelManager];
 ```
 
-Usual Core Data applications do not need to play with Core Data contexts anymore, operations are applied on the topmost model manager:
+You then do not need to play with Core Data contexts anymore. Operations are applied on the topmost model manager:
 
 ```objective-c
 Employee *employee = [Employee insert];
