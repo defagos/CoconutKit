@@ -99,8 +99,9 @@ You can also change the language of your application with a single method call.
 
 ### Easy view instantiation from nib files
 
-To help you further decompose your view hierarchies, CoconutKit provides easy view instantiation from nib files. This way, you can design views separately, and simply aggregate them by adding a view and setting its type in Interface Builder.
+To help you further decompose your view hierarchies, CoconutKit provides easy view instantiation from nib files. This way, you can design views separately, and simply aggregate them directly in Interface Builder.
 
+<p align="center"><img src="README-images/nib_views.jpg"/></p>
 
 Easy table view cell instantiation is available as well.
 
@@ -108,17 +109,35 @@ Easy table view cell instantiation is available as well.
 
 A web browser is available when you have to display some web site within your application.
 
+```objective-c
+NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://about.me/defagos"]];
+HLSWebViewController *webViewController = [[HLSWebViewController alloc] initWithRequest:request];
+UINavigationController *webNavigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+[self presentViewController:webNavigationController animated:YES completion:nil];
+```
+<p align="center"><img src="README-images/web_browser.jpg"/></p>
+
 ### Slideshow
 
 Ever wanted to present images or backgrounds as an animated gallery? CoconutKit slideshow makes it possible in a snap. You can choose among several transition animations, ranging from the simple cross-dissolve to Ken Burns random zooming and panning.
+
+<p align="center"><img src="README-images/slideshow.gif" width="512"/></p>
 
 ### Cursor
 
 Tired of the segmented control? Then use CoconutKit cursor, which can be customized to match your needs.
 
+<p align="center"><img src="README-images/cursor.gif"/></p>
+
 ### Parallax scrolling
 
 Add parallax scrolling to your application by synchronizing scroll views with a single method call.
+
+```objective-c
+[self.treesScrollView synchronizeWithScrollViews:@[self.skyScrollView, self.mountainsScrollView, self.grassScrollView] bounces:NO];
+```
+
+<p align="center"><img src="README-images/parallax.gif"/></p>
 
 ### Simple Core Data management
 
@@ -198,7 +217,7 @@ $ git submodule update --init
 
 Open the `CoconutKit.xcworkspace` and run the `CoconutKit-staticframework` scheme. 
 
-**image**
+<p align="center"><img src="README-images/framework_scheme.jpg"/></p>
 
 This produces a `.staticframework` package in the `Binaries` directory.
 
