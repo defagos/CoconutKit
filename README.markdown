@@ -210,20 +210,38 @@ For more information about CocoaPods and the `Podfile`, please refer to the [off
 Checkout CoconutKit source code from the command-line and update associated submodules:
 
 ```
-$ git clone https://github.com/defagos/CoconutKit.git
+$ git clone --recursive https://github.com/defagos/CoconutKit.git
 $ cd CoconutKit
-$ git submodule update --init
 ```
 
 Open the `CoconutKit.xcworkspace` and run the `CoconutKit-staticframework` scheme. 
 
 <p align="center"><img src="README-images/framework_scheme.jpg"/></p>
 
-This produces a `.staticframework` package in the `Binaries` directory. Add it to your project, and associate either the `CoconutKit-release.xcconfig` or `CoconutKit-debug.xcconfig` to each of your target configurations.
+This produces a `.staticframework` package in the `Binaries` directory. Add it to your project, and associate either the `CoconutKit-release.xcconfig` or `CoconutKit-debug.xcconfig` to each of your target configurations:
 
-These `.xcconfig` files already contain the flags to link against the `CoconutKit` framework, you must therefore remove it from the linker build phase:
+<p align="center"><img src="README-images/set_xcconfig.jpg"/></p>
+
+Since `.xcconfig` files are build files, you should remove them from your target _Copy Bundle Resources_ build phase:
+
+<p align="center"><img src="README-images/remove_xcconfig.jpg"/></p>
+
+Both `.xcconfig` files already contain the flags needed to link against the `CoconutKit` framework release, respectively debug binaries. You must therefore remove the `CoconutKit.framework` entry which was automatically added to your target _Link Binary With Libraries_ build phase:
 
 <p align="center"><img src="README-images/remove_framework.jpg"/></p>
+
+Your project should now successfully compile.
+
+#### Remark
+
+If your project already requires a configuration file, you need to create an umbrella `.xcconfig` file that includes both files, since Xcode only allows one per target / configuration:
+
+```
+#include "/path/to/your/config.xcconfig"
+#include "/path/to/CoconutKit-(debug|release).xcconfig"
+```
+
+Then use this configuration file instead.
 
 ## Usage
 
