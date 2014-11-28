@@ -121,7 +121,7 @@ UINavigationController *webNavigationController = [[UINavigationController alloc
 
 Ever wanted to present images or backgrounds as an animated gallery? CoconutKit slideshow makes it possible in a snap. You can choose among several transition animations, ranging from the simple cross-dissolve to Ken Burns random zooming and panning.
 
-<p align="center"><img src="README-images/slideshow.gif" width="512"/></p>
+<p align="center"><img src="README-images/slideshow.gif" width="256"/></p>
 
 ### Cursor
 
