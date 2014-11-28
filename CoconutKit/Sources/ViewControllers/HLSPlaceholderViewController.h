@@ -53,9 +53,9 @@
  * rotation is deprecated starting with iOS 5, you should not use it anymore anyway.
  *
  * You can also use placeholder view controllers with storyboards:
- *   - drop a view controller onto the storyboard, and set its class to HLSPlaceholderViewController. Add one or several
- *     subviews which you connect to the placeholderViews outlet collection. This defines where inset view controllers
- *     will be drawn
+ *   - drop a view controller onto the storyboard, and set its class to a HLSPlaceholderViewController subclass. Add one
+ *     or several subviews which you connect to the placeholderViews outlet collection. This defines where inset view 
+ *     controllers will be drawn
  *   - drop another view controller onto the storyboard. You can display this view controller as inset as follows:
  *       - if you want to preload the view controller so that it gets displayed when the placeholder view controller
  *         gets displayed, bind the placeholder view controller with it using an HLSPlaceholderInsetSegue with the 
