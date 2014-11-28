@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6F04E3761A1C864000C6C08B /* BindingsControlsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3581A1C864000C6C08B /* BindingsControlsDemoViewController.m */; };
 		6F04E3771A1C864000C6C08B /* BindingsControlsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3581A1C864000C6C08B /* BindingsControlsDemoViewController.m */; };
 		6F04E3781A1C864000C6C08B /* BindingsControlsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3591A1C864000C6C08B /* BindingsControlsDemoViewController.xib */; };
@@ -56,7 +55,6 @@
 		6F04E3A71A1C885900C6C08B /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3A51A1C885900C6C08B /* UppercaseValueTransformer.m */; };
 		6F04E3A81A1C885900C6C08B /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3A51A1C885900C6C08B /* UppercaseValueTransformer.m */; };
 		6F04E3AA1A1C886D00C6C08B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F04E3A91A1C886D00C6C08B /* WebKit.framework */; };
-		6F04E3AB1A1C888B00C6C08B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F04E3A91A1C886D00C6C08B /* WebKit.framework */; };
 		6F04E3AD1A1C8D1700C6C08B /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3AC1A1C8D1700C6C08B /* Employees.plist */; };
 		6F04E3AE1A1C8D1700C6C08B /* Employees.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3AC1A1C8D1700C6C08B /* Employees.plist */; };
 		6F04E3B01A1C8D2100C6C08B /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E3AF1A1C8D2100C6C08B /* Launch Screen.xib */; };
@@ -70,7 +68,6 @@
 		6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DED15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m */; };
 		6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF115A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m */; };
 		6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F4DF415A1B63200F65ECF /* SegueSecondRightPanelDemoViewController.m */; };
-		6F22C75216A93DD20081A9A7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75116A93DD20081A9A7 /* CoreText.framework */; };
 		6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C75716A9420D0081A9A7 /* Beon-Regular.otf */; };
 		6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F22C75F16A942970081A9A7 /* DynamicLocalizationDemoViewController.m */; };
 		6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F22C76016A942970081A9A7 /* DynamicLocalizationDemoViewController.xib */; };
@@ -160,7 +157,6 @@
 		6F468CB019D2E7920021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
 		6F468CB119D2E7920021B95D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAE19D2E7920021B95D /* Localizable.strings */; };
 		6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F468CAC19D2E7920021B95D /* DemoTable.strings */; };
-		6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6F53B63516FA321000E01781 /* DemoColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F53B63416FA321000E01781 /* DemoColors.m */; };
 		6F54E2E61A1F2670000028E1 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F54E2E51A1F2670000028E1 /* GHUnitIOS.framework */; };
 		6F54E2EB1A1F26A3000028E1 /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E2E81A1F26A3000028E1 /* HLSTransformerTestCase.m */; };
@@ -170,7 +166,6 @@
 		6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F58C53917944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib */; };
 		6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB21509D19300A20DFF /* SlideshowDemoViewController.m */; };
 		6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F5A0BB31509D19300A20DFF /* SlideshowDemoViewController.xib */; };
-		6F63E7BA17CF6BA1006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B917CF6BA1006322D9 /* QuickLook.framework */; };
 		6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */ = {isa = PBXBuildFile; fileRef = 6F6B0C9B16B3DACF006B718F /* InnerFolder */; };
 		6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F718CAE16CF8714001498D6 /* ViewEffectsDemoViewController.m */; };
 		6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F718CAF16CF8714001498D6 /* ViewEffectsDemoViewController.xib */; };
@@ -178,7 +173,6 @@
 		6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F89149F15790DDE009FCC78 /* LabelDemoViewController.xib */; };
 		6F8CC0C419DC2A8C003286F7 /* CoconutKit_bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C119DC2A8C003286F7 /* CoconutKit_bootstrap.m */; };
 		6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F8CC0C219DC2A8C003286F7 /* CoconutKit-resources.bundle */; };
-		6F8CC0C619DC2A8C003286F7 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */; };
 		6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
 		6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
 		6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83319D448D90010A128 /* DemosListViewController.xib */; };
@@ -258,12 +252,12 @@
 		6FA9B0A514F8E765008B6D5A /* img_apple2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A114F8E765008B6D5A /* img_apple2.jpg */; };
 		6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A214F8E765008B6D5A /* img_apple3.jpg */; };
 		6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
-		6FAB922016DA70BE00599256 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
 		6FB007E1195304360082D915 /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB007E0195304360082D915 /* HLSGeometryTestCase.m */; };
 		6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */; };
 		6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */; };
 		6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4F15F0DA4D0061D807 /* LayerPropertiesTestViewController.xib */; };
+		6FBB43141A2875AA008C86D9 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */; };
 		6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CF615EFDAC600C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */; };
 		6FC378FD182D188900B55AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FC182D188900B55AF1 /* main.m */; };
@@ -273,7 +267,6 @@
 		6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC3A2A7159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m */; };
 		6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B314F380B500C01ABC /* ParallaxScrollingDemoViewController.m */; };
 		6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5E8B414F380B500C01ABC /* ParallaxScrollingDemoViewController.xib */; };
-		6FC900F713D4662400834900 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
 		6FCB4E871926651F00047AD3 /* CoconutKit_demoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459514C5C30B00824AB2 /* CoconutKit_demoAppDelegate.m */; };
 		6FCB4E881926651F00047AD3 /* CoconutKit_demoApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C459914C5C30B00824AB2 /* CoconutKit_demoApplication.m */; };
 		6FCB4E891926651F00047AD3 /* FixedSizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45AC14C5C30B00824AB2 /* FixedSizeViewController.m */; };
@@ -406,7 +399,6 @@
 		6FCB4F1A1926651F00047AD3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F84AA136E8BA4007D027B /* MessageUI.framework */; };
 		6FCB4F2D192667EE00047AD3 /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCB4F281926657B00047AD3 /* libCoconutKit.a */; };
 		6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB4F2F19266DE200047AD3 /* CoconutKit-resources.bundle */; };
-		6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
 		6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
 		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
@@ -780,6 +772,8 @@
 		6FB500471705A60900779DB3 /* ConnectionDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionDemoViewController.h; sourceTree = "<group>"; };
 		6FB500481705A60900779DB3 /* ConnectionDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionDemoViewController.m; sourceTree = "<group>"; };
 		6FB500491705A60900779DB3 /* ConnectionDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectionDemoViewController.xib; sourceTree = "<group>"; };
+		6FB6242E1A287E86000F1E91 /* CoconutKit-demo-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CoconutKit-demo-debug.xcconfig"; sourceTree = "<group>"; };
+		6FB6242F1A287E86000F1E91 /* CoconutKit-demo-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "CoconutKit-demo-release.xcconfig"; sourceTree = "<group>"; };
 		6FB9EA4D15F0DA4D0061D807 /* LayerPropertiesTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayerPropertiesTestViewController.h; sourceTree = "<group>"; };
 		6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayerPropertiesTestViewController.m; sourceTree = "<group>"; };
 		6FB9EA4F15F0DA4D0061D807 /* LayerPropertiesTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LayerPropertiesTestViewController.xib; sourceTree = "<group>"; };
@@ -821,17 +815,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F04E3AB1A1C888B00C6C08B /* WebKit.framework in Frameworks */,
-				6F63E7BA17CF6BA1006322D9 /* QuickLook.framework in Frameworks */,
-				6FAB922016DA70BE00599256 /* MobileCoreServices.framework in Frameworks */,
-				6F22C75216A93DD20081A9A7 /* CoreText.framework in Frameworks */,
-				6F8CC0C619DC2A8C003286F7 /* CoconutKit.framework in Frameworks */,
-				6FCDA16F14DAE60300ED1CD1 /* QuartzCore.framework in Frameworks */,
-				6FC900F713D4662400834900 /* CoreData.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
-				6F4F84AB136E8BA4007D027B /* MessageUI.framework in Frameworks */,
+				6FBB43141A2875AA008C86D9 /* CoconutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +874,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6FB6242A1A287D44000F1E91 /* Configuration */,
 				6F6B0C8D16B3DA22006B718F /* Dependencies */,
 				6F9C46A214C5C36300824AB2 /* Resources */,
 				6F9C459214C5C30B00824AB2 /* Sources */,
@@ -1713,6 +1700,15 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		6FB6242A1A287D44000F1E91 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				6FB6242E1A287E86000F1E91 /* CoconutKit-demo-debug.xcconfig */,
+				6FB6242F1A287E86000F1E91 /* CoconutKit-demo-release.xcconfig */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
 		6FB9EA4C15F0DA4D0061D807 /* LayerPropertiesTestViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2462,11 +2458,14 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
+			baseConfigurationReference = 6FB6242E1A287E86000F1E91 /* CoconutKit-demo-debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit.staticframework\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../Binaries/CoconutKit.staticframework\"",
+					/Users/defagos/Development/repositories/CoconutKit/Binaries/CoconutKit.staticframework,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2474,29 +2473,24 @@
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
-				OTHER_LDFLAGS = (
-					"-framework",
-					"CoconutKit,Debug",
-				);
 				PRODUCT_NAME = "CoconutKit-demo";
 			};
 			name = Debug;
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
+			baseConfigurationReference = 6FB6242F1A287E86000F1E91 /* CoconutKit-demo-release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../Binaries/CoconutKit.staticframework\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../Binaries/CoconutKit.staticframework\"",
+					/Users/defagos/Development/repositories/CoconutKit/Binaries/CoconutKit.staticframework,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
-				OTHER_LDFLAGS = (
-					"-framework",
-					CoconutKit,
-				);
 				PRODUCT_NAME = "CoconutKit-demo";
 				VALIDATE_PRODUCT = YES;
 			};

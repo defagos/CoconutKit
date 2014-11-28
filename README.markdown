@@ -219,9 +219,11 @@ Open the `CoconutKit.xcworkspace` and run the `CoconutKit-staticframework` schem
 
 <p align="center"><img src="README-images/framework_scheme.jpg"/></p>
 
-This produces a `.staticframework` package in the `Binaries` directory.
+This produces a `.staticframework` package in the `Binaries` directory. Add it to your project, and associate either the `CoconutKit-release.xcconfig` or `CoconutKit-debug.xcconfig` to each of your target configurations.
 
-Add the `.staticframework` to your project and select the `CoconutKit.xcconfig` to setup the required compilation settings automatically. 
+These `.xcconfig` files already contain the flags to link against the `CoconutKit` framework, you must therefore remove it from the linker build phase:
+
+<p align="center"><img src="README-images/remove_framework.jpg"/></p>
 
 ## Usage
 
