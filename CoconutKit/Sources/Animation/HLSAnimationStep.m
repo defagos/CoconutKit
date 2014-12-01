@@ -218,6 +218,7 @@
     reverseAnimationStep.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
     reverseAnimationStep.userInfo = self.userInfo;
     reverseAnimationStep.duration = self.duration;
+    // Does not copy completion block, does not make sense
     return reverseAnimationStep;
 }
 
@@ -251,6 +252,7 @@
     animationStepCopy.tag = self.tag;
     animationStepCopy.userInfo = self.userInfo;
     animationStepCopy.duration = self.duration;
+    animationStepCopy.completionBlock = self.completionBlock;
     return animationStepCopy;
 }
 
