@@ -51,11 +51,11 @@
     //       its owners dies.
     self.person1 = [Person insert];
     self.person1.firstName = @"Tony";
-    self.person1.lastName = @"Slowprano";
+    self.person1.lastName = @"Soprano";
     
     self.person2 = [Person insert];
     self.person2.firstName = @"Carmela";
-    self.person2.lastName = @"Slowprano";
+    self.person2.lastName = @"Soprano";
     
     House *house = [House insert];
     house.name = @"Mafia blues";

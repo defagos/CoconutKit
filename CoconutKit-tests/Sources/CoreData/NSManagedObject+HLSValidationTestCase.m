@@ -15,6 +15,8 @@
 #import "ConcreteClassD.h"
 #import "TestErrors.h"
 
+HLSEnableNSManagedObjectValidation();
+
 @interface NSManagedObject_HLSValidationTestCase ()
 
 @property (nonatomic, strong) ConcreteClassD *lockedDInstance;
