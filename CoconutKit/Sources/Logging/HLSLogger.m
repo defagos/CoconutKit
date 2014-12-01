@@ -167,8 +167,8 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             });
             
             NSString *dateString = [s_dateFormatter stringFromDate:[NSDate date]];
-            NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
-            NSString *versionString = [[[NSBundle mainBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *bundleName = [[[[NSBundle principalBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *versionString = [[[NSBundle principalBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
             NSString *logFileName = [NSString stringWithFormat:@"%@_%@_%@.txt", bundleName, versionString, dateString];
             NSString *logFilePath = [self.logDirectoryPath stringByAppendingPathComponent:logFileName];
             if (! [fileManager fileExistsAtPath:logFilePath]) {

@@ -28,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F65420F1A2C7E4500FDA2DE"
+               BuildableName = "CoconutKit-tests.xctest"
+               BlueprintName = "CoconutKit-tests"
+               ReferencedContainer = "container:CoconutKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D2AAC07D0554694100DB518D"
+            BuildableName = "libCoconutKit.a"
+            BlueprintName = "CoconutKit"
+            ReferencedContainer = "container:CoconutKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
