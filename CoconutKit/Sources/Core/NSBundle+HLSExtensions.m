@@ -78,7 +78,7 @@
     }
     
     if (! bundle) {
-        HLSLoggerWarn(@"No bundle name %@ was found in the main bundle, Library or Documents directory", name);
+        HLSLoggerWarn(@"No bundle named %@ was found in the main bundle, Library or Documents directory", name);
     }
     
     return bundle;
