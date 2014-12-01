@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+//Block signatures
+typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
+
 /**
  * Abstract base class for animation steps. Do not instantiate directly
  */
@@ -38,5 +41,10 @@
  * Default value is 0.2
  */
 @property (nonatomic, assign) NSTimeInterval duration;
+
+/**
+ * Called when a step has been executed
+ */
+@property (nonatomic, copy) HLSAnimationStepCompletionBlock completionBlock;
 
 @end
