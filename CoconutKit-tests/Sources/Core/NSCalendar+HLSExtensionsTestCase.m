@@ -33,7 +33,9 @@
     // CET is used for the rest of the year. Pacific/Tahiti does not use daylight saving times. In summary:
     //   - when Europe/Zurich uses CET (UTC+1): Zurich is 11 hours ahead of Tahiti (UTC-10)
     //   - when Europe/Zurich uses CEST (UTC+2): Zurich is 12 hours ahead of Tahiti (UTC-10)
-    self.calendar = [NSCalendar currentCalendar];
+    self.calendar = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    self.calendar.timeZone = [NSTimeZone timeZoneWithName:@"Europe/Zurich"];
+    
     self.timeZoneZurich = [NSTimeZone timeZoneWithName:@"Europe/Zurich"];
     self.timeZoneTahiti = [NSTimeZone timeZoneWithName:@"Pacific/Tahiti"];
     
