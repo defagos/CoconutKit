@@ -473,7 +473,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     // See https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtPropertyIntrospection.html
     Class rawClass = Nil;
     if (property) {
-        NSString *propertyAttributesString = [NSString stringWithUTF8String:property_getAttributes(property)];
+        NSString *propertyAttributesString = @(property_getAttributes(property));
         NSString *returnInformationString = [[propertyAttributesString componentsSeparatedByString:@","] firstObject];
         
         NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
@@ -780,7 +780,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
     objc_property_t property = class_getProperty([lastTargetInKeyPath class], [methodName UTF8String]);
     if (property) {
-        NSString *propertyAttributesString = [NSString stringWithUTF8String:property_getAttributes(property)];
+        NSString *propertyAttributesString = @(property_getAttributes(property));
         NSArray *propertyAttributes = [propertyAttributesString componentsSeparatedByString:@","];
         return ! [propertyAttributes containsObject:@"R"];
     }

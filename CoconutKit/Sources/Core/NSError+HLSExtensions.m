@@ -137,7 +137,7 @@ static Class subclass_class(id self, SEL _cmd);
         
         // Access the real class, do not use [self class] here since can be faked
         Class class = object_getClass(self);
-        NSString *className = [NSString stringWithUTF8String:class_getName(class)];
+        NSString *className = @(class_getName(class));
         if (! [className hasSuffix:kSubclassSuffix]) {
             NSString *subclassName = [className stringByAppendingString:kSubclassSuffix];
             Class subclass = NSClassFromString(subclassName);
