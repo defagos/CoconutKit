@@ -12,7 +12,9 @@
 
 #pragma mark Tests
 
-- (void)testClassName
+// Warning: -testClassName crashes the test, because the method is a private XCTest.framework method. See
+//   nm /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework/XCTest
+- (void)testNameOfClass
 {
     XCTAssertEqualObjects([XCTestCase className], @"XCTestCase");
     XCTAssertEqualObjects([self className], @"NSObject_HLSExtensionsTestCase");
