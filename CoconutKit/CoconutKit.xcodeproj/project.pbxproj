@@ -69,45 +69,48 @@
 		6F63E7C617CF6E19006322D9 /* HLSPreviewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */; };
 		6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */; };
 		6F6542161A2C7E4500FDA2DE /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libCoconutKit.a */; };
-		6F65426F1A2C7F8500FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65421F1A2C7F8500FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
-		6F6542701A2C7F8500FDA2DE /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542211A2C7F8500FDA2DE /* HLSErrorTestCase.m */; };
-		6F6542711A2C7F8500FDA2DE /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542231A2C7F8500FDA2DE /* HLSFileManagerTestCase.m */; };
-		6F6542721A2C7F8500FDA2DE /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542251A2C7F8500FDA2DE /* HLSGeometryTestCase.m */; };
-		6F6542731A2C7F8500FDA2DE /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542271A2C7F8500FDA2DE /* HLSInMemoryFileManagerTestCase.m */; };
-		6F6542741A2C7F8500FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542291A2C7F8500FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */; };
-		6F6542751A2C7F8500FDA2DE /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65422B1A2C7F8500FDA2DE /* HLSRuntimeTestCase.m */; };
-		6F6542761A2C7F8500FDA2DE /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65422D1A2C7F8500FDA2DE /* HLSStandardFileManagerTestCase.m */; };
-		6F6542771A2C7F8500FDA2DE /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65422F1A2C7F8500FDA2DE /* HLSTransformerTestCase.m */; };
-		6F6542781A2C7F8500FDA2DE /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542311A2C7F8500FDA2DE /* HLSValidatorsTestCase.m */; };
-		6F6542791A2C7F8500FDA2DE /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542331A2C7F8500FDA2DE /* NSArray+HLSExtensionsTestCase.m */; };
-		6F65427A1A2C7F8500FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542351A2C7F8500FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */; };
-		6F65427B1A2C7F8500FDA2DE /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542371A2C7F8500FDA2DE /* NSCalendar+HLSExtensionsTestCase.m */; };
-		6F65427C1A2C7F8500FDA2DE /* NSData+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542391A2C7F8500FDA2DE /* NSData+HLSExtensionsTestCase.m */; };
-		6F65427D1A2C7F8500FDA2DE /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65423B1A2C7F8500FDA2DE /* NSDate+HLSExtensionsTestCase.m */; };
-		6F65427E1A2C7F8500FDA2DE /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65423D1A2C7F8500FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */; };
-		6F65427F1A2C7F8500FDA2DE /* NSNumber+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65423F1A2C7F8500FDA2DE /* NSNumber+HLSExtensionsTestCase.m */; };
-		6F6542801A2C7F8500FDA2DE /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542411A2C7F8500FDA2DE /* NSObject+HLSExtensionsTestCase.m */; };
-		6F6542811A2C7F8500FDA2DE /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542431A2C7F8500FDA2DE /* NSStream+HLSExtensionsTestCase.m */; };
-		6F6542821A2C7F8500FDA2DE /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542451A2C7F8500FDA2DE /* NSString+HLSExtensionsTestCase.m */; };
-		6F6542831A2C7F8500FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542471A2C7F8500FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m */; };
-		6F6542841A2C7F8500FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65424A1A2C7F8500FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */; };
-		6F6542851A2C7F8500FDA2DE /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65424C1A2C7F8500FDA2DE /* NSManagedObject+HLSValidationTestCase.m */; };
-		6F6542861A2C7F8500FDA2DE /* TestErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65424F1A2C7F8500FDA2DE /* TestErrors.m */; };
-		6F6542881A2C7F8500FDA2DE /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542531A2C7F8500FDA2DE /* AbstractClassA.m */; };
-		6F6542891A2C7F8500FDA2DE /* BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542551A2C7F8500FDA2DE /* BankAccount.m */; };
-		6F65428A1A2C7F8500FDA2DE /* ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542571A2C7F8500FDA2DE /* ConcreteClassD.m */; };
-		6F65428B1A2C7F8500FDA2DE /* ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542591A2C7F8500FDA2DE /* ConcreteSubclassB.m */; };
-		6F65428C1A2C7F8500FDA2DE /* ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65425B1A2C7F8500FDA2DE /* ConcreteSubclassC.m */; };
-		6F65428D1A2C7F8500FDA2DE /* _AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65425E1A2C7F8500FDA2DE /* _AbstractClassA.m */; };
-		6F65428E1A2C7F8500FDA2DE /* _BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542601A2C7F8500FDA2DE /* _BankAccount.m */; };
-		6F65428F1A2C7F8500FDA2DE /* _ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542621A2C7F8500FDA2DE /* _ConcreteClassD.m */; };
-		6F6542901A2C7F8500FDA2DE /* _ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542641A2C7F8500FDA2DE /* _ConcreteSubclassB.m */; };
-		6F6542911A2C7F8500FDA2DE /* _ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542661A2C7F8500FDA2DE /* _ConcreteSubclassC.m */; };
-		6F6542921A2C7F8500FDA2DE /* _House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542681A2C7F8500FDA2DE /* _House.m */; };
-		6F6542931A2C7F8500FDA2DE /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65426A1A2C7F8500FDA2DE /* _Person.m */; };
-		6F6542941A2C7F8500FDA2DE /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65426C1A2C7F8500FDA2DE /* House.m */; };
-		6F6542951A2C7F8500FDA2DE /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65426E1A2C7F8500FDA2DE /* Person.m */; };
-		6F65429E1A2C99D800FDA2DE /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F65429D1A2C99D800FDA2DE /* UppercaseValueTransformer.m */; };
+		6F6542FD1A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542A31A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld */; };
+		6F6542FE1A2C9D8400FDA2DE /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F6542A51A2C9D8400FDA2DE /* Sample.txt */; };
+		6F6542FF1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542AA1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
+		6F6543001A2C9D8400FDA2DE /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542AC1A2C9D8400FDA2DE /* HLSErrorTestCase.m */; };
+		6F6543011A2C9D8400FDA2DE /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542AE1A2C9D8400FDA2DE /* HLSFileManagerTestCase.m */; };
+		6F6543021A2C9D8400FDA2DE /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B01A2C9D8400FDA2DE /* HLSGeometryTestCase.m */; };
+		6F6543031A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B21A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m */; };
+		6F6543041A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B41A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */; };
+		6F6543051A2C9D8400FDA2DE /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B61A2C9D8400FDA2DE /* HLSRuntimeTestCase.m */; };
+		6F6543061A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B81A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m */; };
+		6F6543071A2C9D8400FDA2DE /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542BA1A2C9D8400FDA2DE /* HLSTransformerTestCase.m */; };
+		6F6543081A2C9D8400FDA2DE /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542BC1A2C9D8400FDA2DE /* HLSValidatorsTestCase.m */; };
+		6F6543091A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542BE1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m */; };
+		6F65430A1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C01A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */; };
+		6F65430B1A2C9D8400FDA2DE /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C21A2C9D8400FDA2DE /* NSCalendar+HLSExtensionsTestCase.m */; };
+		6F65430C1A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C41A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m */; };
+		6F65430D1A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C61A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m */; };
+		6F65430E1A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C81A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */; };
+		6F65430F1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542CA1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m */; };
+		6F6543101A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542CC1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m */; };
+		6F6543111A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542CE1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m */; };
+		6F6543121A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542D01A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m */; };
+		6F6543131A2C9D8400FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542D21A2C9D8400FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m */; };
+		6F6543141A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542D51A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */; };
+		6F6543151A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542D71A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m */; };
+		6F6543161A2C9D8400FDA2DE /* TestErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542DA1A2C9D8400FDA2DE /* TestErrors.m */; };
+		6F6543171A2C9D8400FDA2DE /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542DC1A2C9D8400FDA2DE /* UppercaseValueTransformer.m */; };
+		6F6543191A2C9D8400FDA2DE /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E01A2C9D8400FDA2DE /* AbstractClassA.m */; };
+		6F65431A1A2C9D8400FDA2DE /* BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E21A2C9D8400FDA2DE /* BankAccount.m */; };
+		6F65431B1A2C9D8400FDA2DE /* ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E41A2C9D8400FDA2DE /* ConcreteClassD.m */; };
+		6F65431C1A2C9D8400FDA2DE /* ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E61A2C9D8400FDA2DE /* ConcreteSubclassB.m */; };
+		6F65431D1A2C9D8400FDA2DE /* ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E81A2C9D8400FDA2DE /* ConcreteSubclassC.m */; };
+		6F65431E1A2C9D8400FDA2DE /* _AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542EB1A2C9D8400FDA2DE /* _AbstractClassA.m */; };
+		6F65431F1A2C9D8400FDA2DE /* _BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542ED1A2C9D8400FDA2DE /* _BankAccount.m */; };
+		6F6543201A2C9D8400FDA2DE /* _ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542EF1A2C9D8400FDA2DE /* _ConcreteClassD.m */; };
+		6F6543211A2C9D8400FDA2DE /* _ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F11A2C9D8400FDA2DE /* _ConcreteSubclassB.m */; };
+		6F6543221A2C9D8400FDA2DE /* _ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F31A2C9D8400FDA2DE /* _ConcreteSubclassC.m */; };
+		6F6543231A2C9D8400FDA2DE /* _House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F51A2C9D8400FDA2DE /* _House.m */; };
+		6F6543241A2C9D8400FDA2DE /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F71A2C9D8400FDA2DE /* _Person.m */; };
+		6F6543251A2C9D8400FDA2DE /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F91A2C9D8400FDA2DE /* House.m */; };
+		6F6543261A2C9D8400FDA2DE /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542FB1A2C9D8400FDA2DE /* Person.m */; };
+		6F65432D1A2CA24900FDA2DE /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F65432C1A2CA24900FDA2DE /* CoconutKit-resources.bundle */; };
 		6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */; };
 		6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; };
 		6F6C7550162DC0290094B090 /* UINavigationController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */; };
@@ -453,86 +456,90 @@
 		6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPreviewItem.h; sourceTree = "<group>"; };
 		6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPreviewItem.m; sourceTree = "<group>"; };
 		6F6542101A2C7E4500FDA2DE /* CoconutKit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CoconutKit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F65421E1A2C7F8500FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F65421F1A2C7F8500FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+HLExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542201A2C7F8500FDA2DE /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
-		6F6542211A2C7F8500FDA2DE /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
-		6F6542221A2C7F8500FDA2DE /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
-		6F6542231A2C7F8500FDA2DE /* HLSFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManagerTestCase.m; sourceTree = "<group>"; };
-		6F6542241A2C7F8500FDA2DE /* HLSGeometryTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSGeometryTestCase.h; sourceTree = "<group>"; };
-		6F6542251A2C7F8500FDA2DE /* HLSGeometryTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSGeometryTestCase.m; sourceTree = "<group>"; };
-		6F6542261A2C7F8500FDA2DE /* HLSInMemoryFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManagerTestCase.h; sourceTree = "<group>"; };
-		6F6542271A2C7F8500FDA2DE /* HLSInMemoryFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManagerTestCase.m; sourceTree = "<group>"; };
-		6F6542281A2C7F8500FDA2DE /* HLSRestrictedInterfaceProxyTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxyTestCase.h; sourceTree = "<group>"; };
-		6F6542291A2C7F8500FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxyTestCase.m; sourceTree = "<group>"; };
-		6F65422A1A2C7F8500FDA2DE /* HLSRuntimeTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntimeTestCase.h; sourceTree = "<group>"; };
-		6F65422B1A2C7F8500FDA2DE /* HLSRuntimeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntimeTestCase.m; sourceTree = "<group>"; };
-		6F65422C1A2C7F8500FDA2DE /* HLSStandardFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardFileManagerTestCase.h; sourceTree = "<group>"; };
-		6F65422D1A2C7F8500FDA2DE /* HLSStandardFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManagerTestCase.m; sourceTree = "<group>"; };
-		6F65422E1A2C7F8500FDA2DE /* HLSTransformerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformerTestCase.h; sourceTree = "<group>"; };
-		6F65422F1A2C7F8500FDA2DE /* HLSTransformerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformerTestCase.m; sourceTree = "<group>"; };
-		6F6542301A2C7F8500FDA2DE /* HLSValidatorsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidatorsTestCase.h; sourceTree = "<group>"; };
-		6F6542311A2C7F8500FDA2DE /* HLSValidatorsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidatorsTestCase.m; sourceTree = "<group>"; };
-		6F6542321A2C7F8500FDA2DE /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F6542331A2C7F8500FDA2DE /* NSArray+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542341A2C7F8500FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSDynamicLocalizationTestCase.h"; sourceTree = "<group>"; };
-		6F6542351A2C7F8500FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalizationTestCase.m"; sourceTree = "<group>"; };
-		6F6542361A2C7F8500FDA2DE /* NSCalendar+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F6542371A2C7F8500FDA2DE /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542381A2C7F8500FDA2DE /* NSData+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F6542391A2C7F8500FDA2DE /* NSData+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F65423A1A2C7F8500FDA2DE /* NSDate+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F65423B1A2C7F8500FDA2DE /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F65423C1A2C7F8500FDA2DE /* NSDictionary+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F65423D1A2C7F8500FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F65423E1A2C7F8500FDA2DE /* NSNumber+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F65423F1A2C7F8500FDA2DE /* NSNumber+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542401A2C7F8500FDA2DE /* NSObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F6542411A2C7F8500FDA2DE /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542421A2C7F8500FDA2DE /* NSStream+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F6542431A2C7F8500FDA2DE /* NSStream+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542441A2C7F8500FDA2DE /* NSString+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F6542451A2C7F8500FDA2DE /* NSString+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542461A2C7F8500FDA2DE /* NSTimeZone+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F6542471A2C7F8500FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F6542491A2C7F8500FDA2DE /* NSManagedObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
-		6F65424A1A2C7F8500FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
-		6F65424B1A2C7F8500FDA2DE /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
-		6F65424C1A2C7F8500FDA2DE /* NSManagedObject+HLSValidationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidationTestCase.m"; sourceTree = "<group>"; };
-		6F65424E1A2C7F8500FDA2DE /* TestErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestErrors.h; sourceTree = "<group>"; };
-		6F65424F1A2C7F8500FDA2DE /* TestErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestErrors.m; sourceTree = "<group>"; };
-		6F6542501A2C7F8500FDA2DE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F6542521A2C7F8500FDA2DE /* AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractClassA.h; sourceTree = "<group>"; };
-		6F6542531A2C7F8500FDA2DE /* AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractClassA.m; sourceTree = "<group>"; };
-		6F6542541A2C7F8500FDA2DE /* BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAccount.h; sourceTree = "<group>"; };
-		6F6542551A2C7F8500FDA2DE /* BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAccount.m; sourceTree = "<group>"; };
-		6F6542561A2C7F8500FDA2DE /* ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteClassD.h; sourceTree = "<group>"; };
-		6F6542571A2C7F8500FDA2DE /* ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteClassD.m; sourceTree = "<group>"; };
-		6F6542581A2C7F8500FDA2DE /* ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassB.h; sourceTree = "<group>"; };
-		6F6542591A2C7F8500FDA2DE /* ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassB.m; sourceTree = "<group>"; };
-		6F65425A1A2C7F8500FDA2DE /* ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassC.h; sourceTree = "<group>"; };
-		6F65425B1A2C7F8500FDA2DE /* ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassC.m; sourceTree = "<group>"; };
-		6F65425D1A2C7F8500FDA2DE /* _AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractClassA.h; sourceTree = "<group>"; };
-		6F65425E1A2C7F8500FDA2DE /* _AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractClassA.m; sourceTree = "<group>"; };
-		6F65425F1A2C7F8500FDA2DE /* _BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _BankAccount.h; sourceTree = "<group>"; };
-		6F6542601A2C7F8500FDA2DE /* _BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _BankAccount.m; sourceTree = "<group>"; };
-		6F6542611A2C7F8500FDA2DE /* _ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteClassD.h; sourceTree = "<group>"; };
-		6F6542621A2C7F8500FDA2DE /* _ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteClassD.m; sourceTree = "<group>"; };
-		6F6542631A2C7F8500FDA2DE /* _ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassB.h; sourceTree = "<group>"; };
-		6F6542641A2C7F8500FDA2DE /* _ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassB.m; sourceTree = "<group>"; };
-		6F6542651A2C7F8500FDA2DE /* _ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassC.h; sourceTree = "<group>"; };
-		6F6542661A2C7F8500FDA2DE /* _ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassC.m; sourceTree = "<group>"; };
-		6F6542671A2C7F8500FDA2DE /* _House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _House.h; sourceTree = "<group>"; };
-		6F6542681A2C7F8500FDA2DE /* _House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _House.m; sourceTree = "<group>"; };
-		6F6542691A2C7F8500FDA2DE /* _Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Person.h; sourceTree = "<group>"; };
-		6F65426A1A2C7F8500FDA2DE /* _Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Person.m; sourceTree = "<group>"; };
-		6F65426B1A2C7F8500FDA2DE /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
-		6F65426C1A2C7F8500FDA2DE /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
-		6F65426D1A2C7F8500FDA2DE /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		6F65426E1A2C7F8500FDA2DE /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
-		6F65429B1A2C95F700FDA2DE /* CoconutKit-tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-tests-Prefix.pch"; sourceTree = "<group>"; };
-		6F65429C1A2C99D800FDA2DE /* UppercaseValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UppercaseValueTransformer.h; sourceTree = "<group>"; };
-		6F65429D1A2C99D800FDA2DE /* UppercaseValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UppercaseValueTransformer.m; sourceTree = "<group>"; };
+		6F6542A01A2C9D8400FDA2DE /* generate_model.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = generate_model.sh; sourceTree = "<group>"; };
+		6F6542A41A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
+		6F6542A51A2C9D8400FDA2DE /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
+		6F6542A91A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542AA1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+HLExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542AB1A2C9D8400FDA2DE /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
+		6F6542AC1A2C9D8400FDA2DE /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
+		6F6542AD1A2C9D8400FDA2DE /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
+		6F6542AE1A2C9D8400FDA2DE /* HLSFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManagerTestCase.m; sourceTree = "<group>"; };
+		6F6542AF1A2C9D8400FDA2DE /* HLSGeometryTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSGeometryTestCase.h; sourceTree = "<group>"; };
+		6F6542B01A2C9D8400FDA2DE /* HLSGeometryTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSGeometryTestCase.m; sourceTree = "<group>"; };
+		6F6542B11A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManagerTestCase.h; sourceTree = "<group>"; };
+		6F6542B21A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManagerTestCase.m; sourceTree = "<group>"; };
+		6F6542B31A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxyTestCase.h; sourceTree = "<group>"; };
+		6F6542B41A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxyTestCase.m; sourceTree = "<group>"; };
+		6F6542B51A2C9D8400FDA2DE /* HLSRuntimeTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntimeTestCase.h; sourceTree = "<group>"; };
+		6F6542B61A2C9D8400FDA2DE /* HLSRuntimeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntimeTestCase.m; sourceTree = "<group>"; };
+		6F6542B71A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardFileManagerTestCase.h; sourceTree = "<group>"; };
+		6F6542B81A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManagerTestCase.m; sourceTree = "<group>"; };
+		6F6542B91A2C9D8400FDA2DE /* HLSTransformerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformerTestCase.h; sourceTree = "<group>"; };
+		6F6542BA1A2C9D8400FDA2DE /* HLSTransformerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformerTestCase.m; sourceTree = "<group>"; };
+		6F6542BB1A2C9D8400FDA2DE /* HLSValidatorsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidatorsTestCase.h; sourceTree = "<group>"; };
+		6F6542BC1A2C9D8400FDA2DE /* HLSValidatorsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidatorsTestCase.m; sourceTree = "<group>"; };
+		6F6542BD1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542BE1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542BF1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSDynamicLocalizationTestCase.h"; sourceTree = "<group>"; };
+		6F6542C01A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalizationTestCase.m"; sourceTree = "<group>"; };
+		6F6542C11A2C9D8400FDA2DE /* NSCalendar+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542C21A2C9D8400FDA2DE /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542C31A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542C41A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542C51A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542C61A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542C71A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542C81A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542C91A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542CA1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542CB1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542CC1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542CD1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542CE1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542CF1A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542D01A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542D11A2C9D8400FDA2DE /* NSTimeZone+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542D21A2C9D8400FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542D41A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542D51A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542D61A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
+		6F6542D71A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidationTestCase.m"; sourceTree = "<group>"; };
+		6F6542D91A2C9D8400FDA2DE /* TestErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestErrors.h; sourceTree = "<group>"; };
+		6F6542DA1A2C9D8400FDA2DE /* TestErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestErrors.m; sourceTree = "<group>"; };
+		6F6542DB1A2C9D8400FDA2DE /* UppercaseValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UppercaseValueTransformer.h; sourceTree = "<group>"; };
+		6F6542DC1A2C9D8400FDA2DE /* UppercaseValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UppercaseValueTransformer.m; sourceTree = "<group>"; };
+		6F6542DF1A2C9D8400FDA2DE /* AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractClassA.h; sourceTree = "<group>"; };
+		6F6542E01A2C9D8400FDA2DE /* AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractClassA.m; sourceTree = "<group>"; };
+		6F6542E11A2C9D8400FDA2DE /* BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAccount.h; sourceTree = "<group>"; };
+		6F6542E21A2C9D8400FDA2DE /* BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAccount.m; sourceTree = "<group>"; };
+		6F6542E31A2C9D8400FDA2DE /* ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteClassD.h; sourceTree = "<group>"; };
+		6F6542E41A2C9D8400FDA2DE /* ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteClassD.m; sourceTree = "<group>"; };
+		6F6542E51A2C9D8400FDA2DE /* ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6F6542E61A2C9D8400FDA2DE /* ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6F6542E71A2C9D8400FDA2DE /* ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6F6542E81A2C9D8400FDA2DE /* ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6F6542EA1A2C9D8400FDA2DE /* _AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractClassA.h; sourceTree = "<group>"; };
+		6F6542EB1A2C9D8400FDA2DE /* _AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractClassA.m; sourceTree = "<group>"; };
+		6F6542EC1A2C9D8400FDA2DE /* _BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _BankAccount.h; sourceTree = "<group>"; };
+		6F6542ED1A2C9D8400FDA2DE /* _BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _BankAccount.m; sourceTree = "<group>"; };
+		6F6542EE1A2C9D8400FDA2DE /* _ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteClassD.h; sourceTree = "<group>"; };
+		6F6542EF1A2C9D8400FDA2DE /* _ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteClassD.m; sourceTree = "<group>"; };
+		6F6542F01A2C9D8400FDA2DE /* _ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6F6542F11A2C9D8400FDA2DE /* _ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6F6542F21A2C9D8400FDA2DE /* _ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6F6542F31A2C9D8400FDA2DE /* _ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6F6542F41A2C9D8400FDA2DE /* _House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _House.h; sourceTree = "<group>"; };
+		6F6542F51A2C9D8400FDA2DE /* _House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _House.m; sourceTree = "<group>"; };
+		6F6542F61A2C9D8400FDA2DE /* _Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Person.h; sourceTree = "<group>"; };
+		6F6542F71A2C9D8400FDA2DE /* _Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Person.m; sourceTree = "<group>"; };
+		6F6542F81A2C9D8400FDA2DE /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
+		6F6542F91A2C9D8400FDA2DE /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
+		6F6542FA1A2C9D8400FDA2DE /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6F6542FB1A2C9D8400FDA2DE /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		6F6543281A2CA02500FDA2DE /* CoconutKit-tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-tests-Prefix.pch"; sourceTree = "<group>"; };
+		6F6543291A2CA02500FDA2DE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F65432C1A2CA24900FDA2DE /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = SOURCE_ROOT; };
 		6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
 		6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
 		6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -850,8 +857,8 @@
 				6FFAB75719DD8DA800A91997 /* Externals */,
 				6FADE51014BA0494007EE121 /* Sources */,
 				6FC5B7801924EE0A00660CDF /* Resources */,
-				6F65421C1A2C7F8500FDA2DE /* Tests */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
+				6F65429F1A2C9D8400FDA2DE /* Tests */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 				6FDEDD081A25DC150034610E /* LICENSE */,
@@ -936,131 +943,168 @@
 			path = "../CoconutKit-resources/Images";
 			sourceTree = "<group>";
 		};
-		6F65421C1A2C7F8500FDA2DE /* Tests */ = {
+		6F65429F1A2C9D8400FDA2DE /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6F65421D1A2C7F8500FDA2DE /* Core */,
-				6F6542481A2C7F8500FDA2DE /* CoreData */,
-				6F65424D1A2C7F8500FDA2DE /* Helpers */,
-				6F6542511A2C7F8500FDA2DE /* Models */,
-				6F65429B1A2C95F700FDA2DE /* CoconutKit-tests-Prefix.pch */,
-				6F6542501A2C7F8500FDA2DE /* Info.plist */,
+				6F65432B1A2CA22E00FDA2DE /* Dependencies */,
+				6F6542A61A2C9D8400FDA2DE /* Sources */,
+				6F6542A11A2C9D8400FDA2DE /* Resources */,
+				6F6543281A2CA02500FDA2DE /* CoconutKit-tests-Prefix.pch */,
+				6F6542A01A2C9D8400FDA2DE /* generate_model.sh */,
+				6F6543291A2CA02500FDA2DE /* Info.plist */,
 			);
-			path = Tests;
+			name = Tests;
+			path = "../CoconutKit-tests";
 			sourceTree = "<group>";
 		};
-		6F65421D1A2C7F8500FDA2DE /* Core */ = {
+		6F6542A11A2C9D8400FDA2DE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6F65421E1A2C7F8500FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.h */,
-				6F65421F1A2C7F8500FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */,
-				6F6542201A2C7F8500FDA2DE /* HLSErrorTestCase.h */,
-				6F6542211A2C7F8500FDA2DE /* HLSErrorTestCase.m */,
-				6F6542221A2C7F8500FDA2DE /* HLSFileManagerTestCase.h */,
-				6F6542231A2C7F8500FDA2DE /* HLSFileManagerTestCase.m */,
-				6F6542241A2C7F8500FDA2DE /* HLSGeometryTestCase.h */,
-				6F6542251A2C7F8500FDA2DE /* HLSGeometryTestCase.m */,
-				6F6542261A2C7F8500FDA2DE /* HLSInMemoryFileManagerTestCase.h */,
-				6F6542271A2C7F8500FDA2DE /* HLSInMemoryFileManagerTestCase.m */,
-				6F6542281A2C7F8500FDA2DE /* HLSRestrictedInterfaceProxyTestCase.h */,
-				6F6542291A2C7F8500FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */,
-				6F65422A1A2C7F8500FDA2DE /* HLSRuntimeTestCase.h */,
-				6F65422B1A2C7F8500FDA2DE /* HLSRuntimeTestCase.m */,
-				6F65422C1A2C7F8500FDA2DE /* HLSStandardFileManagerTestCase.h */,
-				6F65422D1A2C7F8500FDA2DE /* HLSStandardFileManagerTestCase.m */,
-				6F65422E1A2C7F8500FDA2DE /* HLSTransformerTestCase.h */,
-				6F65422F1A2C7F8500FDA2DE /* HLSTransformerTestCase.m */,
-				6F6542301A2C7F8500FDA2DE /* HLSValidatorsTestCase.h */,
-				6F6542311A2C7F8500FDA2DE /* HLSValidatorsTestCase.m */,
-				6F6542321A2C7F8500FDA2DE /* NSArray+HLSExtensionsTestCase.h */,
-				6F6542331A2C7F8500FDA2DE /* NSArray+HLSExtensionsTestCase.m */,
-				6F6542341A2C7F8500FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.h */,
-				6F6542351A2C7F8500FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */,
-				6F6542361A2C7F8500FDA2DE /* NSCalendar+HLSExtensionsTestCase.h */,
-				6F6542371A2C7F8500FDA2DE /* NSCalendar+HLSExtensionsTestCase.m */,
-				6F6542381A2C7F8500FDA2DE /* NSData+HLSExtensionsTestCase.h */,
-				6F6542391A2C7F8500FDA2DE /* NSData+HLSExtensionsTestCase.m */,
-				6F65423A1A2C7F8500FDA2DE /* NSDate+HLSExtensionsTestCase.h */,
-				6F65423B1A2C7F8500FDA2DE /* NSDate+HLSExtensionsTestCase.m */,
-				6F65423C1A2C7F8500FDA2DE /* NSDictionary+HLSExtensionsTestCase.h */,
-				6F65423D1A2C7F8500FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */,
-				6F65423E1A2C7F8500FDA2DE /* NSNumber+HLSExtensionsTestCase.h */,
-				6F65423F1A2C7F8500FDA2DE /* NSNumber+HLSExtensionsTestCase.m */,
-				6F6542401A2C7F8500FDA2DE /* NSObject+HLSExtensionsTestCase.h */,
-				6F6542411A2C7F8500FDA2DE /* NSObject+HLSExtensionsTestCase.m */,
-				6F6542421A2C7F8500FDA2DE /* NSStream+HLSExtensionsTestCase.h */,
-				6F6542431A2C7F8500FDA2DE /* NSStream+HLSExtensionsTestCase.m */,
-				6F6542441A2C7F8500FDA2DE /* NSString+HLSExtensionsTestCase.h */,
-				6F6542451A2C7F8500FDA2DE /* NSString+HLSExtensionsTestCase.m */,
-				6F6542461A2C7F8500FDA2DE /* NSTimeZone+HLSExtensionsTestCase.h */,
-				6F6542471A2C7F8500FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m */,
+				6F6542A21A2C9D8400FDA2DE /* Data */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F6542A21A2C9D8400FDA2DE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542A31A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld */,
+				6F6542A51A2C9D8400FDA2DE /* Sample.txt */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6F6542A61A2C9D8400FDA2DE /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542A81A2C9D8400FDA2DE /* Core */,
+				6F6542D31A2C9D8400FDA2DE /* CoreData */,
+				6F6542D81A2C9D8400FDA2DE /* Helpers */,
+				6F6542DE1A2C9D8400FDA2DE /* Models */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		6F6542A81A2C9D8400FDA2DE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542A91A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.h */,
+				6F6542AA1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */,
+				6F6542AB1A2C9D8400FDA2DE /* HLSErrorTestCase.h */,
+				6F6542AC1A2C9D8400FDA2DE /* HLSErrorTestCase.m */,
+				6F6542AD1A2C9D8400FDA2DE /* HLSFileManagerTestCase.h */,
+				6F6542AE1A2C9D8400FDA2DE /* HLSFileManagerTestCase.m */,
+				6F6542AF1A2C9D8400FDA2DE /* HLSGeometryTestCase.h */,
+				6F6542B01A2C9D8400FDA2DE /* HLSGeometryTestCase.m */,
+				6F6542B11A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.h */,
+				6F6542B21A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m */,
+				6F6542B31A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.h */,
+				6F6542B41A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */,
+				6F6542B51A2C9D8400FDA2DE /* HLSRuntimeTestCase.h */,
+				6F6542B61A2C9D8400FDA2DE /* HLSRuntimeTestCase.m */,
+				6F6542B71A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.h */,
+				6F6542B81A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m */,
+				6F6542B91A2C9D8400FDA2DE /* HLSTransformerTestCase.h */,
+				6F6542BA1A2C9D8400FDA2DE /* HLSTransformerTestCase.m */,
+				6F6542BB1A2C9D8400FDA2DE /* HLSValidatorsTestCase.h */,
+				6F6542BC1A2C9D8400FDA2DE /* HLSValidatorsTestCase.m */,
+				6F6542BD1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.h */,
+				6F6542BE1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m */,
+				6F6542BF1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.h */,
+				6F6542C01A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */,
+				6F6542C11A2C9D8400FDA2DE /* NSCalendar+HLSExtensionsTestCase.h */,
+				6F6542C21A2C9D8400FDA2DE /* NSCalendar+HLSExtensionsTestCase.m */,
+				6F6542C31A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.h */,
+				6F6542C41A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m */,
+				6F6542C51A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.h */,
+				6F6542C61A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m */,
+				6F6542C71A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.h */,
+				6F6542C81A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */,
+				6F6542C91A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.h */,
+				6F6542CA1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m */,
+				6F6542CB1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.h */,
+				6F6542CC1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m */,
+				6F6542CD1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.h */,
+				6F6542CE1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m */,
+				6F6542CF1A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.h */,
+				6F6542D01A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m */,
+				6F6542D11A2C9D8400FDA2DE /* NSTimeZone+HLSExtensionsTestCase.h */,
+				6F6542D21A2C9D8400FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		6F6542481A2C7F8500FDA2DE /* CoreData */ = {
+		6F6542D31A2C9D8400FDA2DE /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				6F6542491A2C7F8500FDA2DE /* NSManagedObject+HLSExtensionsTestCase.h */,
-				6F65424A1A2C7F8500FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */,
-				6F65424B1A2C7F8500FDA2DE /* NSManagedObject+HLSValidationTestCase.h */,
-				6F65424C1A2C7F8500FDA2DE /* NSManagedObject+HLSValidationTestCase.m */,
+				6F6542D41A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.h */,
+				6F6542D51A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */,
+				6F6542D61A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.h */,
+				6F6542D71A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		6F65424D1A2C7F8500FDA2DE /* Helpers */ = {
+		6F6542D81A2C9D8400FDA2DE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6F65424E1A2C7F8500FDA2DE /* TestErrors.h */,
-				6F65424F1A2C7F8500FDA2DE /* TestErrors.m */,
-				6F65429C1A2C99D800FDA2DE /* UppercaseValueTransformer.h */,
-				6F65429D1A2C99D800FDA2DE /* UppercaseValueTransformer.m */,
+				6F6542D91A2C9D8400FDA2DE /* TestErrors.h */,
+				6F6542DA1A2C9D8400FDA2DE /* TestErrors.m */,
+				6F6542DB1A2C9D8400FDA2DE /* UppercaseValueTransformer.h */,
+				6F6542DC1A2C9D8400FDA2DE /* UppercaseValueTransformer.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		6F6542511A2C7F8500FDA2DE /* Models */ = {
+		6F6542DE1A2C9D8400FDA2DE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6F6542521A2C7F8500FDA2DE /* AbstractClassA.h */,
-				6F6542531A2C7F8500FDA2DE /* AbstractClassA.m */,
-				6F6542541A2C7F8500FDA2DE /* BankAccount.h */,
-				6F6542551A2C7F8500FDA2DE /* BankAccount.m */,
-				6F6542561A2C7F8500FDA2DE /* ConcreteClassD.h */,
-				6F6542571A2C7F8500FDA2DE /* ConcreteClassD.m */,
-				6F6542581A2C7F8500FDA2DE /* ConcreteSubclassB.h */,
-				6F6542591A2C7F8500FDA2DE /* ConcreteSubclassB.m */,
-				6F65425A1A2C7F8500FDA2DE /* ConcreteSubclassC.h */,
-				6F65425B1A2C7F8500FDA2DE /* ConcreteSubclassC.m */,
-				6F65425C1A2C7F8500FDA2DE /* Generated */,
-				6F65426B1A2C7F8500FDA2DE /* House.h */,
-				6F65426C1A2C7F8500FDA2DE /* House.m */,
-				6F65426D1A2C7F8500FDA2DE /* Person.h */,
-				6F65426E1A2C7F8500FDA2DE /* Person.m */,
+				6F6542DF1A2C9D8400FDA2DE /* AbstractClassA.h */,
+				6F6542E01A2C9D8400FDA2DE /* AbstractClassA.m */,
+				6F6542E11A2C9D8400FDA2DE /* BankAccount.h */,
+				6F6542E21A2C9D8400FDA2DE /* BankAccount.m */,
+				6F6542E31A2C9D8400FDA2DE /* ConcreteClassD.h */,
+				6F6542E41A2C9D8400FDA2DE /* ConcreteClassD.m */,
+				6F6542E51A2C9D8400FDA2DE /* ConcreteSubclassB.h */,
+				6F6542E61A2C9D8400FDA2DE /* ConcreteSubclassB.m */,
+				6F6542E71A2C9D8400FDA2DE /* ConcreteSubclassC.h */,
+				6F6542E81A2C9D8400FDA2DE /* ConcreteSubclassC.m */,
+				6F6542E91A2C9D8400FDA2DE /* Generated */,
+				6F6542F81A2C9D8400FDA2DE /* House.h */,
+				6F6542F91A2C9D8400FDA2DE /* House.m */,
+				6F6542FA1A2C9D8400FDA2DE /* Person.h */,
+				6F6542FB1A2C9D8400FDA2DE /* Person.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6F65425C1A2C7F8500FDA2DE /* Generated */ = {
+		6F6542E91A2C9D8400FDA2DE /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				6F65425D1A2C7F8500FDA2DE /* _AbstractClassA.h */,
-				6F65425E1A2C7F8500FDA2DE /* _AbstractClassA.m */,
-				6F65425F1A2C7F8500FDA2DE /* _BankAccount.h */,
-				6F6542601A2C7F8500FDA2DE /* _BankAccount.m */,
-				6F6542611A2C7F8500FDA2DE /* _ConcreteClassD.h */,
-				6F6542621A2C7F8500FDA2DE /* _ConcreteClassD.m */,
-				6F6542631A2C7F8500FDA2DE /* _ConcreteSubclassB.h */,
-				6F6542641A2C7F8500FDA2DE /* _ConcreteSubclassB.m */,
-				6F6542651A2C7F8500FDA2DE /* _ConcreteSubclassC.h */,
-				6F6542661A2C7F8500FDA2DE /* _ConcreteSubclassC.m */,
-				6F6542671A2C7F8500FDA2DE /* _House.h */,
-				6F6542681A2C7F8500FDA2DE /* _House.m */,
-				6F6542691A2C7F8500FDA2DE /* _Person.h */,
-				6F65426A1A2C7F8500FDA2DE /* _Person.m */,
+				6F6542EA1A2C9D8400FDA2DE /* _AbstractClassA.h */,
+				6F6542EB1A2C9D8400FDA2DE /* _AbstractClassA.m */,
+				6F6542EC1A2C9D8400FDA2DE /* _BankAccount.h */,
+				6F6542ED1A2C9D8400FDA2DE /* _BankAccount.m */,
+				6F6542EE1A2C9D8400FDA2DE /* _ConcreteClassD.h */,
+				6F6542EF1A2C9D8400FDA2DE /* _ConcreteClassD.m */,
+				6F6542F01A2C9D8400FDA2DE /* _ConcreteSubclassB.h */,
+				6F6542F11A2C9D8400FDA2DE /* _ConcreteSubclassB.m */,
+				6F6542F21A2C9D8400FDA2DE /* _ConcreteSubclassC.h */,
+				6F6542F31A2C9D8400FDA2DE /* _ConcreteSubclassC.m */,
+				6F6542F41A2C9D8400FDA2DE /* _House.h */,
+				6F6542F51A2C9D8400FDA2DE /* _House.m */,
+				6F6542F61A2C9D8400FDA2DE /* _Person.h */,
+				6F6542F71A2C9D8400FDA2DE /* _Person.m */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		6F65432B1A2CA22E00FDA2DE /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				6F65432C1A2CA24900FDA2DE /* CoconutKit-resources.bundle */,
+			);
+			name = Dependencies;
 			sourceTree = "<group>";
 		};
 		6F7ECAB919F5503B00B6BE62 /* HTML */ = {
@@ -1661,6 +1705,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F65421B1A2C7E4500FDA2DE /* Build configuration list for PBXNativeTarget "CoconutKit-tests" */;
 			buildPhases = (
+				6F6543271A2C9DB900FDA2DE /* Generate Model Source Files */,
 				6F65420C1A2C7E4500FDA2DE /* Sources */,
 				6F65420D1A2C7E4500FDA2DE /* Frameworks */,
 				6F65420E1A2C7E4500FDA2DE /* Resources */,
@@ -1756,6 +1801,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F65432D1A2CA24900FDA2DE /* CoconutKit-resources.bundle in Resources */,
+				6F6542FE1A2C9D8400FDA2DE /* Sample.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1802,6 +1849,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6F6543271A2C9DB900FDA2DE /* Generate Model Source Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Model Source Files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${PROJECT_DIR}\"/../CoconutKit-tests/generate_model.sh";
+		};
 		6FCB4E7F19264D3300047AD3 /* Copy Bundle To Static Library Project */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1823,45 +1884,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F65428E1A2C7F8500FDA2DE /* _BankAccount.m in Sources */,
-				6F6542701A2C7F8500FDA2DE /* HLSErrorTestCase.m in Sources */,
-				6F6542951A2C7F8500FDA2DE /* Person.m in Sources */,
-				6F6542741A2C7F8500FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m in Sources */,
-				6F6542821A2C7F8500FDA2DE /* NSString+HLSExtensionsTestCase.m in Sources */,
-				6F6542851A2C7F8500FDA2DE /* NSManagedObject+HLSValidationTestCase.m in Sources */,
-				6F6542861A2C7F8500FDA2DE /* TestErrors.m in Sources */,
-				6F6542911A2C7F8500FDA2DE /* _ConcreteSubclassC.m in Sources */,
-				6F6542751A2C7F8500FDA2DE /* HLSRuntimeTestCase.m in Sources */,
-				6F6542921A2C7F8500FDA2DE /* _House.m in Sources */,
-				6F65427A1A2C7F8500FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */,
-				6F65429E1A2C99D800FDA2DE /* UppercaseValueTransformer.m in Sources */,
-				6F6542891A2C7F8500FDA2DE /* BankAccount.m in Sources */,
-				6F65428D1A2C7F8500FDA2DE /* _AbstractClassA.m in Sources */,
-				6F65427E1A2C7F8500FDA2DE /* NSDictionary+HLSExtensionsTestCase.m in Sources */,
-				6F65428C1A2C7F8500FDA2DE /* ConcreteSubclassC.m in Sources */,
-				6F6542771A2C7F8500FDA2DE /* HLSTransformerTestCase.m in Sources */,
-				6F6542791A2C7F8500FDA2DE /* NSArray+HLSExtensionsTestCase.m in Sources */,
-				6F6542901A2C7F8500FDA2DE /* _ConcreteSubclassB.m in Sources */,
-				6F65428B1A2C7F8500FDA2DE /* ConcreteSubclassB.m in Sources */,
-				6F6542941A2C7F8500FDA2DE /* House.m in Sources */,
-				6F65427C1A2C7F8500FDA2DE /* NSData+HLSExtensionsTestCase.m in Sources */,
-				6F6542841A2C7F8500FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
-				6F6542731A2C7F8500FDA2DE /* HLSInMemoryFileManagerTestCase.m in Sources */,
-				6F6542761A2C7F8500FDA2DE /* HLSStandardFileManagerTestCase.m in Sources */,
-				6F6542931A2C7F8500FDA2DE /* _Person.m in Sources */,
-				6F6542781A2C7F8500FDA2DE /* HLSValidatorsTestCase.m in Sources */,
-				6F6542711A2C7F8500FDA2DE /* HLSFileManagerTestCase.m in Sources */,
-				6F65426F1A2C7F8500FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */,
-				6F65427B1A2C7F8500FDA2DE /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
-				6F6542811A2C7F8500FDA2DE /* NSStream+HLSExtensionsTestCase.m in Sources */,
-				6F65428F1A2C7F8500FDA2DE /* _ConcreteClassD.m in Sources */,
-				6F65428A1A2C7F8500FDA2DE /* ConcreteClassD.m in Sources */,
-				6F6542881A2C7F8500FDA2DE /* AbstractClassA.m in Sources */,
-				6F6542831A2C7F8500FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
-				6F6542801A2C7F8500FDA2DE /* NSObject+HLSExtensionsTestCase.m in Sources */,
-				6F65427D1A2C7F8500FDA2DE /* NSDate+HLSExtensionsTestCase.m in Sources */,
-				6F65427F1A2C7F8500FDA2DE /* NSNumber+HLSExtensionsTestCase.m in Sources */,
-				6F6542721A2C7F8500FDA2DE /* HLSGeometryTestCase.m in Sources */,
+				6F6543231A2C9D8400FDA2DE /* _House.m in Sources */,
+				6F6543151A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m in Sources */,
+				6F6543261A2C9D8400FDA2DE /* Person.m in Sources */,
+				6F6543081A2C9D8400FDA2DE /* HLSValidatorsTestCase.m in Sources */,
+				6F6543251A2C9D8400FDA2DE /* House.m in Sources */,
+				6F6543211A2C9D8400FDA2DE /* _ConcreteSubclassB.m in Sources */,
+				6F6543031A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m in Sources */,
+				6F6543221A2C9D8400FDA2DE /* _ConcreteSubclassC.m in Sources */,
+				6F6543071A2C9D8400FDA2DE /* HLSTransformerTestCase.m in Sources */,
+				6F65430C1A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m in Sources */,
+				6F6543141A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
+				6F65431D1A2C9D8400FDA2DE /* ConcreteSubclassC.m in Sources */,
+				6F65431F1A2C9D8400FDA2DE /* _BankAccount.m in Sources */,
+				6F6543161A2C9D8400FDA2DE /* TestErrors.m in Sources */,
+				6F6542FF1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */,
+				6F65430B1A2C9D8400FDA2DE /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
+				6F65430D1A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m in Sources */,
+				6F6543131A2C9D8400FDA2DE /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
+				6F65430A1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */,
+				6F6543061A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m in Sources */,
+				6F6543241A2C9D8400FDA2DE /* _Person.m in Sources */,
+				6F6543101A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m in Sources */,
+				6F6543011A2C9D8400FDA2DE /* HLSFileManagerTestCase.m in Sources */,
+				6F6543001A2C9D8400FDA2DE /* HLSErrorTestCase.m in Sources */,
+				6F6543201A2C9D8400FDA2DE /* _ConcreteClassD.m in Sources */,
+				6F6543041A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m in Sources */,
+				6F65430F1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m in Sources */,
+				6F6543091A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m in Sources */,
+				6F6543021A2C9D8400FDA2DE /* HLSGeometryTestCase.m in Sources */,
+				6F65431B1A2C9D8400FDA2DE /* ConcreteClassD.m in Sources */,
+				6F65431E1A2C9D8400FDA2DE /* _AbstractClassA.m in Sources */,
+				6F65431C1A2C9D8400FDA2DE /* ConcreteSubclassB.m in Sources */,
+				6F6543111A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m in Sources */,
+				6F65431A1A2C9D8400FDA2DE /* BankAccount.m in Sources */,
+				6F6543051A2C9D8400FDA2DE /* HLSRuntimeTestCase.m in Sources */,
+				6F6543191A2C9D8400FDA2DE /* AbstractClassA.m in Sources */,
+				6F65430E1A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m in Sources */,
+				6F6543121A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m in Sources */,
+				6F6543171A2C9D8400FDA2DE /* UppercaseValueTransformer.m in Sources */,
+				6F6542FD1A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2170,16 +2232,22 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Tests/CoconutKit-tests-Prefix.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../CoconutKit-tests/CoconutKit-tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Sources/**";
 			};
@@ -2201,11 +2269,17 @@
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Tests/CoconutKit-tests-Prefix.pch";
-				INFOPLIST_FILE = Tests/Info.plist;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../CoconutKit-tests/CoconutKit-tests-Prefix.pch";
+				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-tests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Sources/**";
 				VALIDATE_PRODUCT = YES;
@@ -2282,6 +2356,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6F6542A31A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6F6542A41A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodel */,
+			);
+			currentVersion = 6F6542A41A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodel */;
+			path = CoconutKitTestData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
 }

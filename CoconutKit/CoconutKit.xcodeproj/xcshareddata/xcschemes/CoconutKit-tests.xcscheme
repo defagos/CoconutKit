@@ -9,15 +9,15 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F2B2FCA1929BD78003D4C2C"
-               BuildableName = "CoconutKit-tests.app"
+               BlueprintIdentifier = "6F65420F1A2C7E4500FDA2DE"
+               BuildableName = "CoconutKit-tests.xctest"
                BlueprintName = "CoconutKit-tests"
-               ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+               ReferencedContainer = "container:CoconutKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,14 +28,24 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "6F65420F1A2C7E4500FDA2DE"
+               BuildableName = "CoconutKit-tests.xctest"
+               BlueprintName = "CoconutKit-tests"
+               ReferencedContainer = "container:CoconutKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F2B2FCA1929BD78003D4C2C"
-            BuildableName = "CoconutKit-tests.app"
+            BlueprintIdentifier = "6F65420F1A2C7E4500FDA2DE"
+            BuildableName = "CoconutKit-tests.xctest"
             BlueprintName = "CoconutKit-tests"
-            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+            ReferencedContainer = "container:CoconutKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -48,15 +58,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F2B2FCA1929BD78003D4C2C"
-            BuildableName = "CoconutKit-tests.app"
+            BlueprintIdentifier = "6F65420F1A2C7E4500FDA2DE"
+            BuildableName = "CoconutKit-tests.xctest"
             BlueprintName = "CoconutKit-tests"
-            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+            ReferencedContainer = "container:CoconutKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -66,15 +76,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F2B2FCA1929BD78003D4C2C"
-            BuildableName = "CoconutKit-tests.app"
+            BlueprintIdentifier = "6F65420F1A2C7E4500FDA2DE"
+            BuildableName = "CoconutKit-tests.xctest"
             BlueprintName = "CoconutKit-tests"
-            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+            ReferencedContainer = "container:CoconutKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
