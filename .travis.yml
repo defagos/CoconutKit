@@ -1,0 +1,3 @@
+language: objective-c
+xcode_workspace: CoconutKit.xcworkspace
+xcode_scheme: CoconutKit-tests
