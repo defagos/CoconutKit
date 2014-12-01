@@ -28,9 +28,9 @@
     // Make the webview look nice :) 
     [self.webView fadeTop:0.02f bottom:0.02f];
     
-    NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"sample_text_with_custom_font" ofType:@"html"];
+    NSString *htmlFilePath = [[NSBundle principalBundle] pathForResource:@"sample_text_with_custom_font" ofType:@"html"];
     NSString *htmlText = [NSString stringWithContentsOfFile:htmlFilePath encoding:NSUTF8StringEncoding error:NULL];
-    [self.webView loadHTMLString:htmlText baseURL:[[NSBundle mainBundle] bundleURL]];
+    [self.webView loadHTMLString:htmlText baseURL:[[NSBundle principalBundle] bundleURL]];
 }
 
 #pragma mark Orientation management

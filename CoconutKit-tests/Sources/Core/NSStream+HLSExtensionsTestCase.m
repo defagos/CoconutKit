@@ -12,7 +12,7 @@
 
 - (void)testWrite
 {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Sample" ofType:@"txt"];
+    NSString *filePath = [[NSBundle principalBundle] pathForResource:@"Sample" ofType:@"txt"];
     NSData *sampleData = [NSData dataWithContentsOfFile:filePath];
     
     NSInputStream *inputStream = [NSInputStream inputStreamWithData:sampleData];

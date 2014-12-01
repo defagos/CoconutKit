@@ -16,9 +16,19 @@
 
 #pragma mark Class methods
 
++ (NSBundle *)principalBundle
+{
+    static NSBundle *s_principalBundle;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_principalBundle = [NSBundle bundleForClass:[HLSLogger class]];
+    });
+    return s_principalBundle;
+}
+
 + (NSString *)friendlyApplicationVersionNumber
 {
-    return [[NSBundle mainBundle] friendlyVersionNumber];
+    return [[NSBundle principalBundle] friendlyVersionNumber];
 }
 
 + (NSBundle *)coconutKitBundle
@@ -33,7 +43,7 @@
 + (NSBundle *)bundleWithName:(NSString *)name
 {
     if (! name) {
-        return [NSBundle mainBundle];
+        return [NSBundle principalBundle];
     }
     
     static NSMutableDictionary *s_nameToBundleMap = nil;
@@ -52,20 +62,18 @@
         return bundle;
     }
     
-    bundle = [self bundleWithName:name inDirectory:[[NSBundle mainBundle] bundlePath]];
+    bundle = [self bundleWithName:name inDirectory:[[NSBundle principalBundle] bundlePath]];
     if (bundle) {
         [s_nameToBundleMap setObject:bundle forKey:name];
         return bundle;
     }
     
-    // TODO: Use CoconutKit method returning the library folder (available on a branch)
     bundle = [self bundleWithName:name inDirectory:HLSApplicationLibraryDirectoryPath()];
     if (bundle) {
         [s_nameToBundleMap setObject:bundle forKey:name];
         return bundle;
     }
     
-    // TODO: Use CoconutKit method returning the documents folder (available on a branch)
     bundle = [self bundleWithName:name inDirectory:HLSApplicationDocumentDirectoryPath()];
     if (bundle) {
         [s_nameToBundleMap setObject:bundle forKey:name];
@@ -87,7 +95,7 @@
 + (NSBundle *)bundleWithName:(NSString *)name inDirectory:(NSString *)directoryPath
 {
     if (! directoryPath) {
-        directoryPath = [[NSBundle mainBundle] bundlePath];
+        directoryPath = [[NSBundle principalBundle] bundlePath];
     }
     
     NSBundle *bundle = nil;

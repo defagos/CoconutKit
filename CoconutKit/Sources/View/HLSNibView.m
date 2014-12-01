@@ -11,6 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
 #import "NSArray+HLSExtensions.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
@@ -39,7 +40,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         return nil;
     }
     
-    NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
+    NSBundle *bundle = [self bundle] ?: [NSBundle principalBundle];
     
     // A xib has been found, use it
     NSString *nibName = [self nibName];

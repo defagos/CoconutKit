@@ -13,11 +13,11 @@
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
 #import "NSBundle+HLSDynamicLocalization.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 
-@implementation HLSViewController
-
+@implementation HLSViewController 
 #pragma mark Object creation and destruction
 
 - (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
@@ -39,7 +39,7 @@
 - (instancetype)initWithBundle:(NSBundle *)bundle
 {
     if (! bundle) {
-        bundle = [NSBundle mainBundle];
+        bundle = [NSBundle principalBundle];
     }
     
     NSString *nibName = [self nibNameInBundle:bundle];
@@ -105,7 +105,7 @@
     IMP selfIMP = class_getMethodImplementation([self class], _cmd);
     IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
     BOOL isOverriden = (selfIMP != superIMP);
-    if (! isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
+    if (! isOverriden && [[[NSBundle principalBundle] localizations] count] > 1) {
         HLSLoggerDebug(@"%@ is not localized", [self class]);
     }
 }

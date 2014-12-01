@@ -27,12 +27,12 @@
 
 + (NSURL *)image1URL
 {
-    return [[NSBundle mainBundle] URLForResource:@"img_apple1" withExtension:@"jpg"];
+    return [[NSBundle principalBundle] URLForResource:@"img_apple1" withExtension:@"jpg"];
 }
 
 + (NSURL *)image2URL
 {
-    return [[NSBundle mainBundle] URLForResource:@"img_apple2" withExtension:@"jpg"];
+    return [[NSBundle principalBundle] URLForResource:@"img_apple2" withExtension:@"jpg"];
 }
 
 #pragma mark Object creation and destruction
