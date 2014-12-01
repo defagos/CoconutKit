@@ -559,7 +559,7 @@
 
 #pragma mark Tests
 
-- (void)testProtocol_copyMethodDescriptionList
+- (void)testProtocolCopyMethodDescriptionList
 {
     unsigned int NSObject_numberOfRequiredClassMethods = 0;
     struct objc_method_description *NSObject_requiredClassMethodDescriptions = hls_protocol_copyMethodDescriptionList(@protocol(NSObject), YES, NO, &NSObject_numberOfRequiredClassMethods);
@@ -622,7 +622,7 @@
     free(RuntimeTestCompositeProtocol_optionalInstanceMethodDescriptions);
 }
 
-- (void)testClass_conformsToProtocol
+- (void)testClassConformsToProtocol
 {
     XCTAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass1 class], @protocol(NSObject)));
     XCTAssertTrue(hls_class_conformsToProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestFormalProtocolA)));
@@ -691,7 +691,7 @@
     XCTAssertFalse(hls_class_conformsToProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)));
 }
 
-- (void)testClass_conformsToInformalProtocol
+- (void)testClassConformsToInformalProtocol
 {
     XCTAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestInformalProtocolA)));
     XCTAssertFalse(hls_class_conformsToInformalProtocol([RuntimeTestSubclass11 class], @protocol(RuntimeTestInformalProtocolA)));
@@ -707,7 +707,7 @@
 }
 
 // This tests hls_class_implementsProtocolMethods as well
-- (void)testClass_implementsProtocol
+- (void)testClassImplementsProtocol
 {
     XCTAssertTrue(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(NSObject)));
     XCTAssertTrue(hls_class_implementsProtocol([RuntimeTestClass1 class], @protocol(RuntimeTestFormalProtocolA)));
@@ -813,7 +813,7 @@
     XCTAssertTrue(hls_class_swizzleSelector([RuntimeTestClass11 class], NSSelectorFromString(@"unknownSelector"), nil) == NULL);
 }
 
-- (void)testClass_isSubclassOfClass
+- (void)testClassIsSubclassOfClass
 {
     XCTAssertTrue(hls_class_isSubclassOfClass([UIView class], [NSObject class]));
     XCTAssertTrue(hls_class_isSubclassOfClass([UIView class], [UIView class]));
