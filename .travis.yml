@@ -1,3 +1,2 @@
 language: objective-c
-xcode_workspace: CoconutKit.xcworkspace
-xcode_scheme: CoconutKit-tests
+script: xctool -sdk iphonesimulator -workspace CoconutKit.xcworkspace -scheme CoconutKit-tests build test
