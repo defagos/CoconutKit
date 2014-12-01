@@ -10,6 +10,7 @@
     #import <MessageUI/MessageUI.h>
     #import <MobileCoreServices/MobileCoreServices.h>
     #import <WebKit/WebKit.h>
+    #import <XCTest/XCTest.h>
 
     // CoconutKit library public header files
     #import "CALayer+HLSExtensions.h"
