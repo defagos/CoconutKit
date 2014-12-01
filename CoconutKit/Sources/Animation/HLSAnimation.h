@@ -51,10 +51,10 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * the application exits background. The screenshot made when the application enters background namely reflects the
  * non-animated view / layer state, which explains why the views seem to jump.
  *
- * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
- * in each of them, corresponding to how the play method was called. For steps whose duration is 0, the boolean is
- * also YES if the animation was run with animated = YES (even though the step was not actually animated, it is still
- * part of an animation which was played animated).
+ * Delegate methods / blocks can be implemented by clients to catch animation events. An animated boolean value is 
+ * received in each of them, corresponding to how the play method was called. For steps whose duration is 0, the 
+ * boolean is also YES if the animation was run with animated = YES (even though the step was not actually animated, 
+ * it is still part of an animation which was played animated).
  */
 @interface HLSAnimation : NSObject <NSCopying>
 
