@@ -7,3 +7,5 @@ script:
     - set -o pipefail
     - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
     - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
+    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
+    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-demo -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
