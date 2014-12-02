@@ -1,2 +1,6 @@
 language: objective-c
-script: xctool -sdk iphonesimulator -workspace CoconutKit.xcworkspace -scheme CoconutKit-tests build test
+install: 
+    - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+script: 
+    - set -o pipefail
+    - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit -destination 'platform=iOS Simulator,name=iPad 2' -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
