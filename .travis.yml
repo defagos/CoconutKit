@@ -1,7 +1,7 @@
 language: objective-c
 before_install:
     - brew update
-    - brew outdated mogenerator || brew upgrade mogenerator
+    - brew install mogenerator
     - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 script: 
     - set -o pipefail
