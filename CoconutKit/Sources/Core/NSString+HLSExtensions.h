@@ -106,4 +106,9 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform);
  */
 - (NSString *)friendlyVersionNumber;
 
+/**
+ * Guess the MIME type from the path extension
+ */
+- (NSString *)MIMEType;
+
 @end
