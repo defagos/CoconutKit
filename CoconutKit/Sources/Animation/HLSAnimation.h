@@ -11,6 +11,10 @@
 // Forward declarations
 @protocol HLSAnimationDelegate;
 
+// Block signatures
+typedef void (^HLSAnimationStartBlock)(BOOL animated);
+typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
+
 /**
  * HLSAnimation is the simplest way to create and manage complex animations made of Core Animation-based layer
  * and / or UIView-based animations. Usually, creating complex animations made of several steps requires the
@@ -47,10 +51,10 @@
  * the application exits background. The screenshot made when the application enters background namely reflects the
  * non-animated view / layer state, which explains why the views seem to jump.
  *
- * Delegate methods can be implemented by clients to catch animation events. An animated boolean value is received
- * in each of them, corresponding to how the play method was called. For steps whose duration is 0, the boolean is
- * also YES if the animation was run with animated = YES (even though the step was not actually animated, it is still
- * part of an animation which was played animated).
+ * Delegate methods / blocks can be implemented by clients to catch animation events. An animated boolean value is 
+ * received in each of them, corresponding to how the play method was called. For steps whose duration is 0, the 
+ * boolean is also YES if the animation was run with animated = YES (even though the step was not actually animated, 
+ * it is still part of an animation which was played animated).
  */
 @interface HLSAnimation : NSObject <NSCopying>
 
@@ -222,19 +226,30 @@
 - (HLSAnimation *)animationWithDuration:(NSTimeInterval)duration;
 
 /**
- * Generate the reverse animation; all attributes are copied as is, except that all tags for the animation and
- * animation steps get and additional "reverse_" prefix. If a tag has not been filled for the receiver, the
- * corresponding tag of the reverse animation is nil
+ * Generate the reverse animation; all attributes are copied as is, except blocks, and all tags for the animation and
+ * animation steps get an additional "reverse_" prefix. If a tag has not been filled for the receiver, the corresponding 
+ * tag of the reverse animation is nil
  */
 - (HLSAnimation *)reverseAnimation;
 
 /**
  * Generate the corresponding loop animation by concatening self with its reverse animation. All attributes are
- * copied as is, except that all tags for the animation and animation steps get and additional "loop_" prefix
- * (reverse animation steps therefore begin with a "loop_reverse_" prefix). If a tag has not been filled for
- * the receiver, the corresponding tag of the reverse animation is nil
+ * copied as is, except blocks for the reverse animation, and all tags for the animation and animation steps get 
+ * an additional "loop_" prefix (reverse animation steps therefore begin with a "loop_reverse_" prefix). If a
+ * tag has not been filled for the receiver, the corresponding tag of the reverse animation is nil
  */
 - (HLSAnimation *)loopAnimation;
+
+/**
+ * Called right before the first animation step is executed, but after any delay which might have been set
+ */
+@property (nonatomic, copy) HLSAnimationStartBlock startBlock;
+
+/**
+ * Called right after the last animation step has been executed. You can check -terminating or -cancelling
+ * to find if the animation ended normally
+ */
+@property (nonatomic, copy) HLSAnimationCompletionBlock completionBlock;
 
 @end
 
@@ -260,7 +275,7 @@
 
 /**
  * Called when a step has been executed. Since animation steps are deeply copied when assigned to an animation,
- * you must not use animation step pointers to identify animation steps when implementing this method. Use 
+ * you cannot use animation step pointers to identify animation steps when implementing this method. Use
  * animation step tags instead
  */
 - (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;

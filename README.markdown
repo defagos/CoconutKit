@@ -2,10 +2,13 @@
 
 CoconutKit is a **productivity framework for iOS**, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
 
+[![Build Status](https://img.shields.io/travis/defagos/CoconutKit/release/3.0.rc4.svg?style=flat)](https://travis-ci.org/defagos/CoconutKit)
 [![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg?style=flat)](http://cocoadocs.org/docsets/XCDYouTubeKit/)
 [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg?style=flat)](http://cocoadocs.org/docsets/XCDYouTubeKit/)
 [![License](https://img.shields.io/cocoapods/l/CoconutKit.svg?style=flat)](LICENSE)
 [![Donate to author](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=3V35ZXWYXGAYG&lc=CH&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+
+_Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
 ## About
 
@@ -121,7 +124,7 @@ UINavigationController *webNavigationController = [[UINavigationController alloc
 
 Ever wanted to present images or backgrounds as an animated gallery? CoconutKit slideshow makes it possible in a snap. You can choose among several transition animations, ranging from the simple cross-dissolve to Ken Burns random zooming and panning.
 
-<p align="center"><img src="README-images/slideshow.gif" width="512"/></p>
+<p align="center"><img src="README-images/slideshow.gif" width="256"/></p>
 
 ### Cursor
 

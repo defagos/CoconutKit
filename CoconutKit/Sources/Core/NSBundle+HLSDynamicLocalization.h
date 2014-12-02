@@ -80,7 +80,7 @@ NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode);
 /**
  * Set the current localization used by all bundles.
  *
- * The localization parameter must be an element of the [[NSBundle mainBundle] localizations] array.
+ * The localization parameter must be an element of the [[NSBundle principalBundle] localizations] array.
  * If the localization parameter is nil or invalid, the default localization is restored.
  *
  * The new localization is stored in the standard user defaults under the HLSPreferredLocalizationDefaultsKey key.

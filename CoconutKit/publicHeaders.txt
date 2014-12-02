@@ -63,7 +63,6 @@ HLSWizardViewController.h
 NSArray+HLSExtensions.h
 NSBundle+HLSExtensions.h
 NSBundle+HLSDynamicLocalization.h
-NSCalendar+HLSExtensions.h
 NSData+HLSExtensions.h
 NSDate+HLSExtensions.h
 NSDateFormatter+HLSExtensions.h
@@ -76,7 +75,6 @@ NSNumber+HLSExtensions.h
 NSObject+HLSExtensions.h
 NSStream+HLSExtensions.h
 NSString+HLSExtensions.h
-NSTimeZone+HLSExtensions.h
 UIActionSheet+HLSExtensions.h
 UIActivityIndicatorView+HLSViewBinding.h
 UIApplication+HLSExtensions.h

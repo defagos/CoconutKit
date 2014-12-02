@@ -9,7 +9,6 @@
 #import "NSDate+HLSExtensions.h"
 
 #import "HLSRuntime.h"
-#import "NSCalendar+HLSExtensions.h"
 
 // Original implementation of the methods we swizzle
 static id (*s_NSDate__descriptionWithLocale_Imp)(id, SEL, id) = NULL;

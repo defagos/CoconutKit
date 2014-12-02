@@ -132,6 +132,14 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     id (*methodImp)(id, SEL) = (id (*)(id, SEL))[self methodForSelector:selector];
     HLSAnimation *animation = methodImp(self, selector);
     
+    __weak HLSAnimation *weakAnimation = animation;
+    animation.startBlock = ^(BOOL animated) {
+        HLSLoggerInfo(@"Start block called for animation %@", weakAnimation.tag);
+    };
+    animation.completionBlock = ^(BOOL animated) {
+        HLSLoggerInfo(@"Completion block called for animation %@", weakAnimation.tag);
+    };
+    
     animation.tag = [NSString stringWithFormat:@"animation%lu", (unsigned long)animationIndex];
     if (self.reverseSwitch.on) {
         animation = [animation reverseAnimation];
@@ -344,6 +352,9 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
     [layerAnimation11 translateByVectorWithX:100.f y:20.f];
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
+    animationStep1.completionBlock = ^(BOOL animated) {
+        HLSLoggerDebug(@"Completion block called for step1");
+    };
     animationStep1.tag = @"step1";
     [animationStep1 addLayerAnimation:layerAnimation11 forView:self.rectangleView1];
     return [HLSAnimation animationWithAnimationStep:animationStep1];;

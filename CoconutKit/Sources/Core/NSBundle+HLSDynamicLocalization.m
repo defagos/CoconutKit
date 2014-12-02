@@ -10,6 +10,7 @@
 
 #import <objc/runtime.h>
 #import "HLSLogger.h"
+#import "NSBundle+HLSExtensions.h"
 
 NSString * const HLSCurrentLocalizationDidChangeNotification = @"HLSCurrentLocalizationDidChangeNotification";
 NSString * const HLSMissingLocalization = @"HLSMissingLocalization";
@@ -31,7 +32,7 @@ NSString *HLSLanguageForLocalization(NSString *localization)
 NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle)
 {
     if (! bundle) {
-        bundle = [NSBundle mainBundle];
+        bundle = [NSBundle principalBundle];
     }
     
     NSString *localizedString = [bundle localizedStringForKey:key
@@ -57,13 +58,13 @@ NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode)
 
 static void setDefaultLocalization(void)
 {
-    NSArray *mainBundleLocalizations = [[NSBundle mainBundle] localizations];
+    NSArray *mainBundleLocalizations = [[NSBundle principalBundle] localizations];
     NSArray *preferredLocalizations = [NSBundle preferredLocalizationsFromArray:mainBundleLocalizations];
     if ([preferredLocalizations count] > 0) {
         currentLocalization = [[preferredLocalizations objectAtIndex:0] copy];
     }
     else {
-        currentLocalization = [[[NSBundle mainBundle] developmentLocalization] copy];
+        currentLocalization = [[[NSBundle principalBundle] developmentLocalization] copy];
     }
 }
 

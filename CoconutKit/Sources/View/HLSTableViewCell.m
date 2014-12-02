@@ -11,6 +11,7 @@
 #import "HLSLogger.h"
 #import "HLSTableViewCell+Protected.h"
 #import "NSArray+HLSExtensions.h"
+#import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
@@ -41,7 +42,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         
         // A xib file is used
         if (nibName) {
-            NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
+            NSBundle *bundle = [self bundle] ?: [NSBundle principalBundle];
             
             NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
             if ([bundleContents count] == 0) {
@@ -156,7 +157,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     // If a xib file name has been specified, use it, otherwise try to locate the default one (xib bearing
     // the class name)
     NSString *nibName = [self nibName];
-    NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
+    NSBundle *bundle = [self bundle] ?: [NSBundle principalBundle];
     if (! nibName && [bundle pathForResource:[self className] ofType:@"nib"]) {
         nibName = [self className];
     }

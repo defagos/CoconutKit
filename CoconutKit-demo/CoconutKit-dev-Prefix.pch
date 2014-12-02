@@ -78,7 +78,6 @@
     #import "NSArray+HLSExtensions.h"
     #import "NSBundle+HLSDynamicLocalization.h"
     #import "NSBundle+HLSExtensions.h"
-    #import "NSCalendar+HLSExtensions.h"
     #import "NSData+HLSExtensions.h"
     #import "NSDate+HLSExtensions.h"
     #import "NSDateFormatter+HLSExtensions.h"
@@ -92,7 +91,6 @@
     #import "NSSet+HLSExtensions.h"
     #import "NSStream+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
-    #import "NSTimeZone+HLSExtensions.h"
     #import "NSURLRequest+HLSExtensions.h"
     #import "UIActionSheet+HLSExtensions.h"
     #import "UIActivityIndicatorView+HLSViewBinding.h"
@@ -127,10 +125,4 @@
     #import "UIViewController+HLSViewBinding.h"
     #import "UIWebView+HLSExtensions.h"
     #import "UIWindow+HLSExtensions.h"
-
-    // Additional headers for the test target
-#ifdef COCONUTKIT_TESTS
-    #import <GHUnitIOS/GHUnit.h>
-#endif
-
 #endif

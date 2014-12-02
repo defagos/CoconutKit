@@ -68,6 +68,47 @@
 		6F63E7B617CF6B80006322D9 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B517CF6B80006322D9 /* QuickLook.framework */; };
 		6F63E7C617CF6E19006322D9 /* HLSPreviewItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */; };
 		6F63E7C717CF6E19006322D9 /* HLSPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */; };
+		6F6542161A2C7E4500FDA2DE /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC07E0554694100DB518D /* libCoconutKit.a */; };
+		6F6542FD1A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542A31A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld */; };
+		6F6542FE1A2C9D8400FDA2DE /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F6542A51A2C9D8400FDA2DE /* Sample.txt */; };
+		6F6542FF1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542AA1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
+		6F6543001A2C9D8400FDA2DE /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542AC1A2C9D8400FDA2DE /* HLSErrorTestCase.m */; };
+		6F6543011A2C9D8400FDA2DE /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542AE1A2C9D8400FDA2DE /* HLSFileManagerTestCase.m */; };
+		6F6543021A2C9D8400FDA2DE /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B01A2C9D8400FDA2DE /* HLSGeometryTestCase.m */; };
+		6F6543031A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B21A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m */; };
+		6F6543041A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B41A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */; };
+		6F6543051A2C9D8400FDA2DE /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B61A2C9D8400FDA2DE /* HLSRuntimeTestCase.m */; };
+		6F6543061A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542B81A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m */; };
+		6F6543071A2C9D8400FDA2DE /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542BA1A2C9D8400FDA2DE /* HLSTransformerTestCase.m */; };
+		6F6543081A2C9D8400FDA2DE /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542BC1A2C9D8400FDA2DE /* HLSValidatorsTestCase.m */; };
+		6F6543091A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542BE1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m */; };
+		6F65430A1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C01A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */; };
+		6F65430C1A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C41A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m */; };
+		6F65430D1A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C61A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m */; };
+		6F65430E1A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542C81A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */; };
+		6F65430F1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542CA1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m */; };
+		6F6543101A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542CC1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m */; };
+		6F6543111A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542CE1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m */; };
+		6F6543121A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542D01A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m */; };
+		6F6543141A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542D51A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */; };
+		6F6543151A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542D71A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m */; };
+		6F6543161A2C9D8400FDA2DE /* TestErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542DA1A2C9D8400FDA2DE /* TestErrors.m */; };
+		6F6543171A2C9D8400FDA2DE /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542DC1A2C9D8400FDA2DE /* UppercaseValueTransformer.m */; };
+		6F6543191A2C9D8400FDA2DE /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E01A2C9D8400FDA2DE /* AbstractClassA.m */; };
+		6F65431A1A2C9D8400FDA2DE /* BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E21A2C9D8400FDA2DE /* BankAccount.m */; };
+		6F65431B1A2C9D8400FDA2DE /* ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E41A2C9D8400FDA2DE /* ConcreteClassD.m */; };
+		6F65431C1A2C9D8400FDA2DE /* ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E61A2C9D8400FDA2DE /* ConcreteSubclassB.m */; };
+		6F65431D1A2C9D8400FDA2DE /* ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542E81A2C9D8400FDA2DE /* ConcreteSubclassC.m */; };
+		6F65431E1A2C9D8400FDA2DE /* _AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542EB1A2C9D8400FDA2DE /* _AbstractClassA.m */; };
+		6F65431F1A2C9D8400FDA2DE /* _BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542ED1A2C9D8400FDA2DE /* _BankAccount.m */; };
+		6F6543201A2C9D8400FDA2DE /* _ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542EF1A2C9D8400FDA2DE /* _ConcreteClassD.m */; };
+		6F6543211A2C9D8400FDA2DE /* _ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F11A2C9D8400FDA2DE /* _ConcreteSubclassB.m */; };
+		6F6543221A2C9D8400FDA2DE /* _ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F31A2C9D8400FDA2DE /* _ConcreteSubclassC.m */; };
+		6F6543231A2C9D8400FDA2DE /* _House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F51A2C9D8400FDA2DE /* _House.m */; };
+		6F6543241A2C9D8400FDA2DE /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F71A2C9D8400FDA2DE /* _Person.m */; };
+		6F6543251A2C9D8400FDA2DE /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542F91A2C9D8400FDA2DE /* House.m */; };
+		6F6543261A2C9D8400FDA2DE /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6542FB1A2C9D8400FDA2DE /* Person.m */; };
+		6F65432D1A2CA24900FDA2DE /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6F65432C1A2CA24900FDA2DE /* CoconutKit-resources.bundle */; };
 		6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */; };
 		6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; };
 		6F6C7550162DC0290094B090 /* UINavigationController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */; };
@@ -158,8 +199,6 @@
 		6FADE5B814BA0494007EE121 /* NSBundle+HLSDynamicLocalization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE53214BA0494007EE121 /* NSBundle+HLSDynamicLocalization.m */; };
 		6FADE5B914BA0494007EE121 /* NSBundle+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE53314BA0494007EE121 /* NSBundle+HLSExtensions.h */; };
 		6FADE5BA14BA0494007EE121 /* NSBundle+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE53414BA0494007EE121 /* NSBundle+HLSExtensions.m */; };
-		6FADE5BB14BA0494007EE121 /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE53514BA0494007EE121 /* NSCalendar+HLSExtensions.h */; };
-		6FADE5BC14BA0494007EE121 /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE53614BA0494007EE121 /* NSCalendar+HLSExtensions.m */; };
 		6FADE5BD14BA0494007EE121 /* NSData+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE53714BA0494007EE121 /* NSData+HLSExtensions.h */; };
 		6FADE5BE14BA0494007EE121 /* NSData+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE53814BA0494007EE121 /* NSData+HLSExtensions.m */; };
 		6FADE5BF14BA0494007EE121 /* NSDate+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE53914BA0494007EE121 /* NSDate+HLSExtensions.h */; };
@@ -174,8 +213,6 @@
 		6FADE5C814BA0494007EE121 /* NSObject+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54214BA0494007EE121 /* NSObject+HLSExtensions.m */; };
 		6FADE5C914BA0494007EE121 /* NSString+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */; };
 		6FADE5CA14BA0494007EE121 /* NSString+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */; };
-		6FADE5CB14BA0494007EE121 /* NSTimeZone+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54514BA0494007EE121 /* NSTimeZone+HLSExtensions.h */; };
-		6FADE5CC14BA0494007EE121 /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54614BA0494007EE121 /* NSTimeZone+HLSExtensions.m */; };
 		6FADE5CD14BA0494007EE121 /* UIColor+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54714BA0494007EE121 /* UIColor+HLSExtensions.h */; };
 		6FADE5CE14BA0494007EE121 /* UIColor+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE54814BA0494007EE121 /* UIColor+HLSExtensions.m */; };
 		6FADE5CF14BA0494007EE121 /* UIControl+HLSExclusiveTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE54914BA0494007EE121 /* UIControl+HLSExclusiveTouch.h */; };
@@ -337,6 +374,13 @@
 			remoteGlobalIDString = 6FC5B7731924EDC500660CDF;
 			remoteInfo = "CoconutKit-resources";
 		};
+		6F6542171A2C7E4500FDA2DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = CoconutKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -405,6 +449,87 @@
 		6F63E7B517CF6B80006322D9 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSPreviewItem.h; sourceTree = "<group>"; };
 		6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPreviewItem.m; sourceTree = "<group>"; };
+		6F6542101A2C7E4500FDA2DE /* CoconutKit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CoconutKit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F6542A01A2C9D8400FDA2DE /* generate_model.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = generate_model.sh; sourceTree = "<group>"; };
+		6F6542A41A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
+		6F6542A51A2C9D8400FDA2DE /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
+		6F6542A91A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+HLExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542AA1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+HLExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542AB1A2C9D8400FDA2DE /* HLSErrorTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSErrorTestCase.h; sourceTree = "<group>"; };
+		6F6542AC1A2C9D8400FDA2DE /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
+		6F6542AD1A2C9D8400FDA2DE /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
+		6F6542AE1A2C9D8400FDA2DE /* HLSFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManagerTestCase.m; sourceTree = "<group>"; };
+		6F6542AF1A2C9D8400FDA2DE /* HLSGeometryTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSGeometryTestCase.h; sourceTree = "<group>"; };
+		6F6542B01A2C9D8400FDA2DE /* HLSGeometryTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSGeometryTestCase.m; sourceTree = "<group>"; };
+		6F6542B11A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInMemoryFileManagerTestCase.h; sourceTree = "<group>"; };
+		6F6542B21A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManagerTestCase.m; sourceTree = "<group>"; };
+		6F6542B31A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRestrictedInterfaceProxyTestCase.h; sourceTree = "<group>"; };
+		6F6542B41A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxyTestCase.m; sourceTree = "<group>"; };
+		6F6542B51A2C9D8400FDA2DE /* HLSRuntimeTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSRuntimeTestCase.h; sourceTree = "<group>"; };
+		6F6542B61A2C9D8400FDA2DE /* HLSRuntimeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntimeTestCase.m; sourceTree = "<group>"; };
+		6F6542B71A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStandardFileManagerTestCase.h; sourceTree = "<group>"; };
+		6F6542B81A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManagerTestCase.m; sourceTree = "<group>"; };
+		6F6542B91A2C9D8400FDA2DE /* HLSTransformerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformerTestCase.h; sourceTree = "<group>"; };
+		6F6542BA1A2C9D8400FDA2DE /* HLSTransformerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformerTestCase.m; sourceTree = "<group>"; };
+		6F6542BB1A2C9D8400FDA2DE /* HLSValidatorsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSValidatorsTestCase.h; sourceTree = "<group>"; };
+		6F6542BC1A2C9D8400FDA2DE /* HLSValidatorsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidatorsTestCase.m; sourceTree = "<group>"; };
+		6F6542BD1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542BE1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542BF1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSDynamicLocalizationTestCase.h"; sourceTree = "<group>"; };
+		6F6542C01A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalizationTestCase.m"; sourceTree = "<group>"; };
+		6F6542C31A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542C41A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542C51A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542C61A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542C71A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542C81A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542C91A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542CA1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542CB1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542CC1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542CD1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542CE1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542CF1A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542D01A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542D41A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		6F6542D51A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6F6542D61A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+HLSValidationTestCase.h"; sourceTree = "<group>"; };
+		6F6542D71A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidationTestCase.m"; sourceTree = "<group>"; };
+		6F6542D91A2C9D8400FDA2DE /* TestErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestErrors.h; sourceTree = "<group>"; };
+		6F6542DA1A2C9D8400FDA2DE /* TestErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestErrors.m; sourceTree = "<group>"; };
+		6F6542DB1A2C9D8400FDA2DE /* UppercaseValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UppercaseValueTransformer.h; sourceTree = "<group>"; };
+		6F6542DC1A2C9D8400FDA2DE /* UppercaseValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UppercaseValueTransformer.m; sourceTree = "<group>"; };
+		6F6542DF1A2C9D8400FDA2DE /* AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractClassA.h; sourceTree = "<group>"; };
+		6F6542E01A2C9D8400FDA2DE /* AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractClassA.m; sourceTree = "<group>"; };
+		6F6542E11A2C9D8400FDA2DE /* BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAccount.h; sourceTree = "<group>"; };
+		6F6542E21A2C9D8400FDA2DE /* BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAccount.m; sourceTree = "<group>"; };
+		6F6542E31A2C9D8400FDA2DE /* ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteClassD.h; sourceTree = "<group>"; };
+		6F6542E41A2C9D8400FDA2DE /* ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteClassD.m; sourceTree = "<group>"; };
+		6F6542E51A2C9D8400FDA2DE /* ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6F6542E61A2C9D8400FDA2DE /* ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6F6542E71A2C9D8400FDA2DE /* ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6F6542E81A2C9D8400FDA2DE /* ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6F6542EA1A2C9D8400FDA2DE /* _AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractClassA.h; sourceTree = "<group>"; };
+		6F6542EB1A2C9D8400FDA2DE /* _AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractClassA.m; sourceTree = "<group>"; };
+		6F6542EC1A2C9D8400FDA2DE /* _BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _BankAccount.h; sourceTree = "<group>"; };
+		6F6542ED1A2C9D8400FDA2DE /* _BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _BankAccount.m; sourceTree = "<group>"; };
+		6F6542EE1A2C9D8400FDA2DE /* _ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteClassD.h; sourceTree = "<group>"; };
+		6F6542EF1A2C9D8400FDA2DE /* _ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteClassD.m; sourceTree = "<group>"; };
+		6F6542F01A2C9D8400FDA2DE /* _ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6F6542F11A2C9D8400FDA2DE /* _ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6F6542F21A2C9D8400FDA2DE /* _ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6F6542F31A2C9D8400FDA2DE /* _ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6F6542F41A2C9D8400FDA2DE /* _House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _House.h; sourceTree = "<group>"; };
+		6F6542F51A2C9D8400FDA2DE /* _House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _House.m; sourceTree = "<group>"; };
+		6F6542F61A2C9D8400FDA2DE /* _Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Person.h; sourceTree = "<group>"; };
+		6F6542F71A2C9D8400FDA2DE /* _Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Person.m; sourceTree = "<group>"; };
+		6F6542F81A2C9D8400FDA2DE /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
+		6F6542F91A2C9D8400FDA2DE /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
+		6F6542FA1A2C9D8400FDA2DE /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6F6542FB1A2C9D8400FDA2DE /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		6F6543281A2CA02500FDA2DE /* CoconutKit-tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-tests-Prefix.pch"; sourceTree = "<group>"; };
+		6F6543291A2CA02500FDA2DE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F65432C1A2CA24900FDA2DE /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "CoconutKit-resources.bundle"; sourceTree = SOURCE_ROOT; };
 		6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackPushSegue.h; sourceTree = "<group>"; };
 		6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackPushSegue.m; sourceTree = "<group>"; };
 		6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -497,8 +622,6 @@
 		6FADE53214BA0494007EE121 /* NSBundle+HLSDynamicLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalization.m"; sourceTree = "<group>"; };
 		6FADE53314BA0494007EE121 /* NSBundle+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FADE53414BA0494007EE121 /* NSBundle+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSExtensions.m"; sourceTree = "<group>"; };
-		6FADE53514BA0494007EE121 /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
-		6FADE53614BA0494007EE121 /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE53714BA0494007EE121 /* NSData+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FADE53814BA0494007EE121 /* NSData+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE53914BA0494007EE121 /* NSDate+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -513,8 +636,6 @@
 		6FADE54214BA0494007EE121 /* NSObject+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensions.m"; sourceTree = "<group>"; };
-		6FADE54514BA0494007EE121 /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
-		6FADE54614BA0494007EE121 /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE54714BA0494007EE121 /* UIColor+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FADE54814BA0494007EE121 /* UIColor+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FADE54914BA0494007EE121 /* UIControl+HLSExclusiveTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+HLSExclusiveTouch.h"; sourceTree = "<group>"; };
@@ -671,6 +792,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6F65420D1A2C7E4500FDA2DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F6542161A2C7E4500FDA2DE /* libCoconutKit.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FC5B7711924EDC500660CDF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -703,6 +832,7 @@
 			children = (
 				D2AAC07E0554694100DB518D /* libCoconutKit.a */,
 				6FC5B7741924EDC500660CDF /* CoconutKit-resources.bundle */,
+				6F6542101A2C7E4500FDA2DE /* CoconutKit-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -714,6 +844,7 @@
 				6FADE51014BA0494007EE121 /* Sources */,
 				6FC5B7801924EE0A00660CDF /* Resources */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
+				6F65429F1A2C9D8400FDA2DE /* Tests */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 				6FDEDD081A25DC150034610E /* LICENSE */,
@@ -796,6 +927,166 @@
 			);
 			name = Images;
 			path = "../CoconutKit-resources/Images";
+			sourceTree = "<group>";
+		};
+		6F65429F1A2C9D8400FDA2DE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6F65432B1A2CA22E00FDA2DE /* Dependencies */,
+				6F6542A61A2C9D8400FDA2DE /* Sources */,
+				6F6542A11A2C9D8400FDA2DE /* Resources */,
+				6F6543281A2CA02500FDA2DE /* CoconutKit-tests-Prefix.pch */,
+				6F6542A01A2C9D8400FDA2DE /* generate_model.sh */,
+				6F6543291A2CA02500FDA2DE /* Info.plist */,
+			);
+			name = Tests;
+			path = "../CoconutKit-tests";
+			sourceTree = "<group>";
+		};
+		6F6542A11A2C9D8400FDA2DE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542A21A2C9D8400FDA2DE /* Data */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6F6542A21A2C9D8400FDA2DE /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542A31A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld */,
+				6F6542A51A2C9D8400FDA2DE /* Sample.txt */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6F6542A61A2C9D8400FDA2DE /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542A81A2C9D8400FDA2DE /* Core */,
+				6F6542D31A2C9D8400FDA2DE /* CoreData */,
+				6F6542D81A2C9D8400FDA2DE /* Helpers */,
+				6F6542DE1A2C9D8400FDA2DE /* Models */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		6F6542A81A2C9D8400FDA2DE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542A91A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.h */,
+				6F6542AA1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m */,
+				6F6542AB1A2C9D8400FDA2DE /* HLSErrorTestCase.h */,
+				6F6542AC1A2C9D8400FDA2DE /* HLSErrorTestCase.m */,
+				6F6542AD1A2C9D8400FDA2DE /* HLSFileManagerTestCase.h */,
+				6F6542AE1A2C9D8400FDA2DE /* HLSFileManagerTestCase.m */,
+				6F6542AF1A2C9D8400FDA2DE /* HLSGeometryTestCase.h */,
+				6F6542B01A2C9D8400FDA2DE /* HLSGeometryTestCase.m */,
+				6F6542B11A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.h */,
+				6F6542B21A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m */,
+				6F6542B31A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.h */,
+				6F6542B41A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m */,
+				6F6542B51A2C9D8400FDA2DE /* HLSRuntimeTestCase.h */,
+				6F6542B61A2C9D8400FDA2DE /* HLSRuntimeTestCase.m */,
+				6F6542B71A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.h */,
+				6F6542B81A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m */,
+				6F6542B91A2C9D8400FDA2DE /* HLSTransformerTestCase.h */,
+				6F6542BA1A2C9D8400FDA2DE /* HLSTransformerTestCase.m */,
+				6F6542BB1A2C9D8400FDA2DE /* HLSValidatorsTestCase.h */,
+				6F6542BC1A2C9D8400FDA2DE /* HLSValidatorsTestCase.m */,
+				6F6542BD1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.h */,
+				6F6542BE1A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m */,
+				6F6542BF1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.h */,
+				6F6542C01A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m */,
+				6F6542C31A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.h */,
+				6F6542C41A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m */,
+				6F6542C51A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.h */,
+				6F6542C61A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m */,
+				6F6542C71A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.h */,
+				6F6542C81A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m */,
+				6F6542C91A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.h */,
+				6F6542CA1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m */,
+				6F6542CB1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.h */,
+				6F6542CC1A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m */,
+				6F6542CD1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.h */,
+				6F6542CE1A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m */,
+				6F6542CF1A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.h */,
+				6F6542D01A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6F6542D31A2C9D8400FDA2DE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542D41A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.h */,
+				6F6542D51A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m */,
+				6F6542D61A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.h */,
+				6F6542D71A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		6F6542D81A2C9D8400FDA2DE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542D91A2C9D8400FDA2DE /* TestErrors.h */,
+				6F6542DA1A2C9D8400FDA2DE /* TestErrors.m */,
+				6F6542DB1A2C9D8400FDA2DE /* UppercaseValueTransformer.h */,
+				6F6542DC1A2C9D8400FDA2DE /* UppercaseValueTransformer.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6F6542DE1A2C9D8400FDA2DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542DF1A2C9D8400FDA2DE /* AbstractClassA.h */,
+				6F6542E01A2C9D8400FDA2DE /* AbstractClassA.m */,
+				6F6542E11A2C9D8400FDA2DE /* BankAccount.h */,
+				6F6542E21A2C9D8400FDA2DE /* BankAccount.m */,
+				6F6542E31A2C9D8400FDA2DE /* ConcreteClassD.h */,
+				6F6542E41A2C9D8400FDA2DE /* ConcreteClassD.m */,
+				6F6542E51A2C9D8400FDA2DE /* ConcreteSubclassB.h */,
+				6F6542E61A2C9D8400FDA2DE /* ConcreteSubclassB.m */,
+				6F6542E71A2C9D8400FDA2DE /* ConcreteSubclassC.h */,
+				6F6542E81A2C9D8400FDA2DE /* ConcreteSubclassC.m */,
+				6F6542E91A2C9D8400FDA2DE /* Generated */,
+				6F6542F81A2C9D8400FDA2DE /* House.h */,
+				6F6542F91A2C9D8400FDA2DE /* House.m */,
+				6F6542FA1A2C9D8400FDA2DE /* Person.h */,
+				6F6542FB1A2C9D8400FDA2DE /* Person.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6F6542E91A2C9D8400FDA2DE /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				6F6542EA1A2C9D8400FDA2DE /* _AbstractClassA.h */,
+				6F6542EB1A2C9D8400FDA2DE /* _AbstractClassA.m */,
+				6F6542EC1A2C9D8400FDA2DE /* _BankAccount.h */,
+				6F6542ED1A2C9D8400FDA2DE /* _BankAccount.m */,
+				6F6542EE1A2C9D8400FDA2DE /* _ConcreteClassD.h */,
+				6F6542EF1A2C9D8400FDA2DE /* _ConcreteClassD.m */,
+				6F6542F01A2C9D8400FDA2DE /* _ConcreteSubclassB.h */,
+				6F6542F11A2C9D8400FDA2DE /* _ConcreteSubclassB.m */,
+				6F6542F21A2C9D8400FDA2DE /* _ConcreteSubclassC.h */,
+				6F6542F31A2C9D8400FDA2DE /* _ConcreteSubclassC.m */,
+				6F6542F41A2C9D8400FDA2DE /* _House.h */,
+				6F6542F51A2C9D8400FDA2DE /* _House.m */,
+				6F6542F61A2C9D8400FDA2DE /* _Person.h */,
+				6F6542F71A2C9D8400FDA2DE /* _Person.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		6F65432B1A2CA22E00FDA2DE /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				6F65432C1A2CA24900FDA2DE /* CoconutKit-resources.bundle */,
+			);
+			name = Dependencies;
 			sourceTree = "<group>";
 		};
 		6F7ECAB919F5503B00B6BE62 /* HTML */ = {
@@ -935,8 +1226,6 @@
 				6FADE53214BA0494007EE121 /* NSBundle+HLSDynamicLocalization.m */,
 				6FADE53314BA0494007EE121 /* NSBundle+HLSExtensions.h */,
 				6FADE53414BA0494007EE121 /* NSBundle+HLSExtensions.m */,
-				6FADE53514BA0494007EE121 /* NSCalendar+HLSExtensions.h */,
-				6FADE53614BA0494007EE121 /* NSCalendar+HLSExtensions.m */,
 				6FADE53714BA0494007EE121 /* NSData+HLSExtensions.h */,
 				6FADE53814BA0494007EE121 /* NSData+HLSExtensions.m */,
 				6FADE53914BA0494007EE121 /* NSDate+HLSExtensions.h */,
@@ -959,8 +1248,6 @@
 				6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */,
 				6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */,
 				6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */,
-				6FADE54514BA0494007EE121 /* NSTimeZone+HLSExtensions.h */,
-				6FADE54614BA0494007EE121 /* NSTimeZone+HLSExtensions.m */,
 				6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */,
 				6FC8CB891574BFC10014B37B /* NSURLRequest+HLSExtensions.m */,
 				6FC3790A182D2C2200B55AF1 /* UIApplication+HLSExtensions.h */,
@@ -1248,7 +1535,6 @@
 				6FCD33AC1A1216690002F478 /* UIDatePicker+HLSViewBinding.h in Headers */,
 				6FADE5B714BA0494007EE121 /* NSBundle+HLSDynamicLocalization.h in Headers */,
 				6FADE5B914BA0494007EE121 /* NSBundle+HLSExtensions.h in Headers */,
-				6FADE5BB14BA0494007EE121 /* NSCalendar+HLSExtensions.h in Headers */,
 				6FFAB76819DD8DA800A91997 /* HLSMAWeakDictionary.h in Headers */,
 				6FADE5BD14BA0494007EE121 /* NSData+HLSExtensions.h in Headers */,
 				6F28D61419FF79F400564BD3 /* UIWindow+HLSExtensions.h in Headers */,
@@ -1259,7 +1545,6 @@
 				6FADE5C514BA0494007EE121 /* NSError+HLSExtensions.h in Headers */,
 				6FADE5C714BA0494007EE121 /* NSObject+HLSExtensions.h in Headers */,
 				6FADE5C914BA0494007EE121 /* NSString+HLSExtensions.h in Headers */,
-				6FADE5CB14BA0494007EE121 /* NSTimeZone+HLSExtensions.h in Headers */,
 				6FADE5CD14BA0494007EE121 /* UIColor+HLSExtensions.h in Headers */,
 				6FADE5CF14BA0494007EE121 /* UIControl+HLSExclusiveTouch.h in Headers */,
 				6F0CA8DE19DD934300CBE2E1 /* HLSViewBindingInformation.h in Headers */,
@@ -1392,6 +1677,25 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		6F65420F1A2C7E4500FDA2DE /* CoconutKit-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F65421B1A2C7E4500FDA2DE /* Build configuration list for PBXNativeTarget "CoconutKit-tests" */;
+			buildPhases = (
+				6F6543271A2C9DB900FDA2DE /* Generate Model Source Files */,
+				6F65420C1A2C7E4500FDA2DE /* Sources */,
+				6F65420D1A2C7E4500FDA2DE /* Frameworks */,
+				6F65420E1A2C7E4500FDA2DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F6542181A2C7E4500FDA2DE /* PBXTargetDependency */,
+			);
+			name = "CoconutKit-tests";
+			productName = "CoconutKit-tests";
+			productReference = 6F6542101A2C7E4500FDA2DE /* CoconutKit-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6FC5B7731924EDC500660CDF /* CoconutKit-resources */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FC5B77F1924EDC500660CDF /* Build configuration list for PBXNativeTarget "CoconutKit-resources" */;
@@ -1437,6 +1741,11 @@
 				CLASSPREFIX = HLS;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Samuel Défago";
+				TargetAttributes = {
+					6F65420F1A2C7E4500FDA2DE = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "CoconutKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1458,11 +1767,21 @@
 				D2AAC07D0554694100DB518D /* CoconutKit */,
 				6F159C6D15A5D7720020AFAC /* CoconutKit-staticframework */,
 				6FC5B7731924EDC500660CDF /* CoconutKit-resources */,
+				6F65420F1A2C7E4500FDA2DE /* CoconutKit-tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6F65420E1A2C7E4500FDA2DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F65432D1A2CA24900FDA2DE /* CoconutKit-resources.bundle in Resources */,
+				6F6542FE1A2C9D8400FDA2DE /* Sample.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FC5B7721924EDC500660CDF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1506,6 +1825,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6F6543271A2C9DB900FDA2DE /* Generate Model Source Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Model Source Files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${PROJECT_DIR}\"/../CoconutKit-tests/generate_model.sh";
+		};
 		6FCB4E7F19264D3300047AD3 /* Copy Bundle To Static Library Project */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1523,6 +1856,51 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6F65420C1A2C7E4500FDA2DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F6543231A2C9D8400FDA2DE /* _House.m in Sources */,
+				6F6543151A2C9D8400FDA2DE /* NSManagedObject+HLSValidationTestCase.m in Sources */,
+				6F6543261A2C9D8400FDA2DE /* Person.m in Sources */,
+				6F6543081A2C9D8400FDA2DE /* HLSValidatorsTestCase.m in Sources */,
+				6F6543251A2C9D8400FDA2DE /* House.m in Sources */,
+				6F6543211A2C9D8400FDA2DE /* _ConcreteSubclassB.m in Sources */,
+				6F6543031A2C9D8400FDA2DE /* HLSInMemoryFileManagerTestCase.m in Sources */,
+				6F6543221A2C9D8400FDA2DE /* _ConcreteSubclassC.m in Sources */,
+				6F6543071A2C9D8400FDA2DE /* HLSTransformerTestCase.m in Sources */,
+				6F65430C1A2C9D8400FDA2DE /* NSData+HLSExtensionsTestCase.m in Sources */,
+				6F6543141A2C9D8400FDA2DE /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
+				6F65431D1A2C9D8400FDA2DE /* ConcreteSubclassC.m in Sources */,
+				6F65431F1A2C9D8400FDA2DE /* _BankAccount.m in Sources */,
+				6F6543161A2C9D8400FDA2DE /* TestErrors.m in Sources */,
+				6F6542FF1A2C9D8400FDA2DE /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */,
+				6F65430D1A2C9D8400FDA2DE /* NSDate+HLSExtensionsTestCase.m in Sources */,
+				6F65430A1A2C9D8400FDA2DE /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */,
+				6F6543061A2C9D8400FDA2DE /* HLSStandardFileManagerTestCase.m in Sources */,
+				6F6543241A2C9D8400FDA2DE /* _Person.m in Sources */,
+				6F6543101A2C9D8400FDA2DE /* NSObject+HLSExtensionsTestCase.m in Sources */,
+				6F6543011A2C9D8400FDA2DE /* HLSFileManagerTestCase.m in Sources */,
+				6F6543001A2C9D8400FDA2DE /* HLSErrorTestCase.m in Sources */,
+				6F6543201A2C9D8400FDA2DE /* _ConcreteClassD.m in Sources */,
+				6F6543041A2C9D8400FDA2DE /* HLSRestrictedInterfaceProxyTestCase.m in Sources */,
+				6F65430F1A2C9D8400FDA2DE /* NSNumber+HLSExtensionsTestCase.m in Sources */,
+				6F6543091A2C9D8400FDA2DE /* NSArray+HLSExtensionsTestCase.m in Sources */,
+				6F6543021A2C9D8400FDA2DE /* HLSGeometryTestCase.m in Sources */,
+				6F65431B1A2C9D8400FDA2DE /* ConcreteClassD.m in Sources */,
+				6F65431E1A2C9D8400FDA2DE /* _AbstractClassA.m in Sources */,
+				6F65431C1A2C9D8400FDA2DE /* ConcreteSubclassB.m in Sources */,
+				6F6543111A2C9D8400FDA2DE /* NSStream+HLSExtensionsTestCase.m in Sources */,
+				6F65431A1A2C9D8400FDA2DE /* BankAccount.m in Sources */,
+				6F6543051A2C9D8400FDA2DE /* HLSRuntimeTestCase.m in Sources */,
+				6F6543191A2C9D8400FDA2DE /* AbstractClassA.m in Sources */,
+				6F65430E1A2C9D8400FDA2DE /* NSDictionary+HLSExtensionsTestCase.m in Sources */,
+				6F6543121A2C9D8400FDA2DE /* NSString+HLSExtensionsTestCase.m in Sources */,
+				6F6543171A2C9D8400FDA2DE /* UppercaseValueTransformer.m in Sources */,
+				6F6542FD1A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FC5B7701924EDC500660CDF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1553,7 +1931,6 @@
 				6FADE5B814BA0494007EE121 /* NSBundle+HLSDynamicLocalization.m in Sources */,
 				6F0CA8F519DD934300CBE2E1 /* UIViewController+HLSViewBinding.m in Sources */,
 				6FADE5BA14BA0494007EE121 /* NSBundle+HLSExtensions.m in Sources */,
-				6FADE5BC14BA0494007EE121 /* NSCalendar+HLSExtensions.m in Sources */,
 				6FADE5BE14BA0494007EE121 /* NSData+HLSExtensions.m in Sources */,
 				6FADE5C014BA0494007EE121 /* NSDate+HLSExtensions.m in Sources */,
 				6F04E2D11A1BA3FB00C6C08B /* HLSCoreError.m in Sources */,
@@ -1572,7 +1949,6 @@
 				6FCD33BF1A1216690002F478 /* UISwitch+HLSViewBinding.m in Sources */,
 				6FCD33D21A1216E30002F478 /* HLSViewBindingDebugOverlayViewController.m in Sources */,
 				6F8B184D19DD8B0000A06F2B /* HLSTransformer.m in Sources */,
-				6FADE5CC14BA0494007EE121 /* NSTimeZone+HLSExtensions.m in Sources */,
 				6FADE5CE14BA0494007EE121 /* UIColor+HLSExtensions.m in Sources */,
 				6FADE5D014BA0494007EE121 /* UIControl+HLSExclusiveTouch.m in Sources */,
 				6F28D6191A00C29600564BD3 /* UITextView+HLSCursorVisibility.m in Sources */,
@@ -1674,6 +2050,11 @@
 			isa = PBXTargetDependency;
 			target = 6FC5B7731924EDC500660CDF /* CoconutKit-resources */;
 			targetProxy = 6F47EC651924F36D00C5F6AC /* PBXContainerItemProxy */;
+		};
+		6F6542181A2C7E4500FDA2DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC07D0554694100DB518D /* CoconutKit */;
+			targetProxy = 6F6542171A2C7E4500FDA2DE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1807,6 +2188,76 @@
 			};
 			name = Release;
 		};
+		6F6542191A2C7E4500FDA2DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../CoconutKit-tests/CoconutKit-tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Sources/**";
+			};
+			name = Debug;
+		};
+		6F65421A1A2C7E4500FDA2DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/../CoconutKit-tests/CoconutKit-tests-Prefix.pch";
+				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Sources/**";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		6FC5B77D1924EDC500660CDF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
@@ -1859,6 +2310,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		6F65421B1A2C7E4500FDA2DE /* Build configuration list for PBXNativeTarget "CoconutKit-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F6542191A2C7E4500FDA2DE /* Debug */,
+				6F65421A1A2C7E4500FDA2DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6FC5B77F1924EDC500660CDF /* Build configuration list for PBXNativeTarget "CoconutKit-resources" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1869,6 +2329,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6F6542A31A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6F6542A41A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodel */,
+			);
+			currentVersion = 6F6542A41A2C9D8400FDA2DE /* CoconutKitTestData.xcdatamodel */;
+			path = CoconutKitTestData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
 }

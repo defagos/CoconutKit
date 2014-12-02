@@ -298,6 +298,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
             if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                 [self.delegate animationWillStart:self animated:animated];
             }
+            self.startBlock ? self.startBlock(animated) : nil;
             
             self.started = YES;
         }
@@ -319,9 +320,11 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
             self.playing = NO;
             
             if (! self.cancelling) {
+                BOOL actuallyAnimated = self.terminating ? NO : animated;
                 if ([self.delegate respondsToSelector:@selector(animationDidStop:animated:)]) {
-                    [self.delegate animationDidStop:self animated:self.terminating ? NO : animated];
+                    [self.delegate animationDidStop:self animated:actuallyAnimated];
                 }
+                self.completionBlock ? self.completionBlock(actuallyAnimated) : nil;
             }
             
             // End of the animation
@@ -445,6 +448,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     reverseAnimation.lockingUI = self.lockingUI;
     reverseAnimation.delegate = self.delegate;
     reverseAnimation.userInfo = self.userInfo;
+    // Does not copy blocks, does not make sense
     
     return reverseAnimation;
 }
@@ -485,6 +489,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
                 if ([self.delegate respondsToSelector:@selector(animationWillStart:animated:)]) {
                     [self.delegate animationWillStart:self animated:animated];
                 }
+                self.startBlock ? self.startBlock(animated) : nil;
                 
                 self.started = YES;
             }
@@ -493,6 +498,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
             if ([self.delegate respondsToSelector:@selector(animation:didFinishStep:animated:)]) {
                 [self.delegate animation:self didFinishStep:animationStep animated:animated];
             }
+            animationStep.completionBlock ? animationStep.completionBlock(animated) : nil;
         }
     }
     
@@ -528,6 +534,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     animationCopy.lockingUI = self.lockingUI;
     animationCopy.delegate = self.delegate;
     animationCopy.userInfo = self.userInfo;
+    animationCopy.startBlock = self.startBlock;
+    animationCopy.completionBlock = self.completionBlock;
     
     return animationCopy;
 }
