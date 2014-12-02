@@ -5,4 +5,5 @@ before_install:
     - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 script: 
     - set -o pipefail
-    - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit -destination 'platform=iOS Simulator,name=iPad 2' -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
+    - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
+    - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
