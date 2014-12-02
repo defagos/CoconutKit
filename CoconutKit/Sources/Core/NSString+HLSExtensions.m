@@ -111,21 +111,4 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return self;
 }
 
-- (NSString *)MIMEType
-{
-    NSString *pathExtension = [self pathExtension];
-    if (! pathExtension) {
-        return nil;
-    }
-    
-    CFStringRef identifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)pathExtension, NULL);
-    if (! identifier) {
-        return nil;
-    }
-    
-    NSString *MIMEType = (NSString *)CFBridgingRelease(UTTypeCopyPreferredTagWithClass(identifier, kUTTagClassMIMEType));
-    CFRelease(identifier);
-    return MIMEType;
-}
-
 @end

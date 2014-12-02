@@ -73,16 +73,4 @@
     XCTAssertEqualObjects([string urlEncodedStringUsingEncoding:NSUTF8StringEncoding], encodedStringReference);
 }
 
-- (void)testMIMEType
-{
-    XCTAssertEqualObjects([@"/path/to/file.png" MIMEType], @"image/png");
-    XCTAssertEqualObjects([@"/path/to/file.PNG" MIMEType], @"image/png");
-    XCTAssertEqualObjects([@"/path/to/file.jpg" MIMEType], @"image/jpeg");
-    XCTAssertEqualObjects([@"/path/to/file.JPG" MIMEType], @"image/jpeg");
-    XCTAssertEqualObjects([@"/path/to/file.txt" MIMEType], @"text/plain");
-    XCTAssertEqualObjects([@"/path/to/file.TXT" MIMEType], @"text/plain");
-    XCTAssertEqualObjects([@"/path/to/file.pdf" MIMEType], @"application/pdf");
-    XCTAssertEqualObjects([@"/path/to/file.PDF" MIMEType], @"application/pdf");
-}
-
 @end
