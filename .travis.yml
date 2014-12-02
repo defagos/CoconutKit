@@ -10,5 +10,4 @@ script:
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-staticframework | xcpretty -c
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
-    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS,name=iPad 2' | xcpretty -c
-    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS,name=iPad Air' | xcpretty -c
+    
