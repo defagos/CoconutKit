@@ -22,7 +22,7 @@ static void *s_userInfoKey = &s_userInfoKey;
 static BOOL (*s_UIView_becomeFirstResponder)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
+static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd);
 
 @implementation UIView (HLSExtensions)
 
@@ -30,7 +30,7 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIView_becomeFirstResponder = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self, @selector(becomeFirstResponder), (IMP)swizzled_UIView__becomeFirstResponder_Imp);
+    s_UIView_becomeFirstResponder = (__typeof(s_UIView_becomeFirstResponder))hls_class_swizzleSelector(self, @selector(becomeFirstResponder), (IMP)swizzle_becomeFirstResponder);
 }
 
 #pragma mark Accessors and mutators
@@ -149,7 +149,7 @@ static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd);
 
 #pragma mark Swizzled method implementations
 
-static BOOL swizzled_UIView__becomeFirstResponder_Imp(UIView *self, SEL _cmd)
+static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd)
 {
     // Scroll any scroll view avoiding the keyboard when the focus changes. This is implemented for free by UIKit for UITextField,
     // but not for UITextView, for example

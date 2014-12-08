@@ -25,10 +25,10 @@ BOOL injectedManagedObjectValidation(void);
 static BOOL s_injectedManagedObjectValidation = NO;
 
 // Original implementation of the methods we swizzle
-static void (*s_NSManagedObject__initialize_Imp)(id, SEL) = NULL;
+static void (*s_initialize)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_NSManagedObject__initialize_Imp(Class self, SEL _cmd);
+static void swizzle_initialize(Class self, SEL _cmd);
 
 // Static helper functions
 static Method instanceMethodOnClass(Class class, SEL sel);
@@ -62,9 +62,9 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         return;
     }
     
-    s_NSManagedObject__initialize_Imp = (void (*)(id, SEL))hls_class_swizzleClassSelector(self,
-                                                                                          @selector(initialize),
-                                                                                          (IMP)swizzled_NSManagedObject__initialize_Imp);
+    s_initialize = (__typeof(s_initialize))hls_class_swizzleClassSelector(self,
+                                                                          @selector(initialize),
+                                                                          (IMP)swizzle_initialize);
     
     s_injectedManagedObjectValidation = YES;
 }
@@ -446,10 +446,10 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
  * initialize method, otherwise the Core Data runtime will be incomplete and silly crashes will occur at runtime). We therefore must 
  * swizzle the existing +initialize method instead and call the existing implementation first.
  */
-static void swizzled_NSManagedObject__initialize_Imp(Class self, SEL _cmd)
+static void swizzle_initialize(Class self, SEL _cmd)
 {
     // Call swizzled implementation
-    (*s_NSManagedObject__initialize_Imp)(self, _cmd);
+    (*s_initialize)(self, _cmd);
     
     // No class identity test here. This must be executed for all objects in the hierarchy rooted at NSManagedObject, so that we can
     // locate the @dynamic properties we are interested in (those which need validation)

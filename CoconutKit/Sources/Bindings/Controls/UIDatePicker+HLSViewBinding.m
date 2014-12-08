@@ -11,16 +11,16 @@
 #import "HLSRuntime.h"
 
 // Original implementation of the methods we swizzle
-static id (*s_UIDatePicker__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
-static id (*s_UIDatePicker__initWithCoder_Imp)(id, SEL, id) = NULL;
-static void (*s_UIDatePicker__setDate_Imp)(id, SEL, id) = NULL;
-static void (*s_UIDatePicker__setDate_animated_Imp)(id, SEL, id, BOOL) = NULL;
+static id (*s_initWithFrame)(id, SEL, CGRect) = NULL;
+static id (*s_initWithCoder)(id, SEL, id) = NULL;
+static void (*s_setDate)(id, SEL, id) = NULL;
+static void (*s_setDate_animated)(id, SEL, id, BOOL) = NULL;
 
 // Swizzled method implementations
-static id swizzled_UIDatePicker__initWithFrame_Imp(UIDatePicker *self, SEL _cmd, CGRect frame);
-static id swizzled_UIDatePicker__initWithCoder_Imp(UIDatePicker *self, SEL _cmd, NSCoder *aDecoder);
-static void swizzled_UIDatePicker__setDate_Imp(UIDatePicker *self, SEL _cmd, NSDate *date);
-static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL _cmd, NSDate *date, BOOL animated);
+static id swizzle_initWithFrame(UIDatePicker *self, SEL _cmd, CGRect frame);
+static id swizzle_initWithCoder(UIDatePicker *self, SEL _cmd, NSCoder *aDecoder);
+static void swizzle_setDate(UIDatePicker *self, SEL _cmd, NSDate *date);
+static void swizzle_setDate_animated(UIDatePicker *self, SEL _cmd, NSDate *date, BOOL animated);
 
 @implementation UIDatePicker (HLSViewBinding)
 
@@ -28,20 +28,12 @@ static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL 
 
 + (void)load
 {
-    s_UIDatePicker__initWithFrame_Imp = (id (*)(id, SEL, CGRect))hls_class_swizzleSelector(self,
-                                                                                           @selector(initWithFrame:),
-                                                                                           (IMP)swizzled_UIDatePicker__initWithFrame_Imp);
-    s_UIDatePicker__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                       @selector(initWithCoder:),
-                                                                                       (IMP)swizzled_UIDatePicker__initWithCoder_Imp);
+    s_initWithFrame = (__typeof(s_initWithFrame))hls_class_swizzleSelector(self, @selector(initWithFrame:), (IMP)swizzle_initWithFrame);
+    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
     
     // Both setters are independent, must swizzle both
-    s_UIDatePicker__setDate_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                   @selector(setDate:),
-                                                                                   (IMP)swizzled_UIDatePicker__setDate_Imp);
-    s_UIDatePicker__setDate_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzleSelector(self,
-                                                                                                  @selector(setDate:animated:),
-                                                                                                  (IMP)swizzled_UIDatePicker__setDate_animated_Imp);
+    s_setDate = (__typeof(s_setDate))hls_class_swizzleSelector(self, @selector(setDate:), (IMP)swizzle_setDate);
+    s_setDate_animated = (__typeof(s_setDate_animated))hls_class_swizzleSelector(self, @selector(setDate:animated:), (IMP)swizzle_setDate_animated);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -84,32 +76,32 @@ static void commonInit(UIDatePicker *self)
 
 #pragma mark Static functions
 
-static id swizzled_UIDatePicker__initWithFrame_Imp(UIDatePicker *self, SEL _cmd, CGRect frame)
+static id swizzle_initWithFrame(UIDatePicker *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_UIDatePicker__initWithFrame_Imp)(self, _cmd, frame))) {
+    if ((self = (*s_initWithFrame)(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
 }
 
-static id swizzled_UIDatePicker__initWithCoder_Imp(UIDatePicker *self, SEL _cmd, NSCoder *aDecoder)
+static id swizzle_initWithCoder(UIDatePicker *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_UIDatePicker__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;
 }
 
-static void swizzled_UIDatePicker__setDate_Imp(UIDatePicker *self, SEL _cmd, NSDate *date)
+static void swizzle_setDate(UIDatePicker *self, SEL _cmd, NSDate *date)
 {
-    (*s_UIDatePicker__setDate_Imp)(self, _cmd, date);
+    (*s_setDate)(self, _cmd, date);
     
     [self check:YES update:YES withInputValue:date error:NULL];
 }
 
-static void swizzled_UIDatePicker__setDate_animated_Imp(UIDatePicker *self, SEL _cmd, NSDate *date, BOOL animated)
+static void swizzle_setDate_animated(UIDatePicker *self, SEL _cmd, NSDate *date, BOOL animated)
 {
-    (*s_UIDatePicker__setDate_animated_Imp)(self, _cmd, date, animated);
+    (*s_setDate_animated)(self, _cmd, date, animated);
     
     [self check:YES update:YES withInputValue:date error:NULL];
 }

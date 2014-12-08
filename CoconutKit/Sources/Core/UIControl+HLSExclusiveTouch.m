@@ -12,12 +12,12 @@
 #import "HLSRuntime.h"
 
 // Original implementation of the methods we swizzle
-static id (*s_UIControl__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
-static id (*s_UIControl__initWithCoder_Imp)(id, SEL, id) = NULL;
+static id (*s_initWithFrame)(id, SEL, CGRect) = NULL;
+static id (*s_initWithCoder)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
-static id swizzled_UIControl__initWithFrame_Imp(UIControl *self, SEL _cmd, CGRect frame);
-static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCoder *aDecoder);
+static id swizzle_initWithFrame(UIControl *self, SEL _cmd, CGRect frame);
+static id swizzle_initWithCoder(UIControl *self, SEL _cmd, NSCoder *aDecoder);
 
 @implementation UIControl (HLSExclusiveTouch)
 
@@ -32,12 +32,8 @@ static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCod
     }
     
     // Swizzle the original implementations (keep a hand on them)
-    s_UIControl__initWithFrame_Imp = (id (*)(id, SEL, CGRect))hls_class_swizzleSelector(self,
-                                                                                        @selector(initWithFrame:),
-                                                                                        (IMP)swizzled_UIControl__initWithFrame_Imp);
-    s_UIControl__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                    @selector(initWithCoder:),
-                                                                                    (IMP)swizzled_UIControl__initWithCoder_Imp);
+    s_initWithFrame = (__typeof(s_initWithFrame))hls_class_swizzleSelector(self, @selector(initWithFrame:), (IMP)swizzle_initWithFrame);
+    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
     
     s_injected = YES;
 }
@@ -51,17 +47,17 @@ static void commonInit(UIControl *self)
     self.exclusiveTouch = YES;
 }
 
-static id swizzled_UIControl__initWithFrame_Imp(UIControl *self, SEL _cmd, CGRect frame)
+static id swizzle_initWithFrame(UIControl *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_UIControl__initWithFrame_Imp)(self, _cmd, frame))) {
+    if ((self = (*s_initWithFrame)(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
 }
 
-static id swizzled_UIControl__initWithCoder_Imp(UIControl *self, SEL _cmd, NSCoder *aDecoder)
+static id swizzle_initWithCoder(UIControl *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_UIControl__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;

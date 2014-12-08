@@ -14,20 +14,20 @@
 static void *s_ownerKey = &s_ownerKey;
 
 // Original implementation of the methods we swizzle
-static void (*s_UIActionSheet__showFromToolbar_Imp)(id, SEL, id) = NULL;
-static void (*s_UIActionSheet__showFromTabBar_Imp)(id, SEL, id) = NULL;
-static void (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(id, SEL, id, BOOL) = NULL;
-static void (*s_UIActionSheet__showFromRect_inView_animated_Imp)(id, SEL, CGRect, id, BOOL) = NULL;
-static void (*s_UIActionSheet__showInView_Imp)(id, SEL, id) = NULL;
-static void (*s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp)(id, SEL, NSInteger, BOOL) = NULL;
+static void (*s_showFromToolbar)(id, SEL, id) = NULL;
+static void (*s_showFromTabBar)(id, SEL, id) = NULL;
+static void (*s_showFromBarButtonItem_animated)(id, SEL, id, BOOL) = NULL;
+static void (*s_showFromRect_inView_animated)(id, SEL, CGRect, id, BOOL) = NULL;
+static void (*s_showInView)(id, SEL, id) = NULL;
+static void (*s_dismissWithClickedButtonIndex_animated)(id, SEL, NSInteger, BOOL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UIActionSheet__showFromToolbar_Imp(UIActionSheet *self, SEL _cmd, UIToolbar *toolbar);
-static void swizzled_UIActionSheet__showFromTabBar_Imp(UIActionSheet *self, SEL _cmd, UITabBar *tabBar);
-static void swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp(UIActionSheet *self, SEL _cmd, UIBarButtonItem *barButtonItem, BOOL animated);
-static void swizzled_UIActionSheet__showFromRect_inView_animated_Imp(UIActionSheet *self, SEL _cmd, CGRect rect, UIView *view, BOOL animated);
-static void swizzled_UIActionSheet__showInView_Imp(UIActionSheet *self, SEL _cmd, UIView *view);
-static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(UIActionSheet *self, SEL _cmd, NSInteger buttonIndex, BOOL animated);
+static void swizzle_showFromToolbar(UIActionSheet *self, SEL _cmd, UIToolbar *toolbar);
+static void swizzle_showFromTabBar(UIActionSheet *self, SEL _cmd, UITabBar *tabBar);
+static void swizzle_showFromBarButtonItem_animated(UIActionSheet *self, SEL _cmd, UIBarButtonItem *barButtonItem, BOOL animated);
+static void swizzle_showFromRect_inView_animated(UIActionSheet *self, SEL _cmd, CGRect rect, UIView *view, BOOL animated);
+static void swizzle_showInView(UIActionSheet *self, SEL _cmd, UIView *view);
+static void swizzle_dismissWithClickedButtonIndex_animated(UIActionSheet *self, SEL _cmd, NSInteger buttonIndex, BOOL animated);
 
 @implementation UIActionSheet (HLSExtensions)
 
@@ -35,24 +35,18 @@ static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(U
 
 + (void)load
 {
-    s_UIActionSheet__showFromToolbar_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                            @selector(showFromToolbar:),
-                                                                                            (IMP)swizzled_UIActionSheet__showFromToolbar_Imp);
-    s_UIActionSheet__showFromTabBar_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                           @selector(showFromTabBar:),
-                                                                                           (IMP)swizzled_UIActionSheet__showFromTabBar_Imp);
-    s_UIActionSheet__showFromBarButtonItem_animated_Imp = (void (*)(id, SEL, id, BOOL))hls_class_swizzleSelector(self,
-                                                                                                                 @selector(showFromBarButtonItem:animated:),
-                                                                                                                 (IMP)swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp);
-    s_UIActionSheet__showFromRect_inView_animated_Imp = (void (*)(id, SEL, CGRect, id, BOOL))hls_class_swizzleSelector(self,
-                                                                                                                       @selector(showFromRect:inView:animated:),
-                                                                                                                       (IMP)swizzled_UIActionSheet__showFromRect_inView_animated_Imp);
-    s_UIActionSheet__showInView_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                       @selector(showInView:),
-                                                                                       (IMP)swizzled_UIActionSheet__showInView_Imp);
-    s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp = (void (*)(id, SEL, NSInteger, BOOL))hls_class_swizzleSelector(self,
-                                                                                                                                @selector(dismissWithClickedButtonIndex:animated:),
-                                                                                                                                (IMP)swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp);
+    s_showFromToolbar = (__typeof(s_showFromToolbar))hls_class_swizzleSelector(self, @selector(showFromToolbar:), (IMP)swizzle_showFromToolbar);
+    s_showFromTabBar = (__typeof(s_showFromTabBar))hls_class_swizzleSelector(self, @selector(showFromTabBar:), (IMP)swizzle_showFromTabBar);
+    s_showFromBarButtonItem_animated = (__typeof(s_showFromBarButtonItem_animated))hls_class_swizzleSelector(self,
+                                                                                                             @selector(showFromBarButtonItem:animated:),
+                                                                                                             (IMP)swizzle_showFromBarButtonItem_animated);
+    s_showFromRect_inView_animated = (__typeof(s_showFromRect_inView_animated))hls_class_swizzleSelector(self,
+                                                                                                         @selector(showFromRect:inView:animated:),
+                                                                                                         (IMP)swizzle_showFromRect_inView_animated);
+    s_showInView = (__typeof(s_showInView))hls_class_swizzleSelector(self, @selector(showInView:), (IMP)swizzle_showInView);
+    s_dismissWithClickedButtonIndex_animated = (__typeof(s_dismissWithClickedButtonIndex_animated))hls_class_swizzleSelector(self,
+                                                                                                                             @selector(dismissWithClickedButtonIndex:animated:),
+                                                                                                                             (IMP)swizzle_dismissWithClickedButtonIndex_animated);
 }
 
 #pragma mark Accessors and mutators
@@ -66,40 +60,40 @@ static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(U
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UIActionSheet__showFromToolbar_Imp(UIActionSheet *self, SEL _cmd, UIToolbar *toolbar)
+static void swizzle_showFromToolbar(UIActionSheet *self, SEL _cmd, UIToolbar *toolbar)
 {
     hls_setAssociatedObject(self, s_ownerKey, toolbar, HLS_ASSOCIATION_WEAK_NONATOMIC);
-    (*s_UIActionSheet__showFromToolbar_Imp)(self, _cmd, toolbar);
+    (*s_showFromToolbar)(self, _cmd, toolbar);
 }
 
-static void swizzled_UIActionSheet__showFromTabBar_Imp(UIActionSheet *self, SEL _cmd, UITabBar *tabBar)
+static void swizzle_showFromTabBar(UIActionSheet *self, SEL _cmd, UITabBar *tabBar)
 {
     hls_setAssociatedObject(self, s_ownerKey, tabBar, HLS_ASSOCIATION_WEAK_NONATOMIC);
-    (*s_UIActionSheet__showFromTabBar_Imp)(self, _cmd, tabBar);
+    (*s_showFromTabBar)(self, _cmd, tabBar);
 }
 
-static void swizzled_UIActionSheet__showFromBarButtonItem_animated_Imp(UIActionSheet *self, SEL _cmd, UIBarButtonItem *barButtonItem, BOOL animated)
+static void swizzle_showFromBarButtonItem_animated(UIActionSheet *self, SEL _cmd, UIBarButtonItem *barButtonItem, BOOL animated)
 {
     hls_setAssociatedObject(self, s_ownerKey, barButtonItem, HLS_ASSOCIATION_WEAK_NONATOMIC);
-    (*s_UIActionSheet__showFromBarButtonItem_animated_Imp)(self, _cmd, barButtonItem, animated);
+    (*s_showFromBarButtonItem_animated)(self, _cmd, barButtonItem, animated);
 }
 
-static void swizzled_UIActionSheet__showFromRect_inView_animated_Imp(UIActionSheet *self, SEL _cmd, CGRect rect, UIView *view, BOOL animated)
+static void swizzle_showFromRect_inView_animated(UIActionSheet *self, SEL _cmd, CGRect rect, UIView *view, BOOL animated)
 {
     hls_setAssociatedObject(self, s_ownerKey, view, HLS_ASSOCIATION_WEAK_NONATOMIC);
-    (*s_UIActionSheet__showFromRect_inView_animated_Imp)(self, _cmd, rect, view, animated);
+    (*s_showFromRect_inView_animated)(self, _cmd, rect, view, animated);
 }
 
-static void swizzled_UIActionSheet__showInView_Imp(UIActionSheet *self, SEL _cmd, UIView *view)
+static void swizzle_showInView(UIActionSheet *self, SEL _cmd, UIView *view)
 {
     hls_setAssociatedObject(self, s_ownerKey, view, HLS_ASSOCIATION_WEAK_NONATOMIC);
-    (*s_UIActionSheet__showInView_Imp)(self, _cmd, view);
+    (*s_showInView)(self, _cmd, view);
 }
 
 // The dismissWithClickedButtonIndex:animated: method is also called when the user dismisses
 // the action sheet by tapping outside it
-static void swizzled_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp(UIActionSheet *self, SEL _cmd, NSInteger buttonIndex, BOOL animated)
+static void swizzle_dismissWithClickedButtonIndex_animated(UIActionSheet *self, SEL _cmd, NSInteger buttonIndex, BOOL animated)
 {
-    (*s_UIActionSheet__dismissWithClickedButtonIndex_animated_Imp)(self, _cmd, buttonIndex, animated);
+    (*s_dismissWithClickedButtonIndex_animated)(self, _cmd, buttonIndex, animated);
     hls_setAssociatedObject(self, s_ownerKey, nil, HLS_ASSOCIATION_WEAK_NONATOMIC);
 }

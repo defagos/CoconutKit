@@ -11,16 +11,16 @@
 #import "HLSRuntime.h"
 
 // Original implementation of the methods we swizzle
-static id (*s_UITextView__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
-static id (*s_UITextView__initWithCoder_Imp)(id, SEL, id) = NULL;
-static void (*s_UITextView__dealloc_Imp)(__unsafe_unretained id, SEL) = NULL;
-static void (*s_UITextView__setText_Imp)(id, SEL, id) = NULL;
+static id (*s_initWithFrame)(id, SEL, CGRect) = NULL;
+static id (*s_initWithCoder)(id, SEL, id) = NULL;
+static void (*s_dealloc)(__unsafe_unretained id, SEL) = NULL;
+static void (*s_setText)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
-static id swizzled_UITextView__initWithFrame_Imp(UITextView *self, SEL _cmd, CGRect frame);
-static id swizzled_UITextView__initWithCoder_Imp(UITextView *self, SEL _cmd, NSCoder *aDecoder);
-static void swizzled_UITextView__dealloc_Imp(__unsafe_unretained UITextView *self, SEL _cmd);
-static void swizzled_UITextView__setText_Imp(UITextField *self, SEL _cmd, NSString *text);
+static id swizzle_initWithFrame(UITextView *self, SEL _cmd, CGRect frame);
+static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
+static void swizzle_dealloc(__unsafe_unretained UITextView *self, SEL _cmd);
+static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
 
 @implementation UITextView (HLSViewBindingImplementation)
 
@@ -28,18 +28,10 @@ static void swizzled_UITextView__setText_Imp(UITextField *self, SEL _cmd, NSStri
 
 + (void)load
 {
-    s_UITextView__initWithFrame_Imp = (id (*)(id, SEL, CGRect))hls_class_swizzleSelector(self,
-                                                                                         @selector(initWithFrame:),
-                                                                                         (IMP)swizzled_UITextView__initWithFrame_Imp);
-    s_UITextView__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                     @selector(initWithCoder:),
-                                                                                     (IMP)swizzled_UITextView__initWithCoder_Imp);
-    s_UITextView__dealloc_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                             NSSelectorFromString(@"dealloc"),
-                                                                             (IMP)swizzled_UITextView__dealloc_Imp);
-    s_UITextView__setText_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                 @selector(setText:),
-                                                                                 (IMP)swizzled_UITextView__setText_Imp);
+    s_initWithFrame = (__typeof(s_initWithFrame))hls_class_swizzleSelector(self, @selector(initWithFrame:), (IMP)swizzle_initWithFrame);
+    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
+    s_dealloc = (__typeof(s_dealloc))hls_class_swizzleSelector(self, sel_getUid("dealloc"), (IMP)swizzle_dealloc);
+    s_setText = (__typeof(s_setText))hls_class_swizzleSelector(self, @selector(setText:), (IMP)swizzle_setText);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -73,35 +65,35 @@ static void commonInit(UITextView *self)
                                                object:self];
 }
 
-static id swizzled_UITextView__initWithFrame_Imp(UITextView *self, SEL _cmd, CGRect frame)
+static id swizzle_initWithFrame(UITextView *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_UITextView__initWithFrame_Imp)(self, _cmd, frame))) {
+    if ((self = (*s_initWithFrame)(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
 }
 
-static id swizzled_UITextView__initWithCoder_Imp(UITextView *self, SEL _cmd, NSCoder *aDecoder)
+static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_UITextView__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;
 }
 
 // Marked as __unsafe_unretained to avoid ARC inserting incorrect memory management calls leading to crashes for -dealloc
-static void swizzled_UITextView__dealloc_Imp(__unsafe_unretained UITextView *self, SEL _cmd)
+static void swizzle_dealloc(__unsafe_unretained UITextView *self, SEL _cmd)
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UITextViewTextDidChangeNotification
                                                   object:self];
     
-    (*s_UITextView__dealloc_Imp)(self, _cmd);
+    (*s_dealloc)(self, _cmd);
 }
 
-static void swizzled_UITextView__setText_Imp(UITextField *self, SEL _cmd, NSString *text)
+static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text)
 {
-    (*s_UITextView__setText_Imp)(self, _cmd, text);
+    (*s_setText)(self, _cmd, text);
     
     [self check:YES update:YES withInputValue:text error:NULL];
 }

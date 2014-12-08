@@ -11,10 +11,10 @@
 #import "HLSRuntime.h"
 
 // Original implementation of the methods we swizzle
-static void (*s_UIStepper__setValue_Imp)(id, SEL, double) = NULL;
+static void (*s_setValue)(id, SEL, double) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double value);
+static void swizzle_setValue(UIStepper *self, SEL _cmd, double value);
 
 @implementation UIStepper (HLSViewBinding)
 
@@ -22,9 +22,7 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
 
 + (void)load
 {
-    s_UIStepper__setValue_Imp = (void (*)(id, SEL, double))hls_class_swizzleSelector(self,
-                                                                                     @selector(setValue:),
-                                                                                     (IMP)swizzled_UIStepper__setValue_Imp);
+    s_setValue = (__typeof(s_setValue))hls_class_swizzleSelector(self, @selector(setValue:), (IMP)swizzle_setValue);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -48,9 +46,9 @@ static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double v
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UIStepper__setValue_Imp(UIStepper *self, SEL _cmd, double value)
+static void swizzle_setValue(UIStepper *self, SEL _cmd, double value)
 {
-    (*s_UIStepper__setValue_Imp)(self, _cmd, value);
+    (*s_setValue)(self, _cmd, value);
     
     [self check:YES update:YES withInputValue:@(value) error:NULL];
 }

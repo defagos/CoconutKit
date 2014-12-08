@@ -12,12 +12,12 @@
 #import <objc/message.h>
 
 // Original implementation of the methods we swizzle
-static void (*s_UISlider__didMoveToWindow_Imp)(id, SEL) = NULL;
-static void (*s_UISlider__setValue_animated_Imp)(id, SEL, float, BOOL) = NULL;
+static void (*s_didMoveToWindow)(id, SEL) = NULL;
+static void (*s_setValue_animated)(id, SEL, float, BOOL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd);
-static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, float value, BOOL animated);
+static void swizzle_didMoveToWindow(UISlider *self, SEL _cmd);
+static void swizzle_setValue_animated(UISlider *self, SEL _cmd, float value, BOOL animated);
 
 @implementation UISlider (HLSViewBindingImplementation)
 
@@ -30,14 +30,10 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
     // -[UISlider didMoveToWindow] method implementation has been removed starting with iOS 7.1, which fixes this
     // issue. On iOS 7.0 and below, though, we must inject a fix so that the call chain is the expected one
     if (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_7_1) {
-        s_UISlider__didMoveToWindow_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                       @selector(didMoveToWindow),
-                                                                                       (IMP)swizzled_UISlider__didMoveToWindow_Imp);
+        s_didMoveToWindow = (__typeof(s_didMoveToWindow))hls_class_swizzleSelector(self, @selector(didMoveToWindow), (IMP)swizzle_didMoveToWindow);
     }
     
-    s_UISlider__setValue_animated_Imp = (void (*)(id, SEL, float, BOOL))hls_class_swizzleSelector(self,
-                                                                                                  @selector(setValue:animated:),
-                                                                                                  (IMP)swizzled_UISlider__setValue_animated_Imp);
+    s_setValue_animated = (__typeof(s_setValue_animated))hls_class_swizzleSelector(self, @selector(setValue:animated:), (IMP)swizzle_setValue_animated);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -61,7 +57,7 @@ static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, f
 
 #pragma mark Static functions
 
-static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd)
+static void swizzle_didMoveToWindow(UISlider *self, SEL _cmd)
 {
     // Fix missing call to the super method
     struct objc_super super = {
@@ -73,12 +69,12 @@ static void swizzled_UISlider__didMoveToWindow_Imp(UISlider *self, SEL _cmd)
     id (*objc_msgSendSuper_typed)(struct objc_super *, SEL) = (void *)&objc_msgSendSuper;
     objc_msgSendSuper_typed(&super, _cmd);
     
-    (*s_UISlider__didMoveToWindow_Imp)(self, _cmd);
+    (*s_didMoveToWindow)(self, _cmd);
 }
 
-static void swizzled_UISlider__setValue_animated_Imp(UISlider *self, SEL _cmd, float value, BOOL animated)
+static void swizzle_setValue_animated(UISlider *self, SEL _cmd, float value, BOOL animated)
 {
-    (*s_UISlider__setValue_animated_Imp)(self, _cmd, value, animated);
+    (*s_setValue_animated)(self, _cmd, value, animated);
     
     [self check:YES update:YES withInputValue:@(value) error:NULL];
 }

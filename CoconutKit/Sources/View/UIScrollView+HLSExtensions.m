@@ -23,10 +23,10 @@ static void *s_avoidingKeyboardKey = &s_avoidingKeyboardKey;
 static void *s_keyboardDistanceKey = &s_keyboardDistanceKey;
 
 // Original implementation of the methods we swizzle
-static void (*s_UIScrollView__setContentOffset_Imp)(id, SEL, CGPoint) = NULL;
+static void (*s_setContentOffset)(id, SEL, CGPoint) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
+static void swizzle_setContentOffset(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
 
 static NSArray *s_adjustedScrollViews = nil;
 static NSDictionary *s_scrollViewOriginalBottomInsets = nil;
@@ -99,9 +99,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 + (void)load
 {
-    s_UIScrollView__setContentOffset_Imp = (void (*)(id, SEL, CGPoint))hls_class_swizzleSelector(self,
-                                                                                                 @selector(setContentOffset:),
-                                                                                                 (IMP)swizzled_UIScrollView__setContentOffset_Imp);
+    s_setContentOffset = (__typeof(s_setContentOffset))hls_class_swizzleSelector(self, @selector(setContentOffset:), (IMP)swizzle_setContentOffset);
 }
 
 #pragma mark Scrolling synchronization
@@ -287,8 +285,8 @@ __attribute__ ((constructor)) static void HLSTextFieldInit(void)
 
 #pragma mark Swizzled method implementations
 
-static void swizzled_UIScrollView__setContentOffset_Imp(UIScrollView *self, SEL _cmd, CGPoint contentOffset)
+static void swizzle_setContentOffset(UIScrollView *self, SEL _cmd, CGPoint contentOffset)
 {
-    (*s_UIScrollView__setContentOffset_Imp)(self, _cmd, contentOffset);
+    (*s_setContentOffset)(self, _cmd, contentOffset);
     [self synchronizeScrolling];
 }
