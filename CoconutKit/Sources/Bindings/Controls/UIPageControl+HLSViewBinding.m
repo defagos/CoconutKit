@@ -26,9 +26,9 @@ static void swizzle_setCurrentPage(UIPageControl *self, SEL _cmd, NSInteger curr
 
 + (void)load
 {
-    s_initWithFrame = (__typeof(s_initWithFrame))hls_class_swizzleSelector(self, @selector(initWithFrame:), (IMP)swizzle_initWithFrame);
-    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
-    s_setCurrentPage = (__typeof(s_setCurrentPage))hls_class_swizzleSelector(self, @selector(setCurrentPage:), (IMP)swizzle_setCurrentPage);
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
+    HLSSwizzleSelector(self, @selector(setCurrentPage:), swizzle_setCurrentPage, &s_setCurrentPage);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -70,7 +70,7 @@ static void commonInit(UIPageControl *self)
 
 static id swizzle_initWithFrame(UIPageControl *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_initWithFrame)(self, _cmd, frame))) {
+    if ((self = s_initWithFrame(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
@@ -78,7 +78,7 @@ static id swizzle_initWithFrame(UIPageControl *self, SEL _cmd, CGRect frame)
 
 static id swizzle_initWithCoder(UIPageControl *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
+    if ((self = s_initWithCoder(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;
@@ -86,7 +86,7 @@ static id swizzle_initWithCoder(UIPageControl *self, SEL _cmd, NSCoder *aDecoder
 
 static void swizzle_setCurrentPage(UIPageControl *self, SEL _cmd, NSInteger currentPage)
 {
-    (*s_setCurrentPage)(self, _cmd, currentPage);
+    s_setCurrentPage(self, _cmd, currentPage);
     
     [self check:YES update:YES withInputValue:@(currentPage) error:NULL];
 }

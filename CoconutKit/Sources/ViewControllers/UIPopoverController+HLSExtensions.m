@@ -36,12 +36,8 @@ static void swizzle_setContentViewController_animated(UIPopoverController *self,
 {
     // initWithContentViewController: sadly does not rely on setContentViewController:animated: to set its content view controller. Must
     // swizzle it as well
-    s_initWithContentViewController = (__typeof(s_initWithContentViewController))hls_class_swizzleSelector(self,
-                                                                                                           @selector(initWithContentViewController:),
-                                                                                                           (IMP)swizzle_initWithContentViewController);
-    s_setContentViewController_animated = (__typeof(s_setContentViewController_animated))hls_class_swizzleSelector(self,
-                                                                                                                   @selector(setContentViewController:animated:),
-                                                                                                                   (IMP)swizzle_setContentViewController_animated);
+    HLSSwizzleSelector(self, @selector(initWithContentViewController:), swizzle_initWithContentViewController, &s_initWithContentViewController);
+    HLSSwizzleSelector(self, @selector(setContentViewController:animated:), swizzle_setContentViewController_animated, &s_setContentViewController_animated);
 }
 
 @end
@@ -66,13 +62,13 @@ static id swizzle_initWithContentViewController(UIPopoverController *self, SEL _
     // The -viewDidLoad method is triggered from the -initWithContentViewController method. If we want the parent information to be available
     // also in -viewDidLoad, we need to set the parent-child relationship early
     hls_setAssociatedObject(viewController, s_popoverControllerKey, self, HLS_ASSOCIATION_WEAK_NONATOMIC);
-    return (*s_initWithContentViewController)(self, _cmd, viewController);
+    return s_initWithContentViewController(self, _cmd, viewController);
 }
 
 static void swizzle_setContentViewController_animated(UIPopoverController *self, SEL _cmd, UIViewController *viewController, BOOL animated)
 {
     // Remove the old association before creating the new one
     hls_setAssociatedObject(self.contentViewController, s_popoverControllerKey, nil, HLS_ASSOCIATION_WEAK_NONATOMIC);
-    (*s_setContentViewController_animated)(self, _cmd, viewController, animated);
+    s_setContentViewController_animated(self, _cmd, viewController, animated);
     hls_setAssociatedObject(viewController, s_popoverControllerKey, self, HLS_ASSOCIATION_WEAK_NONATOMIC);
 }

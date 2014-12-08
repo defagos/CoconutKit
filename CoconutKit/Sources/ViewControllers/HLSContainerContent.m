@@ -365,12 +365,8 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
 + (void)load
 {
     // Swizzle the methods introduced by the containment API so that view controllers can get a correct information even when inserted into a custom container
-    s_isMovingToParentViewController = (__typeof(s_isMovingToParentViewController))hls_class_swizzleSelector(self,
-                                                                                                             @selector(isMovingToParentViewController),
-                                                                                                             (IMP)swizzle_isMovingToParentViewController);
-    s_isMovingFromParentViewController = (__typeof(s_isMovingFromParentViewController))hls_class_swizzleSelector(self,
-                                                                                                                 @selector(isMovingFromParentViewController),
-                                                                                                                 (IMP)swizzle_isMovingFromParentViewController);
+    HLSSwizzleSelector(self, @selector(isMovingToParentViewController), swizzle_isMovingToParentViewController, &s_isMovingToParentViewController);
+    HLSSwizzleSelector(self, @selector(isMovingFromParentViewController), swizzle_isMovingFromParentViewController, &s_isMovingFromParentViewController);
 }
 
 @end
@@ -382,7 +378,7 @@ static BOOL swizzle_isMovingToParentViewController(UIViewController *self, SEL _
         return containerContent.movingToParentViewController;
     }
     else {
-        return (*s_isMovingToParentViewController)(self, _cmd);
+        return s_isMovingToParentViewController(self, _cmd);
     }
 }
 
@@ -393,6 +389,6 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
         return containerContent.movingFromParentViewController;
     }
     else {
-        return (*s_isMovingFromParentViewController)(self, _cmd);
+        return s_isMovingFromParentViewController(self, _cmd);
     }
 }

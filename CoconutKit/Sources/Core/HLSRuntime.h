@@ -9,6 +9,32 @@
 #import <objc/runtime.h>
 
 /**
+ * Swizzle the method with the specified instance / classselector on the specified class, assigning it a new function
+ * implementation. The previous implementation is returned in pPreviousImplementation, must be stored in a function
+ * pointer with proper prototype, and called from within the new implementation
+ */
+#define HLSSwizzleSelector(clazz, selector, newImplementation, pPreviousImplementation) \
+    (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleSelector((clazz), (selector), (IMP)(newImplementation))
+
+#define HLSSwizzleClassSelector(clazz, selector, newImplementation, pPreviousImplementation) \
+    (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleClassSelector((clazz), (selector), (IMP)(newImplementation))
+
+/**
+ * Swizzle the specified instance / class selector on the specified class, assigning it a new implementation given by a 
+ * block. When implementing the block, the variables _cmd and _imp are reserved for easy access to the selector, respectively
+ * the original implementation. The original implementation must be cast to a function pointer with proper prototype
+ */
+#define HLSSwizzleSelectorWithBlock(clazz, selector, newImplementationBlock) { \
+    __unused SEL _cmd = selector; \
+    __block IMP _imp = hls_class_swizzleSelectorWithBlock((clazz), (selector), (newImplementationBlock)); \
+}
+
+#define HLSSwizzleClassSelectorWithBlock(clazz, selector, newImplementationBlock) { \
+    __unused SEL _cmd = selector; \
+    __block IMP _imp = hls_class_swizzleClassSelectorWithBlock((clazz), (selector), (newImplementationBlock)); \
+}
+
+/**
  * Policies for associated objects
  */
 typedef NS_ENUM(uintptr_t, hls_AssociationPolicy) {
@@ -109,7 +135,7 @@ IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
  * You should store this original implementation in a __block variable and call it from the implementation block to
  * preserve existing behavior
  */
-IMP hls_class_swizzleClassSelector_block(Class clazz, SEL selector, id newImplementationBlock);
+IMP hls_class_swizzleClassSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
 
 /**
  * Replace the implementation of an instance method using the provided implementation block (see imp_implementationWithBlock
@@ -117,7 +143,7 @@ IMP hls_class_swizzleClassSelector_block(Class clazz, SEL selector, id newImplem
  * You should store this original implementation in a __block variable and call it from the implementation block to
  * preserve existing behavior
  */
-IMP hls_class_swizzleSelector_block(Class clazz, SEL selector, id newImplementationBlock);
+IMP hls_class_swizzleSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
 
 /**
  * Return YES iff subclass is a subclass of superclass, or if subclass == superclass (in agreement with

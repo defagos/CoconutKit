@@ -28,10 +28,10 @@ static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
 
 + (void)load
 {
-    s_initWithFrame = (__typeof(s_initWithFrame))hls_class_swizzleSelector(self, @selector(initWithFrame:), (IMP)swizzle_initWithFrame);
-    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
-    s_dealloc = (__typeof(s_dealloc))hls_class_swizzleSelector(self, sel_getUid("dealloc"), (IMP)swizzle_dealloc);
-    s_setText = (__typeof(s_setText))hls_class_swizzleSelector(self, @selector(setText:), (IMP)swizzle_setText);
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
+    HLSSwizzleSelector(self, sel_getUid("dealloc"), swizzle_dealloc, &s_dealloc);
+    HLSSwizzleSelector(self, @selector(setText:), swizzle_setText, &s_setText);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -72,7 +72,7 @@ static void commonInit(UITextField *self)
 
 static id swizzle_initWithFrame(UITextField *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_initWithFrame)(self, _cmd, frame))) {
+    if ((self = s_initWithFrame(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
@@ -80,7 +80,7 @@ static id swizzle_initWithFrame(UITextField *self, SEL _cmd, CGRect frame)
 
 static id swizzle_initWithCoder(UITextField *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
+    if ((self = s_initWithCoder(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;
@@ -93,12 +93,12 @@ static void swizzle_dealloc(__unsafe_unretained UITextField *self, SEL _cmd)
                                                     name:UITextFieldTextDidChangeNotification
                                                   object:self];
     
-    (*s_dealloc)(self, _cmd);
+    s_dealloc(self, _cmd);
 }
 
 static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text)
 {
-    (*s_setText)(self, _cmd, text);
+    s_setText(self, _cmd, text);
     
     [self check:YES update:YES withInputValue:text error:NULL];
 }

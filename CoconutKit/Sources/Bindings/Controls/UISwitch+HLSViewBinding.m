@@ -27,9 +27,9 @@ static void swizzle_setOn_animated(UISwitch *self, SEL _cmd, BOOL on, BOOL anima
 
 + (void)load
 {
-    s_initWithFrame = (__typeof(s_initWithFrame))hls_class_swizzleSelector(self, @selector(initWithFrame:), (IMP)swizzle_initWithFrame);
-    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
-    s_setOn_animated = (__typeof(s_setOn_animated))hls_class_swizzleSelector(self, @selector(setOn:animated:), (IMP)swizzle_setOn_animated);
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
+    HLSSwizzleSelector(self, @selector(setOn:animated:), swizzle_setOn_animated, &s_setOn_animated);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -71,7 +71,7 @@ static void commonInit(UISwitch *self)
 
 static id swizzle_initWithFrame(UISwitch *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_initWithFrame)(self, _cmd, frame))) {
+    if ((self = s_initWithFrame(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
@@ -79,7 +79,7 @@ static id swizzle_initWithFrame(UISwitch *self, SEL _cmd, CGRect frame)
 
 static id swizzle_initWithCoder(UISwitch *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
+    if ((self = s_initWithCoder(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;
@@ -87,7 +87,7 @@ static id swizzle_initWithCoder(UISwitch *self, SEL _cmd, NSCoder *aDecoder)
 
 static void swizzle_setOn_animated(UISwitch *self, SEL _cmd, BOOL on, BOOL animated)
 {
-    (*s_setOn_animated)(self, _cmd, on, animated);
+    s_setOn_animated(self, _cmd, on, animated);
     
     [self check:YES update:YES withInputValue:@(on) error:NULL];
 }

@@ -30,10 +30,10 @@ static void swizzle_setValue_animated(UISlider *self, SEL _cmd, float value, BOO
     // -[UISlider didMoveToWindow] method implementation has been removed starting with iOS 7.1, which fixes this
     // issue. On iOS 7.0 and below, though, we must inject a fix so that the call chain is the expected one
     if (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_7_1) {
-        s_didMoveToWindow = (__typeof(s_didMoveToWindow))hls_class_swizzleSelector(self, @selector(didMoveToWindow), (IMP)swizzle_didMoveToWindow);
+        HLSSwizzleSelector(self, @selector(didMoveToWindow), swizzle_didMoveToWindow, &s_didMoveToWindow);
     }
     
-    s_setValue_animated = (__typeof(s_setValue_animated))hls_class_swizzleSelector(self, @selector(setValue:animated:), (IMP)swizzle_setValue_animated);
+    HLSSwizzleSelector(self, @selector(setValue:animated:), swizzle_setValue_animated, &s_setValue_animated);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -69,12 +69,12 @@ static void swizzle_didMoveToWindow(UISlider *self, SEL _cmd)
     id (*objc_msgSendSuper_typed)(struct objc_super *, SEL) = (void *)&objc_msgSendSuper;
     objc_msgSendSuper_typed(&super, _cmd);
     
-    (*s_didMoveToWindow)(self, _cmd);
+    s_didMoveToWindow(self, _cmd);
 }
 
 static void swizzle_setValue_animated(UISlider *self, SEL _cmd, float value, BOOL animated)
 {
-    (*s_setValue_animated)(self, _cmd, value, animated);
+    s_setValue_animated(self, _cmd, value, animated);
     
     [self check:YES update:YES withInputValue:@(value) error:NULL];
 }

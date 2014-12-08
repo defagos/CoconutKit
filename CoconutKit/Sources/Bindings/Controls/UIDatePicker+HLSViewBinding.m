@@ -28,12 +28,10 @@ static void swizzle_setDate_animated(UIDatePicker *self, SEL _cmd, NSDate *date,
 
 + (void)load
 {
-    s_initWithFrame = (__typeof(s_initWithFrame))hls_class_swizzleSelector(self, @selector(initWithFrame:), (IMP)swizzle_initWithFrame);
-    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
-    
-    // Both setters are independent, must swizzle both
-    s_setDate = (__typeof(s_setDate))hls_class_swizzleSelector(self, @selector(setDate:), (IMP)swizzle_setDate);
-    s_setDate_animated = (__typeof(s_setDate_animated))hls_class_swizzleSelector(self, @selector(setDate:animated:), (IMP)swizzle_setDate_animated);
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
+    HLSSwizzleSelector(self, @selector(setDate:), swizzle_setDate, &s_setDate);
+    HLSSwizzleSelector(self, @selector(setDate:animated:), swizzle_setDate_animated, &s_setDate_animated);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -78,7 +76,7 @@ static void commonInit(UIDatePicker *self)
 
 static id swizzle_initWithFrame(UIDatePicker *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_initWithFrame)(self, _cmd, frame))) {
+    if ((self = s_initWithFrame(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
@@ -86,7 +84,7 @@ static id swizzle_initWithFrame(UIDatePicker *self, SEL _cmd, CGRect frame)
 
 static id swizzle_initWithCoder(UIDatePicker *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
+    if ((self = s_initWithCoder(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;
@@ -94,14 +92,14 @@ static id swizzle_initWithCoder(UIDatePicker *self, SEL _cmd, NSCoder *aDecoder)
 
 static void swizzle_setDate(UIDatePicker *self, SEL _cmd, NSDate *date)
 {
-    (*s_setDate)(self, _cmd, date);
+    s_setDate(self, _cmd, date);
     
     [self check:YES update:YES withInputValue:date error:NULL];
 }
 
 static void swizzle_setDate_animated(UIDatePicker *self, SEL _cmd, NSDate *date, BOOL animated)
 {
-    (*s_setDate_animated)(self, _cmd, date, animated);
+    s_setDate_animated(self, _cmd, date, animated);
     
     [self check:YES update:YES withInputValue:date error:NULL];
 }

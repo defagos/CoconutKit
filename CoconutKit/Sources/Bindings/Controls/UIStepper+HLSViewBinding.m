@@ -22,7 +22,7 @@ static void swizzle_setValue(UIStepper *self, SEL _cmd, double value);
 
 + (void)load
 {
-    s_setValue = (__typeof(s_setValue))hls_class_swizzleSelector(self, @selector(setValue:), (IMP)swizzle_setValue);
+    HLSSwizzleSelector(self, @selector(setValue:), swizzle_setValue, &s_setValue);
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -48,7 +48,7 @@ static void swizzle_setValue(UIStepper *self, SEL _cmd, double value);
 
 static void swizzle_setValue(UIStepper *self, SEL _cmd, double value)
 {
-    (*s_setValue)(self, _cmd, value);
+    s_setValue(self, _cmd, value);
     
     [self check:YES update:YES withInputValue:@(value) error:NULL];
 }

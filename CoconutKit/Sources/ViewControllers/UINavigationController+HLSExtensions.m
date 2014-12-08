@@ -27,10 +27,8 @@ static NSUInteger swizzle_supportedInterfaceOrientations(UINavigationController 
 
 + (void)load
 {
-    s_shouldAutorotate = (__typeof(s_shouldAutorotate))hls_class_swizzleSelector(self, @selector(shouldAutorotate), (IMP)swizzle_shouldAutorotate);
-    s_supportedInterfaceOrientations = (__typeof(s_supportedInterfaceOrientations))hls_class_swizzleSelector(self,
-                                                                                                             @selector(supportedInterfaceOrientations),
-                                                                                                             (IMP)swizzle_supportedInterfaceOrientations);
+    HLSSwizzleSelector(self, @selector(shouldAutorotate), swizzle_shouldAutorotate, &s_shouldAutorotate);
+    HLSSwizzleSelector(self, @selector(supportedInterfaceOrientations), swizzle_supportedInterfaceOrientations, &s_supportedInterfaceOrientations);
 }
 
 #pragma mark Accessors and mutators
@@ -56,7 +54,7 @@ static NSUInteger swizzle_supportedInterfaceOrientations(UINavigationController 
 static BOOL swizzle_shouldAutorotate(UINavigationController *self, SEL _cmd)
 {
     // The container always decides first (does not look at children)
-    if (! (*s_shouldAutorotate)(self, _cmd)) {
+    if (! s_shouldAutorotate(self, _cmd)) {
         return NO;
     }
     
@@ -90,7 +88,7 @@ static BOOL swizzle_shouldAutorotate(UINavigationController *self, SEL _cmd)
 static NSUInteger swizzle_supportedInterfaceOrientations(UINavigationController *self, SEL _cmd)
 {
     // The container always decides first (does not look at children)
-    NSUInteger containerSupportedInterfaceOrientations = (*s_supportedInterfaceOrientations)(self, _cmd);
+    NSUInteger containerSupportedInterfaceOrientations = s_supportedInterfaceOrientations(self, _cmd);
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {

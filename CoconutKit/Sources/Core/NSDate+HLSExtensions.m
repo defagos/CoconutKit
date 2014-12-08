@@ -22,9 +22,7 @@ static NSString *swizzle_descriptionWithLocale(NSDate *self, SEL _cmd, id locale
 
 + (void)load
 {
-    s_descriptionWithLocale = (__typeof(s_descriptionWithLocale))hls_class_swizzleSelector(self,
-                                                                                           @selector(descriptionWithLocale:),
-                                                                                           (IMP)swizzle_descriptionWithLocale);
+    HLSSwizzleSelector(self, @selector(descriptionWithLocale:), swizzle_descriptionWithLocale, &s_descriptionWithLocale);
 }
 
 #pragma mark Convenience methods
@@ -63,6 +61,6 @@ static NSString *swizzle_descriptionWithLocale(NSDate *self, SEL _cmd, id locale
         [s_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ"];
     });
     
-    NSString *originalString = (*s_descriptionWithLocale)(self, _cmd, locale);
+    NSString *originalString = s_descriptionWithLocale(self, _cmd, locale);
     return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
 }

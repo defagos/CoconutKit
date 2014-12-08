@@ -99,7 +99,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 + (void)load
 {
-    s_setContentOffset = (__typeof(s_setContentOffset))hls_class_swizzleSelector(self, @selector(setContentOffset:), (IMP)swizzle_setContentOffset);
+    HLSSwizzleSelector(self, @selector(setContentOffset:), swizzle_setContentOffset, &s_setContentOffset);
 }
 
 #pragma mark Scrolling synchronization
@@ -287,6 +287,6 @@ __attribute__ ((constructor)) static void HLSTextFieldInit(void)
 
 static void swizzle_setContentOffset(UIScrollView *self, SEL _cmd, CGPoint contentOffset)
 {
-    (*s_setContentOffset)(self, _cmd, contentOffset);
+    s_setContentOffset(self, _cmd, contentOffset);
     [self synchronizeScrolling];
 }

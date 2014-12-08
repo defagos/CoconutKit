@@ -386,53 +386,54 @@
 @implementation RuntimeTestClass10 (Swizzling)
 
 + (void)load
-{
+{    
     // Swizzle to get 42 as a result
-    __block IMP originalClassMagicalIntegerImp = hls_class_swizzleClassSelector_block(self, @selector(classMagicalInteger), ^(RuntimeTestClass10 *self_) {
-        return ((NSInteger (*)(id, SEL))originalClassMagicalIntegerImp)(self_, @selector(classMagicalInteger)) / 10;
-    });
-    __block IMP originalInstanceMagicalIntegerImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalInteger), ^(RuntimeTestClass10 *self_) {
-        return ((NSInteger (*)(id, SEL))originalInstanceMagicalIntegerImp)(self_, @selector(instanceMagicalInteger)) / 10;
+    HLSSwizzleClassSelectorWithBlock(self, @selector(classMagicalInteger), ^(RuntimeTestClass10 *self) {
+        return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
     });
     
-    __block IMP originalInstanceMagicalFloatImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalFloat), ^(RuntimeTestClass10 *self_) {
-        return ((float (*)(id, SEL))originalInstanceMagicalFloatImp)(self_, @selector(instanceMagicalFloat)) / 10.f;
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalInteger), ^(RuntimeTestClass10 *self) {
+        return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
     });
     
-    __block IMP originalInstanceMagicalDoubleImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalDouble), ^(RuntimeTestClass10 *self_) {
-        return ((double (*)(id, SEL))originalInstanceMagicalDoubleImp)(self_, @selector(instanceMagicalDouble)) / 10.;
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalFloat), ^(RuntimeTestClass10 *self) {
+        return ((float (*)(id, SEL))_imp)(self, _cmd) / 10.f;
     });
     
-    __block IMP originalInstanceMagicalCGFloatImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalCGFloat), ^(RuntimeTestClass10 *self_) {
-        return ((CGFloat (*)(id, SEL))originalInstanceMagicalCGFloatImp)(self_, @selector(instanceMagicalCGFloat)) / 10.f;
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalDouble), ^(RuntimeTestClass10 *self) {
+        return ((double (*)(id, SEL))_imp)(self, _cmd) / 10.;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalCGFloat), ^(RuntimeTestClass10 *self) {
+        return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 10.f;
     });
     
     // Swizzle to uppercase
-    __block IMP originalInstanceMagicalStringImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalString), ^(RuntimeTestClass10 *self_) {
-        return [((id (*)(id, SEL))originalInstanceMagicalStringImp)(self_, @selector(instanceMagicalInteger)) uppercaseString];
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalString), ^(RuntimeTestClass10 *self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) uppercaseString];
     });
     
     // Swizzle to get (42, 42) as a result
-    __block IMP originalInstanceMagicalPointImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalPoint), ^(RuntimeTestClass10 *self_) {
-        CGPoint point = ((CGPoint (*)(id, SEL))originalInstanceMagicalPointImp)(self_, @selector(instanceMagicalInteger));
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalPoint), ^(RuntimeTestClass10 *self) {
+        CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 10.f, point.y / 10.f);
     });
     
     // Swizzle to get (12, 12) as a result
-    __block IMP originalInstanceMagicalLocationCoordinateImp = hls_class_swizzleSelector_block(self, @selector(instanceMagicalLocationCoordinate), ^(RuntimeTestClass10 *self_) {
-        CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))originalInstanceMagicalLocationCoordinateImp)(self_, @selector(instanceMagicalLocationCoordinate));
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalLocationCoordinate), ^(RuntimeTestClass10 *self) {
+        CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))_imp)(self, _cmd);
         return CLLocationCoordinate2DMake(locationCoordinate.longitude / 10., locationCoordinate.latitude / 10.);
     });
     
     // Replace ',' with '.' as separator
-    __block IMP originalInstanceMethodJoiningIntegerFloatStringPointImp = hls_class_swizzleSelector_block(self, @selector(instanceMethodJoiningInteger:float:string:point:), ^(RuntimeTestClass10 *self_, NSInteger i, float f, NSString *s, CGPoint p) {
-        NSString *joinedString = ((id (*)(id, SEL, NSInteger, float, id, CGPoint))originalInstanceMethodJoiningIntegerFloatStringPointImp)(self_, @selector(instanceMethodJoiningInteger:float:string:point:), i, f, s, p);
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceMethodJoiningInteger:float:string:point:), ^(RuntimeTestClass10 *self, NSInteger i, float f, NSString *s, CGPoint p) {
+        NSString *joinedString = ((id (*)(id, SEL, NSInteger, float, id, CGPoint))_imp)(self, _cmd, i, f, s, p);
         return [joinedString stringByReplacingOccurrencesOfString:@"," withString:@"."];
     });
     
     // Cannot swizzle functions with ellipsis (cannot forward the call to the original implementation). Must swizzle the method with va_list if available (of course, here available :) )
-    __block IMP originalInstanceVariadicMethodJoiningStringsStringListImp = hls_class_swizzleSelector_block(self, @selector(instanceVariadicMethodJoiningStrings:stringList:), ^(RuntimeTestClass10 *self_, NSString *firstString, va_list stringList) {
-        NSString *joinedString = ((id (*)(id, SEL, id, va_list))originalInstanceVariadicMethodJoiningStringsStringListImp)(self_, @selector(instanceVariadicMethodJoiningStrings:stringList:), firstString, stringList);
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceVariadicMethodJoiningStrings:stringList:), ^(RuntimeTestClass10 *self, NSString *firstString, va_list stringList) {
+        NSString *joinedString = ((id (*)(id, SEL, id, va_list))_imp)(self, _cmd, firstString, stringList);
         return [joinedString stringByReplacingOccurrencesOfString:@"," withString:@"."];
     });
 }
@@ -463,19 +464,19 @@
 + (void)load
 {
     // Test multiple swizzlings of the same method
-    __block IMP originalTestStringImp1 = hls_class_swizzleClassSelector_block(self, @selector(testString), ^(id self_) {
+    __block IMP originalTestStringImp1 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
         return [((id (*)(id, SEL))originalTestStringImp1)(self_, @selector(testString)) stringByAppendingString:@"B"];
     });
     
-    __block IMP originalTestStringImp2 = hls_class_swizzleClassSelector_block(self, @selector(testString), ^(id self_) {
+    __block IMP originalTestStringImp2 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
         return [((id (*)(id, SEL))originalTestStringImp2)(self_, @selector(testString)) stringByAppendingString:@"C"];
     });
 
-    __block IMP originalTestStringImp3 = hls_class_swizzleClassSelector_block(self, @selector(testString), ^(id self_) {
+    __block IMP originalTestStringImp3 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
         return [((id (*)(id, SEL))originalTestStringImp3)(self_, @selector(testString)) stringByAppendingString:@"D"];
     });
 
-    __block IMP originalTestStringImp4 = hls_class_swizzleClassSelector_block(self, @selector(testString), ^(id self_) {
+    __block IMP originalTestStringImp4 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
         return [((id (*)(id, SEL))originalTestStringImp4)(self_, @selector(testString)) stringByAppendingString:@"E"];
     });
 }
@@ -522,10 +523,10 @@
 + (void)load
 {
     // Swizzling of non-overridden methods in class hierarchies (see HLSRuntime.m for an explanation)
-    __block IMP originalTopClassMethodImp = hls_class_swizzleClassSelector_block(self, @selector(topClassMethod), ^(RuntimeTestSubClass121 *self_) {
+    __block IMP originalTopClassMethodImp = hls_class_swizzleClassSelectorWithBlock(self, @selector(topClassMethod), ^(RuntimeTestSubClass121 *self_) {
         return [((id (*)(id, SEL))originalTopClassMethodImp)(self_, @selector(topClassMethod)) stringByAppendingString:@"2"];
     });
-    __block IMP originalTopMethodImp = hls_class_swizzleSelector_block(self, @selector(topMethod), ^(RuntimeTestSubClass121 *self_) {
+    __block IMP originalTopMethodImp = hls_class_swizzleSelectorWithBlock(self, @selector(topMethod), ^(RuntimeTestSubClass121 *self_) {
         return [((id (*)(id, SEL))originalTopMethodImp)(self_, @selector(topMethod)) stringByAppendingString:@"B"];
     });
 }
@@ -551,10 +552,10 @@
 + (void)load
 {
     // Swizzling of non-overridden methods in class hierarchies (see HLSRuntime.m for an explanation)
-    __block IMP originalTopClassMethodImp = hls_class_swizzleClassSelector_block(self, @selector(topClassMethod), ^(RuntimeTestSubSubClass1211 *self_) {
+    __block IMP originalTopClassMethodImp = hls_class_swizzleClassSelectorWithBlock(self, @selector(topClassMethod), ^(RuntimeTestSubSubClass1211 *self_) {
         return [((id (*)(id, SEL))originalTopClassMethodImp)(self_, @selector(topClassMethod)) stringByAppendingString:@"3"];
     });
-    __block IMP originalTopMethodImp = hls_class_swizzleSelector_block(self, @selector(topMethod), ^(RuntimeTestSubSubClass1211 *self_) {
+    __block IMP originalTopMethodImp = hls_class_swizzleSelectorWithBlock(self, @selector(topMethod), ^(RuntimeTestSubSubClass1211 *self_) {
         return [((id (*)(id, SEL))originalTopMethodImp)(self_, @selector(topMethod)) stringByAppendingString:@"C"];
     });
 }

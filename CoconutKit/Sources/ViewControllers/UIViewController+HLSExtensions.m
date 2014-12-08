@@ -183,13 +183,13 @@ static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL anim
 
 + (void)load
 {
-    s_initWithNibName_bundle = (__typeof(s_initWithNibName_bundle))hls_class_swizzleSelector(self, @selector(initWithNibName:bundle:), (IMP)swizzle_initWithNibName_bundle);
-    s_initWithCoder = (__typeof(s_initWithCoder))hls_class_swizzleSelector(self, @selector(initWithCoder:), (IMP)swizzle_initWithCoder);
-    s_viewDidLoad = (__typeof(s_viewDidLoad))hls_class_swizzleSelector(self, @selector(viewDidLoad), (IMP)swizzle_viewDidLoad);
-    s_viewWillAppear = (__typeof(s_viewWillAppear))hls_class_swizzleSelector(self, @selector(viewWillAppear:), (IMP)swizzle_viewWillAppear);
-    s_viewDidAppear = (__typeof(s_viewDidAppear))hls_class_swizzleSelector(self, @selector(viewDidAppear:), (IMP)swizzle_viewDidAppear);
-    s_viewWillDisappear = (__typeof(s_viewWillDisappear))hls_class_swizzleSelector(self, @selector(viewWillDisappear:), (IMP)swizzle_viewWillDisappear);
-    s_viewDidDisappear = (__typeof(s_viewDidDisappear))hls_class_swizzleSelector(self, @selector(viewDidDisappear:), (IMP)swizzle_viewDidDisappear);
+    HLSSwizzleSelector(self, @selector(initWithNibName:bundle:), swizzle_initWithNibName_bundle, &s_initWithNibName_bundle);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
+    HLSSwizzleSelector(self, @selector(viewDidLoad), swizzle_viewDidLoad, &s_viewDidLoad);
+    HLSSwizzleSelector(self, @selector(viewWillAppear:), swizzle_viewWillAppear, &s_viewWillAppear);
+    HLSSwizzleSelector(self, @selector(viewDidAppear:), swizzle_viewDidAppear, &s_viewDidAppear);
+    HLSSwizzleSelector(self, @selector(viewWillDisappear:), swizzle_viewWillDisappear, &s_viewWillDisappear);
+    HLSSwizzleSelector(self, @selector(viewDidDisappear:), swizzle_viewDidDisappear, &s_viewDidDisappear);
 }
 
 #pragma mark Object creation and destruction
@@ -225,7 +225,7 @@ static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL anim
 
 static id swizzle_initWithNibName_bundle(UIViewController *self, SEL _cmd, NSString *nibName, NSBundle *bundle)
 {
-    if ((self = (*s_initWithNibName_bundle)(self, _cmd, nibName, bundle))) {
+    if ((self = s_initWithNibName_bundle(self, _cmd, nibName, bundle))) {
         [self uiViewControllerHLSExtensionsInit];
     }
     return self;
@@ -233,7 +233,7 @@ static id swizzle_initWithNibName_bundle(UIViewController *self, SEL _cmd, NSStr
 
 static id swizzle_initWithCoder(UIViewController *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_initWithCoder)(self, _cmd, aDecoder))) {
+    if ((self = s_initWithCoder(self, _cmd, aDecoder))) {
         [self uiViewControllerHLSExtensionsInit];
     }
     return self;
@@ -249,7 +249,7 @@ static void swizzle_viewDidLoad(UIViewController *self, SEL _cmd)
     
     hls_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.view.bounds.size], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
-    (*s_viewDidLoad)(self, _cmd);
+    s_viewDidLoad(self, _cmd);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidLoad]) {
         HLSLoggerWarn(@"The viewDidLoad method has been called on %@, but its current view lifecycle state is not compatible. "
@@ -262,7 +262,7 @@ static void swizzle_viewDidLoad(UIViewController *self, SEL _cmd)
 
 static void swizzle_viewWillAppear(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_viewWillAppear)(self, _cmd, animated);
+    s_viewWillAppear(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillAppear]) {
         HLSLoggerWarn(@"The viewWillAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
@@ -275,7 +275,7 @@ static void swizzle_viewWillAppear(UIViewController *self, SEL _cmd, BOOL animat
 
 static void swizzle_viewDidAppear(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_viewDidAppear)(self, _cmd, animated);
+    s_viewDidAppear(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidAppear]) {
         HLSLoggerWarn(@"The viewDidAppear: method has been called on %@, but its current view lifecycle state is not compatible. "
@@ -288,7 +288,7 @@ static void swizzle_viewDidAppear(UIViewController *self, SEL _cmd, BOOL animate
 
 static void swizzle_viewWillDisappear(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_viewWillDisappear)(self, _cmd, animated);
+    s_viewWillDisappear(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear]) {
         HLSLoggerWarn(@"The viewWillDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "
@@ -308,7 +308,7 @@ static void swizzle_viewWillDisappear(UIViewController *self, SEL _cmd, BOOL ani
 
 static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL animated)
 {
-    (*s_viewDidDisappear)(self, _cmd, animated);
+    s_viewDidDisappear(self, _cmd, animated);
     
     if (! [self isReadyForLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewDidDisappear]) {
         HLSLoggerWarn(@"The viewDidDisappear: method has been called on %@, but its current view lifecycle state is not compatible. "

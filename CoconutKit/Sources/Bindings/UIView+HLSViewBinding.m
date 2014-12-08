@@ -47,7 +47,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_didMoveToWindow = (__typeof(s_didMoveToWindow))hls_class_swizzleSelector(self, @selector(didMoveToWindow), (IMP)swizzle_didMoveToWindow);
+    HLSSwizzleSelector(self, @selector(didMoveToWindow), swizzle_didMoveToWindow, &s_didMoveToWindow);
 }
 
 + (void)showBindingsDebugOverlay
@@ -240,7 +240,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 // complete
 static void swizzle_didMoveToWindow(UIView *self, SEL _cmd)
 {
-    (*s_didMoveToWindow)(self, _cmd);
+    s_didMoveToWindow(self, _cmd);
     
     if (self.window) {
         if (self.bindKeyPath) {

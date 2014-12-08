@@ -62,10 +62,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         return;
     }
     
-    s_initialize = (__typeof(s_initialize))hls_class_swizzleClassSelector(self,
-                                                                          @selector(initialize),
-                                                                          (IMP)swizzle_initialize);
-    
+    HLSSwizzleClassSelector(self, @selector(initialize), swizzle_initialize, &s_initialize);
     s_injectedManagedObjectValidation = YES;
 }
 
@@ -449,7 +446,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
 static void swizzle_initialize(Class self, SEL _cmd)
 {
     // Call swizzled implementation
-    (*s_initialize)(self, _cmd);
+    s_initialize(self, _cmd);
     
     // No class identity test here. This must be executed for all objects in the hierarchy rooted at NSManagedObject, so that we can
     // locate the @dynamic properties we are interested in (those which need validation)
