@@ -464,20 +464,20 @@
 + (void)load
 {
     // Test multiple swizzlings of the same method
-    __block IMP originalTestStringImp1 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
-        return [((id (*)(id, SEL))originalTestStringImp1)(self_, @selector(testString)) stringByAppendingString:@"B"];
+    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"B"];
     });
     
-    __block IMP originalTestStringImp2 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
-        return [((id (*)(id, SEL))originalTestStringImp2)(self_, @selector(testString)) stringByAppendingString:@"C"];
+    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"C"];
     });
 
-    __block IMP originalTestStringImp3 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
-        return [((id (*)(id, SEL))originalTestStringImp3)(self_, @selector(testString)) stringByAppendingString:@"D"];
+    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"D"];
     });
 
-    __block IMP originalTestStringImp4 = hls_class_swizzleClassSelectorWithBlock(self, @selector(testString), ^(id self_) {
-        return [((id (*)(id, SEL))originalTestStringImp4)(self_, @selector(testString)) stringByAppendingString:@"E"];
+    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"E"];
     });
 }
 
@@ -523,11 +523,11 @@
 + (void)load
 {
     // Swizzling of non-overridden methods in class hierarchies (see HLSRuntime.m for an explanation)
-    __block IMP originalTopClassMethodImp = hls_class_swizzleClassSelectorWithBlock(self, @selector(topClassMethod), ^(RuntimeTestSubClass121 *self_) {
-        return [((id (*)(id, SEL))originalTopClassMethodImp)(self_, @selector(topClassMethod)) stringByAppendingString:@"2"];
+    HLSSwizzleClassSelectorWithBlock(self, @selector(topClassMethod), ^(RuntimeTestSubClass121 *self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"2"];
     });
-    __block IMP originalTopMethodImp = hls_class_swizzleSelectorWithBlock(self, @selector(topMethod), ^(RuntimeTestSubClass121 *self_) {
-        return [((id (*)(id, SEL))originalTopMethodImp)(self_, @selector(topMethod)) stringByAppendingString:@"B"];
+    HLSSwizzleSelectorWithBlock(self, @selector(topMethod), ^(RuntimeTestSubClass121 *self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"B"];
     });
 }
 
@@ -552,11 +552,11 @@
 + (void)load
 {
     // Swizzling of non-overridden methods in class hierarchies (see HLSRuntime.m for an explanation)
-    __block IMP originalTopClassMethodImp = hls_class_swizzleClassSelectorWithBlock(self, @selector(topClassMethod), ^(RuntimeTestSubSubClass1211 *self_) {
-        return [((id (*)(id, SEL))originalTopClassMethodImp)(self_, @selector(topClassMethod)) stringByAppendingString:@"3"];
+    HLSSwizzleClassSelectorWithBlock(self, @selector(topClassMethod), ^(RuntimeTestSubSubClass1211 *self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"3"];
     });
-    __block IMP originalTopMethodImp = hls_class_swizzleSelectorWithBlock(self, @selector(topMethod), ^(RuntimeTestSubSubClass1211 *self_) {
-        return [((id (*)(id, SEL))originalTopMethodImp)(self_, @selector(topMethod)) stringByAppendingString:@"C"];
+    HLSSwizzleSelectorWithBlock(self, @selector(topMethod), ^(RuntimeTestSubSubClass1211 *self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"C"];
     });
 }
 
