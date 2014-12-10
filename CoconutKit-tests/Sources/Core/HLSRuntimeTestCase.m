@@ -10,6 +10,10 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+typedef struct LargeStruct_ {
+    float values[50];
+} LargeStruct;
+
 #pragma mark Test classes
 
 @protocol RuntimeTestFormalProtocolA <NSObject>
@@ -348,6 +352,16 @@
     return CLLocationCoordinate2DMake(120., 120.);
 }
 
+- (LargeStruct)instanceLargeStruct
+{
+    LargeStruct largeStruct;
+    memset(&largeStruct, 0, sizeof(LargeStruct));
+    for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+        largeStruct.values[i] = 420.f;
+    }
+    return largeStruct;
+}
+
 - (NSString *)instanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p
 {
     return [NSString stringWithFormat:@"%@,%@,%@,%@,%@", @(i), @(f), s, @(p.x), @(p.y)];
@@ -417,6 +431,15 @@
     HLSSwizzleSelectorWithBlock(self, @selector(instancePoint), ^(RuntimeTestClass10 *self) {
         CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 10.f, point.y / 10.f);
+    });
+    
+    // Swizzle to get 42 for all values
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceLargeStruct), ^(RuntimeTestClass10 *self) {
+        LargeStruct largeStruct = ((LargeStruct (*)(id, SEL))_imp)(self, _cmd);
+        for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+            largeStruct.values[i] /= 10.f;
+        }
+        return largeStruct;
     });
     
     // Swizzle to get (12, 12) as a result
@@ -883,6 +906,11 @@
     CLLocationCoordinate2D locationCoordinate10 = [[RuntimeTestClass10 new] instanceLocationCoordinate];
     XCTAssertEqual(locationCoordinate10.longitude, 12.f);
     XCTAssertEqual(locationCoordinate10.latitude, 12.f);
+    
+    LargeStruct largeStruct10 = [[RuntimeTestClass10 new] instanceLargeStruct];
+    for (size_t i = 0; i < sizeof(largeStruct10.values) / sizeof(largeStruct10.values[0]); ++i) {
+        XCTAssertEqual(largeStruct10.values[i], 42.f);
+    }
     
     XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceMethodJoiningInteger:42 float:42.f string:@"42" point:CGPointMake(42.f, 42.f)], @"42.42.42.42.42");
     
