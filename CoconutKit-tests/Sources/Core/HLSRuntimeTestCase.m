@@ -284,20 +284,20 @@
 @interface RuntimeTestClass10 : NSObject
 
 // Primitive integer type as return value
-+ (NSInteger)classMagicalInteger;
-- (NSInteger)instanceMagicalInteger;
++ (NSInteger)classInteger;
+- (NSInteger)instanceInteger;
 
 // Primitive floating-point type as return value
-- (float)instanceMagicalFloat;
-- (double)instanceMagicalDouble;
-- (CGFloat)instanceMagicalCGFloat;
+- (float)instanceFloat;
+- (double)instanceDouble;
+- (CGFloat)instanceCGFloat;
 
 // Object as return value
-- (NSString *)instanceMagicalString;
+- (NSString *)instanceString;
 
 // Struct as return value
-- (CGPoint)instanceMagicalPoint;
-- (CLLocationCoordinate2D)instanceMagicalLocationCoordinate;
+- (CGPoint)instancePoint;
+- (CLLocationCoordinate2D)instanceLocationCoordinate;
 
 // Parameters
 - (NSString *)instanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p;
@@ -308,42 +308,42 @@
 
 @implementation RuntimeTestClass10
 
-+ (NSInteger)classMagicalInteger
++ (NSInteger)classInteger
 {
     return 420;
 }
 
-- (NSInteger)instanceMagicalInteger
+- (NSInteger)instanceInteger
 {
     return 420;
 }
 
-- (float)instanceMagicalFloat
+- (float)instanceFloat
 {
     return 420.f;
 }
 
-- (double)instanceMagicalDouble
+- (double)instanceDouble
 {
     return 420.;
 }
 
-- (CGFloat)instanceMagicalCGFloat
+- (CGFloat)instanceCGFloat
 {
     return 420.f;
 }
 
-- (NSString *)instanceMagicalString
+- (NSString *)instanceString
 {
     return @"Tom";
 }
 
-- (CGPoint)instanceMagicalPoint
+- (CGPoint)instancePoint
 {
     return CGPointMake(420.f, 420.f);
 }
 
-- (CLLocationCoordinate2D)instanceMagicalLocationCoordinate
+- (CLLocationCoordinate2D)instanceLocationCoordinate
 {
     return CLLocationCoordinate2DMake(120., 120.);
 }
@@ -388,39 +388,39 @@
 + (void)load
 {    
     // Swizzle to get 42 as a result
-    HLSSwizzleClassSelectorWithBlock(self, @selector(classMagicalInteger), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleClassSelectorWithBlock(self, @selector(classInteger), ^(RuntimeTestClass10 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
     });
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalInteger), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceInteger), ^(RuntimeTestClass10 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
     });
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalFloat), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceFloat), ^(RuntimeTestClass10 *self) {
         return ((float (*)(id, SEL))_imp)(self, _cmd) / 10.f;
     });
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalDouble), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceDouble), ^(RuntimeTestClass10 *self) {
         return ((double (*)(id, SEL))_imp)(self, _cmd) / 10.;
     });
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalCGFloat), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceCGFloat), ^(RuntimeTestClass10 *self) {
         return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 10.f;
     });
     
     // Swizzle to uppercase
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalString), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceString), ^(RuntimeTestClass10 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) uppercaseString];
     });
     
     // Swizzle to get (42, 42) as a result
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalPoint), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(instancePoint), ^(RuntimeTestClass10 *self) {
         CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 10.f, point.y / 10.f);
     });
     
     // Swizzle to get (12, 12) as a result
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMagicalLocationCoordinate), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceLocationCoordinate), ^(RuntimeTestClass10 *self) {
         CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))_imp)(self, _cmd);
         return CLLocationCoordinate2DMake(locationCoordinate.longitude / 10., locationCoordinate.latitude / 10.);
     });
@@ -867,20 +867,20 @@
 - (void)testSwizzling
 {
     // Swizzling has been made in a +load. We here simply check that expected values after swizzling are correct
-    XCTAssertEqual([RuntimeTestClass10 classMagicalInteger], (NSInteger)42);
-    XCTAssertEqual([[RuntimeTestClass10 new] instanceMagicalInteger], (NSInteger)42);
+    XCTAssertEqual([RuntimeTestClass10 classInteger], (NSInteger)42);
+    XCTAssertEqual([[RuntimeTestClass10 new] instanceInteger], (NSInteger)42);
     
-    XCTAssertEqual([[RuntimeTestClass10 new] instanceMagicalFloat], 42.f);
-    XCTAssertEqual([[RuntimeTestClass10 new] instanceMagicalDouble], 42.f);
-    XCTAssertEqual([[RuntimeTestClass10 new] instanceMagicalCGFloat], 42.f);
+    XCTAssertEqual([[RuntimeTestClass10 new] instanceFloat], 42.f);
+    XCTAssertEqual([[RuntimeTestClass10 new] instanceDouble], 42.f);
+    XCTAssertEqual([[RuntimeTestClass10 new] instanceCGFloat], 42.f);
     
-    XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceMagicalString], @"TOM");
+    XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceString], @"TOM");
     
-    CGPoint point10 = [[RuntimeTestClass10 new] instanceMagicalPoint];
+    CGPoint point10 = [[RuntimeTestClass10 new] instancePoint];
     XCTAssertEqual(point10.x, 42.f);
     XCTAssertEqual(point10.y, 42.f);
     
-    CLLocationCoordinate2D locationCoordinate10 = [[RuntimeTestClass10 new] instanceMagicalLocationCoordinate];
+    CLLocationCoordinate2D locationCoordinate10 = [[RuntimeTestClass10 new] instanceLocationCoordinate];
     XCTAssertEqual(locationCoordinate10.longitude, 12.f);
     XCTAssertEqual(locationCoordinate10.latitude, 12.f);
     
