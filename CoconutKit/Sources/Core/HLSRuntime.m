@@ -250,11 +250,12 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
     // sigatures must not have a SEL argument). The added method only calls the super counterpart, see explanation above
     const char *types = method_getTypeEncoding(method);
     
+#if !defined(__arm64__)
     NSUInteger returnSize = 0;
     NSGetSizeAndAlignment(types, &returnSize, NULL);
     
-    // Non 64-bit architectures: Implementations returning large structs need _stret messaging methods, otherwise standard
-    // Objective-C messaging is used (small structs are returned in registers). No worry on 32-bit architectures
+    // Non ARM 64-bit architectures: Implementations returning large structs need _stret messaging methods, otherwise standard
+    // Objective-C messaging is used (small structs are returned in registers)
     // For more information, see http://www.sealiesoftware.com/blog/archive/2008/10/30/objc_explain_objc_msgSend_stret.html
     if (sizeof(void *) != 8 && types[0] == _C_STRUCT_B && returnSize != 1 && returnSize != 2 && returnSize != 4 && returnSize != 8) {
         class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
@@ -277,6 +278,7 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
         }), types);
     }
     else {
+#endif
         class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
             struct objc_super super = {
                 .receiver = self,
@@ -287,7 +289,9 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
             id (*objc_msgSendSuper_typed)(struct objc_super *, SEL, va_list) = (void *)&objc_msgSendSuper;
             return objc_msgSendSuper_typed(&super, selector, argp);
         }), types);
+#if !defined(__arm64__)
     }
+#endif
     
     // Swizzling
     return class_replaceMethod(clazz, selector, newImplementation, types);
