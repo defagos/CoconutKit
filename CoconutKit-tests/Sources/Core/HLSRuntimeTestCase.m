@@ -10,9 +10,23 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+typedef struct SmallStruct_ {
+    NSInteger i;
+} SmallStruct;
+
 typedef struct LargeStruct_ {
     float values[50];
 } LargeStruct;
+
+typedef union SmallUnion_ {
+    NSInteger i;
+    char c;
+} SmallUnion;
+
+typedef union LargeUnion_ {
+    LargeStruct largeStruct;
+    NSInteger i;
+} LargeUnion;
 
 #pragma mark Test classes
 
@@ -302,6 +316,10 @@ typedef struct LargeStruct_ {
 // Struct as return value
 - (CGPoint)instancePoint;
 - (CLLocationCoordinate2D)instanceLocationCoordinate;
+- (SmallStruct)instanceSmallStruct;
+- (LargeStruct)instanceLargeStruct;
+- (SmallUnion)instanceSmallUnion;
+- (LargeUnion)instanceLargeUnion;
 
 // Parameters
 - (NSString *)instanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p;
@@ -352,6 +370,14 @@ typedef struct LargeStruct_ {
     return CLLocationCoordinate2DMake(120., 120.);
 }
 
+- (SmallStruct)instanceSmallStruct
+{
+    SmallStruct smallStruct;
+    memset(&smallStruct, 0, sizeof(SmallStruct));
+    smallStruct.i = 420;
+    return smallStruct;
+}
+
 - (LargeStruct)instanceLargeStruct
 {
     LargeStruct largeStruct;
@@ -360,6 +386,27 @@ typedef struct LargeStruct_ {
         largeStruct.values[i] = 420.f;
     }
     return largeStruct;
+}
+
+- (SmallUnion)instanceSmallUnion
+{
+    SmallUnion smallUnion;
+    smallUnion.i = 420;
+    return smallUnion;
+}
+
+- (LargeUnion)instanceLargeUnion
+{
+    LargeUnion largeUnion;
+    
+    LargeStruct largeStruct;
+    memset(&largeStruct, 0, sizeof(LargeStruct));
+    for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+        largeStruct.values[i] = 420.f;
+    }
+    largeUnion.largeStruct = largeStruct;
+    
+    return largeUnion;
 }
 
 - (NSString *)instanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p
@@ -434,12 +481,36 @@ typedef struct LargeStruct_ {
     });
     
     // Swizzle to get 42 for all values
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceSmallStruct), ^(RuntimeTestClass10 *self) {
+        SmallStruct smallStruct = ((SmallStruct (*)(id, SEL))_imp)(self, _cmd);
+        smallStruct.i /= 10;
+        return smallStruct;
+    });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(instanceLargeStruct), ^(RuntimeTestClass10 *self) {
         LargeStruct largeStruct = ((LargeStruct (*)(id, SEL))_imp)(self, _cmd);
         for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
             largeStruct.values[i] /= 10.f;
         }
         return largeStruct;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceSmallUnion), ^(RuntimeTestClass10 *self) {
+        SmallUnion smallUnion = ((SmallUnion (*)(id, SEL))_imp)(self, _cmd);
+        smallUnion.i /= 10;
+        return smallUnion;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceLargeUnion), ^(RuntimeTestClass10 *self) {
+        LargeUnion largeUnion = ((LargeUnion (*)(id, SEL))_imp)(self, _cmd);
+        
+        LargeStruct largeStruct = largeUnion.largeStruct;
+        for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+            largeStruct.values[i] /= 10.f;
+        }
+        largeUnion.largeStruct = largeStruct;
+        
+        return largeUnion;
     });
     
     // Swizzle to get (12, 12) as a result
@@ -907,9 +978,20 @@ typedef struct LargeStruct_ {
     XCTAssertEqual(locationCoordinate10.longitude, 12.f);
     XCTAssertEqual(locationCoordinate10.latitude, 12.f);
     
+    SmallStruct smallStruct10 = [[RuntimeTestClass10 new] instanceSmallStruct];
+    XCTAssertEqual(smallStruct10.i, 42);
+    
     LargeStruct largeStruct10 = [[RuntimeTestClass10 new] instanceLargeStruct];
     for (size_t i = 0; i < sizeof(largeStruct10.values) / sizeof(largeStruct10.values[0]); ++i) {
         XCTAssertEqual(largeStruct10.values[i], 42.f);
+    }
+    
+    SmallUnion smallUnion10 = [[RuntimeTestClass10 new] instanceSmallUnion];
+    XCTAssertEqual(smallUnion10.i, 42);
+    
+    LargeUnion largeUnion10 = [[RuntimeTestClass10 new] instanceLargeUnion];
+    for (size_t i = 0; i < sizeof(largeUnion10.largeStruct.values) / sizeof(largeUnion10.largeStruct.values[0]); ++i) {
+        XCTAssertEqual(largeUnion10.largeStruct.values[i], 42);
     }
     
     XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceMethodJoiningInteger:42 float:42.f string:@"42" point:CGPointMake(42.f, 42.f)], @"42.42.42.42.42");
