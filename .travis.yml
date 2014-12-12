@@ -11,7 +11,7 @@ script:
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-staticframework | xcpretty -c
     # Demo and tests for 32 bits
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
-    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-tests-runner -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
+    - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit-tests-runner -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
     # Demo and tests for 64 bits
-    - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
+    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
     - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit-tests-runner -destination 'platform=iOS Simulator,name=iPad Air' | xcpretty -c
