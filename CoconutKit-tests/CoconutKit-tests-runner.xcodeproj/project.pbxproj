@@ -742,10 +742,6 @@
 				);
 				INFOPLIST_FILE = "CoconutKit-tests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/defagos/Development/devhortis/CoconutKit/CoconutKit/build/Debug-iphoneos",
-				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -770,10 +766,6 @@
 				GCC_PREFIX_HEADER = "CoconutKit-tests-Prefix.pch";
 				INFOPLIST_FILE = "CoconutKit-tests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/defagos/Development/devhortis/CoconutKit/CoconutKit/build/Debug-iphoneos",
-				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -814,6 +806,7 @@
 				6FCC114F1A3B0943005BA6E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
