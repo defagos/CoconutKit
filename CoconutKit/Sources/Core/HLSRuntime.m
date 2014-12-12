@@ -249,16 +249,45 @@ static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImp
     // The following only adds a method implementation if the class does not implement it itself (block implementations
     // sigatures must not have a SEL argument). The added method only calls the super counterpart, see explanation above
     const char *types = method_getTypeEncoding(method);
-    class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
-        struct objc_super super = {
-            .receiver = self,
-            .super_class = class_getSuperclass(clazz)
-        };
-        
-        // Cast the call to objc_msgSendSuper appropriately
-        id (*objc_msgSendSuper_typed)(struct objc_super *, SEL, va_list) = (void *)&objc_msgSendSuper;
-        return objc_msgSendSuper_typed(&super, selector, argp);
-    }), types);
+    
+    NSUInteger returnSize = 0;
+    NSGetSizeAndAlignment(types, &returnSize, NULL);
+    
+    // Non 64-bit architectures: Implementations returning large structs need _stret messaging methods, otherwise standard
+    // Objective-C messaging is used (small structs are returned in registers). No worry on 32-bit architectures
+    // For more information, see http://www.sealiesoftware.com/blog/archive/2008/10/30/objc_explain_objc_msgSend_stret.html
+    if (sizeof(void *) != 8 && types[0] == _C_STRUCT_B && returnSize != 1 && returnSize != 2 && returnSize != 4 && returnSize != 8) {
+        class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
+            struct objc_super super = {
+                .receiver = self,
+                .super_class = class_getSuperclass(clazz)
+            };
+            
+            // We must return a struct type from the call below. Any kind of struct can be used, its layout details are
+            // irrelevant. Only size matters, as usual. We must namely ensure that the return size is large enough so
+            // that the struct cannot be returned in registers (i.e. not one one of the sizes tested above). This way
+            // we ensure the block implementation trampoline generates the correct implementation
+            typedef struct HLSLargeStruct_ {
+                char dummy[16];
+            } HLSLargeStruct;
+            
+            // Cast the call to objc_msgSendSuper appropriately
+            HLSLargeStruct (*objc_msgSendSuper_stret_typed)(struct objc_super *, SEL, va_list) = (void *)&objc_msgSendSuper_stret;
+            return objc_msgSendSuper_stret_typed(&super, selector, argp);
+        }), types);
+    }
+    else {
+        class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
+            struct objc_super super = {
+                .receiver = self,
+                .super_class = class_getSuperclass(clazz)
+            };
+            
+            // Cast the call to objc_msgSendSuper appropriately
+            id (*objc_msgSendSuper_typed)(struct objc_super *, SEL, va_list) = (void *)&objc_msgSendSuper;
+            return objc_msgSendSuper_typed(&super, selector, argp);
+        }), types);
+    }
     
     // Swizzling
     return class_replaceMethod(clazz, selector, newImplementation, types);
