@@ -687,7 +687,7 @@
 				6F9C46A214C5C36300824AB2 /* Resources */,
 				6F9C459214C5C30B00824AB2 /* Sources */,
 				6F6B0C9B16B3DACF006B718F /* InnerFolder */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97315FDCFA39411CA2CEA /* Supporting Files */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				6F8CC0A519DC2A3D003286F7 /* version.xcconfig */,
@@ -698,14 +698,14 @@
 			tabWidth = 4;
 			usesTabs = 0;
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+		29B97315FDCFA39411CA2CEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				6FCB4F2E192668B400047AD3 /* CoconutKit-dev-Prefix.pch */,
 				8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */,
 				32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */,
 			);
-			name = "Other Sources";
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
