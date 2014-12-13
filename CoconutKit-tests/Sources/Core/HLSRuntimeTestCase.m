@@ -310,6 +310,9 @@ typedef union LargeUnion_ {
 - (double)instanceDouble;
 - (CGFloat)instanceCGFloat;
 
+// Void
+- (void)instanceVoidReturningIntegerByReference:(NSInteger *)pValue;
+
 // Object as return value
 - (NSString *)instanceString;
 
@@ -353,6 +356,13 @@ typedef union LargeUnion_ {
 - (CGFloat)instanceCGFloat
 {
     return 420.f;
+}
+
+- (void)instanceVoidReturningIntegerByReference:(NSInteger *)pValue
+{
+    if (pValue) {
+        *pValue = 420;
+    }
 }
 
 - (NSString *)instanceString
@@ -467,6 +477,15 @@ typedef union LargeUnion_ {
     
     HLSSwizzleSelectorWithBlock(self, @selector(instanceCGFloat), ^(RuntimeTestClass10 *self) {
         return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 10.f;
+    });
+    
+    // Void
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceVoidReturningIntegerByReference:), ^(RuntimeTestClass10 *self, NSInteger *pValue) {
+        ((void (*)(id, SEL, NSInteger *))_imp)(self, _cmd, pValue);
+        
+        if (pValue) {
+            *pValue /= 10;
+        }
     });
     
     // Swizzle to uppercase
@@ -967,6 +986,10 @@ typedef union LargeUnion_ {
     XCTAssertEqual([[RuntimeTestClass10 new] instanceFloat], 42.f);
     XCTAssertEqual([[RuntimeTestClass10 new] instanceDouble], 42.f);
     XCTAssertEqual([[RuntimeTestClass10 new] instanceCGFloat], 42.f);
+    
+    NSInteger value = 0;
+    [[RuntimeTestClass10 new] instanceVoidReturningIntegerByReference:&value];
+    XCTAssertEqual(value, 42);
     
     XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceString], @"TOM");
     
