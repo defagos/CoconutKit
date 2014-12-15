@@ -604,8 +604,19 @@ typedef union LargeUnion_ {
 - (float)topInstanceFloat;
 - (double)topInstanceDouble;
 - (CGFloat)topInstanceCGFloat;
+
+- (void)topInstanceVoidReturningIntegerByReference:(NSInteger *)pValue;
+
 - (CGPoint)topInstancePoint;
 - (CLLocationCoordinate2D)topInstanceLocationCoordinate;
+- (SmallStruct)topInstanceSmallStruct;
+- (LargeStruct)topInstanceLargeStruct;
+- (SmallUnion)topInstanceSmallUnion;
+- (LargeUnion)topInstanceLargeUnion;
+
+- (NSString *)topInstanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p;
+- (NSString *)topInstanceVariadicMethodJoiningStrings:(NSString *)firstString stringList:(va_list)stringList;
+- (NSString *)topInstanceVariadicMethodJoiningStrings:(NSString *)firstString, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end
 
@@ -641,6 +652,13 @@ typedef union LargeUnion_ {
     return 420.f;
 }
 
+- (void)topInstanceVoidReturningIntegerByReference:(NSInteger *)pValue
+{
+    if (pValue) {
+        *pValue = 420;
+    }
+}
+
 - (CGPoint)topInstancePoint
 {
     return CGPointMake(420.f, 420.f);
@@ -649,6 +667,74 @@ typedef union LargeUnion_ {
 - (CLLocationCoordinate2D)topInstanceLocationCoordinate
 {
     return CLLocationCoordinate2DMake(120., 120.);
+}
+
+- (SmallStruct)topInstanceSmallStruct
+{
+    SmallStruct smallStruct;
+    memset(&smallStruct, 0, sizeof(SmallStruct));
+    smallStruct.i = 420;
+    return smallStruct;
+}
+
+- (LargeStruct)topInstanceLargeStruct
+{
+    LargeStruct largeStruct;
+    memset(&largeStruct, 0, sizeof(LargeStruct));
+    for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+        largeStruct.values[i] = 420.f;
+    }
+    return largeStruct;
+}
+
+- (SmallUnion)topInstanceSmallUnion
+{
+    SmallUnion smallUnion;
+    smallUnion.i = 420;
+    return smallUnion;
+}
+
+- (LargeUnion)topInstanceLargeUnion
+{
+    LargeUnion largeUnion;
+    
+    LargeStruct largeStruct;
+    memset(&largeStruct, 0, sizeof(LargeStruct));
+    for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+        largeStruct.values[i] = 420.f;
+    }
+    largeUnion.largeStruct = largeStruct;
+    
+    return largeUnion;
+}
+
+- (NSString *)topInstanceMethodJoiningInteger:(NSInteger)i float:(float)f string:(NSString *)s point:(CGPoint)p
+{
+    return [NSString stringWithFormat:@"%@,%@,%@,%@,%@", @(i), @(f), s, @(p.x), @(p.y)];
+}
+
+- (NSString *)topInstanceVariadicMethodJoiningStrings:(NSString *)firstString stringList:(va_list)stringList
+{
+    NSMutableArray *strings = [NSMutableArray arrayWithObject:firstString];
+    
+    NSString *string = va_arg(stringList, NSString *);
+    while (string) {
+        [strings addObject:string];
+        string = va_arg(stringList, NSString *);
+    }
+    
+    return [strings componentsJoinedByString:@","];
+}
+
+- (NSString *)topInstanceVariadicMethodJoiningStrings:(NSString *)firstString, ...
+{
+    va_list args;
+    
+    va_start(args, firstString);
+    NSString *string = [self topInstanceVariadicMethodJoiningStrings:firstString stringList:args];
+    va_end(args);
+    
+    return string;
 }
 
 @end
@@ -675,6 +761,7 @@ typedef union LargeUnion_ {
     HLSSwizzleClassSelectorWithBlock(self, @selector(topClassString), ^(RuntimeTestSubClass121 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"2"];
     });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(topInstanceString), ^(RuntimeTestSubClass121 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"B"];
     });
@@ -682,22 +769,77 @@ typedef union LargeUnion_ {
     HLSSwizzleSelectorWithBlock(self, @selector(topInstanceInteger), ^(RuntimeTestSubClass121 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
     });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(topInstanceFloat), ^(RuntimeTestSubClass121 *self) {
         return ((float (*)(id, SEL))_imp)(self, _cmd) / 10.f;
     });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(topInstanceDouble), ^(RuntimeTestSubClass121 *self) {
         return ((double (*)(id, SEL))_imp)(self, _cmd) / 10.;
     });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(topInstanceCGFloat), ^(RuntimeTestSubClass121 *self) {
         return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 10.f;
     });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVoidReturningIntegerByReference:), ^(RuntimeTestSubClass121 *self, NSInteger *pValue) {
+        ((void (*)(id, SEL, NSInteger *))_imp)(self, _cmd, pValue);
+        
+        if (pValue) {
+            *pValue /= 10;
+        }
+    });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(topInstancePoint), ^(RuntimeTestSubClass121 *self) {
         CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 10.f, point.y / 10.f);
     });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLocationCoordinate), ^(RuntimeTestSubClass121 *self) {
         CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))_imp)(self, _cmd);
         return CLLocationCoordinate2DMake(locationCoordinate.longitude / 10., locationCoordinate.latitude / 10.);
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallStruct), ^(RuntimeTestSubClass121 *self) {
+        SmallStruct smallStruct = ((SmallStruct (*)(id, SEL))_imp)(self, _cmd);
+        smallStruct.i /= 10;
+        return smallStruct;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeStruct), ^(RuntimeTestSubClass121 *self) {
+        LargeStruct largeStruct = ((LargeStruct (*)(id, SEL))_imp)(self, _cmd);
+        for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+            largeStruct.values[i] /= 10.f;
+        }
+        return largeStruct;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallUnion), ^(RuntimeTestClass10 *self) {
+        SmallUnion smallUnion = ((SmallUnion (*)(id, SEL))_imp)(self, _cmd);
+        smallUnion.i /= 10;
+        return smallUnion;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeUnion), ^(RuntimeTestClass10 *self) {
+        LargeUnion largeUnion = ((LargeUnion (*)(id, SEL))_imp)(self, _cmd);
+        
+        LargeStruct largeStruct = largeUnion.largeStruct;
+        for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+            largeStruct.values[i] /= 10.f;
+        }
+        largeUnion.largeStruct = largeStruct;
+        
+        return largeUnion;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceMethodJoiningInteger:float:string:point:), ^(RuntimeTestSubSubClass1211 *self, NSInteger i, float f, NSString *s, CGPoint p) {
+        NSString *string = ((id (*)(id, SEL, NSInteger, float, id, CGPoint))_imp)(self, _cmd, i, f, s, p);
+        return [NSString stringWithFormat:@"-%@-", string];
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVariadicMethodJoiningStrings:stringList:), ^(RuntimeTestSubSubClass1211 *self, NSString *firstString, va_list stringList) {
+        NSString *string = ((id (*)(id, SEL, NSString *, va_list))_imp)(self, _cmd, firstString, stringList);
+        return [NSString stringWithFormat:@"-%@-", string];
     });
 }
 
@@ -725,29 +867,85 @@ typedef union LargeUnion_ {
     HLSSwizzleClassSelectorWithBlock(self, @selector(topClassString), ^(RuntimeTestSubSubClass1211 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"3"];
     });
+    
     HLSSwizzleSelectorWithBlock(self, @selector(topInstanceString), ^(RuntimeTestSubSubClass1211 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"C"];
     });
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceInteger), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceInteger), ^(RuntimeTestSubSubClass1211 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 2;
     });
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceFloat), ^(RuntimeTestSubClass121 *self) {
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceFloat), ^(RuntimeTestSubSubClass1211 *self) {
         return ((float (*)(id, SEL))_imp)(self, _cmd) / 2.f;
     });
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceDouble), ^(RuntimeTestSubClass121 *self) {
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceDouble), ^(RuntimeTestSubSubClass1211 *self) {
         return ((double (*)(id, SEL))_imp)(self, _cmd) / 2.;
     });
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceCGFloat), ^(RuntimeTestSubClass121 *self) {
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceCGFloat), ^(RuntimeTestSubSubClass1211 *self) {
         return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 2.f;
     });
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstancePoint), ^(RuntimeTestSubClass121 *self) {
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVoidReturningIntegerByReference:), ^(RuntimeTestSubSubClass1211 *self, NSInteger *pValue) {
+        ((void (*)(id, SEL, NSInteger *))_imp)(self, _cmd, pValue);
+        
+        if (pValue) {
+            *pValue /= 2;
+        }
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstancePoint), ^(RuntimeTestSubSubClass1211 *self) {
         CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 2.f, point.y / 2.f);
     });
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLocationCoordinate), ^(RuntimeTestSubClass121 *self) {
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLocationCoordinate), ^(RuntimeTestSubSubClass1211 *self) {
         CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))_imp)(self, _cmd);
         return CLLocationCoordinate2DMake(locationCoordinate.longitude / 2., locationCoordinate.latitude / 2.);
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallStruct), ^(RuntimeTestSubSubClass1211 *self) {
+        SmallStruct smallStruct = ((SmallStruct (*)(id, SEL))_imp)(self, _cmd);
+        smallStruct.i /= 2;
+        return smallStruct;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeStruct), ^(RuntimeTestSubSubClass1211 *self) {
+        LargeStruct largeStruct = ((LargeStruct (*)(id, SEL))_imp)(self, _cmd);
+        for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+            largeStruct.values[i] /= 2.f;
+        }
+        return largeStruct;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallUnion), ^(RuntimeTestSubSubClass1211 *self) {
+        SmallUnion smallUnion = ((SmallUnion (*)(id, SEL))_imp)(self, _cmd);
+        smallUnion.i /= 2;
+        return smallUnion;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeUnion), ^(RuntimeTestSubSubClass1211 *self) {
+        LargeUnion largeUnion = ((LargeUnion (*)(id, SEL))_imp)(self, _cmd);
+        
+        LargeStruct largeStruct = largeUnion.largeStruct;
+        for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+            largeStruct.values[i] /= 2.f;
+        }
+        largeUnion.largeStruct = largeStruct;
+        
+        return largeUnion;
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceMethodJoiningInteger:float:string:point:), ^(RuntimeTestSubSubClass1211 *self, NSInteger i, float f, NSString *s, CGPoint p) {
+        NSString *string = ((id (*)(id, SEL, NSInteger, float, id, CGPoint))_imp)(self, _cmd, i, f, s, p);
+        return [NSString stringWithFormat:@"-%@-", string];
+    });
+    
+    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVariadicMethodJoiningStrings:stringList:), ^(RuntimeTestSubSubClass1211 *self, NSString *firstString, va_list stringList) {
+        NSString *string = ((id (*)(id, SEL, NSString *, va_list))_imp)(self, _cmd, firstString, stringList);
+        return [NSString stringWithFormat:@"-%@-", string];
     });
 }
 
