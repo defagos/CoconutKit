@@ -301,8 +301,11 @@ typedef union LargeUnion_ {
 
 @interface RuntimeTestClass10 : NSObject
 
+// Object as return value
++ (NSString *)classString;
+- (NSString *)instanceString;
+
 // Primitive integer type as return value
-+ (NSInteger)classInteger;
 - (NSInteger)instanceInteger;
 
 // Primitive floating-point type as return value
@@ -312,9 +315,6 @@ typedef union LargeUnion_ {
 
 // Void
 - (void)instanceVoidReturningIntegerByReference:(NSInteger *)pValue;
-
-// Object as return value
-- (NSString *)instanceString;
 
 // Struct as return value
 - (CGPoint)instancePoint;
@@ -333,9 +333,9 @@ typedef union LargeUnion_ {
 
 @implementation RuntimeTestClass10
 
-+ (NSInteger)classInteger
++ (NSString *)classString
 {
-    return 420;
+    return @"Tom";
 }
 
 - (NSInteger)instanceInteger
@@ -457,12 +457,16 @@ typedef union LargeUnion_ {
 @implementation RuntimeTestClass10 (Swizzling)
 
 + (void)load
-{    
-    // Swizzle to get 42 as a result
-    HLSSwizzleClassSelectorWithBlock(self, @selector(classInteger), ^(RuntimeTestClass10 *self) {
-        return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
+{
+    // Swizzle to uppercase
+    HLSSwizzleClassSelectorWithBlock(self, @selector(classString), ^(RuntimeTestClass10 *self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) uppercaseString];
+    });
+    HLSSwizzleSelectorWithBlock(self, @selector(instanceString), ^(RuntimeTestClass10 *self) {
+        return [((id (*)(id, SEL))_imp)(self, _cmd) uppercaseString];
     });
     
+    // Swizzle to get 42 as a result
     HLSSwizzleSelectorWithBlock(self, @selector(instanceInteger), ^(RuntimeTestClass10 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
     });
@@ -486,11 +490,6 @@ typedef union LargeUnion_ {
         if (pValue) {
             *pValue /= 10;
         }
-    });
-    
-    // Swizzle to uppercase
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceString), ^(RuntimeTestClass10 *self) {
-        return [((id (*)(id, SEL))_imp)(self, _cmd) uppercaseString];
     });
     
     // Swizzle to get (42, 42) as a result
@@ -977,10 +976,12 @@ typedef union LargeUnion_ {
     XCTAssertFalse(hls_class_implementsProtocol(NSClassFromString(@"RuntimeTestClass9"), @protocol(RuntimeTestFormalProtocolB)));
 }
 
-- (void)testSwizzling
+- (void)testSimpleSwizzling
 {
     // Swizzling has been made in a +load. We here simply check that expected values after swizzling are correct
-    XCTAssertEqual([RuntimeTestClass10 classInteger], (NSInteger)42);
+    XCTAssertEqualObjects([RuntimeTestClass10 classString], @"TOM");
+    XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceString], @"TOM");
+    
     XCTAssertEqual([[RuntimeTestClass10 new] instanceInteger], (NSInteger)42);
     
     XCTAssertEqual([[RuntimeTestClass10 new] instanceFloat], 42.f);
@@ -991,30 +992,28 @@ typedef union LargeUnion_ {
     [[RuntimeTestClass10 new] instanceVoidReturningIntegerByReference:&value];
     XCTAssertEqual(value, 42);
     
-    XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceString], @"TOM");
+    CGPoint point = [[RuntimeTestClass10 new] instancePoint];
+    XCTAssertEqual(point.x, 42.f);
+    XCTAssertEqual(point.y, 42.f);
     
-    CGPoint point10 = [[RuntimeTestClass10 new] instancePoint];
-    XCTAssertEqual(point10.x, 42.f);
-    XCTAssertEqual(point10.y, 42.f);
+    CLLocationCoordinate2D locationCoordinate = [[RuntimeTestClass10 new] instanceLocationCoordinate];
+    XCTAssertEqual(locationCoordinate.longitude, 12.f);
+    XCTAssertEqual(locationCoordinate.latitude, 12.f);
     
-    CLLocationCoordinate2D locationCoordinate10 = [[RuntimeTestClass10 new] instanceLocationCoordinate];
-    XCTAssertEqual(locationCoordinate10.longitude, 12.f);
-    XCTAssertEqual(locationCoordinate10.latitude, 12.f);
+    SmallStruct smallStruct = [[RuntimeTestClass10 new] instanceSmallStruct];
+    XCTAssertEqual(smallStruct.i, 42);
     
-    SmallStruct smallStruct10 = [[RuntimeTestClass10 new] instanceSmallStruct];
-    XCTAssertEqual(smallStruct10.i, 42);
-    
-    LargeStruct largeStruct10 = [[RuntimeTestClass10 new] instanceLargeStruct];
-    for (size_t i = 0; i < sizeof(largeStruct10.values) / sizeof(largeStruct10.values[0]); ++i) {
-        XCTAssertEqual(largeStruct10.values[i], 42.f);
+    LargeStruct largeStruct = [[RuntimeTestClass10 new] instanceLargeStruct];
+    for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
+        XCTAssertEqual(largeStruct.values[i], 42.f);
     }
     
-    SmallUnion smallUnion10 = [[RuntimeTestClass10 new] instanceSmallUnion];
-    XCTAssertEqual(smallUnion10.i, 42);
+    SmallUnion smallUnion = [[RuntimeTestClass10 new] instanceSmallUnion];
+    XCTAssertEqual(smallUnion.i, 42);
     
-    LargeUnion largeUnion10 = [[RuntimeTestClass10 new] instanceLargeUnion];
-    for (size_t i = 0; i < sizeof(largeUnion10.largeStruct.values) / sizeof(largeUnion10.largeStruct.values[0]); ++i) {
-        XCTAssertEqual(largeUnion10.largeStruct.values[i], 42);
+    LargeUnion largeUnion = [[RuntimeTestClass10 new] instanceLargeUnion];
+    for (size_t i = 0; i < sizeof(largeUnion.largeStruct.values) / sizeof(largeUnion.largeStruct.values[0]); ++i) {
+        XCTAssertEqual(largeUnion.largeStruct.values[i], 42);
     }
     
     XCTAssertEqualObjects([[RuntimeTestClass10 new] instanceMethodJoiningInteger:42 float:42.f string:@"42" point:CGPointMake(42.f, 42.f)], @"42.42.42.42.42");
@@ -1023,10 +1022,16 @@ typedef union LargeUnion_ {
     XCTAssertEqualObjects(joinedString1, @"42.42.42");
     NSString *joinedString2 = [[RuntimeTestClass10 new] instanceVariadicMethodJoiningStrings:@"42", @"42", @"42", @"42", @"42", nil];
     XCTAssertEqualObjects(joinedString2, @"42.42.42.42.42");
-    
+}
+
+- (void)testMultipleSwizzling
+{
     // Multiple swizzling
     XCTAssertEqualObjects([RuntimeTestClass11 testString], @"ABCDE");
-    
+}
+
+- (void)testSwizzlingInClassHierarchies
+{
     // Swizzling of non-overridden methods in class hierarchies (see HLSRuntime.m for an explanation)
     XCTAssertEqualObjects([RuntimeTestSubClass121 topClassString], @"12");
     XCTAssertEqualObjects([RuntimeTestSubSubClass1211 topClassString], @"123");
