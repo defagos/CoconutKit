@@ -459,67 +459,91 @@ typedef union LargeUnion_ {
 + (void)load
 {
     // Swizzle to uppercase
-    HLSSwizzleClassSelectorWithBlock(self, @selector(classString), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleClassSelectorWithBlock_B(self, @selector(classString))
+    ^(RuntimeTestClass10 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) uppercaseString];
-    });
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceString), ^(RuntimeTestClass10 *self) {
+    }
+    HLSSwizzleClassSelectorWithBlock_E;
+    
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceString))
+    ^(RuntimeTestClass10 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) uppercaseString];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
     // Swizzle to get 42 as a result
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceInteger), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceInteger))
+    ^(RuntimeTestClass10 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceFloat), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceFloat))
+    ^(RuntimeTestClass10 *self) {
         return ((float (*)(id, SEL))_imp)(self, _cmd) / 10.f;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceDouble), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceDouble))
+    ^(RuntimeTestClass10 *self) {
         return ((double (*)(id, SEL))_imp)(self, _cmd) / 10.;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceCGFloat), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceCGFloat))
+    ^(RuntimeTestClass10 *self) {
         return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 10.f;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
     // Void
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceVoidReturningIntegerByReference:), ^(RuntimeTestClass10 *self, NSInteger *pValue) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceVoidReturningIntegerByReference:))
+    ^(RuntimeTestClass10 *self, NSInteger *pValue) {
         ((void (*)(id, SEL, NSInteger *))_imp)(self, _cmd, pValue);
         
         if (pValue) {
             *pValue /= 10;
         }
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
     // Swizzle to get (42, 42) as a result
-    HLSSwizzleSelectorWithBlock(self, @selector(instancePoint), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instancePoint))
+    ^(RuntimeTestClass10 *self) {
         CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 10.f, point.y / 10.f);
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
     // Swizzle to get 42 for all values
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceSmallStruct), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceSmallStruct))
+    ^(RuntimeTestClass10 *self) {
         SmallStruct smallStruct = ((SmallStruct (*)(id, SEL))_imp)(self, _cmd);
         smallStruct.i /= 10;
         return smallStruct;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceLargeStruct), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceLargeStruct))
+    ^(RuntimeTestClass10 *self) {
         LargeStruct largeStruct = ((LargeStruct (*)(id, SEL))_imp)(self, _cmd);
         for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
             largeStruct.values[i] /= 10.f;
         }
         return largeStruct;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceSmallUnion), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceSmallUnion))
+    ^(RuntimeTestClass10 *self) {
         SmallUnion smallUnion = ((SmallUnion (*)(id, SEL))_imp)(self, _cmd);
         smallUnion.i /= 10;
         return smallUnion;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceLargeUnion), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceLargeUnion))
+    ^(RuntimeTestClass10 *self) {
         LargeUnion largeUnion = ((LargeUnion (*)(id, SEL))_imp)(self, _cmd);
         
         LargeStruct largeStruct = largeUnion.largeStruct;
@@ -529,25 +553,32 @@ typedef union LargeUnion_ {
         largeUnion.largeStruct = largeStruct;
         
         return largeUnion;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
     // Swizzle to get (12, 12) as a result
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceLocationCoordinate), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceLocationCoordinate))
+    ^(RuntimeTestClass10 *self) {
         CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))_imp)(self, _cmd);
         return CLLocationCoordinate2DMake(locationCoordinate.longitude / 10., locationCoordinate.latitude / 10.);
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
     // Replace ',' with '.' as separator
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceMethodJoiningInteger:float:string:point:), ^(RuntimeTestClass10 *self, NSInteger i, float f, NSString *s, CGPoint p) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceMethodJoiningInteger:float:string:point:))
+    ^(RuntimeTestClass10 *self, NSInteger i, float f, NSString *s, CGPoint p) {
         NSString *joinedString = ((id (*)(id, SEL, NSInteger, float, id, CGPoint))_imp)(self, _cmd, i, f, s, p);
         return [joinedString stringByReplacingOccurrencesOfString:@"," withString:@"."];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
     // Cannot swizzle functions with ellipsis (cannot forward the call to the original implementation). Must swizzle the method with va_list if available (of course, here available :) )
-    HLSSwizzleSelectorWithBlock(self, @selector(instanceVariadicMethodJoiningStrings:stringList:), ^(RuntimeTestClass10 *self, NSString *firstString, va_list stringList) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(instanceVariadicMethodJoiningStrings:stringList:))
+    ^(RuntimeTestClass10 *self, NSString *firstString, va_list stringList) {
         NSString *joinedString = ((id (*)(id, SEL, id, va_list))_imp)(self, _cmd, firstString, stringList);
         return [joinedString stringByReplacingOccurrencesOfString:@"," withString:@"."];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
 }
 
 @end
@@ -576,21 +607,29 @@ typedef union LargeUnion_ {
 + (void)load
 {
     // Test multiple swizzlings of the same method
-    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+    HLSSwizzleClassSelectorWithBlock_B(self, @selector(testString))
+    ^(RuntimeTestClass11 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"B"];
-    });
+    }
+    HLSSwizzleClassSelectorWithBlock_E;
     
-    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+    HLSSwizzleClassSelectorWithBlock_B(self, @selector(testString))
+    ^(RuntimeTestClass11 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"C"];
-    });
+    }
+    HLSSwizzleClassSelectorWithBlock_E;
 
-    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+    HLSSwizzleClassSelectorWithBlock_B(self, @selector(testString))
+    ^(RuntimeTestClass11 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"D"];
-    });
+    }
+    HLSSwizzleClassSelectorWithBlock_E;
 
-    HLSSwizzleClassSelectorWithBlock(self, @selector(testString), ^(id self) {
+    HLSSwizzleClassSelectorWithBlock_B(self, @selector(testString))
+    ^(RuntimeTestClass11 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"E"];
-    });
+    }
+    HLSSwizzleClassSelectorWithBlock_E;
 }
 
 @end
@@ -758,69 +797,95 @@ typedef union LargeUnion_ {
 + (void)load
 {
     // Swizzling of non-overridden methods in class hierarchies (see HLSRuntime.m for an explanation)
-    HLSSwizzleClassSelectorWithBlock(self, @selector(topClassString), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleClassSelectorWithBlock_B(self, @selector(topClassString))
+    ^(RuntimeTestSubClass121 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"2"];
-    });
+    }
+    HLSSwizzleClassSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceString), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceString))
+    ^(RuntimeTestSubClass121 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"B"];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceInteger), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceInteger))
+    ^(RuntimeTestSubClass121 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 10;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceFloat), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceFloat))
+    ^(RuntimeTestSubClass121 *self) {
         return ((float (*)(id, SEL))_imp)(self, _cmd) / 10.f;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceDouble), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceDouble))
+    ^(RuntimeTestSubClass121 *self) {
         return ((double (*)(id, SEL))_imp)(self, _cmd) / 10.;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceCGFloat), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceCGFloat))
+    ^(RuntimeTestSubClass121 *self) {
         return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 10.f;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVoidReturningIntegerByReference:), ^(RuntimeTestSubClass121 *self, NSInteger *pValue) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceVoidReturningIntegerByReference:))
+    ^(RuntimeTestSubClass121 *self, NSInteger *pValue) {
         ((void (*)(id, SEL, NSInteger *))_imp)(self, _cmd, pValue);
         
         if (pValue) {
             *pValue /= 10;
         }
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstancePoint), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstancePoint))
+    ^(RuntimeTestSubClass121 *self) {
         CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 10.f, point.y / 10.f);
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLocationCoordinate), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceLocationCoordinate))
+    ^(RuntimeTestSubClass121 *self) {
         CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))_imp)(self, _cmd);
         return CLLocationCoordinate2DMake(locationCoordinate.longitude / 10., locationCoordinate.latitude / 10.);
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallStruct), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceSmallStruct))
+    ^(RuntimeTestSubClass121 *self) {
         SmallStruct smallStruct = ((SmallStruct (*)(id, SEL))_imp)(self, _cmd);
         smallStruct.i /= 10;
         return smallStruct;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeStruct), ^(RuntimeTestSubClass121 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceLargeStruct))
+    ^(RuntimeTestSubClass121 *self) {
         LargeStruct largeStruct = ((LargeStruct (*)(id, SEL))_imp)(self, _cmd);
         for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
             largeStruct.values[i] /= 10.f;
         }
         return largeStruct;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallUnion), ^(RuntimeTestClass10 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceSmallUnion))
+    ^(RuntimeTestSubClass121 *self) {
         SmallUnion smallUnion = ((SmallUnion (*)(id, SEL))_imp)(self, _cmd);
         smallUnion.i /= 10;
         return smallUnion;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeUnion), ^(RuntimeTestClass10 *self) {
+    
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceLargeUnion))
+    ^(RuntimeTestSubClass121 *self) {
         LargeUnion largeUnion = ((LargeUnion (*)(id, SEL))_imp)(self, _cmd);
         
         LargeStruct largeStruct = largeUnion.largeStruct;
@@ -830,17 +895,22 @@ typedef union LargeUnion_ {
         largeUnion.largeStruct = largeStruct;
         
         return largeUnion;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceMethodJoiningInteger:float:string:point:), ^(RuntimeTestSubSubClass1211 *self, NSInteger i, float f, NSString *s, CGPoint p) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceMethodJoiningInteger:float:string:point:))
+    ^(RuntimeTestSubClass121 *self, NSInteger i, float f, NSString *s, CGPoint p) {
         NSString *string = ((id (*)(id, SEL, NSInteger, float, id, CGPoint))_imp)(self, _cmd, i, f, s, p);
         return [NSString stringWithFormat:@"-%@-", string];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVariadicMethodJoiningStrings:stringList:), ^(RuntimeTestSubSubClass1211 *self, NSString *firstString, va_list stringList) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceVariadicMethodJoiningStrings:stringList:))
+    ^(RuntimeTestSubClass121 *self, NSString *firstString, va_list stringList) {
         NSString *string = ((id (*)(id, SEL, NSString *, va_list))_imp)(self, _cmd, firstString, stringList);
         return [NSString stringWithFormat:@"-%@-", string];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
 }
 
 @end
@@ -864,69 +934,94 @@ typedef union LargeUnion_ {
 + (void)load
 {
     // Swizzling of non-overridden methods in class hierarchies (see HLSRuntime.m for an explanation)
-    HLSSwizzleClassSelectorWithBlock(self, @selector(topClassString), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleClassSelectorWithBlock_B(self, @selector(topClassString))
+    ^(RuntimeTestSubSubClass1211 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"3"];
-    });
+    }
+    HLSSwizzleClassSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceString), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceString))
+    ^(RuntimeTestSubSubClass1211 *self) {
         return [((id (*)(id, SEL))_imp)(self, _cmd) stringByAppendingString:@"C"];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceInteger), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceInteger))
+    ^(RuntimeTestSubSubClass1211 *self) {
         return ((NSInteger (*)(id, SEL))_imp)(self, _cmd) / 2;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceFloat), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceFloat))
+    ^(RuntimeTestSubSubClass1211 *self) {
         return ((float (*)(id, SEL))_imp)(self, _cmd) / 2.f;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceDouble), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceDouble))
+    ^(RuntimeTestSubSubClass1211 *self) {
         return ((double (*)(id, SEL))_imp)(self, _cmd) / 2.;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceCGFloat), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceCGFloat))
+    ^(RuntimeTestSubSubClass1211 *self) {
         return ((CGFloat (*)(id, SEL))_imp)(self, _cmd) / 2.f;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVoidReturningIntegerByReference:), ^(RuntimeTestSubSubClass1211 *self, NSInteger *pValue) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceVoidReturningIntegerByReference:))
+    ^(RuntimeTestSubSubClass1211 *self, NSInteger *pValue) {
         ((void (*)(id, SEL, NSInteger *))_imp)(self, _cmd, pValue);
         
         if (pValue) {
             *pValue /= 2;
         }
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstancePoint), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstancePoint))
+    ^(RuntimeTestSubSubClass1211 *self) {
         CGPoint point = ((CGPoint (*)(id, SEL))_imp)(self, _cmd);
         return CGPointMake(point.x / 2.f, point.y / 2.f);
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLocationCoordinate), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceLocationCoordinate))
+    ^(RuntimeTestSubSubClass1211 *self) {
         CLLocationCoordinate2D locationCoordinate = ((CLLocationCoordinate2D (*)(id, SEL))_imp)(self, _cmd);
         return CLLocationCoordinate2DMake(locationCoordinate.longitude / 2., locationCoordinate.latitude / 2.);
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallStruct), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceSmallStruct))
+    ^(RuntimeTestSubSubClass1211 *self) {
         SmallStruct smallStruct = ((SmallStruct (*)(id, SEL))_imp)(self, _cmd);
         smallStruct.i /= 2;
         return smallStruct;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeStruct), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceLargeStruct))
+    ^(RuntimeTestSubSubClass1211 *self) {
         LargeStruct largeStruct = ((LargeStruct (*)(id, SEL))_imp)(self, _cmd);
         for (size_t i = 0; i < sizeof(largeStruct.values) / sizeof(largeStruct.values[0]); ++i) {
             largeStruct.values[i] /= 2.f;
         }
         return largeStruct;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceSmallUnion), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceSmallUnion))
+    ^(RuntimeTestSubSubClass1211 *self) {
         SmallUnion smallUnion = ((SmallUnion (*)(id, SEL))_imp)(self, _cmd);
         smallUnion.i /= 2;
         return smallUnion;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceLargeUnion), ^(RuntimeTestSubSubClass1211 *self) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceLargeUnion))
+    ^(RuntimeTestSubSubClass1211 *self) {
         LargeUnion largeUnion = ((LargeUnion (*)(id, SEL))_imp)(self, _cmd);
         
         LargeStruct largeStruct = largeUnion.largeStruct;
@@ -936,17 +1031,22 @@ typedef union LargeUnion_ {
         largeUnion.largeStruct = largeStruct;
         
         return largeUnion;
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceMethodJoiningInteger:float:string:point:), ^(RuntimeTestSubSubClass1211 *self, NSInteger i, float f, NSString *s, CGPoint p) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceMethodJoiningInteger:float:string:point:))
+    ^(RuntimeTestSubSubClass1211 *self, NSInteger i, float f, NSString *s, CGPoint p) {
         NSString *string = ((id (*)(id, SEL, NSInteger, float, id, CGPoint))_imp)(self, _cmd, i, f, s, p);
         return [NSString stringWithFormat:@"-%@-", string];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
     
-    HLSSwizzleSelectorWithBlock(self, @selector(topInstanceVariadicMethodJoiningStrings:stringList:), ^(RuntimeTestSubSubClass1211 *self, NSString *firstString, va_list stringList) {
+    HLSSwizzleSelectorWithBlock_B(self, @selector(topInstanceVariadicMethodJoiningStrings:stringList:))
+    ^(RuntimeTestSubSubClass1211 *self, NSString *firstString, va_list stringList) {
         NSString *string = ((id (*)(id, SEL, NSString *, va_list))_imp)(self, _cmd, firstString, stringList);
         return [NSString stringWithFormat:@"-%@-", string];
-    });
+    }
+    HLSSwizzleSelectorWithBlock_E;
 }
 
 @end

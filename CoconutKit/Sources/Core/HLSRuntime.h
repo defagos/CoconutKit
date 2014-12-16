@@ -20,21 +20,17 @@
     (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleClassSelector((clazz), (selector), (IMP)(newImplementation))
 
 /**
- * Swizzle the specified instance / class selector on the specified class, assigning it a new implementation given by a 
- * block. When implementing the block, the variables _cmd and _imp are reserved for easy access to the selector, respectively
- * the original implementation. The original implementation must be cast to a function pointer with proper prototype before
- * being called. Neither _cmd nor _imp are here marked as __unused so that the compiler emits an appropriate warning if
- * this is not the case
+ * Macros defined for consistency with above ones
  */
-#define HLSSwizzleSelectorWithBlock(clazz, selector, newImplementationBlock) { \
+#define HLSSwizzleSelectorWithBlock_B(clazz, selector) { \
     SEL _cmd = selector; \
-    __block IMP _imp = hls_class_swizzleSelectorWithBlock((clazz), (selector), (newImplementationBlock)); \
-}
+    __block IMP _imp = hls_class_swizzleSelectorWithBlock((clazz), (selector),
+#define HLSSwizzleSelectorWithBlock_E );}
 
-#define HLSSwizzleClassSelectorWithBlock(clazz, selector, newImplementationBlock) { \
+#define HLSSwizzleClassSelectorWithBlock_B(clazz, selector) { \
     SEL _cmd = selector; \
-    __block IMP _imp = hls_class_swizzleClassSelectorWithBlock((clazz), (selector), (newImplementationBlock)); \
-}
+    __block IMP _imp = hls_class_swizzleClassSelectorWithBlock((clazz), (selector),
+#define HLSSwizzleClassSelectorWithBlock_E );}
 
 /**
  * Policies for associated objects
