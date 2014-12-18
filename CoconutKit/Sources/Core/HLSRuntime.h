@@ -20,17 +20,17 @@
     (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleClassSelector((clazz), (selector), (IMP)(newImplementation))
 
 /**
- * Macros defined for consistency with above ones
+ * Begin / end macros for block swizzling
  */
-#define HLSSwizzleSelectorWithBlock_B(clazz, selector) { \
+#define HLSSwizzleSelectorWithBlock_Begin(clazz, selector) { \
     SEL _cmd = selector; \
     __block IMP _imp = hls_class_swizzleSelectorWithBlock((clazz), (selector),
-#define HLSSwizzleSelectorWithBlock_E );}
+#define HLSSwizzleSelectorWithBlock_End );}
 
-#define HLSSwizzleClassSelectorWithBlock_B(clazz, selector) { \
+#define HLSSwizzleClassSelectorWithBlock_Begin(clazz, selector) { \
     SEL _cmd = selector; \
     __block IMP _imp = hls_class_swizzleClassSelectorWithBlock((clazz), (selector),
-#define HLSSwizzleClassSelectorWithBlock_E );}
+#define HLSSwizzleClassSelectorWithBlock_End );}
 
 /**
  * Policies for associated objects
