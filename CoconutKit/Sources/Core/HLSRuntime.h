@@ -9,9 +9,29 @@
 #import <objc/runtime.h>
 
 /**
- * Swizzle the method with the specified instance / classselector on the specified class, assigning it a new function
- * implementation. The previous implementation is returned in pPreviousImplementation, must be stored in a function
+ * Swizzle the method with the specified instance / class selector on the specified class, assigning it a new function
+ * implementation. The previous implementation is returned in pPreviousImplementation, which must be stored in a function
  * pointer with proper prototype, and called from within the new implementation
+ *
+ * Example of use:
+ * ---------------
+ *
+ *    static void (*s_setValue_animated)(id, SEL, float, BOOL) = NULL;
+ *
+ *    static void swizzle_setValue_animated(UISlider *self, SEL _cmd, float value, BOOL animated)
+ *    {
+ *        s_setValue_animated(self, _cmd, value, animated);
+ *        
+ *        // ...
+ *    }
+ *
+ *
+ *    int main(int argc, char *argv[])
+ *    {
+ *        HLSSwizzleSelector([UISlider class], @selector(setValue:animated:), swizzle_setValue_animated, &s_setValue_animated);
+ *        
+ *        // ...
+ *    }
  */
 #define HLSSwizzleSelector(clazz, selector, newImplementation, pPreviousImplementation) \
     (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleSelector((clazz), (selector), (IMP)(newImplementation))
@@ -20,19 +40,32 @@
     (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleClassSelector((clazz), (selector), (IMP)(newImplementation))
 
 /**
- * Swizzle the specified instance / class selector on the specified class, assigning it a new implementation given by a 
- * block. When implementing the block, the variables _cmd and _imp are reserved for easy access to the selector, respectively
- * the original implementation. The original implementation must be cast to a function pointer with proper prototype
+ * Begin / end macros for block swizzling. The new implementation is supplied using an enclosed block with proper signature
+ * (self, followed by method arguments). Within the block implementation, you can use _cmd and _imp to refer to the swizzled
+ * selector, respectively to the replaced implementation. The original implementation must be cast to a pointer with proper
+ * prototype (including the SEL argument), and called from within the new implementation block
+ *
+ * Example of use:
+ * ---------------
+ *
+ *    HLSSwizzleSelectorWithBlock_Begin([UISlider class], @selector(setValue:animated:))
+ *    ^(UISlider *self, float value, BOOL animated) {
+ *        ((void (*)(id, SEL, float, BOOL))_imp)(self, _cmd, value, animated);
+ *        
+ *        // ...
+ *    }
+ *    HLSSwizzleSelectorWithBlock_End;
+ *
  */
-#define HLSSwizzleSelectorWithBlock(clazz, selector, newImplementationBlock) { \
-    __unused SEL _cmd = selector; \
-    __block IMP _imp = hls_class_swizzleSelectorWithBlock((clazz), (selector), (newImplementationBlock)); \
-}
+#define HLSSwizzleSelectorWithBlock_Begin(clazz, selector) { \
+    SEL _cmd = selector; \
+    __block IMP _imp = hls_class_swizzleSelectorWithBlock((clazz), (selector),
+#define HLSSwizzleSelectorWithBlock_End );}
 
-#define HLSSwizzleClassSelectorWithBlock(clazz, selector, newImplementationBlock) { \
-    __unused SEL _cmd = selector; \
-    __block IMP _imp = hls_class_swizzleClassSelectorWithBlock((clazz), (selector), (newImplementationBlock)); \
-}
+#define HLSSwizzleClassSelectorWithBlock_Begin(clazz, selector) { \
+    SEL _cmd = selector; \
+    __block IMP _imp = hls_class_swizzleClassSelectorWithBlock((clazz), (selector),
+#define HLSSwizzleClassSelectorWithBlock_End );}
 
 /**
  * Policies for associated objects

@@ -17,8 +17,6 @@
 
 #import <objc/message.h>
 
-static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImplementation);
-
 struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol *protocol,
                                                                        BOOL isRequiredMethod,
                                                                        BOOL isInstanceMethod,
@@ -228,15 +226,10 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
 
 IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation)
 {
-    return hls_class_swizzleSelectorCommon(objc_getMetaClass(class_getName(clazz)), selector, newImplementation);
+    return hls_class_swizzleSelector(objc_getMetaClass(class_getName(clazz)), selector, newImplementation);
 }
 
 IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation)
-{
-    return hls_class_swizzleSelectorCommon(clazz, selector, newImplementation);
-}
-
-static IMP hls_class_swizzleSelectorCommon(Class clazz, SEL selector, IMP newImplementation)
 {
     // Calling class_getInstanceMethod on a metaclass is the same as calling class_getClassMethod on the class itself. There
     // is therefore no need to test whether the class is a metaclass or not! Lookup is performed in parent classes as well
