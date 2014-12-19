@@ -247,10 +247,10 @@ IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation)
     NSUInteger returnSize = 0;
     NSGetSizeAndAlignment(types, &returnSize, NULL);
     
-    // Non ARM 64-bit architectures: Implementations returning large structs need _stret messaging methods, otherwise standard
+    // 32-bit architectures: Implementations returning large structs need _stret messaging methods, otherwise standard
     // Objective-C messaging is used (small structs are returned in registers)
     // For more information, see http://www.sealiesoftware.com/blog/archive/2008/10/30/objc_explain_objc_msgSend_stret.html
-    if (sizeof(void *) != 8 && types[0] == _C_STRUCT_B && returnSize != 1 && returnSize != 2 && returnSize != 4 && returnSize != 8) {
+    if (sizeof(void *) == 4 && types[0] == _C_STRUCT_B && returnSize != 1 && returnSize != 2 && returnSize != 4 && returnSize != 8) {
         class_addMethod(clazz, selector, imp_implementationWithBlock(^(__unsafe_unretained id self /* prevent incorrect ARC memory calls */, va_list argp) {
             struct objc_super super = {
                 .receiver = self,
