@@ -265,7 +265,7 @@ IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation)
                 char dummy[16];
             } HLSLargeStruct;
             
-            // Cast the call to objc_msgSendSuper appropriately
+            // Cast the call to objc_msgSendSuper_stret appropriately
             HLSLargeStruct (*objc_msgSendSuper_stret_typed)(struct objc_super *, SEL, va_list) = (void *)&objc_msgSendSuper_stret;
             return objc_msgSendSuper_stret_typed(&super, selector, argp);
         }), types);
