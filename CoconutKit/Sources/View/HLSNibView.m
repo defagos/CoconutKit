@@ -113,6 +113,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         
         // Get rid of the placeholder and install the nib-instantiated view instead
         nibView.frame = self.frame;
+        nibView.alpha = self.alpha;
         nibView.autoresizingMask = self.autoresizingMask;
         [self.superview insertSubview:nibView belowSubview:self];
         [self removeFromSuperview];
