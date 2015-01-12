@@ -23,6 +23,8 @@
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
 #import "LabelDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
+#import "NibViewAutolayoutDemoViewController.h"
+#import "NibViewAutoresizingMasksDemoViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
@@ -109,6 +111,8 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexEffects,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
+    ViewDemoIndexNibViewAutolayout,
+    ViewDemoIndexNibViewAutoresizingMasks,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 };
@@ -418,6 +422,16 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     cell.textLabel.text = NSLocalizedString(@"Parallax scrolling", nil);
                     break;
                 }
+                    
+                case ViewDemoIndexNibViewAutolayout: {
+                    cell.textLabel.text = NSLocalizedString(@"Nib view (autolayout)", nil);
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutoresizingMasks: {
+                    cell.textLabel.text = NSLocalizedString(@"Nib view (autoresizing masks)", nil);
+                    break;
+                }
                 
                 default: {
                     return nil;
@@ -635,6 +649,16 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexParallaxScrolling: {
                     demoViewController = [[ParallaxScrollingDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutolayout: {
+                    demoViewController = [[NibViewAutolayoutDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutoresizingMasks: {
+                    demoViewController = [[NibViewAutoresizingMasksDemoViewController alloc] init];
                     break;
                 }
                     

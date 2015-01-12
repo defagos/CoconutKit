@@ -320,6 +320,14 @@
 		6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCB4F2F19266DE200047AD3 /* CoconutKit-resources.bundle */; };
 		6FD0024F15D5463200375240 /* ContainmentTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD0024D15D5463200375240 /* ContainmentTestViewController.m */; };
 		6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */; };
+		6FD2DE0F1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE0D1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m */; };
+		6FD2DE101A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE0D1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m */; };
+		6FD2DE111A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE0E1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib */; };
+		6FD2DE121A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE0E1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib */; };
+		6FD2DE161A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */; };
+		6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */; };
+		6FD2DE181A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
+		6FD2DE191A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
@@ -335,13 +343,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6F159C2515A596590020AFAC;
 			remoteInfo = "Build-StaticFramework";
-		};
-		6F6542991A2C946700FDA2DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FCB4F211926657B00047AD3 /* CoconutKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6F6542101A2C7E4500FDA2DE;
-			remoteInfo = "CoconutKit-tests";
 		};
 		6F6B0C9216B3DA35006B718F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -628,6 +629,12 @@
 		6FD0024C15D5463200375240 /* ContainmentTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainmentTestViewController.h; sourceTree = "<group>"; };
 		6FD0024D15D5463200375240 /* ContainmentTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainmentTestViewController.m; sourceTree = "<group>"; };
 		6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContainmentTestViewController.xib; sourceTree = "<group>"; };
+		6FD2DE0C1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibViewAutoresizingMasksDemoViewController.h; sourceTree = "<group>"; };
+		6FD2DE0D1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewAutoresizingMasksDemoViewController.m; sourceTree = "<group>"; };
+		6FD2DE0E1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibViewAutoresizingMasksDemoViewController.xib; sourceTree = "<group>"; };
+		6FD2DE131A64531300B98C11 /* NibViewAutolayoutDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibViewAutolayoutDemoViewController.h; sourceTree = "<group>"; };
+		6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewAutolayoutDemoViewController.m; sourceTree = "<group>"; };
+		6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibViewAutolayoutDemoViewController.xib; sourceTree = "<group>"; };
 		6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
 		6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
@@ -1081,6 +1088,7 @@
 				6F718CAC16CF8714001498D6 /* Effects */,
 				6F58C53617944E080092590C /* KeyboardAvoidingScrollView */,
 				6F89149C15790DDE009FCC78 /* Label */,
+				6FD2DE091A6452D800B98C11 /* NibView */,
 				6FC5E8B114F380B500C01ABC /* ParallaxScrolling */,
 				6F5A0BB01509D19300A20DFF /* Slideshow */,
 				6F9C45FE14C5C30B00824AB2 /* TableViewCells */,
@@ -1401,7 +1409,6 @@
 			children = (
 				6FCB4F281926657B00047AD3 /* libCoconutKit.a */,
 				6FCB4F2A1926657B00047AD3 /* CoconutKit-resources.bundle */,
-				6F65429A1A2C946700FDA2DE /* CoconutKit-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1414,6 +1421,19 @@
 				6FD0024E15D5463200375240 /* ContainmentTestViewController.xib */,
 			);
 			path = ContainmentTestViewController;
+			sourceTree = "<group>";
+		};
+		6FD2DE091A6452D800B98C11 /* NibView */ = {
+			isa = PBXGroup;
+			children = (
+				6FD2DE131A64531300B98C11 /* NibViewAutolayoutDemoViewController.h */,
+				6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */,
+				6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */,
+				6FD2DE0C1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.h */,
+				6FD2DE0D1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m */,
+				6FD2DE0E1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib */,
+			);
+			path = NibView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1519,13 +1539,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6F65429A1A2C946700FDA2DE /* CoconutKit-tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CoconutKit-tests.xctest";
-			remoteRef = 6F6542991A2C946700FDA2DE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		6F6B0C9316B3DA35006B718F /* InnerBundle.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
@@ -1561,6 +1574,7 @@
 				6F9C465D14C5C30C00824AB2 /* LifeCycleTestViewController.xib in Resources */,
 				6F9C465F14C5C30C00824AB2 /* MemoryWarningTestCoverViewController.xib in Resources */,
 				6F9C466614C5C30C00824AB2 /* PortraitOnlyViewController.xib in Resources */,
+				6FD2DE191A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */,
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
 				6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
@@ -1576,6 +1590,7 @@
 				6F3569AD19D59A68000CADE2 /* Localizable.strings in Resources */,
 				6F9C468E14C5C30C00824AB2 /* WebViewDemoViewController.xib in Resources */,
 				6F9C469014C5C30C00824AB2 /* PlaceholderDemoViewController.xib in Resources */,
+				6FD2DE121A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
 				6F9C469214C5C30C00824AB2 /* RootStackDemoViewController.xib in Resources */,
 				6F9C469414C5C30C00824AB2 /* StackDemoViewController.xib in Resources */,
 				6F04E38F1A1C864000C6C08B /* BindingsViewsDemoViewController.xib in Resources */,
@@ -1648,6 +1663,7 @@
 				6FCB4ECE1926651F00047AD3 /* LifeCycleTestViewController.xib in Resources */,
 				6FCB4ECF1926651F00047AD3 /* MemoryWarningTestCoverViewController.xib in Resources */,
 				6FCB4ED01926651F00047AD3 /* PortraitOnlyViewController.xib in Resources */,
+				6FD2DE181A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */,
 				6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */,
 				6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */,
 				6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */,
@@ -1663,6 +1679,7 @@
 				6FCB4EDE1926651F00047AD3 /* WebViewDemoViewController.xib in Resources */,
 				6FCB4EDF1926651F00047AD3 /* PlaceholderDemoViewController.xib in Resources */,
 				6FCB4EE01926651F00047AD3 /* RootStackDemoViewController.xib in Resources */,
+				6FD2DE111A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
 				6FCB4EE11926651F00047AD3 /* StackDemoViewController.xib in Resources */,
 				6FCB4EE21926651F00047AD3 /* TableSearchDisplayDemoViewController.xib in Resources */,
 				6F04E38E1A1C864000C6C08B /* BindingsViewsDemoViewController.xib in Resources */,
@@ -1780,6 +1797,7 @@
 				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
 				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
 				6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */,
+				6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */,
 				6F04E3911A1C864000C6C08B /* Employee.m in Sources */,
 				6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */,
 				6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */,
@@ -1814,6 +1832,7 @@
 				6F04E3971A1C864000C6C08B /* EmployeeTableViewCell.m in Sources */,
 				6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */,
 				6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
+				6FD2DE101A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m in Sources */,
 				6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
 				6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F04E3A71A1C885900C6C08B /* UppercaseValueTransformer.m in Sources */,
@@ -1881,6 +1900,8 @@
 				6FCB4EA91926651F00047AD3 /* DemosListViewController.m in Sources */,
 				6FCB4EAA1926651F00047AD3 /* DemoErrors.m in Sources */,
 				6F04E3A61A1C885900C6C08B /* UppercaseValueTransformer.m in Sources */,
+				6FD2DE161A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */,
+				6FD2DE0F1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m in Sources */,
 				6FCB4EAB1926651F00047AD3 /* _PersonInformation.m in Sources */,
 				6FCB4EAC1926651F00047AD3 /* PersonInformation.m in Sources */,
 				6FCB4EAD1926651F00047AD3 /* CoconutKitDemoData.xcdatamodeld in Sources */,
