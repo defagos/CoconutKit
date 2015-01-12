@@ -328,6 +328,14 @@
 		6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */; };
 		6FD2DE181A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
 		6FD2DE191A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
+		6FD2DE1C1A64550500B98C11 /* AutolayoutNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */; };
+		6FD2DE1D1A64550500B98C11 /* AutolayoutNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */; };
+		6FD2DE1F1A64551600B98C11 /* AutolayoutNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */; };
+		6FD2DE201A64551600B98C11 /* AutolayoutNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */; };
+		6FD2DE231A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */; };
+		6FD2DE241A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */; };
+		6FD2DE261A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */; };
+		6FD2DE271A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
@@ -635,6 +643,12 @@
 		6FD2DE131A64531300B98C11 /* NibViewAutolayoutDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibViewAutolayoutDemoViewController.h; sourceTree = "<group>"; };
 		6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewAutolayoutDemoViewController.m; sourceTree = "<group>"; };
 		6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibViewAutolayoutDemoViewController.xib; sourceTree = "<group>"; };
+		6FD2DE1A1A64550500B98C11 /* AutolayoutNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutNibView.h; sourceTree = "<group>"; };
+		6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutNibView.m; sourceTree = "<group>"; };
+		6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutNibView.xib; sourceTree = "<group>"; };
+		6FD2DE211A64554200B98C11 /* AutoresizingMasksNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMasksNibView.h; sourceTree = "<group>"; };
+		6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMasksNibView.m; sourceTree = "<group>"; };
+		6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMasksNibView.xib; sourceTree = "<group>"; };
 		6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
 		6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
@@ -1426,6 +1440,12 @@
 		6FD2DE091A6452D800B98C11 /* NibView */ = {
 			isa = PBXGroup;
 			children = (
+				6FD2DE1A1A64550500B98C11 /* AutolayoutNibView.h */,
+				6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */,
+				6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */,
+				6FD2DE211A64554200B98C11 /* AutoresizingMasksNibView.h */,
+				6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */,
+				6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */,
 				6FD2DE131A64531300B98C11 /* NibViewAutolayoutDemoViewController.h */,
 				6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */,
 				6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */,
@@ -1615,6 +1635,7 @@
 				6F9C46C214C5C36300824AB2 /* img_coconut1.jpg in Resources */,
 				6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */,
 				6F9C46C314C5C36300824AB2 /* img_coconut2.jpg in Resources */,
+				6FD2DE201A64551600B98C11 /* AutolayoutNibView.xib in Resources */,
 				6F9C46C414C5C36300824AB2 /* img_coconut3.jpg in Resources */,
 				6F9C46C514C5C36300824AB2 /* img_coconut4.jpg in Resources */,
 				6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */,
@@ -1646,6 +1667,7 @@
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */,
 				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
+				6FD2DE271A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */,
 				6F04E3991A1C864000C6C08B /* EmployeeTableViewCell.xib in Resources */,
 				6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 				6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
@@ -1704,6 +1726,7 @@
 				6FCB4EF01926651F00047AD3 /* img_coconut2.jpg in Resources */,
 				6FCB4EF11926651F00047AD3 /* img_coconut3.jpg in Resources */,
 				6FCB4EF21926651F00047AD3 /* img_coconut4.jpg in Resources */,
+				6FD2DE1F1A64551600B98C11 /* AutolayoutNibView.xib in Resources */,
 				6FCB4EF31926651F00047AD3 /* parallax_demo_grass_layer.png in Resources */,
 				6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6FCB4EF41926651F00047AD3 /* parallax_demo_sky_layer.png in Resources */,
@@ -1735,6 +1758,7 @@
 				6FCB4F0C1926651F00047AD3 /* InnerFolder in Resources */,
 				6FCB4F0D1926651F00047AD3 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FCB4F0E1926651F00047AD3 /* ConnectionDemoViewController.xib in Resources */,
+				6FD2DE261A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */,
 				6F04E3981A1C864000C6C08B /* EmployeeTableViewCell.xib in Resources */,
 				6FCB4F0F1926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 				6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */,
@@ -1796,9 +1820,11 @@
 				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
 				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
 				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
+				6FD2DE1D1A64550500B98C11 /* AutolayoutNibView.m in Sources */,
 				6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */,
 				6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */,
 				6F04E3911A1C864000C6C08B /* Employee.m in Sources */,
+				6FD2DE241A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */,
 				6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */,
 				6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */,
 				6F04E3931A1C864000C6C08B /* EmployeeHeaderView.m in Sources */,
@@ -1865,6 +1891,7 @@
 				6F04E3961A1C864000C6C08B /* EmployeeTableViewCell.m in Sources */,
 				6FCB4E871926651F00047AD3 /* CoconutKit_demoAppDelegate.m in Sources */,
 				6FCB4E881926651F00047AD3 /* CoconutKit_demoApplication.m in Sources */,
+				6FD2DE231A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */,
 				6FCB4E891926651F00047AD3 /* FixedSizeViewController.m in Sources */,
 				6FCB4E8A1926651F00047AD3 /* HeavyViewController.m in Sources */,
 				6FCB4E8B1926651F00047AD3 /* LandscapeOnlyViewController.m in Sources */,
@@ -1925,6 +1952,7 @@
 				6FCB4EBD1926651F00047AD3 /* RootNavigationDemoViewController.m in Sources */,
 				6FCB4EBE1926651F00047AD3 /* RootSplitViewDemoController.m in Sources */,
 				6FCB4EBF1926651F00047AD3 /* RootTabBarDemoViewController.m in Sources */,
+				6FD2DE1C1A64550500B98C11 /* AutolayoutNibView.m in Sources */,
 				6FCB4EC01926651F00047AD3 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F04E37A1A1C864000C6C08B /* BindingsFailuresDemoViewController.m in Sources */,
 				6FCB4EC11926651F00047AD3 /* FontsDemoViewController.m in Sources */,

@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6254"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NibViewAutolayoutDemoViewController">
@@ -14,7 +14,19 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mg4-kD-79O" customClass="AutoresizingMasksNibView">
+                    <rect key="frame" x="150" y="100" width="300" height="400"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="mg4-kD-79O" secondAttribute="trailing" constant="150" id="9kE-Mr-GUX"/>
+                <constraint firstItem="mg4-kD-79O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="150" id="Hkb-xu-ZdO"/>
+                <constraint firstItem="mg4-kD-79O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="bnK-UQ-cxu"/>
+                <constraint firstAttribute="bottom" secondItem="mg4-kD-79O" secondAttribute="bottom" constant="100" id="lwX-F6-iOZ"/>
+            </constraints>
         </view>
     </objects>
 </document>
