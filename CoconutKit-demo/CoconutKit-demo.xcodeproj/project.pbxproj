@@ -328,20 +328,84 @@
 		6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */; };
 		6FD2DE181A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
 		6FD2DE191A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
-		6FD2DE1C1A64550500B98C11 /* AutolayoutNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */; };
-		6FD2DE1D1A64550500B98C11 /* AutolayoutNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */; };
-		6FD2DE1F1A64551600B98C11 /* AutolayoutNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */; };
-		6FD2DE201A64551600B98C11 /* AutolayoutNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */; };
-		6FD2DE231A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */; };
-		6FD2DE241A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */; };
-		6FD2DE261A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */; };
-		6FD2DE271A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
 		6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */; };
 		6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86914F29C9A001585A6 /* skyscraper.jpg */; };
 		6FF3E71715D37FB900AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */; };
+		E611733E1A654BA90066C42C /* AutolayoutBottomLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611731D1A654BA90066C42C /* AutolayoutBottomLeftNibView.m */; };
+		E611733F1A654BA90066C42C /* AutolayoutBottomLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611731D1A654BA90066C42C /* AutolayoutBottomLeftNibView.m */; };
+		E61173401A654BA90066C42C /* AutolayoutBottomLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611731E1A654BA90066C42C /* AutolayoutBottomLeftNibView.xib */; };
+		E61173411A654BA90066C42C /* AutolayoutBottomLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611731E1A654BA90066C42C /* AutolayoutBottomLeftNibView.xib */; };
+		E61173421A654BA90066C42C /* AutolayoutBottomNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173201A654BA90066C42C /* AutolayoutBottomNibView.m */; };
+		E61173431A654BA90066C42C /* AutolayoutBottomNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173201A654BA90066C42C /* AutolayoutBottomNibView.m */; };
+		E61173441A654BA90066C42C /* AutolayoutBottomNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173211A654BA90066C42C /* AutolayoutBottomNibView.xib */; };
+		E61173451A654BA90066C42C /* AutolayoutBottomNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173211A654BA90066C42C /* AutolayoutBottomNibView.xib */; };
+		E61173461A654BA90066C42C /* AutolayoutBottomRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173231A654BA90066C42C /* AutolayoutBottomRightNibView.m */; };
+		E61173471A654BA90066C42C /* AutolayoutBottomRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173231A654BA90066C42C /* AutolayoutBottomRightNibView.m */; };
+		E61173481A654BA90066C42C /* AutolayoutBottomRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173241A654BA90066C42C /* AutolayoutBottomRightNibView.xib */; };
+		E61173491A654BA90066C42C /* AutolayoutBottomRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173241A654BA90066C42C /* AutolayoutBottomRightNibView.xib */; };
+		E611734A1A654BA90066C42C /* AutolayoutCenterNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173261A654BA90066C42C /* AutolayoutCenterNibView.m */; };
+		E611734B1A654BA90066C42C /* AutolayoutCenterNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173261A654BA90066C42C /* AutolayoutCenterNibView.m */; };
+		E611734C1A654BA90066C42C /* AutolayoutCenterNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173271A654BA90066C42C /* AutolayoutCenterNibView.xib */; };
+		E611734D1A654BA90066C42C /* AutolayoutCenterNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173271A654BA90066C42C /* AutolayoutCenterNibView.xib */; };
+		E611734E1A654BA90066C42C /* AutolayoutLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173291A654BA90066C42C /* AutolayoutLeftNibView.m */; };
+		E611734F1A654BA90066C42C /* AutolayoutLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173291A654BA90066C42C /* AutolayoutLeftNibView.m */; };
+		E61173501A654BA90066C42C /* AutolayoutLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611732A1A654BA90066C42C /* AutolayoutLeftNibView.xib */; };
+		E61173511A654BA90066C42C /* AutolayoutLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611732A1A654BA90066C42C /* AutolayoutLeftNibView.xib */; };
+		E61173521A654BA90066C42C /* AutolayoutRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611732C1A654BA90066C42C /* AutolayoutRightNibView.m */; };
+		E61173531A654BA90066C42C /* AutolayoutRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611732C1A654BA90066C42C /* AutolayoutRightNibView.m */; };
+		E61173541A654BA90066C42C /* AutolayoutRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611732D1A654BA90066C42C /* AutolayoutRightNibView.xib */; };
+		E61173551A654BA90066C42C /* AutolayoutRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611732D1A654BA90066C42C /* AutolayoutRightNibView.xib */; };
+		E61173561A654BA90066C42C /* AutolayoutTopLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611732F1A654BA90066C42C /* AutolayoutTopLeftNibView.m */; };
+		E61173571A654BA90066C42C /* AutolayoutTopLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611732F1A654BA90066C42C /* AutolayoutTopLeftNibView.m */; };
+		E61173581A654BA90066C42C /* AutolayoutTopLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173301A654BA90066C42C /* AutolayoutTopLeftNibView.xib */; };
+		E61173591A654BA90066C42C /* AutolayoutTopLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173301A654BA90066C42C /* AutolayoutTopLeftNibView.xib */; };
+		E611735A1A654BA90066C42C /* AutolayoutTopNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173321A654BA90066C42C /* AutolayoutTopNibView.m */; };
+		E611735B1A654BA90066C42C /* AutolayoutTopNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173321A654BA90066C42C /* AutolayoutTopNibView.m */; };
+		E611735C1A654BA90066C42C /* AutolayoutTopNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173331A654BA90066C42C /* AutolayoutTopNibView.xib */; };
+		E611735D1A654BA90066C42C /* AutolayoutTopNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173331A654BA90066C42C /* AutolayoutTopNibView.xib */; };
+		E611735E1A654BA90066C42C /* AutolayoutTopRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173351A654BA90066C42C /* AutolayoutTopRightNibView.m */; };
+		E611735F1A654BA90066C42C /* AutolayoutTopRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173351A654BA90066C42C /* AutolayoutTopRightNibView.m */; };
+		E61173601A654BA90066C42C /* AutolayoutTopRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173361A654BA90066C42C /* AutolayoutTopRightNibView.xib */; };
+		E61173611A654BA90066C42C /* AutolayoutTopRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173361A654BA90066C42C /* AutolayoutTopRightNibView.xib */; };
+		E61173621A654BA90066C42C /* AutoresizingMaskCenterNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173391A654BA90066C42C /* AutoresizingMaskCenterNibView.m */; };
+		E61173631A654BA90066C42C /* AutoresizingMaskCenterNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173391A654BA90066C42C /* AutoresizingMaskCenterNibView.m */; };
+		E61173641A654BA90066C42C /* AutoresizingMaskCenterNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611733A1A654BA90066C42C /* AutoresizingMaskCenterNibView.xib */; };
+		E61173651A654BA90066C42C /* AutoresizingMaskCenterNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611733A1A654BA90066C42C /* AutoresizingMaskCenterNibView.xib */; };
+		E61173661A654BA90066C42C /* AutoresizingMaskLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611733C1A654BA90066C42C /* AutoresizingMaskLeftNibView.m */; };
+		E61173671A654BA90066C42C /* AutoresizingMaskLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611733C1A654BA90066C42C /* AutoresizingMaskLeftNibView.m */; };
+		E61173681A654BA90066C42C /* AutoresizingMaskLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611733D1A654BA90066C42C /* AutoresizingMaskLeftNibView.xib */; };
+		E61173691A654BA90066C42C /* AutoresizingMaskLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611733D1A654BA90066C42C /* AutoresizingMaskLeftNibView.xib */; };
+		E611736C1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611736B1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m */; };
+		E611736D1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611736B1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m */; };
+		E611736F1A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611736E1A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib */; };
+		E61173701A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611736E1A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib */; };
+		E61173731A654D330066C42C /* AutoresizingMaskBottomNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173721A654D330066C42C /* AutoresizingMaskBottomNibView.m */; };
+		E61173741A654D330066C42C /* AutoresizingMaskBottomNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173721A654D330066C42C /* AutoresizingMaskBottomNibView.m */; };
+		E61173761A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173751A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib */; };
+		E61173771A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173751A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib */; };
+		E611737A1A654D490066C42C /* AutoresizingMaskBottomRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173791A654D490066C42C /* AutoresizingMaskBottomRightNibView.m */; };
+		E611737B1A654D490066C42C /* AutoresizingMaskBottomRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173791A654D490066C42C /* AutoresizingMaskBottomRightNibView.m */; };
+		E611737D1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611737C1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib */; };
+		E611737E1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611737C1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib */; };
+		E61173811A654D720066C42C /* AutoresizingMaskRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173801A654D720066C42C /* AutoresizingMaskRightNibView.m */; };
+		E61173821A654D720066C42C /* AutoresizingMaskRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173801A654D720066C42C /* AutoresizingMaskRightNibView.m */; };
+		E61173841A654D830066C42C /* AutoresizingMaskRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173831A654D830066C42C /* AutoresizingMaskRightNibView.xib */; };
+		E61173851A654D830066C42C /* AutoresizingMaskRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173831A654D830066C42C /* AutoresizingMaskRightNibView.xib */; };
+		E61173881A654D910066C42C /* AutoresizingMaskTopLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173871A654D910066C42C /* AutoresizingMaskTopLeftNibView.m */; };
+		E61173891A654D910066C42C /* AutoresizingMaskTopLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173871A654D910066C42C /* AutoresizingMaskTopLeftNibView.m */; };
+		E611738B1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611738A1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib */; };
+		E611738C1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611738A1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib */; };
+		E611738F1A654DA90066C42C /* AutoresizingMaskTopNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611738E1A654DA90066C42C /* AutoresizingMaskTopNibView.m */; };
+		E61173901A654DA90066C42C /* AutoresizingMaskTopNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611738E1A654DA90066C42C /* AutoresizingMaskTopNibView.m */; };
+		E61173921A654DB30066C42C /* AutoresizingMaskTopNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173911A654DB30066C42C /* AutoresizingMaskTopNibView.xib */; };
+		E61173931A654DB30066C42C /* AutoresizingMaskTopNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173911A654DB30066C42C /* AutoresizingMaskTopNibView.xib */; };
+		E61173961A654DC00066C42C /* AutoresizingMaskTopRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173951A654DC00066C42C /* AutoresizingMaskTopRightNibView.m */; };
+		E61173971A654DC00066C42C /* AutoresizingMaskTopRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173951A654DC00066C42C /* AutoresizingMaskTopRightNibView.m */; };
+		E61173991A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173981A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib */; };
+		E611739A1A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173981A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -643,12 +707,6 @@
 		6FD2DE131A64531300B98C11 /* NibViewAutolayoutDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibViewAutolayoutDemoViewController.h; sourceTree = "<group>"; };
 		6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewAutolayoutDemoViewController.m; sourceTree = "<group>"; };
 		6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibViewAutolayoutDemoViewController.xib; sourceTree = "<group>"; };
-		6FD2DE1A1A64550500B98C11 /* AutolayoutNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutNibView.h; sourceTree = "<group>"; };
-		6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutNibView.m; sourceTree = "<group>"; };
-		6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutNibView.xib; sourceTree = "<group>"; };
-		6FD2DE211A64554200B98C11 /* AutoresizingMasksNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMasksNibView.h; sourceTree = "<group>"; };
-		6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMasksNibView.m; sourceTree = "<group>"; };
-		6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMasksNibView.xib; sourceTree = "<group>"; };
 		6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
 		6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
@@ -657,6 +715,60 @@
 		6FF3E71515D37FB900AB9A53 /* CustomTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTransitions.h; sourceTree = "<group>"; };
 		6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTransitions.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-demo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		E611731C1A654BA90066C42C /* AutolayoutBottomLeftNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutBottomLeftNibView.h; sourceTree = "<group>"; };
+		E611731D1A654BA90066C42C /* AutolayoutBottomLeftNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutBottomLeftNibView.m; sourceTree = "<group>"; };
+		E611731E1A654BA90066C42C /* AutolayoutBottomLeftNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutBottomLeftNibView.xib; sourceTree = "<group>"; };
+		E611731F1A654BA90066C42C /* AutolayoutBottomNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutBottomNibView.h; sourceTree = "<group>"; };
+		E61173201A654BA90066C42C /* AutolayoutBottomNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutBottomNibView.m; sourceTree = "<group>"; };
+		E61173211A654BA90066C42C /* AutolayoutBottomNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutBottomNibView.xib; sourceTree = "<group>"; };
+		E61173221A654BA90066C42C /* AutolayoutBottomRightNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutBottomRightNibView.h; sourceTree = "<group>"; };
+		E61173231A654BA90066C42C /* AutolayoutBottomRightNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutBottomRightNibView.m; sourceTree = "<group>"; };
+		E61173241A654BA90066C42C /* AutolayoutBottomRightNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutBottomRightNibView.xib; sourceTree = "<group>"; };
+		E61173251A654BA90066C42C /* AutolayoutCenterNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutCenterNibView.h; sourceTree = "<group>"; };
+		E61173261A654BA90066C42C /* AutolayoutCenterNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutCenterNibView.m; sourceTree = "<group>"; };
+		E61173271A654BA90066C42C /* AutolayoutCenterNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutCenterNibView.xib; sourceTree = "<group>"; };
+		E61173281A654BA90066C42C /* AutolayoutLeftNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutLeftNibView.h; sourceTree = "<group>"; };
+		E61173291A654BA90066C42C /* AutolayoutLeftNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutLeftNibView.m; sourceTree = "<group>"; };
+		E611732A1A654BA90066C42C /* AutolayoutLeftNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutLeftNibView.xib; sourceTree = "<group>"; };
+		E611732B1A654BA90066C42C /* AutolayoutRightNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutRightNibView.h; sourceTree = "<group>"; };
+		E611732C1A654BA90066C42C /* AutolayoutRightNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutRightNibView.m; sourceTree = "<group>"; };
+		E611732D1A654BA90066C42C /* AutolayoutRightNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutRightNibView.xib; sourceTree = "<group>"; };
+		E611732E1A654BA90066C42C /* AutolayoutTopLeftNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutTopLeftNibView.h; sourceTree = "<group>"; };
+		E611732F1A654BA90066C42C /* AutolayoutTopLeftNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutTopLeftNibView.m; sourceTree = "<group>"; };
+		E61173301A654BA90066C42C /* AutolayoutTopLeftNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutTopLeftNibView.xib; sourceTree = "<group>"; };
+		E61173311A654BA90066C42C /* AutolayoutTopNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutTopNibView.h; sourceTree = "<group>"; };
+		E61173321A654BA90066C42C /* AutolayoutTopNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutTopNibView.m; sourceTree = "<group>"; };
+		E61173331A654BA90066C42C /* AutolayoutTopNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutTopNibView.xib; sourceTree = "<group>"; };
+		E61173341A654BA90066C42C /* AutolayoutTopRightNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutolayoutTopRightNibView.h; sourceTree = "<group>"; };
+		E61173351A654BA90066C42C /* AutolayoutTopRightNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutTopRightNibView.m; sourceTree = "<group>"; };
+		E61173361A654BA90066C42C /* AutolayoutTopRightNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutolayoutTopRightNibView.xib; sourceTree = "<group>"; };
+		E61173381A654BA90066C42C /* AutoresizingMaskCenterNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskCenterNibView.h; sourceTree = "<group>"; };
+		E61173391A654BA90066C42C /* AutoresizingMaskCenterNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskCenterNibView.m; sourceTree = "<group>"; };
+		E611733A1A654BA90066C42C /* AutoresizingMaskCenterNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskCenterNibView.xib; sourceTree = "<group>"; };
+		E611733B1A654BA90066C42C /* AutoresizingMaskLeftNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskLeftNibView.h; sourceTree = "<group>"; };
+		E611733C1A654BA90066C42C /* AutoresizingMaskLeftNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskLeftNibView.m; sourceTree = "<group>"; };
+		E611733D1A654BA90066C42C /* AutoresizingMaskLeftNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskLeftNibView.xib; sourceTree = "<group>"; };
+		E611736A1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskBottomLeftNibView.h; sourceTree = "<group>"; };
+		E611736B1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskBottomLeftNibView.m; sourceTree = "<group>"; };
+		E611736E1A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskBottomLeftNibView.xib; sourceTree = "<group>"; };
+		E61173711A654D330066C42C /* AutoresizingMaskBottomNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskBottomNibView.h; sourceTree = "<group>"; };
+		E61173721A654D330066C42C /* AutoresizingMaskBottomNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskBottomNibView.m; sourceTree = "<group>"; };
+		E61173751A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskBottomNibView.xib; sourceTree = "<group>"; };
+		E61173781A654D490066C42C /* AutoresizingMaskBottomRightNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskBottomRightNibView.h; sourceTree = "<group>"; };
+		E61173791A654D490066C42C /* AutoresizingMaskBottomRightNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskBottomRightNibView.m; sourceTree = "<group>"; };
+		E611737C1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskBottomRightNibView.xib; sourceTree = "<group>"; };
+		E611737F1A654D720066C42C /* AutoresizingMaskRightNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskRightNibView.h; sourceTree = "<group>"; };
+		E61173801A654D720066C42C /* AutoresizingMaskRightNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskRightNibView.m; sourceTree = "<group>"; };
+		E61173831A654D830066C42C /* AutoresizingMaskRightNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskRightNibView.xib; sourceTree = "<group>"; };
+		E61173861A654D910066C42C /* AutoresizingMaskTopLeftNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskTopLeftNibView.h; sourceTree = "<group>"; };
+		E61173871A654D910066C42C /* AutoresizingMaskTopLeftNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskTopLeftNibView.m; sourceTree = "<group>"; };
+		E611738A1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskTopLeftNibView.xib; sourceTree = "<group>"; };
+		E611738D1A654DA90066C42C /* AutoresizingMaskTopNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskTopNibView.h; sourceTree = "<group>"; };
+		E611738E1A654DA90066C42C /* AutoresizingMaskTopNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskTopNibView.m; sourceTree = "<group>"; };
+		E61173911A654DB30066C42C /* AutoresizingMaskTopNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskTopNibView.xib; sourceTree = "<group>"; };
+		E61173941A654DC00066C42C /* AutoresizingMaskTopRightNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskTopRightNibView.h; sourceTree = "<group>"; };
+		E61173951A654DC00066C42C /* AutoresizingMaskTopRightNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskTopRightNibView.m; sourceTree = "<group>"; };
+		E61173981A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskTopRightNibView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1440,12 +1552,8 @@
 		6FD2DE091A6452D800B98C11 /* NibView */ = {
 			isa = PBXGroup;
 			children = (
-				6FD2DE1A1A64550500B98C11 /* AutolayoutNibView.h */,
-				6FD2DE1B1A64550500B98C11 /* AutolayoutNibView.m */,
-				6FD2DE1E1A64551600B98C11 /* AutolayoutNibView.xib */,
-				6FD2DE211A64554200B98C11 /* AutoresizingMasksNibView.h */,
-				6FD2DE221A64554200B98C11 /* AutoresizingMasksNibView.m */,
-				6FD2DE251A64555500B98C11 /* AutoresizingMasksNibView.xib */,
+				E611731B1A654BA90066C42C /* Autolayout */,
+				E61173371A654BA90066C42C /* AutoresizingMask */,
 				6FD2DE131A64531300B98C11 /* NibViewAutolayoutDemoViewController.h */,
 				6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */,
 				6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */,
@@ -1454,6 +1562,74 @@
 				6FD2DE0E1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib */,
 			);
 			path = NibView;
+			sourceTree = "<group>";
+		};
+		E611731B1A654BA90066C42C /* Autolayout */ = {
+			isa = PBXGroup;
+			children = (
+				E611731C1A654BA90066C42C /* AutolayoutBottomLeftNibView.h */,
+				E611731D1A654BA90066C42C /* AutolayoutBottomLeftNibView.m */,
+				E611731E1A654BA90066C42C /* AutolayoutBottomLeftNibView.xib */,
+				E611731F1A654BA90066C42C /* AutolayoutBottomNibView.h */,
+				E61173201A654BA90066C42C /* AutolayoutBottomNibView.m */,
+				E61173211A654BA90066C42C /* AutolayoutBottomNibView.xib */,
+				E61173221A654BA90066C42C /* AutolayoutBottomRightNibView.h */,
+				E61173231A654BA90066C42C /* AutolayoutBottomRightNibView.m */,
+				E61173241A654BA90066C42C /* AutolayoutBottomRightNibView.xib */,
+				E61173251A654BA90066C42C /* AutolayoutCenterNibView.h */,
+				E61173261A654BA90066C42C /* AutolayoutCenterNibView.m */,
+				E61173271A654BA90066C42C /* AutolayoutCenterNibView.xib */,
+				E61173281A654BA90066C42C /* AutolayoutLeftNibView.h */,
+				E61173291A654BA90066C42C /* AutolayoutLeftNibView.m */,
+				E611732A1A654BA90066C42C /* AutolayoutLeftNibView.xib */,
+				E611732B1A654BA90066C42C /* AutolayoutRightNibView.h */,
+				E611732C1A654BA90066C42C /* AutolayoutRightNibView.m */,
+				E611732D1A654BA90066C42C /* AutolayoutRightNibView.xib */,
+				E611732E1A654BA90066C42C /* AutolayoutTopLeftNibView.h */,
+				E611732F1A654BA90066C42C /* AutolayoutTopLeftNibView.m */,
+				E61173301A654BA90066C42C /* AutolayoutTopLeftNibView.xib */,
+				E61173311A654BA90066C42C /* AutolayoutTopNibView.h */,
+				E61173321A654BA90066C42C /* AutolayoutTopNibView.m */,
+				E61173331A654BA90066C42C /* AutolayoutTopNibView.xib */,
+				E61173341A654BA90066C42C /* AutolayoutTopRightNibView.h */,
+				E61173351A654BA90066C42C /* AutolayoutTopRightNibView.m */,
+				E61173361A654BA90066C42C /* AutolayoutTopRightNibView.xib */,
+			);
+			path = Autolayout;
+			sourceTree = "<group>";
+		};
+		E61173371A654BA90066C42C /* AutoresizingMask */ = {
+			isa = PBXGroup;
+			children = (
+				E611736A1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.h */,
+				E611736B1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m */,
+				E611736E1A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib */,
+				E61173711A654D330066C42C /* AutoresizingMaskBottomNibView.h */,
+				E61173721A654D330066C42C /* AutoresizingMaskBottomNibView.m */,
+				E61173751A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib */,
+				E61173781A654D490066C42C /* AutoresizingMaskBottomRightNibView.h */,
+				E61173791A654D490066C42C /* AutoresizingMaskBottomRightNibView.m */,
+				E611737C1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib */,
+				E61173381A654BA90066C42C /* AutoresizingMaskCenterNibView.h */,
+				E61173391A654BA90066C42C /* AutoresizingMaskCenterNibView.m */,
+				E611733A1A654BA90066C42C /* AutoresizingMaskCenterNibView.xib */,
+				E611733B1A654BA90066C42C /* AutoresizingMaskLeftNibView.h */,
+				E611733C1A654BA90066C42C /* AutoresizingMaskLeftNibView.m */,
+				E611733D1A654BA90066C42C /* AutoresizingMaskLeftNibView.xib */,
+				E611737F1A654D720066C42C /* AutoresizingMaskRightNibView.h */,
+				E61173801A654D720066C42C /* AutoresizingMaskRightNibView.m */,
+				E61173831A654D830066C42C /* AutoresizingMaskRightNibView.xib */,
+				E61173861A654D910066C42C /* AutoresizingMaskTopLeftNibView.h */,
+				E61173871A654D910066C42C /* AutoresizingMaskTopLeftNibView.m */,
+				E611738A1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib */,
+				E611738D1A654DA90066C42C /* AutoresizingMaskTopNibView.h */,
+				E611738E1A654DA90066C42C /* AutoresizingMaskTopNibView.m */,
+				E61173911A654DB30066C42C /* AutoresizingMaskTopNibView.xib */,
+				E61173941A654DC00066C42C /* AutoresizingMaskTopRightNibView.h */,
+				E61173951A654DC00066C42C /* AutoresizingMaskTopRightNibView.m */,
+				E61173981A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib */,
+			);
+			path = AutoresizingMask;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1597,12 +1773,15 @@
 				6FD2DE191A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */,
 				6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */,
 				6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
+				E61173491A654BA90066C42C /* AutolayoutBottomRightNibView.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
 				6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */,
 				6F9C467D14C5C30C00824AB2 /* CursorSelectedFolderView.xib in Resources */,
+				E61173691A654BA90066C42C /* AutoresizingMaskLeftNibView.xib in Resources */,
+				E61173651A654BA90066C42C /* AutoresizingMaskCenterNibView.xib in Resources */,
 				6F28177219D99A33009D1CC3 /* img_localized.png in Resources */,
 				6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */,
 				6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */,
@@ -1611,22 +1790,29 @@
 				6F9C468E14C5C30C00824AB2 /* WebViewDemoViewController.xib in Resources */,
 				6F9C469014C5C30C00824AB2 /* PlaceholderDemoViewController.xib in Resources */,
 				6FD2DE121A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
+				E61173771A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */,
 				6F9C469214C5C30C00824AB2 /* RootStackDemoViewController.xib in Resources */,
 				6F9C469414C5C30C00824AB2 /* StackDemoViewController.xib in Resources */,
+				E61173611A654BA90066C42C /* AutolayoutTopRightNibView.xib in Resources */,
 				6F04E38F1A1C864000C6C08B /* BindingsViewsDemoViewController.xib in Resources */,
+				E61173851A654D830066C42C /* AutoresizingMaskRightNibView.xib in Resources */,
 				6F9C469714C5C30C00824AB2 /* TableSearchDisplayDemoViewController.xib in Resources */,
 				6F04E3811A1C864000C6C08B /* BindingsPerformance1DemoViewController.xib in Resources */,
 				6F9C469914C5C30C00824AB2 /* WizardAddressPageViewController.xib in Resources */,
 				6F9C469D14C5C30C00824AB2 /* WizardIdentityPageViewController.xib in Resources */,
 				6F04E3B11A1C8D2100C6C08B /* Launch Screen.xib in Resources */,
 				6F9C46B914C5C36300824AB2 /* ProximaNova-Bold.otf in Resources */,
+				E61173511A654BA90066C42C /* AutolayoutLeftNibView.xib in Resources */,
 				6F9C46BA14C5C36300824AB2 /* ProximaNova-Regular.otf in Resources */,
 				6F04E39D1A1C864000C6C08B /* EmployeeView.xib in Resources */,
 				6F9C46BB14C5C36300824AB2 /* sample_text.html in Resources */,
+				E611738C1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib in Resources */,
 				6F9C46BC14C5C36300824AB2 /* bkgr_bar.png in Resources */,
 				6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */,
 				6F96C83519D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6F9C46BD14C5C36300824AB2 /* cell_bkgr_brown_large.png in Resources */,
+				E611737E1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib in Resources */,
+				E61173411A654BA90066C42C /* AutolayoutBottomLeftNibView.xib in Resources */,
 				6F9C46BE14C5C36300824AB2 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6F9C46C014C5C36300824AB2 /* icn_bookmark.png in Resources */,
 				6F04E3791A1C864000C6C08B /* BindingsControlsDemoViewController.xib in Resources */,
@@ -1635,17 +1821,21 @@
 				6F9C46C214C5C36300824AB2 /* img_coconut1.jpg in Resources */,
 				6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */,
 				6F9C46C314C5C36300824AB2 /* img_coconut2.jpg in Resources */,
-				6FD2DE201A64551600B98C11 /* AutolayoutNibView.xib in Resources */,
+				E61173701A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib in Resources */,
+				E61173591A654BA90066C42C /* AutolayoutTopLeftNibView.xib in Resources */,
 				6F9C46C414C5C36300824AB2 /* img_coconut3.jpg in Resources */,
 				6F9C46C514C5C36300824AB2 /* img_coconut4.jpg in Resources */,
 				6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */,
+				E611735D1A654BA90066C42C /* AutolayoutTopNibView.xib in Resources */,
 				6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */,
+				E611739A1A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */,
 				6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */,
 				6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */,
 				6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */,
 				6FC5E8B614F380B500C01ABC /* ParallaxScrollingDemoViewController.xib in Resources */,
 				6FA9B0A414F8E765008B6D5A /* img_apple1.jpg in Resources */,
 				6F04E38B1A1C864000C6C08B /* BindingsTransformersDemoViewController.xib in Resources */,
+				E611734D1A654BA90066C42C /* AutolayoutCenterNibView.xib in Resources */,
 				6F04E37D1A1C864000C6C08B /* BindingsFailuresDemoViewController.xib in Resources */,
 				6FA9B0A514F8E765008B6D5A /* img_apple2.jpg in Resources */,
 				6FA9B0A614F8E765008B6D5A /* img_apple3.jpg in Resources */,
@@ -1653,12 +1843,15 @@
 				6F5A0BB51509D19300A20DFF /* SlideshowDemoViewController.xib in Resources */,
 				6F04E3851A1C864000C6C08B /* BindingsPerformance2DemoViewController.xib in Resources */,
 				6F8914A115790DDE009FCC78 /* LabelDemoViewController.xib in Resources */,
+				E61173931A654DB30066C42C /* AutoresizingMaskTopNibView.xib in Resources */,
 				6FC3A2A8159E0422001A290E /* SegueDemo.storyboard in Resources */,
 				6FD0025115D5463200375240 /* ContainmentTestViewController.xib in Resources */,
 				6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */,
 				6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */,
 				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
+				E61173451A654BA90066C42C /* AutolayoutBottomNibView.xib in Resources */,
+				E61173551A654BA90066C42C /* AutolayoutRightNibView.xib in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 				6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
 				6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */,
@@ -1667,7 +1860,6 @@
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */,
 				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
-				6FD2DE271A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */,
 				6F04E3991A1C864000C6C08B /* EmployeeTableViewCell.xib in Resources */,
 				6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
 				6F58C53C17944E080092590C /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
@@ -1688,12 +1880,15 @@
 				6FD2DE181A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */,
 				6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */,
 				6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */,
+				E61173481A654BA90066C42C /* AutolayoutBottomRightNibView.xib in Resources */,
 				6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */,
 				6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */,
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
 				6FCB4ED91926651F00047AD3 /* CursorSelectedFolderView.xib in Resources */,
 				6F468CB119D2E7920021B95D /* Localizable.strings in Resources */,
+				E61173681A654BA90066C42C /* AutoresizingMaskLeftNibView.xib in Resources */,
+				E61173641A654BA90066C42C /* AutoresizingMaskCenterNibView.xib in Resources */,
 				6F28177119D99A33009D1CC3 /* img_localized.png in Resources */,
 				6FCB4EDB1926651F00047AD3 /* FooterView.xib in Resources */,
 				6FCB4EDC1926651F00047AD3 /* HeaderView.xib in Resources */,
@@ -1702,22 +1897,29 @@
 				6FCB4EDF1926651F00047AD3 /* PlaceholderDemoViewController.xib in Resources */,
 				6FCB4EE01926651F00047AD3 /* RootStackDemoViewController.xib in Resources */,
 				6FD2DE111A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
+				E61173761A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */,
 				6FCB4EE11926651F00047AD3 /* StackDemoViewController.xib in Resources */,
 				6FCB4EE21926651F00047AD3 /* TableSearchDisplayDemoViewController.xib in Resources */,
+				E61173601A654BA90066C42C /* AutolayoutTopRightNibView.xib in Resources */,
 				6F04E38E1A1C864000C6C08B /* BindingsViewsDemoViewController.xib in Resources */,
+				E61173841A654D830066C42C /* AutoresizingMaskRightNibView.xib in Resources */,
 				6FCB4EE31926651F00047AD3 /* WizardAddressPageViewController.xib in Resources */,
 				6F04E3801A1C864000C6C08B /* BindingsPerformance1DemoViewController.xib in Resources */,
 				6FCB4EE51926651F00047AD3 /* WizardIdentityPageViewController.xib in Resources */,
 				6FCB4EE61926651F00047AD3 /* ProximaNova-Bold.otf in Resources */,
 				6F04E3B01A1C8D2100C6C08B /* Launch Screen.xib in Resources */,
 				6FCB4EE71926651F00047AD3 /* ProximaNova-Regular.otf in Resources */,
+				E61173501A654BA90066C42C /* AutolayoutLeftNibView.xib in Resources */,
 				6FCB4EE81926651F00047AD3 /* sample_text.html in Resources */,
 				6F04E39C1A1C864000C6C08B /* EmployeeView.xib in Resources */,
 				6FCB4EE91926651F00047AD3 /* bkgr_bar.png in Resources */,
+				E611738B1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib in Resources */,
 				6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */,
 				6FCB4EEA1926651F00047AD3 /* cell_bkgr_brown_large.png in Resources */,
 				6FCB4EEB1926651F00047AD3 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6FCB4EED1926651F00047AD3 /* icn_bookmark.png in Resources */,
+				E611737D1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib in Resources */,
+				E61173401A654BA90066C42C /* AutolayoutBottomLeftNibView.xib in Resources */,
 				6FCB4EEE1926651F00047AD3 /* icn_folder.png in Resources */,
 				6FCB4EEF1926651F00047AD3 /* img_coconut1.jpg in Resources */,
 				6F04E3781A1C864000C6C08B /* BindingsControlsDemoViewController.xib in Resources */,
@@ -1726,17 +1928,21 @@
 				6FCB4EF01926651F00047AD3 /* img_coconut2.jpg in Resources */,
 				6FCB4EF11926651F00047AD3 /* img_coconut3.jpg in Resources */,
 				6FCB4EF21926651F00047AD3 /* img_coconut4.jpg in Resources */,
-				6FD2DE1F1A64551600B98C11 /* AutolayoutNibView.xib in Resources */,
+				E611736F1A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib in Resources */,
+				E61173581A654BA90066C42C /* AutolayoutTopLeftNibView.xib in Resources */,
 				6FCB4EF31926651F00047AD3 /* parallax_demo_grass_layer.png in Resources */,
 				6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6FCB4EF41926651F00047AD3 /* parallax_demo_sky_layer.png in Resources */,
+				E611735C1A654BA90066C42C /* AutolayoutTopNibView.xib in Resources */,
 				6FCB4EF51926651F00047AD3 /* parallax_demo_trees_layer.png in Resources */,
+				E61173991A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */,
 				6FCB4EF61926651F00047AD3 /* parallax_demo_mountains_layer.png in Resources */,
 				6FCB4EF71926651F00047AD3 /* skyscraper.jpg in Resources */,
 				6FCB4EF81926651F00047AD3 /* ParallaxScrollingDemoViewController.xib in Resources */,
 				6FCB4EF91926651F00047AD3 /* img_apple1.jpg in Resources */,
 				6FCB4EFA1926651F00047AD3 /* img_apple2.jpg in Resources */,
 				6F04E38A1A1C864000C6C08B /* BindingsTransformersDemoViewController.xib in Resources */,
+				E611734C1A654BA90066C42C /* AutolayoutCenterNibView.xib in Resources */,
 				6F04E37C1A1C864000C6C08B /* BindingsFailuresDemoViewController.xib in Resources */,
 				6FCB4EFB1926651F00047AD3 /* img_apple3.jpg in Resources */,
 				6FCB4EFC1926651F00047AD3 /* img_apple4.jpg in Resources */,
@@ -1744,12 +1950,15 @@
 				6FCB4EFE1926651F00047AD3 /* LabelDemoViewController.xib in Resources */,
 				6F04E3841A1C864000C6C08B /* BindingsPerformance2DemoViewController.xib in Resources */,
 				6FCB4F001926651F00047AD3 /* SegueDemo.storyboard in Resources */,
+				E61173921A654DB30066C42C /* AutoresizingMaskTopNibView.xib in Resources */,
 				6FCB4F021926651F00047AD3 /* ContainmentTestViewController.xib in Resources */,
 				6FCB4F031926651F00047AD3 /* AnimationDemoViewController.xib in Resources */,
 				6FCB4F041926651F00047AD3 /* LayerPropertiesTestViewController.xib in Resources */,
 				6FCB4F051926651F00047AD3 /* RootNavigationDemoViewController.xib in Resources */,
 				6FCB4F061926651F00047AD3 /* RootSplitViewDemoController.xib in Resources */,
 				6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
+				E61173441A654BA90066C42C /* AutolayoutBottomNibView.xib in Resources */,
+				E61173541A654BA90066C42C /* AutolayoutRightNibView.xib in Resources */,
 				6FCB4F071926651F00047AD3 /* RootTabBarDemoViewController.xib in Resources */,
 				6FCB4F081926651F00047AD3 /* Beon-Regular.otf in Resources */,
 				6FCB4F091926651F00047AD3 /* DynamicLocalizationDemoViewController.xib in Resources */,
@@ -1758,7 +1967,6 @@
 				6FCB4F0C1926651F00047AD3 /* InnerFolder in Resources */,
 				6FCB4F0D1926651F00047AD3 /* ViewEffectsDemoViewController.xib in Resources */,
 				6FCB4F0E1926651F00047AD3 /* ConnectionDemoViewController.xib in Resources */,
-				6FD2DE261A64555500B98C11 /* AutoresizingMasksNibView.xib in Resources */,
 				6F04E3981A1C864000C6C08B /* EmployeeTableViewCell.xib in Resources */,
 				6FCB4F0F1926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
 				6FCB4F3019266DE200047AD3 /* CoconutKit-resources.bundle in Resources */,
@@ -1804,6 +2012,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F9C464C14C5C30C00824AB2 /* CoconutKit_demoAppDelegate.m in Sources */,
+				E61173971A654DC00066C42C /* AutoresizingMaskTopRightNibView.m in Sources */,
 				6F9C464E14C5C30C00824AB2 /* CoconutKit_demoApplication.m in Sources */,
 				6F9C465614C5C30C00824AB2 /* FixedSizeViewController.m in Sources */,
 				6F9C465814C5C30C00824AB2 /* HeavyViewController.m in Sources */,
@@ -1814,24 +2023,27 @@
 				6F04E3771A1C864000C6C08B /* BindingsControlsDemoViewController.m in Sources */,
 				6F9C466514C5C30C00824AB2 /* PortraitOnlyViewController.m in Sources */,
 				6F9C466814C5C30C00824AB2 /* StretchableViewController.m in Sources */,
+				E611733F1A654BA90066C42C /* AutolayoutBottomLeftNibView.m in Sources */,
 				6F04E3891A1C864000C6C08B /* BindingsTransformersDemoViewController.m in Sources */,
 				6F04E3A31A1C865E00C6C08B /* DemoTransformer.m in Sources */,
+				E611735F1A654BA90066C42C /* AutolayoutTopRightNibView.m in Sources */,
 				6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */,
 				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
 				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
 				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
-				6FD2DE1D1A64550500B98C11 /* AutolayoutNibView.m in Sources */,
 				6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */,
 				6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */,
 				6F04E3911A1C864000C6C08B /* Employee.m in Sources */,
-				6FD2DE241A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */,
 				6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */,
 				6F9C467814C5C30C00824AB2 /* CursorFolderView.m in Sources */,
 				6F04E3931A1C864000C6C08B /* EmployeeHeaderView.m in Sources */,
+				E611734F1A654BA90066C42C /* AutolayoutLeftNibView.m in Sources */,
 				6F9C467C14C5C30C00824AB2 /* CursorSelectedFolderView.m in Sources */,
+				E611735B1A654BA90066C42C /* AutolayoutTopNibView.m in Sources */,
 				6F9C468214C5C30C00824AB2 /* FooterView.m in Sources */,
 				6F9C468414C5C30C00824AB2 /* HeaderView.m in Sources */,
 				6F9C468614C5C30C00824AB2 /* ProgrammaticTableViewCell.m in Sources */,
+				E61173821A654D720066C42C /* AutoresizingMaskRightNibView.m in Sources */,
 				6F9C468714C5C30C00824AB2 /* TableViewCellsDemoViewController.m in Sources */,
 				6F9C468814C5C30C00824AB2 /* XibTableViewCell.m in Sources */,
 				6F9C468D14C5C30C00824AB2 /* WebViewDemoViewController.m in Sources */,
@@ -1849,17 +2061,25 @@
 				6F9C46A014C5C30C00824AB2 /* _PersonInformation.m in Sources */,
 				6F04E39B1A1C864000C6C08B /* EmployeeView.m in Sources */,
 				6F04E37F1A1C864000C6C08B /* BindingsPerformance1DemoViewController.m in Sources */,
+				E611736D1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m in Sources */,
+				E61173631A654BA90066C42C /* AutoresizingMaskCenterNibView.m in Sources */,
 				6F9C46A114C5C30C00824AB2 /* PersonInformation.m in Sources */,
+				E61173741A654D330066C42C /* AutoresizingMaskBottomNibView.m in Sources */,
+				E61173531A654BA90066C42C /* AutolayoutRightNibView.m in Sources */,
 				6F9C46B814C5C36300824AB2 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FC5E8B514F380B500C01ABC /* ParallaxScrollingDemoViewController.m in Sources */,
 				6F5A0BB41509D19300A20DFF /* SlideshowDemoViewController.m in Sources */,
 				6F8914A015790DDE009FCC78 /* LabelDemoViewController.m in Sources */,
+				E61173891A654D910066C42C /* AutoresizingMaskTopLeftNibView.m in Sources */,
 				6FC3A2A9159E0422001A290E /* SeguePlaceholderInsetDemoViewController.m in Sources */,
 				6F04E3971A1C864000C6C08B /* EmployeeTableViewCell.m in Sources */,
 				6FC3A2AA159E0422001A290E /* SegueStackOtherDemoViewController.m in Sources */,
+				E611734B1A654BA90066C42C /* AutolayoutCenterNibView.m in Sources */,
 				6FC3A2AB159E0422001A290E /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
 				6FD2DE101A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m in Sources */,
 				6F1F4DEE15A1B5F900F65ECF /* SegueLeftPanelDemoViewController.m in Sources */,
+				E61173431A654BA90066C42C /* AutolayoutBottomNibView.m in Sources */,
+				E61173471A654BA90066C42C /* AutolayoutBottomRightNibView.m in Sources */,
 				6F1F4DF215A1B61800F65ECF /* SegueFirstRightPanelDemoViewController.m in Sources */,
 				6F04E3A71A1C885900C6C08B /* UppercaseValueTransformer.m in Sources */,
 				6F1F4DF515A1B63300F65ECF /* SegueSecondRightPanelDemoViewController.m in Sources */,
@@ -1869,12 +2089,16 @@
 				6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */,
 				6F04E37B1A1C864000C6C08B /* BindingsFailuresDemoViewController.m in Sources */,
 				6F0BFE03163EED8900420A5F /* RootNavigationDemoViewController.m in Sources */,
+				E61173671A654BA90066C42C /* AutoresizingMaskLeftNibView.m in Sources */,
 				6F0BFE0A163EED9F00420A5F /* RootSplitViewDemoController.m in Sources */,
 				6F0BFE11163EEDAC00420A5F /* RootTabBarDemoViewController.m in Sources */,
 				6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F8CC0C419DC2A8C003286F7 /* CoconutKit_bootstrap.m in Sources */,
+				E611737B1A654D490066C42C /* AutoresizingMaskBottomRightNibView.m in Sources */,
+				E61173571A654BA90066C42C /* AutolayoutTopLeftNibView.m in Sources */,
 				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
+				E61173901A654DA90066C42C /* AutoresizingMaskTopNibView.m in Sources */,
 				6F04E3871A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m in Sources */,
 				6F53B63516FA321000E01781 /* DemoColors.m in Sources */,
 				6FB5004A1705A60900779DB3 /* ConnectionDemoViewController.m in Sources */,
@@ -1887,23 +2111,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E61173731A654D330066C42C /* AutoresizingMaskBottomNibView.m in Sources */,
+				E611736C1A654D0A0066C42C /* AutoresizingMaskBottomLeftNibView.m in Sources */,
+				E61173421A654BA90066C42C /* AutolayoutBottomNibView.m in Sources */,
 				6F04E3901A1C864000C6C08B /* Employee.m in Sources */,
 				6F04E3961A1C864000C6C08B /* EmployeeTableViewCell.m in Sources */,
 				6FCB4E871926651F00047AD3 /* CoconutKit_demoAppDelegate.m in Sources */,
 				6FCB4E881926651F00047AD3 /* CoconutKit_demoApplication.m in Sources */,
-				6FD2DE231A64554200B98C11 /* AutoresizingMasksNibView.m in Sources */,
+				E61173661A654BA90066C42C /* AutoresizingMaskLeftNibView.m in Sources */,
 				6FCB4E891926651F00047AD3 /* FixedSizeViewController.m in Sources */,
 				6FCB4E8A1926651F00047AD3 /* HeavyViewController.m in Sources */,
 				6FCB4E8B1926651F00047AD3 /* LandscapeOnlyViewController.m in Sources */,
 				6FCB4E8C1926651F00047AD3 /* LifeCycleTestViewController.m in Sources */,
 				6FCB4E8D1926651F00047AD3 /* MemoryWarningTestCoverViewController.m in Sources */,
+				E61173561A654BA90066C42C /* AutolayoutTopLeftNibView.m in Sources */,
 				6FCB4E8E1926651F00047AD3 /* PortraitOnlyViewController.m in Sources */,
 				6FCB4E8F1926651F00047AD3 /* StretchableViewController.m in Sources */,
+				E61173881A654D910066C42C /* AutoresizingMaskTopLeftNibView.m in Sources */,
 				6FCB4E901926651F00047AD3 /* TransparentViewController.m in Sources */,
+				E611733E1A654BA90066C42C /* AutolayoutBottomLeftNibView.m in Sources */,
 				6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */,
 				6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */,
 				6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */,
 				6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */,
+				E61173621A654BA90066C42C /* AutoresizingMaskCenterNibView.m in Sources */,
+				E611738F1A654DA90066C42C /* AutoresizingMaskTopNibView.m in Sources */,
 				6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */,
 				6F04E3881A1C864000C6C08B /* BindingsTransformersDemoViewController.m in Sources */,
 				6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */,
@@ -1913,10 +2145,13 @@
 				6FCB4E9D1926651F00047AD3 /* ProgrammaticTableViewCell.m in Sources */,
 				6FCB4E9E1926651F00047AD3 /* TableViewCellsDemoViewController.m in Sources */,
 				6FCB4E9F1926651F00047AD3 /* XibTableViewCell.m in Sources */,
+				E61173461A654BA90066C42C /* AutolayoutBottomRightNibView.m in Sources */,
+				E61173521A654BA90066C42C /* AutolayoutRightNibView.m in Sources */,
 				6FCB4EA01926651F00047AD3 /* WebViewDemoViewController.m in Sources */,
 				6FCB4EA11926651F00047AD3 /* PlaceholderDemoViewController.m in Sources */,
 				6FCB4EA21926651F00047AD3 /* RootStackDemoViewController.m in Sources */,
 				6FCB4EA31926651F00047AD3 /* StackDemoViewController.m in Sources */,
+				E611734A1A654BA90066C42C /* AutolayoutCenterNibView.m in Sources */,
 				6FCB4EA41926651F00047AD3 /* DeviceInfo.m in Sources */,
 				6F04E3861A1C864000C6C08B /* BindingsProgrammaticDemoViewController.m in Sources */,
 				6FCB4EA51926651F00047AD3 /* TableSearchDisplayDemoViewController.m in Sources */,
@@ -1924,6 +2159,7 @@
 				6FCB4EA61926651F00047AD3 /* WizardAddressPageViewController.m in Sources */,
 				6FCB4EA71926651F00047AD3 /* WizardDemoViewController.m in Sources */,
 				6FCB4EA81926651F00047AD3 /* WizardIdentityPageViewController.m in Sources */,
+				E61173811A654D720066C42C /* AutoresizingMaskRightNibView.m in Sources */,
 				6FCB4EA91926651F00047AD3 /* DemosListViewController.m in Sources */,
 				6FCB4EAA1926651F00047AD3 /* DemoErrors.m in Sources */,
 				6F04E3A61A1C885900C6C08B /* UppercaseValueTransformer.m in Sources */,
@@ -1941,6 +2177,8 @@
 				6FCB4EB41926651F00047AD3 /* SegueStackRootDemoPlaceholderViewController.m in Sources */,
 				6FCB4EB51926651F00047AD3 /* SegueLeftPanelDemoViewController.m in Sources */,
 				6FCB4EB61926651F00047AD3 /* SegueFirstRightPanelDemoViewController.m in Sources */,
+				E611735E1A654BA90066C42C /* AutolayoutTopRightNibView.m in Sources */,
+				E61173961A654DC00066C42C /* AutoresizingMaskTopRightNibView.m in Sources */,
 				6F04E3821A1C864000C6C08B /* BindingsPerformance2DemoViewController.m in Sources */,
 				6FCB4EB71926651F00047AD3 /* SegueSecondRightPanelDemoViewController.m in Sources */,
 				6FCB4EB91926651F00047AD3 /* CustomTransitions.m in Sources */,
@@ -1952,9 +2190,10 @@
 				6FCB4EBD1926651F00047AD3 /* RootNavigationDemoViewController.m in Sources */,
 				6FCB4EBE1926651F00047AD3 /* RootSplitViewDemoController.m in Sources */,
 				6FCB4EBF1926651F00047AD3 /* RootTabBarDemoViewController.m in Sources */,
-				6FD2DE1C1A64550500B98C11 /* AutolayoutNibView.m in Sources */,
 				6FCB4EC01926651F00047AD3 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F04E37A1A1C864000C6C08B /* BindingsFailuresDemoViewController.m in Sources */,
+				E611734E1A654BA90066C42C /* AutolayoutLeftNibView.m in Sources */,
+				E611737A1A654D490066C42C /* AutoresizingMaskBottomRightNibView.m in Sources */,
 				6FCB4EC11926651F00047AD3 /* FontsDemoViewController.m in Sources */,
 				6FCB4EC21926651F00047AD3 /* ViewEffectsDemoViewController.m in Sources */,
 				6FCB4EC31926651F00047AD3 /* DemoColors.m in Sources */,
@@ -1963,6 +2202,7 @@
 				6F04E37E1A1C864000C6C08B /* BindingsPerformance1DemoViewController.m in Sources */,
 				6F04E39A1A1C864000C6C08B /* EmployeeView.m in Sources */,
 				6FCB4EC71926651F00047AD3 /* main.m in Sources */,
+				E611735A1A654BA90066C42C /* AutolayoutTopNibView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
