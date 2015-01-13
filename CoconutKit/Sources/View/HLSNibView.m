@@ -104,17 +104,61 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             responder = responder.nextResponder;
         }
         
-        // FIXME: Issue with constraints. The original constraints should be preserved and copied
-        //        over from self to nibView. To test:
-        //           - create a layout with a centered placeholder
-        //           - run and rotate the view to check behavior
-        //           - set view class to an NLSNibView subclass
-        //           - check behavior again, should be incorrect
-        
         // Get rid of the placeholder and install the nib-instantiated view instead
         nibView.frame = self.frame;
         nibView.alpha = self.alpha;
         nibView.autoresizingMask = self.autoresizingMask;
+        
+        // Avoid conflicts with constraints generated from autoresizing masks
+        nibView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        // Replace constraints defined for the placeholder view with same constraints applied to the nib-instantiated view
+        for (NSLayoutConstraint *placeholderConstraint in self.superview.constraints) {
+            // Skip constraints which do not involve the placeholder
+            if (placeholderConstraint.firstItem != self && placeholderConstraint.secondItem != self) {
+                continue;
+            }
+            
+            NSLayoutConstraint *constraint = nil;
+            if (placeholderConstraint.firstItem == self && placeholderConstraint.secondItem == self) {
+                constraint = [NSLayoutConstraint constraintWithItem:nibView
+                                                          attribute:placeholderConstraint.firstAttribute
+                                                          relatedBy:placeholderConstraint.relation
+                                                             toItem:nibView
+                                                          attribute:placeholderConstraint.secondAttribute
+                                                         multiplier:placeholderConstraint.multiplier
+                                                           constant:placeholderConstraint.constant];
+            }
+            else if (placeholderConstraint.firstItem == self) {
+                constraint = [NSLayoutConstraint constraintWithItem:nibView
+                                                          attribute:placeholderConstraint.firstAttribute
+                                                          relatedBy:placeholderConstraint.relation
+                                                             toItem:placeholderConstraint.secondItem
+                                                          attribute:placeholderConstraint.secondAttribute
+                                                         multiplier:placeholderConstraint.multiplier
+                                                           constant:placeholderConstraint.constant];
+            }
+            else {
+                constraint = [NSLayoutConstraint constraintWithItem:placeholderConstraint.firstItem
+                                                          attribute:placeholderConstraint.firstAttribute
+                                                          relatedBy:placeholderConstraint.relation
+                                                             toItem:nibView
+                                                          attribute:placeholderConstraint.secondAttribute
+                                                         multiplier:placeholderConstraint.multiplier
+                                                           constant:placeholderConstraint.constant];
+            }
+            
+            // Copy constraint properties
+            constraint.identifier = placeholderConstraint.identifier;
+            constraint.shouldBeArchived = placeholderConstraint.shouldBeArchived;
+            constraint.priority = placeholderConstraint.priority;
+            constraint.active = placeholderConstraint.active;
+            
+            // Replace
+            [self.superview removeConstraint:placeholderConstraint];
+            [self.superview addConstraint:constraint];
+        }
+        
         [self.superview insertSubview:nibView belowSubview:self];
         [self removeFromSuperview];
     }
