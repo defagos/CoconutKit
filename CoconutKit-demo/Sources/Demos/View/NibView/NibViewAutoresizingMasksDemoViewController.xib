@@ -45,17 +45,17 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="h2S-XI-vrp" customClass="AutoresizingMaskBottomLeftNibView">
+                <view contentMode="scaleToFill" id="h2S-XI-vrp" customClass="AutolayoutBottomLeftNibView">
                     <rect key="frame" x="30" y="714" width="216" height="280"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="jWD-jd-MgL" customClass="AutoresizingMaskBottomNibView">
+                <view contentMode="scaleToFill" id="jWD-jd-MgL" customClass="AutolayoutBottomNibView">
                     <rect key="frame" x="276" y="714" width="216" height="280"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="mBG-wi-lnE" customClass="AutoresizingMaskBottomRightNibView">
+                <view contentMode="scaleToFill" id="mBG-wi-lnE" customClass="AutolayoutBottomRightNibView">
                     <rect key="frame" x="522" y="714" width="216" height="280"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

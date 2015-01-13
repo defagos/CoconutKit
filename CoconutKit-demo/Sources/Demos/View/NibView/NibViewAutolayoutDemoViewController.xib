@@ -39,15 +39,15 @@
                     <rect key="frame" x="410" y="256" width="160" height="152"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4q-yw-2fF" customClass="AutolayoutBottomLeftNibView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4q-yw-2fF" customClass="AutoresizingMaskBottomLeftNibView">
                     <rect key="frame" x="30" y="428" width="160" height="152"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpG-AH-0c4" customClass="AutolayoutBottomNibView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpG-AH-0c4" customClass="AutoresizingMaskBottomNibView">
                     <rect key="frame" x="220" y="428" width="160" height="152"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Sd-kt-YgJ" customClass="AutolayoutBottomRightNibView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Sd-kt-YgJ" customClass="AutoresizingMaskBottomRightNibView">
                     <rect key="frame" x="410" y="428" width="160" height="152"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
