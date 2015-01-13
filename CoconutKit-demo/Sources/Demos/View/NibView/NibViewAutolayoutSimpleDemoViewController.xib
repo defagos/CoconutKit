@@ -15,29 +15,29 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFf-Mx-ai2">
-                    <rect key="frame" x="164" y="154" width="272" height="291"/>
-                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="291" id="2iC-sj-bbY"/>
-                        <constraint firstAttribute="width" constant="272" id="Aca-Dp-FCI"/>
-                    </constraints>
-                </view>
-                <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Lg-qU-yMs" customClass="AutolayoutLeftNibView">
-                    <rect key="frame" x="164" y="154" width="272" height="291"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXu-7b-qH3" customClass="AutoresizingMaskRightNibView">
+                    <rect key="frame" x="343" y="335" width="200" height="220"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="291" id="Azl-ae-hJs"/>
-                        <constraint firstAttribute="width" constant="272" id="w7J-A4-6O5"/>
+                        <constraint firstAttribute="width" constant="200" id="3IH-ZK-ewd"/>
+                        <constraint firstAttribute="height" constant="220" id="bbJ-B3-pLs"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Lg-qU-yMs" customClass="AutolayoutLeftNibView">
+                    <rect key="frame" x="52" y="79" width="200" height="220"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="Aw7-3w-P0Q"/>
+                        <constraint firstAttribute="height" constant="220" id="WmB-Zt-Bfg"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="DFf-Mx-ai2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="164" id="7Ks-Re-10k"/>
-                <constraint firstItem="2Lg-qU-yMs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="154" id="AxZ-VZ-S68"/>
-                <constraint firstItem="2Lg-qU-yMs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="164" id="XEE-BQ-ZIj"/>
-                <constraint firstItem="DFf-Mx-ai2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="154" id="b6Z-8a-ngz"/>
+                <constraint firstItem="2Lg-qU-yMs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="52" id="SDv-0d-c7V"/>
+                <constraint firstAttribute="trailing" secondItem="pXu-7b-qH3" secondAttribute="trailing" constant="57" id="VZD-5U-C7Z"/>
+                <constraint firstAttribute="bottom" secondItem="pXu-7b-qH3" secondAttribute="bottom" constant="45" id="kEx-DD-vZh"/>
+                <constraint firstItem="2Lg-qU-yMs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="79" id="l3O-bO-rsP"/>
             </constraints>
         </view>
     </objects>

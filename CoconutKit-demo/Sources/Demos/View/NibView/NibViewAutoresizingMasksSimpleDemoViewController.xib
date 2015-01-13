@@ -16,8 +16,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="zZx-6v-dwv" customClass="AutoresizingMaskLeftNibView">
-                    <rect key="frame" x="65" y="181" width="400" height="300"/>
+                    <rect key="frame" x="35" y="121" width="400" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="eXh-FL-TxX" customClass="AutolayoutRightNibView">
+                    <rect key="frame" x="325" y="674" width="400" height="300"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
