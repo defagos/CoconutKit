@@ -76,6 +76,31 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         nibView.frame = self.frame;
         nibView.alpha = self.alpha;
         nibView.autoresizingMask = self.autoresizingMask;
+        
+        // Copy constraints defined on the placeholder view itself (size constraints)
+        for (NSLayoutConstraint *placeholderConstraint in self.constraints) {
+            id firstItem = (placeholderConstraint.firstItem == self) ? nibView : placeholderConstraint.firstItem;
+            id secondItem = (placeholderConstraint.secondItem == self) ? nibView : placeholderConstraint.secondItem;
+            
+            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:firstItem
+                                                                          attribute:placeholderConstraint.firstAttribute
+                                                                          relatedBy:placeholderConstraint.relation
+                                                                             toItem:secondItem
+                                                                          attribute:placeholderConstraint.secondAttribute
+                                                                         multiplier:placeholderConstraint.multiplier
+                                                                           constant:placeholderConstraint.constant];
+            constraint.identifier = placeholderConstraint.identifier;
+            constraint.shouldBeArchived = placeholderConstraint.shouldBeArchived;
+            constraint.priority = placeholderConstraint.priority;
+            
+            // TODO: Remove when iOS 8 is the minimum required version for CoconutKit
+            if ([constraint respondsToSelector:@selector(isActive)]) {
+                constraint.active = placeholderConstraint.active;
+            }
+            
+            [nibView addConstraint:constraint];
+        }
+        
         return nibView;
     }
     else {
