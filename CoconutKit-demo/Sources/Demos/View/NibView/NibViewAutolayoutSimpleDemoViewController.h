@@ -1,11 +1,11 @@
 //
-//  NibViewSimpleDemoViewController.h
+//  NibViewAutolayoutSimpleDemoViewController.h
 //  CoconutKit-demo
 //
 //  Created by Samuel Defago on 13.01.15.
 //  Copyright (c) 2015 Samuel Défago. All rights reserved.
 //
 
-@interface NibViewSimpleDemoViewController : HLSViewController
+@interface NibViewAutolayoutSimpleDemoViewController : HLSViewController
 
 @end
