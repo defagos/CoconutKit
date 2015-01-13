@@ -406,6 +406,10 @@
 		E61173971A654DC00066C42C /* AutoresizingMaskTopRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173951A654DC00066C42C /* AutoresizingMaskTopRightNibView.m */; };
 		E61173991A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173981A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib */; };
 		E611739A1A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173981A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib */; };
+		E611739E1A656F5B0066C42C /* NibViewSimpleDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E611739C1A656F5B0066C42C /* NibViewSimpleDemoViewController.m */; };
+		E611739F1A656F5B0066C42C /* NibViewSimpleDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E611739C1A656F5B0066C42C /* NibViewSimpleDemoViewController.m */; };
+		E61173A01A656F5B0066C42C /* NibViewSimpleDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611739D1A656F5B0066C42C /* NibViewSimpleDemoViewController.xib */; };
+		E61173A11A656F5B0066C42C /* NibViewSimpleDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611739D1A656F5B0066C42C /* NibViewSimpleDemoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -769,6 +773,9 @@
 		E61173941A654DC00066C42C /* AutoresizingMaskTopRightNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoresizingMaskTopRightNibView.h; sourceTree = "<group>"; };
 		E61173951A654DC00066C42C /* AutoresizingMaskTopRightNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoresizingMaskTopRightNibView.m; sourceTree = "<group>"; };
 		E61173981A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoresizingMaskTopRightNibView.xib; sourceTree = "<group>"; };
+		E611739B1A656F5B0066C42C /* NibViewSimpleDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibViewSimpleDemoViewController.h; sourceTree = "<group>"; };
+		E611739C1A656F5B0066C42C /* NibViewSimpleDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewSimpleDemoViewController.m; sourceTree = "<group>"; };
+		E611739D1A656F5B0066C42C /* NibViewSimpleDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibViewSimpleDemoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1560,6 +1567,9 @@
 				6FD2DE0C1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.h */,
 				6FD2DE0D1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m */,
 				6FD2DE0E1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib */,
+				E611739B1A656F5B0066C42C /* NibViewSimpleDemoViewController.h */,
+				E611739C1A656F5B0066C42C /* NibViewSimpleDemoViewController.m */,
+				E611739D1A656F5B0066C42C /* NibViewSimpleDemoViewController.xib */,
 			);
 			path = NibView;
 			sourceTree = "<group>";
@@ -1789,6 +1799,7 @@
 				6F3569AD19D59A68000CADE2 /* Localizable.strings in Resources */,
 				6F9C468E14C5C30C00824AB2 /* WebViewDemoViewController.xib in Resources */,
 				6F9C469014C5C30C00824AB2 /* PlaceholderDemoViewController.xib in Resources */,
+				E61173A11A656F5B0066C42C /* NibViewSimpleDemoViewController.xib in Resources */,
 				6FD2DE121A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
 				E61173771A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */,
 				6F9C469214C5C30C00824AB2 /* RootStackDemoViewController.xib in Resources */,
@@ -1896,6 +1907,7 @@
 				6FCB4EDE1926651F00047AD3 /* WebViewDemoViewController.xib in Resources */,
 				6FCB4EDF1926651F00047AD3 /* PlaceholderDemoViewController.xib in Resources */,
 				6FCB4EE01926651F00047AD3 /* RootStackDemoViewController.xib in Resources */,
+				E61173A01A656F5B0066C42C /* NibViewSimpleDemoViewController.xib in Resources */,
 				6FD2DE111A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
 				E61173761A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */,
 				6FCB4EE11926651F00047AD3 /* StackDemoViewController.xib in Resources */,
@@ -2095,6 +2107,7 @@
 				6F22C76116A942970081A9A7 /* DynamicLocalizationDemoViewController.m in Sources */,
 				6F8CC0C419DC2A8C003286F7 /* CoconutKit_bootstrap.m in Sources */,
 				E611737B1A654D490066C42C /* AutoresizingMaskBottomRightNibView.m in Sources */,
+				E611739F1A656F5B0066C42C /* NibViewSimpleDemoViewController.m in Sources */,
 				E61173571A654BA90066C42C /* AutolayoutTopLeftNibView.m in Sources */,
 				6F22C78116A942F10081A9A7 /* FontsDemoViewController.m in Sources */,
 				6F718CB016CF8714001498D6 /* ViewEffectsDemoViewController.m in Sources */,
@@ -2167,6 +2180,7 @@
 				6FD2DE0F1A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.m in Sources */,
 				6FCB4EAB1926651F00047AD3 /* _PersonInformation.m in Sources */,
 				6FCB4EAC1926651F00047AD3 /* PersonInformation.m in Sources */,
+				E611739E1A656F5B0066C42C /* NibViewSimpleDemoViewController.m in Sources */,
 				6FCB4EAD1926651F00047AD3 /* CoconutKitDemoData.xcdatamodeld in Sources */,
 				6FCB4EAE1926651F00047AD3 /* ParallaxScrollingDemoViewController.m in Sources */,
 				6FCB4EAF1926651F00047AD3 /* SlideshowDemoViewController.m in Sources */,

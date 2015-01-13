@@ -25,6 +25,7 @@
 #import "LayerPropertiesTestViewController.h"
 #import "NibViewAutolayoutDemoViewController.h"
 #import "NibViewAutoresizingMasksDemoViewController.h"
+#import "NibViewSimpleDemoViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
@@ -111,6 +112,7 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexEffects,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
+    ViewDemoIndexNibViewSimple,
     ViewDemoIndexNibViewAutolayout,
     ViewDemoIndexNibViewAutoresizingMasks,
     ViewDemoIndexEnumEnd,
@@ -423,6 +425,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
+                case ViewDemoIndexNibViewSimple: {
+                    cell.textLabel.text = NSLocalizedString(@"Nib view (simple)", nil);
+                    break;
+                }
+                    
                 case ViewDemoIndexNibViewAutolayout: {
                     cell.textLabel.text = NSLocalizedString(@"Nib view (autolayout)", nil);
                     break;
@@ -649,6 +656,11 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexParallaxScrolling: {
                     demoViewController = [[ParallaxScrollingDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewSimple: {
+                    demoViewController = [[NibViewSimpleDemoViewController alloc] init];
                     break;
                 }
                     
