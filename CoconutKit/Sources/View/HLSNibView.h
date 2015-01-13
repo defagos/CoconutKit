@@ -75,6 +75,7 @@
 
 @interface HLSNibView (RequiresSuper)
 
+- (id)awakeAfterUsingCoder NS_REQUIRES_SUPER;
 - (void)awakeFromNib NS_REQUIRES_SUPER;
 
 @end
