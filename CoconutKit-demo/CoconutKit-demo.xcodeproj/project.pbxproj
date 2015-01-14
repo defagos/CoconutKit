@@ -328,6 +328,46 @@
 		6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */; };
 		6FD2DE181A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
 		6FD2DE191A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */; };
+		6FD2DE3F1A6635AF00B98C11 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE2D1A6635AF00B98C11 /* Icon-72.png */; };
+		6FD2DE401A6635AF00B98C11 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE2D1A6635AF00B98C11 /* Icon-72.png */; };
+		6FD2DE411A6635AF00B98C11 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE2E1A6635AF00B98C11 /* Icon-72@2x.png */; };
+		6FD2DE421A6635AF00B98C11 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE2E1A6635AF00B98C11 /* Icon-72@2x.png */; };
+		6FD2DE431A6635AF00B98C11 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE2F1A6635AF00B98C11 /* Icon-Small-50.png */; };
+		6FD2DE441A6635AF00B98C11 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE2F1A6635AF00B98C11 /* Icon-Small-50.png */; };
+		6FD2DE451A6635AF00B98C11 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE301A6635AF00B98C11 /* Icon-Small-50@2x.png */; };
+		6FD2DE461A6635AF00B98C11 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE301A6635AF00B98C11 /* Icon-Small-50@2x.png */; };
+		6FD2DE471A6635AF00B98C11 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE311A6635AF00B98C11 /* Icon-Small.png */; };
+		6FD2DE481A6635AF00B98C11 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE311A6635AF00B98C11 /* Icon-Small.png */; };
+		6FD2DE491A6635AF00B98C11 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE321A6635AF00B98C11 /* Icon-Small@2x.png */; };
+		6FD2DE4A1A6635AF00B98C11 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE321A6635AF00B98C11 /* Icon-Small@2x.png */; };
+		6FD2DE4B1A6635AF00B98C11 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE331A6635AF00B98C11 /* Icon.png */; };
+		6FD2DE4C1A6635AF00B98C11 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE331A6635AF00B98C11 /* Icon.png */; };
+		6FD2DE4D1A6635AF00B98C11 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE341A6635AF00B98C11 /* Icon@2x.png */; };
+		6FD2DE4E1A6635AF00B98C11 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE341A6635AF00B98C11 /* Icon@2x.png */; };
+		6FD2DE4F1A6635AF00B98C11 /* ios7_app_icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE351A6635AF00B98C11 /* ios7_app_icon_ipad.png */; };
+		6FD2DE501A6635AF00B98C11 /* ios7_app_icon_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE351A6635AF00B98C11 /* ios7_app_icon_ipad.png */; };
+		6FD2DE511A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE361A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png */; };
+		6FD2DE521A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE361A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png */; };
+		6FD2DE531A6635AF00B98C11 /* ios7_app_icon_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE371A6635AF00B98C11 /* ios7_app_icon_iphone.png */; };
+		6FD2DE541A6635AF00B98C11 /* ios7_app_icon_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE371A6635AF00B98C11 /* ios7_app_icon_iphone.png */; };
+		6FD2DE551A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE381A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png */; };
+		6FD2DE561A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE381A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png */; };
+		6FD2DE571A6635AF00B98C11 /* ios7_settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE391A6635AF00B98C11 /* ios7_settings_icon.png */; };
+		6FD2DE581A6635AF00B98C11 /* ios7_settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE391A6635AF00B98C11 /* ios7_settings_icon.png */; };
+		6FD2DE591A6635AF00B98C11 /* ios7_settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3A1A6635AF00B98C11 /* ios7_settings_icon@2x.png */; };
+		6FD2DE5A1A6635AF00B98C11 /* ios7_settings_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3A1A6635AF00B98C11 /* ios7_settings_icon@2x.png */; };
+		6FD2DE5B1A6635AF00B98C11 /* ios7_spotlight_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3B1A6635AF00B98C11 /* ios7_spotlight_icon.png */; };
+		6FD2DE5C1A6635AF00B98C11 /* ios7_spotlight_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3B1A6635AF00B98C11 /* ios7_spotlight_icon.png */; };
+		6FD2DE5D1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3C1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png */; };
+		6FD2DE5E1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3C1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png */; };
+		6FD2DE5F1A6635AF00B98C11 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3D1A6635AF00B98C11 /* iTunesArtwork */; };
+		6FD2DE601A6635AF00B98C11 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3D1A6635AF00B98C11 /* iTunesArtwork */; };
+		6FD2DE611A6635AF00B98C11 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3E1A6635AF00B98C11 /* iTunesArtwork@2x */; };
+		6FD2DE621A6635AF00B98C11 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3E1A6635AF00B98C11 /* iTunesArtwork@2x */; };
+		6FD2DE671A66365500B98C11 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE651A66365500B98C11 /* logo.png */; };
+		6FD2DE681A66365500B98C11 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE651A66365500B98C11 /* logo.png */; };
+		6FD2DE691A66365500B98C11 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE661A66365500B98C11 /* logo@2x.png */; };
+		6FD2DE6A1A66365500B98C11 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE661A66365500B98C11 /* logo@2x.png */; };
 		6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */; };
 		6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */; };
 		6FEEF84714F2810E001585A6 /* parallax_demo_trees_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */; };
@@ -715,6 +755,26 @@
 		6FD2DE131A64531300B98C11 /* NibViewAutolayoutDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibViewAutolayoutDemoViewController.h; sourceTree = "<group>"; };
 		6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewAutolayoutDemoViewController.m; sourceTree = "<group>"; };
 		6FD2DE151A64531300B98C11 /* NibViewAutolayoutDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibViewAutolayoutDemoViewController.xib; sourceTree = "<group>"; };
+		6FD2DE2D1A6635AF00B98C11 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		6FD2DE2E1A6635AF00B98C11 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		6FD2DE2F1A6635AF00B98C11 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		6FD2DE301A6635AF00B98C11 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		6FD2DE311A6635AF00B98C11 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		6FD2DE321A6635AF00B98C11 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		6FD2DE331A6635AF00B98C11 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		6FD2DE341A6635AF00B98C11 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6FD2DE351A6635AF00B98C11 /* ios7_app_icon_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios7_app_icon_ipad.png; sourceTree = "<group>"; };
+		6FD2DE361A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7_app_icon_ipad@2x.png"; sourceTree = "<group>"; };
+		6FD2DE371A6635AF00B98C11 /* ios7_app_icon_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios7_app_icon_iphone.png; sourceTree = "<group>"; };
+		6FD2DE381A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7_app_icon_iphone@2x.png"; sourceTree = "<group>"; };
+		6FD2DE391A6635AF00B98C11 /* ios7_settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios7_settings_icon.png; sourceTree = "<group>"; };
+		6FD2DE3A1A6635AF00B98C11 /* ios7_settings_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7_settings_icon@2x.png"; sourceTree = "<group>"; };
+		6FD2DE3B1A6635AF00B98C11 /* ios7_spotlight_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios7_spotlight_icon.png; sourceTree = "<group>"; };
+		6FD2DE3C1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7_spotlight_icon@2x.png"; sourceTree = "<group>"; };
+		6FD2DE3D1A6635AF00B98C11 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		6FD2DE3E1A6635AF00B98C11 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
+		6FD2DE651A66365500B98C11 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		6FD2DE661A66365500B98C11 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_grass_layer.png; sourceTree = "<group>"; };
 		6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_sky_layer.png; sourceTree = "<group>"; };
 		6FEEF84414F2810E001585A6 /* parallax_demo_trees_layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parallax_demo_trees_layer.png; sourceTree = "<group>"; };
@@ -1410,13 +1470,16 @@
 		6F9C46A214C5C36300824AB2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6F04E3AF1A1C8D2100C6C08B /* Launch Screen.xib */,
-				6F468CAC19D2E7920021B95D /* DemoTable.strings */,
-				6F468CAE19D2E7920021B95D /* Localizable.strings */,
 				6F9C46A314C5C36300824AB2 /* Data */,
 				6F9C46A614C5C36300824AB2 /* Fonts */,
 				6F9C46A914C5C36300824AB2 /* HTML */,
+				6FD2DE2C1A6635AF00B98C11 /* Icons */,
 				6F9C46AB14C5C36300824AB2 /* Images */,
+				6FD2DE3D1A6635AF00B98C11 /* iTunesArtwork */,
+				6FD2DE3E1A6635AF00B98C11 /* iTunesArtwork@2x */,
+				6F04E3AF1A1C8D2100C6C08B /* Launch Screen.xib */,
+				6F468CAC19D2E7920021B95D /* DemoTable.strings */,
+				6F468CAE19D2E7920021B95D /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1466,6 +1529,8 @@
 				6F9C46B514C5C36300824AB2 /* img_coconut2.jpg */,
 				6F9C46B614C5C36300824AB2 /* img_coconut3.jpg */,
 				6F9C46B714C5C36300824AB2 /* img_coconut4.jpg */,
+				6FD2DE651A66365500B98C11 /* logo.png */,
+				6FD2DE661A66365500B98C11 /* logo@2x.png */,
 				6FEEF84214F2810E001585A6 /* parallax_demo_grass_layer.png */,
 				6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */,
 				6FEEF84314F2810E001585A6 /* parallax_demo_sky_layer.png */,
@@ -1582,6 +1647,29 @@
 				E61173A41A65779D0066C42C /* NibViewAutoresizingMasksSimpleDemoViewController.xib */,
 			);
 			path = NibView;
+			sourceTree = "<group>";
+		};
+		6FD2DE2C1A6635AF00B98C11 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				6FD2DE2D1A6635AF00B98C11 /* Icon-72.png */,
+				6FD2DE2E1A6635AF00B98C11 /* Icon-72@2x.png */,
+				6FD2DE2F1A6635AF00B98C11 /* Icon-Small-50.png */,
+				6FD2DE301A6635AF00B98C11 /* Icon-Small-50@2x.png */,
+				6FD2DE311A6635AF00B98C11 /* Icon-Small.png */,
+				6FD2DE321A6635AF00B98C11 /* Icon-Small@2x.png */,
+				6FD2DE331A6635AF00B98C11 /* Icon.png */,
+				6FD2DE341A6635AF00B98C11 /* Icon@2x.png */,
+				6FD2DE351A6635AF00B98C11 /* ios7_app_icon_ipad.png */,
+				6FD2DE361A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png */,
+				6FD2DE371A6635AF00B98C11 /* ios7_app_icon_iphone.png */,
+				6FD2DE381A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png */,
+				6FD2DE391A6635AF00B98C11 /* ios7_settings_icon.png */,
+				6FD2DE3A1A6635AF00B98C11 /* ios7_settings_icon@2x.png */,
+				6FD2DE3B1A6635AF00B98C11 /* ios7_spotlight_icon.png */,
+				6FD2DE3C1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		E611731B1A654BA90066C42C /* Autolayout */ = {
@@ -1785,6 +1873,7 @@
 			files = (
 				6F04E3AE1A1C8D1700C6C08B /* Employees.plist in Resources */,
 				6F9C465714C5C30C00824AB2 /* FixedSizeViewController.xib in Resources */,
+				6FD2DE541A6635AF00B98C11 /* ios7_app_icon_iphone.png in Resources */,
 				6F9C465914C5C30C00824AB2 /* HeavyViewController.xib in Resources */,
 				6F9C465B14C5C30C00824AB2 /* LandscapeOnlyViewController.xib in Resources */,
 				6F9C465D14C5C30C00824AB2 /* LifeCycleTestViewController.xib in Resources */,
@@ -1798,11 +1887,13 @@
 				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
+				6FD2DE601A6635AF00B98C11 /* iTunesArtwork in Resources */,
 				6F9C467914C5C30C00824AB2 /* CursorFolderView.xib in Resources */,
 				6F9C467D14C5C30C00824AB2 /* CursorSelectedFolderView.xib in Resources */,
 				E61173691A654BA90066C42C /* AutoresizingMaskLeftNibView.xib in Resources */,
 				E61173651A654BA90066C42C /* AutoresizingMaskCenterNibView.xib in Resources */,
 				6F28177219D99A33009D1CC3 /* img_localized.png in Resources */,
+				6FD2DE461A6635AF00B98C11 /* Icon-Small-50@2x.png in Resources */,
 				6F9C468314C5C30C00824AB2 /* FooterView.xib in Resources */,
 				6F9C468514C5C30C00824AB2 /* HeaderView.xib in Resources */,
 				6F9C468914C5C30C00824AB2 /* XibTableViewCell.xib in Resources */,
@@ -1814,6 +1905,7 @@
 				6FD2DE121A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
 				E61173771A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */,
 				6F9C469214C5C30C00824AB2 /* RootStackDemoViewController.xib in Resources */,
+				6FD2DE501A6635AF00B98C11 /* ios7_app_icon_ipad.png in Resources */,
 				6F9C469414C5C30C00824AB2 /* StackDemoViewController.xib in Resources */,
 				E61173611A654BA90066C42C /* AutolayoutTopRightNibView.xib in Resources */,
 				6F04E38F1A1C864000C6C08B /* BindingsViewsDemoViewController.xib in Resources */,
@@ -1822,17 +1914,24 @@
 				6F04E3811A1C864000C6C08B /* BindingsPerformance1DemoViewController.xib in Resources */,
 				6F9C469914C5C30C00824AB2 /* WizardAddressPageViewController.xib in Resources */,
 				6F9C469D14C5C30C00824AB2 /* WizardIdentityPageViewController.xib in Resources */,
+				6FD2DE481A6635AF00B98C11 /* Icon-Small.png in Resources */,
 				6F04E3B11A1C8D2100C6C08B /* Launch Screen.xib in Resources */,
 				6F9C46B914C5C36300824AB2 /* ProximaNova-Bold.otf in Resources */,
+				6FD2DE4C1A6635AF00B98C11 /* Icon.png in Resources */,
+				6FD2DE521A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png in Resources */,
 				E61173511A654BA90066C42C /* AutolayoutLeftNibView.xib in Resources */,
+				6FD2DE5A1A6635AF00B98C11 /* ios7_settings_icon@2x.png in Resources */,
 				6F9C46BA14C5C36300824AB2 /* ProximaNova-Regular.otf in Resources */,
+				6FD2DE5E1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png in Resources */,
 				6F04E39D1A1C864000C6C08B /* EmployeeView.xib in Resources */,
 				6F9C46BB14C5C36300824AB2 /* sample_text.html in Resources */,
 				E611738C1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib in Resources */,
+				6FD2DE4E1A6635AF00B98C11 /* Icon@2x.png in Resources */,
 				6F9C46BC14C5C36300824AB2 /* bkgr_bar.png in Resources */,
 				6F41D2FD19D2987800E8681A /* WizardDemoViewController.xib in Resources */,
 				6F96C83519D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6F9C46BD14C5C36300824AB2 /* cell_bkgr_brown_large.png in Resources */,
+				6FD2DE621A6635AF00B98C11 /* iTunesArtwork@2x in Resources */,
 				E611737E1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib in Resources */,
 				E61173411A654BA90066C42C /* AutolayoutBottomLeftNibView.xib in Resources */,
 				6F9C46BE14C5C36300824AB2 /* cell_bkgr_brown_large_selected.png in Resources */,
@@ -1840,7 +1939,10 @@
 				6F04E3791A1C864000C6C08B /* BindingsControlsDemoViewController.xib in Resources */,
 				6F9C46C114C5C36300824AB2 /* icn_folder.png in Resources */,
 				6F04E3951A1C864000C6C08B /* EmployeeHeaderView.xib in Resources */,
+				6FD2DE441A6635AF00B98C11 /* Icon-Small-50.png in Resources */,
+				6FD2DE5C1A6635AF00B98C11 /* ios7_spotlight_icon.png in Resources */,
 				6F9C46C214C5C36300824AB2 /* img_coconut1.jpg in Resources */,
+				6FD2DE401A6635AF00B98C11 /* Icon-72.png in Resources */,
 				6F468CB419D2E7AB0021B95D /* DemoTable.strings in Resources */,
 				6F9C46C314C5C36300824AB2 /* img_coconut2.jpg in Resources */,
 				E61173701A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib in Resources */,
@@ -1848,6 +1950,7 @@
 				6F9C46C414C5C36300824AB2 /* img_coconut3.jpg in Resources */,
 				6F9C46C514C5C36300824AB2 /* img_coconut4.jpg in Resources */,
 				6FEEF84514F2810E001585A6 /* parallax_demo_grass_layer.png in Resources */,
+				6FD2DE681A66365500B98C11 /* logo.png in Resources */,
 				E611735D1A654BA90066C42C /* AutolayoutTopNibView.xib in Resources */,
 				6FEEF84614F2810E001585A6 /* parallax_demo_sky_layer.png in Resources */,
 				E611739A1A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */,
@@ -1872,15 +1975,20 @@
 				6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */,
 				6F0BFE05163EED8900420A5F /* RootNavigationDemoViewController.xib in Resources */,
 				6F0BFE0C163EED9F00420A5F /* RootSplitViewDemoController.xib in Resources */,
+				6FD2DE4A1A6635AF00B98C11 /* Icon-Small@2x.png in Resources */,
+				6FD2DE421A6635AF00B98C11 /* Icon-72@2x.png in Resources */,
+				6FD2DE581A6635AF00B98C11 /* ios7_settings_icon.png in Resources */,
 				E61173451A654BA90066C42C /* AutolayoutBottomNibView.xib in Resources */,
 				E61173551A654BA90066C42C /* AutolayoutRightNibView.xib in Resources */,
 				6F0BFE13163EEDAC00420A5F /* RootTabBarDemoViewController.xib in Resources */,
 				6F22C75816A9420D0081A9A7 /* Beon-Regular.otf in Resources */,
+				6FD2DE561A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png in Resources */,
 				6F8CC0C519DC2A8C003286F7 /* CoconutKit-resources.bundle in Resources */,
 				6F22C76316A942970081A9A7 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6F22C78316A942F10081A9A7 /* FontsDemoViewController.xib in Resources */,
 				6F22C78616A946C40081A9A7 /* sample_text_with_custom_font.html in Resources */,
 				6F6B0C9C16B3DACF006B718F /* InnerFolder in Resources */,
+				6FD2DE6A1A66365500B98C11 /* logo@2x.png in Resources */,
 				6F718CB216CF8714001498D6 /* ViewEffectsDemoViewController.xib in Resources */,
 				6F04E3991A1C864000C6C08B /* EmployeeTableViewCell.xib in Resources */,
 				6FB5004C1705A60900779DB3 /* ConnectionDemoViewController.xib in Resources */,
@@ -1894,6 +2002,7 @@
 			files = (
 				6F04E3AD1A1C8D1700C6C08B /* Employees.plist in Resources */,
 				6FCB4ECB1926651F00047AD3 /* FixedSizeViewController.xib in Resources */,
+				6FD2DE531A6635AF00B98C11 /* ios7_app_icon_iphone.png in Resources */,
 				6FCB4ECC1926651F00047AD3 /* HeavyViewController.xib in Resources */,
 				6FCB4ECD1926651F00047AD3 /* LandscapeOnlyViewController.xib in Resources */,
 				6FCB4ECE1926651F00047AD3 /* LifeCycleTestViewController.xib in Resources */,
@@ -1907,11 +2016,13 @@
 				6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */,
 				6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */,
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
+				6FD2DE5F1A6635AF00B98C11 /* iTunesArtwork in Resources */,
 				6FCB4ED91926651F00047AD3 /* CursorSelectedFolderView.xib in Resources */,
 				6F468CB119D2E7920021B95D /* Localizable.strings in Resources */,
 				E61173681A654BA90066C42C /* AutoresizingMaskLeftNibView.xib in Resources */,
 				E61173641A654BA90066C42C /* AutoresizingMaskCenterNibView.xib in Resources */,
 				6F28177119D99A33009D1CC3 /* img_localized.png in Resources */,
+				6FD2DE451A6635AF00B98C11 /* Icon-Small-50@2x.png in Resources */,
 				6FCB4EDB1926651F00047AD3 /* FooterView.xib in Resources */,
 				6FCB4EDC1926651F00047AD3 /* HeaderView.xib in Resources */,
 				6FCB4EDD1926651F00047AD3 /* XibTableViewCell.xib in Resources */,
@@ -1923,6 +2034,7 @@
 				6FD2DE111A6452FC00B98C11 /* NibViewAutoresizingMasksDemoViewController.xib in Resources */,
 				E61173761A654D3A0066C42C /* AutoresizingMaskBottomNibView.xib in Resources */,
 				6FCB4EE11926651F00047AD3 /* StackDemoViewController.xib in Resources */,
+				6FD2DE4F1A6635AF00B98C11 /* ios7_app_icon_ipad.png in Resources */,
 				6FCB4EE21926651F00047AD3 /* TableSearchDisplayDemoViewController.xib in Resources */,
 				E61173601A654BA90066C42C /* AutolayoutTopRightNibView.xib in Resources */,
 				6F04E38E1A1C864000C6C08B /* BindingsViewsDemoViewController.xib in Resources */,
@@ -1931,17 +2043,24 @@
 				6F04E3801A1C864000C6C08B /* BindingsPerformance1DemoViewController.xib in Resources */,
 				6FCB4EE51926651F00047AD3 /* WizardIdentityPageViewController.xib in Resources */,
 				6FCB4EE61926651F00047AD3 /* ProximaNova-Bold.otf in Resources */,
+				6FD2DE471A6635AF00B98C11 /* Icon-Small.png in Resources */,
 				6F04E3B01A1C8D2100C6C08B /* Launch Screen.xib in Resources */,
 				6FCB4EE71926651F00047AD3 /* ProximaNova-Regular.otf in Resources */,
+				6FD2DE4B1A6635AF00B98C11 /* Icon.png in Resources */,
+				6FD2DE511A6635AF00B98C11 /* ios7_app_icon_ipad@2x.png in Resources */,
 				E61173501A654BA90066C42C /* AutolayoutLeftNibView.xib in Resources */,
+				6FD2DE591A6635AF00B98C11 /* ios7_settings_icon@2x.png in Resources */,
 				6FCB4EE81926651F00047AD3 /* sample_text.html in Resources */,
+				6FD2DE5D1A6635AF00B98C11 /* ios7_spotlight_icon@2x.png in Resources */,
 				6F04E39C1A1C864000C6C08B /* EmployeeView.xib in Resources */,
 				6FCB4EE91926651F00047AD3 /* bkgr_bar.png in Resources */,
 				E611738B1A654D9C0066C42C /* AutoresizingMaskTopLeftNibView.xib in Resources */,
+				6FD2DE4D1A6635AF00B98C11 /* Icon@2x.png in Resources */,
 				6F41D2FE19D29C8000E8681A /* WizardDemoViewController.xib in Resources */,
 				6FCB4EEA1926651F00047AD3 /* cell_bkgr_brown_large.png in Resources */,
 				6FCB4EEB1926651F00047AD3 /* cell_bkgr_brown_large_selected.png in Resources */,
 				6FCB4EED1926651F00047AD3 /* icn_bookmark.png in Resources */,
+				6FD2DE611A6635AF00B98C11 /* iTunesArtwork@2x in Resources */,
 				E611737D1A654D540066C42C /* AutoresizingMaskBottomRightNibView.xib in Resources */,
 				E61173401A654BA90066C42C /* AutolayoutBottomLeftNibView.xib in Resources */,
 				6FCB4EEE1926651F00047AD3 /* icn_folder.png in Resources */,
@@ -1949,7 +2068,10 @@
 				6F04E3781A1C864000C6C08B /* BindingsControlsDemoViewController.xib in Resources */,
 				6F468CB019D2E7920021B95D /* DemoTable.strings in Resources */,
 				6F04E3941A1C864000C6C08B /* EmployeeHeaderView.xib in Resources */,
+				6FD2DE431A6635AF00B98C11 /* Icon-Small-50.png in Resources */,
+				6FD2DE5B1A6635AF00B98C11 /* ios7_spotlight_icon.png in Resources */,
 				6FCB4EF01926651F00047AD3 /* img_coconut2.jpg in Resources */,
+				6FD2DE3F1A6635AF00B98C11 /* Icon-72.png in Resources */,
 				6FCB4EF11926651F00047AD3 /* img_coconut3.jpg in Resources */,
 				6FCB4EF21926651F00047AD3 /* img_coconut4.jpg in Resources */,
 				E611736F1A654D180066C42C /* AutoresizingMaskBottomLeftNibView.xib in Resources */,
@@ -1957,6 +2079,7 @@
 				6FCB4EF31926651F00047AD3 /* parallax_demo_grass_layer.png in Resources */,
 				6F96C83419D448D90010A128 /* DemosListViewController.xib in Resources */,
 				6FCB4EF41926651F00047AD3 /* parallax_demo_sky_layer.png in Resources */,
+				6FD2DE671A66365500B98C11 /* logo.png in Resources */,
 				E611735C1A654BA90066C42C /* AutolayoutTopNibView.xib in Resources */,
 				6FCB4EF51926651F00047AD3 /* parallax_demo_trees_layer.png in Resources */,
 				E61173991A654DCD0066C42C /* AutoresizingMaskTopRightNibView.xib in Resources */,
@@ -1981,15 +2104,20 @@
 				6FCB4F051926651F00047AD3 /* RootNavigationDemoViewController.xib in Resources */,
 				6FCB4F061926651F00047AD3 /* RootSplitViewDemoController.xib in Resources */,
 				6F96C83119D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
+				6FD2DE491A6635AF00B98C11 /* Icon-Small@2x.png in Resources */,
+				6FD2DE411A6635AF00B98C11 /* Icon-72@2x.png in Resources */,
+				6FD2DE571A6635AF00B98C11 /* ios7_settings_icon.png in Resources */,
 				E61173441A654BA90066C42C /* AutolayoutBottomNibView.xib in Resources */,
 				E61173541A654BA90066C42C /* AutolayoutRightNibView.xib in Resources */,
 				6FCB4F071926651F00047AD3 /* RootTabBarDemoViewController.xib in Resources */,
 				6FCB4F081926651F00047AD3 /* Beon-Regular.otf in Resources */,
+				6FD2DE551A6635AF00B98C11 /* ios7_app_icon_iphone@2x.png in Resources */,
 				6FCB4F091926651F00047AD3 /* DynamicLocalizationDemoViewController.xib in Resources */,
 				6FCB4F0A1926651F00047AD3 /* FontsDemoViewController.xib in Resources */,
 				6FCB4F0B1926651F00047AD3 /* sample_text_with_custom_font.html in Resources */,
 				6FCB4F0C1926651F00047AD3 /* InnerFolder in Resources */,
 				6FCB4F0D1926651F00047AD3 /* ViewEffectsDemoViewController.xib in Resources */,
+				6FD2DE691A66365500B98C11 /* logo@2x.png in Resources */,
 				6FCB4F0E1926651F00047AD3 /* ConnectionDemoViewController.xib in Resources */,
 				6F04E3981A1C864000C6C08B /* EmployeeTableViewCell.xib in Resources */,
 				6FCB4F0F1926651F00047AD3 /* KeyboardAvoidingScrollViewDemoViewController.xib in Resources */,
