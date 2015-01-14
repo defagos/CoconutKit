@@ -16,7 +16,10 @@
 
 static NSMutableDictionary *s_classNameToSizeMap = nil;
 
-@implementation HLSNibView
+@implementation HLSNibView {
+@private
+    BOOL _loadedFromPlaceholder;
+}
 
 #pragma mark Class methods for creation
 
@@ -73,6 +76,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     // correctly reference the replacing object
     if ([self.subviews count] == 0) {
         HLSNibView *nibView = [[self class] view];
+        nibView->_loadedFromPlaceholder = YES;
         nibView.frame = self.frame;
         nibView.alpha = self.alpha;
         nibView.autoresizingMask = self.autoresizingMask;
@@ -113,7 +117,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     [super awakeFromNib];
     
     // Avoid conflicts with constraints generated from autoresizing masks (if the parent view uses constraints)
-    if ([self.superview.constraints count] > 0) {
+    if (_loadedFromPlaceholder && [self.superview.constraints count] > 0) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
     }
 }
