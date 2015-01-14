@@ -114,6 +114,10 @@
 "Multiple view animation"="Multiple view animation";
 "Names of all employees"="Names of all employees";
 "Next"="Next";
+"Nib view (autolayout)"="Nib view (autolayout)";
+"Nib view (autoresizing masks)"="Nib view (autoresizing masks)";
+"Nib view (autolayout, simple)"="Nib view (autolayout, simple)";
+"Nib view (autoresizing masks, simple)"="Nib view (autoresizing masks, simple)";
 "No children"="No children";
 "None"="None";
 "Now"="Now";

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6250"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NibViewAutolayoutSimpleDemoViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pXu-7b-qH3" customClass="AutoresizingMaskRightNibView">
+                    <rect key="frame" x="343" y="335" width="200" height="220"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="3IH-ZK-ewd"/>
+                        <constraint firstAttribute="height" constant="220" id="bbJ-B3-pLs"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Lg-qU-yMs" customClass="AutolayoutLeftNibView">
+                    <rect key="frame" x="52" y="79" width="200" height="220"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="Aw7-3w-P0Q"/>
+                        <constraint firstAttribute="height" constant="220" id="WmB-Zt-Bfg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2Lg-qU-yMs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="52" id="SDv-0d-c7V"/>
+                <constraint firstAttribute="trailing" secondItem="pXu-7b-qH3" secondAttribute="trailing" constant="57" id="VZD-5U-C7Z"/>
+                <constraint firstAttribute="bottom" secondItem="pXu-7b-qH3" secondAttribute="bottom" constant="45" id="kEx-DD-vZh"/>
+                <constraint firstItem="2Lg-qU-yMs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="79" id="l3O-bO-rsP"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
