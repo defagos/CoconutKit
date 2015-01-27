@@ -165,10 +165,12 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 + (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter
 {
     return [self blockTransformerWithBlock:^(id object) {
+        // Remark: The specific -[NSNumberFormatter stringFromNumber:] has a behavior which differs from -stringFromObjectValue:, e.g
+        //         it ignores nilSymbol. Since -stringForObjectValue: has the richest behavior, it makes sense to call it in all cases
         return [formatter stringForObjectValue:object];
     } reverseBlock:^(__autoreleasing id *pObject, NSString *string, NSError *__autoreleasing *pError) {
-        // For NSFormatter subclassess, calling -getObjectValue:forString:errorDescription: will crash for nil input strings, but
-        // interestingly do not crash and return nil when calling their specific -numberFromString: (for NSNumberFormatter) and
+        // For NSFormatter subclasses, calling -getObjectValue:forString:errorDescription: will crash for nil input strings, but
+        // interestingly does not crash and returns nil when calling their specific -numberFromString: (for NSNumberFormatter) and
         // -dateFromString: (for NSDateFormatter) methods. Check and apply the same behavior as those specific methods here. Since
         // converting an empty string via NSNumberFormatter or NSDateFormatter returns YES -getObjectValue:forString:errorDescription:
         // (the object returned by reference is nil), we also consider the conversion successful here, which makes sense
