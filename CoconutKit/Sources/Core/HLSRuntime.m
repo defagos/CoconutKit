@@ -226,7 +226,7 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
 
 IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation)
 {
-    return hls_class_swizzleSelector(objc_getMetaClass(class_getName(clazz)), selector, newImplementation);
+    return hls_class_swizzleSelector(object_getClass(clazz), selector, newImplementation);
 }
 
 IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation)
