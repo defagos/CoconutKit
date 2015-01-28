@@ -12,6 +12,7 @@ HLSViewController.m
 NSArray+HLSExtensions.m
 NSBundle+HLSDynamicLocalization.m
 NSBundle+HLSExtensions.m
+NSCalendar+HLSExtensions.m
 NSData+HLSExtensions.m
 NSDate+HLSExtensions.m
 NSDateFormatter+HLSExtensions.m
@@ -25,6 +26,7 @@ NSObject+HLSExtensions.m
 NSSet+HLSExtensions.m
 NSStream+HLSExtensions.m
 NSString+HLSExtensions.m
+NSTimeZone+HLSExtensions.m
 NSURLRequest+HLSExtensions.m
 UIActivityIndicatorView+HLSViewBinding.m
 UIApplication+HLSExtensions.m
