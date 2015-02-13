@@ -323,6 +323,10 @@
 		6FFAB76E19DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB76319DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h */; };
 		AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+		E62CB1211A78D89F0093106A /* NSTimeZone+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E62CB11F1A78D89F0093106A /* NSTimeZone+HLSExtensions.h */; };
+		E62CB1221A78D89F0093106A /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */; };
+		E62CB1251A78D8B50093106A /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */; };
+		E62CB1261A78D8B50093106A /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -740,6 +744,10 @@
 		AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCoconutKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoconutKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E62CB11F1A78D89F0093106A /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
+		E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
+		E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
+		E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1168,6 +1176,8 @@
 				6FADE53214BA0494007EE121 /* NSBundle+HLSDynamicLocalization.m */,
 				6FADE53314BA0494007EE121 /* NSBundle+HLSExtensions.h */,
 				6FADE53414BA0494007EE121 /* NSBundle+HLSExtensions.m */,
+				E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */,
+				E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */,
 				6FADE53714BA0494007EE121 /* NSData+HLSExtensions.h */,
 				6FADE53814BA0494007EE121 /* NSData+HLSExtensions.m */,
 				6FADE53914BA0494007EE121 /* NSDate+HLSExtensions.h */,
@@ -1190,6 +1200,8 @@
 				6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */,
 				6FADE54314BA0494007EE121 /* NSString+HLSExtensions.h */,
 				6FADE54414BA0494007EE121 /* NSString+HLSExtensions.m */,
+				E62CB11F1A78D89F0093106A /* NSTimeZone+HLSExtensions.h */,
+				E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */,
 				6FC8CB881574BFC10014B37B /* NSURLRequest+HLSExtensions.h */,
 				6FC8CB891574BFC10014B37B /* NSURLRequest+HLSExtensions.m */,
 				6FC3790A182D2C2200B55AF1 /* UIApplication+HLSExtensions.h */,
@@ -1478,6 +1490,7 @@
 				6FADE5B714BA0494007EE121 /* NSBundle+HLSDynamicLocalization.h in Headers */,
 				6FADE5B914BA0494007EE121 /* NSBundle+HLSExtensions.h in Headers */,
 				6FFAB76819DD8DA800A91997 /* HLSMAWeakDictionary.h in Headers */,
+				E62CB1251A78D8B50093106A /* NSCalendar+HLSExtensions.h in Headers */,
 				6FADE5BD14BA0494007EE121 /* NSData+HLSExtensions.h in Headers */,
 				6F28D61419FF79F400564BD3 /* UIWindow+HLSExtensions.h in Headers */,
 				6FB007DD1952D09B0082D915 /* HLSGeometry.h in Headers */,
@@ -1489,6 +1502,7 @@
 				6FADE5C914BA0494007EE121 /* NSString+HLSExtensions.h in Headers */,
 				6FADE5CD14BA0494007EE121 /* UIColor+HLSExtensions.h in Headers */,
 				6FADE5CF14BA0494007EE121 /* UIControl+HLSExclusiveTouch.h in Headers */,
+				E62CB1211A78D89F0093106A /* NSTimeZone+HLSExtensions.h in Headers */,
 				6F0CA8DE19DD934300CBE2E1 /* HLSViewBindingInformation.h in Headers */,
 				6FADE5D114BA0494007EE121 /* UIImage+HLSExtensions.h in Headers */,
 				6FCD33C21A1216690002F478 /* UITextField+HLSViewBinding.h in Headers */,
@@ -1829,6 +1843,7 @@
 				6FCD33BD1A1216690002F478 /* UIStepper+HLSViewBinding.m in Sources */,
 				6FCD33D41A1216E30002F478 /* HLSViewBindingInformationEntry.m in Sources */,
 				6FADE61414BA0494007EE121 /* HLSViewController.m in Sources */,
+				E62CB1261A78D8B50093106A /* NSCalendar+HLSExtensions.m in Sources */,
 				6FADE61614BA0494007EE121 /* HLSWebViewController.m in Sources */,
 				6FADE61814BA0494007EE121 /* HLSWizardViewController.m in Sources */,
 				6F04E2D91A1BA61500C6C08B /* HLSViewBindingError.m in Sources */,
@@ -1869,6 +1884,7 @@
 				6F7A871116522C0A0030B091 /* UIPopoverController+HLSExtensions.m in Sources */,
 				6FCA2DD41679E36D0011CFDA /* HLSFileManager.m in Sources */,
 				6FCA2DD91679E3B20011CFDA /* HLSStandardFileManager.m in Sources */,
+				E62CB1221A78D89F0093106A /* NSTimeZone+HLSExtensions.m in Sources */,
 				6F54E32D1A1F7DDC000028E1 /* HLSWeakObjectWrapper.m in Sources */,
 				6F22C74116A858530081A9A7 /* UIFont+HLSExtensions.m in Sources */,
 				6FFAB76D19DD8DA800A91997 /* HLSMAZeroingWeakRef.m in Sources */,
