@@ -59,6 +59,8 @@
 		6FCC118D1A3B124A005BA6E8 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC10A91A3B0744005BA6E8 /* Sample.txt */; };
 		6FCC119D1A3B1301005BA6E8 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC119C1A3B1301005BA6E8 /* CoconutKit-resources.bundle */; };
 		6FCC11A01A3B14A6005BA6E8 /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCC11971A3B12F2005BA6E8 /* libCoconutKit.a */; };
+		E6A23E881A8E404000B7048D /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDC76F1A7FC3E3005FC8D8 /* NSCalendar+HLSExtensionsTestCase.m */; };
+		E6A23E8B1A8E40A200B7048D /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDC7711A7FC3E3005FC8D8 /* NSTimeZone+HLSExtensionsTestCase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,13 +84,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 6FC5B7741924EDC500660CDF;
 			remoteInfo = "CoconutKit-resources";
-		};
-		6FCC119A1A3B12F2005BA6E8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FCC118F1A3B12F1005BA6E8 /* CoconutKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6F6542101A2C7E4500FDA2DE;
-			remoteInfo = "CoconutKit-tests";
 		};
 		6FCC119E1A3B131C005BA6E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -194,6 +189,10 @@
 		6FCC11881A3B0D27005BA6E8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6FCC118F1A3B12F1005BA6E8 /* CoconutKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoconutKit.xcodeproj; path = ../CoconutKit/CoconutKit.xcodeproj; sourceTree = "<group>"; };
 		6FCC119C1A3B1301005BA6E8 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CoconutKit-resources.bundle"; path = "../CoconutKit/CoconutKit-resources.bundle"; sourceTree = "<group>"; };
+		E6EDC76E1A7FC3E3005FC8D8 /* NSCalendar+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		E6EDC76F1A7FC3E3005FC8D8 /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		E6EDC7701A7FC3E3005FC8D8 /* NSTimeZone+HLSExtensionsTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensionsTestCase.h"; sourceTree = "<group>"; };
+		E6EDC7711A7FC3E3005FC8D8 /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +302,8 @@
 				6FCC10C11A3B0744005BA6E8 /* NSArray+HLSExtensionsTestCase.m */,
 				6FCC10C21A3B0744005BA6E8 /* NSBundle+HLSDynamicLocalizationTestCase.h */,
 				6FCC10C31A3B0744005BA6E8 /* NSBundle+HLSDynamicLocalizationTestCase.m */,
+				E6EDC76E1A7FC3E3005FC8D8 /* NSCalendar+HLSExtensionsTestCase.h */,
+				E6EDC76F1A7FC3E3005FC8D8 /* NSCalendar+HLSExtensionsTestCase.m */,
 				6FCC10C41A3B0744005BA6E8 /* NSData+HLSExtensionsTestCase.h */,
 				6FCC10C51A3B0744005BA6E8 /* NSData+HLSExtensionsTestCase.m */,
 				6FCC10C61A3B0744005BA6E8 /* NSDate+HLSExtensionsTestCase.h */,
@@ -317,6 +318,8 @@
 				6FCC10CF1A3B0744005BA6E8 /* NSStream+HLSExtensionsTestCase.m */,
 				6FCC10D01A3B0744005BA6E8 /* NSString+HLSExtensionsTestCase.h */,
 				6FCC10D11A3B0744005BA6E8 /* NSString+HLSExtensionsTestCase.m */,
+				E6EDC7701A7FC3E3005FC8D8 /* NSTimeZone+HLSExtensionsTestCase.h */,
+				E6EDC7711A7FC3E3005FC8D8 /* NSTimeZone+HLSExtensionsTestCase.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -426,7 +429,6 @@
 			children = (
 				6FCC11971A3B12F2005BA6E8 /* libCoconutKit.a */,
 				6FCC11991A3B12F2005BA6E8 /* CoconutKit-resources.bundle */,
-				6FCC119B1A3B12F2005BA6E8 /* CoconutKit-tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -528,13 +530,6 @@
 			remoteRef = 6FCC11981A3B12F2005BA6E8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6FCC119B1A3B12F2005BA6E8 /* CoconutKit-tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CoconutKit-tests.xctest";
-			remoteRef = 6FCC119A1A3B12F2005BA6E8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -593,8 +588,10 @@
 				6FCC11701A3B0B8E005BA6E8 /* _BankAccount.m in Sources */,
 				6FCC11651A3B0B76005BA6E8 /* NSManagedObject+HLSValidationTestCase.m in Sources */,
 				6FCC116C1A3B0B85005BA6E8 /* ConcreteSubclassC.m in Sources */,
+				E6A23E881A8E404000B7048D /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
 				6FCC115E1A3B0B6E005BA6E8 /* NSDate+HLSExtensionsTestCase.m in Sources */,
 				6FCC115A1A3B0B6E005BA6E8 /* HLSValidatorsTestCase.m in Sources */,
+				E6A23E8B1A8E40A200B7048D /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
 				6FCC115F1A3B0B6E005BA6E8 /* NSDictionary+HLSExtensionsTestCase.m in Sources */,
 				6FCC11721A3B0B8E005BA6E8 /* _ConcreteSubclassB.m in Sources */,
 				6FCC116A1A3B0B85005BA6E8 /* ConcreteClassD.m in Sources */,
