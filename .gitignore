@@ -1,5 +1,9 @@
 .DS_Store
+build/
 Binaries/
-CoconutKit.xcworkspace/xcuserdata
-Tools/Scripts/GeneratedHeaders
-Tools/Scripts/GeneratedResources
+GeneratedHeaders/
+GeneratedResources/
+xcshareddata
+xcuserdata
+CoconutKit-resources.bundle
+InnerBundle.bundle
