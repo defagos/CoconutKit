@@ -484,7 +484,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             rawClass = NSClassFromString(rawClassName);
         }
         // Primitive types are boxed as NSNumber using KVC
-        else if ([@"cdfilsBCILQS" rangeOfString:type].length != 0) {
+        else if ([@"cdfilqsBCILQS" rangeOfString:type].length != 0) {
             rawClass = [NSNumber class];
         }
         // Structs are boxed as NSValue
