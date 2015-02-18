@@ -496,7 +496,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                               code:HLSViewBindingErrorUnsupportedType
-                              localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. can be bound)"];
+                              localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. cannot be bound directly)"];
             }
             return NO;
         }
