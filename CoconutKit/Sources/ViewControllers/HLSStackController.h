@@ -9,6 +9,9 @@
 #import "HLSContainerStack.h"
 #import "HLSViewController.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Forward declarations
 @protocol HLSStackControllerDelegate;
 

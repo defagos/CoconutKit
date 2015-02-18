@@ -8,6 +8,9 @@
 
 #import "HLSAutorotation.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Lifecycle phases
 typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
     HLSViewControllerLifeCyclePhaseEnumBegin = 0,

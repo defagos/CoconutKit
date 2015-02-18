@@ -6,6 +6,8 @@
 //  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * The following macros are only active if NS_BLOCK_ASSERTIONS is disabled for the project configuration you use
  * (usually -DNS_BLOCK_ASSERTIONS=1)

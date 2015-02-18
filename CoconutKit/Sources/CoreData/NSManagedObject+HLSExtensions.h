@@ -6,6 +6,9 @@
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+
 /**
  * Convenience methods to perform common Core Data operations on managed objects. Most methods appear in two versions:
  *   - a version expecting a managed object context parameter:  

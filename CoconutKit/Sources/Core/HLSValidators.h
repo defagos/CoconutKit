@@ -6,6 +6,8 @@
 //  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Not meant to be instantiated
  */

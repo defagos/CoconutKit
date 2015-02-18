@@ -6,6 +6,9 @@
 //  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+
 // Formatting functions
 NSString *HLSStringFromCATransform3D(CATransform3D transform);
 

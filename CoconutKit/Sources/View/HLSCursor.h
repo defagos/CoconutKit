@@ -9,6 +9,9 @@
 #import "HLSAnimation.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Macros
 #define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
 

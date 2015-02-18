@@ -10,6 +10,9 @@
 #import "HLSAutorotation.h"
 #import "HLSTransition.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Stack behavior
 typedef NS_ENUM(NSInteger, HLSContainerStackBehavior) {
     HLSContainerStackBehaviorEnumBegin = 0,

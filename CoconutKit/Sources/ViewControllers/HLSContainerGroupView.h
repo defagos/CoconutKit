@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * A private class to manage group views in an HLSContainerStackView. Such a view has at most two subviews,
  * one for the front content (mandatory and which cannot be changed), and another one for the back content 

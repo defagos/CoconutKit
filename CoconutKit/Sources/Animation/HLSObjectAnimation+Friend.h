@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Interface meant to be used by friend classes of HLSObjectAnimation (= classes which must have access to private implementation
  * details)

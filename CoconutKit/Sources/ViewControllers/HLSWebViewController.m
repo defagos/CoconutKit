@@ -23,6 +23,8 @@
 #import "NSString+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
 
+#import <MessageUI/MessageUI.h>
+
 static void *s_KVOContext = &s_KVOContext;
 
 // TODO: Remove fake constants and variables when CoconutKit requires iOS 8 and above

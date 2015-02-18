@@ -6,6 +6,9 @@
 //  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * This class makes keyboard properties accessible at any time in a convenient way. Just access the +keyboardInformation 
  * method. If the returned object is not nil, then the keyboard is docked and visible (or soon will) and you can check its 

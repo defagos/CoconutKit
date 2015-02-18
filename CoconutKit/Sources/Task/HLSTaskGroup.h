@@ -8,6 +8,8 @@
 
 #import "HLSTask.h"
 
+#import <Foundation/Foundation.h>
+
 #define kTaskGroupNoTimeIntervalEstimateAvailable                     -1.
 
 // Forward declarations

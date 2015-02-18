@@ -8,6 +8,8 @@
 
 #import "HLSFileManager.h"
 
+#import <Foundation/Foundation.h>
+
 /**
  * A standard NSFileManager-based file manager, built upon +[NSFileManager defaultManager]
  */

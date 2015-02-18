@@ -8,6 +8,9 @@
 
 #import "HLSViewController.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Overlay view controller displaying binding debugging information
  */

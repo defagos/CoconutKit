@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Protocol to be implemented by classes whose instances want to show interest in receiving binding events. Information 
  * about the binding arameters can be obtained by accessing the bindingInformation property of the boundView parameter

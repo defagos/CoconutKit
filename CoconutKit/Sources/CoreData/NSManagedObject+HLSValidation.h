@@ -6,6 +6,9 @@
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+
 /**
  * Writing Core Data validations is cumbersome, error-prone and ultimately painful. Though the initial idea 
  * is good (writing a set of methods beginning with 'validate' and which perform individual and consistency

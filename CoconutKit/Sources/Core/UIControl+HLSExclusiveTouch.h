@@ -6,6 +6,9 @@
 //  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Globally set exclusive touch to YES for all UIControl objects, preventing quasi-simultaneous taps.
  */

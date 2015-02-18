@@ -8,9 +8,11 @@
 
 #import "NSString+HLSExtensions.h"
 
-#import <CommonCrypto/CommonDigest.h>
 #import "HLSLogger.h"
 #import "NSData+HLSExtensions.h"
+
+#import <CommonCrypto/CommonDigest.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)
 {

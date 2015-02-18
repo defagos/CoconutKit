@@ -8,6 +8,9 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Binding support for UIProgressView:
  *   - binds to NSNumber (float) or float model values

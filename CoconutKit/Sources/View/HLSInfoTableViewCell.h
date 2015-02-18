@@ -9,6 +9,9 @@
 #import "HLSLabel.h"
 #import "HLSTableViewCell.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 @interface HLSInfoTableViewCell : HLSTableViewCell
 
 + (CGFloat)heightForValue:(NSString *)value;

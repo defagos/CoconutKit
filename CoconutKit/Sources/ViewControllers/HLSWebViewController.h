@@ -8,6 +8,10 @@
 
 #import "HLSViewController.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
+
 /**
  * A web browser with standard features (navigation buttons, link sharing, etc.)
  */

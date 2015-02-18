@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Convenience methods on UIViewController. Do nothing if the view controller view is not loaded
  */

@@ -6,6 +6,8 @@
 //  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Logging macros. Only active if HLS_LOGGER is added to your configuration preprocessor flags (-DHLS_LOGGER). You can also use this macro in your
  * own code if you need to enable or disable logging-specific code for some of your configurations

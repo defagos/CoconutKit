@@ -10,6 +10,8 @@
 #import "HLSTask.h"
 #import "HLSTaskManager.h"
 
+#import <Foundation/Foundation.h>
+
 /**
  * Abstract class for implementing operations to be performed for a task by a task manager. Concrete subclasses
  * must include the HLSTaskOperation+Protected.h header file within their implementation file to benefit from the

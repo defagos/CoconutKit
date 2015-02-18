@@ -8,6 +8,9 @@
 
 #import "HLSFileManager.h"
 
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+
 // Standard option combinations
 #define HLSModelManagerLightweightMigrationOptions          [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,   \
                                                                                                        [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,         \

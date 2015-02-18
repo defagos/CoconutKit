@@ -8,6 +8,8 @@
 
 #import "HLSViewController.h"
 
+#import <Foundation/Foundation.h>
+
 /**
  * View controller displaying help about bindings
  */

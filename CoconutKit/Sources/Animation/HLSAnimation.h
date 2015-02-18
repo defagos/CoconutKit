@@ -8,6 +8,8 @@
 
 #import "HLSAnimationStep.h"
 
+#import <Foundation/Foundation.h>
+
 // Forward declarations
 @protocol HLSAnimationDelegate;
 

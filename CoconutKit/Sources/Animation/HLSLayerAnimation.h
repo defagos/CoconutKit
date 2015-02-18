@@ -8,6 +8,9 @@
 
 #import "HLSObjectAnimation.h"
 
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+
 /**
  * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step
  * (HLSLayerAnimationStep). An animation step is the combination of several layer animations applied

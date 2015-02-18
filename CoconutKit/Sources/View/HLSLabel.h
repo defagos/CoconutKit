@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Vertical alignments
  */

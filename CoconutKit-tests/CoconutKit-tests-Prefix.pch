@@ -1,15 +1,5 @@
 #ifdef __OBJC__
     // Additional required framework global headers
-    #import <Foundation/Foundation.h>
-    #import <CoreData/CoreData.h>
-    #import <CoreGraphics/CoreGraphics.h>
-    #import <CoreText/CoreText.h>
-    #import <UIKit/UIKit.h>
-    #import <QuartzCore/QuartzCore.h>
-    #import <QuickLook/QuickLook.h>
-    #import <MessageUI/MessageUI.h>
-    #import <MobileCoreServices/MobileCoreServices.h>
-    #import <WebKit/WebKit.h>
     #import <XCTest/XCTest.h>
 
     // CoconutKit library public header files

@@ -10,6 +10,8 @@
 
 #import "HLSLogger.h"
 
+#import <UIKit/UIKit.h>
+
 #pragma mark -
 #pragma mark NotificationSender class interface
 

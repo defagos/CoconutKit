@@ -8,6 +8,9 @@
 
 #import "HLSTransition.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * The segue identifier prefix reserved for preloading view controllers into a placeholder view controller
  * ('hls_preload_at_index_')

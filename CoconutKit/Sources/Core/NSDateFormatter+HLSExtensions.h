@@ -6,6 +6,8 @@
 //  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 @interface NSDateFormatter (HLSExtensions)
 
 /**

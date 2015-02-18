@@ -8,6 +8,9 @@
 
 #import "HLSAssert.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Lightweight view controller subclass adding useful stuff to UIViewController, and which should be always used as 
  * base class when creating view controller subclasses in projects using CoconutKit (provided you do not have to 

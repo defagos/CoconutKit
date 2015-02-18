@@ -6,4 +6,6 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 NSString * const HLSCoreErrorDomain = @"ch.defagos.coconutkit.core";

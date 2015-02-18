@@ -15,6 +15,8 @@
 #import "NSError+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
+#import <UIKit/UIKit.h>
+
 @interface HLSInMemoryFileManager ()
 
 @property (nonatomic, strong) NSMutableDictionary *rootItems;           // Stores the directory / file hierarchy

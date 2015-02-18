@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 @interface NSURLRequest (HLSExtensions)
 
 // Private class used for method swizzling

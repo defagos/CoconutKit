@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 @interface NSTimeZone (HLSExtensions)
 
 /**

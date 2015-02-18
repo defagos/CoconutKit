@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <QuickLook/QuickLook.h>
+
 /**
  * Simple QLPreviewItem implementation. Should be self-explanatory
  */

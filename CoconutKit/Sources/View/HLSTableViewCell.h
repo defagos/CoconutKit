@@ -6,6 +6,9 @@
 //  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Class for easy table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
  * every time you instantiate cells. This class also forces centralization of common cell class properties, like
