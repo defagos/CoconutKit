@@ -321,7 +321,6 @@
 		6FFAB76C19DD8DA800A91997 /* HLSMAZeroingWeakRef.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB76119DD8DA800A91997 /* HLSMAZeroingWeakRef.h */; };
 		6FFAB76D19DD8DA800A91997 /* HLSMAZeroingWeakRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFAB76219DD8DA800A91997 /* HLSMAZeroingWeakRef.m */; settings = {COMPILER_FLAGS = "-w -fno-objc-arc"; }; };
 		6FFAB76E19DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FFAB76319DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h */; };
-		AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		E62CB1211A78D89F0093106A /* NSTimeZone+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E62CB11F1A78D89F0093106A /* NSTimeZone+HLSExtensions.h */; };
 		E62CB1221A78D89F0093106A /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */; };
@@ -741,7 +740,6 @@
 		6FFAB76119DD8DA800A91997 /* HLSMAZeroingWeakRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMAZeroingWeakRef.h; sourceTree = "<group>"; };
 		6FFAB76219DD8DA800A91997 /* HLSMAZeroingWeakRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSMAZeroingWeakRef.m; sourceTree = "<group>"; };
 		6FFAB76319DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h; sourceTree = "<group>"; };
-		AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libCoconutKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoconutKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E62CB11F1A78D89F0093106A /* NSTimeZone+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimeZone+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -793,7 +791,6 @@
 				6FFAB75719DD8DA800A91997 /* Externals */,
 				6FADE51014BA0494007EE121 /* Sources */,
 				6FC5B7801924EE0A00660CDF /* Resources */,
-				32C88DFF0371C24200C91783 /* Supporting Files */,
 				6F65429F1A2C9D8400FDA2DE /* Tests */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
@@ -821,14 +818,6 @@
 				6F4D3DD819F6576C009718E4 /* WebKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		32C88DFF0371C24200C91783 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AA747D9E0F9514B9006C5449 /* CoconutKit-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		6F0CA8B819DD934300CBE2E1 /* Bindings */ = {
@@ -1464,7 +1453,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FCD33B61A1216690002F478 /* UIProgressView+HLSViewBinding.h in Headers */,
-				AA747D9F0F9514B9006C5449 /* CoconutKit-Prefix.pch in Headers */,
 				6F8B184C19DD8B0000A06F2B /* HLSTransformer.h in Headers */,
 				6F0CA8F319DD934300CBE2E1 /* UIView+HLSViewBindingImplementation.h in Headers */,
 				6FADE59914BA0494007EE121 /* HLSAnimation.h in Headers */,
@@ -1942,8 +1930,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
@@ -1960,8 +1946,6 @@
 				DSTROOT = /tmp/CoconutKit.dst;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
