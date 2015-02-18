@@ -9,6 +9,9 @@
 #import "HLSViewBindingInformation.h"
 #import "HLSViewController.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Display various information about a binding
  */

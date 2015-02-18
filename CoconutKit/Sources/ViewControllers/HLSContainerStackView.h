@@ -8,6 +8,9 @@
 
 #import "HLSContainerGroupView.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Forward declarations
 @protocol HLSContainerStackViewDelegate;
 

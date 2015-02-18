@@ -9,6 +9,10 @@
 #import "HLSLogger.h"
 #import "HLSViewController.h"
 
+#import <Foundation/Foundation.h>
+#import <QuickLook/QuickLook.h>
+#import <UIKit/UIKit.h>
+
 @interface HLSLoggerViewController : HLSViewController <QLPreviewControllerDataSource, UITableViewDataSource, UITableViewDelegate>
 
 - (instancetype)initWithLogger:(HLSLogger *)logger NS_DESIGNATED_INITIALIZER;

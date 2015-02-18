@@ -11,6 +11,8 @@
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
 
+#import <CoreText/CoreText.h>
+
 @implementation UIFont (HLSExtensions)
 
 + (BOOL)loadFontWithFileName:(NSString *)fileName inBundle:(NSBundle *)bundle

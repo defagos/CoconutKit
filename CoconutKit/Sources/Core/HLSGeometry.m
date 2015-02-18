@@ -13,12 +13,12 @@
 CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentMode contentMode)
 {
     switch (contentMode) {
-        case UIViewContentModeScaleToFill: {
+        case HLSContentModeScaleToFill: {
             return targetRect;
             break;
         }
             
-        case UIViewContentModeScaleAspectFit: {
+        case HLSContentModeScaleAspectFit: {
             CGSize targetSize = CGSizeMake(CGRectGetWidth(targetRect), CGRectGetHeight(targetRect));
             CGSize fittingSize = HLSSizeForAspectFittingInSize(size, targetSize);
             return CGRectMake(CGRectGetMinX(targetRect) + (CGRectGetWidth(targetRect) - fittingSize.width) / 2.f,
@@ -28,7 +28,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeScaleAspectFill: {
+        case HLSContentModeScaleAspectFill: {
             CGSize targetSize = CGSizeMake(CGRectGetWidth(targetRect), CGRectGetHeight(targetRect));
             CGSize fillingSize = HLSSizeForAspectFillingInSize(size, targetSize);
             return CGRectMake(CGRectGetMinX(targetRect) + (CGRectGetWidth(targetRect) - fillingSize.width) / 2.f,
@@ -38,7 +38,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeCenter: {
+        case HLSContentModeCenter: {
             return CGRectMake(CGRectGetMinX(targetRect) + (CGRectGetWidth(targetRect) - size.width) / 2.f,
                               CGRectGetMinY(targetRect) + (CGRectGetHeight(targetRect) - size.height) / 2.f,
                               size.width,
@@ -46,7 +46,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeTop: {
+        case HLSContentModeTop: {
             return CGRectMake(CGRectGetMinX(targetRect) + (CGRectGetWidth(targetRect) - size.width) / 2.f,
                               CGRectGetMinY(targetRect),
                               size.width,
@@ -54,7 +54,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeBottom: {
+        case HLSContentModeBottom: {
             return CGRectMake(CGRectGetMinX(targetRect) + (CGRectGetWidth(targetRect) - size.width) / 2.f,
                               CGRectGetMaxY(targetRect) - size.height,
                               size.width,
@@ -62,7 +62,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeLeft: {
+        case HLSContentModeLeft: {
             return CGRectMake(CGRectGetMinX(targetRect),
                               CGRectGetMinY(targetRect) + (CGRectGetHeight(targetRect) - size.height) / 2.f,
                               size.width,
@@ -70,7 +70,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeRight: {
+        case HLSContentModeRight: {
             return CGRectMake(CGRectGetMaxX(targetRect) - size.width,
                               CGRectGetMinY(targetRect) + (CGRectGetHeight(targetRect) - size.height) / 2.f,
                               size.width,
@@ -78,7 +78,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeTopLeft: {
+        case HLSContentModeTopLeft: {
             return CGRectMake(CGRectGetMinX(targetRect),
                               CGRectGetMinY(targetRect),
                               size.width,
@@ -86,7 +86,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeTopRight: {
+        case HLSContentModeTopRight: {
             return CGRectMake(CGRectGetMaxX(targetRect) - size.width,
                               CGRectGetMinY(targetRect),
                               size.width,
@@ -94,7 +94,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeBottomLeft: {
+        case HLSContentModeBottomLeft: {
             return CGRectMake(CGRectGetMinX(targetRect),
                               CGRectGetMaxY(targetRect) - size.height,
                               size.width,
@@ -102,7 +102,7 @@ CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentM
             break;
         }
             
-        case UIViewContentModeBottomRight: {
+        case HLSContentModeBottomRight: {
             return CGRectMake(CGRectGetMaxX(targetRect) - size.width,
                               CGRectGetMaxY(targetRect) - size.height,
                               size.width,

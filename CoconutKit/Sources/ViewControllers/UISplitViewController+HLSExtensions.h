@@ -8,6 +8,9 @@
 
 #import "HLSAutorotation.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 @interface UISplitViewController (HLSExtensions)
 
 /**

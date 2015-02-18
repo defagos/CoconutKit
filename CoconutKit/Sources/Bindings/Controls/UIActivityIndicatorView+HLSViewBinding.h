@@ -8,6 +8,9 @@
 
 #import "UIView+HLSViewBindingImplementation.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Binding support for UIActivityIndicatorView:
  *   - binds to NSNumber (boolean) or BOOL model values

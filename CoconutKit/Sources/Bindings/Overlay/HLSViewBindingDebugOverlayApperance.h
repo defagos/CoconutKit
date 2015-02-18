@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Appearance settings for binding debugging overlay buttons
  */

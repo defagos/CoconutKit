@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * To perform calculations for another time zone, instantiate a new calendar and set its time zone. Then call calendrical
  * calculation methods on this calendar

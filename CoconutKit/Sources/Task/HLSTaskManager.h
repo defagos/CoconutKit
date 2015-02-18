@@ -8,7 +8,9 @@
 
 #import "HLSTask.h"
 #import "HLSTaskGroup.h"
-                
+
+#import <Foundation/Foundation.h>
+
 /**
  * Concrete class responsible for instantiating, processing and managing HLSTaskOperation objects spawned for each
  * task submitted to it. Each such object represents a work unit processed by a dedicated thread.

@@ -8,6 +8,9 @@
 
 #import "HLSTransition.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * The segue identifier reserved for setting the root view controller of a stack ('hls_root')
  */

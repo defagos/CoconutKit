@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Concrete subclasses of HLSFileManager must implement the set of methods declared by the following protocol
  */

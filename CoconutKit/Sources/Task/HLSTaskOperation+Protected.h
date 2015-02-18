@@ -6,6 +6,8 @@
 //  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Protected interface for use by subclasses of HLSTaskOperation in their implementation, and to be included
  * from their implementation file

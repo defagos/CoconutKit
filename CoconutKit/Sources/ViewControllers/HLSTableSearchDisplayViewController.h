@@ -8,6 +8,9 @@
 
 #import "HLSViewController.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * This class conveniently implements the UISearchDisplayController behavior for a table view (the most common case). It 
  * manages two table views:

@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+
 // Same as UIViewContentMode values, but without irrelevant ones
 typedef NS_ENUM(NSInteger, HLSContentMode) {
     HLSContentModeEnumBegin = 0,

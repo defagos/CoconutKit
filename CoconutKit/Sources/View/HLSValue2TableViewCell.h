@@ -8,6 +8,8 @@
 
 #import "HLSTableViewCell.h"
 
+#import <Foundation/Foundation.h>
+
 /**
  * Same as HLSTableViewCell, but with UITableViewCellStyleValue2 as style
  */

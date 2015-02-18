@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * The way the localized string must be displayed
  */

@@ -9,6 +9,9 @@
 #import "HLSAnimation.h"
 #import "HLSLayerAnimationStep.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Default duration for a transition animation. This is a reserved value and corresponds to the intrinsic duration
 // of an animation as defined by its implementation
 extern const NSTimeInterval kAnimationTransitionDefaultDuration;

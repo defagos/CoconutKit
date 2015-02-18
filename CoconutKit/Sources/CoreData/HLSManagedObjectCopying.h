@@ -6,6 +6,8 @@
 //  Copyright 2011 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * NSManagedObject does not implement the NSCopying protocol. Instead, you can have your managed objects
  * implement the HLSManagedObjectCopying protocol. Objects implementing this protocol can be copied

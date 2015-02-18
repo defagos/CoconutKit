@@ -8,6 +8,10 @@
 
 #import "HLSVector.h"
 
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+
 /**
   * Interface meant to be used by friend classes of HLSLayerAnimation (= classes which must have access to private implementation
   * details)

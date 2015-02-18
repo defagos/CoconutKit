@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Conversions to string. Other conventional conversions are already available as NSStringFrom... functions
  */

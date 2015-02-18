@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Thin wrapper to provide for store weak references in associated objects (see HLSRuntime.m)
  *

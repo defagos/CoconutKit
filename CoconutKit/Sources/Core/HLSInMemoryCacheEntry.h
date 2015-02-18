@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Private class containing the information of an entry within the cache managed by HLSInMemoryFileManager
  *

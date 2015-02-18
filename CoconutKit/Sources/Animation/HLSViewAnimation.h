@@ -8,6 +8,9 @@
 
 #import "HLSObjectAnimation.h"
 
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+
 /**
  * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 
  * (HLSViewAnimationStep). An animation step is the combination of several view animations applied

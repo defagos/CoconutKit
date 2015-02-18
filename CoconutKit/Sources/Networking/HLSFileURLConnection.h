@@ -8,6 +8,8 @@
 
 #import "HLSURLConnection.h"
 
+#import <Foundation/Foundation.h>
+
 /**
  * A connection managing file URL requests only (creation fails if the URLRequest is not a file URL request). It returns
  * the NSArray of all corresponding file paths as responseObject:

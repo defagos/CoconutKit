@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+
 // A vector with 2 components
 typedef struct {
     CGFloat v1;

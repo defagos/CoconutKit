@@ -8,6 +8,8 @@
 
 #import "HLSConnection.h"
 
+#import <Foundation/Foundation.h>
+
 // Completion block signatures
 typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *connection, NSURLProtectionSpace *protectionSpace);
 

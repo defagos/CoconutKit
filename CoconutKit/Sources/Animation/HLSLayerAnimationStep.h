@@ -9,6 +9,10 @@
 #import "HLSAnimationStep.h"
 #import "HLSLayerAnimation.h"
 
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
+
 /**
  * A layer animation step (HLSLayerAnimationStep) is the combination of several layer animations (HLSLayerAnimation) applied
  * to a set of layers, and represent the collective set of changes applied to them during some time interval. An animation

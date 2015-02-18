@@ -9,6 +9,9 @@
 #import "HLSAnimationStep.h"
 #import "HLSViewAnimation.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * A view animation step (HLSViewAnimationStep) is the combination of several view animations (HLSViewAnimation) applied
  * to a set of views, and represent the collective set of changes applied to them during some time interval. An animation

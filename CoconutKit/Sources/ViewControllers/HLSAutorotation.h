@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Define the several ways for a container view controller to behave when interface rotation occurs. This means:
  *   - which view controllers decide whether rotation can occur or not

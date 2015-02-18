@@ -10,6 +10,8 @@
 
 #import "HLSLogger.h"
 
+#import <UIKit/UIKit.h>
+
 @implementation HLSUserInterfaceLock {
 @private
     NSUInteger _useCount;

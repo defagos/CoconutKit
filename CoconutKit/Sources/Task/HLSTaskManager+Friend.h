@@ -10,6 +10,8 @@
 #import "HLSTaskGroup.h"
 #import "HLSTaskOperation.h"
 
+#import <Foundation/Foundation.h>
+
 @interface HLSTaskManager (Friend)
 
 /**

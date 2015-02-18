@@ -6,6 +6,8 @@
 //  Copyright 2010 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 /**
  * Interface meant to be used by friend classes of HLSTaskGroup (= classes which must have access to private implementation
  * details)

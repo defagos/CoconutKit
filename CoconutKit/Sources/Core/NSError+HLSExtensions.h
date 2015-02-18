@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 extern NSString * const HLSDetailedErrorsKey;           // Key for storing the multiple error list in the user info dictionary
 
 /**

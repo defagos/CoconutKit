@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * For a view and a pair of begin / end notifications, traps touches outside the view frame and resigns responder
  * status if enabled

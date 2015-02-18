@@ -8,6 +8,9 @@
 
 #import "HLSViewBindingDelegate.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter resolving, caching,
  * and automatic synchronization via KVO when possible. The bound object is resolved automatically at runtime. There

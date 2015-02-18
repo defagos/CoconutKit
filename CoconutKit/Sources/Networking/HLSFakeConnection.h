@@ -8,6 +8,8 @@
 
 #import "HLSConnection.h"
 
+#import <Foundation/Foundation.h>
+
 /**
  * A fake connection, useful when having a connection object is mandatory
  *

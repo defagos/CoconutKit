@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Samuel Défago. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * Category for easier label localization in nib files. Instead of having to define and bind an outlet just 
  * to localize a UILabel or a UIButton, this category makes it easy to attach a localization key to a label

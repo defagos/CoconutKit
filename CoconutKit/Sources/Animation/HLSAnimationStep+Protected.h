@@ -8,6 +8,8 @@
 
 #import "HLSObjectAnimation.h"
 
+#import <Foundation/Foundation.h>
+
 /**
  * Protected interface for use by subclasses of HLSAnimationStep in their implementation, and to be included
  * from their implementation file
