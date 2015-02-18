@@ -111,47 +111,18 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    switch (row) {
-        case HLSSlideshowEffectNone: {
-            return @"HLSSlideshowEffectNone";
-            break;
-        }
-            
-        case HLSSlideshowEffectCrossDissolve: {
-            return @"HLSSlideshowEffectCrossDissolve";
-            break;
-        }
-            
-        case HLSSlideshowEffectKenBurns: {
-            return @"HLSSlideshowEffectKenBurns";
-            break;
-        }
-            
-        case HLSSlideshowEffectHorizontalRibbon: {
-            return @"HLSSlideshowEffectHorizontalRibbon";
-            break;
-        }
-            
-        case HLSSlideshowEffectInverseHorizontalRibbon: {
-            return @"HLSSlideshowEffectInverseHorizontalRibbon";
-            break;
-        }
-            
-        case HLSSlideshowEffectVerticalRibbon: {
-            return @"HLSSlideshowEffectVerticalRibbon";
-            break;
-        }
-            
-        case HLSSlideshowEffectInverseVerticalRibbon: {
-            return @"HLSSlideshowEffectInverseVerticalRibbon";
-            break;
-        }
-            
-        default: {
-            return @"";
-            break;
-        }            
-    }
+    static NSDictionary *s_rows;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_rows = @{ @(HLSSlideshowEffectNone) : @"HLSSlideshowEffectNone",
+                    @(HLSSlideshowEffectCrossDissolve) : @"HLSSlideshowEffectCrossDissolve",
+                    @(HLSSlideshowEffectKenBurns) : @"HLSSlideshowEffectKenBurns",
+                    @(HLSSlideshowEffectHorizontalRibbon) : @"HLSSlideshowEffectHorizontalRibbon",
+                    @(HLSSlideshowEffectInverseHorizontalRibbon) : @"HLSSlideshowEffectInverseHorizontalRibbon",
+                    @(HLSSlideshowEffectVerticalRibbon) : @"HLSSlideshowEffectVerticalRibbon",
+                    @(HLSSlideshowEffectInverseVerticalRibbon) : @"HLSSlideshowEffectInverseVerticalRibbon" };
+    });
+    return [s_rows objectForKey:@(row)];
 }
 
 #pragma mark Slideshow

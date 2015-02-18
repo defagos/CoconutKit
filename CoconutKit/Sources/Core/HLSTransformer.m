@@ -17,64 +17,28 @@ NSString *HLSStringFromBool(BOOL yesOrNo)
 
 NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation)
 {
-    switch (interfaceOrientation) {
-        case UIInterfaceOrientationPortrait: {
-            return @"UIInterfaceOrientationPortrait";
-            break;
-        }
-            
-        case UIInterfaceOrientationPortraitUpsideDown: {
-            return @"UIInterfaceOrientationPortraitUpsideDown";
-            break;
-        }
-            
-        case UIInterfaceOrientationLandscapeLeft: {
-            return @"UIInterfaceOrientationLandscapeLeft";
-            break;
-        }
-            
-        case UIInterfaceOrientationLandscapeRight: {
-            return @"UIInterfaceOrientationLandscapeRight";
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown interface orientation");
-            return nil;
-            break;
-        }
-    }
+    static NSDictionary *s_names;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @(UIInterfaceOrientationPortrait) : @"UIInterfaceOrientationPortrait",
+                     @(UIInterfaceOrientationPortraitUpsideDown) : @"UIInterfaceOrientationPortraitUpsideDown",
+                     @(UIInterfaceOrientationLandscapeLeft) : @"UIInterfaceOrientationLandscapeLeft",
+                     @(UIInterfaceOrientationLandscapeRight) : @"UIInterfaceOrientationLandscapeRight" };
+    });
+    return [s_names objectForKey:@(interfaceOrientation)];
 }
 
 NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
 {
-    switch (deviceOrientation) {
-        case UIDeviceOrientationPortrait: {
-            return @"UIDeviceOrientationPortrait";
-            break;
-        }
-            
-        case UIDeviceOrientationPortraitUpsideDown: {
-            return @"UIDeviceOrientationPortraitUpsideDown";
-            break;
-        }
-            
-        case UIDeviceOrientationLandscapeLeft: {
-            return @"UIDeviceOrientationLandscapeLeft";
-            break;
-        }
-            
-        case UIDeviceOrientationLandscapeRight: {
-            return @"UIDeviceOrientationLandscapeRight";
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown device orientation");
-            return nil;
-            break;
-        }
-    }
+    static NSDictionary *s_names;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @(UIDeviceOrientationPortrait) : @"UIDeviceOrientationPortrait",
+                     @(UIDeviceOrientationPortraitUpsideDown) : @"UIDeviceOrientationPortraitUpsideDown",
+                     @(UIDeviceOrientationLandscapeLeft) : @"UIDeviceOrientationLandscapeLeft",
+                     @(UIDeviceOrientationLandscapeRight) : @"UIDeviceOrientationLandscapeRight" };
+    });
+    return [s_names objectForKey:@(deviceOrientation)];
 }
 
 NSString *HLSStringFromCATransform3D(CATransform3D transform)
