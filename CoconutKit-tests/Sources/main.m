@@ -1,9 +1,7 @@
 //
-//  main.m
-//  CoconutKit-tests-runner
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Defago on 12/12/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import <UIKit/UIKit.h>

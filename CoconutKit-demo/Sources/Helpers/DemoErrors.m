@@ -1,9 +1,7 @@
 //
-//  DemoErrors.m
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 09.12.11.
-//  Copyright (c) 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "DemoErrors.h"

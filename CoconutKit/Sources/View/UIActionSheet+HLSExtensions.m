@@ -1,9 +1,7 @@
 //
-//  UIActionSheet+HLSExtensions.m
-//  CoconutKit-dev
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 24.01.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UIActionSheet+HLSExtensions.h"

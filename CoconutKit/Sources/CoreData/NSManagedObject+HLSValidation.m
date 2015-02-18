@@ -1,9 +1,7 @@
 //
-//  NSManagedObject+HLSValidation.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 19.11.11.
-//  Copyright (c) 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "NSManagedObject+HLSValidation.h"

@@ -1,9 +1,7 @@
 //
-//  UILabel+HLSViewBinding.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 18.06.13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UILabel+HLSViewBinding.h"

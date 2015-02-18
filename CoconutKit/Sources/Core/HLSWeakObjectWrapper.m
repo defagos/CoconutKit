@@ -1,9 +1,7 @@
 //
-//  HLSWeakObjectWrapper.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Defago on 21/11/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSWeakObjectWrapper.h"

@@ -1,9 +1,7 @@
 //
-//  AutoresizingMaskBottomNibView.h
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Defago on 13.01.15.
-//  Copyright (c) 2015 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 @interface AutoresizingMaskBottomNibView : HLSNibView

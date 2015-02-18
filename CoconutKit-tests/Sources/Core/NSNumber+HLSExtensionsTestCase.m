@@ -1,9 +1,7 @@
 //
-//  NSNumber+HLSExtensionsTestCase.m
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 17.06.13.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "NSNumber+HLSExtensionsTestCase.h"

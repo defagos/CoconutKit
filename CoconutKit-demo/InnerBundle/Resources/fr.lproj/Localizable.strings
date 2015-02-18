@@ -1,8 +1,7 @@
-/* 
-  Localizable.strings
-  InnerBundle
+//
+//  Copyright (c) Samuel Défago. All rights reserved.
+//
+//  Licence information is available from the LICENCE file.
+//
 
-  Created by Samuel Défago on 1/26/13.
-  Copyright (c) 2014 Samuel Défago. All rights reserved.
-*/
 "String in InnerBundle/Localizable.strings"="Chaîne de InnerBundle/Localizable.strings";

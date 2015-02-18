@@ -1,9 +1,7 @@
 //
-//  NSBundle+HLSDynamicLocalization.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Cédric Luthi on 08/15/11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import <Foundation/Foundation.h>

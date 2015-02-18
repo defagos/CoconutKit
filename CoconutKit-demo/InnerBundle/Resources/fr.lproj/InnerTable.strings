@@ -1,9 +1,8 @@
-/* 
-  InnerTable.strings
-  InnerBundle
+//
+//  Copyright (c) Samuel Défago. All rights reserved.
+//
+//  Licence information is available from the LICENCE file.
+//
 
-  Created by Samuel Défago on 1/26/13.
-  Copyright (c) 2014 Samuel Défago. All rights reserved.
-*/
 "String in InnerBundle/InnerTable.strings"="Chaîne de InnerBundle/InnerTable.strings";
 "String in InnerBundle/InnerTable.strings, localized by setting bundle and table attributes on a parent view (here the gray view)"="Chaîne de InnerBundle/InnerTable.strings, localisée via les attributs d'une vue parente (vue grise)";

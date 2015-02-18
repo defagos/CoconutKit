@@ -1,9 +1,7 @@
 //
-//  BindingsControlsDemoViewController.m
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 25.07.13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "BindingsControlsDemoViewController.h"

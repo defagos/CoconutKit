@@ -1,9 +1,7 @@
 //
-//  HLSViewBindingInformationViewController.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 03/12/13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSViewBindingInformation.h"

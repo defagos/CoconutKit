@@ -1,10 +1,9 @@
-/* 
-  DemoTable.strings
-  CoconutKit-demo
+//
+//  Copyright (c) Samuel Défago. All rights reserved.
+//
+//  Licence information is available from the LICENCE file.
+//
 
-  Created by Samuel Défago on 09.01.12.
-  Copyright (c) 2012 Samuel Défago. All rights reserved.
-*/
 "Capitalized string in DemoTable.strings"="Chaîne de DemoTable.strings capitalisée";
 "Lowercase string in DemoTable.strings"="Chaîne de DemoTable.strings en minuscules";
 "String in DemoTable.strings"="Chaîne de DemoTable.strings";

@@ -1,9 +1,7 @@
 //
-//  UISlider+HLSViewBinding.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 16/03/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UISlider+HLSViewBinding.h"

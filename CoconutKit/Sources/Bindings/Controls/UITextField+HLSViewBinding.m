@@ -1,9 +1,7 @@
 //
-//  UITextField+HLSViewBinding.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 07/03/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UITextField+HLSViewBinding.h"
