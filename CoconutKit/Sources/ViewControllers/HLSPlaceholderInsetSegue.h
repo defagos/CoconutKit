@@ -13,7 +13,7 @@
  * The segue identifier prefix reserved for preloading view controllers into a placeholder view controller
  * ('hls_preload_at_index_')
  */
-extern NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
+OBJC_EXPORT NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
 
 /**
  * Segue class for setting the inset view controller of an HLSPlaceholderViewController when using storyboards.

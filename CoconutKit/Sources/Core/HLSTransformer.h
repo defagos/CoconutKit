@@ -11,10 +11,10 @@
 /**
  * Conversions to string. Other conventional conversions are already available as NSStringFrom... functions
  */
-NSString *HLSStringFromBool(BOOL yesOrNo);
-NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation);
-NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation);
-NSString *HLSStringFromCATransform3D(CATransform3D transform);
+OBJC_EXPORT NSString *HLSStringFromBool(BOOL yesOrNo);
+OBJC_EXPORT NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation);
+OBJC_EXPORT NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation);
+OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
 /**
  * Block signatures

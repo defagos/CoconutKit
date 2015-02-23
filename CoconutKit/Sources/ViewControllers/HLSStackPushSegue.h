@@ -12,7 +12,7 @@
 /**
  * The segue identifier reserved for setting the root view controller of a stack ('hls_root')
  */
-extern NSString * const HLSStackRootSegueIdentifier;
+OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
 
 /**
  * Segue class for pushing view controllers into an HLSStackController when using storyboards. The source

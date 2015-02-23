@@ -8,7 +8,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 // Formatting functions
-NSString *HLSStringFromCATransform3D(CATransform3D transform);
+OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
 @interface NSString (HLSExtensions)
 

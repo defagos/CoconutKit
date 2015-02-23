@@ -22,5 +22,5 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 /**
  * Common domain for view binding related errors
  */
-extern NSString * const HLSViewBindingErrorDomain;
+OBJC_EXPORT NSString * const HLSViewBindingErrorDomain;
 

@@ -81,7 +81,6 @@
     #import "NSStream+HLSExtensions.h"
     #import "NSString+HLSExtensions.h"
     #import "NSTimeZone+HLSExtensions.h"
-    #import "NSURLRequest+HLSExtensions.h"
     #import "UIActionSheet+HLSExtensions.h"
     #import "UIActivityIndicatorView+HLSViewBinding.h"
     #import "UIApplication+HLSExtensions.h"

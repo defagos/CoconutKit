@@ -9,12 +9,12 @@
 /**
  * Notification sent when the localization is changed at runtime
  */
-extern NSString * const HLSCurrentLocalizationDidChangeNotification;
+OBJC_EXPORT NSString * const HLSCurrentLocalizationDidChangeNotification;
 
 /**
  * This constant is returned when a localized string could not be found
  */
-extern NSString * const HLSMissingLocalization;
+OBJC_EXPORT NSString * const HLSMissingLocalization;
 
 /**
  * Return the language for a localization
@@ -22,7 +22,7 @@ extern NSString * const HLSMissingLocalization;
  *   HLSLanguageForLocalization(@"de") returns @"Deutsch"
  *   HLSLanguageForLocalization(@"en") returns @"English"
  */
-NSString *HLSLanguageForLocalization(NSString *localization);
+OBJC_EXPORT NSString *HLSLanguageForLocalization(NSString *localization);
 
 /**
  * Return a localized string from the specified bundle (if the bundle is nil, then
@@ -30,21 +30,21 @@ NSString *HLSLanguageForLocalization(NSString *localization);
  *
  * If no match is found, return HLSMissingLocalization
  */
-NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle);
+OBJC_EXPORT NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle);
 
 /**
  * Return a localized string from the UIKit bundle
  *
  * If no match is found, return HLSMissingLocalization
  */
-NSString *HLSLocalizedStringFromUIKit(NSString *key);
+OBJC_EXPORT NSString *HLSLocalizedStringFromUIKit(NSString *key);
 
 /**
  * Return the localized description matching an error code
  *
  * If no match is found, return HLSMissingLocalization
  */
-NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode);
+OBJC_EXPORT NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode);
 
 /**
  * This category makes it possible to change the application language at runtime without leaving the application. 

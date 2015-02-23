@@ -101,10 +101,10 @@ void instrumentObjcMessageSends(BOOL start);
  *
  * The list of method descriptions this function returns must later be freed by calling free()
  */
-struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol *protocol,
-                                                                       BOOL isRequiredMethod,
-                                                                       BOOL isInstanceMethod,
-                                                                       unsigned int *pCount);
+OBJC_EXPORT struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol *protocol,
+                                                                                   BOOL isRequiredMethod,
+                                                                                   BOOL isInstanceMethod,
+                                                                                   unsigned int *pCount);
 
 /**
  * Return YES iff the class or one of its superclasses conforms to the given protocol. This
@@ -115,7 +115,7 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
  * Remark: The fact that class_conformsToProtocol does not take superclasses into account
  *         is currently not documented
  */
-BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol);
+OBJC_EXPORT BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol);
 
 /**
  * Return YES iff the class informally conforms to a protocol, i.e. if it implements all of its
@@ -125,14 +125,14 @@ BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol);
  * Remark: If a class formally conforms to a protocol it automatically informally conforms to
  *         it as well. The converse is not true
  */
-BOOL hls_class_conformsToInformalProtocol(Class cls, Protocol *protocol);
+OBJC_EXPORT BOOL hls_class_conformsToInformalProtocol(Class cls, Protocol *protocol);
 
 /**
  * Return YES iff the class implements all @optional and @required methods of a given protocol
  * and of its parent protocols (whether the class formally or only informally conforms to the
  * protocol is irrelevant). This method also takes superclasses into account
  */
-BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol);
+OBJC_EXPORT BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol);
 
 /**
  * Check that a class (taking into account its superclasses) implements methods of a given protocol,
@@ -141,7 +141,7 @@ BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol);
  *   - isRequiredMethod: If YES, checks @required methods only, otherwise @optional methods only
  *   - isInstanceMethod: If YES, checks instance methods only, otherwise class methods only
  */
-BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isRequiredMethod, BOOL isInstanceMethod);
+OBJC_EXPORT BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isRequiredMethod, BOOL isInstanceMethod);
 
 /**
  * Replace the implementation of a class method, given its selector. Return the original implementation,
@@ -150,7 +150,7 @@ BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isR
  * to cast the IMP pointer to the proper signature (the first arguments of a method implementation signature 
  * are always self (of type id) and the selector (of type SEL), followed by the method arguments
  */
-IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
+OBJC_EXPORT IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
 
 /**
  * Replace the implementation of an instance method, given its selector. Return the original implementation,
@@ -159,7 +159,7 @@ IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementat
  * to cast the IMP pointer to the proper signature (the first arguments of a method implementation signature
  * are always self (of type id) and the selector (of type SEL), followed by the method arguments
  */
-IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
+OBJC_EXPORT IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
 
 /**
  * Replace the implementation of a class method using the provided implementation block (see imp_implementationWithBlock
@@ -167,7 +167,7 @@ IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
  * You should store this original implementation in a __block variable and call it from the implementation block to
  * preserve existing behavior
  */
-IMP hls_class_swizzleClassSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
+OBJC_EXPORT IMP hls_class_swizzleClassSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
 
 /**
  * Replace the implementation of an instance method using the provided implementation block (see imp_implementationWithBlock
@@ -175,33 +175,33 @@ IMP hls_class_swizzleClassSelectorWithBlock(Class clazz, SEL selector, id newImp
  * You should store this original implementation in a __block variable and call it from the implementation block to
  * preserve existing behavior
  */
-IMP hls_class_swizzleSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
+OBJC_EXPORT IMP hls_class_swizzleSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
 
 /**
  * Return YES iff subclass is a subclass of superclass, or if subclass == superclass (in agreement with
  * the behavior of +[NSObject isSubclassOfClass:])
  */
-BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass);
+OBJC_EXPORT BOOL hls_class_isSubclassOfClass(Class subclass, Class superclass);
 
 /**
  * Return YES iff object is a class object
  */
-BOOL hls_isClass(id object);
+OBJC_EXPORT BOOL hls_isClass(id object);
 
 /**
  * Replace all references to an object (replaced object), appearing in an object (object), by references to another object
  * (replacingObject)
  */
-void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject);
+OBJC_EXPORT void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject);
 
 /**
  * Same as objc_setAssociatedObject, but with support for weak references. Objects associated using hls_setAssociatedObject
  * can only be retrieved using hls_getAssociatedObject, not using objc_getAssociatedObject
  */
-void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy);
+OBJC_EXPORT void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy);
 
 /**
  * Same as objc_setAssociatedObject, but with support for weak references. Only retrieves objects associated using
  * hls_setAssociatedObject, not objc_setAssociatedObject
  */
-id hls_getAssociatedObject(id object, const void *key);
+OBJC_EXPORT id hls_getAssociatedObject(id object, const void *key);

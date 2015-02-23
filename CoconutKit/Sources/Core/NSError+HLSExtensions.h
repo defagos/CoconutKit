@@ -6,7 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const HLSDetailedErrorsKey;           // Key for storing the multiple error list in the user info dictionary
+OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing the multiple error list in the user info dictionary
 
 /**
  * Extensions to NSError providing a convenient way to create errors. Mutability methods have been implemented so that
