@@ -121,4 +121,11 @@
     return [versionNumber friendlyVersionNumber];
 }
 
+- (NSDictionary *)fullInfoDictionary
+{
+    NSMutableDictionary *fullInfoDictionary = [NSMutableDictionary dictionaryWithDictionary:self.infoDictionary];
+    [fullInfoDictionary addEntriesFromDictionary:self.localizedInfoDictionary];
+    return [NSDictionary dictionaryWithDictionary:fullInfoDictionary];
+}
+
 @end

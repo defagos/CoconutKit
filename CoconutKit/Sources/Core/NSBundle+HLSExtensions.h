@@ -45,4 +45,9 @@
  */
 - (NSString *)friendlyVersionNumber;
 
+/**
+ * Return a dictionary containing both the contents of the info and localized info dictionaries
+ */
+- (NSDictionary *)fullInfoDictionary;
+
 @end
