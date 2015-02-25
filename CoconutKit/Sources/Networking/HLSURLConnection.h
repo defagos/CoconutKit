@@ -1,12 +1,12 @@
 //
-//  HLSURLConnection.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 12/5/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSConnection.h"
+
+#import <Foundation/Foundation.h>
 
 // Completion block signatures
 typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *connection, NSURLProtectionSpace *protectionSpace);

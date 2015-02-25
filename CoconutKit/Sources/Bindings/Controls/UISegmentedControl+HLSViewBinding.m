@@ -1,9 +1,7 @@
 //
-//  UISegmentedControl+HLSViewBinding.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 29/03/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UISegmentedControl+HLSViewBinding.h"
@@ -11,14 +9,14 @@
 #import "HLSRuntime.h"
 
 // Original implementation of the methods we swizzle
-static id (*s_UISegmentedControl__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
-static id (*s_UISegmentedControl__initWithCoder_Imp)(id, SEL, id) = NULL;
-static void (*s_UISegmentedControl__setSelectedSegmentIndex_Imp)(id, SEL, NSInteger) = NULL;
+static id (*s_initWithFrame)(id, SEL, CGRect) = NULL;
+static id (*s_initWithCoder)(id, SEL, id) = NULL;
+static void (*s_setSelectedSegmentIndex)(id, SEL, NSInteger) = NULL;
 
 // Swizzled method implementations
-static id swizzled_UISegmentedControl__initWithFrame_Imp(UISegmentedControl *self, SEL _cmd, CGRect frame);
-static id swizzled_UISegmentedControl__initWithCoder_Imp(UISegmentedControl *self, SEL _cmd, NSCoder *aDecoder);
-static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmentedControl *self, SEL _cmd, NSInteger selectedSegmentIndex);
+static id swizzle_initWithFrame(UISegmentedControl *self, SEL _cmd, CGRect frame);
+static id swizzle_initWithCoder(UISegmentedControl *self, SEL _cmd, NSCoder *aDecoder);
+static void swizzle_setSelectedSegmentIndex(UISegmentedControl *self, SEL _cmd, NSInteger selectedSegmentIndex);
 
 @implementation UISegmentedControl (HLSViewBindingImplementation)
 
@@ -26,15 +24,9 @@ static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmented
 
 + (void)load
 {
-    s_UISegmentedControl__initWithFrame_Imp = (id (*)(id, SEL, CGRect))hls_class_swizzleSelector(self,
-                                                                                                 @selector(initWithFrame:),
-                                                                                                 (IMP)swizzled_UISegmentedControl__initWithFrame_Imp);
-    s_UISegmentedControl__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                             @selector(initWithCoder:),
-                                                                                             (IMP)swizzled_UISegmentedControl__initWithCoder_Imp);
-    s_UISegmentedControl__setSelectedSegmentIndex_Imp = (void (*)(id, SEL, NSInteger))hls_class_swizzleSelector(self,
-                                                                                                                @selector(setSelectedSegmentIndex:),
-                                                                                                                (IMP)swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp);
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
+    HLSSwizzleSelector(self, @selector(setSelectedSegmentIndex:), swizzle_setSelectedSegmentIndex, &s_setSelectedSegmentIndex);
     
 }
 
@@ -75,26 +67,26 @@ static void commonInit(UISegmentedControl *self)
 
 #pragma mark Swizzled method implementations
 
-static id swizzled_UISegmentedControl__initWithFrame_Imp(UISegmentedControl *self, SEL _cmd, CGRect frame)
+static id swizzle_initWithFrame(UISegmentedControl *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_UISegmentedControl__initWithFrame_Imp)(self, _cmd, frame))) {
+    if ((self = s_initWithFrame(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
 
 }
 
-static id swizzled_UISegmentedControl__initWithCoder_Imp(UISegmentedControl *self, SEL _cmd, NSCoder *aDecoder)
+static id swizzle_initWithCoder(UISegmentedControl *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_UISegmentedControl__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+    if ((self = s_initWithCoder(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;
 }
 
-static void swizzled_UISegmentedControl__setSelectedSegmentIndex_Imp(UISegmentedControl *self, SEL _cmd, NSInteger selectedSegmentIndex)
+static void swizzle_setSelectedSegmentIndex(UISegmentedControl *self, SEL _cmd, NSInteger selectedSegmentIndex)
 {
-    (*s_UISegmentedControl__setSelectedSegmentIndex_Imp)(self, _cmd, selectedSegmentIndex);
+    s_setSelectedSegmentIndex(self, _cmd, selectedSegmentIndex);
     
     [self check:YES update:YES withInputValue:@(selectedSegmentIndex) error:NULL];
 }

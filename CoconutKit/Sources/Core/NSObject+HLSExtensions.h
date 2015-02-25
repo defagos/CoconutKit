@@ -1,10 +1,10 @@
 //
-//  NSObject+HLSExtensions.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 2/11/11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 @interface NSObject (HLSExtensions)
 

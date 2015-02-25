@@ -1,12 +1,13 @@
 //
-//  UIView+HLSViewBindingFriend.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 02.12.13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSViewBindingInformation.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Interface meant to be used by friend classes of UIView (HLSViewBinding) (= classes which must have access to private 

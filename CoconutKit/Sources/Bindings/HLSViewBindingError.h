@@ -1,10 +1,10 @@
 //
-//  HLSViewBindingError.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Defago on 18/11/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 /**
  * View binding error codes
@@ -22,5 +22,5 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
 /**
  * Common domain for view binding related errors
  */
-extern NSString * const HLSViewBindingErrorDomain;
+OBJC_EXPORT NSString * const HLSViewBindingErrorDomain;
 

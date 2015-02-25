@@ -1,10 +1,11 @@
 //
-//  UIControl+HLSExclusiveTouch.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 07.06.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Globally set exclusive touch to YES for all UIControl objects, preventing quasi-simultaneous taps.

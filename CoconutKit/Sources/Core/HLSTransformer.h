@@ -1,18 +1,20 @@
 //
-//  HLSTransformer.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 20/03/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Conversions to string. Other conventional conversions are already available as NSStringFrom... functions
  */
-NSString *HLSStringFromBool(BOOL yesOrNo);
-NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation);
-NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation);
-NSString *HLSStringFromCATransform3D(CATransform3D transform);
+OBJC_EXPORT NSString *HLSStringFromBool(BOOL yesOrNo);
+OBJC_EXPORT NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation);
+OBJC_EXPORT NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation);
+OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
 /**
  * Block signatures

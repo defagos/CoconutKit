@@ -1,12 +1,12 @@
 //
-//  HLSInMemoryFileManager.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 18.10.13.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSFileManager.h"
+
+#import <Foundation/Foundation.h>
 
 /**
  * A file manager implementation storing data in memory. If the application receives a memory warning, this data

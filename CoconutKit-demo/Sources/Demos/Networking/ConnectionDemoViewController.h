@@ -1,9 +1,7 @@
 //
-//  ConnectionDemoViewController.h
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 29.03.13.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 @interface ConnectionDemoViewController : HLSViewController

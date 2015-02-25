@@ -1,12 +1,13 @@
 //
-//  UISplitViewController+HLSExtensions.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 10/31/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSAutorotation.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface UISplitViewController (HLSExtensions)
 

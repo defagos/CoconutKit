@@ -1,12 +1,12 @@
 //
-//  HLSSubtitleTableViewCell.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 2/11/11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSTableViewCell.h"
+
+#import <Foundation/Foundation.h>
 
 /**
  * Same as HLSTableViewCell, but with UITableViewCellStyleSubtitle as style

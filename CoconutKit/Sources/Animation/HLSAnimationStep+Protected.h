@@ -1,12 +1,12 @@
 //
-//  HLSAnimationStep+Protected.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 8/21/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSObjectAnimation.h"
+
+#import <Foundation/Foundation.h>
 
 /**
  * Protected interface for use by subclasses of HLSAnimationStep in their implementation, and to be included

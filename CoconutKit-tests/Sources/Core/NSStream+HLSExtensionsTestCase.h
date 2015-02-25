@@ -1,9 +1,7 @@
 //
-//  NSStream+HLSExtensionsTestCase.h
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 14.10.13.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 @interface NSStream_HLSExtensionsTestCase : XCTestCase

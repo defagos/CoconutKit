@@ -1,9 +1,7 @@
 //
-//  DemosListViewController.m
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 2/10/11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "DemosListViewController.h"
@@ -23,6 +21,10 @@
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
 #import "LabelDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
+#import "NibViewAutolayoutDemoViewController.h"
+#import "NibViewAutoresizingMasksDemoViewController.h"
+#import "NibViewAutolayoutSimpleDemoViewController.h"
+#import "NibViewAutoresizingMasksSimpleDemoViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
 #import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
@@ -109,6 +111,10 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexEffects,
     ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
+    ViewDemoIndexNibViewAutolayoutSimple,
+    ViewDemoIndexNibViewAutoresizingMasksSimple,
+    ViewDemoIndexNibViewAutolayout,
+    ViewDemoIndexNibViewAutoresizingMasks,
     ViewDemoIndexEnumEnd,
     ViewDemoIndexEnumSize = ViewDemoIndexEnumEnd - ViewDemoIndexEnumBegin
 };
@@ -418,6 +424,26 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     cell.textLabel.text = NSLocalizedString(@"Parallax scrolling", nil);
                     break;
                 }
+                    
+                case ViewDemoIndexNibViewAutolayoutSimple: {
+                    cell.textLabel.text = NSLocalizedString(@"Nib view (autolayout, simple)", nil);
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutoresizingMasksSimple: {
+                    cell.textLabel.text = NSLocalizedString(@"Nib view (autoresizing masks, simple)", nil);
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutolayout: {
+                    cell.textLabel.text = NSLocalizedString(@"Nib view (autolayout)", nil);
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutoresizingMasks: {
+                    cell.textLabel.text = NSLocalizedString(@"Nib view (autoresizing masks)", nil);
+                    break;
+                }
                 
                 default: {
                     return nil;
@@ -635,6 +661,26 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexParallaxScrolling: {
                     demoViewController = [[ParallaxScrollingDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutolayoutSimple: {
+                    demoViewController = [[NibViewAutolayoutSimpleDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutoresizingMasksSimple: {
+                    demoViewController = [[NibViewAutoresizingMasksSimpleDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutolayout: {
+                    demoViewController = [[NibViewAutolayoutDemoViewController alloc] init];
+                    break;
+                }
+                    
+                case ViewDemoIndexNibViewAutoresizingMasks: {
+                    demoViewController = [[NibViewAutoresizingMasksDemoViewController alloc] init];
                     break;
                 }
                     

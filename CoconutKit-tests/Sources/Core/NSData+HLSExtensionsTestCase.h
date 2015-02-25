@@ -1,9 +1,7 @@
 //
-//  NSData+HLSExtensionsTestCase.h
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 29.05.12.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 @interface NSData_HLSExtensionsTestCase : XCTestCase

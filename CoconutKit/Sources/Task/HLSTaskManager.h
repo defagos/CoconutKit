@@ -1,14 +1,14 @@
 //
-//  HLSTaskManager.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 12/18/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSTask.h"
 #import "HLSTaskGroup.h"
-                
+
+#import <Foundation/Foundation.h>
+
 /**
  * Concrete class responsible for instantiating, processing and managing HLSTaskOperation objects spawned for each
  * task submitted to it. Each such object represents a work unit processed by a dedicated thread.

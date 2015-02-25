@@ -1,9 +1,7 @@
 //
-//  UILabel+HLSDynamicLocalization.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 08.01.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UILabel+HLSDynamicLocalization.h"
@@ -25,16 +23,16 @@ static void *s_localizationTableNameKey = &s_localizationTableNameKey;
 static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 
 // Original implementation of the methods we swizzle
-static void (*s_UILabel__dealloc_Imp)(__unsafe_unretained id, SEL) = NULL;
-static void (*s_UILabel__awakeFromNib_Imp)(id, SEL) = NULL;
-static void (*s_UILabel__setText_Imp)(id, SEL, id) = NULL;
-static void (*s_UILabel__setBackgroundColor_Imp)(id, SEL, id) = NULL;
+static void (*s_dealloc)(__unsafe_unretained id, SEL) = NULL;
+static void (*s_awakeFromNib)(id, SEL) = NULL;
+static void (*s_setText)(id, SEL, id) = NULL;
+static void (*s_setBackgroundColor)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UILabel__dealloc_Imp(__unsafe_unretained UILabel *self, SEL _cmd);
-static void swizzled_UILabel__awakeFromNib_Imp(UILabel *self, SEL _cmd);
-static void swizzled_UILabel__setText_Imp(UILabel *self, SEL _cmd, NSString *text);
-static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UIColor *backgroundColor);
+static void swizzle_dealloc(__unsafe_unretained UILabel *self, SEL _cmd);
+static void swizzle_awakeFromNib(UILabel *self, SEL _cmd);
+static void swizzle_setText(UILabel *self, SEL _cmd, NSString *text);
+static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgroundColor);
 
 @interface UILabel (HLSDynamicLocalizationPrivate)
 
@@ -80,18 +78,10 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 
 + (void)load
 {
-    s_UILabel__dealloc_Imp = (void (*)(__unsafe_unretained id, SEL))hls_class_swizzleSelector(self,
-                                                                                              NSSelectorFromString(@"dealloc"),
-                                                                                              (IMP)swizzled_UILabel__dealloc_Imp);
-    s_UILabel__awakeFromNib_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                               @selector(awakeFromNib),
-                                                                               (IMP)swizzled_UILabel__awakeFromNib_Imp);
-    s_UILabel__setText_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                              @selector(setText:),
-                                                                              (IMP)swizzled_UILabel__setText_Imp);
-    s_UILabel__setBackgroundColor_Imp = (void (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                         @selector(setBackgroundColor:),
-                                                                                         (IMP)swizzled_UILabel__setBackgroundColor_Imp);
+    HLSSwizzleSelector(self, sel_getUid("dealloc"), swizzle_dealloc, &s_dealloc);
+    HLSSwizzleSelector(self, @selector(awakeFromNib), swizzle_awakeFromNib, &s_awakeFromNib);
+    HLSSwizzleSelector(self, @selector(setText:), swizzle_setText, &s_setText);
+    HLSSwizzleSelector(self, @selector(setBackgroundColor:), swizzle_setBackgroundColor, &s_setBackgroundColor);
 }
 
 #pragma mark Localization
@@ -204,14 +194,14 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
         [self localizeTextWithLocalizationInfo:localizationInfo];
     }
     else {
-        (*s_UILabel__setText_Imp)(self, @selector(setText:), text);
+        s_setText(self, @selector(setText:), text);
     }
 }
 
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
     NSString *localizedText = [localizationInfo localizedText];
-    (*s_UILabel__setText_Imp)(self, @selector(setText:), localizedText);
+    s_setText(self, @selector(setText:), localizedText);
     
     // Avoid button label truncation when the localization changes (setting the title triggers a sizeToFit), and fixes
     // issues with the button label tint color. If we only change the label text, we namely face some minor issues
@@ -229,13 +219,13 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
     
     // Restore the original background color if it had been altered
     UIColor *originalBackgroundColor = hls_getAssociatedObject(self, s_originalBackgroundColorKey);
-    (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), originalBackgroundColor);
+    s_setBackgroundColor(self, @selector(setBackgroundColor:), originalBackgroundColor);
     
     // Make labels with missing localizations visible (saving the original color first)
     if (s_missingLocalizationsVisible) {
         if ([localizationInfo isIncomplete]) {
             // Using the original implementation here. We do not want to update the color stored in the information object
-            (*s_UILabel__setBackgroundColor_Imp)(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
+            s_setBackgroundColor(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
         }
     }
 }
@@ -281,31 +271,31 @@ static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UI
 #pragma mark Swizzled method implementations
 
 // Marked as __unsafe_unretained to avoid ARC inserting incorrect memory management calls leading to crashes for -dealloc
-static void swizzled_UILabel__dealloc_Imp(__unsafe_unretained UILabel *self, SEL _cmd)
+static void swizzle_dealloc(__unsafe_unretained UILabel *self, SEL _cmd)
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self 
                                                     name:HLSCurrentLocalizationDidChangeNotification 
                                                   object:nil];
     
-    (*s_UILabel__dealloc_Imp)(self, _cmd);
+    s_dealloc(self, _cmd);
 }
 
-static void swizzled_UILabel__awakeFromNib_Imp(UILabel *self, SEL _cmd)
+static void swizzle_awakeFromNib(UILabel *self, SEL _cmd)
 {
-    (*s_UILabel__awakeFromNib_Imp)(self, _cmd);
+    s_awakeFromNib(self, _cmd);
     
     // Here self.text returns the string filled by deserialization from the nib (which is not set using setText:)
     [self setAndLocalizeText:self.text];
 }
 
-static void swizzled_UILabel__setText_Imp(UILabel *self, SEL _cmd, NSString *text)
+static void swizzle_setText(UILabel *self, SEL _cmd, NSString *text)
 {
     [self setAndLocalizeText:text];
 }
 
-static void swizzled_UILabel__setBackgroundColor_Imp(UILabel *self, SEL _cmd, UIColor *backgroundColor)
+static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgroundColor)
 {
-    (*s_UILabel__setBackgroundColor_Imp)(self, _cmd, backgroundColor);
+    s_setBackgroundColor(self, _cmd, backgroundColor);
     
     // The background color is stored as separate associated object, not in the HLSLabelLocalizationInfo object. The reason
     // is that the HLSLabelLocalizationInfo is only attached when the text is first set, while the background color is

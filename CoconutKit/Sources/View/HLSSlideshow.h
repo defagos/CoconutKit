@@ -1,12 +1,13 @@
 //
-//  HLSSlideshow.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 17.10.11.
-//  Copyright (c) 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSAnimation.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Slideshow effects. Depending on which effect is applied the images will be scaled to fill or fit the slideshow

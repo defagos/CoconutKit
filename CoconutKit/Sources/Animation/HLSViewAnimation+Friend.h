@@ -1,10 +1,11 @@
 //
-//  HLSViewAnimation+Friend.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 9/2/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 /**
  * Interface meant to be used by friend classes of HLSViewAnimation (= classes which must have access to private implementation

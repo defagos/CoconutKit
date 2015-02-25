@@ -1,17 +1,18 @@
 //
-//  HLSStackPushSegue.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 27.06.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSTransition.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 /**
  * The segue identifier reserved for setting the root view controller of a stack ('hls_root')
  */
-extern NSString * const HLSStackRootSegueIdentifier;
+OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
 
 /**
  * Segue class for pushing view controllers into an HLSStackController when using storyboards. The source

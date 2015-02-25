@@ -1,13 +1,14 @@
 //
-//  HLSViewAnimationStep.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 8/10/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSAnimationStep.h"
 #import "HLSViewAnimation.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * A view animation step (HLSViewAnimationStep) is the combination of several view animations (HLSViewAnimation) applied

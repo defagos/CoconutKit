@@ -1,10 +1,11 @@
 //
-//  HLSGeometry.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 19.06.14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
 
 // Same as UIViewContentMode values, but without irrelevant ones
 typedef NS_ENUM(NSInteger, HLSContentMode) {
@@ -30,10 +31,10 @@ typedef NS_ENUM(NSInteger, HLSContentMode) {
  * mode. The returned rectangle coordinates are expressed in the same coordinate system as the target rectangle. For content
  * modes with scaling, the returned rectangle will be larger or smaller than the size specified by the caller
  */
-CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentMode contentMode);
+OBJC_EXPORT CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect, HLSContentMode contentMode);
 
 /**
  * Given a size, return the size which aspect fits, respectively fills a specified target size
  */
-CGSize HLSSizeForAspectFittingInSize(CGSize size, CGSize targetSize);
-CGSize HLSSizeForAspectFillingInSize(CGSize size, CGSize targetSize);
+OBJC_EXPORT CGSize HLSSizeForAspectFittingInSize(CGSize size, CGSize targetSize);
+OBJC_EXPORT CGSize HLSSizeForAspectFillingInSize(CGSize size, CGSize targetSize);

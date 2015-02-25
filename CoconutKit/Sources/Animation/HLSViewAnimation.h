@@ -1,12 +1,13 @@
 //
-//  HLSViewAnimation.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 2/8/11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSObjectAnimation.h"
+
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 /**
  * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 

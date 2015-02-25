@@ -1,9 +1,7 @@
 //
-//  HLSLabelLocalizationInfo.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 12.01.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSLabelLocalizationInfo.h"
@@ -179,31 +177,13 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 static NSString *stringForLabelRepresentation(HLSLabelRepresentation representation)
 {
-    switch (representation) {
-        case HLSLabelRepresentationNormal: {
-            return @"normal";
-            break;
-        }
-            
-        case HLSLabelRepresentationUppercase: {
-            return @"uppercase";
-            break;
-        }
-            
-        case HLSLabelRepresentationLowercase: {
-            return @"lowercase";
-            break;
-        }
-            
-        case HLSLabelRepresentationCapitalized: {
-            return @"capitalized";
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown representation");
-            return @"unknown";
-            break;
-        }
-    }
+    static NSDictionary *s_names;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @(HLSLabelRepresentationNormal) : @"normal",
+                     @(HLSLabelRepresentationUppercase) : @"uppercase",
+                     @(HLSLabelRepresentationLowercase) : @"lowercase",
+                     @(HLSLabelRepresentationCapitalized) : @"capitalized" };
+    });
+    return [s_names objectForKey:@(representation)] ?: @"unknown";    
 }

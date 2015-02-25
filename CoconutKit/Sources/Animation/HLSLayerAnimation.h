@@ -1,12 +1,13 @@
 //
-//  HLSLayerAnimation.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 8/20/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSObjectAnimation.h"
+
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
 
 /**
  * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step

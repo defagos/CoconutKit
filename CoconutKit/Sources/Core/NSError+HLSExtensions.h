@@ -1,12 +1,12 @@
 //
-//  NSError+HLSExtensions.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 27.12.11.
-//  Copyright (c) 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
-extern NSString * const HLSDetailedErrorsKey;           // Key for storing the multiple error list in the user info dictionary
+#import <Foundation/Foundation.h>
+
+OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing the multiple error list in the user info dictionary
 
 /**
  * Extensions to NSError providing a convenient way to create errors. Mutability methods have been implemented so that

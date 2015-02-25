@@ -1,10 +1,10 @@
 //
-//  HLSTaskGroup+Friend.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 12/17/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 /**
  * Interface meant to be used by friend classes of HLSTaskGroup (= classes which must have access to private implementation

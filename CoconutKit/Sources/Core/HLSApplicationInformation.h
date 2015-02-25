@@ -1,37 +1,37 @@
 //
-//  HLSApplicationInformation.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 11.04.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
+#import <Foundation/Foundation.h>
+    
 /**
  * Return the application Library directory
  */
-NSString *HLSApplicationLibraryDirectoryPath(void);
-NSURL *HLSApplicationLibraryDirectoryURL(void);
+OBJC_EXPORT NSString *HLSApplicationLibraryDirectoryPath(void);
+OBJC_EXPORT NSURL *HLSApplicationLibraryDirectoryURL(void);
 
 /**
  * Return the Caches directory
  */
-NSString *HLSApplicationCachesDirectoryPath(void);
-NSURL *HLSApplicationCachesDirectoryURL(void);
+OBJC_EXPORT NSString *HLSApplicationCachesDirectoryPath(void);
+OBJC_EXPORT NSURL *HLSApplicationCachesDirectoryURL(void);
 
 /**
  * Return the application Documents directory
  */
-NSString *HLSApplicationDocumentDirectoryPath(void);
-NSURL *HLSApplicationDocumentDirectoryURL(void);
+OBJC_EXPORT NSString *HLSApplicationDocumentDirectoryPath(void);
+OBJC_EXPORT NSURL *HLSApplicationDocumentDirectoryURL(void);
 
 /**
  * Return the application temporary directory
  */
-NSString *HLSApplicationTemporaryDirectoryPath(void);
-NSURL *HLSApplicationTemporaryDirectoryURL(void);
+OBJC_EXPORT NSString *HLSApplicationTemporaryDirectoryPath(void);
+OBJC_EXPORT NSURL *HLSApplicationTemporaryDirectoryURL(void);
 
 /**
  * Return the application inbox directory (location where files using Open in... are saved)
  */
-NSString *HLSApplicationInboxDirectoryPath(void);
-NSURL *HLSApplicationInboxDirectoryURL(void);
+OBJC_EXPORT NSString *HLSApplicationInboxDirectoryPath(void);
+OBJC_EXPORT NSURL *HLSApplicationInboxDirectoryURL(void);

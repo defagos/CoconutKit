@@ -1,9 +1,7 @@
 //
-//  HLSWebViewController.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Cédric Luthi on 02.03.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSWebViewController.h"
@@ -22,6 +20,8 @@
 #import "NSObject+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
+
+#import <MessageUI/MessageUI.h>
 
 static void *s_KVOContext = &s_KVOContext;
 

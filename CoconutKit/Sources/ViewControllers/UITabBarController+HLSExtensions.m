@@ -1,9 +1,7 @@
 //
-//  UITabBarController+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 10/16/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UITabBarController+HLSExtensions.h"
@@ -14,12 +12,12 @@
 static void *s_autorotationModeKey = &s_autorotationModeKey;
 
 // Original implementation of the methods we swizzle
-static BOOL (*s_UITabBarController__shouldAutorotate_Imp)(id, SEL) = NULL;
-static NSUInteger (*s_UITabBarController__supportedInterfaceOrientations_Imp)(id, SEL) = NULL;
+static BOOL (*s_shouldAutorotate)(id, SEL) = NULL;
+static NSUInteger (*s_supportedInterfaceOrientations)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController *self, SEL _cmd);
-static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Imp(UITabBarController *self, SEL _cmd);
+static BOOL swizzle_shouldAutorotate(UITabBarController *self, SEL _cmd);
+static NSUInteger swizzle_supportedInterfaceOrientations(UITabBarController *self, SEL _cmd);
 
 @implementation UITabBarController (HLSExtensions)
 
@@ -27,12 +25,8 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
 
 + (void)load
 {
-    s_UITabBarController__shouldAutorotate_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                              @selector(shouldAutorotate),
-                                                                                              (IMP)swizzled_UITabBarController__shouldAutorotate_Imp);
-    s_UITabBarController__supportedInterfaceOrientations_Imp = (NSUInteger (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                                  @selector(supportedInterfaceOrientations),
-                                                                                                                  (IMP)swizzled_UITabBarController__supportedInterfaceOrientations_Imp);
+    HLSSwizzleSelector(self, @selector(shouldAutorotate), swizzle_shouldAutorotate, &s_shouldAutorotate);
+    HLSSwizzleSelector(self, @selector(supportedInterfaceOrientations), swizzle_supportedInterfaceOrientations, &s_supportedInterfaceOrientations);
 }
 
 #pragma mark Accessors and mutators
@@ -55,10 +49,10 @@ static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Im
 
 @end
 
-static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController *self, SEL _cmd)
+static BOOL swizzle_shouldAutorotate(UITabBarController *self, SEL _cmd)
 {
     // The container always decides first (does not look at children)
-    if (! (*s_UITabBarController__shouldAutorotate_Imp)(self, _cmd)) {
+    if (! s_shouldAutorotate(self, _cmd)) {
         return NO;
     }
     
@@ -83,10 +77,10 @@ static BOOL swizzled_UITabBarController__shouldAutorotate_Imp(UITabBarController
     return YES;
 }
 
-static NSUInteger swizzled_UITabBarController__supportedInterfaceOrientations_Imp(UITabBarController *self, SEL _cmd)
+static NSUInteger swizzle_supportedInterfaceOrientations(UITabBarController *self, SEL _cmd)
 {
     // The container always decides first (does not look at children)
-    NSUInteger containerSupportedInterfaceOrientations = (*s_UITabBarController__supportedInterfaceOrientations_Imp)(self, _cmd);
+    NSUInteger containerSupportedInterfaceOrientations = s_supportedInterfaceOrientations(self, _cmd);
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:

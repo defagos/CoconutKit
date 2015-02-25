@@ -1,9 +1,7 @@
 //
-//  HLSNibView.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 9/1/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSNibView.h"
@@ -18,7 +16,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 
 @implementation HLSNibView {
 @private
-    BOOL _isPlaceholder;
+    BOOL _loadedFromPlaceholder;
 }
 
 #pragma mark Class methods for creation
@@ -34,7 +32,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 }
 
 + (instancetype)view
-{   
+{
     if ([self isMemberOfClass:[HLSNibView class]]) {
         HLSLoggerError(@"HLSNibView cannot be instantiated directly");
         return nil;
@@ -67,54 +65,58 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     }
 }
 
-#pragma mark NSCoding protocol
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    if (self = [super initWithCoder:aDecoder]) {
-        // If no child views, consider we are deserializing a placeholder, and add an instance deserizalized from the nib
-        // as subview. We cannot simply return this instance instead of self since decoding would otherwise throw an exception.
-        // The view hierarchy contains an extra view level (the placeholder) which can only be later removed. To be able to
-        // ensure outlet consistency, this must be made right after decoding, i.e. in -awakeFromNib
-        if ([self.subviews count] == 0) {
-            _isPlaceholder = YES;
-            
-            // The view we want to replace the placeholder with, which is complete since deserialized from its nib
-            HLSNibView *nibView = [[self class] view];
-            [self addSubview:nibView];
-        }
-    }
-    return self;
-}
-
 #pragma mark Overrides
+
+- (id)awakeAfterUsingCoder:(NSCoder *)aDecoder
+{
+    // If no child views, consider we are deserializing a placeholder, and thus return a properly instantiated view instead. Since
+    // we are swapping the object when it is deserialized, i.e. early in the process, all constraints which might be applied will
+    // correctly reference the replacing object
+    if ([self.subviews count] == 0) {
+        HLSNibView *nibView = [[self class] view];
+        nibView->_loadedFromPlaceholder = YES;
+        nibView.frame = self.frame;
+        nibView.alpha = self.alpha;
+        nibView.autoresizingMask = self.autoresizingMask;
+        
+        // Copy constraints defined on the placeholder view itself (size constraints)
+        for (NSLayoutConstraint *placeholderConstraint in self.constraints) {
+            id firstItem = (placeholderConstraint.firstItem == self) ? nibView : placeholderConstraint.firstItem;
+            id secondItem = (placeholderConstraint.secondItem == self) ? nibView : placeholderConstraint.secondItem;
+            
+            NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:firstItem
+                                                                          attribute:placeholderConstraint.firstAttribute
+                                                                          relatedBy:placeholderConstraint.relation
+                                                                             toItem:secondItem
+                                                                          attribute:placeholderConstraint.secondAttribute
+                                                                         multiplier:placeholderConstraint.multiplier
+                                                                           constant:placeholderConstraint.constant];
+            constraint.identifier = placeholderConstraint.identifier;
+            constraint.shouldBeArchived = placeholderConstraint.shouldBeArchived;
+            constraint.priority = placeholderConstraint.priority;
+            
+            // TODO: Remove when iOS 8 is the minimum required version for CoconutKit
+            if ([constraint respondsToSelector:@selector(isActive)]) {
+                constraint.active = placeholderConstraint.active;
+            }
+            
+            [nibView addConstraint:constraint];
+        }
+        
+        return nibView;
+    }
+    else {
+        return self;
+    }
+}
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     
-    if (_isPlaceholder) {
-        // Replace the placeholder with the nib-instantiated view it contains
-        UIView *nibView = [self.subviews firstObject];
-        
-        // Replace references to the placeholder with references to the nib-instantiated view
-        UIResponder *responder = self.superview;
-        while (responder) {
-            hls_object_replaceReferencesToObject(responder, self, nibView);
-            responder = responder.nextResponder;
-        }
-        
-        // FIXME: Issue with constraints. The original constraints should be preserved and copied
-        //        over from self to nibView. To test:
-        //           - create a layout with a centered placeholder
-        //           - run and rotate the view to check behavior
-        //           - set view class to an NLSNibView subclass
-        //           - check behavior again, should be incorrect
-        
-        // Get rid of the placeholder and install the nib-instantiated view instead
-        nibView.frame = self.frame;
-        [self.superview insertSubview:nibView belowSubview:self];
-        [self removeFromSuperview];
+    // Avoid conflicts with constraints generated from autoresizing masks (if the parent view uses constraints)
+    if (_loadedFromPlaceholder && [self.superview.constraints count] > 0) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
     }
 }
 

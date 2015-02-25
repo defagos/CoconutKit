@@ -1,13 +1,14 @@
 //
-//  HLSInfoTableViewCell.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 04/12/13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSLabel.h"
 #import "HLSTableViewCell.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface HLSInfoTableViewCell : HLSTableViewCell
 

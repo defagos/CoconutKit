@@ -1,10 +1,11 @@
 //
-//  UIViewController+HLSViewBinding.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 18.06.13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Convenience methods on UIViewController. Do nothing if the view controller view is not loaded

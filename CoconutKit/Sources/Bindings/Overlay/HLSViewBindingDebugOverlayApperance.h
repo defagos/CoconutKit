@@ -1,10 +1,12 @@
 //
-//  HLSViewBindingDebugOverlayApperance.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 14.11.14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Appearance settings for binding debugging overlay buttons

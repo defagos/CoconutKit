@@ -1,17 +1,19 @@
 //
-//  HLSTransition.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 8/8/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
 
 #import "HLSAnimation.h"
 #import "HLSLayerAnimationStep.h"
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 // Default duration for a transition animation. This is a reserved value and corresponds to the intrinsic duration
 // of an animation as defined by its implementation
-extern const NSTimeInterval kAnimationTransitionDefaultDuration;
+OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
 
 /**
  * Base class for transition animations involving two views (currently for use by containers). To define your

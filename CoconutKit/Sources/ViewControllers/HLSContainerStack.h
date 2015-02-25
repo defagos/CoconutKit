@@ -1,14 +1,15 @@
 //
-//  HLSContainerStack.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 09.07.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSAnimation.h"
 #import "HLSAutorotation.h"
 #import "HLSTransition.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 // Stack behavior
 typedef NS_ENUM(NSInteger, HLSContainerStackBehavior) {

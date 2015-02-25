@@ -1,9 +1,7 @@
 //
-//  UIWebView+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 10.01.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UIWebView+HLSExtensions.h"

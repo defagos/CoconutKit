@@ -1,9 +1,7 @@
 //
-//  HLSViewBindingInformation.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 18.06.13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSViewBindingInformation.h"
@@ -484,7 +482,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             rawClass = NSClassFromString(rawClassName);
         }
         // Primitive types are boxed as NSNumber using KVC
-        else if ([@"cdfilsBCILQS" rangeOfString:type].length != 0) {
+        else if ([@"cdfilqsBCILQS" rangeOfString:type].length != 0) {
             rawClass = [NSNumber class];
         }
         // Structs are boxed as NSValue
@@ -496,7 +494,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                               code:HLSViewBindingErrorUnsupportedType
-                              localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. can be bound)"];
+                              localizedDescription:@"Only objects and numeric types are supported (structs, pointers, blocks, etc. cannot be bound directly)"];
             }
             return NO;
         }

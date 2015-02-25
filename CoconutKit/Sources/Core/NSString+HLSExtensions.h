@@ -1,13 +1,14 @@
 //
-//  NSString+HLSExtensions.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 11/3/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+
 // Formatting functions
-NSString *HLSStringFromCATransform3D(CATransform3D transform);
+OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
 @interface NSString (HLSExtensions)
 

@@ -1,10 +1,10 @@
 //
-//  NSBundle+HLSExtensions.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 2/24/11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 #define CoconutKitLocalizedString(key, comment) \
     [[NSBundle coconutKitBundle] localizedStringForKey:(key) value:@"" table:nil]
@@ -44,5 +44,10 @@
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */
 - (NSString *)friendlyVersionNumber;
+
+/**
+ * Return a dictionary containing both the contents of the info and localized info dictionaries
+ */
+- (NSDictionary *)fullInfoDictionary;
 
 @end

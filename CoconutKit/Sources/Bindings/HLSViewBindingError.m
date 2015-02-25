@@ -1,9 +1,9 @@
 //
-//  HLSViewBindingError.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Defago on 18/11/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 NSString * const HLSViewBindingErrorDomain = @"ch.defagos.coconutkit.bindings";

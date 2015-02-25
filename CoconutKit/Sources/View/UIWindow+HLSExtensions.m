@@ -1,9 +1,7 @@
 //
-//  UIWindow+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 28.10.14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UIWindow+HLSExtensions.h"

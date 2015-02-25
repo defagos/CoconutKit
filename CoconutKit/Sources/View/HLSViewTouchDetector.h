@@ -1,10 +1,11 @@
 //
-//  HLSViewTouchDetector.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 24.07.13.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * For a view and a pair of begin / end notifications, traps touches outside the view frame and resigns responder

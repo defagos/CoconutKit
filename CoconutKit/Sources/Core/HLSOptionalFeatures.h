@@ -1,21 +1,25 @@
 //
-//  HLSOptionalFeatures.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 03.07.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
-
-/**
- * A collection of macros to enable optional CoconutKit features you might not want in your application.
- * Simply call a macro at global scope to enable the corresponding feature. Good places are for example 
- * main.m or your application delegate .m file
- */
 
 #import "NSManagedObject+HLSValidation.h"
 #import "UIControl+HLSExclusiveTouch.h"
 #import "UITextView+HLSCursorVisibility.h"
 
+#import <Foundation/Foundation.h>
+
+/**
+ * A collection of macros to enable optional CoconutKit features you might not want in your application.
+ * Simply call a macro at global scope to enable the corresponding feature. Good places are for example
+ * main.m or your application delegate .m file
+ */
+
+/**
+ * Ensure the text view cursor always stays visible. This feature does not incur any major
+ * overhead but swizzles several methods under the hood
+ */
 #define HLSEnableUITextViewCursorVisibility()                                                            \
     __attribute__ ((constructor)) void HLSEnableUITextViewCursorVisibilityConstructor(void)              \
     {                                                                                                    \

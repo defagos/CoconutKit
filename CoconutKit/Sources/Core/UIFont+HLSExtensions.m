@@ -1,15 +1,15 @@
 //
-//  UIFont+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 1/17/13.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UIFont+HLSExtensions.h"
 
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
+
+#import <CoreText/CoreText.h>
 
 @implementation UIFont (HLSExtensions)
 

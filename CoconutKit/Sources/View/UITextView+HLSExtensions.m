@@ -1,9 +1,7 @@
 //
-//  UITextView+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 02.04.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UITextView+HLSExtensions.h"
@@ -15,12 +13,12 @@
 static void *s_touchDetectorKey = &s_touchDetectorKey;
 
 // Original implementation of the methods we swizzle
-static id (*s_UITextView__initWithFrame_Imp)(id, SEL, CGRect) = NULL;
-static id (*s_UITextView__initWithCoder_Imp)(id, SEL, id) = NULL;
+static id (*s_initWithFrame)(id, SEL, CGRect) = NULL;
+static id (*s_initWithCoder)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
-static id swizzled_UITextView__initWithFrame_Imp(UITextView *self, SEL _cmd, CGRect frame);
-static id swizzled_UITextView__initWithCoder_Imp(UITextView *self, SEL _cmd, NSCoder *aDecoder);
+static id swizzle_initWithFrame(UITextView *self, SEL _cmd, CGRect frame);
+static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
 
 @interface UITextView (HLSExtensionsPrivate)
 
@@ -34,12 +32,8 @@ static id swizzled_UITextView__initWithCoder_Imp(UITextView *self, SEL _cmd, NSC
 
 + (void)load
 {
-    s_UITextView__initWithFrame_Imp = (id (*)(id, SEL, CGRect))hls_class_swizzleSelector(self,
-                                                                                         @selector(initWithFrame:),
-                                                                                         (IMP)swizzled_UITextView__initWithFrame_Imp);
-    s_UITextView__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                     @selector(initWithCoder:),
-                                                                                     (IMP)swizzled_UITextView__initWithCoder_Imp);
+    HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
+    HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
 }
 
 #pragma mark Accessors and mutators
@@ -83,17 +77,17 @@ static void commonInit(UITextView *self)
 
 #pragma mark Swizzled method implementations
 
-static id swizzled_UITextView__initWithFrame_Imp(UITextView *self, SEL _cmd, CGRect frame)
+static id swizzle_initWithFrame(UITextView *self, SEL _cmd, CGRect frame)
 {
-    if ((self = (*s_UITextView__initWithFrame_Imp)(self, _cmd, frame))) {
+    if ((self = s_initWithFrame(self, _cmd, frame))) {
         commonInit(self);
     }
     return self;
 }
 
-static id swizzled_UITextView__initWithCoder_Imp(UITextView *self, SEL _cmd, NSCoder *aDecoder)
+static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder)
 {
-    if ((self = (*s_UITextView__initWithCoder_Imp)(self, _cmd, aDecoder))) {
+    if ((self = s_initWithCoder(self, _cmd, aDecoder))) {
         commonInit(self);
     }
     return self;

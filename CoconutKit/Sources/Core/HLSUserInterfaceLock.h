@@ -1,10 +1,10 @@
 //
-//  HLSUserInterfaceLock.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 11/15/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 /**
  * Singleton class for preventing / allowing user interface interaction

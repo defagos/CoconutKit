@@ -1,14 +1,14 @@
 //
-//  HLSNotifications.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel DEFAGO on 09.06.10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSNotifications.h"
 
 #import "HLSLogger.h"
+
+#import <UIKit/UIKit.h>
 
 #pragma mark -
 #pragma mark NotificationSender class interface

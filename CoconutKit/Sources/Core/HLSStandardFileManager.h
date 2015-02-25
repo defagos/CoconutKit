@@ -1,12 +1,12 @@
 //
-//  HLSStandardFileManager.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 12/13/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSFileManager.h"
+
+#import <Foundation/Foundation.h>
 
 /**
  * A standard NSFileManager-based file manager, built upon +[NSFileManager defaultManager]

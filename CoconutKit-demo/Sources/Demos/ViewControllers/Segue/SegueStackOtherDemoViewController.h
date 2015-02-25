@@ -1,9 +1,7 @@
 //
-//  SegueStackOtherDemoViewController.h
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 29.06.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 @interface SegueStackOtherDemoViewController : HLSViewController

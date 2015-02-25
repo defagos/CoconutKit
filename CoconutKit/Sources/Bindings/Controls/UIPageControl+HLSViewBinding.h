@@ -1,12 +1,13 @@
 //
-//  UIPageControl+HLSViewBinding.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 04.11.14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UIView+HLSViewBindingImplementation.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Binding support for UIPageControl:

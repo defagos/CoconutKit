@@ -1,9 +1,7 @@
 //
-//  NSDate+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 11/26/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "NSDate+HLSExtensions.h"
@@ -11,10 +9,10 @@
 #import "HLSRuntime.h"
 
 // Original implementation of the methods we swizzle
-static id (*s_NSDate__descriptionWithLocale_Imp)(id, SEL, id) = NULL;
+static id (*s_descriptionWithLocale)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
-static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _cmd, id locale);
+static NSString *swizzle_descriptionWithLocale(NSDate *self, SEL _cmd, id locale);
 
 @implementation NSDate (HLSExtensions)
 
@@ -22,9 +20,7 @@ static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _c
 
 + (void)load
 {
-    s_NSDate__descriptionWithLocale_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                         @selector(descriptionWithLocale:),
-                                                                                         (IMP)swizzled_NSDate__descriptionWithLocale_Imp);
+    HLSSwizzleSelector(self, @selector(descriptionWithLocale:), swizzle_descriptionWithLocale, &s_descriptionWithLocale);
 }
 
 #pragma mark Convenience methods
@@ -53,7 +49,7 @@ static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _c
 
 #pragma mark Swizzled method implementations
 
-static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _cmd, id locale)
+static NSString *swizzle_descriptionWithLocale(NSDate *self, SEL _cmd, id locale)
 {
     static NSDateFormatter *s_dateFormatter = nil;
     static dispatch_once_t s_onceToken;
@@ -63,6 +59,6 @@ static NSString *swizzled_NSDate__descriptionWithLocale_Imp(NSDate *self, SEL _c
         [s_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ"];
     });
     
-    NSString *originalString = (*s_NSDate__descriptionWithLocale_Imp)(self, _cmd, locale);
+    NSString *originalString = s_descriptionWithLocale(self, _cmd, locale);
     return [NSString stringWithFormat:@"%@ (system time zone: %@)", originalString, [s_dateFormatter stringFromDate:self]];
 }

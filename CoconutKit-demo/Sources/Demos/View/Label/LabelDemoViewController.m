@@ -1,9 +1,7 @@
 //
-//  LabelDemoViewController.m
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Joris Heuberger on 13.04.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "LabelDemoViewController.h"
@@ -126,38 +124,17 @@ static NSArray *s_fontNames = nil;
         return [s_fontNames objectAtIndex:row];
     }
     else if (pickerView == self.lineBreakModePickerView) {
-        switch (row) {                
-            case NSLineBreakByCharWrapping: {
-                return @"NSLineBreakByCharWrapping";
-                break;
-            }
-                
-            case NSLineBreakByClipping: {
-                return @"NSLineBreakByClipping";
-                break;
-            }
-                
-            case NSLineBreakByTruncatingHead: {
-                return @"NSLineBreakByTruncatingHead";
-                break;
-            }
-                
-            case NSLineBreakByTruncatingTail: {
-                return @"NSLineBreakByTruncatingTail";
-                break;
-            }
-                
-            case NSLineBreakByTruncatingMiddle: {
-                return @"NSLineBreakByTruncatingMiddle";
-                break;
-            }
-                
-            case NSLineBreakByWordWrapping:
-            default: {
-                return @"NSLineBreakByWordWrapping";
-                break;
-            }
-        }
+        static NSDictionary *s_rows;
+        static dispatch_once_t s_onceToken;
+        dispatch_once(&s_onceToken, ^{
+            s_rows = @{ @(NSLineBreakByCharWrapping) : @"NSLineBreakByCharWrapping",
+                        @(NSLineBreakByClipping) : @"NSLineBreakByClipping",
+                        @(NSLineBreakByTruncatingHead) : @"NSLineBreakByTruncatingHead",
+                        @(NSLineBreakByTruncatingTail) : @"NSLineBreakByTruncatingTail",
+                        @(NSLineBreakByTruncatingMiddle) : @"NSLineBreakByTruncatingMiddle",
+                        @(NSLineBreakByWordWrapping) : @"NSLineBreakByWordWrapping" };
+        });
+        return [s_rows objectForKey:@(row)];
     }
     else {
         HLSLoggerError(@"Unknown picker view");

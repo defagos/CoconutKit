@@ -1,12 +1,14 @@
 //
-//  HLSWebViewController.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Cédric Luthi on 02.03.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSViewController.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 /**
  * A web browser with standard features (navigation buttons, link sharing, etc.)

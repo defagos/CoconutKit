@@ -1,12 +1,12 @@
 //
-//  HLSFileURLConnection.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 12/6/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSURLConnection.h"
+
+#import <Foundation/Foundation.h>
 
 /**
  * A connection managing file URL requests only (creation fails if the URLRequest is not a file URL request). It returns

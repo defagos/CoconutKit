@@ -1,10 +1,11 @@
 //
-//  HLSViewBindingDelegate.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 01/04/14.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Protocol to be implemented by classes whose instances want to show interest in receiving binding events. Information 

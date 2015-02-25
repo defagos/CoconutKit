@@ -1,10 +1,11 @@
 //
-//  HLSKeyboardInformation.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 2/17/11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * This class makes keyboard properties accessible at any time in a convenient way. Just access the +keyboardInformation 

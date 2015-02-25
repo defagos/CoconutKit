@@ -1,10 +1,11 @@
 //
-//  UILabel+HLSDynamicLocalization.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 08.01.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Category for easier label localization in nib files. Instead of having to define and bind an outlet just 

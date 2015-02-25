@@ -1,9 +1,7 @@
 //
-//  HLSTransformer.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 9/21/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSTransformer.h"
@@ -19,64 +17,28 @@ NSString *HLSStringFromBool(BOOL yesOrNo)
 
 NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrientation)
 {
-    switch (interfaceOrientation) {
-        case UIInterfaceOrientationPortrait: {
-            return @"UIInterfaceOrientationPortrait";
-            break;
-        }
-            
-        case UIInterfaceOrientationPortraitUpsideDown: {
-            return @"UIInterfaceOrientationPortraitUpsideDown";
-            break;
-        }
-            
-        case UIInterfaceOrientationLandscapeLeft: {
-            return @"UIInterfaceOrientationLandscapeLeft";
-            break;
-        }
-            
-        case UIInterfaceOrientationLandscapeRight: {
-            return @"UIInterfaceOrientationLandscapeRight";
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown interface orientation");
-            return nil;
-            break;
-        }
-    }
+    static NSDictionary *s_names;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @(UIInterfaceOrientationPortrait) : @"UIInterfaceOrientationPortrait",
+                     @(UIInterfaceOrientationPortraitUpsideDown) : @"UIInterfaceOrientationPortraitUpsideDown",
+                     @(UIInterfaceOrientationLandscapeLeft) : @"UIInterfaceOrientationLandscapeLeft",
+                     @(UIInterfaceOrientationLandscapeRight) : @"UIInterfaceOrientationLandscapeRight" };
+    });
+    return [s_names objectForKey:@(interfaceOrientation)];
 }
 
 NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
 {
-    switch (deviceOrientation) {
-        case UIDeviceOrientationPortrait: {
-            return @"UIDeviceOrientationPortrait";
-            break;
-        }
-            
-        case UIDeviceOrientationPortraitUpsideDown: {
-            return @"UIDeviceOrientationPortraitUpsideDown";
-            break;
-        }
-            
-        case UIDeviceOrientationLandscapeLeft: {
-            return @"UIDeviceOrientationLandscapeLeft";
-            break;
-        }
-            
-        case UIDeviceOrientationLandscapeRight: {
-            return @"UIDeviceOrientationLandscapeRight";
-            break;
-        }
-            
-        default: {
-            HLSLoggerError(@"Unknown device orientation");
-            return nil;
-            break;
-        }
-    }
+    static NSDictionary *s_names;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_names = @{ @(UIDeviceOrientationPortrait) : @"UIDeviceOrientationPortrait",
+                     @(UIDeviceOrientationPortraitUpsideDown) : @"UIDeviceOrientationPortraitUpsideDown",
+                     @(UIDeviceOrientationLandscapeLeft) : @"UIDeviceOrientationLandscapeLeft",
+                     @(UIDeviceOrientationLandscapeRight) : @"UIDeviceOrientationLandscapeRight" };
+    });
+    return [s_names objectForKey:@(deviceOrientation)];
 }
 
 NSString *HLSStringFromCATransform3D(CATransform3D transform)
@@ -165,10 +127,12 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 + (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter
 {
     return [self blockTransformerWithBlock:^(id object) {
+        // Remark: The specific -[NSNumberFormatter stringFromNumber:] has a behavior which differs from -stringFromObjectValue:, e.g
+        //         it ignores nilSymbol. Since -stringForObjectValue: has the richest behavior, it makes sense to call it in all cases
         return [formatter stringForObjectValue:object];
     } reverseBlock:^(__autoreleasing id *pObject, NSString *string, NSError *__autoreleasing *pError) {
-        // For NSFormatter subclassess, calling -getObjectValue:forString:errorDescription: will crash for nil input strings, but
-        // interestingly do not crash and return nil when calling their specific -numberFromString: (for NSNumberFormatter) and
+        // For NSFormatter subclasses, calling -getObjectValue:forString:errorDescription: will crash for nil input strings, but
+        // interestingly does not crash and returns nil when calling their specific -numberFromString: (for NSNumberFormatter) and
         // -dateFromString: (for NSDateFormatter) methods. Check and apply the same behavior as those specific methods here. Since
         // converting an empty string via NSNumberFormatter or NSDateFormatter returns YES -getObjectValue:forString:errorDescription:
         // (the object returned by reference is nil), we also consider the conversion successful here, which makes sense

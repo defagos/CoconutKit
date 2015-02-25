@@ -1,9 +1,7 @@
 //
-//  UIView+HLSViewBinding.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 18.06.13.
-//  Copyright (c) 2013 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UIView+HLSViewBinding.h"
@@ -24,10 +22,10 @@ static void *s_bindInputCheckedKey = &s_bindInputCheckedKey;
 static void *s_bindingInformationKey = &s_bindingInformationKey;
 
 // Original implementation of the methods we swizzle
-static void (*s_UIView__didMoveToWindow_Imp)(id, SEL) = NULL;
+static void (*s_didMoveToWindow)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
+static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 @interface UIView (HLSViewBindingPrivate)
 
@@ -47,9 +45,7 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 + (void)load
 {
-    s_UIView__didMoveToWindow_Imp = (__typeof(s_UIView__didMoveToWindow_Imp))hls_class_swizzleSelector(self,
-                                                                                                       @selector(didMoveToWindow),
-                                                                                                       (IMP)swizzled_UIView__didMoveToWindow_Imp);
+    HLSSwizzleSelector(self, @selector(didMoveToWindow), swizzle_didMoveToWindow, &s_didMoveToWindow);
 }
 
 + (void)showBindingsDebugOverlay
@@ -240,9 +236,9 @@ static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd);
 
 // By swizzling -didMoveToWindow, we know that the view has been added to its view hierarchy. The responder chain is therefore
 // complete
-static void swizzled_UIView__didMoveToWindow_Imp(UIView *self, SEL _cmd)
+static void swizzle_didMoveToWindow(UIView *self, SEL _cmd)
 {
-    (*s_UIView__didMoveToWindow_Imp)(self, _cmd);
+    s_didMoveToWindow(self, _cmd);
     
     if (self.window) {
         if (self.bindKeyPath) {

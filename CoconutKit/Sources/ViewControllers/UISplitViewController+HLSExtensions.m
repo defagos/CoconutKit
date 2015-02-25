@@ -1,9 +1,7 @@
 //
-//  UISplitViewController+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 10/31/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UISplitViewController+HLSExtensions.h"
@@ -14,12 +12,12 @@
 static void *s_autorotationModeKey = &s_autorotationModeKey;
 
 // Original implementation of the methods we swizzle
-static BOOL (*s_UISplitViewController__shouldAutorotate_Imp)(id, SEL) = NULL;
-static NSUInteger (*s_UISplitViewController__supportedInterfaceOrientations_Imp)(id, SEL) = NULL;
+static BOOL (*s_shouldAutorotate)(id, SEL) = NULL;
+static NSUInteger (*s_supportedInterfaceOrientations)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static BOOL swizzled_UISplitViewController__shouldAutorotate_Imp(UISplitViewController *self, SEL _cmd);
-static NSUInteger swizzled_UISplitViewController__supportedInterfaceOrientations_Imp(UISplitViewController *self, SEL _cmd);
+static BOOL swizzle_shouldAutorotate(UISplitViewController *self, SEL _cmd);
+static NSUInteger swizzle_supportedInterfaceOrientations(UISplitViewController *self, SEL _cmd);
 
 @implementation UISplitViewController (HLSExtensions)
 
@@ -28,12 +26,8 @@ static NSUInteger swizzled_UISplitViewController__supportedInterfaceOrientations
 + (void)load
 {
     // No swizzling occurs on iOS < 6 since those two methods do not exist
-    s_UISplitViewController__shouldAutorotate_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                 @selector(shouldAutorotate),
-                                                                                                 (IMP)swizzled_UISplitViewController__shouldAutorotate_Imp);
-    s_UISplitViewController__supportedInterfaceOrientations_Imp = (NSUInteger (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                                     @selector(supportedInterfaceOrientations),
-                                                                                                                     (IMP)swizzled_UISplitViewController__supportedInterfaceOrientations_Imp);
+    HLSSwizzleSelector(self, @selector(shouldAutorotate), swizzle_shouldAutorotate, &s_shouldAutorotate);
+    HLSSwizzleSelector(self, @selector(supportedInterfaceOrientations), swizzle_supportedInterfaceOrientations, &s_supportedInterfaceOrientations);
 }
 
 #pragma mark Accessors and mutators
@@ -56,10 +50,10 @@ static NSUInteger swizzled_UISplitViewController__supportedInterfaceOrientations
 
 @end
 
-static BOOL swizzled_UISplitViewController__shouldAutorotate_Imp(UISplitViewController *self, SEL _cmd)
+static BOOL swizzle_shouldAutorotate(UISplitViewController *self, SEL _cmd)
 {
     // The container always decides first (does not look at children)
-    if (! (*s_UISplitViewController__shouldAutorotate_Imp)(self, _cmd)) {
+    if (! s_shouldAutorotate(self, _cmd)) {
         return NO;
     }
     
@@ -84,10 +78,10 @@ static BOOL swizzled_UISplitViewController__shouldAutorotate_Imp(UISplitViewCont
     return YES;
 }
 
-static NSUInteger swizzled_UISplitViewController__supportedInterfaceOrientations_Imp(UISplitViewController *self, SEL _cmd)
+static NSUInteger swizzle_supportedInterfaceOrientations(UISplitViewController *self, SEL _cmd)
 {
     // The container always decides first (does not look at children)
-    NSUInteger containerSupportedInterfaceOrientations = (*s_UISplitViewController__supportedInterfaceOrientations_Imp)(self, _cmd);
+    NSUInteger containerSupportedInterfaceOrientations = s_supportedInterfaceOrientations(self, _cmd);
     
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren:

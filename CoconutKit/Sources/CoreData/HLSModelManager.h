@@ -1,12 +1,13 @@
 //
-//  HLSModelManager.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 28.06.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSFileManager.h"
+
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
 
 // Standard option combinations
 #define HLSModelManagerLightweightMigrationOptions          [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,   \

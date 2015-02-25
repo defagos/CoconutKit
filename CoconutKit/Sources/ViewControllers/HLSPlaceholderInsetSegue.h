@@ -1,18 +1,19 @@
 //
-//  HLSPlaceholderInsetSegue.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 28.06.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSTransition.h"
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * The segue identifier prefix reserved for preloading view controllers into a placeholder view controller
  * ('hls_preload_at_index_')
  */
-extern NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
+OBJC_EXPORT NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
 
 /**
  * Segue class for setting the inset view controller of an HLSPlaceholderViewController when using storyboards.

@@ -1,10 +1,10 @@
 //
-//  HLSLogger+Friend.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 29.08.13.
-//  Copyright (c) 2014 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 /**
  * Interface meant to be used by friend classes of HLSLogger (= classes which must have access to private implementation

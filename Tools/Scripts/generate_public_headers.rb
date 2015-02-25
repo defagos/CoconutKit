@@ -16,7 +16,6 @@ FileUtils.mkdir_p(generated_headers_directory)
 # Generate the global public header
 public_headers = File.read(File.join(project_directory, 'publicHeaders.txt')).split("\n")  
 File.open(File.join(generated_headers_directory, 'CoconutKit.h'), 'w') do |file|
-  file.puts(File.read(File.join(project_directory, 'CoconutKit-Prefix.pch')))
   public_headers.each do |header| 
     file.puts "#import <CoconutKit/#{header}>"
   end

@@ -1,10 +1,10 @@
 //
-//  HLSAutorotation.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 10/16/12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
 
 /**
  * Define the several ways for a container view controller to behave when interface rotation occurs. This means:

@@ -1,9 +1,7 @@
 //
-//  HLSContainerContent.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 27.07.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "HLSContainerContent.h"
@@ -19,12 +17,12 @@
 static void *s_containerContentKey = &s_containerContentKey;
 
 // Original implementation of the methods we swizzle
-static BOOL (*s_UIViewController__isMovingToParentViewController_Imp)(id, SEL) = NULL;
-static BOOL (*s_UIViewController__isMovingFromParentViewController_Imp)(id, SEL) = NULL;
+static BOOL (*s_isMovingToParentViewController)(id, SEL) = NULL;
+static BOOL (*s_isMovingFromParentViewController)(id, SEL) = NULL;
 
 // Swizzled method implementations
-static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd);
-static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd);
+static BOOL swizzle_isMovingToParentViewController(UIViewController *self, SEL _cmd);
+static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL _cmd);
 
 @interface HLSContainerContent ()
 
@@ -365,34 +363,30 @@ static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIVi
 + (void)load
 {
     // Swizzle the methods introduced by the containment API so that view controllers can get a correct information even when inserted into a custom container
-    s_UIViewController__isMovingToParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                          @selector(isMovingToParentViewController),
-                                                                                                          (IMP)swizzled_UIViewController__isMovingToParentViewController_Imp);
-    s_UIViewController__isMovingFromParentViewController_Imp = (BOOL (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                                            @selector(isMovingFromParentViewController),
-                                                                                                            (IMP)swizzled_UIViewController__isMovingFromParentViewController_Imp);
+    HLSSwizzleSelector(self, @selector(isMovingToParentViewController), swizzle_isMovingToParentViewController, &s_isMovingToParentViewController);
+    HLSSwizzleSelector(self, @selector(isMovingFromParentViewController), swizzle_isMovingFromParentViewController, &s_isMovingFromParentViewController);
 }
 
 @end
 
-static BOOL swizzled_UIViewController__isMovingToParentViewController_Imp(UIViewController *self, SEL _cmd)
+static BOOL swizzle_isMovingToParentViewController(UIViewController *self, SEL _cmd)
 {
     HLSContainerContent *containerContent = hls_getAssociatedObject(self, s_containerContentKey);
     if (containerContent) {
         return containerContent.movingToParentViewController;
     }
     else {
-        return (*s_UIViewController__isMovingToParentViewController_Imp)(self, _cmd);
+        return s_isMovingToParentViewController(self, _cmd);
     }
 }
 
-static BOOL swizzled_UIViewController__isMovingFromParentViewController_Imp(UIViewController *self, SEL _cmd)
+static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL _cmd)
 {
     HLSContainerContent *containerContent = hls_getAssociatedObject(self, s_containerContentKey);
     if (containerContent) {
         return containerContent.movingFromParentViewController;
     }
     else {
-        return (*s_UIViewController__isMovingFromParentViewController_Imp)(self, _cmd);
+        return s_isMovingFromParentViewController(self, _cmd);
     }
 }

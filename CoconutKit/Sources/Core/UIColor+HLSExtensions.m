@@ -1,9 +1,7 @@
 //
-//  UIColor+HLSExtensions.m
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 14.06.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 #import "UIColor+HLSExtensions.h"
@@ -14,7 +12,7 @@
 #import "NSString+HLSExtensions.h"
 
 // Method implementations
-static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFormat);
+static void setColorFormat(UIView *self, SEL _cmd, NSString *colorFormat);
 
 @interface UIView (HLSColorNameRuntimeAttributes)
 
@@ -150,7 +148,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
             }
             
             SEL colorSetterSelector = NSSelectorFromString([methodName stringByReplacingOccurrencesOfString:@":" withString:@"Name:"]);
-            class_addMethod(class, colorSetterSelector, (IMP)UIView__setColorFormat_Imp, "v@:@");
+            class_addMethod(class, colorSetterSelector, (IMP)setColorFormat, "v@:@");
         }
         free(methods);
     }
@@ -162,7 +160,7 @@ static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFo
 #pragma mark Method implementations
 
 // Common setter implementation for setting colors by name
-static void UIView__setColorFormat_Imp(UIView *self, SEL _cmd, NSString *colorFormat)
+static void setColorFormat(UIView *self, SEL _cmd, NSString *colorFormat)
 {
     if (! [colorFormat isFilled]) {
         HLSLoggerWarn(@"No value has been set for attribute %s of %@. Skipped", sel_getName(_cmd), self);

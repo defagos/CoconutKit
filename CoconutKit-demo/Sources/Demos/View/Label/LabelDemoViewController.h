@@ -1,9 +1,7 @@
 //
-//  LabelDemoViewController.h
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Joris Heuberger on 13.04.12.
-//  Copyright (c) 2012 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
 
 @interface LabelDemoViewController : HLSViewController <UIPickerViewDataSource, UIPickerViewDelegate>

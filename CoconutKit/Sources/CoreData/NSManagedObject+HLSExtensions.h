@@ -1,10 +1,11 @@
 //
-//  NSManagedObject+HLSExtensions.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 21.10.11.
-//  Copyright (c) 2011 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
 
 /**
  * Convenience methods to perform common Core Data operations on managed objects. Most methods appear in two versions:

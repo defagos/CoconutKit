@@ -1,10 +1,11 @@
 //
-//  HLSNibView.h
-//  CoconutKit
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 9/1/10.
-//  Copyright 2010 Samuel Défago. All rights reserved.
+//  Licence information is available from the LICENCE file.
 //
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * Abstract class for easy view creation using nibs.
@@ -75,6 +76,7 @@
 
 @interface HLSNibView (RequiresSuper)
 
+- (id)awakeAfterUsingCoder NS_REQUIRES_SUPER;
 - (void)awakeFromNib NS_REQUIRES_SUPER;
 
 @end
