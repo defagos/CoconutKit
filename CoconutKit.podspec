@@ -12,8 +12,7 @@ Pod::Spec.new do |s|
   s.description = <<-DESC
                   CoconutKit is a productivity framework for iOS, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
                   DESC
-
-  s.prefix_header_file = 'CoconutKit/CoconutKit-Prefix.pch'
+                  
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit', 'WebKit'
 
   # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
