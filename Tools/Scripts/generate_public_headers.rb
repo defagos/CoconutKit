@@ -21,10 +21,10 @@ File.open(File.join(generated_headers_directory, 'CoconutKit.h'), 'w') do |file|
   end
 end
 
-# Symlink all public headers
+# Copy all public headers
 sources_directory = File.join(project_directory, 'Sources')
 public_headers.each do |file_name|
   Dir["#{sources_directory}/**/#{file_name}"].each do |file|
-    FileUtils.ln_s(file, File.join(generated_headers_directory, file_name))
+    FileUtils.cp_r(file, generated_headers_directory)
   end
 end
