@@ -130,7 +130,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     id (*methodImp)(id, SEL) = (id (*)(id, SEL))[self methodForSelector:selector];
     HLSAnimation *animation = methodImp(self, selector);
     
-    __weak HLSAnimation *weakAnimation = animation;
+    __unused __weak HLSAnimation *weakAnimation = animation;
     animation.startBlock = ^(BOOL animated) {
         HLSLoggerInfo(@"Start block called for animation %@", weakAnimation.tag);
     };
