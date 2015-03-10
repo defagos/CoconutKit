@@ -21,15 +21,32 @@
  *     remains compatible with the usual way of changing localization via system preferences, but it is stil good practice
  *     to collect localization code in a single method anyway)
  *   - instead of the default nib resolution mechanism of -[UIViewController init] (for @class MyViewController, first
- *     locate MyView.nib, then MyViewController.nib), HLSViewController subclasses look for a nib bearing the same name
- *     as the class or one of its superclasses only (otherwise the view controller is assumed to be instantiated 
- *     programmatically). This promotes a consistent naming scheme between source and nib files
- *   - the way how methods must be overridden is clean and consistent: The rule is now "Always call the super implementation 
+ *     locate MyView.nib, then MyViewController.nib), HLSViewController subclasses look for either a storyboard or a nib 
+ *     bearing the same name as the class or one of its superclasses (if no match is found the view controller is assumed 
+ *     to be instantiated programmatically). This promotes a consistent naming scheme between source and interface design 
+ *     files
+ *   - the way how methods must be overridden is clean and consistent: The rule is now "Always call the super implementation
  *     first" (if failing to do so, the behavior is undefined). This includes all view lifecycle methods, rotation methods,
  *     as well as -localize and -didReceiveMemoryWarning
  *
- * The HLSViewController class is not meant to be instantiated directly, you should subclass it to define your own view 
+ * The HLSViewController class is not meant to be instantiated directly, you should subclass it to define your own view
  * controllers.
+ *
+ * The current Apple recommended way to instantiate view controllers is using storyboards. Though they let you define your
+ * view hierarchy on a single screen, storyboards have a few drawbacks:
+ *   - they tend to scatter code around, most notably when you want to want to tweak how segues connect view controllers
+ *   - even if you break your hierarchy into several storyboards, a single storyboard containing usually contains several 
+ *     view controllers. Such a file can be a hot spot when working within a team of developers, and can lead to nightmares
+ *     when merging changes
+ *
+ * This is why you might prefer view instantiation using nib files associated with each view controllers, an approach which
+ * has its own drawbacks as well:
+ *   - you cannot use prototype cells
+ *   - you cannot layout your views using top and bottom layout guides
+ *
+ * CoconutKit instantiation mechanism solves these issues by letting you instantiate a view controller from an associated
+ * storyboard. This still lets you have a separate interface design file for each view controller, while letting you use
+ * prototype cells and layout guides.
  *
  * Otherwise, HLSViewController is used exactly like UIViewController. There is only one major difference with 
  * UIViewController: HLSViewController supports all interface orientations by default. This choice was made so that 
@@ -45,8 +62,21 @@
 @interface HLSViewController : UIViewController
 
 /**
- * Instantiate a view controller, looking for a nib bearing the same name as the class or one of its superclasses in the 
- * given bundle. If the specified bundle is nil, lookup is performed in the main bundle
+ * Instantiate a view controller from a storyboard, looking for a storyboard file with the the specified name, containing 
+ * a view controller with the name of the class or one of its superclasses as identifier, and belonging to this class.
+ * Lookup is performed in the specified bundle or, if nil, in the main bundle.
+ *
+ * If no storyboard name is provided, a storyboard file with the name of the class or one of its superclasses is searched,
+ * containing a view controller with this name as identifier, and belonging to the associated class.
+ */
+- (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+
+/**
+ * Instantiate a view controller, looking for a storyboard or a nib in the specified bundle. If no bundle is specified, lookup
+ * is performed in the main bundle.
+ *
+ * Storyboard lookup is performed first with no storyboard name provided (read above how this is achieved). If no match is
+ * found, a nib bearing the same name as the class or one of its superclasses is searched instead.
  */
 - (instancetype)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
 
