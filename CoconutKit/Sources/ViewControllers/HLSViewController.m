@@ -55,7 +55,6 @@ static void commonInit(HLSViewController *self);
 
 - (void)dealloc
 {
-    HLSLoggerDebug(@"View controller %@ deallocated", self);
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -65,31 +64,6 @@ static void commonInit(HLSViewController *self);
 {
     [super viewDidLoad];
     [self localize];
-    HLSLoggerDebug(@"View controller %@: view did load", self);
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    HLSLoggerDebug(@"View controller %@: view will appear, animated = %@", self, HLSStringFromBool(animated));
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    HLSLoggerDebug(@"View controller %@: view did appear, animated = %@", self, HLSStringFromBool(animated));
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    HLSLoggerDebug(@"View controller %@: view will disappear, animated = %@", self, HLSStringFromBool(animated));
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    HLSLoggerDebug(@"View controller %@: view did disappear, animated = %@", self, HLSStringFromBool(animated));
 }
 
 #pragma mark Localization
@@ -115,32 +89,6 @@ static void commonInit(HLSViewController *self);
 {
     // This fixes an inconsistency of UIViewController, see HLSViewController.h documentation
     return UIInterfaceOrientationMaskAll;
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    HLSLoggerDebug(@"View controller %@ will rotate to interface orientation %@", self, HLSStringFromInterfaceOrientation(toInterfaceOrientation));
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    HLSLoggerDebug(@"View controller %@ will animated rotation to interface orientation %@", self, HLSStringFromInterfaceOrientation(toInterfaceOrientation));
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    HLSLoggerDebug(@"View controller %@ did rotate from interface orientation %@", self, HLSStringFromInterfaceOrientation(fromInterfaceOrientation));
-}
-
-#pragma mark Memory warnings
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    HLSLoggerDebug(@"View controller %@ did receive a memory warning", self);
 }
 
 #pragma mark Notifications
@@ -169,5 +117,4 @@ static void commonInit(HLSViewController *self)
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
     [self localize];
-    HLSLoggerDebug(@"View controller %@ initialized", self);
 }
