@@ -16,6 +16,8 @@
 #import "UIViewController+HLSExtensions.h"
 #import "UIViewController+HLSInstantiation.h"
 
+static void commonInit(HLSViewController *self);
+
 @implementation HLSViewController
 
 #pragma mark Object creation and destruction
@@ -23,7 +25,7 @@
 - (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     if (self = [super initWithNibName:nibName bundle:bundle]) {
-        [self hlsViewControllerInit];
+        commonInit(self);
     }
     return self;
 }
@@ -31,7 +33,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self hlsViewControllerInit];
+        commonInit(self);
     }
     return self;
 }
@@ -51,18 +53,10 @@
     return [self initWithBundle:nil];
 }
 
-// Common initialization code
-- (void)hlsViewControllerInit
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
-    [self localize];
-    HLSLoggerDebug(@"View controller %@ initialized", self);
-}
-
 - (void)dealloc
 {
     HLSLoggerDebug(@"View controller %@ deallocated", self);
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:HLSCurrentLocalizationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark View lifecycle
@@ -110,11 +104,6 @@
     }
 }
 
-- (void)currentLocalizationDidChange:(NSNotification *)notification
-{
-    [self localize];
-}
-
 #pragma mark Orientation management
 
 - (BOOL)shouldAutorotate
@@ -154,6 +143,13 @@
     HLSLoggerDebug(@"View controller %@ did receive a memory warning", self);
 }
 
+#pragma mark Notifications
+
+- (void)currentLocalizationDidChange:(NSNotification *)notification
+{
+    [self localize];
+}
+
 #pragma mark Description
 
 - (NSString *)description
@@ -166,3 +162,12 @@
 }
 
 @end
+
+#pragma mark Functions
+
+static void commonInit(HLSViewController *self)
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
+    [self localize];
+    HLSLoggerDebug(@"View controller %@ initialized", self);
+}

@@ -7,7 +7,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- * Provide the same storyboard and nib instantiation abilities as HLSViewController, but for UICollectionViewController
+ * Provide the same storyboard, nib instantiation and localization abilities as HLSViewController, but for UICollectionViewController
  * subclasses
  */
 @interface HLSCollectionViewController : UICollectionViewController
@@ -17,6 +17,11 @@
  */
 - (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
 - (instancetype)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+
+/**
+ * See -[HLSViewController localize] documentation
+ */
+- (void)localize NS_REQUIRES_SUPER;
 
 @end
 
