@@ -14,19 +14,11 @@
 #import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
+#import "UIViewController+HLSInstantiation.h"
 
 @implementation HLSViewController
 
 #pragma mark Object creation and destruction
-
-- (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle
-{
-    if (! bundle) {
-        bundle = [NSBundle principalBundle];
-    }
-    
-    return [self viewControllerFromStoryboardWithName:storyboardName inBundle:bundle];
-}
 
 - (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
@@ -44,19 +36,14 @@
     return self;
 }
 
+- (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle
+{
+    return [self instanceWithStoryboardName:storyboardName inBundle:bundle];
+}
+
 - (instancetype)initWithBundle:(NSBundle *)bundle
 {
-    if (! bundle) {
-        bundle = [NSBundle principalBundle];
-    }
-    
-    HLSViewController *viewController = [self viewControllerFromStoryboardWithName:nil inBundle:bundle];
-    if (viewController) {
-        return viewController;
-    }
-    
-    NSString *nibName = [self nibNameInBundle:bundle];
-    return [self initWithNibName:nibName bundle:bundle];
+    return [self instanceInBundle:bundle];
 }
 
 - (instancetype)init
@@ -165,66 +152,6 @@
 {
     [super didReceiveMemoryWarning];
     HLSLoggerDebug(@"View controller %@ did receive a memory warning", self);
-}
-
-#pragma mark View controller resource lookup
-
-- (NSString *)nibNameInBundle:(NSBundle *)bundle
-{
-    NSParameterAssert(bundle);
-    
-    Class class = [self class];
-    while (class != Nil) {
-        NSString *className = NSStringFromClass(class);
-        if ([bundle pathForResource:className ofType:@"nib"]) {
-            return className;
-        }
-        class = class_getSuperclass(class);
-    }
-    return nil;
-}
-
-- (HLSViewController *)viewControllerFromStoryboardWithName:(NSString *)storyboardName inBundle:(NSBundle *)bundle
-{
-    NSParameterAssert(bundle);
-    
-    Class class = [self class];
-    while (class != Nil) {
-        NSString *storyboardLookupName = storyboardName ?: NSStringFromClass(class);
-        HLSViewController *viewController = [HLSViewController viewControllerFromStoryboardWithName:storyboardLookupName class:class inBundle:bundle];
-        if (viewController) {
-            return viewController;
-        }
-        class = class_getSuperclass(class);
-    }
-    return nil;
-}
-
-+ (HLSViewController *)viewControllerFromStoryboardWithName:(NSString *)storyboardName class:(Class)class inBundle:(NSBundle *)bundle
-{
-    NSParameterAssert(storyboardName);
-    NSParameterAssert(class);
-    NSParameterAssert(bundle);
-    
-    NSString *identifier = NSStringFromClass(class);
-    if (! [bundle pathForResource:identifier ofType:@"storyboardc"]) {
-        return nil;
-    }
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:identifier bundle:bundle];
-    
-    // Throws an exception if no view controller is found for the specified identifier
-    @try {
-        HLSViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:identifier];
-        if (! [viewController isKindOfClass:class]) {
-            return nil;
-        }
-        
-        return viewController;
-    }
-    @catch (NSException *exception) {
-        return nil;
-    }
 }
 
 #pragma mark Description
