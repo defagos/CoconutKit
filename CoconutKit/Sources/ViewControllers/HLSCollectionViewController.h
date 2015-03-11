@@ -8,4 +8,8 @@
 
 @interface HLSCollectionViewController : UICollectionViewController
 
+- (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+
+- (instancetype)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+
 @end

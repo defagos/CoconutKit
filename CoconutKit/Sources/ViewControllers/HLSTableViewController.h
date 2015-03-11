@@ -6,6 +6,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HLSTableViewController : UIViewController
+@interface HLSTableViewController : UITableViewController
+
+- (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+
+- (instancetype)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
 
 @end
