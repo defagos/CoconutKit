@@ -47,12 +47,6 @@
  * CoconutKit instantiation mechanism solves these issues by letting you instantiate a view controller from an associated
  * storyboard. This still lets you have a separate interface design file for each view controller, while letting you use
  * prototype cells and layout guides.
- *
- * Otherwise, HLSViewController is used exactly like UIViewController. There is only one major difference with 
- * UIViewController: HLSViewController supports all interface orientations by default. This choice was made so that 
- * the "Always call the super implementation first" rule can be applied. This also makes sense from a user's perspective 
- * since view controllers tend to support more and more orientations (especially since the iPad was launched, or more 
- * with the autorotation behavior introduced in iOS 6).
  */
 @interface HLSViewController : UIViewController
 

@@ -78,19 +78,6 @@ static void commonInit(HLSViewController *self);
     }
 }
 
-#pragma mark Orientation management
-
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    // This fixes an inconsistency of UIViewController, see HLSViewController.h documentation
-    return UIInterfaceOrientationMaskAll;
-}
-
 #pragma mark Notifications
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification
