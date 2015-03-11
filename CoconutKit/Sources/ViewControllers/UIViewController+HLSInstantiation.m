@@ -13,6 +13,15 @@
 
 #pragma mark Instantiation
 
+- (instancetype)instanceWithStoryboardName:(NSString *)storyboardName inBundle:(NSBundle *)bundle
+{
+    if (! bundle) {
+        bundle = [NSBundle principalBundle];
+    }
+    
+    return [self viewControllerFromStoryboardWithName:storyboardName inBundle:bundle];
+}
+
 - (instancetype)instanceInBundle:(NSBundle *)bundle
 {
     if (! bundle) {
@@ -26,15 +35,6 @@
     
     NSString *nibName = [self nibNameInBundle:bundle];
     return [self initWithNibName:nibName bundle:bundle];
-}
-
-- (instancetype)instanceWithStoryboardName:(NSString *)storyboardName inBundle:(NSBundle *)bundle
-{
-    if (! bundle) {
-        bundle = [NSBundle principalBundle];
-    }
-    
-    return [self viewControllerFromStoryboardWithName:storyboardName inBundle:bundle];
 }
 
 #pragma mark Resource lookup
