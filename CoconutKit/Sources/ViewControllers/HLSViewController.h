@@ -52,11 +52,13 @@
 
 /**
  * Instantiate a view controller from a storyboard, looking for a storyboard file with the the specified name, containing 
- * a view controller with the name of the class or one of its superclasses as identifier, and belonging to this class.
- * Lookup is performed in the specified bundle or, if nil, in the main bundle.
+ * a view controller with the name of the class or one of its superclasses as identifier (if none is found, the initial
+ * view controller is used), and belonging to this class. Lookup is performed in the specified bundle or, if nil, in the 
+ * main bundle.
  *
  * If no storyboard name is provided, a storyboard file with the name of the class or one of its superclasses is searched,
- * containing a view controller with this name as identifier, and belonging to the associated class.
+ * containing a view controller with this name as identifier (if none is found, the initial view controller is used), and 
+ * belonging to the associated class.
  */
 - (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
 

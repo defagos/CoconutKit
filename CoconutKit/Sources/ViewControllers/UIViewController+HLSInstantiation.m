@@ -85,7 +85,7 @@
     
     // Throws an exception if no view controller is found for the specified identifier
     @try {
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:identifier];
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:identifier] ?: [storyboard instantiateInitialViewController];
         if (! [viewController isKindOfClass:class]) {
             return nil;
         }
