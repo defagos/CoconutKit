@@ -90,6 +90,10 @@
     }
     @catch (NSException *exception) {}
     
+    if (viewController) {
+        return viewController;
+    }
+    
     viewController = [storyboard instantiateInitialViewController];
     if (! [viewController isKindOfClass:class]) {
         return nil;
