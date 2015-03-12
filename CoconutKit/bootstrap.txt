@@ -1,6 +1,7 @@
 CALayer+HLSExtensions.m
 CAMediaTimingFunction+HLSExtensions.m
 HLSAssert.m
+HLSCollectionViewController.m
 HLSCursor.m
 HLSLabel.m
 HLSMAKVONotificationCenter.m
@@ -8,6 +9,7 @@ HLSMANotificationCenterAdditions.m
 HLSPlaceholderInsetSegue.m
 HLSSlideshow.m
 HLSStackPushSegue.m
+HLSTableViewController.m
 HLSViewController.m
 NSArray+HLSExtensions.m
 NSBundle+HLSDynamicLocalization.m
