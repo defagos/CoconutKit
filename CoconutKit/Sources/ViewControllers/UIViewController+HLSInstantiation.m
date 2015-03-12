@@ -84,17 +84,18 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:identifier bundle:bundle];
     
     // Throws an exception if no view controller is found for the specified identifier
+    UIViewController *viewController = nil;
     @try {
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:identifier] ?: [storyboard instantiateInitialViewController];
-        if (! [viewController isKindOfClass:class]) {
-            return nil;
-        }
-        
-        return viewController;
+        viewController = [storyboard instantiateViewControllerWithIdentifier:identifier];
     }
-    @catch (NSException *exception) {
+    @catch (NSException *exception) {}
+    
+    viewController = [storyboard instantiateInitialViewController];
+    if (! [viewController isKindOfClass:class]) {
         return nil;
     }
+    
+    return viewController;
 }
 
 @end
