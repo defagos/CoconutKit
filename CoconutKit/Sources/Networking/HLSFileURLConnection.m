@@ -24,18 +24,6 @@
     return [super initWithRequest:request completionBlock:completionBlock];
 }
 
-#pragma mark Accessors and mutators
-
-- (void)setDownloadProgressBlock:(HLSConnectionProgressBlock)downloadProgressBlock
-{
-    HLSLoggerInfo(@"Progress block have not been implemented for mocked disk connections");
-}
-
-- (void)setUploadProgressBlock:(HLSConnectionProgressBlock)uploadProgressBlock
-{
-    HLSLoggerInfo(@"Progress block have not been implemented for mocked disk connections");
-}
-
 #pragma mark HLSConnectionAbstract protocol methods
 
 - (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
@@ -79,7 +67,7 @@
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSURLErrorNetworkConnectionLost
                              localizedDescription:NSLocalizedString(@"Connection error", nil)];
-        self.completionBlock ? self.completionBlock(self, nil, error) : nil;
+        [self finishWithResponseObject:nil error:error];
         return;
     }
     
@@ -87,7 +75,7 @@
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSURLErrorResourceUnavailable
                              localizedDescription:CoconutKitLocalizedString(@"Not found", nil)];
-        self.completionBlock ? self.completionBlock(self, nil, error) : nil;
+        [self finishWithResponseObject:nil error:error];
         return;
     }
     
@@ -105,7 +93,7 @@
     else {
         contents = @[[NSURL fileURLWithPath:filePath]];
     }
-    self.completionBlock ? self.completionBlock(self, contents, nil) : nil;
+    [self finishWithResponseObject:contents error:nil];
 }
 
 @end

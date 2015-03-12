@@ -11,7 +11,7 @@
 
 // Completion block signature
 typedef void (^HLSConnectionCompletionBlock)(HLSConnection *connection, id responseObject, NSError *error);
-typedef void (^HLSConnectionProgressBlock)(long long bytesTransferred, long long bytesTotal);
+typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t totalUnitCount);
 
 /**
  * Subclasses of HLSConnection MUST implement the set of methods declared by the following protocol
@@ -21,7 +21,7 @@ typedef void (^HLSConnectionProgressBlock)(long long bytesTransferred, long long
 
 /**
  * Start the connection, scheduling it with a given set of run loop modes. When implementing this method, you should
- * take care of calling the various completion blocks when appropriate
+ * take care of calling methods from the Subclassing category to update progress and mark completion
  *
  * If your concrete implementation cannot take into account one or several of these parameters, you should override
  * the corresponding setters to provide some feedback to the programmer (e.g. a log)
@@ -64,18 +64,28 @@ typedef void (^HLSConnectionProgressBlock)(long long bytesTransferred, long long
 /**
  * Return YES while the connection is running
  */
-@property (nonatomic, assign, readonly, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 
 /**
- * Progress blocks
+ * The last error encountered when running the connection, nil if none
  */
-@property (nonatomic, copy) HLSConnectionProgressBlock downloadProgressBlock;
-@property (nonatomic, copy) HLSConnectionProgressBlock uploadProgressBlock;
+@property (nonatomic, readonly, strong) NSError *error;
+
+/**
+ * Connection progress information (use KVO to be notified about changes, see NSProgress documentation)
+ */
+@property (nonatomic, readonly, strong) NSProgress *progress;
 
 /**
  * The completion block to be called when the connection completes (either normally or on failure)
  */
 @property (nonatomic, readonly, copy) HLSConnectionCompletionBlock completionBlock;
+
+/**
+ * A progress block which gets called as the connection runs (same information as -progress, but without the need
+ * for KVO)
+ */
+@property (nonatomic, copy) HLSConnectionProgressBlock progressBlock;
 
 /**
  * Create a parent - child relationship between the receiver and another connection. When cancelling the receiver,
@@ -93,5 +103,14 @@ typedef void (^HLSConnectionProgressBlock)(long long bytesTransferred, long long
  * is undefined
  */
 - (void)addChildConnection:(HLSConnection *)connection;
+
+@end
+
+@interface HLSConnection (Subclassing)
+
+- (void)setTotalUnitCount:(int64_t)totalUnitCount;
+- (void)updateProgressWithCompletedUnitCount:(int64_t)completedUnitCount;
+
+- (void)finishWithResponseObject:(id)responseObject error:(NSError *)error;
 
 @end
