@@ -81,7 +81,7 @@
  * To ensure that your application is properly localized - even when the localization changes at runtime using +[NSBundle setLocalization:]
  * (from NSBundle+HLSDynamicLocalization.h) - you must access localized resources only from within this method
  *
- * You do not need to bind outlets just for the purpose of label or button localization in nib files. Refer to UILabel+HLSDynamicLocalization
+ * You do not need to bind outlets just for the purpose of label or bugtton localization in nib files. Refer to UILabel+HLSDynamicLocalization
  * for more information
  */
 - (void)localize NS_REQUIRES_SUPER;

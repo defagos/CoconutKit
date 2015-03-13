@@ -18,7 +18,7 @@
                                                                  // over (so that child connections can still be cancelled by cancelling their
                                                                  // parent, even if it ended first)
 
-@property (nonatomic, strong) NSMutableArray *childConnections;  // contains HLSConnection objects
+@property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;        // contains HLSConnection objects
 
 @property (nonatomic, strong) NSSet *runLoopModes;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
@@ -39,7 +39,7 @@
 {
     if (self = [super init]) {
         self.completionBlock = completionBlock;
-        self.childConnections = [NSMutableArray array];
+        self.childConnectionsDictionary = [NSMutableDictionary dictionary];
         self.progress = [NSProgress progressWithTotalUnitCount:0];          // Will be updated by subclasses
     }
     return self;
@@ -64,7 +64,7 @@
     }
     
     BOOL finalized = YES;
-    for (HLSConnection *childConnection in self.childConnections) {
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
         if (childConnection.running) {
             finalized = NO;
             break;
@@ -94,7 +94,7 @@
     self.living = YES;
     self.runLoopModes = runLoopModes;
     
-    for (HLSConnection *childConnection in self.childConnections) {
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
         if (! childConnection.living) {
             [childConnection startWithRunLoopModes:runLoopModes];
         }
@@ -107,9 +107,7 @@
         [self cancelConnection];
     }
     
-    // Connections are removed from the array when terminated. We must avoid iterating the collection while this might happen
-    NSArray *childConnections = [NSArray arrayWithArray:self.childConnections];
-    for (HLSConnection *childConnection in childConnections) {
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
         [childConnection cancel];
     }
 }
@@ -122,7 +120,7 @@
     
     NSError *error = [self.error copy];
     
-    for (HLSConnection *childConnection in self.childConnections) {
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
         [NSError combineError:childConnection.error withError:&error];
     }
     
@@ -139,18 +137,41 @@
 
 #pragma mark Child connections
 
-- (void)addChildConnection:(HLSConnection *)connection
+- (void)addChildConnection:(HLSConnection *)connection withIdentifier:(NSString *)identifier
 {
+    NSParameterAssert(identifier);
+    
+    if ([self.childConnectionsDictionary objectForKey:identifier]) {
+        HLSLoggerError(@"A connection has already been registered for identifier %@", identifier);
+        return;
+    }
+    
     if (connection.parentConnection) {
-        HLSLoggerWarn(@"A parent connection has already been defined");
+        HLSLoggerError(@"A parent connection has already been defined");
         return;
     }
     connection.parentConnection = self;
-    [self.childConnections addObject:connection];
+    [self.childConnectionsDictionary setObject:connection forKey:identifier];
     
     if (self.living) {
         [connection startWithRunLoopModes:self.runLoopModes];
     }
+}
+
+- (void)addChildConnection:(HLSConnection *)connection
+{
+    NSString *identifier = [[NSUUID UUID] UUIDString];
+    [self addChildConnection:connection withIdentifier:identifier];
+}
+
+- (NSArray *)childConnections
+{
+    return [self.childConnectionsDictionary allValues];
+}
+
+- (HLSConnection *)childConnectionWithIdentifier:(NSString *)identifier
+{
+    return [self.childConnectionsDictionary objectForKey:identifier];
 }
 
 #pragma mark Methods to be called by subclasses

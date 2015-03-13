@@ -105,10 +105,28 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
  * two requests. You want the process to happen as if only one connection is actually running. This can be easily achieved
  * using a child connection
  *
+ * An identifier must specified, which can be used to retrieve the connection at a later time. If you do not need
+ * any identifier, use -addChildConnection: instead. At most one connection can be registered for a specific identifier
+ *
  * Note that you are responsible of avoiding cycles when creating parent / child relationships, otherwise the behavior
  * is undefined
  */
+- (void)addChildConnection:(HLSConnection *)connection withIdentifier:(NSString *)identifier;
+
+/**
+ * Same as -addChildConnection:withIdentifier:, but without identifier
+ */
 - (void)addChildConnection:(HLSConnection *)connection;
+
+/**
+ * Return all child connections, in no specific order
+ */
+@property (nonatomic, readonly, strong) NSArray *childConnections;
+
+/**
+ * Return the connection with the specified identifier, nil if none is found
+ */
+- (HLSConnection *)childConnectionWithIdentifier:(NSString *)identifier;
 
 @end
 
