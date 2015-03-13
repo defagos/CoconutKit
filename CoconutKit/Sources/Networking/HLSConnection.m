@@ -87,18 +87,20 @@
         return;
     }
     
-    [self updateProgressWithCompletedUnitCount:0];
-    [self startConnectionWithRunLoopModes:runLoopModes];
-    
     self.running = YES;
     self.living = YES;
     self.runLoopModes = runLoopModes;
     
+    // Start child connections first. This ensures correct behavior even if the -startConnectionWithRunLoopModes:
+    // subclass implementation directly calls -finishWithResponseObject:error:
     for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
         if (! childConnection.living) {
             [childConnection startWithRunLoopModes:runLoopModes];
         }
     }
+    
+    [self updateProgressWithCompletedUnitCount:0];
+    [self startConnectionWithRunLoopModes:runLoopModes];
 }
 
 - (void)cancel
