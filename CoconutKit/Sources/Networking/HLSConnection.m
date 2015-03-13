@@ -24,7 +24,7 @@
 @property (nonatomic, assign, getter=isRunning) BOOL running;
 @property (nonatomic, assign, getter=isLiving) BOOL living;
 
-@property (nonatomic, readonly, assign, getter=isFinalized) BOOL finalized;
+@property (nonatomic, readonly, assign, getter=hasEnded) BOOL ended;
 
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, strong) NSProgress *progress;
@@ -57,20 +57,20 @@
 
 #pragma mark Accessors and mutators
 
-- (BOOL)isFinalized
+- (BOOL)hasEnded
 {
     if (self.running) {
         return NO;
     }
     
-    BOOL finalized = YES;
+    BOOL hasEnded = YES;
     for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
         if (childConnection.running) {
-            finalized = NO;
+            hasEnded = NO;
             break;
         }
     }
-    return finalized;
+    return hasEnded;
 }
 
 #pragma mark Connection management
@@ -114,7 +114,7 @@
     }
 }
 
-- (void)finalize
+- (void)endConnection
 {
     if (! self.finalizeBlock) {
         return;
@@ -200,12 +200,12 @@
     
     self.living = NO;
     
-    if (self.finalized) {
-        [self finalize];
+    if (self.ended) {
+        [self endConnection];
     }
     
-    if (self.parentConnection.finalized) {
-        [self.parentConnection finalize];
+    if (self.parentConnection.ended) {
+        [self.parentConnection endConnection];
     }
     
     self.parentConnection = nil;
