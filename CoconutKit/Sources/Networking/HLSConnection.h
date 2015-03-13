@@ -63,7 +63,7 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 - (void)cancel;
 
 /**
- * Return YES while the connection is running
+ * Return YES while the connection or one of its children connections are running
  */
 @property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
 

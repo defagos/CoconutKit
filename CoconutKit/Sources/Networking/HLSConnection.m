@@ -21,10 +21,8 @@
 @property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;        // contains HLSConnection objects
 
 @property (nonatomic, strong) NSSet *runLoopModes;
-@property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter=isConnectionRunning) BOOL connectionRunning;
 @property (nonatomic, assign, getter=isLiving) BOOL living;
-
-@property (nonatomic, readonly, assign, getter=hasEnded) BOOL ended;
 
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, strong) NSProgress *progress;
@@ -57,20 +55,18 @@
 
 #pragma mark Accessors and mutators
 
-- (BOOL)hasEnded
+- (BOOL)isRunning
 {
-    if (self.running) {
-        return NO;
+    if (self.connectionRunning) {
+        return YES;
     }
     
-    BOOL hasEnded = YES;
     for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
-        if (childConnection.running) {
-            hasEnded = NO;
-            break;
+        if (childConnection.connectionRunning) {
+            return YES;
         }
     }
-    return hasEnded;
+    return NO;
 }
 
 #pragma mark Connection management
@@ -87,7 +83,7 @@
         return;
     }
     
-    self.running = YES;
+    self.connectionRunning = YES;
     self.living = YES;
     self.runLoopModes = runLoopModes;
     
@@ -194,17 +190,17 @@
     [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
     
     self.error = error;
-    self.running = NO;
+    self.connectionRunning = NO;
     
     self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
     
     self.living = NO;
     
-    if (self.ended) {
+    if (! self.running) {
         [self endConnection];
     }
     
-    if (self.parentConnection.ended) {
+    if (! self.parentConnection.running) {
         [self.parentConnection endConnection];
     }
     
