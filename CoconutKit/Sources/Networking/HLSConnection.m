@@ -137,12 +137,12 @@
 
 #pragma mark Child connections
 
-- (void)addChildConnection:(HLSConnection *)connection withIdentifier:(NSString *)identifier
+- (void)addChildConnection:(HLSConnection *)connection withKey:(id)key
 {
-    NSParameterAssert(identifier);
+    NSParameterAssert(key);
     
-    if ([self.childConnectionsDictionary objectForKey:identifier]) {
-        HLSLoggerError(@"A connection has already been registered for identifier %@", identifier);
+    if ([self.childConnectionsDictionary objectForKey:key]) {
+        HLSLoggerError(@"A connection has already been registered for key %@", key);
         return;
     }
     
@@ -151,7 +151,7 @@
         return;
     }
     connection.parentConnection = self;
-    [self.childConnectionsDictionary setObject:connection forKey:identifier];
+    [self.childConnectionsDictionary setObject:connection forKey:key];
     
     if (self.living) {
         [connection startWithRunLoopModes:self.runLoopModes];
@@ -160,8 +160,8 @@
 
 - (void)addChildConnection:(HLSConnection *)connection
 {
-    NSString *identifier = [[NSUUID UUID] UUIDString];
-    [self addChildConnection:connection withIdentifier:identifier];
+    NSString *key = [[NSUUID UUID] UUIDString];
+    [self addChildConnection:connection withKey:key];
 }
 
 - (NSArray *)childConnections
@@ -169,9 +169,9 @@
     return [self.childConnectionsDictionary allValues];
 }
 
-- (HLSConnection *)childConnectionWithIdentifier:(NSString *)identifier
+- (HLSConnection *)childConnectionForKey:(id)key
 {
-    return [self.childConnectionsDictionary objectForKey:identifier];
+    return [self.childConnectionsDictionary objectForKey:key];
 }
 
 #pragma mark Methods to be called by subclasses
