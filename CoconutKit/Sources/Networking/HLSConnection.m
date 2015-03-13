@@ -7,6 +7,7 @@
 #import "HLSConnection.h"
 
 #import "HLSLogger.h"
+#import "NSError+HLSExtensions.h"
 
 @interface HLSConnection ()
 
@@ -21,6 +22,9 @@
 
 @property (nonatomic, strong) NSSet *runLoopModes;
 @property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter=isLiving) BOOL living;
+
+@property (nonatomic, readonly, assign, getter=isFinalized) BOOL finalized;
 
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, strong) NSProgress *progress;
@@ -46,6 +50,29 @@
     return [self initWithCompletionBlock:nil];
 }
 
+- (void)dealloc
+{
+    self.parentConnection = nil;
+}
+
+#pragma mark Accessors and mutators
+
+- (BOOL)isFinalized
+{
+    if (self.running) {
+        return NO;
+    }
+    
+    BOOL finalized = YES;
+    for (HLSConnection *childConnection in self.childConnections) {
+        if (childConnection.running) {
+            finalized = NO;
+            break;
+        }
+    }
+    return finalized;
+}
+
 #pragma mark Connection management
 
 - (void)start
@@ -64,10 +91,11 @@
     [self startConnectionWithRunLoopModes:runLoopModes];
     
     self.running = YES;
+    self.living = YES;
     self.runLoopModes = runLoopModes;
     
     for (HLSConnection *childConnection in self.childConnections) {
-        if (! childConnection.running) {
+        if (! childConnection.living) {
             [childConnection startWithRunLoopModes:runLoopModes];
         }
     }
@@ -84,6 +112,21 @@
     for (HLSConnection *childConnection in childConnections) {
         [childConnection cancel];
     }
+}
+
+- (void)finalize
+{
+    if (! self.finalizeBlock) {
+        return;
+    }
+    
+    NSError *error = [self.error copy];
+    
+    for (HLSConnection *childConnection in self.childConnections) {
+        [NSError combineError:childConnection.error withError:&error];
+    }
+    
+    self.finalizeBlock(error);
 }
 
 #pragma mark HLSConnectionAbstract protocol implementation
@@ -105,7 +148,7 @@
     connection.parentConnection = self;
     [self.childConnections addObject:connection];
     
-    if (self.running) {
+    if (self.living) {
         [connection startWithRunLoopModes:self.runLoopModes];
     }
 }
@@ -126,12 +169,23 @@
 - (void)finishWithResponseObject:(id)responseObject error:(NSError *)error
 {
     [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
+    
     self.error = error;
+    self.running = NO;
     
     self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
-    [self.parentConnection.childConnections removeObject:self];
+    
+    self.living = NO;
+    
+    if (self.finalized) {
+        [self finalize];
+    }
+    
+    if (self.parentConnection.finalized) {
+        [self.parentConnection finalize];
+    }
+    
     self.parentConnection = nil;
-    self.running = NO;
 }
 
 @end

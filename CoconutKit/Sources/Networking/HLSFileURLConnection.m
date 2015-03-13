@@ -6,6 +6,7 @@
 
 #import "HLSFileURLConnection.h"
 
+#import "HLSCoreError.h"
 #import "HLSLogger.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
@@ -42,6 +43,11 @@
 - (void)cancelConnection
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(retrieveFiles) object:nil];
+    
+    NSError *error = [NSError errorWithDomain:HLSCoreErrorDomain
+                                         code:HLSCoreErrorCanceled
+                         localizedDescription:CoconutKitLocalizedString(@"The connection has been canceled", nil)];
+    [self finishWithResponseObject:nil error:error];
 }
 
 #pragma mark File management

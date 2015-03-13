@@ -11,6 +11,7 @@
 
 // Completion block signature
 typedef void (^HLSConnectionCompletionBlock)(HLSConnection *connection, id responseObject, NSError *error);
+typedef void (^HLSConnectionFinalizeBlock)(NSError *error);
 typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t totalUnitCount);
 
 /**
@@ -88,6 +89,11 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 @property (nonatomic, copy) HLSConnectionProgressBlock progressBlock;
 
 /**
+ * A block called after the connection and all its child connection are finished
+ */
+@property (nonatomic, copy) HLSConnectionFinalizeBlock finalizeBlock;
+
+/**
  * Create a parent - child relationship between the receiver and another connection. When cancelling the receiver,
  * all associated child connections will be cancelled as well. Note that a connection can at most have one parent.
  * If the parent - child relationship is established when the parent connection is not running, both the parent
@@ -106,11 +112,25 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 
 @end
 
+/**
+ * Methods which subclasses must / can call to update the connection status
+ */
 @interface HLSConnection (Subclassing)
 
+/**
+ * The total amount of work required by the connection (if known)
+ */
 - (void)setTotalUnitCount:(int64_t)totalUnitCount;
+
+/**
+ * The total amount of work currently achieved by the connection (if known)
+ */
 - (void)updateProgressWithCompletedUnitCount:(int64_t)completedUnitCount;
 
+/**
+ * This method must be called when the connection finishes, whether it finishes normally, with an error or has
+ * been canceled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks)
+ */
 - (void)finishWithResponseObject:(id)responseObject error:(NSError *)error;
 
 @end
