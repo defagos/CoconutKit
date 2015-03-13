@@ -38,7 +38,7 @@
     if (self = [super init]) {
         self.completionBlock = completionBlock;
         self.childConnectionsDictionary = [NSMutableDictionary dictionary];
-        self.progress = [NSProgress progressWithTotalUnitCount:0];          // Will be updated by subclasses
+        self.progress = [NSProgress progressWithTotalUnitCount:1];          // Will be updated by subclasses
     }
     return self;
 }
@@ -187,6 +187,11 @@
 
 - (void)finishWithResponseObject:(id)responseObject error:(NSError *)error
 {
+    // Setting completed unit count to total unit count only gives a fraction completed of 1 if total is not 0. Fix the
+    // total value if this is the case
+    if (self.progress.totalUnitCount == 0) {
+        self.progress.totalUnitCount = 1;
+    }
     [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
     
     self.error = error;
