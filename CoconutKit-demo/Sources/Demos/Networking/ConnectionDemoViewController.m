@@ -6,6 +6,8 @@
 
 #import "ConnectionDemoViewController.h"
 
+// FIXME: Replace with unit tests
+
 @interface ConnectionDemoViewController ()
 
 @property (nonatomic, weak) HLSURLConnection *singleWeakRefConnection;
@@ -25,12 +27,12 @@
 
 + (NSURL *)image1URL
 {
-    return [[NSBundle principalBundle] URLForResource:@"img_apple1" withExtension:@"jpg"];
+    return [[NSBundle mainBundle] URLForResource:@"img_apple1" withExtension:@"jpg"];
 }
 
 + (NSURL *)image2URL
 {
-    return [[NSBundle principalBundle] URLForResource:@"img_apple2" withExtension:@"jpg"];
+    return [[NSBundle mainBundle] URLForResource:@"img_apple2" withExtension:@"jpg"];
 }
 
 #pragma mark Object creation and destruction
@@ -130,6 +132,9 @@
         NSLog(@"---> Child done! %@", self);
     }];
     [severalWeakRefParentConnection addChildConnection:severalWeakRefChildConnection];
+    severalWeakRefParentConnection.finalizeBlock = ^(NSError *error) {
+        NSLog(@"---> Finalized with error %@", error);
+    };
     
     self.severalWeakRefParentConnection = severalWeakRefParentConnection;
     [self.severalWeakRefParentConnection start];

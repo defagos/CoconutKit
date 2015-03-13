@@ -8,8 +8,8 @@
 
 @interface HLSFakeConnection ()
 
-@property (nonatomic, strong) id responseObject;
-@property (nonatomic, strong) NSError *error;
+@property (nonatomic, strong) id fakeResponseObject;
+@property (nonatomic, strong) NSError *fakeError;
 
 @end
 
@@ -20,8 +20,8 @@
 - (instancetype)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     if (self = [super initWithCompletionBlock:completionBlock]) {
-        self.responseObject = responseObject;
-        self.error = error;
+        self.fakeResponseObject = responseObject;
+        self.fakeError = error;
     }
     return self;
 }
@@ -40,7 +40,7 @@
 
 - (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
 {
-    self.completionBlock ? self.completionBlock(self, self.responseObject, self.error) : nil;
+    [self finishWithResponseObject:self.fakeResponseObject error:self.fakeError];
 }
 
 - (void)cancelConnection

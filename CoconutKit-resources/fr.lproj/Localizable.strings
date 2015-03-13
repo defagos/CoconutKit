@@ -20,6 +20,7 @@
 "Not found"="Non trouvé";
 "Open in Chrome"="Ouvrir dans Chrome";
 "Open in Safari"="Ouvrir dans Safari";
+"The connection has been canceled"="La connexion a été annulée";
 "The destination already exists"="Le chemin de destination existe déjà";
 "The destination cannot be contained in the source"="La source ne peut être contenue dans la destination";
 "The destination directory does not exist"="Le répertoire de destination n'existe pas";
