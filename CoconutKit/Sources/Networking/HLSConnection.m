@@ -21,7 +21,6 @@
 @property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;        // contains HLSConnection objects
 
 @property (nonatomic, strong) NSSet *runLoopModes;
-@property (nonatomic, assign, getter=isConnectionRunning) BOOL connectionRunning;
 @property (nonatomic, assign, getter=isLiving) BOOL living;
 
 @property (nonatomic, strong) NSError *error;
@@ -57,12 +56,12 @@
 
 - (BOOL)isRunning
 {
-    if (self.connectionRunning) {
+    if (self.living) {
         return YES;
     }
     
     for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
-        if (childConnection.connectionRunning) {
+        if (childConnection.living) {
             return YES;
         }
     }
@@ -83,7 +82,6 @@
         return;
     }
     
-    self.connectionRunning = YES;
     self.living = YES;
     self.runLoopModes = runLoopModes;
     
@@ -195,7 +193,6 @@
     [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
     
     self.error = error;
-    self.connectionRunning = NO;
     
     self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
     
@@ -205,7 +202,7 @@
         [self endConnection];
     }
     
-    if (! self.parentConnection.running) {
+    if (self.parentConnection && ! self.parentConnection.running) {
         [self.parentConnection endConnection];
     }
     
