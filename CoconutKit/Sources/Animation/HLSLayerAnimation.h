@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
 #import "HLSObjectAnimation.h"
 
 #import <CoreGraphics/CoreGraphics.h>
@@ -27,6 +28,7 @@
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should
  * use layer animations instead of view animations since they have far more capabilities.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSLayerAnimation : HLSObjectAnimation
 
 /**
@@ -97,7 +99,7 @@
 /**
  * Whether the shouldRasterize flag should be changed during the animation
  */
-@property (nonatomic, assign, getter=isTogglingShouldRasterize) BOOL togglingShouldRasterize;
+@property (nonatomic, getter=isTogglingShouldRasterize) BOOL togglingShouldRasterize;
 
 /**
  * Rasterization scale increment or decrement to be applied during the layer animation. You can use this parameter
@@ -106,3 +108,4 @@
 - (void)addToRasterizationScale:(CGFloat)rasterizationScaleIncrement;
 
 @end
+NS_ASSUME_NONNULL_END

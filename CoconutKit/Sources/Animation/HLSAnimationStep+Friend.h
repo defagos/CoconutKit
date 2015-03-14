@@ -5,6 +5,7 @@
 //
 
 #import "HLSAnimationStep.h"
+#import "HLSNullability.h"
 
 #import <Foundation/Foundation.h>
 
@@ -15,13 +16,14 @@
  * Interface meant to be used by friend classes of HLSAnimationStep (= classes which must have access to private implementation
  * details)
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSAnimationStep (Friend)
 
 /**
  * Play the associated animation (starting at startTime, 0 if the full animation must be played), reporting events to the 
  * specified delegate (which is retained during the animation)
  */
-- (void)playWithDelegate:(id<HLSAnimationStepDelegate>)delegate startTime:(NSTimeInterval)startTime animated:(BOOL)animated;
+- (void)playWithDelegate:(nullable id<HLSAnimationStepDelegate>)delegate startTime:(NSTimeInterval)startTime animated:(BOOL)animated;
 
 /**
  * Pause the animation step being played (does nothing if the animation is not running or not animated)
@@ -52,7 +54,7 @@
 /**
  * Return YES iff the animation has been paused
  */
-@property (nonatomic, readonly, assign, getter=isPaused) BOOL paused;
+@property (nonatomic, readonly, getter=isPaused) BOOL paused;
 
 @end
 
@@ -66,3 +68,4 @@
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished;
 
 @end
+NS_ASSUME_NONNULL_END

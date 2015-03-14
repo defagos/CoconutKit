@@ -36,16 +36,16 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     BOOL _pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
 }
 
-@property (nonatomic, strong) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
-@property (nonatomic, strong) NSArray *animationStepCopies;                     // another copy made temporarily during animation
-@property (nonatomic, strong) NSEnumerator *animationStepsEnumerator;           // enumerator over steps
-@property (nonatomic, strong) HLSAnimationStep *currentAnimationStep;           // the currently played animation step
-@property (nonatomic, assign, getter=isRunning) BOOL running;
-@property (nonatomic, assign, getter=isPlaying) BOOL playing;
-@property (nonatomic, assign, getter=isStarted) BOOL started;
-@property (nonatomic, assign, getter=isCancelling) BOOL cancelling;
-@property (nonatomic, assign, getter=isTerminating) BOOL terminating;
-@property (nonatomic, strong) HLSMAZeroingWeakRef *delegateZeroingWeakRef;
+@property (nonatomic) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
+@property (nonatomic) NSArray *animationStepCopies;                     // another copy made temporarily during animation
+@property (nonatomic) NSEnumerator *animationStepsEnumerator;           // enumerator over steps
+@property (nonatomic) HLSAnimationStep *currentAnimationStep;           // the currently played animation step
+@property (nonatomic, getter=isRunning) BOOL running;
+@property (nonatomic, getter=isPlaying) BOOL playing;
+@property (nonatomic, getter=isStarted) BOOL started;
+@property (nonatomic, getter=isCancelling) BOOL cancelling;
+@property (nonatomic, getter=isTerminating) BOOL terminating;
+@property (nonatomic) HLSMAZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 

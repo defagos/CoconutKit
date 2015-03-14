@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
 #import "HLSObjectAnimation.h"
 
 #import <Foundation/Foundation.h>
@@ -25,6 +26,7 @@
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should 
  * use layer animations instead of view animations since they have far more capabilities.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewAnimation : HLSObjectAnimation
 
 /**
@@ -55,3 +57,4 @@
 - (void)addToAlpha:(CGFloat)alphaIncrement;
 
 @end
+NS_ASSUME_NONNULL_END

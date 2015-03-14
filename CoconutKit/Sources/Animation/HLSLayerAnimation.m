@@ -33,16 +33,16 @@
 
 @interface HLSLayerAnimation ()
 
-@property (nonatomic, assign) HLSVector4 rotationParameters;
-@property (nonatomic, assign) HLSVector3 scaleParameters;
-@property (nonatomic, assign) HLSVector3 translationParameters;
-@property (nonatomic, assign) HLSVector3 anchorPointTranslationParameters;
-@property (nonatomic, assign) HLSVector4 sublayerRotationParameters;
-@property (nonatomic, assign) HLSVector3 sublayerScaleParameters;
-@property (nonatomic, assign) HLSVector3 sublayerTranslationParameters;
-@property (nonatomic, assign) CGFloat sublayerCameraTranslationZ;
-@property (nonatomic, assign) CGFloat opacityIncrement;
-@property (nonatomic, assign) CGFloat rasterizationScaleIncrement;
+@property (nonatomic) HLSVector4 rotationParameters;
+@property (nonatomic) HLSVector3 scaleParameters;
+@property (nonatomic) HLSVector3 translationParameters;
+@property (nonatomic) HLSVector3 anchorPointTranslationParameters;
+@property (nonatomic) HLSVector4 sublayerRotationParameters;
+@property (nonatomic) HLSVector3 sublayerScaleParameters;
+@property (nonatomic) HLSVector3 sublayerTranslationParameters;
+@property (nonatomic) CGFloat sublayerCameraTranslationZ;
+@property (nonatomic) CGFloat opacityIncrement;
+@property (nonatomic) CGFloat rasterizationScaleIncrement;
 
 @end
 

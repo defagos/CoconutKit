@@ -14,7 +14,7 @@
 
 @interface HLSViewAnimationStep ()
 
-@property (nonatomic, strong) UIView *dummyView;
+@property (nonatomic) UIView *dummyView;
 
 @end
 

@@ -15,10 +15,10 @@
 
 @interface HLSAnimationStep ()
 
-@property (nonatomic, strong) NSMutableArray *objectKeys;
-@property (nonatomic, strong) NSMutableDictionary *objectToObjectAnimationMap;
-@property (nonatomic, strong) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
-@property (nonatomic, assign, getter=isCancelling) BOOL terminating;
+@property (nonatomic) NSMutableArray *objectKeys;
+@property (nonatomic) NSMutableDictionary *objectToObjectAnimationMap;
+@property (nonatomic) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
+@property (nonatomic, getter=isCancelling) BOOL terminating;
 
 @end
 

@@ -17,9 +17,9 @@
 
 @interface HLSViewAnimation ()
 
-@property (nonatomic, assign) HLSVector2 scaleParameters;
-@property (nonatomic, assign) HLSVector2 translationParameters;
-@property (nonatomic, assign) CGFloat alphaIncrement;
+@property (nonatomic) HLSVector2 scaleParameters;
+@property (nonatomic) HLSVector2 translationParameters;
+@property (nonatomic) CGFloat alphaIncrement;
 
 @end
 

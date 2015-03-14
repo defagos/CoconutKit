@@ -6,6 +6,7 @@
 
 #import "HLSAnimationStep.h"
 #import "HLSLayerAnimation.h"
+#import "HLSNullability.h"
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
@@ -20,6 +21,7 @@
  * To create a layer animation step, simply instantiate it using the +animationStep class method, then add layer animations
  * to it, and set its duration and curve
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSLayerAnimationStep : HLSAnimationStep
 
 /**
@@ -45,6 +47,7 @@
  *
  * Default value is the function corresponding to the kCAMediaTimingFunctionEaseInEaseOut constant
  */
-@property (nonatomic, strong) CAMediaTimingFunction *timingFunction;
+@property (nonatomic) CAMediaTimingFunction *timingFunction;
 
 @end
+NS_ASSUME_NONNULL_END

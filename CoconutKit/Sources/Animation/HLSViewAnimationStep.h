@@ -5,6 +5,7 @@
 //
 
 #import "HLSAnimationStep.h"
+#import "HLSNullability.h"
 #import "HLSViewAnimation.h"
 
 #import <Foundation/Foundation.h>
@@ -19,6 +20,7 @@
  * To create a view animation step, simply instantiate it using the +animationStep class method, then add view animations
  * to it, and set its duration and curve
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewAnimationStep : HLSAnimationStep
 
 /**
@@ -39,6 +41,7 @@
  *
  * Default value is UIViewAnimationCurveEaseInOut
  */
-@property (nonatomic, assign) UIViewAnimationCurve curve;
+@property (nonatomic) UIViewAnimationCurve curve;
 
 @end
+NS_ASSUME_NONNULL_END

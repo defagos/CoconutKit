@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullabilIty.h"
+
 #import <Foundation/Foundation.h>
 
 //Block signatures
@@ -12,6 +14,7 @@ typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
 /**
  * Abstract base class for animation steps. Do not instantiate directly
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSAnimationStep : NSObject <NSCopying>
 
 /**
@@ -27,12 +30,12 @@ typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
 /**
  * Optional tag to help identifying animation steps
  */
-@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, nullable) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information
  */
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, nullable) NSDictionary *userInfo;
 
 /**
  * Animation duration. Unlike UIView animation blocks, the duration of an animation step is never reduced
@@ -40,11 +43,12 @@ typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
  *
  * Default value is 0.2
  */
-@property (nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic) NSTimeInterval duration;
 
 /**
  * Called when a step has been executed
  */
-@property (nonatomic, copy) HLSAnimationStepCompletionBlock completionBlock;
+@property (nonatomic, copy, nullable) HLSAnimationStepCompletionBlock completionBlock;
 
 @end
+NS_ASSUME_NONNULL_END

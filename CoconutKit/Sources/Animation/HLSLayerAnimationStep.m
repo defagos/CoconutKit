@@ -28,7 +28,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 @interface HLSLayerAnimationStep ()
 
-@property (nonatomic, strong) UIView *dummyView;
+@property (nonatomic) UIView *dummyView;
 
 @end
 
