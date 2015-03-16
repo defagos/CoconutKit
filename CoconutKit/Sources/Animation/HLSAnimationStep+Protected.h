@@ -4,6 +4,7 @@
 //  Licence information is available from the LICENCE file.
 //
 
+#import "HLSAnimationStep.h"
 #import "HLSObjectAnimation.h"
 
 #import <Foundation/Foundation.h>
