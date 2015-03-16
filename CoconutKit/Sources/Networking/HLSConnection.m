@@ -7,6 +7,7 @@
 #import "HLSConnection.h"
 
 #import "HLSLogger.h"
+#import "HLSTransformer.h"
 #import "NSError+HLSExtensions.h"
 
 @interface HLSConnection ()
@@ -207,6 +208,19 @@
     }
     
     self.parentConnection = nil;
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; running: %@; error: %@; progress: %@; childConnections: %@>",
+            [self class],
+            self,
+            HLSStringFromBool(self.running),
+            self.error,
+            self.progress,
+            self.childConnections];
 }
 
 @end
