@@ -14,10 +14,11 @@
 
 @property (nonatomic, copy) HLSConnectionCompletionBlock completionBlock;
 
-@property (nonatomic, strong) HLSConnection *parentConnection;   // not a weak ref. No retain cycle (the implementation ensures that no cycle
-                                                                 // is created. This makes the parent live until all child connections are
-                                                                 // over (so that child connections can still be cancelled by cancelling their
-                                                                 // parent, even if it ended first)
+@property (nonatomic, weak) HLSConnection *parentConnection;
+@property (nonatomic, strong) HLSConnection *parentStrongConnection;    // not a weak ref. No retain cycle (the implementation ensures that no cycle
+                                                                        // is created. This makes the parent live until all child connections are
+                                                                        // over (so that child connections can still be cancelled by cancelling their
+                                                                        // parent, even if it ended first)
 
 @property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;        // contains HLSConnection objects
 
@@ -50,7 +51,7 @@
 
 - (void)dealloc
 {
-    self.parentConnection = nil;
+    self.parentStrongConnection = nil;
 }
 
 #pragma mark Accessors and mutators
@@ -148,6 +149,7 @@
         return;
     }
     connection.parentConnection = self;
+    connection.parentStrongConnection = self;
     [self.childConnectionsDictionary setObject:connection forKey:key];
     
     if (self.living) {
@@ -207,7 +209,7 @@
         [self.parentConnection endConnection];
     }
     
-    self.parentConnection = nil;
+    self.parentStrongConnection = nil;
 }
 
 #pragma mark Description
