@@ -16,19 +16,21 @@ Pod::Spec.new do |s|
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit', 'WebKit'
 
   # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
-  non_arc_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}'
+  MAZeroingWeakRef_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.m'
+  MAZeroingWeakRef_header_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.h'
 
   # ARC source files. Generated headers must be added as well since public .framework headers are setup in the generated Pods
   # target, and therefore must belong to the source_files to be taken into account. This trick is not needed for usual
   # static lib Pods integration, but does not hurt since header files are everywhere the same
   s.requires_arc = true
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}', 'Tools/Scripts/GeneratedHeaders/*.h'
-  s.exclude_files = non_arc_source_files
+  s.exclude_files = MAZeroingWeakRef_source_files
 
   # Non-ARC source files
-  s.subspec 'fno-objc-arc' do |source_file|
-    source_file.requires_arc = false
-    source_file.source_files = non_arc_source_files
+  s.subspec 'fno-objc-arc' do |subspec|
+    subspec.requires_arc = false
+    subspec.source_files = MAZeroingWeakRef_source_files
+    subspec.public_header_files = nil
   end
 
   # Process the publicHeaders.txt file listing public headers to generate a public header directory as well as a global header file
