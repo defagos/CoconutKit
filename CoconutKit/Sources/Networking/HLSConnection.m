@@ -98,7 +98,7 @@
 
 - (void)cancel
 {
-    if (self.running) {
+    if (self.selfRunning) {
         [self cancelConnection];
     }
     
