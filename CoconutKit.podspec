@@ -45,5 +45,5 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'Tools/Scripts/PublicHeaders'
 
   # Do not use CoconutKit-resources target, use CocoaPods native bundle creation mechanism
-  s.resource_bundle = { 'CoconutKit-resources' => 'CoconutKit-resources/*.lproj' }
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{HTML,Images,Nibs}/*', 'CoconutKit-resources/*.lproj'] }
 end
