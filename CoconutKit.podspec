@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   # target, and therefore must belong to the source_files to be taken into account. This trick is not needed for usual
   # static lib Pods integration, but does not hurt since header files are everywhere the same
   s.requires_arc = true
-  s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
+  s.source_files = 'CoconutKit/Sources/**/*.{h,m}', 'Tools/Scripts/PublicHeaders/*.h'
   s.public_header_files = 'Tools/Scripts/PublicHeaders/*.h'
   s.exclude_files = MAZeroingWeakRef_source_files
 
