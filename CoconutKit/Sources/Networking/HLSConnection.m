@@ -14,15 +14,13 @@
 
 @property (nonatomic, copy) HLSConnectionCompletionBlock completionBlock;
 
-@property (nonatomic, strong) HLSConnection *parentConnection;   // not a weak ref. No retain cycle (the implementation ensures that no cycle
-                                                                 // is created. This makes the parent live until all child connections are
-                                                                 // over (so that child connections can still be cancelled by cancelling their
-                                                                 // parent, even if it ended first)
+@property (nonatomic, weak) HLSConnection *parentConnection;
+@property (nonatomic, strong) HLSConnection *parentStrongConnection;                    // Ensure the parent connection lives at least until all child connections are over
 
-@property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;        // contains HLSConnection objects
+@property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;          // contains HLSConnection objects
 
 @property (nonatomic, strong) NSSet *runLoopModes;
-@property (nonatomic, assign, getter=isLiving) BOOL living;
+@property (nonatomic, assign, getter=isSelfRunning) BOOL selfRunning;                   // Is self running or not (NOT including child connections)
 
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, strong) NSProgress *progress;
@@ -50,19 +48,19 @@
 
 - (void)dealloc
 {
-    self.parentConnection = nil;
+    self.parentStrongConnection = nil;
 }
 
 #pragma mark Accessors and mutators
 
 - (BOOL)isRunning
 {
-    if (self.living) {
+    if (self.selfRunning) {
         return YES;
     }
     
     for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
-        if (childConnection.living) {
+        if (childConnection.selfRunning) {
             return YES;
         }
     }
@@ -83,13 +81,13 @@
         return;
     }
     
-    self.living = YES;
+    self.selfRunning = YES;
     self.runLoopModes = runLoopModes;
     
     // Start child connections first. This ensures correct behavior even if the -startConnectionWithRunLoopModes:
     // subclass implementation directly calls -finishWithResponseObject:error:
     for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
-        if (! childConnection.living) {
+        if (! childConnection.selfRunning) {
             [childConnection startWithRunLoopModes:runLoopModes];
         }
     }
@@ -100,7 +98,7 @@
 
 - (void)cancel
 {
-    if (self.running) {
+    if (self.selfRunning) {
         [self cancelConnection];
     }
     
@@ -148,9 +146,10 @@
         return;
     }
     connection.parentConnection = self;
+    connection.parentStrongConnection = self;
     [self.childConnectionsDictionary setObject:connection forKey:key];
     
-    if (self.living) {
+    if (self.selfRunning) {
         [connection startWithRunLoopModes:self.runLoopModes];
     }
 }
@@ -197,7 +196,7 @@
     
     self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
     
-    self.living = NO;
+    self.selfRunning = NO;
     
     if (! self.running) {
         [self endConnection];
@@ -207,7 +206,7 @@
         [self.parentConnection endConnection];
     }
     
-    self.parentConnection = nil;
+    self.parentStrongConnection = nil;
 }
 
 #pragma mark Description
