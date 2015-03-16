@@ -13,7 +13,6 @@
 #import "BindingsProgrammaticDemoViewController.h"
 #import "BindingsTransformersDemoViewController.h"
 #import "BindingsViewsDemoViewController.h"
-#import "ConnectionDemoViewController.h"
 #import "CursorDemoViewController.h"
 #import "DynamicLocalizationDemoViewController.h"
 #import "FixedSizeViewController.h"
@@ -44,7 +43,6 @@ typedef NS_ENUM(NSInteger, DemoCategoryIndex) {
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
     DemoCategoryIndexBindings,
     DemoCategoryIndexCore,
-    DemoCategoryIndexNetworking,
     DemoCategoryIndexTask,
     DemoCategoryIndexView,
     DemoCategoryIndexViewControllers,
@@ -82,14 +80,6 @@ typedef NS_ENUM(NSInteger, CoreDemoIndex) {
     CoreDemoIndexFonts,
     CoreDemoIndexEnumEnd,
     CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
-};
-
-// Demos for networking
-typedef NS_ENUM(NSInteger, NetworkingDemoIndex) {
-    NetworkingDemoIndexEnumBegin = 0,
-    NetworkingDemoIndexConnection = NetworkingDemoIndexEnumBegin,
-    NetworkingDemoIndexEnumEnd,
-    NetworkingDemoIndexEnumSize = NetworkingDemoIndexEnumEnd - NetworkingDemoIndexEnumBegin
 };
 
 // Demos for tasks
@@ -191,11 +181,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             break;
         }
             
-        case DemoCategoryIndexNetworking: {
-            return NSLocalizedString(@"Networking", nil);
-            break;
-        }
-            
         case DemoCategoryIndexTask: {
             return NSLocalizedString(@"Tasks", nil);
             break;
@@ -233,11 +218,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             
         case DemoCategoryIndexCore: {
             return CoreDemoIndexEnumSize;
-            break;
-        }
-            
-        case DemoCategoryIndexNetworking: {
-            return NetworkingDemoIndexEnumSize;
             break;
         }
             
@@ -342,21 +322,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case CoreDemoIndexFonts: {
                     cell.textLabel.text = NSLocalizedString(@"Fonts", nil);
-                    break;
-                }
-                    
-                default: {
-                    return nil;
-                    break;
-                }
-            }
-            break;
-        }
-            
-        case DemoCategoryIndexNetworking: {
-            switch (indexPath.row) {
-                case NetworkingDemoIndexConnection: {
-                    cell.textLabel.text = NSLocalizedString(@"Connection", nil);
                     break;
                 }
                     
@@ -581,21 +546,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case CoreDemoIndexFonts: {
                     demoViewController = [[FontsDemoViewController alloc] init];
-                    break;
-                }
-                    
-                default: {
-                    return;
-                    break;
-                }
-            }
-            break;
-        }
-            
-        case DemoCategoryIndexNetworking: {
-            switch (indexPath.row) {
-                case NetworkingDemoIndexConnection: {
-                    demoViewController = [[ConnectionDemoViewController alloc] init];
                     break;
                 }
                     
