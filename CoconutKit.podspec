@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
   # WARNING: This command is not executed if the pod is installed via :path, see http://guides.cocoapods.org/syntax/podspec.html. In other
   #          words, results are different when the podspec is tested locally, always push to the repository first!
   s.prepare_command = <<-CMD
-                      ruby Tools/Scripts/fix_localized_resources.rb
                       ruby Tools/Scripts/extract_public_headers.rb
                       CMD
 
@@ -43,10 +42,8 @@ Pod::Spec.new do |s|
 
   # Process the publicHeaders.txt file listing public headers to move public headers to a separate directory and create
   # an associated global header
-  # TODO: An additional CocoaPods temporary fix for resources has been added, see https://github.com/CocoaPods/CocoaPods/issues/1653.
-  s.preserve_paths = 'Tools/Scripts/PublicHeaders', 'Tools/Scripts/FixedResources'
+  s.preserve_paths = 'Tools/Scripts/PublicHeaders'
 
   # Do not use CoconutKit-resources target, use CocoaPods native bundle creation mechanism
-  # TODO: Replace localized resources with 'CoconutKit-resources/*.lproj' when the bug above has been fixed
-  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{HTML,Images,Nibs}/*', 'Tools/Scripts/FixedResources/*.lproj'] }
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{HTML,Images,Nibs}/*', 'CoconutKit-resources/*.lproj'] }
 end
