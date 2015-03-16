@@ -18,9 +18,11 @@ Pod::Spec.new do |s|
   # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
   non_arc_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}'
 
-  # ARC source files
+  # ARC source files. Generated headers must be added as well since public .framework headers are setup in the generated Pods
+  # target, and therefore must belong to the source_files to be taken into account. This trick is not needed for usual
+  # static lib Pods integration, but does not hurt since header files are everywhere the same
   s.requires_arc = true
-  s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
+  s.source_files = 'CoconutKit/Sources/**/*.{h,m}', 'Tools/Scripts/GeneratedHeaders/*.h'
   s.exclude_files = non_arc_source_files
 
   # Non-ARC source files
