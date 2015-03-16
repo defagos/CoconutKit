@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
   # WARNING: This command is not executed if the pod is installed via :path, see http://guides.cocoapods.org/syntax/podspec.html. In other
   #          words, results are different when the podspec is tested locally, always push to the repository first!
   s.prepare_command = <<-CMD
-                      ruby Tools/Scripts/fix_localized_resources.rb
                       ruby Tools/Scripts/extract_public_headers.rb
                       CMD
 
