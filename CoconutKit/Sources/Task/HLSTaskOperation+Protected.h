@@ -4,6 +4,8 @@
 //  Licence information is available from the LICENCE file.
 //
 
+#import "HLSTaskOperation.h"
+
 #import <Foundation/Foundation.h>
 
 /**
