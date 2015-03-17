@@ -22,8 +22,8 @@ Pod::Spec.new do |s|
                       CMD
 
   # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
-  MAZeroingWeakRef_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.m'
-  MAZeroingWeakRef_header_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.h'
+  zeroing_weak_ref_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.m'
+  zeroing_weak_ref_header_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.h'
 
   # ARC source files. Generated headers must be added as well since public .framework headers are setup in the generated Pods
   # target, and therefore must belong to the source_files to be taken into account. This trick is not needed for usual
@@ -31,12 +31,12 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}', 'Tools/Scripts/PublicHeaders/*.h'
   s.public_header_files = 'Tools/Scripts/PublicHeaders/*.h'
-  s.exclude_files = MAZeroingWeakRef_source_files
+  s.exclude_files = zeroing_weak_ref_source_files
 
   # Non-ARC source files
   s.subspec 'fno-objc-arc' do |subspec|
     subspec.requires_arc = false
-    subspec.source_files = MAZeroingWeakRef_source_files
+    subspec.source_files = [zeroing_weak_ref_source_files, zeroing_weak_ref_header_files]
     subspec.public_header_files = nil
   end
 
