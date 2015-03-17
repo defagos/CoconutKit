@@ -21,25 +21,21 @@ Pod::Spec.new do |s|
                       ruby Tools/Scripts/extract_public_headers.rb
                       CMD
 
-  # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
-  zeroing_weak_ref_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.m'
-  zeroing_weak_ref_header_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.h'
-
-  # ARC source files. Generated headers must be added as well since public .framework headers are setup in the generated Pods
-  # target, and therefore must belong to the source_files to be taken into account. This trick is not needed for usual
-  # static lib Pods integration, but does not hurt since header files are everywhere the same
   s.requires_arc = true
   s.source_files = 'CoconutKit/Sources/**/*.{h,m}', 'Tools/Scripts/PublicHeaders/*.h'
   s.public_header_files = 'Tools/Scripts/PublicHeaders/*.h'
-  s.exclude_files = zeroing_weak_ref_source_files
 
   # MAZeroingWeakRef external dependency
+  zeroing_weak_ref_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}'
+
   s.subspec 'zeroing-weak-ref' do |subspec|
     subspec.requires_arc = false
-    subspec.source_files = [zeroing_weak_ref_source_files, zeroing_weak_ref_header_files]
+    subspec.source_files = zeroing_weak_ref_source_files
     subspec.public_header_files = nil
     subspec.compiler_flags = '-w'
   end
+  
+  s.exclude_files = zeroing_weak_ref_source_files
 
   # Process the publicHeaders.txt file listing public headers to move public headers to a separate directory and create
   # an associated global header
