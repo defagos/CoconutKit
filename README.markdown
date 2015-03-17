@@ -2,7 +2,7 @@
 
 CoconutKit is a **productivity framework for iOS**, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
 
-[![Build Status](https://img.shields.io/travis/defagos/CoconutKit/develop.svg?style=flat)](https://travis-ci.org/defagos/CoconutKit)
+[![Build Status](https://img.shields.io/travis/defagos/CoconutKit/release/3.0.svg?style=flat)](https://travis-ci.org/defagos/CoconutKit)
 [![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg?style=flat)](http://cocoadocs.org/docsets/XCDYouTubeKit/)
 [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg?style=flat)](http://cocoadocs.org/docsets/XCDYouTubeKit/)
 [![License](https://img.shields.io/cocoapods/l/CoconutKit.svg?style=flat)](LICENSE)
