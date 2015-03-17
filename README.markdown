@@ -2,7 +2,7 @@
 
 CoconutKit is a **productivity framework for iOS**, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
 
-[![Build Status](https://img.shields.io/travis/defagos/CoconutKit/master.svg?style=flat)](https://travis-ci.org/defagos/CoconutKit)
+[![Build Status](https://img.shields.io/travis/defagos/CoconutKit/release/3.0.svg?style=flat)](https://travis-ci.org/defagos/CoconutKit)
 [![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg?style=flat)](http://cocoadocs.org/docsets/XCDYouTubeKit/)
 [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg?style=flat)](http://cocoadocs.org/docsets/XCDYouTubeKit/)
 [![License](https://img.shields.io/cocoapods/l/CoconutKit.svg?style=flat)](LICENSE)
@@ -194,7 +194,7 @@ CoconutKit can be used both from Objective-C or Swift files. It does not contain
 
 ## Installation
 
-CoconutKit can either be installed with [CocoaPods](http://cocoapods.org/) or as a compiled framework.
+CoconutKit can either be added to a project with [CocoaPods](http://cocoapods.org/) or as a static compiled framework.
 
 ### Installation with CocoaPods
 
@@ -204,11 +204,11 @@ Add the following dependency to your `Podfile`
 pod 'CoconutKit', '<version>'
 ```
 
-Then run `pod install` to update the dependencies.
+Then run `pod install` to update the dependencies. For targets starting with iOS 8, you can also add the `use_frameworks!` directive in your `Podfile`, which embeds CoconutKit as a native Cocoa framework.
 
 For more information about CocoaPods and the `Podfile`, please refer to the [official documentation](http://guides.cocoapods.org/).
 
-### Framework
+### Static framework
 
 Checkout CoconutKit source code from the command-line:
 
@@ -255,32 +255,34 @@ A global `CoconutKit.h` header file is provided. You can of course individually 
 Import the global header file using
 
 ```objective-c
-#import "CoconutKit.h"                            // Installation with CocoaPods
-#import <CoconutKit/CoconutKit.h>                 // Framework
+#import <CoconutKit/CoconutKit.h>
 ```
 
-You can similarly import individual files
+You can similarly import individual files, e.g.
 
 ```objective-c
-#import "HLSStackController.h"                    // Installation with CocoaPods
-#import <CoconutKit/HLSStackController.h>         // Framework
+#import <CoconutKit/HLSStackController.h>
 ```
 
-It you use the framework, it is also possible to import the CoconutKit module itself where needed:
+It you use the static framework, or CocoaPods with the `use_frameworks!` directive, it is also possible to import the CoconutKit module itself where needed:
 
 ```objective-c
 @import CoconutKit
 ```
 
+#### Remark
+
+For the installation with CocoaPods, you can also use `#import "CoconutKit.h"`, respectively `#import "HLSStackController.h"`, though I do not recommend this syntax.
+
 ### Swift
 
-If you installed CoconutKit with CocoaPods, import the global header from a bridging header:
+If you installed CoconutKit with CocoaPods but without the `use_frameworks!` directive, import the global header from a bridging header:
 
 ```objective-c
-#import "CoconutKit.h"                            // Installation with CocoaPods
+#import <CoconutKit.h/CoconutKit.h>
 ```
 
-If you use the framework, the CoconutKit module can be imported where needed:
+If you use the static framework, or CocoaPods with the `use_frameworks!` directive, the CoconutKit module can be imported where needed:
 
 ```swift
 import CoconutKit

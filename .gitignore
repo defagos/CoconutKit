@@ -1,8 +1,8 @@
 .DS_Store
 build/
 Binaries/
-GeneratedHeaders/
-GeneratedResources/
+PublicHeaders/
+FixedResources/
 xcshareddata
 xcuserdata
 CoconutKit-resources.bundle

@@ -4,6 +4,7 @@
 //  Licence information is available from the LICENCE file.
 //
 
+#import "HLSLayerAnimation.h"
 #import "HLSVector.h"
 
 #import <CoreGraphics/CoreGraphics.h>

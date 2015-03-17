@@ -4,6 +4,8 @@
 //  Licence information is available from the LICENCE file.
 //
 
+#import "HLSLogger.h"
+
 #import <Foundation/Foundation.h>
 
 /**

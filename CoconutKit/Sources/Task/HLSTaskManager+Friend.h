@@ -6,6 +6,7 @@
 
 #import "HLSTask.h"
 #import "HLSTaskGroup.h"
+#import "HLSTaskManager.h"
 #import "HLSTaskOperation.h"
 
 #import <Foundation/Foundation.h>

@@ -4,21 +4,18 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "HLSViewController.h"
+#import "HLSTableViewController.h"
 
-#import <objc/runtime.h>
-#import "HLSAutorotation.h"
 #import "HLSLogger.h"
-#import "HLSTransformer.h"
 #import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
-#import "NSObject+HLSExtensions.h"
-#import "UIViewController+HLSExtensions.h"
 #import "UIViewController+HLSInstantiation.h"
 
-static void commonInit(HLSViewController *self);
+#import <objc/runtime.h>
 
-@implementation HLSViewController
+static void commonInit(HLSTableViewController *self);
+
+@implementation HLSTableViewController
 
 #pragma mark Object creation and destruction
 
@@ -85,22 +82,11 @@ static void commonInit(HLSViewController *self);
     [self localize];
 }
 
-#pragma mark Description
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@: %p; view: %@; superview: %@>",
-            [self class],
-            self,
-            self.viewIfLoaded,
-            self.viewIfLoaded.superview];
-}
-
 @end
 
 #pragma mark Functions
 
-static void commonInit(HLSViewController *self)
+static void commonInit(HLSTableViewController *self)
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
     [self localize];

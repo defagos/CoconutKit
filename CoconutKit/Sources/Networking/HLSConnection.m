@@ -7,21 +7,23 @@
 #import "HLSConnection.h"
 
 #import "HLSLogger.h"
+#import "HLSTransformer.h"
+#import "NSError+HLSExtensions.h"
 
 @interface HLSConnection ()
 
-@property (nonatomic, copy) HLSConnectionCompletionBlock userCompletionBlock;
-@property (nonatomic, copy) HLSConnectionCompletionBlock wrapperCompletionBlock;
+@property (nonatomic, copy) HLSConnectionCompletionBlock completionBlock;
 
-@property (nonatomic, strong) HLSConnection *parentConnection;   // not a weak ref. No retain cycle (the implementation ensures that no cycle
-                                                                 // is createad. This makes the parent live until all child connections are
-                                                                 // over (so that child connections can still be cancelled by cancelling their
-                                                                 // parent, even if it ended first)
+@property (nonatomic, weak) HLSConnection *parentConnection;
+@property (nonatomic, strong) HLSConnection *parentStrongConnection;                    // Ensure the parent connection lives at least until all child connections are over
 
-@property (nonatomic, strong) NSMutableArray *childConnections;  // contains HLSConnection objects
+@property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;          // contains HLSConnection objects
 
 @property (nonatomic, strong) NSSet *runLoopModes;
-@property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, assign, getter=isSelfRunning) BOOL selfRunning;                   // Is self running or not (NOT including child connections)
+
+@property (nonatomic, strong) NSError *error;
+@property (nonatomic, strong) NSProgress *progress;
 
 @end
 
@@ -33,8 +35,8 @@
 {
     if (self = [super init]) {
         self.completionBlock = completionBlock;
-        
-        self.childConnections = [NSMutableArray array];
+        self.childConnectionsDictionary = [NSMutableDictionary dictionary];
+        self.progress = [NSProgress progressWithTotalUnitCount:1];          // Will be updated by subclasses
     }
     return self;
 }
@@ -44,22 +46,25 @@
     return [self initWithCompletionBlock:nil];
 }
 
-#pragma mark Accessors and mutators
-
-- (void)setCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
+- (void)dealloc
 {
-    self.wrapperCompletionBlock = ^(HLSConnection *connection, id responseObject, NSError *error) {
-        connection.userCompletionBlock ? connection.userCompletionBlock(connection, responseObject, error) : nil;
-        [connection.parentConnection.childConnections removeObject:connection];
-        connection.parentConnection = nil;
-        connection.running = NO;
-    };
-    self.userCompletionBlock = completionBlock;
+    self.parentStrongConnection = nil;
 }
 
-- (HLSConnectionCompletionBlock)completionBlock
+#pragma mark Accessors and mutators
+
+- (BOOL)isRunning
 {
-    return self.wrapperCompletionBlock;
+    if (self.selfRunning) {
+        return YES;
+    }
+    
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
+        if (childConnection.selfRunning) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 #pragma mark Connection management
@@ -76,56 +81,145 @@
         return;
     }
     
-    [self startConnectionWithRunLoopModes:runLoopModes];
-    
-    self.running = YES;
+    self.selfRunning = YES;
     self.runLoopModes = runLoopModes;
     
-    for (HLSConnection *childConnection in self.childConnections) {
-        if (! childConnection.running) {
+    // Start child connections first. This ensures correct behavior even if the -startConnectionWithRunLoopModes:
+    // subclass implementation directly calls -finishWithResponseObject:error:
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
+        if (! childConnection.selfRunning) {
             [childConnection startWithRunLoopModes:runLoopModes];
         }
     }
+    
+    [self updateProgressWithCompletedUnitCount:0];
+    [self startConnectionWithRunLoopModes:runLoopModes];
 }
 
 - (void)cancel
 {
-    if (self.running) {
+    if (self.selfRunning) {
         [self cancelConnection];
     }
     
-    // Connections are removed from the array when terminated. We must avoid iterating the collection while this
-    // might happen
-    NSArray *childConnections = [NSArray arrayWithArray:self.childConnections];
-    for (HLSConnection *childConnection in childConnections) {
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
         [childConnection cancel];
     }
+}
+
+- (void)endConnection
+{
+    if (! self.finalizeBlock) {
+        return;
+    }
+    
+    NSError *error = [self.error copy];
+    
+    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
+        [NSError combineError:childConnection.error withError:&error];
+    }
+    
+    self.finalizeBlock(error);
 }
 
 #pragma mark HLSConnectionAbstract protocol implementation
 
 - (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
-{
-    self.completionBlock(self, nil, nil);
-}
+{}
 
 - (void)cancelConnection
 {}
 
 #pragma mark Child connections
 
-- (void)addChildConnection:(HLSConnection *)connection
+- (void)addChildConnection:(HLSConnection *)connection withKey:(id)key
 {
+    NSParameterAssert(key);
+    
+    if ([self.childConnectionsDictionary objectForKey:key]) {
+        HLSLoggerError(@"A connection has already been registered for key %@", key);
+        return;
+    }
+    
     if (connection.parentConnection) {
-        HLSLoggerWarn(@"A parent connection has already been defined");
+        HLSLoggerError(@"A parent connection has already been defined");
         return;
     }
     connection.parentConnection = self;
-    [self.childConnections addObject:connection];
+    connection.parentStrongConnection = self;
+    [self.childConnectionsDictionary setObject:connection forKey:key];
     
-    if (self.running) {
+    if (self.selfRunning) {
         [connection startWithRunLoopModes:self.runLoopModes];
     }
+}
+
+- (void)addChildConnection:(HLSConnection *)connection
+{
+    NSString *key = [[NSUUID UUID] UUIDString];
+    [self addChildConnection:connection withKey:key];
+}
+
+- (NSArray *)childConnections
+{
+    return [self.childConnectionsDictionary allValues];
+}
+
+- (HLSConnection *)childConnectionForKey:(id)key
+{
+    return [self.childConnectionsDictionary objectForKey:key];
+}
+
+#pragma mark Methods to be called by subclasses
+
+- (void)setTotalUnitCount:(int64_t)totalUnitCount
+{
+    self.progress.totalUnitCount = totalUnitCount;
+}
+
+- (void)updateProgressWithCompletedUnitCount:(int64_t)completedUnitCount
+{
+    self.progress.completedUnitCount = completedUnitCount;
+    self.progressBlock ? self.progressBlock(self.progress.completedUnitCount, self.progress.totalUnitCount) : nil;
+}
+
+- (void)finishWithResponseObject:(id)responseObject error:(NSError *)error
+{
+    // Setting completed unit count to total unit count only gives a fraction completed of 1 if total is not 0. Fix the
+    // total value if this is the case
+    if (self.progress.totalUnitCount == 0) {
+        self.progress.totalUnitCount = 1;
+    }
+    [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
+    
+    self.error = error;
+    
+    self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
+    
+    self.selfRunning = NO;
+    
+    if (! self.running) {
+        [self endConnection];
+    }
+    
+    if (self.parentConnection && ! self.parentConnection.running) {
+        [self.parentConnection endConnection];
+    }
+    
+    self.parentStrongConnection = nil;
+}
+
+#pragma mark Description
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; running: %@; error: %@; progress: %@; childConnections: %@>",
+            [self class],
+            self,
+            HLSStringFromBool(self.running),
+            self.error,
+            self.progress,
+            self.childConnections];
 }
 
 @end

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'CoconutKit'
-  s.version = '3.0.rc6'
+  s.version = '3.0'
   s.license = 'MIT'
   s.summary = 'CoconutKit is a library of high-quality iOS components.'
   s.homepage = 'https://github.com/defagos/CoconutKit'
@@ -15,30 +15,32 @@ Pod::Spec.new do |s|
                   
   s.frameworks = 'CoreData', 'CoreGraphics', 'CoreText', 'Foundation', 'MessageUI', 'MobileCoreServices', 'QuartzCore', 'QuickLook', 'UIKit', 'WebKit'
 
-  # The spec uses ARC for compilation. Files which cannot be compiled using ARC are moved to a subspec
-  non_arc_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}'
-
-  # ARC source files
-  s.requires_arc = true
-  s.source_files = 'CoconutKit/Sources/**/*.{h,m}'
-  s.exclude_files = non_arc_source_files
-
-  # Non-ARC source files
-  s.subspec 'fno-objc-arc' do |source_file|
-    source_file.requires_arc = false
-    source_file.source_files = non_arc_source_files
-  end
-
-  # Process the publicHeaders.txt file listing public headers to generate a public header directory as well as a global header file
-  # TODO: An additional CocoaPods temporary fix has been added, see https://github.com/CocoaPods/CocoaPods/issues/1653.
-  s.preserve_paths = 'Tools/Scripts/GeneratedHeaders', 'Tools/Scripts/GeneratedResources'
+  # WARNING: This command is not executed if the pod is installed via :path, see http://guides.cocoapods.org/syntax/podspec.html. In other
+  #          words, results are different when the podspec is tested locally, always push to the repository first!
   s.prepare_command = <<-CMD
-                      ruby Tools/Scripts/fix_cocoapods_localized_strings.rb
-                      ruby Tools/Scripts/generate_public_headers.rb
+                      ruby Tools/Scripts/extract_public_headers.rb
                       CMD
-  s.public_header_files = 'Tools/Scripts/GeneratedHeaders/*.h'
+
+  s.requires_arc = true
+  s.source_files = 'CoconutKit/Sources/**/*.{h,m}', 'Tools/Scripts/PublicHeaders/*.h'
+  s.public_header_files = 'Tools/Scripts/PublicHeaders/*.h'
+
+  # MAZeroingWeakRef external dependency
+  zeroing_weak_ref_source_files = 'CoconutKit/Sources/Externals/MAZeroingWeakRef-75695a81/*.{h,m}'
+
+  s.subspec 'zeroing-weak-ref' do |subspec|
+    subspec.requires_arc = false
+    subspec.source_files = zeroing_weak_ref_source_files
+    subspec.public_header_files = nil
+    subspec.compiler_flags = '-w'
+  end
+  
+  s.exclude_files = zeroing_weak_ref_source_files
+
+  # Process the publicHeaders.txt file listing public headers to move public headers to a separate directory and create
+  # an associated global header
+  s.preserve_paths = 'Tools/Scripts/PublicHeaders'
 
   # Do not use CoconutKit-resources target, use CocoaPods native bundle creation mechanism
-  # TODO: Replace with localized resources with 'CoconutKit-resources/*.lproj' when the bug above has been fixed
-  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{HTML,Images,Nibs}/*', 'Tools/Scripts/GeneratedResources/*.lproj'] }
+  s.resource_bundle = { 'CoconutKit-resources' => ['CoconutKit-resources/{HTML,Images,Nibs}/*', 'CoconutKit-resources/*.lproj'] }
 end

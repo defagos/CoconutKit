@@ -4,6 +4,8 @@
 //  Licence information is available from the LICENCE file.
 //
 
+#import "HLSViewAnimation.h"
+
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 

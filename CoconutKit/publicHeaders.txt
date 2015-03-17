@@ -5,6 +5,7 @@ HLSAnimationStep.h
 HLSApplicationInformation.h
 HLSAssert.h
 HLSAutorotation.h
+HLSCollectionViewController.h
 HLSConnection.h
 HLSContainerStack.h
 HLSCoreError.h
@@ -39,6 +40,7 @@ HLSStandardFileManager.h
 HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h
+HLSTableViewController.h
 HLSTask.h
 HLSTaskGroup.h
 HLSTaskManager.h
