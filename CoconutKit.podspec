@@ -33,11 +33,12 @@ Pod::Spec.new do |s|
   s.public_header_files = 'Tools/Scripts/PublicHeaders/*.h'
   s.exclude_files = zeroing_weak_ref_source_files
 
-  # Non-ARC source files
-  s.subspec 'fno-objc-arc' do |subspec|
+  # MAZeroingWeakRef external dependency
+  s.subspec 'zeroing-weak-ref' do |subspec|
     subspec.requires_arc = false
     subspec.source_files = [zeroing_weak_ref_source_files, zeroing_weak_ref_header_files]
     subspec.public_header_files = nil
+    subspec.compiler_flags = '-w'
   end
 
   # Process the publicHeaders.txt file listing public headers to move public headers to a separate directory and create
