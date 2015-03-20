@@ -21,6 +21,6 @@
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2012 Samuel Défago. All rights reserved.</string>
+	<string>Copyright Samuel Défago. All rights reserved.</string>
 </dict>
 </plist>
