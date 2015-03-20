@@ -646,6 +646,7 @@
 		E69F22891ABCAF63000EEC39 /* HLSViewBindingInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FCD33D71A124AD70002F478 /* HLSViewBindingInformationViewController.xib */; };
 		E69F228A1ABCAF63000EEC39 /* HLSViewBindingHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC672FE1A164A9E008BE139 /* HLSViewBindingHelpViewController.xib */; };
 		E69F228B1ABCAF63000EEC39 /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A31924EE4E00660CDF /* HLSWebViewController.xib */; };
+		E69F228C1ABCB319000EEC39 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DD819F6576C009718E4 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E6E94C1F1AB0216B00FCCC4E /* HLSTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */; };
 		E6E94C201AB0216B00FCCC4E /* HLSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */; };
 		E6E94C231AB0218300FCCC4E /* HLSCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */; };
@@ -1032,6 +1033,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E69F228C1ABCB319000EEC39 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2545,6 +2547,7 @@
 		};
 		E69F212D1ABC9F8C000EEC39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2567,7 +2570,6 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = CoconutKit;
@@ -2579,6 +2581,7 @@
 		};
 		E69F212E1ABC9F8C000EEC39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -2596,7 +2599,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = CoconutKit;

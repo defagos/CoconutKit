@@ -4,10 +4,10 @@
 //  Licence information is available from the LICENCE file.
 //
 
-//! Project version number for CoconutKit-framework.
+/**
+ * Framework version
+ */
 FOUNDATION_EXPORT double CoconutKit_VersionNumber;
-
-//! Project version string for CoconutKit-framework.
 FOUNDATION_EXPORT const unsigned char CoconutKit_VersionString[];
 
 #import <CoconutKit/CALayer+HLSExtensions.h>
