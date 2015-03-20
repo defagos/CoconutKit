@@ -7,8 +7,8 @@
 /**
  * Framework version
  */
-FOUNDATION_EXPORT double CoconutKit_VersionNumber;
-FOUNDATION_EXPORT const unsigned char CoconutKit_VersionString[];
+//FOUNDATION_EXPORT double CoconutKit_VersionNumber;
+//FOUNDATION_EXPORT const unsigned char CoconutKit_VersionString[];
 
 #import <CoconutKit/CALayer+HLSExtensions.h>
 #import <CoconutKit/CAMediaTimingFunction+HLSExtensions.h>

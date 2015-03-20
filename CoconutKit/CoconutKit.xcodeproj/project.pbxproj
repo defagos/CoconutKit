@@ -646,7 +646,7 @@
 		E69F228A1ABCAF63000EEC39 /* HLSViewBindingHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC672FE1A164A9E008BE139 /* HLSViewBindingHelpViewController.xib */; };
 		E69F228B1ABCAF63000EEC39 /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A31924EE4E00660CDF /* HLSWebViewController.xib */; };
 		E69F228C1ABCB319000EEC39 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DD819F6576C009718E4 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E69F22931ABCD7E0000EEC39 /* CoconutKit-framework.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F22901ABCD7E0000EEC39 /* CoconutKit-framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F22901ABCD7E0000EEC39 /* CoconutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6E94C1F1AB0216B00FCCC4E /* HLSTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */; };
 		E6E94C201AB0216B00FCCC4E /* HLSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */; };
 		E6E94C231AB0218300FCCC4E /* HLSCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */; };
@@ -994,9 +994,8 @@
 		E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
 		E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 		E69F211A1ABC9F8B000EEC39 /* CoconutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoconutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E69F22901ABCD7E0000EEC39 /* CoconutKit-framework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-framework.h"; sourceTree = "<group>"; };
+		E69F22901ABCD7E0000EEC39 /* CoconutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit.h; sourceTree = "<group>"; };
 		E69F22911ABCD7E0000EEC39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E69F22921ABCD7E0000EEC39 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableViewController.h; sourceTree = "<group>"; };
 		E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableViewController.m; sourceTree = "<group>"; };
 		E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCollectionViewController.h; sourceTree = "<group>"; };
@@ -1560,9 +1559,8 @@
 		E69F228F1ABCD7E0000EEC39 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				E69F22901ABCD7E0000EEC39 /* CoconutKit-framework.h */,
+				E69F22901ABCD7E0000EEC39 /* CoconutKit.h */,
 				E69F22911ABCD7E0000EEC39 /* Info.plist */,
-				E69F22921ABCD7E0000EEC39 /* module.modulemap */,
 			);
 			name = Framework;
 			path = "../CoconutKit-framework";
@@ -1849,7 +1847,7 @@
 				E69F21511ABCABFB000EEC39 /* UIView+HLSViewBinding.h in Headers */,
 				E69F21A31ABCAC0D000EEC39 /* NSBundle+HLSExtensions.h in Headers */,
 				E69F214C1ABCABFB000EEC39 /* HLSViewBindingDelegate.h in Headers */,
-				E69F22931ABCD7E0000EEC39 /* CoconutKit-framework.h in Headers */,
+				E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */,
 				E69F21E61ABCAC2A000EEC39 /* HLSTaskOperation+Protected.h in Headers */,
 				E69F21BF1ABCAC0D000EEC39 /* NSURLRequest+HLSExtensions.h in Headers */,
 				E69F21EB1ABCAC31000EEC39 /* HLSInfoTableViewCell.h in Headers */,
@@ -2574,7 +2572,6 @@
 				INFOPLIST_FILE = "../CoconutKit-Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "../CoconutKit-framework/module.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = CoconutKit;
 				SKIP_INSTALL = YES;
@@ -2604,7 +2601,6 @@
 				INFOPLIST_FILE = "../CoconutKit-Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "../CoconutKit-framework/module.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = CoconutKit;
 				SKIP_INSTALL = YES;

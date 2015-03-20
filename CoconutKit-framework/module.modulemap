@@ -1,5 +1,0 @@
-framework module CoconutKit {
-  umbrella header "CoconutKit.h"
-  requires objc
-  export *
-}
