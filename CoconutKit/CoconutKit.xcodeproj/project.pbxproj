@@ -326,7 +326,7 @@
 		E62CB1221A78D89F0093106A /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */; };
 		E62CB1251A78D8B50093106A /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */; };
 		E62CB1261A78D8B50093106A /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */; };
-		E69F211F1ABC9F8B000EEC39 /* CoconutKit-framework.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F211E1ABC9F8B000EEC39 /* CoconutKit-framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69F21371ABCA0FB000EEC39 /* CoconutKit-framework.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F21351ABCA0FB000EEC39 /* CoconutKit-framework.h */; };
 		E6E94C1F1AB0216B00FCCC4E /* HLSTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */; };
 		E6E94C201AB0216B00FCCC4E /* HLSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */; };
 		E6E94C231AB0218300FCCC4E /* HLSCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */; };
@@ -674,8 +674,8 @@
 		E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
 		E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
 		E69F211A1ABC9F8B000EEC39 /* CoconutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoconutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E69F211E1ABC9F8B000EEC39 /* CoconutKit-framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-framework.h"; sourceTree = "<group>"; };
-		E69F21331ABCA037000EEC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E69F21351ABCA0FB000EEC39 /* CoconutKit-framework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-framework.h"; sourceTree = "<group>"; };
+		E69F21361ABCA0FB000EEC39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableViewController.h; sourceTree = "<group>"; };
 		E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableViewController.m; sourceTree = "<group>"; };
 		E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCollectionViewController.h; sourceTree = "<group>"; };
@@ -733,9 +733,9 @@
 			isa = PBXGroup;
 			children = (
 				6FFAB75719DD8DA800A91997 /* Externals */,
+				E69F21341ABCA0FB000EEC39 /* Framework */,
 				6FADE51014BA0494007EE121 /* Sources */,
 				6FC5B7801924EE0A00660CDF /* Resources */,
-				E69F211B1ABC9F8B000EEC39 /* CoconutKit-framework */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 				6FDEDD081A25DC150034610E /* LICENSE */,
@@ -1235,13 +1235,13 @@
 			path = "MAZeroingWeakRef-75695a81";
 			sourceTree = "<group>";
 		};
-		E69F211B1ABC9F8B000EEC39 /* CoconutKit-framework */ = {
+		E69F21341ABCA0FB000EEC39 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				E69F211E1ABC9F8B000EEC39 /* CoconutKit-framework.h */,
-				E69F21331ABCA037000EEC39 /* Info.plist */,
+				E69F21351ABCA0FB000EEC39 /* CoconutKit-framework.h */,
+				E69F21361ABCA0FB000EEC39 /* Info.plist */,
 			);
-			path = "CoconutKit-framework";
+			path = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1407,7 +1407,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E69F211F1ABC9F8B000EEC39 /* CoconutKit-framework.h in Headers */,
+				E69F21371ABCA0FB000EEC39 /* CoconutKit-framework.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1927,7 +1927,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "CoconutKit-framework/Info.plist";
+				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1956,7 +1956,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				INFOPLIST_FILE = "CoconutKit-framework/Info.plist";
+				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
