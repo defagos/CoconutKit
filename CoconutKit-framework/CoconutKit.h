@@ -85,6 +85,7 @@
 #import <CoconutKit/NSMutableArray+HLSExtensions.h>
 #import <CoconutKit/NSNumber+HLSExtensions.h>
 #import <CoconutKit/NSObject+HLSExtensions.h>
+#import <CoconutKit/NSSet+HLSExtensions.h>
 #import <CoconutKit/NSStream+HLSExtensions.h>
 #import <CoconutKit/NSString+HLSExtensions.h>
 #import <CoconutKit/NSTimeZone+HLSExtensions.h>
