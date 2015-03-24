@@ -33,7 +33,8 @@
 {
     NSBundle *coconutKitBundle = [self bundleWithName:@"CoconutKit-resources"];
     if (! coconutKitBundle) {
-        HLSLoggerError(@"Could not find CoconutKit-resources bundle. Have you added it to your project main bundle?");
+        HLSLoggerInfo(@"Could not find CoconutKit resources bundle. Use principal bundle instead (bundle containing CoconutKit classes)");
+         coconutKitBundle = [self principalBundle];
     }
     return coconutKitBundle;
 }
