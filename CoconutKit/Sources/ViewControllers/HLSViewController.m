@@ -11,7 +11,6 @@
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
 #import "NSBundle+HLSDynamicLocalization.h"
-#import "NSBundle+HLSExtensions.h"
 #import "NSObject+HLSExtensions.h"
 #import "UIViewController+HLSExtensions.h"
 #import "UIViewController+HLSInstantiation.h"
@@ -73,7 +72,7 @@ static void commonInit(HLSViewController *self);
     IMP selfIMP = class_getMethodImplementation([self class], _cmd);
     IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
     BOOL isOverriden = (selfIMP != superIMP);
-    if (! isOverriden && [[[NSBundle principalBundle] localizations] count] > 1) {
+    if (! isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
         HLSLoggerDebug(@"%@ is not localized", [self class]);
     }
 }

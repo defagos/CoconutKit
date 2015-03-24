@@ -38,7 +38,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         return nil;
     }
     
-    NSBundle *bundle = [self bundle] ?: [NSBundle principalBundle];
+    NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
     
     // A xib has been found, use it
     NSString *nibName = [self nibName];

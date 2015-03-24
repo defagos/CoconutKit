@@ -199,7 +199,7 @@
         return;
     }
     
-    NSString *localization = [[[NSBundle principalBundle] localizations] objectAtIndex:buttonIndex];
+    NSString *localization = [[[NSBundle mainBundle] localizations] objectAtIndex:buttonIndex];
     [NSBundle setLocalization:localization];
 }
 
@@ -274,7 +274,7 @@
 {
     self.languageActionSheet = [[UIActionSheet alloc] init];
     self.languageActionSheet.delegate = self;
-    for (NSString *localization in [[NSBundle principalBundle] localizations]) {
+    for (NSString *localization in [[NSBundle mainBundle] localizations]) {
         [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
     }
     [self.languageActionSheet showFromBarButtonItem:sender animated:YES];

@@ -7,7 +7,6 @@
 #import "UIFont+HLSExtensions.h"
 
 #import "HLSLogger.h"
-#import "NSBundle+HLSExtensions.h"
 
 #import <CoreText/CoreText.h>
 
@@ -16,7 +15,7 @@
 + (BOOL)loadFontWithFileName:(NSString *)fileName inBundle:(NSBundle *)bundle
 {
     if (! bundle) {
-        bundle = [NSBundle principalBundle];
+        bundle = [NSBundle mainBundle];
     }
     
     NSString *fontFilePath = [bundle pathForResource:[fileName stringByDeletingPathExtension]

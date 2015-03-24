@@ -12,13 +12,6 @@
 @interface NSBundle (HLSExtensions)
 
 /**
- * Return the bundle containing the CoconutKit executable code (in general the main bundle, but not always, e.g. 
- * when running tests with XCTest). Since princpal bundle = main bundle in almost all practical cases, CoconutKit
- * documentation uses main bundle and principal bundle interchangeably
- */
-+ (NSBundle *)principalBundle;
-
-/**
  * Return a friendly application version number, based on the main bundle version
  *
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)

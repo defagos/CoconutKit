@@ -14,6 +14,10 @@
 
 #pragma mark Class methods
 
+/**
+ * Return the bundle containing the CoconutKit executable code (in general the main bundle, but not always, e.g.
+ * when running tests with XCTest or when using CoconutKit as a Cocoa Touch framework)
+ */
 + (NSBundle *)principalBundle
 {
     static NSBundle *s_principalBundle;
@@ -26,7 +30,7 @@
 
 + (NSString *)friendlyApplicationVersionNumber
 {
-    return [[NSBundle principalBundle] friendlyVersionNumber];
+    return [[NSBundle mainBundle] friendlyVersionNumber];
 }
 
 + (NSBundle *)coconutKitBundle
@@ -42,7 +46,7 @@
 + (NSBundle *)bundleWithName:(NSString *)name
 {
     if (! name) {
-        return [NSBundle principalBundle];
+        return [NSBundle mainBundle];
     }
     
     static NSMutableDictionary *s_nameToBundleMap = nil;
@@ -61,7 +65,7 @@
         return bundle;
     }
     
-    bundle = [self bundleWithName:name inDirectory:[[NSBundle principalBundle] bundlePath]];
+    bundle = [self bundleWithName:name inDirectory:[[NSBundle mainBundle] bundlePath]];
     if (bundle) {
         [s_nameToBundleMap setObject:bundle forKey:name];
         return bundle;
@@ -94,7 +98,7 @@
 + (NSBundle *)bundleWithName:(NSString *)name inDirectory:(NSString *)directoryPath
 {
     if (! directoryPath) {
-        directoryPath = [[NSBundle principalBundle] bundlePath];
+        directoryPath = [[NSBundle mainBundle] bundlePath];
     }
     
     NSBundle *bundle = nil;

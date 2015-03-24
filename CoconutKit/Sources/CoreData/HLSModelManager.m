@@ -10,7 +10,6 @@
 #import "HLSLogger.h"
 #import "HLSStandardFileManager.h"
 #import "NSArray+HLSExtensions.h"
-#import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 
 @interface HLSModelManager ()
@@ -272,7 +271,7 @@
 - (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName inBundle:(NSBundle *)bundle
 {
     if (! bundle) {
-        bundle = [NSBundle principalBundle];
+        bundle = [NSBundle mainBundle];
     }
     
     NSString *modelFilePath = [bundle pathForResource:modelFileName ofType:@"momd"];

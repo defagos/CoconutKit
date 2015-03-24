@@ -15,7 +15,7 @@
     static NSString *s_relativeBundlePath = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *mainBundlePath = [[NSBundle principalBundle] bundlePath];
+        NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
         NSString *coconutKitBundlePath = [[NSBundle coconutKitBundle] bundlePath];
         if ([coconutKitBundlePath hasPrefix:mainBundlePath]) {
             s_relativeBundlePath = [coconutKitBundlePath stringByReplacingCharactersInRange:NSMakeRange(0, [mainBundlePath length] + 1) withString:@""];
