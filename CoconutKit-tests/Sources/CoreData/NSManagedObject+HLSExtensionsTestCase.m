@@ -6,6 +6,7 @@
 
 #import "NSManagedObject+HLSExtensionsTestCase.h"
 
+#import "NSBundle+Tests.h"
 #import "Person.h"
 
 @interface NSManagedObject_HLSExtensionsTestCase ()
@@ -36,7 +37,7 @@
     
     // Freshly create a test store
     HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitTestData"
-                                                                           inBundle:nil
+                                                                           inBundle:[NSBundle testBundle]
                                                                       configuration:nil
                                                                      storeDirectory:HLSApplicationLibraryDirectoryPath()
                                                                         fileManager:nil
