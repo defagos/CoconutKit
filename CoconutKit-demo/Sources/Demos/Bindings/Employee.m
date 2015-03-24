@@ -17,7 +17,7 @@
     static dispatch_once_t s_onceToken;
     static NSArray *s_employees;
     dispatch_once(&s_onceToken, ^{
-        NSString *employeesFilePath = [[NSBundle principalBundle] pathForResource:@"Employees" ofType:@"plist"];
+        NSString *employeesFilePath = [[NSBundle mainBundle] pathForResource:@"Employees" ofType:@"plist"];
         NSArray *fullNames = [NSArray arrayWithContentsOfFile:employeesFilePath];
         
         NSMutableArray *employees = [NSMutableArray array];

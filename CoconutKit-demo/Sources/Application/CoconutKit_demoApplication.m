@@ -89,15 +89,15 @@
             self.rootViewController = navigationController;
             
             UIBarButtonItem *languageBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Language", nil)
-                                                                                       style:UIBarButtonItemStyleBordered 
+                                                                                       style:UIBarButtonItemStylePlain
                                                                                       target:self 
                                                                                       action:@selector(toggleLanguageSheet:)];
             UIBarButtonItem *logsButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Log", nil)
-                                                                               style:UIBarButtonItemStyleBordered
+                                                                               style:UIBarButtonItemStylePlain
                                                                               target:self
                                                                               action:@selector(showSettings:)];
             UIBarButtonItem *debugOverlayBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bindings", nil)
-                                                                                          style:UIBarButtonItemStyleBordered
+                                                                                          style:UIBarButtonItemStylePlain
                                                                                          target:self
                                                                                          action:@selector(showBindingDebugOverlay:)];
             demosListViewController.navigationItem.rightBarButtonItems = @[languageBarButtonItem, logsButtonItem, debugOverlayBarButtonItem];
@@ -199,7 +199,7 @@
         return;
     }
     
-    NSString *localization = [[[NSBundle principalBundle] localizations] objectAtIndex:buttonIndex];
+    NSString *localization = [[[NSBundle mainBundle] localizations] objectAtIndex:buttonIndex];
     [NSBundle setLocalization:localization];
 }
 
@@ -274,7 +274,7 @@
 {
     self.languageActionSheet = [[UIActionSheet alloc] init];
     self.languageActionSheet.delegate = self;
-    for (NSString *localization in [[NSBundle principalBundle] localizations]) {
+    for (NSString *localization in [[NSBundle mainBundle] localizations]) {
         [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
     }
     [self.languageActionSheet showFromBarButtonItem:sender animated:YES];

@@ -6,11 +6,13 @@
 
 #import "NSStream+HLSExtensionsTestCase.h"
 
+#import "NSBundle+Tests.h"
+
 @implementation NSStream_HLSExtensionsTestCase
 
 - (void)testWrite
 {
-    NSString *filePath = [[NSBundle principalBundle] pathForResource:@"Sample" ofType:@"txt"];
+    NSString *filePath = [[NSBundle testBundle] pathForResource:@"Sample" ofType:@"txt"];
     NSData *sampleData = [NSData dataWithContentsOfFile:filePath];
     
     NSInputStream *inputStream = [NSInputStream inputStreamWithData:sampleData];

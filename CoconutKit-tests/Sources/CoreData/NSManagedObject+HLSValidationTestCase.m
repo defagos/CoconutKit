@@ -11,6 +11,7 @@
 #import "ConcreteSubclassB.h"
 #import "ConcreteSubclassC.h"
 #import "ConcreteClassD.h"
+#import "NSBundle+Tests.h"
 #import "TestErrors.h"
 
 HLSEnableNSManagedObjectValidation();
@@ -42,7 +43,7 @@ HLSEnableNSManagedObjectValidation();
     
     // Freshly create a test store
     HLSModelManager *modelManager = [HLSModelManager SQLiteManagerWithModelFileName:@"CoconutKitTestData"
-                                                                           inBundle:nil
+                                                                           inBundle:[NSBundle testBundle]
                                                                       configuration:nil 
                                                                      storeDirectory:HLSApplicationLibraryDirectoryPath()
                                                                         fileManager:nil

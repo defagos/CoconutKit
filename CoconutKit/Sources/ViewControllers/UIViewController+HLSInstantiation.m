@@ -6,7 +6,6 @@
 
 #import "UIViewController+HLSInstantiation.h"
 
-#import "NSBundle+HLSExtensions.h"
 #import <objc/runtime.h>
 
 @implementation UIViewController (HLSInstantiation)
@@ -16,7 +15,7 @@
 - (instancetype)instanceWithStoryboardName:(NSString *)storyboardName inBundle:(NSBundle *)bundle
 {
     if (! bundle) {
-        bundle = [NSBundle principalBundle];
+        bundle = [NSBundle mainBundle];
     }
     
     return [self viewControllerFromStoryboardWithName:storyboardName inBundle:bundle];
@@ -25,7 +24,7 @@
 - (instancetype)instanceInBundle:(NSBundle *)bundle
 {
     if (! bundle) {
-        bundle = [NSBundle principalBundle];
+        bundle = [NSBundle mainBundle];
     }
     
     UIViewController *viewController = [self viewControllerFromStoryboardWithName:nil inBundle:bundle];
