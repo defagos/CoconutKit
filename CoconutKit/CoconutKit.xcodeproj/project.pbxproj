@@ -647,6 +647,7 @@
 		E69F228B1ABCAF63000EEC39 /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A31924EE4E00660CDF /* HLSWebViewController.xib */; };
 		E69F228C1ABCB319000EEC39 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DD819F6576C009718E4 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F22901ABCD7E0000EEC39 /* CoconutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E69F22DE1AC13306000EEC39 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; };
 		E6E94C1F1AB0216B00FCCC4E /* HLSTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */; };
 		E6E94C201AB0216B00FCCC4E /* HLSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */; };
 		E6E94C231AB0218300FCCC4E /* HLSCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */; };
@@ -2375,6 +2376,7 @@
 				E69F21A41ABCAC0D000EEC39 /* NSBundle+HLSExtensions.m in Sources */,
 				E69F21E81ABCAC2A000EEC39 /* HLSTaskOperation.m in Sources */,
 				E69F21AC1ABCAC0D000EEC39 /* NSDateFormatter+HLSExtensions.m in Sources */,
+				E69F22DE1AC13306000EEC39 /* HLSTableSearchDisplayViewController.m in Sources */,
 				E69F220F1ABCAC31000EEC39 /* UIWindow+HLSExtensions.m in Sources */,
 				E69F21FB1ABCAC31000EEC39 /* HLSValue1TableViewCell.m in Sources */,
 				E69F21BC1ABCAC0D000EEC39 /* NSString+HLSExtensions.m in Sources */,
