@@ -208,6 +208,11 @@ Then run `pod install` to update the dependencies. For targets starting with iOS
 
 For more information about CocoaPods and the `Podfile`, please refer to the [official documentation](http://guides.cocoapods.org/).
 
+### Installation with Carthage
+
+- documenter ajout aux binaires embedded (info tab)
+- ajouter badge
+
 ### Static framework
 
 Checkout CoconutKit source code from the command-line:
