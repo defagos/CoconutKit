@@ -7,8 +7,9 @@ before_install:
 
 script: 
     - set -o pipefail
-    # Builds the static framework containing all architectures
+    # Builds the static and Cocoa Touch frameworks containing all architectures
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-staticframework | xcpretty -c
+    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-framework | xcpretty -c
     # Demo and tests for 32 bits
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-dev -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
     - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit-tests-runner -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
