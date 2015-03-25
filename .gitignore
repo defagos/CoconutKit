@@ -4,7 +4,6 @@ Binaries/
 Carthage/
 PublicHeaders/
 FixedResources/
-xcshareddata
 xcuserdata
 CoconutKit-resources.bundle
 InnerBundle.bundle
