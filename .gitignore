@@ -1,9 +1,9 @@
 .DS_Store
 build/
 Binaries/
+Carthage/
 PublicHeaders/
 FixedResources/
-xcshareddata
 xcuserdata
 CoconutKit-resources.bundle
 InnerBundle.bundle

@@ -104,12 +104,12 @@
 
 - (NSString *)apple3ImagePath
 {
-    return [[NSBundle principalBundle] pathForResource:@"img_apple3" ofType:@"jpg"];
+    return [[NSBundle mainBundle] pathForResource:@"img_apple3" ofType:@"jpg"];
 }
 
 - (NSURL *)apple4ImageFileURL
 {
-    return [[NSBundle principalBundle] URLForResource:@"img_apple4" withExtension:@"jpg"];
+    return [[NSBundle mainBundle] URLForResource:@"img_apple4" withExtension:@"jpg"];
 }
 
 - (void)setTimer:(NSTimer *)timer

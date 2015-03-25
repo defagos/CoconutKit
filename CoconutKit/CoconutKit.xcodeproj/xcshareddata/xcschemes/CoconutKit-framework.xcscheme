@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6FCB4E801926651F00047AD3"
-               BuildableName = "CoconutKit (dev).app"
-               BlueprintName = "CoconutKit-dev"
-               ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+               BlueprintIdentifier = "E69F21191ABC9F8B000EEC39"
+               BuildableName = "CoconutKit.framework"
+               BlueprintName = "CoconutKit-framework"
+               ReferencedContainer = "container:CoconutKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6FCB4E801926651F00047AD3"
-            BuildableName = "CoconutKit (dev).app"
-            BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+            BlueprintIdentifier = "E69F21191ABC9F8B000EEC39"
+            BuildableName = "CoconutKit.framework"
+            BlueprintName = "CoconutKit-framework"
+            ReferencedContainer = "container:CoconutKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -48,28 +48,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6FCB4E801926651F00047AD3"
-            BuildableName = "CoconutKit (dev).app"
-            BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+            BlueprintIdentifier = "E69F21191ABC9F8B000EEC39"
+            BuildableName = "CoconutKit.framework"
+            BlueprintName = "CoconutKit-framework"
+            ReferencedContainer = "container:CoconutKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "XcodeColors"
-            value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "CoconutKitDemoMode"
-            value = "RootStack"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,16 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6FCB4E801926651F00047AD3"
-            BuildableName = "CoconutKit (dev).app"
-            BlueprintName = "CoconutKit-dev"
-            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
+            BlueprintIdentifier = "E69F21191ABC9F8B000EEC39"
+            BuildableName = "CoconutKit.framework"
+            BlueprintName = "CoconutKit-framework"
+            ReferencedContainer = "container:CoconutKit.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
