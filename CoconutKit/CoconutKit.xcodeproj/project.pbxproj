@@ -307,6 +307,7 @@
 		E62CB1221A78D89F0093106A /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */; };
 		E62CB1251A78D8B50093106A /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */; };
 		E62CB1261A78D8B50093106A /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */; };
+		E671AB6D1AC3CE5000AD5EB0 /* HLSNullability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE8318C1AB4376D0066B372 /* HLSNullability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F21391ABCABF4000EEC39 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F213A1ABCABF4000EEC39 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
 		E69F213B1ABCABF4000EEC39 /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCFEA4715E37E25002CAF9E /* HLSAnimationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1787,6 +1788,7 @@
 				E69F21A51ABCAC0D000EEC39 /* NSCalendar+HLSExtensions.h in Headers */,
 				E69F21C51ABCAC0D000EEC39 /* UIControl+HLSExclusiveTouch.h in Headers */,
 				E69F21611ABCAC03000EEC39 /* UIProgressView+HLSViewBinding.h in Headers */,
+				E671AB6D1AC3CE5000AD5EB0 /* HLSNullability.h in Headers */,
 				E69F21FA1ABCAC31000EEC39 /* HLSValue1TableViewCell.h in Headers */,
 				E69F21BD1ABCAC0D000EEC39 /* NSTimeZone+HLSExtensions.h in Headers */,
 				E69F21871ABCAC0D000EEC39 /* HLSNotifications.h in Headers */,
