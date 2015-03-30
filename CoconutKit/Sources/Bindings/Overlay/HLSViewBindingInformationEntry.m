@@ -11,9 +11,9 @@
 
 @interface HLSViewBindingInformationEntry ()
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) id object;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic) id object;
 
 @end
 

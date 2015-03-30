@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
 #import "HLSViewBindingInformation.h"
 #import "HLSViewController.h"
 
@@ -13,6 +14,7 @@
 /**
  * Display various information about a binding
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewBindingInformationViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate>
 
 /**
@@ -21,6 +23,7 @@
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation NS_DESIGNATED_INITIALIZER;
 
 @end
+NS_ASSUME_NONNULL_END
 
 @interface HLSViewBindingInformationViewController (UnavailableMethods)
 

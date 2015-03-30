@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -17,6 +19,7 @@
  *     update operations
  */
 
+NS_ASSUME_NONNULL_BEGIN
 @protocol HLSViewBindingImplementation <NSObject>
 
 @required
@@ -27,7 +30,7 @@
  * be sure to implement the +supportedBindingClasses method accordingly). If a UIView class does not implement this
  * method, bindings will not be available for it
  */
-- (void)updateViewWithValue:(id)value animated:(BOOL)animated;
+- (void)updateViewWithValue:(nullable id)value animated:(BOOL)animated;
 
 @optional
 
@@ -51,7 +54,7 @@
  * one of the classes returned by +supportedBindingClasses. If your view binds only to one type, you can ignore
  * this parameter and return an object with the according class
  */
-- (id)inputValueWithClass:(Class)inputClass;
+- (nullable id)inputValueWithClass:(Class)inputClass;
 
 @end
 
@@ -75,6 +78,7 @@
  * Remark: Setting check = YES does not necessary leads to a check if the view has its bindInputChecked property
  *         set to NO. Setting check to NO, however, disables checks in all cases
  */
-- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(nullable id)inputValue error:(NSError *__autoreleasing *)pError;
 
 @end
+NS_ASSUME_NONNULL_END

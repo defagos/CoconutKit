@@ -24,12 +24,12 @@
 
 @interface HLSViewBindingInformationViewController ()
 
-@property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
+@property (nonatomic) HLSViewBindingInformation *bindingInformation;
 
-@property (nonatomic, strong) NSArray *headerTitles;
-@property (nonatomic, strong) NSArray *footerTitles;
+@property (nonatomic) NSArray *headerTitles;
+@property (nonatomic) NSArray *footerTitles;
 
-@property (nonatomic, strong) NSArray *entries;
+@property (nonatomic) NSArray *entries;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -41,6 +41,8 @@
 
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
+    NSParameterAssert(bindingInformation);
+    
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.bindingInformation = bindingInformation;
         

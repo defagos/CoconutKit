@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Optional tag to help identifying animation steps
  */
-@property (nonatomic, nullable) NSString *tag;
+@property (nonatomic, copy, nullable) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information

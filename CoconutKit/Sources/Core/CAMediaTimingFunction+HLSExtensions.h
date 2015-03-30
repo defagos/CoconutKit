@@ -4,9 +4,12 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface CAMediaTimingFunction (HLSExtensions)
 
 /**
@@ -29,3 +32,4 @@
 - (NSString *)controlPointsString;
 
 @end
+NS_ASSUME_NONNULL_END

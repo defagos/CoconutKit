@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
 #import "HLSTransformer.h"
 
 #import <Foundation/Foundation.h>
@@ -311,6 +312,7 @@
  * are initially bound. Cached information is then reused for fast updates during scrolling.
  *
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface UIView (HLSViewBinding)
 
 /**
@@ -324,13 +326,13 @@
  * The keypath to bind to (most conveniently set via Interface Builder, but can also be set programmatically by calling
  * -bindToKeyPath:withTransformer:)
  */
-@property (nonatomic, readonly, strong) IBInspectable NSString *bindKeyPath;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *bindKeyPath;
 
 /**
  * The name of the transformer to apply (most conveniently set via Interface Builder, can also be set programmatically 
  * by calling -bindToKeyPath:withTransformer:)
  */
-@property (nonatomic, readonly, strong) IBInspectable NSString *bindTransformer;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *bindTransformer;
 
 /**
  * Set to YES iff updates made to the model object are applied to the bound view with an animation, provided the latter
@@ -338,7 +340,7 @@
  *
  * The default value is NO
  */
-@property (nonatomic, assign, getter=isBindUpdateAnimated) IBInspectable BOOL bindUpdateAnimated;
+@property (nonatomic, getter=isBindUpdateAnimated) IBInspectable BOOL bindUpdateAnimated;
 
 /**
  * Set to YES to perform validation when the bound view content is changed
@@ -346,13 +348,13 @@
  * The default value is NO. In this case, call -checkBoundViewHierarchyWithError: to manually trigger a check when
  * needed
  */
-@property (nonatomic, assign, getter=isBindInputChecked) IBInspectable BOOL bindInputChecked;
+@property (nonatomic, getter=isBindInputChecked) IBInspectable BOOL bindInputChecked;
 
 /**
  * Return YES iff binding is possible against the receiver. This method is provided for information purposes, trying
  * to bind a view which does not support bindings is safe (i.e. won't crash) but does nothing
  */
-@property (nonatomic, readonly, assign, getter=isBindingSupported) BOOL bindingSupported;
+@property (nonatomic, readonly, getter=isBindingSupported) BOOL bindingSupported;
 
 /**
  * Update the value displayed by the receiver and the whole view hierarchy rooted at it, stopping at view controller
@@ -375,13 +377,16 @@
 - (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
 
 @end
+NS_ASSUME_NONNULL_END
 
+NS_ASSUME_NONNULL_BEGIN
 @interface UIView (HLSViewBindingProgrammatic)
 
 /**
  * Programmatically bind a view to a given keypath with a given transformer. This method can also be used to change 
  * an existing binding (if the view is displayed, it will automatically be updated)
  */
-- (void)bindToKeyPath:(NSString *)keyPath withTransformer:(NSString *)transformer;
+- (void)bindToKeyPath:(nullable NSString *)keyPath withTransformer:(nullable NSString *)transformer;
 
 @end
+NS_ASSUME_NONNULL_END

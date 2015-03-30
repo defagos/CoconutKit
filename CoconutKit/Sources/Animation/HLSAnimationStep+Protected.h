@@ -10,11 +10,11 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
 /**
  * Protected interface for use by subclasses of HLSAnimationStep in their implementation, and to be included
  * from their implementation file
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSAnimationStep (Protected)
 
 /**

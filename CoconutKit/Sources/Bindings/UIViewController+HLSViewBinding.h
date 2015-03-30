@@ -4,12 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 /**
  * Convenience methods on UIViewController. Do nothing if the view controller view is not loaded
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface UIViewController (HLSViewBinding)
 
 /**
@@ -33,3 +36,4 @@
 - (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
 
 @end
+NS_ASSUME_NONNULL_END

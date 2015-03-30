@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Tag which can optionally be used to help identifying an animation
  */
-@property (nonatomic, nullable) NSString *tag;
+@property (nonatomic, copy, nullable) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information

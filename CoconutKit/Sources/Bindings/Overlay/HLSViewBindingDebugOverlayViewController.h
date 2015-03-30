@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
 #import "HLSViewController.h"
 
 #import <Foundation/Foundation.h>
@@ -12,6 +13,7 @@
 /**
  * Overlay view controller displaying binding debugging information
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewBindingDebugOverlayViewController : HLSViewController <UIPopoverControllerDelegate>
 
 /**
@@ -22,7 +24,7 @@
 /**
  * Return the current overlay, nil if none
  */
-+ (HLSViewBindingDebugOverlayViewController *)currentBindingDebugOverlayViewController;
++ (nullable HLSViewBindingDebugOverlayViewController *)currentBindingDebugOverlayViewController;
 
 /**
  * Animate a frame to highlight a given view on the overlay
@@ -30,6 +32,7 @@
 - (void)highlightView:(UIView *)view;
 
 @end
+NS_ASSUME_NONNULL_END
 
 @interface HLSViewBindingDebugOverlayViewController (UnavailableMethods)
 

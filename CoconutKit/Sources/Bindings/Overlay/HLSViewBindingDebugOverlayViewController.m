@@ -26,7 +26,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 
 @property (nonatomic, weak) UIWindow *debuggedWindow;
 
-@property (nonatomic, strong) UIPopoverController *bindingInformationPopoverController;
+@property (nonatomic) UIPopoverController *bindingInformationPopoverController;
 @property (nonatomic, weak) HLSViewBindingInformationViewController *bindingInformationViewController;
 
 @end

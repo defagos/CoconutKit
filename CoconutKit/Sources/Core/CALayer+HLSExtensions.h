@@ -4,10 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 @interface CALayer (HLSExtensions)
 
 /**
@@ -37,3 +40,4 @@
 - (UIImage *)flattenedImage;
 
 @end
+NS_ASSUME_NONNULL_END

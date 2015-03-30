@@ -11,7 +11,6 @@
 /**
  * Common abstract class for animations
  */
-
 NS_ASSUME_NONNULL_BEGIN
 @interface HLSObjectAnimation : NSObject <NSCopying>
 

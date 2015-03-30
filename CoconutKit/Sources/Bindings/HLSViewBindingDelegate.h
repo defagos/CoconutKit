@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -11,6 +13,7 @@
  * Protocol to be implemented by classes whose instances want to show interest in receiving binding events. Information 
  * about the binding arameters can be obtained by accessing the bindingInformation property of the boundView parameter
  */
+NS_ASSUME_NONNULL_BEGIN
 @protocol HLSViewBindingDelegate <NSObject>
 
 @optional
@@ -34,3 +37,4 @@
 - (void)boundView:(UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error;
 
 @end
+NS_ASSUME_NONNULL_END

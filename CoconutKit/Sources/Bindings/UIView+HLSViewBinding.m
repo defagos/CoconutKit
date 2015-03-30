@@ -29,10 +29,10 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 @interface UIView (HLSViewBindingPrivate)
 
-@property (nonatomic, strong) NSString *bindKeyPath;
-@property (nonatomic, strong) NSString *bindTransformer;
+@property (nonatomic, copy) NSString *bindKeyPath;
+@property (nonatomic, copy) NSString *bindTransformer;
 
-@property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
+@property (nonatomic) HLSViewBindingInformation *bindingInformation;
 
 - (void)updateBoundViewHierarchyAnimated:(NSNumber *)animated inViewController:(UIViewController *)viewController;
 - (BOOL)checkBoundViewHierarchyInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
@@ -110,7 +110,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindKeyPath:(NSString *)bindKeyPath
 {
-    hls_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, HLS_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (NSString *)bindTransformer
@@ -120,7 +120,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindTransformer:(NSString *)bindTransformer
 {
-    hls_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, HLS_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (HLSViewBindingInformation *)bindingInformation

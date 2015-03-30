@@ -39,36 +39,36 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 @interface HLSViewBindingInformation ()
 
-@property (nonatomic, strong) NSString *keyPath;
-@property (nonatomic, strong) NSString *transformerName;
+@property (nonatomic, copy) NSString *keyPath;
+@property (nonatomic, copy) NSString *transformerName;
 @property (nonatomic, weak) UIView *view;
 
 @property (nonatomic, weak) id objectTarget;
-@property (nonatomic, assign) Class rawClass;
-@property (nonatomic, assign) Class inputClass;
+@property (nonatomic) Class rawClass;
+@property (nonatomic) Class inputClass;
 
 @property (nonatomic, weak) id transformationTarget;
-@property (nonatomic, assign) SEL transformationSelector;
-@property (nonatomic, strong) NSObject<HLSTransformer> *transformer;
+@property (nonatomic) SEL transformationSelector;
+@property (nonatomic) NSObject<HLSTransformer> *transformer;
 
 @property (nonatomic, weak) id<HLSViewBindingDelegate> delegate;
 
-@property (nonatomic, assign) HLSViewBindingStatus status;
+@property (nonatomic) HLSViewBindingStatus status;
 
-@property (nonatomic, strong) NSError *error;
+@property (nonatomic) NSError *error;
 
-@property (nonatomic, assign, getter=isSupportingInput) BOOL supportingInput;
+@property (nonatomic, getter=isSupportingInput) BOOL supportingInput;
 
-@property (nonatomic, assign, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
-@property (nonatomic, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
+@property (nonatomic, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
+@property (nonatomic, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
 
 // Used to prevent recursive calls to checks / update methods when we are simply updating a view. Depending on how view update
 // is performed, we namely could end up triggering an update which would yield to a view updated, and therefore to an infinite
 // call chain
-@property (nonatomic, assign, getter=isUpdatingView) BOOL updatingView;
+@property (nonatomic, getter=isUpdatingView) BOOL updatingView;
 
 // Same as above, but when updating the model
-@property (nonatomic, assign, getter=isUpdatingModel) BOOL updatingModel;
+@property (nonatomic, getter=isUpdatingModel) BOOL updatingModel;
 
 @end
 
