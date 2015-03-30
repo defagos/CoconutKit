@@ -26,7 +26,6 @@
 #import <CoconutKit/HLSGoogleChromeActivity.h>
 #import <CoconutKit/HLSInMemoryFileManager.h>
 #import <CoconutKit/HLSKeyboardInformation.h>
-#import <CoconutKit/HLSLabel.h>
 #import <CoconutKit/HLSLayerAnimation.h>
 #import <CoconutKit/HLSLayerAnimationStep.h>
 #import <CoconutKit/HLSLogger.h>

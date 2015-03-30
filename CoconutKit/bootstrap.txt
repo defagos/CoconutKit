@@ -3,7 +3,6 @@ CAMediaTimingFunction+HLSExtensions.m
 HLSAssert.m
 HLSCollectionViewController.m
 HLSCursor.m
-HLSLabel.m
 HLSMAKVONotificationCenter.m
 HLSMANotificationCenterAdditions.m
 HLSPlaceholderInsetSegue.m
