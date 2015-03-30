@@ -7,6 +7,7 @@
 #import "HLSLabel.h"
 
 #import "HLSLogger.h"
+#import "NSDictionary+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
 @implementation HLSLabel
@@ -58,7 +59,19 @@
                                        attributes:@{ NSFontAttributeName : self.font }
                                           context:nil];
     CGRect actualRect = [self textRectForBounds:rect limitedToNumberOfLines:self.numberOfLines];
-    [self.text drawInRect:actualRect withAttributes:@{ NSFontAttributeName : self.font }];
+    
+    // Most attributes are ignored when using the attributedText property of UILabel, see UILabel.h
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+    [attributes safelySetObject:self.font forKey:NSFontAttributeName];
+    [attributes safelySetObject:self.textColor forKey:NSForegroundColorAttributeName];
+    [attributes safelySetObject:self.backgroundColor forKey:NSBackgroundColorAttributeName];
+    
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowOffset = self.shadowOffset;
+    shadow.shadowColor = self.shadowColor;
+    [attributes safelySetObject:shadow forKey:NSShadowAttributeName];
+    
+    [self.text drawInRect:actualRect withAttributes:attributes];
 }
 
 @end
