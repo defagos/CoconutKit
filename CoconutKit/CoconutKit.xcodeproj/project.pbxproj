@@ -89,8 +89,6 @@
 		6F8366071588CC690044E572 /* HLSVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8366051588CC690044E572 /* HLSVector.m */; };
 		6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */; };
 		6F8785C614F3E35A00580634 /* UIViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */; };
-		6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F89148A15790D21009FCC78 /* HLSLabel.h */; };
-		6F89148D15790D21009FCC78 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89148B15790D21009FCC78 /* HLSLabel.m */; };
 		6F8B184C19DD8B0000A06F2B /* HLSTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8B184A19DD8B0000A06F2B /* HLSTransformer.h */; };
 		6F8B184D19DD8B0000A06F2B /* HLSTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B184B19DD8B0000A06F2B /* HLSTransformer.m */; };
 		6F8B185019DD8B6D00A06F2B /* HLSInfoTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8B184E19DD8B6D00A06F2B /* HLSInfoTableViewCell.h */; };
@@ -488,8 +486,6 @@
 		E69F21EA1ABCAC31000EEC39 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56B14BA0494007EE121 /* HLSCursor.m */; };
 		E69F21EB1ABCAC31000EEC39 /* HLSInfoTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8B184E19DD8B6D00A06F2B /* HLSInfoTableViewCell.h */; };
 		E69F21EC1ABCAC31000EEC39 /* HLSInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8B184F19DD8B6D00A06F2B /* HLSInfoTableViewCell.m */; };
-		E69F21ED1ABCAC31000EEC39 /* HLSLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F89148A15790D21009FCC78 /* HLSLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F21EE1ABCAC31000EEC39 /* HLSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F89148B15790D21009FCC78 /* HLSLabel.m */; };
 		E69F21EF1ABCAC31000EEC39 /* HLSLabelLocalizationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */; };
 		E69F21F01ABCAC31000EEC39 /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		E69F21F11ABCAC31000EEC39 /* HLSNibView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56E14BA0494007EE121 /* HLSNibView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -753,8 +749,6 @@
 		6F8366051588CC690044E572 /* HLSVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSVector.m; sourceTree = "<group>"; };
 		6F8785C314F3E35A00580634 /* UIViewController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F8785C414F3E35A00580634 /* UIViewController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F89148A15790D21009FCC78 /* HLSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabel.h; sourceTree = "<group>"; };
-		6F89148B15790D21009FCC78 /* HLSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabel.m; sourceTree = "<group>"; };
 		6F8B184A19DD8B0000A06F2B /* HLSTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransformer.h; sourceTree = "<group>"; };
 		6F8B184B19DD8B0000A06F2B /* HLSTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformer.m; sourceTree = "<group>"; };
 		6F8B184E19DD8B6D00A06F2B /* HLSInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSInfoTableViewCell.h; sourceTree = "<group>"; };
@@ -1363,8 +1357,6 @@
 				6FADE56B14BA0494007EE121 /* HLSCursor.m */,
 				6F8B184E19DD8B6D00A06F2B /* HLSInfoTableViewCell.h */,
 				6F8B184F19DD8B6D00A06F2B /* HLSInfoTableViewCell.m */,
-				6F89148A15790D21009FCC78 /* HLSLabel.h */,
-				6F89148B15790D21009FCC78 /* HLSLabel.m */,
 				6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */,
 				6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */,
 				6FADE56E14BA0494007EE121 /* HLSNibView.h */,
@@ -1678,7 +1670,6 @@
 				6FC8CB8A1574BFC10014B37B /* NSURLRequest+HLSExtensions.h in Headers */,
 				6F2D46F915761A8600EF5E4F /* NSSet+HLSExtensions.h in Headers */,
 				6F2D46FD15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h in Headers */,
-				6F89148C15790D21009FCC78 /* HLSLabel.h in Headers */,
 				6F8366061588CC690044E572 /* HLSVector.h in Headers */,
 				6F6C0A16159B964B007933EB /* HLSStackPushSegue.h in Headers */,
 				6FCD33D51A1216E30002F478 /* HLSViewBindingInformationViewController.h in Headers */,
@@ -1795,7 +1786,6 @@
 				E69F21831ABCAC0D000EEC39 /* HLSInMemoryFileManager.h in Headers */,
 				E69F221F1ABCAC37000EEC39 /* HLSPlaceholderInsetSegue.h in Headers */,
 				E69F219F1ABCAC0D000EEC39 /* NSArray+HLSExtensions.h in Headers */,
-				E69F21ED1ABCAC31000EEC39 /* HLSLabel.h in Headers */,
 				E69F219B1ABCAC0D000EEC39 /* HLSVector.h in Headers */,
 				E69F222B1ABCAC37000EEC39 /* HLSTransition.h in Headers */,
 				E69F22001ABCAC31000EEC39 /* UIActionSheet+HLSExtensions.h in Headers */,
@@ -2203,7 +2193,6 @@
 				E6E94C281AB021CB00FCCC4E /* UIViewController+HLSInstantiation.m in Sources */,
 				6F2D46FE15761AA500EF5E4F /* NSMutableArray+HLSExtensions.m in Sources */,
 				6FC673031A164B33008BE139 /* HLSViewBindingHelpViewController.m in Sources */,
-				6F89148D15790D21009FCC78 /* HLSLabel.m in Sources */,
 				6FCD33AF1A1216690002F478 /* UIImageView+HLSViewBinding.m in Sources */,
 				6F8366071588CC690044E572 /* HLSVector.m in Sources */,
 				6F6C0A17159B964B007933EB /* HLSStackPushSegue.m in Sources */,
@@ -2333,7 +2322,6 @@
 				E69F21B21ABCAC0D000EEC39 /* NSMutableArray+HLSExtensions.m in Sources */,
 				E69F213A1ABCABF4000EEC39 /* HLSAnimation.m in Sources */,
 				E69F218B1ABCAC0D000EEC39 /* HLSPreviewItem.m in Sources */,
-				E69F21EE1ABCAC31000EEC39 /* HLSLabel.m in Sources */,
 				E69F22071ABCAC31000EEC39 /* UITextField+HLSExtensions.m in Sources */,
 				E69F221C1ABCAC37000EEC39 /* HLSContainerStackView.m in Sources */,
 				E69F21BA1ABCAC0D000EEC39 /* NSStream+HLSExtensions.m in Sources */,

@@ -21,7 +21,6 @@
     #import "HLSGoogleChromeActivity.h"
     #import "HLSInMemoryFileManager.h"
     #import "HLSKeyboardInformation.h"
-    #import "HLSLabel.h"
     #import "HLSLayerAnimation.h"
     #import "HLSLayerAnimationStep.h"
     #import "HLSLogger.h"
