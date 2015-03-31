@@ -172,7 +172,6 @@
 		6FA9B0A714F8E765008B6D5A /* img_apple4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9B0A314F8E765008B6D5A /* img_apple4.jpg */; };
 		6FB9EA5015F0DA4D0061D807 /* LayerPropertiesTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4E15F0DA4D0061D807 /* LayerPropertiesTestViewController.m */; };
 		6FB9EA5215F0DA4D0061D807 /* LayerPropertiesTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB9EA4F15F0DA4D0061D807 /* LayerPropertiesTestViewController.xib */; };
-		6FBB43141A2875AA008C86D9 /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8CC0C319DC2A8C003286F7 /* CoconutKit.framework */; };
 		6FC09CF815EFDAC600C0CC74 /* AnimationDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC09CF615EFDAC600C0CC74 /* AnimationDemoViewController.m */; };
 		6FC09CF915EFDAC600C0CC74 /* AnimationDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC09CF715EFDAC600C0CC74 /* AnimationDemoViewController.xib */; };
 		6FC378FD182D188900B55AF1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC378FC182D188900B55AF1 /* main.m */; };
@@ -366,6 +365,13 @@
 		6FEEF85214F2887C001585A6 /* parallax_demo_mountains_layer.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF85114F2887C001585A6 /* parallax_demo_mountains_layer.png */; };
 		6FEEF86A14F29C9A001585A6 /* skyscraper.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEF86914F29C9A001585A6 /* skyscraper.jpg */; };
 		6FF3E71715D37FB900AB9A53 /* CustomTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3E71615D37FB900AB9A53 /* CustomTransitions.m */; };
+		E60EEB331ACA575800354B4D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FC900F613D4662400834900 /* CoreData.framework */; };
+		E60EEB341ACA575F00354B4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		E60EEB351ACA576700354B4D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F22C75116A93DD20081A9A7 /* CoreText.framework */; };
+		E60EEB361ACA577300354B4D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAB921F16DA70BE00599256 /* MobileCoreServices.framework */; };
+		E60EEB371ACA577900354B4D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCDA16E14DAE60300ED1CD1 /* QuartzCore.framework */; };
+		E60EEB381ACA577E00354B4D /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F63E7B917CF6BA1006322D9 /* QuickLook.framework */; };
+		E60EEB391ACA578400354B4D /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F04E3A91A1C886D00C6C08B /* WebKit.framework */; };
 		E611733E1A654BA90066C42C /* AutolayoutBottomLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611731D1A654BA90066C42C /* AutolayoutBottomLeftNibView.m */; };
 		E611733F1A654BA90066C42C /* AutolayoutBottomLeftNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E611731D1A654BA90066C42C /* AutolayoutBottomLeftNibView.m */; };
 		E61173401A654BA90066C42C /* AutolayoutBottomLeftNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E611731E1A654BA90066C42C /* AutolayoutBottomLeftNibView.xib */; };
@@ -1089,7 +1095,6 @@
 			files = (
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				6FBB43141A2875AA008C86D9 /* CoconutKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1115,6 +1120,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60EEB391ACA578400354B4D /* WebKit.framework in Frameworks */,
+				E60EEB381ACA577E00354B4D /* QuickLook.framework in Frameworks */,
+				E60EEB371ACA577900354B4D /* QuartzCore.framework in Frameworks */,
+				E60EEB361ACA577300354B4D /* MobileCoreServices.framework in Frameworks */,
+				E60EEB351ACA576700354B4D /* CoreText.framework in Frameworks */,
+				E60EEB341ACA575F00354B4D /* CoreGraphics.framework in Frameworks */,
+				E60EEB331ACA575800354B4D /* CoreData.framework in Frameworks */,
 				E67CF5A11AC284E700AA0C3B /* CoconutKit.framework in Frameworks */,
 				E67CF5941AC2839200AA0C3B /* Foundation.framework in Frameworks */,
 				E67CF5951AC2839200AA0C3B /* UIKit.framework in Frameworks */,
@@ -3066,7 +3078,7 @@
 		};
 		E67CF5981AC2839200AA0C3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6FB6242E1A287E86000F1E91 /* CoconutKit-demo-debug.xcconfig */;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
@@ -3084,7 +3096,7 @@
 		};
 		E67CF5991AC2839200AA0C3B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6FB6242F1A287E86000F1E91 /* CoconutKit-demo-release.xcconfig */;
+			baseConfigurationReference = 6F8CC0A519DC2A3D003286F7 /* version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
