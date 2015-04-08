@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -18,6 +20,7 @@
  *
  * Not meant to be instantiated directly. Simply use the +keyboardInformation class method.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSKeyboardInformation : NSObject
 
 /**
@@ -29,30 +32,30 @@
  *         not match the keyboard visual status (but is consistent with the buggy keyboard status maintained by the
  *         system)
  */
-+ (instancetype)keyboardInformation;
++ (nullable instancetype)keyboardInformation;
 
 /**
  * Start frame of the keyboard before it is displayed (in the window coordinate system). Refer to the 
  * UIKeyboardFrameBeginUserInfoKey documentation for how to translate this frame into a meaningful coordinate system
  */
-@property (nonatomic, readonly, assign) CGRect beginFrame;
+@property (nonatomic, readonly) CGRect beginFrame;
 
 /**
  * Start frame of the keyboard after it is displayed (in the window coordinate system). This is the most interesting 
  * keyboard property since it lets you find which screen area the keyboard covers when displayed. Refer to the 
  * UIKeyboardFrameEndUserInfoKey documentation for how to translate this frame into a meaningful coordinate system
  */
-@property (nonatomic, readonly, assign) CGRect endFrame;
+@property (nonatomic, readonly) CGRect endFrame;
 
 /**
  * Duration of the animation showing the keyboard
  */
-@property (nonatomic, readonly, assign) NSTimeInterval animationDuration;
+@property (nonatomic, readonly) NSTimeInterval animationDuration;
 
 /**
  * Curve of the animation showing the keyboard
  */
-@property (nonatomic, readonly, assign) UIViewAnimationCurve animationCurve;
+@property (nonatomic, readonly) UIViewAnimationCurve animationCurve;
 
 @end
 
@@ -61,3 +64,4 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

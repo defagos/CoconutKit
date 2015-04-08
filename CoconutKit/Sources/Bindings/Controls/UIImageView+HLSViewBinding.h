@@ -16,5 +16,4 @@
  *   - does not animate updates
  */
 @interface UIImageView (HLSViewBinding) <HLSViewBindingImplementation>
-
 @end

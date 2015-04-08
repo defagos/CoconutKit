@@ -17,8 +17,8 @@
 
 @interface HLSInMemoryFileManager ()
 
-@property (nonatomic, strong) NSMutableDictionary *rootItems;           // Stores the directory / file hierarchy
-@property (nonatomic, strong) NSCache *cache;                           // Store data
+@property (nonatomic) NSMutableDictionary *rootItems;           // Stores the directory / file hierarchy
+@property (nonatomic) NSCache *cache;                           // Store data
 
 @end
 

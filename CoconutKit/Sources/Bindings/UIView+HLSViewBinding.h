@@ -377,9 +377,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
 
 @end
-NS_ASSUME_NONNULL_END
 
-NS_ASSUME_NONNULL_BEGIN
 @interface UIView (HLSViewBindingProgrammatic)
 
 /**

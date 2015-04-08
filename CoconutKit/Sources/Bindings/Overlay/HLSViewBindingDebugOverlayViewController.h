@@ -32,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)highlightView:(UIView *)view;
 
 @end
-NS_ASSUME_NONNULL_END
 
 @interface HLSViewBindingDebugOverlayViewController (UnavailableMethods)
 
@@ -42,3 +41,4 @@ NS_ASSUME_NONNULL_END
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

@@ -8,8 +8,8 @@
 
 @interface HLSPreviewItem ()
 
-@property (nonatomic, strong) NSURL *previewItemURL;
-@property (nonatomic, strong) NSString *previewItemTitle;
+@property (nonatomic) NSURL *previewItemURL;
+@property (nonatomic, copy) NSString *previewItemTitle;
 
 @end
 

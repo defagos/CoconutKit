@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 
 /**
@@ -13,6 +15,7 @@
  * cases, the internal file hierarchy dictionary maintained by the file manager needs to be updated to reflect which
  * object has been discarded
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSInMemoryCacheEntry : NSObject
 
 /**
@@ -26,10 +29,10 @@
  * Access entry information
  */
 @property (nonatomic, readonly, weak) NSMutableDictionary *parentItems;
-@property (nonatomic, readonly, strong) NSString *name;
-@property (nonatomic, readonly, strong) NSData *data;
+@property (nonatomic, readonly, copy) NSString *name;
+@property (nonatomic, readonly) NSData *data;
 
-@property (nonatomic, readonly, assign) NSUInteger cost;
+@property (nonatomic, readonly) NSUInteger cost;
 
 @end
 
@@ -38,3 +41,4 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

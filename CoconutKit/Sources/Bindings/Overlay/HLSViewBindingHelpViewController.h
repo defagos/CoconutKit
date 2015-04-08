@@ -12,5 +12,4 @@
  * View controller displaying help about bindings
  */
 @interface HLSViewBindingHelpViewController : HLSViewController
-
 @end

@@ -64,10 +64,6 @@
 
 #pragma clang diagnostic pop
 
-#pragma mark Accessors and mutators
-
-@synthesize targetZeroingWeakRef = _targetZeroingWeakRef;
-
 #pragma mark Proxy implementation
 
 - (BOOL)conformsToProtocol:(Protocol *)protocol

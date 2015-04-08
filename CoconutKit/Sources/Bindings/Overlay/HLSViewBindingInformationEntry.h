@@ -40,10 +40,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable UIView *)view;
 
 @end
-NS_ASSUME_NONNULL_END
 
 @interface HLSViewBindingInformationEntry (UnavailableMethods)
 
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

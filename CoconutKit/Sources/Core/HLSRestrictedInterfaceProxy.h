@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 
 // Forward declarations
@@ -38,12 +40,13 @@
  * The proxy object does not retain the object it is created from, and if the object gets deallocated, all 
  * associated proxy objects are automatically set to nil.
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSRestrictedInterfaceProxy : NSProxy
 
 /**
  * Convenience constructor
  */
-+ (instancetype)proxyWithTarget:(id)target protocol:(Protocol *)protocol;
++ (nullable instancetype)proxyWithTarget:(nullable id)target protocol:(Protocol *)protocol;
 
 /**
  * Create a proxy object. On success a proxy object is returned, otherwise nil (most notably if the target fails to 
@@ -52,7 +55,7 @@
  *
  * Currently the target cannot be another NSProxy object
  */
-- (instancetype)initWithTarget:(id)target protocol:(Protocol *)protocol NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithTarget:(nullable id)target protocol:(Protocol *)protocol NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -61,6 +64,7 @@
 /**
  * Convenient proxy creation
  */
-- (id)proxyWithRestrictedInterface:(Protocol *)protocol;
+- (nullable id)proxyWithRestrictedInterface:(Protocol *)protocol;
 
 @end
+NS_ASSUME_NONNULL_END

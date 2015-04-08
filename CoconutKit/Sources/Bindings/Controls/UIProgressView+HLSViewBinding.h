@@ -16,5 +16,4 @@
  *   - can animate updates
  */
 @interface UIProgressView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
-
 @end

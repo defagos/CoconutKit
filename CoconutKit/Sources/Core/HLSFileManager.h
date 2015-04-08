@@ -4,11 +4,14 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 
 /**
  * Concrete subclasses of HLSFileManager must implement the set of methods declared by the following protocol
  */
+NS_ASSUME_NONNULL_BEGIN
 @protocol HLSFileManagerAbstract <NSObject>
 @optional
 
@@ -16,7 +19,7 @@
  * Return the content of the file at the given location. If the path is incorrect or if the file does not exist, the method
  * must return nil and an error, otherwise YES and no error.
  */
-- (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError;
+- (nullable NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError;
 
 /**
  * Create a file with the specified content at the given location. If the path is incorrect or if an error is encountered, 
@@ -44,7 +47,7 @@
  * need this information). If the path is invalid or if the file does not exist, the method must return NO and leave the boolean received
  * by reference unchanged
  */
-- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory;
+- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(nullable BOOL *)pIsDirectory;
 
 /**
  * Recursively copy the file or directory at the specified path to a new location. If any path is invalid, if the copy 
@@ -82,13 +85,13 @@
  * Return an input stream for the file at a given location, nil if the path is invalid. Check the providingInputStreams
  * property before calling this method
  */
-- (NSInputStream *)inputStreamWithFileAtPath:(NSString *)path;
+- (nullable NSInputStream *)inputStreamWithFileAtPath:(NSString *)path;
 
 /**
  * Return an output stream for the file at a given location, nil if the path is invalid (e.g. corresponds to an existing
  * directory). Check the providingOutputStreams property before calling this method
  */
-- (NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append;
+- (nullable NSOutputStream *)outputStreamToFileAtPath:(NSString *)path append:(BOOL)append;
 
 @end
 
@@ -103,7 +106,7 @@
  * Return the file URL pointing at a file given its path. If the file does not exist, the method must return nil. Check 
  * the providingURLs property before calling this method
  */
-- (NSURL *)URLForFileAtPath:(NSString *)path;
+- (nullable NSURL *)URLForFileAtPath:(NSString *)path;
 
 @end
 
@@ -130,12 +133,13 @@
  * Return YES iff the corresponding stream type is supported. Check before calling methods from the HLSFileManagerStreamSupport
  * protocol
  */
-@property (atomic, readonly, assign, getter=isProvidingInputStreams) BOOL providingInputStreams;
-@property (atomic, readonly, assign, getter=isProvidingInputStreams) BOOL providingOutputStreams;
+@property (atomic, readonly, getter=isProvidingInputStreams) BOOL providingInputStreams;
+@property (atomic, readonly, getter=isProvidingInputStreams) BOOL providingOutputStreams;
 
 /**
  * Return YES iff URL mappings are supported. Check before calling methods from the HLSFileManagerURLSupport protocol
  */
-@property (atomic, readonly, assign, getter=isProvidingURLs) BOOL providingURLs;
+@property (atomic, readonly, getter=isProvidingURLs) BOOL providingURLs;
 
 @end
+NS_ASSUME_NONNULL_END

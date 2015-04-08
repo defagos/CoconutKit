@@ -19,20 +19,15 @@
  *
  * Designated initializer: -initWithObject:forNotificationName:
  */
-@interface NotificationSender : NSObject {
-@private
-    NSString *_notificationName;
-    id __weak _object;
-}
+@interface NotificationSender : NSObject
 
 - (instancetype)initWithNotificationName:(NSString *)notificationName forObject:(id)object NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, strong) NSString *notificationName;
+@property (nonatomic, copy) NSString *notificationName;
 @property (nonatomic, weak) id object;
 
 @end
 
-#pragma mark -
 #pragma mark HLSNotificationConverter class interface extension
 
 @interface HLSNotificationConverter ()
@@ -41,7 +36,6 @@
 
 @end
 
-#pragma mark -
 #pragma mark HLSNotificationManager class implementation
 
 @implementation HLSNotificationManager  {
@@ -102,7 +96,6 @@
 
 @end
 
-#pragma mark -
 #pragma mark NotificationSender class implementation
 
 @implementation NotificationSender
@@ -125,7 +118,6 @@
 
 @end
 
-#pragma mark -
 #pragma mark HLSNotificationConverter class implementation
 
 @implementation HLSNotificationConverter
@@ -287,7 +279,6 @@
 
 @end
 
-#pragma mark -
 #pragma mark NSObject extensions
 
 @implementation NSObject (HLSNotificationExtensions)
@@ -310,7 +301,6 @@
 
 @end
 
-#pragma mark -
 #pragma mark NSNotificationCenter extensions
 
 @implementation NSNotificationCenter (HLSNotificationExtensions)

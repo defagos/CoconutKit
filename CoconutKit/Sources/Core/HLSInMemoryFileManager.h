@@ -5,6 +5,7 @@
 //
 
 #import "HLSFileManager.h"
+#import "HLSNullability.h"
 
 #import <Foundation/Foundation.h>
 
@@ -12,6 +13,7 @@
  * A file manager implementation storing data in memory. If the application receives a memory warning, this data
  * cache is automatically cleared
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSInMemoryFileManager : HLSFileManager <NSCacheDelegate>
 
 /**
@@ -20,6 +22,7 @@
  *
  * Default value is 0 (no limit)
  */
-@property (nonatomic, assign) NSUInteger byteCostLimit;
+@property (nonatomic) NSUInteger byteCostLimit;
 
 @end
+NS_ASSUME_NONNULL_END

@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
@@ -26,6 +28,8 @@ typedef NS_ENUM(NSInteger, HLSContentMode) {
     HLSContentModeEnumSize = HLSContentModeEnumEnd - HLSContentModeEnumBegin
 };
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Given a size, return the rectangle corresponding to a rectangle passing in a given target rectangle for the provided content
  * mode. The returned rectangle coordinates are expressed in the same coordinate system as the target rectangle. For content
@@ -38,3 +42,5 @@ OBJC_EXPORT CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect,
  */
 OBJC_EXPORT CGSize HLSSizeForAspectFittingInSize(CGSize size, CGSize targetSize);
 OBJC_EXPORT CGSize HLSSizeForAspectFillingInSize(CGSize size, CGSize targetSize);
+
+NS_ASSUME_NONNULL_END

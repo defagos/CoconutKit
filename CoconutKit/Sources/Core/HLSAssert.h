@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "HLSNullability.h"
+
 /**
  * The following macros are only active if NS_BLOCK_ASSERTIONS is disabled for the project configuration you use
  * (usually -DNS_BLOCK_ASSERTIONS=1)
@@ -82,6 +84,7 @@
 
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
 @interface NSAssertionHandler (HLSAssert)
 
 /**
@@ -89,17 +92,18 @@
  * must be members of the class which is provided, otherwise they must be connected to it via inheritance
  */
 - (void)handleIncorrectObjectClass:(Class)objectClass 
-                     inEnumeration:(id<NSFastEnumeration>)enumeration
+                     inEnumeration:(nullable id<NSFastEnumeration>)enumeration
                             strict:(BOOL)strict 
                           inMethod:(SEL)selector 
                             object:(id)object 
                               file:(NSString *)fileName 
                         lineNumber:(NSInteger)line;
 - (void)handleIncorrectObjectClass:(Class)objectClass 
-                     inEnumeration:(id<NSFastEnumeration>)enumeration
+                     inEnumeration:(nullable id<NSFastEnumeration>)enumeration
                             strict:(BOOL)strict 
                         inFunction:(NSString *)functionName 
                               file:(NSString *)fileName 
                         lineNumber:(NSInteger)line;
 
 @end
+NS_ASSUME_NONNULL_END

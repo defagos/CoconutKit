@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation NS_DESIGNATED_INITIALIZER;
 
 @end
-NS_ASSUME_NONNULL_END
 
 @interface HLSViewBindingInformationViewController (UnavailableMethods)
 
@@ -32,3 +31,4 @@ NS_ASSUME_NONNULL_END
 - (instancetype)initWithStyle:(UITableViewStyle)style NS_UNAVAILABLE;
 
 @end
+NS_ASSUME_NONNULL_END

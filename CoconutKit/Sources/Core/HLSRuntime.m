@@ -20,6 +20,8 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
                                                                        BOOL isInstanceMethod,
                                                                        unsigned int *pCount)
 {
+    NSCParameterAssert(protocol);
+    
     unsigned int numberOfMethodDescriptions = 0;
     struct objc_method_description *methodDescriptions = NULL;
     
@@ -102,6 +104,8 @@ struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol 
 
 BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol)
 {
+    NSCParameterAssert(protocol);
+    
     Class class = cls;
     while (class != Nil) {
         if (class_conformsToProtocol(class, protocol)) {
@@ -114,6 +118,8 @@ BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol)
 
 BOOL hls_class_conformsToInformalProtocol(Class cls, Protocol *protocol)
 {
+    NSCParameterAssert(protocol);
+    
     // Just checks that all required class and instance methods have been implemented
     return hls_class_implementsProtocolMethods(cls, protocol, YES, NO)
         && hls_class_implementsProtocolMethods(cls, protocol, YES, YES);
@@ -121,6 +127,8 @@ BOOL hls_class_conformsToInformalProtocol(Class cls, Protocol *protocol)
 
 BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol)
 {
+    NSCParameterAssert(protocol);
+    
     // Check that all required and optional class and instance methods have been implemented
     return hls_class_implementsProtocolMethods(cls, protocol, YES, NO)
         && hls_class_implementsProtocolMethods(cls, protocol, NO, NO)
@@ -130,6 +138,8 @@ BOOL hls_class_implementsProtocol(Class cls, Protocol *protocol)
 
 BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protocol, BOOL isRequiredMethod, BOOL isInstanceMethod)
 {
+    NSCParameterAssert(protocol);
+    
     unsigned int numberOfMethods = 0;
     struct objc_method_description *methodDescriptions = hls_protocol_copyMethodDescriptionList(protocol,
                                                                                                 isRequiredMethod,
@@ -317,6 +327,8 @@ BOOL hls_isClass(id object)
 
 void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject)
 {
+    NSCParameterAssert(replacedObject);
+    
     unsigned int numberOfIvars = 0;
     Ivar *ivars = class_copyIvarList([object class], &numberOfIvars);
     for (unsigned int i = 0; i < numberOfIvars; ++i) {
@@ -340,6 +352,9 @@ void hls_object_replaceReferencesToObject(id object, id replacedObject, id repla
 
 void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy)
 {
+    NSCParameterAssert(object);
+    NSCParameterAssert(key);
+    
     // Use an indirection so that associated objects attached using hls_setAssociatedObject can only be retrieved
     // using hls_getAssociatedObject, not using objc_getAssociatedObject. Conversely, associated objects created
     // using objc_setAssociatedObject cannot be retrieved using hls_getAssociatedObject
@@ -357,6 +372,9 @@ void hls_setAssociatedObject(id object, const void *key, id value, hls_Associati
 
 id hls_getAssociatedObject(id object, const void *key)
 {
+    NSCParameterAssert(object);
+    NSCParameterAssert(key);
+    
     // See hls_setAssociatedObject
     void *hiddenKey = (void *)[[NSString stringWithFormat:@"hls_%p", key] hash];
     id associatedObject = objc_getAssociatedObject(object, hiddenKey);

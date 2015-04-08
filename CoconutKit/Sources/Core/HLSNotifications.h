@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSNullability.h"
+
 #import <Foundation/Foundation.h>
 
 /**
@@ -26,6 +28,7 @@
  *
  * This class is not thread-safe
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface HLSNotificationManager : NSObject
 
 /**
@@ -73,7 +76,7 @@
 /**
  * Singleton instance
  */
-+ (HLSNotificationConverter *)sharedNotificationConverter;
++ (instancetype)sharedNotificationConverter;
 
 /**
  * Create a notification converter
@@ -91,28 +94,28 @@
  *              is guaranteed to be valid, since its lifetime is longer than the one of objectFrom
  */
 - (void)convertNotificationWithName:(NSString *)notificationNameFrom
-                       sentByObject:(id)objectFrom
+                       sentByObject:(nullable id)objectFrom
            intoNotificationWithName:(NSString *)notificationNameTo
-                       sentByObject:(id)objectTo;
+                       sentByObject:(nullable id)objectTo;
 
 /**
  * Add a conversion rule for all objects within an enumerable collection. Convenience function with same semantics
  * as -convertNotificationWithName:sentByObject:intoNotificationWithName:sentByObject:
  */
 - (void)convertNotificationWithName:(NSString *)notificationNameFrom
-           sentByObjectInCollection:(id<NSFastEnumeration>)collectionFrom
+           sentByObjectInCollection:(nullable id<NSFastEnumeration>)collectionFrom
            intoNotificationWithName:(NSString *)notificationNameTo
-                       sentByObject:(id)objectTo;
+                       sentByObject:(nullable id)objectTo;
 
 /**
  * Remove all conversion rules related to an object
  */
-- (void)removeConversionsFromObject:(id)objectFrom;
+- (void)removeConversionsFromObject:(nullable id)objectFrom;
 
 /**
  * Remove all conversion rules related to all objects of an enumerable collection
  */
-- (void)removeConversionsFromObjectsInCollection:(id<NSFastEnumeration>)collectionFrom;
+- (void)removeConversionsFromObjectsInCollection:(nullable id<NSFastEnumeration>)collectionFrom;
 
 @end
 
@@ -121,14 +124,15 @@
  */
 @interface NSObject (HLSNotificationExtensions)
 
-- (void)postCoalescingNotificationWithName:(NSString *)name userInfo:(NSDictionary *)userInfo;
+- (void)postCoalescingNotificationWithName:(NSString *)name userInfo:(nullable NSDictionary *)userInfo;
 - (void)postCoalescingNotificationWithName:(NSString *)name;
 
 @end
 
 @interface NSNotificationCenter (HLSNotificationExtensions)
 
-- (void)addObserver:(id)observer selector:(SEL)selector name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection;
-- (void)removeObserver:(id)observer name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection;
+- (void)addObserver:(id)observer selector:(SEL)selector name:(nullable NSString *)name objectsInCollection:(nullable id<NSFastEnumeration>)collection;
+- (void)removeObserver:(id)observer name:(nullable NSString *)name objectsInCollection:(nullable id<NSFastEnumeration>)collection;
 
 @end
+NS_ASSUME_NONNULL_END

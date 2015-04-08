@@ -17,5 +17,4 @@
  *   - check (if not disabled via bindInputChecked) and update the value each time it is changed
  */
 @interface UITextField (HLSViewBindingImplementation) <HLSViewBindingImplementation>
-
 @end

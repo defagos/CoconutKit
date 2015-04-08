@@ -5,7 +5,11 @@
 //
 
 #import <Foundation/Foundation.h>
-    
+
+#import "HLSNullability.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Return the application Library directory
  */
@@ -35,3 +39,5 @@ OBJC_EXPORT NSURL *HLSApplicationTemporaryDirectoryURL(void);
  */
 OBJC_EXPORT NSString *HLSApplicationInboxDirectoryPath(void);
 OBJC_EXPORT NSURL *HLSApplicationInboxDirectoryURL(void);
+
+NS_ASSUME_NONNULL_END
