@@ -213,7 +213,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     //
     // TODO: Remove when a fix is available
     if ([WKWebView class]) {
-        NSString *temporaryCoconutKitBundlePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingString:@"CoconutKit-resources.bundle"];
+        NSString *temporaryCoconutKitBundlePath = [HLSApplicationTemporaryDirectoryPath() stringByAppendingPathComponent:@"CoconutKit-resources.bundle"];
         
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
