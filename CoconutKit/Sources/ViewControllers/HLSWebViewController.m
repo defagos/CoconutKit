@@ -455,7 +455,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     self.activityPopoverController = nil;
 }
 
-#pragma mark UIWebViewDelegate protocol implementation
+#pragma mark WKWebViewDelegate protocol implementation
 
 // TODO: When iOS 8 only, use explicit WKWebView type here, instead of common UIView * type (use to help the compiler catch errors)
 - (void)webView:(UIView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
@@ -529,7 +529,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self updateInterfaceAnimated:YES];
 }
 
-#pragma mark WKWebViewDelegate protocol implementation
+#pragma mark UIWebViewDelegate protocol implementation
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {

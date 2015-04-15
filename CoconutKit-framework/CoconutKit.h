@@ -4,9 +4,6 @@
 //  Licence information is available from the LICENCE file.
 //
 
-/**
- * Framework version
- */
 #import <CoconutKit/CALayer+HLSExtensions.h>
 #import <CoconutKit/CAMediaTimingFunction+HLSExtensions.h>
 #import <CoconutKit/HLSAnimation.h>
