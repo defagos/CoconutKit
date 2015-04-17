@@ -179,13 +179,13 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 6
-* iOS 8 SDK
+* Xcode 6.3
+* iOS 8.3 SDK
 
 Deployment is supported for the two most recent major iOS versions, currently:
 
-* iOS 7
-* iOS 8
+* iOS 7.x
+* iOS 8.x
 
 All architectures are supported:
 
@@ -220,11 +220,7 @@ Add CoconutKit as dependency in your `Cartfile`:
 github "defagos/CoconutKit" == <version>
 ```
 
-Then run `carthage update` to update the dependencies. Unlike CocoaPods, your project is not changed. You will need to manually add the `.framework` generated in the `Carthage/Build/iOS` folder to your projet. On your target `General` tab, add `CoconutKit.framwork` to the _Embedded Binaries_ list:
-
-<p align="center"><img src="README-images/carthage.jpg"/></p>
-
-For more information about Carthage and the `Cartfile`, please refer to the [official documentation](https://github.com/Carthage/Carthage).
+Then run `carthage update` to update the dependencies. Unlike CocoaPods, your project is not changed. You will need to manually add the `.framework` generated in the `Carthage/Build/iOS` folder to your projet. Refer to the [official documentation](https://github.com/Carthage/Carthage) for more information.
 
 ### Static framework
 
