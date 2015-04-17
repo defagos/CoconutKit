@@ -264,7 +264,7 @@ Then use this configuration file instead.
 
 A global `CoconutKit.h` header file is provided. You can of course individually import public header files if you prefer, though.
 
-### Objective-C
+### Usage from Objective-C source files
 
 Import the global header file using
 
@@ -288,7 +288,7 @@ It you use the static framework, Carthage or CocoaPods with the `use_frameworks!
 
 For the installation with CocoaPods, you can also use `#import "CoconutKit.h"`, respectively `#import "HLSStackController.h"`, though I do not recommend this syntax anymore.
 
-### Swift
+### Usage from Swift source files
 
 If you installed CoconutKit with CocoaPods but without the `use_frameworks!` directive, import the global header from a bridging header:
 
