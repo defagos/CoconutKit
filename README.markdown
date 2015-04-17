@@ -281,7 +281,7 @@ You can similarly import individual files, e.g.
 It you use the static framework, Carthage or CocoaPods with the `use_frameworks!` directive, it is easier to import the CoconutKit module itself where needed:
 
 ```objective-c
-@import CoconutKit
+@import CoconutKit;
 ```
 
 #### Remark
