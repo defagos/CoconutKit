@@ -44,6 +44,7 @@
 
 - (void)dealloc
 {
+    [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:self.gestureRecognizer];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
