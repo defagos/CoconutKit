@@ -100,6 +100,11 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 - (void)dealloc
 {
     // Unregister KVO

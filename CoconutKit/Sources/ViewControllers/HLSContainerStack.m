@@ -66,6 +66,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 - (void)dealloc
 {
     for (HLSContainerContent *containerContent in self.containerContents) {

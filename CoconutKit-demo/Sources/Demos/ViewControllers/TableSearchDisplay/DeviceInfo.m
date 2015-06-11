@@ -33,4 +33,9 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 @end

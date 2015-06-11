@@ -38,6 +38,11 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 #pragma mark Parsing text
 
 - (void)parseText:(NSString *)text

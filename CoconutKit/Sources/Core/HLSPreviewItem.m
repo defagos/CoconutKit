@@ -31,4 +31,9 @@
     return [self initWithPreviewItemURL:previewItemURL previewItemTitle:nil];
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 @end

@@ -33,6 +33,11 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 #pragma mark Thread main function
 
 - (void)main

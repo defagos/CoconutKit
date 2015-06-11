@@ -89,6 +89,11 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 #pragma mark HLSTransformer protocol implementation
 
 - (id)transformObject:(id)object

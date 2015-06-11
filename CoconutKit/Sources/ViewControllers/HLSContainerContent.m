@@ -136,6 +136,11 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 - (void)dealloc
 {
     // Remove the view from the stack (this does NOT set viewController.view to nil to allow view caching)
