@@ -147,7 +147,8 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 
 /**
  * This method must be called when the connection finishes, whether it finishes normally, with an error or has
- * been canceled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks)
+ * been canceled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks).
+ * If called with both parameters set to nil, the completion block won't be called
  */
 - (void)finishWithResponseObject:(id)responseObject error:(NSError *)error;
 

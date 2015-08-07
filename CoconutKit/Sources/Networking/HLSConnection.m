@@ -194,7 +194,9 @@
     
     self.error = error;
     
-    self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
+    if (responseObject || error) {
+        self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
+    }
     
     self.selfRunning = NO;
     
