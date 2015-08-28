@@ -114,9 +114,10 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 - (void)addChildConnection:(HLSConnection *)connection withKey:(id)key;
 
 /**
- * Same as -addChildConnection:withIdentifier:, but without key
+ * Same as -addChildConnection:withIdentifier:, but without specifiying an explicit key. The automatically generated
+ * key is provided as return value for further use
  */
-- (void)addChildConnection:(HLSConnection *)connection;
+- (id)addChildConnection:(HLSConnection *)connection;
 
 /**
  * Return all child connections, in no specific order
@@ -127,6 +128,12 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
  * Return the connection with the specified key, nil if none is found
  */
 - (HLSConnection *)childConnectionForKey:(id)key;
+
+/**
+ * Remove the connection with the specified key, does nothing if none is found. The connection is automatically
+ * cancelled
+ */
+- (void)removeChildConnectionForKey:(id)key;
 
 @end
 
