@@ -78,11 +78,6 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 @property (nonatomic, readonly, strong) NSProgress *progress;
 
 /**
- * The completion block to be called when the connection completes (either normally or on failure)
- */
-@property (nonatomic, readonly, copy) HLSConnectionCompletionBlock completionBlock;
-
-/**
  * A progress block which gets called as the connection runs (same information as -progress, but without the need
  * for KVO)
  */
