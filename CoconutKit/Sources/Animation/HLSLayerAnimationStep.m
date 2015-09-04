@@ -112,6 +112,9 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     for (CALayer *layer in [self objects]) {        
         HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
         NSAssert(layerAnimation != nil, @"Missing layer animation; data consistency failure");
+        
+        // Ensure pending layout operations are done
+        [layer layoutIfNeeded];
                 
         // Remark: For each property we animate, we still must set the final value manually (CoreAnimations animate properties
         // but do not set them). Since we do not need to support delays (which are implemented at the HLSAnimation level), we
