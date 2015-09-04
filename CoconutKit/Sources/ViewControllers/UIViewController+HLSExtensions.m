@@ -181,27 +181,28 @@ static void swizzled_UIViewController__viewDidDisappear_Imp(UIViewController *se
 
 + (void)load
 {
-    s_UIViewController__initWithNibName_bundle_Imp = (id (*)(id, SEL, id, id))hls_class_swizzleSelector(self,
-                                                                                                        @selector(initWithNibName:bundle:),
-                                                                                                        (IMP)swizzled_UIViewController__initWithNibName_bundle_Imp);
-    s_UIViewController__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
-                                                                                           @selector(initWithCoder:),
-                                                                                           (IMP)swizzled_UIViewController__initWithCoder_Imp);
-    s_UIViewController__viewDidLoad_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
-                                                                                       @selector(viewDidLoad),
-                                                                                       (IMP)swizzled_UIViewController__viewDidLoad_Imp);
-    s_UIViewController__viewWillAppear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
-                                                                                                @selector(viewWillAppear:),
-                                                                                                (IMP)swizzled_UIViewController__viewWillAppear_Imp);
-    s_UIViewController__viewDidAppear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
-                                                                                               @selector(viewDidAppear:),
-                                                                                               (IMP)swizzled_UIViewController__viewDidAppear_Imp);
-    s_UIViewController__viewWillDisappear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
-                                                                                                   @selector(viewWillDisappear:),
-                                                                                                   (IMP)swizzled_UIViewController__viewWillDisappear_Imp);
-    s_UIViewController__viewDidDisappear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
-                                                                                                  @selector(viewDidDisappear:),
-                                                                                                  (IMP)swizzled_UIViewController__viewDidDisappear_Imp);
+    // disabled the method swizzling as the implementation breaks 3rd party keyboards
+    // s_UIViewController__initWithNibName_bundle_Imp = (id (*)(id, SEL, id, id))hls_class_swizzleSelector(self,
+    //                                                                                                     @selector(initWithNibName:bundle:),
+    //                                                                                                     (IMP)swizzled_UIViewController__initWithNibName_bundle_Imp);
+    // s_UIViewController__initWithCoder_Imp = (id (*)(id, SEL, id))hls_class_swizzleSelector(self,
+    //                                                                                        @selector(initWithCoder:),
+    //                                                                                        (IMP)swizzled_UIViewController__initWithCoder_Imp);
+    // s_UIViewController__viewDidLoad_Imp = (void (*)(id, SEL))hls_class_swizzleSelector(self,
+    //                                                                                    @selector(viewDidLoad),
+    //                                                                                    (IMP)swizzled_UIViewController__viewDidLoad_Imp);
+    // s_UIViewController__viewWillAppear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
+    //                                                                                             @selector(viewWillAppear:),
+    //                                                                                             (IMP)swizzled_UIViewController__viewWillAppear_Imp);
+    // s_UIViewController__viewDidAppear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
+    //                                                                                            @selector(viewDidAppear:),
+    //                                                                                            (IMP)swizzled_UIViewController__viewDidAppear_Imp);
+    // s_UIViewController__viewWillDisappear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
+    //                                                                                                @selector(viewWillDisappear:),
+    //                                                                                                (IMP)swizzled_UIViewController__viewWillDisappear_Imp);
+    // s_UIViewController__viewDidDisappear_Imp = (void (*)(id, SEL, BOOL))hls_class_swizzleSelector(self,
+    //                                                                                               @selector(viewDidDisappear:),
+    //                                                                                               (IMP)swizzled_UIViewController__viewDidDisappear_Imp);
 }
 
 #pragma mark Object creation and destruction
