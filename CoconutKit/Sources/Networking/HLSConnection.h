@@ -78,11 +78,6 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 @property (nonatomic, readonly, strong) NSProgress *progress;
 
 /**
- * The completion block to be called when the connection completes (either normally or on failure)
- */
-@property (nonatomic, readonly, copy) HLSConnectionCompletionBlock completionBlock;
-
-/**
  * A progress block which gets called as the connection runs (same information as -progress, but without the need
  * for KVO)
  */
@@ -114,9 +109,10 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 - (void)addChildConnection:(HLSConnection *)connection withKey:(id)key;
 
 /**
- * Same as -addChildConnection:withIdentifier:, but without key
+ * Same as -addChildConnection:withIdentifier:, but without specifiying an explicit key. The automatically generated
+ * key is provided as return value for further use
  */
-- (void)addChildConnection:(HLSConnection *)connection;
+- (id)addChildConnection:(HLSConnection *)connection;
 
 /**
  * Return all child connections, in no specific order
@@ -127,6 +123,12 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
  * Return the connection with the specified key, nil if none is found
  */
 - (HLSConnection *)childConnectionForKey:(id)key;
+
+/**
+ * Remove the connection with the specified key, does nothing if none is found. The connection is automatically
+ * cancelled
+ */
+- (void)removeChildConnectionForKey:(id)key;
 
 @end
 
@@ -147,7 +149,8 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 
 /**
  * This method must be called when the connection finishes, whether it finishes normally, with an error or has
- * been canceled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks)
+ * been canceled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks).
+ * If called with both parameters set to nil, the completion block won't be called
  */
 - (void)finishWithResponseObject:(id)responseObject error:(NSError *)error;
 

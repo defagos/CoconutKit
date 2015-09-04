@@ -18,7 +18,6 @@
 #import "FixedSizeViewController.h"
 #import "FontsDemoViewController.h"
 #import "KeyboardAvoidingScrollViewDemoViewController.h"
-#import "LabelDemoViewController.h"
 #import "LayerPropertiesTestViewController.h"
 #import "NibViewAutolayoutDemoViewController.h"
 #import "NibViewAutoresizingMasksDemoViewController.h"
@@ -96,7 +95,6 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexTableViewCells = ViewDemoIndexEnumBegin,
     ViewDemoIndexKeyboardAvoidingScrollView,
     ViewDemoIndexCursor,
-    ViewDemoIndexLabel,
     ViewDemoIndexSlideshow,
     ViewDemoIndexEffects,
     ViewDemoIndexWebView,
@@ -364,12 +362,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     cell.textLabel.text = NSLocalizedString(@"Cursor", nil);
                     break;
                 }
-                
-                case ViewDemoIndexLabel: {
-                    cell.textLabel.text = NSLocalizedString(@"Label", nil);
-                    break;
-                }
-                    
+                                    
                 case ViewDemoIndexSlideshow: {
                     cell.textLabel.text = NSLocalizedString(@"Slideshow", nil);
                     break;
@@ -586,11 +579,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewDemoIndexCursor: {
                     demoViewController = [[CursorDemoViewController alloc] init];
-                    break;
-                }
-                    
-                case ViewDemoIndexLabel: {
-                    demoViewController = [[LabelDemoViewController alloc] init];
                     break;
                 }
                     

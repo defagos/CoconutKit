@@ -18,9 +18,11 @@
 - (void)updateViewWithValue:(id)value animated:(BOOL)animated
 {
     if ([value boolValue]) {
+        self.hidden = NO;
         [self startAnimating];
     }
     else {
+        self.hidden = YES;
         [self stopAnimating];
     }
 }

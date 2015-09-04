@@ -17,7 +17,6 @@ HLSGeometry.h
 HLSGoogleChromeActivity.h
 HLSInMemoryFileManager.h
 HLSKeyboardInformation.h
-HLSLabel.h
 HLSLayerAnimation.h
 HLSLayerAnimationStep.h
 HLSLogger.h

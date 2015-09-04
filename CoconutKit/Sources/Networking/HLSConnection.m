@@ -154,10 +154,11 @@
     }
 }
 
-- (void)addChildConnection:(HLSConnection *)connection
+- (id)addChildConnection:(HLSConnection *)connection
 {
     NSString *key = [[NSUUID UUID] UUIDString];
     [self addChildConnection:connection withKey:key];
+    return key;
 }
 
 - (NSArray *)childConnections
@@ -168,6 +169,17 @@
 - (HLSConnection *)childConnectionForKey:(id)key
 {
     return [self.childConnectionsDictionary objectForKey:key];
+}
+
+- (void)removeChildConnectionForKey:(id)key
+{
+    HLSConnection *connection = [self.childConnectionsDictionary objectForKey:key];
+    if (! connection) {
+        return;
+    }
+    
+    [connection cancel];
+    [self.childConnectionsDictionary removeObjectForKey:key];
 }
 
 #pragma mark Methods to be called by subclasses
@@ -194,7 +206,9 @@
     
     self.error = error;
     
-    self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
+    if (responseObject || error) {
+        self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
+    }
     
     self.selfRunning = NO;
     

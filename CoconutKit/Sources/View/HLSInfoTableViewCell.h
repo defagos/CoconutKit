@@ -4,7 +4,6 @@
 //  Licence information is available from the LICENCE file.
 //
 
-#import "HLSLabel.h"
 #import "HLSTableViewCell.h"
 
 #import <Foundation/Foundation.h>

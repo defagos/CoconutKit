@@ -240,9 +240,8 @@ static id swizzle_initWithCoder(UIViewController *self, SEL _cmd, NSCoder *aDeco
 static void swizzle_viewDidLoad(UIViewController *self, SEL _cmd)
 {
     if (! [self isViewLoaded]) {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException 
-                                       reason:@"The view controller's view has not been loaded" 
-                                     userInfo:nil];
+        HLSLoggerError(@"The view controller's view has not been loaded, but -viewDidLoad is being called. Something "
+                       "must be terribly wrong with this view controller");
     }
     
     hls_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.view.bounds.size], OBJC_ASSOCIATION_RETAIN_NONATOMIC);

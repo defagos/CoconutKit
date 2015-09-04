@@ -4,9 +4,6 @@
 //  Licence information is available from the LICENCE file.
 //
 
-/**
- * Framework version
- */
 #import <CoconutKit/CALayer+HLSExtensions.h>
 #import <CoconutKit/CAMediaTimingFunction+HLSExtensions.h>
 #import <CoconutKit/HLSAnimation.h>
@@ -26,7 +23,6 @@
 #import <CoconutKit/HLSGoogleChromeActivity.h>
 #import <CoconutKit/HLSInMemoryFileManager.h>
 #import <CoconutKit/HLSKeyboardInformation.h>
-#import <CoconutKit/HLSLabel.h>
 #import <CoconutKit/HLSLayerAnimation.h>
 #import <CoconutKit/HLSLayerAnimationStep.h>
 #import <CoconutKit/HLSLogger.h>

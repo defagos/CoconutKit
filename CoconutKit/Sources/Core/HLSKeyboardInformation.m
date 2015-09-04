@@ -7,7 +7,6 @@
 #import "HLSKeyboardInformation.h"
 
 #import "HLSLogger.h"
-#import "HLSRuntime.h"
 
 // FIXME: There are serious bugs with the undocked keyboard in iOS 8 / 8.1:
 //          - when undocked by dragging the keyboard upwards, the keyboard does not transition to undocked state. The
@@ -138,5 +137,4 @@ __attribute__ ((constructor)) static void HLSKeyboardInformationInit(void)
                                                  name:UIKeyboardDidChangeFrameNotification
                                                object:nil];
 #endif
-
 }
