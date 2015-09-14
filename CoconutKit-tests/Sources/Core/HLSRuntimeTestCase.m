@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSRuntimeTestCase.h"
