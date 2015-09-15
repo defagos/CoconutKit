@@ -18,6 +18,9 @@ const NSUInteger HLSContainerStackMinimalCapacity = 1;
 const NSUInteger HLSContainerStackDefaultCapacity = 2;
 const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
+static NSString * const HLSContainerStackPushAnimationName = @"push_animation";
+static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
+
 @interface HLSContainerStack () <HLSContainerStackViewDelegate>
 
 @property (nonatomic, weak) UIViewController *containerViewController;                  // The container view controller implemented using HLSContainerStack
@@ -462,7 +465,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             // we give them a tag which we can test in those callbacks
             //
             // Same remark as in -addViewForContainerContent:inserting:animated: regarding animations in nested containers
-            reverseAnimation.tag = @"pop_animation";
+            reverseAnimation.tag = HLSContainerStackPopAnimationName;
             reverseAnimation.lockingUI = self.lockingUI;
             [reverseAnimation playAnimated:animated];
             
@@ -909,7 +912,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if (inserting && index == [self.containerContents count] - 1) {
         // Some more work has to be done for push animations in the animation begin / end callbacks. To identify such animations,
         // we give them a tag which we can test in those callbacks
-        animation.tag = @"push_animation";
+        animation.tag = HLSContainerStackPushAnimationName;
         animation.lockingUI = self.lockingUI;
         [animation playAnimated:animated];
         
@@ -1016,14 +1019,14 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     _animating = YES;
     
     // Extra work needed for push and pop animations
-    if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
+    if ([animation.tag isEqualToString:HLSContainerStackPushAnimationName] || [animation.tag isEqualToString:HLSContainerStackPopAnimationName]) {
         // FIXME: Should be correctly animated for animated status bar changes
         [self.containerViewController setNeedsStatusBarAppearanceUpdate];
         
         HLSContainerContent *appearingContainerContent = nil;
         HLSContainerContent *disappearingContainerContent = nil;
         
-        if ([animation.tag isEqualToString:@"push_animation"]) {
+        if ([animation.tag isEqualToString:HLSContainerStackPushAnimationName]) {
             appearingContainerContent = [self topContainerContent];
             disappearingContainerContent = [self secondTopContainerContent];        
         }
@@ -1039,7 +1042,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Containment relationship removal in general occurs during pop animations, but can also happen when a push forces a destructive
         // container with capacity = 1 to remove the disappearing view controller
-        BOOL movingFromParentViewController = [animation.tag isEqualToString:@"pop_animation"]
+        BOOL movingFromParentViewController = [animation.tag isEqualToString:HLSContainerStackPopAnimationName]
             || (_behavior == HLSContainerStackBehaviorRemoving && self.capacity == 1 && [self.containerContents count] == 2);
         [disappearingContainerContent viewWillDisappear:animated movingFromParentViewController:movingFromParentViewController];
         
@@ -1047,7 +1050,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:willShowViewController:animated:)]) {
             [self.delegate containerStack:self willShowViewController:appearingContainerContent.viewController animated:animated];
         }
-        [appearingContainerContent viewWillAppear:animated movingToParentViewController:[animation.tag isEqualToString:@"push_animation"]];
+        [appearingContainerContent viewWillAppear:animated movingToParentViewController:[animation.tag isEqualToString:HLSContainerStackPushAnimationName]];
     }
 }
 
@@ -1056,11 +1059,11 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     _animating = NO;
     
     // Extra work needed for push and pop animations
-    if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
+    if ([animation.tag isEqualToString:HLSContainerStackPushAnimationName] || [animation.tag isEqualToString:HLSContainerStackPopAnimationName]) {
         HLSContainerContent *appearingContainerContent = nil;
         HLSContainerContent *disappearingContainerContent = nil;
         
-        if ([animation.tag isEqualToString:@"push_animation"]) {
+        if ([animation.tag isEqualToString:HLSContainerStackPushAnimationName]) {
             appearingContainerContent = [self topContainerContent];
             disappearingContainerContent = [self secondTopContainerContent];
         }
@@ -1071,7 +1074,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         
         // Forward events (didDisappear is sent to the view controller before didHide is sent to the delegate). For an explanation of
         // movingFromParentViewController value, see -animationWillStart:animated:
-        BOOL movingFromParentViewController = [animation.tag isEqualToString:@"pop_animation"]
+        BOOL movingFromParentViewController = [animation.tag isEqualToString:HLSContainerStackPopAnimationName]
             || (_behavior == HLSContainerStackBehaviorRemoving && self.capacity == 1 && [self.containerContents count] == 2);
         [disappearingContainerContent viewDidDisappear:animated movingFromParentViewController:movingFromParentViewController];
         if (disappearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didHideViewController:animated:)]) {
@@ -1079,7 +1082,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
          
         // Forward events (didAppear is sent to the view controller before didShow is sent to the delegate)
-        [appearingContainerContent viewDidAppear:animated movingToParentViewController:[animation.tag isEqualToString:@"push_animation"]];
+        [appearingContainerContent viewDidAppear:animated movingToParentViewController:[animation.tag isEqualToString:HLSContainerStackPushAnimationName]];
         if (appearingContainerContent && [self.delegate respondsToSelector:@selector(containerStack:didShowViewController:animated:)]) {
             [self.delegate containerStack:self didShowViewController:appearingContainerContent.viewController animated:animated];
         }
@@ -1088,7 +1091,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         UIViewController *disappearingViewController = disappearingContainerContent.viewController;
         UIViewController *appearingViewController = appearingContainerContent.viewController;
         
-        if ([animation.tag isEqualToString:@"push_animation"]) {
+        if ([animation.tag isEqualToString:HLSContainerStackPushAnimationName]) {
             // Now that the animation is over, get rid of the view or view controller which does not match the capacity criterium
             HLSContainerContent *containerContentAtCapacity = [self containerContentAtDepth:self.capacity];
             if (_behavior == HLSContainerStackBehaviorRemoving) {
@@ -1111,7 +1114,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                      animated:animated];
             }
         }
-        else if ([animation.tag isEqualToString:@"pop_animation"]) {
+        else if ([animation.tag isEqualToString:HLSContainerStackPopAnimationName]) {
             [self.containerContents removeObject:disappearingContainerContent];
             
             // Notify the delegate after the view controller has been removed from the stack and the parent-child containment relationship
