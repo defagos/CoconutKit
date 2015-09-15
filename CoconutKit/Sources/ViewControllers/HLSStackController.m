@@ -233,6 +233,23 @@
     [self.containerStack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
+#pragma mark Status bar
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return self.containerStack.preferredStatusBarStyle;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.containerStack.prefersStatusBarHidden;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return self.containerStack.preferredStatusBarUpdateAnimation;
+}
+
 #pragma mark Inserting or removing view controllers
 
 - (void)pushViewController:(UIViewController *)viewController 

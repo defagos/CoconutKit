@@ -252,6 +252,9 @@
     }
 }
 
+// Remark: The status bar is not controlled by child view controllers, no explicit calls to the underlying container
+//         stack methods
+
 #pragma mark Setting the inset view controller
 
 - (void)setInsetViewController:(UIViewController *)insetViewController 

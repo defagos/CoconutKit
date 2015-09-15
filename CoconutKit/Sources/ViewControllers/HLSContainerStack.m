@@ -816,6 +816,22 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     _rotating = NO;
 }
 
+// Use UIViewController default values for status bar behavior methods
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return self.topViewController ? self.topViewController.preferredStatusBarStyle : UIStatusBarStyleDefault;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.topViewController ? self.topViewController.prefersStatusBarHidden : NO;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return self.topViewController ? self.topViewController.preferredStatusBarUpdateAnimation : UIStatusBarAnimationFade;
+}
+
 /**
  * Method to add the view for a container content to the stack view hierarchy. The container content parameter is mandatory
  * and must be part of the stack. If the view is added because the container content is being inserted into the container,
@@ -1001,6 +1017,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     
     // Extra work needed for push and pop animations
     if ([animation.tag isEqualToString:@"push_animation"] || [animation.tag isEqualToString:@"pop_animation"]) {
+        // FIXME: Should be correctly animated for animated status bar changes
+        [self.containerViewController setNeedsStatusBarAppearanceUpdate];
+        
         HLSContainerContent *appearingContainerContent = nil;
         HLSContainerContent *disappearingContainerContent = nil;
         
