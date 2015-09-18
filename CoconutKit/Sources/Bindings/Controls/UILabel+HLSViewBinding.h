@@ -17,4 +17,9 @@
  */
 @interface UILabel (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 
+/**
+ * An optional placeholder to be displayed when the text to be displayed is nil. Default is nil
+ */
+@property (nonatomic, copy) IBInspectable NSString *bindPlaceholder;
+
 @end
