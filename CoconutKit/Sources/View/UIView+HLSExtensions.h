@@ -52,6 +52,11 @@
  */
 - (UIView *)firstResponderView;
 
+- (void)enableModalBehaviorWithOutsideActionBlock:(void (^)())outsideActionBlock;
+- (void)disableModalBehavior;
+
+@property (nonatomic, readonly, assign, getter=hasModalBehavior) BOOL modalBehavior;
+
 @end
 
 #ifdef DEBUG

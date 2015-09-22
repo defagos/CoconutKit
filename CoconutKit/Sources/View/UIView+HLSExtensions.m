@@ -7,6 +7,7 @@
 #import "UIView+HLSExtensions.h"
 
 #import "CALayer+HLSExtensions.h"
+#import "HLSAnyGestureRecognizer.h"
 #import "HLSKeyboardInformation.h"
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
@@ -15,12 +16,23 @@
 // Keys for associated objects
 static void *s_tagKey = &s_tagKey;
 static void *s_userInfoKey = &s_userInfoKey;
+static void *s_modalOutsideActionBlockKey = &s_modalOutsideActionBlockKey;
+static void *s_outsideGestureRecognizerKey = &s_outsideGestureRecognizerKey;
 
 // Original implementation of the methods we swizzle
 static BOOL (*s_UIView_becomeFirstResponder)(id, SEL) = NULL;
+static void (*s_UIView_willMoveToWindow)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
 static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd);
+static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
+
+@interface UIView (HLSExtensionsPrivate)
+
+@property (nonatomic, copy) void (^modalOutsideActionBlock)(void);
+@property (nonatomic, strong) HLSAnyGestureRecognizer *outsideGestureRecognizer;        // strong to keep setup if later installed
+
+@end
 
 @implementation UIView (HLSExtensions)
 
@@ -29,6 +41,7 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd);
 + (void)load
 {
     HLSSwizzleSelector(self, @selector(becomeFirstResponder), swizzle_becomeFirstResponder, &s_UIView_becomeFirstResponder);
+    HLSSwizzleSelector(self, @selector(willMoveToWindow:), swizzle_willMoveToWindow, &s_UIView_willMoveToWindow);
 }
 
 #pragma mark Accessors and mutators
@@ -96,6 +109,62 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd);
     return nil;
 }
 
+- (BOOL)hasModalBehavior
+{
+    return self.outsideGestureRecognizer != nil;
+}
+
+- (void (^)(void))modalOutsideActionBlock
+{
+    return objc_getAssociatedObject(self, s_modalOutsideActionBlockKey);
+}
+
+- (void)setModalOutsideActionBlock:(void (^)(void))modalOutsideActionBlock
+{
+    objc_setAssociatedObject(self, s_modalOutsideActionBlockKey, modalOutsideActionBlock, OBJC_ASSOCIATION_COPY);
+}
+
+- (HLSAnyGestureRecognizer *)outsideGestureRecognizer
+{
+    return objc_getAssociatedObject(self, s_outsideGestureRecognizerKey);
+}
+
+- (void)setOutsideGestureRecognizer:(HLSAnyGestureRecognizer *)outsideGestureRecognizer
+{
+    objc_setAssociatedObject(self, s_outsideGestureRecognizerKey, outsideGestureRecognizer, OBJC_ASSOCIATION_RETAIN);
+}
+
+#pragma mark Modal behavior
+
+- (void)enableModalBehaviorWithOutsideActionBlock:(void (^)())outsideActionBlock
+{
+    if (self.modalBehavior) {
+        HLSLoggerWarn(@"The view already has modal behavior");
+        return;
+    }
+    
+    self.outsideGestureRecognizer = [[HLSAnyGestureRecognizer alloc] initWithTarget:self action:@selector(outsideAction:)];
+    self.outsideGestureRecognizer.cancelsTouchesInView = NO;
+    self.modalOutsideActionBlock = outsideActionBlock;
+    
+    if (self.window) {
+        [self.window addGestureRecognizer:self.outsideGestureRecognizer];
+    }
+}
+
+- (void)disableModalBehavior
+{
+    if (! self.modalBehavior) {
+        HLSLoggerWarn(@"The view does not have modal behavior");
+        return;
+    }
+    
+    [self.outsideGestureRecognizer.view removeGestureRecognizer:self.outsideGestureRecognizer];
+    self.outsideGestureRecognizer = nil;
+    
+    self.modalOutsideActionBlock = nil;
+}
+
 #pragma mark View fading
 
 - (void)fadeLeft:(CGFloat)left right:(CGFloat)right
@@ -143,6 +212,20 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd);
     return maskLayer;
 }
 
+#pragma mark Actions
+
+- (void)outsideAction:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (self.modalOutsideActionBlock) {
+        // Check the gesture happens outside the receiver
+        CGPoint point = [gestureRecognizer locationInView:nil];
+        CGRect frameInWindow = [self convertRect:self.bounds toCoordinateSpace:self.window];
+        if (! CGRectContainsPoint(frameInWindow, point)) {
+            self.modalOutsideActionBlock();
+        }
+    }
+}
+
 @end
 
 #pragma mark Swizzled method implementations
@@ -177,6 +260,15 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd)
     }
     
     return s_UIView_becomeFirstResponder(self, _cmd);
+}
+
+static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window)
+{
+    s_UIView_willMoveToWindow(self, _cmd, window);
+    
+    if (self.outsideGestureRecognizer && ! self.outsideGestureRecognizer.view) {
+        [window addGestureRecognizer:self.outsideGestureRecognizer];
+    }
 }
 
 #ifdef DEBUG
