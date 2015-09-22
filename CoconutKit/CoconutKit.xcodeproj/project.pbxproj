@@ -644,6 +644,10 @@
 		E69F228C1ABCB319000EEC39 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DD819F6576C009718E4 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F22901ABCD7E0000EEC39 /* CoconutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22DE1AC13306000EEC39 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; };
+		E6AC75ED1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */; };
+		E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6AC75EF1BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */; };
+		E6AC75F01BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */; };
 		E6E94C1F1AB0216B00FCCC4E /* HLSTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */; };
 		E6E94C201AB0216B00FCCC4E /* HLSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */; };
 		E6E94C231AB0218300FCCC4E /* HLSCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */; };
@@ -991,6 +995,8 @@
 		E69F211A1ABC9F8B000EEC39 /* CoconutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoconutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E69F22901ABCD7E0000EEC39 /* CoconutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit.h; sourceTree = "<group>"; };
 		E69F22911ABCD7E0000EEC39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnyGestureRecognizer.h; sourceTree = "<group>"; };
+		E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnyGestureRecognizer.m; sourceTree = "<group>"; };
 		E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableViewController.h; sourceTree = "<group>"; };
 		E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableViewController.m; sourceTree = "<group>"; };
 		E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCollectionViewController.h; sourceTree = "<group>"; };
@@ -1353,6 +1359,8 @@
 		6FADE56714BA0494007EE121 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */,
+				E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */,
 				6FADE56A14BA0494007EE121 /* HLSCursor.h */,
 				6FADE56B14BA0494007EE121 /* HLSCursor.m */,
 				6F8B184E19DD8B6D00A06F2B /* HLSInfoTableViewCell.h */,
@@ -1683,6 +1691,7 @@
 				E6E94C271AB021CB00FCCC4E /* UIViewController+HLSInstantiation.h in Headers */,
 				6F04E2D81A1BA61500C6C08B /* HLSViewBindingError.h in Headers */,
 				6FCD33BC1A1216690002F478 /* UIStepper+HLSViewBinding.h in Headers */,
+				E6AC75ED1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */,
 				6F04E2D01A1BA3FB00C6C08B /* HLSCoreError.h in Headers */,
 				6F41D22B15E6A527009A2384 /* CALayer+HLSExtensions.h in Headers */,
 				6F41D23F15E6AD9A009A2384 /* CAMediaTimingFunction+HLSExtensions.h in Headers */,
@@ -1724,6 +1733,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */,
 				E69F21941ABCAC0D000EEC39 /* HLSTransformer.h in Headers */,
 				E69F217F1ABCAC0D000EEC39 /* HLSGoogleChromeActivity.h in Headers */,
 				E69F21E71ABCAC2A000EEC39 /* HLSTaskOperation.h in Headers */,
@@ -2163,6 +2173,7 @@
 				6FADE5F314BA0494007EE121 /* HLSSubtitleTableViewCell.m in Sources */,
 				6FADE5F614BA0494007EE121 /* HLSTableViewCell.m in Sources */,
 				6FADE5FE14BA0494007EE121 /* HLSValue1TableViewCell.m in Sources */,
+				E6AC75EF1BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */,
 				6FADE60014BA0494007EE121 /* HLSValue2TableViewCell.m in Sources */,
 				6FFAB76719DD8DA800A91997 /* HLSMAWeakArray.m in Sources */,
 				6FADE60614BA0494007EE121 /* UIView+HLSExtensions.m in Sources */,
@@ -2302,6 +2313,7 @@
 				E69F22201ABCAC37000EEC39 /* HLSPlaceholderInsetSegue.m in Sources */,
 				E69F22241ABCAC37000EEC39 /* HLSStackController.m in Sources */,
 				E69F22681ABCAC71000EEC39 /* HLSMAZeroingWeakProxy.m in Sources */,
+				E6AC75F01BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */,
 				E69F21451ABCABF4000EEC39 /* HLSObjectAnimation.m in Sources */,
 				E69F22221ABCAC37000EEC39 /* HLSPlaceholderViewController.m in Sources */,
 				E69F21FD1ABCAC31000EEC39 /* HLSValue2TableViewCell.m in Sources */,
