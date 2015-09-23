@@ -8,7 +8,7 @@
 
 /**
  * Gesture recognizer invoking the action once on its target for any kind of gesture. This gesture recognizer
- * never prevents other gesture recognizers
+ * is recognized along other gesture recognizers and never prevents them
  */
-@interface HLSAnyGestureRecognizer : UIGestureRecognizer
+@interface HLSAnyGestureRecognizer : UIGestureRecognizer <UIGestureRecognizerDelegate>
 @end

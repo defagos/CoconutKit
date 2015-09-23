@@ -2,7 +2,6 @@ CALayer+HLSExtensions.h
 CAMediaTimingFunction+HLSExtensions.h
 HLSAnimation.h
 HLSAnimationStep.h
-HLSAnyGestureRecognizer.h
 HLSApplicationInformation.h
 HLSAssert.h
 HLSAutorotation.h

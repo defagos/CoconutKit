@@ -645,7 +645,7 @@
 		E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F22901ABCD7E0000EEC39 /* CoconutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22DE1AC13306000EEC39 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; };
 		E6AC75ED1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */; };
-		E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */; };
 		E6AC75EF1BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */; };
 		E6AC75F01BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */; };
 		E6E94C1F1AB0216B00FCCC4E /* HLSTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */; };
@@ -1733,7 +1733,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */,
 				E69F21941ABCAC0D000EEC39 /* HLSTransformer.h in Headers */,
 				E69F217F1ABCAC0D000EEC39 /* HLSGoogleChromeActivity.h in Headers */,
 				E69F21E71ABCAC2A000EEC39 /* HLSTaskOperation.h in Headers */,
@@ -1850,6 +1849,7 @@
 				E69F214C1ABCABFB000EEC39 /* HLSViewBindingDelegate.h in Headers */,
 				E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */,
 				E69F21E61ABCAC2A000EEC39 /* HLSTaskOperation+Protected.h in Headers */,
+				E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */,
 				E69F21BF1ABCAC0D000EEC39 /* NSURLRequest+HLSExtensions.h in Headers */,
 				E69F21EB1ABCAC31000EEC39 /* HLSInfoTableViewCell.h in Headers */,
 				E69F21FE1ABCAC31000EEC39 /* HLSViewTouchDetector.h in Headers */,

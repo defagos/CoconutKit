@@ -144,7 +144,6 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
     }
     
     self.outsideGestureRecognizer = [[HLSAnyGestureRecognizer alloc] initWithTarget:self action:@selector(outsideAction:)];
-    self.outsideGestureRecognizer.cancelsTouchesInView = NO;
     self.modalOutsideActionBlock = outsideActionBlock;
     
     if (self.window) {
