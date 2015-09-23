@@ -109,7 +109,7 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
     return nil;
 }
 
-- (BOOL)hasModalBehavior
+- (BOOL)hasOutsideAction
 {
     return self.outsideGestureRecognizer != nil;
 }
@@ -136,10 +136,12 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 
 #pragma mark Modal behavior
 
-- (void)enableModalBehaviorWithOutsideActionBlock:(void (^)())outsideActionBlock
+- (void)enableOutsideActionWithBlock:(void (^)())outsideActionBlock
 {
-    if (self.modalBehavior) {
-        HLSLoggerWarn(@"The view already has modal behavior");
+    NSParameterAssert(outsideActionBlock);
+    
+    if ([self hasOutsideAction]) {
+        HLSLoggerWarn(@"The view already has an outside action");
         return;
     }
     
@@ -151,10 +153,10 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
     }
 }
 
-- (void)disableModalBehavior
+- (void)disableOutsideAction
 {
-    if (! self.modalBehavior) {
-        HLSLoggerWarn(@"The view does not have modal behavior");
+    if (! [self hasOutsideAction]) {
+        HLSLoggerWarn(@"The view does not have any outside action");
         return;
     }
     
@@ -215,13 +217,13 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 
 - (void)outsideAction:(UIGestureRecognizer *)gestureRecognizer
 {
-    if (self.modalOutsideActionBlock) {
-        // Check the gesture happens outside the receiver
-        CGPoint point = [gestureRecognizer locationInView:nil];
-        CGRect frameInWindow = [self convertRect:self.bounds toCoordinateSpace:self.window];
-        if (! CGRectContainsPoint(frameInWindow, point)) {
-            self.modalOutsideActionBlock();
-        }
+    NSAssert(self.modalOutsideActionBlock, @"An action block is mandatory");
+    
+    // Check the gesture happens outside the receiver
+    CGPoint point = [gestureRecognizer locationInView:nil];
+    CGRect frameInWindow = [self convertRect:self.bounds toCoordinateSpace:self.window];
+    if (! CGRectContainsPoint(frameInWindow, point)) {
+        self.modalOutsideActionBlock();
     }
 }
 
