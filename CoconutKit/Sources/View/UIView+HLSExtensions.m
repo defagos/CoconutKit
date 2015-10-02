@@ -21,11 +21,11 @@ static void *s_outsideGestureRecognizerKey = &s_outsideGestureRecognizerKey;
 
 // Original implementation of the methods we swizzle
 static BOOL (*s_UIView_becomeFirstResponder)(id, SEL) = NULL;
-static void (*s_UIView_willMoveToWindow)(id, SEL, id) = NULL;
+static void (*s_UIView_didMoveToWindow)(id, SEL) = NULL;
 
 // Swizzled method implementations
 static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd);
-static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
+static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 @interface UIView (HLSExtensionsPrivate)
 
@@ -41,7 +41,7 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 + (void)load
 {
     HLSSwizzleSelector(self, @selector(becomeFirstResponder), swizzle_becomeFirstResponder, &s_UIView_becomeFirstResponder);
-    HLSSwizzleSelector(self, @selector(willMoveToWindow:), swizzle_willMoveToWindow, &s_UIView_willMoveToWindow);
+    HLSSwizzleSelector(self, @selector(didMoveToWindow), swizzle_didMoveToWindow, &s_UIView_didMoveToWindow);
 }
 
 #pragma mark Accessors and mutators
@@ -263,12 +263,12 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd)
     return s_UIView_becomeFirstResponder(self, _cmd);
 }
 
-static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window)
+static void swizzle_didMoveToWindow(UIView *self, SEL _cmd)
 {
-    s_UIView_willMoveToWindow(self, _cmd, window);
+    s_UIView_didMoveToWindow(self, _cmd);
     
-    if (self.outsideGestureRecognizer && ! self.outsideGestureRecognizer.view) {
-        [window addGestureRecognizer:self.outsideGestureRecognizer];
+    if (self.window && self.outsideGestureRecognizer && ! self.outsideGestureRecognizer.view) {
+        [self.window addGestureRecognizer:self.outsideGestureRecognizer];
     }
 }
 
