@@ -157,7 +157,7 @@ static Class subclass_class(id self, SEL _cmd);
             object_setClass(self, subclass);
         }
         
-        hls_setAssociatedObject(self, s_mutableUserInfoKey, mutableUserInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(self, s_mutableUserInfoKey, mutableUserInfo, HLS_ASSOCIATION_STRONG_NONATOMIC);
     }
     return mutableUserInfo;
 }

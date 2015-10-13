@@ -125,11 +125,11 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
         buttonStateToLocalizationInfoMap = [buttonStateToLocalizationInfoMap dictionaryBySettingObject:localizationInfo 
                                                                                                 forKey:buttonStateKey];
         
-        hls_setAssociatedObject(button, s_localizationInfosKey, buttonStateToLocalizationInfoMap, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(button, s_localizationInfosKey, buttonStateToLocalizationInfoMap, HLS_ASSOCIATION_STRONG_NONATOMIC);
     }
     // Standalone label
     else {
-        hls_setAssociatedObject(self, s_localizationInfosKey, localizationInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(self, s_localizationInfosKey, localizationInfo, HLS_ASSOCIATION_STRONG_NONATOMIC);
     }
 }
 
@@ -253,7 +253,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
 
 - (void)setLocTable:(NSString *)locTable
 {
-    hls_setAssociatedObject(self, s_localizationTableNameKey, locTable, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_localizationTableNameKey, locTable, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (NSString *)locBundle
@@ -263,7 +263,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
 
 - (void)setLocBundle:(NSString *)locBundle
 {
-    hls_setAssociatedObject(self, s_localizationBundleNameKey, locBundle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_localizationBundleNameKey, locBundle, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 @end
@@ -300,5 +300,5 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
     // The background color is stored as separate associated object, not in the HLSLabelLocalizationInfo object. The reason
     // is that the HLSLabelLocalizationInfo is only attached when the text is first set, while the background color is
     // usually set earlier (i.e. when this object is not available)
-    hls_setAssociatedObject(self, s_originalBackgroundColorKey, backgroundColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_originalBackgroundColorKey, backgroundColor, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }

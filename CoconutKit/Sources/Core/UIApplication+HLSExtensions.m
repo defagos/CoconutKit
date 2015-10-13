@@ -27,7 +27,7 @@ static void *s_applicationPreloaderKey = &s_applicationPreloaderKey;
     
     // The preloader object is retained since it might involve asychronous processes
     applicationPreloader = [[HLSApplicationPreloader alloc] initWithApplication:self];
-    hls_setAssociatedObject(self, s_applicationPreloaderKey, applicationPreloader, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_applicationPreloaderKey, applicationPreloader, HLS_ASSOCIATION_STRONG_NONATOMIC);
     [applicationPreloader preload];
 }
 

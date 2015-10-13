@@ -47,7 +47,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 - (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
 {
-    hls_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (CGFloat)keyboardDistance
@@ -60,7 +60,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 - (void)setKeyboardDistance:(CGFloat)keyboardDistance
 {
-    hls_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Synchronizing scroll views
@@ -79,14 +79,14 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         return;
     }
     
-    hls_setAssociatedObject(self, s_synchronizedScrollViewsKey, scrollViews, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    hls_setAssociatedObject(self, s_parallaxBouncesKey, @(bounces), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_synchronizedScrollViewsKey, scrollViews, HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_parallaxBouncesKey, @(bounces), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (void)removeSynchronization
 {
-    hls_setAssociatedObject(self, s_synchronizedScrollViewsKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    hls_setAssociatedObject(self, s_parallaxBouncesKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_synchronizedScrollViewsKey, nil, HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_parallaxBouncesKey, nil, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 @end

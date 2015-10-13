@@ -75,7 +75,7 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 
 - (void)setTag_hls:(NSString *)tag_hls
 {
-    hls_setAssociatedObject(self, s_tagKey, tag_hls, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_tagKey, tag_hls, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (NSDictionary *)userInfo_hls
@@ -85,7 +85,7 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 
 - (void)setUserInfo_hls:(NSDictionary *)userInfo_hls
 {
-    hls_setAssociatedObject(self, s_userInfoKey, userInfo_hls, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_userInfoKey, userInfo_hls, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (UIImage *)flattenedImage
