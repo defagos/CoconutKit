@@ -13,7 +13,7 @@ fi
 SCRIPT_FILE_DIR=`dirname $0`
 SCRIPT_FILE_DIR=`cd $SCRIPT_FILE_DIR; pwd`
 
-MODEL_DIR="$SCRIPT_FILE_DIR/Resources/Data/CoconutKitDemoData.xcdatamodeld/CoconutKitDemoData.xcdatamodel/"
+MODEL_DIR="$SCRIPT_FILE_DIR/Resources/Data/CoconutKitDemoData.xcdatamodeld"
 HUMAN_DIR="$SCRIPT_FILE_DIR/Sources/Models/"
 MACHINE_DIR="$SCRIPT_FILE_DIR/Sources/Models/Generated/"
 
