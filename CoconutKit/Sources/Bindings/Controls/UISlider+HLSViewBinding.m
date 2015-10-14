@@ -64,7 +64,7 @@ static void swizzle_didMoveToWindow(UISlider *self, SEL _cmd)
     };
     
     // Cast the call to objc_msgSendSuper appropriately
-    id (*objc_msgSendSuper_typed)(struct objc_super *, SEL) = (void *)&objc_msgSendSuper;
+    void (*objc_msgSendSuper_typed)(struct objc_super *, SEL) = (void *)&objc_msgSendSuper;
     objc_msgSendSuper_typed(&super, _cmd);
     
     s_didMoveToWindow(self, _cmd);
