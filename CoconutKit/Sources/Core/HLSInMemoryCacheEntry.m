@@ -37,6 +37,11 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 #pragma mark Accessors and mutators
 
 - (NSUInteger)cost

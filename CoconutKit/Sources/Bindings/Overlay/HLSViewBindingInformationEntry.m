@@ -70,6 +70,11 @@
     return [self initWithName:name text:nil object:object];
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 #pragma mark Highlighting
 
 - (UIView *)view

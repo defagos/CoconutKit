@@ -118,6 +118,11 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return [self initWithNotificationName:nil forObject:nil];
+}
+
 @end
 
 #pragma mark -

@@ -41,6 +41,16 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    return nil;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return nil;
+}
+
 #pragma mark Accessors and mutators
 
 - (UIView *)frontContentView

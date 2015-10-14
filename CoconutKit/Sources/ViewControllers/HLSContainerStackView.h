@@ -103,11 +103,6 @@
 @interface HLSContainerStackView : UIView
 
 /**
- * Create the stack view
- */
-- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
-
-/**
  * Return the array of views used to display content (child views), from the bottommost to the topmost one
  */
 - (NSArray *)contentViews;

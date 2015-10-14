@@ -42,6 +42,11 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return [self initWithView:nil beginNotificationName:nil endNotificationName:nil];
+}
+
 - (void)dealloc
 {
     [[UIApplication sharedApplication].keyWindow removeGestureRecognizer:self.gestureRecognizer];

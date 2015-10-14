@@ -2066,7 +2066,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Samuel Défago";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CoconutKit-demo" */;
@@ -2941,6 +2941,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "CoconutKit (static framework)";
 			};
 			name = Debug;
@@ -2956,6 +2957,7 @@
 				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "CoconutKit (static framework)";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2989,6 +2991,7 @@
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "CoconutKit (dev)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../CoconutKit/Sources/**";
 			};
@@ -3005,6 +3008,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "CoconutKit (dev)";
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../CoconutKit/Sources/**";
 				VALIDATE_PRODUCT = YES;
@@ -3025,6 +3029,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -3041,7 +3046,6 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
-				WARNING_CFLAGS = "-Wno-objc-designated-initializers";
 			};
 			name = Debug;
 		};
@@ -3074,7 +3078,6 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
-				WARNING_CFLAGS = "-Wno-objc-designated-initializers";
 			};
 			name = Release;
 		};
@@ -3092,6 +3095,7 @@
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "CoconutKit (framework)";
 			};
 			name = Debug;
@@ -3107,6 +3111,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "CoconutKit (framework)";
 				VALIDATE_PRODUCT = YES;
 			};

@@ -31,6 +31,11 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 #pragma mark Pre-loading
 
 - (void)preload

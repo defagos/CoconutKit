@@ -1970,7 +1970,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = HLS;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Samuel Défago";
 				TargetAttributes = {
 					E69F21191ABC9F8B000EEC39 = {
@@ -2460,6 +2460,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_THUMB_SUPPORT = NO;
@@ -2476,7 +2477,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WARNING_CFLAGS = "-Wno-objc-designated-initializers";
 			};
 			name = Debug;
 		};
@@ -2508,7 +2508,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WARNING_CFLAGS = "-Wno-objc-designated-initializers";
 			};
 			name = Release;
 		};
@@ -2534,6 +2533,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-resources/CoconutKit-resources-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2545,6 +2545,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/../CoconutKit-resources/CoconutKit-resources-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -2575,6 +2576,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoconutKit;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2602,6 +2604,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CoconutKit;
 				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;

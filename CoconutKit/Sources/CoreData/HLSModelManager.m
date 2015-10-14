@@ -266,6 +266,11 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return nil;
+}
+
 #pragma mark Initialization
 
 - (NSManagedObjectModel *)managedObjectModelFromModelFileName:(NSString *)modelFileName inBundle:(NSBundle *)bundle

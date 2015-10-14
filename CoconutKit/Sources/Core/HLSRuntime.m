@@ -348,7 +348,7 @@ void hls_setAssociatedObject(id object, const void *key, id value, hls_Associati
         objc_AssociationPolicy objc_policy = (policy == HLS_ASSOCIATION_WEAK) ? OBJC_ASSOCIATION_RETAIN : OBJC_ASSOCIATION_RETAIN_NONATOMIC;
         
         HLSWeakObjectWrapper *weakObjectWrapper = [[HLSWeakObjectWrapper alloc] initWithObject:value];
-        objc_setAssociatedObject(object, hiddenKey, weakObjectWrapper, objc_policy);
+        objc_setAssociatedObject(object, hiddenKey, weakObjectWrapper, (objc_AssociationPolicy)objc_policy);
     }
     else {
         objc_setAssociatedObject(object, hiddenKey, value, (objc_AssociationPolicy)policy);
