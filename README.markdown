@@ -177,13 +177,13 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 6.3
-* iOS 8.3 SDK
+* Xcode 7.0
+* iOS 9.0 SDK
 
 Deployment is supported for the two most recent major iOS versions, currently:
 
-* iOS 7.x
 * iOS 8.x
+* iOS 9.x
 
 All architectures are supported:
 
@@ -204,13 +204,11 @@ Add CoconutKit as dependency in your `Podfile`
 pod 'CoconutKit', '<version>'
 ```
 
-Then run `pod install` to update the dependencies. For targets starting with iOS 8, you can also add the `use_frameworks!` directive in your `Podfile`, which embeds CoconutKit as a native Cocoa Touch framework.
+Then run `pod install` to update the dependencies. You can also add the `use_frameworks!` directive in your `Podfile` if you want to embed CoconutKit as a native Cocoa Touch framework.
 
 For more information about CocoaPods and the `Podfile`, please refer to the [official documentation](http://guides.cocoapods.org/).
 
 ### Installation with Carthage
-
-For targets starting with iOS 8, you can use CoconutKit as an embedded Cocoa Touch framework, conveniently managed using Carthage. 
 
 Add CoconutKit as dependency in your `Cartfile`:
 
