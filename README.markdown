@@ -2,9 +2,9 @@
 
 CoconutKit is a **productivity framework for iOS**, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
 
-| Build status | Latest version | Compatibility | Integration | Documentation | License | Contributing |
-|--------------|----------------|---------------|-------------|---------------|---------|--------------|
-| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/feature/xcode7.svg?style=flat)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | ![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg?style=flat) | [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg?style=flat)](https://guides.cocoapods.org/using/using-cocoapods.html) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) | [![Documentation](https://img.shields.io/badge/doc-CocoaDocs-orange.svg?style=flat)](http://cocoadocs.org/docsets/CoconutKit/feature/xcode7.svg) |
+| Build status | Technology | Latest version | Integration | Documentation | License |
+|--------------|------------|----------------|-------------|---------------|---------|
+| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/feature/xcode7.svg)](https://travis-ci.org/defagos/CoconutKit) | ![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg) ![Language](https://img.shields.io/badge/language-objective--c-blue.svg) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg)](https://guides.cocoapods.org/using/using-cocoapods.html) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | [![Documentation](https://img.shields.io/badge/doc-CocoaDocs-orange.svg)](http://cocoadocs.org/docsets/CoconutKit/feature/xcode7.svg) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
 
 _Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
