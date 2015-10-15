@@ -284,7 +284,6 @@
 		6FDE694414BEB12500F8CD3A /* HLSLabelLocalizationInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */; };
 		6FDE694514BEB12500F8CD3A /* HLSLabelLocalizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */; };
 		6FDEDD091A25DC150034610E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6FDEDD081A25DC150034610E /* LICENSE */; };
-		6FE8318E1AB4376D0066B372 /* HLSNullability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE8318C1AB4376D0066B372 /* HLSNullability.h */; };
 		6FEEF85C14F29057001585A6 /* UIScrollView+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FEEF85A14F29057001585A6 /* UIScrollView+HLSExtensions.h */; };
 		6FEEF85D14F29057001585A6 /* UIScrollView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEF85B14F29057001585A6 /* UIScrollView+HLSExtensions.m */; };
 		6FF3E6EF15D2E4C900AB9A53 /* HLSTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF3E6ED15D2E4C800AB9A53 /* HLSTransition.h */; };
@@ -307,7 +306,6 @@
 		E62CB1221A78D89F0093106A /* NSTimeZone+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */; };
 		E62CB1251A78D8B50093106A /* NSCalendar+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */; };
 		E62CB1261A78D8B50093106A /* NSCalendar+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */; };
-		E671AB6D1AC3CE5000AD5EB0 /* HLSNullability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FE8318C1AB4376D0066B372 /* HLSNullability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F21391ABCABF4000EEC39 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F213A1ABCABF4000EEC39 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
 		E69F213B1ABCABF4000EEC39 /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCFEA4715E37E25002CAF9E /* HLSAnimationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -971,7 +969,6 @@
 		6FDE694214BEB12400F8CD3A /* HLSLabelLocalizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLabelLocalizationInfo.h; sourceTree = "<group>"; };
 		6FDE694314BEB12400F8CD3A /* HLSLabelLocalizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLabelLocalizationInfo.m; sourceTree = "<group>"; };
 		6FDEDD081A25DC150034610E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		6FE8318C1AB4376D0066B372 /* HLSNullability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSNullability.h; sourceTree = "<group>"; };
 		6FEEF85A14F29057001585A6 /* UIScrollView+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+HLSExtensions.h"; sourceTree = "<group>"; };
 		6FEEF85B14F29057001585A6 /* UIScrollView+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+HLSExtensions.m"; sourceTree = "<group>"; };
 		6FF3E6ED15D2E4C800AB9A53 /* HLSTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTransition.h; sourceTree = "<group>"; };
@@ -1246,7 +1243,6 @@
 				6FADE52314BA0494007EE121 /* HLSKeyboardInformation.m */,
 				6FADE52414BA0494007EE121 /* HLSNotifications.h */,
 				6FADE52514BA0494007EE121 /* HLSNotifications.m */,
-				6FE8318C1AB4376D0066B372 /* HLSNullability.h */,
 				6F3E3EC815A38D62007E78BD /* HLSOptionalFeatures.h */,
 				6F63E7C417CF6E19006322D9 /* HLSPreviewItem.h */,
 				6F63E7C517CF6E19006322D9 /* HLSPreviewItem.m */,
@@ -1675,7 +1671,6 @@
 				6FEEF85C14F29057001585A6 /* UIScrollView+HLSExtensions.h in Headers */,
 				E69F22511ABCAC40000EEC39 /* HLSViewAnimationStep.h in Headers */,
 				6F8785C514F3E35A00580634 /* UIViewController+HLSExtensions.h in Headers */,
-				6FE8318E1AB4376D0066B372 /* HLSNullability.h in Headers */,
 				6FDDEC1A1529778E00CED462 /* UITextField+HLSExtensions.h in Headers */,
 				6FDDEC1E1529780200CED462 /* UITextView+HLSExtensions.h in Headers */,
 				6FCD33AE1A1216690002F478 /* UIImageView+HLSViewBinding.h in Headers */,
@@ -1788,7 +1783,6 @@
 				E69F21A51ABCAC0D000EEC39 /* NSCalendar+HLSExtensions.h in Headers */,
 				E69F21C51ABCAC0D000EEC39 /* UIControl+HLSExclusiveTouch.h in Headers */,
 				E69F21611ABCAC03000EEC39 /* UIProgressView+HLSViewBinding.h in Headers */,
-				E671AB6D1AC3CE5000AD5EB0 /* HLSNullability.h in Headers */,
 				E69F21FA1ABCAC31000EEC39 /* HLSValue1TableViewCell.h in Headers */,
 				E69F21BD1ABCAC0D000EEC39 /* NSTimeZone+HLSExtensions.h in Headers */,
 				E69F21871ABCAC0D000EEC39 /* HLSNotifications.h in Headers */,
