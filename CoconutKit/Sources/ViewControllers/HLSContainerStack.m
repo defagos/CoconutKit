@@ -346,7 +346,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                                                                        duration:duration];
     if (! containerContent) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"The view controller to insert is incompatible with the container it is inserted into"
+                                       reason:@"The view controller could not be inserted into the container"
                                      userInfo:nil];
     }
     
