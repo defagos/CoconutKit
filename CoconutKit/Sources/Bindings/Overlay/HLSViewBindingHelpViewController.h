@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * View controller displaying help about bindings
  */
 @interface HLSViewBindingHelpViewController : HLSViewController
 @end
+
+NS_ASSUME_NONNULL_END

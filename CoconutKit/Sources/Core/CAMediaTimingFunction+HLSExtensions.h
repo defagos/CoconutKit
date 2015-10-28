@@ -8,6 +8,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface CAMediaTimingFunction (HLSExtensions)
 
 /**
@@ -22,12 +23,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return the inverse function, i.e. the one which must be played when playing an animation backwards
  */
-- (CAMediaTimingFunction *)inverseFunction;
+@property (nonatomic, readonly) CAMediaTimingFunction *inverseFunction;
 
 /**
  * Return the control points as a human-readable string
  */
-- (NSString *)controlPointsString;
+@property (nonatomic, readonly, copy) NSString *controlPointsString;
 
 @end
+
 NS_ASSUME_NONNULL_END

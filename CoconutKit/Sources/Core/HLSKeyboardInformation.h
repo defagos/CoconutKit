@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * This class makes keyboard properties accessible at any time in a convenient way. Just access the +keyboardInformation 
  * method. If the returned object is not nil, then the keyboard is docked and visible (or soon will) and you can check its 
@@ -18,7 +20,6 @@
  *
  * Not meant to be instantiated directly. Simply use the +keyboardInformation class method.
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSKeyboardInformation : NSObject
 
 /**
@@ -62,4 +63,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Conversions to string. Other conventional conversions are already available as NSStringFrom... functions
  */
@@ -19,8 +21,8 @@ OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 /**
  * Block signatures
  */
-typedef id (^HLSTransformerBlock)(id object);
-typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **pError);
+typedef id __nullable (^HLSTransformerBlock)(id __nullable object);
+typedef BOOL (^HLSReverseTransformerBlock)(id __nullable * __nonnull pObject, id fromObject, NSError *__autoreleasing *pError);
 
 /**
  * A protocol to define transformations between objects. Transformations in forward direction are mandatory and
@@ -43,13 +45,13 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 /**
  * Transform the provided object of class A into another one of class B (the classes might be the same)
  */
-- (id)transformObject:(id)object;
+- (nullable id)transformObject:(nullable id)object;
 
 /**
  * Reverse transform the provided object of class B into another one of class A. Check for existence before calling
  */
 @optional
-- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError *__autoreleasing *)pError;
+- (BOOL)getObject:(inout id __nullable * __nonnull)pObject fromObject:(nullable id)fromObject error:(out NSError *__autoreleasing *)pError;
 
 @end
 
@@ -64,14 +66,14 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
  * Convenience constructor
  */
 + (instancetype)blockTransformerWithBlock:(HLSTransformerBlock)transformerBlock
-                             reverseBlock:(HLSReverseTransformerBlock)reverseBlock;
+                             reverseBlock:(nullable HLSReverseTransformerBlock)reverseBlock;
 
 /**
  * Designated intializer. The forward transformer block is mandatory, the reverse one is optional. If no reverse
  * transformation block has been provided, the instance does not respond to -getObject:fromObject:error:
  */
 - (instancetype)initWithBlock:(HLSTransformerBlock)transformerBlock
-                 reverseBlock:(HLSReverseTransformerBlock)reverseBlock NS_DESIGNATED_INITIALIZER;
+                 reverseBlock:(nullable HLSReverseTransformerBlock)reverseBlock NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -94,3 +96,5 @@ typedef BOOL (^HLSReverseTransformerBlock)(id *pObject,id fromObject, NSError **
 + (instancetype)blockTransformerFromValueTransformer:(NSValueTransformer *)valueTransformer;
 
 @end
+
+NS_ASSUME_NONNULL_END

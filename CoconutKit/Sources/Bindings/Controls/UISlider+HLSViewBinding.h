@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Binding support for UISlider:
  *   - binds to NSNumber (float) or float model values
@@ -18,3 +20,5 @@
  */
 @interface UISlider (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 @end
+
+NS_ASSUME_NONNULL_END

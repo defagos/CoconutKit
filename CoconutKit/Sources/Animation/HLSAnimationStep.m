@@ -18,7 +18,7 @@
 @property (nonatomic) NSMutableArray *objectKeys;
 @property (nonatomic) NSMutableDictionary *objectToObjectAnimationMap;
 @property (nonatomic) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
-@property (nonatomic, getter=isCancelling) BOOL terminating;
+@property (nonatomic, getter=isTerminating) BOOL terminating;
 
 @end
 
@@ -61,7 +61,7 @@
 
 - (BOOL)isPaused
 {
-    return [self isAnimationPaused];
+    return self.animationPaused;
 }
 
 - (NSArray *)objects

@@ -9,6 +9,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step
  * (HLSLayerAnimationStep). An animation step is the combination of several layer animations applied
@@ -27,7 +29,6 @@
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should
  * use layer animations instead of view animations since they have far more capabilities.
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSLayerAnimation : HLSObjectAnimation
 
 /**
@@ -107,4 +108,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addToRasterizationScale:(CGFloat)rasterizationScaleIncrement;
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -11,11 +11,12 @@
 // Forward declarations
 @protocol HLSAnimationStepDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Interface meant to be used by friend classes of HLSAnimationStep (= classes which must have access to private implementation
  * details)
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSAnimationStep (Friend)
 
 /**
@@ -43,12 +44,12 @@ NS_ASSUME_NONNULL_BEGIN
  * The time elapsed since the animation step began animating (might be self.duration if the animation step does 
  * not support arbitrary start times). This method returns the actual running time, removing pauses (if any)
  */
-- (NSTimeInterval)elapsedTime;
+@property (nonatomic, readonly) NSTimeInterval elapsedTime;
 
 /**
  * The corresponding animation step to be played during the reverse animation
  */
-- (id)reverseAnimationStep;
+@property (nonatomic, readonly) id reverseAnimationStep;
 
 /**
  * Return YES iff the animation has been paused
@@ -67,4 +68,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)animationStepDidStop:(HLSAnimationStep *)animationStep animated:(BOOL)animated finished:(BOOL)finished;
 
 @end
+
 NS_ASSUME_NONNULL_END

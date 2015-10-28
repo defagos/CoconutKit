@@ -9,11 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Protected interface for use by subclasses of HLSAnimationStep in their implementation, and to be included
  * from their implementation file
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSAnimationStep (Protected)
 
 /**
@@ -31,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * All objects changed by the animation step, returned in the order they were added to it
  */
-- (NSArray *)objects;
+@property (nonatomic, readonly) NSArray *objects;
 
 /**
  * Return YES iff the step is running
@@ -74,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The super method implementation must not be called (it raises an exception)
  */
-- (BOOL)isAnimationPaused;
+@property (nonatomic, readonly, getter=isAnimationPaused) BOOL animationPaused;
 
 /**
  * This method must be implemented by subclasses to terminate the animation
@@ -88,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The super method implementation must be called first
  */
-- (id)reverseAnimationStep;
+@property (nonatomic, readonly) id reverseAnimationStep;
 
 /**
  * The time elapsed since the animation step began animating. If your animation step subclass cannot support
@@ -97,12 +98,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The super method implementation must not be called (it raises an exception)
  */
-- (NSTimeInterval)elapsedTime;
+@property (nonatomic, readonly) NSTimeInterval elapsedTime;
 
 /**
  * Return a string describing the involved object animations
  */
-- (NSString *)objectAnimationsDescriptionString;
+@property (nonatomic, readonly, copy) NSString *objectAnimationsDescriptionString;
 
 /**
  * Subclasses must register themselves for the asynchronous delegate events of the animation they implement,
@@ -112,4 +113,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished;
 
 @end
+
 NS_ASSUME_NONNULL_END

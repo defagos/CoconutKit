@@ -25,15 +25,15 @@
 
 static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
-@interface HLSAnimation () <HLSAnimationStepDelegate>  {
+@interface HLSAnimation () <HLSAnimationStepDelegate> {
 @private
     BOOL _animated;
     NSUInteger _repeatCount;
     NSUInteger _currentRepeatCount;
-    NSTimeInterval _remainingTimeBeforeStart;                      // the time remaining before the start time is reached
-    NSTimeInterval _elapsedTime;                                   // the currently elapsed time (does not include pauses)
-    BOOL _runningBeforeEnteringBackground;                         // was the animation running before the application entered background?
-    BOOL _pausedBeforeEnteringBackground;                          // was the animation paused before the application entered background?
+    NSTimeInterval _remainingTimeBeforeStart;                           // the time remaining before the start time is reached
+    NSTimeInterval _elapsedTime;                                        // the currently elapsed time (does not include pauses)
+    BOOL _runningBeforeEnteringBackground;                              // was the animation running before the application entered background?
+    BOOL _pausedBeforeEnteringBackground;                               // was the animation paused before the application entered background?
 }
 
 @property (nonatomic) NSArray *animationSteps;                          // a copy of the HLSAnimationSteps passed at initialization time
@@ -103,6 +103,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (instancetype)init
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
@@ -122,7 +123,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (BOOL)isPaused
 {
-    return [self.currentAnimationStep isPaused];
+    return self.currentAnimationStep.paused;
 }
 
 - (id<HLSAnimationDelegate>)delegate

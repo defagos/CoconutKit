@@ -89,7 +89,7 @@
 
 #pragma mark HLSFileManagerAbstract protocol implementation
 
-- (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
+- (NSData *)contentsOfFileAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {
@@ -99,7 +99,7 @@
     return [NSData dataWithContentsOfFile:fullPath options:NSDataReadingMappedIfSafe error:pError];
 }
 
-- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError *__autoreleasing *)pError
+- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(out NSError *__autoreleasing *)pError
 {
     // NSFileManager returns NO but no error when contents == nil
     if (! contents) {
@@ -120,7 +120,7 @@
     return [contents writeToFile:fullPath options:NSDataWritingAtomic error:pError];
 }
 
-- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError *__autoreleasing *)pError
+- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(out NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {
@@ -131,7 +131,7 @@
     return [[NSFileManager defaultManager] createDirectoryAtPath:fullPath withIntermediateDirectories:withIntermediateDirectories attributes:nil error:pError];
 }
 
-- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
+- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {
@@ -141,7 +141,7 @@
     return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:fullPath error:pError];
 }
 
-- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory
+- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(out BOOL *)pIsDirectory
 {
     NSString *fullPath = [self fullPathForPath:path withError:NULL];
     if (! fullPath) {
@@ -151,7 +151,7 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:fullPath isDirectory:pIsDirectory];
 }
 
-- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
+- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(out NSError *__autoreleasing *)pError
 {
     // Prevent recursive copy
     if ([destinationPath hasPrefix:sourcePath]) {
@@ -176,7 +176,7 @@
     return [[NSFileManager defaultManager] copyItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
-- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
+- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(out NSError *__autoreleasing *)pError
 {
     // Prevent recursive move
     if ([destinationPath hasPrefix:sourcePath]) {
@@ -201,7 +201,7 @@
     return [[NSFileManager defaultManager] moveItemAtPath:fullSourcePath toPath:fullDestinationPath error:pError];
 }
 
-- (BOOL)removeItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
+- (BOOL)removeItemAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     NSString *fullPath = [self fullPathForPath:path withError:pError];
     if (! fullPath) {

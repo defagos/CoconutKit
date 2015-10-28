@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Private class encapsulating view binding information, and performing lazy binding parameter resolving, caching,
  * and automatic synchronization via KVO when possible. The bound object is resolved automatically at runtime. There
  * is no way to change or recalculate binding information: If binding information changes for some view, create a
  * new instance and replace the previous one with it
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewBindingInformation : NSObject
 
 /**
@@ -30,19 +31,19 @@ NS_ASSUME_NONNULL_BEGIN
  * Return the current value corresponding to the stored binding information (the transformer method is applied, if any). 
  * The method returns nil if the bound object has not been resolved yet
  */
-- (nullable id)value;
+@property (nonatomic, readonly, nullable) id value;
 
 /**
  * The plain value retrieved from the bound object, without any transformation, nil if the bound object has not been
  * resolved yet, or if the view cannot display it
  */
-- (nullable id)rawValue;
+@property (nonatomic, readonly, nullable) id rawValue;
 
 /**
  * The value currently made available for input by the view. If the view does not support input (supportingInput = NO), 
  * the method returns nil
  */
-- (nullable id)inputValue;
+@property (nonatomic, readonly, nullable) id inputValue;
 
 /**
  * Update the view using the current underlying bound value. Then change can be animated if the view supports it
@@ -127,14 +128,14 @@ NS_ASSUME_NONNULL_BEGIN
  * otherwise NO and error information. Fails if the view does not support input (supportingInput = NO). If both
  * check and update are made, failure to perform one does not prevent the other from being attempted
  */
-- (BOOL)check:(BOOL)check update:(BOOL)update withError:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withError:(out NSError *__autoreleasing *)pError;
 
 /**
  * Check and / or update the model using the specified value. Return YES iff successful, otherwise NO and error information.
  * Fails if the view does not support input (supportingInput = NO). If both check and update are made, failure to perform 
  * one does not prevent the other from being attempted
  */
-- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(out NSError *__autoreleasing *)pError;
 
 @end
 
@@ -143,5 +144,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
 NS_ASSUME_NONNULL_END
 

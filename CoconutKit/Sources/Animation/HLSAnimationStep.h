@@ -6,13 +6,14 @@
 
 #import <Foundation/Foundation.h>
 
-//Block signatures
+NS_ASSUME_NONNULL_BEGIN
+
+// Block signatures
 typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
 
 /**
  * Abstract base class for animation steps. Do not instantiate directly
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSAnimationStep : NSObject <NSCopying>
 
 /**
@@ -49,4 +50,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) HLSAnimationStepCompletionBlock completionBlock;
 
 @end
+
 NS_ASSUME_NONNULL_END

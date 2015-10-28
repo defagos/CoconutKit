@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A file manager implementation storing data in memory. If the application receives a memory warning, this data
  * cache is automatically cleared
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSInMemoryFileManager : HLSFileManager <NSCacheDelegate>
 
 /**
@@ -24,4 +25,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSUInteger byteCostLimit;
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 
  * (HLSViewAnimationStep). An animation step is the combination of several view animations applied
@@ -25,7 +27,6 @@
  * In general, and if you do not need to animate view frames to resize subviews during animations, you should 
  * use layer animations instead of view animations since they have far more capabilities.
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewAnimation : HLSObjectAnimation
 
 /**
@@ -56,4 +57,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addToAlpha:(CGFloat)alphaIncrement;
 
 @end
+
 NS_ASSUME_NONNULL_END

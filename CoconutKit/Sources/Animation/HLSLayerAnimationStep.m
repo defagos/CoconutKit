@@ -347,7 +347,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (id)reverseAnimationStep
 {
-    HLSLayerAnimationStep *reverseAnimationStep = [super reverseAnimationStep];
+    HLSLayerAnimationStep *reverseAnimationStep = super.reverseAnimationStep;
     reverseAnimationStep.timingFunction = [self.timingFunction inverseFunction];
     return reverseAnimationStep;
 }

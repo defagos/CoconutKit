@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Overlay view controller displaying binding debugging information
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewBindingDebugOverlayViewController : HLSViewController <UIPopoverControllerDelegate>
 
 /**
@@ -40,4 +41,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
 NS_ASSUME_NONNULL_END

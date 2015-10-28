@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Swizzle the method with the specified instance / class selector on the specified class, assigning it a new function
  * implementation. The previous implementation is returned in pPreviousImplementation, which must be stored in a function
@@ -78,8 +80,6 @@ typedef NS_ENUM(uintptr_t, hls_AssociationPolicy) {
     HLS_ASSOCIATION_WEAK,
     HLS_ASSOCIATION_WEAK_NONATOMIC
 };
-
-NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Enable or disable logging of the messages sent through objc_msgSend. Messages are logged to

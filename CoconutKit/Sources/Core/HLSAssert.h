@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * The following macros are only active if NS_BLOCK_ASSERTIONS is disabled for the project configuration you use
  * (usually -DNS_BLOCK_ASSERTIONS=1)
@@ -82,7 +84,6 @@
 
 #endif
 
-NS_ASSUME_NONNULL_BEGIN
 @interface NSAssertionHandler (HLSAssert)
 
 /**
@@ -104,4 +105,5 @@ NS_ASSUME_NONNULL_BEGIN
                         lineNumber:(NSInteger)line;
 
 @end
+
 NS_ASSUME_NONNULL_END

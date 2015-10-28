@@ -77,12 +77,9 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 - (instancetype)initWithBlock:(HLSTransformerBlock)transformerBlock
                  reverseBlock:(HLSReverseTransformerBlock)reverseBlock
 {
-    if (self = [super init]) {
-        if (! transformerBlock) {
-            HLSLoggerError(@"A transformer block is mandatory");
-            return nil;
-        }
-        
+    NSParameterAssert(transformerBlock);
+    
+    if (self = [super init]) {        
         self.transformerBlock = transformerBlock;
         self.reverseBlock = reverseBlock;
     }
@@ -101,7 +98,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
     return self.transformerBlock(object);
 }
 
-- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError *__autoreleasing *)pError
+- (BOOL)getObject:(inout id *)pObject fromObject:(id)fromObject error:(out NSError *__autoreleasing *)pError
 {
     if (! self.reverseBlock) {
         [self doesNotRecognizeSelector:_cmd];
@@ -131,6 +128,8 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 
 + (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter
 {
+    NSParameterAssert(formatter);
+    
     return [self blockTransformerWithBlock:^(id object) {
         // Remark: The specific -[NSNumberFormatter stringFromNumber:] has a behavior which differs from -stringFromObjectValue:, e.g
         //         it ignores nilSymbol. Since -stringForObjectValue: has the richest behavior, it makes sense to call it in all cases
@@ -162,6 +161,8 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 
 + (instancetype)blockTransformerFromValueTransformer:(NSValueTransformer *)valueTransformer
 {
+    NSParameterAssert(valueTransformer);
+    
     HLSTransformerBlock block = ^(id object) {
         return [valueTransformer transformedValue:object];
     };

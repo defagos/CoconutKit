@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Binding support for UIProgressView:
  *   - binds to NSNumber (float) or float model values
@@ -17,3 +19,5 @@
  */
 @interface UIProgressView (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * CoconutKit bindings for custom view classes
  * -------------------------------------------
@@ -16,8 +18,6 @@
  *   - In your implementation, be sure to use the HLSViewBindingUpdateImplementation category when implementing
  *     update operations
  */
-
-NS_ASSUME_NONNULL_BEGIN
 @protocol HLSViewBindingImplementation <NSObject>
 
 @required
@@ -76,7 +76,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Remark: Setting check = YES does not necessary leads to a check if the view has its bindInputChecked property
  *         set to NO. Setting check to NO, however, disables checks in all cases
  */
-- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(nullable id)inputValue error:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(nullable id)inputValue error:(out NSError *__autoreleasing *)pError;
 
 @end
+
 NS_ASSUME_NONNULL_END

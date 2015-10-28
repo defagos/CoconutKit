@@ -144,7 +144,7 @@
 
 - (id)reverseAnimationStep
 {
-    HLSViewAnimationStep *reverseAnimationStep = [super reverseAnimationStep];
+    HLSViewAnimationStep *reverseAnimationStep = super.reverseAnimationStep;
     switch (self.curve) {
         case UIViewAnimationCurveEaseIn:
             reverseAnimationStep.curve = UIViewAnimationCurveEaseOut;

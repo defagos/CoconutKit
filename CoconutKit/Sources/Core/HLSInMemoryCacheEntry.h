@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Private class containing the information of an entry within the cache managed by HLSInMemoryFileManager
  *
@@ -13,7 +15,6 @@
  * cases, the internal file hierarchy dictionary maintained by the file manager needs to be updated to reflect which
  * object has been discarded
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSInMemoryCacheEntry : NSObject
 
 /**
@@ -39,4 +40,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
 NS_ASSUME_NONNULL_END

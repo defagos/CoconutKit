@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Interface meant to be used by friend classes of HLSViewAnimation (= classes which must have access to private implementation
  * details)
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewAnimation (Friend)
 
 /**
@@ -27,4 +28,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) CGFloat alphaIncrement;
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @class HLSZeroingWeakRef;
 
@@ -38,7 +40,6 @@
  * The proxy object does not retain the object it is created from, and if the object gets deallocated, all 
  * associated proxy objects are automatically set to nil.
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSRestrictedInterfaceProxy : NSProxy
 
 /**
@@ -65,4 +66,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable id)proxyWithRestrictedInterface:(Protocol *)protocol;
 
 @end
+
 NS_ASSUME_NONNULL_END

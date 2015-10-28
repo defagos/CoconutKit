@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Binding support for UIDatePicker:
  *   - binds to NSDate model values
@@ -18,3 +20,5 @@
  */
 @interface UIDatePicker (HLSViewBinding)
 @end
+
+NS_ASSUME_NONNULL_END

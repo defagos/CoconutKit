@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * CoconutKit core error codes
  */
@@ -19,3 +21,5 @@ typedef NS_ENUM(NSInteger, HLSCoreError) {
  * Common domain for core errors
  */
 extern NSString * const HLSCoreErrorDomain;
+
+NS_ASSUME_NONNULL_END

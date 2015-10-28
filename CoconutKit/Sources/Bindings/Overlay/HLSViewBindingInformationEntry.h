@@ -7,10 +7,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Contains information related to a binding entry
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSViewBindingInformationEntry : NSObject
 
 /**
@@ -35,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return a view if there is a view associated with the entry, nil if none
  */
-- (nullable UIView *)view;
+@property (nonatomic, readonly, nullable) UIView *view;
 
 @end
 
@@ -44,4 +45,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
 NS_ASSUME_NONNULL_END

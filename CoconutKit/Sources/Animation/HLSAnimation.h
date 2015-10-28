@@ -11,6 +11,8 @@
 // Forward declarations
 @protocol HLSAnimationDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Block signatures
 typedef void (^HLSAnimationStartBlock)(BOOL animated);
 typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
@@ -46,7 +48,7 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * Running animations (this includes animations which have been paused) are automatically paused and resumed (if they
  * were running before) when the application enters, respectively exits background. Note that this mechanism works 
  * perfectly within the iOS simulator and on the device, though views will appear to "jump" on the device and on
- * iOS >= 6 simulators. This is not a bug and has no negative effect on the animation behavior (in particular, delegate 
+ * iOS simulators. This is not a bug and has no negative effect on the animation behavior (in particular, delegate 
  * methods are still called correctly), but is a consequence of the application screenshot which is displayed when 
  * the application exits background. The screenshot made when the application enters background namely reflects the
  * non-animated view / layer state, which explains why the views seem to jump.
@@ -56,7 +58,6 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * boolean is also YES if the animation was run with animated = YES (even though the step was not actually animated, 
  * it is still part of an animation which was played animated).
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSAnimation : NSObject <NSCopying>
 
 /**
@@ -82,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSString *tag;
 
 /**
- * Dictionary which can be freely used to convey additional information
+ * Dictionary which can be optionally used to convey additional arbitrary information
  */
 @property (nonatomic, nullable) NSDictionary *userInfo;
 
@@ -231,7 +232,7 @@ NS_ASSUME_NONNULL_BEGIN
  * animation steps get an additional "reverse_" prefix. If a tag has not been filled for the receiver, the corresponding 
  * tag of the reverse animation is nil
  */
-- (HLSAnimation *)reverseAnimation;
+@property (nonatomic, readonly) HLSAnimation *reverseAnimation;
 
 /**
  * Generate the corresponding loop animation by concatening self with its reverse animation. All attributes are
@@ -239,7 +240,7 @@ NS_ASSUME_NONNULL_BEGIN
  * an additional "loop_" prefix (reverse animation steps therefore begin with a "loop_reverse_" prefix). If a
  * tag has not been filled for the receiver, the corresponding tag of the reverse animation is nil
  */
-- (HLSAnimation *)loopAnimation;
+@property (nonatomic, readonly) HLSAnimation *loopAnimation;
 
 /**
  * Called right before the first animation step is executed, but after any delay which might have been set
@@ -282,4 +283,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
 @end
+
 NS_ASSUME_NONNULL_END

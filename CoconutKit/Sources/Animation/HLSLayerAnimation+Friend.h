@@ -11,11 +11,12 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
   * Interface meant to be used by friend classes of HLSLayerAnimation (= classes which must have access to private implementation
   * details)
   */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSLayerAnimation (Friend)
 
 /**
@@ -49,4 +50,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) CGFloat rasterizationScaleIncrement;
 
 @end
+
 NS_ASSUME_NONNULL_END

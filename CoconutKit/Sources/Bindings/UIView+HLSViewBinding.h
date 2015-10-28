@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Cocoa-inspired bindings on iOS
  * ------------------------------
@@ -311,7 +313,6 @@
  * are initially bound. Cached information is then reused for fast updates during scrolling.
  *
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface UIView (HLSViewBinding)
 
 /**
@@ -373,7 +374,7 @@ NS_ASSUME_NONNULL_BEGIN
  * boundaries. Errors are individually reported to the validation delegate, and chained as a single error returned 
  * to the caller as well. The method returns YES iff all operations have been successful
  */
-- (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
+- (BOOL)checkBoundViewHierarchyWithError:(out NSError *__autoreleasing *)pError;
 
 @end
 
@@ -386,4 +387,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)bindToKeyPath:(nullable NSString *)keyPath withTransformer:(nullable NSString *)transformer;
 
 @end
+
 NS_ASSUME_NONNULL_END

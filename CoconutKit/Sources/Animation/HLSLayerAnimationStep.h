@@ -11,6 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A layer animation step (HLSLayerAnimationStep) is the combination of several layer animations (HLSLayerAnimation) applied
  * to a set of layers, and represent the collective set of changes applied to them during some time interval. An animation
@@ -20,7 +22,6 @@
  * To create a layer animation step, simply instantiate it using the +animationStep class method, then add layer animations
  * to it, and set its duration and curve
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSLayerAnimationStep : HLSAnimationStep
 
 /**
@@ -49,4 +50,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CAMediaTimingFunction *timingFunction;
 
 @end
+
 NS_ASSUME_NONNULL_END

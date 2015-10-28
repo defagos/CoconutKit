@@ -6,10 +6,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Concrete subclasses of HLSFileManager must implement the set of methods declared by the following protocol
  */
-NS_ASSUME_NONNULL_BEGIN
 @protocol HLSFileManagerAbstract <NSObject>
 @optional
 
@@ -17,35 +18,35 @@ NS_ASSUME_NONNULL_BEGIN
  * Return the content of the file at the given location. If the path is incorrect or if the file does not exist, the method
  * must return nil and an error, otherwise YES and no error.
  */
-- (nullable NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError;
+- (nullable NSData *)contentsOfFileAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Create a file with the specified content at the given location. If the path is incorrect or if an error is encountered, 
  * the method must return NO and an error, otherwise YES and no error. If the file already exists, its contents must be 
  * replaced, and the method must return YES and no error
  */
-- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError *__autoreleasing *)pError;
+- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Create a directory at the specified path (create intermediate directories if enabled, otherwise fails if the parent 
  * directory does not exist). If the path is incorrect or if an error is encountered, the method must return NO and an
  * error, otherwise YES and no error. If the directory already exists, the method must return YES and no error
  */
-- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError *__autoreleasing *)pError;
+- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(out NSError *__autoreleasing *)pError;
 
 /**
  * List the contents of the specified directory. If the path is incorrect or if an error is encountered, the method must
  * return nil and an error, otherwise YES and no error. If the directory is empty, the method must return an empty array,
  * not nil
  */
-- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError;
+- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Return YES iff the file or folder exists at the specified path (and whether it is a directory or not; you can pass NULL if you do not
  * need this information). If the path is invalid or if the file does not exist, the method must return NO and leave the boolean received
  * by reference unchanged
  */
-- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(nullable BOOL *)pIsDirectory;
+- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(out nullable BOOL *)pIsDirectory;
 
 /**
  * Recursively copy the file or directory at the specified path to a new location. If any path is invalid, if the copy 
@@ -53,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  * path is a subfolder of the source path (recursion issues), the method must return NO and an error, otherwise YES 
  * and no error. The destination path must contain the name of the file or directory in its new location
  */
-- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError;
+- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Recursively move the file or directory at the specified path to a new location. If any path is invalid, if the move
@@ -61,14 +62,14 @@ NS_ASSUME_NONNULL_BEGIN
  * path is a subfolder of the source path (recursion issues), the method must return NO and an error, otherwise YES and 
  * no error. The destination path must contain the name of the file or directory in its new location
  */
-- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError;
+- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Remove the file or directory at the specified path. If the path is invalid or if an error is encountered, the method
  * must return nil and an error, otherwise YES and no error. If the path is /, all data is erased, but the root itself
  * must not be destroyed
  */
-- (BOOL)removeItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError;
+- (BOOL)removeItemAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError;
 
 @end
 
@@ -140,4 +141,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (atomic, readonly, getter=isProvidingURLs) BOOL providingURLs;
 
 @end
+
 NS_ASSUME_NONNULL_END

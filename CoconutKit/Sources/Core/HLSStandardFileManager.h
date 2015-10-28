@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A standard NSFileManager-based file manager, built upon +[NSFileManager defaultManager]
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSStandardFileManager : HLSFileManager
 
 /**
@@ -27,4 +28,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)initWithRootFolderPath:(nullable NSString *)rootFolderPath NS_DESIGNATED_INITIALIZER;
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Binding support for UITextField:
  *   - binds to NSString model values
@@ -18,3 +20,5 @@
  */
 @interface UITextField (HLSViewBindingImplementation) <HLSViewBindingImplementation>
 @end
+
+NS_ASSUME_NONNULL_END

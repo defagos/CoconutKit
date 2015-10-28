@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Interface meant to be used by friend classes of UIView (HLSViewBinding) (= classes which must have access to private 
  * implementation details)
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface UIView (HLSViewBindingFriend)
 
 /**
@@ -27,4 +28,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateBoundView;
 
 @end
+
 NS_ASSUME_NONNULL_END

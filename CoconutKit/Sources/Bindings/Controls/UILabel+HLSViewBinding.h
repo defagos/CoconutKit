@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Binding support for UILabel:
  *   - binds to NSString model values
@@ -23,3 +25,5 @@
 @property (nonatomic, copy) IBInspectable NSString *bindPlaceholder;
 
 @end
+
+NS_ASSUME_NONNULL_END

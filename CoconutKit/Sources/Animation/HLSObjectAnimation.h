@@ -6,10 +6,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Common abstract class for animations
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSObjectAnimation : NSObject <NSCopying>
 
 /**
@@ -18,4 +19,5 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)animation;
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Same as UIViewContentMode values, but without irrelevant ones
 typedef NS_ENUM(NSInteger, HLSContentMode) {
     HLSContentModeEnumBegin = 0,
@@ -25,8 +27,6 @@ typedef NS_ENUM(NSInteger, HLSContentMode) {
     HLSContentModeEnumEnd,
     HLSContentModeEnumSize = HLSContentModeEnumEnd - HLSContentModeEnumBegin
 };
-
-NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Given a size, return the rectangle corresponding to a rectangle passing in a given target rectangle for the provided content

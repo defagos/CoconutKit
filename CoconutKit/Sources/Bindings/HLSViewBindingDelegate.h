@@ -7,11 +7,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Protocol to be implemented by classes whose instances want to show interest in receiving binding events. Information 
  * about the binding arameters can be obtained by accessing the bindingInformation property of the boundView parameter
  */
-NS_ASSUME_NONNULL_BEGIN
 @protocol HLSViewBindingDelegate <NSObject>
 
 @optional

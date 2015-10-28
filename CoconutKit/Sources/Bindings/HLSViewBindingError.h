@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * View binding error codes
  */
@@ -23,4 +25,6 @@ typedef NS_ENUM(NSInteger, HLSViewBindingError) {
  * Common domain for view binding related errors
  */
 OBJC_EXPORT NSString * const HLSViewBindingErrorDomain;
+
+NS_ASSUME_NONNULL_END
 

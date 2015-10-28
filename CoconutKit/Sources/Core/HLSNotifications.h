@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Helper header file for defining new notifications.
  *
@@ -26,7 +28,6 @@
  *
  * This class is not thread-safe
  */
-NS_ASSUME_NONNULL_BEGIN
 @interface HLSNotificationManager : NSObject
 
 /**
@@ -133,4 +134,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeObserver:(id)observer name:(nullable NSString *)name objectsInCollection:(nullable id<NSFastEnumeration>)collection;
 
 @end
+
 NS_ASSUME_NONNULL_END

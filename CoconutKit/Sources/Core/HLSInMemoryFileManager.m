@@ -300,7 +300,7 @@
 
 #pragma mark HLSFileManagerAbstract protocol implementation
 
-- (NSData *)contentsOfFileAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
+- (NSData *)contentsOfFileAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     id content = [self contentAtPath:path forItems:self.rootItems];
     if (! content || ! [content isKindOfClass:[NSString class]]) {
@@ -316,7 +316,7 @@
     return cacheEntry.data;
 }
 
-- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(NSError *__autoreleasing *)pError
+- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(out NSError *__autoreleasing *)pError
 {
     if (! contents) {
         if (pError) {
@@ -335,7 +335,7 @@
     return [self addObjectAtPath:path withData:contents error:pError];
 }
 
-- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(NSError *__autoreleasing *)pError
+- (BOOL)createDirectoryAtPath:(NSString *)path withIntermediateDirectories:(BOOL)withIntermediateDirectories error:(out NSError *__autoreleasing *)pError
 {
     if (! withIntermediateDirectories) {
         if (! [self checkParentDirectoryForPath:path error:pError]) {
@@ -346,7 +346,7 @@
     return [self addObjectAtPath:path withData:nil error:pError];
 }
 
-- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
+- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     id subitems = [self contentAtPath:path forItems:self.rootItems];
     if (! [subitems isKindOfClass:[NSDictionary class]]) {
@@ -361,7 +361,7 @@
     return [subitems allKeys];
 }
 
-- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(BOOL *)pIsDirectory
+- (BOOL)fileExistsAtPath:(NSString *)path isDirectory:(out BOOL *)pIsDirectory
 {
     id subitems = [self contentAtPath:path forItems:self.rootItems];
     if (! subitems) {
@@ -375,7 +375,7 @@
     return YES;
 }
 
-- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
+- (BOOL)copyItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(out NSError *__autoreleasing *)pError
 {
     // Prevent recursive copy
     if ([destinationPath hasPrefix:sourcePath]) {
@@ -416,7 +416,7 @@
                               error:pError];
 }
 
-- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(NSError *__autoreleasing *)pError
+- (BOOL)moveItemAtPath:(NSString *)sourcePath toPath:(NSString *)destinationPath error:(out NSError *__autoreleasing *)pError
 {
     // Prevent recursive move
     if ([destinationPath hasPrefix:sourcePath]) {
@@ -457,7 +457,7 @@
                                error:pError];
 }
 
-- (BOOL)removeItemAtPath:(NSString *)path error:(NSError *__autoreleasing *)pError
+- (BOOL)removeItemAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     // Get the directory in which the element to delete is located
     id content = [self contentAtPath:[path stringByDeletingLastPathComponent] forItems:self.rootItems];
