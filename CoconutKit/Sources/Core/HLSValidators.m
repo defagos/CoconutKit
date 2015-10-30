@@ -10,6 +10,10 @@
 
 + (BOOL)validateEmailAddress:(NSString *)emailAddress
 {
+    if (! emailAddress) {
+        return NO;
+    }
+    
     // For some obscure reason, escaping the % in the directly in the format string (using %%) does not work and crashes at runtime! But creating the
     // regex outside and inserting it into the control string works. Are control strings in Objective-C really standard? 
     // The following regex is the one used by Apple, e.g. in iOS mail. Thanks to Cédric Lüthi (0xced) for its extraction

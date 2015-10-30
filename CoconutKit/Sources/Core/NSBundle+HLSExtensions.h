@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define CoconutKitLocalizedString(key, comment) \
     [[NSBundle coconutKitBundle] localizedStringForKey:(key) value:@"" table:nil]
 
@@ -16,7 +18,7 @@
  *
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */
-+ (NSString *)friendlyApplicationVersionNumber;
++ (nullable NSString *)friendlyApplicationVersionNumber;
 
 /**
  * Return the resource bundle associated with CoconutKit
@@ -29,18 +31,20 @@
  * will be made. If no matching bundle is found, nil is returned. Note that bundles are searched recursively, and 
  * that results are cached for faster lookup. If name is nil, the main bundle is returned
  */
-+ (NSBundle *)bundleWithName:(NSString *)name;
++ (nullable NSBundle *)bundleWithName:(nullable NSString *)name;
 
 /**
  * Return a friendly bundle version number
  *
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */
-- (NSString *)friendlyVersionNumber;
+- (nullable NSString *)friendlyVersionNumber;
 
 /**
  * Return a dictionary containing both the contents of the info and localized info dictionaries
  */
-- (NSDictionary *)fullInfoDictionary;
+- (nullable NSDictionary *)fullInfoDictionary;
 
 @end
+
+NS_ASSUME_NONNULL_END

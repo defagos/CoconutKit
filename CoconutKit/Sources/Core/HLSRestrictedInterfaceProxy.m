@@ -13,7 +13,7 @@
 
 @interface HLSRestrictedInterfaceProxy ()
 
-@property (nonatomic, strong) HLSMAZeroingWeakRef *targetZeroingWeakRef;
+@property (nonatomic) HLSMAZeroingWeakRef *targetZeroingWeakRef;
 
 @end
 
@@ -35,11 +35,8 @@
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 
 - (instancetype)initWithTarget:(id)target protocol:(Protocol *)protocol
-{    
-    if (! protocol) {
-        HLSLoggerError(@"Cannot create a proxy to target %@ without a protocol", target);
-        return nil;
-    }
+{
+    NSParameterAssert(protocol);
     
     if ([target isProxy]) {
         HLSLoggerError(@"Cannot create a proxy to another proxy");

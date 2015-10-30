@@ -32,6 +32,11 @@
 
 @interface HLSNotificationConverter ()
 
+// To be able to add conversion rules for an (object, notification name), and to be able to remove all rules defined
+// for an object, we introduce two dictionary levels:
+//   - 1st dictionary: maps objects to a notification map
+//   - 2nd dictionary (notification map): maps notification name to the (object, notification name) pair to
+//                                        convert to
 @property (nonatomic, strong) NSMutableDictionary *objectToNotificationMap;
 
 @end

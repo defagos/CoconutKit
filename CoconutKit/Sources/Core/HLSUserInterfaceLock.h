@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Singleton class for preventing / allowing user interface interaction
  *
@@ -26,3 +28,5 @@
 - (void)unlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

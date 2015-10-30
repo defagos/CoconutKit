@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Notification sent when the localization is changed at runtime
  */
@@ -17,12 +19,13 @@ OBJC_EXPORT NSString * const HLSCurrentLocalizationDidChangeNotification;
 OBJC_EXPORT NSString * const HLSMissingLocalization;
 
 /**
- * Return the language for a localization
+ * Return the language for a localization, nil if not found
+ *
  * For example:
  *   HLSLanguageForLocalization(@"de") returns @"Deutsch"
  *   HLSLanguageForLocalization(@"en") returns @"English"
  */
-OBJC_EXPORT NSString *HLSLanguageForLocalization(NSString *localization);
+OBJC_EXPORT NSString * __nullable HLSLanguageForLocalization(NSString * __nullable localization);
 
 /**
  * Return a localized string from the specified bundle (if the bundle is nil, then
@@ -30,14 +33,14 @@ OBJC_EXPORT NSString *HLSLanguageForLocalization(NSString *localization);
  *
  * If no match is found, return HLSMissingLocalization
  */
-OBJC_EXPORT NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle);
+OBJC_EXPORT NSString *HLSLocalizedStringFromBundle(NSString * __nullable key, NSBundle * __nullable bundle);
 
 /**
  * Return a localized string from the UIKit bundle
  *
  * If no match is found, return HLSMissingLocalization
  */
-OBJC_EXPORT NSString *HLSLocalizedStringFromUIKit(NSString *key);
+OBJC_EXPORT NSString *HLSLocalizedStringFromUIKit(NSString * __nullable key);
 
 /**
  * Return the localized description matching an error code
@@ -85,6 +88,8 @@ OBJC_EXPORT NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCo
  *
  * The new localization is stored in the standard user defaults under the HLSPreferredLocalizationDefaultsKey key.
  */
-+ (void)setLocalization:(NSString *)localization;
++ (void)setLocalization:(nullable NSString *)localization;
 
 @end
+
+NS_ASSUME_NONNULL_END

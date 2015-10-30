@@ -84,16 +84,15 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (id)objectForKey:(NSString *)key
 {
-    if (! key) {
-        HLSLoggerError(@"Missing key");
-        return nil;
-    }
-    
+    NSParameterAssert(key);
+        
     return [[self userInfo] objectForKey:key];
 }
 
 - (NSArray *)objectsForKey:(NSString *)key
 {
+    NSParameterAssert(key);
+    
     id object = [self objectForKey:key];
     if (! object) {
         return nil;
@@ -109,7 +108,11 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (NSDictionary *)customUserInfo
 {
-    NSMutableDictionary *customUserInfo = [NSMutableDictionary dictionaryWithDictionary:[self userInfo]];
+    if (! self.userInfo) {
+        return nil;
+    }
+    
+    NSMutableDictionary *customUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
     [customUserInfo removeObjectForKey:NSLocalizedDescriptionKey];
     [customUserInfo removeObjectForKey:NSLocalizedFailureReasonErrorKey];
     [customUserInfo removeObjectForKey:NSLocalizedRecoverySuggestionErrorKey];
@@ -201,9 +204,7 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (void)setObject:(id)object forKey:(NSString *)key
 {
-    if (! key || ! object) {
-        return;
-    }
+    NSParameterAssert(key);
     
     if (object) {
         [[self mutableUserInfo] setObject:object forKey:key];
@@ -215,16 +216,14 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (void)addObject:(id)object forKey:(NSString *)key
 {
-    if (! key || ! object) {
-        return;
-    }
-    
     [self addObjects:@[object] forKey:key];
 }
 
 - (void)addObjects:(NSArray *)objects forKey:(NSString *)key
 {
-    if ([objects count] == 0 || ! key) {
+    NSParameterAssert(key);
+    
+    if ([objects count] == 0) {
         return;
     }
     

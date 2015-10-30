@@ -51,8 +51,6 @@ NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode)
     return HLSLocalizedStringFromBundle(key, bundle);
 }
 
-@implementation NSBundle (HLSDynamicLocalization)
-
 static void setDefaultLocalization(void)
 {
     NSArray *mainBundleLocalizations = [[NSBundle mainBundle] localizations];
@@ -64,6 +62,10 @@ static void setDefaultLocalization(void)
         currentLocalization = [[[NSBundle mainBundle] developmentLocalization] copy];
     }
 }
+
+@implementation NSBundle (HLSDynamicLocalization)
+
+#pragma mark Class methods
 
 + (void)load
 {
@@ -107,7 +109,7 @@ static void setDefaultLocalization(void)
     [[NSUserDefaults standardUserDefaults] setObject:currentLocalization forKey:HLSPreferredLocalizationDefaultsKey];
 }
 
-// MARK: - Localized strings
+#pragma mark Localized strings
 
 - (NSString *)dynamic_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
 {
@@ -161,7 +163,7 @@ static void setDefaultLocalization(void)
     return localizedString;
 }
 
-// MARK: - URLs
+#pragma mark URLs
 
 - (NSURL *)dynamic_URLForResource:(NSString *)name withExtension:(NSString *)extension subdirectory:(NSString *)subpath
 {
@@ -179,7 +181,7 @@ static void setDefaultLocalization(void)
     return [self URLsForResourcesWithExtension:extension subdirectory:subpath localization:currentLocalization];
 }
 
-// MARK: - Paths
+#pragma mark Paths
 
 - (NSString *)dynamic_pathForResource:(NSString *)name ofType:(NSString *)extension inDirectory:(NSString *)subpath
 {
@@ -197,7 +199,7 @@ static void setDefaultLocalization(void)
     return [self pathsForResourcesOfType:extension inDirectory:subpath forLocalization:currentLocalization];
 }
 
-// MARK: - Swizzling
+#pragma mark Swizzling
 
 static void exchangeNSBundleInstanceMethod(SEL originalSelector)
 {

@@ -6,22 +6,24 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (HLSExtensions)
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSDictionary<__covariant KeyType, __covariant ObjectType> (HLSExtensions)
 
 /**
  * Return the receiver, to which object has been set for key
  */
-- (NSDictionary *)dictionaryBySettingObject:(id)object forKey:(id)key;
+- (NSDictionary<KeyType, ObjectType> *)dictionaryBySettingObject:(ObjectType)object forKey:(KeyType)key;
 
 /**
  * Return the receiver without the object designated by key
  */
-- (NSDictionary *)dictionaryByRemovingObjectForKey:(id)key;
+- (NSDictionary<KeyType, ObjectType> *)dictionaryByRemovingObjectForKey:(KeyType)key;
 
 /**
  * Return the receiver without the objects designated by the keys and the array
  */
-- (NSDictionary *)dictionaryByRemovingObjectsForKeys:(NSArray *)keyArray;
+- (NSDictionary<KeyType, ObjectType> *)dictionaryByRemovingObjectsForKeys:(NSArray<KeyType> *)keyArray;
 
 /**
  * Return the receiver, but merged with the dictionary returned by [[NSProcessInfo processInfo] environment]. This 
@@ -29,15 +31,17 @@
  *
  * Can be very handy to provide default plist value overriding via environment variables, for example
  */
-- (NSDictionary *)dictionaryOverriddenWithEnvironment;
+- (NSDictionary<KeyType, ObjectType> *)dictionaryOverriddenWithEnvironment;
 
 @end
 
-@interface NSMutableDictionary (HLSExtensions)
+@interface NSMutableDictionary<KeyType, ObjectType> (HLSExtensions)
 
 /**
  * Same as setObject:forKey:, but does not attempt to insert nil objects or keys
  */
-- (void)safelySetObject:(id)object forKey:(id)key;
+- (void)safelySetObject:(nullable ObjectType)object forKey:(nullable KeyType)key;
 
 @end
+
+NS_ASSUME_NONNULL_END

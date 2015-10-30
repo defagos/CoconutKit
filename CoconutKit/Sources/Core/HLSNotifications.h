@@ -62,15 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  * such conversion code can be tedious and error prone. The HLSNotificationConverter singleton provides a convenient
  * way to define conversions with very litte code.
  */
-@interface HLSNotificationConverter : NSObject {
-@private
-    // To be able to add conversion rules for an (object, notification name), and to be able to remove all rules defined
-    // for an object, we introduce two dictionary levels:
-    //   - 1st dictionary: maps objects to a notification map
-    //   - 2nd dictionary (notification map): maps notification name to the (object, notification name) pair to
-    //                                        convert to
-    NSMutableDictionary *_objectToNotificationMap;
-}
+@interface HLSNotificationConverter : NSObject
 
 /**
  * Singleton instance
