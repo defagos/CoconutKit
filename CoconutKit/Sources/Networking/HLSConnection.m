@@ -205,11 +205,7 @@
     [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
     
     self.error = error;
-    
-    if (responseObject || error) {
-        self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
-    }
-    
+    self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
     self.selfRunning = NO;
     
     if (! self.running) {

@@ -6,8 +6,8 @@
 
 #import "HLSFakeConnection.h"
 
-#import "HLSCoreError.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 #import "NSError+HLSExtensions.h"
 
 @interface HLSFakeConnection ()
@@ -49,9 +49,9 @@
 
 - (void)cancelConnection
 {
-    NSError *error = [NSError errorWithDomain:HLSCoreErrorDomain
-                                         code:HLSCoreErrorCanceled
-                         localizedDescription:CoconutKitLocalizedString(@"The connection has been canceled", nil)];
+    NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                         code:NSURLErrorCancelled
+                         localizedDescription:HLSLocalizedDescriptionForCFNetworkError(NSURLErrorCancelled)];
     [self finishWithResponseObject:nil error:error];
 }
 

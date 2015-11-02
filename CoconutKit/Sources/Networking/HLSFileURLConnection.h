@@ -17,6 +17,9 @@
  *   - If the URL does not refer to a valid file, responseObject is nil
  * The duration of the connection is random between 0 and 1 second
  *
+ * If the connection is cancelled, the completion block is called with the NSURLErrorCancelled error code in the
+ * NSURLErrorDomain domain.
+ *
  * Two environment variables can be set to simulate connection issues:
  *   - HLSFileURLConnectionLatency: A latency duration which gets added to each connection, in seconds
  *   - HLSFileURLConnectionFailureRate: A failure rate (between 0 and 1)
