@@ -346,6 +346,24 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  */
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
 
+/**
+ * Call this method from your container view controller -preferredStatusBarStyle method if children must participate
+ * to the status bar behavior
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle;
+
+/**
+ * Call this method from your container view controller -prefersStatusBarHidden method if children must participate
+ * to the status bar behavior
+ */
+- (BOOL)prefersStatusBarHidden;
+
+/**
+ * Call this method from your container view controller -preferredStatusBarUpdateAnimation method if children must participate
+ * to the status bar behavior
+ */
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation;
+
 @end
 
 /**
