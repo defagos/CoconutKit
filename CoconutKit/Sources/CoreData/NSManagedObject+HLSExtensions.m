@@ -18,6 +18,8 @@
 
 + (instancetype)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
+    NSParameterAssert(managedObjectContext);
+    
     return [NSEntityDescription insertNewObjectForEntityForName:[self className] 
                                          inManagedObjectContext:managedObjectContext];
 }
@@ -31,11 +33,8 @@
                     sortedUsingDescriptors:(NSArray *)sortDescriptors
                     inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
+    NSParameterAssert(managedObjectContext);
     HLSAssertObjectsInEnumerationAreKindOfClass(sortDescriptors, NSSortDescriptor);
-    if (! managedObjectContext) {
-        HLSLoggerError(@"Missing managed object context");
-        return nil;
-    }
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[self className]
                                                          inManagedObjectContext:managedObjectContext];
@@ -133,7 +132,7 @@
 
 #pragma mark Creating a copy
 
-- (id)duplicate
+- (NSManagedObject *)duplicate
 {
     if (! [self conformsToProtocol:@protocol(HLSManagedObjectCopying)]) {
         return nil;

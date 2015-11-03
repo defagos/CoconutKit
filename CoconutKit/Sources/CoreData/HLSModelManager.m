@@ -14,9 +14,9 @@
 
 @interface HLSModelManager ()
 
-@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -115,10 +115,7 @@
 
 + (void)pushModelManager:(HLSModelManager *)modelManager
 {
-    if (! modelManager) {
-        HLSLoggerError(@"Missing model manager");
-        return;
-    }
+    NSParameterAssert(modelManager);
     
     NSMutableArray *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
     [modelManagerStack addObject:modelManager];
@@ -212,6 +209,8 @@
 
 + (void)deleteObjectFromCurrentModelContext:(NSManagedObject *)managedObject
 {
+    NSParameterAssert(managedObject);
+    
     NSManagedObjectContext *currentModelContext = [self currentModelContext];
     if (! currentModelContext) {
         HLSLoggerError(@"No current context");
@@ -231,6 +230,8 @@
                           fileManager:(HLSFileManager *)fileManager
                               options:(NSDictionary *)options
 {
+    NSParameterAssert(modelFileName);
+    
     if (self = [super init]) {
         if (! fileManager) {
             fileManager = [HLSStandardFileManager defaultManager];

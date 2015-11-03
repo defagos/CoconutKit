@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSTimeZone (HLSExtensions)
 
 /**
@@ -65,3 +67,5 @@
 - (NSTimeInterval)timeIntervalBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2;
 
 @end
+
+NS_ASSUME_NONNULL_END

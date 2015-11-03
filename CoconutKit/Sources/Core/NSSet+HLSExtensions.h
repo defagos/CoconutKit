@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSSet (HLSExtensions)
 
 /**
@@ -14,3 +16,5 @@
 - (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
 
 @end
+
+NS_ASSUME_NONNULL_END

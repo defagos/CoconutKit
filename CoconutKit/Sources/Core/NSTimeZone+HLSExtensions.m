@@ -12,11 +12,17 @@
 
 - (NSTimeInterval)offsetFromTimeZone:(NSTimeZone *)timeZone forDate:(NSDate *)date
 {
+    NSParameterAssert(timeZone);
+    NSParameterAssert(date);
+    
     return [self secondsFromGMTForDate:date] - [timeZone secondsFromGMTForDate:date];
 }
 
 - (NSDate *)dateWithSameComponentsAsDate:(NSDate *)date fromTimeZone:(NSTimeZone *)timeZone
 {
+    NSParameterAssert(date);
+    NSParameterAssert(timeZone);
+    
     NSTimeInterval timeZoneOffset = [timeZone offsetFromTimeZone:self forDate:date];
     NSDate *dateInSelf = [date dateByAddingTimeInterval:timeZoneOffset];
     
@@ -28,6 +34,8 @@
 
 - (NSDate *)dateByAddingTimeInterval:(NSTimeInterval)timeInterval toDate:(NSDate *)date
 {
+    NSParameterAssert(date);
+    
     NSDate *resultDate = [date dateByAddingTimeInterval:timeInterval];
     
     // If we crossed the DST transition, we must compensante its effect
@@ -38,11 +46,16 @@
 
 - (NSDate *)dateByAddingNumberOfDays:(NSInteger)numberOfDays toDate:(NSDate *)date
 {
+    NSParameterAssert(date);
+    
     return [self dateByAddingTimeInterval:24. * 60. * 60. * numberOfDays toDate:date];
 }
 
 - (NSTimeInterval)timeIntervalBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2
 {
+    NSParameterAssert(date1);
+    NSParameterAssert(date2);
+    
     NSTimeInterval timeInterval = [date1 timeIntervalSinceDate:date2];
     
     // If we crossed the DST transition, we must compensante its effect

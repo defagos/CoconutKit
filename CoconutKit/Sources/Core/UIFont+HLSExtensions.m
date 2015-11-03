@@ -14,6 +14,8 @@
 
 + (BOOL)loadFontWithFileName:(NSString *)fileName inBundle:(NSBundle *)bundle
 {
+    NSParameterAssert(fileName);
+    
     if (! bundle) {
         bundle = [NSBundle mainBundle];
     }
@@ -26,6 +28,8 @@
 
 + (BOOL)loadFontWithData:(NSData *)data
 {
+    NSParameterAssert(data);
+    
     // See http://www.marco.org/2012/12/21/ios-dynamic-font-loading
     CGDataProviderRef providerRef = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     CGFontRef fontRef = CGFontCreateWithDataProvider(providerRef);

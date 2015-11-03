@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * NSManagedObject does not implement the NSCopying protocol. Instead, you can have your managed objects
  * implement the HLSManagedObjectCopying protocol. Objects implementing this protocol can be copied
@@ -20,6 +22,8 @@
  * If some keys need to be excluded during copy, simply implement this method to return the corresponding
  * name strings
  */
-- (NSSet *)keysToExclude;
+@property (nonatomic, readonly, nullable) NSSet *keysToExclude;
 
 @end
+
+NS_ASSUME_NONNULL_END

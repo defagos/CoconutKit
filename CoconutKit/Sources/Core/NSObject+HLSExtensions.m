@@ -23,6 +23,8 @@
 
 - (BOOL)implementsProtocol:(Protocol *)protocol
 {
+    NSParameterAssert(protocol);
+    
     // Only interested in optional methods. Required methods are checked at compilation time
     unsigned int numberOfMethods = 0;
     struct objc_method_description *methodDescriptions = protocol_copyMethodDescriptionList(protocol, NO /* optional only */, YES, &numberOfMethods);

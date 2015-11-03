@@ -10,8 +10,8 @@
 
 - (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
-    return [self sortedArrayUsingDescriptors:sortDescriptors];
+    NSParameterAssert(sortDescriptor);
+    return [self sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 @end

@@ -116,6 +116,8 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 - (void)logMessage:(NSString *)message forMode:(HLSLoggerMode)mode
 {
+    NSParameterAssert(message);
+    
 	if (self.level > mode.level) {
 		return;
 	}

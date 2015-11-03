@@ -7,6 +7,8 @@
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Writing Core Data validations is cumbersome, error-prone and ultimately painful. Though the initial idea 
  * is good (writing a set of methods beginning with 'validate' and which perform individual and consistency
@@ -42,9 +44,9 @@
  * When HLSValidation extensions have been enabled, model object validation must be implemented in a 
  * different way:
  *   - instead of implementing 
- *         - (BOOL)validate<fieldName>:(<class> *)pValue error:(NSError *__autoreleasing *)pError
+ *         - (BOOL)validate<fieldName>:(<class> *)pValue error:(out NSError *__autoreleasing *)pError
  *     for each model field to validate, you now implement methods with signature
- *         - (BOOL)check<fieldName>:(<class>)value error:(NSError *__autoreleasing *)pError
+ *         - (BOOL)check<fieldName>:(<class>)value error:(out NSError *__autoreleasing *)pError
  *     (value can never be of a primitive type here)
  *     As for the 'validate' methods, the 'check' methods are not meant to be called directly (i.e. public)
  *     and should remain hidden in the model object implementation file. If you need to call a validation
@@ -59,10 +61,10 @@
  *     individual validations, pError is guaranteed to be valid (with *pError = nil upon method entry), you
  *     therefore do not need to check the pointer before dereferencing it (read remark above, though). Moreover, 
  *     error-chaining will be performed for you. The signature of this method must be
- *         - (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
+ *         - (BOOL)checkForConsistency:(out NSError *__autoreleasing *)pError
  *   - similarly, instead of implementing the -validateForDelete: method to perform checks when deleting
  *     an object, you now must implement a 'check' method with the following signature:
- *         - (BOOL)checkForDelete:(NSError *__autoreleasing *)pError
+ *         - (BOOL)checkForDelete:(out NSError *__autoreleasing *)pError
  * UITextField leverage this new set of validation methods by providing binding with model object fields. This 
  * makes synchronization and validation of forms very easy to implement. Refer to UITextField+HLSValidation.h
  * for more information.
@@ -107,12 +109,12 @@
  *
  * If the key does not exist, the method returns YES and no error (as -validateValue:forKey:error does)
  */
-- (BOOL)checkValue:(id)value forKey:(NSString *)key error:(NSError *__autoreleasing *)pError;
+- (BOOL)checkValue:(nullable id)value forKey:(NSString *)key error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Check the object as a whole (i.e. individual and consistency validations)
  */
-- (BOOL)check:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(out NSError *__autoreleasing *)pError;
 
 /**
  * Subclasses of NSManagedObject can override this method to perform additional consistency validations when
@@ -121,11 +123,13 @@
  *
  * When implementing this method, you do not have to (and should not) call the method on super first.
  */
-- (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError;
+- (BOOL)checkForConsistency:(out NSError *__autoreleasing *)pError;
 
 /**
  * Same as -checkForConsistency: (see above), but when an object deletion is committed
  */
-- (BOOL)checkForDelete:(NSError *__autoreleasing *)pError;
+- (BOOL)checkForDelete:(out NSError *__autoreleasing *)pError;
 
 @end
+
+NS_ASSUME_NONNULL_END

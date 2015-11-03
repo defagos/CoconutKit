@@ -22,21 +22,25 @@
 
 - (BOOL)isLessThanNumber:(NSNumber *)number
 {
+    NSParameterAssert(number);
     return [self compare:number] == NSOrderedAscending;
 }
 
 - (BOOL)isLessThanOrEqualToNumber:(NSNumber *)number
 {
+    NSParameterAssert(number);
     return [self compare:number] != NSOrderedDescending;
 }
 
 - (BOOL)isGreaterThanNumber:(NSNumber *)number
 {
+    NSParameterAssert(number);
     return [self compare:number] == NSOrderedDescending;
 }
 
 - (BOOL)isGreaterThanOrEqualToNumber:(NSNumber *)number
 {
+    NSParameterAssert(number);
     return [self compare:number] != NSOrderedAscending;
 }
 
