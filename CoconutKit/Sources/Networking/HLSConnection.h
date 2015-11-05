@@ -6,12 +6,14 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @class HLSConnection;
 
 // Completion block signature
-typedef void (^HLSConnectionCompletionBlock)(HLSConnection *connection, id responseObject, NSError *error);
-typedef void (^HLSConnectionFinalizeBlock)(NSError *error);
+typedef void (^HLSConnectionCompletionBlock)(HLSConnection *connection, id __nullable responseObject, NSError * __nullable error);
+typedef void (^HLSConnectionFinalizeBlock)(NSError * __nullable error);
 typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t totalUnitCount);
 
 /**
@@ -45,7 +47,7 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 /**
  * Create a connection, attaching it the specified completion block (optional)
  */
-- (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithCompletionBlock:(nullable HLSConnectionCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
 
 /**
  * Start the connection, scheduling it for the NSRunLoopCommonModes run loop modes
@@ -65,28 +67,28 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 /**
  * Return YES while the connection or one of its children connections are running
  */
-@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 /**
  * The last error encountered when running the connection, nil if none
  */
-@property (nonatomic, readonly, strong) NSError *error;
+@property (nonatomic, readonly, nullable) NSError *error;
 
 /**
  * Connection progress information (use KVO to be notified about changes, see NSProgress documentation)
  */
-@property (nonatomic, readonly, strong) NSProgress *progress;
+@property (nonatomic, readonly) NSProgress *progress;
 
 /**
  * A progress block which gets called as the connection runs (same information as -progress, but without the need
  * for KVO)
  */
-@property (nonatomic, copy) HLSConnectionProgressBlock progressBlock;
+@property (nonatomic, copy, nullable) HLSConnectionProgressBlock progressBlock;
 
 /**
  * A block called after the connection and all its child connection are finished
  */
-@property (nonatomic, copy) HLSConnectionFinalizeBlock finalizeBlock;
+@property (nonatomic, copy, nullable) HLSConnectionFinalizeBlock finalizeBlock;
 
 /**
  * Create a parent - child relationship between the receiver and another connection. When cancelling the receiver,
@@ -117,12 +119,12 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 /**
  * Return all child connections, in no specific order
  */
-@property (nonatomic, readonly, strong) NSArray *childConnections;
+@property (nonatomic, readonly) NSArray *childConnections;
 
 /**
  * Return the connection with the specified key, nil if none is found
  */
-- (HLSConnection *)childConnectionForKey:(id)key;
+- (nullable HLSConnection *)childConnectionForKey:(id)key;
 
 /**
  * Remove the connection with the specified key, does nothing if none is found. The connection is automatically
@@ -152,6 +154,8 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
  * been canceled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks).
  * If called with both parameters set to nil, the completion block won't be called
  */
-- (void)finishWithResponseObject:(id)responseObject error:(NSError *)error;
+- (void)finishWithResponseObject:(nullable id)responseObject error:(nullable NSError *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

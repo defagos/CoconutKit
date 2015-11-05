@@ -76,8 +76,15 @@
 
 - (void)startWithRunLoopModes:(NSSet *)runLoopModes
 {
+    NSParameterAssert(runLoopModes);
+    
     if (self.running) {
         HLSLoggerInfo(@"The connection is already running");
+        return;
+    }
+    
+    if (runLoopModes.count == 0) {
+        HLSLoggerError(@"No run loop modes have been specified");
         return;
     }
     
@@ -134,6 +141,7 @@
 
 - (void)addChildConnection:(HLSConnection *)connection withKey:(id)key
 {
+    NSParameterAssert(connection);
     NSParameterAssert(key);
     
     if ([self.childConnectionsDictionary objectForKey:key]) {
@@ -156,6 +164,8 @@
 
 - (id)addChildConnection:(HLSConnection *)connection
 {
+    NSParameterAssert(connection);
+    
     NSString *key = [[NSUUID UUID] UUIDString];
     [self addChildConnection:connection withKey:key];
     return key;
@@ -168,11 +178,15 @@
 
 - (HLSConnection *)childConnectionForKey:(id)key
 {
+    NSParameterAssert(key);
+    
     return [self.childConnectionsDictionary objectForKey:key];
 }
 
 - (void)removeChildConnectionForKey:(id)key
 {
+    NSParameterAssert(key);
+    
     HLSConnection *connection = [self.childConnectionsDictionary objectForKey:key];
     if (! connection) {
         return;

@@ -12,8 +12,8 @@
 
 @interface HLSFakeConnection ()
 
-@property (nonatomic, strong) id fakeResponseObject;
-@property (nonatomic, strong) NSError *fakeError;
+@property (nonatomic) id fakeResponseObject;
+@property (nonatomic) NSError *fakeError;
 
 @end
 

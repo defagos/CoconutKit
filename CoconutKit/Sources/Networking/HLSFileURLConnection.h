@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^HLSConnectionArrayCompletionBlock)(HLSConnection *connection, NSArray<NSURL *> * __nullable fileURLs, NSError * __nullable error);
+
 /**
- * A connection managing file URL requests only (creation fails if the URLRequest is not a file URL request). It returns
- * the NSArray of all corresponding file paths as responseObject:
+ * A connection managing file URL requests only (the URLRequest must be a file URL request). It returns the NSArray of 
+ * all corresponding file paths as responseObject:
  *   - If the URL is a directory, then the file paths of all files and folders within it are returned. If the directory
  *     is empty, an empty array is returned
  *   - If the URL is a file, then its path is returned
@@ -22,4 +26,9 @@
  *   - HLSFileURLConnectionFailureRate: A failure rate (between 0 and 1)
  */
 @interface HLSFileURLConnection : HLSURLConnection
+
+- (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionArrayCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
+
 @end
+
+NS_ASSUME_NONNULL_END

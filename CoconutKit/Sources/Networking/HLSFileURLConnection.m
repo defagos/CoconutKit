@@ -15,12 +15,9 @@
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
+- (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionArrayCompletionBlock)completionBlock
 {
-    if (! [[request URL] isFileURL]) {
-        HLSLoggerError(@"The request is not a file request");
-        return nil;
-    }
+    NSAssert([[request URL] isFileURL], @"A file URL request is required");
     
     return [super initWithRequest:request completionBlock:completionBlock];
 }

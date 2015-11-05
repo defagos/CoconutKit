@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A fake connection, useful when having a connection object is mandatory
  *
@@ -16,6 +18,8 @@
  */
 @interface HLSFakeConnection : HLSConnection
 
-- (instancetype)initWithResponseObject:(id)responseObject error:(NSError *)error completionBlock:(HLSConnectionCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithResponseObject:(nullable id)responseObject error:(nullable NSError *)error completionBlock:(nullable HLSConnectionCompletionBlock)completionBlock NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END
