@@ -6,10 +6,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @protocol HLSTaskDelegate;
 
-#define kTaskNoTimeIntervalEstimateAvailable        -1.
+extern const NSTimeInterval HLSTaskNoTimeIntervalEstimateAvailable;
 
 /**
  * Abstract class for tasks. Tasks offer a delegate mechanism for tracking their status. To create your own
@@ -31,71 +33,71 @@
  * Class responsible of processing the task. Must be a subclass of HLSTaskOperation
  * Must be overridden
  */
-- (Class)operationClass;
+@property (nonatomic, readonly) Class operationClass;
 
 /**
  * Optional tag to identify a task
  * Not meant to be overridden
  */
-@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, copy, nullable) NSString *tag;
 
 /**
  * Dictionary which can be used freely to convey additional information
  * Not meant to be overridden
  */
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, nullable) NSDictionary *userInfo;
 
 /**
  * Return YES if the task processing is running
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 /**
  * Return YES if the task processing is over (this can be because the operation has completed its task,
  * or after it has been cancelled)
  */
-@property (nonatomic, readonly, assign, getter=isFinished) BOOL finished;
+@property (nonatomic, readonly, getter=isFinished) BOOL finished;
 
 /**
  * Return YES if the task group has been cancelled
  */
-@property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
+@property (nonatomic, readonly, getter=isCancelled) BOOL cancelled;
 
 /**
  * Task progress value (always between 0.f and 1.f). A task might not reach 1.f if it fails
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign) float progress;
+@property (nonatomic, readonly) float progress;
 
 /**
- * Return an estimate about the remaining time before the task processing completes (or kTaskNoTimeIntervalEstimateAvailable if no
+ * Return an estimate about the remaining time before the task processing completes (or HLSTaskNoTimeIntervalEstimateAvailable if no
  * estimate is available yet)
  * Important remark: Accurate measurements can only be obtained if the progress update rate of a task is not varying fast (in another
  *                   words: constant over long enough periods of time). This is for example usually the case for download or
  *                   inflating / deflating tasks.
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, readonly) NSTimeInterval remainingTimeIntervalEstimate;
 
 /**
  * Return a localized string describing the estimated time before completion
  * (see remark of -remainingTimeIntervalEstimate method)
  * Not meant to be overridden
  */
-- (NSString *)remainingTimeIntervalEstimateLocalizedString;
+@property (nonatomic, readonly, copy) NSString *remainingTimeIntervalEstimateLocalizedString;
 
 /**
  * NSDictionary which can freely be used to convey return information
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, strong) NSDictionary *returnInfo;
+@property (nonatomic, readonly, nullable) NSDictionary *returnInfo;
 
 /**
  * When the process is complete, check this property to find out if an error was encountered
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, strong) NSError *error;
+@property (nonatomic, readonly, nullable) NSError *error;
 
 @end
 
@@ -125,3 +127,5 @@
 - (void)taskHasBeenCancelled:(HLSTask *)task;
 
 @end
+
+NS_ASSUME_NONNULL_END

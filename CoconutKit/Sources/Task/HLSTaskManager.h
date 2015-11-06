@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Concrete class responsible for instantiating, processing and managing HLSTaskOperation objects spawned for each
  * task submitted to it. Each such object represents a work unit processed by a dedicated thread.
@@ -129,3 +131,5 @@
 - (void)unregisterDelegate:(id)delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END

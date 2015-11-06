@@ -80,6 +80,8 @@
 
 - (void)submitTask:(HLSTask *)task
 {
+    NSParameterAssert(task);
+    
     // Cannot submit a task if already running
     if ([self.tasks containsObject:task]) {
         HLSLoggerWarn(@"Cannot submit a task which is already running");
@@ -98,6 +100,8 @@
 
 - (void)submitTaskGroup:(HLSTaskGroup *)taskGroup
 {
+    NSParameterAssert(taskGroup);
+    
     // Cannot submit a task if already running
     if ([self.taskGroups containsObject:taskGroup]) {
         HLSLoggerWarn(@"Cannot submit a task group which is already running");
@@ -171,6 +175,8 @@
 
 - (void)cancelTask:(HLSTask *)task
 {
+    NSParameterAssert(task);
+    
     // If already finished (cancelled or complete), nothing to cancel
     if (task.finished) {
         HLSLoggerDebug(@"Task %@ is already complete or cancelled", task);
@@ -242,6 +248,8 @@
 
 - (void)cancelTaskGroup:(HLSTaskGroup *)taskGroup
 {
+    NSParameterAssert(taskGroup);
+    
     taskGroup.cancelled = YES;
     
     // Cancel all individual tasks
@@ -252,6 +260,8 @@
 
 - (void)cancelTasksWithTag:(NSString *)tag
 {
+    NSParameterAssert(tag);
+    
     NSArray *tasks = [self tasksWithTag:tag];
     for (HLSTask *task in tasks) {
         [self cancelTask:task];
@@ -260,6 +270,8 @@
 
 - (void)cancelTaskGroupsWithTag:(NSString *)tag
 {
+    NSParameterAssert(tag);
+    
     NSArray *taskGroups = [self taskGroupsWithTag:tag];
     for (HLSTaskGroup *taskGroup in taskGroups) {
         [self cancelTaskGroup:taskGroup];
@@ -268,6 +280,8 @@
 
 - (void)cancelTasksWithDelegate:(id)delegate
 {
+    NSParameterAssert(delegate);
+    
     // Cancel all task groups associated with this delegate
     NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSSet *taskGroupsForDelegate = [NSSet setWithSet:[self.delegateToTaskGroupsMap objectForKey:delegateKey]];
@@ -286,12 +300,16 @@
 
 - (NSArray *)tasksWithTag:(NSString *)tag
 {
+    NSParameterAssert(tag);
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tag MATCHES %@", tag];
     return [[self.tasks filteredSetUsingPredicate:predicate] allObjects];
 }
 
 - (NSArray *)taskGroupsWithTag:(NSString *)tag
 {
+    NSParameterAssert(tag);
+    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"tag MATCHES %@", tag];
     return [[self.taskGroups filteredSetUsingPredicate:predicate] allObjects];    
 }
@@ -300,6 +318,9 @@
 
 - (void)registerDelegate:(id<HLSTaskDelegate>)delegate forTask:(HLSTask *)task
 {
+    NSParameterAssert(delegate);
+    NSParameterAssert(task);
+    
     // Unregister any previously registered delegate first
     [self unregisterDelegateForTask:task];
     
@@ -334,6 +355,9 @@
 
 - (void)registerDelegate:(id<HLSTaskGroupDelegate>)delegate forTaskGroup:(HLSTaskGroup *)taskGroup
 {
+    NSParameterAssert(delegate);
+    NSParameterAssert(taskGroup);
+    
     // Unregister any previously registered delegate first
     [self unregisterDelegateForTaskGroup:taskGroup];
     
@@ -354,6 +378,8 @@
 
 - (void)unregisterDelegateForTask:(HLSTask *)task
 {
+    NSParameterAssert(task);
+    
     // Find if a delegate has been defined for this task; use the task pointer as key
     NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     id<HLSTaskDelegate> delegate = [self.taskToDelegateMap objectForKey:taskKey];
@@ -382,6 +408,8 @@
 
 - (void)unregisterDelegateForTaskGroup:(HLSTaskGroup *)taskGroup
 {
+    NSParameterAssert(taskGroup);
+    
     // Find if a delegate has been defined for this task group; use the task pointer as key
     NSValue *taskGroupKey = [NSValue valueWithNonretainedObject:taskGroup];
     id<HLSTaskGroupDelegate> delegate = [self.taskGroupToDelegateMap objectForKey:taskGroupKey];
@@ -405,6 +433,8 @@
 
 - (void)unregisterDelegateAndCancelAssociatedTasks:(id)delegate
 {
+    NSParameterAssert(delegate);
+    
     // Cancel tasks first (had we unregistered first, we would have lost track of the delegate - task 
     // relationships, cancelling nothing!) 
     [self cancelTasksWithDelegate:delegate];
@@ -413,6 +443,8 @@
 
 - (void)unregisterDelegate:(id)delegate
 {
+    NSParameterAssert(delegate);
+    
     // Find all tasks for this delegate, and unregister; use the delegate pointer as key
     NSValue *delegateKey = [NSValue valueWithNonretainedObject:delegate];
     NSSet *tasksForDelegate = [NSSet setWithSet:[self.delegateToTasksMap objectForKey:delegateKey]];
@@ -455,6 +487,8 @@
 
 - (void)unregisterOperation:(HLSTaskOperation *)operation
 {
+    NSParameterAssert(operation);
+    
     // Unregister the associated task - operation relationship; use the task pointer as key
     NSValue *taskKey = [NSValue valueWithNonretainedObject:operation.task];
     [self.taskToOperationMap removeObjectForKey:taskKey];   
@@ -493,12 +527,16 @@
 
 - (id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task
 {
+    NSParameterAssert(task);
+    
     NSValue *taskKey = [NSValue valueWithNonretainedObject:task];
     return [self.taskToDelegateMap objectForKey:taskKey];
 }
 
 - (id<HLSTaskGroupDelegate>)delegateForTaskGroup:(HLSTaskGroup *)taskGroup
 {
+    NSParameterAssert(taskGroup);
+    
     NSValue *taskGroupKey = [NSValue valueWithNonretainedObject:taskGroup];
     return [self.taskGroupToDelegateMap objectForKey:taskGroupKey];
 }

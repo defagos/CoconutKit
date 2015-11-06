@@ -9,28 +9,32 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Interface meant to be used by friend classes of HLSTask (= classes which must have access to private implementation
  * details)
  */
 @interface HLSTask (Friend)
 
-@property (nonatomic, assign, getter=isRunning) BOOL running;
-
-@property (nonatomic, assign, getter=isFinished) BOOL finished;
-
-@property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
+/**
+ * Internal properties
+ */
+@property (nonatomic, getter=isRunning) BOOL running;
+@property (nonatomic, getter=isFinished) BOOL finished;
+@property (nonatomic, getter=isCancelled) BOOL cancelled;
 
 /**
  * Set the operation progress to 0.f (task not processed), 1.f (task fully processed), or a value in between 
  * (which should reflect an estimate about how much of the task has been processed)
  */
-@property (nonatomic, assign) float progress;
+@property (nonatomic) float progress;
 
-@property (nonatomic, strong) NSDictionary *returnInfo;
-
-@property (nonatomic, strong) NSError *error;
-
+/**
+ * More internal properties
+ */
+@property (nonatomic) NSDictionary *returnInfo;
+@property (nonatomic) NSError *error;
 @property (nonatomic, weak) HLSTaskGroup *taskGroup;           // weak ref to parent task group
 
 /**
@@ -39,3 +43,5 @@
 - (void)reset;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define kTaskGroupNoTimeIntervalEstimateAvailable                     -1.
+NS_ASSUME_NONNULL_BEGIN
+
+extern const NSTimeInterval HLSTaskGroupNoTimeIntervalEstimateAvailable;
 
 // Forward declarations
 @protocol HLSTaskGroupDelegate;
@@ -34,12 +36,12 @@
 /**
  * Optional tag to identify a task group
  */
-@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, copy, nullable) NSString *tag;
 
 /**
  * Dictionary which can be used freely to convey additional information
  */
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, strong, nullable) NSDictionary *userInfo;
 
 /**
  * Add a task to the task group
@@ -49,49 +51,49 @@
 /**
  * Return the current set of HLSTask objects
  */
-- (NSSet *)tasks;
+@property (nonatomic, readonly) NSSet *tasks;
 
 /**
  * Return YES if the task group is being processed
  */
-@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 /**
  * Return YES if the task group processing is done (i.e. all contained tasks are finished as well)
  */
-@property (nonatomic, readonly, assign, getter=isFinished) BOOL finished;
+@property (nonatomic, readonly, getter=isFinished) BOOL finished;
 
 /**
  * Return YES if the task group processing has been cancelled
  */
-@property (nonatomic, readonly, assign, getter=isCancelled) BOOL cancelled;
+@property (nonatomic, readonly, getter=isCancelled) BOOL cancelled;
 
 /**
  * Overall progress value (between 0.f and 1.f). If some tasks fail this value may not reach 1.f
  */
-@property (nonatomic, readonly, assign) float progress;
+@property (nonatomic, readonly) float progress;
 
 /**
- * Return an estimate about the remaining time before the task group processing completes (or kTaskGroupNoTimeIntervalEstimateAvailable if no
+ * Return an estimate about the remaining time before the task group processing completes (or HLSTaskGroupNoTimeIntervalEstimateAvailable if no
  * estimate is available yet)
  * Important remark: Accurate measurements can only be obtained if the progress update rate of a task group is not varying fast (in another
  *                   words: Constant over long enough periods of time). This is most likely to happen when all tasks are similar (i.e. the
  *                   underlying processing is similar) and roughly of the same size.
  * Not meant to be overridden
  */
-@property (nonatomic, readonly, assign) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic, readonly) NSTimeInterval remainingTimeIntervalEstimate;
 
 /**
  * Return a localized string describing the estimated time before completion
  * Not meant to be overridden
  * (see remark of -remainingTimeIntervalEstimate method)
  */
-- (NSString *)remainingTimeIntervalEstimateLocalizedString;
+@property (nonatomic, readonly, copy) NSString *remainingTimeIntervalEstimateLocalizedString;
 
 /**
  * Return the current number of failed tasks
  */
-- (NSUInteger)nbrFailures;
+@property (nonatomic, readonly) NSUInteger numberOfFailures;
 
 /**
  * Create dependencies between tasks of a task group (both tasks must have already been added to the task group. If task1 depends on task2, then 
@@ -130,3 +132,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

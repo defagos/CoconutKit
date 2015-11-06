@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface HLSTaskManager (Friend)
 
 /**
@@ -23,7 +25,9 @@
 /**
  * Retrieving registered delegates
  */
-- (id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task;
-- (id<HLSTaskGroupDelegate>)delegateForTaskGroup:(HLSTaskGroup *)taskGroup;
+- (nullable id<HLSTaskDelegate>)delegateForTask:(HLSTask *)task;
+- (nullable id<HLSTaskGroupDelegate>)delegateForTaskGroup:(HLSTaskGroup *)taskGroup;
 
 @end
+
+NS_ASSUME_NONNULL_END

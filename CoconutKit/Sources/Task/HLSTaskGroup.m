@@ -16,25 +16,26 @@
 // keep everything simple (because it is already complicated enough), I chose to create two separate kinds of
 // objects instead.
 
+const NSTimeInterval HLSTaskGroupNoTimeIntervalEstimateAvailable = -1.;
 const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 @interface HLSTaskGroup ()
 
-@property (nonatomic, strong) NSMutableSet *taskSet;                                    // contains HLSTask objects
+@property (nonatomic) NSMutableSet *taskSet;                                    // contains HLSTask objects
 
 // Dependencies between tasks are saved in both directions for faster lookup
-@property (nonatomic, strong) NSMutableDictionary *weakTaskDependencyMap;               // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
-@property (nonatomic, strong) NSMutableDictionary *strongTaskDependencyMap;             // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
-@property (nonatomic, strong) NSMutableDictionary *taskToWeakDependentsMap;             // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
-@property (nonatomic, strong) NSMutableDictionary *taskToStrongDependentsMap;           // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
+@property (nonatomic) NSMutableDictionary *weakTaskDependencyMap;               // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it weakly depends on
+@property (nonatomic) NSMutableDictionary *strongTaskDependencyMap;             // maps an HLSTask object to the NSMutableSet of all other HLSTask objects it strongly depends on
+@property (nonatomic) NSMutableDictionary *taskToWeakDependentsMap;             // maps an HLSTask object to the NSMutableSet of all HLSTask objects weakly depending on it
+@property (nonatomic) NSMutableDictionary *taskToStrongDependentsMap;           // maps an HLSTask object to the NSMutableSet of all HLSTask objects strongly depending on it
 
-@property (nonatomic, assign, getter=isRunning) BOOL running;
-@property (nonatomic, assign, getter=isFinished) BOOL finished;
-@property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
-@property (nonatomic, assign) float progress;                                           // all individual progress values added
-@property (nonatomic, assign) float fullProgress;                                       // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
-@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;             // date & time when the remaining time was previously estimated ...
-@property (nonatomic, strong) NSDate *lastEstimateDate;
+@property (nonatomic, getter=isRunning) BOOL running;
+@property (nonatomic, getter=isFinished) BOOL finished;
+@property (nonatomic, getter=isCancelled) BOOL cancelled;
+@property (nonatomic) float progress;                                           // all individual progress values added
+@property (nonatomic) float fullProgress;                                       // all individual progress values added (failures count as 1.f). 1 - _fullProgress is remainder
+@property (nonatomic) NSTimeInterval remainingTimeIntervalEstimate;             // date & time when the remaining time was previously estimated ...
+@property (nonatomic) NSDate *lastEstimateDate;
 
 @end
 
@@ -42,7 +43,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 @private
     float _lastEstimateFullProgress;            // the progress value when the remaining time was previously estimated (lastEstimateDate)
     NSUInteger _fullProgressStepsCounter;
-    NSUInteger _nbrFailures;
+    NSUInteger _numberOfFailures;
 }
 
 #pragma mark Object creation and destruction
@@ -122,18 +123,18 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         return _remainingTimeIntervalEstimate;
     }
     else {
-        return kTaskGroupNoTimeIntervalEstimateAvailable;
+        return HLSTaskGroupNoTimeIntervalEstimateAvailable;
     }
 }
 
-- (NSUInteger)nbrFailures
+- (NSUInteger)numberOfFailures
 {
-    return _nbrFailures;
+    return _numberOfFailures;
 }
 
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
 {
-    if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
+    if (self.remainingTimeIntervalEstimate == HLSTaskGroupNoTimeIntervalEstimateAvailable) {
         return CoconutKitLocalizedString(@"No remaining time estimate available", nil);
     }
     
@@ -190,7 +191,7 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
         // Failed tasks increase the failure counter and count for 1 in fullProgress
         if (task.error) {
             fullProgress += 1.f;
-            ++_nbrFailures;
+            ++_numberOfFailures;
         }
         else {
             fullProgress += task.progress;
@@ -209,6 +210,9 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
 
 - (void)addDependencyForTask:(HLSTask *)task1 onTask:(HLSTask *)task2 strong:(BOOL)strong
 {
+    NSParameterAssert(task1);
+    NSParameterAssert(task2);
+    
     // Check that both tasks are part of the task group
     if (! [self.taskSet containsObject:task1]) {
         HLSLoggerError(@"First task %@ does not belong to the task group set; cannot set a dependency", task1);
@@ -307,9 +311,9 @@ const NSUInteger kFullProgressStepsCounterThreshold = 50;
     self.cancelled = NO;
     self.progress = 0.f;
     self.fullProgress = 0.f;
-    self.remainingTimeIntervalEstimate = kTaskGroupNoTimeIntervalEstimateAvailable;
+    self.remainingTimeIntervalEstimate = HLSTaskGroupNoTimeIntervalEstimateAvailable;
     self.lastEstimateDate = nil;
-    _nbrFailures = 0;
+    _numberOfFailures = 0;
 }
 
 @end

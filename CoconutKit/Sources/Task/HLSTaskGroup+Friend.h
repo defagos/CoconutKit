@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Interface meant to be used by friend classes of HLSTaskGroup (= classes which must have access to private implementation
  * details)
@@ -19,11 +21,12 @@
  */
 - (void)updateStatus;
 
-@property (nonatomic, assign, getter=isRunning) BOOL running;
-
-@property (nonatomic, assign, getter=isFinished) BOOL finished;
-
-@property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
+/**
+ * Internal properties
+ */
+@property (nonatomic, getter=isRunning) BOOL running;
+@property (nonatomic, getter=isFinished) BOOL finished;
+@property (nonatomic, getter=isCancelled) BOOL cancelled;
 
 /**
  * Return the set of tasks which a task depends on
@@ -45,3 +48,5 @@
 - (void)reset;
 
 @end
+
+NS_ASSUME_NONNULL_END

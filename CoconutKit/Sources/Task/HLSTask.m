@@ -6,11 +6,13 @@
 
 #import "HLSTask.h"
 
+#import "HLSAssert.h"
 #import "HLSLogger.h"
 #import "HLSTaskGroup.h"
 #import "NSBundle+HLSExtensions.h"
 
-const NSUInteger kProgressStepsCounterThreshold = 50;
+const NSUInteger HLSTaskProgressStepsCounterThreshold = 50;
+const NSTimeInterval HLSTaskNoTimeIntervalEstimateAvailable = -1.;
 
 @interface HLSTask ()
 
@@ -46,7 +48,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
 
 - (Class)operationClass
 {
-    HLSLoggerError(@"No operation class attached to task class %@", [self class]);
+    HLSMissingMethodImplementation();
     return NULL;
 }
 
@@ -85,7 +87,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     
     // Should update estimate?
     NSTimeInterval elapsedTimeIntervalSinceLastEstimate = [[NSDate date] timeIntervalSinceDate:self.lastEstimateDate];
-    if (_progressStepsCounter > kProgressStepsCounterThreshold) {
+    if (_progressStepsCounter > HLSTaskProgressStepsCounterThreshold) {
         // Calculate estimate based on velocity during previous step (never 0 since this method returns if progress does not change)
         double progressSinceLastEstimate = progress - _lastEstimateProgress;
         if (progressSinceLastEstimate != 0.) {
@@ -105,13 +107,13 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
         return _remainingTimeIntervalEstimate;
     }
     else {
-        return kTaskNoTimeIntervalEstimateAvailable;
+        return HLSTaskNoTimeIntervalEstimateAvailable;
     }
 }
 
 - (NSString *)remainingTimeIntervalEstimateLocalizedString
 {
-    if (self.remainingTimeIntervalEstimate == kTaskGroupNoTimeIntervalEstimateAvailable) {
+    if (self.remainingTimeIntervalEstimate == HLSTaskGroupNoTimeIntervalEstimateAvailable) {
         return CoconutKitLocalizedString(@"No remaining time estimate available", nil);
     }    
     
@@ -144,7 +146,7 @@ const NSUInteger kProgressStepsCounterThreshold = 50;
     self.finished = NO;
     self.cancelled = NO;
     self.progress = 0.f;
-    self.remainingTimeIntervalEstimate = kTaskNoTimeIntervalEstimateAvailable;
+    self.remainingTimeIntervalEstimate = HLSTaskNoTimeIntervalEstimateAvailable;
     self.lastEstimateDate = nil;
     self.returnInfo = nil;
     self.error = nil;

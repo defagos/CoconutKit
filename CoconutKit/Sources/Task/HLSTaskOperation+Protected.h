@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Protected interface for use by subclasses of HLSTaskOperation in their implementation, and to be included
  * from their implementation file
@@ -32,13 +34,15 @@
  * Call this method to attach return value information to the task processed by the operation
  * Not meant to be overridden
  */
-- (void)attachReturnInfo:(NSDictionary *)returnInfo;
+- (void)attachReturnInfo:(nullable NSDictionary *)returnInfo;
 
 /**
  * Call this method to attach an error to the task processed by the operation. The task is then considered to have
  * failed
  * Not meant to be overridden
  */
-- (void)attachError:(NSError *)error;
+- (void)attachError:(nullable NSError *)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Abstract class for implementing operations to be performed for a task by a task manager. Concrete subclasses
  * must include the HLSTaskOperation+Protected.h header file within their implementation file to benefit from the
@@ -30,7 +32,7 @@
 
 - (instancetype)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task NS_REQUIRES_SUPER NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, readonly, weak) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
+@property (nonatomic, readonly, weak, nullable) HLSTask *task;           // weak ref; the manager is responsible to keep the strong ref
 
 @end
 
@@ -39,3 +41,5 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

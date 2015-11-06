@@ -297,7 +297,7 @@
 - (void)taskGroupHasBeenProcessed:(HLSTaskGroup *)taskGroup
 {
     if ([taskGroup.tag isEqualToString:@"TG_taskGroup"]) {
-        // Failures could be tested here using [taskGroup nbrFailures]. This is not made here since we already
+        // Failures could be tested here using [taskGroup numberOfFailures]. This is not made here since we already
         // manage failures at the task level
         
         self.taskGroupProgressView.hidden = YES;

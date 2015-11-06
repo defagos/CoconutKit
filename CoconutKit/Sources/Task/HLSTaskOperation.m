@@ -15,7 +15,7 @@
 
 @property (nonatomic, weak) HLSTaskManager *taskManager;          // The task manager which spawned the operation
 @property (nonatomic, weak) HLSTask *task;                        // The task the operation is processing
-@property (nonatomic, strong) NSThread *callingThread;              // Thread onto which spawned the operation
+@property (nonatomic) NSThread *callingThread;              // Thread onto which spawned the operation
 
 @end
 
@@ -25,6 +25,9 @@
 
 - (instancetype)initWithTaskManager:(HLSTaskManager *)taskManager task:(HLSTask *)task
 {
+    NSParameterAssert(taskManager);
+    NSParameterAssert(task);
+    
     if (self = [super init]) {
         self.taskManager = taskManager;
         self.task = task;
@@ -35,6 +38,7 @@
 
 - (instancetype)init
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
