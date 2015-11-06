@@ -74,6 +74,10 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     // correctly reference the replacing object
     if ([self.subviews count] == 0) {
         HLSNibView *nibView = [[self class] view];
+        if (! nibView) {
+            HLSLoggerError(@"View class could not be instantiated");
+            return nil;
+        }
         nibView->_loadedFromPlaceholder = YES;
         nibView.frame = self.frame;
         nibView.alpha = self.alpha;
