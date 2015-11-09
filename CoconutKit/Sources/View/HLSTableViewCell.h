@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Class for easy table view cell creation. Using this class, you avoid having to code the cell reuse mechanism
  * every time you instantiate cells. This class also forces centralization of common cell class properties, like
@@ -45,7 +47,7 @@
  * Factory method for creating a table view cell. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (instancetype)cellForTableView:(UITableView *)tableView;
++ (instancetype)cellForTableView:(nullable UITableView *)tableView;
 
 /**
  * Obtaining a cell with custom background and selected background images is surprisingly not so easy, especially if
@@ -76,8 +78,8 @@
  *
  * Not meant to be overridden
  */
-- (void)setBackgroundWithImageNamed:(NSString *)backgroundImageName
-    selectedBackgroundWithImageName:(NSString *)selectedBackgroundImageName;
+- (void)setBackgroundWithImageNamed:(nullable NSString *)backgroundImageName
+    selectedBackgroundWithImageName:(nullable NSString *)selectedBackgroundImageName;
 
 /**
  * Returns the cell dimensions
@@ -89,15 +91,15 @@
 
 /**
  * If the cell layout is created using Interface Builder, override this accessor to return the name of the associated nib
- * file. This is not needed if the nib file name is identical to the class name
+ * file. This is not needed if the nib file name is identical to the class name. The default implementation returns nil
  */
-+ (NSString *)nibName;
++ (nullable NSString *)nibName;
 
 /**
  * If the cell layout is created using Interface Builder, and if the nib is not located in the main bundle, override this 
  * method to return the bundle to search in (by default, this method returns nil, which corresponds to the main bundle)
  */
-+ (NSBundle *)bundle;
++ (nullable NSBundle *)bundle;
 
 /**
  * The cell identifier to apply for cell reuse. You can override this method if you do really want to define your
@@ -107,3 +109,5 @@
 + (NSString *)identifier;
 
 @end
+
+NS_ASSUME_NONNULL_END

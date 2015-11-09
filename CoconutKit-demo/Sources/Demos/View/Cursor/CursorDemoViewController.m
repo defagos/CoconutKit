@@ -209,7 +209,7 @@ static NSArray *s_folders = nil;
         return CGSizeMake(0, 1);
     }
     else {
-        return kCursorShadowOffsetDefault;
+        return HLSCursorShadowOffsetDefault;
     }
 }
 

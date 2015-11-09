@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Slideshow effects. Depending on which effect is applied the images will be scaled to fill or fit the slideshow
  * view frame (preserving their aspect ratio)
@@ -45,7 +47,7 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
  *
  * This property cannot be changed while the slideshow is running
  */
-@property (nonatomic, assign) HLSSlideshowEffect effect;
+@property (nonatomic) HLSSlideshowEffect effect;
 
 /**
  * An array giving the names (for images inside the main bundle) or the full path of the images to be displayed. Images
@@ -56,14 +58,14 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
  * slideshow does not have to be stopped. If you want the change to happen immediately, stop the slideshow, update its 
  * image set and start it again.
  */
-@property (nonatomic, strong) NSArray *imageNamesOrPaths;
+@property (nonatomic, nullable) NSArray *imageNamesOrPaths;
 
 /**
  * How much time an image stays visible alone. Default is 4 seconds. Must be > 0
  *
  * This property can be changed while the slideshow is running
  */
-@property (nonatomic, assign) NSTimeInterval imageDuration;
+@property (nonatomic) NSTimeInterval imageDuration;
 
 /**
  * The duration of the transition between two images (this setting is ignored by slideshows which do not involve a 
@@ -71,7 +73,7 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
  *
  * This property can be changed while the slideshow is running
  */
-@property (nonatomic, assign) NSTimeInterval transitionDuration;
+@property (nonatomic) NSTimeInterval transitionDuration;
 
 /**
  * If set to YES, images will be played in a random order. If set to NO, they are played sequentially
@@ -79,12 +81,12 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
  *
  * This property can be changed while the slideshow is running
  */
-@property (nonatomic, assign) BOOL random;
+@property (nonatomic, getter=isRandom) BOOL random;
 
 /**
  * The slideshow delegate
  */
-@property (nonatomic, weak) id<HLSSlideshowDelegate> delegate;
+@property (nonatomic, weak, nullable) id<HLSSlideshowDelegate> delegate;
 
 /**
  * Slideshow controls
@@ -110,17 +112,17 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
  * Return the currently displayed image (when a transition occurs, this method returns the disappearing image
  * until the image has been hidden)
  */
-- (NSString *)currentImageNameOrPath;
+@property (nonatomic, readonly, copy, nullable) NSString *currentImageNameOrPath;
 
 /**
  * Return YES iff the slideshow is running
  */
-@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 /**
  * Return YES iff the slideshow is paused
  */
-@property (nonatomic, readonly, assign, getter=isPaused) BOOL paused;
+@property (nonatomic, readonly, getter=isPaused) BOOL paused;
 
 @end
 
@@ -133,3 +135,5 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
 - (void)slideshow:(HLSSlideshow *)slideshow didHideImageWithNameOrPath:(NSString *)imageNameOrPath;
 
 @end
+
+NS_ASSUME_NONNULL_END

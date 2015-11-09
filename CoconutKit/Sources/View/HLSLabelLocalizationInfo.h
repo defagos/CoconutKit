@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * The way the localized string must be displayed
  */
@@ -31,23 +33,23 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
  * default localization table name). The main bundle is used if bundleName is set to nil. Bundles are searched
  * recursively in the main bundle
  */
-- (instancetype)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithText:(nullable NSString *)text tableName:(nullable NSString *)tableName bundleName:(nullable NSString *)bundleName NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return YES iff the information object corresponds to localized content
  */
-- (BOOL)isLocalized;
+@property (nonatomic, readonly, getter=isLocalized) BOOL localized;
 
 /**
  * Return YES iff some localization information is missing (localized key, corresponding translation, etc.)
  */
-- (BOOL)isIncomplete;
+@property (nonatomic, readonly, getter=isIncomplete) BOOL incomplete;
 
 /**
  * Build and return the corresponding localized text. Return nil if the object does not contain localized information
  * (i.e. if isLocalized returns NO)
  */
-- (NSString *)localizedText;
+@property (nonatomic, readonly, copy, nullable) NSString *localizedText;
 
 @end
 
@@ -56,3 +58,5 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

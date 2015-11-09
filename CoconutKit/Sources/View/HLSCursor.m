@@ -15,12 +15,15 @@
 #import "UIView+HLSViewBindingImplementation.h"
 #import "UIView+HLSExtensions.h"
 
+CGSize HLSCursorShadowOffsetDefault;
+
+static void commonInit(HLSCursor *self);
+
 @interface HLSCursor ()
 
-@property (nonatomic, strong) NSArray *elementWrapperViews;
-@property (nonatomic, strong) NSArray *elementWrapperViewSizeValues;
-
-@property (nonatomic, strong) UIView *pointerContainerView;         // strong, not an error
+@property (nonatomic) NSArray *elementWrapperViews;
+@property (nonatomic) NSArray *elementWrapperViewSizeValues;
+@property (nonatomic) UIView *pointerContainerView;         // strong, not an error
 
 @end
 
@@ -38,12 +41,23 @@
     CGFloat _spacing;
 }
 
+#pragma mark Class methods
+
++ (void)initialize
+{
+    if (self != [HLSCursor class]) {
+        return;
+    }
+    
+    HLSCursorShadowOffsetDefault = CGSizeMake(0.f, -1.f);
+}
+
 #pragma mark Object creation and destruction
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self hlsCursorInit];
+        commonInit(self);
     }
     return self;
 }
@@ -51,16 +65,9 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self hlsCursorInit];
+        commonInit(self);
     }
     return self;
-}
-
-- (void)hlsCursorInit
-{
-    self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
-    self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
-    self.animationDuration = 0.2;
 }
 
 #pragma mark Accessors and mutators
@@ -240,7 +247,7 @@
         }
         
         // Shadow offset. If not defined, default value (CGSizeMake(0, -1), see UILabel documentation)
-        CGSize shadowOffset = kCursorShadowOffsetDefault;
+        CGSize shadowOffset = HLSCursorShadowOffsetDefault;
         if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
             shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:selected];
         }
@@ -651,3 +658,12 @@
 }
 
 @end
+
+#pragma mark Static functions
+
+static void commonInit(HLSCursor *self)
+{
+    self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
+    self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
+    self.animationDuration = 0.2;
+}

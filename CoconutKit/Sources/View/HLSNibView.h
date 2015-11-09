@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Abstract class for easy view creation using nibs.
  *
@@ -70,13 +72,15 @@
 @interface HLSNibView (UnavailableMethods)
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE NS_REQUIRES_SUPER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE NS_REQUIRES_SUPER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE NS_REQUIRES_SUPER;
 
 @end
 
 @interface HLSNibView (RequiresSuper)
 
-- (id)awakeAfterUsingCoder NS_REQUIRES_SUPER;
+- (nullable id)awakeAfterUsingCoder NS_REQUIRES_SUPER;
 - (void)awakeFromNib NS_REQUIRES_SUPER;
 
 @end
+
+NS_ASSUME_NONNULL_END

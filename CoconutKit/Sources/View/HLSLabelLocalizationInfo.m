@@ -16,10 +16,10 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 @interface HLSLabelLocalizationInfo ()
 
-@property (nonatomic, strong) NSString *localizationKey;
-@property (nonatomic, strong) NSString *tableName;
-@property (nonatomic, strong) NSString *bundleName;
-@property (nonatomic, assign) HLSLabelRepresentation representation;
+@property (nonatomic, copy) NSString *localizationKey;
+@property (nonatomic, copy) NSString *tableName;
+@property (nonatomic, copy) NSString *bundleName;
+@property (nonatomic) HLSLabelRepresentation representation;
 
 @end
 
@@ -40,6 +40,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 - (instancetype)init
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
