@@ -9,7 +9,7 @@
 @interface HLSViewTouchDetector ()
 
 @property (nonatomic, weak) UIView *view;               // weak ref. Detector lifetime is managed by the text field
-@property (nonatomic, strong) UIGestureRecognizer *gestureRecognizer;
+@property (nonatomic) UIGestureRecognizer *gestureRecognizer;
 
 @end
 
@@ -19,7 +19,9 @@
 
 - (instancetype)initWithView:(UIView *)view beginNotificationName:(NSString *)beginNotificationName endNotificationName:(NSString *)endNotificationName
 {
-    NSAssert(beginNotificationName && endNotificationName, @"Notifications required");
+    NSParameterAssert(view);
+    NSParameterAssert(beginNotificationName);
+    NSParameterAssert(endNotificationName);
     
     if (self = [super init]) {
         self.view = view;
@@ -44,7 +46,8 @@
 
 - (instancetype)init
 {
-    return [self initWithView:nil beginNotificationName:nil endNotificationName:nil];
+    [self doesNotRecognizeSelector:_cmd];
+    return [self initWithView:[UIView new] beginNotificationName:@"" endNotificationName:@""];
 }
 
 - (void)dealloc

@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Same as HLSTableViewCell, but with UITableViewCellStyleValue1 as style
  */
 @interface HLSValue1TableViewCell : HLSTableViewCell
 @end
+
+NS_ASSUME_NONNULL_END

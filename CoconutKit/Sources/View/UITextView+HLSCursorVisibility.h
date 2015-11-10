@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Globally ensure that the text view cursor stays in the area defined by its content insets
  *
@@ -21,3 +23,5 @@
 + (void)enableCursorVisibility;
 
 @end
+
+NS_ASSUME_NONNULL_END

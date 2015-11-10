@@ -48,8 +48,8 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
 
 @interface UIView (HLSDynamicLocalizationPrivate)
 
-@property (nonatomic, strong) NSString *locTable;
-@property (nonatomic, strong) NSString *locBundle;
+@property (nonatomic, copy) NSString *locTable;
+@property (nonatomic, copy) NSString *locBundle;
 
 @end
 

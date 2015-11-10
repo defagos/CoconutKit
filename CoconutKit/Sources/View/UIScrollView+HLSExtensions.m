@@ -67,12 +67,8 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 - (void)synchronizeWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces
 {
+    NSParameterAssert(scrollViews);
     HLSAssertObjectsInEnumerationAreKindOfClass(scrollViews, UIScrollView);
-    
-    if (! scrollViews || [scrollViews count] == 0) {
-        HLSLoggerError(@"No scroll views to synchronize");
-        return;
-    }
     
     if ([scrollViews containsObject:self]) {
         HLSLoggerError(@"A scroll view cannot be synchronized with itself");

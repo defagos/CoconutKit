@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define HLSViewAutoresizingAll UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth |         \
     UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |                               \
     UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin
@@ -16,27 +18,27 @@
 /**
  * Return the view controller from which the receiver is the view, nil otherwise
  */
-@property (nonatomic, readonly, weak) UIViewController *viewController;
+@property (nonatomic, readonly, weak, nullable) __kindof UIViewController *viewController;
 
 /**
  * Return the nearest view controller which displays the view, nil if none
  */
-@property (nonatomic, readonly, weak) UIViewController *nearestViewController;
+@property (nonatomic, readonly, weak, nullable) __kindof UIViewController *nearestViewController;
 
 /**
  * Use this property if you want to tag your view with a string instead of an integer
  */
-@property (nonatomic, strong) NSString *tag_hls;
+@property (nonatomic, copy, nullable) NSString *tag_hls;
 
 /**
  * Use this dictionary to convey additional information about your views
  */
-@property (nonatomic, strong) NSDictionary *userInfo_hls;
+@property (nonatomic, nullable) NSDictionary *userInfo_hls;
 
 /**
  * Return the view and all its subview flattened as a UIImage
  */
-- (UIImage *)flattenedImage;
+@property (nonatomic, readonly) UIImage *flattenedImage;
 
 /**
  * Convenience method to apply a mask to a view, fading in the specified directions from a given fraction of the
@@ -50,7 +52,7 @@
 /**
  * Return the first responder view contained within the receiver, nil if none
  */
-- (UIView *)firstResponderView;
+@property (nonatomic, readonly, nullable) UIView *firstResponderView;
 
 /**
  * Set the view to call the given action block (mandatory) when any interaction outside its bounds happens. The action
@@ -80,3 +82,4 @@
 
 #endif
 
+NS_ASSUME_NONNULL_END

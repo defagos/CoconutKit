@@ -30,7 +30,7 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 @interface UIView (HLSExtensionsPrivate)
 
 @property (nonatomic, copy) void (^modalOutsideActionBlock)(void);
-@property (nonatomic, strong) HLSAnyGestureRecognizer *outsideGestureRecognizer;        // strong to keep setup if later installed
+@property (nonatomic) HLSAnyGestureRecognizer *outsideGestureRecognizer;        // strong to keep setup if later installed
 
 @end
 
