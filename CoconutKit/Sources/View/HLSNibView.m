@@ -42,6 +42,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     
     // A xib has been found, use it
     NSString *nibName = [self nibName];
+    NSAssert(nibName, @"A nib name is required");
     if ([bundle pathForResource:nibName ofType:@"nib"]) {
         NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
         if ([bundleContents count] == 0) {

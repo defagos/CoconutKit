@@ -11,7 +11,7 @@
 
 @interface HLSContainerStackView ()
 
-@property (nonatomic, strong) NSMutableArray *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
+@property (nonatomic) NSMutableArray<HLSContainerGroupView *> *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
 
 @end
 
@@ -52,9 +52,9 @@
     return NSNotFound;
 }
 
-- (NSArray *)contentViews
+- (NSArray<UIView *> *)contentViews
 {
-    NSMutableArray *contentViews = [NSMutableArray array];
+    NSMutableArray<UIView *> *contentViews = [NSMutableArray array];
     for (HLSContainerGroupView *groupView in self.groupViews) {
         [contentViews addObject:groupView.frontContentView];
     }
@@ -63,8 +63,10 @@
 
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index
 {
+    NSParameterAssert(contentView);
+    
     if (index > [self.groupViews count]) {
-        HLSLoggerWarn(@"Invalid index %ld. Expected in [0;%lu]", (long)index, (unsigned long)[self.groupViews count]);
+        HLSLoggerWarn(@"Invalid index %@. Expected in [0;%@]", @(index), @([self.groupViews count]));
         return;
     }
     
@@ -93,6 +95,8 @@
 
 - (void)removeContentView:(UIView *)contentView
 {
+    NSParameterAssert(contentView);
+    
     NSUInteger index = [self indexOfContentView:contentView];
     if (index == NSNotFound) {
         HLSLoggerWarn(@"Content view not found");
@@ -120,6 +124,8 @@
 
 - (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView
 {
+    NSParameterAssert(contentView);
+    
     NSUInteger i = 0;
     for (HLSContainerGroupView *groupView in self.groupViews) {
         if (groupView.frontContentView == contentView) {

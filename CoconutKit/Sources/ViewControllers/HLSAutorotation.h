@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Define the several ways for a container view controller to behave when interface rotation occurs. This means:
  *   - which view controllers decide whether rotation can occur or not
@@ -24,3 +26,5 @@ typedef NS_ENUM(NSInteger, HLSAutorotationMode) {
     HLSAutorotationModeEnumEnd,
     HLSAutorotationModeEnumSize = HLSAutorotationModeEnumEnd - HLSAutorotationModeEnumBegin
 };
+
+NS_ASSUME_NONNULL_END

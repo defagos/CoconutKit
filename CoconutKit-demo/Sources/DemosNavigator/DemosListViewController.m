@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
 
 #pragma mark Orientation management
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }

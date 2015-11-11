@@ -16,12 +16,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView
 {
-    if (self = [super initWithFrame:frame]) {
-        if (! frontContentView) {
-            HLSLoggerError(@"A front content view is mandatory");
-            return nil;
-        }
-        
+    NSParameterAssert(frontContentView);
+    
+    if (self = [super initWithFrame:frame]) {        
         self.backgroundColor = [UIColor clearColor];
         self.autoresizingMask = HLSViewAutoresizingAll;
         
@@ -43,11 +40,13 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 

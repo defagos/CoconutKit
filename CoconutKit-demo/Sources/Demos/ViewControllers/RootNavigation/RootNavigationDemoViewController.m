@@ -111,11 +111,11 @@
     return [super shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     HLSLoggerInfo(@"Called");
     
-    NSUInteger supportedOrientations = 0;
+    UIInterfaceOrientationMask supportedOrientations = 0;
     if ([self isViewLoaded]) {
         if (self.portraitSwitch.on) {
             supportedOrientations |= UIInterfaceOrientationMaskPortrait;

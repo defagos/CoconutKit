@@ -26,15 +26,15 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
 
 @interface HLSContainerContent ()
 
-@property (nonatomic, strong) UIViewController *viewController;                 // The embedded view controller
+@property (nonatomic) UIViewController *viewController;                         // The embedded view controller
 @property (nonatomic, weak) UIViewController *containerViewController;          // The container it is inserted into
-@property (nonatomic, assign) Class transitionClass;                            // The transition animation class used when inserting the view controller
-@property (nonatomic, assign) NSTimeInterval duration;                          // The transition animation duration
+@property (nonatomic) Class transitionClass;                                    // The transition animation class used when inserting the view controller
+@property (nonatomic) NSTimeInterval duration;                                  // The transition animation duration
 @property (nonatomic, weak) HLSContainerStackView *containerStackView;          // The container stack view into which the view controller's view is inserted
-@property (nonatomic, assign) CGRect originalViewFrame;                         // The view controller's view frame prior to insertion
-@property (nonatomic, assign) UIViewAutoresizing originalAutoresizingMask;      // The view controller's view autoresizing mask prior to insertion
-@property (nonatomic, assign, getter=isMovingToParentViewController) BOOL movingToParentViewController;
-@property (nonatomic, assign, getter=isMovingFromParentViewController) BOOL movingFromParentViewController;
+@property (nonatomic) CGRect originalViewFrame;                                 // The view controller's view frame prior to insertion
+@property (nonatomic) UIViewAutoresizing originalAutoresizingMask;              // The view controller's view autoresizing mask prior to insertion
+@property (nonatomic, getter=isMovingToParentViewController) BOOL movingToParentViewController;
+@property (nonatomic, getter=isMovingFromParentViewController) BOOL movingFromParentViewController;
 
 @end
 
@@ -51,6 +51,8 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
 + (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass
                                        forViewController:(UIViewController *)viewController
 {
+    NSParameterAssert(viewController);
+    
     HLSContainerContent *containerContent = hls_getAssociatedObject(viewController, s_containerContentKey);
     if (containerViewControllerClass) {
         if ([containerContent.containerViewController isKindOfClass:containerViewControllerClass]) {
@@ -72,17 +74,13 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
                        transitionClass:(Class)transitionClass
                               duration:(NSTimeInterval)duration
 {
+    NSParameterAssert(viewController);
+    NSParameterAssert(containerViewController);
+    
     if (self = [super init]) {
-        if (! viewController) {
-            HLSLoggerError(@"A view controller is mandatory");
-            return nil;
+        if (! transitionClass) {
+            transitionClass = [HLSTransition class];
         }
-        
-        if (! containerViewController) {
-            HLSLoggerError(@"A container view controller must be provided");
-            return nil;
-        }
-        
         if (! [transitionClass isSubclassOfClass:[HLSTransition class]]) {
             HLSLoggerWarn(@"Transitions must be subclasses of HLSTransition. No transition animation will be made");
             transitionClass = [HLSTransition class];
@@ -183,6 +181,8 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
 
 - (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView atIndex:(NSUInteger)index
 {
+    NSParameterAssert(containerStackView);
+    
     if (index > [containerStackView.contentViews count]) {
         HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[containerStackView.contentViews count]);
         return;
@@ -326,7 +326,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
     return [self.viewController shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [self.viewController supportedInterfaceOrientations];
 }

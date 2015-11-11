@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A private class to manage group views in an HLSContainerStackView. Such a view has at most two subviews,
  * one for the front content (mandatory and which cannot be changed), and another one for the back content 
@@ -30,31 +32,33 @@
  * The content view which has been inserted at the front into the group view. Do not use this view for 
  * animation purposes, use -frontView instead
  */
-@property (nonatomic, readonly, strong) UIView *frontContentView;
+@property (nonatomic, readonly) UIView *frontContentView;
 
 /**
  * The front content view wrapper. If you want to animate the group view, animate this view (which has 
  * a guaranteed initial alpha of 1.f)
  */
-@property (nonatomic, readonly, strong) UIView *frontView;
+@property (nonatomic, readonly) UIView *frontView;
 
 /**
  * Set the content view displayed in the back. If this view was already added to a superview, it is 
  * transferred to the group view
  */
-@property (nonatomic, strong) UIView *backContentView;
+@property (nonatomic, strong, nullable) UIView *backContentView;
 
 /**
  * The back content view wrapper. If you want to animate the group view, animate this view (which has
  * a guaranteed initial alpha of 1.f)
  */
-@property (nonatomic, readonly, strong) UIView *backView;
+@property (nonatomic, readonly, nullable) UIView *backView;
 
 @end
 
 @interface HLSContainerGroupView (UnavailableMethods)
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

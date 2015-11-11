@@ -20,9 +20,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @interface HLSContainerStack () <HLSContainerStackViewDelegate>
 
-@property (nonatomic, weak) UIViewController *containerViewController;                  // The container view controller implemented using HLSContainerStack
-@property (nonatomic, strong) NSMutableArray *containerContents;                        // The contents loaded into the stack. The first element corresponds to the root view controller
-@property (nonatomic, assign) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
+@property (nonatomic, weak, nullable) UIViewController *containerViewController;                  // The container view controller implemented using HLSContainerStack
+@property (nonatomic) NSMutableArray *containerContents;                        // The contents loaded into the stack. The first element corresponds to the root view controller
+@property (nonatomic) NSUInteger capacity;                                      // The maximum number of top view controllers loaded / not removed at any time
 
 @end
 
@@ -50,12 +50,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                                        behavior:(HLSContainerStackBehavior)behavior
                                        capacity:(NSUInteger)capacity
 {
+    NSParameterAssert(containerViewController);
+    
     if (self = [super init]) {
-        if (! containerViewController) {
-            HLSLoggerError(@"Missing container view controller");
-            return nil;
-        }
-                
         self.containerViewController = containerViewController;
         self.containerContents = [NSMutableArray array];
         _behavior = behavior;
@@ -68,6 +65,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (instancetype)init
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
@@ -292,10 +290,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated
 {
-    if (! viewController) {
-        HLSLoggerError(@"Cannot push nil into a view controller container");
-        return;
-    }
+    NSParameterAssert(viewController);
     
     if (index > [self.containerContents count]) {
         HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[self.containerContents count]);
@@ -375,6 +370,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
          withTransitionClass:(Class)transitionClass
                     duration:(NSTimeInterval)duration
 {
+    NSParameterAssert(viewController);
+    NSParameterAssert(siblingViewController);
+    
     NSUInteger index = [[self viewControllers] indexOfObject:siblingViewController];
     if (index == NSNotFound) {
         HLSLoggerWarn(@"The given sibling view controller does not belong to the container");
@@ -480,6 +478,8 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 - (void)removeViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    NSParameterAssert(viewController);
+    
     NSUInteger index = [[self viewControllers] indexOfObject:viewController];
     if (index == NSNotFound) {
         HLSLoggerWarn(@"The view controller to remove does not belong to the container");
@@ -605,9 +605,9 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    NSUInteger supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
+    UIInterfaceOrientationMask supportedInterfaceOrientations = UIInterfaceOrientationMaskAll;
     switch (self.autorotationMode) {
         case HLSAutorotationModeContainerAndAllChildren: {
             for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {

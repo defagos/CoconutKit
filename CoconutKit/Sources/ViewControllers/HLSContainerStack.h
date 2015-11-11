@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Stack behavior
 typedef NS_ENUM(NSInteger, HLSContainerStackBehavior) {
     HLSContainerStackBehaviorEnumBegin = 0,
@@ -141,7 +143,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * view controller's view hierarchy and cannot be set once it has been displayed (in general, though, you need to
  * set it once in the container view controller -loadView or -viewDidLoad method)
  */
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic) UIView *containerView;
 
 /**
  * Set how a container decides whether it must rotate or not. Your containers should in general exhibit a similar 
@@ -158,12 +160,12 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * The default value is HLSAutorotationModeContainer
  */
-@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
+@property (nonatomic) HLSAutorotationMode autorotationMode;
 
 /**
  * The stack delegate (usually the container view controller you are implementing)
  */
-@property (nonatomic, weak) id<HLSContainerStackDelegate> delegate;
+@property (nonatomic, weak, nullable) id<HLSContainerStackDelegate> delegate;
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
@@ -171,27 +173,27 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * Default is YES
  */
-@property (nonatomic, assign) BOOL lockingUI;
+@property (nonatomic, getter=isLockingUI) BOOL lockingUI;
 
 /**
  * Return the root view controller loaded into the stack, or nil if none
  */
-- (UIViewController *)rootViewController;
+@property (nonatomic, readonly, nullable) __kindof UIViewController *rootViewController;
 
 /**
  * Return the current topmost view controller, or nil if none
  */
-- (UIViewController *)topViewController;
+@property (nonatomic, readonly, nullable) __kindof UIViewController *topViewController;
 
 /**
  * Return the view controllers currently loaded into the stack, from the bottommost to the topmost one
  */
-- (NSArray *)viewControllers;
+@property (nonatomic, readonly) NSArray<UIViewController *> *viewControllers;
 
 /**
  * Return the number of view controllers loaded into the stack
  */
-- (NSUInteger)count;
+@property (nonatomic, readonly) NSUInteger count;
 
 /**
  * Push a view controller on top of the stack using a given animation class (subclass of HLSTransition). You can subclass
@@ -204,7 +206,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * This method can also be used to preload view controllers into a stack (in which case the animated parameter is ignored)
  */
 - (void)pushViewController:(UIViewController *)viewController
-       withTransitionClass:(Class)transitionClass
+       withTransitionClass:(nullable Class)transitionClass
                   duration:(NSTimeInterval)duration
                   animated:(BOOL)animated;
 
@@ -224,7 +226,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *
  * If the view controller is not in the stack or if it is already the top view controller, this method does nothing.
  */
-- (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)popToViewController:(nullable UIViewController *)viewController animated:(BOOL)animated;
 
 /**
  * Same as -popToViewController:animated:, but specifying a view controller using its index. Set index to NSUIntegerMax
@@ -256,7 +258,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  */
 - (void)insertViewController:(UIViewController *)viewController
                      atIndex:(NSUInteger)index
-         withTransitionClass:(Class)transitionClass
+         withTransitionClass:(nullable Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 
@@ -276,7 +278,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  */
 - (void)insertViewController:(UIViewController *)viewController
          aboveViewController:(UIViewController *)siblingViewController
-         withTransitionClass:(Class)transitionClass
+         withTransitionClass:(nullable Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 
@@ -326,7 +328,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Call this method from your container view controller -supportedInterfaceOrientations method, otherwise the behavior
  * is undefined
  */
-- (NSUInteger)supportedInterfaceOrientations;
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations;
 
 /**
  * Call this method from your container view controller -willRotateToInterfaceOrientation:duration: method, otherwise 
@@ -364,7 +366,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
 willPushViewController:(UIViewController *)pushedViewController
-   coverViewController:(UIViewController *)coveredViewController
+   coverViewController:(nullable UIViewController *)coveredViewController
               animated:(BOOL)animated;
 
 /**
@@ -388,7 +390,7 @@ willShowViewController:(UIViewController *)viewController
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
  didPushViewController:(UIViewController *)pushedViewController
-   coverViewController:(UIViewController *)coveredViewController
+   coverViewController:(nullable UIViewController *)coveredViewController
               animated:(BOOL)animated;
 
 /**
@@ -397,7 +399,7 @@ willShowViewController:(UIViewController *)viewController
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
  willPopViewController:(UIViewController *)poppedViewController
-  revealViewController:(UIViewController *)revealedViewController
+  revealViewController:(nullable UIViewController *)revealedViewController
               animated:(BOOL)animated;
 
 /**
@@ -422,7 +424,7 @@ willHideViewController:(UIViewController *)viewController
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
   didPopViewController:(UIViewController *)poppedViewController
-  revealViewController:(UIViewController *)revealedViewController
+  revealViewController:(nullable UIViewController *)revealedViewController
               animated:(BOOL)animated;
 
 @end
@@ -436,7 +438,7 @@ willHideViewController:(UIViewController *)viewController
  * straightforward: Simply call the method below with your container class as argument. If Nil is provided as class
  * parameter, lookup is performed for any kind of CoconutKit-based container
  */
-- (id)containerViewControllerKindOfClass:(Class)containerViewControllerClass;
+- (__kindof UIViewController *)containerViewControllerKindOfClass:(nullable Class)containerViewControllerClass;
 
 /**
  * Return the interface orientation used for displaying the view controller. For view controllers not embedded into
@@ -445,7 +447,7 @@ willHideViewController:(UIViewController *)viewController
  * orientation of the view controller, compatible with the container, which has been used for display (this might
  * not necessarily match the status bar orientation)
  */
-@property (nonatomic, readonly, assign) UIInterfaceOrientation displayedInterfaceOrientation;
+@property (nonatomic, readonly) UIInterfaceOrientation displayedInterfaceOrientation;
 
 @end
 
@@ -454,3 +456,5 @@ willHideViewController:(UIViewController *)viewController
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

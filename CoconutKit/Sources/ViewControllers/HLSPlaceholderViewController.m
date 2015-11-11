@@ -216,9 +216,9 @@
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    NSUInteger supportedInterfaceOrientations = [super supportedInterfaceOrientations];
+    UIInterfaceOrientationMask supportedInterfaceOrientations = [super supportedInterfaceOrientations];
     for (HLSContainerStack *containerStack in self.containerStacks) {
         supportedInterfaceOrientations &= [containerStack supportedInterfaceOrientations];
     }

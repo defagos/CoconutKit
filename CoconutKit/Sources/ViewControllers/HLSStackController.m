@@ -207,7 +207,7 @@
     return [self.containerStack shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & [self.containerStack supportedInterfaceOrientations];
 }

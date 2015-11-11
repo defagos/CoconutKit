@@ -78,7 +78,7 @@
     return [super shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     HLSLoggerInfo(@"Called");
     

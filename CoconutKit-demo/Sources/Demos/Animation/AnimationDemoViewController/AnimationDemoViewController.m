@@ -59,7 +59,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 #pragma mark Orientation management
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }

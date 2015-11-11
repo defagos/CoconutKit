@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Factory method for creating the view. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (instancetype)view;
++ (nullable instancetype)view;
 
 /**
  * Return the view dimensions
@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  * If the nib is not located in the main bundle, override this method to return the bundle to search in (by
  * default, this method returns nil, which corresponds to the main bundle)
  */
-+ (NSBundle *)bundle;
++ (nullable NSBundle *)bundle;
 
 @end
 

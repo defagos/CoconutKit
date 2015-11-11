@@ -42,6 +42,6 @@
 - (void)willMoveToParentViewController:(UIViewController *)parent NS_REQUIRES_SUPER;
 - (void)didMoveToParentViewController:(UIViewController *)parent NS_REQUIRES_SUPER;
 - (BOOL)shouldAutorotate NS_REQUIRES_SUPER;
-- (NSUInteger)supportedInterfaceOrientations NS_REQUIRES_SUPER;
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations NS_REQUIRES_SUPER;
 
 @end

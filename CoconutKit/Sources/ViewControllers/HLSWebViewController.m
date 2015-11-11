@@ -287,7 +287,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 #pragma mark Orientation management
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
