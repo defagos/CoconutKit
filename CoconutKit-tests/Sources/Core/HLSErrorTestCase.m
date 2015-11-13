@@ -4,15 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSErrorTestCase.h"
+@interface HLSErrorTestCase : XCTestCase
 
-@interface HLSErrorTestCase ()
-
-@property (nonatomic, strong) NSError *error1;
-@property (nonatomic, strong) NSError *error2;
-@property (nonatomic, strong) NSError *error3;
-@property (nonatomic, strong) NSError *error4;
-@property (nonatomic, strong) NSError *error5;
+@property (nonatomic) NSError *error1;
+@property (nonatomic) NSError *error2;
+@property (nonatomic) NSError *error3;
+@property (nonatomic) NSError *error4;
+@property (nonatomic) NSError *error5;
 
 @end
 

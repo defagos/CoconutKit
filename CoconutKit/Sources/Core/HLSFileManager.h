@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  * the method must return NO and an error, otherwise YES and no error. If the file already exists, its contents must be 
  * replaced, and the method must return YES and no error
  */
-- (BOOL)createFileAtPath:(NSString *)path contents:(NSData *)contents error:(out NSError *__autoreleasing *)pError;
+- (BOOL)createFileAtPath:(NSString *)path contents:(nullable NSData *)contents error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Create a directory at the specified path (create intermediate directories if enabled, otherwise fails if the parent 

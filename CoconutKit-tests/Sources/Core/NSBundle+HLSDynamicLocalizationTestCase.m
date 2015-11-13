@@ -4,10 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "NSBundle+HLSDynamicLocalizationTestCase.h"
-
 // Just needed for an error constant
 #import <CFNetwork/CFNetwork.h>
+
+@interface NSBundle_HLSDynamicLocalizationTestCase : XCTestCase
+@end
 
 @implementation NSBundle_HLSDynamicLocalizationTestCase
 

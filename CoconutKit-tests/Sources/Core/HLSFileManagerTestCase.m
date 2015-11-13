@@ -12,6 +12,8 @@
 
 - (void)testCreationAndRemovalWithFileManager:(HLSFileManager *)fileManager
 {
+    NSParameterAssert(fileManager);
+    
     // File creation, parent directory exists. Must succeed
     NSError *error1 = nil;
     NSData *data1 = [@"data1" dataUsingEncoding:NSUTF8StringEncoding];
@@ -119,6 +121,8 @@
 
 - (void)testContentsAndExistenceWithFileManager:(HLSFileManager *)fileManager
 {
+    NSParameterAssert(fileManager);
+    
     // Create some files and folders
     NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
     XCTAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL]);
@@ -203,6 +207,8 @@
 
 - (void)testCopyWithFileManager:(HLSFileManager *)fileManager
 {
+    NSParameterAssert(fileManager);
+    
     // Create some files and folders
     NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
     XCTAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL]);
@@ -297,6 +303,8 @@
 
 - (void)testMoveWithFileManager:(HLSFileManager *)fileManager
 {
+    NSParameterAssert(fileManager);
+    
     // Create some files and folders
     NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
     XCTAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL]);
@@ -385,6 +393,8 @@
 
 - (void)testStreamsWithFileManager:(HLSFileManager *)fileManager
 {
+    NSParameterAssert(fileManager);
+    
     // Create test file and folder
     NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
     XCTAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL]);
@@ -436,6 +446,8 @@
 
 - (void)testURLsWithFileManager:(HLSFileManager *)fileManager
 {
+    NSParameterAssert(fileManager);
+    
     // Create test file and folder
     NSData *data = [@"data" dataUsingEncoding:NSUTF8StringEncoding];
     XCTAssertTrue([fileManager createFileAtPath:@"/file1.txt" contents:data error:NULL]);

@@ -4,14 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "CAMediaTimingFunction+HLExtensionsTestCase.h"
-
 @interface CAMediaTimingFunction (CAPrivate)
 
 // Private method used to compute function values. Use them as reference, tests will never make it to the AppStore
 // after all
 - (float)_solveForInput:(float)normalizedTime;
 
+@end
+
+@interface CAMediaTimingFunction_HLExtensionsTestCase : XCTestCase
 @end
 
 @implementation CAMediaTimingFunction_HLExtensionsTestCase

@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSValidatorsTestCase.h"
+@interface HLSValidatorsTestCase : XCTestCase
+@end
 
 @implementation HLSValidatorsTestCase
 

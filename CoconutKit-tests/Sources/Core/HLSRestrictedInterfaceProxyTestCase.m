@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSRestrictedInterfaceProxyTestCase.h"
+@interface HLSRestrictedInterfaceProxyTestCase : XCTestCase
+@end
 
 @protocol CompatibleRestrictedInterfaceA <NSObject>
 

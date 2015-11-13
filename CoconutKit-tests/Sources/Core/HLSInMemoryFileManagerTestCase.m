@@ -4,7 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSInMemoryFileManagerTestCase.h"
+#import "HLSFileManagerTestCase.h"
+
+@interface HLSInMemoryFileManagerTestCase : HLSFileManagerTestCase
+@end
 
 @implementation HLSInMemoryFileManagerTestCase
 

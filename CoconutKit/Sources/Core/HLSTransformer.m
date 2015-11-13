@@ -100,6 +100,8 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 
 - (BOOL)getObject:(inout id *)pObject fromObject:(id)fromObject error:(out NSError *__autoreleasing *)pError
 {
+    NSParameterAssert(pObject);
+    
     if (! self.reverseBlock) {
         [self doesNotRecognizeSelector:_cmd];
     }

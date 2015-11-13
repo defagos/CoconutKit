@@ -4,9 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSTransformerTestCase.h"
-
 #import "UppercaseValueTransformer.h"
+
+@interface HLSTransformerTestCase : XCTestCase
+@end
 
 @implementation HLSTransformerTestCase
 
@@ -19,7 +20,6 @@
     NSNumber *roundedNumber = [blockTransformer transformObject:@(M_PI)];
     XCTAssertEqualObjects(roundedNumber, @3);
     XCTAssertFalse([blockTransformer respondsToSelector:@selector(getObject:fromObject:error:)]);
-    XCTAssertThrows([blockTransformer getObject:NULL fromObject:roundedNumber error:NULL]);
 }
 
 - (void)testTwoWayBlockTransformer
@@ -83,7 +83,6 @@
     XCTAssertEqualObjects(uppercaseString, @"HELLO, WORLD!");
     
     XCTAssertFalse([blockTransformer respondsToSelector:@selector(getObject:fromObject:error:)]);
-    XCTAssertThrows([blockTransformer getObject:NULL fromObject:uppercaseString error:NULL]);
 }
 
 @end

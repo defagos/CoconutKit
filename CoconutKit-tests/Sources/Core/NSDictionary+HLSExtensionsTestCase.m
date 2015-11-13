@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "NSDictionary+HLSExtensionsTestCase.h"
+@interface NSDictionary_HLSExtensionsTestCase : XCTestCase
+@end
 
 @implementation NSDictionary_HLSExtensionsTestCase
 

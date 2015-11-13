@@ -4,8 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "NSManagedObject+HLSValidationTestCase.h"
-
 #import "AbstractClassA.h"
 #import "ConcreteClassD.h"
 #import "ConcreteSubclassB.h"
@@ -16,9 +14,9 @@
 
 HLSEnableNSManagedObjectValidation();
 
-@interface NSManagedObject_HLSValidationTestCase ()
+@interface NSManagedObject_HLSValidationTestCase : XCTestCase
 
-@property (nonatomic, strong) ConcreteClassD *lockedDInstance;
+@property (nonatomic) ConcreteClassD *lockedDInstance;
 
 @end
 

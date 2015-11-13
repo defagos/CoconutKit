@@ -1,27 +1,23 @@
 //
-//  NSTimeZone+HLSExtensionsTestCase.m
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 06.09.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  License information is available from the LICENSE file.
 //
 
-#import "NSTimeZone+HLSExtensionsTestCase.h"
+@interface NSTimeZone_HLSExtensionsTestCase : XCTestCase
 
-@interface NSTimeZone_HLSExtensionsTestCase ()
+@property (nonatomic) NSTimeZone *timeZoneZurich;
+@property (nonatomic) NSTimeZone *timeZoneTahiti;
 
-@property (nonatomic, strong) NSTimeZone *timeZoneZurich;
-@property (nonatomic, strong) NSTimeZone *timeZoneTahiti;
+@property (nonatomic) NSCalendar *calendar;
+@property (nonatomic) NSCalendar *calendarZurich;
+@property (nonatomic) NSCalendar *calendarTahiti;
 
-@property (nonatomic, strong) NSCalendar *calendar;
-@property (nonatomic, strong) NSCalendar *calendarZurich;
-@property (nonatomic, strong) NSCalendar *calendarTahiti;
-
-@property (nonatomic, strong) NSDate *date1;
-@property (nonatomic, strong) NSDate *date2;
-@property (nonatomic, strong) NSDate *date3;
-@property (nonatomic, strong) NSDate *date4;
-@property (nonatomic, strong) NSDate *date5;
+@property (nonatomic) NSDate *date1;
+@property (nonatomic) NSDate *date2;
+@property (nonatomic) NSDate *date3;
+@property (nonatomic) NSDate *date4;
+@property (nonatomic) NSDate *date5;
 
 @end
 
