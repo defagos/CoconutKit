@@ -4,11 +4,12 @@
 //  License information is available from the LICENSE file.
 //
 
-/**
- * Designated initializer: -initWithFrame:
- */
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CursorFolderView : HLSNibView
 
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak, nullable) IBOutlet UILabel *nameLabel;
 
 @end
+
+NS_ASSUME_NONNULL_END

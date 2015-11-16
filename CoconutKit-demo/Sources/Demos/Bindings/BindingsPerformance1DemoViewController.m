@@ -8,7 +8,7 @@
 
 @interface BindingsPerformance1DemoViewController ()
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 @end
 

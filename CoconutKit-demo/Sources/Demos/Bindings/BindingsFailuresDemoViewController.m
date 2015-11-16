@@ -8,7 +8,7 @@
 
 @interface BindingsFailuresDemoViewController ()
 
-@property (nonatomic, strong) NSNumber *number;
+@property (nonatomic) NSNumber *number;
 
 @end
 

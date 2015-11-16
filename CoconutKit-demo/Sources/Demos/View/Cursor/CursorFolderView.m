@@ -7,5 +7,4 @@
 #import "CursorFolderView.h"
 
 @implementation CursorFolderView
-
 @end

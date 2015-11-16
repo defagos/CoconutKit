@@ -12,33 +12,33 @@
 
 @interface BindingsControlsDemoViewController ()
 
-@property (nonatomic, strong) NSArray *employees;
-@property (nonatomic, strong) Employee *randomEmployee;
+@property (nonatomic) NSArray *employees;
+@property (nonatomic) Employee *randomEmployee;
 
-@property (nonatomic, strong) NSDate *currentDate;
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic) NSDate *currentDate;
+@property (nonatomic) NSTimer *timer;
 
 // Custom getter / setter names, not necessarily those expected according to KVC conventions
-@property (nonatomic, assign, getter=isThisSwitchEnabled, setter=setThisSwitchEnabled:) BOOL switchEnabled;
+@property (nonatomic, getter=isThisSwitchEnabled, setter=setThisSwitchEnabled:) BOOL switchEnabled;
 
-@property (nonatomic, assign) NSInteger category;
-@property (nonatomic, assign) float completion;
+@property (nonatomic) NSInteger category;
+@property (nonatomic) float completion;
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) NSInteger age;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic) NSInteger age;
+@property (nonatomic, copy) NSString *text;
 
-@property (nonatomic, assign) NSUInteger page;
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic) NSUInteger page;
+@property (nonatomic) NSDate *date;
 
-@property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
+@property (nonatomic) NSDateFormatter *localizedDateFormatter;
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
 @property (nonatomic, weak) IBOutlet HLSCursor *cursor;
 
-@property (nonatomic, readonly, strong) UIImage *apple1Image;
+@property (nonatomic, readonly) UIImage *apple1Image;
 
 @end
 

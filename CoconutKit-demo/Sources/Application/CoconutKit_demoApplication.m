@@ -14,8 +14,8 @@
 
 @interface CoconutKit_demoApplication ()
 
-@property (nonatomic, strong) UIViewController *rootViewController;
-@property (nonatomic, strong) UIActionSheet *languageActionSheet;
+@property (nonatomic) UIViewController *rootViewController;
+@property (nonatomic) UIActionSheet *languageActionSheet;
 
 @end
 

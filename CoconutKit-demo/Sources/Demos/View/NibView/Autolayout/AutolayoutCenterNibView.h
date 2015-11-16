@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-@interface AutolayoutCenterNibView : HLSNibView
+NS_ASSUME_NONNULL_BEGIN
 
+@interface AutolayoutCenterNibView : HLSNibView
 @end
+
+NS_ASSUME_NONNULL_END

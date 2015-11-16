@@ -7,5 +7,4 @@
 #import "EmployeeHeaderView.h"
 
 @implementation EmployeeHeaderView
-
 @end

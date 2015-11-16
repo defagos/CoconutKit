@@ -7,5 +7,4 @@
 #import "CursorSelectedFolderView.h"
 
 @implementation CursorSelectedFolderView
-
 @end

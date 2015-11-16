@@ -10,7 +10,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @interface AnimationDemoViewController ()
 
-@property (nonatomic, strong) HLSAnimation *animation;
+@property (nonatomic) HLSAnimation *animation;
 
 @property (nonatomic, weak) IBOutlet UIView *rectangleView1;
 @property (nonatomic, weak) IBOutlet UIView *rectangleView2;

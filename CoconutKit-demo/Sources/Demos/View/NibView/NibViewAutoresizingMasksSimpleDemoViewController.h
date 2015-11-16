@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-@interface NibViewAutoresizingMasksSimpleDemoViewController : HLSViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface NibViewAutoresizingMasksSimpleDemoViewController : HLSViewController
 @end
+
+NS_ASSUME_NONNULL_END

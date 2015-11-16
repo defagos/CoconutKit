@@ -19,7 +19,7 @@ HLSEnableNSManagedObjectValidation();
 
 @interface CoconutKit_demoAppDelegate ()
 
-@property (nonatomic, strong) CoconutKit_demoApplication *application;
+@property (nonatomic) CoconutKit_demoApplication *application;
 
 @end
 

@@ -4,11 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface Employee : NSObject
 
 + (NSArray *)employees;
 
-@property (nonatomic, strong) NSString *fullName;
-@property (nonatomic, strong) NSNumber *age;
+@property (nonatomic, copy) NSString *fullName;
+@property (nonatomic) NSNumber *age;
 
 @end
+
+NS_ASSUME_NONNULL_END

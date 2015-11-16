@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-@interface BindingsPerformance1DemoViewController : HLSViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface BindingsPerformance1DemoViewController : HLSViewController
 @end
+
+NS_ASSUME_NONNULL_END

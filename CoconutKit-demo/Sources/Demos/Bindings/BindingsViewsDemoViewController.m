@@ -13,7 +13,7 @@
 
 @interface BindingsViewsDemoViewController ()
 
-@property (nonatomic, strong) NSArray *employees;
+@property (nonatomic) NSArray *employees;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet EmployeeView *employeeView;

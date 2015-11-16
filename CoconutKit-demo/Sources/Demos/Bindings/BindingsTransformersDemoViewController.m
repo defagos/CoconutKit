@@ -12,7 +12,7 @@
 
 @interface BindingsTransformersDemoViewController ()
 
-@property (nonatomic, assign) CGPoint point;
+@property (nonatomic) CGPoint point;
 
 @end
 
