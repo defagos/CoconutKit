@@ -51,7 +51,7 @@ static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
 
 #pragma mark Notification callbacks
 
-- (void)textFieldDidChange:(NSNotification *)notification
+- (void)hls_textFieldDidChange:(NSNotification *)notification
 {
     [self check:YES update:YES withInputValue:self.text error:NULL];
 }
@@ -63,7 +63,7 @@ static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
 static void commonInit(UITextField *self)
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textFieldDidChange:)
+                                             selector:@selector(hls_textFieldDidChange:)
                                                  name:UITextFieldTextDidChangeNotification
                                                object:self];
 }
