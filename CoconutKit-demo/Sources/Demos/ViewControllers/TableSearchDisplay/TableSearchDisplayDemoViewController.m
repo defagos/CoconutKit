@@ -21,8 +21,8 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 
 @interface TableSearchDisplayDemoViewController ()
 
-@property (nonatomic, strong) NSArray *devices;
-@property (nonatomic, strong) NSArray *filteredDevices;
+@property (nonatomic) NSArray *devices;
+@property (nonatomic) NSArray *filteredDevices;
 
 @end
 

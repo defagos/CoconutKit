@@ -4,9 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface XibTableViewCell : HLSTableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *testImageView;
-@property (nonatomic, weak) IBOutlet UILabel *testLabel;
+@property (nonatomic, weak, nullable) IBOutlet UIImageView *testImageView;
+@property (nonatomic, weak, nullable) IBOutlet UILabel *testLabel;
 
 @end
+
+NS_ASSUME_NONNULL_END

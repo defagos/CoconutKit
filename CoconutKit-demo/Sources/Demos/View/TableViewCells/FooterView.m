@@ -7,5 +7,4 @@
 #import "FooterView.h"
 
 @implementation FooterView
-
 @end

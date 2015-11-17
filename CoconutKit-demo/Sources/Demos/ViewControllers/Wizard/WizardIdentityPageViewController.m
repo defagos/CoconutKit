@@ -10,14 +10,14 @@
 
 @interface WizardIdentityPageViewController ()
 
-@property (nonatomic, strong) PersonInformation *personInformation;
+@property (nonatomic) PersonInformation *personInformation;
 
 @property (nonatomic, weak) IBOutlet UILabel *birthdateLabel;
 
-@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
-@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *errorLabels;
+@property (nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic) IBOutletCollection(UILabel) NSArray *errorLabels;
 
-@property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
+@property (nonatomic) NSDateFormatter *localizedDateFormatter;
 
 @end
 

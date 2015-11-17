@@ -1577,10 +1577,10 @@
 				6F9C460614C5C30B00824AB2 /* ProgrammaticTableViewCell.m */,
 				6F9C460714C5C30B00824AB2 /* TableViewCellsDemoViewController.h */,
 				6F9C460814C5C30B00824AB2 /* TableViewCellsDemoViewController.m */,
+				6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */,
 				6F9C460914C5C30B00824AB2 /* XibTableViewCell.h */,
 				6F9C460A14C5C30B00824AB2 /* XibTableViewCell.m */,
 				6F9C460B14C5C30B00824AB2 /* XibTableViewCell.xib */,
-				6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";

@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 @property (nonatomic, weak) IBOutlet UILabel *insertionIndexLabel;
 @property (nonatomic, weak) IBOutlet UILabel *removalIndexLabel;
 
-@property (nonatomic, strong) UIPopoverController *displayedPopoverController;
+@property (nonatomic) UIPopoverController *displayedPopoverController;
 
 @end
 

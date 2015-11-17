@@ -33,8 +33,8 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 @property (nonatomic, weak) IBOutlet UISwitch *rightPlaceholderSwitch;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *autorotationModeSegmentedControl;
 
-@property (nonatomic, strong) HeavyViewController *leftHeavyViewController;
-@property (nonatomic, strong) HeavyViewController *rightHeavyViewController;
+@property (nonatomic) HeavyViewController *leftHeavyViewController;
+@property (nonatomic) HeavyViewController *rightHeavyViewController;
 
 @end
 

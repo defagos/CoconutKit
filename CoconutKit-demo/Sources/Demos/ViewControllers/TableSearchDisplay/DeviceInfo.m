@@ -8,8 +8,8 @@
 
 @interface DeviceInfo ()
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) DeviceType type;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic) DeviceType type;
 
 @end
 
@@ -26,6 +26,8 @@
 
 - (instancetype)initWithName:(NSString *)name type:(DeviceType)type
 {
+    NSParameterAssert(name);
+    
     if (self = [super init]) {
         self.name = name;
         self.type = type;
@@ -35,6 +37,7 @@
 
 - (instancetype)init
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
