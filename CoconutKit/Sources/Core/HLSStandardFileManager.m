@@ -13,7 +13,7 @@
 
 @interface HLSStandardFileManager ()
 
-@property (nonatomic, strong) NSString *rootFolderPath;
+@property (nonatomic, copy) NSString *rootFolderPath;
 
 @end
 

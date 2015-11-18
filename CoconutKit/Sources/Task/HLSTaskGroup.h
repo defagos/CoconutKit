@@ -41,7 +41,7 @@ extern const NSTimeInterval HLSTaskGroupNoTimeIntervalEstimateAvailable;
 /**
  * Dictionary which can be used freely to convey additional information
  */
-@property (nonatomic, strong, nullable) NSDictionary *userInfo;
+@property (nonatomic, nullable) NSDictionary *userInfo;
 
 /**
  * Add a task to the task group

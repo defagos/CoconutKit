@@ -16,15 +16,15 @@ const NSTimeInterval HLSTaskNoTimeIntervalEstimateAvailable = -1.;
 
 @interface HLSTask ()
 
-@property (nonatomic, assign, getter=isRunning) BOOL running;
-@property (nonatomic, assign, getter=isFinished) BOOL finished;
-@property (nonatomic, assign, getter=isCancelled) BOOL cancelled;
-@property (nonatomic, assign) float progress;
-@property (nonatomic, assign) NSTimeInterval remainingTimeIntervalEstimate;
-@property (nonatomic, strong) NSDate *lastEstimateDate;         // date & time when the remaining time was previously estimated
-@property (nonatomic, strong) NSDictionary *returnInfo;
-@property (nonatomic, strong) NSError *error;
-@property (nonatomic, weak) HLSTaskGroup *taskGroup;           // weak ref to parent task group, nil if none
+@property (nonatomic, getter=isRunning) BOOL running;
+@property (nonatomic, getter=isFinished) BOOL finished;
+@property (nonatomic, getter=isCancelled) BOOL cancelled;
+@property (nonatomic) float progress;
+@property (nonatomic) NSTimeInterval remainingTimeIntervalEstimate;
+@property (nonatomic) NSDate *lastEstimateDate;                 // date & time when the remaining time was previously estimated
+@property (nonatomic) NSDictionary *returnInfo;
+@property (nonatomic) NSError *error;
+@property (nonatomic, weak) HLSTaskGroup *taskGroup;            // weak ref to parent task group, nil if none
 
 @end
 

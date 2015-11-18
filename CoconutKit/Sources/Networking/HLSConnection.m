@@ -15,15 +15,15 @@
 @property (nonatomic, copy) HLSConnectionCompletionBlock completionBlock;
 
 @property (nonatomic, weak) HLSConnection *parentConnection;
-@property (nonatomic, strong) HLSConnection *parentStrongConnection;                    // Ensure the parent connection lives at least until all child connections are over
+@property (nonatomic) HLSConnection *parentStrongConnection;                    // Ensure the parent connection lives at least until all child connections are over
 
-@property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;          // contains HLSConnection objects
+@property (nonatomic) NSMutableDictionary *childConnectionsDictionary;          // contains HLSConnection objects
 
-@property (nonatomic, strong) NSSet *runLoopModes;
-@property (nonatomic, assign, getter=isSelfRunning) BOOL selfRunning;                   // Is self running or not (NOT including child connections)
+@property (nonatomic) NSSet *runLoopModes;
+@property (nonatomic, getter=isSelfRunning) BOOL selfRunning;                   // Is self running or not (NOT including child connections)
 
-@property (nonatomic, strong) NSError *error;
-@property (nonatomic, strong) NSProgress *progress;
+@property (nonatomic) NSError *error;
+@property (nonatomic) NSProgress *progress;
 
 @end
 

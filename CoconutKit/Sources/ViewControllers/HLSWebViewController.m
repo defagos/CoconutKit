@@ -34,9 +34,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 @interface HLSWebViewController ()
 
-@property (nonatomic, strong) NSURLRequest *request;
-@property (nonatomic, strong) NSURL *currentURL;
-@property (nonatomic, strong) NSError *currentError;
+@property (nonatomic) NSURLRequest *request;
+@property (nonatomic) NSURL *currentURL;
+@property (nonatomic) NSError *currentError;
 
 // Tempting to use WKWebView or UIWebView here as type, but using id lets the compiler find methods with ambiguous
 // prototypes (e.g. -goBack or -loadRequest). Incorrectly called, ARC would insert incorrect memory management
@@ -53,14 +53,14 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *actionBarButtonItem;
 
-@property (nonatomic, strong) NSArray *normalToolbarItems;
-@property (nonatomic, strong) NSArray *loadingToolbarItems;
+@property (nonatomic) NSArray *normalToolbarItems;
+@property (nonatomic) NSArray *loadingToolbarItems;
 
-@property (nonatomic, strong) NSArray *actions;
+@property (nonatomic) NSArray *actions;
 
-@property (nonatomic, strong) UIPopoverController *activityPopoverController;
+@property (nonatomic) UIPopoverController *activityPopoverController;
 
-@property (nonatomic, strong) NSTimer *fakeProgressTimer;
+@property (nonatomic) NSTimer *fakeProgressTimer;
 
 @end
 
@@ -73,6 +73,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (instancetype)initWithRequest:(NSURLRequest *)request
 {
+    NSParameterAssert(request);
+    
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.request = request;
     }

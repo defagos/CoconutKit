@@ -11,7 +11,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *backgroundView;
 
-@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @property (nonatomic, weak) IBOutlet UITextView *textView;
 

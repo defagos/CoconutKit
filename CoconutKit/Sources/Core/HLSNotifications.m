@@ -37,7 +37,7 @@
 //   - 1st dictionary: maps objects to a notification map
 //   - 2nd dictionary (notification map): maps notification name to the (object, notification name) pair to
 //                                        convert to
-@property (nonatomic, strong) NSMutableDictionary *objectToNotificationMap;
+@property (nonatomic) NSMutableDictionary *objectToNotificationMap;
 
 @end
 

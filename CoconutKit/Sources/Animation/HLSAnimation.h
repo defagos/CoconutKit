@@ -93,7 +93,7 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  *
  * Default is NO
  */
-@property (nonatomic, assign) BOOL lockingUI;
+@property (nonatomic) BOOL lockingUI;
 
 /**
  * The animation delegate. Note that the animation is automatically cancelled if a delegate has been set

@@ -13,7 +13,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 
 @interface HLSStackPushStandardSegue ()
 
-@property (nonatomic, assign) Class transitionClass;
+@property (nonatomic) Class transitionClass;
 
 @end
 

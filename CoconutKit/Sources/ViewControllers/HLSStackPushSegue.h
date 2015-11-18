@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * The segue identifier reserved for setting the root view controller of a stack ('hls_root')
  */
@@ -30,19 +32,19 @@ OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
  * Push animation style
  * Default value is HLSTransitionNone
  */
-@property (nonatomic, assign) Class transitionClass;
+@property (nonatomic, nullable) Class transitionClass;
 
 /**
  * Push animation duration
  * Default is kAnimationTransitionDefaultDuration
  */
-@property (nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic) NSTimeInterval duration;
 
 /**
  * Animated transition
  * Default is YES
  */
-@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, getter=isAnimated) BOOL animated;
 
 @end
 
@@ -59,28 +61,27 @@ OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
  * Subclasses must override -initWithIdentifier:source:destination:, calling the following method in their implementation
  * (passing it the transition class to use)
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier
+- (instancetype)initWithIdentifier:(nullable NSString *)identifier
                             source:(UIViewController *)source
                        destination:(UIViewController *)destination
-                   transitionClass:(Class)transitionClass;
+                   transitionClass:(nullable Class)transitionClass;
 
 /**
  * Push animation style
- * Default value is HLSTransitionNone
  */
-@property (nonatomic, readonly, assign) Class transitionClass;
+@property (nonatomic, readonly, nullable) Class transitionClass;
 
 /**
  * Push animation duration
  * Default is kAnimationTransitionDefaultDuration
  */
-@property (nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic) NSTimeInterval duration;
 
 /**
  * Animated transition
  * Default is YES
  */
-@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, getter=isAnimated) BOOL animated;
 
 @end
 
@@ -249,3 +250,5 @@ OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
 
 @interface HLSStackRotateVerticallyFromRightClockwiseSegue : HLSStackPushStandardSegue
 @end
+
+NS_ASSUME_NONNULL_END

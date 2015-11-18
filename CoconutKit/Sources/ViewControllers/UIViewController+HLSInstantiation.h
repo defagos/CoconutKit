@@ -6,6 +6,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIViewController (HLSInstantiation)
 
 /**
@@ -17,7 +19,7 @@
  * If no storyboard name is provided, a storyboard file with the name of the class or one of its superclasses is searched,
  * containing a view controller with this name as identifier, and belonging to the associated class.
  */
-- (instancetype)instanceWithStoryboardName:(NSString *)storyboardName inBundle:(NSBundle *)bundle;
+- (instancetype)instanceWithStoryboardName:(nullable NSString *)storyboardName inBundle:(nullable NSBundle *)bundle;
 
 /**
  * Instantiate a view controller, looking for a storyboard or a nib in the specified bundle. If no bundle is specified, lookup
@@ -26,6 +28,8 @@
  * Storyboard lookup is performed first with no storyboard name provided (read above how this is achieved). If no match is
  * found, a nib bearing the same name as the class or one of its superclasses is searched instead.
  */
-- (instancetype)instanceInBundle:(NSBundle *)bundle;
+- (instancetype)instanceInBundle:(nullable NSBundle *)bundle;
 
 @end
+
+NS_ASSUME_NONNULL_END

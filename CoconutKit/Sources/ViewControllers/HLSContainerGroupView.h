@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Set the content view displayed in the back. If this view was already added to a superview, it is 
  * transferred to the group view
  */
-@property (nonatomic, strong, nullable) UIView *backContentView;
+@property (nonatomic, nullable) UIView *backContentView;
 
 /**
  * The back content view wrapper. If you want to animate the group view, animate this view (which has

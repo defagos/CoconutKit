@@ -15,7 +15,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 @interface HLSWizardViewController ()
 
-@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic) NSInteger currentPage;
 
 @end
 

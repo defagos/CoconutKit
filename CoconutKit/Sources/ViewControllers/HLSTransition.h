@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Default duration for a transition animation. This is a reserved value and corresponds to the intrinsic duration
 // of an animation as defined by its implementation
 OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
@@ -114,9 +116,9 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * The default implementation of this method returns nil, which corresponds to an empty animation (i.e. an animation
  * which does not alter any view)
  */
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
++ (NSArray *)layerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
+                                 disappearingView:(nullable UIView *)disappearingView
+                                           inView:(nullable UIView *)view
                                        withBounds:(CGRect)bounds;
 
 /**
@@ -130,9 +132,9 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * appearingView (respectively disappearing view) is the view which appears (respectively disappears) during the
  * reverse transition
  */
-+ (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                        disappearingView:(UIView *)disappearingView
-                                                  inView:(UIView *)view
++ (NSArray *)reverseLayerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
+                                        disappearingView:(nullable UIView *)disappearingView
+                                                  inView:(nullable UIView *)view
                                               withBounds:(CGRect)bounds;
 
 /**
@@ -151,8 +153,8 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  *
  * Not meant to be subclassed
  */
-+ (HLSAnimation *)animationWithAppearingView:(UIView *)appearingView
-                            disappearingView:(UIView *)disappearingView
++ (HLSAnimation *)animationWithAppearingView:(nullable UIView *)appearingView
+                            disappearingView:(nullable UIView *)disappearingView
                                       inView:(UIView *)view
                                     duration:(NSTimeInterval)duration;
 
@@ -166,8 +168,8 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  *
  * Not meant to be subclassed
  */
-+ (HLSAnimation *)reverseAnimationWithAppearingView:(UIView *)appearingView
-                                   disappearingView:(UIView *)disappearingView
++ (HLSAnimation *)reverseAnimationWithAppearingView:(nullable UIView *)appearingView
+                                   disappearingView:(nullable UIView *)disappearingView
                                              inView:(UIView *)view
                                            duration:(NSTimeInterval)duration;
 
@@ -460,3 +462,5 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  */
 @interface HLSTransitionRotateVerticallyFromRightClockwise : HLSTransition
 @end
+
+NS_ASSUME_NONNULL_END

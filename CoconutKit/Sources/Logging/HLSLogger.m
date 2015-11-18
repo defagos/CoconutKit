@@ -30,8 +30,8 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 @interface HLSLogger ()
 
-@property (nonatomic, strong) NSString *logDirectoryPath;
-@property (nonatomic, strong) NSFileHandle *logFileHandle;
+@property (nonatomic, copy) NSString *logDirectoryPath;
+@property (nonatomic) NSFileHandle *logFileHandle;
 
 @end
 
@@ -55,12 +55,9 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 - (instancetype)initWithLogDirectoryPath:(NSString *)logDirectoryPath
 {
+    NSParameterAssert(logDirectoryPath);
+    
 	if (self = [super init]) {
-        if (! [logDirectoryPath isFilled]) {
-            NSLog(@"A log directory is mandatory");
-            return nil;
-        }
-        
         self.logDirectoryPath = logDirectoryPath;
         
         NSNumber *level = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerLevelKey];

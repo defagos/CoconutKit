@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Lightweight view controller subclass adding useful stuff to UIViewController, and which should be always used as 
  * base class when creating view controller subclasses in projects using CoconutKit (provided you do not have to 
@@ -60,7 +62,7 @@
  * containing a view controller with this name as identifier (if none is found, the initial view controller is used), and 
  * belonging to the associated class.
  */
-- (instancetype)initWithStoryboardName:(NSString *)storyboardName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+- (instancetype)initWithStoryboardName:(nullable NSString *)storyboardName bundle:(nullable NSBundle *)bundle NS_REQUIRES_SUPER;
 
 /**
  * Instantiate a view controller, looking for a storyboard or a nib in the specified bundle. If no bundle is specified, lookup
@@ -69,7 +71,7 @@
  * Storyboard lookup is performed first with no storyboard name provided (read above how this is achieved). If no match is
  * found, a nib bearing the same name as the class or one of its superclasses is searched instead.
  */
-- (instancetype)initWithBundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+- (instancetype)initWithBundle:(nullable NSBundle *)bundle NS_REQUIRES_SUPER;
 
 /**
  * In your subclass, use this method to collect your localization code. You must not call this method directly, it is automatically
@@ -91,7 +93,7 @@
 @interface HLSViewController (HLSRequiresSuper)
 
 - (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_REQUIRES_SUPER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_REQUIRES_SUPER;
 - (void)viewDidLoad NS_REQUIRES_SUPER;
 - (void)viewWillAppear:(BOOL)animated NS_REQUIRES_SUPER;
 - (void)viewDidAppear:(BOOL)animated NS_REQUIRES_SUPER;
@@ -108,3 +110,5 @@
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations NS_REQUIRES_SUPER;
 
 @end
+
+NS_ASSUME_NONNULL_END

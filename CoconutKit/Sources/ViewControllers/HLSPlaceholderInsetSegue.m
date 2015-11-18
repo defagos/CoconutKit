@@ -13,7 +13,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 
 @interface HLSPlaceholderInsetStandardSegue ()
 
-@property (nonatomic, assign) Class transitionClass;
+@property (nonatomic) Class transitionClass;
 
 @end
 

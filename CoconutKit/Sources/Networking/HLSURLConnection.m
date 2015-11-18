@@ -10,7 +10,7 @@
 
 @interface HLSURLConnection ()
 
-@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic) NSURLRequest *request;
 
 @end
 

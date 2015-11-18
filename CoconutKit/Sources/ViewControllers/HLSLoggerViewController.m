@@ -14,15 +14,15 @@
 
 @interface HLSLoggerViewController ()
 
-@property (nonatomic, strong) HLSLogger *logger;
+@property (nonatomic) HLSLogger *logger;
 
-@property (nonatomic, strong) NSArray *logFilePaths;
+@property (nonatomic) NSArray *logFilePaths;
 
 @property (nonatomic, weak) IBOutlet UISegmentedControl *levelSegmentedControl;
 @property (nonatomic, weak) IBOutlet UISwitch *enabledSwitch;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) NSURL *currentLogFileURL;
+@property (nonatomic) NSURL *currentLogFileURL;
 
 @end
 
@@ -32,14 +32,10 @@
 
 - (instancetype)initWithLogger:(HLSLogger *)logger
 {
+    NSParameterAssert(logger);
+    
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
-        if (! logger) {
-            HLSLoggerError(@"A logger is mandatory");
-            return nil;
-        }
-        
-        self.logger = logger;
-        
+        self.logger = logger;        
         self.title = @"Logging controls";
     }
     return self;

@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @protocol HLSStackControllerDelegate;
 
@@ -88,12 +90,12 @@
  *
  * The default value is HLSAutorotationModeContainer
  */
-@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
+@property (nonatomic) HLSAutorotationMode autorotationMode;
 
 /**
  * The stack controller delegate
  */
-@property (nonatomic, weak) id<HLSStackControllerDelegate> delegate;
+@property (nonatomic, weak, nullable) id<HLSStackControllerDelegate> delegate;
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
@@ -101,27 +103,27 @@
  *
  * Default is NO
  */
-@property (nonatomic, assign) BOOL lockingUI;
+@property (nonatomic, getter=isLockingUI) BOOL lockingUI;
 
 /**
  * Return the view controller at the bottom
  */
-- (UIViewController *)rootViewController;
+@property (nonatomic, readonly) __kindof UIViewController *rootViewController;
 
 /**
  * Return the view controller currently on top
  */
-- (UIViewController *)topViewController;
+@property (nonatomic, readonly) __kindof UIViewController *topViewController;
 
 /**
  * The view controllers in the stack. The first one is the root view controller, the last one the top one
  */
-- (NSArray *)viewControllers;
+@property (nonatomic, readonly) NSArray<__kindof UIViewController *> *viewControllers;
 
 /**
  * Return the number of view controllers within the stack
  */
-- (NSUInteger)count;
+@property (nonatomic, readonly) NSUInteger count;
 
 /**
  * Push a view controller onto the stack using a given transition class. The transition duration is the one defined by 
@@ -131,7 +133,7 @@
  * defines the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController 
-       withTransitionClass:(Class)transitionClass
+       withTransitionClass:(nullable Class)transitionClass
                   animated:(BOOL)animated;
 
 /**
@@ -143,7 +145,7 @@
  * defines the pop animation which will get played when the view controller is later removed)
  */
 - (void)pushViewController:(UIViewController *)viewController
-       withTransitionClass:(Class)transitionClass
+       withTransitionClass:(nullable Class)transitionClass
                   duration:(NSTimeInterval)duration
                   animated:(BOOL)animated;
 
@@ -160,9 +162,9 @@
  * to the specified view controller using the reverse animation with which it was pushed onto the stack. 
  *
  * If the view controller to pop to does not belong to the stack or is the current top view controller, this method 
- * does nothing
+ * does nothing. If view controller is nil, the method pops all view controllers in the stack
  */
-- (void)popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)popToViewController:(nullable UIViewController *)viewController animated:(BOOL)animated;
 
 /**
  * Same as -popToViewController:animated:, but specifying a view controller using its index. Set index to NSUIntegerMax
@@ -189,7 +191,7 @@
  */
 - (void)insertViewController:(UIViewController *)viewController
                      atIndex:(NSUInteger)index
-         withTransitionClass:(Class)transitionClass
+         withTransitionClass:(nullable Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 
@@ -201,7 +203,7 @@
  */
 - (void)insertViewController:(UIViewController *)viewController
          belowViewController:(UIViewController *)siblingViewController
-         withTransitionClass:(Class)transitionClass
+         withTransitionClass:(nullable Class)transitionClass
                     duration:(NSTimeInterval)duration;
 
 /**
@@ -211,7 +213,7 @@
  */
 - (void)insertViewController:(UIViewController *)viewController
          aboveViewController:(UIViewController *)siblingViewController
-         withTransitionClass:(Class)transitionClass
+         withTransitionClass:(nullable Class)transitionClass
                     duration:(NSTimeInterval)duration
                     animated:(BOOL)animated;
 
@@ -236,7 +238,7 @@
 @interface HLSStackController (UnavailableMethods)
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 - (instancetype)initWithBundle NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -254,7 +256,7 @@
 /**
  * Called before pushedViewController is about to be pushed onto the stack. When called, pushedViewController does not
  * belong to [self viewControllers] yet, and the parent-child containment relationship has not been established.
- * The coveredViewController parameter is the view controller which is about to be covered (nil if none)
+ * The coveredViewController parameter is the view controller which is about to be covered
  */
 - (void)stackController:(HLSStackController *)stackController
  willPushViewController:(UIViewController *)pushedViewController
@@ -278,7 +280,7 @@
 
 /**
  * Called when a view controller has been pushed onto the stack. The coveredViewController parameter is the view
- * controller which was covered (nil if none)
+ * controller which was covered
  */
 - (void)stackController:(HLSStackController *)stackController
   didPushViewController:(UIViewController *)pushedViewController
@@ -287,7 +289,7 @@
 
 /**
  * Called when a view controller is about to be popped off the stack. The revealedViewController parameter is the
- * view controller which will be revealed (nil if none)
+ * view controller which will be revealed
  */
 - (void)stackController:(HLSStackController *)stackController
   willPopViewController:(UIViewController *)poppedViewController
@@ -329,7 +331,7 @@
 /**
  * The maximum number of views loaded at any time in the stack
  */
-@property (nonatomic, readonly, assign) IBInspectable NSUInteger capacity;
+@property (nonatomic, readonly) IBInspectable NSUInteger capacity;
 
 @end
 
@@ -338,6 +340,8 @@
 /**
  * Return the stack controller the view controller is inserted in, or nil if none.
  */
-@property (nonatomic, readonly, weak) HLSStackController *stackController;
+@property (nonatomic, readonly, weak, nullable) HLSStackController *stackController;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -15,8 +15,8 @@
 
 @interface HLSStackController ()
 
-@property (nonatomic, strong) HLSContainerStack *containerStack;
-@property (nonatomic, assign) NSUInteger capacity;
+@property (nonatomic) HLSContainerStack *containerStack;
+@property (nonatomic) NSUInteger capacity;
 
 @end
 
@@ -26,6 +26,9 @@
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
+    // Root view controller mandatory (fixed root, see below)
+    NSParameterAssert(rootViewController);
+    
     if (self = [super init]) {
         self.autorotationMode = HLSAutorotationModeContainer;
         
@@ -141,7 +144,7 @@
     self.containerStack.lockingUI = lockingUI;
 }
 
-- (BOOL)lockingUI
+- (BOOL)isLockingUI
 {
     return self.containerStack.lockingUI;
 }

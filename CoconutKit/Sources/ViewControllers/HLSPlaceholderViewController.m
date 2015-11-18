@@ -14,7 +14,7 @@
 
 @interface HLSPlaceholderViewController ()
 
-@property (nonatomic, strong) NSMutableArray *containerStacks;
+@property (nonatomic) NSMutableArray *containerStacks;
 
 @end
 

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @protocol HLSWizardViewControllerDelegate;
 
@@ -45,19 +47,19 @@ typedef NS_ENUM(NSInteger, HLSWizardTransitionStyle) {
  * The wizard buttons. Create them either using Interface Builder or by implementing a loadview. Do not attempt
  * to replace the callback method registered for UIControlEventTouchUpInside, or the behavior will be undefined
  */
-@property (nonatomic, weak) IBOutlet UIButton *previousButton;
-@property (nonatomic, weak) IBOutlet UIButton *nextButton;
-@property (nonatomic, weak) IBOutlet UIButton *doneButton;
+@property (nonatomic, weak, nullable) IBOutlet UIButton *previousButton;
+@property (nonatomic, weak, nullable) IBOutlet UIButton *nextButton;
+@property (nonatomic, weak, nullable) IBOutlet UIButton *doneButton;
 
 /**
  * The view controllers to display as pages
  */
-@property (nonatomic, strong) NSArray *viewControllers;
+@property (nonatomic) NSArray *viewControllers;
 
 /**
  * The transition style to use when changing pages. Default is HLSWizardTransitionStyleNone
  */
-@property (nonatomic, assign) HLSWizardTransitionStyle wizardTransitionStyle;
+@property (nonatomic) HLSWizardTransitionStyle wizardTransitionStyle;
 
 /**
  * Go to some page; hopping in forward direction will block if some page in between is not valid
@@ -72,3 +74,5 @@ typedef NS_ENUM(NSInteger, HLSWizardTransitionStyle) {
 - (void)wizardViewControllerHasClickedDoneButton:(HLSWizardViewController *)wizardViewController;
 
 @end
+
+NS_ASSUME_NONNULL_END

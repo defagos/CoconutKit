@@ -14,9 +14,9 @@ static const CGFloat kSearchBarStandardHeight = 44.f;
 
 @interface HLSTableSearchDisplayViewController ()
 
-@property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, strong) UISearchDisplayController *searchController;      // Not called searchDisplayController to avoid conflicts with
-                                                                                // UIViewController's searchViewController property
+@property (nonatomic) UISearchBar *searchBar;
+@property (nonatomic) UISearchDisplayController *searchController;      // Not called searchDisplayController to avoid conflicts with
+                                                                        // UIViewController's searchViewController property
 @end
 
 @implementation HLSTableSearchDisplayViewController {
