@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The bound view
  */
-@property (nonatomic, readonly, weak) UIView *view;
+@property (nonatomic, readonly, weak, nullable) UIView *view;
 
 /**
  * Return the transformer name specified during initialization

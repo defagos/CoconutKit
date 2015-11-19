@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * or simply a UIView depending on which show... method was called. If the action sheet is currently
  * not displayed, the property returns nil
  */
-@property (nonatomic, readonly, weak) id owner;
+@property (nonatomic, readonly, weak, nullable) id owner;
 
 @end
 

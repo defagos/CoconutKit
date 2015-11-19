@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic) NSDictionary *returnInfo;
 @property (nonatomic) NSError *error;
-@property (nonatomic, weak) HLSTaskGroup *taskGroup;           // weak ref to parent task group
+@property (nonatomic, weak, nullable) HLSTaskGroup *taskGroup;           // weak ref to parent task group
 
 /**
  * Reset internal status variables
