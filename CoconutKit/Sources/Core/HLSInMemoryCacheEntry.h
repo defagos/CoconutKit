@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Access entry information
  */
-@property (nonatomic, readonly, weak) NSMutableDictionary *parentItems;
+@property (nonatomic, readonly) NSMutableDictionary *parentItems;
 @property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly) NSData *data;
 

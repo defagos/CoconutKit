@@ -8,7 +8,7 @@
 
 @interface HLSInMemoryCacheEntry ()
 
-@property (nonatomic, weak) NSMutableDictionary *parentItems;
+@property (nonatomic) NSMutableDictionary *parentItems;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSData *data;
 
