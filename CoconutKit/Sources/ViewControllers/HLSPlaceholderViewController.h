@@ -170,7 +170,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Default is NO
  */
-@property (nonatomic, assign) BOOL lockingUI;
+@property (nonatomic, getter=isLockingUI) BOOL lockingUI;
 
 @end
 
