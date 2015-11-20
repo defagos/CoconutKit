@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The corresponding animation step to be played during the reverse animation
  */
-@property (nonatomic, readonly) id reverseAnimationStep;
+@property (nonatomic, readonly) __kindof HLSAnimationStep *reverseAnimationStep;
 
 /**
  * Return YES iff the animation has been paused

@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The super method implementation must be called first
  */
-@property (nonatomic, readonly) id reverseAnimationStep;
+@property (nonatomic, readonly) __kindof HLSAnimationStep *reverseAnimationStep;
 
 /**
  * The time elapsed since the animation step began animating. If your animation step subclass cannot support

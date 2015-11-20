@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return the object animation corresponding to the inverse animation
  */
-@property (nonatomic, readonly) id reverseObjectAnimation;
+@property (nonatomic, readonly) __kindof HLSObjectAnimation *reverseObjectAnimation;
 
 @end
 

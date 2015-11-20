@@ -64,7 +64,7 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * Convenience constructor for creating an animation from HLSAnimationStep objects. Providing nil creates an empty
  * animation
  */
-+ (instancetype)animationWithAnimationSteps:(nullable NSArray *)animationSteps;
++ (instancetype)animationWithAnimationSteps:(nullable NSArray<HLSAnimationStep *> *)animationSteps;
 + (instancetype)animationWithAnimationStep:(nullable HLSAnimationStep *)animationStep;
 
 /**
@@ -75,7 +75,7 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * A deep copy of the animation steps is performed to prevent further changes once the steps have been assigned to an
  * animation
  */
-- (instancetype)initWithAnimationSteps:(nullable NSArray *)animationSteps NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAnimationSteps:(nullable NSArray<HLSAnimationStep *> *)animationSteps NS_DESIGNATED_INITIALIZER;
 
 /**
  * Tag which can optionally be used to help identifying an animation
@@ -93,7 +93,7 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  *
  * Default is NO
  */
-@property (nonatomic) BOOL lockingUI;
+@property (nonatomic, getter=isLockingUI) BOOL lockingUI;
 
 /**
  * The animation delegate. Note that the animation is automatically cancelled if a delegate has been set
