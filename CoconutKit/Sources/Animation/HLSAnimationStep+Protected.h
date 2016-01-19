@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Retrieve the animation for an object (nil if not match is found)
  */
-- (nullable HLSObjectAnimation *)objectAnimationForObject:(id)object;
+- (nullable __kindof HLSObjectAnimation *)objectAnimationForObject:(id)object;
 
 /**
  * All objects changed by the animation step, returned in the order they were added to it

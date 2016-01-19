@@ -26,7 +26,7 @@
 
 #pragma mark Reverse animation
 
-- (id)reverseObjectAnimation
+- (HLSObjectAnimation *)reverseObjectAnimation
 {
     return [[self class] animation];
 }

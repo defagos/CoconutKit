@@ -16,11 +16,11 @@
 #import <dlfcn.h>
 #endif
 
-static NSString * const kLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
-static NSString * const kDummyViewLayerAnimationKey = @"HLSDummyViewLayerAnimation";
+static NSString * const HLSLayerAnimationGroupKey = @"HLSLayerAnimationGroup";
+static NSString * const HLSDummyViewLayerAnimationKey = @"HLSDummyViewLayerAnimation";
 
-static NSString * const kLayerNonProjectedSublayerTransformKey = @"HLSNonProjectedSublayerTransform";
-static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZPositionForSublayers";
+static NSString * const HLSLayerNonProjectedSublayerTransformKey = @"HLSNonProjectedSublayerTransform";
+static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZPositionForSublayers";
 
 // Remark: CoreAnimation default settings are duration = 0.25 and linear timing function, but
 //         to be consistent with UIView block-based animations we do not override the default
@@ -109,8 +109,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     }
     
     // Animate all layers involved in the animation step
-    for (CALayer *layer in [self objects]) {        
-        HLSLayerAnimation *layerAnimation = (HLSLayerAnimation *)[self objectAnimationForObject:layer];
+    for (CALayer *layer in self.objects) {
+        HLSLayerAnimation *layerAnimation = [self objectAnimationForObject:layer];
         NSAssert(layerAnimation != nil, @"Missing layer animation; data consistency failure");
         
         // Ensure pending layout operations are done
@@ -197,7 +197,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         layer.rasterizationScale = rasterizationScale;
         
         // Get the sublayer transform without its perspective component (saved as additional layer information)
-        NSValue *nonProjectedSublayerTransformValue = [layer valueForKey:kLayerNonProjectedSublayerTransformKey];
+        NSValue *nonProjectedSublayerTransformValue = [layer valueForKey:HLSLayerNonProjectedSublayerTransformKey];
         CATransform3D nonProjectedSublayerTransform = CATransform3DIdentity;
         if (nonProjectedSublayerTransformValue) {
             nonProjectedSublayerTransform = [nonProjectedSublayerTransformValue CATransform3DValue];
@@ -207,7 +207,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         }
         
         // Get the current camera position (saved as additional layer information)
-        NSNumber *sublayerCameraZPositionNumber = [layer valueForKey:kLayerCameraZPositionForSublayersKey];
+        NSNumber *sublayerCameraZPositionNumber = [layer valueForKey:HLSLayerCameraZPositionForSublayersKey];
         CGFloat sublayerCameraZPosition = 0.f;
         if (sublayerCameraZPositionNumber) {
             sublayerCameraZPosition = [sublayerCameraZPositionNumber floatValue];
@@ -226,8 +226,8 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         sublayerCameraZPosition += layerAnimation.sublayerCameraTranslationZ;
         
         // Save the information relative / not relative to the perspective separately
-        [layer setValue:@(sublayerCameraZPosition) forKey:kLayerCameraZPositionForSublayersKey];
-        [layer setValue:[NSValue valueWithCATransform3D:sublayerTransform] forKey:kLayerNonProjectedSublayerTransformKey];
+        [layer setValue:@(sublayerCameraZPosition) forKey:HLSLayerCameraZPositionForSublayersKey];
+        [layer setValue:[NSValue valueWithCATransform3D:sublayerTransform] forKey:HLSLayerNonProjectedSublayerTransformKey];
         
         // Create the perspective matrix (see http://en.wikipedia.org/wiki/3D_projection#Perspective_projection)
         CATransform3D perspectiveProjectionTransform = CATransform3DIdentity;
@@ -260,7 +260,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
             animationGroup.animations = [NSArray arrayWithArray:animations];
             animationGroup.delegate = self;
-            [layer addAnimation:animationGroup forKey:kLayerAnimationGroupKey];
+            [layer addAnimation:animationGroup forKey:HLSLayerAnimationGroupKey];
         }
     }
     
@@ -271,7 +271,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
         dummyViewOpacityAnimation.fromValue = @(self.dummyView.layer.opacity);
         dummyViewOpacityAnimation.toValue = @(1.f - self.dummyView.layer.opacity);
         dummyViewOpacityAnimation.delegate = self;
-        [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:kDummyViewLayerAnimationKey];
+        [self.dummyView.layer addAnimation:dummyViewOpacityAnimation forKey:HLSDummyViewLayerAnimationKey];
     }
         
     // Animated
@@ -298,7 +298,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (void)pauseAnimation
 {
-    for (CALayer *layer in [self objects]) {
+    for (CALayer *layer in self.objects) {
         [layer pauseAllAnimations];
     }
     [self.dummyView.layer pauseAllAnimations];
@@ -308,7 +308,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
 
 - (void)resumeAnimation
 {
-    for (CALayer *layer in [self objects]) {
+    for (CALayer *layer in self.objects) {
         [layer resumeAllAnimations];
     }
     [self.dummyView.layer resumeAllAnimations];
@@ -327,7 +327,7 @@ static NSString * const kLayerCameraZPositionForSublayersKey = @"HLSLayerCameraZ
     // We recursively cancel subview animations. It does not seem to be an issue here (like for UIViews, see
     // HLSViewAnimationStep.m), since we do not alter layer frames, but this is a safety measure and is the
     // correct way to cancel animations attached to a layer
-    for (CALayer *layer in [self objects]) {
+    for (CALayer *layer in self.objects) {
         [layer removeAllAnimationsRecursively];
     }
     [self.dummyView.layer removeAllAnimationsRecursively];

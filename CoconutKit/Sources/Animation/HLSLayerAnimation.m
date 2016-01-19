@@ -242,10 +242,10 @@
 
 #pragma mark Reverse animation
 
-- (id)reverseObjectAnimation
+- (HLSObjectAnimation *)reverseObjectAnimation
 {
     // See remarks at the beginning
-    HLSLayerAnimation *reverseLayerAnimation = [super reverseObjectAnimation];
+    HLSLayerAnimation *reverseLayerAnimation = super.reverseObjectAnimation;
     
     [reverseLayerAnimation rotateByAngle:-self.rotationParameters.v1
                         aboutVectorWithX:self.rotationParameters.v2
