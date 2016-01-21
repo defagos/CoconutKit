@@ -58,9 +58,9 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
 - (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code;
 
 /**
- * Return the nested error which has been set (if any)
+ * Set / return a nested error
  */
-- (nullable NSError *)underlyingError;
+@property (nonatomic, nullable) NSError *underlyingError;
 
 /**
  * Return the object set for a given key. The key can either be a reserved one (see NSError) or a custom
@@ -90,11 +90,6 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
 - (void)setLocalizedRecoveryOptions:(nullable NSArray *)localizedRecoveryOptions;
 - (void)setRecoveryAttempter:(nullable id)recoveryAttempter;
 - (void)setHelpAnchor:(nullable NSString *)helpAnchor;
-
-/**
- * Set a nested error
- */
-- (void)setUnderlyingError:(nullable NSError *)underlyingError;
 
 /**
  * Set an object for some key. The key can either be a reserved one (see NSError header) or a custom one. Instead

@@ -84,17 +84,17 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)updateBoundViewHierarchyAnimated:(BOOL)animated
 {
-    [self updateBoundViewHierarchyAnimated:@(animated) inViewController:[self nearestViewController]];
+    [self updateBoundViewHierarchyAnimated:@(animated) inViewController:self.nearestViewController];
 }
 
 - (void)updateBoundViewHierarchy
 {
-    [self updateBoundViewHierarchyAnimated:nil inViewController:[self nearestViewController]];
+    [self updateBoundViewHierarchyAnimated:nil inViewController:self.nearestViewController];
 }
 
 - (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError
 {
-    return [self checkBoundViewHierarchyInViewController:[self nearestViewController] withError:pError];
+    return [self checkBoundViewHierarchyInViewController:self.nearestViewController withError:pError];
 }
 
 @end
@@ -146,7 +146,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
     }
     
     if (animated) {
-        [self updateBoundViewAnimated:[animated boolValue]];
+        [self updateBoundViewAnimated:animated.boolValue];
     }
     else {
         [self updateBoundView];
