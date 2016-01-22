@@ -17,8 +17,8 @@
 
 @interface HLSInMemoryFileManager ()
 
-@property (nonatomic) NSMutableDictionary *rootItems;           // Stores the directory / file hierarchy
-@property (nonatomic) NSCache *cache;                           // Store data
+@property (nonatomic) NSMutableDictionary<NSString *, id> *rootItems;           // Stores the directory / file hierarchy
+@property (nonatomic) NSCache *cache;                                           // Store data
 
 @end
 
@@ -81,10 +81,10 @@
     return [self addObjectAtPath:path toItems:self.rootItems withData:data error:pError];
 }
 
-- (BOOL)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary *)items withData:(NSData *)data error:(NSError *__autoreleasing *)pError
+- (BOOL)addObjectAtPath:(NSString *)path toItems:(NSMutableDictionary<NSString *, id> *)items withData:(NSData *)data error:(NSError *__autoreleasing *)pError
 {
-    NSArray *pathComponents = [path pathComponents];
-    if ([pathComponents count] == 0) {
+    NSArray<NSString *> *pathComponents = path.pathComponents;
+    if (pathComponents.count == 0) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
                                           code:NSFileNoSuchFileError
@@ -93,8 +93,8 @@
         return NO;
     }
     
-    if ([pathComponents count] == 1) {
-        NSString *objectName = [pathComponents firstObject];
+    if (pathComponents.count == 1) {
+        NSString *objectName = pathComponents.firstObject;
         
         // File. If the file already exists, it will be replaced
         if (data) {
@@ -107,7 +107,7 @@
                                                                                               name:objectName
                                                                                               data:data];
             
-            NSString *UUID = [[NSUUID UUID] UUIDString];
+            NSString *UUID = [NSUUID UUID].UUIDString;
             [items setObject:UUID forKey:objectName];
             [self.cache setObject:cacheEntry forKey:UUID cost:cacheEntry.cost];
         }
@@ -121,17 +121,17 @@
         return YES;
     }
     else {
-        NSString *firstPathComponent = [pathComponents firstObject];
+        NSString *firstPathComponent = pathComponents.firstObject;
         
         // Create intermediate directories if needed
-        NSMutableDictionary *subitems = [items objectForKey:firstPathComponent];
+        NSMutableDictionary<NSString *, id> *subitems = [items objectForKey:firstPathComponent];
         if (! subitems) {
             subitems = [NSMutableDictionary dictionary];
             [items setObject:subitems forKey:firstPathComponent];
         }
         
         // Go down one level deeper
-        NSArray *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
+        NSArray<NSString *> *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
         return [self addObjectAtPath:subpath toItems:subitems withData:data error:pError];
     }
@@ -142,9 +142,9 @@
  * is not found or if the destination already exists
  */
 - (BOOL)copyObjectWithName:(NSString *)sourceObjectName
-                   inItems:(NSDictionary *)sourceItems
+                   inItems:(NSDictionary<NSString *, id> *)sourceItems
           toObjectWithName:(NSString *)destinationObjectName
-                   inItems:(NSMutableDictionary *)destinationItems
+                   inItems:(NSMutableDictionary<NSString *, id> *)destinationItems
                      error:(NSError *__autoreleasing *)pError
 {
     // Retrieve the source content
@@ -169,7 +169,7 @@
     
     // Folder
     if ([sourceContent isKindOfClass:[NSDictionary class]]) {
-        NSMutableDictionary *destinationSubitems = [NSMutableDictionary dictionary];
+        NSMutableDictionary<NSString *, id> *destinationSubitems = [NSMutableDictionary dictionary];
         [destinationItems setObject:destinationSubitems forKey:destinationObjectName];
         
         for (NSString *subname in [sourceContent allKeys]) {
@@ -190,7 +190,7 @@
                                                                                                      name:destinationObjectName
                                                                                                      data:[sourceCacheEntry.data copy]];
         
-        NSString *UUID = [[NSUUID UUID] UUIDString];
+        NSString *UUID = [NSUUID UUID].UUIDString;
         [destinationItems setObject:UUID forKey:destinationObjectName];
         [self.cache setObject:destinationCacheEntry forKey:UUID cost:destinationCacheEntry.cost];
     }
@@ -199,9 +199,9 @@
 }
 
 - (BOOL)moveObjectWithName:(NSString *)sourceObjectName
-                   inItems:(NSMutableDictionary *)sourceItems
+                   inItems:(NSMutableDictionary<NSString *, id> *)sourceItems
           toObjectWithName:(NSString *)destinationObjectName
-                   inItems:(NSMutableDictionary *)destinationItems
+                   inItems:(NSMutableDictionary<NSString *, id> *)destinationItems
                      error:(NSError *__autoreleasing *)pError
 {
     // Retrieve the source content
@@ -234,27 +234,27 @@
 /**
  * Return either a dictionary (folder) or a string identifier pointing to a cache entry (file)
  */
-- (id)contentAtPath:(NSString *)path forItems:(NSDictionary *)items
+- (id)contentAtPath:(NSString *)path forItems:(NSDictionary<NSString *, id> *)items
 {
-    NSArray *pathComponents = [path pathComponents];
-    if ([pathComponents count] == 0) {
+    NSArray<NSString *> *pathComponents = path.pathComponents;
+    if (pathComponents.count == 0) {
         return nil;
     }
     
-    NSString *firstPathComponent = [pathComponents firstObject];
+    NSString *firstPathComponent = pathComponents.firstObject;
     id subitems = [items objectForKey:firstPathComponent];
     
-    if ([pathComponents count] == 1) {
+    if (pathComponents.count == 1) {
         return subitems;
     }
     else {
-        NSArray *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
+        NSArray<NSString *> *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
         return [self contentAtPath:subpath forItems:subitems];
     }  
 }
 
-- (BOOL)removeItemWithName:(NSString *)name inItems:(NSMutableDictionary *)items error:(NSError *__autoreleasing *)pError
+- (BOOL)removeItemWithName:(NSString *)name inItems:(NSMutableDictionary<NSString *, id> *)items error:(NSError *__autoreleasing *)pError
 {
     id content = [items objectForKey:name];
     if (! content) {
@@ -269,7 +269,7 @@
     // Directory
     if ([content isKindOfClass:[NSDictionary class]]) {
         // Recursively remove content
-        NSArray *subnames = [content allKeys];
+        NSArray<NSString *> *subnames = [content allKeys];
         for (NSString *subname in subnames) {
             [self removeItemWithName:subname inItems:content error:NULL];
         }
@@ -346,7 +346,7 @@
     return [self addObjectAtPath:path withData:nil error:pError];
 }
 
-- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
+- (NSArray<NSString *> *)contentsOfDirectoryAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     id subitems = [self contentAtPath:path forItems:self.rootItems];
     if (! [subitems isKindOfClass:[NSDictionary class]]) {
@@ -409,9 +409,9 @@
         return NO;
     }
     
-    return [self copyObjectWithName:[sourcePath lastPathComponent]
+    return [self copyObjectWithName:sourcePath.lastPathComponent
                             inItems:sourceContent
-                   toObjectWithName:[destinationPath lastPathComponent]
+                   toObjectWithName:destinationPath.lastPathComponent
                             inItems:destinationContent
                               error:pError];
 }
@@ -450,9 +450,9 @@
         return NO;
     }
     
-    return  [self moveObjectWithName:[sourcePath lastPathComponent]
+    return  [self moveObjectWithName:sourcePath.lastPathComponent
                              inItems:sourceContent
-                    toObjectWithName:[destinationPath lastPathComponent]
+                    toObjectWithName:destinationPath.lastPathComponent
                              inItems:destinationContent
                                error:pError];
 }
@@ -460,7 +460,7 @@
 - (BOOL)removeItemAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError
 {
     // Get the directory in which the element to delete is located
-    id content = [self contentAtPath:[path stringByDeletingLastPathComponent] forItems:self.rootItems];
+    id content = [self contentAtPath:path.stringByDeletingLastPathComponent forItems:self.rootItems];
     if (! [content isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -471,8 +471,8 @@
     }
     
     // Never delete the root, rather delete all its contents
-    NSArray *pathComponents = [path pathComponents];
-    if ([pathComponents count] == 1 && [[pathComponents firstObject] isEqualToString:@"/"]) {
+    NSArray<NSString *> *pathComponents = path.pathComponents;
+    if (pathComponents.count == 1 && [pathComponents.firstObject isEqualToString:@"/"]) {
         for (NSString *name in [content allKeys]) {
             if (! [self removeItemWithName:name inItems:content error:NULL]) {
                 HLSLoggerWarn(@"Could not remove %@", name);
@@ -481,7 +481,7 @@
         return YES;
     }
     else {
-        NSString *name = [path lastPathComponent];
+        NSString *name = path.lastPathComponent;
         return [self removeItemWithName:name inItems:content error:pError];
     }
 }

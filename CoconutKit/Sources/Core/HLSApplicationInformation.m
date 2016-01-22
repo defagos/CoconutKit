@@ -13,7 +13,7 @@ NSString *HLSApplicationLibraryDirectoryPath(void)
     static NSString *s_path = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        s_path = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
+        s_path = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES).firstObject;
     });
     return s_path;
 }
@@ -33,7 +33,7 @@ NSString *HLSApplicationCachesDirectoryPath(void)
     static NSString *s_path = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        s_path = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+        s_path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
     });
     return s_path;
 }
@@ -53,7 +53,7 @@ NSString *HLSApplicationDocumentDirectoryPath(void)
     static NSString *s_path = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        s_path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        s_path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
     });
     return s_path;
 }

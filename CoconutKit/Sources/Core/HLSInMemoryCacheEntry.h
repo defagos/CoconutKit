@@ -20,14 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Create a cache entry. The name points at an object contained within the parentItems file dictionary
  */
-- (instancetype)initWithParentItems:(NSMutableDictionary *)parentItems
+- (instancetype)initWithParentItems:(NSMutableDictionary<NSString *, id> *)parentItems
                                name:(NSString *)name
                                data:(NSData *)data NS_DESIGNATED_INITIALIZER;
 
 /**
  * Access entry information
  */
-@property (nonatomic, readonly) NSMutableDictionary *parentItems;
+@property (nonatomic, readonly) NSMutableDictionary<NSString *, id> *parentItems;
 @property (nonatomic, readonly, copy) NSString *name;
 @property (nonatomic, readonly) NSData *data;
 

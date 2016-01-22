@@ -8,7 +8,7 @@
 
 @interface HLSInMemoryCacheEntry ()
 
-@property (nonatomic) NSMutableDictionary *parentItems;
+@property (nonatomic) NSMutableDictionary<NSString *, id> *parentItems;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSData *data;
 
@@ -18,7 +18,7 @@
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithParentItems:(NSMutableDictionary *)parentItems
+- (instancetype)initWithParentItems:(NSMutableDictionary<NSString *, id> *)parentItems
                                name:(NSString *)name
                                data:(NSData *)data
 {

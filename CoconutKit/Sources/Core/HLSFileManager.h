@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  * return nil and an error, otherwise YES and no error. If the directory is empty, the method must return an empty array,
  * not nil
  */
-- (NSArray *)contentsOfDirectoryAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError;
+- (NSArray<NSString *> *)contentsOfDirectoryAtPath:(NSString *)path error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Return YES iff the file or folder exists at the specified path (and whether it is a directory or not; you can pass NULL if you do not
