@@ -66,21 +66,21 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return the invert color corresponding to the receiver
  */
-- (UIColor *)invertedColor;
+@property (nonatomic, readonly) UIColor *invertedColor;
 
 /**
  * Return non-normalized color components (0 - 255)
  */
-- (NSUInteger)redComponent;
-- (NSUInteger)greenComponent;
-- (NSUInteger)blueComponent;
+@property (nonatomic, readonly) NSUInteger redComponent;
+@property (nonatomic, readonly) NSUInteger greenComponent;
+@property (nonatomic, readonly) NSUInteger blueComponent;
 
 /**
  * Return the normalized color components (0.f - 1.f)
  */
-- (CGFloat)normalizedRedComponent;
-- (CGFloat)normalizedGreenComponent;
-- (CGFloat)normalizedBlueComponent;
+@property (nonatomic, readonly) CGFloat normalizedRedComponent;
+@property (nonatomic, readonly) CGFloat normalizedGreenComponent;
+@property (nonatomic, readonly) CGFloat normalizedBlueComponent;
 
 @end
 

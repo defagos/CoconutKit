@@ -31,7 +31,7 @@ static id swizzle_initWithURL_cachePolicy_timeoutInterval(NSURLRequest *self, SE
     // Warns about unimplemented NSURLRequest cache policies. See http://blackpixel.com/blog/1659/caching-and-nsurlconnection/
     self = s_initWithURL_cachePolicy_timeoutInterval(self, _cmd, url, cachePolicy, timeoutInterval);
     if (self.cachePolicy != cachePolicy) {
-        HLSLoggerWarn(@"The cache policy %lu is not yet implemented and has been replaced with the cache policy %lu", (unsigned long)cachePolicy, (unsigned long)self.cachePolicy);
+        HLSLoggerWarn(@"The cache policy %@ is not yet implemented and has been replaced with the cache policy %@", @(cachePolicy), @(self.cachePolicy));
     }
     return self;
 }

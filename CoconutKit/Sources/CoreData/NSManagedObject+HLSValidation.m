@@ -137,14 +137,14 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         // Already a multiple error. Add the new error to the list (this can only be done cleanly by creating a new error object)
         NSDictionary *userInfo = nil;
         if ([*pExistingError hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
-            userInfo = [*pExistingError userInfo];
-            NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
+            userInfo = (*pExistingError).userInfo;
+            NSArray<NSError *> *errors = [userInfo objectForKey:NSDetailedErrorsKey];
             errors = [errors arrayByAddingObject:newError];
             userInfo = [userInfo dictionaryBySettingObject:errors forKey:NSDetailedErrorsKey];            
         }
         // Not a multiple error yet. Combine into a multiple error
         else {
-            NSArray *errors = @[*pExistingError, newError];
+            NSArray<NSError *> *errors = @[*pExistingError, newError];
             userInfo = @{ NSDetailedErrorsKey : errors };
         }
         
@@ -224,16 +224,16 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     
     // Extract the error list (should be one since this method is meant to flatten out errors returned by the
     // Core Data runtime)
-    NSDictionary *userInfo = [error userInfo];
+    NSDictionary *userInfo = error.userInfo;
     NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
-    if ([errors count] == 0) {
+    if (errors.count == 0) {
         HLSLoggerWarn(@"Error with code NSValidationMultipleErrorsError, but no error list found");
         return error;
     }
     
     // Flatten out errors if necessary
     BOOL flattened = NO;
-    NSArray *flattenedErrors = @[];
+    NSArray<NSError *> *flattenedErrors = @[];
     for (NSError *error in errors) {
         // Not a nested mulitple error. Nothing to do
         if (! [error hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
@@ -242,8 +242,8 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         }
         
         // Flatten out nested errors
-        NSArray *errorsInError = [[error userInfo] objectForKey:NSDetailedErrorsKey];
-        if ([errorsInError count] != 0) {
+        NSArray<NSError *> *errorsInError = [error.userInfo objectForKey:NSDetailedErrorsKey];
+        if (errorsInError.count != 0) {
             flattenedErrors = [flattenedErrors arrayByAddingObjectsFromArray:errorsInError];
         }
         
@@ -471,7 +471,7 @@ static void swizzle_initialize(Class self, SEL _cmd)
         
         // Add the validation method Core Data expects for this field. Signature is
         //   - (BOOL)validate<fieldName>:(id *)pValue error:(NSError *__autoreleasing *)pError
-        NSString *validationSelectorName = [NSString stringWithFormat:@"validate%@%@:error:", [[propertyName substringToIndex:1] uppercaseString], 
+        NSString *validationSelectorName = [NSString stringWithFormat:@"validate%@%@:error:", [propertyName substringToIndex:1].uppercaseString,
                                             [propertyName substringFromIndex:1]];
         if (! class_addMethod(self, 
                               NSSelectorFromString(validationSelectorName),         // Remark: (SEL)[validationSelectorName cStringUsingEncoding:NSUTF8StringEncoding] 

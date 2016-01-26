@@ -119,12 +119,12 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 /**
  * Return all child connections, in no specific order
  */
-@property (nonatomic, readonly) NSArray *childConnections;
+@property (nonatomic, readonly) NSArray<__kindof HLSConnection *> *childConnections;
 
 /**
  * Return the connection with the specified key, nil if none is found
  */
-- (nullable HLSConnection *)childConnectionForKey:(id)key;
+- (nullable __kindof HLSConnection *)childConnectionForKey:(id)key;
 
 /**
  * Remove the connection with the specified key, does nothing if none is found. The connection is automatically

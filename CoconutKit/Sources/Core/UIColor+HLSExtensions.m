@@ -52,14 +52,14 @@ static void setColorFormat(UIView *self, SEL _cmd, NSString *colorFormat);
     SEL selector = NSSelectorFromString([name stringByAppendingString:@"Color"]);
     Method method = class_getClassMethod(self, selector);
     if (! method) {
-        HLSLoggerWarn(@"No color %@ name was found on class %@", name, [self className]);
+        HLSLoggerWarn(@"No color %@ name was found on class %@", name, self.className);
         return nil;
     }
     
     id (*implementation)(id, SEL) = (id (*)(id, SEL))method_getImplementation(method);
     id color = (*implementation)(self, selector);
     if (! [color isKindOfClass:[UIColor class]]) {
-        HLSLoggerWarn(@"The name %@ does not correspond to a color for class %@", name, [self className]);
+        HLSLoggerWarn(@"The name %@ does not correspond to a color for class %@", name, self.className);
         return nil;
     }
     
@@ -82,17 +82,17 @@ static void setColorFormat(UIView *self, SEL _cmd, NSString *colorFormat);
 
 - (NSUInteger)redComponent
 {
-    return (NSUInteger)roundf(255.f * [self normalizedRedComponent]);
+    return (NSUInteger)roundf(255.f * self.normalizedRedComponent);
 }
 
 - (NSUInteger)greenComponent
 {
-    return (NSUInteger)roundf(255.f * [self normalizedGreenComponent]);
+    return (NSUInteger)roundf(255.f * self.normalizedGreenComponent);
 }
 
 - (NSUInteger)blueComponent
 {
-    return (NSUInteger)roundf(255.f * [self normalizedBlueComponent]);
+    return (NSUInteger)roundf(255.f * self.normalizedBlueComponent);
 }
 
 - (CGFloat)normalizedRedComponent
@@ -162,25 +162,25 @@ static void setColorFormat(UIView *self, SEL _cmd, NSString *colorFormat);
 // Common setter implementation for setting colors by name
 static void setColorFormat(UIView *self, SEL _cmd, NSString *colorFormat)
 {
-    if (! [colorFormat isFilled]) {
+    if (! colorFormat.filled) {
         HLSLoggerWarn(@"No value has been set for attribute %s of %@. Skipped", sel_getName(_cmd), self);
         return;
     }
     
-    NSArray *colorFormatComponents = [colorFormat componentsSeparatedByString:@":"];
-    if ([colorFormatComponents count] > 2) {
+    NSArray<NSString *> *colorFormatComponents = [colorFormat componentsSeparatedByString:@":"];
+    if (colorFormatComponents.count > 2) {
         HLSLoggerWarn(@"Invalid syntax for attribute %s of %@ (expect className:colorName). Skipped", sel_getName(_cmd), self);
         return;
     }
     
     NSString *className = nil;
     NSString *colorName = nil;
-    if ([colorFormatComponents count] == 2) {
-        className = [colorFormatComponents firstObject];
-        colorName = [colorFormatComponents lastObject];
+    if (colorFormatComponents.count == 2) {
+        className = colorFormatComponents.firstObject;
+        colorName = colorFormatComponents.lastObject;
     }
     else {
-        colorName = [colorFormatComponents firstObject];
+        colorName = colorFormatComponents.firstObject;
     }
     
     Class colorClass = Nil;

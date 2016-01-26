@@ -36,14 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return a friendly bundle version number
  *
- * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
+ * See NSString friendlyVersionNumber extension property (NSString+HLSExtensions.h)
  */
-- (nullable NSString *)friendlyVersionNumber;
+@property (nonatomic, readonly, copy, nullable) NSString *friendlyVersionNumber;
 
 /**
  * Return a dictionary containing both the contents of the info and localized info dictionaries
  */
-- (nullable NSDictionary *)fullInfoDictionary;
+@property (nonatomic, readonly, nullable) NSDictionary *fullInfoDictionary;
 
 @end
 

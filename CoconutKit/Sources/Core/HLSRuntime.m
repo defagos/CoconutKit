@@ -376,7 +376,7 @@ id hls_getAssociatedObject(id object, const void *key)
     NSCParameterAssert(key);
     
     // See hls_setAssociatedObject
-    void *hiddenKey = (void *)[[NSString stringWithFormat:@"hls_%p", key] hash];
+    void *hiddenKey = (void *)[NSString stringWithFormat:@"hls_%p", key].hash;
     id associatedObject = objc_getAssociatedObject(object, hiddenKey);
     if ([associatedObject isKindOfClass:[HLSWeakObjectWrapper class]]) {
         HLSWeakObjectWrapper *weakObjectWrapper = (HLSWeakObjectWrapper *)associatedObject;

@@ -21,7 +21,7 @@
         return self;
     }
     
-    NSUInteger shift = numberOfObjects % [self count];
+    NSUInteger shift = numberOfObjects % self.count;
     return [self arrayByShiftingNumberOfObjects:shift];
 }
 
@@ -31,13 +31,13 @@
         return self;
     }
     
-    NSUInteger shift = numberOfObjects % [self count];
-    return [self arrayByShiftingNumberOfObjects:[self count] - shift];
+    NSUInteger shift = numberOfObjects % self.count;
+    return [self arrayByShiftingNumberOfObjects:self.count - shift];
 }
 
 - (NSArray *)arrayByShiftingNumberOfObjects:(NSUInteger)numberOfObjects
 {
-    return [[self subarrayWithRange:NSMakeRange(numberOfObjects, [self count] -  numberOfObjects)] 
+    return [[self subarrayWithRange:NSMakeRange(numberOfObjects, self.count - numberOfObjects)]
             arrayByAddingObjectsFromArray:[self subarrayWithRange:NSMakeRange(0, numberOfObjects)]];
 }
 

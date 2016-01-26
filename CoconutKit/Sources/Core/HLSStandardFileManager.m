@@ -209,8 +209,8 @@
     }
 
     // Never delete the root, rather delete all its contents
-    NSArray *pathComponents = [path pathComponents];
-    if ([pathComponents count] == 1 && [[pathComponents firstObject] isEqualToString:@"/"]) {
+    NSArray *pathComponents = path.pathComponents;
+    if (pathComponents.count == 1 && [pathComponents.firstObject isEqualToString:@"/"]) {
         NSArray *contents = [self contentsOfDirectoryAtPath:@"/" error:NULL];
         for (NSString *content in contents) {
             NSString *contentPath = [path stringByAppendingPathComponent:content];

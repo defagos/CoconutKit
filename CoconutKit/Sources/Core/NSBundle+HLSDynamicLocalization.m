@@ -53,10 +53,10 @@ NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode)
 
 static void setDefaultLocalization(void)
 {
-    NSArray *mainBundleLocalizations = [[NSBundle mainBundle] localizations];
+    NSArray *mainBundleLocalizations = [NSBundle mainBundle].localizations;
     NSArray *preferredLocalizations = [NSBundle preferredLocalizationsFromArray:mainBundleLocalizations];
-    if ([preferredLocalizations count] > 0) {
-        currentLocalization = [[preferredLocalizations objectAtIndex:0] copy];
+    if (preferredLocalizations.count > 0) {
+        currentLocalization = [preferredLocalizations.firstObject copy];
     }
     else {
         currentLocalization = [[[NSBundle mainBundle] developmentLocalization] copy];
@@ -79,7 +79,7 @@ static void setDefaultLocalization(void)
 
 + (NSString *)localization
 {
-    if (!currentLocalization) {
+    if (! currentLocalization) {
         setDefaultLocalization();
     }
     return currentLocalization;
@@ -91,7 +91,7 @@ static void setDefaultLocalization(void)
     
     NSString *previousLocalization = [currentLocalization copy];
     
-    if (!localization) {
+    if (! localization) {
         setDefaultLocalization();
     }
     else {
@@ -114,7 +114,7 @@ static void setDefaultLocalization(void)
 - (NSString *)dynamic_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
 {
     // See -localizedStringForKey:value:table: return value documentation
-    NSString *notFoundValue = [value length] > 0 ? value : key;
+    NSString *notFoundValue = value.length > 0 ? value : key;
     
     if (!currentLocalization || !key) {    
         return notFoundValue;
@@ -122,7 +122,7 @@ static void setDefaultLocalization(void)
     
     NSString *localizationName = currentLocalization;
     BOOL lprojFound = YES;
-    NSString *lprojPath = [[[self bundlePath] stringByAppendingPathComponent:currentLocalization] stringByAppendingPathExtension:@"lproj"];
+    NSString *lprojPath = [[self.bundlePath stringByAppendingPathComponent:currentLocalization] stringByAppendingPathExtension:@"lproj"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:lprojPath]) {
         // Handle old style English.lproj / French.lproj / German.lproj ...
         static NSLocale *enLocale = nil;
@@ -130,7 +130,7 @@ static void setDefaultLocalization(void)
             enLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en"];
         }
         NSString *displayLocalizationName = [enLocale displayNameForKey:NSLocaleLanguageCode value:currentLocalization];
-        lprojPath = [[[self bundlePath] stringByAppendingPathComponent:displayLocalizationName] stringByAppendingPathExtension:@"lproj"];
+        lprojPath = [[self.bundlePath stringByAppendingPathComponent:displayLocalizationName] stringByAppendingPathExtension:@"lproj"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:lprojPath]) {
             localizationName = displayLocalizationName;
         }
@@ -139,11 +139,11 @@ static void setDefaultLocalization(void)
         }
     }
     
-    if (!lprojFound) {
+    if (! lprojFound) {
         return notFoundValue;
     }
     
-    if ([tableName length] == 0) {
+    if (tableName.length == 0) {
         tableName = @"Localizable";
     }
     
@@ -152,10 +152,10 @@ static void setDefaultLocalization(void)
     
     NSString *localizedString = [table objectForKey:key];
     
-    if (!localizedString) {
+    if (! localizedString) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NSShowNonLocalizedStrings"]) {
             HLSLoggerWarn(@"Localizable string \"%@\" not found in strings table \"%@\" of bundle %@", key, tableName, self);
-            return [key uppercaseString];
+            return key.uppercaseString;
         }
         return notFoundValue;
     }
@@ -206,11 +206,11 @@ static void exchangeNSBundleInstanceMethod(SEL originalSelector)
     SEL dynamicSelector = NSSelectorFromString([@"dynamic_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
     Method originalMethod = class_getInstanceMethod([NSBundle class], originalSelector);
     Method dynamicMethod = class_getInstanceMethod([NSBundle class], dynamicSelector);
-    if (!originalMethod || !dynamicMethod) {
-        if (!originalMethod) {
+    if (! originalMethod || ! dynamicMethod) {
+        if (! originalMethod) {
             HLSLoggerError(@"NSBundle original '%@' method not found.", NSStringFromSelector(originalSelector));
         }
-        if (!dynamicMethod) {
+        if (! dynamicMethod) {
             HLSLoggerError(@"NSBundle dynamic '%@' method not found.", NSStringFromSelector(dynamicSelector));
         }
         return;

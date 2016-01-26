@@ -61,10 +61,10 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
         self.logDirectoryPath = logDirectoryPath;
         
         NSNumber *level = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerLevelKey];
-        _level = level ? [level integerValue] : HLSLoggerLevelInfo;
+        _level = level ? level.integerValue : HLSLoggerLevelInfo;
         
         NSNumber *fileLoggingEnabled = [[NSUserDefaults standardUserDefaults] objectForKey:HLSLoggerFileLoggingEnabledKey];
-        _fileLoggingEnabled = fileLoggingEnabled ? [fileLoggingEnabled integerValue] : NO;
+        _fileLoggingEnabled = fileLoggingEnabled ? fileLoggingEnabled.integerValue : NO;
 	}
 	return self;
 }
@@ -122,7 +122,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
     static BOOL s_xcodeColorsEnabled = NO;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        NSString *xcodeColorsValue = [[[NSProcessInfo processInfo] environment] objectForKey:@"XcodeColors"];
+        NSString *xcodeColorsValue = [[NSProcessInfo processInfo].environment objectForKey:@"XcodeColors"];
         s_xcodeColorsEnabled = [xcodeColorsValue isEqualToString:@"YES"];
     });
     
@@ -160,12 +160,12 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             static dispatch_once_t s_onceToken;
             dispatch_once(&s_onceToken, ^{
                 s_dateFormatter = [[NSDateFormatter alloc] init];
-                [s_dateFormatter setDateFormat:@"yyyyMMdd_HHmmss"];
+                s_dateFormatter.dateFormat = @"yyyyMMdd_HHmmss";
             });
             
             NSString *dateString = [s_dateFormatter stringFromDate:[NSDate date]];
-            NSString *bundleName = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
-            NSString *versionString = [[[NSBundle mainBundle] friendlyVersionNumber] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *bundleName = [[[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *versionString = [[NSBundle mainBundle].friendlyVersionNumber stringByReplacingOccurrencesOfString:@"." withString:@"-"];
             NSString *logFileName = [NSString stringWithFormat:@"%@_%@_%@.txt", bundleName, versionString, dateString];
             NSString *logFilePath = [self.logDirectoryPath stringByAppendingPathComponent:logFileName];
             if (! [fileManager fileExistsAtPath:logFilePath]) {
@@ -183,14 +183,11 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
             s_dateFormatter = [[NSDateFormatter alloc] init];
-            [s_dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+            s_dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
         });
         
         mach_port_t threadId = pthread_mach_thread_np(pthread_self());
-        NSString *logFileEntry = [NSString stringWithFormat:@"%@ [%x] %@\n",
-                                  [s_dateFormatter stringFromDate:[NSDate date]],
-                                  threadId,
-                                  logEntry];
+        NSString *logFileEntry = [NSString stringWithFormat:@"%@ [%x] %@\n", [s_dateFormatter stringFromDate:[NSDate date]], threadId, logEntry];
         [self.logFileHandle writeData:[logFileEntry dataUsingEncoding:NSUTF8StringEncoding]];
     }
 }
@@ -249,13 +246,13 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 #pragma mark Files
 
-- (NSArray *)availableLogFilePaths
+- (NSArray<NSString *> *)availableLogFilePaths
 {
     @synchronized(self) {
-        NSArray *logFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.logDirectoryPath error:NULL];
+        NSArray<NSString *> *logFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.logDirectoryPath error:NULL];
         
         // Log files names are sorted in increasing date order
-        NSMutableArray *logFilePaths = [NSMutableArray array];
+        NSMutableArray<NSString *> *logFilePaths = [NSMutableArray array];
         for (NSString *logFileName in [logFileNames reverseObjectEnumerator]) {
             NSString *logFilePath = [self.logDirectoryPath stringByAppendingPathComponent:logFileName];
             [logFilePaths addObject:logFilePath];
@@ -270,7 +267,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
     @synchronized(self) {
         self.logFileHandle = nil;
         
-        NSArray *availableLogPaths = [self availableLogFilePaths];
+        NSArray<NSString *> *availableLogPaths = [self availableLogFilePaths];
         for (NSString *availableLogPath in availableLogPaths) {
             NSError *error = nil;
             if (! [[NSFileManager defaultManager] removeItemAtPath:availableLogPath error:&error]) {

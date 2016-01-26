@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Return the name of an object's class (as returned by [self class]) as a string. May be faked by dynamic subclasses
  * (e.g. those added by KVO)
  */
-- (NSString *)className;
+@property (nonatomic, readonly, copy) NSString *className;
 
 /**
  * Return YES iff the object class implements all methods of a given protocol

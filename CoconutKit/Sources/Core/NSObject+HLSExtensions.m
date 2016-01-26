@@ -32,7 +32,7 @@
         struct objc_method_description methodDescription = methodDescriptions[i];
         SEL selector = methodDescription.name;
         if (! class_getInstanceMethod([self class], selector)) {
-            HLSLoggerInfo(@"Class %@ does not implement method %@ of protocol %@", [self className], @(sel_getName(selector)), @(protocol_getName(protocol)));
+            HLSLoggerInfo(@"Class %@ does not implement method %@ of protocol %@", self.className, @(sel_getName(selector)), @(protocol_getName(protocol)));
             return NO;
         }
     }

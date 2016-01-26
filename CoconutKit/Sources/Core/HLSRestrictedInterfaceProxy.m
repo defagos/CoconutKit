@@ -102,7 +102,7 @@
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
-    SEL selector = [invocation selector];
+    SEL selector = invocation.selector;
     if (! [self protocolDeclaresSelector:selector]) {
         NSString *reason = [NSString stringWithFormat:@"[id<%s> %s]: unrecognized selector sent to proxy instance %p", protocol_getName(_protocol),
                             sel_getName(selector), self];

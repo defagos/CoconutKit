@@ -8,12 +8,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSSet (HLSExtensions)
+@interface NSSet<__covariant ObjectType> (HLSExtensions)
 
 /**
  * Sort an array using a single descriptor
  */
-- (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
+- (NSArray<ObjectType> *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
 
 @end
 

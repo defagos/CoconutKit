@@ -31,10 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
  * specified descriptors (without context parameter, the current HLSModelManager context is used)
  */
 + (nullable NSArray *)filteredObjectsUsingPredicate:(nullable NSPredicate *)predicate
-                             sortedUsingDescriptors:(nullable NSArray *)sortDescriptors
+                             sortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors
                              inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (nullable NSArray *)filteredObjectsUsingPredicate:(nullable NSPredicate *)predicate
-                             sortedUsingDescriptors:(nullable NSArray *)sortDescriptors;
+                             sortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors;
 
 + (nullable NSArray *)filteredObjectsUsingPredicate:(nullable NSPredicate *)predicate
                               sortedUsingDescriptor:(nullable NSSortDescriptor *)sortDescriptor
@@ -46,9 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
  * When called on an NSManagedObject subclass, query all instances of it, sorting them using the specified descriptors
  * (without context parameter, the current HLSModelManager context is used)
  */
-+ (nullable NSArray *)allObjectsSortedUsingDescriptors:(nullable NSArray *)sortDescriptors
++ (nullable NSArray *)allObjectsSortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors
                                 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (nullable NSArray *)allObjectsSortedUsingDescriptors:(nullable NSArray *)sortDescriptors;
++ (nullable NSArray *)allObjectsSortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors;
 
 + (nullable NSArray *)allObjectsSortedUsingDescriptor:(nullable NSSortDescriptor *)sortDescriptor
                                inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;

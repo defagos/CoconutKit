@@ -26,7 +26,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
         [hexHash appendFormat:@"%02X", md[i]];
     }
     
-    return [hexHash lowercaseString];
+    return hexHash.lowercaseString;
 }
 
 @implementation NSString (HLSExtensions)
@@ -40,7 +40,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 
 - (BOOL)isFilled
 {
-    return [[self stringByTrimmingWhitespaces] length] != 0;
+    return [self stringByTrimmingWhitespaces].length != 0;
 }
 
 #pragma mark URL encoding
@@ -101,9 +101,9 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 
 - (NSString *)friendlyVersionNumber
 {
-    NSArray *versionComponents = [self componentsSeparatedByString:@"+"];
-    if ([versionComponents count] > 1) {
-        NSString *lastComponent = [versionComponents lastObject];
+    NSArray<NSString *> *versionComponents = [self componentsSeparatedByString:@"+"];
+    if (versionComponents.count > 1) {
+        NSString *lastComponent = versionComponents.lastObject;
         if (! [lastComponent isEqualToString:@"dev"] && ! [lastComponent isEqualToString:@"test"]) {
             return lastComponent;
         }
@@ -113,7 +113,7 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
 
 - (NSString *)MIMEType
 {
-    NSString *pathExtension = [self pathExtension];
+    NSString *pathExtension = self.pathExtension;
     if (! pathExtension) {
         return nil;
     }

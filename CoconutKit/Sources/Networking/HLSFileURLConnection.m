@@ -17,7 +17,7 @@
 
 - (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionArrayCompletionBlock)completionBlock
 {
-    NSAssert([[request URL] isFileURL], @"A file URL request is required");
+    NSAssert(request.URL.fileURL, @"A file URL request is required");
     
     return [super initWithRequest:request completionBlock:completionBlock];
 }
@@ -27,7 +27,7 @@
 - (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
 {
     // A latency can be added using environment variables
-    NSTimeInterval delay = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSFileURLConnectionLatency"] doubleValue]
+    NSTimeInterval delay = [[NSProcessInfo processInfo].environment objectForKey:@"HLSFileURLConnectionLatency"].doubleValue
         + arc4random_uniform(1001) / 1000.;
     if (isless(delay, 0.)) {
         HLSLoggerWarn(@"The connection latency must be >= 0. Fixed to 0");
@@ -51,12 +51,12 @@
 
 - (void)retrieveFiles
 {   
-    NSString *filePath = [[self.request URL] relativePath];
+    NSString *filePath = self.request.URL.relativePath;
     BOOL isDirectory = NO;
     
     // If the corresponding environment variable has been set, the connection can be set to be unreliable, in which
     // case it will have the corresponding failure probability
-    double failureRate = [[[[NSProcessInfo processInfo] environment] objectForKey:@"HLSFileURLConnectionFailureRate"] doubleValue];
+    double failureRate = [[NSProcessInfo processInfo].environment objectForKey:@"HLSFileURLConnectionFailureRate"].doubleValue;
     if (isless(failureRate, 0.)) {
         HLSLoggerWarn(@"The failure rate must be >= 0. Fixed to 0");
         failureRate = 0.;
@@ -82,11 +82,11 @@
         return;
     }
     
-    NSArray *contents = nil;
+    NSArray<NSURL *> *contents = nil;
     if (isDirectory) {
-        NSArray *contentNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:NULL];
+        NSArray<NSString *> *contentNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:NULL];
         
-        NSMutableArray *mutableContents = [NSMutableArray array];
+        NSMutableArray<NSURL *> *mutableContents = [NSMutableArray array];
         for (NSString *contentName in contentNames) {
             NSURL *fileURL = [NSURL fileURLWithPath:[filePath stringByAppendingPathComponent:contentName]];
             [mutableContents addObject:fileURL];

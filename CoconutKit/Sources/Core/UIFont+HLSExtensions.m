@@ -20,8 +20,8 @@
         bundle = [NSBundle mainBundle];
     }
     
-    NSString *fontFilePath = [bundle pathForResource:[fileName stringByDeletingPathExtension]
-                                              ofType:[fileName pathExtension]];
+    NSString *fontFilePath = [bundle pathForResource:fileName.stringByDeletingPathExtension
+                                              ofType:fileName.pathExtension];
     NSData *fontData = [NSData dataWithContentsOfFile:fontFilePath];
     return [self loadFontWithData:fontData];
 }
