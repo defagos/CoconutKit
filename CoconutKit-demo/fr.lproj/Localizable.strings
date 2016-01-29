@@ -116,7 +116,6 @@
 "Oldest employee age"="Age du plus vieil employé";
 "Other view controller"="Autre view controller";
 "Parallax scrolling"="Défilement parallaxe";
-"Parallel processing"="Calculs en parallèle";
 "Pause"="Pause";
 "Performance 1"="Performance 1";
 "Performance 2"="Performance 2";
@@ -142,7 +141,6 @@
 "Random employee name"="Nom d'employé aléatoire";
 "Rebind"="Lier à nouveau";
 "Reload"="Recharger";
-"Remaining time estimate"="Temps restant estimé";
 "Removal index: %d"="Index de retrait: %d";
 "Remove"="Retirer";
 "Repeat count"="Répétitions";
@@ -170,10 +168,7 @@
 "Sub-tasks"="Sous-tâches";
 "Table view cells"="Cellules";
 "Tablets"="Tablettes";
-"Task"="Tâche";
-"Task group"="Tâche groupée";
 "Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong"="Appuyez sur le bouton bindings en haut à droite et interagissez avec les champs pour découvrir ce qui n'a pas fonctionné";
-"Tasks"="Tâches";
 "Terminate"="Terminer";
 "Test in modal"="Test dans modale";
 "Test in popover"="Test dans popover";

@@ -5,18 +5,12 @@
    Created by Samuel Défago on 9/14/10.
    Copyright 2010 Samuel Défago. All rights reserved.
  */
-
-"< 1 min remaining (estimate)"="< 1 min remaining (estimate)";
-"%d min remaining (estimate)"="%d min remaining (estimate)";
-"%dd %dh remaining (estimate)"="%dd %dh remaining (estimate)";
-"%dh %dm remaining (estimate)"="%dh %dm remaining (estimate)";
 "Cannot Open Page"="Cannot Open Page";
 "File not found"="File not found";
 "File or directory not found"="File or directory not found";
 "Invalid file path"="Invalid file path";
 "No data has been provided"="No data has been provided";
 "No Internet connection is available"="No Internet connection is available";
-"No remaining time estimate available"="No remaining time estimate available";
 "Not found"="Not found";
 "Open in Chrome"="Open in Chrome";
 "Open in Safari"="Open in Safari";

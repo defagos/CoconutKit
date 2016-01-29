@@ -113,10 +113,6 @@
 		6F9C466914C5C30C00824AB2 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
 		6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
-		6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
-		6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
-		6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
 		6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		6F9C467614C5C30C00824AB2 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
@@ -191,9 +187,6 @@
 		6FCB4E8E1926651F00047AD3 /* PortraitOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45C714C5C30B00824AB2 /* PortraitOnlyViewController.m */; };
 		6FCB4E8F1926651F00047AD3 /* StretchableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45CC14C5C30B00824AB2 /* StretchableViewController.m */; };
 		6FCB4E901926651F00047AD3 /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
-		6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
-		6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
-		6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
 		6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		6FCB4E961926651F00047AD3 /* CursorDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45EA14C5C30B00824AB2 /* CursorDemoViewController.m */; };
 		6FCB4E971926651F00047AD3 /* CursorFolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45ED14C5C30B00824AB2 /* CursorFolderView.m */; };
@@ -246,7 +239,6 @@
 		6FCB4ED01926651F00047AD3 /* PortraitOnlyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45C814C5C30B00824AB2 /* PortraitOnlyViewController.xib */; };
 		6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45CD14C5C30B00824AB2 /* StretchableViewController.xib */; };
 		6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EE14C5C30B00824AB2 /* CursorFolderView.xib */; };
@@ -469,9 +461,6 @@
 		E67CF4C91AC2839200AA0C3B /* DemoTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3A11A1C865E00C6C08B /* DemoTransformer.m */; };
 		E67CF4CA1AC2839200AA0C3B /* AutolayoutTopRightNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = E61173351A654BA90066C42C /* AutolayoutTopRightNibView.m */; };
 		E67CF4CB1AC2839200AA0C3B /* TransparentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */; };
-		E67CF4CC1AC2839200AA0C3B /* ParallelProcessingDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */; };
-		E67CF4CD1AC2839200AA0C3B /* SleepTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DD14C5C30B00824AB2 /* SleepTask.m */; };
-		E67CF4CE1AC2839200AA0C3B /* SleepTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */; };
 		E67CF4CF1AC2839200AA0C3B /* CursorCustomPointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */; };
 		E67CF4D01AC2839200AA0C3B /* NibViewAutolayoutDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2DE141A64531300B98C11 /* NibViewAutolayoutDemoViewController.m */; };
 		E67CF4D11AC2839200AA0C3B /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E36C1A1C864000C6C08B /* Employee.m */; };
@@ -557,7 +546,6 @@
 		E67CF5241AC2839200AA0C3B /* TableViewCellsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F96C83019D445CC0010A128 /* TableViewCellsDemoViewController.xib */; };
 		E67CF5251AC2839200AA0C3B /* AutolayoutBottomRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173241A654BA90066C42C /* AutolayoutBottomRightNibView.xib */; };
 		E67CF5261AC2839200AA0C3B /* TransparentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */; };
-		E67CF5271AC2839200AA0C3B /* ParallelProcessingDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */; };
 		E67CF5281AC2839200AA0C3B /* CursorCustomPointerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */; };
 		E67CF5291AC2839200AA0C3B /* CursorDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C45EB14C5C30B00824AB2 /* CursorDemoViewController.xib */; };
 		E67CF52A1AC2839200AA0C3B /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2DE3D1A6635AF00B98C11 /* iTunesArtwork */; };
@@ -880,13 +868,6 @@
 		6F9C45CF14C5C30B00824AB2 /* TransparentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentViewController.h; sourceTree = "<group>"; };
 		6F9C45D014C5C30B00824AB2 /* TransparentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentViewController.m; sourceTree = "<group>"; };
 		6F9C45D114C5C30B00824AB2 /* TransparentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransparentViewController.xib; sourceTree = "<group>"; };
-		6F9C45D914C5C30B00824AB2 /* ParallelProcessingDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelProcessingDemoViewController.h; sourceTree = "<group>"; };
-		6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallelProcessingDemoViewController.m; sourceTree = "<group>"; };
-		6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ParallelProcessingDemoViewController.xib; sourceTree = "<group>"; };
-		6F9C45DC14C5C30B00824AB2 /* SleepTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTask.h; sourceTree = "<group>"; };
-		6F9C45DD14C5C30B00824AB2 /* SleepTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTask.m; sourceTree = "<group>"; };
-		6F9C45DE14C5C30B00824AB2 /* SleepTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SleepTaskOperation.h; sourceTree = "<group>"; };
-		6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepTaskOperation.m; sourceTree = "<group>"; };
 		6F9C45E614C5C30B00824AB2 /* CursorCustomPointerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CursorCustomPointerView.h; sourceTree = "<group>"; };
 		6F9C45E714C5C30B00824AB2 /* CursorCustomPointerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CursorCustomPointerView.m; sourceTree = "<group>"; };
 		6F9C45E814C5C30B00824AB2 /* CursorCustomPointerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CursorCustomPointerView.xib; sourceTree = "<group>"; };
@@ -1387,7 +1368,6 @@
 				6F04E3561A1C864000C6C08B /* Bindings */,
 				6F9C45A414C5C30B00824AB2 /* Common */,
 				6F9C45D214C5C30B00824AB2 /* Core */,
-				6F9C45D714C5C30B00824AB2 /* Task */,
 				6F9C45E014C5C30B00824AB2 /* View */,
 				6F9C461514C5C30B00824AB2 /* ViewControllers */,
 			);
@@ -1506,28 +1486,6 @@
 				6F22C77616A942C20081A9A7 /* Fonts */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		6F9C45D714C5C30B00824AB2 /* Task */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45D814C5C30B00824AB2 /* ParallelProcessing */,
-			);
-			path = Task;
-			sourceTree = "<group>";
-		};
-		6F9C45D814C5C30B00824AB2 /* ParallelProcessing */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C45D914C5C30B00824AB2 /* ParallelProcessingDemoViewController.h */,
-				6F9C45DA14C5C30B00824AB2 /* ParallelProcessingDemoViewController.m */,
-				6F9C45DB14C5C30B00824AB2 /* ParallelProcessingDemoViewController.xib */,
-				6F9C45DC14C5C30B00824AB2 /* SleepTask.h */,
-				6F9C45DD14C5C30B00824AB2 /* SleepTask.m */,
-				6F9C45DE14C5C30B00824AB2 /* SleepTaskOperation.h */,
-				6F9C45DF14C5C30B00824AB2 /* SleepTaskOperation.m */,
-			);
-			path = ParallelProcessing;
 			sourceTree = "<group>";
 		};
 		6F9C45E014C5C30B00824AB2 /* View */ = {
@@ -2152,7 +2110,6 @@
 				6F96C83219D445CC0010A128 /* TableViewCellsDemoViewController.xib in Resources */,
 				E61173491A654BA90066C42C /* AutolayoutBottomRightNibView.xib in Resources */,
 				6F9C466B14C5C30C00824AB2 /* TransparentViewController.xib in Resources */,
-				6F9C466F14C5C30C00824AB2 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6F9C467514C5C30C00824AB2 /* CursorCustomPointerView.xib in Resources */,
 				6F9C467714C5C30C00824AB2 /* CursorDemoViewController.xib in Resources */,
 				6FD2DE601A6635AF00B98C11 /* iTunesArtwork in Resources */,
@@ -2278,7 +2235,6 @@
 				6FCB4ED11926651F00047AD3 /* StretchableViewController.xib in Resources */,
 				6FCB4ED21926651F00047AD3 /* TransparentViewController.xib in Resources */,
 				E61173481A654BA90066C42C /* AutolayoutBottomRightNibView.xib in Resources */,
-				6FCB4ED31926651F00047AD3 /* ParallelProcessingDemoViewController.xib in Resources */,
 				6FCB4ED51926651F00047AD3 /* CursorCustomPointerView.xib in Resources */,
 				6FCB4ED61926651F00047AD3 /* CursorDemoViewController.xib in Resources */,
 				6FCB4ED71926651F00047AD3 /* CursorFolderView.xib in Resources */,
@@ -2406,7 +2362,6 @@
 				E67CF5241AC2839200AA0C3B /* TableViewCellsDemoViewController.xib in Resources */,
 				E67CF5251AC2839200AA0C3B /* AutolayoutBottomRightNibView.xib in Resources */,
 				E67CF5261AC2839200AA0C3B /* TransparentViewController.xib in Resources */,
-				E67CF5271AC2839200AA0C3B /* ParallelProcessingDemoViewController.xib in Resources */,
 				E67CF5281AC2839200AA0C3B /* CursorCustomPointerView.xib in Resources */,
 				E67CF5291AC2839200AA0C3B /* CursorDemoViewController.xib in Resources */,
 				E67CF52A1AC2839200AA0C3B /* iTunesArtwork in Resources */,
@@ -2584,9 +2539,6 @@
 				6F04E3A31A1C865E00C6C08B /* DemoTransformer.m in Sources */,
 				E611735F1A654BA90066C42C /* AutolayoutTopRightNibView.m in Sources */,
 				6F9C466A14C5C30C00824AB2 /* TransparentViewController.m in Sources */,
-				6F9C466E14C5C30C00824AB2 /* ParallelProcessingDemoViewController.m in Sources */,
-				6F9C467014C5C30C00824AB2 /* SleepTask.m in Sources */,
-				6F9C467114C5C30C00824AB2 /* SleepTaskOperation.m in Sources */,
 				6F9C467414C5C30C00824AB2 /* CursorCustomPointerView.m in Sources */,
 				6FD2DE171A64531300B98C11 /* NibViewAutolayoutDemoViewController.m in Sources */,
 				6F04E3911A1C864000C6C08B /* Employee.m in Sources */,
@@ -2686,9 +2638,6 @@
 				E61173881A654D910066C42C /* AutoresizingMaskTopLeftNibView.m in Sources */,
 				6FCB4E901926651F00047AD3 /* TransparentViewController.m in Sources */,
 				E611733E1A654BA90066C42C /* AutolayoutBottomLeftNibView.m in Sources */,
-				6FCB4E911926651F00047AD3 /* ParallelProcessingDemoViewController.m in Sources */,
-				6FCB4E921926651F00047AD3 /* SleepTask.m in Sources */,
-				6FCB4E931926651F00047AD3 /* SleepTaskOperation.m in Sources */,
 				6FCB4E951926651F00047AD3 /* CursorCustomPointerView.m in Sources */,
 				E61173621A654BA90066C42C /* AutoresizingMaskCenterNibView.m in Sources */,
 				E611738F1A654DA90066C42C /* AutoresizingMaskTopNibView.m in Sources */,
@@ -2783,9 +2732,6 @@
 				E67CF4C91AC2839200AA0C3B /* DemoTransformer.m in Sources */,
 				E67CF4CA1AC2839200AA0C3B /* AutolayoutTopRightNibView.m in Sources */,
 				E67CF4CB1AC2839200AA0C3B /* TransparentViewController.m in Sources */,
-				E67CF4CC1AC2839200AA0C3B /* ParallelProcessingDemoViewController.m in Sources */,
-				E67CF4CD1AC2839200AA0C3B /* SleepTask.m in Sources */,
-				E67CF4CE1AC2839200AA0C3B /* SleepTaskOperation.m in Sources */,
 				E67CF4CF1AC2839200AA0C3B /* CursorCustomPointerView.m in Sources */,
 				E67CF4D01AC2839200AA0C3B /* NibViewAutolayoutDemoViewController.m in Sources */,
 				E67CF4D11AC2839200AA0C3B /* Employee.m in Sources */,

@@ -24,7 +24,6 @@
 #import "NibViewAutolayoutSimpleDemoViewController.h"
 #import "NibViewAutoresizingMasksSimpleDemoViewController.h"
 #import "ParallaxScrollingDemoViewController.h"
-#import "ParallelProcessingDemoViewController.h"
 #import "PlaceholderDemoViewController.h"
 #import "AnimationDemoViewController.h"
 #import "SlideshowDemoViewController.h"
@@ -42,7 +41,6 @@ typedef NS_ENUM(NSInteger, DemoCategoryIndex) {
     DemoCategoryIndexAnimation = DemoCategoryIndexEnumBegin,
     DemoCategoryIndexBindings,
     DemoCategoryIndexCore,
-    DemoCategoryIndexTask,
     DemoCategoryIndexView,
     DemoCategoryIndexViewControllers,
     DemoCategoryIndexEnumEnd,
@@ -79,14 +77,6 @@ typedef NS_ENUM(NSInteger, CoreDemoIndex) {
     CoreDemoIndexFonts,
     CoreDemoIndexEnumEnd,
     CoreDemoIndexEnumSize = CoreDemoIndexEnumEnd - CoreDemoIndexEnumBegin
-};
-
-// Demos for tasks
-typedef NS_ENUM(NSInteger, TaskDemoIndex) {
-    TaskDemoIndexEnumBegin = 0,
-    TaskDemoIndexParallelProcessing = TaskDemoIndexEnumBegin,
-    TaskDemoIndexEnumEnd,
-    TaskDemoIndexEnumSize = TaskDemoIndexEnumEnd - TaskDemoIndexEnumBegin
 };
 
 // Demos for views
@@ -179,11 +169,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             break;
         }
             
-        case DemoCategoryIndexTask: {
-            return NSLocalizedString(@"Tasks", nil);
-            break;
-        }
-
         case DemoCategoryIndexView: {
             return NSLocalizedString(@"Views", nil);
             break;
@@ -218,11 +203,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
             return CoreDemoIndexEnumSize;
             break;
         }
-            
-        case DemoCategoryIndexTask: {
-            return TaskDemoIndexEnumSize;
-            break;
-        }            
             
         case DemoCategoryIndexView: {
             return ViewDemoIndexEnumSize;
@@ -327,21 +307,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     return nil;
                     break;
                 }
-            }
-            break;
-        }
-            
-        case DemoCategoryIndexTask: {
-            switch (indexPath.row) {
-                case TaskDemoIndexParallelProcessing: {
-                    cell.textLabel.text = NSLocalizedString(@"Parallel processing", nil);
-                    break;
-                }
-                    
-                default: {
-                    return nil;
-                    break;
-                }            
             }
             break;
         }
@@ -546,21 +511,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     return;
                     break;
                 }
-            }
-            break;
-        }
-            
-        case DemoCategoryIndexTask: {
-            switch (indexPath.row) {
-                case TaskDemoIndexParallelProcessing: {
-                    demoViewController = [[ParallelProcessingDemoViewController alloc] init];
-                    break;
-                }
-                    
-                default: {
-                    return;
-                    break;
-                }            
             }
             break;
         }

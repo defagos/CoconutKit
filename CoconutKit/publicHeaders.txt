@@ -41,11 +41,6 @@ HLSSubtitleTableViewCell.h
 HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h
 HLSTableViewController.h
-HLSTask.h
-HLSTaskGroup.h
-HLSTaskManager.h
-HLSTaskOperation.h
-HLSTaskOperation+Protected.h
 HLSTransformer.h
 HLSTransition.h
 HLSURLConnection.h
