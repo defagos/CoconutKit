@@ -42,13 +42,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
             
             NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
-            if ([bundleContents count] == 0) {
+            if (bundleContents.count == 0) {
                 HLSLoggerError(@"Missing cell object in xib file %@", nibName);
                 return nil;
             }
             
             // Get the first object and check that it is what we expect
-            id firstObject = [bundleContents firstObject];
+            id firstObject = bundleContents.firstObject;
             if (! [firstObject isKindOfClass:self]) {
                 HLSLoggerError(@"The cell object must be the first one in the xib file, and must be of type %@", [self className]);
                 return nil;

@@ -162,7 +162,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
         NSString *tableName = self.locTable;
         if (! tableName) {
             UIView *parentView = self.superview;
-            while (parentView && ! [parentView.locTable isFilled]) {
+            while (parentView && ! parentView.locTable.filled) {
                 parentView = parentView.superview;
             }
             tableName = parentView.locTable;
@@ -171,7 +171,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
         NSString *bundleName = self.locBundle;
         if (! bundleName) {
             UIView *parentView = self.superview;
-            while (parentView && ! [parentView.locBundle isFilled]) {
+            while (parentView && ! parentView.locBundle.filled) {
                 parentView = parentView.superview;
             }
             bundleName = parentView.locBundle;
@@ -190,7 +190,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
     }
     
     // Update the label text
-    if ([localizationInfo isLocalized]) {
+    if (localizationInfo.localized) {
         [self localizeTextWithLocalizationInfo:localizationInfo];
     }
     else {
@@ -200,7 +200,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
 
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
-    NSString *localizedText = [localizationInfo localizedText];
+    NSString *localizedText = localizationInfo.localizedText;
     s_setText(self, @selector(setText:), localizedText);
     
     // Avoid button label truncation when the localization changes (setting the title triggers a sizeToFit), and fixes
@@ -223,7 +223,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
     
     // Make labels with missing localizations visible (saving the original color first)
     if (s_missingLocalizationsVisible) {
-        if ([localizationInfo isIncomplete]) {
+        if (localizationInfo.incomplete) {
             // Using the original implementation here. We do not want to update the color stored in the information object
             s_setBackgroundColor(self, @selector(setBackgroundColor:), [UIColor yellowColor]);
         }
@@ -235,7 +235,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
 - (void)currentLocalizationDidChange:(NSNotification *)notification
 {
     HLSLabelLocalizationInfo *localizationInfo = [self localizationInfo];
-    if ([localizationInfo isLocalized]) {
+    if (localizationInfo.localized) {
         [self localizeTextWithLocalizationInfo:localizationInfo];
     }
 }

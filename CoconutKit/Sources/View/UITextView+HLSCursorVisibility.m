@@ -40,8 +40,8 @@
     // Locate the first view leaf. Can be the blinking cursor or part of the selection view. This trick works because the possible
     // view hierarchies are stable, this trick namely only targets iOS 7
     UIView *cursorView = self;
-    while ([cursorView.subviews count] != 0) {
-        cursorView = [cursorView.subviews firstObject];
+    while (cursorView.subviews.count != 0) {
+        cursorView = cursorView.subviews.firstObject;
     }
     
     static const CGFloat HLSCursorVisibilityMargin = 10.f;
@@ -69,7 +69,7 @@
 
 + (void)keyboardDidShow:(NSNotification *)notification
 {
-    UIView *firstResponderView = [[UIApplication sharedApplication].keyWindow.activeViewController.view firstResponderView];
+    UIView *firstResponderView = [UIApplication sharedApplication].keyWindow.activeViewController.view.firstResponderView;
     if ([firstResponderView isKindOfClass:[UITextView class]]) {
         UITextView *textView = (UITextView *)firstResponderView;
         [textView scrollCursorToVisible];

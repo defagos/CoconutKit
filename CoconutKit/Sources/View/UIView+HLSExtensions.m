@@ -90,7 +90,7 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 
 - (UIImage *)flattenedImage
 {
-    return [self.layer flattenedImage];
+    return self.layer.flattenedImage;
 }
 
 - (UIView *)firstResponderView
@@ -100,7 +100,7 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
     }
     
     for (UIView *subview in self.subviews) {
-        UIView *firstResponderSubview = [subview firstResponderView];
+        UIView *firstResponderSubview = subview.firstResponderView;
         if (firstResponderSubview) {
             return firstResponderSubview;
         }

@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, HLSSlideshowEffect) {
  * slideshow does not have to be stopped. If you want the change to happen immediately, stop the slideshow, update its 
  * image set and start it again.
  */
-@property (nonatomic, nullable) NSArray *imageNamesOrPaths;
+@property (nonatomic, nullable) NSArray<NSString *> *imageNamesOrPaths;
 
 /**
  * How much time an image stays visible alone. Default is 4 seconds. Must be > 0

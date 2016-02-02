@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Return the list of classes supported for bindings. If this method is not implemented, the supported types default
  * to NSString only
  */
-+ (NSArray *)supportedBindingClasses;
++ (NSArray<Class> *)supportedBindingClasses;
 
 /**
  * Should return YES iff the UIView subclass is able to display a placeholder. If not implemented, the default

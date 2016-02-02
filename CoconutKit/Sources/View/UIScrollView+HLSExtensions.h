@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This method only synchronizes scrolling between scroll views. You still have to align them properly
  * and to set their respective content sizes to get the result you want.
  */
-- (void)synchronizeWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces;
+- (void)synchronizeWithScrollViews:(NSArray<UIScrollView *> *)scrollViews bounces:(BOOL)bounces;
 
 /**
  * Remove any previously existing synchronization set for the receiver

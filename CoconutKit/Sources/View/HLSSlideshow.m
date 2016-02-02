@@ -22,7 +22,7 @@ static void commonInit(HLSSlideshow *self);
 
 @interface HLSSlideshow () <HLSAnimationDelegate>
 
-@property (nonatomic) NSArray *imageViews;
+@property (nonatomic) NSArray<UIImageView *> *imageViews;
 @property (nonatomic) HLSAnimation *animation;
 
 @property (nonatomic) NSInteger currentImageIndex;
@@ -68,7 +68,7 @@ static void commonInit(HLSSlideshow *self);
     _effect = effect;
 }
 
-- (void)setImageNamesOrPaths:(NSArray *)imageNamesOrPaths
+- (void)setImageNamesOrPaths:(NSArray<NSString *> *)imageNamesOrPaths
 {   
     HLSAssertObjectsInEnumerationAreKindOfClass(imageNamesOrPaths, NSString);
     
@@ -76,7 +76,7 @@ static void commonInit(HLSSlideshow *self);
         return;
     }
     
-    if ([imageNamesOrPaths count] != 0) {
+    if (imageNamesOrPaths.count != 0) {
         if (self.currentImageIndex != kSlideshowNoIndex) {
             // Try to find whether the current image is also in the new array. If the answer is
             // yes, start at the corresponding location to guarantee we won't see the same image
@@ -138,7 +138,7 @@ static void commonInit(HLSSlideshow *self);
         return;
     }
     
-    if ([self.imageNamesOrPaths count] == 0) {
+    if (self.imageNamesOrPaths.count == 0) {
         HLSLoggerInfo(@"No images to display. Nothing to animate");
         return;
     }
@@ -286,7 +286,7 @@ static void commonInit(HLSSlideshow *self);
     // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
     //       be reused
-    CGFloat zoomScale;
+    CGFloat zoomScale = 0.f;
     // Aspect ratios of frame and image
     CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
     CGFloat imageRatio = image.size.width / image.size.height;
@@ -333,7 +333,7 @@ static void commonInit(HLSSlideshow *self);
 
 - (NSString *)imageNameOrPathForImageView:(UIImageView *)imageView
 {
-    return [[imageView userInfo_hls] objectForKey:@"imageNameOrPath"];
+    return [imageView.userInfo_hls objectForKey:@"imageNameOrPath"];
 }
 
 // Randomly move and scale an image view so that it stays in self.view. Returns random scale factors, x and y offsets
@@ -606,7 +606,7 @@ static void commonInit(HLSSlideshow *self);
 
 - (void)playNextAnimation
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     if (self.random) {
@@ -630,7 +630,7 @@ static void commonInit(HLSSlideshow *self);
 
 - (void)playAnimationForImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     NSUInteger imageIndex = [self.imageNamesOrPaths indexOfObject:imageNameOrPath];
@@ -660,7 +660,7 @@ static void commonInit(HLSSlideshow *self);
 
 - (void)playAnimationForNextImage
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     if (self.random) {
@@ -684,7 +684,7 @@ static void commonInit(HLSSlideshow *self);
 
 - (void)playAnimationForPreviousImage
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     if (self.random) {

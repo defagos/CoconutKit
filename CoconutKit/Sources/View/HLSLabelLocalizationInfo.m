@@ -118,7 +118,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Missing localization key. Return some label to make it clear when the label is displayed on screenyy
-    if ([self.localizationKey length] == 0) {
+    if (self.localizationKey.length == 0) {
         return @"(no key)";
     }
     
@@ -140,19 +140,20 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Formatting
+    // TODO: When iOS 9 is the minimal supported version, only return localized versions
     switch (self.representation) {
         case HLSLabelRepresentationUppercase: {
-            text = [text uppercaseString];
+            text = [text respondsToSelector:@selector(localizedUppercaseString)] ? text.localizedUppercaseString : text.uppercaseString;
             break;
         }
             
         case HLSLabelRepresentationLowercase: {
-            text = [text lowercaseString];
+            text = [text respondsToSelector:@selector(localizedLowercaseString)] ? text.localizedLowercaseString : text.lowercaseString;
             break;
         }
             
         case HLSLabelRepresentationCapitalized: {
-            text = [text capitalizedString];
+            text = [text respondsToSelector:@selector(localizedCapitalizedString)] ? text.localizedCapitalizedString : text.capitalizedString;
             break;
         }
             
