@@ -244,7 +244,9 @@ static void swizzle_viewDidLoad(UIViewController *self, SEL _cmd)
                        "must be terribly wrong with this view controller");
     }
     
-    hls_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.view.bounds.size], HLS_ASSOCIATION_STRONG_NONATOMIC);
+    // Remote view controllers have weird behavior and can have -viewDidLoad being called while the view is nil.
+    // Use -viewIfLoaded to prevent infinite recursion
+    hls_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.viewIfLoaded.bounds.size], HLS_ASSOCIATION_STRONG_NONATOMIC);
     
     s_viewDidLoad(self, _cmd);
     
