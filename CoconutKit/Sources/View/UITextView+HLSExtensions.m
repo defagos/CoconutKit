@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UITextView+HLSExtensions.h"
@@ -61,7 +61,7 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
 
 - (void)setTouchDetector:(HLSViewTouchDetector *)touchDetector
 {
-    hls_setAssociatedObject(self, s_touchDetectorKey, touchDetector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_touchDetectorKey, touchDetector, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 @end

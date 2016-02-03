@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSStackController.h"
@@ -231,6 +231,23 @@
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
     [self.containerStack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+}
+
+#pragma mark Status bar
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return self.containerStack.preferredStatusBarStyle;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.containerStack.prefersStatusBarHidden;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return self.containerStack.preferredStatusBarUpdateAnimation;
 }
 
 #pragma mark Inserting or removing view controllers

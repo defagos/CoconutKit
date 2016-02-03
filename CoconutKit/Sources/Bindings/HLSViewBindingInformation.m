@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSViewBindingInformation.h"
@@ -98,6 +98,11 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         self.supportingInput = [view respondsToSelector:@selector(inputValueWithClass:)];
     }
     return self;
+}
+
+- (instancetype)init
+{
+    return nil;
 }
 
 - (void)dealloc

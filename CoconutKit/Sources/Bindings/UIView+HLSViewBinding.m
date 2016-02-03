@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UIView+HLSViewBinding.h"
@@ -62,7 +62,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindUpdateAnimated:(BOOL)bindUpdateAnimated
 {
-    hls_setAssociatedObject(self, s_bindUpdateAnimatedKey, @(bindUpdateAnimated), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindUpdateAnimatedKey, @(bindUpdateAnimated), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (BOOL)isBindInputChecked
@@ -72,7 +72,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindInputChecked:(BOOL)bindInputChecked
 {
-    hls_setAssociatedObject(self, s_bindInputCheckedKey, @(bindInputChecked), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindInputCheckedKey, @(bindInputChecked), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (BOOL)isBindingSupported
@@ -110,7 +110,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindKeyPath:(NSString *)bindKeyPath
 {
-    hls_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (NSString *)bindTransformer
@@ -120,7 +120,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindTransformer:(NSString *)bindTransformer
 {
-    hls_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 - (HLSViewBindingInformation *)bindingInformation
@@ -130,7 +130,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
-    hls_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindingInformationKey, bindingInformation, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Bindings

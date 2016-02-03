@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSTransformer.h"
@@ -87,6 +87,11 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
         self.reverseBlock = reverseBlock;
     }
     return self;
+}
+
+- (instancetype)init
+{
+    return nil;
 }
 
 #pragma mark HLSTransformer protocol implementation

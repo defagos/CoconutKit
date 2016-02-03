@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSPreviewItem.h"
@@ -29,6 +29,11 @@
 - (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL
 {
     return [self initWithPreviewItemURL:previewItemURL previewItemTitle:nil];
+}
+
+- (instancetype)init
+{
+    return nil;
 }
 
 @end

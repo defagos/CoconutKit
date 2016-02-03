@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSViewTouchDetector.h"
@@ -40,6 +40,11 @@
                                                    object:view];
     }
     return self;
+}
+
+- (instancetype)init
+{
+    return [self initWithView:nil beginNotificationName:nil endNotificationName:nil];
 }
 
 - (void)dealloc

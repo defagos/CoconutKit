@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UINavigationController+HLSExtensions.h"
@@ -44,7 +44,7 @@ static NSUInteger swizzle_supportedInterfaceOrientations(UINavigationController 
 
 - (void)setAutorotationMode:(HLSAutorotationMode)autorotationMode
 {
-    hls_setAssociatedObject(self, s_autorotationModeKey, @(autorotationMode), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_autorotationModeKey, @(autorotationMode), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 @end

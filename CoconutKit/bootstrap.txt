@@ -1,5 +1,6 @@
 CALayer+HLSExtensions.m
 CAMediaTimingFunction+HLSExtensions.m
+HLSAnyGestureRecognizer.m
 HLSAssert.m
 HLSCollectionViewController.m
 HLSCursor.m

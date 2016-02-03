@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSURLConnection.h"
@@ -16,6 +16,9 @@
  *   - If the URL is a file, then its path is returned
  *   - If the URL does not refer to a valid file, responseObject is nil
  * The duration of the connection is random between 0 and 1 second
+ *
+ * If the connection is cancelled, the completion block is called with the NSURLErrorCancelled error code in the
+ * NSURLErrorDomain domain.
  *
  * Two environment variables can be set to simulate connection issues:
  *   - HLSFileURLConnectionLatency: A latency duration which gets added to each connection, in seconds

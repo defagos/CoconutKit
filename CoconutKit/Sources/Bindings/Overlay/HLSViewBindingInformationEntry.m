@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSViewBindingInformationEntry.h"
@@ -68,6 +68,11 @@
 - (instancetype)initWithName:(NSString *)name object:(id)object
 {
     return [self initWithName:name text:nil object:object];
+}
+
+- (instancetype)init
+{
+    return nil;
 }
 
 #pragma mark Highlighting

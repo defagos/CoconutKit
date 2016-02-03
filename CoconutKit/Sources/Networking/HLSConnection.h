@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import <Foundation/Foundation.h>
@@ -149,8 +149,7 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 
 /**
  * This method must be called when the connection finishes, whether it finishes normally, with an error or has
- * been canceled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks).
- * If called with both parameters set to nil, the completion block won't be called
+ * been cancelled. Failing to call this method in those cases results in undefined behavior (mostly memory leaks).
  */
 - (void)finishWithResponseObject:(id)responseObject error:(NSError *)error;
 

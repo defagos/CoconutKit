@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSContainerContent.h"
@@ -134,6 +134,11 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
         self.originalViewFrame = CGRectZero;
     }
     return self;
+}
+
+- (instancetype)init
+{
+    return nil;
 }
 
 - (void)dealloc

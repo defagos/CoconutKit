@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UIViewController+HLSExtensions.h"
@@ -201,7 +201,7 @@ static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL anim
 
 - (void)setLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase
 {
-    hls_setAssociatedObject(self, s_lifeCyclePhaseKey, [NSNumber numberWithInt:lifeCyclePhase], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    hls_setAssociatedObject(self, s_lifeCyclePhaseKey, [NSNumber numberWithInt:lifeCyclePhase], HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 @end
@@ -244,7 +244,9 @@ static void swizzle_viewDidLoad(UIViewController *self, SEL _cmd)
                        "must be terribly wrong with this view controller");
     }
     
-    hls_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.view.bounds.size], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    // Remote view controllers have weird behavior and can have -viewDidLoad being called while the view is nil.
+    // Use -viewIfLoaded to prevent infinite recursion
+    hls_setAssociatedObject(self, s_createdViewSizeKey, [NSValue valueWithCGSize:self.viewIfLoaded.bounds.size], HLS_ASSOCIATION_STRONG_NONATOMIC);
     
     s_viewDidLoad(self, _cmd);
     

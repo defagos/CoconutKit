@@ -2,9 +2,9 @@
 
 CoconutKit is a **productivity framework for iOS**, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
 
-| Build status | Latest version | Compatibility | Integration | Documentation | License | Contributing |
-|--------------|----------------|---------------|-------------|---------------|---------|--------------|
-| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/develop.svg?style=flat)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | ![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg?style=flat) | [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg?style=flat)](https://guides.cocoapods.org/using/using-cocoapods.html) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) | [![Documentation](https://img.shields.io/badge/doc-CocoaDocs-orange.svg?style=flat)](http://cocoadocs.org/docsets/CoconutKit/master.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/) |
+| Build status | Technology | Latest version | Integration | Documentation | License |
+|--------------|------------|----------------|-------------|---------------|---------|
+| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/release/3.2.1.svg)](https://travis-ci.org/defagos/CoconutKit) | ![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg) ![Language](https://img.shields.io/badge/language-objective--c-blue.svg) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg)](https://guides.cocoapods.org/using/using-cocoapods.html) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | [![Documentation](https://img.shields.io/badge/doc-CocoaDocs-orange.svg)](https://cocoapods.org/pods/CoconutKit) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
 
 _Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
@@ -177,13 +177,13 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 6.3
-* iOS 8.3 SDK
+* Xcode 7.0
+* iOS 9.0 SDK
 
 Deployment is supported for the two most recent major iOS versions, currently:
 
-* iOS 7.x
 * iOS 8.x
+* iOS 9.x
 
 All architectures are supported:
 
@@ -204,13 +204,11 @@ Add CoconutKit as dependency in your `Podfile`
 pod 'CoconutKit', '<version>'
 ```
 
-Then run `pod install` to update the dependencies. For targets starting with iOS 8, you can also add the `use_frameworks!` directive in your `Podfile`, which embeds CoconutKit as a native Cocoa Touch framework.
+Then run `pod install` to update the dependencies. You can also add the `use_frameworks!` directive in your `Podfile` if you want to embed CoconutKit as a native Cocoa Touch framework.
 
 For more information about CocoaPods and the `Podfile`, please refer to the [official documentation](http://guides.cocoapods.org/).
 
 ### Installation with Carthage
-
-For targets starting with iOS 8, you can use CoconutKit as an embedded Cocoa Touch framework, conveniently managed using Carthage. 
 
 Add CoconutKit as dependency in your `Cartfile`:
 

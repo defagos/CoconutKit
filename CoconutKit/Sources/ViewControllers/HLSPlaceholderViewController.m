@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSPlaceholderViewController.h"
@@ -251,6 +251,9 @@
         [containerStack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     }
 }
+
+// Remark: The status bar is not controlled by child view controllers, no explicit calls to the underlying container
+//         stack methods
 
 #pragma mark Setting the inset view controller
 

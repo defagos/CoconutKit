@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import <Foundation/Foundation.h>
@@ -51,6 +51,19 @@
  * Return the first responder view contained within the receiver, nil if none
  */
 - (UIView *)firstResponderView;
+
+/**
+ * Set the view to call the given action block (mandatory) when any interaction outside its bounds happens. The action
+ * is called only once per interaction (even with continuous interactions like panning or zooming).
+ *
+ * Action blocks can be useful when you want to implement modal-like behavior for a view (e.g. if you want that any
+ * interaction outside a view to dismiss it).
+ * 
+ * The action block is automatically discarded when the view is removed from the view hierarchy. If you need to remove 
+ * the action before the view is removed from the view hierarchy, call -disableOutsideAction.
+ */
+- (void)enableOutsideActionWithBlock:(void (^)())outsideActionBlock;
+- (void)disableOutsideAction;
 
 @end
 

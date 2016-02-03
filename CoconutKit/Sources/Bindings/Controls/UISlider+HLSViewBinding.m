@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UISlider+HLSViewBinding.h"
@@ -64,7 +64,7 @@ static void swizzle_didMoveToWindow(UISlider *self, SEL _cmd)
     };
     
     // Cast the call to objc_msgSendSuper appropriately
-    id (*objc_msgSendSuper_typed)(struct objc_super *, SEL) = (void *)&objc_msgSendSuper;
+    void (*objc_msgSendSuper_typed)(struct objc_super *, SEL) = (void *)&objc_msgSendSuper;
     objc_msgSendSuper_typed(&super, _cmd);
     
     s_didMoveToWindow(self, _cmd);

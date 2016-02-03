@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UITextView+HLSViewBinding.h"
@@ -46,7 +46,7 @@ static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
 
 #pragma mark Notification callbacks
 
-- (void)textViewDidChange:(NSNotification *)notification
+- (void)hls_textViewDidChange:(NSNotification *)notification
 {
     [self check:YES update:YES withInputValue:self.text error:NULL];
 }
@@ -58,7 +58,7 @@ static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
 static void commonInit(UITextView *self)
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(textViewDidChange:)
+                                             selector:@selector(hls_textViewDidChange:)
                                                  name:UITextViewTextDidChangeNotification
                                                object:self];
 }

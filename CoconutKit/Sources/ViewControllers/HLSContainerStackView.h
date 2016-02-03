@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSContainerGroupView.h"
@@ -101,11 +101,6 @@
  * and removal of views.
  */
 @interface HLSContainerStackView : UIView
-
-/**
- * Create the stack view
- */
-- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return the array of views used to display content (child views), from the bottommost to the topmost one

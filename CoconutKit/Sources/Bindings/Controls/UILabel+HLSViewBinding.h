@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UIView+HLSViewBindingImplementation.h"
@@ -16,5 +16,10 @@
  *   - does not animate updates
  */
 @interface UILabel (HLSViewBindingImplementation) <HLSViewBindingImplementation>
+
+/**
+ * An optional placeholder to be displayed when the text to be displayed is nil. Default is nil
+ */
+@property (nonatomic, copy) IBInspectable NSString *bindPlaceholder;
 
 @end

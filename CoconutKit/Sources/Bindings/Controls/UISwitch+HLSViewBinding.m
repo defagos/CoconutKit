@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "UISwitch+HLSViewBinding.h"
@@ -49,7 +49,7 @@ static void swizzle_setOn_animated(UISwitch *self, SEL _cmd, BOOL on, BOOL anima
 
 #pragma mark Actions
 
-- (void)stateDidChange:(id)sender
+- (void)hls_stateDidChange:(id)sender
 {
     [self check:YES update:YES withInputValue:@(self.on) error:NULL];
 }
@@ -62,7 +62,7 @@ static void swizzle_setOn_animated(UISwitch *self, SEL _cmd, BOOL on, BOOL anima
 // events, we need to add an action for UIControlEventValueChanged
 static void commonInit(UISwitch *self)
 {
-    [self addTarget:self action:@selector(stateDidChange:) forControlEvents:UIControlEventValueChanged];
+    [self addTarget:self action:@selector(hls_stateDidChange:) forControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark Swizzled method implementations

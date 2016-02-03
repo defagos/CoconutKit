@@ -8,6 +8,6 @@ README_FILE_NAME="README.markdown"
 # Badge example:
 #   [![Build Status](https://img.shields.io/travis/$USER_NAME/$REPOSITORY_NAME/master.svg?style=flat)](https://travis-ci.org/$USER_NAME/$REPOSITORY_NAME)
 branch_name=`git symbolic-ref --short HEAD`
-sed -E -i "" "s|(^.*https://img.shields.io/travis.*/$REPOSITORY_NAME/).*(\.svg.*$)|\1$branch_name\2|g" "$README_FILE_NAME"
+perl -pi -e "s|(https://img.shields.io/travis.*?/$REPOSITORY_NAME/).*?(.svg)|\1$branch_name\2|" "$README_FILE_NAME"
 git add "$README_FILE_NAME"
 git commit -m "Update Travis badge for branch $branch_name"

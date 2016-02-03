@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSLabelLocalizationInfo.h"
@@ -36,6 +36,11 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
         self.bundleName = bundleName;
     }
     return self;
+}
+
+- (instancetype)init
+{
+    return nil;
 }
 
 #pragma mark Parsing text

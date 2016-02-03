@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSNotifications.h"
@@ -116,6 +116,11 @@
         self.object = object;
     }
     return self;
+}
+
+- (instancetype)init
+{
+    return [self initWithNotificationName:nil forObject:nil];
 }
 
 @end

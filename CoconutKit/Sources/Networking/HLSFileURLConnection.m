@@ -1,13 +1,13 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSFileURLConnection.h"
 
-#import "HLSCoreError.h"
 #import "HLSLogger.h"
+#import "NSBundle+HLSDynamicLocalization.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 
@@ -44,9 +44,9 @@
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(retrieveFiles) object:nil];
     
-    NSError *error = [NSError errorWithDomain:HLSCoreErrorDomain
-                                         code:HLSCoreErrorCanceled
-                         localizedDescription:CoconutKitLocalizedString(@"The connection has been canceled", nil)];
+    NSError *error = [NSError errorWithDomain:NSURLErrorDomain
+                                         code:NSURLErrorCancelled
+                         localizedDescription:HLSLocalizedDescriptionForCFNetworkError(NSURLErrorCancelled)];
     [self finishWithResponseObject:nil error:error];
 }
 

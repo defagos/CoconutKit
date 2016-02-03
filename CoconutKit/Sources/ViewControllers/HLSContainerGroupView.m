@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSContainerGroupView.h"
@@ -39,6 +39,16 @@
         [self addSubview:frontView];
     }
     return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    return nil;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return nil;
 }
 
 #pragma mark Accessors and mutators

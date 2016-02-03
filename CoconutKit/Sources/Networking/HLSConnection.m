@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "HLSConnection.h"
@@ -205,11 +205,7 @@
     [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
     
     self.error = error;
-    
-    if (responseObject || error) {
-        self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
-    }
-    
+    self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
     self.selfRunning = NO;
     
     if (! self.running) {

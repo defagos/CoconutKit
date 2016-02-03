@@ -1,7 +1,7 @@
 //
 //  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Licence information is available from the LICENCE file.
+//  License information is available from the LICENSE file.
 //
 
 #import "CAMediaTimingFunction+HLSExtensions.h"
@@ -76,7 +76,7 @@ static const float kEpsilon = 1e-5f;
         coeffs.ay = 1.f - coeffs.cy - coeffs.by;
         
         coeffsValue = [NSValue value:&coeffs withObjCType:@encode(PolynomialCoefficients)];
-        hls_setAssociatedObject(self, s_polynomialCoefficientsKey, coeffsValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        hls_setAssociatedObject(self, s_polynomialCoefficientsKey, coeffsValue, HLS_ASSOCIATION_STRONG_NONATOMIC);
         
         return coeffs;
     }
