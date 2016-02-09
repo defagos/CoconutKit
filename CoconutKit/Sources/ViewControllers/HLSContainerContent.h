@@ -119,7 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
  * creation. When you need to create the associated view, use -addAsSubviewIntoContainerStackView: or
  * -insertAsSubviewIntoContainerStackView:index
  */
-@property (nonatomic, readonly) UIView *viewIfLoaded;
+@property (nonatomic, readonly, nullable) UIView *viewIfLoaded;
 
 /**
  * Remove the view controller's view from its container view (if added to a container view)

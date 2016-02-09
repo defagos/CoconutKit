@@ -88,7 +88,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
         
         // Cannot be mixed with the containment API automatic event management
         if (([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardAppearanceMethods)]
-             && [containerViewController shouldAutomaticallyForwardAppearanceMethods])
+                && [containerViewController shouldAutomaticallyForwardAppearanceMethods])
             || ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardRotationMethods)]
                 && [containerViewController shouldAutomaticallyForwardRotationMethods])) {
             HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which view lifecycle and rotation event automatic "
@@ -169,7 +169,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
 
 - (UIView *)viewIfLoaded
 {
-    return [self.viewController viewIfLoaded];
+    return self.viewController.viewIfLoaded;
 }
 
 #pragma mark View management
@@ -183,8 +183,8 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
 {
     NSParameterAssert(containerStackView);
     
-    if (index > [containerStackView.contentViews count]) {
-        HLSLoggerError(@"Invalid index %lu. Expected in [0;%lu]", (unsigned long)index, (unsigned long)[containerStackView.contentViews count]);
+    if (index > containerStackView.contentViews.count) {
+        HLSLoggerError(@"Invalid index %@. Expected in [0;%@]", @(index), @(containerStackView.contentViews.count));
         return;
     }
     
@@ -261,7 +261,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
     }
     
     // Remove the view controller's view
-    [self.containerStackView removeContentView:[self viewIfLoaded]];
+    [self.containerStackView removeContentView:self.viewIfLoaded];
     self.containerStackView = nil;
     
     // Restore view controller original properties
@@ -358,7 +358,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
             self.containerViewController,
             self.containerStackView,
             HLSStringFromBool(self.addedToContainerView),
-            [self viewIfLoaded]];
+            self.viewIfLoaded];
 }
 
 @end
