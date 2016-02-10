@@ -23,6 +23,13 @@ OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
  * Each HLSStackController dropped onto a storyboard must be connected to its root view controller using
  * a segue with the identifier 'hls_root'. To push a view controller B onto another one A already in the 
  * stack, connect A with B using an HLSStackPushSegue
+ *
+ * To pop view controllers, implement a method with the following signature:
+ *   - (IBAction)methodName:(UIStoryboardSegue *)unwindSegue
+ * in the target view controller to pop to. Then bind a control of the view controller to pop from to the
+ * Exit icon, and select this method. In the method, call
+ *    [self.stackController popToViewController:self animated:animated];
+ * to perform the actual pop.
  */
 @interface HLSStackPushSegue : UIStoryboardSegue
 
@@ -81,25 +88,6 @@ OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
  * Default is YES
  */
 @property (nonatomic, assign) BOOL animated;
-
-@end
-
-/**
- * Segue unwinding. Bind to the scene's exit icon
- */
-@interface UIViewController (HLSStackControllerSegueUnwinding)
-
-/**
- * Pop one view controller
- */
-- (IBAction)unwindToPreviousViewControllerInStackControllerAnimated:(UIStoryboardSegue *)sender;
-- (IBAction)unwindToPreviousViewControllerInStackControllerNotAnimated:(UIStoryboardSegue *)sender;
-
-/**
- * Pop to the root view controller
- */
-- (IBAction)unwindToRootViewControllerInStackControllerNotAnimated:(UIStoryboardSegue *)sender;
-- (IBAction)unwindToRootViewControllerInStackControllerAnimated:(UIStoryboardSegue *)sender;
 
 @end
 
