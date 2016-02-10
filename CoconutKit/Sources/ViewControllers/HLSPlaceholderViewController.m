@@ -56,7 +56,7 @@
     for (NSUInteger i = 0; i < 20; ++i) {
         @try {
             NSString *segueIdentifier = [NSString stringWithFormat:@"%@%lu", HLSPlaceholderPreloadSegueIdentifierPrefix, (unsigned long)i];
-            [self performSegueWithIdentifier:segueIdentifier sender:self];
+            [self performSegueWithIdentifier:segueIdentifier sender:nil];
         }
         @catch (NSException *exception) {
             HLSLoggerDebug(@"Exception caught but not rethrown: %@", exception);

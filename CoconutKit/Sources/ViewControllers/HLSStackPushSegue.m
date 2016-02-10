@@ -106,34 +106,6 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 
 @end
 
-@implementation UIViewController (HLSStackControllerSegueUnwinding)
-
-- (IBAction)unwindToPreviousViewControllerInStackControllerAnimated:(UIStoryboardSegue *)sender
-{
-    NSAssert(self.stackController, @"The view controller must be contained within a stack controller");
-    [self.stackController popViewControllerAnimated:YES];
-}
-
-- (IBAction)unwindToPreviousViewControllerInStackControllerNotAnimated:(UIStoryboardSegue *)sender
-{
-    NSAssert(self.stackController, @"The view controller must be contained within a stack controller");
-    [self.stackController popViewControllerAnimated:NO];
-}
-
-- (IBAction)unwindToRootViewControllerInStackControllerAnimated:(UIStoryboardSegue *)sender
-{
-    NSAssert(self.stackController, @"The view controller must be contained within a stack controller");
-    [self.stackController popToRootViewControllerAnimated:YES];
-}
-
-- (IBAction)unwindToRootViewControllerInStackControllerNotAnimated:(UIStoryboardSegue *)sender
-{
-    NSAssert(self.stackController, @"The view controller must be contained within a stack controller");
-    [self.stackController popToRootViewControllerAnimated:NO];
-}
-
-@end
-
 @implementation HLSStackCoverFromBottomSegue
 
 - (instancetype)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination

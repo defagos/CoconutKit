@@ -27,4 +27,11 @@
     [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
+#pragma mark Segue unwinding
+
+- (IBAction)unwindToRoot:(UIStoryboardSegue *)unwindSegue
+{
+    [self.stackController popToViewController:self animated:YES];
+}
+
 @end
