@@ -81,8 +81,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     if ([WKWebView class]) {
         @try {
             [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
@@ -250,11 +248,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
     [loadingToolbarItems replaceObjectAtIndex:[loadingToolbarItems indexOfObject:self.refreshBarButtonItem] withObject:stopBarButtonItem];
     self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardDidChangeFrame:)
-                                                 name:UIKeyboardDidChangeFrameNotification
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -276,34 +269,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
 }
 
-#pragma mark Layout
-
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    
-    [self layoutForInterfaceOrientation:self.interfaceOrientation];
-}
-
-#pragma mark Orientation management
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
-    }
-    else {
-        return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAll;
-    }
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [self layoutForInterfaceOrientation:toInterfaceOrientation];
-}
-
 #pragma mark Localization
 
 - (void)localize
@@ -316,8 +281,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 #pragma mark Layout and display
 
-- (void)layoutForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)viewWillLayoutSubviews
 {
+    [super viewWillLayoutSubviews];
+    
     // Position the progress view under the top layout guide when wrapped in a navigation controller
     self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
                                          self.navigationController ? self.topLayoutGuide.length : 0.f,
@@ -638,13 +605,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     if (arc4random_uniform(3) == 0) {
         [self setProgress:[self progress] + HLSWebViewFakeTimerProgressIncrement animated:YES];
     }
-}
-
-#pragma mark Notification callbacks
-
-- (void)keyboardDidChangeFrame:(NSNotification *)notification
-{
-    [self layoutForInterfaceOrientation:self.interfaceOrientation];
 }
 
 #pragma mark KVO
