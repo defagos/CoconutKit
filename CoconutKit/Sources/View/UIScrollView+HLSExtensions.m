@@ -222,16 +222,13 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
                                                             scrollView.scrollIndicatorInsets.right);
         [adjustedScrollViews addObject:scrollView];
         
-        // Find if the first responder is contained within the scroll view. Only for scroll views which might embed other controls
-        if ([scrollView isMemberOfClass:[UIScrollView class]]) {
-            UIView *firstResponderView = [scrollView firstResponderView];
-            if (firstResponderView) {
-                // If the first responder is not visible, change the offset to make it visible
-                [UIView animateWithDuration:0.25 animations:^{
-                    CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
-                    [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
-                }];
-            }
+        UIView *firstResponderView = [scrollView firstResponderView];
+        if (firstResponderView) {
+            // If the first responder is not visible, change the offset to make it visible
+            [UIView animateWithDuration:0.25 animations:^{
+                CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
+                [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
+            }];
         }
     }
     
