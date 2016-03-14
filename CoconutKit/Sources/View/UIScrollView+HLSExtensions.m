@@ -222,9 +222,10 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
                                                             scrollView.scrollIndicatorInsets.right);
         [adjustedScrollViews addObject:scrollView];
         
+        // If the first responder is not visible, change the offset to make it visible. Do not do anything if the responder is the
+        // scroll view itself (e.g. a UITextView)
         UIView *firstResponderView = [scrollView firstResponderView];
-        if (firstResponderView) {
-            // If the first responder is not visible, change the offset to make it visible
+        if (firstResponderView && firstResponderView != scrollView) {
             [UIView animateWithDuration:0.25 animations:^{
                 CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
                 [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
