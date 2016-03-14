@@ -133,7 +133,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The order of the placeholder views in the IBOutletCollection is the one in which they are bound in the corresponding
  * nib or storyboard file
  */
-@property (nonatomic, nullable) IBOutletCollection(UIView) NSArray *placeholderViews;
+@property (nonatomic, nullable) IBOutletCollection(UIView) NSArray<__kindof UIView *> *placeholderViews;
 
 /**
  * Return the placeholder view at the given index, or nil if none
@@ -181,7 +181,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when a view controller is about to be displayed
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-      willShowInsetViewController:(UIViewController *)viewController
+      willShowInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
@@ -189,7 +189,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when a view controller has been displayed
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-       didShowInsetViewController:(UIViewController *)viewController
+       didShowInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
@@ -197,7 +197,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when a view controller is about to be hidden
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-      willHideInsetViewController:(UIViewController *)viewController
+      willHideInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
@@ -205,7 +205,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when a view controller has been hidden
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-       didHideInsetViewController:(UIViewController *)viewController
+       didHideInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 

@@ -65,14 +65,14 @@
 {
     NSParameterAssert(contentView);
     
-    if (index > [self.groupViews count]) {
-        HLSLoggerWarn(@"Invalid index %@. Expected in [0;%@]", @(index), @([self.groupViews count]));
+    if (index > self.groupViews.count) {
+        HLSLoggerWarn(@"Invalid index %@. Expected in [0;%@]", @(index), @(self.groupViews.count));
         return;
     }
     
     // Add to the top
-    if (index == [self.groupViews count]) {
-        HLSContainerGroupView *topGroupView = [self.groupViews lastObject];
+    if (index == self.groupViews.count) {
+        HLSContainerGroupView *topGroupView = self.groupViews.lastObject;
         
         HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = topGroupView;
@@ -107,7 +107,7 @@
     HLSContainerGroupView *belowGroupView = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
     
     // Remove at the top
-    if (index == [self.groupViews count] - 1) {
+    if (index == self.groupViews.count - 1) {
         // No need to call -removeFromSuperview, the view is moved between superviews automatically. No need
         // for a retain-autorelease: The view is kept alive during this process. See UIView documentation
         [self insertSubview:belowGroupView atIndex:0];

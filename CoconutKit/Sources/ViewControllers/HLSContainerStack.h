@@ -365,8 +365,8 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * The coveredViewController parameter is the view controller which is about to be covered (nil if none)
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
-willPushViewController:(UIViewController *)pushedViewController
-   coverViewController:(nullable UIViewController *)coveredViewController
+willPushViewController:(__kindof UIViewController *)pushedViewController
+   coverViewController:(nullable __kindof UIViewController *)coveredViewController
               animated:(BOOL)animated;
 
 /**
@@ -374,14 +374,14 @@ willPushViewController:(UIViewController *)pushedViewController
  * [self viewControllers], even if this event is the result of a push
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
-willShowViewController:(UIViewController *)viewController
+willShowViewController:(__kindof UIViewController *)viewController
               animated:(BOOL)animated;
 
 /**
  * Called when a child view controller has been displayed
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
- didShowViewController:(UIViewController *)viewController
+ didShowViewController:(__kindof UIViewController *)viewController
               animated:(BOOL)animated;
 
 /**
@@ -389,8 +389,8 @@ willShowViewController:(UIViewController *)viewController
  * controller which was covered (nil if none)
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
- didPushViewController:(UIViewController *)pushedViewController
-   coverViewController:(nullable UIViewController *)coveredViewController
+ didPushViewController:(__kindof UIViewController *)pushedViewController
+   coverViewController:(nullable __kindof UIViewController *)coveredViewController
               animated:(BOOL)animated;
 
 /**
@@ -398,15 +398,15 @@ willShowViewController:(UIViewController *)viewController
  * view controller which will be revealed (nil if none)
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
- willPopViewController:(UIViewController *)poppedViewController
-  revealViewController:(nullable UIViewController *)revealedViewController
+ willPopViewController:(__kindof UIViewController *)poppedViewController
+  revealViewController:(nullable __kindof UIViewController *)revealedViewController
               animated:(BOOL)animated;
 
 /**
  * Called when a child view controller is about to be hidden
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
-willHideViewController:(UIViewController *)viewController
+willHideViewController:(__kindof UIViewController *)viewController
               animated:(BOOL)animated;
 
 /**
@@ -414,7 +414,7 @@ willHideViewController:(UIViewController *)viewController
  * even if this event is received during a pop
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
- didHideViewController:(UIViewController *)viewController
+ didHideViewController:(__kindof UIViewController *)viewController
               animated:(BOOL)animated;
 
 /**
@@ -423,8 +423,8 @@ willHideViewController:(UIViewController *)viewController
  * parameter is the view controller which has been revealed (nil if none)
  */
 - (void)containerStack:(HLSContainerStack *)containerStack
-  didPopViewController:(UIViewController *)poppedViewController
-  revealViewController:(nullable UIViewController *)revealedViewController
+  didPopViewController:(__kindof UIViewController *)poppedViewController
+  revealViewController:(nullable __kindof UIViewController *)revealedViewController
               animated:(BOOL)animated;
 
 @end

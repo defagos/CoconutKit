@@ -121,22 +121,22 @@
 
 - (UIViewController *)rootViewController
 {
-    return [self.containerStack rootViewController];
+    return self.containerStack.rootViewController;
 }
 
 - (UIViewController *)topViewController
 {
-    return [self.containerStack topViewController];
+    return self.containerStack.topViewController;
 }
 
-- (NSArray *)viewControllers
+- (NSArray<UIViewController *> *)viewControllers
 {
-    return [self.containerStack viewControllers];
+    return self.containerStack.viewControllers;
 }
 
 - (NSUInteger)count
 {
-    return [self.containerStack count];
+    return self.containerStack.count;
 }
 
 - (void)setLockingUI:(BOOL)lockingUI

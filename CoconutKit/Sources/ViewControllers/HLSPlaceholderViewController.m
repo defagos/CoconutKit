@@ -14,7 +14,7 @@
 
 @interface HLSPlaceholderViewController ()
 
-@property (nonatomic) NSMutableArray *containerStacks;
+@property (nonatomic) NSMutableArray<HLSContainerStack *> *containerStacks;
 
 @end
 
@@ -55,7 +55,7 @@
     // Checking the first 20 indices should be sufficient
     for (NSUInteger i = 0; i < 20; ++i) {
         @try {
-            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%lu", HLSPlaceholderPreloadSegueIdentifierPrefix, (unsigned long)i];
+            NSString *segueIdentifier = [NSString stringWithFormat:@"%@%@", HLSPlaceholderPreloadSegueIdentifierPrefix, @(i)];
             [self performSegueWithIdentifier:segueIdentifier sender:self];
         }
         @catch (NSException *exception) {
@@ -77,7 +77,7 @@
 
 - (UIView *)placeholderViewAtIndex:(NSUInteger)index
 {
-    if (index >= [self.placeholderViews count]) {
+    if (index >= self.placeholderViews.count) {
         return nil;
     }
     return [self.placeholderViews objectAtIndex:index];
@@ -85,12 +85,12 @@
 
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index
 {
-    if (index >= [self.containerStacks count]) {
+    if (index >= self.containerStacks.count) {
         return nil;
     }
     
     HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
-    return [containerStack topViewController];
+    return containerStack.topViewController;
 }
 
 - (void)setLockingUI:(BOOL)lockingUI
@@ -127,9 +127,9 @@
     if (! _loadedOnce) {
         // View controllers have been preloaded
         if (self.containerStacks) {
-            if ([self.placeholderViews count] < [self.containerStacks count]) {
-                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%lu) to hold preloaded view controllers (%lu)",
-                                    (unsigned long)[self.placeholderViews count], (unsigned long)[self.containerStacks count]];
+            if (self.placeholderViews.count < self.containerStacks.count) {
+                NSString *reason = [NSString stringWithFormat:@"Not enough placeholder views (%@) to hold preloaded view controllers (%@)",
+                                    @(self.placeholderViews.count), @(self.containerStacks.count)];
                 @throw [NSException exceptionWithName:NSInternalInconsistencyException 
                                                reason:reason
                                              userInfo:nil];
@@ -141,7 +141,7 @@
         }
         
         // We need to have a stack for each placeholder view
-        for (NSUInteger i = [self.containerStacks count]; i < [self.placeholderViews count]; ++i) {
+        for (NSUInteger i = self.containerStacks.count; i < self.placeholderViews.count; ++i) {
             HLSContainerStack *containerStack = [HLSContainerStack singleControllerContainerStackWithContainerViewController:self];
             containerStack.autorotationMode = self.autorotationMode;
             containerStack.delegate = self;
@@ -152,7 +152,7 @@
     }
     // If the view has been unloaded, we expect the same number of placeholder views after a reload
     else {
-        NSAssert([self.containerStacks count] == [self.placeholderViews count], @"The number of placeholder views has changed");
+        NSAssert(self.containerStacks.count == self.placeholderViews.count, @"The number of placeholder views has changed");
     }
     
     // Associate stacks and placeholder views
@@ -284,7 +284,7 @@
             self.containerStacks = [NSMutableArray array];
         }
         
-        for (NSUInteger i = [self.containerStacks count]; i <= index; ++i) {
+        for (NSUInteger i = self.containerStacks.count; i <= index; ++i) {
             HLSContainerStack *containerStack = [HLSContainerStack singleControllerContainerStackWithContainerViewController:self];
             containerStack.autorotationMode = self.autorotationMode;
             containerStack.delegate = self;
@@ -292,15 +292,15 @@
         }
     }
     else {
-        if (index >= [self.containerStacks count]) {
-            HLSLoggerError(@"Invalid index. Must be between 0 and %lu", (unsigned long)[self.containerStacks count] - 1);
+        if (index >= self.containerStacks.count) {
+            HLSLoggerError(@"Invalid index. Must be between 0 and %@", @(self.containerStacks.count - 1));
             return;
         }
     }
     
     HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
     if (! insetViewController) {
-        if ([containerStack count] > 0) {
+        if (containerStack.count > 0) {
             [containerStack popViewControllerAnimated:YES];
         }
         return;

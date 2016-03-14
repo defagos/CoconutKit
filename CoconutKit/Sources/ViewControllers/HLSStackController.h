@@ -259,8 +259,8 @@ NS_ASSUME_NONNULL_BEGIN
  * The coveredViewController parameter is the view controller which is about to be covered
  */
 - (void)stackController:(HLSStackController *)stackController
- willPushViewController:(UIViewController *)pushedViewController
-    coverViewController:(UIViewController *)coveredViewController
+ willPushViewController:(__kindof UIViewController *)pushedViewController
+    coverViewController:(__kindof UIViewController *)coveredViewController
                animated:(BOOL)animated;
 
 /**
@@ -268,14 +268,14 @@ NS_ASSUME_NONNULL_BEGIN
  * [self viewControllers], even if this event is the result of a push
  */
 - (void)stackController:(HLSStackController *)stackController
- willShowViewController:(UIViewController *)viewController 
+ willShowViewController:(__kindof UIViewController *)viewController
                animated:(BOOL)animated;
 
 /**
  * Called when a child view controller has been displayed
  */
 - (void)stackController:(HLSStackController *)stackController
-  didShowViewController:(UIViewController *)viewController
+  didShowViewController:(__kindof UIViewController *)viewController
                animated:(BOOL)animated;
 
 /**
@@ -283,8 +283,8 @@ NS_ASSUME_NONNULL_BEGIN
  * controller which was covered
  */
 - (void)stackController:(HLSStackController *)stackController
-  didPushViewController:(UIViewController *)pushedViewController
-    coverViewController:(UIViewController *)coveredViewController
+  didPushViewController:(__kindof UIViewController *)pushedViewController
+    coverViewController:(__kindof UIViewController *)coveredViewController
                animated:(BOOL)animated;
 
 /**
@@ -292,15 +292,15 @@ NS_ASSUME_NONNULL_BEGIN
  * view controller which will be revealed
  */
 - (void)stackController:(HLSStackController *)stackController
-  willPopViewController:(UIViewController *)poppedViewController
-   revealViewController:(UIViewController *)revealedViewController
+  willPopViewController:(__kindof UIViewController *)poppedViewController
+   revealViewController:(__kindof UIViewController *)revealedViewController
                animated:(BOOL)animated;
 
 /**
  * Called when a child view controller is about to be hidden
  */
 - (void)stackController:(HLSStackController *)stackController
- willHideViewController:(UIViewController *)viewController
+ willHideViewController:(__kindof UIViewController *)viewController
                animated:(BOOL)animated;
 
 /**
@@ -308,7 +308,7 @@ NS_ASSUME_NONNULL_BEGIN
  * even if this event is received during a pop
  */
 - (void)stackController:(HLSStackController *)stackController
-  didHideViewController:(UIViewController *)viewController
+  didHideViewController:(__kindof UIViewController *)viewController
                animated:(BOOL)animated;
 
 /**
@@ -317,8 +317,8 @@ NS_ASSUME_NONNULL_BEGIN
  * parameter is the view controller which has been revealed (nil if none)
  */
 - (void)stackController:(HLSStackController *)stackController
-   didPopViewController:(UIViewController *)poppedViewController
-   revealViewController:(UIViewController *)revealedViewController
+   didPopViewController:(__kindof UIViewController *)poppedViewController
+   revealViewController:(__kindof UIViewController *)revealedViewController
                animated:(BOOL)animated;
 
 @end

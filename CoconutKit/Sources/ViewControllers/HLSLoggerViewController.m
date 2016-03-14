@@ -16,7 +16,7 @@
 
 @property (nonatomic) HLSLogger *logger;
 
-@property (nonatomic) NSArray *logFilePaths;
+@property (nonatomic) NSArray<NSString *> *logFilePaths;
 
 @property (nonatomic, weak) IBOutlet UISegmentedControl *levelSegmentedControl;
 @property (nonatomic, weak) IBOutlet UISwitch *enabledSwitch;
@@ -101,7 +101,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [[self.logFilePaths objectAtIndex:indexPath.row] lastPathComponent];
+    cell.textLabel.text = [self.logFilePaths objectAtIndex:indexPath.row].lastPathComponent;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -123,7 +123,7 @@
 
 - (IBAction)selectLevel:(id)sender
 {
-    self.logger.level = [self.levelSegmentedControl selectedSegmentIndex];
+    self.logger.level = self.levelSegmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction)clearLogs:(id)sender

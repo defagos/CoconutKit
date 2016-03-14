@@ -45,7 +45,7 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
             return;
         }
         
-        if ([[stackController viewControllers] count] != 0) {
+        if (stackController.viewControllers.count != 0) {
             HLSLoggerError(@"The segue called '%@' can only be used to set a root view controller. No view controller "
                            "must have been loaded before", HLSStackRootSegueIdentifier);
             return;
@@ -97,7 +97,9 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
 
 - (void)perform
 {
-    HLSStackPushSegue *pushSegue = [[HLSStackPushSegue alloc] initWithIdentifier:self.identifier source:self.sourceViewController destination:self.destinationViewController];
+    HLSStackPushSegue *pushSegue = [[HLSStackPushSegue alloc] initWithIdentifier:self.identifier
+                                                                          source:self.sourceViewController
+                                                                     destination:self.destinationViewController];
     pushSegue.transitionClass = self.transitionClass;
     pushSegue.duration = self.duration;
     pushSegue.animated = self.animated;
