@@ -84,12 +84,12 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
 /**
  * Various mutators for setting standard NSError properties. Please refer to the NSError documentation for more information
  */
-- (void)setLocalizedDescription:(nullable NSString *)localizedDescription;
-- (void)setLocalizedFailureReason:(nullable NSString *)localizedFailureReason;
-- (void)setLocalizedRecoverySuggestion:(nullable NSString *)localizedRecoverySuggestion;
-- (void)setLocalizedRecoveryOptions:(nullable NSArray *)localizedRecoveryOptions;
-- (void)setRecoveryAttempter:(nullable id)recoveryAttempter;
-- (void)setHelpAnchor:(nullable NSString *)helpAnchor;
+@property (nonatomic, copy, nullable) NSString *localizedDescription;
+@property (nonatomic, copy, nullable) NSString *localizedFailureReason;
+@property (nonatomic, copy, nullable) NSString *localizedRecoverySuggestion;
+@property (nonatomic, nullable) NSArray<NSString *> *localizedRecoveryOptions;
+@property (nonatomic, nullable) id recoveryAttempter;
+@property (nonatomic, copy, nullable) NSString *helpAnchor;
 
 /**
  * Set an object for some key. The key can either be a reserved one (see NSError header) or a custom one. Instead

@@ -32,7 +32,7 @@
 - (void)testInverse
 {
     // Inverse ease in must be ease out
-    CAMediaTimingFunction *inverseEaseInTimingFunction = [[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn] inverseFunction];
+    CAMediaTimingFunction *inverseEaseInTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn].inverseFunction;
     CAMediaTimingFunction *easeOutTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
     for (size_t i = 0; i < 4; ++i) {

@@ -179,7 +179,7 @@
     [self.dummyView removeFromSuperview];
     self.dummyView = nil;
     
-    [self notifyAsynchronousAnimationStepDidStopFinished:[finished boolValue]];
+    [self notifyAsynchronousAnimationStepDidStopFinished:finished.boolValue];
 }
 
 @end

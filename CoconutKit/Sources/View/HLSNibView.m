@@ -45,7 +45,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     NSAssert(nibName, @"A nib name is required");
     if ([bundle pathForResource:nibName ofType:@"nib"]) {
         NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
-        if ([bundleContents count] == 0) {
+        if (bundleContents.count == 0) {
             HLSLoggerError(@"Missing view object in xib file %@", nibName);
             return nil;
         }

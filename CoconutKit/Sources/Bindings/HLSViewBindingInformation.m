@@ -517,7 +517,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                   withPendingReason:(NSString **)pPendingReason
                               error:(NSError *__autoreleasing *)pError
 {
-    NSAssert([self.transformerName isFilled], @"A transformer name is mandatory");
+    NSAssert(self.transformerName.filled, @"A transformer name is mandatory");
     
     // Check whether the transformer is a global formatter (ClassName:formatterName)
     NSArray<NSString *> *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
@@ -858,7 +858,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     if ((self.status & HLSViewBindingStatusTransformationTargetResolved) == 0) {
-        if ([self.transformerName isFilled]) {
+        if (self.transformerName.filled) {
             id transformationTarget = nil;
             SEL transformationSelector = NULL;
             NSString *pendingReason = nil;

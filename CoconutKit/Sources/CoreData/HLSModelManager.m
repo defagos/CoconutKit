@@ -124,7 +124,7 @@
 + (void)popModelManager
 {
     NSMutableArray<HLSModelManager *> *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
-    if ([modelManagerStack count] == 0) {
+    if (modelManagerStack.count == 0) {
         HLSLoggerInfo(@"No model manager to pop");
         return;
     }

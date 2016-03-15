@@ -50,7 +50,7 @@
 {
     [super awakeFromNib];
     
-    // Load view controllers initially using reserved segue identifiers. We cannot use [self.placeholderViews count]
+    // Load view controllers initially using reserved segue identifiers. We cannot use self.placeholderViews.count
     // as loop upper limit here since the view is not loaded (and we cannot do this after -loadView has been called). 
     // Checking the first 20 indices should be sufficient
     for (NSUInteger i = 0; i < 20; ++i) {
@@ -103,7 +103,7 @@
 - (BOOL)lockingUI
 {
     // This property is consistently set for all container stacks. Return what the first says
-    HLSContainerStack *firstContainerStack = [self.containerStacks firstObject];
+    HLSContainerStack *firstContainerStack = self.containerStacks.firstObject;
     return firstContainerStack.lockingUI;
 }
 

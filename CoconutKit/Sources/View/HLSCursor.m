@@ -172,7 +172,7 @@ static void commonInit(HLSCursor *self);
             self.pointerView = imageView;
         }
         
-        if (_initialIndex >= [self.elementWrapperViews count]) {
+        if (_initialIndex >= self.elementWrapperViews.count) {
             _initialIndex = 0;
             HLSLoggerWarn(@"Initial index too large; fixed");
         }

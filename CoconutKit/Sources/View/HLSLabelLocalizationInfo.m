@@ -77,7 +77,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Extract localization key
-    self.localizationKey = [text stringByReplacingCharactersInRange:NSMakeRange(0, [prefix length]) withString:@""];
+    self.localizationKey = [text stringByReplacingCharactersInRange:NSMakeRange(0, prefix.length) withString:@""];
 }
 
 #pragma mark Localizing
@@ -90,7 +90,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 - (BOOL)isIncomplete
 {
     // Missing localization key
-    if ([self.localizationKey length] == 0) {
+    if (self.localizationKey.length == 0) {
         return YES;
     }
     

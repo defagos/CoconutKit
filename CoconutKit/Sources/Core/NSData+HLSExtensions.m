@@ -20,7 +20,7 @@ static NSString* digest(NSData *data, unsigned char *(*cc_digest)(const void *, 
         [hexHash appendFormat:@"%02X", md[i]];
     }
     
-    return [hexHash lowercaseString];
+    return hexHash.lowercaseString;
 }
 
 @implementation NSData (HLSExtensions)

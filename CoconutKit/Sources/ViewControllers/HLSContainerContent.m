@@ -176,7 +176,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
 
 - (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView
 {
-    [self insertAsSubviewIntoContainerStackView:containerStackView atIndex:[containerStackView.contentViews count]];
+    [self insertAsSubviewIntoContainerStackView:containerStackView atIndex:containerStackView.contentViews.count];
 }
 
 - (void)insertAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView atIndex:(NSUInteger)index

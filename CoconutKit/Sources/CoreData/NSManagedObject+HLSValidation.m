@@ -464,7 +464,7 @@ static void swizzle_initialize(Class self, SEL _cmd)
         
         // Get the property name
         NSString *propertyName = @(property_getName(property));
-        if ([propertyName length] == 0) {
+        if (propertyName.length == 0) {
             HLSLoggerError(@"Missing property name");
             continue;
         }

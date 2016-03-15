@@ -577,7 +577,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 - (IBAction)refresh:(id)sender
 {
     // Reload the currently displayed page (if any)
-    if ([[self.currentURL absoluteString] isFilled]) {
+    if (self.currentURL.absoluteString.filled) {
         if ([WKWebView class]) {
             [(WKWebView *)self.webView reload];
         }

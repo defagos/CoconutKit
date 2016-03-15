@@ -210,7 +210,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         NSNumber *sublayerCameraZPositionNumber = [layer valueForKey:HLSLayerCameraZPositionForSublayersKey];
         CGFloat sublayerCameraZPosition = 0.f;
         if (sublayerCameraZPositionNumber) {
-            sublayerCameraZPosition = [sublayerCameraZPositionNumber floatValue];
+            sublayerCameraZPosition = sublayerCameraZPositionNumber.floatValue;
         }
         else {
             sublayerCameraZPosition = (layer.sublayerTransform.m34 == 0.f) ? 0.f : 1.f / layer.sublayerTransform.m34;
@@ -287,7 +287,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         // destroyed while the animation was running), we cannot compare to self.objects anymore (otherwise
         // the application will crash). We therefore keep track of how animations are expected, but in a safe way
         // (+ 1 for the dummy view animation)
-        _numberOfLayerAnimations = [self.objects count] + 1;
+        _numberOfLayerAnimations = self.objects.count + 1;
         
         // When a start time has been defined, the animation must look like it started earlier
         _startTime = CACurrentMediaTime() - startTime;

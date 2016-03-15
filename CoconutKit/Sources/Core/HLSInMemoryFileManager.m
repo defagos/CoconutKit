@@ -131,7 +131,7 @@
         }
         
         // Go down one level deeper
-        NSArray<NSString *> *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
+        NSArray<NSString *> *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, pathComponents.count - 1)];
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
         return [self addObjectAtPath:subpath toItems:subitems withData:data error:pError];
     }
@@ -248,7 +248,7 @@
         return subitems;
     }
     else {
-        NSArray<NSString *> *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, [pathComponents count] - 1)];
+        NSArray<NSString *> *subpathComponents = [pathComponents subarrayWithRange:NSMakeRange(1, pathComponents.count - 1)];
         NSString *subpath = [NSString pathWithComponents:subpathComponents];
         return [self contentAtPath:subpath forItems:subitems];
     }  

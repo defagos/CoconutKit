@@ -20,7 +20,7 @@
 {
     NSParameterAssert(managedObjectContext);
     
-    return [NSEntityDescription insertNewObjectForEntityForName:self.className
+    return [NSEntityDescription insertNewObjectForEntityForName:[self className]
                                          inManagedObjectContext:managedObjectContext];
 }
 
@@ -36,7 +36,7 @@
     NSParameterAssert(managedObjectContext);
     HLSAssertObjectsInEnumerationAreKindOfClass(sortDescriptors, NSSortDescriptor);
     
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:self.className
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[self className]
                                                          inManagedObjectContext:managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescription];

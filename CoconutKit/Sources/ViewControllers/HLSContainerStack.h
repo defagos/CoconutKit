@@ -232,7 +232,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * Same as -popToViewController:animated:, but specifying a view controller using its index. Set index to NSUIntegerMax
  * to pop everything (except if the root view controller is fixed, in which case this method does nothing)
  *
- * If the index is invalid or if it is the index of the top view controller (i.e. [self count] - 1), this method 
+ * If the index is invalid or if it is the index of the top view controller (i.e. self.count - 1), this method
  * does nothing
  */
 - (void)popToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
@@ -248,7 +248,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (void)popAllViewControllersAnimated:(BOOL)animated;
 
 /**
- * Insert a view controller at the specified index with some transition animation properties. If index == [self count],
+ * Insert a view controller at the specified index with some transition animation properties. If index == self.count,
  * the view controller is added at the top of the stack, and the transition animation takes place (provided animated has
  * been set to YES). In all other cases, no animation occurs. Note that the corresponding reverse animation will still 
  * be played when the view controller is later popped
@@ -283,7 +283,7 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
                     animated:(BOOL)animated;
 
 /**
- * Remove the view controller at a given index. If index == [self count] - 1, the removal will be animated
+ * Remove the view controller at a given index. If index == self.count - 1, the removal will be animated
  * (provided animated has been set to YES), otherwise no animation will occur
  *
  * If the index is invalid, or if it is 0 and the root view controller is fixed, this method does nothing

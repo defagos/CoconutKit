@@ -107,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView;
 
 /**
- * Valid values for index range from 0 to [containerStackView.contentViews count] (this last value being equivalent to
+ * Valid values for index range from 0 to containerStackView.contentViews.count (this last value being equivalent to
  * calling -addAsSubviewIntoContainerStackView:)
  *
  * If the view has already been added to a stack view or if the index is invalid, this method does nothing

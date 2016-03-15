@@ -43,7 +43,7 @@
 
 - (NSUInteger)cost
 {
-    return [self.data length];
+    return self.data.length;
 }
 
 #pragma mark Description

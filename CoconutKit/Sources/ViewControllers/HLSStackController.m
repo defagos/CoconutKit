@@ -82,7 +82,7 @@
         HLSLoggerDebug(@"Exception caught but not rethrown: %@", exception);
     }
     
-    if ([self.containerStack count] == 0) {
+    if (self.containerStack.count == 0) {
         NSString *reason = [NSString stringWithFormat: @"No root view controller has been loaded. Drag a segue called '%@' "
                             "in your storyboard file, from the stack controller to the view controller you want to install "
                             "as root", HLSStackRootSegueIdentifier];

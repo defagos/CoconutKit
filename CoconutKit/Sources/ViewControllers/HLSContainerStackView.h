@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSArray<UIView *> *contentViews;
  
 /**
- * Insert a view at a given index. If index is [contentViews count], then the view is added at the top
+ * Insert a view at a given index. If index is contentViews.count, then the view is added at the top
  */
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index;
 

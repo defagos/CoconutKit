@@ -142,7 +142,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         s_animationClassNameToDurationMap = [NSMutableDictionary dictionary];
     });
         
-    NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:self.className];
+    NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];
     if (! duration) {
         // Calculate for a dummy animation
         HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[[self class] layerAnimationStepsWithAppearingView:nil
@@ -150,7 +150,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                                                                         inView:nil
                                                                                                                     withBounds:CGRectZero]];
         duration = @(animation.duration);
-        [s_animationClassNameToDurationMap setObject:duration forKey:self.className];
+        [s_animationClassNameToDurationMap setObject:duration forKey:[self className]];
     }
     
     return [duration doubleValue];

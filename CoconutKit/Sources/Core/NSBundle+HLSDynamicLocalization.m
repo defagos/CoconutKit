@@ -23,7 +23,7 @@ static void initialize(void);
 NSString *HLSLanguageForLocalization(NSString *localization)
 {
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:localization];
-    return [[locale displayNameForKey:NSLocaleLanguageCode value:localization] capitalizedString];
+    return [locale displayNameForKey:NSLocaleLanguageCode value:localization].capitalizedString;
 }
 
 NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle)

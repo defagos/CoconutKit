@@ -86,7 +86,7 @@ static Class subclass_class(id self, SEL _cmd);
 {
     NSParameterAssert(key);
         
-    return [[self userInfo] objectForKey:key];
+    return [self.userInfo objectForKey:key];
 }
 
 - (NSArray *)objectsForKey:(NSString *)key
@@ -223,7 +223,7 @@ static Class subclass_class(id self, SEL _cmd);
 {
     NSParameterAssert(key);
     
-    if ([objects count] == 0) {
+    if (objects.count == 0) {
         return;
     }
     
@@ -233,7 +233,7 @@ static Class subclass_class(id self, SEL _cmd);
         [self setObject:[existingObjects arrayByAddingObjectsFromArray:objects] forKey:key];
     }
     else {
-        [self setObject:[objects firstObject] forKey:key];
+        [self setObject:objects.firstObject forKey:key];
     }
 }
 

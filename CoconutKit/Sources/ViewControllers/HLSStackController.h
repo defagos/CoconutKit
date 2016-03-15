@@ -170,7 +170,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Same as -popToViewController:animated:, but specifying a view controller using its index. Set index to NSUIntegerMax
  * to pop everything
  *
- * If the index is invalid or if its is the index of the top view controller (i.e. [self count] - 1), this method
+ * If the index is invalid or if its is the index of the top view controller (i.e. self.count - 1), this method
  * does nothing
  */
 - (void)popToViewControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)popToRootViewControllerAnimated:(BOOL)animated;
 
 /**
- * Insert a view controller at the specified index with some transition animation properties. If index == [self count],
+ * Insert a view controller at the specified index with some transition animation properties. If index == self.count,
  * the view controller is added at the top of the stack, and the transition animation takes place (provided animated has
  * been set to YES). In all other cases, no animation occurs. Note that the corresponding reverse animation will still
  * be played when the view controller is later popped
@@ -218,7 +218,7 @@ NS_ASSUME_NONNULL_BEGIN
                     animated:(BOOL)animated;
 
 /**
- * Remove the view controller at a given index. If index == [self count] - 1, the removal will be animated
+ * Remove the view controller at a given index. If index == self.count - 1, the removal will be animated
  * (provided animated has been set to YES), otherwise no animation will occur
  *
  * If the index is invalid, or if it is 0, this method does nothing

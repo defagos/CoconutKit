@@ -116,7 +116,7 @@
     XCTAssertTrue([fileManager removeItemAtPath:@"/" error:&remError4]);
     XCTAssertNil(remError4);
     XCTAssertTrue([fileManager fileExistsAtPath:@"/"]);
-    XCTAssertEqual([[fileManager contentsOfDirectoryAtPath:@"/" error:NULL] count], (NSUInteger)0);
+    XCTAssertEqual([fileManager contentsOfDirectoryAtPath:@"/" error:NULL].count, (NSUInteger)0);
 }
 
 - (void)testContentsAndExistenceWithFileManager:(HLSFileManager *)fileManager
@@ -133,19 +133,19 @@
 
     // List files at the root. Must succeed
     NSError *error1 = nil;
-    XCTAssertEqual([[fileManager contentsOfDirectoryAtPath:@"/" error:&error1] count], (NSUInteger)3);
+    XCTAssertEqual([fileManager contentsOfDirectoryAtPath:@"/" error:&error1].count, (NSUInteger)3);
     XCTAssertNil(error1);
     
     // List files in existing non-empty directory. Must succeed
     NSError *error2 = nil;
-    XCTAssertEqual([[fileManager contentsOfDirectoryAtPath:@"/folder3" error:&error2] count], (NSUInteger)2);
+    XCTAssertEqual([fileManager contentsOfDirectoryAtPath:@"/folder3" error:&error2].count, (NSUInteger)2);
     XCTAssertNil(error2);
     
     // List file in existing empty directory. Must succeed and return an empty array
     NSError *error3 = nil;
     NSArray *contents3 = [fileManager contentsOfDirectoryAtPath:@"/folder2" error:&error3];
     XCTAssertNotNil(contents3);
-    XCTAssertEqual([contents3 count], (NSUInteger)0);
+    XCTAssertEqual(contents3.count, (NSUInteger)0);
     XCTAssertNil(error3);
     
     // Invalid path (does not exist). Must fail and return nil
