@@ -72,7 +72,7 @@ static void commonInit(HLSViewController *self);
     IMP selfIMP = class_getMethodImplementation([self class], _cmd);
     IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
     BOOL isOverriden = (selfIMP != superIMP);
-    if (! isOverriden && [[[NSBundle mainBundle] localizations] count] > 1) {
+    if (! isOverriden && [NSBundle mainBundle].localizations.count > 1) {
         HLSLoggerDebug(@"%@ is not localized", [self class]);
     }
 }
@@ -101,6 +101,8 @@ static void commonInit(HLSViewController *self);
 
 static void commonInit(HLSViewController *self)
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentLocalizationDidChange:) name:HLSCurrentLocalizationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(currentLocalizationDidChange:)
+                                                 name:HLSCurrentLocalizationDidChangeNotification object:nil];
     [self localize];
 }

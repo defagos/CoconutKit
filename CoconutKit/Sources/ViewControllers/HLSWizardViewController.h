@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, HLSWizardTransitionStyle) {
 /**
  * The view controllers to display as pages
  */
-@property (nonatomic) NSArray *viewControllers;
+@property (nonatomic) NSArray<UIViewController *> *viewControllers;
 
 /**
  * The transition style to use when changing pages. Default is HLSWizardTransitionStyleNone

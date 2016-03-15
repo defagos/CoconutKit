@@ -53,10 +53,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *actionBarButtonItem;
 
-@property (nonatomic) NSArray *normalToolbarItems;
-@property (nonatomic) NSArray *loadingToolbarItems;
+@property (nonatomic) NSArray<UIBarButtonItem *> *normalToolbarItems;
+@property (nonatomic) NSArray<UIBarButtonItem *> *loadingToolbarItems;
 
-@property (nonatomic) NSArray *actions;
+@property (nonatomic) NSArray<NSValue *> *actions;
 
 @property (nonatomic) UIPopoverController *activityPopoverController;
 
@@ -223,7 +223,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
                 [[NSFileManager defaultManager] removeItemAtPath:temporaryCoconutKitBundlePath error:NULL];
             }
             
-            NSString *coconutKitBundlePath = [[NSBundle coconutKitBundle] bundlePath];
+            NSString *coconutKitBundlePath = [NSBundle coconutKitBundle].bundlePath;
             [[NSFileManager defaultManager] copyItemAtPath:coconutKitBundlePath toPath:temporaryCoconutKitBundlePath error:NULL];
         });
         
@@ -249,7 +249,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     
     // Build the toolbar displayed when the web view is loading content
     NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
-    UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
+    UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                                                       target:self
+                                                                                       action:@selector(stop:)];
     [loadingToolbarItems replaceObjectAtIndex:[loadingToolbarItems indexOfObject:self.refreshBarButtonItem] withObject:stopBarButtonItem];
     self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
     
@@ -291,7 +293,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskAllButUpsideDown;
     }
     else {

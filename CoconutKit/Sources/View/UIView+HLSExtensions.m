@@ -116,22 +116,22 @@ static void swizzle_willMoveToWindow(UIView *self, SEL _cmd, UIWindow *window);
 
 - (void (^)(void))modalOutsideActionBlock
 {
-    return objc_getAssociatedObject(self, s_modalOutsideActionBlockKey);
+    return hls_getAssociatedObject(self, s_modalOutsideActionBlockKey);
 }
 
 - (void)setModalOutsideActionBlock:(void (^)(void))modalOutsideActionBlock
 {
-    objc_setAssociatedObject(self, s_modalOutsideActionBlockKey, modalOutsideActionBlock, OBJC_ASSOCIATION_COPY);
+    hls_setAssociatedObject(self, s_modalOutsideActionBlockKey, modalOutsideActionBlock, HLS_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (HLSAnyGestureRecognizer *)outsideGestureRecognizer
 {
-    return objc_getAssociatedObject(self, s_outsideGestureRecognizerKey);
+    return hls_getAssociatedObject(self, s_outsideGestureRecognizerKey);
 }
 
 - (void)setOutsideGestureRecognizer:(HLSAnyGestureRecognizer *)outsideGestureRecognizer
 {
-    objc_setAssociatedObject(self, s_outsideGestureRecognizerKey, outsideGestureRecognizer, OBJC_ASSOCIATION_RETAIN);
+    hls_setAssociatedObject(self, s_outsideGestureRecognizerKey, outsideGestureRecognizer, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Modal behavior

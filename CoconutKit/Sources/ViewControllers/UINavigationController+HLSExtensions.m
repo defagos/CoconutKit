@@ -38,7 +38,7 @@ static NSUInteger swizzle_supportedInterfaceOrientations(UINavigationController 
         return HLSAutorotationModeContainer;
     }
     else {
-        return [autorotationModeNumber integerValue];
+        return autorotationModeNumber.integerValue;
     }
 }
 

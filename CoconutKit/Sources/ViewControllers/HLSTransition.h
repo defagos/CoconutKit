@@ -61,10 +61,10 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * For example, here is the implementation of a push from right animation (the usual UINavigationController animation)
  * with an intrinsic duration of 0.4:
  *
- *   + (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
- *                                    disappearingView:(UIView *)disappearingView
- *                                              inView:(UIView *)view
- *                                          withBounds:(CGRect)bounds
+ *   + (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+ *                                                        disappearingView:(UIView *)disappearingView
+ *                                                                  inView:(UIView *)view
+ *                                                              withBounds:(CGRect)bounds
  *   {
  *       NSMutableArray *animationSteps = [NSMutableArray array];
  *
@@ -107,7 +107,7 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * Return all class names corresponding to available transition animations (except HLSTransition itself). These include
  * custom transitions as well
  */
-+ (NSArray *)availableTransitionNames;
++ (NSArray<NSString *> *)availableTransitionNames;
 
 /**
  * The method to be overridden by subclasses to return the transition animation steps which the animation is made of.
@@ -116,10 +116,10 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * The default implementation of this method returns nil, which corresponds to an empty animation (i.e. an animation
  * which does not alter any view)
  */
-+ (NSArray *)layerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
-                                 disappearingView:(nullable UIView *)disappearingView
-                                           inView:(nullable UIView *)view
-                                       withBounds:(CGRect)bounds;
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
+                                                     disappearingView:(nullable UIView *)disappearingView
+                                                               inView:(nullable UIView *)view
+                                                           withBounds:(CGRect)bounds;
 
 /**
  * The method which subclasses can optionally override to define a custom reverse transition animation. The base
@@ -132,10 +132,10 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * appearingView (respectively disappearing view) is the view which appears (respectively disappears) during the
  * reverse transition
  */
-+ (NSArray *)reverseLayerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
-                                        disappearingView:(nullable UIView *)disappearingView
-                                                  inView:(nullable UIView *)view
-                                              withBounds:(CGRect)bounds;
++ (NSArray<HLSAnimationStep *> *)reverseLayerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
+                                                            disappearingView:(nullable UIView *)disappearingView
+                                                                      inView:(nullable UIView *)view
+                                                                  withBounds:(CGRect)bounds;
 
 /**
  * Return the intrinsic duration of a transition as given by its implementation

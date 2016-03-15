@@ -71,7 +71,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 
 #pragma mark Accessors and mutators
 
-- (void)setViewControllers:(NSArray *)viewControllers
+- (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(viewControllers, UIViewController);
     
@@ -82,7 +82,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     _viewControllers = viewControllers;
     
     // Start with the first page
-    if ([_viewControllers count] > 0) {
+    if (_viewControllers.count > 0) {
         self.currentPage = 0;   
     }    
 }
@@ -104,8 +104,8 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Sanitize input
-    if (currentPage < 0 || currentPage >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)currentPage, (unsigned long)[self.viewControllers count]);
+    if (currentPage < 0 || currentPage >= self.viewControllers.count) {
+        HLSLoggerError(@"Incorrect page number %@, must lie between 0 and %@", @(currentPage), @(self.viewControllers.count));
         return;
     }
     
@@ -159,13 +159,13 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Sanitize input
-    if (self.currentPage < 0 || self.currentPage >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)self.currentPage, (unsigned long)[self.viewControllers count]);
+    if (self.currentPage < 0 || self.currentPage >= self.viewControllers.count) {
+        HLSLoggerError(@"Incorrect page number %@, must lie between 0 and %@", @(self.currentPage), @(self.viewControllers.count));
         return;
     }
     
     // Done button on last page only
-    if (self.currentPage == [self.viewControllers count] - 1) {
+    if (self.currentPage == self.viewControllers.count - 1) {
         self.doneButton.hidden = NO;
     }
     else {
@@ -181,7 +181,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Next button on all but the last page
-    if (self.currentPage < [self.viewControllers count] - 1) {
+    if (self.currentPage < self.viewControllers.count - 1) {
         self.nextButton.hidden = NO;
     }
     else {
@@ -194,8 +194,8 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 - (BOOL)validatePage:(NSInteger)page
 {
     // Sanitize input (deals with the "no page" case)
-    if (page < 0 || page >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)page, (unsigned long)[self.viewControllers count]);
+    if (page < 0 || page >= self.viewControllers.count) {
+        HLSLoggerError(@"Incorrect page number %@, must lie between 0 and %@", @(page), @(self.viewControllers.count));
         return YES;
     }
     
@@ -213,8 +213,8 @@ static const NSInteger kWizardViewControllerNoPage = -1;
 - (void)moveToPage:(NSInteger)page
 {
     // Sanitize input
-    if (page < 0 || page >= [self.viewControllers count]) {
-        HLSLoggerError(@"Incorrect page number %ld, must lie between 0 and %lu", (long)page, (unsigned long)[self.viewControllers count]);
+    if (page < 0 || page >= self.viewControllers.count) {
+        HLSLoggerError(@"Incorrect page number %@, must lie between 0 and %@", @(page), @(self.viewControllers.count));
         return;
     }
     
