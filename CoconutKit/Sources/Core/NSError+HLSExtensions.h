@@ -79,7 +79,7 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
 /**
  * Return the user-specific information (i.e. without the information corresponding to reserved keys)
  */
-- (nullable NSDictionary *)customUserInfo;
+@property (nonatomic, readonly, nullable) NSDictionary *customUserInfo;
 
 /**
  * Various mutators for setting standard NSError properties. Please refer to the NSError documentation for more information

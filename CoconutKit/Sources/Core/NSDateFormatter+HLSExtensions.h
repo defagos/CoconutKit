@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Same as -weekDaySymbols and -shortWeekdaySymbols, but returning the days in the order corresponding to the
  * device international settings. 
  */
-+ (NSArray *)orderedWeekdaySymbols;
-+ (NSArray *)orderedShortWeekdaySymbols;
+@property (nonatomic, readonly) NSArray <NSString *> *orderedWeekdaySymbols;
+@property (nonatomic, readonly) NSArray <NSString *> *orderedShortWeekdaySymbols;
 
 @end
 

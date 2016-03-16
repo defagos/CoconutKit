@@ -64,7 +64,7 @@
     XCTAssertEqualObjects(self.error2.helpAnchor, @"Help anchor");
     XCTAssertEqual(self.error2.underlyingError, self.error1);
     XCTAssertEqualObjects([self.error2 objectForKey:@"AdditionalInfo2"], @"Additional information 2");
-    XCTAssertEqual([self.error2 customUserInfo].count, (NSUInteger)3);
+    XCTAssertEqual(self.error2.customUserInfo.count, (NSUInteger)3);
 }
 
 - (void)testCopy

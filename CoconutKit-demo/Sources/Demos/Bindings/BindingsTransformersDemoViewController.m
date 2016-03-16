@@ -88,7 +88,7 @@
             static dispatch_once_t s_onceToken;
             dispatch_once(&s_onceToken, ^{
                 s_numberFormatter = [[NSNumberFormatter alloc] init];
-                [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+                s_numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
             });
             
             // Extract capture group information

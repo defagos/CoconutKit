@@ -14,8 +14,8 @@
     static NSDateFormatter *s_dateFormatter;
     dispatch_once(&s_onceToken, ^{
         s_dateFormatter = [[NSDateFormatter alloc] init];
-        [s_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [s_dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        s_dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        s_dateFormatter.timeStyle = NSDateFormatterMediumStyle;
     });
     return s_dateFormatter;
 }
@@ -26,7 +26,7 @@
     static NSNumberFormatter *s_numberFormatter;
     dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        s_numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     });
     return s_numberFormatter;
 }

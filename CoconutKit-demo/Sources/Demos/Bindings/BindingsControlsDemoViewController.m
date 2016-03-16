@@ -184,7 +184,7 @@
     self.title = NSLocalizedString(@"Controls", nil);
     
     NSDateFormatter *localizedDateFormatter = [[NSDateFormatter alloc] init];
-    [localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    localizedDateFormatter.dateFormat = NSLocalizedString(@"yyyy/MM/dd", nil);
     
     // Changing the date formatter object automatically triggers a bound view update
     self.localizedDateFormatter = localizedDateFormatter;

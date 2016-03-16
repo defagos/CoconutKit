@@ -16,7 +16,7 @@
 - (void)testNameOfClass
 {
     XCTAssertEqualObjects([XCTestCase className], @"XCTestCase");
-    XCTAssertEqualObjects([self className], @"NSObject_HLSExtensionsTestCase");
+    XCTAssertEqualObjects(self.className, @"NSObject_HLSExtensionsTestCase");
 }
 
 @end

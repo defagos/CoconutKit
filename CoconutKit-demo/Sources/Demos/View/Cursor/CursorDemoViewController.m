@@ -38,7 +38,7 @@ static NSArray *s_folders = nil;
 
 + (void)initialize
 {
-    s_weekDays = [NSDateFormatter orderedWeekdaySymbols];
+    s_weekDays = [[[NSDateFormatter alloc] init] orderedWeekdaySymbols];
     s_completeRange = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                         @"11", @"12", @"13", @"14", @"15", @"16"];
     s_folders = @[@"A-F", @"G-L", @"M-R", @"S-Z"];

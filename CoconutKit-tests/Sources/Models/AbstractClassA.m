@@ -40,7 +40,7 @@
 
 - (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
 {
-    if ([self.noValidationStringA isFilled] && ! [self.noValidationStringA isEqualToString:@"Consistency check"]) {
+    if (self.noValidationStringA.filled && ! [self.noValidationStringA isEqualToString:@"Consistency check"]) {
         if (pError) {
             *pError = [NSError errorWithDomain:TestValidationErrorDomain
                                           code:TestValidationInconsistencyError];

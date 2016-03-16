@@ -28,7 +28,7 @@
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setPositiveFormat:@"###0"];
+        s_numberFormatter.positiveFormat = @"###0";
     });
     
     HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
@@ -60,7 +60,7 @@
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setPositiveFormat:@"###0"];
+        s_numberFormatter.positiveFormat = @"###0";
     });
     
     HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerFromFormatter:s_numberFormatter];
