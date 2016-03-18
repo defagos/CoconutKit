@@ -20,7 +20,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 
 @interface HLSContainerStack () <HLSContainerStackViewDelegate>
 
-@property (nonatomic, weak, nullable) UIViewController *containerViewController;        // The container view controller implemented using HLSContainerStack
+@property (nonatomic, weak) UIViewController *containerViewController;                  // The container view controller implemented using HLSContainerStack
 @property (nonatomic) NSMutableArray<HLSContainerContent *> *containerContents;         // The contents loaded into the stack. The first element corresponds to the root view controller
 @property (nonatomic) NSUInteger capacity;                                              // The maximum number of top view controllers loaded / not removed at any time
 

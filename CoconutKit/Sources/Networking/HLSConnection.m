@@ -17,7 +17,7 @@
 @property (nonatomic, weak) HLSConnection *parentConnection;
 @property (nonatomic) HLSConnection *parentStrongConnection;                                        // Ensure the parent connection lives at least until all child connections are over
 
-@property (nonatomic) NSMutableDictionary<id, HLSConnection *> *childConnectionsDictionary;         // contains HLSConnection objects
+@property (nonatomic) NSMutableDictionary<id, HLSConnection *> *childConnectionsDictionary;
 
 @property (nonatomic) NSSet *runLoopModes;
 @property (nonatomic, getter=isSelfRunning) BOOL selfRunning;                                       // Is self running or not (NOT including child connections)

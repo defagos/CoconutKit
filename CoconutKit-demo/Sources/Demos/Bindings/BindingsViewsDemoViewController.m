@@ -13,7 +13,7 @@
 
 @interface BindingsViewsDemoViewController ()
 
-@property (nonatomic) NSArray *employees;
+@property (nonatomic) NSArray<Employee *> *employees;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet EmployeeView *employeeView;
@@ -39,7 +39,7 @@
 
 - (NSString *)numberOfEmployeesString
 {
-    return [NSString stringWithFormat:NSLocalizedString(@"%@ employees", nil), @([self.employees count])];
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ employees", nil), @(self.employees.count)];
 }
 
 #pragma mark View lifecycle
@@ -72,7 +72,7 @@
 
 - (void)changeEmployee
 {
-    _currentEmployeeIndex = (_currentEmployeeIndex + 1) % [self.employees count];
+    _currentEmployeeIndex = (_currentEmployeeIndex + 1) % self.employees.count;
     self.employeeView.employee = [self.employees objectAtIndex:_currentEmployeeIndex];
 }
 
@@ -80,7 +80,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.employees count];
+    return self.employees.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

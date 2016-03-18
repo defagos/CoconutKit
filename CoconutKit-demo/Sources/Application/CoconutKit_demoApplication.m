@@ -43,7 +43,7 @@
         // Special modes can be set by setting the CoconutKitDemoMode environment variable:
         //    - "Normal" (or not set): Full set of demos
         //    - "RootStack": Test a stack controller as root view controller of the application
-        NSString *demoMode = [[[NSProcessInfo processInfo] environment] objectForKey:@"CoconutKitDemoMode"];
+        NSString *demoMode = [[NSProcessInfo processInfo].environment objectForKey:@"CoconutKitDemoMode"];
         if ([demoMode isEqualToString:@"RootStack"]) {
             // Pre-load the stack with two view controllers (by enabling logging, one can discover that view events are correctly
             // forwarded to the view controller on top only)
@@ -73,8 +73,7 @@
             RootTabBarDemoViewController *rootTabBarDemoViewController2 = [[RootTabBarDemoViewController alloc] init];
             RootTabBarDemoViewController *rootTabBarDemoViewController3 = [[RootTabBarDemoViewController alloc] init];
             UITabBarController *tabBarController = [[UITabBarController alloc] init];
-            tabBarController.viewControllers = @[rootTabBarDemoViewController1, rootTabBarDemoViewController2,
-                                                rootTabBarDemoViewController3];
+            tabBarController.viewControllers = @[rootTabBarDemoViewController1, rootTabBarDemoViewController2, rootTabBarDemoViewController3];
             tabBarController.delegate = self;
             self.rootViewController = tabBarController;
         }
@@ -199,7 +198,7 @@
         return;
     }
     
-    NSString *localization = [[[NSBundle mainBundle] localizations] objectAtIndex:buttonIndex];
+    NSString *localization = [[NSBundle mainBundle].localizations objectAtIndex:buttonIndex];
     [NSBundle setLocalization:localization];
 }
 
@@ -259,11 +258,11 @@
 {
     // Save any pending changes in the default context
     NSManagedObjectContext *managedObjectContext = [HLSModelManager currentModelContext];
-    if ([managedObjectContext hasChanges]) {
+    if (managedObjectContext.hasChanges) {
         HLSLoggerInfo(@"Saving pending changes on exit");
         NSError *error = nil;
         if (! [managedObjectContext save:&error]) {
-            HLSLoggerError(@"Failed to save pending changes. Reason: %@", [error localizedDescription]);
+            HLSLoggerError(@"Failed to save pending changes. Reason: %@", error.localizedDescription);
         }
     }
 }
@@ -274,7 +273,7 @@
 {
     self.languageActionSheet = [[UIActionSheet alloc] init];
     self.languageActionSheet.delegate = self;
-    for (NSString *localization in [[NSBundle mainBundle] localizations]) {
+    for (NSString *localization in [NSBundle mainBundle].localizations) {
         [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
     }
     [self.languageActionSheet showFromBarButtonItem:sender animated:YES];

@@ -32,10 +32,10 @@
 
 - (Employee *)employee
 {
-    return [[Employee employees] firstObject];
+    return [Employee employees].firstObject;
 }
 
-- (NSArray *)employees
+- (NSArray<Employee *> *)employees
 {
     return [Employee employees];
 }
@@ -75,15 +75,15 @@
 
 - (HLSBlockTransformer *)otherPointTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(NSValue *pointValue) {
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSValue * _Nullable pointValue) {
         CGPoint point = [pointValue CGPointValue];
         return [NSString stringWithFormat:@"(%.0f, %.0f)", point.x, point.y];
-    } reverseBlock:^(__autoreleasing NSValue **pPointValue, NSString *string, NSError *__autoreleasing *pError) {
+    } reverseBlock:^(NSValue *  _Nullable __autoreleasing * _Nonnull pPointValue, NSString *  _Nonnull string, NSError * _Nullable __autoreleasing * _Nullable pError) {
         // Regular expression: \(\s*(.*)\s*,\s*(.*)\s*\)
         NSRegularExpression *regularExpression = [NSRegularExpression regularExpressionWithPattern:@"\\(\\s*(.*)\\s*,\\s*(.*)\\s*\\)" options:0 error:NULL];
         
         __block BOOL found = NO;
-        [regularExpression enumerateMatchesInString:string options:0 range:NSMakeRange(0, [string length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        [regularExpression enumerateMatchesInString:string options:0 range:NSMakeRange(0, string.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
             static NSNumberFormatter *s_numberFormatter = nil;
             static dispatch_once_t s_onceToken;
             dispatch_once(&s_onceToken, ^{
@@ -108,7 +108,7 @@
             }
             
             if (pPointValue) {
-                *pPointValue = [NSValue valueWithCGPoint:CGPointMake([x floatValue], [y floatValue])];
+                *pPointValue = [NSValue valueWithCGPoint:CGPointMake(x.floatValue, y.floatValue)];
             }
             
             found = YES;

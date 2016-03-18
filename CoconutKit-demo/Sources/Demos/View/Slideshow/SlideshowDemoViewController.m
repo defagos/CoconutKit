@@ -53,9 +53,9 @@
     self.randomSwitch.on = self.slideshow.random;
     
     self.imageDurationSlider.value = self.slideshow.imageDuration;
-    self.imageDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.imageDuration)];
+    self.imageDurationLabel.text = @(round(self.slideshow.imageDuration)).stringValue;
     self.transitionDurationSlider.value = self.slideshow.transitionDuration;
-    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.transitionDuration)];
+    self.transitionDurationLabel.text = @(round(self.slideshow.transitionDuration)).stringValue;
     
     [self loadImages];
 }
@@ -73,26 +73,26 @@
 
 - (void)slideshow:(HLSSlideshow *)slideshow willShowImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    HLSLoggerInfo(@"Will show image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
+    HLSLoggerInfo(@"Will show image %@; currentImageNameOrPath = %@", imageNameOrPath, slideshow.currentImageNameOrPath);
     
     self.currentImageNameLabel.text = @"<->";
 }
 
 - (void)slideshow:(HLSSlideshow *)slideshow didShowImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    HLSLoggerInfo(@"Did show image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
+    HLSLoggerInfo(@"Did show image %@; currentImageNameOrPath = %@", imageNameOrPath, slideshow.currentImageNameOrPath);
     
-    self.currentImageNameLabel.text = [imageNameOrPath lastPathComponent];
+    self.currentImageNameLabel.text = imageNameOrPath.lastPathComponent;
 }
 
 - (void)slideshow:(HLSSlideshow *)slideshow willHideImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    HLSLoggerInfo(@"Will hide image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
+    HLSLoggerInfo(@"Will hide image %@; currentImageNameOrPath = %@", imageNameOrPath, slideshow.currentImageNameOrPath);
 }
 
 - (void)slideshow:(HLSSlideshow *)slideshow didHideImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    HLSLoggerInfo(@"Did hide image %@; currentImageNameOrPath = %@", imageNameOrPath, [slideshow currentImageNameOrPath]);
+    HLSLoggerInfo(@"Did hide image %@; currentImageNameOrPath = %@", imageNameOrPath, slideshow.currentImageNameOrPath);
 }
 
 #pragma mark UIPickerViewDataSource protocol implementation
@@ -225,13 +225,13 @@
 - (IBAction)imageDurationValueChanged:(id)sender
 {
     self.slideshow.imageDuration = round(self.imageDurationSlider.value);
-    self.imageDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.imageDuration)];
+    self.imageDurationLabel.text = @(round(self.slideshow.imageDuration)).stringValue;
 }
 
 - (IBAction)transitionDurationValueChanged:(id)sender
 {
     self.slideshow.transitionDuration = round(self.transitionDurationSlider.value);
-    self.transitionDurationLabel.text = [NSString stringWithFormat:@"%ld", lround(self.slideshow.transitionDuration)];
+    self.transitionDurationLabel.text = @(round(self.slideshow.transitionDuration)).stringValue;
 }
 
 @end

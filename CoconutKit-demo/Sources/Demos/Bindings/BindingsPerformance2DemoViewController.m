@@ -37,11 +37,11 @@
 
 - (id<HLSTransformer>)uppercaseTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(NSString *name) {
-        return [name uppercaseString];
-    } reverseBlock:^(__autoreleasing NSString **pName, NSString *uppercaseName, NSError *__autoreleasing *pError) {
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSString *  _Nullable name) {
+        return name.uppercaseString;
+    } reverseBlock:^(NSString  * _Nullable __autoreleasing * _Nonnull pName, NSString *  _Nonnull uppercaseName, NSError * _Nullable __autoreleasing * _Nullable pError) {
         if (pName) {
-            *pName = [uppercaseName lowercaseString];
+            *pName = uppercaseName.lowercaseString;
         }
         return YES;
     }];

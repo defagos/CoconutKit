@@ -13,7 +13,7 @@
 
 - (void)testOneWayBlockTransformer
 {
-    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
+    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber * _Nullable number) {
         return @(floorf([number floatValue]));
     } reverseBlock:nil];
     
@@ -31,9 +31,9 @@
         s_numberFormatter.positiveFormat = @"###0";
     });
     
-    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
+    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber * _Nullable number) {
         return [s_numberFormatter stringFromNumber:number];
-    } reverseBlock:^(__autoreleasing NSNumber **pNumber, NSString *string, NSError *__autoreleasing *pError) {
+    } reverseBlock:^(NSNumber *  _Nullable __autoreleasing * _Nonnull pNumber, NSString *  _Nonnull string, NSError * _Nullable __autoreleasing * _Nullable pError) {
         NSRange range = NSMakeRange(0, [string length]);
         return [s_numberFormatter getObjectValue:pNumber forString:string range:&range error:pError];
     }];

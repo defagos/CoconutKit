@@ -43,7 +43,7 @@
 
 - (HLSBlockTransformer *)truthTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(id object) {
+    return [HLSBlockTransformer blockTransformerWithBlock:^(id  _Nullable object) {
         return @42;
     } reverseBlock:nil];
 }

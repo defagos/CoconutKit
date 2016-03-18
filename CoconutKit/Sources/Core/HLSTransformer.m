@@ -132,11 +132,11 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 {
     NSParameterAssert(formatter);
     
-    return [self blockTransformerWithBlock:^(id object) {
+    return [self blockTransformerWithBlock:^(id  _Nullable object) {
         // Remark: The specific -[NSNumberFormatter stringFromNumber:] has a behavior which differs from -stringFromObjectValue:, e.g
         //         it ignores nilSymbol. Since -stringForObjectValue: has the richest behavior, it makes sense to call it in all cases
         return [formatter stringForObjectValue:object];
-    } reverseBlock:^(__autoreleasing id *pObject, NSString *string, NSError *__autoreleasing *pError) {
+    } reverseBlock:^(id  _Nullable __autoreleasing * _Nonnull pObject, NSString *  _Nonnull string, NSError * _Nullable __autoreleasing * _Nullable pError) {
         // For NSFormatter subclasses, calling -getObjectValue:forString:errorDescription: will crash for nil input strings, but
         // interestingly does not crash and returns nil when calling their specific -numberFromString: (for NSNumberFormatter) and
         // -dateFromString: (for NSDateFormatter) methods. Check and apply the same behavior as those specific methods here. Since
@@ -165,7 +165,7 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 {
     NSParameterAssert(valueTransformer);
     
-    HLSTransformerBlock block = ^(id object) {
+    HLSTransformerBlock block = ^(id _Nullable object) {
         return [valueTransformer transformedValue:object];
     };
     

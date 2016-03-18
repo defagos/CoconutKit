@@ -60,7 +60,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
-    if (index < [self.textFields count] - 1) {
+    if (index < self.textFields.count - 1) {
         UITextField *nextTextField = [self.textFields objectAtIndex:index + 1];
         [nextTextField becomeFirstResponder];
     }

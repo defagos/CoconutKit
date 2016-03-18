@@ -30,7 +30,7 @@ HLSEnableNSManagedObjectValidation();
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // We do not assign to the optional property, to ensure that CoconutKit does not rely on this property
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     
