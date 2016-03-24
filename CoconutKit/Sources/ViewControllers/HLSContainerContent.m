@@ -226,7 +226,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
     // To fix this issue, we force the tab bar controller to reload its child view controller by setting the current view
     // controller again.
     if ([self.viewController isKindOfClass:[UITabBarController class]]) {
-        UITabBarController *tabBarController = (UITabBarController *)self.viewController;
+        UITabBarController *tabBarController = self.viewController;
         if (tabBarController.selectedViewController && ! [tabBarController.selectedViewController isViewLoaded]) {
             UIViewController *currentViewController = tabBarController.selectedViewController;
             tabBarController.selectedViewController = nil;

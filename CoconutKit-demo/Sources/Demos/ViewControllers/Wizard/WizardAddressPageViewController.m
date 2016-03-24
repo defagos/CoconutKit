@@ -28,7 +28,7 @@
 {
     if (self = [super init]) {
         // Only one person in the DB. If does not exist yet, create it
-        PersonInformation *personInformation = [[PersonInformation allObjects] firstObject];
+        PersonInformation *personInformation = [PersonInformation allObjects].firstObject;
         if (! personInformation) {
             personInformation = [PersonInformation insert];
         }
@@ -83,7 +83,7 @@
     boundView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     
     UILabel *errorLabel = [self errorLabelForView:boundView];
-    errorLabel.text = [error localizedDescription];
+    errorLabel.text = error.localizedDescription;
 }
 
 #pragma mark Retrieving the error label associated with a view
@@ -95,7 +95,7 @@
         return nil;
     }
     
-    NSAssert([self.textFields count] == [self.errorLabels count], @"Expect one label per text field");
+    NSAssert(self.textFields.count == self.errorLabels.count, @"Expect one label per text field");
     return [self.errorLabels objectAtIndex:index];
 }
 

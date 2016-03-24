@@ -155,7 +155,7 @@
                                                                       y:1.f
                                                                       z:0.f
                                                        counterclockwise:YES
-                                                     cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                     cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                           appearingView:appearingView
                                                        disappearingView:disappearingView
                                                                  inView:view];
@@ -175,7 +175,7 @@
                                                                       y:1.f
                                                                       z:0.f
                                                        counterclockwise:NO
-                                                     cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                     cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                           appearingView:appearingView
                                                        disappearingView:disappearingView
                                                                  inView:view];
@@ -195,7 +195,7 @@
                                                                       y:0.f
                                                                       z:0.f
                                                        counterclockwise:YES
-                                                     cameraZTranslation:4.f * CGRectGetHeight([[UIScreen mainScreen] applicationFrame])
+                                                     cameraZTranslation:4.f * CGRectGetHeight([UIScreen mainScreen].applicationFrame)
                                                           appearingView:appearingView
                                                        disappearingView:disappearingView
                                                                  inView:view];
@@ -215,7 +215,7 @@
                                                                       y:0.f
                                                                       z:0.f
                                                        counterclockwise:NO
-                                                     cameraZTranslation:4.f * CGRectGetHeight([[UIScreen mainScreen] applicationFrame])
+                                                     cameraZTranslation:4.f * CGRectGetHeight([UIScreen mainScreen].applicationFrame)
                                                           appearingView:appearingView
                                                        disappearingView:disappearingView
                                                                  inView:view];

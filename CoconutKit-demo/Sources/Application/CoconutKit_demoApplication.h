@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
     UITabBarControllerDelegate
 >
 
-@property (nonatomic, readonly) UIViewController *rootViewController;
+@property (nonatomic, readonly) __kindof UIViewController *rootViewController;
 
 - (void)savePendingChanges;
 

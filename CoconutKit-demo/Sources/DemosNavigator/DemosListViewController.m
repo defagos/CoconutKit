@@ -134,7 +134,7 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
 {
     [super viewWillAppear:animated];
     
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:animated];
 }
 
 #pragma mark Orientation management

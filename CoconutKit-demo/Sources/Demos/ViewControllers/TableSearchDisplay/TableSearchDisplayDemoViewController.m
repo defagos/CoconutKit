@@ -107,10 +107,10 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchResultsTableView) {
-        return [self.filteredDevices count];
+        return self.filteredDevices.count;
     }
     else {
-        return [self.devices count];
+        return self.devices.count;
     }
 }
 

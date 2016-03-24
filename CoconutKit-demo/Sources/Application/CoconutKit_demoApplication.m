@@ -116,7 +116,7 @@
 {
     // Normal demo mode
     if ([self.rootViewController isMemberOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = (UINavigationController *)self.rootViewController;
+        UINavigationController *navigationController = self.rootViewController;
         navigationController.topViewController.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Language", nil);
     }
 }

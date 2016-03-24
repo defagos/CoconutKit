@@ -10,7 +10,7 @@ extern const struct PersonInformationAttributes {
 	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *firstName;
 	__unsafe_unretained NSString *lastName;
-	__unsafe_unretained NSString *nbrChildren;
+	__unsafe_unretained NSString *numberOfChildren;
 	__unsafe_unretained NSString *state;
 	__unsafe_unretained NSString *street;
 } PersonInformationAttributes;
@@ -48,13 +48,13 @@ extern const struct PersonInformationAttributes {
 
 //- (BOOL)validateLastName:(id*)value_ error:(NSError**)error_;
 
-@property (nonatomic, strong) NSNumber* nbrChildren;
+@property (nonatomic, strong) NSNumber* numberOfChildren;
 
-@property (atomic) int16_t nbrChildrenValue;
-- (int16_t)nbrChildrenValue;
-- (void)setNbrChildrenValue:(int16_t)value_;
+@property (atomic) int16_t numberOfChildrenValue;
+- (int16_t)numberOfChildrenValue;
+- (void)setNumberOfChildrenValue:(int16_t)value_;
 
-//- (BOOL)validateNbrChildren:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateNumberOfChildren:(id*)value_ error:(NSError**)error_;
 
 @property (nonatomic, strong) NSString* state;
 
@@ -86,11 +86,11 @@ extern const struct PersonInformationAttributes {
 - (NSString*)primitiveLastName;
 - (void)setPrimitiveLastName:(NSString*)value;
 
-- (NSNumber*)primitiveNbrChildren;
-- (void)setPrimitiveNbrChildren:(NSNumber*)value;
+- (NSNumber*)primitiveNumberOfChildren;
+- (void)setPrimitiveNumberOfChildren:(NSNumber*)value;
 
-- (int16_t)primitiveNbrChildrenValue;
-- (void)setPrimitiveNbrChildrenValue:(int16_t)value_;
+- (int16_t)primitiveNumberOfChildrenValue;
+- (void)setPrimitiveNumberOfChildrenValue:(int16_t)value_;
 
 - (NSString*)primitiveState;
 - (void)setPrimitiveState:(NSString*)value;

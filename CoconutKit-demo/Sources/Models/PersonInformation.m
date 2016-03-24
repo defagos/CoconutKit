@@ -14,7 +14,7 @@
 
 - (BOOL)checkFirstName:(NSString *)firstName error:(NSError *__autoreleasing *)pError
 {
-    if (! [firstName isFilled]) {
+    if (! firstName.filled) {
         if (pError) {
             *pError = [NSError errorWithDomain:DemoErrorDomain
                                           code:DemoMandatoryError
@@ -28,7 +28,7 @@
 
 - (BOOL)checkLastName:(NSString *)lastName error:(NSError *__autoreleasing *)pError
 {
-    if (! [lastName isFilled]) {
+    if (! lastName.filled) {
         if (pError) {
             *pError = [NSError errorWithDomain:DemoErrorDomain
                                           code:DemoMandatoryError
@@ -43,7 +43,7 @@
 - (BOOL)checkEmail:(NSString *)email error:(NSError *__autoreleasing *)pError
 {
     // Optional
-    if (! [email isFilled]) {
+    if (! email.filled) {
         return YES;
     }
     
@@ -59,9 +59,9 @@
     return YES;
 }
 
-- (BOOL)checkNbrChildren:(NSNumber *)nbrChildren error:(NSError *__autoreleasing *)pError
+- (BOOL)checkNumberOfChildren:(NSNumber *)numberOfChildren error:(NSError *__autoreleasing *)pError
 {
-    if ([nbrChildren integerValue] < 0) {
+    if (numberOfChildren.integerValue < 0) {
         if (pError) {
             *pError = [NSError errorWithDomain:DemoErrorDomain
                                           code:DemoIncorrectError
@@ -81,7 +81,7 @@
 
 - (BOOL)checkCity:(NSString *)city error:(NSError *__autoreleasing *)pError
 {
-    if (! [city isFilled]) {
+    if (! city.filled) {
         if (pError) {
             *pError = [NSError errorWithDomain:DemoErrorDomain
                                           code:DemoMandatoryError
@@ -101,7 +101,7 @@
 
 - (BOOL)checkCountry:(NSString *)country error:(NSError *__autoreleasing *)pError
 {
-    if (! [country isFilled]) {
+    if (! country.filled) {
         if (pError) {
             *pError = [NSError errorWithDomain:DemoErrorDomain
                                           code:DemoMandatoryError
