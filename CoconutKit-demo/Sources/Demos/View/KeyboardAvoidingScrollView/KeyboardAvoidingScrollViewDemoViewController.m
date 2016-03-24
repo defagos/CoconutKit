@@ -46,7 +46,7 @@
     UITextField *textField1 = [self.textFields firstObject];
     textField1.resigningFirstResponderOnTap = YES;
     
-    UITextField *textField3 = [self.textFields objectAtIndex:2];
+    UITextField *textField3 = self.textFields[2];
     
     // Custom input views
     textField1.inputView = self.smallCustomInputView;
@@ -61,7 +61,7 @@
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
     if (index < self.textFields.count - 1) {
-        UITextField *nextTextField = [self.textFields objectAtIndex:index + 1];
+        UITextField *nextTextField = self.textFields[index + 1];
         [nextTextField becomeFirstResponder];
     }
     else {

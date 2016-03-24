@@ -146,7 +146,7 @@ static void commonInit(HLSCursor *self);
     CGFloat xPos = fmaxf(-self.pointerViewTopLeftOffset.width, 0.f);
     NSUInteger i = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        CGSize elementWrapperViewSize = [self.elementWrapperViewSizeValues objectAtIndex:i].CGSizeValue;
+        CGSize elementWrapperViewSize = self.elementWrapperViewSizeValues[i].CGSizeValue;
         
         // Centered in main frame
         elementWrapperView.frame = CGRectMake(floorf(xPos),
@@ -348,12 +348,12 @@ static void commonInit(HLSCursor *self);
         return;
     }
     
-    UIView *elementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+    UIView *elementWrapperView = self.elementWrapperViews[index];
     
-    UIView *elementView = [elementWrapperView.subviews objectAtIndex:0];
+    UIView *elementView = elementWrapperView.subviews.firstObject;
     elementView.hidden = selected;
     
-    UIView *selectedElementView = [elementWrapperView.subviews objectAtIndex:1];
+    UIView *selectedElementView = elementWrapperView.subviews[1];
     selectedElementView.hidden = ! selected;
 }
 
@@ -368,7 +368,7 @@ static void commonInit(HLSCursor *self);
         return 0.f;
     }
     
-    UIView *elementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+    UIView *elementWrapperView = self.elementWrapperViews[index];
     return elementWrapperView.center.x;
 }
 
@@ -424,8 +424,8 @@ static void commonInit(HLSCursor *self);
     }
     // Cursor in between views with indices index-1 and index. Interpolate
     else {
-        UIView *previousElementWrapperView = [self.elementWrapperViews objectAtIndex:index - 1];
-        UIView *nextElementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+        UIView *previousElementWrapperView = self.elementWrapperViews[index - 1];
+        UIView *nextElementWrapperView = self.elementWrapperViews[index];
         
         // Linear interpolation
         CGFloat width = ((xPos - nextElementWrapperView.center.x) * CGRectGetWidth(previousElementWrapperView.frame)

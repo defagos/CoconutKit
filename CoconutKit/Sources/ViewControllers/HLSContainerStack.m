@@ -132,7 +132,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if (self.containerContents.count < 2) {
         return nil;
     }
-    return [self.containerContents objectAtIndex:self.containerContents.count - 2];
+    return self.containerContents[self.containerContents.count - 2];
 }
 
 - (UIViewController *)rootViewController
@@ -164,7 +164,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
 - (HLSContainerContent *)containerContentAtDepth:(NSUInteger)depth
 {
     if (self.containerContents.count > depth) {
-        return [self.containerContents objectAtIndex:self.containerContents.count - depth - 1];
+        return self.containerContents[self.containerContents.count - depth - 1];
     }
     else {
         return nil;
@@ -249,7 +249,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     NSUInteger i = self.containerContents.count - firstRemovedIndex - 1;
     while (i > 0) {
         // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
-        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:firstRemovedIndex];
+        HLSContainerContent *containerContent = self.containerContents[firstRemovedIndex];
         [containerContent.viewController willMoveToParentViewController:nil];
         
         [self.containerContents removeObjectAtIndex:firstRemovedIndex];
@@ -261,7 +261,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     if (firstRemovedIndex != 0) {
         for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
             NSUInteger index = firstRemovedIndex - 1 - i;
-            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            HLSContainerContent *containerContent = self.containerContents[index];
             [self addViewForContainerContent:containerContent inserting:NO animated:NO];
             
             if (index == 0) {
@@ -433,7 +433,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         }
     }
     
-    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+    HLSContainerContent *containerContent = self.containerContents[index];
     
     // We must call -willMoveToParentViewController: manually right before the containment relationship is removed
     [containerContent.viewController willMoveToParentViewController:nil];
@@ -593,7 +593,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         default: {
             for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
                 NSUInteger index = self.containerContents.count - 1 - i;
-                HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                HLSContainerContent *containerContent = self.containerContents[index];
                 if (! [containerContent shouldAutorotate]) {
                     return NO;
                 }
@@ -632,7 +632,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         default: {
             for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
                 NSUInteger index = self.containerContents.count - 1 - i;
-                HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                HLSContainerContent *containerContent = self.containerContents[index];
                 supportedInterfaceOrientations &= [containerContent supportedInterfaceOrientations];
             }
             break;
@@ -650,7 +650,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Avoid frame issues due to rotation
         for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
             NSUInteger index = self.containerContents.count - 1 - i;
-            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            HLSContainerContent *containerContent = self.containerContents[index];
             
             if (containerContent.viewIfLoaded) {
                 // To avoid issues when pushing - rotating - popping view controllers (which can lead to blurry views depending
@@ -700,7 +700,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             default: {
                 for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
                     NSUInteger index = self.containerContents.count - 1 - i;
-                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                    HLSContainerContent *containerContent = self.containerContents[index];
                     [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
                 }
                 break;
@@ -715,7 +715,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Avoid frame issues due to rotation
         for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
             NSUInteger index = self.containerContents.count - 1 - i;
-            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            HLSContainerContent *containerContent = self.containerContents[index];
             
             if (containerContent.viewIfLoaded) {
                 // See comments in -willRotateToInterfaceOrientation:duration:
@@ -756,7 +756,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             default: {
                 for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
                     NSUInteger index = self.containerContents.count - 1 - i;
-                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                    HLSContainerContent *containerContent = self.containerContents[index];
                     [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
                 }
                 break;
@@ -771,7 +771,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // Rotate the loaded child view controller's views to an orientation they support (if needed)
         for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
             NSUInteger index = self.containerContents.count - 1 - i;
-            HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+            HLSContainerContent *containerContent = self.containerContents[index];
             
             // Called in -didRotate. Two reasons:
             //   - the result looks better (children incompatible with the current orientation snap at the end of the animation,
@@ -805,7 +805,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
             default: {
                 for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
                     NSUInteger index = self.containerContents.count - 1 - i;
-                    HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+                    HLSContainerContent *containerContent = self.containerContents[index];
                     [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
                 }
                 break;
@@ -852,7 +852,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         // deep in the stack)
         BOOL inserted = NO;
         for (NSUInteger i = index + 1; i < self.containerContents.count; ++i) {
-            HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:i];
+            HLSContainerContent *aboveContainerContent = self.containerContents[i];
             if (aboveContainerContent.addedToContainerView) {
                 [containerContent insertAsSubviewIntoContainerStackView:stackView
                                                                 atIndex:[stackView.contentViews indexOfObject:aboveContainerContent.viewIfLoaded]];
@@ -867,7 +867,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
         [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
         
         // Play the corresponding animation to put the view into the correct location
-        HLSContainerContent *aboveContainerContent = [self.containerContents objectAtIndex:index + 1];
+        HLSContainerContent *aboveContainerContent = self.containerContents[index + 1];
         HLSContainerGroupView *aboveGroupView = [[self containerStackView] groupViewForContentView:aboveContainerContent.viewIfLoaded];
         HLSAnimation *aboveAnimation = [aboveContainerContent.transitionClass animationWithAppearingView:nil      /* only play the animation for the view we added */
                                                                                         disappearingView:aboveGroupView.backView
@@ -1126,7 +1126,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // previous state is then restored after the frame has changed, see below)
     for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
         NSUInteger index = self.containerContents.count - 1 - i;
-        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+        HLSContainerContent *containerContent = self.containerContents[index];
         
         if (containerContent.viewIfLoaded) {
             HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:containerContent.viewIfLoaded];
@@ -1153,7 +1153,7 @@ const NSUInteger HLSContainerStackUnlimitedCapacity = NSUIntegerMax;
     // See comment in -containerStackViewWillChangeFrame:
     for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
         NSUInteger index = self.containerContents.count - 1 - i;
-        HLSContainerContent *containerContent = [self.containerContents objectAtIndex:index];
+        HLSContainerContent *containerContent = self.containerContents[index];
         
         if (containerContent.viewIfLoaded) {
             HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:containerContent.viewIfLoaded];

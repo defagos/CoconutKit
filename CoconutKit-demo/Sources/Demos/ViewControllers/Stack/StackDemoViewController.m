@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     }
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    NSString *transitionName = [HLSTransition availableTransitionNames][pickedIndex];
     
     @try {
         [stackController insertViewController:pushedViewController
@@ -320,14 +320,14 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] count];
+    return [HLSTransition availableTransitionNames].count;
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
+    return [HLSTransition availableTransitionNames][row];
 }
 
 #pragma mark UIPopoverControllerDelegate protocol implementation
@@ -460,7 +460,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     NSArray *viewControllers = stackController.viewControllers;
     UIViewController *targetViewController = nil;
     if ([viewControllers count] >= 4) {
-        targetViewController = [viewControllers objectAtIndex:viewControllers.count - 4];
+        targetViewController = viewControllers[viewControllers.count - 4];
     }
     else {
         targetViewController = stackController.rootViewController;

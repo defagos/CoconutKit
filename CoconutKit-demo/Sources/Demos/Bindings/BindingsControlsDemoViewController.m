@@ -62,7 +62,7 @@
         employee3.age = @52;
         
         self.employees = @[employee1, employee2, employee3];
-        self.randomEmployee = [self.employees objectAtIndex:arc4random_uniform((u_int32_t)self.employees.count)];
+        self.randomEmployee = self.employees[arc4random_uniform((u_int32_t)self.employees.count)];
         
         self.currentDate = [NSDate date];
         

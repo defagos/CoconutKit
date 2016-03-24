@@ -116,7 +116,7 @@
     }
     
     NSAssert(self.textFields.count == self.errorLabels.count, @"Expect one label per text field");
-    return [self.errorLabels objectAtIndex:index];
+    return self.errorLabels[index];
 }
 
 #pragma mark Event callbacks

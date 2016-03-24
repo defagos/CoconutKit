@@ -112,12 +112,12 @@ static NSArray *s_folders = nil;
     if (cursor == self.foldersCursor || (cursor == self.mixedFoldersCursor && index % 2 == 0)) {
         if (selected) {
             CursorSelectedFolderView *view = [CursorSelectedFolderView view];
-            view.nameLabel.text = [s_folders objectAtIndex:index];
+            view.nameLabel.text = s_folders[index];
             return view;
         }
         else {
             CursorFolderView *view = [CursorFolderView view];
-            view.nameLabel.text = [s_folders objectAtIndex:index];
+            view.nameLabel.text = s_folders[index];
             return view;        
         }
     }
@@ -151,16 +151,16 @@ static NSArray *s_folders = nil;
 - (NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index
 {
     if (cursor == self.weekDaysCursor) {
-        return [s_weekDays objectAtIndex:index];
+        return s_weekDays[index];
     }
     else if (cursor == self.randomRangeCursor) {
-        return [s_completeRange objectAtIndex:index];
+        return s_completeRange[index];
     }
     else if (cursor == self.timeScalesCursor) {
-        return [s_timeScales objectAtIndex:index];
+        return s_timeScales[index];
     }
     else if (cursor == self.mixedFoldersCursor && index % 2 != 0) {
-        return [s_folders objectAtIndex:index];
+        return s_folders[index];
     }
     else {
         return @"";
@@ -242,7 +242,7 @@ static NSArray *s_folders = nil;
         self.randomRangeIndexLabel.textColor = [UIColor blackColor];
         
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
-        pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
+        pointerView.valueLabel.text = s_completeRange[index];
     }
 }
 
@@ -257,7 +257,7 @@ static NSArray *s_folders = nil;
     
     if (cursor == self.randomRangeCursor) {
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
-        pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
+        pointerView.valueLabel.text = s_completeRange[index];
     }
 }
 

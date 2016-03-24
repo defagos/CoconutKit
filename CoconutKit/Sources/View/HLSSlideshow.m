@@ -81,7 +81,7 @@ static void commonInit(HLSSlideshow *self);
             // Try to find whether the current image is also in the new array. If the answer is
             // yes, start at the corresponding location to guarantee we won't see the same image
             // soon afterwards (if images are not displayed randomly, of course)
-            NSString *currentImageNameOrPath = [_imageNamesOrPaths objectAtIndex:self.currentImageIndex];
+            NSString *currentImageNameOrPath = _imageNamesOrPaths[self.currentImageIndex];
             NSUInteger currentImageIndexInNewArray = [imageNamesOrPaths indexOfObject:currentImageNameOrPath];
             if (currentImageIndexInNewArray != NSNotFound) {
                 self.currentImageIndex = currentImageIndexInNewArray;
@@ -252,11 +252,11 @@ static void commonInit(HLSSlideshow *self);
     }
     
     if (self.running) {
-        UIImageView *currentImageView = [self.imageViews objectAtIndex:self.currentImageViewIndex];
+        UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
         return [self imageNameOrPathForImageView:currentImageView];        
     }
     else {
-        UIImageView *nextImageView = [self.imageViews objectAtIndex:(self.currentImageViewIndex + 1) % 2];
+        UIImageView *nextImageView = self.imageViews[(self.currentImageViewIndex + 1) % 2];
         return [self imageNameOrPathForImageView:nextImageView];
     }
 }
@@ -712,15 +712,15 @@ static void commonInit(HLSSlideshow *self);
     // Find the image views to use for the current / next images. Only unused image views (i.e. with image == nil)
     // have to be filled at each step.
     self.currentImageViewIndex = (self.currentImageViewIndex + 1) % 2;
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:self.currentImageViewIndex];
+    UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
     if (! currentImageView.image) {
-        NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:self.currentImageIndex];
+        NSString *currentImagePath = self.imageNamesOrPaths[self.currentImageIndex];
         [self prepareImageView:currentImageView withImageNameOrPath:currentImagePath];
     }
     
-    UIImageView *nextImageView = [self.imageViews objectAtIndex:(self.currentImageViewIndex + 1) % 2];
+    UIImageView *nextImageView = self.imageViews[(self.currentImageViewIndex + 1) % 2];
     if (! nextImageView.image) {
-        NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:self.nextImageIndex];
+        NSString *nextImagePath = self.imageNamesOrPaths[self.nextImageIndex];
         [self prepareImageView:nextImageView withImageNameOrPath:nextImagePath];
     }
     
@@ -749,12 +749,12 @@ static void commonInit(HLSSlideshow *self);
 - (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     if ([animationStep.tag isEqualToString:@"singleImage"]) {
-        UIImageView *currentImageView = [self.imageViews objectAtIndex:self.currentImageViewIndex];
+        UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
         if ([self.delegate respondsToSelector:@selector(slideshow:willHideImageWithNameOrPath:)]) {
             [self.delegate slideshow:self willHideImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
         }
         
-        UIImageView *nextImageView = [self.imageViews objectAtIndex:(self.currentImageViewIndex + 1) % 2];
+        UIImageView *nextImageView = self.imageViews[(self.currentImageViewIndex + 1) % 2];
         if ([self.delegate respondsToSelector:@selector(slideshow:willShowImageWithNameOrPath:)]) {
             [self.delegate slideshow:self willShowImageWithNameOrPath:[self imageNameOrPathForImageView:nextImageView]];
         }
@@ -764,14 +764,14 @@ static void commonInit(HLSSlideshow *self);
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
     if ([self.delegate respondsToSelector:@selector(slideshow:didShowImageWithNameOrPath:)]) {
-        UIImageView *currentImageView = [self.imageViews objectAtIndex:self.currentImageViewIndex];
+        UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
         [self.delegate slideshow:self didShowImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
     }
 }
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:self.currentImageViewIndex];
+    UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
     if ([self.delegate respondsToSelector:@selector(slideshow:didHideImageWithNameOrPath:)]) {
         [self.delegate slideshow:self didHideImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
     }

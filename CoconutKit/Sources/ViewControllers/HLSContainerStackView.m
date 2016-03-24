@@ -82,8 +82,8 @@
     }
     // Insert in the middle
     else {
-        HLSContainerGroupView *groupViewAtIndex = [self.groupViews objectAtIndex:index];
-        HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
+        HLSContainerGroupView *groupViewAtIndex = self.groupViews[index];
+        HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? self.groupViews[index - 1] : nil;
         
         HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = belowGroupViewAtIndex;
@@ -103,8 +103,8 @@
         return;
     }
     
-    HLSContainerGroupView *groupView = [self.groupViews objectAtIndex:index];
-    HLSContainerGroupView *belowGroupView = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
+    HLSContainerGroupView *groupView = self.groupViews[index];
+    HLSContainerGroupView *belowGroupView = (index > 0) ? self.groupViews[index - 1] : nil;
     
     // Remove at the top
     if (index == self.groupViews.count - 1) {
@@ -114,7 +114,7 @@
     }
     // Remove in the middle
     else {
-        HLSContainerGroupView *aboveGroupView = [self.groupViews objectAtIndex:index + 1];
+        HLSContainerGroupView *aboveGroupView = self.groupViews[index + 1];
         aboveGroupView.backContentView = belowGroupView;
     }
     

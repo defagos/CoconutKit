@@ -118,10 +118,10 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 {   
     DeviceInfo *device = nil;
     if (tableView == self.searchResultsTableView) {
-        device = [self.filteredDevices objectAtIndex:indexPath.row];
+        device = self.filteredDevices[indexPath.row];
     }
     else {
-        device = [self.devices objectAtIndex:indexPath.row];
+        device = self.devices[indexPath.row];
     }
     
     HLSTableViewCell *cell = [HLSTableViewCell cellForTableView:tableView];

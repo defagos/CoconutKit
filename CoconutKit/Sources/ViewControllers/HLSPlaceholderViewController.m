@@ -80,7 +80,7 @@
     if (index >= self.placeholderViews.count) {
         return nil;
     }
-    return [self.placeholderViews objectAtIndex:index];
+    return self.placeholderViews[index];
 }
 
 - (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index
@@ -89,7 +89,7 @@
         return nil;
     }
     
-    HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
+    HLSContainerStack *containerStack = self.containerStacks[index];
     return containerStack.topViewController;
 }
 
@@ -158,7 +158,7 @@
     // Associate stacks and placeholder views
     NSUInteger i = 0;
     for (HLSContainerStack *containerStack in self.containerStacks) {
-        containerStack.containerView = [self.placeholderViews objectAtIndex:i];
+        containerStack.containerView = self.placeholderViews[i];
         ++i;
     }
 }
@@ -298,7 +298,7 @@
         }
     }
     
-    HLSContainerStack *containerStack = [self.containerStacks objectAtIndex:index];
+    HLSContainerStack *containerStack = self.containerStacks[index];
     if (! insetViewController) {
         if (containerStack.count > 0) {
             [containerStack popViewControllerAnimated:YES];

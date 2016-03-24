@@ -198,7 +198,7 @@
         return;
     }
     
-    NSString *localization = [[NSBundle mainBundle].localizations objectAtIndex:buttonIndex];
+    NSString *localization = [NSBundle mainBundle].localizations[buttonIndex];
     [NSBundle setLocalization:localization];
 }
 

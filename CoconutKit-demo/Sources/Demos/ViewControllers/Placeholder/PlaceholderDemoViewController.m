@@ -126,7 +126,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
     }
         
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    NSString *transitionName = [HLSTransition availableTransitionNames][pickedIndex];
     
     @try {
         [self setInsetViewController:insetViewController atIndex:index withTransitionClass:NSClassFromString(transitionName)];
@@ -194,14 +194,14 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] count];
+    return [HLSTransition availableTransitionNames].count;
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
+    return [HLSTransition availableTransitionNames][row];
 }
 
 #pragma mark Event callbacks

@@ -140,7 +140,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Display the current page
-    UIViewController *viewController = [self.viewControllers objectAtIndex:_currentPage];
+    UIViewController *viewController = self.viewControllers[_currentPage];
     [self setInsetViewController:viewController atIndex:0 withTransitionClass:transitionClass];
 }
 
@@ -200,7 +200,7 @@ static const NSInteger kWizardViewControllerNoPage = -1;
     }
     
     // Validate the current page if it implements a validation mechanism
-    UIViewController *viewController = [self.viewControllers objectAtIndex:page];
+    UIViewController *viewController = self.viewControllers[page];
     if ([viewController conformsToProtocol:@protocol(HLSValidable)]) {
         return [(UIViewController<HLSValidable>*)viewController validate];
     }

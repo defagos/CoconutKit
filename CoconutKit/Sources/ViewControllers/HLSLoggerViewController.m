@@ -101,14 +101,14 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [self.logFilePaths objectAtIndex:indexPath.row].lastPathComponent;
+    cell.textLabel.text = self.logFilePaths[indexPath.row].lastPathComponent;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.currentLogFileURL = [NSURL fileURLWithPath:[self.logFilePaths objectAtIndex:indexPath.row]];
+    self.currentLogFileURL = [NSURL fileURLWithPath:self.logFilePaths[indexPath.row]];
     QLPreviewController *previewController = [[QLPreviewController alloc] init];
     previewController.dataSource = self;
     [self.navigationController pushViewController:previewController animated:YES];

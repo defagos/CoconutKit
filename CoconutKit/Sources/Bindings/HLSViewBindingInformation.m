@@ -546,7 +546,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
         transformationTarget = class;
         
-        transformationSelector = NSSelectorFromString([transformerComponents objectAtIndex:1]);
+        transformationSelector = NSSelectorFromString(transformerComponents[1]);
         if (! transformationSelector || ! class_getClassMethod(class, transformationSelector)) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
@@ -1111,7 +1111,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         return object;
     }
     // Key path ending with an operator. Extract objects onto which the key path is applied
-    else if (keyPathComponents.count >= 2 && [[keyPathComponents objectAtIndex:keyPathComponents.count - 2] hasPrefix:@"@"]) {
+    else if (keyPathComponents.count >= 2 && [keyPathComponents[keyPathComponents.count - 2] hasPrefix:@"@"]) {
         NSString *lastObjectsKeyPath = [[[keyPathComponents arrayByRemovingLastObject] arrayByRemovingLastObject] componentsJoinedByString:@"."];
         return [object valueForKeyPath:lastObjectsKeyPath];
     }

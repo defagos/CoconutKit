@@ -73,7 +73,7 @@
 - (void)changeEmployee
 {
     _currentEmployeeIndex = (_currentEmployeeIndex + 1) % self.employees.count;
-    self.employeeView.employee = [self.employees objectAtIndex:_currentEmployeeIndex];
+    self.employeeView.employee = self.employees[_currentEmployeeIndex];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -93,7 +93,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EmployeeTableViewCell *employeeCell = (EmployeeTableViewCell *)cell;
-    employeeCell.employee = [self.employees objectAtIndex:indexPath.row];
+    employeeCell.employee = self.employees[indexPath.row];
     employeeCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 

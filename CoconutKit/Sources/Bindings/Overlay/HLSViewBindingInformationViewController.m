@@ -245,8 +245,8 @@
 
 - (HLSViewBindingInformationEntry *)entryAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray<HLSViewBindingInformationEntry *> *sectionEntries = [self.entries objectAtIndex:indexPath.section];
-    return [sectionEntries objectAtIndex:indexPath.row];
+    NSArray<HLSViewBindingInformationEntry *> *sectionEntries = self.entries[indexPath.section];
+    return sectionEntries[indexPath.row];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
@@ -258,18 +258,18 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.headerTitles objectAtIndex:section];
+    return self.headerTitles[section];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    NSString *title = [self.footerTitles objectAtIndex:section];
+    NSString *title = self.footerTitles[section];
     return title.filled ? title : nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *sectionEntries = [self.entries objectAtIndex:section];
+    NSArray *sectionEntries = self.entries[section];
     return sectionEntries.count;
 }
 
