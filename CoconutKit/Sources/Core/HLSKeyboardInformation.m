@@ -44,10 +44,10 @@ static HLSKeyboardInformation *s_instance = nil;
 - (instancetype)initWithUserInfo:(NSDictionary *)userInfo
 {
     if (self = [super init]) {
-        self.beginFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-        self.endFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        self.animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        self.animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntValue];
+        self.beginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        self.endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        self.animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        self.animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] unsignedIntValue];
     }
     return self;
 }

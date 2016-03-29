@@ -98,7 +98,7 @@
         
         // File. If the file already exists, it will be replaced
         if (data) {
-            NSString *oldUUID = [items objectForKey:objectName];
+            NSString *oldUUID = items[objectName];
             if (oldUUID) {
                 [self.cache removeObjectForKey:oldUUID];
             }
@@ -113,7 +113,7 @@
         }
         // Folder. If the folder already exists, it is not replaced, and the method succeeds
         else {
-            if (! [items objectForKey:objectName]) {
+            if (! items[objectName]) {
                 [items setObject:[NSMutableDictionary dictionary] forKey:objectName];
             }
         }
@@ -124,7 +124,7 @@
         NSString *firstPathComponent = pathComponents.firstObject;
         
         // Create intermediate directories if needed
-        NSMutableDictionary<NSString *, id> *subitems = [items objectForKey:firstPathComponent];
+        NSMutableDictionary<NSString *, id> *subitems = items[firstPathComponent];
         if (! subitems) {
             subitems = [NSMutableDictionary dictionary];
             [items setObject:subitems forKey:firstPathComponent];
@@ -148,7 +148,7 @@
                      error:(NSError *__autoreleasing *)pError
 {
     // Retrieve the source content
-    id sourceContent = [sourceItems objectForKey:sourceObjectName];
+    id sourceContent = sourceItems[sourceObjectName];
     if (! sourceContent) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -158,7 +158,7 @@
         return NO;
     }
     
-    if ([destinationItems objectForKey:destinationObjectName]) {
+    if (destinationItems[destinationObjectName]) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
                                           code:NSFileWriteFileExistsError
@@ -205,7 +205,7 @@
                      error:(NSError *__autoreleasing *)pError
 {
     // Retrieve the source content
-    id sourceContent = [sourceItems objectForKey:sourceObjectName];
+    id sourceContent = sourceItems[sourceObjectName];
     if (! sourceContent) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -215,7 +215,7 @@
         return NO;
     }
     
-    if ([destinationItems objectForKey:destinationObjectName]) {
+    if (destinationItems[destinationObjectName]) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
                                           code:NSFileWriteFileExistsError
@@ -242,7 +242,7 @@
     }
     
     NSString *firstPathComponent = pathComponents.firstObject;
-    id subitems = [items objectForKey:firstPathComponent];
+    id subitems = items[firstPathComponent];
     
     if (pathComponents.count == 1) {
         return subitems;
@@ -256,7 +256,7 @@
 
 - (BOOL)removeItemWithName:(NSString *)name inItems:(NSMutableDictionary<NSString *, id> *)items error:(NSError *__autoreleasing *)pError
 {
-    id content = [items objectForKey:name];
+    id content = items[name];
     if (! content) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain

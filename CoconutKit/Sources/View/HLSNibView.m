@@ -136,7 +136,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 + (CGSize)size
 {
     // Cache the view height
-    NSValue *viewSizeValue = [s_classNameToSizeMap objectForKey:[self className]];
+    NSValue *viewSizeValue = s_classNameToSizeMap[[self className]];
     if (! viewSizeValue) {
         UIView *view = [self view];
         viewSizeValue = [NSValue valueWithCGSize:view.bounds.size];

@@ -138,7 +138,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         NSDictionary *userInfo = nil;
         if ([*pExistingError hasCode:NSValidationMultipleErrorsError withinDomain:NSCocoaErrorDomain]) {
             userInfo = (*pExistingError).userInfo;
-            NSArray<NSError *> *errors = [userInfo objectForKey:NSDetailedErrorsKey];
+            NSArray<NSError *> *errors = userInfo[NSDetailedErrorsKey];
             errors = [errors arrayByAddingObject:newError];
             userInfo = [userInfo dictionaryBySettingObject:errors forKey:NSDetailedErrorsKey];            
         }
@@ -225,7 +225,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
     // Extract the error list (should be one since this method is meant to flatten out errors returned by the
     // Core Data runtime)
     NSDictionary *userInfo = error.userInfo;
-    NSArray *errors = [userInfo objectForKey:NSDetailedErrorsKey];
+    NSArray *errors = userInfo[NSDetailedErrorsKey];
     if (errors.count == 0) {
         HLSLoggerWarn(@"Error with code NSValidationMultipleErrorsError, but no error list found");
         return error;
@@ -242,7 +242,7 @@ static BOOL validateObjectConsistencyInClassHierarchy(id self, Class class, SEL 
         }
         
         // Flatten out nested errors
-        NSArray<NSError *> *errorsInError = [error.userInfo objectForKey:NSDetailedErrorsKey];
+        NSArray<NSError *> *errorsInError = error.userInfo[NSDetailedErrorsKey];
         if (errorsInError.count != 0) {
             flattenedErrors = [flattenedErrors arrayByAddingObjectsFromArray:errorsInError];
         }

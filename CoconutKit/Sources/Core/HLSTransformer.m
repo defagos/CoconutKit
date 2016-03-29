@@ -25,7 +25,7 @@ NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrie
                      @(UIInterfaceOrientationLandscapeLeft) : @"UIInterfaceOrientationLandscapeLeft",
                      @(UIInterfaceOrientationLandscapeRight) : @"UIInterfaceOrientationLandscapeRight" };
     });
-    return [s_names objectForKey:@(interfaceOrientation)];
+    return s_names[@(interfaceOrientation)];
 }
 
 NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
@@ -38,7 +38,7 @@ NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
                      @(UIDeviceOrientationLandscapeLeft) : @"UIDeviceOrientationLandscapeLeft",
                      @(UIDeviceOrientationLandscapeRight) : @"UIDeviceOrientationLandscapeRight" };
     });
-    return [s_names objectForKey:@(deviceOrientation)];
+    return s_names[@(deviceOrientation)];
 }
 
 NSString *HLSStringFromCATransform3D(CATransform3D transform)

@@ -100,7 +100,7 @@
     }
     
     NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
-    return [self.objectToObjectAnimationMap objectForKey:objectKey];
+    return self.objectToObjectAnimationMap[objectKey];
 }
 
 #pragma mark Managing the animation

@@ -177,7 +177,7 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
     UIView *activeView = [UIApplication sharedApplication].keyWindow.activeViewController.view;
     NSArray<UIScrollView *> *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:activeView];
     
-    CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardEndFrameInWindow = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
     NSMutableArray<UIScrollView *> *adjustedScrollViews = [NSMutableArray array];
     
@@ -201,10 +201,10 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
         // initial values in such cases
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         
-        NSNumber *scrollViewOriginalBottomInset = [s_scrollViewOriginalBottomInsets objectForKey:pointerKey] ?: @(scrollView.contentInset.bottom);
+        NSNumber *scrollViewOriginalBottomInset = s_scrollViewOriginalBottomInsets[pointerKey] ?: @(scrollView.contentInset.bottom);
         [scrollViewOriginalBottomInsets setObject:scrollViewOriginalBottomInset forKey:pointerKey];
         
-        NSNumber *scrollViewOriginalIndicatorBottomInset = [s_scrollViewOriginalIndicatorBottomInsets objectForKey:pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
+        NSNumber *scrollViewOriginalIndicatorBottomInset = s_scrollViewOriginalIndicatorBottomInsets[pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
         [scrollViewOriginalIndicatorBottomInsets setObject:scrollViewOriginalIndicatorBottomInset forKey:pointerKey];
         
         // Adjust content
@@ -241,13 +241,13 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
     for (UIScrollView *scrollView in s_adjustedScrollViews) {
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         
-        CGFloat scrollViewOriginalBottomInset = [[s_scrollViewOriginalBottomInsets objectForKey:pointerKey] floatValue];
+        CGFloat scrollViewOriginalBottomInset = [s_scrollViewOriginalBottomInsets[pointerKey] floatValue];
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
                                                    scrollViewOriginalBottomInset,
                                                    scrollView.contentInset.right);
         
-        CGFloat scrollViewOriginalIndicatorBottomInset = [[s_scrollViewOriginalBottomInsets objectForKey:pointerKey] floatValue];
+        CGFloat scrollViewOriginalIndicatorBottomInset = [s_scrollViewOriginalBottomInsets[pointerKey] floatValue];
         scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                             scrollView.scrollIndicatorInsets.left,
                                                             scrollViewOriginalIndicatorBottomInset,

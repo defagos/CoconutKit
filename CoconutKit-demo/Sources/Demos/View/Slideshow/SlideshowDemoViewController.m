@@ -111,7 +111,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    static NSDictionary *s_rows;
+    static NSDictionary<NSNumber *, NSString *> *s_rows;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_rows = @{ @(HLSSlideshowEffectNone) : @"HLSSlideshowEffectNone",
@@ -122,7 +122,7 @@
                     @(HLSSlideshowEffectVerticalRibbon) : @"HLSSlideshowEffectVerticalRibbon",
                     @(HLSSlideshowEffectInverseVerticalRibbon) : @"HLSSlideshowEffectInverseVerticalRibbon" };
     });
-    return [s_rows objectForKey:@(row)];
+    return s_rows[@(row)];
 }
 
 #pragma mark Slideshow

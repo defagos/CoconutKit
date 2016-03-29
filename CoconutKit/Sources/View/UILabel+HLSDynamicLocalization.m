@@ -100,7 +100,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
         
         // Get the information for the current button state
         NSNumber *buttonStateKey = @(button.state);
-        return [buttonStateToLocalizationInfoMap objectForKey:buttonStateKey];
+        return buttonStateToLocalizationInfoMap[buttonStateKey];
     }
     // Standalone label
     else {

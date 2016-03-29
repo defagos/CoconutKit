@@ -144,7 +144,7 @@
     NSParameterAssert(connection);
     NSParameterAssert(key);
     
-    if ([self.childConnectionsDictionary objectForKey:key]) {
+    if (self.childConnectionsDictionary[key]) {
         HLSLoggerError(@"A connection has already been registered for key %@", key);
         return;
     }
@@ -180,14 +180,14 @@
 {
     NSParameterAssert(key);
     
-    return [self.childConnectionsDictionary objectForKey:key];
+    return self.childConnectionsDictionary[key];
 }
 
 - (void)removeChildConnectionForKey:(id)key
 {
     NSParameterAssert(key);
     
-    HLSConnection *connection = [self.childConnectionsDictionary objectForKey:key];
+    HLSConnection *connection = self.childConnectionsDictionary[key];
     if (! connection) {
         return;
     }

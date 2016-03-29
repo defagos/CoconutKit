@@ -333,7 +333,7 @@ static void commonInit(HLSSlideshow *self);
 
 - (NSString *)imageNameOrPathForImageView:(UIImageView *)imageView
 {
-    return [imageView.userInfo_hls objectForKey:@"imageNameOrPath"];
+    return imageView.userInfo_hls[@"imageNameOrPath"];
 }
 
 // Randomly move and scale an image view so that it stays in self.view. Returns random scale factors, x and y offsets
@@ -431,10 +431,10 @@ static void commonInit(HLSSlideshow *self);
     
     // User information attached: Not the first animation loop (and not reset after skipping
     // to the next or previous image)
-    if ([userInfo objectForKey:@"scaleFactor"]) {
-        currentImageScaleFactor = [[userInfo objectForKey:@"scaleFactor"] floatValue];
-        currentImageXOffset = [[userInfo objectForKey:@"xOffset"] floatValue];
-        currentImageYOffset = [[userInfo objectForKey:@"yOffset"] floatValue];
+    if (userInfo[@"scaleFactor"]) {
+        currentImageScaleFactor = [userInfo[@"scaleFactor"] floatValue];
+        currentImageXOffset = [userInfo[@"xOffset"] floatValue];
+        currentImageYOffset = [userInfo[@"yOffset"] floatValue];
     }
     // No user information attached: First animation loop
     else {

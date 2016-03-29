@@ -220,7 +220,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 - (void)updateOverlayViewFrames
 {
     for (UIView *overlayView in self.view.subviews) {
-        UIView *underlyingView = [overlayView.userInfo_hls objectForKey:HLSViewBindingDebugOverlayUnderlyingViewKey];
+        UIView *underlyingView = overlayView.userInfo_hls[HLSViewBindingDebugOverlayUnderlyingViewKey];
         if (! underlyingView) {
             HLSLoggerWarn(@"The view %@ has no underlying view. Its frame will not be correctly updated", overlayView);
             continue;
@@ -277,7 +277,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 {
     NSAssert([sender isKindOfClass:[UIButton class]], @"Expect a button");
     UIButton *overlayButton = sender;
-    UIView *underlyingView = [overlayButton.userInfo_hls objectForKey:HLSViewBindingDebugOverlayUnderlyingViewKey];
+    UIView *underlyingView = overlayButton.userInfo_hls[HLSViewBindingDebugOverlayUnderlyingViewKey];
     HLSViewBindingInformation *bindingInformation = underlyingView.bindingInformation;
     if (! bindingInformation) {
         return;

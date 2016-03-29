@@ -136,7 +136,7 @@
 {
     static NSString * const HLSModelManagerStackThreadLocalStorageKey = @"HLSModelManagerStackThreadLocalStorageKey";
     
-    NSMutableArray<HLSModelManager *> *modelManagerStack = [thread.threadDictionary objectForKey:HLSModelManagerStackThreadLocalStorageKey];
+    NSMutableArray<HLSModelManager *> *modelManagerStack = thread.threadDictionary[HLSModelManagerStackThreadLocalStorageKey];
     if (! modelManagerStack) {
         modelManagerStack = [NSMutableArray array];
         [thread.threadDictionary setObject:modelManagerStack forKey:HLSModelManagerStackThreadLocalStorageKey];

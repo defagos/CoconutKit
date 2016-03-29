@@ -150,7 +150,7 @@ static void setDefaultLocalization(void)
     NSString *tablePath = [self pathForResource:tableName ofType:@"strings" inDirectory:nil forLocalization:localizationName];
     NSDictionary *table = [NSDictionary dictionaryWithContentsOfFile:tablePath];
     
-    NSString *localizedString = [table objectForKey:key];
+    NSString *localizedString = table[key];
     
     if (! localizedString) {
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"NSShowNonLocalizedStrings"]) {

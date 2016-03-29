@@ -15,7 +15,7 @@
 {
     NSDictionary *dictionary1 = @{};
     dictionary1 = [dictionary1 dictionaryBySettingObject:@"obj1" forKey:@"key1"];
-    XCTAssertEqualObjects([dictionary1 objectForKey:@"key1"], @"obj1");
+    XCTAssertEqualObjects(dictionary1[@"key1"], @"obj1");
     dictionary1 = [dictionary1 dictionaryByRemovingObjectForKey:@"key1"];
     XCTAssertEqual(dictionary1.count, (NSUInteger)0);
     

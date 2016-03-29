@@ -86,7 +86,7 @@ static Class subclass_class(id self, SEL _cmd);
 {
     NSParameterAssert(key);
         
-    return [self.userInfo objectForKey:key];
+    return self.userInfo[key];
 }
 
 - (NSArray *)objectsForKey:(NSString *)key

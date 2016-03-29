@@ -168,7 +168,7 @@
         }
         
         // Deep copy owned objects implementing the NSManagedObjectCopying protocol
-        NSRelationshipDescription *relationshipDescription = [relationships objectForKey:relationshipName];
+        NSRelationshipDescription *relationshipDescription = relationships[relationshipName];
         if (relationshipDescription.deleteRule == NSCascadeDeleteRule) {
             // To-many relationship
             if (relationshipDescription.toMany) {

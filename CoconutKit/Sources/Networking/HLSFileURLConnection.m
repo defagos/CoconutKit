@@ -27,7 +27,7 @@
 - (void)startConnectionWithRunLoopModes:(NSSet *)runLoopModes
 {
     // A latency can be added using environment variables
-    NSTimeInterval delay = [[NSProcessInfo processInfo].environment objectForKey:@"HLSFileURLConnectionLatency"].doubleValue
+    NSTimeInterval delay = [NSProcessInfo processInfo].environment[@"HLSFileURLConnectionLatency"].doubleValue
         + arc4random_uniform(1001) / 1000.;
     if (isless(delay, 0.)) {
         HLSLoggerWarn(@"The connection latency must be >= 0. Fixed to 0");
@@ -56,7 +56,7 @@
     
     // If the corresponding environment variable has been set, the connection can be set to be unreliable, in which
     // case it will have the corresponding failure probability
-    double failureRate = [[NSProcessInfo processInfo].environment objectForKey:@"HLSFileURLConnectionFailureRate"].doubleValue;
+    double failureRate = [NSProcessInfo processInfo].environment[@"HLSFileURLConnectionFailureRate"].doubleValue;
     if (isless(failureRate, 0.)) {
         HLSLoggerWarn(@"The failure rate must be >= 0. Fixed to 0");
         failureRate = 0.;

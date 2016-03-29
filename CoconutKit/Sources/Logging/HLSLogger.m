@@ -122,7 +122,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
     static BOOL s_xcodeColorsEnabled = NO;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        NSString *xcodeColorsValue = [[NSProcessInfo processInfo].environment objectForKey:@"XcodeColors"];
+        NSString *xcodeColorsValue = [NSProcessInfo processInfo].environment[@"XcodeColors"];
         s_xcodeColorsEnabled = [xcodeColorsValue isEqualToString:@"YES"];
     });
     
@@ -164,7 +164,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             });
             
             NSString *dateString = [s_dateFormatter stringFromDate:[NSDate date]];
-            NSString *bundleName = [[[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
+            NSString *bundleName = [[NSBundle mainBundle].infoDictionary[@"CFBundleName"] stringByReplacingOccurrencesOfString:@"." withString:@"-"];
             NSString *versionString = [[NSBundle mainBundle].friendlyVersionNumber stringByReplacingOccurrencesOfString:@"." withString:@"-"];
             NSString *logFileName = [NSString stringWithFormat:@"%@_%@_%@.txt", bundleName, versionString, dateString];
             NSString *logFilePath = [self.logDirectoryPath stringByAppendingPathComponent:logFileName];

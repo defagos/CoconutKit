@@ -43,7 +43,7 @@
         // Special modes can be set by setting the CoconutKitDemoMode environment variable:
         //    - "Normal" (or not set): Full set of demos
         //    - "RootStack": Test a stack controller as root view controller of the application
-        NSString *demoMode = [[NSProcessInfo processInfo].environment objectForKey:@"CoconutKitDemoMode"];
+        NSString *demoMode = [NSProcessInfo processInfo].environment[@"CoconutKitDemoMode"];
         if ([demoMode isEqualToString:@"RootStack"]) {
             // Pre-load the stack with two view controllers (by enabling logging, one can discover that view events are correctly
             // forwarded to the view controller on top only)

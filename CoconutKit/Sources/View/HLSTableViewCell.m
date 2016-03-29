@@ -117,7 +117,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 {
     // Cache the cell size; this way the user does pay the same performance penalty for height whether she
     // sets the UITableView rowHeight property or uses the row height callback
-    NSValue *cellSizeValue = [s_classNameToSizeMap objectForKey:[self className]];
+    NSValue *cellSizeValue = s_classNameToSizeMap[[self className]];
     if (! cellSizeValue) {
         // Instantiate a dummy cell
         UITableViewCell *cell = [self cellForTableView:nil];

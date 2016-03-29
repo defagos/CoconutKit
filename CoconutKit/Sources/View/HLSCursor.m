@@ -613,7 +613,7 @@ static void commonInit(HLSCursor *self);
     if ([animation.tag isEqualToString:@"move"]) {
         // If the finger has been released during the move animation, update the selected index and notify
         if (! _holding) {
-            _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+            _selectedIndex = [animation.userInfo[@"targetIndex"] unsignedIntegerValue];
             [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
@@ -626,7 +626,7 @@ static void commonInit(HLSCursor *self);
         _moving = NO;
     }
     else if ([animation.tag isEqualToString:@"snap"]) {
-        _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+        _selectedIndex = [animation.userInfo[@"targetIndex"] unsignedIntegerValue];
         [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
         
         [self showElementViewAtIndex:_selectedIndex selected:YES];
