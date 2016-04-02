@@ -68,7 +68,7 @@
 
 - (void)reloadData
 {
-    self.logFilePaths = [self.logger availableLogFilePaths];
+    self.logFilePaths = self.logger.availableLogFilePaths;
     
     [self.tableView reloadData];
 }

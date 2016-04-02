@@ -143,7 +143,7 @@ static Class subclass_class(id self, SEL _cmd);
             NSString *subclassName = [className stringByAppendingString:kSubclassSuffix];
             Class subclass = NSClassFromString(subclassName);
             if (! subclass) {
-                subclass = objc_allocateClassPair(class, [subclassName UTF8String], 0);
+                subclass = objc_allocateClassPair(class, subclassName.UTF8String, 0);
                 NSAssert(subclass != Nil, @"Could not register subclass");
                 class_addMethod(subclass,
                                 @selector(userInfo),
@@ -241,7 +241,7 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (BOOL)hasCode:(NSInteger)code withinDomain:(NSString *)domain
 {
-    return [self code] == code && [[self domain] isEqualToString:domain];
+    return self.code == code && [self.domain isEqualToString:domain];
 }
 
 @end

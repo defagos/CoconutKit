@@ -74,7 +74,7 @@ OBJC_EXPORT NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
 - (instancetype)initWithIdentifier:(nullable NSString *)identifier
                             source:(UIViewController *)source
                        destination:(UIViewController *)destination
-                   transitionClass:(nullable Class)transitionClass;
+                   transitionClass:(nullable Class)transitionClass NS_DESIGNATED_INITIALIZER;
 
 /**
  * The placeholder view index which the destination view controller must be displayed in

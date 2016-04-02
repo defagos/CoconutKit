@@ -22,4 +22,9 @@
     return self;
 }
 
+- (instancetype)init
+{
+    return [self initWithObject:nil];
+}
+
 @end

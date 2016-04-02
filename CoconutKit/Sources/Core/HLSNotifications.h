@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Get the shared object managing application-wide notifications
  */
-+ (instancetype)sharedNotificationManager;
++ (HLSNotificationManager *)sharedNotificationManager;
 
 /**
  * Call this method to notify that a network task has started. This method can be called several times if several

@@ -78,7 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HLSNibView (RequiresSuper)
 
-- (nullable id)awakeAfterUsingCoder NS_REQUIRES_SUPER;
 - (void)awakeFromNib NS_REQUIRES_SUPER;
 
 @end

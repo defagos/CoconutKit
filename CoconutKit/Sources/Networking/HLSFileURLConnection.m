@@ -34,7 +34,7 @@
         delay = 0.;
     }
     
-    [self performSelector:@selector(retrieveFiles) withObject:nil afterDelay:delay inModes:[runLoopModes allObjects]];
+    [self performSelector:@selector(retrieveFiles) withObject:nil afterDelay:delay inModes:runLoopModes.allObjects];
 }
 
 - (void)cancelConnection

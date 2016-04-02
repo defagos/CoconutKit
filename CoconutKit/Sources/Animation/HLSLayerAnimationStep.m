@@ -87,7 +87,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         static float (*s_UIAnimationDragCoefficient)(void) = NULL;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
-            void *UIKitDylib = dlopen([[[NSBundle bundleForClass:[UIApplication class]] executablePath] fileSystemRepresentation], RTLD_LAZY);
+            void *UIKitDylib = dlopen([NSBundle bundleForClass:[UIApplication class]].executablePath.fileSystemRepresentation, RTLD_LAZY);
             s_UIAnimationDragCoefficient = (float (*)(void))dlsym(UIKitDylib, "UIAnimationDragCoefficient");
             if (! s_UIAnimationDragCoefficient) {
                 HLSLoggerInfo(@"UIAnimationDragCoefficient not found. Slow animations won't be available for animations based on Core Animation");
@@ -134,8 +134,8 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         
         if (animated) {
             CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-            [opacityAnimation setFromValue:@(layer.opacity)];
-            [opacityAnimation setToValue:@(opacity)];
+            opacityAnimation.fromValue = @(layer.opacity);
+            opacityAnimation.toValue = @(opacity);
             [animations addObject:opacityAnimation];
         }
         layer.opacity = opacity;
@@ -149,8 +149,8 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         
         if (animated) {
             CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-            [transformAnimation setFromValue:[NSValue valueWithCATransform3D:layer.transform]];
-            [transformAnimation setToValue:[NSValue valueWithCATransform3D:transform]];
+            transformAnimation.fromValue = [NSValue valueWithCATransform3D:layer.transform];
+            transformAnimation.toValue = [NSValue valueWithCATransform3D:transform];
             [animations addObject:transformAnimation];
         }
         layer.transform = transform;
@@ -162,13 +162,13 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         
         if (animated) {
             CABasicAnimation *anchorPointAnimation = [CABasicAnimation animationWithKeyPath:@"anchorPoint"];
-            [anchorPointAnimation setFromValue:[NSValue valueWithCGPoint:layer.anchorPoint]];
-            [anchorPointAnimation setToValue:[NSValue valueWithCGPoint:anchorPoint]];
+            anchorPointAnimation.fromValue = [NSValue valueWithCGPoint:layer.anchorPoint];
+            anchorPointAnimation.toValue = [NSValue valueWithCGPoint:anchorPoint];
             [animations addObject:anchorPointAnimation];
             
             CABasicAnimation *anchorPointZAnimation = [CABasicAnimation animationWithKeyPath:@"anchorPointZ"];
-            [anchorPointZAnimation setFromValue:@(layer.anchorPointZ)];
-            [anchorPointZAnimation setToValue:@(anchorPointZ)];
+            anchorPointZAnimation.fromValue = @(layer.anchorPointZ);
+            anchorPointZAnimation.toValue = @(anchorPointZ);
             [animations addObject:anchorPointZAnimation];
         }
         layer.anchorPoint = anchorPoint;
@@ -179,8 +179,8 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
             BOOL shouldRasterize = ! layer.shouldRasterize;
             if (animated) {
                 CABasicAnimation *shouldRasterizeAnimation = [CABasicAnimation animationWithKeyPath:@"shouldRasterize"];
-                [shouldRasterizeAnimation setFromValue:@(layer.shouldRasterize)];
-                [shouldRasterizeAnimation setToValue:@(shouldRasterize)];
+                shouldRasterizeAnimation.fromValue = @(layer.shouldRasterize);
+                shouldRasterizeAnimation.toValue = @(shouldRasterize);
                 [animations addObject:shouldRasterizeAnimation];
             }
             layer.shouldRasterize = shouldRasterize;
@@ -190,8 +190,8 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         CGFloat rasterizationScale = layer.rasterizationScale + layerAnimation.rasterizationScaleIncrement;
         if (animated) {
             CABasicAnimation *rasterizationScaleAnimation = [CABasicAnimation animationWithKeyPath:@"rasterizationScale"];
-            [rasterizationScaleAnimation setFromValue:@(layer.rasterizationScale)];
-            [rasterizationScaleAnimation setToValue:@(rasterizationScale)];
+            rasterizationScaleAnimation.fromValue = @(layer.rasterizationScale);
+            rasterizationScaleAnimation.toValue = @(rasterizationScale);
             [animations addObject:rasterizationScaleAnimation];
         }
         layer.rasterizationScale = rasterizationScale;
@@ -200,7 +200,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         NSValue *nonProjectedSublayerTransformValue = [layer valueForKey:HLSLayerNonProjectedSublayerTransformKey];
         CATransform3D nonProjectedSublayerTransform = CATransform3DIdentity;
         if (nonProjectedSublayerTransformValue) {
-            nonProjectedSublayerTransform = [nonProjectedSublayerTransformValue CATransform3DValue];
+            nonProjectedSublayerTransform = nonProjectedSublayerTransformValue.CATransform3DValue;
         }
         else {
             nonProjectedSublayerTransform = layer.sublayerTransform;
@@ -240,8 +240,8 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
         
         if (animated) {
             CABasicAnimation *sublayerTransformAnimation = [CABasicAnimation animationWithKeyPath:@"sublayerTransform"];
-            [sublayerTransformAnimation setFromValue:[NSValue valueWithCATransform3D:layer.sublayerTransform]];
-            [sublayerTransformAnimation setToValue:[NSValue valueWithCATransform3D:sublayerTransform]];
+            sublayerTransformAnimation.fromValue = [NSValue valueWithCATransform3D:layer.sublayerTransform];
+            sublayerTransformAnimation.toValue = [NSValue valueWithCATransform3D:sublayerTransform];
             [animations addObject:sublayerTransformAnimation];
         }
         layer.sublayerTransform = sublayerTransform;
@@ -319,7 +319,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
 
 - (BOOL)isAnimationPaused
 {
-    return [self.dummyView.layer isPaused];
+    return self.dummyView.layer.paused;
 }
 
 - (void)terminateAnimation
@@ -348,7 +348,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
 - (id)reverseAnimationStep
 {
     HLSLayerAnimationStep *reverseAnimationStep = super.reverseAnimationStep;
-    reverseAnimationStep.timingFunction = [self.timingFunction inverseFunction];
+    reverseAnimationStep.timingFunction = self.timingFunction.inverseFunction;
     return reverseAnimationStep;
 }
 

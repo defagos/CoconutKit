@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return the default instance (with root folder /)
  */
-+ (instancetype)defaultManager;
++ (HLSStandardFileManager *)defaultManager;
 
 /**
  * Create a file manager, using the specified root folder path (relative to the system file hierarchy) as root.

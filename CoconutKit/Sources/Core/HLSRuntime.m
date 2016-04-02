@@ -358,7 +358,7 @@ void hls_setAssociatedObject(id object, const void *key, id value, hls_Associati
     // Use an indirection so that associated objects attached using hls_setAssociatedObject can only be retrieved
     // using hls_getAssociatedObject, not using objc_getAssociatedObject. Conversely, associated objects created
     // using objc_setAssociatedObject cannot be retrieved using hls_getAssociatedObject
-    void *hiddenKey = (void *)[[NSString stringWithFormat:@"hls_%p", key] hash];
+    void *hiddenKey = (void *)[NSString stringWithFormat:@"hls_%p", key].hash;
     if (policy == HLS_ASSOCIATION_WEAK || policy == HLS_ASSOCIATION_WEAK_NONATOMIC) {
         objc_AssociationPolicy objc_policy = (policy == HLS_ASSOCIATION_WEAK) ? OBJC_ASSOCIATION_RETAIN : OBJC_ASSOCIATION_RETAIN_NONATOMIC;
         

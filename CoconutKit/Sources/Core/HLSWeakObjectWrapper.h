@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface HLSWeakObjectWrapper : NSObject
 
-- (instancetype)initWithObject:(nullable id)object;
+- (instancetype)initWithObject:(nullable id)object NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly, weak, nullable) id object;
 

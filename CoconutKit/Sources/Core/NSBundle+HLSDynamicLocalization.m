@@ -59,7 +59,7 @@ static void setDefaultLocalization(void)
         currentLocalization = [preferredLocalizations.firstObject copy];
     }
     else {
-        currentLocalization = [[[NSBundle mainBundle] developmentLocalization] copy];
+        currentLocalization = [[NSBundle mainBundle].developmentLocalization copy];
     }
 }
 

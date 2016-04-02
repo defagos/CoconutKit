@@ -333,7 +333,7 @@
 - (NSManagedObjectContext *)managedObjectContextForPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [managedObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
+    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
     
     return managedObjectContext;
 }

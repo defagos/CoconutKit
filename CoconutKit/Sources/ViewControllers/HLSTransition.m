@@ -153,7 +153,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         s_animationClassNameToDurationMap[[self className]] = duration;
     }
     
-    return [duration doubleValue];
+    return duration.doubleValue;
 }
 
 #pragma mark Built-in transition common code

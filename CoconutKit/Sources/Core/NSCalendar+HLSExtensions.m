@@ -59,9 +59,9 @@
     
     NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:date];
-    [dateComponents setHour:hour];
-    [dateComponents setMinute:minute];
-    [dateComponents setSecond:second];
+    dateComponents.hour = hour;
+    dateComponents.minute = minute;
+    dateComponents.second = second;
     return [self dateFromComponents:dateComponents];
 }
 
@@ -76,13 +76,13 @@
     
     // Create comparable strings from those components
     NSString *dateString1 = [NSString stringWithFormat:@"%ld%02ld%02ld",
-                             (long)[dateComponents1 year],
-                             (long)[dateComponents1 month],
-                             (long)[dateComponents1 day]];
+                             (long)dateComponents1.year,
+                             (long)dateComponents1.month,
+                             (long)dateComponents1.day];
     NSString *dateString2 = [NSString stringWithFormat:@"%ld%02ld%02ld",
-                             (long)[dateComponents2 year],
-                             (long)[dateComponents2 month],
-                             (long)[dateComponents2 day]];
+                             (long)dateComponents2.year,
+                             (long)dateComponents2.month,
+                             (long)dateComponents2.day];
     
     return [dateString1 compare:dateString2];
 }

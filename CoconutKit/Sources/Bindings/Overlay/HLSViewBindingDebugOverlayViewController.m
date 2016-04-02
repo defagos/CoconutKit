@@ -45,7 +45,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     s_previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     
     // Ensure we exit edit mode when displaying the overlay
-    [[s_previousKeyWindow firstResponderView] resignFirstResponder];
+    [s_previousKeyWindow.firstResponderView resignFirstResponder];
     
     // Using a second window and setting our overlay as its root view controller ensures that rotation is dealt with correctly
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

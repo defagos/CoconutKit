@@ -21,7 +21,7 @@
 
 #pragma mark Class methods
 
-+ (instancetype)defaultManager
++ (HLSStandardFileManager *)defaultManager
 {
     static HLSStandardFileManager *s_sharedInstance = nil;
     static dispatch_once_t onceToken;

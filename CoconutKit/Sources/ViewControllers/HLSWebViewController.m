@@ -443,7 +443,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         return;
     }
     
-    SEL action = [self.actions[buttonIndex] pointerValue];
+    SEL action = (self.actions[buttonIndex]).pointerValue;
     
     // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
     // correct memory management
@@ -623,7 +623,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         [self presentViewController:activityViewController animated:YES completion:nil];
     }
     // iOS 7: Present as is on iPhone
-    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    else if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         [self presentViewController:activityViewController animated:YES completion:nil];
     }
     // iOS 7: Present in manually instantiated popover

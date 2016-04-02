@@ -36,7 +36,7 @@
     HLSAssertObjectsInEnumerationAreKindOfClass(self.allKeys, NSString);
 
     NSMutableDictionary *overriddenDictionary = [NSMutableDictionary dictionaryWithDictionary:self];
-    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    NSDictionary *environment = [NSProcessInfo processInfo].environment;
     for (NSString *key in environment.allKeys) {
         id environmentValue = environment[key];
         overriddenDictionary[key] = environmentValue;

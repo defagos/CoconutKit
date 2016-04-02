@@ -286,7 +286,7 @@
 - (BOOL)checkParentDirectoryForPath:(NSString *)path error:(NSError *__autoreleasing *)pError
 {
     BOOL isDirectory = NO;
-    NSString *parentPath = [path stringByDeletingLastPathComponent];    
+    NSString *parentPath = path.stringByDeletingLastPathComponent;    
     if (! [self fileExistsAtPath:parentPath isDirectory:&isDirectory] || ! isDirectory) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -388,7 +388,7 @@
     }
     
     // Get the directory in which the element to copy is located
-    id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    id sourceContent = [self contentAtPath:sourcePath.stringByDeletingLastPathComponent forItems:self.rootItems];
     if (! [sourceContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -399,7 +399,7 @@
     }
     
     // Get the destination directory contents
-    id destinationContent = [self contentAtPath:[destinationPath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    id destinationContent = [self contentAtPath:destinationPath.stringByDeletingLastPathComponent forItems:self.rootItems];
     if (! [destinationContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -429,7 +429,7 @@
     }
     
     // Get the directory in which the element to move is located
-    id sourceContent = [self contentAtPath:[sourcePath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    id sourceContent = [self contentAtPath:sourcePath.stringByDeletingLastPathComponent forItems:self.rootItems];
     if (! [sourceContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -440,7 +440,7 @@
     }
     
     // Get the destination directory contents
-    id destinationContent = [self contentAtPath:[destinationPath stringByDeletingLastPathComponent] forItems:self.rootItems];
+    id destinationContent = [self contentAtPath:destinationPath.stringByDeletingLastPathComponent forItems:self.rootItems];
     if (! [destinationContent isKindOfClass:[NSDictionary class]]) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain

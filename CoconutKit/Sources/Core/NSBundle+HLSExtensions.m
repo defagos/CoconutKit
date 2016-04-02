@@ -123,7 +123,7 @@
 - (NSString *)friendlyVersionNumber
 {
     NSString *versionNumber = self.infoDictionary[@"CFBundleVersion"];
-    return [versionNumber friendlyVersionNumber];
+    return versionNumber.friendlyVersionNumber;
 }
 
 - (NSDictionary *)fullInfoDictionary

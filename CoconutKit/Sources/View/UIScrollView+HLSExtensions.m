@@ -241,13 +241,13 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
     for (UIScrollView *scrollView in s_adjustedScrollViews) {
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         
-        CGFloat scrollViewOriginalBottomInset = [s_scrollViewOriginalBottomInsets[pointerKey] floatValue];
+        CGFloat scrollViewOriginalBottomInset = (s_scrollViewOriginalBottomInsets[pointerKey]).floatValue;
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
                                                    scrollViewOriginalBottomInset,
                                                    scrollView.contentInset.right);
         
-        CGFloat scrollViewOriginalIndicatorBottomInset = [s_scrollViewOriginalBottomInsets[pointerKey] floatValue];
+        CGFloat scrollViewOriginalIndicatorBottomInset = (s_scrollViewOriginalBottomInsets[pointerKey]).floatValue;
         scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                             scrollView.scrollIndicatorInsets.left,
                                                             scrollViewOriginalIndicatorBottomInset,

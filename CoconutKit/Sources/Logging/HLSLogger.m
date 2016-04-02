@@ -39,7 +39,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
 
 #pragma mark Class methods
 
-+ (instancetype)sharedLogger
++ (HLSLogger *)sharedLogger
 {
 	static HLSLogger *s_instance = nil;
     static dispatch_once_t s_onceToken;
@@ -267,7 +267,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
     @synchronized(self) {
         self.logFileHandle = nil;
         
-        NSArray<NSString *> *availableLogPaths = [self availableLogFilePaths];
+        NSArray<NSString *> *availableLogPaths = self.availableLogFilePaths;
         for (NSString *availableLogPath in availableLogPaths) {
             NSError *error = nil;
             if (! [[NSFileManager defaultManager] removeItemAtPath:availableLogPath error:&error]) {

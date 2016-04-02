@@ -68,7 +68,7 @@
 {
     NSMutableArray *objects = [NSMutableArray array];
     for (NSValue *objectKey in self.objectKeys) {
-        id object = [objectKey nonretainedObjectValue];
+        id object = objectKey.nonretainedObjectValue;
         [objects addObject:object];
     }
     return [NSArray arrayWithArray:objects];
@@ -211,7 +211,7 @@
     HLSAnimationStep *reverseAnimationStep = [[self class] animationStep];
     for (id object in self.objects) {
         HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
-        [reverseAnimationStep addObjectAnimation:[objectAnimation reverseObjectAnimation] forObject:object];
+        [reverseAnimationStep addObjectAnimation:objectAnimation.reverseObjectAnimation forObject:object];
     }
     reverseAnimationStep.tag = self.tag.filled ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
     reverseAnimationStep.userInfo = self.userInfo;
@@ -270,7 +270,7 @@
     return [NSString stringWithFormat:@"<%@: %p; objectAnimations: %@; duration: %.2f; tag: %@>",
             [self class],
             self,
-            [self objectAnimationsDescriptionString],
+            self.objectAnimationsDescriptionString,
             self.duration,
             self.tag];
 }

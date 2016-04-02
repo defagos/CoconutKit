@@ -14,7 +14,7 @@
 {
     NSArray *weekDays = self.weekdaySymbols;
     // firstWeekday returns indices starting at 1
-    NSUInteger offset = [[NSCalendar currentCalendar] firstWeekday] - 1;
+    NSUInteger offset = [NSCalendar currentCalendar].firstWeekday - 1;
     return [weekDays arrayByLeftRotatingNumberOfObjects:offset];
 }
 
@@ -22,7 +22,7 @@
 {
     NSArray *shortWeekDays = self.shortWeekdaySymbols;
     // firstWeekday returns indices starting at 1
-    NSUInteger offset = [[NSCalendar currentCalendar] firstWeekday] - 1;
+    NSUInteger offset = [NSCalendar currentCalendar].firstWeekday - 1;
     return [shortWeekDays arrayByLeftRotatingNumberOfObjects:offset];
 }
 

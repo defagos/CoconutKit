@@ -64,7 +64,7 @@ OBJC_EXPORT NSString * const HLSStackRootSegueIdentifier;
 - (instancetype)initWithIdentifier:(nullable NSString *)identifier
                             source:(UIViewController *)source
                        destination:(UIViewController *)destination
-                   transitionClass:(nullable Class)transitionClass;
+                   transitionClass:(nullable Class)transitionClass NS_DESIGNATED_INITIALIZER;
 
 /**
  * Push animation style

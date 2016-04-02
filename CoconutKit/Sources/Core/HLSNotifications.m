@@ -17,7 +17,7 @@
 
 #pragma mark Class methods
 
-+ (instancetype)sharedNotificationManager
++ (HLSNotificationManager *)sharedNotificationManager
 {
     static HLSNotificationManager *s_instance = nil;
     static dispatch_once_t s_onceToken;

@@ -39,7 +39,7 @@
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[self className]
                                                          inManagedObjectContext:managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:entityDescription];
+    fetchRequest.entity = entityDescription;
     fetchRequest.sortDescriptors = sortDescriptors;
     fetchRequest.predicate = predicate;
     

@@ -508,7 +508,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     
     // We accumulate the effective duration of the animation which has been run until now
     if (! self.cancelling && ! self.terminating) {
-        _elapsedTime += [self.currentAnimationStep duration];
+        _elapsedTime += self.currentAnimationStep.duration;
     }
     
     // Play the next step (or the first step if the initial delay animation step has ended(), but non-animated if the

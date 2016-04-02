@@ -67,7 +67,7 @@ static void commonInit(HLSCollectionViewController *self);
 - (void)localize
 {
     IMP selfIMP = class_getMethodImplementation([self class], _cmd);
-    IMP superIMP = class_getMethodImplementation([self superclass], _cmd);
+    IMP superIMP = class_getMethodImplementation(self.superclass, _cmd);
     BOOL isOverriden = (selfIMP != superIMP);
     if (! isOverriden && [NSBundle mainBundle].localizations.count > 1) {
         HLSLoggerDebug(@"%@ is not localized", [self class]);

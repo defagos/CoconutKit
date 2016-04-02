@@ -36,8 +36,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
 
 @interface UILabel (HLSDynamicLocalizationPrivate)
 
-- (HLSLabelLocalizationInfo *)localizationInfo;
-- (void)setLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
+@property (nonatomic) HLSLabelLocalizationInfo *localizationInfo;
 
 - (void)setAndLocalizeText:(NSString *)text;
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
@@ -181,7 +180,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
         [self setLocalizationInfo:localizationInfo];
         
         // For labels localized with prefixes only: Listen to localization change notifications
-        if ([localizationInfo isLocalized]) {
+        if (localizationInfo.localized) {
             [[NSNotificationCenter defaultCenter] addObserver:self 
                                                      selector:@selector(currentLocalizationDidChange:) 
                                                          name:HLSCurrentLocalizationDidChangeNotification 

@@ -34,7 +34,7 @@
 - (void)setFrame:(CGRect)frame
 {
     [self.delegate containerStackViewWillChangeFrame:self];
-    [super setFrame:frame];
+    super.frame = frame;
     [self.delegate containerStackViewDidChangeFrame:self];
 }
 
