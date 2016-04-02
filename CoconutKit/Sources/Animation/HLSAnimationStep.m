@@ -90,7 +90,7 @@
     
     NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     [self.objectKeys addObject:objectKey];
-    [self.objectToObjectAnimationMap setObject:[objectAnimation copy] forKey:objectKey];
+    self.objectToObjectAnimationMap[objectKey] = [objectAnimation copy];
 }
 
 - (HLSObjectAnimation *)objectAnimationForObject:(id)object

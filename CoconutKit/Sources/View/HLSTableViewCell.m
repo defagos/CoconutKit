@@ -122,7 +122,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
         // Instantiate a dummy cell
         UITableViewCell *cell = [self cellForTableView:nil];
         cellSizeValue = [NSValue valueWithCGSize:cell.bounds.size];
-        [s_classNameToSizeMap setObject:cellSizeValue forKey:[self className]];
+        s_classNameToSizeMap[[self className]] = cellSizeValue;
     }
     return [cellSizeValue CGSizeValue];
 }

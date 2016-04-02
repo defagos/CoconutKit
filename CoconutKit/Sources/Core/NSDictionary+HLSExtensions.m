@@ -13,7 +13,7 @@
 - (NSDictionary *)dictionaryBySettingObject:(id)object forKey:(id)key
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
-    [dictionary setObject:object forKey:key];
+    dictionary[key] = object;
     return [NSDictionary dictionaryWithDictionary:dictionary];
 }
 
@@ -39,7 +39,7 @@
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
     for (NSString *key in environment.allKeys) {
         id environmentValue = environment[key];
-        [overriddenDictionary setObject:environmentValue forKey:key];
+        overriddenDictionary[key] = environmentValue;
     }
     return [NSDictionary dictionaryWithDictionary:overriddenDictionary];
 }
@@ -53,7 +53,7 @@
     if (! object || ! key) {
         return;
     }
-    [self setObject:object forKey:key];
+    self[key] = object;
 }
 
 @end

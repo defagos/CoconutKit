@@ -202,10 +202,10 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         
         NSNumber *scrollViewOriginalBottomInset = s_scrollViewOriginalBottomInsets[pointerKey] ?: @(scrollView.contentInset.bottom);
-        [scrollViewOriginalBottomInsets setObject:scrollViewOriginalBottomInset forKey:pointerKey];
+        scrollViewOriginalBottomInsets[pointerKey] = scrollViewOriginalBottomInset;
         
         NSNumber *scrollViewOriginalIndicatorBottomInset = s_scrollViewOriginalIndicatorBottomInsets[pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
-        [scrollViewOriginalIndicatorBottomInsets setObject:scrollViewOriginalIndicatorBottomInset forKey:pointerKey];
+        scrollViewOriginalIndicatorBottomInsets[pointerKey] = scrollViewOriginalIndicatorBottomInset;
         
         // Adjust content
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,

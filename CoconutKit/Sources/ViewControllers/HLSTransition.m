@@ -150,7 +150,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                                                                         inView:nil
                                                                                                                     withBounds:CGRectZero]];
         duration = @(animation.duration);
-        [s_animationClassNameToDurationMap setObject:duration forKey:[self className]];
+        s_animationClassNameToDurationMap[[self className]] = duration;
     }
     
     return [duration doubleValue];

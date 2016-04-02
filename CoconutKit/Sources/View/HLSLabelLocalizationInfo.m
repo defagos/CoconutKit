@@ -192,5 +192,5 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
                      @(HLSLabelRepresentationLowercase) : @"lowercase",
                      @(HLSLabelRepresentationCapitalized) : @"capitalized" };
     });
-    return [s_names objectForKey:@(representation)] ?: @"unknown";    
+    return s_names[@(representation)] ?: @"unknown";    
 }

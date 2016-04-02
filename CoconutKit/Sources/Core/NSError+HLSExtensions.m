@@ -207,7 +207,7 @@ static Class subclass_class(id self, SEL _cmd);
     NSParameterAssert(key);
     
     if (object) {
-        [[self mutableUserInfo] setObject:object forKey:key];
+        [self mutableUserInfo][key] = object;
     }
     else {
         [[self mutableUserInfo] removeObjectForKey:key];

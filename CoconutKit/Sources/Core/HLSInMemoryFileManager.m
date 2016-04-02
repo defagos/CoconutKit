@@ -108,13 +108,13 @@
                                                                                               data:data];
             
             NSString *UUID = [NSUUID UUID].UUIDString;
-            [items setObject:UUID forKey:objectName];
+            items[objectName] = UUID;
             [self.cache setObject:cacheEntry forKey:UUID cost:cacheEntry.cost];
         }
         // Folder. If the folder already exists, it is not replaced, and the method succeeds
         else {
             if (! items[objectName]) {
-                [items setObject:[NSMutableDictionary dictionary] forKey:objectName];
+                items[objectName] = [NSMutableDictionary dictionary];
             }
         }
         
@@ -127,7 +127,7 @@
         NSMutableDictionary<NSString *, id> *subitems = items[firstPathComponent];
         if (! subitems) {
             subitems = [NSMutableDictionary dictionary];
-            [items setObject:subitems forKey:firstPathComponent];
+            items[firstPathComponent] = subitems;
         }
         
         // Go down one level deeper
@@ -170,7 +170,7 @@
     // Folder
     if ([sourceContent isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary<NSString *, id> *destinationSubitems = [NSMutableDictionary dictionary];
-        [destinationItems setObject:destinationSubitems forKey:destinationObjectName];
+        destinationItems[destinationObjectName] = destinationSubitems;
         
         for (NSString *subname in [sourceContent allKeys]) {
             if (! [self copyObjectWithName:subname inItems:sourceContent toObjectWithName:subname inItems:destinationSubitems error:pError]) {
@@ -191,7 +191,7 @@
                                                                                                      data:[sourceCacheEntry.data copy]];
         
         NSString *UUID = [NSUUID UUID].UUIDString;
-        [destinationItems setObject:UUID forKey:destinationObjectName];
+        destinationItems[destinationObjectName] = UUID;
         [self.cache setObject:destinationCacheEntry forKey:UUID cost:destinationCacheEntry.cost];
     }
     
@@ -225,7 +225,7 @@
     }
     
     // Unlink from source and link to destination folder. Very cheap
-    [destinationItems setObject:sourceContent forKey:destinationObjectName];
+    destinationItems[destinationObjectName] = sourceContent;
     [sourceItems removeObjectForKey:sourceObjectName];
     
     return YES;

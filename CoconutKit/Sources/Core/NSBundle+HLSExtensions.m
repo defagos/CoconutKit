@@ -67,19 +67,19 @@
     
     bundle = [self bundleWithName:name inDirectory:[NSBundle mainBundle].bundlePath];
     if (bundle) {
-        [s_nameToBundleMap setObject:bundle forKey:name];
+        s_nameToBundleMap[name] = bundle;
         return bundle;
     }
     
     bundle = [self bundleWithName:name inDirectory:HLSApplicationLibraryDirectoryPath()];
     if (bundle) {
-        [s_nameToBundleMap setObject:bundle forKey:name];
+        s_nameToBundleMap[name] = bundle;
         return bundle;
     }
     
     bundle = [self bundleWithName:name inDirectory:HLSApplicationDocumentDirectoryPath()];
     if (bundle) {
-        [s_nameToBundleMap setObject:bundle forKey:name];
+        s_nameToBundleMap[name] = bundle;
         return bundle;
     }
     

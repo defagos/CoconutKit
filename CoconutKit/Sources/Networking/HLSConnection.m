@@ -155,7 +155,7 @@
     }
     connection.parentConnection = self;
     connection.parentStrongConnection = self;
-    [self.childConnectionsDictionary setObject:connection forKey:key];
+    self.childConnectionsDictionary[key] = connection;
     
     if (self.selfRunning) {
         [connection startWithRunLoopModes:self.runLoopModes];

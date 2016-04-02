@@ -139,7 +139,7 @@
     NSMutableArray<HLSModelManager *> *modelManagerStack = thread.threadDictionary[HLSModelManagerStackThreadLocalStorageKey];
     if (! modelManagerStack) {
         modelManagerStack = [NSMutableArray array];
-        [thread.threadDictionary setObject:modelManagerStack forKey:HLSModelManagerStackThreadLocalStorageKey];
+        thread.threadDictionary[HLSModelManagerStackThreadLocalStorageKey] = modelManagerStack;
     }
     return modelManagerStack;
 }

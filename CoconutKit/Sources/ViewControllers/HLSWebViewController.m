@@ -252,7 +252,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                                                        target:self
                                                                                        action:@selector(stop:)];
-    [loadingToolbarItems replaceObjectAtIndex:[loadingToolbarItems indexOfObject:self.refreshBarButtonItem] withObject:stopBarButtonItem];
+    loadingToolbarItems[[loadingToolbarItems indexOfObject:self.refreshBarButtonItem]] = stopBarButtonItem;
     self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
     
     [[NSNotificationCenter defaultCenter] addObserver:self

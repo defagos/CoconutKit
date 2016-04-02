@@ -140,7 +140,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     if (! viewSizeValue) {
         UIView *view = [self view];
         viewSizeValue = [NSValue valueWithCGSize:view.bounds.size];
-        [s_classNameToSizeMap setObject:viewSizeValue forKey:[self className]];
+        s_classNameToSizeMap[[self className]] = viewSizeValue;
     }
     return viewSizeValue.CGSizeValue;
 }
