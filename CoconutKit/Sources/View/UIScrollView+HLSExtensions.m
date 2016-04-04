@@ -198,7 +198,7 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
         // Adjust content
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
-                                                   keyboardHeightAdjustment + keyboardDistance,
+                                                   keyboardHeightAdjustment + keyboardDistance * CGRectGetHeight([UIScreen mainScreen].applicationFrame) / 768.f,
                                                    scrollView.contentInset.right);
         scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                             scrollView.scrollIndicatorInsets.left,

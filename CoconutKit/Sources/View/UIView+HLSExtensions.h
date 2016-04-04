@@ -68,9 +68,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)disableOutsideAction;
 
 /**
- * The distance to keep (at least) between keyboard and content. For scroll views, this value is 10.f by default,
+ * The distance to keep (at least) between keyboard and content. For scroll views, this value is 10.f by default
+ * (this value is applied for a 768 pixel height screen, and is adjusted proportionally for larger or smaller sizes),
  * for other views it is CGFLOAT_MAX. For all views within a scroll view, the value defined by the scroll view is 
- * used. This value can be overridden on a view basis
+ * used. This value can be overridden on a view basis if needed
  */
 @property (nonatomic) IBInspectable CGFloat keyboardDistance;
 
