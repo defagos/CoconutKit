@@ -16,7 +16,6 @@
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
 static void *s_avoidingKeyboardKey = &s_avoidingKeyboardKey;
-static void *s_keyboardDistanceKey = &s_keyboardDistanceKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_setContentOffset)(id, SEL, CGPoint) = NULL;
@@ -46,19 +45,6 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
 - (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
 {
     hls_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), HLS_ASSOCIATION_STRONG_NONATOMIC);
-}
-
-- (NSNumber *)keyboardDistance
-{
-    static const CGFloat HLSDefaultKeyboardDistance = 10.f;
-    
-    NSNumber *keyboardDistance = hls_getAssociatedObject(self, s_keyboardDistanceKey);
-    return keyboardDistance ?: @(HLSDefaultKeyboardDistance);
-}
-
-- (void)setKeyboardDistance:(NSNumber *)keyboardDistance
-{
-    hls_setAssociatedObject(self, s_keyboardDistanceKey, keyboardDistance, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Synchronizing scroll views

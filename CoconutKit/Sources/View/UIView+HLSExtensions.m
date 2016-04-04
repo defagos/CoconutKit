@@ -137,7 +137,13 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (NSNumber *)keyboardDistance
 {
-    return hls_getAssociatedObject(self, s_keyboardDistanceKey);
+    NSNumber *keyboardDistance =  hls_getAssociatedObject(self, s_keyboardDistanceKey);
+    if ([self isKindOfClass:[UIScrollView class]]) {
+        return keyboardDistance ?: @(10.f);
+    }
+    else {
+        return keyboardDistance;
+    }
 }
 
 - (void)setKeyboardDistance:(NSNumber *)keyboardDistance
