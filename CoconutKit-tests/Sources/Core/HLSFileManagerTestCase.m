@@ -250,11 +250,11 @@
     XCTAssertTrue([fileManager fileExistsAtPath:@"/folder3/file31.txt"]);
     XCTAssertTrue([fileManager fileExistsAtPath:@"/folder3/folder33/file331.txt"]);
     XCTAssertNil(error5);
-    XCTAssertEqual([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3" error:&error5] count], (NSUInteger)3);
+    XCTAssertEqual([fileManager contentsOfDirectoryAtPath:@"/copy/folder3" error:&error5].count, (NSUInteger)3);
     XCTAssertNil(error5);
     XCTAssertEqualObjects([fileManager contentsOfFileAtPath:@"/copy/folder3/file31.txt" error:&error5], data);
     XCTAssertNil(error5);
-    XCTAssertEqual([[fileManager contentsOfDirectoryAtPath:@"/copy/folder3/folder33" error:&error5] count], (NSUInteger)1);
+    XCTAssertEqual([fileManager contentsOfDirectoryAtPath:@"/copy/folder3/folder33" error:&error5].count, (NSUInteger)1);
     XCTAssertNil(error5);
     XCTAssertEqualObjects([fileManager contentsOfFileAtPath:@"/copy/folder3/folder33/file331.txt" error:&error5], data);
     XCTAssertNil(error5);
@@ -348,11 +348,11 @@
     XCTAssertTrue([fileManager moveItemAtPath:@"/folder3" toPath:@"/move/folder3" error:&error5]);
     XCTAssertFalse([fileManager fileExistsAtPath:@"/folder3"]);
     XCTAssertNil(error5);
-    XCTAssertEqual([[fileManager contentsOfDirectoryAtPath:@"/move/folder3" error:&error5] count], (NSUInteger)3);
+    XCTAssertEqual([fileManager contentsOfDirectoryAtPath:@"/move/folder3" error:&error5].count, (NSUInteger)3);
     XCTAssertNil(error5);
     XCTAssertEqualObjects([fileManager contentsOfFileAtPath:@"/move/folder3/file31.txt" error:&error5], data);
     XCTAssertNil(error5);
-    XCTAssertEqual([[fileManager contentsOfDirectoryAtPath:@"/move/folder3/folder33" error:&error5] count], (NSUInteger)1);
+    XCTAssertEqual([fileManager contentsOfDirectoryAtPath:@"/move/folder3/folder33" error:&error5].count, (NSUInteger)1);
     XCTAssertNil(error5);
     XCTAssertEqualObjects([fileManager contentsOfFileAtPath:@"/move/folder3/folder33/file331.txt" error:&error5], data);
     XCTAssertNil(error5);

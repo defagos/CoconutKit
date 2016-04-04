@@ -28,7 +28,7 @@
 {
     NSMutableArray *array = [NSMutableArray array];
     [array safelyAddObject:nil];
-    XCTAssertEqual([array count], (NSUInteger)0);
+    XCTAssertEqual(array.count, (NSUInteger)0);
 }
 
 @end
