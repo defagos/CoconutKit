@@ -55,9 +55,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, getter=isAvoidingKeyboard) IBInspectable BOOL avoidingKeyboard;
 
 /**
- * The distance to at least keep between keyboard and content. Defaults to 10.f
+ * The distance to keep (at least) between keyboard and content. Defaults to 10.f. Can be overridden using the corresponding
+ * UIResponder property for each involved view, if needed
  */
-@property (nonatomic) IBInspectable CGFloat keyboardDistance;
+@property (nonatomic, null_resettable) IBInspectable NSNumber *keyboardDistance;
 
 @end
 

@@ -12,8 +12,6 @@
 #import "UIView+HLSExtensions.h"
 #import "UIWindow+HLSExtensions.h"
 
-#import <objc/runtime.h>
-
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
@@ -50,17 +48,17 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
     hls_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
-- (CGFloat)keyboardDistance
+- (NSNumber *)keyboardDistance
 {
     static const CGFloat HLSDefaultKeyboardDistance = 10.f;
     
-    NSNumber *keyboardDistanceNumber = hls_getAssociatedObject(self, s_keyboardDistanceKey);
-    return keyboardDistanceNumber ? keyboardDistanceNumber.floatValue : HLSDefaultKeyboardDistance;
+    NSNumber *keyboardDistance = hls_getAssociatedObject(self, s_keyboardDistanceKey);
+    return keyboardDistance ?: @(HLSDefaultKeyboardDistance);
 }
 
-- (void)setKeyboardDistance:(CGFloat)keyboardDistance
+- (void)setKeyboardDistance:(NSNumber *)keyboardDistance
 {
-    hls_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_keyboardDistanceKey, keyboardDistance, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Synchronizing scroll views
@@ -210,7 +208,7 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
         // Adjust content
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
-                                                   keyboardHeightAdjustment + scrollView.keyboardDistance,
+                                                   keyboardHeightAdjustment + scrollView.keyboardDistance.floatValue,
                                                    scrollView.contentInset.right);
         scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                             scrollView.scrollIndicatorInsets.left,
