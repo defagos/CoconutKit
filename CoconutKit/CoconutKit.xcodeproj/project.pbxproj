@@ -1819,23 +1819,6 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
-/* Begin PBXLegacyTarget section */
-		6F159C6D15A5D7720020AFAC /* CoconutKit-staticframework */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 6F159C6E15A5D7720020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-staticframework" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = "${PROJECT_DIR}/../Tools/Makefile";
-			dependencies = (
-			);
-			name = "CoconutKit-staticframework";
-			passBuildSettingsInEnvironment = 1;
-			productName = "CoconutKit-staticframework";
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		6FC5B7731924EDC500660CDF /* CoconutKit-resources */ = {
 			isa = PBXNativeTarget;
@@ -1924,7 +1907,6 @@
 			projectRoot = "";
 			targets = (
 				D2AAC07D0554694100DB518D /* CoconutKit */,
-				6F159C6D15A5D7720020AFAC /* CoconutKit-staticframework */,
 				6FC5B7731924EDC500660CDF /* CoconutKit-resources */,
 				E69F21191ABC9F8B000EEC39 /* CoconutKit-framework */,
 			);
@@ -2431,22 +2413,6 @@
 			};
 			name = Release;
 		};
-		6F159C6F15A5D7720020AFAC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
-			buildSettings = {
-				GCC_THUMB_SUPPORT = NO;
-			};
-			name = Debug;
-		};
-		6F159C7015A5D7720020AFAC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
-			buildSettings = {
-				GCC_THUMB_SUPPORT = NO;
-			};
-			name = Release;
-		};
 		6FC5B77D1924EDC500660CDF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
@@ -2550,15 +2516,6 @@
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,
 				1DEB922408733DC00010E9CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6F159C6E15A5D7720020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-staticframework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6F159C6F15A5D7720020AFAC /* Debug */,
-				6F159C7015A5D7720020AFAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
