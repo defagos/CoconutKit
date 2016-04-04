@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @class HLSZeroingWeakRef;
 
@@ -43,7 +45,7 @@
 /**
  * Convenience constructor
  */
-+ (instancetype)proxyWithTarget:(id)target protocol:(Protocol *)protocol;
++ (nullable instancetype)proxyWithTarget:(nullable id)target protocol:(Protocol *)protocol;
 
 /**
  * Create a proxy object. On success a proxy object is returned, otherwise nil (most notably if the target fails to 
@@ -52,7 +54,7 @@
  *
  * Currently the target cannot be another NSProxy object
  */
-- (instancetype)initWithTarget:(id)target protocol:(Protocol *)protocol NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithTarget:(nullable id)target protocol:(Protocol *)protocol NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -61,6 +63,8 @@
 /**
  * Convenient proxy creation
  */
-- (id)proxyWithRestrictedInterface:(Protocol *)protocol;
+- (nullable id)proxyWithRestrictedInterface:(Protocol *)protocol;
 
 @end
+
+NS_ASSUME_NONNULL_END

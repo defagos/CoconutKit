@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-@interface BindingsControlsDemoViewController : HLSViewController <HLSCursorDataSource, HLSViewBindingDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
+@interface BindingsControlsDemoViewController : HLSViewController <HLSCursorDataSource, HLSViewBindingDelegate>
 @end
+
+NS_ASSUME_NONNULL_END

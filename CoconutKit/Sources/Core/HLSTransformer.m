@@ -25,7 +25,7 @@ NSString *HLSStringFromInterfaceOrientation(UIInterfaceOrientation interfaceOrie
                      @(UIInterfaceOrientationLandscapeLeft) : @"UIInterfaceOrientationLandscapeLeft",
                      @(UIInterfaceOrientationLandscapeRight) : @"UIInterfaceOrientationLandscapeRight" };
     });
-    return [s_names objectForKey:@(interfaceOrientation)];
+    return s_names[@(interfaceOrientation)];
 }
 
 NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
@@ -38,7 +38,7 @@ NSString *HLSStringFromDeviceOrientation(UIDeviceOrientation deviceOrientation)
                      @(UIDeviceOrientationLandscapeLeft) : @"UIDeviceOrientationLandscapeLeft",
                      @(UIDeviceOrientationLandscapeRight) : @"UIDeviceOrientationLandscapeRight" };
     });
-    return [s_names objectForKey:@(deviceOrientation)];
+    return s_names[@(deviceOrientation)];
 }
 
 NSString *HLSStringFromCATransform3D(CATransform3D transform)
@@ -77,12 +77,9 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 - (instancetype)initWithBlock:(HLSTransformerBlock)transformerBlock
                  reverseBlock:(HLSReverseTransformerBlock)reverseBlock
 {
-    if (self = [super init]) {
-        if (! transformerBlock) {
-            HLSLoggerError(@"A transformer block is mandatory");
-            return nil;
-        }
-        
+    NSParameterAssert(transformerBlock);
+    
+    if (self = [super init]) {        
         self.transformerBlock = transformerBlock;
         self.reverseBlock = reverseBlock;
     }
@@ -101,8 +98,10 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
     return self.transformerBlock(object);
 }
 
-- (BOOL)getObject:(id *)pObject fromObject:(id)fromObject error:(NSError *__autoreleasing *)pError
+- (BOOL)getObject:(inout id *)pObject fromObject:(id)fromObject error:(out NSError *__autoreleasing *)pError
 {
+    NSParameterAssert(pObject);
+    
     if (! self.reverseBlock) {
         [self doesNotRecognizeSelector:_cmd];
     }
@@ -131,17 +130,19 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 
 + (instancetype)blockTransformerFromFormatter:(NSFormatter *)formatter
 {
-    return [self blockTransformerWithBlock:^(id object) {
+    NSParameterAssert(formatter);
+    
+    return [self blockTransformerWithBlock:^(id  _Nullable object) {
         // Remark: The specific -[NSNumberFormatter stringFromNumber:] has a behavior which differs from -stringFromObjectValue:, e.g
         //         it ignores nilSymbol. Since -stringForObjectValue: has the richest behavior, it makes sense to call it in all cases
         return [formatter stringForObjectValue:object];
-    } reverseBlock:^(__autoreleasing id *pObject, NSString *string, NSError *__autoreleasing *pError) {
+    } reverseBlock:^(id  _Nullable __autoreleasing * _Nonnull pObject, NSString *  _Nonnull string, NSError * _Nullable __autoreleasing * _Nullable pError) {
         // For NSFormatter subclasses, calling -getObjectValue:forString:errorDescription: will crash for nil input strings, but
         // interestingly does not crash and returns nil when calling their specific -numberFromString: (for NSNumberFormatter) and
         // -dateFromString: (for NSDateFormatter) methods. Check and apply the same behavior as those specific methods here. Since
         // converting an empty string via NSNumberFormatter or NSDateFormatter returns YES -getObjectValue:forString:errorDescription:
         // (the object returned by reference is nil), we also consider the conversion successful here, which makes sense
-        if ([string length] == 0) {
+        if (string.length == 0) {
             if (pObject) {
                 *pObject = nil;
             }
@@ -162,7 +163,9 @@ NSString *HLSStringFromCATransform3D(CATransform3D transform)
 
 + (instancetype)blockTransformerFromValueTransformer:(NSValueTransformer *)valueTransformer
 {
-    HLSTransformerBlock block = ^(id object) {
+    NSParameterAssert(valueTransformer);
+    
+    HLSTransformerBlock block = ^(id _Nullable object) {
         return [valueTransformer transformedValue:object];
     };
     

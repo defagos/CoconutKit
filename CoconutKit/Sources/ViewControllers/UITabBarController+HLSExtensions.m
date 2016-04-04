@@ -38,7 +38,7 @@ static NSUInteger swizzle_supportedInterfaceOrientations(UITabBarController *sel
         return HLSAutorotationModeContainer;
     }
     else {
-        return [autorotationModeNumber integerValue];
+        return autorotationModeNumber.integerValue;
     }
 }
 

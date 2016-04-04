@@ -4,15 +4,17 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "NSManagedObject+HLSExtensionsTestCase.h"
-
 #import "NSBundle+Tests.h"
 #import "Person.h"
 
+@interface NSManagedObject_HLSExtensionsTestCase : XCTestCase
+
+@end
+
 @interface NSManagedObject_HLSExtensionsTestCase ()
 
-@property (nonatomic, strong) Person *person1;
-@property (nonatomic, strong) Person *person2;
+@property (nonatomic) Person *person1;
+@property (nonatomic) Person *person2;
 
 @end
 

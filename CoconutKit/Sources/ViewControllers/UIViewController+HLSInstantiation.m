@@ -33,7 +33,9 @@
     }
     
     NSString *nibName = [self nibNameInBundle:bundle];
-    return [self initWithNibName:nibName bundle:bundle];
+    viewController = [self initWithNibName:nibName bundle:bundle];
+    NSAssert(viewController, @"The view controller could not be loaded");
+    return viewController;
 }
 
 #pragma mark Resource lookup

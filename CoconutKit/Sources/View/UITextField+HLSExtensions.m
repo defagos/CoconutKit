@@ -22,7 +22,7 @@ static id swizzle_initWithCoder(UITextField *self, SEL _cmd, NSCoder *aDecoder);
 
 @interface UITextField (HLSExtensionsPrivate)
 
-@property (nonatomic, strong) HLSViewTouchDetector *touchDetector;
+@property (nonatomic) HLSViewTouchDetector *touchDetector;
 
 @end
 

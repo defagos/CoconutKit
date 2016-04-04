@@ -21,8 +21,8 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 
 @interface TableSearchDisplayDemoViewController ()
 
-@property (nonatomic, strong) NSArray *devices;
-@property (nonatomic, strong) NSArray *filteredDevices;
+@property (nonatomic) NSArray *devices;
+@property (nonatomic) NSArray *filteredDevices;
 
 @end
 
@@ -107,10 +107,10 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchResultsTableView) {
-        return [self.filteredDevices count];
+        return self.filteredDevices.count;
     }
     else {
-        return [self.devices count];
+        return self.devices.count;
     }
 }
 
@@ -118,10 +118,10 @@ typedef NS_ENUM(NSInteger, ScopeButtonIndex) {
 {   
     DeviceInfo *device = nil;
     if (tableView == self.searchResultsTableView) {
-        device = [self.filteredDevices objectAtIndex:indexPath.row];
+        device = self.filteredDevices[indexPath.row];
     }
     else {
-        device = [self.devices objectAtIndex:indexPath.row];
+        device = self.devices[indexPath.row];
     }
     
     HLSTableViewCell *cell = [HLSTableViewCell cellForTableView:tableView];

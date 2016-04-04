@@ -32,7 +32,7 @@
 // modelMandatoryCodeNotZeroNumberB: Validation defined in the xcdatamodel (mandatory) and in the code (not zero)
 - (BOOL)checkModelMandatoryCodeNotZeroNumberB:(NSNumber *)modelMandatoryCodeNotZeroNumberB error:(NSError *__autoreleasing *)pError
 {
-    if ([modelMandatoryCodeNotZeroNumberB intValue] == 0) {
+    if (modelMandatoryCodeNotZeroNumberB.integerValue == 0) {
         if (pError) {
             *pError = [NSError errorWithDomain:TestValidationErrorDomain
                                           code:TestValidationIncorrectValueError];
@@ -48,7 +48,7 @@
 {
     // To test to-many relationships, test the number of elements (there is always a set in this case, i.e.
     // we cannot simply test against nil)
-    if ([codeMandatoryConcreteClassesD count] == 0) {
+    if (codeMandatoryConcreteClassesD.count == 0) {
         if (pError) {
             *pError = [NSError errorWithDomain:TestValidationErrorDomain
                                           code:TestValidationMandatoryValueError];

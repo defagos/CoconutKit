@@ -12,7 +12,7 @@ static NSString* digest(NSData *data, unsigned char *(*cc_digest)(const void *, 
 {
 	unsigned char md[digestLength];     // C99
     memset(md, 0, sizeof(md));
-	cc_digest([data bytes], (CC_LONG)[data length], md);
+	cc_digest(data.bytes, (CC_LONG)data.length, md);
     
     // Hexadecimal representation
     NSMutableString *hexHash = [NSMutableString string];
@@ -20,7 +20,7 @@ static NSString* digest(NSData *data, unsigned char *(*cc_digest)(const void *, 
         [hexHash appendFormat:@"%02X", md[i]];
     }
     
-    return [hexHash lowercaseString];
+    return hexHash.lowercaseString;
 }
 
 @implementation NSData (HLSExtensions)

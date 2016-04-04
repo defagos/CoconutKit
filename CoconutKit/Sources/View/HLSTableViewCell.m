@@ -42,13 +42,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             NSBundle *bundle = [self bundle] ?: [NSBundle mainBundle];
             
             NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
-            if ([bundleContents count] == 0) {
+            if (bundleContents.count == 0) {
                 HLSLoggerError(@"Missing cell object in xib file %@", nibName);
                 return nil;
             }
             
             // Get the first object and check that it is what we expect
-            id firstObject = [bundleContents firstObject];
+            id firstObject = bundleContents.firstObject;
             if (! [firstObject isKindOfClass:self]) {
                 HLSLoggerError(@"The cell object must be the first one in the xib file, and must be of type %@", [self className]);
                 return nil;
@@ -57,7 +57,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             cell = (HLSTableViewCell *)firstObject;
             
             // Check that the reuse identifier defined in the xib is correct
-            if (! [[cell reuseIdentifier] isEqualToString:[self identifier]]) {
+            if (! [cell.reuseIdentifier isEqualToString:[self identifier]]) {
                 HLSLoggerWarn(@"The reuse identifier in the xib %@ (%@) does not match the one defined for the class "
                               "(%@). The reuse mechanism will not work properly and the table view will suffer from "
                               "performance issues", nibName, [cell reuseIdentifier], [self identifier]);
@@ -117,12 +117,12 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 {
     // Cache the cell size; this way the user does pay the same performance penalty for height whether she
     // sets the UITableView rowHeight property or uses the row height callback
-    NSValue *cellSizeValue = [s_classNameToSizeMap objectForKey:[self className]];
+    NSValue *cellSizeValue = s_classNameToSizeMap[[self className]];
     if (! cellSizeValue) {
         // Instantiate a dummy cell
         UITableViewCell *cell = [self cellForTableView:nil];
         cellSizeValue = [NSValue valueWithCGSize:cell.bounds.size];
-        [s_classNameToSizeMap setObject:cellSizeValue forKey:[self className]];
+        s_classNameToSizeMap[[self className]] = cellSizeValue;
     }
     return [cellSizeValue CGSizeValue];
 }

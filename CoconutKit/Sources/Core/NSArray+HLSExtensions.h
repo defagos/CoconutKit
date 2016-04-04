@@ -6,23 +6,27 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSArray (HLSExtensions)
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSArray<__covariant ObjectType> (HLSExtensions)
 
 /**
  * Return the array obtained by removing the last object
  */
-- (NSArray *)arrayByRemovingLastObject;
+- (NSArray<ObjectType> *)arrayByRemovingLastObject;
 
 /**
  * Return the array obtained by rotating receiver elements left or right (elements disappearing at an end are moved to 
  * the other end)
  */
-- (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfElements;
-- (NSArray *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;
+- (NSArray<ObjectType> *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfElements;
+- (NSArray<ObjectType> *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;
 
 /**
  * Sort an array using a single descriptor
  */
-- (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
+- (NSArray<ObjectType> *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
 
 @end
+
+NS_ASSUME_NONNULL_END

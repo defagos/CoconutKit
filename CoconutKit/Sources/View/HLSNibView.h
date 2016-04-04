@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Abstract class for easy view creation using nibs.
  *
@@ -42,7 +44,7 @@
  * Factory method for creating the view. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (instancetype)view;
++ (nullable instancetype)view;
 
 /**
  * Return the view dimensions
@@ -62,7 +64,7 @@
  * If the nib is not located in the main bundle, override this method to return the bundle to search in (by
  * default, this method returns nil, which corresponds to the main bundle)
  */
-+ (NSBundle *)bundle;
++ (nullable NSBundle *)bundle;
 
 @end
 
@@ -70,13 +72,14 @@
 @interface HLSNibView (UnavailableMethods)
 
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE NS_REQUIRES_SUPER;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE NS_REQUIRES_SUPER;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE NS_REQUIRES_SUPER;
 
 @end
 
 @interface HLSNibView (RequiresSuper)
 
-- (id)awakeAfterUsingCoder NS_REQUIRES_SUPER;
 - (void)awakeFromNib NS_REQUIRES_SUPER;
 
 @end
+
+NS_ASSUME_NONNULL_END

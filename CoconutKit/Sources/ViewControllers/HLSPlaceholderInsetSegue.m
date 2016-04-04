@@ -13,7 +13,7 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 
 @interface HLSPlaceholderInsetStandardSegue ()
 
-@property (nonatomic, assign) Class transitionClass;
+@property (nonatomic) Class transitionClass;
 
 @end
 
@@ -55,10 +55,10 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
                 return;
             }
             
-            if (self.index != [indexNumber unsignedIntegerValue]) {
+            if (self.index != indexNumber.unsignedIntegerValue) {
                 HLSLoggerWarn(@"For preloading segues, the index is extracted from the segue identifier '%@' and will override the one "
-                              "(%lu) manually set", self.identifier, (unsigned long)self.index);
-                self.index = [indexNumber unsignedIntegerValue];
+                              "(%@) manually set", self.identifier, @(self.index));
+                self.index = indexNumber.unsignedIntegerValue;
             }
         }
     }
@@ -104,7 +104,9 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
 
 - (void)perform
 {
-    HLSPlaceholderInsetSegue *insetSegue = [[HLSPlaceholderInsetSegue alloc] initWithIdentifier:self.identifier source:self.sourceViewController destination:self.destinationViewController];
+    HLSPlaceholderInsetSegue *insetSegue = [[HLSPlaceholderInsetSegue alloc] initWithIdentifier:self.identifier
+                                                                                         source:self.sourceViewController
+                                                                                    destination:self.destinationViewController];
     insetSegue.index = self.index;
     insetSegue.transitionClass = self.transitionClass;
     insetSegue.duration = self.duration;

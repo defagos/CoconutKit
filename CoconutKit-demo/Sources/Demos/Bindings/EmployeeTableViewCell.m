@@ -15,7 +15,7 @@
     static dispatch_once_t s_onceToken;
     static HLSBlockTransformer *s_transformer;
     dispatch_once(&s_onceToken, ^{
-        s_transformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
+        s_transformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *  _Nullable number) {
             return [NSString stringWithFormat:NSLocalizedString(@"Age: %@", nil), number];
         } reverseBlock:nil];
     });

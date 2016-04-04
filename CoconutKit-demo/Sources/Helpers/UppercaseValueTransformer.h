@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-@interface UppercaseValueTransformer : NSValueTransformer
+NS_ASSUME_NONNULL_BEGIN
 
+@interface UppercaseValueTransformer : NSValueTransformer
 @end
+
+NS_ASSUME_NONNULL_END

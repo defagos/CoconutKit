@@ -7,5 +7,4 @@
 #import "AutolayoutTopRightNibView.h"
 
 @implementation AutolayoutTopRightNibView
-
 @end

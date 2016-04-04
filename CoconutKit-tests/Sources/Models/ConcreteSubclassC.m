@@ -33,7 +33,7 @@
 
 - (BOOL)checkForConsistency:(NSError *__autoreleasing *)pError
 {
-    if ([self.noValidationStringA isFilled] && ! self.noValidationNumberC) {
+    if (self.noValidationStringA.filled && ! self.noValidationNumberC) {
         if (pError) {
             *pError = [NSError errorWithDomain:TestValidationErrorDomain
                                           code:TestValidationInconsistencyError];            

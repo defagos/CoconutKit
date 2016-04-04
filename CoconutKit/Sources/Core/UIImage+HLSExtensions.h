@@ -7,12 +7,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIImage (HLSExtensions)
 
 /**
  * Return an image from the CoconutKit-resources bundle
  */
-+ (instancetype)coconutKitImageNamed:(NSString *)imageName;
++ (nullable instancetype)coconutKitImageNamed:(NSString *)imageName;
 
 /**
  * Return a 1x1 px image having a given color
@@ -31,3 +33,5 @@
 - (UIImage *)imageScaledToSize:(CGSize)size;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSNumber (HLSExtensions)
 
 /**
@@ -23,3 +25,5 @@
 - (BOOL)isGreaterThanOrEqualToNumber:(NSNumber *)number;
 
 @end
+
+NS_ASSUME_NONNULL_END

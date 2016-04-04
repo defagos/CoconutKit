@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A view animation step (HLSViewAnimationStep) is the combination of several view animations (HLSViewAnimation) applied
  * to a set of views, and represent the collective set of changes applied to them during some time interval. An animation
@@ -39,6 +41,8 @@
  *
  * Default value is UIViewAnimationCurveEaseInOut
  */
-@property (nonatomic, assign) UIViewAnimationCurve curve;
+@property (nonatomic) UIViewAnimationCurve curve;
 
 @end
+
+NS_ASSUME_NONNULL_END

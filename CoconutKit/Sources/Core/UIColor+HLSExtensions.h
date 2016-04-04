@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIColor (HLSExtensions)
 
 /**
@@ -59,26 +61,26 @@
  * is defined on a UIColor subclass, say +[SomeColor corporateColor] color, then set the 'textColorName' 
  * value to 'SomeColor:corporate'
  */
-+ (instancetype)colorWithName:(NSString *)name;
++ (nullable instancetype)colorWithName:(NSString *)name;
 
 /**
  * Return the invert color corresponding to the receiver
  */
-- (UIColor *)invertedColor;
+@property (nonatomic, readonly) UIColor *invertedColor;
 
 /**
  * Return non-normalized color components (0 - 255)
  */
-- (NSUInteger)redComponent;
-- (NSUInteger)greenComponent;
-- (NSUInteger)blueComponent;
+@property (nonatomic, readonly) NSUInteger redComponent;
+@property (nonatomic, readonly) NSUInteger greenComponent;
+@property (nonatomic, readonly) NSUInteger blueComponent;
 
 /**
  * Return the normalized color components (0.f - 1.f)
  */
-- (CGFloat)normalizedRedComponent;
-- (CGFloat)normalizedGreenComponent;
-- (CGFloat)normalizedBlueComponent;
+@property (nonatomic, readonly) CGFloat normalizedRedComponent;
+@property (nonatomic, readonly) CGFloat normalizedGreenComponent;
+@property (nonatomic, readonly) CGFloat normalizedBlueComponent;
 
 @end
 
@@ -87,34 +89,35 @@
  */
 @interface UIView (HLSColorInspectables)
 
-@property (nonatomic, readonly, assign) IBInspectable NSString *backgroundColorName;
-@property (nonatomic, readonly, assign) IBInspectable NSString *tintColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *backgroundColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *tintColorName;
 
 @end
 
 @interface UILabel (HLSColorInspectables)
 
-@property (nonatomic, readonly, assign) IBInspectable NSString *textColorName;
-@property (nonatomic, readonly, assign) IBInspectable NSString *shadowColorName;
-@property (nonatomic, readonly, assign) IBInspectable NSString *highlightedTextColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *textColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *shadowColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *highlightedTextColorName;
 
 @end
 
 @interface UITextView (HLSColorInspectables)
 
-@property (nonatomic, readonly, assign) IBInspectable NSString *textColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *textColorName;
 
 @end
 
 @interface UITextField (HLSColorInspectables)
 
-@property (nonatomic, readonly, assign) IBInspectable NSString *textColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *textColorName;
 
 @end
 
 @interface UISearchBar (HLSColorInspectables)
 
-@property (nonatomic, readonly, assign) IBInspectable NSString *barTintColorName;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *barTintColorName;
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -16,12 +16,9 @@
 
 - (instancetype)initWithFrame:(CGRect)frame frontContentView:(UIView *)frontContentView
 {
-    if (self = [super initWithFrame:frame]) {
-        if (! frontContentView) {
-            HLSLoggerError(@"A front content view is mandatory");
-            return nil;
-        }
-        
+    NSParameterAssert(frontContentView);
+    
+    if (self = [super initWithFrame:frame]) {        
         self.backgroundColor = [UIColor clearColor];
         self.autoresizingMask = HLSViewAutoresizingAll;
         
@@ -43,11 +40,13 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
@@ -55,17 +54,17 @@
 
 - (UIView *)frontContentView
 {
-    return [self.frontView.subviews firstObject];
+    return self.frontView.subviews.firstObject;
 }
 
 - (UIView *)frontView
 {
-    return [self.subviews lastObject];
+    return self.subviews.lastObject;
 }
 
 - (UIView *)backContentView
 {
-    return [self.backView.subviews firstObject];
+    return self.backView.subviews.firstObject;
 }
 
 - (void)setBackContentView:(UIView *)backContentView
@@ -92,8 +91,8 @@
 
 - (UIView *)backView
 {
-    if ([self.subviews count] == 2) {
-        return [self.subviews firstObject];
+    if (self.subviews.count == 2) {
+        return self.subviews.firstObject;
     }
     else {
         return nil;

@@ -8,9 +8,9 @@
 
 @interface BindingsProgrammaticDemoViewController ()
 
-@property (nonatomic, strong) NSDate *date;
-@property (nonatomic, assign) float completion;
-@property (nonatomic, assign) float completion2;
+@property (nonatomic) NSDate *date;
+@property (nonatomic) float completion;
+@property (nonatomic) float completion2;
 
 @property (nonatomic, weak) UISlider *slider;
 @property (nonatomic, weak) UIProgressView *progressView;

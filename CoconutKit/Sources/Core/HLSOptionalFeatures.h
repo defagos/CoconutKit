@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A collection of macros to enable optional CoconutKit features you might not want in your application.
  * Simply call a macro at global scope to enable the corresponding feature. Good places are for example
@@ -53,3 +55,5 @@
             [UIControl enableExclusiveTouch];                                                            \
         }                                                                                                \
     }
+
+NS_ASSUME_NONNULL_END

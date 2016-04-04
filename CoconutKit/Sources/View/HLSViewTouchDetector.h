@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * For a view and a pair of begin / end notifications, traps touches outside the view frame and resigns responder
  * status if enabled
@@ -24,6 +26,8 @@
  *
  * The default value is NO
  */
-@property (nonatomic, assign, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;
+@property (nonatomic, getter=isResigningFirstResponderOnTap) BOOL resigningFirstResponderOnTap;
 
 @end
+
+NS_ASSUME_NONNULL_END

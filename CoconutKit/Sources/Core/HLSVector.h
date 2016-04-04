@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // A vector with 2 components
 typedef struct {
     CGFloat v1;
@@ -37,3 +39,5 @@ OBJC_EXPORT HLSVector4 HLSVector4Make(CGFloat v1, CGFloat v2, CGFloat v3, CGFloa
 OBJC_EXPORT NSString *HLSStringFromVector2(HLSVector2 vector2);
 OBJC_EXPORT NSString *HLSStringFromVector3(HLSVector3 vector3);
 OBJC_EXPORT NSString *HLSStringFromVector4(HLSVector4 vector4);
+
+NS_ASSUME_NONNULL_END

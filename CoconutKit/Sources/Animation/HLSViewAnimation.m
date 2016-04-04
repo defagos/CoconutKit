@@ -17,9 +17,9 @@
 
 @interface HLSViewAnimation ()
 
-@property (nonatomic, assign) HLSVector2 scaleParameters;
-@property (nonatomic, assign) HLSVector2 translationParameters;
-@property (nonatomic, assign) CGFloat alphaIncrement;
+@property (nonatomic) HLSVector2 scaleParameters;
+@property (nonatomic) HLSVector2 translationParameters;
+@property (nonatomic) CGFloat alphaIncrement;
 
 @end
 
@@ -92,10 +92,10 @@
 
 #pragma mark Reverse animation
 
-- (id)reverseObjectAnimation
+- (HLSObjectAnimation *)reverseObjectAnimation
 {
     // See remarks at the beginning
-    HLSViewAnimation *reverseViewAnimation = [super reverseObjectAnimation];
+    HLSViewAnimation *reverseViewAnimation = super.reverseObjectAnimation;
     [reverseViewAnimation scaleWithXFactor:1.f / self.scaleParameters.v1
                                    yFactor:1.f / self.scaleParameters.v2];
     [reverseViewAnimation translateByVectorWithX:-self.translationParameters.v1

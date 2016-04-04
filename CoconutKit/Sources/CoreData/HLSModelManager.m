@@ -14,9 +14,9 @@
 
 @interface HLSModelManager ()
 
-@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -115,19 +115,16 @@
 
 + (void)pushModelManager:(HLSModelManager *)modelManager
 {
-    if (! modelManager) {
-        HLSLoggerError(@"Missing model manager");
-        return;
-    }
+    NSParameterAssert(modelManager);
     
-    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
+    NSMutableArray<HLSModelManager *> *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
     [modelManagerStack addObject:modelManager];
 }
 
 + (void)popModelManager
 {
-    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
-    if ([modelManagerStack count] == 0) {
+    NSMutableArray<HLSModelManager *> *modelManagerStack = [self modelManagerStackForThread:[NSThread currentThread]];
+    if (modelManagerStack.count == 0) {
         HLSLoggerInfo(@"No model manager to pop");
         return;
     }
@@ -135,14 +132,14 @@
     [modelManagerStack removeLastObject];
 }
 
-+ (NSMutableArray *)modelManagerStackForThread:(NSThread *)thread
++ (NSMutableArray<HLSModelManager *> *)modelManagerStackForThread:(NSThread *)thread
 {
     static NSString * const HLSModelManagerStackThreadLocalStorageKey = @"HLSModelManagerStackThreadLocalStorageKey";
     
-    NSMutableArray *modelManagerStack = [[thread threadDictionary] objectForKey:HLSModelManagerStackThreadLocalStorageKey];
+    NSMutableArray<HLSModelManager *> *modelManagerStack = thread.threadDictionary[HLSModelManagerStackThreadLocalStorageKey];
     if (! modelManagerStack) {
         modelManagerStack = [NSMutableArray array];
-        [[thread threadDictionary] setObject:modelManagerStack forKey:HLSModelManagerStackThreadLocalStorageKey];
+        thread.threadDictionary[HLSModelManagerStackThreadLocalStorageKey] = modelManagerStack;
     }
     return modelManagerStack;
 }
@@ -159,8 +156,8 @@
 
 + (HLSModelManager *)currentModelManagerForThread:(NSThread *)thread
 {
-    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:thread];
-    return [modelManagerStack lastObject];
+    NSMutableArray<HLSModelManager *> *modelManagerStack = [self modelManagerStackForThread:thread];
+    return modelManagerStack.lastObject;
 }
 
 + (HLSModelManager *)rootModelManager
@@ -175,18 +172,18 @@
 
 + (HLSModelManager *)rootModelManagerForThread:(NSThread *)thread
 {
-    NSMutableArray *modelManagerStack = [self modelManagerStackForThread:thread];
-    return [modelManagerStack firstObject];
+    NSMutableArray<HLSModelManager *> *modelManagerStack = [self modelManagerStackForThread:thread];
+    return modelManagerStack.firstObject;
 }
 
 + (NSManagedObjectContext *)currentModelContext
 {
-    return [self currentModelManager].managedObjectContext;
+    return self.currentModelManager.managedObjectContext;
 }
 
 + (BOOL)saveCurrentModelContext:(NSError *__autoreleasing *)pError
 {
-    NSManagedObjectContext *currentModelContext = [self currentModelContext];
+    NSManagedObjectContext *currentModelContext = self.currentModelContext;
     if (! currentModelContext) {
         if (pError) {
             *pError = [NSError errorWithDomain:NSCocoaErrorDomain
@@ -201,7 +198,7 @@
 
 + (void)rollbackCurrentModelContext
 {
-    NSManagedObjectContext *currentModelContext = [self currentModelContext];
+    NSManagedObjectContext *currentModelContext = self.currentModelContext;
     if (! currentModelContext) {
         HLSLoggerError(@"No current context");
         return;
@@ -212,7 +209,9 @@
 
 + (void)deleteObjectFromCurrentModelContext:(NSManagedObject *)managedObject
 {
-    NSManagedObjectContext *currentModelContext = [self currentModelContext];
+    NSParameterAssert(managedObject);
+    
+    NSManagedObjectContext *currentModelContext = self .currentModelContext;
     if (! currentModelContext) {
         HLSLoggerError(@"No current context");
         return;
@@ -231,6 +230,8 @@
                           fileManager:(HLSFileManager *)fileManager
                               options:(NSDictionary *)options
 {
+    NSParameterAssert(modelFileName);
+    
     if (self = [super init]) {
         if (! fileManager) {
             fileManager = [HLSStandardFileManager defaultManager];
@@ -309,19 +310,19 @@
                                                                                         options:options
                                                                                           error:&error];
     if (! persistentStore) {
-        HLSLoggerError(@"Failed to create persistent store. Reason: %@", [error localizedDescription]);
+        HLSLoggerError(@"Failed to create persistent store. Reason: %@", error.localizedDescription);
         return nil;
     }
     
     // If migration of a file-based store has successfully been performed, delete the old file
-    if ([storeURL isFileURL]) {
-        NSString *fileURLString = [storeURL absoluteString];
-        NSString *oldFileName = [NSString stringWithFormat:@"~%@", [fileURLString lastPathComponent]];
-        NSString *oldFilePath = [[fileURLString stringByDeletingLastPathComponent] stringByAppendingPathComponent:oldFileName];
+    if (storeURL.fileURL) {
+        NSString *fileURLString = storeURL.absoluteString;
+        NSString *oldFileName = [NSString stringWithFormat:@"~%@", fileURLString.lastPathComponent];
+        NSString *oldFilePath = [fileURLString.stringByDeletingLastPathComponent stringByAppendingPathComponent:oldFileName];
         
         NSError *deletionError = nil;
         if ([fileManager fileExistsAtPath:oldFilePath]
-            && [fileManager removeItemAtPath:oldFilePath error:&deletionError]) {
+                && [fileManager removeItemAtPath:oldFilePath error:&deletionError]) {
             HLSLoggerInfo(@"The old store at %@ has been removed after successful migration", oldFilePath);
         }
     }
@@ -332,7 +333,7 @@
 - (NSManagedObjectContext *)managedObjectContextForPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] init];
-    [managedObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
+    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
     
     return managedObjectContext;
 }
@@ -352,7 +353,7 @@
 
 - (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError *__autoreleasing *)pError
 {
-    NSPersistentStore *persistentStore = [[self.persistentStoreCoordinator persistentStores] firstObject];
+    NSPersistentStore *persistentStore = self.persistentStoreCoordinator.persistentStores.firstObject;
     return [self.persistentStoreCoordinator migratePersistentStore:persistentStore toURL:url options:nil withType:storeType error:pError] != nil;
 }
 

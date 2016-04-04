@@ -4,8 +4,12 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A view controller with fixed size
  */
 @interface FixedSizeViewController : HLSViewController
 @end
+
+NS_ASSUME_NONNULL_END

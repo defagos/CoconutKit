@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Binding support for UIImageView:
  *   - binds to UIImage, NSString (image name in bundle, or path to image) or NSURL model values (file URL to image)
@@ -16,5 +18,6 @@
  *   - does not animate updates
  */
 @interface UIImageView (HLSViewBinding) <HLSViewBindingImplementation>
-
 @end
+
+NS_ASSUME_NONNULL_END

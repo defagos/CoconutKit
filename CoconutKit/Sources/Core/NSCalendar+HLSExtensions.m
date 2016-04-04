@@ -12,6 +12,8 @@
 
 - (NSInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
 {
+    NSParameterAssert(date);
+    
     NSTimeInterval interval = 0.;
     [self rangeOfUnit:unit
             startDate:NULL
@@ -22,6 +24,8 @@
 
 - (NSDate *)startDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
 {
+    NSParameterAssert(date);
+    
     NSDate *startDateOfUnit = nil;
     [self rangeOfUnit:unit
             startDate:&startDateOfUnit
@@ -32,6 +36,8 @@
 
 - (NSDate *)endDateOfUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date
 {
+    NSParameterAssert(date);
+    
     NSUInteger numberOfDaysInUnit = [self numberOfDaysInUnit:unit containingDate:date];
     NSDate *startDateOfUnit = [self startDateOfUnit:unit containingDate:date];
     return [self.timeZone dateByAddingNumberOfDays:numberOfDaysInUnit toDate:startDateOfUnit];
@@ -49,29 +55,34 @@
 
 - (NSDate *)dateAtHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second theSameDayAsDate:(NSDate *)date
 {
+    NSParameterAssert(date);
+    
     NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSDateComponents *dateComponents = [self components:unitFlags fromDate:date];
-    [dateComponents setHour:hour];
-    [dateComponents setMinute:minute];
-    [dateComponents setSecond:second];
+    dateComponents.hour = hour;
+    dateComponents.minute = minute;
+    dateComponents.second = second;
     return [self dateFromComponents:dateComponents];
 }
 
 - (NSComparisonResult)compareDaysBetweenDate:(NSDate *)date1 andDate:(NSDate *)date2
 {
+    NSParameterAssert(date1);
+    NSParameterAssert(date2);
+    
     NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSDateComponents *dateComponents1 = [self components:unitFlags fromDate:date1];
     NSDateComponents *dateComponents2 = [self components:unitFlags fromDate:date2];
     
     // Create comparable strings from those components
     NSString *dateString1 = [NSString stringWithFormat:@"%ld%02ld%02ld",
-                             (long)[dateComponents1 year],
-                             (long)[dateComponents1 month],
-                             (long)[dateComponents1 day]];
+                             (long)dateComponents1.year,
+                             (long)dateComponents1.month,
+                             (long)dateComponents1.day];
     NSString *dateString2 = [NSString stringWithFormat:@"%ld%02ld%02ld",
-                             (long)[dateComponents2 year],
-                             (long)[dateComponents2 month],
-                             (long)[dateComponents2 day]];
+                             (long)dateComponents2.year,
+                             (long)dateComponents2.month,
+                             (long)dateComponents2.day];
     
     return [dateString1 compare:dateString2];
 }

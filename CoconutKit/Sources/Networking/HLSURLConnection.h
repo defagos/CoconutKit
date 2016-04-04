@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Completion block signatures
 typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *connection, NSURLProtectionSpace *protectionSpace);
 
@@ -26,12 +28,12 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 /**
  * The request attached to the connection
  */
-@property (nonatomic, readonly, strong) NSURLRequest *request;
+@property (nonatomic, readonly) NSURLRequest *request;
 
 /**
  * Authentication blocks
  */
-@property (nonatomic, copy) HLSURLConnectionAuthenticationChallengeBlock authenticationChallengeBlock;
+@property (nonatomic, copy, nullable) HLSURLConnectionAuthenticationChallengeBlock authenticationChallengeBlock;
 
 @end
 
@@ -41,3 +43,5 @@ typedef BOOL (^HLSURLConnectionAuthenticationChallengeBlock)(NSURLConnection *co
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

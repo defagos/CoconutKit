@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * CoconutKit bindings for custom view classes
  * -------------------------------------------
@@ -16,7 +18,6 @@
  *   - In your implementation, be sure to use the HLSViewBindingUpdateImplementation category when implementing
  *     update operations
  */
-
 @protocol HLSViewBindingImplementation <NSObject>
 
 @required
@@ -27,7 +28,7 @@
  * be sure to implement the +supportedBindingClasses method accordingly). If a UIView class does not implement this
  * method, bindings will not be available for it
  */
-- (void)updateViewWithValue:(id)value animated:(BOOL)animated;
+- (void)updateViewWithValue:(nullable id)value animated:(BOOL)animated;
 
 @optional
 
@@ -35,7 +36,7 @@
  * Return the list of classes supported for bindings. If this method is not implemented, the supported types default
  * to NSString only
  */
-+ (NSArray *)supportedBindingClasses;
++ (NSArray<Class> *)supportedBindingClasses;
 
 /**
  * Should return YES iff the UIView subclass is able to display a placeholder. If not implemented, the default
@@ -51,7 +52,7 @@
  * one of the classes returned by +supportedBindingClasses. If your view binds only to one type, you can ignore
  * this parameter and return an object with the according class
  */
-- (id)inputValueWithClass:(Class)inputClass;
+- (nullable id)inputValueWithClass:(Class)inputClass;
 
 @end
 
@@ -75,6 +76,8 @@
  * Remark: Setting check = YES does not necessary leads to a check if the view has its bindInputChecked property
  *         set to NO. Setting check to NO, however, disables checks in all cases
  */
-- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError;
+- (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(nullable id)inputValue error:(out NSError *__autoreleasing *)pError;
 
 @end
+
+NS_ASSUME_NONNULL_END

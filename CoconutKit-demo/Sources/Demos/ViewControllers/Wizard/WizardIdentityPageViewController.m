@@ -10,14 +10,14 @@
 
 @interface WizardIdentityPageViewController ()
 
-@property (nonatomic, strong) PersonInformation *personInformation;
+@property (nonatomic) PersonInformation *personInformation;
 
 @property (nonatomic, weak) IBOutlet UILabel *birthdateLabel;
 
-@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
-@property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *errorLabels;
+@property (nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic) IBOutletCollection(UILabel) NSArray *errorLabels;
 
-@property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
+@property (nonatomic) NSDateFormatter *localizedDateFormatter;
 
 @end
 
@@ -32,7 +32,7 @@
 {
     if (self = [super init]) {
         // Only one person in the DB. If does not exist yet, create it
-        PersonInformation *personInformation = [[PersonInformation allObjects] firstObject];
+        PersonInformation *personInformation = [PersonInformation allObjects].firstObject;
         if (! personInformation) {
             personInformation = [PersonInformation insert];
         }
@@ -64,7 +64,7 @@
     self.birthdateLabel.text = [NSString stringWithFormat:@"%@ (%@)", NSLocalizedString(@"Birthdate", nil), NSLocalizedString(@"yyyy/MM/dd", nil)];
     
     NSDateFormatter *localizedDateFormatter = [[NSDateFormatter alloc] init];
-    [localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    localizedDateFormatter.dateFormat = NSLocalizedString(@"yyyy/MM/dd", nil);
     
     // Changing the date formatter object automatically triggers a bound view update
     self.localizedDateFormatter = localizedDateFormatter;
@@ -87,7 +87,7 @@
     boundView.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
     
     UILabel *errorLabel = [self errorLabelForView:boundView];
-    errorLabel.text = [error localizedDescription];
+    errorLabel.text = error.localizedDescription;
 }
 
 - (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object
@@ -103,7 +103,7 @@
     boundView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     
     UILabel *errorLabel = [self errorLabelForView:boundView];
-    errorLabel.text = [error localizedDescription];
+    errorLabel.text = error.localizedDescription;
 }
 
 #pragma mark Retrieving the error label associated with a view
@@ -115,8 +115,8 @@
         return nil;
     }
     
-    NSAssert([self.textFields count] == [self.errorLabels count], @"Expect one label per text field");
-    return [self.errorLabels objectAtIndex:index];
+    NSAssert(self.textFields.count == self.errorLabels.count, @"Expect one label per text field");
+    return self.errorLabels[index];
 }
 
 #pragma mark Event callbacks
@@ -128,7 +128,7 @@
     self.personInformation.lastName = nil;
     self.personInformation.email = nil;
     self.personInformation.birthdate = nil;
-    self.personInformation.nbrChildrenValue = 0;
+    self.personInformation.numberOfChildrenValue = 0;
 }
 
 - (IBAction)resetTextFields:(id)sender

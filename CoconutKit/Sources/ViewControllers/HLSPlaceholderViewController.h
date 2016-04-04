@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @protocol HLSPlaceholderViewControllerDelegate;
 
@@ -44,7 +46,7 @@
  *   -awakeFromNib
  *   -viewWill...
  *   -viewDid...
- *   -shouldAutorotate and supportedInterfaceOrientations
+ *   -shouldAutorotate and -supportedInterfaceOrientations
  *   -willRotateToInterfaceOrientation:duration:
  *   -willAnimate...
  *   -didRotateFromInterfaceOrientation:
@@ -94,7 +96,7 @@
  *
  * This method can also be called to preload view controllers before the placeholder view controller is displayed
  */
-- (void)setInsetViewController:(UIViewController *)insetViewController
+- (void)setInsetViewController:(nullable UIViewController *)insetViewController
                        atIndex:(NSUInteger)index;
 
 /**
@@ -105,9 +107,9 @@
  *
  * This method can also be called to preload view controllers before the placeholder view controller is displayed
  */
-- (void)setInsetViewController:(UIViewController *)insetViewController
+- (void)setInsetViewController:(nullable UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
-           withTransitionClass:(Class)transitionClass;
+           withTransitionClass:(nullable Class)transitionClass;
 
 /**
  * Display an inset view controller using some transition animation and duration, on the placeholder view corresponding 
@@ -118,9 +120,9 @@
  *
  * This method can also be called to preload view controllers before the placeholder view controller is displayed
  */
-- (void)setInsetViewController:(UIViewController *)insetViewController
+- (void)setInsetViewController:(nullable UIViewController *)insetViewController
                        atIndex:(NSUInteger)index
-           withTransitionClass:(Class)transitionClass
+           withTransitionClass:(nullable Class)transitionClass
                       duration:(NSTimeInterval)duration;
 
 /**
@@ -131,17 +133,17 @@
  * The order of the placeholder views in the IBOutletCollection is the one in which they are bound in the corresponding
  * nib or storyboard file
  */
-@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *placeholderViews;
+@property (nonatomic, nullable) IBOutletCollection(UIView) NSArray<__kindof UIView *> *placeholderViews;
 
 /**
  * Return the placeholder view at the given index, or nil if none
  */
-- (UIView *)placeholderViewAtIndex:(NSUInteger)index;
+- (nullable UIView *)placeholderViewAtIndex:(NSUInteger)index;
 
 /**
  * Return the view controller displayed on the placeholder view at the given index, or nil if none
  */
-- (UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;
+- (nullable __kindof UIViewController *)insetViewControllerAtIndex:(NSUInteger)index;
 
 /**
  * Set how the placeholder view controller decides whether it must rotate or not
@@ -155,12 +157,12 @@
  *
  * The default value is given by HLSAutorotationModeContainer
  */
-@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
+@property (nonatomic) HLSAutorotationMode autorotationMode;
 
 /**
  * The placeholder view controller delegate
  */
-@property (nonatomic, weak) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
+@property (nonatomic, weak, nullable) IBOutlet id<HLSPlaceholderViewControllerDelegate> delegate;
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
@@ -168,7 +170,7 @@
  *
  * Default is NO
  */
-@property (nonatomic, assign) BOOL lockingUI;
+@property (nonatomic, getter=isLockingUI) BOOL lockingUI;
 
 @end
 
@@ -179,7 +181,7 @@
  * Called when a view controller is about to be displayed
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-      willShowInsetViewController:(UIViewController *)viewController
+      willShowInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
@@ -187,7 +189,7 @@
  * Called when a view controller has been displayed
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-       didShowInsetViewController:(UIViewController *)viewController
+       didShowInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
@@ -195,7 +197,7 @@
  * Called when a view controller is about to be hidden
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-      willHideInsetViewController:(UIViewController *)viewController
+      willHideInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
@@ -203,7 +205,7 @@
  * Called when a view controller has been hidden
  */
 - (void)placeholderViewController:(HLSPlaceholderViewController *)placeholderViewController
-       didHideInsetViewController:(UIViewController *)viewController
+       didHideInsetViewController:(__kindof UIViewController *)viewController
                           atIndex:(NSUInteger)index
                          animated:(BOOL)animated;
 
@@ -214,6 +216,8 @@
 /**
  * Return the placeholder view controller a view controller is inserted in, or nil if none
  */
-@property (nonatomic, readonly, weak) HLSPlaceholderViewController *placeholderViewController;
+@property (nonatomic, readonly, weak, nullable) HLSPlaceholderViewController *placeholderViewController;
 
 @end
+
+NS_ASSUME_NONNULL_END

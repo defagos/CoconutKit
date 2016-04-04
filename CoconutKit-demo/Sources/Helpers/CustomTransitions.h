@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * The following are custom transition examples showing how you can subclass HLSTransition to define your own animations
  */
@@ -36,3 +38,5 @@
  */
 @interface CustomTransitionFadeInBlur : HLSTransition
 @end
+
+NS_ASSUME_NONNULL_END

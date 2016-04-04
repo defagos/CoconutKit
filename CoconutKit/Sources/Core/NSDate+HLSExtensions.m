@@ -56,7 +56,7 @@ static NSString *swizzle_descriptionWithLocale(NSDate *self, SEL _cmd, id locale
     dispatch_once(&s_onceToken, ^{
         // Create time formatter for system timezone (which is the default one if not set)
         s_dateFormatter = [[NSDateFormatter alloc] init];
-        [s_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ"];
+        s_dateFormatter.dateFormat = @"yyyy'-'MM'-'dd' 'HH':'mm':'ss' 'ZZZ";
     });
     
     NSString *originalString = s_descriptionWithLocale(self, _cmd, locale);

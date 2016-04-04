@@ -11,7 +11,7 @@
 
 @interface HLSContainerStackView ()
 
-@property (nonatomic, strong) NSMutableArray *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
+@property (nonatomic) NSMutableArray<HLSContainerGroupView *> *groupViews;           // The HLSContainerGroupView in the hierarchy, from the bottommost to the topmost one
 
 @end
 
@@ -34,7 +34,7 @@
 - (void)setFrame:(CGRect)frame
 {
     [self.delegate containerStackViewWillChangeFrame:self];
-    [super setFrame:frame];
+    super.frame = frame;
     [self.delegate containerStackViewDidChangeFrame:self];
 }
 
@@ -52,9 +52,9 @@
     return NSNotFound;
 }
 
-- (NSArray *)contentViews
+- (NSArray<UIView *> *)contentViews
 {
-    NSMutableArray *contentViews = [NSMutableArray array];
+    NSMutableArray<UIView *> *contentViews = [NSMutableArray array];
     for (HLSContainerGroupView *groupView in self.groupViews) {
         [contentViews addObject:groupView.frontContentView];
     }
@@ -63,14 +63,16 @@
 
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index
 {
-    if (index > [self.groupViews count]) {
-        HLSLoggerWarn(@"Invalid index %ld. Expected in [0;%lu]", (long)index, (unsigned long)[self.groupViews count]);
+    NSParameterAssert(contentView);
+    
+    if (index > self.groupViews.count) {
+        HLSLoggerWarn(@"Invalid index %@. Expected in [0;%@]", @(index), @(self.groupViews.count));
         return;
     }
     
     // Add to the top
-    if (index == [self.groupViews count]) {
-        HLSContainerGroupView *topGroupView = [self.groupViews lastObject];
+    if (index == self.groupViews.count) {
+        HLSContainerGroupView *topGroupView = self.groupViews.lastObject;
         
         HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = topGroupView;
@@ -80,8 +82,8 @@
     }
     // Insert in the middle
     else {
-        HLSContainerGroupView *groupViewAtIndex = [self.groupViews objectAtIndex:index];
-        HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
+        HLSContainerGroupView *groupViewAtIndex = self.groupViews[index];
+        HLSContainerGroupView *belowGroupViewAtIndex = (index > 0) ? self.groupViews[index - 1] : nil;
         
         HLSContainerGroupView *newGroupView = [[HLSContainerGroupView alloc] initWithFrame:self.bounds frontContentView:contentView];
         newGroupView.backContentView = belowGroupViewAtIndex;
@@ -93,24 +95,26 @@
 
 - (void)removeContentView:(UIView *)contentView
 {
+    NSParameterAssert(contentView);
+    
     NSUInteger index = [self indexOfContentView:contentView];
     if (index == NSNotFound) {
         HLSLoggerWarn(@"Content view not found");
         return;
     }
     
-    HLSContainerGroupView *groupView = [self.groupViews objectAtIndex:index];
-    HLSContainerGroupView *belowGroupView = (index > 0) ? [self.groupViews objectAtIndex:index - 1] : nil;
+    HLSContainerGroupView *groupView = self.groupViews[index];
+    HLSContainerGroupView *belowGroupView = (index > 0) ? self.groupViews[index - 1] : nil;
     
     // Remove at the top
-    if (index == [self.groupViews count] - 1) {
+    if (index == self.groupViews.count - 1) {
         // No need to call -removeFromSuperview, the view is moved between superviews automatically. No need
         // for a retain-autorelease: The view is kept alive during this process. See UIView documentation
         [self insertSubview:belowGroupView atIndex:0];
     }
     // Remove in the middle
     else {
-        HLSContainerGroupView *aboveGroupView = [self.groupViews objectAtIndex:index + 1];
+        HLSContainerGroupView *aboveGroupView = self.groupViews[index + 1];
         aboveGroupView.backContentView = belowGroupView;
     }
     
@@ -120,6 +124,8 @@
 
 - (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView
 {
+    NSParameterAssert(contentView);
+    
     NSUInteger i = 0;
     for (HLSContainerGroupView *groupView in self.groupViews) {
         if (groupView.frontContentView == contentView) {

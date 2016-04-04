@@ -42,15 +42,16 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     
     // A xib has been found, use it
     NSString *nibName = [self nibName];
+    NSAssert(nibName, @"A nib name is required");
     if ([bundle pathForResource:nibName ofType:@"nib"]) {
         NSArray *bundleContents = [bundle loadNibNamed:nibName owner:nil options:nil];
-        if ([bundleContents count] == 0) {
+        if (bundleContents.count == 0) {
             HLSLoggerError(@"Missing view object in xib file %@", nibName);
             return nil;
         }
         
         // Get the first object and check that it is what we expect
-        id firstObject = [bundleContents firstObject];
+        id firstObject = bundleContents.firstObject;
         if (! [firstObject isKindOfClass:self]) {
             HLSLoggerError(@"The view object must be the first one in the xib file, and must be of type %@", [self className]);
             return nil;
@@ -72,8 +73,12 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     // If no child views, consider we are deserializing a placeholder, and thus return a properly instantiated view instead. Since
     // we are swapping the object when it is deserialized, i.e. early in the process, all constraints which might be applied will
     // correctly reference the replacing object
-    if ([self.subviews count] == 0) {
+    if (self.subviews.count == 0) {
         HLSNibView *nibView = [[self class] view];
+        if (! nibView) {
+            HLSLoggerError(@"View class could not be instantiated");
+            return nil;
+        }
         nibView->_loadedFromPlaceholder = YES;
         nibView.frame = self.frame;
         nibView.alpha = self.alpha;
@@ -94,11 +99,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
             constraint.identifier = placeholderConstraint.identifier;
             constraint.shouldBeArchived = placeholderConstraint.shouldBeArchived;
             constraint.priority = placeholderConstraint.priority;
-            
-            // TODO: Remove when iOS 8 is the minimum required version for CoconutKit
-            if ([constraint respondsToSelector:@selector(isActive)]) {
-                constraint.active = placeholderConstraint.active;
-            }
+            constraint.active = placeholderConstraint.active;
             
             [nibView addConstraint:constraint];
         }
@@ -115,7 +116,7 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
     [super awakeFromNib];
     
     // Avoid conflicts with constraints generated from autoresizing masks (if the parent view uses constraints)
-    if (_loadedFromPlaceholder && [self.superview.constraints count] > 0) {
+    if (_loadedFromPlaceholder && self.superview.constraints.count > 0) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
     }
 }
@@ -135,13 +136,13 @@ static NSMutableDictionary *s_classNameToSizeMap = nil;
 + (CGSize)size
 {
     // Cache the view height
-    NSValue *viewSizeValue = [s_classNameToSizeMap objectForKey:[self className]];
+    NSValue *viewSizeValue = s_classNameToSizeMap[[self className]];
     if (! viewSizeValue) {
         UIView *view = [self view];
         viewSizeValue = [NSValue valueWithCGSize:view.bounds.size];
-        [s_classNameToSizeMap setObject:viewSizeValue forKey:[self className]];
+        s_classNameToSizeMap[[self className]] = viewSizeValue;
     }
-    return [viewSizeValue CGSizeValue];
+    return viewSizeValue.CGSizeValue;
 }
 
 + (NSString *)nibName

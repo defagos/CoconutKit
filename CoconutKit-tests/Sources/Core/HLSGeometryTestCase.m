@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSGeometryTestCase.h"
+@interface HLSGeometryTestCase : XCTestCase
+@end
 
 @implementation HLSGeometryTestCase
 

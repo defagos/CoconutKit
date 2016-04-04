@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Collects the code which can be executed right after an application has started so that perceived performance can be
  * increased. For the moment only UIWebView is preloaded so that the time usually required when instantiating the first
@@ -31,3 +33,5 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

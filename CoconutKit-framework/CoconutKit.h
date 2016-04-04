@@ -46,11 +46,6 @@
 #import <CoconutKit/HLSTableSearchDisplayViewController.h>
 #import <CoconutKit/HLSTableViewCell.h>
 #import <CoconutKit/HLSTableViewController.h>
-#import <CoconutKit/HLSTask.h>
-#import <CoconutKit/HLSTaskGroup.h>
-#import <CoconutKit/HLSTaskManager.h>
-#import <CoconutKit/HLSTaskOperation.h>
-#import <CoconutKit/HLSTaskOperation+Protected.h>
 #import <CoconutKit/HLSTransformer.h>
 #import <CoconutKit/HLSTransition.h>
 #import <CoconutKit/HLSURLConnection.h>

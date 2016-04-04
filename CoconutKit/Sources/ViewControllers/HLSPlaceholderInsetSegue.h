@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * The segue identifier prefix reserved for preloading view controllers into a placeholder view controller
  * ('hls_preload_at_index_')
@@ -34,25 +36,25 @@ OBJC_EXPORT NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
  * The placeholder view index which the destination view controller must be displayed in
  * Default value is 0
  */
-@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic) NSUInteger index;
 
 /**
  * Push animation style
  * Default value is [HLSTransitionNone class]
  */
-@property (nonatomic, assign) Class transitionClass;
+@property (nonatomic, nullable) Class transitionClass;
 
 /**
  * Push animation duration
  * Default is kAnimationTransitionDefaultDuration
  */
-@property (nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic) NSTimeInterval duration;
 
 /**
  * Animated transition
  * Default is YES
  */
-@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, getter=isAnimated) BOOL animated;
 
 @end
 
@@ -69,34 +71,33 @@ OBJC_EXPORT NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
  * Subclasses must override -initWithIdentifier:source:destination:, calling the following method in their implementation
  * (passing it the transition class to use)
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier
+- (instancetype)initWithIdentifier:(nullable NSString *)identifier
                             source:(UIViewController *)source
                        destination:(UIViewController *)destination
-                   transitionClass:(Class)transitionClass;
+                   transitionClass:(nullable Class)transitionClass NS_DESIGNATED_INITIALIZER;
 
 /**
  * The placeholder view index which the destination view controller must be displayed in
  * Default value is 0
  */
-@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic) NSUInteger index;
 
 /**
  * Push animation style
- * Default value is HLSTransitionNone
  */
-@property (nonatomic, readonly, assign) Class transitionClass;
+@property (nonatomic, readonly, nullable) Class transitionClass;
 
 /**
  * Push animation duration
  * Default is kAnimationTransitionDefaultDuration
  */
-@property (nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic) NSTimeInterval duration;
 
 /**
  * Animated transition
  * Default is YES
  */
-@property (nonatomic, assign) BOOL animated;
+@property (nonatomic, getter=isAnimated) BOOL animated;
 
 @end
 
@@ -246,3 +247,5 @@ OBJC_EXPORT NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix;
 
 @interface HLSPlaceholderRotateVerticallyFromRightClockwiseSegue : HLSPlaceholderInsetStandardSegue
 @end
+
+NS_ASSUME_NONNULL_END

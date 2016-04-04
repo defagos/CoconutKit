@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * View controllers inserted into view controller containers exhibit common properties:
  *   - they belong to a container, which they must be able to identify, and they should not be inserted into several
@@ -58,18 +60,18 @@
  * Return the CoconutKit-based container into which a view controller has been inserted into (if any). If a class parameter 
  * is provided, the method returns nil if the container class does not match
  */
-+ (UIViewController *)containerViewControllerKindOfClass:(Class)containerViewControllerClass
-                                       forViewController:(UIViewController *)viewController;
++ (nullable __kindof UIViewController *)containerViewControllerKindOfClass:(nullable Class)containerViewControllerClass
+                                                         forViewController:(UIViewController *)viewController;
 
 /**
  * Initialize a container content object. Expect the view controller to be managed (which is retained), the container 
  * in which it is inserted into (not retained), as well as the details of the transition animation with which it gets 
  * displayed. Use the reserved kAnimationTransitionDefaultDuration duration to use the default animation duration.
  */
-- (instancetype)initWithViewController:(UIViewController *)viewController
-               containerViewController:(UIViewController *)containerViewController
-                       transitionClass:(Class)transitionClass
-                              duration:(NSTimeInterval)duration NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithViewController:(UIViewController *)viewController
+                        containerViewController:(UIViewController *)containerViewController
+                                transitionClass:(Class)transitionClass
+                                       duration:(NSTimeInterval)duration NS_DESIGNATED_INITIALIZER;
 
 /**
  * The attached view controller. If you need to access its view, do not use the -[UIViewController view] property
@@ -78,23 +80,23 @@
  * -[HLSContainerContent viewIfLoaded] accessor to access a view which you created this way (and which does not
  * instantiate the view lazily).
  */
-@property (nonatomic, readonly, strong) UIViewController *viewController;
+@property (nonatomic, readonly) __kindof UIViewController *viewController;
 
 /**
  * The container into which a view controller has been inserted
  */
-@property (nonatomic, readonly, weak) UIViewController *containerViewController;
+@property (nonatomic, readonly, weak, nullable) __kindof UIViewController *containerViewController;
 
 /**
  * The transition properties to be applied when the view controller's view gets displayed
  */
-@property (nonatomic, readonly, assign) Class transitionClass;
-@property (nonatomic, readonly, assign) NSTimeInterval duration;
+@property (nonatomic, readonly) Class transitionClass;
+@property (nonatomic, readonly) NSTimeInterval duration;
 
 /**
  * Return YES iff the view controller has been added to a container
  */
-@property (nonatomic, readonly, assign, getter=isAddedToContainerView) BOOL addedToContainerView;
+@property (nonatomic, readonly, getter=isAddedToContainerView) BOOL addedToContainerView;
 
 /**
  * Instantiate (if not already) and add the view controller's view at the top of a stack view. The frame of the view
@@ -105,7 +107,7 @@
 - (void)addAsSubviewIntoContainerStackView:(HLSContainerStackView *)containerStackView;
 
 /**
- * Valid values for index range from 0 to [containerStackView.contentViews count] (this last value being equivalent to
+ * Valid values for index range from 0 to containerStackView.contentViews.count (this last value being equivalent to
  * calling -addAsSubviewIntoContainerStackView:)
  *
  * If the view has already been added to a stack view or if the index is invalid, this method does nothing
@@ -117,7 +119,7 @@
  * creation. When you need to create the associated view, use -addAsSubviewIntoContainerStackView: or
  * -insertAsSubviewIntoContainerStackView:index
  */
-- (UIView *)viewIfLoaded;
+@property (nonatomic, readonly, nullable) UIView *viewIfLoaded;
 
 /**
  * Remove the view controller's view from its container view (if added to a container view)
@@ -144,7 +146,7 @@
  */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
 - (BOOL)shouldAutorotate;
-- (NSUInteger)supportedInterfaceOrientations;
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
@@ -156,3 +158,5 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

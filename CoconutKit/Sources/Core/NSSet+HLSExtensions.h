@@ -6,11 +6,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSSet (HLSExtensions)
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSSet<__covariant ObjectType> (HLSExtensions)
 
 /**
  * Sort an array using a single descriptor
  */
-- (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
+- (NSArray<ObjectType> *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
 
 @end
+
+NS_ASSUME_NONNULL_END

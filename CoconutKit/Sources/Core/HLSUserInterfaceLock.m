@@ -17,7 +17,7 @@
 
 #pragma mark Class methods
 
-+ (instancetype)sharedUserInterfaceLock
++ (HLSUserInterfaceLock *)sharedUserInterfaceLock
 {
     static HLSUserInterfaceLock *s_instance = nil;
     static dispatch_once_t s_onceToken;

@@ -7,5 +7,4 @@
 #import "CursorCustomPointerView.h"
 
 @implementation CursorCustomPointerView
-
 @end

@@ -67,7 +67,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
     
     // Call order / use of temporaries is very important here! See remark above!
     CFTimeInterval pausedTime = self.timeOffset;
-    self.speed = [speedBeforePauseNumber floatValue];
+    self.speed = speedBeforePauseNumber.floatValue;
     self.timeOffset = 0.;
     self.beginTime = 0.;
     CFTimeInterval timeIntervalSincePause = [self convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
@@ -115,7 +115,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
     // If layer animations had been paused, reset the layer status
     NSNumber *speedBeforePauseNumber = [self valueForKey:kLayerSpeedBeforePauseKey];
     if (speedBeforePauseNumber) {
-        self.speed = [speedBeforePauseNumber floatValue];
+        self.speed = speedBeforePauseNumber.floatValue;
         [self setValue:nil forKey:kLayerSpeedBeforePauseKey];
     }
     

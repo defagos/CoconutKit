@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Forward declarations
 @protocol HLSContainerStackViewDelegate;
 
@@ -105,10 +107,10 @@
 /**
  * Return the array of views used to display content (child views), from the bottommost to the topmost one
  */
-- (NSArray *)contentViews;
+@property (nonatomic, readonly) NSArray<UIView *> *contentViews;
  
 /**
- * Insert a view at a given index. If index is [contentViews count], then the view is added at the top
+ * Insert a view at a given index. If index is contentViews.count, then the view is added at the top
  */
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index;
 
@@ -120,9 +122,12 @@
 /**
  * Return the group view containing a given view as topmost subview. Return nil if not found
  */
-- (HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView;
+- (nullable HLSContainerGroupView *)groupViewForContentView:(UIView *)contentView;
 
-@property (nonatomic, weak) id<HLSContainerStackViewDelegate> delegate;
+/**
+ * The stack view delegate
+ */
+@property (nonatomic, weak, nullable) id<HLSContainerStackViewDelegate> delegate;
 
 @end
 
@@ -139,3 +144,5 @@
 - (void)containerStackViewDidChangeFrame:(HLSContainerStackView *)containerStackView;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,5 +7,4 @@
 #import "AutoresizingMaskBottomLeftNibView.h"
 
 @implementation AutoresizingMaskBottomLeftNibView
-
 @end

@@ -13,7 +13,7 @@
 - (NSDictionary *)dictionaryBySettingObject:(id)object forKey:(id)key
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
-    [dictionary setObject:object forKey:key];
+    dictionary[key] = object;
     return [NSDictionary dictionaryWithDictionary:dictionary];
 }
 
@@ -33,13 +33,13 @@
 
 - (NSDictionary *)dictionaryOverriddenWithEnvironment
 {
-    HLSAssertObjectsInEnumerationAreKindOfClass([self allKeys], NSString);
+    HLSAssertObjectsInEnumerationAreKindOfClass(self.allKeys, NSString);
 
     NSMutableDictionary *overriddenDictionary = [NSMutableDictionary dictionaryWithDictionary:self];
-    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-    for (NSString *key in [environment allKeys]) {
-        id environmentValue = [environment objectForKey:key];
-        [overriddenDictionary setObject:environmentValue forKey:key];
+    NSDictionary *environment = [NSProcessInfo processInfo].environment;
+    for (NSString *key in environment.allKeys) {
+        id environmentValue = environment[key];
+        overriddenDictionary[key] = environmentValue;
     }
     return [NSDictionary dictionaryWithDictionary:overriddenDictionary];
 }
@@ -53,7 +53,7 @@
     if (! object || ! key) {
         return;
     }
-    [self setObject:object forKey:key];
+    self[key] = object;
 }
 
 @end

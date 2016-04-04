@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Convenience methods on UIViewController. Do nothing if the view controller view is not loaded
  */
@@ -30,6 +32,8 @@
  * Errors are individually reported to the validation delegate, and chained as a single error returned to the 
  * caller as well. The method returns YES iff all operations have been successful
  */
-- (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError;
+- (BOOL)checkBoundViewHierarchyWithError:(out NSError *__autoreleasing *)pError;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Formatting functions
 OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 
@@ -15,12 +17,12 @@ OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 /**
  * Trim spaces left and right
  */
-- (NSString *)stringByTrimmingWhitespaces;
+@property (nonatomic, readonly, copy) NSString *stringByTrimmingWhitespaces;
 
 /**
  * Return NO if the string is empty or only made of whitespaces
  */
-- (BOOL)isFilled;
+@property (nonatomic, readonly, getter=isFilled) BOOL filled;
 
 /**
  * URL encoded (aka percent encoded) string with RFC 3986 compliance
@@ -31,42 +33,42 @@ OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 /**
  * Calculate the MD2 hash of a string (hexadecimal)
  */
-- (NSString *)md2hash;
+@property (nonatomic, readonly, copy) NSString *md2hash;
 
 /**
  * Calculate the MD4 hash of a string (hexadecimal)
  */
-- (NSString *)md4hash;
+@property (nonatomic, readonly, copy) NSString *md4hash;
 
 /**
  * Calculate the MD5 hash of a string (hexadecimal)
  */
-- (NSString *)md5hash;
+@property (nonatomic, readonly, copy) NSString *md5hash;
 
 /**
  * Calculate the SHA-1 hash of a string (hexadecimal)
  */
-- (NSString *)sha1hash;
+@property (nonatomic, readonly, copy) NSString *sha1hash;
 
 /**
  * Calculate the SHA-224 hash of a string (hexadecimal)
  */
-- (NSString *)sha224hash;
+@property (nonatomic, readonly, copy) NSString *sha224hash;
 
 /**
  * Calculate the SHA-256 hash of a string (hexadecimal)
  */
-- (NSString *)sha256hash;
+@property (nonatomic, readonly, copy) NSString *sha256hash;
 
 /**
  * Calculate the SHA-384 hash of a string (hexadecimal)
  */
-- (NSString *)sha384hash;
+@property (nonatomic, readonly, copy) NSString *sha384hash;
 
 /**
  * Calculate the SHA-512 hash of a string (hexadecimal)
  */
-- (NSString *)sha512hash;
+@property (nonatomic, readonly, copy) NSString *sha512hash;
 
 /**
  * Here is a convenient way to identify versions during development, for tags and for official releases:
@@ -105,11 +107,13 @@ OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
  *   1.0
  *   1.0+test
  */
-- (NSString *)friendlyVersionNumber;
+@property (nonatomic, readonly, copy, nullable) NSString *friendlyVersionNumber;
 
 /**
  * Guess the MIME type from the path extension
  */
-- (NSString *)MIMEType;
+@property (nonatomic, readonly, copy, nullable) NSString *MIMEType;
 
 @end
+
+NS_ASSUME_NONNULL_END

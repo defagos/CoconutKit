@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Common abstract class for animations
  */
@@ -17,3 +19,5 @@
 + (instancetype)animation;
 
 @end
+
+NS_ASSUME_NONNULL_END

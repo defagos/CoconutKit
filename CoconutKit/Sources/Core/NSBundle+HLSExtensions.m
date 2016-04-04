@@ -30,7 +30,7 @@
 
 + (NSString *)friendlyApplicationVersionNumber
 {
-    return [[NSBundle mainBundle] friendlyVersionNumber];
+    return [NSBundle mainBundle].friendlyVersionNumber;
 }
 
 + (NSBundle *)coconutKitBundle
@@ -55,36 +55,36 @@
         s_nameToBundleMap = [[NSMutableDictionary alloc] init];
     });
     
-    NSBundle *bundle = [s_nameToBundleMap objectForKey:name];
+    NSBundle *bundle = s_nameToBundleMap[name];
     if (bundle) {
         return bundle;
     }
     NSString *nameDotBundle = [name stringByAppendingPathExtension:@"bundle"];
-    bundle = [s_nameToBundleMap objectForKey:nameDotBundle];
+    bundle = s_nameToBundleMap[nameDotBundle];
     if (bundle) {
         return bundle;
     }
     
-    bundle = [self bundleWithName:name inDirectory:[[NSBundle mainBundle] bundlePath]];
+    bundle = [self bundleWithName:name inDirectory:[NSBundle mainBundle].bundlePath];
     if (bundle) {
-        [s_nameToBundleMap setObject:bundle forKey:name];
+        s_nameToBundleMap[name] = bundle;
         return bundle;
     }
     
     bundle = [self bundleWithName:name inDirectory:HLSApplicationLibraryDirectoryPath()];
     if (bundle) {
-        [s_nameToBundleMap setObject:bundle forKey:name];
+        s_nameToBundleMap[name] = bundle;
         return bundle;
     }
     
     bundle = [self bundleWithName:name inDirectory:HLSApplicationDocumentDirectoryPath()];
     if (bundle) {
-        [s_nameToBundleMap setObject:bundle forKey:name];
+        s_nameToBundleMap[name] = bundle;
         return bundle;
     }
     
     // Search again, but with the .bundle extension appended
-    if (! [[name pathExtension] isEqualToString:@"bundle"]) {
+    if (! [name.pathExtension isEqualToString:@"bundle"]) {
         bundle = [self bundleWithName:nameDotBundle];
     }
     
@@ -98,13 +98,13 @@
 + (NSBundle *)bundleWithName:(NSString *)name inDirectory:(NSString *)directoryPath
 {
     if (! directoryPath) {
-        directoryPath = [[NSBundle mainBundle] bundlePath];
+        directoryPath = [NSBundle mainBundle].bundlePath;
     }
     
     NSBundle *bundle = nil;
     NSArray *contentPaths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:directoryPath error:NULL];
     for (NSString *contentPath in contentPaths) {
-        NSString *lastPathComponent = [contentPath lastPathComponent];
+        NSString *lastPathComponent = contentPath.lastPathComponent;
         if (! [lastPathComponent isEqualToString:name]) {
             continue;
         }
@@ -122,8 +122,8 @@
 
 - (NSString *)friendlyVersionNumber
 {
-    NSString *versionNumber = [[self infoDictionary] objectForKey:@"CFBundleVersion"];
-    return [versionNumber friendlyVersionNumber];
+    NSString *versionNumber = self.infoDictionary[@"CFBundleVersion"];
+    return versionNumber.friendlyVersionNumber;
 }
 
 - (NSDictionary *)fullInfoDictionary

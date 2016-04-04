@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Display various information about a binding
  */
@@ -29,3 +31,5 @@
 - (instancetype)initWithStyle:(UITableViewStyle)style NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

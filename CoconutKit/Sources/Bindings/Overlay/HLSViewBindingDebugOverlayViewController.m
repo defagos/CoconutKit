@@ -26,7 +26,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 
 @property (nonatomic, weak) UIWindow *debuggedWindow;
 
-@property (nonatomic, strong) UIPopoverController *bindingInformationPopoverController;
+@property (nonatomic) UIPopoverController *bindingInformationPopoverController;
 @property (nonatomic, weak) HLSViewBindingInformationViewController *bindingInformationViewController;
 
 @end
@@ -45,7 +45,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     s_previousKeyWindow = [UIApplication sharedApplication].keyWindow;
     
     // Ensure we exit edit mode when displaying the overlay
-    [[s_previousKeyWindow firstResponderView] resignFirstResponder];
+    [s_previousKeyWindow.firstResponderView resignFirstResponder];
     
     // Using a second window and setting our overlay as its root view controller ensures that rotation is dealt with correctly
     s_overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -133,7 +133,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 
 #pragma mark Rotation
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & [self.debuggedWindow.rootViewController supportedInterfaceOrientations];
 }
@@ -220,7 +220,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 - (void)updateOverlayViewFrames
 {
     for (UIView *overlayView in self.view.subviews) {
-        UIView *underlyingView = [overlayView.userInfo_hls objectForKey:HLSViewBindingDebugOverlayUnderlyingViewKey];
+        UIView *underlyingView = overlayView.userInfo_hls[HLSViewBindingDebugOverlayUnderlyingViewKey];
         if (! underlyingView) {
             HLSLoggerWarn(@"The view %@ has no underlying view. Its frame will not be correctly updated", overlayView);
             continue;
@@ -277,7 +277,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 {
     NSAssert([sender isKindOfClass:[UIButton class]], @"Expect a button");
     UIButton *overlayButton = sender;
-    UIView *underlyingView = [overlayButton.userInfo_hls objectForKey:HLSViewBindingDebugOverlayUnderlyingViewKey];
+    UIView *underlyingView = overlayButton.userInfo_hls[HLSViewBindingDebugOverlayUnderlyingViewKey];
     HLSViewBindingInformation *bindingInformation = underlyingView.bindingInformation;
     if (! bindingInformation) {
         return;
@@ -286,7 +286,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
     UINavigationController *bindingInformationNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingInformationViewController];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         [self presentViewController:bindingInformationNavigationController animated:YES completion:nil];
     }
     else {

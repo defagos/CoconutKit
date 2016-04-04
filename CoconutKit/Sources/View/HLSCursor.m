@@ -11,16 +11,20 @@
 #import "HLSViewAnimationStep.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSBundle+HLSExtensions.h"
+#import "NSString+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
 #import "UIView+HLSViewBindingImplementation.h"
 #import "UIView+HLSExtensions.h"
 
+CGSize HLSCursorShadowOffsetDefault;
+
+static void commonInit(HLSCursor *self);
+
 @interface HLSCursor ()
 
-@property (nonatomic, strong) NSArray *elementWrapperViews;
-@property (nonatomic, strong) NSArray *elementWrapperViewSizeValues;
-
-@property (nonatomic, strong) UIView *pointerContainerView;         // strong, not an error
+@property (nonatomic) NSArray<UIView *> *elementWrapperViews;
+@property (nonatomic) NSArray<NSValue *> *elementWrapperViewSizeValues;
+@property (nonatomic) UIView *pointerContainerView;         // strong, not an error
 
 @end
 
@@ -38,12 +42,23 @@
     CGFloat _spacing;
 }
 
+#pragma mark Class methods
+
++ (void)initialize
+{
+    if (self != [HLSCursor class]) {
+        return;
+    }
+    
+    HLSCursorShadowOffsetDefault = CGSizeMake(0.f, -1.f);
+}
+
 #pragma mark Object creation and destruction
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self hlsCursorInit];
+        commonInit(self);
     }
     return self;
 }
@@ -51,16 +66,9 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self hlsCursorInit];
+        commonInit(self);
     }
     return self;
-}
-
-- (void)hlsCursorInit
-{
-    self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
-    self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
-    self.animationDuration = 0.2;
 }
 
 #pragma mark Accessors and mutators
@@ -87,14 +95,14 @@
         self.elementWrapperViewSizeValues = @[];
         
         // Check the data source
-        NSUInteger nbrElements = [self.dataSource numberOfElementsForCursor:self];
-        if (nbrElements == 0) {
+        NSUInteger numberOfElements = [self.dataSource numberOfElementsForCursor:self];
+        if (numberOfElements == 0) {
             HLSLoggerError(@"Cursor data source is empty");
             return;
         }
         
         // Fill with views generated from the data source
-        for (NSInteger index = 0; index < nbrElements; ++index) {
+        for (NSInteger index = 0; index < numberOfElements; ++index) {
             UIView *elementWrapperView = [self elementWrapperViewForIndex:index];
             [self addSubview:elementWrapperView];
             self.elementWrapperViews = [self.elementWrapperViews arrayByAddingObject:elementWrapperView];
@@ -120,7 +128,7 @@
     // Cursor large enough so that everything fits in: Add space between elements
     CGFloat widthScaleFactor = 1.f;
     if (islessequal(requiredWidth, CGRectGetWidth(self.frame))) {
-        _spacing = (CGRectGetWidth(self.frame) - requiredWidth) / ([self.elementWrapperViews count] - 1);
+        _spacing = (CGRectGetWidth(self.frame) - requiredWidth) / (self.elementWrapperViews.count - 1);
     }
     // Not large enough: Scale all views so that they can fit with no space in between
     else {
@@ -138,7 +146,7 @@
     CGFloat xPos = fmaxf(-self.pointerViewTopLeftOffset.width, 0.f);
     NSUInteger i = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
-        CGSize elementWrapperViewSize = [[self.elementWrapperViewSizeValues objectAtIndex:i] CGSizeValue];
+        CGSize elementWrapperViewSize = self.elementWrapperViewSizeValues[i].CGSizeValue;
         
         // Centered in main frame
         elementWrapperView.frame = CGRectMake(floorf(xPos),
@@ -164,7 +172,7 @@
             self.pointerView = imageView;
         }
         
-        if (_initialIndex >= [self.elementWrapperViews count]) {
+        if (_initialIndex >= self.elementWrapperViews.count) {
             _initialIndex = 0;
             HLSLoggerWarn(@"Initial index too large; fixed");
         }
@@ -208,8 +216,8 @@
     if ([self.dataSource respondsToSelector:@selector(cursor:titleAtIndex:)]) {
         // Title
         NSString *title = [self.dataSource cursor:self titleAtIndex:index];
-        if ([title length] == 0) {
-            HLSLoggerWarn(@"Empty title string at index %lu", (unsigned long)index);
+        if (!title.filled) {
+            HLSLoggerWarn(@"Empty title string at index %@", @(index));
         }
         
         // Font. If not defined by the data source, use standard font
@@ -240,7 +248,7 @@
         }
         
         // Shadow offset. If not defined, default value (CGSizeMake(0, -1), see UILabel documentation)
-        CGSize shadowOffset = kCursorShadowOffsetDefault;
+        CGSize shadowOffset = HLSCursorShadowOffsetDefault;
         if ([self.dataSource respondsToSelector:@selector(cursor:shadowOffsetAtIndex:selected:)]) {
             shadowOffset = [self.dataSource cursor:self shadowOffsetAtIndex:index selected:selected];
         }
@@ -307,9 +315,9 @@
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
 {
     if (_creatingViews) {
-        if ([self.elementWrapperViews count] > 0 && selectedIndex >= [self.elementWrapperViews count]) {
+        if (self.elementWrapperViews.count > 0 && selectedIndex >= self.elementWrapperViews.count) {
             HLSLoggerWarn(@"Index outside range. Set to last index");
-            selectedIndex = [self.elementWrapperViews count] - 1;
+            selectedIndex = self.elementWrapperViews.count - 1;
         }
         
         HLSViewAnimation *moveViewAnimation11 = [HLSViewAnimation animation];
@@ -336,31 +344,31 @@
 
 - (void)showElementViewAtIndex:(NSUInteger)index selected:(BOOL)selected
 {
-    if (index >= [self.elementWrapperViews count]) {
+    if (index >= self.elementWrapperViews.count) {
         return;
     }
     
-    UIView *elementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+    UIView *elementWrapperView = self.elementWrapperViews[index];
     
-    UIView *elementView = [elementWrapperView.subviews objectAtIndex:0];
+    UIView *elementView = elementWrapperView.subviews.firstObject;
     elementView.hidden = selected;
     
-    UIView *selectedElementView = [elementWrapperView.subviews objectAtIndex:1];
+    UIView *selectedElementView = elementWrapperView.subviews[1];
     selectedElementView.hidden = ! selected;
 }
 
 - (CGFloat)xPosForIndex:(NSUInteger)index
 {
-    if ([self.elementWrapperViews count] == 0) {
+    if (self.elementWrapperViews.count == 0) {
         return 0.f;
     }
     
-    if (index >= [self.elementWrapperViews count]) {
+    if (index >= self.elementWrapperViews.count) {
         HLSLoggerError(@"Invalid index");
         return 0.f;
     }
     
-    UIView *elementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+    UIView *elementWrapperView = self.elementWrapperViews[index];
     return elementWrapperView.center.x;
 }
 
@@ -369,19 +377,19 @@
     NSUInteger index = 0;
     for (UIView *elementWrapperView in self.elementWrapperViews) {
         if (isgreaterequal(xPos, CGRectGetMinX(elementWrapperView.frame) - _spacing / 2.f)
-            && islessequal(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + _spacing / 2.f)) {
+                && islessequal(xPos, CGRectGetMinX(elementWrapperView.frame) + CGRectGetWidth(elementWrapperView.frame) + _spacing / 2.f)) {
             return index;
         }
         ++index;
     }
     
     // No match found; return leftmost or rightmost element view
-    UIView *firstElementWrapperView = [self.elementWrapperViews firstObject];
+    UIView *firstElementWrapperView = self.elementWrapperViews.firstObject;
     if (isless(xPos, CGRectGetMinX(firstElementWrapperView.frame) - _spacing / 2.f)) {
         return 0;
     }
     else {
-        return [self.elementWrapperViews count] - 1;
+        return self.elementWrapperViews.count - 1;
     }
 }
 
@@ -406,18 +414,18 @@
     // Too far on the left; cursor around the first view
     CGRect pointerRect;
     if (index == 0) {
-        UIView *firstElementWrapperView = [self.elementWrapperViews firstObject];
+        UIView *firstElementWrapperView = self.elementWrapperViews.firstObject;
         pointerRect = firstElementWrapperView.frame;
     }
     // Too far on the right; cursor around the last view
-    else if (index == [self.elementWrapperViews count]) {
-        UIView *lastElementWrapperView = [self.elementWrapperViews lastObject];
+    else if (index == self.elementWrapperViews.count) {
+        UIView *lastElementWrapperView = self.elementWrapperViews.lastObject;
         pointerRect = lastElementWrapperView.frame;
     }
     // Cursor in between views with indices index-1 and index. Interpolate
     else {
-        UIView *previousElementWrapperView = [self.elementWrapperViews objectAtIndex:index - 1];
-        UIView *nextElementWrapperView = [self.elementWrapperViews objectAtIndex:index];
+        UIView *previousElementWrapperView = self.elementWrapperViews[index - 1];
+        UIView *nextElementWrapperView = self.elementWrapperViews[index];
         
         // Linear interpolation
         CGFloat width = ((xPos - nextElementWrapperView.center.x) * CGRectGetWidth(previousElementWrapperView.frame)
@@ -466,7 +474,7 @@
 
 #pragma mark Touch events
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     _holding = YES;
     
@@ -482,7 +490,7 @@
     }
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     CGPoint point = [[touches anyObject] locationInView:self];
     
@@ -523,7 +531,7 @@
     }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     CGPoint point = [[touches anyObject] locationInView:self];
     NSUInteger index = [self indexForXPos:point.x];
@@ -573,7 +581,7 @@
     }
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     _holding = NO;
 }
@@ -605,7 +613,7 @@
     if ([animation.tag isEqualToString:@"move"]) {
         // If the finger has been released during the move animation, update the selected index and notify
         if (! _holding) {
-            _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+            _selectedIndex = [animation.userInfo[@"targetIndex"] unsignedIntegerValue];
             [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
             
             [self showElementViewAtIndex:_selectedIndex selected:YES];
@@ -618,7 +626,7 @@
         _moving = NO;
     }
     else if ([animation.tag isEqualToString:@"snap"]) {
-        _selectedIndex = [[animation.userInfo objectForKey:@"targetIndex"] unsignedIntegerValue];
+        _selectedIndex = [animation.userInfo[@"targetIndex"] unsignedIntegerValue];
         [self check:YES update:YES withInputValue:@(_selectedIndex) error:NULL];
         
         [self showElementViewAtIndex:_selectedIndex selected:YES];
@@ -635,7 +643,7 @@
 
 #pragma mark HLSViewBindingImplementation protocol implementation
 
-+ (NSArray *)supportedBindingClasses
++ (NSArray<Class> *)supportedBindingClasses
 {
     return @[[NSNumber class]];
 }
@@ -651,3 +659,12 @@
 }
 
 @end
+
+#pragma mark Static functions
+
+static void commonInit(HLSCursor *self)
+{
+    self.pointerViewTopLeftOffset = CGSizeMake(-10.f, -10.f);
+    self.pointerViewBottomRightOffset = CGSizeMake(10.f, 10.f);
+    self.animationDuration = 0.2;
+}

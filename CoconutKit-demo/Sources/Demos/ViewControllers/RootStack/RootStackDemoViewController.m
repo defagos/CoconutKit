@@ -121,11 +121,11 @@
     return [super shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     HLSLoggerInfo(@"Called");
     
-    NSUInteger supportedOrientations = 0;
+    UIInterfaceOrientationMask supportedOrientations = 0;
     if ([self isViewLoaded]) {
         if (self.portraitSwitch.on) {
             supportedOrientations |= UIInterfaceOrientationMaskPortrait;
@@ -199,14 +199,14 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] count];
+    return [HLSTransition availableTransitionNames].count;
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
+    return [HLSTransition availableTransitionNames][row];
 }
 
 #pragma mark Displaying view controllers
@@ -214,7 +214,7 @@
 - (void)displayViewController:(UIViewController *)viewController
 {
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    NSString *transitionName = [HLSTransition availableTransitionNames][pickedIndex];
     [self.stackController pushViewController:viewController
                          withTransitionClass:NSClassFromString(transitionName)
                                     animated:self.animatedSwitch.on];

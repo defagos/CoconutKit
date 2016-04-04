@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-@interface NibViewAutolayoutDemoViewController : HLSViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface NibViewAutolayoutDemoViewController : HLSViewController
 @end
+
+NS_ASSUME_NONNULL_END

@@ -4,14 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "CAMediaTimingFunction+HLExtensionsTestCase.h"
-
 @interface CAMediaTimingFunction (CAPrivate)
 
 // Private method used to compute function values. Use them as reference, tests will never make it to the AppStore
 // after all
 - (float)_solveForInput:(float)normalizedTime;
 
+@end
+
+@interface CAMediaTimingFunction_HLExtensionsTestCase : XCTestCase
 @end
 
 @implementation CAMediaTimingFunction_HLExtensionsTestCase
@@ -31,7 +32,7 @@
 - (void)testInverse
 {
     // Inverse ease in must be ease out
-    CAMediaTimingFunction *inverseEaseInTimingFunction = [[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn] inverseFunction];
+    CAMediaTimingFunction *inverseEaseInTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn].inverseFunction;
     CAMediaTimingFunction *easeOutTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
     for (size_t i = 0; i < 4; ++i) {

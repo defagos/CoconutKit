@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Common errors
  */
@@ -27,3 +29,5 @@ typedef NS_ENUM(NSInteger, TestValidation) {
     TestValidationEnumEnd,
     TestValidationEnumSize = TestValidationEnumEnd - TestValidationEnumBegin
 };
+
+NS_ASSUME_NONNULL_END

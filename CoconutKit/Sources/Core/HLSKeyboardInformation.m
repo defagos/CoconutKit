@@ -21,10 +21,10 @@
 
 @interface HLSKeyboardInformation ()
 
-@property (nonatomic, assign) CGRect beginFrame;
-@property (nonatomic, assign) CGRect endFrame;
-@property (nonatomic, assign) NSTimeInterval animationDuration;
-@property (nonatomic, assign) UIViewAnimationCurve animationCurve;
+@property (nonatomic) CGRect beginFrame;
+@property (nonatomic) CGRect endFrame;
+@property (nonatomic) NSTimeInterval animationDuration;
+@property (nonatomic) UIViewAnimationCurve animationCurve;
 
 @end
 
@@ -44,10 +44,10 @@ static HLSKeyboardInformation *s_instance = nil;
 - (instancetype)initWithUserInfo:(NSDictionary *)userInfo
 {
     if (self = [super init]) {
-        self.beginFrame = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-        self.endFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-        self.animationDuration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-        self.animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] unsignedIntValue];
+        self.beginFrame = [userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        self.endFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+        self.animationDuration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        self.animationCurve = [userInfo[UIKeyboardAnimationCurveUserInfoKey] unsignedIntValue];
     }
     return self;
 }
@@ -57,7 +57,7 @@ static HLSKeyboardInformation *s_instance = nil;
 + (void)keyboardWillShow:(NSNotification *)notification
 {
     HLSLoggerDebug(@"Keyboard will show");
-    s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:[notification userInfo]];
+    s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:notification.userInfo];
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
@@ -71,7 +71,7 @@ static HLSKeyboardInformation *s_instance = nil;
 + (void)keyboardDidShow:(NSNotification *)notification
 {
     HLSLoggerDebug(@"Keyboard did show");
-    s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:[notification userInfo]];
+    s_instance = [[HLSKeyboardInformation alloc] initWithUserInfo:notification.userInfo];
 }
 
 + (void)keyboardDidHide:(NSNotification *)notification

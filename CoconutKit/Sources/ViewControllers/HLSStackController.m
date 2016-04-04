@@ -15,8 +15,8 @@
 
 @interface HLSStackController ()
 
-@property (nonatomic, strong) HLSContainerStack *containerStack;
-@property (nonatomic, assign) NSUInteger capacity;
+@property (nonatomic) HLSContainerStack *containerStack;
+@property (nonatomic) NSUInteger capacity;
 
 @end
 
@@ -26,6 +26,9 @@
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController capacity:(NSUInteger)capacity
 {
+    // Root view controller mandatory (fixed root, see below)
+    NSParameterAssert(rootViewController);
+    
     if (self = [super init]) {
         self.autorotationMode = HLSAutorotationModeContainer;
         
@@ -79,7 +82,7 @@
         HLSLoggerDebug(@"Exception caught but not rethrown: %@", exception);
     }
     
-    if ([self.containerStack count] == 0) {
+    if (self.containerStack.count == 0) {
         NSString *reason = [NSString stringWithFormat: @"No root view controller has been loaded. Drag a segue called '%@' "
                             "in your storyboard file, from the stack controller to the view controller you want to install "
                             "as root", HLSStackRootSegueIdentifier];
@@ -118,22 +121,22 @@
 
 - (UIViewController *)rootViewController
 {
-    return [self.containerStack rootViewController];
+    return self.containerStack.rootViewController;
 }
 
 - (UIViewController *)topViewController
 {
-    return [self.containerStack topViewController];
+    return self.containerStack.topViewController;
 }
 
-- (NSArray *)viewControllers
+- (NSArray<UIViewController *> *)viewControllers
 {
-    return [self.containerStack viewControllers];
+    return self.containerStack.viewControllers;
 }
 
 - (NSUInteger)count
 {
-    return [self.containerStack count];
+    return self.containerStack.count;
 }
 
 - (void)setLockingUI:(BOOL)lockingUI
@@ -141,7 +144,7 @@
     self.containerStack.lockingUI = lockingUI;
 }
 
-- (BOOL)lockingUI
+- (BOOL)isLockingUI
 {
     return self.containerStack.lockingUI;
 }
@@ -207,7 +210,7 @@
     return [self.containerStack shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & [self.containerStack supportedInterfaceOrientations];
 }

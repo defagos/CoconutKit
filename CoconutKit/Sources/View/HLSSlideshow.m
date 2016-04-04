@@ -18,26 +18,27 @@ static const CGFloat kKenBurnsSlideshowMaxScaleFactorDelta = 0.4f;
 
 static const NSInteger kSlideshowNoIndex = -1;
 
+static void commonInit(HLSSlideshow *self);
+
 @interface HLSSlideshow () <HLSAnimationDelegate>
 
-@property (nonatomic, strong) NSArray *imageViews;
-@property (nonatomic, strong) HLSAnimation *animation;
+@property (nonatomic) NSArray<UIImageView *> *imageViews;
+@property (nonatomic) HLSAnimation *animation;
+
+@property (nonatomic) NSInteger currentImageIndex;
+@property (nonatomic) NSInteger nextImageIndex;
+@property (nonatomic) NSInteger currentImageViewIndex;
 
 @end
 
-@implementation HLSSlideshow {
-@private
-    NSInteger _currentImageIndex;
-    NSInteger _nextImageIndex;
-    NSInteger _currentImageViewIndex;
-}
+@implementation HLSSlideshow
 
 #pragma mark Object creation and destruction
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self hlsSlideshowInit];
+        commonInit(self);
     }
     return self;
 }
@@ -45,30 +46,9 @@ static const NSInteger kSlideshowNoIndex = -1;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder]) {
-        [self hlsSlideshowInit];
+        commonInit(self);
     }
     return self;
-}
-
-- (void)hlsSlideshowInit
-{
-    self.clipsToBounds = YES;           // Uncomment this line to better see what is happening when debugging
-    
-    _currentImageIndex = kSlideshowNoIndex;
-    
-    self.imageViews = @[];
-    for (NSUInteger i = 0; i < 2; ++i) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.autoresizingMask = HLSViewAutoresizingAll;
-        [self addSubview:imageView];
-        
-        self.imageViews = [self.imageViews arrayByAddingObject:imageView];
-    }
-    
-    self.imageDuration = kSlideshowDefaultImageDuration;
-    self.transitionDuration = kSlideshowDefaultTransitionDuration;
-    self.random = NO;
 }
 
 - (void)dealloc
@@ -88,7 +68,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     _effect = effect;
 }
 
-- (void)setImageNamesOrPaths:(NSArray *)imageNamesOrPaths
+- (void)setImageNamesOrPaths:(NSArray<NSString *> *)imageNamesOrPaths
 {   
     HLSAssertObjectsInEnumerationAreKindOfClass(imageNamesOrPaths, NSString);
     
@@ -96,19 +76,19 @@ static const NSInteger kSlideshowNoIndex = -1;
         return;
     }
     
-    if ([imageNamesOrPaths count] != 0) {
-        if (_currentImageIndex != kSlideshowNoIndex) {
+    if (imageNamesOrPaths.count != 0) {
+        if (self.currentImageIndex != kSlideshowNoIndex) {
             // Try to find whether the current image is also in the new array. If the answer is
             // yes, start at the corresponding location to guarantee we won't see the same image
             // soon afterwards (if images are not displayed randomly, of course)
-            NSString *currentImageNameOrPath = [_imageNamesOrPaths objectAtIndex:_currentImageIndex];
+            NSString *currentImageNameOrPath = _imageNamesOrPaths[self.currentImageIndex];
             NSUInteger currentImageIndexInNewArray = [imageNamesOrPaths indexOfObject:currentImageNameOrPath];
             if (currentImageIndexInNewArray != NSNotFound) {
-                _currentImageIndex = currentImageIndexInNewArray;
+                self.currentImageIndex = currentImageIndexInNewArray;
             }
             // Otherwise start at the beginning
             else {
-                _currentImageIndex = kSlideshowNoIndex;
+                self.currentImageIndex = kSlideshowNoIndex;
             }
         }        
     }
@@ -158,14 +138,14 @@ static const NSInteger kSlideshowNoIndex = -1;
         return;
     }
     
-    if ([self.imageNamesOrPaths count] == 0) {
+    if (self.imageNamesOrPaths.count == 0) {
         HLSLoggerInfo(@"No images to display. Nothing to animate");
         return;
     }
     
-    _currentImageIndex = kSlideshowNoIndex;
-    _nextImageIndex = kSlideshowNoIndex;
-    _currentImageViewIndex = kSlideshowNoIndex;
+    self.currentImageIndex = kSlideshowNoIndex;
+    self.nextImageIndex = kSlideshowNoIndex;
+    self.currentImageViewIndex = kSlideshowNoIndex;
     
     [self playAnimationForNextImage];
 }
@@ -205,9 +185,9 @@ static const NSInteger kSlideshowNoIndex = -1;
     [self.animation cancel];
     self.animation = nil;
     
-    _currentImageIndex = kSlideshowNoIndex;
-    _nextImageIndex = kSlideshowNoIndex;
-    _currentImageViewIndex = kSlideshowNoIndex;
+    self.currentImageIndex = kSlideshowNoIndex;
+    self.nextImageIndex = kSlideshowNoIndex;
+    self.currentImageViewIndex = kSlideshowNoIndex;
     
     for (UIImageView *imageView in self.imageViews) {
         imageView.image = nil;
@@ -267,16 +247,16 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (NSString *)currentImageNameOrPath
 {
-    if (_currentImageViewIndex == kSlideshowNoIndex) {
+    if (self.currentImageViewIndex == kSlideshowNoIndex) {
         return nil;
     }
     
     if (self.running) {
-        UIImageView *currentImageView = [self.imageViews objectAtIndex:_currentImageViewIndex];
+        UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
         return [self imageNameOrPathForImageView:currentImageView];        
     }
     else {
-        UIImageView *nextImageView = [self.imageViews objectAtIndex:(_currentImageViewIndex + 1) % 2];
+        UIImageView *nextImageView = self.imageViews[(self.currentImageViewIndex + 1) % 2];
         return [self imageNameOrPathForImageView:nextImageView];
     }
 }
@@ -306,7 +286,7 @@ static const NSInteger kSlideshowNoIndex = -1;
     // Calculate the scale which needs to be applied to get aspect fill behavior for the image view
     // TODO: This code is quite common (most notably in PDF generator code). Factor it somewhere where it can easily
     //       be reused
-    CGFloat zoomScale;
+    CGFloat zoomScale = 0.f;
     // Aspect ratios of frame and image
     CGFloat frameRatio = CGRectGetWidth(self.frame) / CGRectGetHeight(self.frame);
     CGFloat imageRatio = image.size.width / image.size.height;
@@ -353,7 +333,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (NSString *)imageNameOrPathForImageView:(UIImageView *)imageView
 {
-    return [[imageView userInfo_hls] objectForKey:@"imageNameOrPath"];
+    return imageView.userInfo_hls[@"imageNameOrPath"];
 }
 
 // Randomly move and scale an image view so that it stays in self.view. Returns random scale factors, x and y offsets
@@ -451,10 +431,10 @@ static const NSInteger kSlideshowNoIndex = -1;
     
     // User information attached: Not the first animation loop (and not reset after skipping
     // to the next or previous image)
-    if ([userInfo objectForKey:@"scaleFactor"]) {
-        currentImageScaleFactor = [[userInfo objectForKey:@"scaleFactor"] floatValue];
-        currentImageXOffset = [[userInfo objectForKey:@"xOffset"] floatValue];
-        currentImageYOffset = [[userInfo objectForKey:@"yOffset"] floatValue];
+    if (userInfo[@"scaleFactor"]) {
+        currentImageScaleFactor = [userInfo[@"scaleFactor"] floatValue];
+        currentImageXOffset = [userInfo[@"xOffset"] floatValue];
+        currentImageYOffset = [userInfo[@"yOffset"] floatValue];
     }
     // No user information attached: First animation loop
     else {
@@ -626,23 +606,23 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)playNextAnimation
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     if (self.random) {
         if (numberOfImages > 1) {
             // Avoid displaying the same image twice in a row
-            _currentImageIndex = _nextImageIndex;
-            _nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:_currentImageIndex];
+            self.currentImageIndex = self.nextImageIndex;
+            self.nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:self.currentImageIndex];
         }
         else {
-            _currentImageIndex = 0;
-            _nextImageIndex = 0;
+            self.currentImageIndex = 0;
+            self.nextImageIndex = 0;
         }
     }
     else {
-        _currentImageIndex = (_currentImageIndex + 1) % numberOfImages;
-        _nextImageIndex = (_currentImageIndex + 1) % numberOfImages;
+        self.currentImageIndex = (self.currentImageIndex + 1) % numberOfImages;
+        self.nextImageIndex = (self.currentImageIndex + 1) % numberOfImages;
     }
     
     [self animateImages];
@@ -650,7 +630,7 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)playAnimationForImageWithNameOrPath:(NSString *)imageNameOrPath
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     NSUInteger imageIndex = [self.imageNamesOrPaths indexOfObject:imageNameOrPath];
@@ -659,20 +639,20 @@ static const NSInteger kSlideshowNoIndex = -1;
         return;
     }
     
-    _currentImageIndex = imageIndex;
+    self.currentImageIndex = imageIndex;
     
     if (self.random) {
         if (numberOfImages > 1) {
             // Avoid displaying the same image twice in a row
-            _nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:_currentImageIndex];
+            self.nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:self.currentImageIndex];
         }
         else {
             NSAssert(imageIndex == 0, @"Only one image, must have index 0");
-            _nextImageIndex = 0;
+            self.nextImageIndex = 0;
         }
     }
     else {
-        _nextImageIndex = (_currentImageIndex + 1) % numberOfImages;
+        self.nextImageIndex = (self.currentImageIndex + 1) % numberOfImages;
     }
     
     [self animateImages];
@@ -680,23 +660,23 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)playAnimationForNextImage
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     if (self.random) {
         if (numberOfImages > 1) {
             // Avoid displaying the same image twice in a row
-            _currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:_currentImageIndex];
-            _nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:_currentImageIndex];
+            self.currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:self.currentImageIndex];
+            self.nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:self.currentImageIndex];
         }
         else {
-            _currentImageIndex = 0;
-            _nextImageIndex = 0;
+            self.currentImageIndex = 0;
+            self.nextImageIndex = 0;
         }
     }
     else {
-        _currentImageIndex = (_currentImageIndex + 1) % numberOfImages;
-        _nextImageIndex = (_currentImageIndex + 1) % numberOfImages;
+        self.currentImageIndex = (self.currentImageIndex + 1) % numberOfImages;
+        self.nextImageIndex = (self.currentImageIndex + 1) % numberOfImages;
     }
     
     [self animateImages];
@@ -704,24 +684,24 @@ static const NSInteger kSlideshowNoIndex = -1;
 
 - (void)playAnimationForPreviousImage
 {
-    NSUInteger numberOfImages = [self.imageNamesOrPaths count];
+    NSUInteger numberOfImages = self.imageNamesOrPaths.count;
     NSAssert(numberOfImages != 0, @"Cannot be called when no images have been loaded");
     
     if (self.random) {
         if (numberOfImages > 1) {
             // Avoid displaying the same image twice in a row
-            _currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:_currentImageIndex];
-            _nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:_currentImageIndex];
+            self.currentImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:self.currentImageIndex];
+            self.nextImageIndex = [self randomIndexWithUpperBound:numberOfImages forbiddenIndex:self.currentImageIndex];
         }
         else {
-            _currentImageIndex = 0;
-            _nextImageIndex = 0;
+            self.currentImageIndex = 0;
+            self.nextImageIndex = 0;
         }
     }
     else {
         // Add numberOfImages to avoid issues when crossing 0
-        _currentImageIndex = (_currentImageIndex - 1 + numberOfImages) % numberOfImages;
-        _nextImageIndex = (_currentImageIndex - 1 + numberOfImages) % numberOfImages;
+        self.currentImageIndex = (self.currentImageIndex - 1 + numberOfImages) % numberOfImages;
+        self.nextImageIndex = (self.currentImageIndex - 1 + numberOfImages) % numberOfImages;
     }
     
     [self animateImages];
@@ -731,16 +711,16 @@ static const NSInteger kSlideshowNoIndex = -1;
 {    
     // Find the image views to use for the current / next images. Only unused image views (i.e. with image == nil)
     // have to be filled at each step.
-    _currentImageViewIndex = (_currentImageViewIndex + 1) % 2;
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:_currentImageViewIndex];
+    self.currentImageViewIndex = (self.currentImageViewIndex + 1) % 2;
+    UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
     if (! currentImageView.image) {
-        NSString *currentImagePath = [self.imageNamesOrPaths objectAtIndex:_currentImageIndex];
+        NSString *currentImagePath = self.imageNamesOrPaths[self.currentImageIndex];
         [self prepareImageView:currentImageView withImageNameOrPath:currentImagePath];
     }
     
-    UIImageView *nextImageView = [self.imageViews objectAtIndex:(_currentImageViewIndex + 1) % 2];
+    UIImageView *nextImageView = self.imageViews[(self.currentImageViewIndex + 1) % 2];
     if (! nextImageView.image) {
-        NSString *nextImagePath = [self.imageNamesOrPaths objectAtIndex:_nextImageIndex];
+        NSString *nextImagePath = self.imageNamesOrPaths[self.nextImageIndex];
         [self prepareImageView:nextImageView withImageNameOrPath:nextImagePath];
     }
     
@@ -769,12 +749,12 @@ static const NSInteger kSlideshowNoIndex = -1;
 - (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated
 {
     if ([animationStep.tag isEqualToString:@"singleImage"]) {
-        UIImageView *currentImageView = [self.imageViews objectAtIndex:_currentImageViewIndex];
+        UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
         if ([self.delegate respondsToSelector:@selector(slideshow:willHideImageWithNameOrPath:)]) {
             [self.delegate slideshow:self willHideImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
         }
         
-        UIImageView *nextImageView = [self.imageViews objectAtIndex:(_currentImageViewIndex + 1) % 2];
+        UIImageView *nextImageView = self.imageViews[(self.currentImageViewIndex + 1) % 2];
         if ([self.delegate respondsToSelector:@selector(slideshow:willShowImageWithNameOrPath:)]) {
             [self.delegate slideshow:self willShowImageWithNameOrPath:[self imageNameOrPathForImageView:nextImageView]];
         }
@@ -784,14 +764,14 @@ static const NSInteger kSlideshowNoIndex = -1;
 - (void)animationWillStart:(HLSAnimation *)animation animated:(BOOL)animated
 {
     if ([self.delegate respondsToSelector:@selector(slideshow:didShowImageWithNameOrPath:)]) {
-        UIImageView *currentImageView = [self.imageViews objectAtIndex:_currentImageViewIndex];
+        UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
         [self.delegate slideshow:self didShowImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
     }
 }
 
 - (void)animationDidStop:(HLSAnimation *)animation animated:(BOOL)animated
 {
-    UIImageView *currentImageView = [self.imageViews objectAtIndex:_currentImageViewIndex];
+    UIImageView *currentImageView = self.imageViews[self.currentImageViewIndex];
     if ([self.delegate respondsToSelector:@selector(slideshow:didHideImageWithNameOrPath:)]) {
         [self.delegate slideshow:self didHideImageWithNameOrPath:[self imageNameOrPathForImageView:currentImageView]];
     }
@@ -804,3 +784,26 @@ static const NSInteger kSlideshowNoIndex = -1;
 }
 
 @end
+
+#pragma mark Static functions
+
+static void commonInit(HLSSlideshow *self)
+{
+    self.clipsToBounds = YES;           // Uncomment this line to better see what is happening when debugging
+    
+    self.currentImageIndex = kSlideshowNoIndex;
+    
+    self.imageViews = @[];
+    for (NSUInteger i = 0; i < 2; ++i) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.autoresizingMask = HLSViewAutoresizingAll;
+        [self addSubview:imageView];
+        
+        self.imageViews = [self.imageViews arrayByAddingObject:imageView];
+    }
+    
+    self.imageDuration = kSlideshowDefaultImageDuration;
+    self.transitionDuration = kSlideshowDefaultTransitionDuration;
+    self.random = NO;
+}

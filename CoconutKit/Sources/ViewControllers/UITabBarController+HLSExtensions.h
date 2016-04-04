@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UITabBarController (HLSExtensions)
 
 /**
@@ -23,6 +25,8 @@
  *
  * The default value is HLSAutorotationModeContainer
  */
-@property (nonatomic, assign) HLSAutorotationMode autorotationMode;
+@property (nonatomic) HLSAutorotationMode autorotationMode;
 
 @end
+
+NS_ASSUME_NONNULL_END

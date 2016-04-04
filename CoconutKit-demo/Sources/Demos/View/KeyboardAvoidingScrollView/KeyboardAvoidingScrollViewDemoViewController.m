@@ -11,7 +11,7 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *backgroundView;
 
-@property (nonatomic, strong) IBOutletCollection(UITextField) NSArray *textFields;
+@property (nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @property (nonatomic, weak) IBOutlet UITextView *textView;
 
@@ -46,7 +46,7 @@
     UITextField *textField1 = [self.textFields firstObject];
     textField1.resigningFirstResponderOnTap = YES;
     
-    UITextField *textField3 = [self.textFields objectAtIndex:2];
+    UITextField *textField3 = self.textFields[2];
     
     // Custom input views
     textField1.inputView = self.smallCustomInputView;
@@ -60,8 +60,8 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
-    if (index < [self.textFields count] - 1) {
-        UITextField *nextTextField = [self.textFields objectAtIndex:index + 1];
+    if (index < self.textFields.count - 1) {
+        UITextField *nextTextField = self.textFields[index + 1];
         [nextTextField becomeFirstResponder];
     }
     else {

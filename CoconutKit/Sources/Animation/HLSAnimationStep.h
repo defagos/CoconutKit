@@ -6,7 +6,9 @@
 
 #import <Foundation/Foundation.h>
 
-//Block signatures
+NS_ASSUME_NONNULL_BEGIN
+
+// Block signatures
 typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
 
 /**
@@ -27,12 +29,12 @@ typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
 /**
  * Optional tag to help identifying animation steps
  */
-@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, copy, nullable) NSString *tag;
 
 /**
  * Dictionary which can be freely used to convey additional information
  */
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, nullable) NSDictionary *userInfo;
 
 /**
  * Animation duration. Unlike UIView animation blocks, the duration of an animation step is never reduced
@@ -40,11 +42,13 @@ typedef void (^HLSAnimationStepCompletionBlock)(BOOL animated);
  *
  * Default value is 0.2
  */
-@property (nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic) NSTimeInterval duration;
 
 /**
  * Called when a step has been executed
  */
-@property (nonatomic, copy) HLSAnimationStepCompletionBlock completionBlock;
+@property (nonatomic, copy, nullable) HLSAnimationStepCompletionBlock completionBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

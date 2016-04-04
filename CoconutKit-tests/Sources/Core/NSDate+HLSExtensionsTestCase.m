@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "NSDate+HLSExtensionsTestCase.h"
+@interface NSDate_HLSExtensionsTestCase : XCTestCase
+@end
 
 @implementation NSDate_HLSExtensionsTestCase
 

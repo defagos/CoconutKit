@@ -8,6 +8,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CALayer (HLSExtensions)
 
 /**
@@ -29,11 +31,13 @@
 /**
  * Return YES iff layer animations have been paused
  */
-- (BOOL)isPaused;
+@property (nonatomic, readonly, getter=isPaused) BOOL paused;
 
 /**
  * Return the layer and all its sublayers flattened as a UIImage
  */
-- (UIImage *)flattenedImage;
+@property (nonatomic, readonly) UIImage *flattenedImage;
 
 @end
+
+NS_ASSUME_NONNULL_END

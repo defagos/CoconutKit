@@ -11,6 +11,8 @@
 // Forward declarations
 @protocol HLSAnimationDelegate;
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Block signatures
 typedef void (^HLSAnimationStartBlock)(BOOL animated);
 typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
@@ -46,7 +48,7 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * Running animations (this includes animations which have been paused) are automatically paused and resumed (if they
  * were running before) when the application enters, respectively exits background. Note that this mechanism works 
  * perfectly within the iOS simulator and on the device, though views will appear to "jump" on the device and on
- * iOS >= 6 simulators. This is not a bug and has no negative effect on the animation behavior (in particular, delegate 
+ * iOS simulators. This is not a bug and has no negative effect on the animation behavior (in particular, delegate 
  * methods are still called correctly), but is a consequence of the application screenshot which is displayed when 
  * the application exits background. The screenshot made when the application enters background namely reflects the
  * non-animated view / layer state, which explains why the views seem to jump.
@@ -62,8 +64,8 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * Convenience constructor for creating an animation from HLSAnimationStep objects. Providing nil creates an empty
  * animation
  */
-+ (instancetype)animationWithAnimationSteps:(NSArray *)animationSteps;
-+ (instancetype)animationWithAnimationStep:(HLSAnimationStep *)animationStep;
++ (instancetype)animationWithAnimationSteps:(nullable NSArray<HLSAnimationStep *> *)animationSteps;
++ (instancetype)animationWithAnimationStep:(nullable HLSAnimationStep *)animationStep;
 
 /**
  * Create an animation using HLSAnimationStep objects. Those steps will be chained together when the animation
@@ -73,17 +75,17 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * A deep copy of the animation steps is performed to prevent further changes once the steps have been assigned to an
  * animation
  */
-- (instancetype)initWithAnimationSteps:(NSArray *)animationSteps NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAnimationSteps:(nullable NSArray<HLSAnimationStep *> *)animationSteps NS_DESIGNATED_INITIALIZER;
 
 /**
  * Tag which can optionally be used to help identifying an animation
  */
-@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, copy, nullable) NSString *tag;
 
 /**
- * Dictionary which can be freely used to convey additional information
+ * Dictionary which can be optionally used to convey additional arbitrary information
  */
-@property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, nullable) NSDictionary *userInfo;
 
 /**
  * If set to YES, the user interface interaction is blocked during the time the animation is running (see
@@ -91,13 +93,13 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  *
  * Default is NO
  */
-@property (nonatomic, assign) BOOL lockingUI;
+@property (nonatomic, getter=isLockingUI) BOOL lockingUI;
 
 /**
  * The animation delegate. Note that the animation is automatically cancelled if a delegate has been set
  * and gets deallocated while the animation is runnning
  */
-@property (nonatomic, weak) id<HLSAnimationDelegate> delegate;
+@property (nonatomic, weak, nullable) id<HLSAnimationDelegate> delegate;
 
 /**
  * Play the animation. If animated is set to NO, the end state of the animation is reached instantaneously (i.e. the 
@@ -178,59 +180,59 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * Return the total duration of the animation. This does not include delays or repeat count multiplicators which
  * are not intrinsic properties of an animation, but rather specified when the animation is played
  */
-@property (nonatomic, readonly, assign) NSTimeInterval duration;
+@property (nonatomic, readonly) NSTimeInterval duration;
 
 /**
  * Return YES while the animation is running. An animation is considered running from the call to a play method until
  * right after -animationDidStop:animated: has been called. Note that this property also returns YES even when the 
  * animation has been paused or is being terminated / cancelled
  */
-@property (nonatomic, readonly, assign, getter=isRunning) BOOL running;
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 /**
  * Return YES while the animation is being played. An animation is considered being played from the time a play
  * method has been called, and until right before -animationDidStop:animated: is called. Note that this property
  * also returns YES even when the animation has been paused or is being terminated / cancelled
  */
-@property (nonatomic, readonly, assign, getter=isPlaying) BOOL playing;
+@property (nonatomic, readonly, getter=isPlaying) BOOL playing;
 
 /**
  * Return YES while the animation is started. An animation is considered started right after -animationWillStart:animated:
  * has been called, and until right before -animationDidStop:animated: is called. Note that this property also returns YES 
  * even if the animation was played with animated = NO, has been paused, terminated or cancelled
  */
-@property (nonatomic, readonly, assign, getter=isStarted) BOOL started;
+@property (nonatomic, readonly, getter=isStarted) BOOL started;
 
 /**
  * Return YES iff the animation has been paused
  */
-@property (nonatomic, readonly, assign, getter=isPaused) BOOL paused;
+@property (nonatomic, readonly, getter=isPaused) BOOL paused;
 
 /**
  * Return YES iff the animation is being cancelled (i.e. from the time -cancel is called until after -animationDidStop:animated:
  * has been called)
  */
-@property (nonatomic, readonly, assign, getter=isCancelling) BOOL cancelling;
+@property (nonatomic, readonly, getter=isCancelling) BOOL cancelling;
 
 /**
  * Return YES iff the animation is being terminated (i.e. from the time -terminate is called until after -animationDidStop:animated:
  * has been called)
  */
-@property (nonatomic, readonly, assign, getter=isTerminating) BOOL terminating;
+@property (nonatomic, readonly, getter=isTerminating) BOOL terminating;
 
 /**
  * Generate a copy of the animation, but overrides its total duration with a new one. The original appearance of
  * the animation is preserved (it is only faster or slower depending on the new duration). If an invalid negative
  * duration is provided, the method returns nil
  */
-- (HLSAnimation *)animationWithDuration:(NSTimeInterval)duration;
+- (nullable HLSAnimation *)animationWithDuration:(NSTimeInterval)duration;
 
 /**
  * Generate the reverse animation; all attributes are copied as is, except blocks, and all tags for the animation and
  * animation steps get an additional "reverse_" prefix. If a tag has not been filled for the receiver, the corresponding 
  * tag of the reverse animation is nil
  */
-- (HLSAnimation *)reverseAnimation;
+@property (nonatomic, readonly) HLSAnimation *reverseAnimation;
 
 /**
  * Generate the corresponding loop animation by concatening self with its reverse animation. All attributes are
@@ -238,18 +240,18 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
  * an additional "loop_" prefix (reverse animation steps therefore begin with a "loop_reverse_" prefix). If a
  * tag has not been filled for the receiver, the corresponding tag of the reverse animation is nil
  */
-- (HLSAnimation *)loopAnimation;
+@property (nonatomic, readonly) HLSAnimation *loopAnimation;
 
 /**
  * Called right before the first animation step is executed, but after any delay which might have been set
  */
-@property (nonatomic, copy) HLSAnimationStartBlock startBlock;
+@property (nonatomic, copy, nullable) HLSAnimationStartBlock startBlock;
 
 /**
  * Called right after the last animation step has been executed. You can check -terminating or -cancelling
  * to find if the animation ended normally
  */
-@property (nonatomic, copy) HLSAnimationCompletionBlock completionBlock;
+@property (nonatomic, copy, nullable) HLSAnimationCompletionBlock completionBlock;
 
 @end
 
@@ -281,3 +283,5 @@ typedef void (^HLSAnimationCompletionBlock)(BOOL animated);
 - (void)animation:(HLSAnimation *)animation didFinishStep:(HLSAnimationStep *)animationStep animated:(BOOL)animated;
 
 @end
+
+NS_ASSUME_NONNULL_END

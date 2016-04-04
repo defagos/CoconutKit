@@ -9,9 +9,11 @@
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Standard option combinations
-#define HLSModelManagerLightweightMigrationOptions          [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,   \
-                                                                                                       [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,         \
+#define HLSModelManagerLightweightMigrationOptions          [NSDictionary dictionaryWithObjectsAndKeys:@YES, NSMigratePersistentStoresAutomaticallyOption,   \
+                                                                                                       @YES, NSInferMappingModelAutomaticallyOption,         \
                                                                                                        nil]
 
 /**
@@ -56,12 +58,12 @@
  * please refer to the documentation of
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
-+ (instancetype)SQLiteManagerWithModelFileName:(NSString *)modelFileName
-                                      inBundle:(NSBundle *)bundle
-                                 configuration:(NSString *)configuration
-                                storeDirectory:(NSString *)storeDirectory
-                                   fileManager:(HLSFileManager *)fileManager
-                                       options:(NSDictionary *)options;
++ (nullable instancetype)SQLiteManagerWithModelFileName:(NSString *)modelFileName
+                                               inBundle:(nullable NSBundle *)bundle
+                                          configuration:(nullable NSString *)configuration
+                                         storeDirectory:(nullable NSString *)storeDirectory
+                                            fileManager:(nullable HLSFileManager *)fileManager
+                                                options:(nullable NSDictionary *)options;
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
@@ -72,9 +74,9 @@
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
 + (instancetype)inMemoryModelManagerWithModelFileName:(NSString *)modelFileName
-                                             inBundle:(NSBundle *)bundle
-                                        configuration:(NSString *)configuration
-                                              options:(NSDictionary *)options;
+                                             inBundle:(nullable NSBundle *)bundle
+                                        configuration:(nullable NSString *)configuration
+                                              options:(nullable NSDictionary *)options;
 
 /**
  * Create a model manager using the model file given as parameter (lookup is performed in the specified bundle,
@@ -87,19 +89,19 @@
  *  - [NSPersistentStoreCoordinator addPersistentStoreWithType:configuration:URL:options:error:]
  */
 + (instancetype)binaryModelManagerWithModelFileName:(NSString *)modelFileName
-                                           inBundle:(NSBundle *)bundle
-                                      configuration:(NSString *)configuration
-                                     storeDirectory:(NSString *)storeDirectory
-                                        fileManager:(HLSFileManager *)fileManager
-                                            options:(NSDictionary *)options;
+                                           inBundle:(nullable NSBundle *)bundle
+                                      configuration:(nullable NSString *)configuration
+                                     storeDirectory:(nullable NSString *)storeDirectory
+                                        fileManager:(nullable HLSFileManager *)fileManager
+                                            options:(nullable NSDictionary *)options;
 /**
  * Return the file path of the file-based store for a model, searching in a given directory using the specified
  * file manager (or the HLSStandardFileManager singleton if nil). Return nil if not found. You usually do not
  * have to get this path explicitly, except e.g. if you want to cleanup a store by removing its corresponding file
  */
 + (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName
-                             storeDirectory:(NSString *)storeDirectory
-                                fileManager:(HLSFileManager *)fileManager;
+                             storeDirectory:(nullable NSString *)storeDirectory
+                                fileManager:(nullable HLSFileManager *)fileManager;
 
 /**
  * Manage the stack of model managers attached to the current thread
@@ -111,21 +113,21 @@
  * Return the model manager at the top of model manager stack, for the current thread, respectively for the 
  * main thread
  */
-+ (HLSModelManager *)currentModelManager;
-+ (HLSModelManager *)currentModelManagerForMainThread;
++ (nullable HLSModelManager *)currentModelManager;
++ (nullable HLSModelManager *)currentModelManagerForMainThread;
 
 /**
  * Return the model manager at the bottom of model manager stack, for the current thread, respectively for the 
  * main thread
  */
-+ (HLSModelManager *)rootModelManager;
-+ (HLSModelManager *)rootModelManagerForMainThread;
++ (nullable HLSModelManager *)rootModelManager;
++ (nullable HLSModelManager *)rootModelManagerForMainThread;
 
 /**
  * Convenience methods to work with the current model manager context
  */
-+ (NSManagedObjectContext *)currentModelContext;
-+ (BOOL)saveCurrentModelContext:(NSError *__autoreleasing *)pError;
++ (nullable NSManagedObjectContext *)currentModelContext;
++ (BOOL)saveCurrentModelContext:(out NSError *__autoreleasing *)pError;
 + (void)rollbackCurrentModelContext;
 + (void)deleteObjectFromCurrentModelContext:(NSManagedObject *)managedObject;
 
@@ -145,12 +147,12 @@
  * preferred way of instantiating model managers.
  */
 - (instancetype)initWithModelFileName:(NSString *)modelFileName
-                             inBundle:(NSBundle *)bundle
+                             inBundle:(nullable NSBundle *)bundle
                             storeType:(NSString *)storeType
-                        configuration:(NSString *)configuration
-                       storeDirectory:(NSString *)storeDirectory
-                          fileManager:(HLSFileManager *)fileManager
-                              options:(NSDictionary *)options NS_DESIGNATED_INITIALIZER;
+                        configuration:(nullable NSString *)configuration
+                       storeDirectory:(nullable NSString *)storeDirectory
+                          fileManager:(nullable HLSFileManager *)fileManager
+                              options:(nullable NSDictionary *)options NS_DESIGNATED_INITIALIZER;
 /**
  * Duplicate an existing manager
  */
@@ -161,14 +163,14 @@
  * for more information. Due to implementation constraints, migration can only be performed to a file URL, no arbitrary
  * file manager can be specified
  */
-- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(NSError *__autoreleasing *)pError;
+- (BOOL)migrateStoreToURL:(NSURL *)url withStoreType:(NSString *)storeType error:(out NSError *__autoreleasing *)pError;
 
 /**
  * Access to Core Data internals
  */
-@property (nonatomic, readonly, strong) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, readonly, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, readonly, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -177,3 +179,5 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

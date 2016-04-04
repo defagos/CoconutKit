@@ -8,7 +8,7 @@
 
 @interface BindingsFailuresDemoViewController ()
 
-@property (nonatomic, strong) NSNumber *number;
+@property (nonatomic) NSNumber *number;
 
 @end
 
@@ -43,7 +43,7 @@
 
 - (HLSBlockTransformer *)truthTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(id object) {
+    return [HLSBlockTransformer blockTransformerWithBlock:^(id  _Nullable object) {
         return @42;
     } reverseBlock:nil];
 }

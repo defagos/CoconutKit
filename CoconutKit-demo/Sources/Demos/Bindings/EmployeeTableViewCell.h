@@ -6,8 +6,12 @@
 
 #import "Employee.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface EmployeeTableViewCell : HLSTableViewCell
 
-@property (nonatomic, strong) Employee *employee;
+@property (nonatomic) Employee *employee;
 
 @end
+
+NS_ASSUME_NONNULL_END

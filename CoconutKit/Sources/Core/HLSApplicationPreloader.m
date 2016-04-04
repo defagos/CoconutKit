@@ -20,12 +20,9 @@
 
 - (instancetype)initWithApplication:(UIApplication *)application
 {
-    if (self = [super init]) {
-        if (! application) {
-            HLSLoggerError(@"Missing application");
-            return nil;
-        }
-        
+    NSParameterAssert(application);
+    
+    if (self = [super init]) {        
         self.application = application;
     }
     return self;

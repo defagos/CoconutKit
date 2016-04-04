@@ -84,16 +84,15 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (id)objectForKey:(NSString *)key
 {
-    if (! key) {
-        HLSLoggerError(@"Missing key");
-        return nil;
-    }
-    
-    return [[self userInfo] objectForKey:key];
+    NSParameterAssert(key);
+        
+    return self.userInfo[key];
 }
 
 - (NSArray *)objectsForKey:(NSString *)key
 {
+    NSParameterAssert(key);
+    
     id object = [self objectForKey:key];
     if (! object) {
         return nil;
@@ -109,7 +108,11 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (NSDictionary *)customUserInfo
 {
-    NSMutableDictionary *customUserInfo = [NSMutableDictionary dictionaryWithDictionary:[self userInfo]];
+    if (! self.userInfo) {
+        return nil;
+    }
+    
+    NSMutableDictionary *customUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
     [customUserInfo removeObjectForKey:NSLocalizedDescriptionKey];
     [customUserInfo removeObjectForKey:NSLocalizedFailureReasonErrorKey];
     [customUserInfo removeObjectForKey:NSLocalizedRecoverySuggestionErrorKey];
@@ -140,7 +143,7 @@ static Class subclass_class(id self, SEL _cmd);
             NSString *subclassName = [className stringByAppendingString:kSubclassSuffix];
             Class subclass = NSClassFromString(subclassName);
             if (! subclass) {
-                subclass = objc_allocateClassPair(class, [subclassName UTF8String], 0);
+                subclass = objc_allocateClassPair(class, subclassName.UTF8String, 0);
                 NSAssert(subclass != Nil, @"Could not register subclass");
                 class_addMethod(subclass,
                                 @selector(userInfo),
@@ -201,12 +204,10 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (void)setObject:(id)object forKey:(NSString *)key
 {
-    if (! key || ! object) {
-        return;
-    }
+    NSParameterAssert(key);
     
     if (object) {
-        [[self mutableUserInfo] setObject:object forKey:key];
+        [self mutableUserInfo][key] = object;
     }
     else {
         [[self mutableUserInfo] removeObjectForKey:key];
@@ -215,16 +216,14 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (void)addObject:(id)object forKey:(NSString *)key
 {
-    if (! key || ! object) {
-        return;
-    }
-    
     [self addObjects:@[object] forKey:key];
 }
 
 - (void)addObjects:(NSArray *)objects forKey:(NSString *)key
 {
-    if ([objects count] == 0 || ! key) {
+    NSParameterAssert(key);
+    
+    if (objects.count == 0) {
         return;
     }
     
@@ -234,7 +233,7 @@ static Class subclass_class(id self, SEL _cmd);
         [self setObject:[existingObjects arrayByAddingObjectsFromArray:objects] forKey:key];
     }
     else {
-        [self setObject:[objects firstObject] forKey:key];
+        [self setObject:objects.firstObject forKey:key];
     }
 }
 
@@ -242,7 +241,7 @@ static Class subclass_class(id self, SEL _cmd);
 
 - (BOOL)hasCode:(NSInteger)code withinDomain:(NSString *)domain
 {
-    return [self code] == code && [[self domain] isEqualToString:domain];
+    return self.code == code && [self.domain isEqualToString:domain];
 }
 
 @end

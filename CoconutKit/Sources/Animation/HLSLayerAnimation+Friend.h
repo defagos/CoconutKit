@@ -11,6 +11,8 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
   * Interface meant to be used by friend classes of HLSLayerAnimation (= classes which must have access to private implementation
   * details)
@@ -20,31 +22,33 @@
 /**
  * The transform corresponding to the view animation settings
  */
-@property (nonatomic, readonly, assign) CATransform3D transform;
+@property (nonatomic, readonly) CATransform3D transform;
 
 /**
  * The sublayer transform corresponding to the view animation settings
  */
-@property (nonatomic, readonly, assign) CATransform3D sublayerTransform;
+@property (nonatomic, readonly) CATransform3D sublayerTransform;
 
 /**
  * The z-translation to apply to the camera from which sublayers are seen
  */
-@property (nonatomic, readonly, assign) CGFloat sublayerCameraTranslationZ;
+@property (nonatomic, readonly) CGFloat sublayerCameraTranslationZ;
 
 /**
  * The translation to apply to the layer anchor point
  */
-@property (nonatomic, readonly, assign) HLSVector3 anchorPointTranslationParameters;
+@property (nonatomic, readonly) HLSVector3 anchorPointTranslationParameters;
 
 /**
  * The increment to apply to the layer opacity value
  */
-@property (nonatomic, readonly, assign) CGFloat opacityIncrement;
+@property (nonatomic, readonly) CGFloat opacityIncrement;
 
 /**
  * The increment to apply to the layer rasterization scale
  */
-@property (nonatomic, readonly, assign) CGFloat rasterizationScaleIncrement;
+@property (nonatomic, readonly) CGFloat rasterizationScaleIncrement;
 
 @end
+
+NS_ASSUME_NONNULL_END

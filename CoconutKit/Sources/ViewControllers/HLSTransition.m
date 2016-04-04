@@ -23,12 +23,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 #pragma mark Getting transition animation information
 
-+ (NSArray *)availableTransitionNames
++ (NSArray<NSString *> *)availableTransitionNames
 {
-    static NSArray *s_availableTransitionNames = nil;
+    static NSArray<NSString *> *s_availableTransitionNames = nil;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        NSMutableArray *availableTransitionNames = [NSMutableArray array];
+        NSMutableArray<NSString *> *availableTransitionNames = [NSMutableArray array];
         
         // Find all HLSTransition subclasses (except HLSTransition itself)
         unsigned int numberOfClasses = 0;
@@ -126,10 +126,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     }
     // If not implemented by the transition class, use the default reverse animation
     else {
-        return [[self animationWithAppearingView:disappearingView
-                                disappearingView:appearingView
-                                          inView:view
-                                        duration:duration] reverseAnimation];
+        return [self animationWithAppearingView:disappearingView
+                               disappearingView:appearingView
+                                         inView:view
+                                       duration:duration].reverseAnimation;
     }
 }
 
@@ -142,27 +142,27 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
         s_animationClassNameToDurationMap = [NSMutableDictionary dictionary];
     });
         
-    NSNumber *duration = [s_animationClassNameToDurationMap objectForKey:[self className]];
+    NSNumber *duration = s_animationClassNameToDurationMap[[self className]];
     if (! duration) {
         // Calculate for a dummy animation
         HLSAnimation *animation = [HLSAnimation animationWithAnimationSteps:[[self class] layerAnimationStepsWithAppearingView:nil
                                                                                                               disappearingView:nil
                                                                                                                         inView:nil
                                                                                                                     withBounds:CGRectZero]];
-        duration = @([animation duration]);
-        [s_animationClassNameToDurationMap setObject:duration forKey:[self className]];
+        duration = @(animation.duration);
+        s_animationClassNameToDurationMap[[self className]] = duration;
     }
     
-    return [duration doubleValue];
+    return duration.doubleValue;
 }
 
 #pragma mark Built-in transition common code
 
-+ (NSArray *)coverLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                yOffset:(CGFloat)yOffset
-                                          appearingView:(UIView *)appearingView
++ (NSArray<HLSAnimationStep *> *)coverLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                                    yOffset:(CGFloat)yOffset
+                                                              appearingView:(UIView *)appearingView
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -182,12 +182,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)coverPushToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                          yOffset:(CGFloat)yOffset
-                                                    appearingView:(UIView *)appearingView
-                                                 disappearingView:(UIView *)disappearingView
++ (NSArray<HLSAnimationStep *> *)coverPushToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                                              yOffset:(CGFloat)yOffset
+                                                                        appearingView:(UIView *)appearingView
+                                                                     disappearingView:(UIView *)disappearingView
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -210,12 +210,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)pushLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                               yOffset:(CGFloat)yOffset
-                                         appearingView:(UIView *)appearingView
-                                      disappearingView:(UIView *)disappearingView
++ (NSArray<HLSAnimationStep *> *)pushLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                                   yOffset:(CGFloat)yOffset
+                                                             appearingView:(UIView *)appearingView
+                                                          disappearingView:(UIView *)disappearingView
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -246,12 +246,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)pushAndFadeLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                      yOffset:(CGFloat)yOffset
-                                                appearingView:(UIView *)appearingView
-                                             disappearingView:(UIView *)disappearingView
++ (NSArray<HLSAnimationStep *> *)pushAndFadeLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                                          yOffset:(CGFloat)yOffset
+                                                                    appearingView:(UIView *)appearingView
+                                                                 disappearingView:(UIView *)disappearingView
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -289,12 +289,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)pushAndToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                                        yOffset:(CGFloat)yOffset
-                                                  appearingView:(UIView *)appearingView
-                                               disappearingView:(UIView *)disappearingView
++ (NSArray<HLSAnimationStep *> *)pushAndToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                                            yOffset:(CGFloat)yOffset
+                                                                      appearingView:(UIView *)appearingView
+                                                                   disappearingView:(UIView *)disappearingView
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -326,12 +326,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)flowLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
-                                               yOffset:(CGFloat)yOffset
-                                         appearingView:(UIView *)appearingView
-                                      disappearingView:(UIView *)disappearingView
++ (NSArray<HLSAnimationStep *> *)flowLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
+                                                                   yOffset:(CGFloat)yOffset
+                                                             appearingView:(UIView *)appearingView
+                                                          disappearingView:(UIView *)disappearingView
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -376,15 +376,15 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
-                                                    y:(CGFloat)y
-                                                    z:(CGFloat)z
-                                   cameraZTranslation:(CGFloat)cameraZTranslation
-                                        appearingView:(UIView *)appearingView
-                                     disappearingView:(UIView *)disappearingView
-                                               inView:(UIView *)view
++ (NSArray<HLSAnimationStep *> *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
+                                                                        y:(CGFloat)y
+                                                                        z:(CGFloat)z
+                                                       cameraZTranslation:(CGFloat)cameraZTranslation
+                                                            appearingView:(UIView *)appearingView
+                                                         disappearingView:(UIView *)disappearingView
+                                                                   inView:(UIView *)view
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -435,19 +435,19 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [NSArray arrayWithArray:animationSteps];
 }
 
-+ (NSArray *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
-                                                     yOffset:(CGFloat)yOffset
-                                           aroundVectorWithX:(CGFloat)x
-                                                           y:(CGFloat)y
-                                                           z:(CGFloat)z
-                                            counterclockwise:(BOOL)counterclockwise
-                                          cameraZTranslation:(CGFloat)cameraZTranslation
-                                               appearingView:(UIView *)appearingView
-                                            disappearingView:(UIView *)disappearingView
-                                                      inView:(UIView *)view
-                                                  withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
+                                                                         yOffset:(CGFloat)yOffset
+                                                               aroundVectorWithX:(CGFloat)x
+                                                                               y:(CGFloat)y
+                                                                               z:(CGFloat)z
+                                                                counterclockwise:(BOOL)counterclockwise
+                                                              cameraZTranslation:(CGFloat)cameraZTranslation
+                                                                   appearingView:(UIView *)appearingView
+                                                                disappearingView:(UIView *)disappearingView
+                                                                          inView:(UIView *)view
+                                                                      withBounds:(CGRect)bounds
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -502,18 +502,18 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 #pragma mark Default transition implementation
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return nil;
 }
 
-+ (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                        disappearingView:(UIView *)disappearingView
-                                                  inView:(UIView *)view
-                                              withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                            disappearingView:(UIView *)disappearingView
+                                                                      inView:(UIView *)view
+                                                                  withBounds:(CGRect)bounds
 {
     return nil;
 }
@@ -528,10 +528,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromBottom
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:0.f
                                                              yOffset:CGRectGetHeight(bounds)
@@ -542,10 +542,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromTop
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:0.f
                                                              yOffset:-CGRectGetHeight(bounds)
@@ -556,10 +556,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromLeft
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                              yOffset:0.f
@@ -570,10 +570,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromRight
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                              yOffset:0.f
@@ -584,10 +584,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromTopLeft
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                              yOffset:-CGRectGetHeight(bounds)
@@ -598,10 +598,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromTopRight
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                              yOffset:-CGRectGetHeight(bounds)
@@ -612,10 +612,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromBottomLeft
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                              yOffset:CGRectGetHeight(bounds)
@@ -626,10 +626,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromBottomRight
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                              yOffset:CGRectGetHeight(bounds)
@@ -640,10 +640,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromBottomPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:0.f
                                                                        yOffset:CGRectGetHeight(bounds)
@@ -655,10 +655,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromTopPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:0.f
                                                                        yOffset:-CGRectGetHeight(bounds)
@@ -670,10 +670,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromLeftPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                                        yOffset:0.f
@@ -685,10 +685,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromRightPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                                        yOffset:0.f
@@ -700,10 +700,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromTopLeftPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                                        yOffset:-CGRectGetHeight(bounds)
@@ -715,10 +715,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromTopRightPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                                        yOffset:-CGRectGetHeight(bounds)
@@ -730,10 +730,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromBottomLeftPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                                        yOffset:CGRectGetHeight(bounds)
@@ -745,10 +745,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCoverFromBottomRightPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition coverPushToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                                        yOffset:CGRectGetHeight(bounds)
@@ -760,12 +760,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFadeIn
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
@@ -788,12 +788,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFadeInPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
@@ -819,12 +819,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionCrossDissolve
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
     HLSLayerAnimation *layerAnimation11 = [HLSLayerAnimation animation];
@@ -850,10 +850,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromBottom
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:0.f
                                                             yOffset:CGRectGetHeight(bounds)
@@ -865,10 +865,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromTop
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:0.f
                                                             yOffset:-CGRectGetHeight(bounds)
@@ -880,10 +880,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromLeft
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                             yOffset:0.f
@@ -895,10 +895,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromRight
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                             yOffset:0.f
@@ -910,10 +910,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromBottomFadeIn
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:0.f
                                                                    yOffset:CGRectGetHeight(bounds)
@@ -925,10 +925,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromTopFadeIn
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:0.f
                                                                    yOffset:-CGRectGetHeight(bounds)
@@ -940,10 +940,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromLeftFadeIn
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                                    yOffset:0.f
@@ -955,10 +955,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushFromRightFadeIn
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndFadeLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                                    yOffset:0.f
@@ -970,10 +970,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushToBackFromBottom
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:0.f
                                                                      yOffset:CGRectGetHeight(bounds)
@@ -985,10 +985,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushToBackFromTop
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:0.f
                                                                      yOffset:-CGRectGetHeight(bounds)
@@ -1000,10 +1000,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushToBackFromLeft
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                                      yOffset:0.f
@@ -1015,10 +1015,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionPushToBackFromRight
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition pushAndToBackLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                                      yOffset:0.f
@@ -1030,10 +1030,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFlowFromBottom
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:0.f
                                                             yOffset:CGRectGetHeight(bounds)
@@ -1045,10 +1045,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFlowFromTop
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:0.f
                                                             yOffset:-CGRectGetHeight(bounds)
@@ -1060,10 +1060,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFlowFromLeft
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:-CGRectGetWidth(bounds)
                                                             yOffset:0.f
@@ -1075,10 +1075,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFlowFromRight
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition flowLayerAnimationStepsWithInitialXOffset:CGRectGetWidth(bounds)
                                                             yOffset:0.f
@@ -1090,12 +1090,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionEmergeFromCenter
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -1122,12 +1122,12 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionEmergeFromCenterPushToBack
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
-    NSMutableArray *animationSteps = [NSMutableArray array];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray array];
     
     // Setup animation step
     HLSLayerAnimationStep *animationStep1 = [HLSLayerAnimationStep animationStep];
@@ -1158,16 +1158,16 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFlipVertically
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:0.f
                                                                  y:1.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
@@ -1177,16 +1177,16 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionFlipHorizontally
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     // See http://markpospesel.wordpress.com/tag/catransform3d/
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:1.f
                                                                  y:0.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetHeight([[UIScreen mainScreen] applicationFrame])
+                                                cameraZTranslation:4.f * CGRectGetHeight([UIScreen mainScreen].applicationFrame)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
@@ -1196,10 +1196,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateHorizontallyFromBottomCounterclockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
                                                                   yOffset:0.5f
@@ -1207,7 +1207,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1218,10 +1218,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateHorizontallyFromBottomClockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
                                                                   yOffset:0.5f
@@ -1229,7 +1229,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1240,10 +1240,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateHorizontallyFromTopCounterclockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
                                                                   yOffset:-0.5f
@@ -1251,7 +1251,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1262,10 +1262,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateHorizontallyFromTopClockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.f
                                                                   yOffset:-0.5f
@@ -1273,7 +1273,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1284,10 +1284,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateVerticallyFromLeftCounterclockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:-0.5f
                                                                   yOffset:0.f
@@ -1295,7 +1295,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1306,10 +1306,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateVerticallyFromLeftClockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:-0.5f
                                                                   yOffset:0.f
@@ -1317,7 +1317,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1328,10 +1328,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateVerticallyFromRightCounterclockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.5f
                                                                   yOffset:0.f
@@ -1339,7 +1339,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1350,10 +1350,10 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
 
 @implementation HLSTransitionRotateVerticallyFromRightClockwise
 
-+ (NSArray *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
-                                 disappearingView:(UIView *)disappearingView
-                                           inView:(UIView *)view
-                                       withBounds:(CGRect)bounds
++ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(UIView *)appearingView
+                                                     disappearingView:(UIView *)disappearingView
+                                                               inView:(UIView *)view
+                                                           withBounds:(CGRect)bounds
 {
     return [HLSTransition rotateLayerAnimationStepsWithAnchorPointXOffset:0.5f
                                                                   yOffset:0.f
@@ -1361,7 +1361,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([[UIScreen mainScreen] applicationFrame])
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view

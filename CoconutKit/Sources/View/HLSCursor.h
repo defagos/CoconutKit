@@ -10,8 +10,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// Macros
-#define kCursorShadowOffsetDefault      CGSizeMake(0, -1)
+NS_ASSUME_NONNULL_BEGIN
+
+// Constants
+extern CGSize HLSCursorShadowOffsetDefault;
 
 // Forward declarations
 @protocol HLSCursorDataSource;
@@ -44,7 +46,6 @@
  *   - binds to NSNumber model values
  *   - displays and updates the underlying model value
  *   - can animate updates
- *
  */
 @interface HLSCursor : UIView <HLSAnimationDelegate, HLSViewBindingImplementation>
 
@@ -56,27 +57,27 @@
  *
  * As soon as the pointer view has been set it cannot be changed anymore.
  */
-@property (nonatomic, strong) IBOutlet UIView *pointerView;     // strong, not an error
+@property (nonatomic, nullable) IBOutlet UIView *pointerView;     // strong, not an error
 
 /**
  * The duration of cursor animations
  *
  * Default is 0.2
  */
-@property (nonatomic, assign) NSTimeInterval animationDuration;
+@property (nonatomic) NSTimeInterval animationDuration;
 
 /**
  * Pointer view offsets. Use these offsets to make the pointer rectangle larger or smaller than the element it points
  * at
  */
-@property (nonatomic, assign) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px); set negative values to grow larger
-@property (nonatomic, assign) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px); set negative values to grow larger
+@property (nonatomic) CGSize pointerViewTopLeftOffset;              // Default is (-10px, -10px); set negative values to grow larger
+@property (nonatomic) CGSize pointerViewBottomRightOffset;          // Default is (10px, 10px); set negative values to grow larger
 
 /**
  * Get the currently selected element. During the time the pointer is moved the selected index is not updated. This value
  * is only updated as soon as the pointer reaches a new element
  */
-- (NSUInteger)selectedIndex;
+@property (nonatomic, readonly) NSUInteger selectedIndex;
 
 /**
  * Move the pointer to a specific element. This setter can also be used to set the initially selected element before the
@@ -95,12 +96,12 @@
 /**
  * Set / get the data source used to fill the cursor with elements
  */
-@property (nonatomic, weak) id<HLSCursorDataSource> dataSource;
+@property (nonatomic, weak, nullable) id<HLSCursorDataSource> dataSource;
 
 /**
  * Set / get the cursor delegate receiving the cursor events
  */
-@property (nonatomic, weak) id<HLSCursorDelegate> delegate;
+@property (nonatomic, weak, nullable) id<HLSCursorDelegate> delegate;
 
 @end
 
@@ -121,7 +122,7 @@
 - (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected;                   // if not implemented or returning nil: system font, size 17
 - (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected;             // if not implemented or returning nil: invert background color
 - (UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected;           // none if not implemented or returning nil
-- (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected;             // top-shadow if not implemented or returning kCursorShadowOffsetDefault
+- (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected;             // top-shadow if not implemented or returning HLSCursorShadowOffsetDefault
 
 @end
 
@@ -151,3 +152,6 @@
 - (void)cursor:(HLSCursor *)cursor didTouchUpNearIndex:(NSUInteger)index;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Protected interface for use by subclasses of HLSAnimationStep in their implementation, and to be included
  * from their implementation file
@@ -25,22 +27,22 @@
 /**
  * Retrieve the animation for an object (nil if not match is found)
  */
-- (HLSObjectAnimation *)objectAnimationForObject:(id)object;
+- (nullable __kindof HLSObjectAnimation *)objectAnimationForObject:(id)object;
 
 /**
  * All objects changed by the animation step, returned in the order they were added to it
  */
-- (NSArray *)objects;
+@property (nonatomic, readonly) NSArray *objects;
 
 /**
  * Return YES iff the step is running
  */
-@property (nonatomic, assign, getter=isRunning) BOOL running;
+@property (nonatomic, getter=isRunning) BOOL running;
 
 /**
  * Return YES iff the step is being terminated
  */
-@property (nonatomic, assign, getter=isCancelling) BOOL terminating;
+@property (nonatomic, getter=isCancelling) BOOL terminating;
 
 /**
  * This method must be implemented by subclasses to create and play the animation step (animated or not),
@@ -73,7 +75,7 @@
  *
  * The super method implementation must not be called (it raises an exception)
  */
-- (BOOL)isAnimationPaused;
+@property (nonatomic, readonly, getter=isAnimationPaused) BOOL animationPaused;
 
 /**
  * This method must be implemented by subclasses to terminate the animation
@@ -87,7 +89,7 @@
  *
  * The super method implementation must be called first
  */
-- (id)reverseAnimationStep;
+@property (nonatomic, readonly) __kindof HLSAnimationStep *reverseAnimationStep;
 
 /**
  * The time elapsed since the animation step began animating. If your animation step subclass cannot support
@@ -96,12 +98,12 @@
  *
  * The super method implementation must not be called (it raises an exception)
  */
-- (NSTimeInterval)elapsedTime;
+@property (nonatomic, readonly) NSTimeInterval elapsedTime;
 
 /**
  * Return a string describing the involved object animations
  */
-- (NSString *)objectAnimationsDescriptionString;
+@property (nonatomic, readonly, copy) NSString *objectAnimationsDescriptionString;
 
 /**
  * Subclasses must register themselves for the asynchronous delegate events of the animation they implement,
@@ -111,3 +113,5 @@
 - (void)notifyAsynchronousAnimationStepDidStopFinished:(BOOL)finished;
 
 @end
+
+NS_ASSUME_NONNULL_END

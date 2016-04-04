@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "CoconutKit (static framework).app"
+               BlueprintIdentifier = "E67CF4B41AC2839200AA0C3B"
+               BuildableName = "CoconutKit (demo).app"
                BlueprintName = "CoconutKit-demo"
                ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
             </BuildableReference>
@@ -29,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit (static framework).app"
-            BlueprintName = "CoconutKit-demo"
-            ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -55,8 +46,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit (static framework).app"
+            BlueprintIdentifier = "E67CF4B41AC2839200AA0C3B"
+            BuildableName = "CoconutKit (demo).app"
             BlueprintName = "CoconutKit-demo"
             ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>
@@ -86,8 +77,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "CoconutKit (static framework).app"
+            BlueprintIdentifier = "E67CF4B41AC2839200AA0C3B"
+            BuildableName = "CoconutKit (demo).app"
             BlueprintName = "CoconutKit-demo"
             ReferencedContainer = "container:CoconutKit-demo.xcodeproj">
          </BuildableReference>

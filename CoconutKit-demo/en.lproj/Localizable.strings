@@ -117,7 +117,6 @@
 "Oldest employee age"="Oldest employee age";
 "Other view controller"="Other view controller";
 "Parallax scrolling"="Parallax scrolling";
-"Parallel processing"="Parallel processing";
 "Pause"="Pause";
 "Performance 1"="Performance 1";
 "Performance 2"="Performance 2";
@@ -143,7 +142,6 @@
 "Random employee name"="Random employee name";
 "Rebind"="Rebind";
 "Reload"="Reload";
-"Remaining time estimate"="Remaining time estimate";
 "Removal index: %d"="Removal index: %d";
 "Remove"="Remove";
 "Repeat count"="Repeat count";
@@ -168,11 +166,8 @@
 "Street"="Street";
 "Stretchable"="Stretchable";
 "String in Localizable.strings"="String in Localizable.strings";
-"Sub-tasks"="Sub-tasks";
 "Table view cells"="Table view cells";
 "Tablets"="Tablets";
-"Task"="Task";
-"Task group"="Task group";
 "Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong"="Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong";
 "Tasks"="Tasks";
 "Terminate"="Terminate";

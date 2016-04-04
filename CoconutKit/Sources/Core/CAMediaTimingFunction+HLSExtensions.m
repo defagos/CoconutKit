@@ -113,7 +113,7 @@ static const float kEpsilon = 1e-5f;
     float x2 = 0.f;
     float d2 = 0.f;
     
-    // First try a few iterations of Newton's method -- normally very fast.
+    // First try a few iterations of Newton's method -- normally very fast
     for (int i = 0; i < 8; i++) {
         x2 = [self xAtT:t2 forCurveWithPolynomialCoefficients:coeffs] - x;
         if (isless(fabsf(x2), kEpsilon)) {
@@ -126,7 +126,7 @@ static const float kEpsilon = 1e-5f;
         t2 -= x2 / d2;
     }
     
-    // Fall back to the bisection method for reliability.
+    // Fall back to the bissection method for reliability
     t0 = 0.f;
     t1 = 1.f;
     t2 = x;
@@ -155,7 +155,7 @@ static const float kEpsilon = 1e-5f;
         t2 = (t1 - t0) * 0.5f + t0;
     }
     
-    // Failure.
+    // Failure
     return t2;
 }
 

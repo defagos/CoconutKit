@@ -6,13 +6,11 @@
 
 #import "HLSInMemoryCacheEntry.h"
 
-#import "HLSLogger.h"
-
 @interface HLSInMemoryCacheEntry ()
 
-@property (nonatomic, weak) NSMutableDictionary *parentItems;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSData *data;
+@property (nonatomic) NSMutableDictionary<NSString *, id> *parentItems;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic) NSData *data;
 
 @end
 
@@ -20,16 +18,15 @@
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithParentItems:(NSMutableDictionary *)parentItems
+- (instancetype)initWithParentItems:(NSMutableDictionary<NSString *, id> *)parentItems
                                name:(NSString *)name
                                data:(NSData *)data
 {
+    NSParameterAssert(parentItems);
+    NSParameterAssert(name);
+    NSParameterAssert(data);
+    
     if (self = [super init]) {
-        if (! parentItems || ! name || ! data) {
-            HLSLoggerError(@"Missing parameter");
-            return nil;
-        }
-        
         self.parentItems = parentItems;
         self.name = name;
         self.data = data;
@@ -46,7 +43,7 @@
 
 - (NSUInteger)cost
 {
-    return [self.data length];
+    return self.data.length;
 }
 
 #pragma mark Description

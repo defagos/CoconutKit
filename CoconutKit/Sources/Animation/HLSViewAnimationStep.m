@@ -14,7 +14,7 @@
 
 @interface HLSViewAnimationStep ()
 
-@property (nonatomic, strong) UIView *dummyView;
+@property (nonatomic) UIView *dummyView;
 
 @end
 
@@ -62,8 +62,8 @@
         [UIView setAnimationDelegate:self];
     }
     
-    for (UIView *view in [self objects]) {
-        HLSViewAnimation *viewAnimation = (HLSViewAnimation *)[self objectAnimationForObject:view];
+    for (UIView *view in self.objects) {
+        HLSViewAnimation *viewAnimation = [self objectAnimationForObject:view];
         NSAssert(viewAnimation != nil, @"Missing view animation; data consistency failure");
         
         // Alpha animation (alpha must always lie between 0.f and 1.f)
@@ -102,7 +102,7 @@
 
 - (void)pauseAnimation
 {
-    for (UIView *view in [self objects]) {
+    for (UIView *view in self.objects) {
         [view.layer pauseAllAnimations];
     }
     [self.dummyView.layer pauseAllAnimations];
@@ -110,7 +110,7 @@
 
 - (void)resumeAnimation
 {
-    for (UIView *view in [self objects]) {
+    for (UIView *view in self.objects) {
         [view.layer resumeAllAnimations];
     }
     [self.dummyView.layer resumeAllAnimations];
@@ -118,7 +118,7 @@
 
 - (BOOL)isAnimationPaused
 {
-    return [self.dummyView.layer isPaused];
+    return self.dummyView.layer.paused;
 }
 
 - (void)terminateAnimation
@@ -126,7 +126,7 @@
     // We must recursively cancel subview animations (this is especially important since altering the frame (e.g.
     // by scaling it) seems to create additional implicit animations, which still finish and trigger their end
     // animation callback with finished = YES!)
-    for (UIView *view in [self objects]) {
+    for (UIView *view in self.objects) {
         [view.layer removeAllAnimationsRecursively];
     }
     [self.dummyView.layer removeAllAnimationsRecursively];
@@ -144,7 +144,7 @@
 
 - (id)reverseAnimationStep
 {
-    HLSViewAnimationStep *reverseAnimationStep = [super reverseAnimationStep];
+    HLSViewAnimationStep *reverseAnimationStep = super.reverseAnimationStep;
     switch (self.curve) {
         case UIViewAnimationCurveEaseIn:
             reverseAnimationStep.curve = UIViewAnimationCurveEaseOut;
@@ -179,7 +179,7 @@
     [self.dummyView removeFromSuperview];
     self.dummyView = nil;
     
-    [self notifyAsynchronousAnimationStepDidStopFinished:[finished boolValue]];
+    [self notifyAsynchronousAnimationStepDidStopFinished:finished.boolValue];
 }
 
 @end

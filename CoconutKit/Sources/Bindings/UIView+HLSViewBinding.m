@@ -29,10 +29,10 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 @interface UIView (HLSViewBindingPrivate)
 
-@property (nonatomic, strong) NSString *bindKeyPath;
-@property (nonatomic, strong) NSString *bindTransformer;
+@property (nonatomic, copy) NSString *bindKeyPath;
+@property (nonatomic, copy) NSString *bindTransformer;
 
-@property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
+@property (nonatomic) HLSViewBindingInformation *bindingInformation;
 
 - (void)updateBoundViewHierarchyAnimated:(NSNumber *)animated inViewController:(UIViewController *)viewController;
 - (BOOL)checkBoundViewHierarchyInViewController:(UIViewController *)viewController withError:(NSError *__autoreleasing *)pError;
@@ -84,17 +84,17 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)updateBoundViewHierarchyAnimated:(BOOL)animated
 {
-    [self updateBoundViewHierarchyAnimated:@(animated) inViewController:[self nearestViewController]];
+    [self updateBoundViewHierarchyAnimated:@(animated) inViewController:self.nearestViewController];
 }
 
 - (void)updateBoundViewHierarchy
 {
-    [self updateBoundViewHierarchyAnimated:nil inViewController:[self nearestViewController]];
+    [self updateBoundViewHierarchyAnimated:nil inViewController:self.nearestViewController];
 }
 
 - (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError
 {
-    return [self checkBoundViewHierarchyInViewController:[self nearestViewController] withError:pError];
+    return [self checkBoundViewHierarchyInViewController:self.nearestViewController withError:pError];
 }
 
 @end
@@ -110,7 +110,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindKeyPath:(NSString *)bindKeyPath
 {
-    hls_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindKeyPath, bindKeyPath, HLS_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (NSString *)bindTransformer
@@ -120,7 +120,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void)setBindTransformer:(NSString *)bindTransformer
 {
-    hls_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_bindTransformerKey, bindTransformer, HLS_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (HLSViewBindingInformation *)bindingInformation
@@ -146,7 +146,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
     }
     
     if (animated) {
-        [self updateBoundViewAnimated:[animated boolValue]];
+        [self updateBoundViewAnimated:animated.boolValue];
     }
     else {
         [self updateBoundView];

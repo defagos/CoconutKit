@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "NSObject+HLSExtensionsTestCase.h"
+@interface NSObject_HLSExtensionsTestCase : XCTestCase
+@end
 
 @implementation NSObject_HLSExtensionsTestCase
 
@@ -15,7 +16,7 @@
 - (void)testNameOfClass
 {
     XCTAssertEqualObjects([XCTestCase className], @"XCTestCase");
-    XCTAssertEqualObjects([self className], @"NSObject_HLSExtensionsTestCase");
+    XCTAssertEqualObjects(self.className, @"NSObject_HLSExtensionsTestCase");
 }
 
 @end

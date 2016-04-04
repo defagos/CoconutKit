@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 @property (nonatomic, weak) IBOutlet UILabel *insertionIndexLabel;
 @property (nonatomic, weak) IBOutlet UILabel *removalIndexLabel;
 
-@property (nonatomic, strong) UIPopoverController *displayedPopoverController;
+@property (nonatomic) UIPopoverController *displayedPopoverController;
 
 @end
 
@@ -111,7 +111,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     self.transitionPickerView.delegate = self;
     self.transitionPickerView.dataSource = self;
     
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    HLSStackController *stackController = [self insetViewControllerAtIndex:0];
     self.autorotationModeSegmentedControl.selectedSegmentIndex = stackController.autorotationMode;
     
     self.inTabBarControllerSwitch.on = NO;
@@ -185,7 +185,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (void)displayContentViewController:(UIViewController *)viewController
 {
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    HLSStackController *stackController = [self insetViewControllerAtIndex:0];
     
     // We can even embed navigation and tab bar controllers within a placeolder view controller!
     UIViewController *pushedViewController = viewController;
@@ -203,7 +203,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     }
     
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
-    NSString *transitionName = [[HLSTransition availableTransitionNames] objectAtIndex:pickedIndex];
+    NSString *transitionName = [HLSTransition availableTransitionNames][pickedIndex];
     
     @try {
         [stackController insertViewController:pushedViewController
@@ -229,9 +229,9 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (void)updateIndexInfo
 {
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    self.indexSlider.maximumValue = [stackController count];
-    self.indexSlider.value = [stackController count];
+    HLSStackController *stackController = [self insetViewControllerAtIndex:0];
+    self.indexSlider.maximumValue = stackController.count;
+    self.indexSlider.value = stackController.count;
     [self indexChanged:self.indexSlider];
 }
 
@@ -320,14 +320,14 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] count];
+    return [HLSTransition availableTransitionNames].count;
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [[HLSTransition availableTransitionNames] objectAtIndex:row];
+    return [HLSTransition availableTransitionNames][row];
 }
 
 #pragma mark UIPopoverControllerDelegate protocol implementation
@@ -444,26 +444,26 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (IBAction)pop:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    HLSStackController *stackController = [self insetViewControllerAtIndex:0];
     [stackController removeViewControllerAtIndex:[self removalIndex] animated:self.animatedSwitch.on];
 }
 
 - (IBAction)popToRoot:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    HLSStackController *stackController = [self insetViewControllerAtIndex:0];
     [stackController popToRootViewControllerAnimated:self.animatedSwitch.on];
 }
 
 - (IBAction)popThree:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
-    NSArray *viewControllers = [stackController viewControllers];
+    HLSStackController *stackController = [self insetViewControllerAtIndex:0];
+    NSArray *viewControllers = stackController.viewControllers;
     UIViewController *targetViewController = nil;
     if ([viewControllers count] >= 4) {
-        targetViewController = [viewControllers objectAtIndex:[viewControllers count] - 4];
+        targetViewController = viewControllers[viewControllers.count - 4];
     }
     else {
-        targetViewController = [stackController rootViewController];
+        targetViewController = stackController.rootViewController;
     }
     [stackController popToViewController:targetViewController animated:self.animatedSwitch.on];
 }
@@ -480,7 +480,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (IBAction)changeAutorotationMode:(id)sender
 {
-    HLSStackController *stackController = (HLSStackController *)[self insetViewControllerAtIndex:0];
+    HLSStackController *stackController = [self insetViewControllerAtIndex:0];
     stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 

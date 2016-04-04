@@ -3,24 +3,12 @@
 
 #import "_PersonInformation.h"
 
-const struct PersonInformationAttributes PersonInformationAttributes = {
-	.birthdate = @"birthdate",
-	.city = @"city",
-	.country = @"country",
-	.email = @"email",
-	.firstName = @"firstName",
-	.lastName = @"lastName",
-	.nbrChildren = @"nbrChildren",
-	.state = @"state",
-	.street = @"street",
-};
-
 @implementation PersonInformationID
 @end
 
 @implementation _PersonInformation
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"PersonInformation" inManagedObjectContext:moc_];
 }
@@ -41,8 +29,8 @@ const struct PersonInformationAttributes PersonInformationAttributes = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"nbrChildrenValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"nbrChildren"];
+	if ([key isEqualToString:@"numberOfChildrenValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"numberOfChildren"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -62,29 +50,59 @@ const struct PersonInformationAttributes PersonInformationAttributes = {
 
 @dynamic lastName;
 
-@dynamic nbrChildren;
+@dynamic numberOfChildren;
 
-- (int16_t)nbrChildrenValue {
-	NSNumber *result = [self nbrChildren];
+- (int16_t)numberOfChildrenValue {
+	NSNumber *result = [self numberOfChildren];
 	return [result shortValue];
 }
 
-- (void)setNbrChildrenValue:(int16_t)value_ {
-	[self setNbrChildren:[NSNumber numberWithShort:value_]];
+- (void)setNumberOfChildrenValue:(int16_t)value_ {
+	[self setNumberOfChildren:@(value_)];
 }
 
-- (int16_t)primitiveNbrChildrenValue {
-	NSNumber *result = [self primitiveNbrChildren];
+- (int16_t)primitiveNumberOfChildrenValue {
+	NSNumber *result = [self primitiveNumberOfChildren];
 	return [result shortValue];
 }
 
-- (void)setPrimitiveNbrChildrenValue:(int16_t)value_ {
-	[self setPrimitiveNbrChildren:[NSNumber numberWithShort:value_]];
+- (void)setPrimitiveNumberOfChildrenValue:(int16_t)value_ {
+	[self setPrimitiveNumberOfChildren:@(value_)];
 }
 
 @dynamic state;
 
 @dynamic street;
 
+@end
+
+@implementation PersonInformationAttributes 
++ (NSString *)birthdate {
+	return @"birthdate";
+}
++ (NSString *)city {
+	return @"city";
+}
++ (NSString *)country {
+	return @"country";
+}
++ (NSString *)email {
+	return @"email";
+}
++ (NSString *)firstName {
+	return @"firstName";
+}
++ (NSString *)lastName {
+	return @"lastName";
+}
++ (NSString *)numberOfChildren {
+	return @"numberOfChildren";
+}
++ (NSString *)state {
+	return @"state";
+}
++ (NSString *)street {
+	return @"street";
+}
 @end
 

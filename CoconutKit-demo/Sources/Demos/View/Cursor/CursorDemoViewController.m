@@ -38,7 +38,7 @@ static NSArray *s_folders = nil;
 
 + (void)initialize
 {
-    s_weekDays = [NSDateFormatter orderedWeekdaySymbols];
+    s_weekDays = [[[NSDateFormatter alloc] init] orderedWeekdaySymbols];
     s_completeRange = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10",
                         @"11", @"12", @"13", @"14", @"15", @"16"];
     s_folders = @[@"A-F", @"G-L", @"M-R", @"S-Z"];
@@ -112,12 +112,12 @@ static NSArray *s_folders = nil;
     if (cursor == self.foldersCursor || (cursor == self.mixedFoldersCursor && index % 2 == 0)) {
         if (selected) {
             CursorSelectedFolderView *view = [CursorSelectedFolderView view];
-            view.nameLabel.text = [s_folders objectAtIndex:index];
+            view.nameLabel.text = s_folders[index];
             return view;
         }
         else {
             CursorFolderView *view = [CursorFolderView view];
-            view.nameLabel.text = [s_folders objectAtIndex:index];
+            view.nameLabel.text = s_folders[index];
             return view;        
         }
     }
@@ -130,17 +130,17 @@ static NSArray *s_folders = nil;
 - (NSUInteger)numberOfElementsForCursor:(HLSCursor *)cursor
 {
     if (cursor == self.weekDaysCursor) {
-        return [s_weekDays count];
+        return s_weekDays.count;
     }
     else if (cursor == self.randomRangeCursor) {
         // Omit up to 10 objects at the end of the array
-        return arc4random_uniform(10) + [s_completeRange count] - 10 + 1;
+        return arc4random_uniform(10) + s_completeRange.count - 10 + 1;
     }
     else if (cursor == self.timeScalesCursor) {
-        return [s_timeScales count];
+        return s_timeScales.count;
     }
     else if (cursor == self.foldersCursor || cursor == self.mixedFoldersCursor) {
-        return [s_folders count];
+        return s_folders.count;
     }
     else {
         HLSLoggerError(@"Unknown cursor");
@@ -151,16 +151,16 @@ static NSArray *s_folders = nil;
 - (NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index
 {
     if (cursor == self.weekDaysCursor) {
-        return [s_weekDays objectAtIndex:index];
+        return s_weekDays[index];
     }
     else if (cursor == self.randomRangeCursor) {
-        return [s_completeRange objectAtIndex:index];
+        return s_completeRange[index];
     }
     else if (cursor == self.timeScalesCursor) {
-        return [s_timeScales objectAtIndex:index];
+        return s_timeScales[index];
     }
     else if (cursor == self.mixedFoldersCursor && index % 2 != 0) {
-        return [s_folders objectAtIndex:index];
+        return s_folders[index];
     }
     else {
         return @"";
@@ -209,7 +209,7 @@ static NSArray *s_folders = nil;
         return CGSizeMake(0, 1);
     }
     else {
-        return kCursorShadowOffsetDefault;
+        return HLSCursorShadowOffsetDefault;
     }
 }
 
@@ -220,11 +220,11 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did move from index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Index", nil), @(index)];
         self.weekDayIndexLabel.textColor = [UIColor redColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Index", nil), @(index)];
         self.randomRangeIndexLabel.textColor = [UIColor redColor];
     }    
 }
@@ -234,43 +234,43 @@ static NSArray *s_folders = nil;
     HLSLoggerInfo(@"Cursor %p did move to index %lu", cursor, (unsigned long)index);
     
     if (cursor == self.weekDaysCursor) {
-        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
+        self.weekDayIndexLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Index", nil), @(index)];
         self.weekDayIndexLabel.textColor = [UIColor blackColor];
     }
     else if (cursor == self.randomRangeCursor) {
-        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %lu", NSLocalizedString(@"Index", nil), (unsigned long)index];
+        self.randomRangeIndexLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Index", nil), @(index)];
         self.randomRangeIndexLabel.textColor = [UIColor blackColor];
         
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
-        pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
+        pointerView.valueLabel.text = s_completeRange[index];
     }
 }
 
 - (void)cursorDidStartDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did start dragging near index %lu", cursor, (unsigned long)index);
+    HLSLoggerInfo(@"Cursor %p did start dragging near index %@", cursor, @(index));
 }
 
 - (void)cursor:(HLSCursor *)cursor didDragNearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did drag near index %lu", cursor, (unsigned long)index);
+    HLSLoggerInfo(@"Cursor %p did drag near index %@", cursor, @(index));
     
     if (cursor == self.randomRangeCursor) {
         CursorCustomPointerView *pointerView = (CursorCustomPointerView *)cursor.pointerView;
-        pointerView.valueLabel.text = [s_completeRange objectAtIndex:index];
+        pointerView.valueLabel.text = s_completeRange[index];
     }
 }
 
 - (void)cursorDidStopDragging:(HLSCursor *)cursor nearIndex:(NSUInteger)index
 {
-    HLSLoggerInfo(@"Cursor %p did stop dragging near index %lu", cursor, (unsigned long)index);
+    HLSLoggerInfo(@"Cursor %p did stop dragging near index %@", cursor, @(index));
 }
 
 #pragma mark Event callbacks
 
 - (IBAction)moveWeekDaysPointerToNextDay:(id)sender
 {
-    [self.weekDaysCursor setSelectedIndex:[self.weekDaysCursor selectedIndex] + 1 animated:YES];
+    [self.weekDaysCursor setSelectedIndex:self.weekDaysCursor.selectedIndex + 1 animated:YES];
 }
 
 - (IBAction)reloadRandomRangeCursor:(id)sender
@@ -294,10 +294,10 @@ static NSArray *s_folders = nil;
     
     self.title = NSLocalizedString(@"Cursor", nil);
     
-    s_timeScales = @[[NSLocalizedString(@"Year", nil) uppercaseString],
-                     [NSLocalizedString(@"Month", nil) uppercaseString],
-                     [NSLocalizedString(@"Week", nil) uppercaseString],
-                     [NSLocalizedString(@"Day", nil) uppercaseString]];
+    s_timeScales = @[NSLocalizedString(@"Year", nil).uppercaseString,
+                     NSLocalizedString(@"Month", nil).uppercaseString,
+                     NSLocalizedString(@"Week", nil).uppercaseString,
+                     NSLocalizedString(@"Day", nil).uppercaseString];
     
     [self.weekDaysCursor reloadData];
     [self.timeScalesCursor reloadData];

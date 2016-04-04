@@ -39,36 +39,36 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 @interface HLSViewBindingInformation ()
 
-@property (nonatomic, strong) NSString *keyPath;
-@property (nonatomic, strong) NSString *transformerName;
+@property (nonatomic, copy) NSString *keyPath;
+@property (nonatomic, copy) NSString *transformerName;
 @property (nonatomic, weak) UIView *view;
 
 @property (nonatomic, weak) id objectTarget;
-@property (nonatomic, assign) Class rawClass;
-@property (nonatomic, assign) Class inputClass;
+@property (nonatomic) Class rawClass;
+@property (nonatomic) Class inputClass;
 
 @property (nonatomic, weak) id transformationTarget;
-@property (nonatomic, assign) SEL transformationSelector;
-@property (nonatomic, strong) NSObject<HLSTransformer> *transformer;
+@property (nonatomic) SEL transformationSelector;
+@property (nonatomic) NSObject<HLSTransformer> *transformer;
 
 @property (nonatomic, weak) id<HLSViewBindingDelegate> delegate;
 
-@property (nonatomic, assign) HLSViewBindingStatus status;
+@property (nonatomic) HLSViewBindingStatus status;
 
-@property (nonatomic, strong) NSError *error;
+@property (nonatomic) NSError *error;
 
-@property (nonatomic, assign, getter=isSupportingInput) BOOL supportingInput;
+@property (nonatomic, getter=isSupportingInput) BOOL supportingInput;
 
-@property (nonatomic, assign, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
-@property (nonatomic, assign, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
+@property (nonatomic, getter=isViewAutomaticallyUpdated) BOOL viewAutomaticallyUpdated;
+@property (nonatomic, getter=isModelAutomaticallyUpdated) BOOL modelAutomaticallyUpdated;
 
 // Used to prevent recursive calls to checks / update methods when we are simply updating a view. Depending on how view update
 // is performed, we namely could end up triggering an update which would yield to a view updated, and therefore to an infinite
 // call chain
-@property (nonatomic, assign, getter=isUpdatingView) BOOL updatingView;
+@property (nonatomic, getter=isUpdatingView) BOOL updatingView;
 
 // Same as above, but when updating the model
-@property (nonatomic, assign, getter=isUpdatingModel) BOOL updatingModel;
+@property (nonatomic, getter=isUpdatingModel) BOOL updatingModel;
 
 @end
 
@@ -81,7 +81,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                            view:(UIView *)view
 {
     if (self = [super init]) {
-        if (! [keyPath isFilled] || ! view) {
+        if (! keyPath.filled || ! view) {
             HLSLoggerError(@"Binding requires at least a keypath and a view");
             return nil;
         }
@@ -182,13 +182,13 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     
     id value = nil;
     if ([self canDisplayPlaceholder]) {
-        id rawValue = [self rawValue];
+        id rawValue = self.rawValue;
         if (rawValue && (! [rawValue isKindOfClass:[NSNumber class]] || ! [rawValue isEqualToNumber:@0])) {
-            value = [self value];
+            value = self.value;
         }
     }
     else {
-        value = [self value];
+        value = self.value;
     }
     
     self.updatingView = YES;
@@ -243,7 +243,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             error = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                         code:HLSViewBindingErrorTransformation
                         localizedDescription:@"Incorrect format"];
-            [error setUnderlyingError:detailedError];
+            error.underlyingError = detailedError;
             
             if ([self.delegate respondsToSelector:@selector(boundView:transformationDidFailWithObject:error:)]) {
                 [self.delegate boundView:self.view transformationDidFailWithObject:self.objectTarget error:error];
@@ -345,7 +345,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             NSError *detailedError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                                          code:HLSViewBindingErrorUnsupportedOperation
                                          localizedDescription:exception.reason];
-            [error setUnderlyingError:detailedError];
+            error.underlyingError = detailedError;
             
             if ([self.delegate respondsToSelector:@selector(boundView:updateDidFailWithObject:error:)]) {
                 [self.delegate boundView:self.view updateDidFailWithObject:self.objectTarget error:error];
@@ -372,7 +372,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)check:(BOOL)check update:(BOOL)update withError:(NSError *__autoreleasing *)pError
 {
-    return [self check:check update:update withInputValue:[self inputValue] error:pError];
+    return [self check:check update:update withInputValue:self.inputValue error:pError];
 }
 
 - (BOOL)check:(BOOL)check update:(BOOL)update withInputValue:(id)inputValue error:(NSError *__autoreleasing *)pError
@@ -466,10 +466,10 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         return YES;
     }
     
-    NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
+    NSString *methodName = [self.keyPath componentsSeparatedByString:@"."].lastObject;
     
     Class lastTargetInKeyPathClass = hls_isClass(lastTargetInKeyPath) ? lastTargetInKeyPath : [lastTargetInKeyPath class];
-    objc_property_t property = class_getProperty(lastTargetInKeyPathClass, [methodName UTF8String]);
+    objc_property_t property = class_getProperty(lastTargetInKeyPathClass, methodName.UTF8String);
     
     // If the method name corresponds to a property, reliable return type information can be obtained from the runtime. No such information
     // can be obtained for a getter or a getter / setter pair
@@ -477,13 +477,13 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     Class rawClass = Nil;
     if (property) {
         NSString *propertyAttributesString = @(property_getAttributes(property));
-        NSString *returnInformationString = [[propertyAttributesString componentsSeparatedByString:@","] firstObject];
+        NSString *returnInformationString = [propertyAttributesString componentsSeparatedByString:@","].firstObject;
         
         NSString *type = [returnInformationString substringWithRange:NSMakeRange(1, 1)];
         
         // Objects with a specified class
-        if ([type isEqualToString:@"@"] && [returnInformationString length] > 2) {
-            NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, [returnInformationString length] - 4)];
+        if ([type isEqualToString:@"@"] && returnInformationString.length > 2) {
+            NSString *rawClassName = [returnInformationString substringWithRange:NSMakeRange(3, returnInformationString.length - 4)];
             rawClass = NSClassFromString(rawClassName);
         }
         // Primitive types are boxed as NSNumber using KVC
@@ -517,11 +517,11 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                   withPendingReason:(NSString **)pPendingReason
                               error:(NSError *__autoreleasing *)pError
 {
-    NSAssert([self.transformerName isFilled], @"A transformer name is mandatory");
+    NSAssert(self.transformerName.filled, @"A transformer name is mandatory");
     
     // Check whether the transformer is a global formatter (ClassName:formatterName)
-    NSArray *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
-    if ([transformerComponents count] > 2) {
+    NSArray<NSString *> *transformerComponents = [self.transformerName componentsSeparatedByString:@":"];
+    if (transformerComponents.count > 2) {
         if (pError) {
             *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
                                           code:HLSViewBindingErrorInvalidTransformer
@@ -534,8 +534,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     SEL transformationSelector = NULL;
     
     // Global formatter syntax used
-    if ([transformerComponents count] == 2) {
-        Class class = NSClassFromString([transformerComponents firstObject]);
+    if (transformerComponents.count == 2) {
+        Class class = NSClassFromString(transformerComponents.firstObject);
         if (! class) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
@@ -546,7 +546,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
         transformationTarget = class;
         
-        transformationSelector = NSSelectorFromString([transformerComponents objectAtIndex:1]);
+        transformationSelector = NSSelectorFromString(transformerComponents[1]);
         if (! transformationSelector || ! class_getClassMethod(class, transformationSelector)) {
             if (pError) {
                 *pError = [NSError errorWithDomain:HLSViewBindingErrorDomain
@@ -780,18 +780,18 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     // If the key path ends with a property, extract its attributes and ensure there is no readonly attribute set
-    NSString *methodName = [[self.keyPath componentsSeparatedByString:@"."] lastObject];
-    objc_property_t property = class_getProperty([lastTargetInKeyPath class], [methodName UTF8String]);
+    NSString *methodName = [self.keyPath componentsSeparatedByString:@"."].lastObject;
+    objc_property_t property = class_getProperty([lastTargetInKeyPath class], methodName.UTF8String);
     if (property) {
         NSString *propertyAttributesString = @(property_getAttributes(property));
-        NSArray *propertyAttributes = [propertyAttributesString componentsSeparatedByString:@","];
+        NSArray<NSString *> *propertyAttributes = [propertyAttributesString componentsSeparatedByString:@","];
         return ! [propertyAttributes containsObject:@"R"];
     }
     // Otherwise look for a -set<name>: method according to KVO compliance rules
     // For more information, see https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/Compliant.html
     else {
         NSString *setterName = [NSString stringWithFormat:@"set%@:", [methodName stringByReplacingCharactersInRange:NSMakeRange(0, 1)
-                                                                                                         withString:[[methodName substringToIndex:1] uppercaseString]]];
+                                                                                                         withString:[methodName substringToIndex:1].uppercaseString]];
         return [lastTargetInKeyPath respondsToSelector:NSSelectorFromString(setterName)];
     }
 }
@@ -858,7 +858,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     if ((self.status & HLSViewBindingStatusTransformationTargetResolved) == 0) {
-        if ([self.transformerName isFilled]) {
+        if (self.transformerName.filled) {
             id transformationTarget = nil;
             SEL transformationSelector = NULL;
             NSString *pendingReason = nil;
@@ -897,7 +897,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
     
     if ((self.status & HLSViewBindingStatusTransformerResolved) == 0) {
-        if ([self.transformerName isFilled]) {
+        if (self.transformerName.filled) {
             id<HLSTransformer> transformer = nil;
             NSString *pendingReason = nil;
             NSError *error = nil;
@@ -957,7 +957,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 #pragma mark Type checking
 
-- (NSArray *)supportedBindingClasses
+- (NSArray<Class> *)supportedBindingClasses
 {
     Class viewClass = [self.view class];
     
@@ -971,8 +971,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (NSString *)supportedBindingClassesString
 {
-    NSArray *supportedBindingClasses = [self supportedBindingClasses];
-    NSMutableArray *classNames = [NSMutableArray array];
+    NSArray<Class> *supportedBindingClasses = [self supportedBindingClasses];
+    NSMutableArray<NSString *> *classNames = [NSMutableArray array];
     for (Class supportedBindingClass in supportedBindingClasses) {
         [classNames addObject:NSStringFromClass(supportedBindingClass)];
     }
@@ -981,7 +981,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)canDisplayValue:(id)value
 {
-    NSArray *supportedBindingClasses = [self supportedBindingClasses];
+    NSArray<Class> *supportedBindingClasses = [self supportedBindingClasses];
     for (Class supportedBindingClass in supportedBindingClasses) {
         if ([value isKindOfClass:supportedBindingClass]) {
             return YES;
@@ -992,7 +992,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 - (BOOL)canDisplayClass:(Class)class
 {
-    NSArray *supportedBindingClasses = [self supportedBindingClasses];
+    NSArray<Class> *supportedBindingClasses = [self supportedBindingClasses];
     for (Class supportedBindingClass in supportedBindingClasses) {
         if (hls_class_isSubclassOfClass(class, supportedBindingClass)) {
             return YES;
@@ -1104,14 +1104,14 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 // Return the last object designated by a key path (before the final field)
 + (id)lastObjectInKeyPath:(NSString *)keyPath withObject:(id)object
 {
-    NSArray *keyPathComponents = [keyPath componentsSeparatedByString:@"."];
+    NSArray<NSString *> *keyPathComponents = [keyPath componentsSeparatedByString:@"."];
     
     // Simple key path field
-    if ([keyPathComponents count] == 1) {
+    if (keyPathComponents.count == 1) {
         return object;
     }
     // Key path ending with an operator. Extract objects onto which the key path is applied
-    else if ([keyPathComponents count] >= 2 && [[keyPathComponents objectAtIndex:[keyPathComponents count] - 2] hasPrefix:@"@"]) {
+    else if (keyPathComponents.count >= 2 && [keyPathComponents[keyPathComponents.count - 2] hasPrefix:@"@"]) {
         NSString *lastObjectsKeyPath = [[[keyPathComponents arrayByRemovingLastObject] arrayByRemovingLastObject] componentsJoinedByString:@"."];
         return [object valueForKeyPath:lastObjectsKeyPath];
     }

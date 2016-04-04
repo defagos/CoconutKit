@@ -11,8 +11,8 @@
 
 /**
  * Return the active view controller (in general the root view controller of the window or a view controller 
- *ncurrently presented modally)
+ * currently presented modally)
  */
-@property (nonatomic, readonly, strong) UIViewController *activeViewController;
+@property (nonatomic, readonly, nullable) UIViewController *activeViewController;
 
 @end

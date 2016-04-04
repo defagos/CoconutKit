@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Swizzle the method with the specified instance / class selector on the specified class, assigning it a new function
  * implementation. The previous implementation is returned in pPreviousImplementation, which must be stored in a function
@@ -89,7 +91,7 @@ typedef NS_ENUM(uintptr_t, hls_AssociationPolicy) {
  * This is a function secretely implemented by the Objective-C runtime, not by CoconutKit. The declaration 
  * is here only provided for convenience
  */
-void instrumentObjcMessageSends(BOOL start);
+OBJC_EXPORT void instrumentObjcMessageSends(BOOL start);
 
 /**
  * Return the list of method descriptions a protocol or one of its parent protocols declares. This
@@ -104,7 +106,7 @@ void instrumentObjcMessageSends(BOOL start);
 OBJC_EXPORT struct objc_method_description *hls_protocol_copyMethodDescriptionList(Protocol *protocol,
                                                                                    BOOL isRequiredMethod,
                                                                                    BOOL isInstanceMethod,
-                                                                                   unsigned int *pCount);
+                                                                                   unsigned int * __nullable pCount);
 
 /**
  * Return YES iff the class or one of its superclasses conforms to the given protocol. This
@@ -150,7 +152,7 @@ OBJC_EXPORT BOOL hls_class_implementsProtocolMethods(Class cls, Protocol *protoc
  * to cast the IMP pointer to the proper signature (the first arguments of a method implementation signature 
  * are always self (of type id) and the selector (of type SEL), followed by the method arguments
  */
-OBJC_EXPORT IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
+OBJC_EXPORT IMP __nullable hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP newImplementation);
 
 /**
  * Replace the implementation of an instance method, given its selector. Return the original implementation,
@@ -159,7 +161,7 @@ OBJC_EXPORT IMP hls_class_swizzleClassSelector(Class clazz, SEL selector, IMP ne
  * to cast the IMP pointer to the proper signature (the first arguments of a method implementation signature
  * are always self (of type id) and the selector (of type SEL), followed by the method arguments
  */
-OBJC_EXPORT IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
+OBJC_EXPORT IMP __nullable hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImplementation);
 
 /**
  * Replace the implementation of a class method using the provided implementation block (see imp_implementationWithBlock
@@ -167,7 +169,7 @@ OBJC_EXPORT IMP hls_class_swizzleSelector(Class clazz, SEL selector, IMP newImpl
  * You should store this original implementation in a __block variable and call it from the implementation block to
  * preserve existing behavior
  */
-OBJC_EXPORT IMP hls_class_swizzleClassSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
+OBJC_EXPORT IMP __nullable hls_class_swizzleClassSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
 
 /**
  * Replace the implementation of an instance method using the provided implementation block (see imp_implementationWithBlock
@@ -175,7 +177,7 @@ OBJC_EXPORT IMP hls_class_swizzleClassSelectorWithBlock(Class clazz, SEL selecto
  * You should store this original implementation in a __block variable and call it from the implementation block to
  * preserve existing behavior
  */
-OBJC_EXPORT IMP hls_class_swizzleSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
+OBJC_EXPORT IMP __nullable hls_class_swizzleSelectorWithBlock(Class clazz, SEL selector, id newImplementationBlock);
 
 /**
  * Return YES iff subclass is a subclass of superclass, or if subclass == superclass (in agreement with
@@ -192,16 +194,18 @@ OBJC_EXPORT BOOL hls_isClass(id object);
  * Replace all references to an object (replaced object), appearing in an object (object), by references to another object
  * (replacingObject)
  */
-OBJC_EXPORT void hls_object_replaceReferencesToObject(id object, id replacedObject, id replacingObject);
+OBJC_EXPORT void hls_object_replaceReferencesToObject(id object, id replacedObject, id __nullable replacingObject);
 
 /**
  * Same as objc_setAssociatedObject, but with support for weak references. Objects associated using hls_setAssociatedObject
  * can only be retrieved using hls_getAssociatedObject, not using objc_getAssociatedObject
  */
-OBJC_EXPORT void hls_setAssociatedObject(id object, const void *key, id value, hls_AssociationPolicy policy);
+OBJC_EXPORT void hls_setAssociatedObject(id object, const void *key, id __nullable value, hls_AssociationPolicy policy);
 
 /**
  * Same as objc_setAssociatedObject, but with support for weak references. Only retrieves objects associated using
  * hls_setAssociatedObject, not objc_setAssociatedObject
  */
 OBJC_EXPORT id hls_getAssociatedObject(id object, const void *key);
+
+NS_ASSUME_NONNULL_END

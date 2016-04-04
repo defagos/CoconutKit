@@ -39,7 +39,7 @@ static NSUInteger swizzle_supportedInterfaceOrientations(UISplitViewController *
         return HLSAutorotationModeContainer;
     }
     else {
-        return [autorotationModeNumber integerValue];
+        return autorotationModeNumber.integerValue;
     }
 }
 

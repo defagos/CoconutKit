@@ -13,7 +13,7 @@
 
 @interface HLSRestrictedInterfaceProxy ()
 
-@property (nonatomic, strong) HLSMAZeroingWeakRef *targetZeroingWeakRef;
+@property (nonatomic) HLSMAZeroingWeakRef *targetZeroingWeakRef;
 
 @end
 
@@ -35,11 +35,8 @@
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 
 - (instancetype)initWithTarget:(id)target protocol:(Protocol *)protocol
-{    
-    if (! protocol) {
-        HLSLoggerError(@"Cannot create a proxy to target %@ without a protocol", target);
-        return nil;
-    }
+{
+    NSParameterAssert(protocol);
     
     if ([target isProxy]) {
         HLSLoggerError(@"Cannot create a proxy to another proxy");
@@ -63,10 +60,6 @@
 }
 
 #pragma clang diagnostic pop
-
-#pragma mark Accessors and mutators
-
-@synthesize targetZeroingWeakRef = _targetZeroingWeakRef;
 
 #pragma mark Proxy implementation
 
@@ -109,7 +102,7 @@
 
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
-    SEL selector = [invocation selector];
+    SEL selector = invocation.selector;
     if (! [self protocolDeclaresSelector:selector]) {
         NSString *reason = [NSString stringWithFormat:@"[id<%s> %s]: unrecognized selector sent to proxy instance %p", protocol_getName(_protocol),
                             sel_getName(selector), self];

@@ -16,10 +16,10 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 @interface HLSLabelLocalizationInfo ()
 
-@property (nonatomic, strong) NSString *localizationKey;
-@property (nonatomic, strong) NSString *tableName;
-@property (nonatomic, strong) NSString *bundleName;
-@property (nonatomic, assign) HLSLabelRepresentation representation;
+@property (nonatomic, copy) NSString *localizationKey;
+@property (nonatomic, copy) NSString *tableName;
+@property (nonatomic, copy) NSString *bundleName;
+@property (nonatomic) HLSLabelRepresentation representation;
 
 @end
 
@@ -40,6 +40,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 - (instancetype)init
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 
@@ -76,7 +77,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Extract localization key
-    self.localizationKey = [text stringByReplacingCharactersInRange:NSMakeRange(0, [prefix length]) withString:@""];
+    self.localizationKey = [text stringByReplacingCharactersInRange:NSMakeRange(0, prefix.length) withString:@""];
 }
 
 #pragma mark Localizing
@@ -89,7 +90,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 - (BOOL)isIncomplete
 {
     // Missing localization key
-    if ([self.localizationKey length] == 0) {
+    if (self.localizationKey.length == 0) {
         return YES;
     }
     
@@ -117,7 +118,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Missing localization key. Return some label to make it clear when the label is displayed on screenyy
-    if ([self.localizationKey length] == 0) {
+    if (self.localizationKey.length == 0) {
         return @"(no key)";
     }
     
@@ -139,19 +140,20 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Formatting
+    // TODO: When iOS 9 is the minimal supported version, only return localized versions
     switch (self.representation) {
         case HLSLabelRepresentationUppercase: {
-            text = [text uppercaseString];
+            text = [text respondsToSelector:@selector(localizedUppercaseString)] ? text.localizedUppercaseString : text.uppercaseString;
             break;
         }
             
         case HLSLabelRepresentationLowercase: {
-            text = [text lowercaseString];
+            text = [text respondsToSelector:@selector(localizedLowercaseString)] ? text.localizedLowercaseString : text.lowercaseString;
             break;
         }
             
         case HLSLabelRepresentationCapitalized: {
-            text = [text capitalizedString];
+            text = [text respondsToSelector:@selector(localizedCapitalizedString)] ? text.localizedCapitalizedString : text.capitalizedString;
             break;
         }
             
@@ -190,5 +192,5 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
                      @(HLSLabelRepresentationLowercase) : @"lowercase",
                      @(HLSLabelRepresentationCapitalized) : @"capitalized" };
     });
-    return [s_names objectForKey:@(representation)] ?: @"unknown";    
+    return s_names[@(representation)] ?: @"unknown";    
 }

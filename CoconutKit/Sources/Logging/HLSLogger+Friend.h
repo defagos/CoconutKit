@@ -17,7 +17,7 @@
 /**
  * Return the paths of all available log files, from the most recent to the oldest one
  */
-- (NSArray *)availableLogFilePaths;
+@property (nonatomic, readonly) NSArray<NSString *> *availableLogFilePaths;
 
 /**
  * Remove all log files

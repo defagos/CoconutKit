@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Interface meant to be used by friend classes of HLSViewAnimation (= classes which must have access to private implementation
  * details)
@@ -18,11 +20,13 @@
 /**
  * The transform corresponding to the view animation settings
  */
-@property (nonatomic, readonly, assign) CGAffineTransform transform;
+@property (nonatomic, readonly) CGAffineTransform transform;
 
 /**
  * The increment to apply to the view alpha value
  */
-@property (nonatomic, readonly, assign) CGFloat alphaIncrement;
+@property (nonatomic, readonly) CGFloat alphaIncrement;
 
 @end
+
+NS_ASSUME_NONNULL_END

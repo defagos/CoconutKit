@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A protocol for objects supporting validation
  */
@@ -18,3 +20,5 @@
 - (BOOL)validate;
 
 @end
+
+NS_ASSUME_NONNULL_END

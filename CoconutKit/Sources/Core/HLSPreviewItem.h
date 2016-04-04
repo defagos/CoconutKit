@@ -7,13 +7,15 @@
 #import <Foundation/Foundation.h>
 #import <QuickLook/QuickLook.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Simple QLPreviewItem implementation. Should be self-explanatory
  */
 @interface HLSPreviewItem : NSObject <QLPreviewItem>
 
-- (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL previewItemTitle:(NSString *)previewItemTitle NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithPreviewItemURL:(NSURL *)previewItemURL;
+- (instancetype)initWithPreviewItemURL:(nullable NSURL *)previewItemURL previewItemTitle:(nullable NSString *)previewItemTitle NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPreviewItemURL:(nullable NSURL *)previewItemURL;
 
 @end
 
@@ -22,3 +24,5 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

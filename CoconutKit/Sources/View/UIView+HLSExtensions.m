@@ -30,7 +30,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 @interface UIView (HLSExtensionsPrivate)
 
 @property (nonatomic, copy) void (^modalOutsideActionBlock)(void);
-@property (nonatomic, strong) HLSAnyGestureRecognizer *outsideGestureRecognizer;        // strong to keep setup if later installed
+@property (nonatomic) HLSAnyGestureRecognizer *outsideGestureRecognizer;        // strong to keep setup if later installed
 
 @end
 
@@ -90,7 +90,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (UIImage *)flattenedImage
 {
-    return [self.layer flattenedImage];
+    return self.layer.flattenedImage;
 }
 
 - (UIView *)firstResponderView
@@ -100,7 +100,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
     }
     
     for (UIView *subview in self.subviews) {
-        UIView *firstResponderSubview = [subview firstResponderView];
+        UIView *firstResponderSubview = subview.firstResponderView;
         if (firstResponderSubview) {
             return firstResponderSubview;
         }
@@ -116,22 +116,22 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (void (^)(void))modalOutsideActionBlock
 {
-    return objc_getAssociatedObject(self, s_modalOutsideActionBlockKey);
+    return hls_getAssociatedObject(self, s_modalOutsideActionBlockKey);
 }
 
 - (void)setModalOutsideActionBlock:(void (^)(void))modalOutsideActionBlock
 {
-    objc_setAssociatedObject(self, s_modalOutsideActionBlockKey, modalOutsideActionBlock, OBJC_ASSOCIATION_COPY);
+    hls_setAssociatedObject(self, s_modalOutsideActionBlockKey, modalOutsideActionBlock, HLS_ASSOCIATION_COPY_NONATOMIC);
 }
 
 - (HLSAnyGestureRecognizer *)outsideGestureRecognizer
 {
-    return objc_getAssociatedObject(self, s_outsideGestureRecognizerKey);
+    return hls_getAssociatedObject(self, s_outsideGestureRecognizerKey);
 }
 
 - (void)setOutsideGestureRecognizer:(HLSAnyGestureRecognizer *)outsideGestureRecognizer
 {
-    objc_setAssociatedObject(self, s_outsideGestureRecognizerKey, outsideGestureRecognizer, OBJC_ASSOCIATION_RETAIN);
+    hls_setAssociatedObject(self, s_outsideGestureRecognizerKey, outsideGestureRecognizer, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Modal behavior

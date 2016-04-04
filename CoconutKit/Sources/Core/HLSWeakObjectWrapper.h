@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Thin wrapper to provide for store weak references in associated objects (see HLSRuntime.m)
  *
@@ -13,8 +15,10 @@
  */
 @interface HLSWeakObjectWrapper : NSObject
 
-- (id)initWithObject:(id)object;
+- (instancetype)initWithObject:(nullable id)object NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, readonly, weak) id object;
+@property (nonatomic, readonly, weak, nullable) id object;
 
 @end
+
+NS_ASSUME_NONNULL_END

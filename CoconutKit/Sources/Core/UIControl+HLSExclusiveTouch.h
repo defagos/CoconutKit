@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Globally set exclusive touch to YES for all UIControl objects, preventing quasi-simultaneous taps.
  */
@@ -19,3 +21,5 @@
 + (void)enableExclusiveTouch;
 
 @end
+
+NS_ASSUME_NONNULL_END

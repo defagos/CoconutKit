@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSRestrictedInterfaceProxyTestCase.h"
+@interface HLSRestrictedInterfaceProxyTestCase : XCTestCase
+@end
 
 @protocol CompatibleRestrictedInterfaceA <NSObject>
 
@@ -110,8 +111,8 @@
     
     id<CompatibleRestrictedInterfaceA> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
     XCTAssertNil([[HLSRestrictedInterfaceProxy alloc] initWithTarget:proxyB protocol:@protocol(CompatibleRestrictedInterfaceBSubset)]);
-    XCTAssertFalse([target isProxy]);
-    XCTAssertTrue([proxyB isProxy]);
+    XCTAssertFalse(target.isProxy);
+    XCTAssertTrue(proxyB.isProxy);
     
     // According to the -[NSObject isProxy] documentation of -isKindOfClass: and -isMemberOfClass:, these methods test the target
     // identity, not the proxy

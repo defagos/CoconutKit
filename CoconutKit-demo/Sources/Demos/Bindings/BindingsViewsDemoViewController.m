@@ -13,7 +13,7 @@
 
 @interface BindingsViewsDemoViewController ()
 
-@property (nonatomic, strong) NSArray *employees;
+@property (nonatomic) NSArray<Employee *> *employees;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet EmployeeView *employeeView;
@@ -39,7 +39,7 @@
 
 - (NSString *)numberOfEmployeesString
 {
-    return [NSString stringWithFormat:NSLocalizedString(@"%@ employees", nil), @([self.employees count])];
+    return [NSString stringWithFormat:NSLocalizedString(@"%@ employees", nil), @(self.employees.count)];
 }
 
 #pragma mark View lifecycle
@@ -72,15 +72,15 @@
 
 - (void)changeEmployee
 {
-    _currentEmployeeIndex = (_currentEmployeeIndex + 1) % [self.employees count];
-    self.employeeView.employee = [self.employees objectAtIndex:_currentEmployeeIndex];
+    _currentEmployeeIndex = (_currentEmployeeIndex + 1) % self.employees.count;
+    self.employeeView.employee = self.employees[_currentEmployeeIndex];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.employees count];
+    return self.employees.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,7 +93,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EmployeeTableViewCell *employeeCell = (EmployeeTableViewCell *)cell;
-    employeeCell.employee = [self.employees objectAtIndex:indexPath.row];
+    employeeCell.employee = self.employees[indexPath.row];
     employeeCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 

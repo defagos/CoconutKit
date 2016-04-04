@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A web browser with standard features (navigation buttons, link sharing, etc.)
  */
@@ -23,15 +25,17 @@
 /**
  * The initial request
  */
-@property (nonatomic, readonly, strong) NSURLRequest *request;
+@property (nonatomic, readonly) NSURLRequest *request;
 
 @end
 
 @interface HLSWebViewController (UnavailableMethods)
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
 - (instancetype)initWithBundle:(NSBundle *)bundle NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Category for easier label localization in nib files. Instead of having to define and bind an outlet just 
  * to localize a UILabel or a UIButton, this category makes it easy to attach a localization key to a label
@@ -82,13 +84,14 @@
 /**
  * The name of the localization table to use (without the .strings extension). If not set defaults to Localizable
  */
-@property (nonatomic, readonly, strong) IBInspectable NSString *locTable;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *locTable;
 
 /**
  * The name of the bundle to search into (without the .bundle extension). Bundles are searched recursively in the 
  * main bundle, and if locBundle is not set the main bundle is used
  */
-@property (nonatomic, readonly, strong) IBInspectable NSString *locBundle;
+@property (nonatomic, readonly, copy, nullable) IBInspectable NSString *locBundle;
 
 @end
 
+NS_ASSUME_NONNULL_END

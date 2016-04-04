@@ -6,13 +6,17 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDateFormatter (HLSExtensions)
 
 /**
  * Same as -weekDaySymbols and -shortWeekdaySymbols, but returning the days in the order corresponding to the
  * device international settings. 
  */
-+ (NSArray *)orderedWeekdaySymbols;
-+ (NSArray *)orderedShortWeekdaySymbols;
+@property (nonatomic, readonly) NSArray <NSString *> *orderedWeekdaySymbols;
+@property (nonatomic, readonly) NSArray <NSString *> *orderedShortWeekdaySymbols;
 
 @end
+
+NS_ASSUME_NONNULL_END

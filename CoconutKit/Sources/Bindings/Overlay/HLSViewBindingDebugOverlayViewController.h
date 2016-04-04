@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Overlay view controller displaying binding debugging information
  */
@@ -22,7 +24,7 @@
 /**
  * Return the current overlay, nil if none
  */
-+ (HLSViewBindingDebugOverlayViewController *)currentBindingDebugOverlayViewController;
++ (nullable HLSViewBindingDebugOverlayViewController *)currentBindingDebugOverlayViewController;
 
 /**
  * Animate a frame to highlight a given view on the overlay
@@ -39,3 +41,5 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

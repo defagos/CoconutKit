@@ -4,9 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "NSStream+HLSExtensionsTestCase.h"
-
 #import "NSBundle+Tests.h"
+
+@interface NSStream_HLSExtensionsTestCase : XCTestCase
+@end
 
 @implementation NSStream_HLSExtensionsTestCase
 

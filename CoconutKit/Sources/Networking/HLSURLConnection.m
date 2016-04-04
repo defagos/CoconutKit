@@ -10,7 +10,7 @@
 
 @interface HLSURLConnection ()
 
-@property (nonatomic, strong) NSURLRequest *request;
+@property (nonatomic) NSURLRequest *request;
 
 @end
 
@@ -20,12 +20,9 @@
 
 - (instancetype)initWithRequest:(NSURLRequest *)request completionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
+    NSParameterAssert(request);
+    
     if (self = [super initWithCompletionBlock:completionBlock]) {
-        if (! request) {
-            HLSLoggerError(@"Missing request");
-            return nil;
-        }
-        
         self.request = request;
     }
     return self;
@@ -33,6 +30,7 @@
 
 - (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
+    [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
 

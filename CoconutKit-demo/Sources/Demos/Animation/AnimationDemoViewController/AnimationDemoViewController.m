@@ -10,7 +10,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 @interface AnimationDemoViewController ()
 
-@property (nonatomic, strong) HLSAnimation *animation;
+@property (nonatomic) HLSAnimation *animation;
 
 @property (nonatomic, weak) IBOutlet UIView *rectangleView1;
 @property (nonatomic, weak) IBOutlet UIView *rectangleView2;
@@ -59,7 +59,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 #pragma mark Orientation management
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
@@ -96,7 +96,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         self.repeatCountLabel.text = @"inf";
     }
     else {
-        self.repeatCountLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)repeatCount];
+        self.repeatCountLabel.text = [NSString stringWithFormat:@"%@", @(repeatCount)];
     }
     
     // Adjust the start time to cover the whole animation
@@ -138,12 +138,12 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
         HLSLoggerInfo(@"Completion block called for animation %@", weakAnimation.tag);
     };
     
-    animation.tag = [NSString stringWithFormat:@"animation%lu", (unsigned long)animationIndex];
+    animation.tag = [NSString stringWithFormat:@"animation%@", @(animationIndex)];
     if (self.reverseSwitch.on) {
-        animation = [animation reverseAnimation];
+        animation = animation.reverseAnimation;
     }
     if (self.loopingSwitch.on) {
-        animation = [animation loopAnimation];
+        animation = animation.loopAnimation;
     }
     if ([self duration] != kAnimationIntrinsicDuration) {
         animation = [animation animationWithDuration:[self duration]];
@@ -200,7 +200,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [NSString stringWithFormat:@"%ld", (long)row + 1];
+    return [NSString stringWithFormat:@"%@", @(row + 1)];
 }
 
 #pragma mark UIPickerViewDelegate protocol implementation
@@ -293,7 +293,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
 
 - (SEL)selectorForAnimationWithIndex:(NSUInteger)index
 {
-    NSString *selectorName = [NSString stringWithFormat:@"animation%lu", (unsigned long)index];
+    NSString *selectorName = [NSString stringWithFormat:@"animation%@", @(index)];
     return NSSelectorFromString(selectorName);
 }
 
@@ -317,10 +317,10 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     // Special case of infinitely repeating animations: Must limit the range so that the slider can still be used
     // conveniently
     if ([self repeatCount] == NSUIntegerMax) {
-        return 5. * [self.animation duration];
+        return 5. * self.animation.duration;
     }
     else {
-        return [self repeatCount] * [self.animation duration] + [self delay];
+        return [self repeatCount] * self.animation.duration + [self delay];
     }
 }
 

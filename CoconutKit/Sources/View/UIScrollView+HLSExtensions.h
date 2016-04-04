@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIScrollView (HLSExtensions)
 
 /**
@@ -30,7 +32,7 @@
  * This method only synchronizes scrolling between scroll views. You still have to align them properly
  * and to set their respective content sizes to get the result you want.
  */
-- (void)synchronizeWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces;
+- (void)synchronizeWithScrollViews:(NSArray<UIScrollView *> *)scrollViews bounces:(BOOL)bounces;
 
 /**
  * Remove any previously existing synchronization set for the receiver
@@ -50,11 +52,13 @@
  *
  * The default value is NO
  */
-@property (nonatomic, assign, getter=isAvoidingKeyboard) IBInspectable BOOL avoidingKeyboard;
+@property (nonatomic, getter=isAvoidingKeyboard) IBInspectable BOOL avoidingKeyboard;
 
 /**
  * The distance to at least keep between keyboard and content. Defaults to 10.f
  */
-@property (nonatomic, assign) IBInspectable CGFloat keyboardDistance;
+@property (nonatomic) IBInspectable CGFloat keyboardDistance;
 
 @end
+
+NS_ASSUME_NONNULL_END

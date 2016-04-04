@@ -7,6 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIFont (HLSExtensions)
 
 /**
@@ -18,7 +20,7 @@
  * though, e.g. in a library, you might not have access to the application info.plist. In such cases, use
  * the following method to load the fonts you need in code
  */
-+ (BOOL)loadFontWithFileName:(NSString *)fileName inBundle:(NSBundle *)bundle;
++ (BOOL)loadFontWithFileName:(NSString *)fileName inBundle:(nullable NSBundle *)bundle;
 
 /**
  * Load a font from data. The method returns YES iff the font could be successfully loaded.
@@ -28,3 +30,5 @@
 + (BOOL)loadFontWithData:(NSData *)data;
 
 @end
+
+NS_ASSUME_NONNULL_END

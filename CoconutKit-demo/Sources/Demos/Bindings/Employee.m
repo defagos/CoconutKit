@@ -15,12 +15,12 @@
 + (NSArray *)employees;
 {
     static dispatch_once_t s_onceToken;
-    static NSArray *s_employees;
+    static NSArray<Employee *> *s_employees;
     dispatch_once(&s_onceToken, ^{
         NSString *employeesFilePath = [[NSBundle mainBundle] pathForResource:@"Employees" ofType:@"plist"];
-        NSArray *fullNames = [NSArray arrayWithContentsOfFile:employeesFilePath];
+        NSArray<NSString *> *fullNames = [NSArray arrayWithContentsOfFile:employeesFilePath];
         
-        NSMutableArray *employees = [NSMutableArray array];
+        NSMutableArray<Employee *> *employees = [NSMutableArray array];
         for (NSString *fullName in fullNames) {
             Employee *employee = [[Employee alloc] init];
             employee.fullName = fullName;

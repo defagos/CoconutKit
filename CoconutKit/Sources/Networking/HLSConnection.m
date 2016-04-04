@@ -15,15 +15,15 @@
 @property (nonatomic, copy) HLSConnectionCompletionBlock completionBlock;
 
 @property (nonatomic, weak) HLSConnection *parentConnection;
-@property (nonatomic, strong) HLSConnection *parentStrongConnection;                    // Ensure the parent connection lives at least until all child connections are over
+@property (nonatomic) HLSConnection *parentStrongConnection;                                        // Ensure the parent connection lives at least until all child connections are over
 
-@property (nonatomic, strong) NSMutableDictionary *childConnectionsDictionary;          // contains HLSConnection objects
+@property (nonatomic) NSMutableDictionary<id, HLSConnection *> *childConnectionsDictionary;
 
-@property (nonatomic, strong) NSSet *runLoopModes;
-@property (nonatomic, assign, getter=isSelfRunning) BOOL selfRunning;                   // Is self running or not (NOT including child connections)
+@property (nonatomic) NSSet *runLoopModes;
+@property (nonatomic, getter=isSelfRunning) BOOL selfRunning;                                       // Is self running or not (NOT including child connections)
 
-@property (nonatomic, strong) NSError *error;
-@property (nonatomic, strong) NSProgress *progress;
+@property (nonatomic) NSError *error;
+@property (nonatomic) NSProgress *progress;
 
 @end
 
@@ -59,7 +59,7 @@
         return YES;
     }
     
-    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
+    for (HLSConnection *childConnection in self.childConnectionsDictionary.allValues) {
         if (childConnection.selfRunning) {
             return YES;
         }
@@ -76,8 +76,15 @@
 
 - (void)startWithRunLoopModes:(NSSet *)runLoopModes
 {
+    NSParameterAssert(runLoopModes);
+    
     if (self.running) {
         HLSLoggerInfo(@"The connection is already running");
+        return;
+    }
+    
+    if (runLoopModes.count == 0) {
+        HLSLoggerError(@"No run loop modes have been specified");
         return;
     }
     
@@ -86,7 +93,7 @@
     
     // Start child connections first. This ensures correct behavior even if the -startConnectionWithRunLoopModes:
     // subclass implementation directly calls -finishWithResponseObject:error:
-    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
+    for (HLSConnection *childConnection in self.childConnectionsDictionary.allValues) {
         if (! childConnection.selfRunning) {
             [childConnection startWithRunLoopModes:runLoopModes];
         }
@@ -102,7 +109,7 @@
         [self cancelConnection];
     }
     
-    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
+    for (HLSConnection *childConnection in self.childConnectionsDictionary.allValues) {
         [childConnection cancel];
     }
 }
@@ -115,7 +122,7 @@
     
     NSError *error = [self.error copy];
     
-    for (HLSConnection *childConnection in [self.childConnectionsDictionary allValues]) {
+    for (HLSConnection *childConnection in self.childConnectionsDictionary.allValues) {
         [NSError combineError:childConnection.error withError:&error];
     }
     
@@ -134,9 +141,10 @@
 
 - (void)addChildConnection:(HLSConnection *)connection withKey:(id)key
 {
+    NSParameterAssert(connection);
     NSParameterAssert(key);
     
-    if ([self.childConnectionsDictionary objectForKey:key]) {
+    if (self.childConnectionsDictionary[key]) {
         HLSLoggerError(@"A connection has already been registered for key %@", key);
         return;
     }
@@ -147,7 +155,7 @@
     }
     connection.parentConnection = self;
     connection.parentStrongConnection = self;
-    [self.childConnectionsDictionary setObject:connection forKey:key];
+    self.childConnectionsDictionary[key] = connection;
     
     if (self.selfRunning) {
         [connection startWithRunLoopModes:self.runLoopModes];
@@ -156,24 +164,30 @@
 
 - (id)addChildConnection:(HLSConnection *)connection
 {
-    NSString *key = [[NSUUID UUID] UUIDString];
+    NSParameterAssert(connection);
+    
+    NSString *key = [NSUUID UUID].UUIDString;
     [self addChildConnection:connection withKey:key];
     return key;
 }
 
-- (NSArray *)childConnections
+- (NSArray<HLSConnection *> *)childConnections
 {
-    return [self.childConnectionsDictionary allValues];
+    return self.childConnectionsDictionary.allValues;
 }
 
 - (HLSConnection *)childConnectionForKey:(id)key
 {
-    return [self.childConnectionsDictionary objectForKey:key];
+    NSParameterAssert(key);
+    
+    return self.childConnectionsDictionary[key];
 }
 
 - (void)removeChildConnectionForKey:(id)key
 {
-    HLSConnection *connection = [self.childConnectionsDictionary objectForKey:key];
+    NSParameterAssert(key);
+    
+    HLSConnection *connection = self.childConnectionsDictionary[key];
     if (! connection) {
         return;
     }

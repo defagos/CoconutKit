@@ -4,7 +4,7 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 
 | Build status | Technology | Latest version | Integration | Documentation | License |
 |--------------|------------|----------------|-------------|---------------|---------|
-| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/develop.svg)](https://travis-ci.org/defagos/CoconutKit) | ![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg) ![Language](https://img.shields.io/badge/language-objective--c-blue.svg) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg)](https://guides.cocoapods.org/using/using-cocoapods.html) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | [![Documentation](https://img.shields.io/badge/doc-CocoaDocs-orange.svg)](https://cocoapods.org/pods/CoconutKit) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
+| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/feature/nullable-nonnull.svg)](https://travis-ci.org/defagos/CoconutKit) | ![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg) ![Language](https://img.shields.io/badge/language-objective--c-blue.svg) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg)](https://guides.cocoapods.org/using/using-cocoapods.html) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | [![Documentation](https://img.shields.io/badge/doc-CocoaDocs-orange.svg)](https://cocoapods.org/pods/CoconutKit) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
 
 _Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
@@ -177,8 +177,8 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 7.0
-* iOS 9.0 SDK
+* Xcode 7.3
+* iOS 9.3 SDK
 
 Deployment is supported for the two most recent major iOS versions, currently:
 
@@ -194,7 +194,7 @@ CoconutKit can be used both from Objective-C or Swift files. It does not contain
 
 ## Installation
 
-CoconutKit can either be added to a project with [CocoaPods](http://cocoapods.org/), [Carthage](https://github.com/Carthage/Carthage) or as a static compiled framework.
+CoconutKit can either be added to a project with [CocoaPods](http://cocoapods.org/) or [Carthage](https://github.com/Carthage/Carthage).
 
 ### Installation with CocoaPods
 
@@ -218,44 +218,6 @@ github "defagos/CoconutKit" == <version>
 
 Then run `carthage update` to update the dependencies. Unlike CocoaPods, your project is not changed. You will need to manually add the `.framework` generated in the `Carthage/Build/iOS` folder to your projet. Refer to the [official documentation](https://github.com/Carthage/Carthage) for more information.
 
-### Static framework
-
-Checkout CoconutKit source code from the command-line:
-
-```
-$ git clone --recursive https://github.com/defagos/CoconutKit.git
-$ cd CoconutKit
-```
-
-Open the `CoconutKit.xcworkspace` and run the `CoconutKit-staticframework` scheme. 
-
-<p align="center"><img src="README-images/framework_scheme.jpg"/></p>
-
-This produces a `.staticframework` package in the `Binaries` directory. Add it to your project, and associate either the `CoconutKit-release.xcconfig` or `CoconutKit-debug.xcconfig` to each of your target configurations:
-
-<p align="center"><img src="README-images/set_xcconfig.jpg"/></p>
-
-Since `.xcconfig` files are build files, you should remove them from your target _Copy Bundle Resources_ build phase:
-
-<p align="center"><img src="README-images/remove_xcconfig.jpg"/></p>
-
-Both `.xcconfig` files already contain the flags needed to link against the `CoconutKit` framework release, respectively debug binaries. You must therefore remove the `CoconutKit.framework` entry which was automatically added to your target _Link Binary With Libraries_ build phase:
-
-<p align="center"><img src="README-images/remove_framework.jpg"/></p>
-
-Your project should now successfully compile.
-
-#### Remark
-
-If your project already requires a configuration file, you need to create an umbrella `.xcconfig` file that includes both files, since Xcode only allows one per target / configuration:
-
-```
-#include "/path/to/your/config.xcconfig"
-#include "/path/to/CoconutKit-(debug|release).xcconfig"
-```
-
-Then use this configuration file instead.
-
 ## Usage
 
 A global `CoconutKit.h` header file is provided. You can of course individually import public header files if you prefer, though.
@@ -274,7 +236,7 @@ You can similarly import individual files, e.g.
 #import <CoconutKit/HLSStackController.h>
 ```
 
-It you use the static framework, Carthage or CocoaPods with the `use_frameworks!` directive, it is easier to import the CoconutKit module itself where needed:
+It you use Carthage or CocoaPods with the `use_frameworks!` directive, it is easier to import the CoconutKit module itself where needed:
 
 ```objective-c
 @import CoconutKit;
@@ -300,7 +262,7 @@ import CoconutKit
 
 ## Demo project
 
-The CoconutKit workspace contains a demo project, also used for development. Simply run the `CoconutKit-dev` scheme.
+The CoconutKit workspace contains a demo project, also used for development. Simply run the `CoconutKit-demo` scheme.
 
 ## Documentation
 

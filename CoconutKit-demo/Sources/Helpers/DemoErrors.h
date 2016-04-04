@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, DemoError) {
     DemoMandatoryError,
     DemoIncorrectError,
@@ -11,3 +13,5 @@ typedef NS_ENUM(NSInteger, DemoError) {
 };
 
 extern NSString * const DemoErrorDomain;
+
+NS_ASSUME_NONNULL_END

@@ -18,7 +18,9 @@
 
 + (instancetype)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    return [NSEntityDescription insertNewObjectForEntityForName:[self className] 
+    NSParameterAssert(managedObjectContext);
+    
+    return [NSEntityDescription insertNewObjectForEntityForName:[self className]
                                          inManagedObjectContext:managedObjectContext];
 }
 
@@ -28,19 +30,16 @@
 }
 
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
-                    sortedUsingDescriptors:(NSArray *)sortDescriptors
+                    sortedUsingDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
                     inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
+    NSParameterAssert(managedObjectContext);
     HLSAssertObjectsInEnumerationAreKindOfClass(sortDescriptors, NSSortDescriptor);
-    if (! managedObjectContext) {
-        HLSLoggerError(@"Missing managed object context");
-        return nil;
-    }
     
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[self className]
                                                          inManagedObjectContext:managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:entityDescription];
+    fetchRequest.entity = entityDescription;
     fetchRequest.sortDescriptors = sortDescriptors;
     fetchRequest.predicate = predicate;
     
@@ -55,7 +54,7 @@
 }
 
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
-                    sortedUsingDescriptors:(NSArray *)sortDescriptors
+                    sortedUsingDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
 {
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors 
@@ -66,7 +65,7 @@
                      sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
                     inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
+    NSArray<NSSortDescriptor *> *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors 
                         inManagedObjectContext:managedObjectContext];
@@ -75,12 +74,12 @@
 + (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
                      sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
+    NSArray<NSSortDescriptor *> *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self filteredObjectsUsingPredicate:predicate
                         sortedUsingDescriptors:sortDescriptors];
 }
 
-+ (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
++ (NSArray *)allObjectsSortedUsingDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
                        inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     return [self filteredObjectsUsingPredicate:nil 
@@ -88,7 +87,7 @@
                         inManagedObjectContext:managedObjectContext];
 }
 
-+ (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
++ (NSArray *)allObjectsSortedUsingDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
 {
     return [self allObjectsSortedUsingDescriptors:sortDescriptors inManagedObjectContext:[HLSModelManager currentModelContext]];
 }
@@ -96,14 +95,14 @@
 + (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
                       inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
+    NSArray<NSSortDescriptor *> *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self allObjectsSortedUsingDescriptors:sortDescriptors
                            inManagedObjectContext:managedObjectContext];
 }
 
 + (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
-    NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
+    NSArray<NSSortDescriptor *> *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self allObjectsSortedUsingDescriptors:sortDescriptors];
 }
 
@@ -133,7 +132,7 @@
 
 #pragma mark Creating a copy
 
-- (id)duplicate
+- (NSManagedObject *)duplicate
 {
     if (! [self conformsToProtocol:@protocol(HLSManagedObjectCopying)]) {
         return nil;
@@ -147,14 +146,14 @@
     NSSet *keysToExclude = nil;
     NSManagedObject<HLSManagedObjectCopying> *managedObjectCopyable = (NSManagedObject<HLSManagedObjectCopying> *)self;
     if ([managedObjectCopyable respondsToSelector:@selector(keysToExclude)]) {
-        keysToExclude = [managedObjectCopyable keysToExclude];
+        keysToExclude = managedObjectCopyable.keysToExclude;
     }
     
     // Copy attributes (shallow copy for all: Those are of "primitive" immutable types anyway)
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:self.entity.name
                                                          inManagedObjectContext:self.managedObjectContext];
-    NSDictionary *attributes = [entityDescription attributesByName];
-    for (NSString *attributeName in [attributes allKeys]) {
+    NSDictionary<NSString *, NSAttributeDescription *> *attributes = entityDescription.attributesByName;
+    for (NSString *attributeName in attributes.allKeys) {
         if ([keysToExclude containsObject:attributeName]) {
             continue;
         }
@@ -162,17 +161,17 @@
     }
     
     // Copy relationships
-    NSDictionary *relationships = [entityDescription relationshipsByName];
-    for (NSString *relationshipName in [relationships allKeys]) {
+    NSDictionary<NSString *, NSRelationshipDescription *> *relationships = entityDescription.relationshipsByName;
+    for (NSString *relationshipName in relationships.allKeys) {
         if ([keysToExclude containsObject:relationshipName]) {
             continue;
         }
         
         // Deep copy owned objects implementing the NSManagedObjectCopying protocol
-        NSRelationshipDescription *relationshipDescription = [relationships objectForKey:relationshipName];
-        if ([relationshipDescription deleteRule] == NSCascadeDeleteRule) {
+        NSRelationshipDescription *relationshipDescription = relationships[relationshipName];
+        if (relationshipDescription.deleteRule == NSCascadeDeleteRule) {
             // To-many relationship
-            if ([relationshipDescription isToMany]) {
+            if (relationshipDescription.toMany) {
                 // The set of owned objects might be altered when we duplicate them below. To avoid iterating
                 // over mutating sets, we copy it first
                 NSSet *ownedObjects = [NSSet setWithSet:[managedObjectCopyable valueForKey:relationshipName]];

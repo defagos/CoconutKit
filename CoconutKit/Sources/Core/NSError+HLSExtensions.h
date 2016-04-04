@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing the multiple error list in the user info dictionary
 
 /**
@@ -39,7 +41,7 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
  * use the mutators below to add more information if needed
  */
 // FIXME: Warning: This method already exists elsewhere! Check class dump!
-+ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(NSString *)localizedDescription;
++ (instancetype)errorWithDomain:(NSString *)domain code:(NSInteger)code localizedDescription:(nullable NSString *)localizedDescription;
 
 /**
  * Combine a given error with another existing one, passed by reference. For convenience of use, the resulting error is
@@ -47,7 +49,7 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
  * in the CoconutKitErrorDomain error domain. If no existing error is provided, the new resulting error is simply the
  * new error provided. Wrapped errors can be retrieved by from the HLSDetailedErrorsKey
  */
-+ (NSError *)combineError:(NSError *)newError withError:(NSError *__autoreleasing *)pExistingError;
++ (nullable NSError *)combineError:(nullable NSError *)newError withError:(inout NSError *__autoreleasing *)pExistingError;
 
 /**
  * Initialize an error with some code within a domain. The error is created with no information, use the mutators below to
@@ -56,69 +58,58 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
 - (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code;
 
 /**
- * Return the nested error which has been set (if any)
+ * Set / return a nested error
  */
-- (NSError *)underlyingError;
+@property (nonatomic, nullable) NSError *underlyingError;
 
 /**
  * Return the object set for a given key. The key can either be a reserved one (see NSError) or a custom
  * one. Instead of using this generic accessor to retrieve objects corresponding to reserved keys, use the
  * standard accessors provided by NSError, or the additional ones provided above
  */
-- (id)objectForKey:(NSString *)key;
+- (nullable id)objectForKey:(NSString *)key;
 
 /**
  * Return the object set for a given key. If no object has been set, the method returns nil. If an array of
  * objects has been set, the method returns it. In all other cases (single object, or other collection of
  * objects, e.g. a set), the method wraps the object into an array before returning it
  */
-- (NSArray *)objectsForKey:(NSString *)key;
+- (nullable NSArray *)objectsForKey:(NSString *)key;
 
 /**
  * Return the user-specific information (i.e. without the information corresponding to reserved keys)
  */
-- (NSDictionary *)customUserInfo;
+@property (nonatomic, readonly, nullable) NSDictionary *customUserInfo;
 
 /**
  * Various mutators for setting standard NSError properties. Please refer to the NSError documentation for more information
  */
-- (void)setLocalizedDescription:(NSString *)localizedDescription;
-- (void)setLocalizedFailureReason:(NSString *)localizedFailureReason;
-- (void)setLocalizedRecoverySuggestion:(NSString *)localizedRecoverySuggestion;
-- (void)setLocalizedRecoveryOptions:(NSArray *)localizedRecoveryOptions;
-- (void)setRecoveryAttempter:(id)recoveryAttempter;
-- (void)setHelpAnchor:(NSString *)helpAnchor;
-
-/**
- * Set a nested error
- */
-- (void)setUnderlyingError:(NSError *)underlyingError;
+@property (nonatomic, copy, nullable) NSString *localizedDescription;
+@property (nonatomic, copy, nullable) NSString *localizedFailureReason;
+@property (nonatomic, copy, nullable) NSString *localizedRecoverySuggestion;
+@property (nonatomic, nullable) NSArray<NSString *> *localizedRecoveryOptions;
+@property (nonatomic, nullable) id recoveryAttempter;
+@property (nonatomic, copy, nullable) NSString *helpAnchor;
 
 /**
  * Set an object for some key. The key can either be a reserved one (see NSError header) or a custom one. Instead
  * of using this generic mutator to set objects corresponding to reserved keys, you should use the mutators 
  * provided above
- *
- * If object or key is nil, this method does nothing
  */
-- (void)setObject:(id)object forKey:(NSString *)key;
+- (void)setObject:(nullable id)object forKey:(NSString *)key;
 
 /**
  * Add an object for some key. If the key is already set and points to a single object, this object is wrapped
  * into an array, and the new object is added to its end. It the key already points to an array, the new object 
  * is simply appended to it. If the key does not currently point at any object, the method simply assigns it
  * the provided object
- *
- * If either object or key is nil, this method does nothing
  */
-- (void)addObject:(id)object forKey:(NSString *)key;
+- (void)addObject:(nullable id)object forKey:(NSString *)key;
 
 /**
- * Same as -addObject:forKey:, but adding several objects from an array. 
- *
- * If either the array or key is nil, this method does nothing
+ * Same as -addObject:forKey:, but adding several objects from an array.
  */
-- (void)addObjects:(NSArray *)objects forKey:(NSString *)key;
+- (void)addObjects:(nullable NSArray *)objects forKey:(NSString *)key;
 
 /**
  * Return YES iff the receiver has the provided error domain and code
@@ -126,3 +117,5 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
 - (BOOL)hasCode:(NSInteger)code withinDomain:(NSString *)domain;
 
 @end
+
+NS_ASSUME_NONNULL_END

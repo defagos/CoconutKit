@@ -16,17 +16,17 @@
 
 - (void)updateBoundViewHierarchyAnimated:(BOOL)animated
 {
-    [[self viewIfLoaded] updateBoundViewHierarchyAnimated:animated];
+    [self.viewIfLoaded updateBoundViewHierarchyAnimated:animated];
 }
 
 - (void)updateBoundViewHierarchy
 {
-    [[self viewIfLoaded] updateBoundViewHierarchy];
+    [self.viewIfLoaded updateBoundViewHierarchy];
 }
 
 - (BOOL)checkBoundViewHierarchyWithError:(NSError *__autoreleasing *)pError
 {
-    return [[self viewIfLoaded] checkBoundViewHierarchyWithError:pError];
+    return [self.viewIfLoaded checkBoundViewHierarchyWithError:pError];
 }
 
 @end

@@ -15,10 +15,10 @@
 
 @interface HLSAnimationStep ()
 
-@property (nonatomic, strong) NSMutableArray *objectKeys;
-@property (nonatomic, strong) NSMutableDictionary *objectToObjectAnimationMap;
-@property (nonatomic, strong) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
-@property (nonatomic, assign, getter=isCancelling) BOOL terminating;
+@property (nonatomic) NSMutableArray<NSValue *> *objectKeys;
+@property (nonatomic) NSMutableDictionary<NSValue *, id> *objectToObjectAnimationMap;
+@property (nonatomic) id<HLSAnimationStepDelegate> delegate;        // Set during animated animations to retain the delegate
+@property (nonatomic, getter=isTerminating) BOOL terminating;
 
 @end
 
@@ -61,14 +61,14 @@
 
 - (BOOL)isPaused
 {
-    return [self isAnimationPaused];
+    return self.animationPaused;
 }
 
 - (NSArray *)objects
 {
     NSMutableArray *objects = [NSMutableArray array];
     for (NSValue *objectKey in self.objectKeys) {
-        id object = [objectKey nonretainedObjectValue];
+        id object = objectKey.nonretainedObjectValue;
         [objects addObject:object];
     }
     return [NSArray arrayWithArray:objects];
@@ -76,7 +76,7 @@
 
 #pragma mark Animations in the step
 
-- (void)addObjectAnimation:(id)objectAnimation forObject:(id)object
+- (void)addObjectAnimation:(HLSObjectAnimation *)objectAnimation forObject:(id)object
 {
     if (! objectAnimation) {
         HLSLoggerDebug(@"No animation for the object");
@@ -90,17 +90,17 @@
     
     NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
     [self.objectKeys addObject:objectKey];
-    [self.objectToObjectAnimationMap setObject:[objectAnimation copy] forKey:objectKey];
+    self.objectToObjectAnimationMap[objectKey] = [objectAnimation copy];
 }
 
-- (id)objectAnimationForObject:(id)object
+- (HLSObjectAnimation *)objectAnimationForObject:(id)object
 {
     if (! object) {
         return nil;
     }
     
     NSValue *objectKey = [NSValue valueWithNonretainedObject:object];
-    return [self.objectToObjectAnimationMap objectForKey:objectKey];
+    return self.objectToObjectAnimationMap[objectKey];
 }
 
 #pragma mark Managing the animation
@@ -206,14 +206,14 @@
 
 #pragma mark Reverse animation
 
-- (id)reverseAnimationStep
+- (HLSAnimationStep *)reverseAnimationStep
 {
     HLSAnimationStep *reverseAnimationStep = [[self class] animationStep];
-    for (id object in [self objects]) {
+    for (id object in self.objects) {
         HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
-        [reverseAnimationStep addObjectAnimation:[objectAnimation reverseObjectAnimation] forObject:object];
+        [reverseAnimationStep addObjectAnimation:objectAnimation.reverseObjectAnimation forObject:object];
     }
-    reverseAnimationStep.tag = [self.tag isFilled] ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
+    reverseAnimationStep.tag = self.tag.filled ? [NSString stringWithFormat:@"reverse_%@", self.tag] : nil;
     reverseAnimationStep.userInfo = self.userInfo;
     reverseAnimationStep.duration = self.duration;
     // Does not copy completion block, does not make sense
@@ -233,7 +233,6 @@
     }
     
     self.terminating = NO;
-    
     self.delegate = nil;
 }
 
@@ -242,7 +241,7 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     HLSAnimationStep *animationStepCopy = [[[self class] allocWithZone:zone] init];
-    for (id object in [self objects]) {
+    for (id object in self.objects) {
         HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
         HLSObjectAnimation *objectAnimationCopy = [objectAnimation copyWithZone:zone];
         [animationStepCopy addObjectAnimation:objectAnimationCopy forObject:object];
@@ -259,7 +258,7 @@
 - (NSString *)objectAnimationsDescriptionString
 {
     NSString *objectAnimationsDescriptionString = @"{";
-    for (id object in [self objects]) {
+    for (id object in self.objects) {
         HLSObjectAnimation *objectAnimation = [self objectAnimationForObject:object];
         objectAnimationsDescriptionString = [objectAnimationsDescriptionString stringByAppendingFormat:@"\n\t%@ - %@", object, objectAnimation];        
     }
@@ -271,7 +270,7 @@
     return [NSString stringWithFormat:@"<%@: %p; objectAnimations: %@; duration: %.2f; tag: %@>",
             [self class],
             self,
-            [self objectAnimationsDescriptionString],
+            self.objectAnimationsDescriptionString,
             self.duration,
             self.tag];
 }

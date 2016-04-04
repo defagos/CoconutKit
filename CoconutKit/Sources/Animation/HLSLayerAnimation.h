@@ -9,6 +9,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A layer animation (HLSLayerAnimation) describes the changes applied to a layer within an animation step
  * (HLSLayerAnimationStep). An animation step is the combination of several layer animations applied
@@ -97,7 +99,7 @@
 /**
  * Whether the shouldRasterize flag should be changed during the animation
  */
-@property (nonatomic, assign, getter=isTogglingShouldRasterize) BOOL togglingShouldRasterize;
+@property (nonatomic, getter=isTogglingShouldRasterize) BOOL togglingShouldRasterize;
 
 /**
  * Rasterization scale increment or decrement to be applied during the layer animation. You can use this parameter
@@ -106,3 +108,5 @@
 - (void)addToRasterizationScale:(CGFloat)rasterizationScaleIncrement;
 
 @end
+
+NS_ASSUME_NONNULL_END

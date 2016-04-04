@@ -7,6 +7,8 @@
 #import <CoreData/CoreData.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Convenience methods to perform common Core Data operations on managed objects. Most methods appear in two versions:
  *   - a version expecting a managed object context parameter:  
@@ -24,41 +26,40 @@
  */
 + (instancetype)insertIntoManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (instancetype)insert;
-
 /**
  * When called on an NSManagedObject subclass, query instances of it matching a predicate, sorting them using the
  * specified descriptors (without context parameter, the current HLSModelManager context is used)
  */
-+ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
-                    sortedUsingDescriptors:(NSArray *)sortDescriptors
-                    inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
-                    sortedUsingDescriptors:(NSArray *)sortDescriptors;
++ (nullable NSArray *)filteredObjectsUsingPredicate:(nullable NSPredicate *)predicate
+                             sortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors
+                             inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (nullable NSArray *)filteredObjectsUsingPredicate:(nullable NSPredicate *)predicate
+                             sortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors;
 
-+ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
-                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
-                    inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (NSArray *)filteredObjectsUsingPredicate:(NSPredicate *)predicate
-                     sortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
++ (nullable NSArray *)filteredObjectsUsingPredicate:(nullable NSPredicate *)predicate
+                              sortedUsingDescriptor:(nullable NSSortDescriptor *)sortDescriptor
+                             inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (nullable NSArray *)filteredObjectsUsingPredicate:(nullable NSPredicate *)predicate
+                              sortedUsingDescriptor:(nullable NSSortDescriptor *)sortDescriptor;
 
 /**
  * When called on an NSManagedObject subclass, query all instances of it, sorting them using the specified descriptors
  * (without context parameter, the current HLSModelManager context is used)
  */
-+ (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors
-                       inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (NSArray *)allObjectsSortedUsingDescriptors:(NSArray *)sortDescriptors;
++ (nullable NSArray *)allObjectsSortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors
+                                inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (nullable NSArray *)allObjectsSortedUsingDescriptors:(nullable NSArray<NSSortDescriptor *> *)sortDescriptors;
 
-+ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor
-                      inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (NSArray *)allObjectsSortedUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
++ (nullable NSArray *)allObjectsSortedUsingDescriptor:(nullable NSSortDescriptor *)sortDescriptor
+                               inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (nullable NSArray *)allObjectsSortedUsingDescriptor:(nullable NSSortDescriptor *)sortDescriptor;
 
 /**
  * When called on an NSManagedObject subclass, query all instances of it, without predictable ordering (without context 
  * parameter, the current HLSModelManager context is used)
  */
-+ (NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
-+ (NSArray *)allObjects;
++ (nullable NSArray *)allObjectsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (nullable NSArray *)allObjects;
 
 /**
  * When called on an NSManagedObject subclass, deletes all of its instances (without context parameter, the current 
@@ -83,6 +84,8 @@
  * After the method successfully returns an object, you must still commit the changes by calling -save: on the
  * managed object context in which it was created.
  */
-- (id)duplicate;
+- (nullable __kindof NSManagedObject *)duplicate;
 
 @end
+
+NS_ASSUME_NONNULL_END

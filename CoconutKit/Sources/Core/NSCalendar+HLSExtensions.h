@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * To perform calculations for another time zone, instantiate a new calendar and set its time zone. Then call calendrical
  * calculation methods on this calendar
@@ -56,3 +58,5 @@
 - (BOOL)isDate:(NSDate *)date1 theSameDayAsDate:(NSDate *)date2;
 
 @end
+
+NS_ASSUME_NONNULL_END

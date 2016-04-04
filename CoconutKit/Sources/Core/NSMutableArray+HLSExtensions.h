@@ -6,12 +6,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSMutableArray (HLSExtensions)
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSMutableArray<ObjectType> (HLSExtensions)
 
 /**
  * Same as -addObject:, but does not attempt to insert nil objects
  */
-- (void)safelyAddObject:(id)object;
+- (void)safelyAddObject:(nullable ObjectType)object;
 
 /**
  * Sort an array using a single descriptor
@@ -19,3 +21,5 @@
 - (void)sortUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
 
 @end
+
+NS_ASSUME_NONNULL_END

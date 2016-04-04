@@ -4,22 +4,22 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSTransformerTestCase.h"
-
 #import "UppercaseValueTransformer.h"
+
+@interface HLSTransformerTestCase : XCTestCase
+@end
 
 @implementation HLSTransformerTestCase
 
 - (void)testOneWayBlockTransformer
 {
-    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
+    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber * _Nullable number) {
         return @(floorf([number floatValue]));
     } reverseBlock:nil];
     
     NSNumber *roundedNumber = [blockTransformer transformObject:@(M_PI)];
     XCTAssertEqualObjects(roundedNumber, @3);
     XCTAssertFalse([blockTransformer respondsToSelector:@selector(getObject:fromObject:error:)]);
-    XCTAssertThrows([blockTransformer getObject:NULL fromObject:roundedNumber error:NULL]);
 }
 
 - (void)testTwoWayBlockTransformer
@@ -28,12 +28,12 @@
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setPositiveFormat:@"###0"];
+        s_numberFormatter.positiveFormat = @"###0";
     });
     
-    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
+    HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber * _Nullable number) {
         return [s_numberFormatter stringFromNumber:number];
-    } reverseBlock:^(__autoreleasing NSNumber **pNumber, NSString *string, NSError *__autoreleasing *pError) {
+    } reverseBlock:^(NSNumber *  _Nullable __autoreleasing * _Nonnull pNumber, NSString *  _Nonnull string, NSError * _Nullable __autoreleasing * _Nullable pError) {
         NSRange range = NSMakeRange(0, [string length]);
         return [s_numberFormatter getObjectValue:pNumber forString:string range:&range error:pError];
     }];
@@ -60,7 +60,7 @@
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_numberFormatter = [[NSNumberFormatter alloc] init];
-        [s_numberFormatter setPositiveFormat:@"###0"];
+        s_numberFormatter.positiveFormat = @"###0";
     });
     
     HLSBlockTransformer *blockTransformer = [HLSBlockTransformer blockTransformerFromFormatter:s_numberFormatter];
@@ -83,7 +83,6 @@
     XCTAssertEqualObjects(uppercaseString, @"HELLO, WORLD!");
     
     XCTAssertFalse([blockTransformer respondsToSelector:@selector(getObject:fromObject:error:)]);
-    XCTAssertThrows([blockTransformer getObject:NULL fromObject:uppercaseString error:NULL]);
 }
 
 @end

@@ -11,6 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A layer animation step (HLSLayerAnimationStep) is the combination of several layer animations (HLSLayerAnimation) applied
  * to a set of layers, and represent the collective set of changes applied to them during some time interval. An animation
@@ -45,6 +47,8 @@
  *
  * Default value is the function corresponding to the kCAMediaTimingFunctionEaseInEaseOut constant
  */
-@property (nonatomic, strong) CAMediaTimingFunction *timingFunction;
+@property (nonatomic) CAMediaTimingFunction *timingFunction;
 
 @end
+
+NS_ASSUME_NONNULL_END

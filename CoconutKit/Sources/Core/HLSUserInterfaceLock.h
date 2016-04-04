@@ -6,17 +6,19 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Singleton class for preventing / allowing user interface interaction
  *
  * Not meant to be instantiated. Use the singleton method instance
  */
-@interface HLSUserInterfaceLock : NSObject
+@interface HLSUserInterfaceLock : NSObject<NSLocking> 
 
 /**
  * Singleton instance
  */
-+ (instancetype)sharedUserInterfaceLock;
++ (HLSUserInterfaceLock *)sharedUserInterfaceLock;
 
 /**
  * Locking and unlocking the UI. Each lock increments an internal counter, each unlock decrements it. When
@@ -26,3 +28,5 @@
 - (void)unlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Same as UIViewContentMode values, but without irrelevant ones
 typedef NS_ENUM(NSInteger, HLSContentMode) {
     HLSContentModeEnumBegin = 0,
@@ -38,3 +40,5 @@ OBJC_EXPORT CGRect HLSRectForSizeContainedInRect(CGSize size, CGRect targetRect,
  */
 OBJC_EXPORT CGSize HLSSizeForAspectFittingInSize(CGSize size, CGSize targetSize);
 OBJC_EXPORT CGSize HLSSizeForAspectFillingInSize(CGSize size, CGSize targetSize);
+
+NS_ASSUME_NONNULL_END

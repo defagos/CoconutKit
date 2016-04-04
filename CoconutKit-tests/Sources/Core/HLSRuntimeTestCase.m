@@ -4,9 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "HLSRuntimeTestCase.h"
-
 #import <CoreLocation/CoreLocation.h>
+
+@interface HLSRuntimeTestCase : XCTestCase
+@end
 
 typedef struct SmallStruct_ {
     NSInteger i;
@@ -1364,7 +1365,7 @@ typedef union LargeUnion_ {
     XCTAssertEqual(locationCoordinate1211.latitude, 6.f);
     
     // Failures
-    XCTAssertTrue(hls_class_swizzleSelector([RuntimeTestClass11 class], NSSelectorFromString(@"unknownSelector"), nil) == NULL);
+    XCTAssertTrue(hls_class_swizzleSelector([RuntimeTestClass11 class], NSSelectorFromString(@"unknownSelector"), (IMP)0x1) == NULL);
 }
 
 - (void)testClassIsSubclassOfClass

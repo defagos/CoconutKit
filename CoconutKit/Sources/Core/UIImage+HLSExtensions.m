@@ -12,13 +12,15 @@
 
 + (instancetype)coconutKitImageNamed:(NSString *)imageName
 {
+    NSParameterAssert(imageName);
+    
     static NSString *s_relativeBundlePath = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *mainBundlePath = [[NSBundle mainBundle] bundlePath];
-        NSString *coconutKitBundlePath = [[NSBundle coconutKitBundle] bundlePath];
+        NSString *mainBundlePath = [NSBundle mainBundle].bundlePath;
+        NSString *coconutKitBundlePath = [NSBundle coconutKitBundle].bundlePath;
         if ([coconutKitBundlePath hasPrefix:mainBundlePath]) {
-            s_relativeBundlePath = [coconutKitBundlePath stringByReplacingCharactersInRange:NSMakeRange(0, [mainBundlePath length] + 1) withString:@""];
+            s_relativeBundlePath = [coconutKitBundlePath stringByReplacingCharactersInRange:NSMakeRange(0, mainBundlePath.length + 1) withString:@""];
         }
     });
     
@@ -30,13 +32,15 @@
     }
     // The CoconutKit bundle is located outside the main bundle. -[UIImage imageNamed:] cannot be used
     else {
-        NSString *imagePath = [[[NSBundle coconutKitBundle] bundlePath] stringByAppendingPathComponent:imageName];
+        NSString *imagePath = [[NSBundle coconutKitBundle].bundlePath stringByAppendingPathComponent:imageName];
         return [UIImage imageWithContentsOfFile:imagePath];
     }
 }
 
 + (instancetype)imageWithColor:(UIColor *)color
 {
+    NSParameterAssert(color);
+    
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     
     UIGraphicsBeginImageContext(rect.size);
@@ -53,6 +57,8 @@
 
 - (UIImage *)imageMaskedWithImage:(UIImage *)maskImage
 {
+    NSParameterAssert(maskImage);
+    
 	CGImageRef maskImageRef = CGImageMaskCreate(CGImageGetWidth(maskImage.CGImage),
                                                 CGImageGetHeight(maskImage.CGImage),
                                                 CGImageGetBitsPerComponent(maskImage.CGImage),

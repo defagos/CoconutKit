@@ -52,14 +52,14 @@ static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL anim
 
 - (BOOL)isViewVisible
 {
-    HLSViewControllerLifeCyclePhase lifeCyclePhase = [self lifeCyclePhase];
+    HLSViewControllerLifeCyclePhase lifeCyclePhase = self.lifeCyclePhase;
     return HLSViewControllerLifeCyclePhaseViewWillAppear <= lifeCyclePhase 
         && lifeCyclePhase <= HLSViewControllerLifeCyclePhaseViewWillDisappear;
 }
 
 - (BOOL)isViewDisplayed
 {
-    return [self lifeCyclePhase] >= HLSViewControllerLifeCyclePhaseViewWillAppear;
+    return self.lifeCyclePhase >= HLSViewControllerLifeCyclePhaseViewWillAppear;
 }
 
 - (CGSize)createdViewSize
@@ -77,7 +77,7 @@ static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL anim
 
 - (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase
 {
-    HLSViewControllerLifeCyclePhase currentLifeCyclePhase = [self lifeCyclePhase];
+    HLSViewControllerLifeCyclePhase currentLifeCyclePhase = self.lifeCyclePhase;
     switch (lifeCyclePhase) {
         case HLSViewControllerLifeCyclePhaseViewDidLoad: {
             return currentLifeCyclePhase == HLSViewControllerLifeCyclePhaseInitialized;
@@ -200,7 +200,7 @@ static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL anim
 
 - (void)setLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase
 {
-    hls_setAssociatedObject(self, s_lifeCyclePhaseKey, [NSNumber numberWithInt:lifeCyclePhase], HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_lifeCyclePhaseKey, @(lifeCyclePhase), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 @end

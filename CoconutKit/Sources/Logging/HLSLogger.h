@@ -6,6 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Logging macros. Only active if HLS_LOGGER is added to your configuration preprocessor flags (-DHLS_LOGGER). You can also use this macro in your
  * own code if you need to enable or disable logging-specific code for some of your configurations
@@ -67,18 +69,18 @@ typedef NS_ENUM(NSInteger, HLSLoggerLevel) {
 /**
  * Singleton instance fetcher
  */
-+ (instancetype)sharedLogger;
++ (HLSLogger *)sharedLogger;
 
 /**
  * The logger level. The default value is HLSLoggerLevelInfo
  */
-@property (nonatomic, assign) HLSLoggerLevel level;
+@property (nonatomic) HLSLoggerLevel level;
 
 /**
  * Enable or disable logging to a file at runtime. The sharedLogger instance logs files in /Library/HLSLogger. The default 
  * value is NO
  */
-@property (nonatomic, assign, getter=isFileLoggingEnabled) BOOL fileLoggingEnabled;
+@property (nonatomic, getter=isFileLoggingEnabled) BOOL fileLoggingEnabled;
 
 /**
  * Logging functions; should never be called directly, use the macros instead
@@ -90,13 +92,13 @@ typedef NS_ENUM(NSInteger, HLSLoggerLevel) {
 - (void)fatal:(NSString *)message;
 
 /**
- * Level testers
+ * Level testers. Return YES iff the tested level or a level above is active
  */
-- (BOOL)isDebug;
-- (BOOL)isInfo;
-- (BOOL)isWarn;
-- (BOOL)isError;
-- (BOOL)isFatal;
+@property (nonatomic, readonly, getter=isDebug) BOOL debug;
+@property (nonatomic, readonly, getter=isInfo) BOOL info;
+@property (nonatomic, readonly, getter=isWarn) BOOL warn;
+@property (nonatomic, readonly, getter=iserror) BOOL error;
+@property (nonatomic, readonly, getter=isFatal) BOOL fatal;
 
 /**
  * Display a modal window containing log settings and log file history
@@ -110,3 +112,5 @@ typedef NS_ENUM(NSInteger, HLSLoggerLevel) {
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END

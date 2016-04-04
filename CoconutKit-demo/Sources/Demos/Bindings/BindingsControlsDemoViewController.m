@@ -12,33 +12,33 @@
 
 @interface BindingsControlsDemoViewController ()
 
-@property (nonatomic, strong) NSArray *employees;
-@property (nonatomic, strong) Employee *randomEmployee;
+@property (nonatomic) NSArray<Employee *> *employees;
+@property (nonatomic) Employee *randomEmployee;
 
-@property (nonatomic, strong) NSDate *currentDate;
-@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic) NSDate *currentDate;
+@property (nonatomic) NSTimer *timer;
 
 // Custom getter / setter names, not necessarily those expected according to KVC conventions
-@property (nonatomic, assign, getter=isThisSwitchEnabled, setter=setThisSwitchEnabled:) BOOL switchEnabled;
+@property (nonatomic, getter=isThisSwitchEnabled, setter=setThisSwitchEnabled:) BOOL switchEnabled;
 
-@property (nonatomic, assign) NSInteger category;
-@property (nonatomic, assign) float completion;
+@property (nonatomic) NSInteger category;
+@property (nonatomic) float completion;
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) NSInteger age;
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic) NSInteger age;
+@property (nonatomic, copy) NSString *text;
 
-@property (nonatomic, assign) NSUInteger page;
-@property (nonatomic, strong) NSDate *date;
+@property (nonatomic) NSUInteger page;
+@property (nonatomic) NSDate *date;
 
-@property (nonatomic, strong) NSDateFormatter *localizedDateFormatter;
+@property (nonatomic) NSDateFormatter *localizedDateFormatter;
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 
 @property (nonatomic, weak) IBOutlet HLSCursor *cursor;
 
-@property (nonatomic, readonly, strong) UIImage *apple1Image;
+@property (nonatomic, readonly) UIImage *apple1Image;
 
 @end
 
@@ -62,7 +62,7 @@
         employee3.age = @52;
         
         self.employees = @[employee1, employee2, employee3];
-        self.randomEmployee = [self.employees objectAtIndex:arc4random_uniform((u_int32_t)[self.employees count])];
+        self.randomEmployee = self.employees[arc4random_uniform((u_int32_t)self.employees.count)];
         
         self.currentDate = [NSDate date];
         
@@ -170,7 +170,7 @@
 
 #pragma mark Orientation management
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait;
 }
@@ -184,7 +184,7 @@
     self.title = NSLocalizedString(@"Controls", nil);
     
     NSDateFormatter *localizedDateFormatter = [[NSDateFormatter alloc] init];
-    [localizedDateFormatter setDateFormat:NSLocalizedString(@"yyyy/MM/dd", nil)];
+    localizedDateFormatter.dateFormat = NSLocalizedString(@"yyyy/MM/dd", nil);
     
     // Changing the date formatter object automatically triggers a bound view update
     self.localizedDateFormatter = localizedDateFormatter;
@@ -205,7 +205,7 @@
     static dispatch_once_t s_onceToken;
     static HLSBlockTransformer *s_transformer;
     dispatch_once(&s_onceToken, ^{
-        s_transformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSArray *array) {
+        s_transformer = [HLSBlockTransformer blockTransformerWithBlock:^(NSArray<NSString *>  * _Nullable array) {
             return [array componentsJoinedByString:@", "];
         } reverseBlock:nil];
     });
@@ -214,29 +214,29 @@
 
 - (HLSBlockTransformer *)percentTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *number) {
-        return @([number floatValue] / 100.f);
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *  _Nullable number) {
+        return @(number.floatValue / 100.f);
     } reverseBlock:nil];
 }
 
 - (HLSBlockTransformer *)statusTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *statusNumber) {
-        return [statusNumber boolValue] ? @"ON" : @"OFF";
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber * _Nullable statusNumber) {
+        return statusNumber.boolValue ? @"ON" : @"OFF";
     } reverseBlock:nil];
 }
 
 - (HLSBlockTransformer *)greetingsTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^id(NSString *name) {
-        return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), ([name length] != 0) ? name : NSLocalizedString(@"John Doe", nil)];
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSString * _Nullable name) {
+        return [NSString stringWithFormat:NSLocalizedString(@"Hello, %@!", nil), name.filled ? name : NSLocalizedString(@"John Doe", nil)];
     } reverseBlock:nil];
 }
 
 - (HLSBlockTransformer *)ageEvaluationTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber *ageNumber) {
-        NSInteger age = [ageNumber integerValue];
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSNumber * _Nullable ageNumber) {
+        NSInteger age = ageNumber.integerValue;
         if (age <= 0) {
             return NSLocalizedString(@"You are not even born!", nil);
         }
@@ -254,12 +254,12 @@
 
 - (HLSBlockTransformer *)wordCounterTransformer
 {
-    return [HLSBlockTransformer blockTransformerWithBlock:^(NSString *text) {
-        NSArray *words = [text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *word, NSDictionary *bindings) {
-            return [word isFilled];
+    return [HLSBlockTransformer blockTransformerWithBlock:^(NSString * _Nullable text) {
+        NSArray<NSString *> *words = [text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *  _Nonnull word, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return word.filled;
         }];
-        NSUInteger numberOfWords = [[words filteredArrayUsingPredicate:predicate] count];
+        NSUInteger numberOfWords = [words filteredArrayUsingPredicate:predicate].count;
         return [NSString stringWithFormat:NSLocalizedString(@"%@ words", nil), @(numberOfWords)];
     } reverseBlock:nil];
 }
@@ -283,7 +283,7 @@
 
 - (NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index
 {
-    return [@(index) stringValue];
+    return @(index).stringValue;
 }
 
 #pragma mark HLSViewBindingDelegate protocol implementation

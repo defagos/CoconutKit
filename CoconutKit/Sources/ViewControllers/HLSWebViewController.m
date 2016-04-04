@@ -34,9 +34,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 @interface HLSWebViewController ()
 
-@property (nonatomic, strong) NSURLRequest *request;
-@property (nonatomic, strong) NSURL *currentURL;
-@property (nonatomic, strong) NSError *currentError;
+@property (nonatomic) NSURLRequest *request;
+@property (nonatomic) NSURL *currentURL;
+@property (nonatomic) NSError *currentError;
 
 // Tempting to use WKWebView or UIWebView here as type, but using id lets the compiler find methods with ambiguous
 // prototypes (e.g. -goBack or -loadRequest). Incorrectly called, ARC would insert incorrect memory management
@@ -53,14 +53,14 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *refreshBarButtonItem;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *actionBarButtonItem;
 
-@property (nonatomic, strong) NSArray *normalToolbarItems;
-@property (nonatomic, strong) NSArray *loadingToolbarItems;
+@property (nonatomic) NSArray<UIBarButtonItem *> *normalToolbarItems;
+@property (nonatomic) NSArray<UIBarButtonItem *> *loadingToolbarItems;
 
-@property (nonatomic, strong) NSArray *actions;
+@property (nonatomic) NSArray<NSValue *> *actions;
 
-@property (nonatomic, strong) UIPopoverController *activityPopoverController;
+@property (nonatomic) UIPopoverController *activityPopoverController;
 
-@property (nonatomic, strong) NSTimer *fakeProgressTimer;
+@property (nonatomic) NSTimer *fakeProgressTimer;
 
 @end
 
@@ -73,6 +73,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 - (instancetype)initWithRequest:(NSURLRequest *)request
 {
+    NSParameterAssert(request);
+    
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.request = request;
     }
@@ -219,7 +221,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
                 [[NSFileManager defaultManager] removeItemAtPath:temporaryCoconutKitBundlePath error:NULL];
             }
             
-            NSString *coconutKitBundlePath = [[NSBundle coconutKitBundle] bundlePath];
+            NSString *coconutKitBundlePath = [NSBundle coconutKitBundle].bundlePath;
             [[NSFileManager defaultManager] copyItemAtPath:coconutKitBundlePath toPath:temporaryCoconutKitBundlePath error:NULL];
         });
         
@@ -245,8 +247,10 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     
     // Build the toolbar displayed when the web view is loading content
     NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
-    UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stop:)];
-    [loadingToolbarItems replaceObjectAtIndex:[loadingToolbarItems indexOfObject:self.refreshBarButtonItem] withObject:stopBarButtonItem];
+    UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
+                                                                                       target:self
+                                                                                       action:@selector(stop:)];
+    loadingToolbarItems[[loadingToolbarItems indexOfObject:self.refreshBarButtonItem]] = stopBarButtonItem;
     self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
 }
 
@@ -406,7 +410,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         return;
     }
     
-    SEL action = [[self.actions objectAtIndex:buttonIndex] pointerValue];
+    SEL action = (self.actions[buttonIndex]).pointerValue;
     
     // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
     // correct memory management
@@ -540,7 +544,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 - (IBAction)refresh:(id)sender
 {
     // Reload the currently displayed page (if any)
-    if ([[self.currentURL absoluteString] isFilled]) {
+    if (self.currentURL.absoluteString.filled) {
         if ([WKWebView class]) {
             [(WKWebView *)self.webView reload];
         }
@@ -586,7 +590,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
         [self presentViewController:activityViewController animated:YES completion:nil];
     }
     // iOS 7: Present as is on iPhone
-    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    else if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         [self presentViewController:activityViewController animated:YES completion:nil];
     }
     // iOS 7: Present in manually instantiated popover

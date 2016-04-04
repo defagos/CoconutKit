@@ -1,27 +1,23 @@
 //
-//  NSTimeZone+HLSExtensionsTestCase.m
-//  CoconutKit-demo
+//  Copyright (c) Samuel Défago. All rights reserved.
 //
-//  Created by Samuel Défago on 06.09.11.
-//  Copyright 2011 Samuel Défago. All rights reserved.
+//  License information is available from the LICENSE file.
 //
 
-#import "NSTimeZone+HLSExtensionsTestCase.h"
+@interface NSTimeZone_HLSExtensionsTestCase : XCTestCase
 
-@interface NSTimeZone_HLSExtensionsTestCase ()
+@property (nonatomic) NSTimeZone *timeZoneZurich;
+@property (nonatomic) NSTimeZone *timeZoneTahiti;
 
-@property (nonatomic, strong) NSTimeZone *timeZoneZurich;
-@property (nonatomic, strong) NSTimeZone *timeZoneTahiti;
+@property (nonatomic) NSCalendar *calendar;
+@property (nonatomic) NSCalendar *calendarZurich;
+@property (nonatomic) NSCalendar *calendarTahiti;
 
-@property (nonatomic, strong) NSCalendar *calendar;
-@property (nonatomic, strong) NSCalendar *calendarZurich;
-@property (nonatomic, strong) NSCalendar *calendarTahiti;
-
-@property (nonatomic, strong) NSDate *date1;
-@property (nonatomic, strong) NSDate *date2;
-@property (nonatomic, strong) NSDate *date3;
-@property (nonatomic, strong) NSDate *date4;
-@property (nonatomic, strong) NSDate *date5;
+@property (nonatomic) NSDate *date1;
+@property (nonatomic) NSDate *date2;
+@property (nonatomic) NSDate *date3;
+@property (nonatomic) NSDate *date4;
+@property (nonatomic) NSDate *date5;
 
 @end
 
@@ -94,77 +90,77 @@
     
     NSDate *dateFromZurich1 = [timeZone dateWithSameComponentsAsDate:self.date1 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich1 = [self.calendar components:unitFlags fromDate:dateFromZurich1];
-    XCTAssertEqual([dateComponentsFromZurich1 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromZurich1 month], (NSInteger)1);
-    XCTAssertEqual([dateComponentsFromZurich1 day], (NSInteger)1);
-    XCTAssertEqual([dateComponentsFromZurich1 hour], (NSInteger)8);
-    XCTAssertEqual([dateComponentsFromZurich1 minute], (NSInteger)23);
+    XCTAssertEqual(dateComponentsFromZurich1.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromZurich1.month, (NSInteger)1);
+    XCTAssertEqual(dateComponentsFromZurich1.day, (NSInteger)1);
+    XCTAssertEqual(dateComponentsFromZurich1.hour, (NSInteger)8);
+    XCTAssertEqual(dateComponentsFromZurich1.minute, (NSInteger)23);
     
     NSDate *dateFromZurich2 = [timeZone dateWithSameComponentsAsDate:self.date2 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich2 = [self.calendar components:unitFlags fromDate:dateFromZurich2];
-    XCTAssertEqual([dateComponentsFromZurich2 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromZurich2 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsFromZurich2 day], (NSInteger)1);
-    XCTAssertEqual([dateComponentsFromZurich2 hour], (NSInteger)6);
-    XCTAssertEqual([dateComponentsFromZurich2 minute], (NSInteger)12);
+    XCTAssertEqual(dateComponentsFromZurich2.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromZurich2.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromZurich2.day, (NSInteger)1);
+    XCTAssertEqual(dateComponentsFromZurich2.hour, (NSInteger)6);
+    XCTAssertEqual(dateComponentsFromZurich2.minute, (NSInteger)12);
 
     NSDate *dateFromZurich3 = [timeZone dateWithSameComponentsAsDate:self.date3 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich3 = [self.calendar components:unitFlags fromDate:dateFromZurich3];
-    XCTAssertEqual([dateComponentsFromZurich3 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromZurich3 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsFromZurich3 day], (NSInteger)25);
-    XCTAssertEqual([dateComponentsFromZurich3 hour], (NSInteger)1);
+    XCTAssertEqual(dateComponentsFromZurich3.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromZurich3.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromZurich3.day, (NSInteger)25);
+    XCTAssertEqual(dateComponentsFromZurich3.hour, (NSInteger)1);
     
     NSDate *dateFromZurich4 = [timeZone dateWithSameComponentsAsDate:self.date4 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich4 = [self.calendar components:unitFlags fromDate:dateFromZurich4];
-    XCTAssertEqual([dateComponentsFromZurich4 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromZurich4 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsFromZurich4 day], (NSInteger)25);
-    XCTAssertEqual([dateComponentsFromZurich4 hour], (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromZurich4.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromZurich4.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromZurich4.day, (NSInteger)25);
+    XCTAssertEqual(dateComponentsFromZurich4.hour, (NSInteger)3);
     
     NSDate *dateFromZurich5 = [timeZone dateWithSameComponentsAsDate:self.date5 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich5 = [self.calendar components:unitFlags fromDate:dateFromZurich5];
-    XCTAssertEqual([dateComponentsFromZurich5 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromZurich5 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsFromZurich5 day], (NSInteger)26);
-    XCTAssertEqual([dateComponentsFromZurich5 hour], (NSInteger)5);
+    XCTAssertEqual(dateComponentsFromZurich5.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromZurich5.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromZurich5.day, (NSInteger)26);
+    XCTAssertEqual(dateComponentsFromZurich5.hour, (NSInteger)5);
     
     NSDate *dateFromTahiti1 = [timeZone dateWithSameComponentsAsDate:self.date1 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti1 = [self.calendar components:unitFlags fromDate:dateFromTahiti1];
-    XCTAssertEqual([dateComponentsFromTahiti1 year], (NSInteger)2011);
-    XCTAssertEqual([dateComponentsFromTahiti1 month], (NSInteger)12);
-    XCTAssertEqual([dateComponentsFromTahiti1 day], (NSInteger)31);
-    XCTAssertEqual([dateComponentsFromTahiti1 hour], (NSInteger)21);
-    XCTAssertEqual([dateComponentsFromTahiti1 minute], (NSInteger)23);
+    XCTAssertEqual(dateComponentsFromTahiti1.year, (NSInteger)2011);
+    XCTAssertEqual(dateComponentsFromTahiti1.month, (NSInteger)12);
+    XCTAssertEqual(dateComponentsFromTahiti1.day, (NSInteger)31);
+    XCTAssertEqual(dateComponentsFromTahiti1.hour, (NSInteger)21);
+    XCTAssertEqual(dateComponentsFromTahiti1.minute, (NSInteger)23);
     
     NSDate *dateFromTahiti2 = [timeZone dateWithSameComponentsAsDate:self.date2 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti2 = [self.calendar components:unitFlags fromDate:dateFromTahiti2];
-    XCTAssertEqual([dateComponentsFromTahiti2 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromTahiti2 month], (NSInteger)2);
-    XCTAssertEqual([dateComponentsFromTahiti2 day], (NSInteger)29);
-    XCTAssertEqual([dateComponentsFromTahiti2 hour], (NSInteger)19);
-    XCTAssertEqual([dateComponentsFromTahiti2 minute], (NSInteger)12);
+    XCTAssertEqual(dateComponentsFromTahiti2.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromTahiti2.month, (NSInteger)2);
+    XCTAssertEqual(dateComponentsFromTahiti2.day, (NSInteger)29);
+    XCTAssertEqual(dateComponentsFromTahiti2.hour, (NSInteger)19);
+    XCTAssertEqual(dateComponentsFromTahiti2.minute, (NSInteger)12);
     
     NSDate *dateFromTahiti3 = [timeZone dateWithSameComponentsAsDate:self.date3 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti3 = [self.calendar components:unitFlags fromDate:dateFromTahiti3];
-    XCTAssertEqual([dateComponentsFromTahiti3 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromTahiti3 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsFromTahiti3 day], (NSInteger)24);
-    XCTAssertEqual([dateComponentsFromTahiti3 hour], (NSInteger)14);
+    XCTAssertEqual(dateComponentsFromTahiti3.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromTahiti3.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromTahiti3.day, (NSInteger)24);
+    XCTAssertEqual(dateComponentsFromTahiti3.hour, (NSInteger)14);
     
     NSDate *dateFromTahiti4 = [timeZone dateWithSameComponentsAsDate:self.date4 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti4 = [self.calendar components:unitFlags fromDate:dateFromTahiti4];
-    XCTAssertEqual([dateComponentsFromTahiti4 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromTahiti4 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsFromTahiti4 day], (NSInteger)24);
-    XCTAssertEqual([dateComponentsFromTahiti4 hour], (NSInteger)15);
+    XCTAssertEqual(dateComponentsFromTahiti4.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromTahiti4.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromTahiti4.day, (NSInteger)24);
+    XCTAssertEqual(dateComponentsFromTahiti4.hour, (NSInteger)15);
     
     NSDate *dateFromTahiti5 = [timeZone dateWithSameComponentsAsDate:self.date5 fromTimeZone:self.timeZoneTahiti];
     NSDateComponents *dateComponentsFromTahiti5 = [self.calendar components:unitFlags fromDate:dateFromTahiti5];
-    XCTAssertEqual([dateComponentsFromTahiti5 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsFromTahiti5 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsFromTahiti5 day], (NSInteger)25);
-    XCTAssertEqual([dateComponentsFromTahiti5 hour], (NSInteger)17);
+    XCTAssertEqual(dateComponentsFromTahiti5.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsFromTahiti5.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsFromTahiti5.day, (NSInteger)25);
+    XCTAssertEqual(dateComponentsFromTahiti5.hour, (NSInteger)17);
 }
 
 - (void)testDateByAddingTimeIntervalToDate
@@ -173,77 +169,77 @@
     
     NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingTimeInterval:10. * 60. * 60. toDate:self.date1];
     NSDateComponents *dateComponentsZurich1 = [self.calendarZurich components:unitFlags fromDate:dateZurich1];
-    XCTAssertEqual([dateComponentsZurich1 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich1 month], (NSInteger)1);
-    XCTAssertEqual([dateComponentsZurich1 day], (NSInteger)1);
-    XCTAssertEqual([dateComponentsZurich1 hour], (NSInteger)18);
-    XCTAssertEqual([dateComponentsZurich1 minute], (NSInteger)23);
+    XCTAssertEqual(dateComponentsZurich1.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich1.month, (NSInteger)1);
+    XCTAssertEqual(dateComponentsZurich1.day, (NSInteger)1);
+    XCTAssertEqual(dateComponentsZurich1.hour, (NSInteger)18);
+    XCTAssertEqual(dateComponentsZurich1.minute, (NSInteger)23);
     
     NSDate *dateZurich2 = [self.timeZoneZurich dateByAddingTimeInterval:-4. * 60. * 60. toDate:self.date2];
     NSDateComponents *dateComponentsZurich2 = [self.calendarZurich components:unitFlags fromDate:dateZurich2];
-    XCTAssertEqual([dateComponentsZurich2 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich2 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsZurich2 day], (NSInteger)1);
-    XCTAssertEqual([dateComponentsZurich2 hour], (NSInteger)2);
-    XCTAssertEqual([dateComponentsZurich2 minute], (NSInteger)12);
+    XCTAssertEqual(dateComponentsZurich2.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich2.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich2.day, (NSInteger)1);
+    XCTAssertEqual(dateComponentsZurich2.hour, (NSInteger)2);
+    XCTAssertEqual(dateComponentsZurich2.minute, (NSInteger)12);
     
     NSDate *dateZurich3 = [self.timeZoneZurich dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date3];
     NSDateComponents *dateComponentsZurich3 = [self.calendarZurich components:unitFlags fromDate:dateZurich3];
-    XCTAssertEqual([dateComponentsZurich3 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich3 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsZurich3 day], (NSInteger)25);
-    XCTAssertEqual([dateComponentsZurich3 hour], (NSInteger)6);
+    XCTAssertEqual(dateComponentsZurich3.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich3.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich3.day, (NSInteger)25);
+    XCTAssertEqual(dateComponentsZurich3.hour, (NSInteger)6);
     
     NSDate *dateZurich4 = [self.timeZoneZurich dateByAddingTimeInterval:-2. * 60. * 60. toDate:self.date4];
     NSDateComponents *dateComponentsZurich4 = [self.calendarZurich components:unitFlags fromDate:dateZurich4];
-    XCTAssertEqual([dateComponentsZurich4 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich4 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsZurich4 day], (NSInteger)25);
-    XCTAssertEqual([dateComponentsZurich4 hour], (NSInteger)1);
+    XCTAssertEqual(dateComponentsZurich4.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich4.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich4.day, (NSInteger)25);
+    XCTAssertEqual(dateComponentsZurich4.hour, (NSInteger)1);
     
     NSDate *dateZurich5 = [self.timeZoneZurich dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date5];
     NSDateComponents *dateComponentsZurich5 = [self.calendarZurich components:unitFlags fromDate:dateZurich5];
-    XCTAssertEqual([dateComponentsZurich5 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich5 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsZurich5 day], (NSInteger)26);
-    XCTAssertEqual([dateComponentsZurich5 hour], (NSInteger)10);
+    XCTAssertEqual(dateComponentsZurich5.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich5.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich5.day, (NSInteger)26);
+    XCTAssertEqual(dateComponentsZurich5.hour, (NSInteger)10);
     
     NSDate *dateTahiti1 = [self.timeZoneTahiti dateByAddingTimeInterval:10. * 60. * 60. toDate:self.date1];
     NSDateComponents *dateComponentsTahiti1 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti1];
-    XCTAssertEqual([dateComponentsTahiti1 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti1 month], (NSInteger)1);
-    XCTAssertEqual([dateComponentsTahiti1 day], (NSInteger)1);
-    XCTAssertEqual([dateComponentsTahiti1 hour], (NSInteger)7);
-    XCTAssertEqual([dateComponentsTahiti1 minute], (NSInteger)23);
+    XCTAssertEqual(dateComponentsTahiti1.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti1.month, (NSInteger)1);
+    XCTAssertEqual(dateComponentsTahiti1.day, (NSInteger)1);
+    XCTAssertEqual(dateComponentsTahiti1.hour, (NSInteger)7);
+    XCTAssertEqual(dateComponentsTahiti1.minute, (NSInteger)23);
     
     NSDate *dateTahiti2 = [self.timeZoneTahiti dateByAddingTimeInterval:-4. * 60. * 60. toDate:self.date2];
     NSDateComponents *dateComponentsTahiti2 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti2];
-    XCTAssertEqual([dateComponentsTahiti2 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti2 month], (NSInteger)2);
-    XCTAssertEqual([dateComponentsTahiti2 day], (NSInteger)29);
-    XCTAssertEqual([dateComponentsTahiti2 hour], (NSInteger)15);
-    XCTAssertEqual([dateComponentsTahiti2 minute], (NSInteger)12);
+    XCTAssertEqual(dateComponentsTahiti2.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti2.month, (NSInteger)2);
+    XCTAssertEqual(dateComponentsTahiti2.day, (NSInteger)29);
+    XCTAssertEqual(dateComponentsTahiti2.hour, (NSInteger)15);
+    XCTAssertEqual(dateComponentsTahiti2.minute, (NSInteger)12);
     
     NSDate *dateTahiti3 = [self.timeZoneTahiti dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date3];
     NSDateComponents *dateComponentsTahiti3 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti3];
-    XCTAssertEqual([dateComponentsTahiti3 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti3 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsTahiti3 day], (NSInteger)24);
-    XCTAssertEqual([dateComponentsTahiti3 hour], (NSInteger)19);
+    XCTAssertEqual(dateComponentsTahiti3.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti3.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsTahiti3.day, (NSInteger)24);
+    XCTAssertEqual(dateComponentsTahiti3.hour, (NSInteger)19);
     
     NSDate *dateTahiti4 = [self.timeZoneTahiti dateByAddingTimeInterval:-2. * 60. * 60. toDate:self.date4];
     NSDateComponents *dateComponentsTahiti4 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti4];
-    XCTAssertEqual([dateComponentsTahiti4 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti4 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsTahiti4 day], (NSInteger)24);
-    XCTAssertEqual([dateComponentsTahiti4 hour], (NSInteger)13);
+    XCTAssertEqual(dateComponentsTahiti4.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti4.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsTahiti4.day, (NSInteger)24);
+    XCTAssertEqual(dateComponentsTahiti4.hour, (NSInteger)13);
     
     NSDate *dateTahiti5 = [self.timeZoneTahiti dateByAddingTimeInterval:5. * 60. * 60. toDate:self.date5];
     NSDateComponents *dateComponentsTahiti5 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti5];
-    XCTAssertEqual([dateComponentsTahiti5 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti5 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsTahiti5 day], (NSInteger)25);
-    XCTAssertEqual([dateComponentsTahiti5 hour], (NSInteger)22);
+    XCTAssertEqual(dateComponentsTahiti5.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti5.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsTahiti5.day, (NSInteger)25);
+    XCTAssertEqual(dateComponentsTahiti5.hour, (NSInteger)22);
 }
 
 - (void)testDateByAddingNumberOfDaysToDate
@@ -252,77 +248,77 @@
     
     NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingNumberOfDays:5 toDate:self.date1];
     NSDateComponents *dateComponentsZurich1 = [self.calendarZurich components:unitFlags fromDate:dateZurich1];
-    XCTAssertEqual([dateComponentsZurich1 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich1 month], (NSInteger)1);
-    XCTAssertEqual([dateComponentsZurich1 day], (NSInteger)6);
-    XCTAssertEqual([dateComponentsZurich1 hour], (NSInteger)8);
-    XCTAssertEqual([dateComponentsZurich1 minute], (NSInteger)23);
+    XCTAssertEqual(dateComponentsZurich1.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich1.month, (NSInteger)1);
+    XCTAssertEqual(dateComponentsZurich1.day, (NSInteger)6);
+    XCTAssertEqual(dateComponentsZurich1.hour, (NSInteger)8);
+    XCTAssertEqual(dateComponentsZurich1.minute, (NSInteger)23);
     
     NSDate *dateZurich2 = [self.timeZoneZurich dateByAddingNumberOfDays:-3 toDate:self.date2];
     NSDateComponents *dateComponentsZurich2 = [self.calendarZurich components:unitFlags fromDate:dateZurich2];
-    XCTAssertEqual([dateComponentsZurich2 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich2 month], (NSInteger)2);
-    XCTAssertEqual([dateComponentsZurich2 day], (NSInteger)27);
-    XCTAssertEqual([dateComponentsZurich2 hour], (NSInteger)6);
-    XCTAssertEqual([dateComponentsZurich2 minute], (NSInteger)12);
+    XCTAssertEqual(dateComponentsZurich2.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich2.month, (NSInteger)2);
+    XCTAssertEqual(dateComponentsZurich2.day, (NSInteger)27);
+    XCTAssertEqual(dateComponentsZurich2.hour, (NSInteger)6);
+    XCTAssertEqual(dateComponentsZurich2.minute, (NSInteger)12);
     
     NSDate *dateZurich3 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date3];
     NSDateComponents *dateComponentsZurich3 = [self.calendarZurich components:unitFlags fromDate:dateZurich3];
-    XCTAssertEqual([dateComponentsZurich3 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich3 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsZurich3 day], (NSInteger)27);
-    XCTAssertEqual([dateComponentsZurich3 hour], (NSInteger)1);
+    XCTAssertEqual(dateComponentsZurich3.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich3.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich3.day, (NSInteger)27);
+    XCTAssertEqual(dateComponentsZurich3.hour, (NSInteger)1);
     
     NSDate *dateZurich4 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date4];
     NSDateComponents *dateComponentsZurich4 = [self.calendarZurich components:unitFlags fromDate:dateZurich4];
-    XCTAssertEqual([dateComponentsZurich4 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich4 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsZurich4 day], (NSInteger)27);
-    XCTAssertEqual([dateComponentsZurich4 hour], (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich4.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich4.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich4.day, (NSInteger)27);
+    XCTAssertEqual(dateComponentsZurich4.hour, (NSInteger)3);
     
     NSDate *dateZurich5 = [self.timeZoneZurich dateByAddingNumberOfDays:2 toDate:self.date5];
     NSDateComponents *dateComponentsZurich5 = [self.calendarZurich components:unitFlags fromDate:dateZurich5];
-    XCTAssertEqual([dateComponentsZurich5 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsZurich5 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsZurich5 day], (NSInteger)28);
-    XCTAssertEqual([dateComponentsZurich5 hour], (NSInteger)5);
+    XCTAssertEqual(dateComponentsZurich5.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsZurich5.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsZurich5.day, (NSInteger)28);
+    XCTAssertEqual(dateComponentsZurich5.hour, (NSInteger)5);
     
     NSDate *dateTahiti1 = [self.timeZoneTahiti dateByAddingNumberOfDays:5 toDate:self.date1];
     NSDateComponents *dateComponentsTahiti1 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti1];
-    XCTAssertEqual([dateComponentsTahiti1 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti1 month], (NSInteger)1);
-    XCTAssertEqual([dateComponentsTahiti1 day], (NSInteger)5);
-    XCTAssertEqual([dateComponentsTahiti1 hour], (NSInteger)21);
-    XCTAssertEqual([dateComponentsTahiti1 minute], (NSInteger)23);
+    XCTAssertEqual(dateComponentsTahiti1.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti1.month, (NSInteger)1);
+    XCTAssertEqual(dateComponentsTahiti1.day, (NSInteger)5);
+    XCTAssertEqual(dateComponentsTahiti1.hour, (NSInteger)21);
+    XCTAssertEqual(dateComponentsTahiti1.minute, (NSInteger)23);
     
     NSDate *dateTahiti2 = [self.timeZoneTahiti dateByAddingNumberOfDays:-3 toDate:self.date2];
     NSDateComponents *dateComponentsTahiti2 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti2];
-    XCTAssertEqual([dateComponentsTahiti2 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti2 month], (NSInteger)2);
-    XCTAssertEqual([dateComponentsTahiti2 day], (NSInteger)26);
-    XCTAssertEqual([dateComponentsTahiti2 hour], (NSInteger)19);
-    XCTAssertEqual([dateComponentsTahiti2 minute], (NSInteger)12);
+    XCTAssertEqual(dateComponentsTahiti2.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti2.month, (NSInteger)2);
+    XCTAssertEqual(dateComponentsTahiti2.day, (NSInteger)26);
+    XCTAssertEqual(dateComponentsTahiti2.hour, (NSInteger)19);
+    XCTAssertEqual(dateComponentsTahiti2.minute, (NSInteger)12);
     
     NSDate *dateTahiti3 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date3];
     NSDateComponents *dateComponentsTahiti3 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti3];
-    XCTAssertEqual([dateComponentsTahiti3 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti3 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsTahiti3 day], (NSInteger)26);
-    XCTAssertEqual([dateComponentsTahiti3 hour], (NSInteger)14);
+    XCTAssertEqual(dateComponentsTahiti3.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti3.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsTahiti3.day, (NSInteger)26);
+    XCTAssertEqual(dateComponentsTahiti3.hour, (NSInteger)14);
     
     NSDate *dateTahiti4 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date4];
     NSDateComponents *dateComponentsTahiti4 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti4];
-    XCTAssertEqual([dateComponentsTahiti4 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti4 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsTahiti4 day], (NSInteger)26);
-    XCTAssertEqual([dateComponentsTahiti4 hour], (NSInteger)15);
+    XCTAssertEqual(dateComponentsTahiti4.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti4.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsTahiti4.day, (NSInteger)26);
+    XCTAssertEqual(dateComponentsTahiti4.hour, (NSInteger)15);
     
     NSDate *dateTahiti5 = [self.timeZoneTahiti dateByAddingNumberOfDays:2 toDate:self.date5];
     NSDateComponents *dateComponentsTahiti5 = [self.calendarTahiti components:unitFlags fromDate:dateTahiti5];
-    XCTAssertEqual([dateComponentsTahiti5 year], (NSInteger)2012);
-    XCTAssertEqual([dateComponentsTahiti5 month], (NSInteger)3);
-    XCTAssertEqual([dateComponentsTahiti5 day], (NSInteger)27);
-    XCTAssertEqual([dateComponentsTahiti5 hour], (NSInteger)17);
+    XCTAssertEqual(dateComponentsTahiti5.year, (NSInteger)2012);
+    XCTAssertEqual(dateComponentsTahiti5.month, (NSInteger)3);
+    XCTAssertEqual(dateComponentsTahiti5.day, (NSInteger)27);
+    XCTAssertEqual(dateComponentsTahiti5.hour, (NSInteger)17);
 }
 
 - (void)testTimeIntervalBetweenDateAndDate

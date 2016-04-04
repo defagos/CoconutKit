@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Custom colors defined in a UIColor subclass
 @interface DemoColor : UIColor
 
@@ -19,3 +21,5 @@
 + (UIColor *)customCategory2Color;
 
 @end
+
+NS_ASSUME_NONNULL_END

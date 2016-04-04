@@ -18,11 +18,11 @@
 
 + (NSURL *)URLForActivityItems:(NSArray *)activityItems
 {
-    if ([activityItems count] != 1) {
+    if (activityItems.count != 1) {
         return nil;
     }
     
-    id firstActivityItem = [activityItems firstObject];
+    id firstActivityItem = activityItems.firstObject;
     if (! [firstActivityItem isKindOfClass:[NSURL class]]) {
         return nil;
     }

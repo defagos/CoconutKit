@@ -7,5 +7,4 @@
 #import "AutolayoutBottomRightNibView.h"
 
 @implementation AutolayoutBottomRightNibView
-
 @end

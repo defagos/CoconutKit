@@ -174,18 +174,6 @@
 		6FADE5DB14BA0494007EE121 /* NSManagedObject+HLSValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE55614BA0494007EE121 /* NSManagedObject+HLSValidation.m */; };
 		6FADE5DC14BA0494007EE121 /* HLSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55814BA0494007EE121 /* HLSLogger.h */; };
 		6FADE5DD14BA0494007EE121 /* HLSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE55914BA0494007EE121 /* HLSLogger.m */; };
-		6FADE5DE14BA0494007EE121 /* HLSTask+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55B14BA0494007EE121 /* HLSTask+Friend.h */; };
-		6FADE5DF14BA0494007EE121 /* HLSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55C14BA0494007EE121 /* HLSTask.h */; };
-		6FADE5E014BA0494007EE121 /* HLSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE55D14BA0494007EE121 /* HLSTask.m */; };
-		6FADE5E114BA0494007EE121 /* HLSTaskGroup+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55E14BA0494007EE121 /* HLSTaskGroup+Friend.h */; };
-		6FADE5E214BA0494007EE121 /* HLSTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55F14BA0494007EE121 /* HLSTaskGroup.h */; };
-		6FADE5E314BA0494007EE121 /* HLSTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56014BA0494007EE121 /* HLSTaskGroup.m */; };
-		6FADE5E414BA0494007EE121 /* HLSTaskManager+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56114BA0494007EE121 /* HLSTaskManager+Friend.h */; };
-		6FADE5E514BA0494007EE121 /* HLSTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56214BA0494007EE121 /* HLSTaskManager.h */; };
-		6FADE5E614BA0494007EE121 /* HLSTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56314BA0494007EE121 /* HLSTaskManager.m */; };
-		6FADE5E714BA0494007EE121 /* HLSTaskOperation+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56414BA0494007EE121 /* HLSTaskOperation+Protected.h */; };
-		6FADE5E814BA0494007EE121 /* HLSTaskOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56514BA0494007EE121 /* HLSTaskOperation.h */; };
-		6FADE5E914BA0494007EE121 /* HLSTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56614BA0494007EE121 /* HLSTaskOperation.m */; };
 		6FADE5EC14BA0494007EE121 /* HLSCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56A14BA0494007EE121 /* HLSCursor.h */; };
 		6FADE5ED14BA0494007EE121 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56B14BA0494007EE121 /* HLSCursor.m */; };
 		6FADE5EE14BA0494007EE121 /* HLSSlideshow.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56C14BA0494007EE121 /* HLSSlideshow.h */; };
@@ -470,18 +458,6 @@
 		E69F21DA1ABCAC25000EEC39 /* HLSFileURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922616DA7F9100599256 /* HLSFileURLConnection.m */; };
 		E69F21DB1ABCAC25000EEC39 /* HLSURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FAB922716DA7F9100599256 /* HLSURLConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F21DC1ABCAC25000EEC39 /* HLSURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAB922816DA7F9100599256 /* HLSURLConnection.m */; };
-		E69F21DD1ABCAC2A000EEC39 /* HLSTask+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55B14BA0494007EE121 /* HLSTask+Friend.h */; };
-		E69F21DE1ABCAC2A000EEC39 /* HLSTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55C14BA0494007EE121 /* HLSTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F21DF1ABCAC2A000EEC39 /* HLSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE55D14BA0494007EE121 /* HLSTask.m */; };
-		E69F21E01ABCAC2A000EEC39 /* HLSTaskGroup+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55E14BA0494007EE121 /* HLSTaskGroup+Friend.h */; };
-		E69F21E11ABCAC2A000EEC39 /* HLSTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE55F14BA0494007EE121 /* HLSTaskGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F21E21ABCAC2A000EEC39 /* HLSTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56014BA0494007EE121 /* HLSTaskGroup.m */; };
-		E69F21E31ABCAC2A000EEC39 /* HLSTaskManager+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56114BA0494007EE121 /* HLSTaskManager+Friend.h */; };
-		E69F21E41ABCAC2A000EEC39 /* HLSTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56214BA0494007EE121 /* HLSTaskManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F21E51ABCAC2A000EEC39 /* HLSTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56314BA0494007EE121 /* HLSTaskManager.m */; };
-		E69F21E61ABCAC2A000EEC39 /* HLSTaskOperation+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56414BA0494007EE121 /* HLSTaskOperation+Protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F21E71ABCAC2A000EEC39 /* HLSTaskOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56514BA0494007EE121 /* HLSTaskOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F21E81ABCAC2A000EEC39 /* HLSTaskOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56614BA0494007EE121 /* HLSTaskOperation.m */; };
 		E69F21E91ABCAC31000EEC39 /* HLSCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE56A14BA0494007EE121 /* HLSCursor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F21EA1ABCAC31000EEC39 /* HLSCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE56B14BA0494007EE121 /* HLSCursor.m */; };
 		E69F21EB1ABCAC31000EEC39 /* HLSInfoTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F8B184E19DD8B6D00A06F2B /* HLSInfoTableViewCell.h */; };
@@ -851,18 +827,6 @@
 		6FADE55614BA0494007EE121 /* NSManagedObject+HLSValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidation.m"; sourceTree = "<group>"; };
 		6FADE55814BA0494007EE121 /* HLSLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSLogger.h; sourceTree = "<group>"; };
 		6FADE55914BA0494007EE121 /* HLSLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLogger.m; sourceTree = "<group>"; };
-		6FADE55B14BA0494007EE121 /* HLSTask+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTask+Friend.h"; sourceTree = "<group>"; };
-		6FADE55C14BA0494007EE121 /* HLSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTask.h; sourceTree = "<group>"; };
-		6FADE55D14BA0494007EE121 /* HLSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTask.m; sourceTree = "<group>"; };
-		6FADE55E14BA0494007EE121 /* HLSTaskGroup+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTaskGroup+Friend.h"; sourceTree = "<group>"; };
-		6FADE55F14BA0494007EE121 /* HLSTaskGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTaskGroup.h; sourceTree = "<group>"; };
-		6FADE56014BA0494007EE121 /* HLSTaskGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTaskGroup.m; sourceTree = "<group>"; };
-		6FADE56114BA0494007EE121 /* HLSTaskManager+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTaskManager+Friend.h"; sourceTree = "<group>"; };
-		6FADE56214BA0494007EE121 /* HLSTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTaskManager.h; sourceTree = "<group>"; };
-		6FADE56314BA0494007EE121 /* HLSTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTaskManager.m; sourceTree = "<group>"; };
-		6FADE56414BA0494007EE121 /* HLSTaskOperation+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSTaskOperation+Protected.h"; sourceTree = "<group>"; };
-		6FADE56514BA0494007EE121 /* HLSTaskOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTaskOperation.h; sourceTree = "<group>"; };
-		6FADE56614BA0494007EE121 /* HLSTaskOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTaskOperation.m; sourceTree = "<group>"; };
 		6FADE56A14BA0494007EE121 /* HLSCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCursor.h; sourceTree = "<group>"; };
 		6FADE56B14BA0494007EE121 /* HLSCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCursor.m; sourceTree = "<group>"; };
 		6FADE56C14BA0494007EE121 /* HLSSlideshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSSlideshow.h; sourceTree = "<group>"; };
@@ -1181,7 +1145,6 @@
 				6FADE54D14BA0494007EE121 /* CoreData */,
 				6FADE55714BA0494007EE121 /* Logging */,
 				6FAB922416DA7F9100599256 /* Networking */,
-				6FADE55A14BA0494007EE121 /* Task */,
 				6FADE56714BA0494007EE121 /* View */,
 				6FADE58514BA0494007EE121 /* ViewControllers */,
 			);
@@ -1335,25 +1298,6 @@
 				6F954F6317CF4707001E5F67 /* HLSLogger+Friend.h */,
 			);
 			path = Logging;
-			sourceTree = "<group>";
-		};
-		6FADE55A14BA0494007EE121 /* Task */ = {
-			isa = PBXGroup;
-			children = (
-				6FADE55B14BA0494007EE121 /* HLSTask+Friend.h */,
-				6FADE55C14BA0494007EE121 /* HLSTask.h */,
-				6FADE55D14BA0494007EE121 /* HLSTask.m */,
-				6FADE55E14BA0494007EE121 /* HLSTaskGroup+Friend.h */,
-				6FADE55F14BA0494007EE121 /* HLSTaskGroup.h */,
-				6FADE56014BA0494007EE121 /* HLSTaskGroup.m */,
-				6FADE56114BA0494007EE121 /* HLSTaskManager+Friend.h */,
-				6FADE56214BA0494007EE121 /* HLSTaskManager.h */,
-				6FADE56314BA0494007EE121 /* HLSTaskManager.m */,
-				6FADE56414BA0494007EE121 /* HLSTaskOperation+Protected.h */,
-				6FADE56514BA0494007EE121 /* HLSTaskOperation.h */,
-				6FADE56614BA0494007EE121 /* HLSTaskOperation.m */,
-			);
-			path = Task;
 			sourceTree = "<group>";
 		};
 		6FADE56714BA0494007EE121 /* View */ = {
@@ -1626,15 +1570,7 @@
 				6FADE5D814BA0494007EE121 /* NSManagedObject+HLSExtensions.h in Headers */,
 				6FADE5DA14BA0494007EE121 /* NSManagedObject+HLSValidation.h in Headers */,
 				6FADE5DC14BA0494007EE121 /* HLSLogger.h in Headers */,
-				6FADE5DE14BA0494007EE121 /* HLSTask+Friend.h in Headers */,
-				6FADE5DF14BA0494007EE121 /* HLSTask.h in Headers */,
-				6FADE5E114BA0494007EE121 /* HLSTaskGroup+Friend.h in Headers */,
 				6F8B185019DD8B6D00A06F2B /* HLSInfoTableViewCell.h in Headers */,
-				6FADE5E214BA0494007EE121 /* HLSTaskGroup.h in Headers */,
-				6FADE5E414BA0494007EE121 /* HLSTaskManager+Friend.h in Headers */,
-				6FADE5E514BA0494007EE121 /* HLSTaskManager.h in Headers */,
-				6FADE5E714BA0494007EE121 /* HLSTaskOperation+Protected.h in Headers */,
-				6FADE5E814BA0494007EE121 /* HLSTaskOperation.h in Headers */,
 				6FADE5EC14BA0494007EE121 /* HLSCursor.h in Headers */,
 				6FADE5EE14BA0494007EE121 /* HLSSlideshow.h in Headers */,
 				6FFAB76E19DD8DA800A91997 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */,
@@ -1735,13 +1671,11 @@
 			files = (
 				E69F21941ABCAC0D000EEC39 /* HLSTransformer.h in Headers */,
 				E69F217F1ABCAC0D000EEC39 /* HLSGoogleChromeActivity.h in Headers */,
-				E69F21E71ABCAC2A000EEC39 /* HLSTaskOperation.h in Headers */,
 				E69F21C11ABCAC0D000EEC39 /* UIApplication+HLSExtensions.h in Headers */,
 				E69F21891ABCAC0D000EEC39 /* HLSOptionalFeatures.h in Headers */,
 				E69F21851ABCAC0D000EEC39 /* HLSKeyboardInformation.h in Headers */,
 				E69F21CC1ABCAC19000EEC39 /* HLSModelManager.h in Headers */,
 				E69F21B11ABCAC0D000EEC39 /* NSMutableArray+HLSExtensions.h in Headers */,
-				E69F21DE1ABCAC2A000EEC39 /* HLSTask.h in Headers */,
 				E69F21AB1ABCAC0D000EEC39 /* NSDateFormatter+HLSExtensions.h in Headers */,
 				E69F21981ABCAC0D000EEC39 /* HLSValidable.h in Headers */,
 				E69F21901ABCAC0D000EEC39 /* HLSSafariActivity.h in Headers */,
@@ -1813,7 +1747,6 @@
 				E69F21FC1ABCAC31000EEC39 /* HLSValue2TableViewCell.h in Headers */,
 				E69F21D21ABCAC1F000EEC39 /* HLSLogger.h in Headers */,
 				E69F22271ABCAC37000EEC39 /* HLSTableSearchDisplayViewController.h in Headers */,
-				E69F21E41ABCAC2A000EEC39 /* HLSTaskManager.h in Headers */,
 				E69F22211ABCAC37000EEC39 /* HLSPlaceholderViewController.h in Headers */,
 				E69F21C91ABCAC0D000EEC39 /* UIImage+HLSExtensions.h in Headers */,
 				E69F213B1ABCABF4000EEC39 /* HLSAnimationStep.h in Headers */,
@@ -1824,7 +1757,6 @@
 				E69F21421ABCABF4000EEC39 /* HLSLayerAnimationStep.h in Headers */,
 				E69F21591ABCAC03000EEC39 /* UIDatePicker+HLSViewBinding.h in Headers */,
 				E69F21AF1ABCAC0D000EEC39 /* NSError+HLSExtensions.h in Headers */,
-				E69F21E11ABCAC2A000EEC39 /* HLSTaskGroup.h in Headers */,
 				E69F21C31ABCAC0D000EEC39 /* UIColor+HLSExtensions.h in Headers */,
 				E69F216D1ABCAC03000EEC39 /* UITextView+HLSViewBinding.h in Headers */,
 				E69F22101ABCAC31000EEC39 /* UITextView+HLSCursorVisibility.h in Headers */,
@@ -1848,14 +1780,12 @@
 				E69F21A31ABCAC0D000EEC39 /* NSBundle+HLSExtensions.h in Headers */,
 				E69F214C1ABCABFB000EEC39 /* HLSViewBindingDelegate.h in Headers */,
 				E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */,
-				E69F21E61ABCAC2A000EEC39 /* HLSTaskOperation+Protected.h in Headers */,
 				E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */,
 				E69F21BF1ABCAC0D000EEC39 /* NSURLRequest+HLSExtensions.h in Headers */,
 				E69F21EB1ABCAC31000EEC39 /* HLSInfoTableViewCell.h in Headers */,
 				E69F21FE1ABCAC31000EEC39 /* HLSViewTouchDetector.h in Headers */,
 				E69F21751ABCAC0D000EEC39 /* HLSApplicationPreloader.h in Headers */,
 				E69F21531ABCABFB000EEC39 /* UIView+HLSViewBindingFriend.h in Headers */,
-				E69F21DD1ABCAC2A000EEC39 /* HLSTask+Friend.h in Headers */,
 				E69F22611ABCAC71000EEC39 /* HLSMANotificationCenterAdditions.h in Headers */,
 				E69F21461ABCABF4000EEC39 /* HLSObjectAnimation+Friend.h in Headers */,
 				E69F21F71ABCAC31000EEC39 /* HLSTableViewCell+Protected.h in Headers */,
@@ -1863,7 +1793,6 @@
 				E69F225F1ABCAC6C000EEC39 /* HLSMAKVONotificationCenter.h in Headers */,
 				E69F213D1ABCABF4000EEC39 /* HLSAnimationStep+Friend.h in Headers */,
 				E69F219D1ABCAC0D000EEC39 /* HLSWeakObjectWrapper.h in Headers */,
-				E69F21E01ABCAC2A000EEC39 /* HLSTaskGroup+Friend.h in Headers */,
 				E69F22581ABCAC53000EEC39 /* HLSViewBindingHelpViewController.h in Headers */,
 				E69F214F1ABCABFB000EEC39 /* HLSViewBindingInformation.h in Headers */,
 				E69F22631ABCAC71000EEC39 /* HLSMAWeakArray.h in Headers */,
@@ -1872,7 +1801,6 @@
 				E69F22691ABCAC71000EEC39 /* HLSMAZeroingWeakRef.h in Headers */,
 				E69F22151ABCAC37000EEC39 /* HLSContainerContent.h in Headers */,
 				E69F225A1ABCAC53000EEC39 /* HLSViewBindingInformationEntry.h in Headers */,
-				E69F21E31ABCAC2A000EEC39 /* HLSTaskManager+Friend.h in Headers */,
 				E69F226B1ABCAC71000EEC39 /* HLSMAZeroingWeakRefNativeZWRNotAllowedTable.h in Headers */,
 				E69F21D41ABCAC1F000EEC39 /* HLSLogger+Friend.h in Headers */,
 				E69F221D1ABCAC37000EEC39 /* HLSLoggerViewController.h in Headers */,
@@ -1890,23 +1818,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
-
-/* Begin PBXLegacyTarget section */
-		6F159C6D15A5D7720020AFAC /* CoconutKit-staticframework */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = 6F159C6E15A5D7720020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-staticframework" */;
-			buildPhases = (
-			);
-			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = "${PROJECT_DIR}/../Tools/Makefile";
-			dependencies = (
-			);
-			name = "CoconutKit-staticframework";
-			passBuildSettingsInEnvironment = 1;
-			productName = "CoconutKit-staticframework";
-		};
-/* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
 		6FC5B7731924EDC500660CDF /* CoconutKit-resources */ = {
@@ -1996,7 +1907,6 @@
 			projectRoot = "";
 			targets = (
 				D2AAC07D0554694100DB518D /* CoconutKit */,
-				6F159C6D15A5D7720020AFAC /* CoconutKit-staticframework */,
 				6FC5B7731924EDC500660CDF /* CoconutKit-resources */,
 				E69F21191ABC9F8B000EEC39 /* CoconutKit-framework */,
 			);
@@ -2162,11 +2072,7 @@
 				6FCD33BB1A1216690002F478 /* UISlider+HLSViewBinding.m in Sources */,
 				6FADE5DB14BA0494007EE121 /* NSManagedObject+HLSValidation.m in Sources */,
 				6FADE5DD14BA0494007EE121 /* HLSLogger.m in Sources */,
-				6FADE5E014BA0494007EE121 /* HLSTask.m in Sources */,
-				6FADE5E314BA0494007EE121 /* HLSTaskGroup.m in Sources */,
-				6FADE5E614BA0494007EE121 /* HLSTaskManager.m in Sources */,
 				6FCD33B31A1216690002F478 /* UIPageControl+HLSViewBinding.m in Sources */,
-				6FADE5E914BA0494007EE121 /* HLSTaskOperation.m in Sources */,
 				6FADE5ED14BA0494007EE121 /* HLSCursor.m in Sources */,
 				6FADE5EF14BA0494007EE121 /* HLSSlideshow.m in Sources */,
 				6FADE5F114BA0494007EE121 /* HLSNibView.m in Sources */,
@@ -2265,7 +2171,6 @@
 				E69F22161ABCAC37000EEC39 /* HLSContainerContent.m in Sources */,
 				E69F213C1ABCABF4000EEC39 /* HLSAnimationStep.m in Sources */,
 				E69F21AA1ABCAC0D000EEC39 /* NSDate+HLSExtensions.m in Sources */,
-				E69F21E51ABCAC2A000EEC39 /* HLSTaskManager.m in Sources */,
 				E69F21F91ABCAC31000EEC39 /* HLSTableViewCell.m in Sources */,
 				E69F22641ABCAC71000EEC39 /* HLSMAWeakArray.m in Sources */,
 				E69F21881ABCAC0D000EEC39 /* HLSNotifications.m in Sources */,
@@ -2290,7 +2195,6 @@
 				E69F21701ABCAC0D000EEC39 /* CALayer+HLSExtensions.m in Sources */,
 				E69F225D1ABCAC53000EEC39 /* HLSViewBindingInformationViewController.m in Sources */,
 				E69F222C1ABCAC37000EEC39 /* HLSTransition.m in Sources */,
-				E69F21DF1ABCAC2A000EEC39 /* HLSTask.m in Sources */,
 				E69F216E1ABCAC03000EEC39 /* UITextView+HLSViewBinding.m in Sources */,
 				E69F21D61ABCAC25000EEC39 /* HLSConnection.m in Sources */,
 				E69F215C1ABCAC03000EEC39 /* UIImageView+HLSViewBinding.m in Sources */,
@@ -2346,7 +2250,6 @@
 				E69F21501ABCABFB000EEC39 /* HLSViewBindingInformation.m in Sources */,
 				E69F21F41ABCAC31000EEC39 /* HLSSlideshow.m in Sources */,
 				E69F22181ABCAC37000EEC39 /* HLSContainerGroupView.m in Sources */,
-				E69F21E21ABCAC2A000EEC39 /* HLSTaskGroup.m in Sources */,
 				E69F221E1ABCAC37000EEC39 /* HLSLoggerViewController.m in Sources */,
 				E69F22361ABCAC37000EEC39 /* UIPopoverController+HLSExtensions.m in Sources */,
 				E69F225B1ABCAC53000EEC39 /* HLSViewBindingInformationEntry.m in Sources */,
@@ -2374,7 +2277,6 @@
 				E69F21C81ABCAC0D000EEC39 /* UIFont+HLSExtensions.m in Sources */,
 				E69F21F21ABCAC31000EEC39 /* HLSNibView.m in Sources */,
 				E69F21A41ABCAC0D000EEC39 /* NSBundle+HLSExtensions.m in Sources */,
-				E69F21E81ABCAC2A000EEC39 /* HLSTaskOperation.m in Sources */,
 				E69F21AC1ABCAC0D000EEC39 /* NSDateFormatter+HLSExtensions.m in Sources */,
 				E69F22DE1AC13306000EEC39 /* HLSTableSearchDisplayViewController.m in Sources */,
 				E69F220F1ABCAC31000EEC39 /* UIWindow+HLSExtensions.m in Sources */,
@@ -2450,6 +2352,7 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -2483,6 +2386,7 @@
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -2508,22 +2412,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		6F159C6F15A5D7720020AFAC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
-			buildSettings = {
-				GCC_THUMB_SUPPORT = NO;
-			};
-			name = Debug;
-		};
-		6F159C7015A5D7720020AFAC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F8CC0A419DC29D1003286F7 /* version.xcconfig */;
-			buildSettings = {
-				GCC_THUMB_SUPPORT = NO;
 			};
 			name = Release;
 		};
@@ -2630,15 +2518,6 @@
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,
 				1DEB922408733DC00010E9CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6F159C6E15A5D7720020AFAC /* Build configuration list for PBXLegacyTarget "CoconutKit-staticframework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6F159C6F15A5D7720020AFAC /* Debug */,
-				6F159C7015A5D7720020AFAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

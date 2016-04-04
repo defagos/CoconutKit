@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * A view animation (HLSViewAnimation) describes the changes applied to a view within an animation step 
  * (HLSViewAnimationStep). An animation step is the combination of several view animations applied
@@ -55,3 +57,5 @@
 - (void)addToAlpha:(CGFloat)alphaIncrement;
 
 @end
+
+NS_ASSUME_NONNULL_END

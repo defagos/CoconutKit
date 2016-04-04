@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-@interface AutoresizingMaskBottomRightNibView : HLSNibView
+NS_ASSUME_NONNULL_BEGIN
 
+@interface AutoresizingMaskBottomRightNibView : HLSNibView
 @end
+
+NS_ASSUME_NONNULL_END

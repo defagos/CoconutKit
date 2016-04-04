@@ -29,7 +29,7 @@
     }
     else {
         NSURL *URL = value;
-        self.image = [URL isFileURL] ? [UIImage imageWithContentsOfFile:[URL path]] : nil;
+        self.image = URL.fileURL ? [UIImage imageWithContentsOfFile:URL.path] : nil;
     }
 }
 

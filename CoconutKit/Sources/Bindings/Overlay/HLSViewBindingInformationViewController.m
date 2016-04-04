@@ -14,6 +14,7 @@
 #import "HLSTransformer.h"
 #import "HLSViewBindingDebugOverlayViewController.h"
 #import "HLSViewBindingHelpViewController.h"
+#import "HLSViewBindingInformation.h"
 #import "HLSViewBindingInformationEntry.h"
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
@@ -24,12 +25,12 @@
 
 @interface HLSViewBindingInformationViewController ()
 
-@property (nonatomic, strong) HLSViewBindingInformation *bindingInformation;
+@property (nonatomic) HLSViewBindingInformation *bindingInformation;
 
-@property (nonatomic, strong) NSArray *headerTitles;
-@property (nonatomic, strong) NSArray *footerTitles;
+@property (nonatomic) NSArray<NSString *> *headerTitles;
+@property (nonatomic) NSArray<NSString *> *footerTitles;
 
-@property (nonatomic, strong) NSArray *entries;
+@property (nonatomic) NSArray<NSArray<HLSViewBindingInformationEntry *> *> *entries;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
@@ -41,13 +42,15 @@
 
 - (instancetype)initWithBindingInformation:(HLSViewBindingInformation *)bindingInformation
 {
+    NSParameterAssert(bindingInformation);
+    
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.bindingInformation = bindingInformation;
         
         self.title = @"Properties";
         
         self.headerTitles = @[@"Status", @"Capabilities", @"Parameters", @"Resolved information", @"Values"];
-        self.footerTitles = @[[NSNull null], [NSNull null], [NSNull null], @"Tap to highlight objects", [NSNull null]];
+        self.footerTitles = @[@"", @"", @"", @"Tap to highlight objects", @""];
         
         __weak __typeof(self) weakSelf = self;
         if ([bindingInformation.keyPath rangeOfString:@"@"].length == 0) {
@@ -86,9 +89,9 @@
 
 #pragma mark Data
 
-- (NSArray *)statusEntries
+- (NSArray<HLSViewBindingInformationEntry *> *)statusEntries
 {
-    NSMutableArray *statusEntries = [NSMutableArray array];
+    NSMutableArray<HLSViewBindingInformationEntry *> *statusEntries = [NSMutableArray array];
     
     NSString *statusString = nil;
     if (! self.bindingInformation.error) {
@@ -96,12 +99,12 @@
     }
     else {
         if ([self.bindingInformation.error hasCode:HLSCoreErrorMultipleErrors withinDomain:HLSCoreErrorDomain]) {
-            NSArray *errors = [self.bindingInformation.error objectForKey:HLSDetailedErrorsKey];
-            NSArray *localizedDescriptions = [errors valueForKeyPath:@"@distinctUnionOfObjects.localizedDescription"];
+            NSArray<NSError *> *errors = [self.bindingInformation.error objectForKey:HLSDetailedErrorsKey];
+            NSArray<NSString *> *localizedDescriptions = [errors valueForKeyPath:@"@distinctUnionOfObjects.localizedDescription"];
             statusString = [localizedDescriptions componentsJoinedByString:@"\n\n"];
         }
         else {
-            statusString = [self.bindingInformation.error localizedDescription];
+            statusString = self.bindingInformation.error.localizedDescription;
         }
     }
     
@@ -112,9 +115,9 @@
     return [NSArray arrayWithArray:statusEntries];
 }
 
-- (NSArray *)capabilitiesEntries
+- (NSArray<HLSViewBindingInformationEntry *> *)capabilitiesEntries
 {
-    NSMutableArray *capabilitiesEntries = [NSMutableArray array];
+    NSMutableArray<HLSViewBindingInformationEntry *> *capabilitiesEntries = [NSMutableArray array];
     
     HLSViewBindingInformationEntry *supportingInputEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Supports input"
                                                                                                            text:HLSStringFromBool(self.bindingInformation.supportingInput)];
@@ -133,9 +136,9 @@
     return [NSArray arrayWithArray:capabilitiesEntries];
 }
 
-- (NSArray *)parameterEntries
+- (NSArray<HLSViewBindingInformationEntry *> *)parameterEntries
 {
-    NSMutableArray *parameterEntries = [NSMutableArray array];
+    NSMutableArray<HLSViewBindingInformationEntry *> *parameterEntries = [NSMutableArray array];
     
     HLSViewBindingInformationEntry *keyPathEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Key path"
                                                                                                    text:self.bindingInformation.keyPath];
@@ -158,9 +161,9 @@
     return [NSArray arrayWithArray:parameterEntries];
 }
 
-- (NSArray *)resolvedInformationEntries
+- (NSArray<HLSViewBindingInformationEntry *> *)resolvedInformationEntries
 {
-    NSMutableArray *resolvedInformationEntries = [NSMutableArray array];
+    NSMutableArray<HLSViewBindingInformationEntry *> *resolvedInformationEntries = [NSMutableArray array];
     
     HLSViewBindingInformationEntry *objectTargetEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Resolved bound object"
                                                                                                       object:self.bindingInformation.objectTarget];
@@ -202,22 +205,22 @@
     return [NSArray arrayWithArray:resolvedInformationEntries];
 }
 
-- (NSArray *)valueEntries
+- (NSArray<HLSViewBindingInformationEntry *> *)valueEntries
 {
-    NSMutableArray *valueEntries = [NSMutableArray array];
+    NSMutableArray<HLSViewBindingInformationEntry *> *valueEntries = [NSMutableArray array];
     
     if (self.bindingInformation.supportingInput) {
         HLSViewBindingInformationEntry *inputValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Input value (view)"
-                                                                                                        object:[self.bindingInformation inputValue]];
+                                                                                                        object:self.bindingInformation.inputValue];
         [valueEntries addObject:inputValueEntry];
     }
     
     HLSViewBindingInformationEntry *rawValueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Raw value (model)"
-                                                                                                  object:[self.bindingInformation rawValue]];
+                                                                                                  object:self.bindingInformation.rawValue];
     [valueEntries addObject:rawValueEntry];
     
     HLSViewBindingInformationEntry *valueEntry = [[HLSViewBindingInformationEntry alloc] initWithName:@"Transformed value"
-                                                                                               object:[self.bindingInformation value]];
+                                                                                               object:self.bindingInformation.value];
     [valueEntries addObject:valueEntry];
     
     return [NSArray arrayWithArray:valueEntries];
@@ -225,7 +228,7 @@
 
 - (void)reloadEntries
 {
-    NSMutableArray *entries = [NSMutableArray array];
+    NSMutableArray<NSArray<HLSViewBindingInformationEntry *> *> *entries = [NSMutableArray array];
     [entries addObject:[self statusEntries]];
     [entries addObject:[self capabilitiesEntries]];
     [entries addObject:[self parameterEntries]];
@@ -242,32 +245,32 @@
 
 - (HLSViewBindingInformationEntry *)entryAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *sectionEntries = [self.entries objectAtIndex:indexPath.section];
-    return [sectionEntries objectAtIndex:indexPath.row];
+    NSArray<HLSViewBindingInformationEntry *> *sectionEntries = self.entries[indexPath.section];
+    return sectionEntries[indexPath.row];
 }
 
 #pragma mark UITableViewDataSource protocol implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.headerTitles count];
+    return self.headerTitles.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [self.headerTitles objectAtIndex:section];
+    return self.headerTitles[section];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    id title = [self.footerTitles objectAtIndex:section];
-    return title != [NSNull null] ? title : nil;
+    NSString *title = self.footerTitles[section];
+    return title.filled ? title : nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *sectionEntries = [self.entries objectAtIndex:section];
-    return [sectionEntries count];
+    NSArray *sectionEntries = self.entries[section];
+    return sectionEntries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -284,7 +287,7 @@
     HLSInfoTableViewCell *infoCell = (HLSInfoTableViewCell *)cell;
     infoCell.nameLabel.text = entry.name;
     infoCell.valueLabel.text = entry.text;
-    infoCell.selectionStyle = [entry view] ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
+    infoCell.selectionStyle = entry.view ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -298,7 +301,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     HLSViewBindingInformationEntry *entry = [self entryAtIndexPath:indexPath];
-    [[HLSViewBindingDebugOverlayViewController currentBindingDebugOverlayViewController] highlightView:[entry view]];
+    [[HLSViewBindingDebugOverlayViewController currentBindingDebugOverlayViewController] highlightView:entry.view];
 }
 
 #pragma mark Actions

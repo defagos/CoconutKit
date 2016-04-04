@@ -14,15 +14,15 @@
 
 @interface HLSLoggerViewController ()
 
-@property (nonatomic, strong) HLSLogger *logger;
+@property (nonatomic) HLSLogger *logger;
 
-@property (nonatomic, strong) NSArray *logFilePaths;
+@property (nonatomic) NSArray<NSString *> *logFilePaths;
 
 @property (nonatomic, weak) IBOutlet UISegmentedControl *levelSegmentedControl;
 @property (nonatomic, weak) IBOutlet UISwitch *enabledSwitch;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) NSURL *currentLogFileURL;
+@property (nonatomic) NSURL *currentLogFileURL;
 
 @end
 
@@ -32,14 +32,10 @@
 
 - (instancetype)initWithLogger:(HLSLogger *)logger
 {
+    NSParameterAssert(logger);
+    
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
-        if (! logger) {
-            HLSLoggerError(@"A logger is mandatory");
-            return nil;
-        }
-        
-        self.logger = logger;
-        
+        self.logger = logger;        
         self.title = @"Logging controls";
     }
     return self;
@@ -72,7 +68,7 @@
 
 - (void)reloadData
 {
-    self.logFilePaths = [self.logger availableLogFilePaths];
+    self.logFilePaths = self.logger.availableLogFilePaths;
     
     [self.tableView reloadData];
 }
@@ -93,7 +89,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.logFilePaths count];
+    return self.logFilePaths.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -105,14 +101,14 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [[self.logFilePaths objectAtIndex:indexPath.row] lastPathComponent];
+    cell.textLabel.text = self.logFilePaths[indexPath.row].lastPathComponent;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.currentLogFileURL = [NSURL fileURLWithPath:[self.logFilePaths objectAtIndex:indexPath.row]];
+    self.currentLogFileURL = [NSURL fileURLWithPath:self.logFilePaths[indexPath.row]];
     QLPreviewController *previewController = [[QLPreviewController alloc] init];
     previewController.dataSource = self;
     [self.navigationController pushViewController:previewController animated:YES];
@@ -127,7 +123,7 @@
 
 - (IBAction)selectLevel:(id)sender
 {
-    self.logger.level = [self.levelSegmentedControl selectedSegmentIndex];
+    self.logger.level = self.levelSegmentedControl.selectedSegmentIndex;
 }
 
 - (IBAction)clearLogs:(id)sender

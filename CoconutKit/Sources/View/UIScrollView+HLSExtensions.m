@@ -26,9 +26,9 @@ static void (*s_setContentOffset)(id, SEL, CGPoint) = NULL;
 // Swizzled method implementations
 static void swizzle_setContentOffset(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
 
-static NSArray *s_adjustedScrollViews = nil;
-static NSDictionary *s_scrollViewOriginalBottomInsets = nil;
-static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
+static NSArray<UIScrollView *> *s_adjustedScrollViews = nil;
+static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalBottomInsets = nil;
+static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 @interface UIScrollView (HLSExtensionsPrivate)
 
@@ -55,7 +55,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
     static const CGFloat HLSDefaultKeyboardDistance = 10.f;
     
     NSNumber *keyboardDistanceNumber = hls_getAssociatedObject(self, s_keyboardDistanceKey);
-    return keyboardDistanceNumber ? [keyboardDistanceNumber floatValue] : HLSDefaultKeyboardDistance;
+    return keyboardDistanceNumber ? keyboardDistanceNumber.floatValue : HLSDefaultKeyboardDistance;
 }
 
 - (void)setKeyboardDistance:(CGFloat)keyboardDistance
@@ -65,14 +65,10 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 #pragma mark Synchronizing scroll views
 
-- (void)synchronizeWithScrollViews:(NSArray *)scrollViews bounces:(BOOL)bounces
+- (void)synchronizeWithScrollViews:(NSArray<UIScrollView *> *)scrollViews bounces:(BOOL)bounces
 {
+    NSParameterAssert(scrollViews);
     HLSAssertObjectsInEnumerationAreKindOfClass(scrollViews, UIScrollView);
-    
-    if (! scrollViews || [scrollViews count] == 0) {
-        HLSLoggerError(@"No scroll views to synchronize");
-        return;
-    }
     
     if ([scrollViews containsObject:self]) {
         HLSLoggerError(@"A scroll view cannot be synchronized with itself");
@@ -104,7 +100,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 - (void)synchronizeScrolling
 {
-    NSArray *synchronizedScrollViews = hls_getAssociatedObject(self, s_synchronizedScrollViewsKey);
+    NSArray<UIScrollView *> *synchronizedScrollViews = hls_getAssociatedObject(self, s_synchronizedScrollViewsKey);
     if (! synchronizedScrollViews) {
         return;
     }
@@ -155,7 +151,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 
 #pragma mark Collecting scroll views which avoid the keyboard
 
-+ (NSArray *)keyboardAvoidingScrollViewsInView:(UIView *)view
++ (NSArray<UIScrollView *> *)keyboardAvoidingScrollViewsInView:(UIView *)view
 {
     if ([view isKindOfClass:[UIScrollView class]]) {
         UIScrollView *scrollView = (UIScrollView *)view;
@@ -167,7 +163,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         }
     }
     
-    NSMutableArray *keyboardAvoidingScrollViews = [NSMutableArray array];
+    NSMutableArray<UIScrollView *> *keyboardAvoidingScrollViews = [NSMutableArray array];
     for (UIView *subview in view.subviews) {
         [keyboardAvoidingScrollViews addObjectsFromArray:[self keyboardAvoidingScrollViewsInView:subview]];
     }
@@ -179,14 +175,14 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
 + (void)keyboardWillShow:(NSNotification *)notification
 {
     UIView *activeView = [UIApplication sharedApplication].keyWindow.activeViewController.view;
-    NSArray *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:activeView];
+    NSArray<UIScrollView *> *keyboardAvoidingScrollViews = [UIScrollView keyboardAvoidingScrollViewsInView:activeView];
     
-    CGRect keyboardEndFrameInWindow = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardEndFrameInWindow = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
-    NSMutableArray *adjustedScrollViews = [NSMutableArray array];
+    NSMutableArray<UIScrollView *> *adjustedScrollViews = [NSMutableArray array];
     
-    NSMutableDictionary *scrollViewOriginalBottomInsets = [NSMutableDictionary dictionary];
-    NSMutableDictionary *scrollViewOriginalIndicatorBottomInsets = [NSMutableDictionary dictionary];
+    NSMutableDictionary<NSValue *, NSNumber *> *scrollViewOriginalBottomInsets = [NSMutableDictionary dictionary];
+    NSMutableDictionary<NSValue *, NSNumber *> *scrollViewOriginalIndicatorBottomInsets = [NSMutableDictionary dictionary];
     
     // Though we consider all scroll views avoiding the keyboard, some might not require any change depending on their position
     for (UIScrollView *scrollView in keyboardAvoidingScrollViews) {
@@ -205,11 +201,11 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         // initial values in such cases
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         
-        NSNumber *scrollViewOriginalBottomInset = [s_scrollViewOriginalBottomInsets objectForKey:pointerKey] ?: @(scrollView.contentInset.bottom);
-        [scrollViewOriginalBottomInsets setObject:scrollViewOriginalBottomInset forKey:pointerKey];
+        NSNumber *scrollViewOriginalBottomInset = s_scrollViewOriginalBottomInsets[pointerKey] ?: @(scrollView.contentInset.bottom);
+        scrollViewOriginalBottomInsets[pointerKey] = scrollViewOriginalBottomInset;
         
-        NSNumber *scrollViewOriginalIndicatorBottomInset = [s_scrollViewOriginalIndicatorBottomInsets objectForKey:pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
-        [scrollViewOriginalIndicatorBottomInsets setObject:scrollViewOriginalIndicatorBottomInset forKey:pointerKey];
+        NSNumber *scrollViewOriginalIndicatorBottomInset = s_scrollViewOriginalIndicatorBottomInsets[pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
+        scrollViewOriginalIndicatorBottomInsets[pointerKey] = scrollViewOriginalIndicatorBottomInset;
         
         // Adjust content
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
@@ -224,7 +220,7 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
         
         // If the first responder is not visible, change the offset to make it visible. Do not do anything if the responder is the
         // scroll view itself (e.g. a UITextView)
-        UIView *firstResponderView = [scrollView firstResponderView];
+        UIView *firstResponderView = scrollView.firstResponderView;
         if (firstResponderView && firstResponderView != scrollView) {
             [UIView animateWithDuration:0.25 animations:^{
                 CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
@@ -243,13 +239,13 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
     for (UIScrollView *scrollView in s_adjustedScrollViews) {
         NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
         
-        CGFloat scrollViewOriginalBottomInset = [[s_scrollViewOriginalBottomInsets objectForKey:pointerKey] floatValue];
+        CGFloat scrollViewOriginalBottomInset = (s_scrollViewOriginalBottomInsets[pointerKey]).floatValue;
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
                                                    scrollViewOriginalBottomInset,
                                                    scrollView.contentInset.right);
         
-        CGFloat scrollViewOriginalIndicatorBottomInset = [[s_scrollViewOriginalBottomInsets objectForKey:pointerKey] floatValue];
+        CGFloat scrollViewOriginalIndicatorBottomInset = (s_scrollViewOriginalBottomInsets[pointerKey]).floatValue;
         scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                             scrollView.scrollIndicatorInsets.left,
                                                             scrollViewOriginalIndicatorBottomInset,
@@ -260,8 +256,6 @@ static NSDictionary *s_scrollViewOriginalIndicatorBottomInsets = nil;
     s_scrollViewOriginalBottomInsets = nil;
     s_scrollViewOriginalIndicatorBottomInsets = nil;
 }
-
-
 
 @end
 

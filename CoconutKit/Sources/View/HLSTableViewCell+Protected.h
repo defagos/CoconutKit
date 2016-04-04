@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Just to be used by subclasses of HLSTableViewCell within the CoconutKit framework (the ones needing
  * access to styles). Not to be published in the library public headers
@@ -18,3 +20,5 @@
 + (UITableViewCellStyle)style;
 
 @end
+
+NS_ASSUME_NONNULL_END

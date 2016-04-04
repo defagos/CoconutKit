@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, DeviceType) {
     DeviceTypeEnumBegin = 0,
     DeviceTypeAll = DeviceTypeEnumBegin,
@@ -20,8 +22,8 @@ typedef NS_ENUM(NSInteger, DeviceType) {
 
 - (instancetype)initWithName:(NSString *)name type:(DeviceType)type NS_DESIGNATED_INITIALIZER;
 
-@property (nonatomic, readonly, strong) NSString *name;
-@property (nonatomic, readonly, assign) DeviceType type;
+@property (nonatomic, readonly, copy) NSString *name;
+@property (nonatomic, readonly) DeviceType type;
 
 @end
 
@@ -30,3 +32,5 @@ typedef NS_ENUM(NSInteger, DeviceType) {
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
+
+NS_ASSUME_NONNULL_END
