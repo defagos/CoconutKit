@@ -262,7 +262,7 @@ import CoconutKit
 
 ## Demo project
 
-The CoconutKit workspace contains a demo project, also used for development. Simply run the `CoconutKit-dev` scheme.
+The CoconutKit workspace contains a demo project, also used for development. Simply run the `CoconutKit-demo` scheme.
 
 ## Documentation
 
