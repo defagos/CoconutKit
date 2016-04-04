@@ -8,7 +8,6 @@ before_install:
 
 script: 
     - set -o pipefail
-    - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-framework | xcpretty -c
     # Demo and tests for 32 bits
     - xcodebuild -workspace CoconutKit.xcworkspace -scheme CoconutKit-demo -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
     - xcodebuild test -workspace CoconutKit.xcworkspace -scheme CoconutKit-tests-runner -destination 'platform=iOS Simulator,name=iPad 2' | xcpretty -c
