@@ -135,20 +135,20 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
     hls_setAssociatedObject(self, s_outsideGestureRecognizerKey, outsideGestureRecognizer, HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
-- (NSNumber *)keyboardDistance
+- (CGFloat)keyboardDistance
 {
     NSNumber *keyboardDistance =  hls_getAssociatedObject(self, s_keyboardDistanceKey);
     if ([self isKindOfClass:[UIScrollView class]]) {
-        return keyboardDistance ?: @(10.f);
+        return keyboardDistance ? keyboardDistance.floatValue : 10.f;
     }
     else {
-        return keyboardDistance;
+        return keyboardDistance ? keyboardDistance.floatValue : CGFLOAT_MAX;
     }
 }
 
-- (void)setKeyboardDistance:(NSNumber *)keyboardDistance
+- (void)setKeyboardDistance:(CGFloat)keyboardDistance
 {
-    hls_setAssociatedObject(self, s_keyboardDistanceKey, keyboardDistance, HLS_ASSOCIATION_STRONG_NONATOMIC);
+    hls_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Modal behavior
