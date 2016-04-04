@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E63094D81CB298B000AC59D5 /* UIResponder+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E63094D61CB298B000AC59D5 /* UIResponder+HLSExtensions.h */; };
+		E63094D81CB298B000AC59D5 /* UIResponder+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E63094D61CB298B000AC59D5 /* UIResponder+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E63094D91CB298B000AC59D5 /* UIResponder+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E63094D71CB298B000AC59D5 /* UIResponder+HLSExtensions.m */; };
 		E69F21391ABCABF4000EEC39 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F213A1ABCABF4000EEC39 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
@@ -1207,7 +1207,6 @@
 				E69F220E1ABCAC31000EEC39 /* UIWindow+HLSExtensions.h in Headers */,
 				E69F21CE1ABCAC19000EEC39 /* NSManagedObject+HLSExtensions.h in Headers */,
 				E69F218E1ABCAC0D000EEC39 /* HLSRuntime.h in Headers */,
-				E63094D81CB298B000AC59D5 /* UIResponder+HLSExtensions.h in Headers */,
 				E69F217D1ABCAC0D000EEC39 /* HLSGeometry.h in Headers */,
 				E69F223B1ABCAC37000EEC39 /* UIViewController+HLSExtensions.h in Headers */,
 				E69F215B1ABCAC03000EEC39 /* UIImageView+HLSViewBinding.h in Headers */,
@@ -1280,6 +1279,7 @@
 				E69F22021ABCAC31000EEC39 /* UILabel+HLSDynamicLocalization.h in Headers */,
 				E69F21511ABCABFB000EEC39 /* UIView+HLSViewBinding.h in Headers */,
 				E69F21A31ABCAC0D000EEC39 /* NSBundle+HLSExtensions.h in Headers */,
+				E63094D81CB298B000AC59D5 /* UIResponder+HLSExtensions.h in Headers */,
 				E69F214C1ABCABFB000EEC39 /* HLSViewBindingDelegate.h in Headers */,
 				E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */,
 				E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */,
