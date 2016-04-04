@@ -11,7 +11,6 @@
 #import "HLSRuntime.h"
 #import "UITextField+HLSExtensions.h"
 #import "UITextView+HLSExtensions.h"
-#import "UIView+HLSExtensions.h"
 
 // TODO: When CoconutKit requires iOS >= 8, completely update rotation code. Yeah, this is going to be a lot of work...
 
@@ -296,13 +295,6 @@ static void swizzle_viewWillDisappear(UIViewController *self, SEL _cmd, BOOL ani
     }
     
     [self setLifeCyclePhase:HLSViewControllerLifeCyclePhaseViewWillDisappear];
-    
-    // Automatic keyboard dismissal when the view disappears. We test that the view has been loaded to account for the possibility 
-    // that the view lifecycle has been incorrectly implemented
-    if ([self isViewLoaded]) {
-        UIView *firstResponderView = [self.view firstResponderView];
-        [firstResponderView resignFirstResponder];
-    }
 }
 
 static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL animated)

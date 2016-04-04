@@ -24,8 +24,6 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
 
 /**
  * Various useful additions to UIViewController, most notably the ability get more information about the view lifecycle.
- * This category also provide automatic keyboard dismissal when a view controller disappears while a text field was
- * active.
  *
  * Remark:
  * -------
