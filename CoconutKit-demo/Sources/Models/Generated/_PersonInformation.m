@@ -3,24 +3,12 @@
 
 #import "_PersonInformation.h"
 
-const struct PersonInformationAttributes PersonInformationAttributes = {
-	.birthdate = @"birthdate",
-	.city = @"city",
-	.country = @"country",
-	.email = @"email",
-	.firstName = @"firstName",
-	.lastName = @"lastName",
-	.numberOfChildren = @"numberOfChildren",
-	.state = @"state",
-	.street = @"street",
-};
-
 @implementation PersonInformationID
 @end
 
 @implementation _PersonInformation
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"PersonInformation" inManagedObjectContext:moc_];
 }
@@ -70,7 +58,7 @@ const struct PersonInformationAttributes PersonInformationAttributes = {
 }
 
 - (void)setNumberOfChildrenValue:(int16_t)value_ {
-	[self setNumberOfChildren:[NSNumber numberWithShort:value_]];
+	[self setNumberOfChildren:@(value_)];
 }
 
 - (int16_t)primitiveNumberOfChildrenValue {
@@ -79,12 +67,42 @@ const struct PersonInformationAttributes PersonInformationAttributes = {
 }
 
 - (void)setPrimitiveNumberOfChildrenValue:(int16_t)value_ {
-	[self setPrimitiveNumberOfChildren:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveNumberOfChildren:@(value_)];
 }
 
 @dynamic state;
 
 @dynamic street;
 
+@end
+
+@implementation PersonInformationAttributes 
++ (NSString *)birthdate {
+	return @"birthdate";
+}
++ (NSString *)city {
+	return @"city";
+}
++ (NSString *)country {
+	return @"country";
+}
++ (NSString *)email {
+	return @"email";
+}
++ (NSString *)firstName {
+	return @"firstName";
+}
++ (NSString *)lastName {
+	return @"lastName";
+}
++ (NSString *)numberOfChildren {
+	return @"numberOfChildren";
+}
++ (NSString *)state {
+	return @"state";
+}
++ (NSString *)street {
+	return @"street";
+}
 @end
 
