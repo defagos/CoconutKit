@@ -58,10 +58,10 @@
 		6FCC118C1A3B1245005BA6E8 /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC10A71A3B0744005BA6E8 /* CoconutKitTestData.xcdatamodeld */; };
 		6FCC118D1A3B124A005BA6E8 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC10A91A3B0744005BA6E8 /* Sample.txt */; };
 		6FCC119D1A3B1301005BA6E8 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC119C1A3B1301005BA6E8 /* CoconutKit-resources.bundle */; };
-		6FCC11A01A3B14A6005BA6E8 /* libCoconutKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCC11971A3B12F2005BA6E8 /* libCoconutKit.a */; };
 		E69F22F01AC140ED000EEC39 /* NSBundle+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E69F22EF1AC140ED000EEC39 /* NSBundle+Tests.m */; };
 		E6A23E881A8E404000B7048D /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDC76F1A7FC3E3005FC8D8 /* NSCalendar+HLSExtensionsTestCase.m */; };
 		E6A23E8B1A8E40A200B7048D /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDC7711A7FC3E3005FC8D8 /* NSTimeZone+HLSExtensionsTestCase.m */; };
+		E6B707511CB2C930006376FE /* CoconutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E69F22F51AC140ED000EEC39 /* CoconutKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,27 +71,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6FCC107B1A3B067F005BA6E8;
 			remoteInfo = "CoconutKit-tests-runner";
-		};
-		6FCC11961A3B12F2005BA6E8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FCC118F1A3B12F1005BA6E8 /* CoconutKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = CoconutKit;
-		};
-		6FCC11981A3B12F2005BA6E8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FCC118F1A3B12F1005BA6E8 /* CoconutKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6FC5B7741924EDC500660CDF;
-			remoteInfo = "CoconutKit-resources";
-		};
-		6FCC119E1A3B131C005BA6E8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6FCC118F1A3B12F1005BA6E8 /* CoconutKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = CoconutKit;
 		};
 		E69F22F41AC140ED000EEC39 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -195,7 +174,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FCC11A01A3B14A6005BA6E8 /* libCoconutKit.a in Frameworks */,
+				E6B707511CB2C930006376FE /* CoconutKit.framework in Frameworks */,
 				6FCC11891A3B0D27005BA6E8 /* WebKit.framework in Frameworks */,
 				6FCC11871A3B0D23005BA6E8 /* UIKit.framework in Frameworks */,
 				6FCC11851A3B0D19005BA6E8 /* QuickLook.framework in Frameworks */,
@@ -395,8 +374,6 @@
 		6FCC11901A3B12F1005BA6E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6FCC11971A3B12F2005BA6E8 /* libCoconutKit.a */,
-				6FCC11991A3B12F2005BA6E8 /* CoconutKit-resources.bundle */,
 				E69F22F51AC140ED000EEC39 /* CoconutKit.framework */,
 			);
 			name = Products;
@@ -433,7 +410,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6FCC119F1A3B131C005BA6E8 /* PBXTargetDependency */,
 				6FCC114C1A3B0943005BA6E8 /* PBXTargetDependency */,
 			);
 			name = "CoconutKit-tests";
@@ -485,20 +461,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6FCC11971A3B12F2005BA6E8 /* libCoconutKit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libCoconutKit.a;
-			remoteRef = 6FCC11961A3B12F2005BA6E8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6FCC11991A3B12F2005BA6E8 /* CoconutKit-resources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CoconutKit-resources.bundle";
-			remoteRef = 6FCC11981A3B12F2005BA6E8 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		E69F22F51AC140ED000EEC39 /* CoconutKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -591,11 +553,6 @@
 			isa = PBXTargetDependency;
 			target = 6FCC107B1A3B067F005BA6E8 /* CoconutKit-tests-runner */;
 			targetProxy = 6FCC114B1A3B0943005BA6E8 /* PBXContainerItemProxy */;
-		};
-		6FCC119F1A3B131C005BA6E8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CoconutKit;
-			targetProxy = 6FCC119E1A3B131C005BA6E8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
