@@ -67,6 +67,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)enableOutsideActionWithBlock:(void (^)())outsideActionBlock;
 - (void)disableOutsideAction;
 
+/**
+ * The distance to keep (at least) between keyboard and content. Overrides the corresponding value defined on UIScrollView
+ * when set
+ */
+@property (nonatomic, nullable) IBInspectable NSNumber *keyboardDistance;
+
 @end
 
 #ifdef DEBUG

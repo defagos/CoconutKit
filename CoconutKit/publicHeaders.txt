@@ -90,7 +90,6 @@ UINavigationController+HLSExtensions.h
 UIPageControl+HLSViewBinding.h
 UIPopoverController+HLSExtensions.h
 UIProgressView+HLSViewBinding.h
-UIResponder+HLSExtensions.h
 UIScrollView+HLSExtensions.h
 UISegmentedControl+HLSViewBinding.h
 UISlider+HLSViewBinding.h

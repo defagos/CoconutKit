@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E63094D81CB298B000AC59D5 /* UIResponder+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = E63094D61CB298B000AC59D5 /* UIResponder+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E63094D91CB298B000AC59D5 /* UIResponder+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E63094D71CB298B000AC59D5 /* UIResponder+HLSExtensions.m */; };
 		E69F21391ABCABF4000EEC39 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE51214BA0494007EE121 /* HLSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F213A1ABCABF4000EEC39 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE51314BA0494007EE121 /* HLSAnimation.m */; };
 		E69F213B1ABCABF4000EEC39 /* HLSAnimationStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FCFEA4715E37E25002CAF9E /* HLSAnimationStep.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -630,8 +628,6 @@
 		E62CB1201A78D89F0093106A /* NSTimeZone+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensions.m"; sourceTree = "<group>"; };
 		E62CB1231A78D8B50093106A /* NSCalendar+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendar+HLSExtensions.h"; sourceTree = "<group>"; };
 		E62CB1241A78D8B50093106A /* NSCalendar+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensions.m"; sourceTree = "<group>"; };
-		E63094D61CB298B000AC59D5 /* UIResponder+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+HLSExtensions.h"; sourceTree = "<group>"; };
-		E63094D71CB298B000AC59D5 /* UIResponder+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+HLSExtensions.m"; sourceTree = "<group>"; };
 		E69F211A1ABC9F8B000EEC39 /* CoconutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoconutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E69F22901ABCD7E0000EEC39 /* CoconutKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoconutKit.h; sourceTree = "<group>"; };
 		E69F22911ABCD7E0000EEC39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -922,8 +918,6 @@
 				6F22C73F16A858530081A9A7 /* UIFont+HLSExtensions.m */,
 				6FADE54B14BA0494007EE121 /* UIImage+HLSExtensions.h */,
 				6FADE54C14BA0494007EE121 /* UIImage+HLSExtensions.m */,
-				E63094D61CB298B000AC59D5 /* UIResponder+HLSExtensions.h */,
-				E63094D71CB298B000AC59D5 /* UIResponder+HLSExtensions.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1279,7 +1273,6 @@
 				E69F22021ABCAC31000EEC39 /* UILabel+HLSDynamicLocalization.h in Headers */,
 				E69F21511ABCABFB000EEC39 /* UIView+HLSViewBinding.h in Headers */,
 				E69F21A31ABCAC0D000EEC39 /* NSBundle+HLSExtensions.h in Headers */,
-				E63094D81CB298B000AC59D5 /* UIResponder+HLSExtensions.h in Headers */,
 				E69F214C1ABCABFB000EEC39 /* HLSViewBindingDelegate.h in Headers */,
 				E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */,
 				E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */,
@@ -1432,7 +1425,6 @@
 				E69F21CD1ABCAC19000EEC39 /* HLSModelManager.m in Sources */,
 				E69F21CA1ABCAC0D000EEC39 /* UIImage+HLSExtensions.m in Sources */,
 				E69F21B61ABCAC0D000EEC39 /* NSObject+HLSExtensions.m in Sources */,
-				E63094D91CB298B000AC59D5 /* UIResponder+HLSExtensions.m in Sources */,
 				E69F22161ABCAC37000EEC39 /* HLSContainerContent.m in Sources */,
 				E69F213C1ABCABF4000EEC39 /* HLSAnimationStep.m in Sources */,
 				E69F21AA1ABCAC0D000EEC39 /* NSDate+HLSExtensions.m in Sources */,
