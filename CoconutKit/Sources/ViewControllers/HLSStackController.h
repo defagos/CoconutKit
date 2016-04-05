@@ -18,9 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * We often need to manage a stack of view controllers. Usually, we use a navigation controller, but there is no way
  * to easily use other transition animations as the built-in ones. Sometimes, we also want to show view controllers
- * modally, but often the usual -presentViewController:animated:completion: method of UIViewController is too limited. Modal
- * sheets on the iPad have namely pre-defined sizes, and when displaying full screen the view below disappears, which prevents
- * from displaying transparent modal windows (transparent modals are available since iOS 8, though).
+ * modally, but often the usual -presentViewController:animated:completion: method of UIViewController is too limited. 
  *
  * To circumvent those problems, HLSStackController provides a generic way to deal with a view controller stack, whose
  * root view is fixed and set once at creation time. It can be applied a richer set of transition animations, even

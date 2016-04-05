@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Remark: On iOS 8 and 8.1, the undocked keyboard has serious bugs. When dragging the keyboard, docking / undocking
  *         is not correctly detected. As a result, the +keyboardInformation method might return a value which does
  *         not match the keyboard visual status (but is consistent with the buggy keyboard status maintained by the
- *         system)
+ *         system).
  */
 + (nullable instancetype)keyboardInformation;
 
