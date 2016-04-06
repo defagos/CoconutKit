@@ -18,6 +18,7 @@ static void *s_tagKey = &s_tagKey;
 static void *s_userInfoKey = &s_userInfoKey;
 static void *s_modalOutsideActionBlockKey = &s_modalOutsideActionBlockKey;
 static void *s_outsideGestureRecognizerKey = &s_outsideGestureRecognizerKey;
+static void *s_keyboardDistanceKey = &s_keyboardDistanceKey;
 
 // Original implementation of the methods we swizzle
 static BOOL (*s_becomeFirstResponder)(id, SEL) = NULL;
@@ -132,6 +133,22 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 - (void)setOutsideGestureRecognizer:(HLSAnyGestureRecognizer *)outsideGestureRecognizer
 {
     hls_setAssociatedObject(self, s_outsideGestureRecognizerKey, outsideGestureRecognizer, HLS_ASSOCIATION_STRONG_NONATOMIC);
+}
+
+- (CGFloat)keyboardDistance
+{
+    NSNumber *keyboardDistance =  hls_getAssociatedObject(self, s_keyboardDistanceKey);
+    if ([self isKindOfClass:[UIScrollView class]]) {
+        return keyboardDistance ? keyboardDistance.floatValue : 10.f;
+    }
+    else {
+        return keyboardDistance ? keyboardDistance.floatValue : CGFLOAT_MAX;
+    }
+}
+
+- (void)setKeyboardDistance:(CGFloat)keyboardDistance
+{
+    hls_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Modal behavior

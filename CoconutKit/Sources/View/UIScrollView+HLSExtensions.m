@@ -12,13 +12,10 @@
 #import "UIView+HLSExtensions.h"
 #import "UIWindow+HLSExtensions.h"
 
-#import <objc/runtime.h>
-
 // Associated object keys
 static void *s_synchronizedScrollViewsKey = &s_synchronizedScrollViewsKey;
 static void *s_parallaxBouncesKey = &s_parallaxBouncesKey;
 static void *s_avoidingKeyboardKey = &s_avoidingKeyboardKey;
-static void *s_keyboardDistanceKey = &s_keyboardDistanceKey;
 
 // Original implementation of the methods we swizzle
 static void (*s_setContentOffset)(id, SEL, CGPoint) = NULL;
@@ -48,19 +45,6 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
 - (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
 {
     hls_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), HLS_ASSOCIATION_STRONG_NONATOMIC);
-}
-
-- (CGFloat)keyboardDistance
-{
-    static const CGFloat HLSDefaultKeyboardDistance = 10.f;
-    
-    NSNumber *keyboardDistanceNumber = hls_getAssociatedObject(self, s_keyboardDistanceKey);
-    return keyboardDistanceNumber ? keyboardDistanceNumber.floatValue : HLSDefaultKeyboardDistance;
-}
-
-- (void)setKeyboardDistance:(CGFloat)keyboardDistance
-{
-    hls_setAssociatedObject(self, s_keyboardDistanceKey, @(keyboardDistance), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
 
 #pragma mark Synchronizing scroll views
@@ -207,10 +191,14 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
         NSNumber *scrollViewOriginalIndicatorBottomInset = s_scrollViewOriginalIndicatorBottomInsets[pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
         scrollViewOriginalIndicatorBottomInsets[pointerKey] = scrollViewOriginalIndicatorBottomInset;
         
+        // Keyboard distance is globally defined by the scroll view, but can be overridden for each view
+        UIView *firstResponderView = scrollView.firstResponderView;
+        CGFloat keyboardDistance = (firstResponderView.keyboardDistance == CGFLOAT_MAX) ? scrollView.keyboardDistance : firstResponderView.keyboardDistance;
+        
         // Adjust content
         scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                    scrollView.contentInset.left,
-                                                   keyboardHeightAdjustment + scrollView.keyboardDistance,
+                                                   keyboardHeightAdjustment + keyboardDistance * CGRectGetHeight([UIScreen mainScreen].applicationFrame) / 768.f,
                                                    scrollView.contentInset.right);
         scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                             scrollView.scrollIndicatorInsets.left,
@@ -220,7 +208,6 @@ static NSDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicatorBottomI
         
         // If the first responder is not visible, change the offset to make it visible. Do not do anything if the responder is the
         // scroll view itself (e.g. a UITextView)
-        UIView *firstResponderView = scrollView.firstResponderView;
         if (firstResponderView && firstResponderView != scrollView) {
             [UIView animateWithDuration:0.25 animations:^{
                 CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
