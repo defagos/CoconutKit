@@ -57,7 +57,6 @@
 		6FCC11891A3B0D27005BA6E8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCC11881A3B0D27005BA6E8 /* WebKit.framework */; };
 		6FCC118C1A3B1245005BA6E8 /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FCC10A71A3B0744005BA6E8 /* CoconutKitTestData.xcdatamodeld */; };
 		6FCC118D1A3B124A005BA6E8 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC10A91A3B0744005BA6E8 /* Sample.txt */; };
-		6FCC119D1A3B1301005BA6E8 /* CoconutKit-resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6FCC119C1A3B1301005BA6E8 /* CoconutKit-resources.bundle */; };
 		E69F22F01AC140ED000EEC39 /* NSBundle+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E69F22EF1AC140ED000EEC39 /* NSBundle+Tests.m */; };
 		E6A23E881A8E404000B7048D /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDC76F1A7FC3E3005FC8D8 /* NSCalendar+HLSExtensionsTestCase.m */; };
 		E6A23E8B1A8E40A200B7048D /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EDC7711A7FC3E3005FC8D8 /* NSTimeZone+HLSExtensionsTestCase.m */; };
@@ -154,7 +153,6 @@
 		6FCC11861A3B0D23005BA6E8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6FCC11881A3B0D27005BA6E8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6FCC118F1A3B12F1005BA6E8 /* CoconutKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoconutKit.xcodeproj; path = ../CoconutKit/CoconutKit.xcodeproj; sourceTree = "<group>"; };
-		6FCC119C1A3B1301005BA6E8 /* CoconutKit-resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "CoconutKit-resources.bundle"; path = "../CoconutKit/CoconutKit-resources.bundle"; sourceTree = "<group>"; };
 		E69F22EE1AC140ED000EEC39 /* NSBundle+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Tests.h"; sourceTree = "<group>"; };
 		E69F22EF1AC140ED000EEC39 /* NSBundle+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Tests.m"; sourceTree = "<group>"; };
 		E6A7CFC11BF5B15A003F48FC /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
@@ -349,7 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				6FCC118F1A3B12F1005BA6E8 /* CoconutKit.xcodeproj */,
-				6FCC119C1A3B1301005BA6E8 /* CoconutKit-resources.bundle */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -482,7 +479,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FCC119D1A3B1301005BA6E8 /* CoconutKit-resources.bundle in Resources */,
 				6FCC118D1A3B124A005BA6E8 /* Sample.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
