@@ -37,7 +37,6 @@ HLSStackController.h
 HLSStackPushSegue.h
 HLSStandardFileManager.h
 HLSSubtitleTableViewCell.h
-HLSTableSearchDisplayViewController.h
 HLSTableViewCell.h
 HLSTableViewController.h
 HLSTransformer.h
@@ -98,7 +97,6 @@ UISwitch+HLSViewBinding.h
 UITabBarController+HLSExtensions.h
 UITextField+HLSExtensions.h
 UITextField+HLSViewBinding.h
-UITextView+HLSCursorVisibility.h
 UITextView+HLSExtensions.h
 UITextView+HLSViewBinding.h
 UIView+HLSExtensions.h
