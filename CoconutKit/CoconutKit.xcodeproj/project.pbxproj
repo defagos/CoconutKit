@@ -229,7 +229,6 @@
 		E69F22241ABCAC37000EEC39 /* HLSStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE58C14BA0494007EE121 /* HLSStackController.m */; };
 		E69F22251ABCAC37000EEC39 /* HLSStackPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22261ABCAC37000EEC39 /* HLSStackPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */; };
-		E69F22271ABCAC37000EEC39 /* HLSTableSearchDisplayViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22291ABCAC37000EEC39 /* HLSTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F222A1ABCAC37000EEC39 /* HLSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */; };
 		E69F222B1ABCAC37000EEC39 /* HLSTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF3E6ED15D2E4C800AB9A53 /* HLSTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -309,7 +308,6 @@
 		E69F228B1ABCAF63000EEC39 /* HLSWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC5B7A31924EE4E00660CDF /* HLSWebViewController.xib */; };
 		E69F228C1ABCB319000EEC39 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4D3DD819F6576C009718E4 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F22901ABCD7E0000EEC39 /* CoconutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F22DE1AC13306000EEC39 /* HLSTableSearchDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */; };
 		E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */; };
 		E6AC75F01BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */; };
 /* End PBXBuildFile section */
@@ -520,8 +518,6 @@
 		6FADE58A14BA0494007EE121 /* HLSPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSPlaceholderViewController.m; sourceTree = "<group>"; };
 		6FADE58B14BA0494007EE121 /* HLSStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSStackController.h; sourceTree = "<group>"; };
 		6FADE58C14BA0494007EE121 /* HLSStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStackController.m; sourceTree = "<group>"; };
-		6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableSearchDisplayViewController.h; sourceTree = "<group>"; };
-		6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableSearchDisplayViewController.m; sourceTree = "<group>"; };
 		6FADE59314BA0494007EE121 /* HLSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSViewController.h; sourceTree = "<group>"; };
 		6FADE59414BA0494007EE121 /* HLSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewController.m; sourceTree = "<group>"; };
 		6FADE59514BA0494007EE121 /* HLSWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSWebViewController.h; sourceTree = "<group>"; };
@@ -1012,8 +1008,6 @@
 				6FADE58C14BA0494007EE121 /* HLSStackController.m */,
 				6F6C0A14159B964B007933EB /* HLSStackPushSegue.h */,
 				6F6C0A15159B964B007933EB /* HLSStackPushSegue.m */,
-				6FADE58F14BA0494007EE121 /* HLSTableSearchDisplayViewController.h */,
-				6FADE59014BA0494007EE121 /* HLSTableSearchDisplayViewController.m */,
 				E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */,
 				E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */,
 				6FF3E6ED15D2E4C800AB9A53 /* HLSTransition.h */,
@@ -1235,7 +1229,6 @@
 				E69F214A1ABCABF4000EEC39 /* HLSViewAnimationStep.h in Headers */,
 				E69F21FC1ABCAC31000EEC39 /* HLSValue2TableViewCell.h in Headers */,
 				E69F21D21ABCAC1F000EEC39 /* HLSLogger.h in Headers */,
-				E69F22271ABCAC37000EEC39 /* HLSTableSearchDisplayViewController.h in Headers */,
 				E69F22211ABCAC37000EEC39 /* HLSPlaceholderViewController.h in Headers */,
 				E69F21C91ABCAC0D000EEC39 /* UIImage+HLSExtensions.h in Headers */,
 				E69F213B1ABCABF4000EEC39 /* HLSAnimationStep.h in Headers */,
@@ -1527,7 +1520,6 @@
 				E69F21F21ABCAC31000EEC39 /* HLSNibView.m in Sources */,
 				E69F21A41ABCAC0D000EEC39 /* NSBundle+HLSExtensions.m in Sources */,
 				E69F21AC1ABCAC0D000EEC39 /* NSDateFormatter+HLSExtensions.m in Sources */,
-				E69F22DE1AC13306000EEC39 /* HLSTableSearchDisplayViewController.m in Sources */,
 				E69F220F1ABCAC31000EEC39 /* UIWindow+HLSExtensions.m in Sources */,
 				E69F21FB1ABCAC31000EEC39 /* HLSValue1TableViewCell.m in Sources */,
 				E69F21BC1ABCAC0D000EEC39 /* NSString+HLSExtensions.m in Sources */,

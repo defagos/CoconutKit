@@ -43,7 +43,6 @@
 #import <CoconutKit/HLSStackPushSegue.h>
 #import <CoconutKit/HLSStandardFileManager.h>
 #import <CoconutKit/HLSSubtitleTableViewCell.h>
-#import <CoconutKit/HLSTableSearchDisplayViewController.h>
 #import <CoconutKit/HLSTableViewCell.h>
 #import <CoconutKit/HLSTableViewController.h>
 #import <CoconutKit/HLSTransformer.h>

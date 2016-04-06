@@ -103,7 +103,6 @@
 "Missing localization visibility"="Afficher les localisations de libellés manquantes";
 "Month"="Mois";
 "Multiple view animation"="Animation de plusieurs vues";
-"Music players"="Baladeurs";
 "Names of all employees"="Noms des employés";
 "Next"="Suivant";
 "Nib view (autolayout)"="Nib view (autolayout)";
@@ -119,7 +118,6 @@
 "Pause"="Pause";
 "Performance 1"="Performance 1";
 "Performance 2"="Performance 2";
-"Phones"="Téléphones";
 "Play"="Jouer";
 "Pop"="Pop";
 "Pop 3 VCs"="Pop 3 VCs";
@@ -167,7 +165,6 @@
 "String in Localizable.strings"="Chaîne de Localizable.strings";
 "Sub-tasks"="Sous-tâches";
 "Table view cells"="Cellules";
-"Tablets"="Tablettes";
 "Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong"="Appuyez sur le bouton bindings en haut à droite et interagissez avec les champs pour découvrir ce qui n'a pas fonctionné";
 "Terminate"="Terminer";
 "Test in modal"="Test dans modale";
