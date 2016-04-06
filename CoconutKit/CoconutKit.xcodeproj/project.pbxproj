@@ -208,8 +208,6 @@
 		E69F220D1ABCAC31000EEC39 /* UIWebView+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */; };
 		E69F220E1ABCAC31000EEC39 /* UIWindow+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F28D61219FF79F400564BD3 /* UIWindow+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F220F1ABCAC31000EEC39 /* UIWindow+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28D61319FF79F400564BD3 /* UIWindow+HLSExtensions.m */; };
-		E69F22101ABCAC31000EEC39 /* UITextView+HLSCursorVisibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F28D6161A00C29600564BD3 /* UITextView+HLSCursorVisibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F22111ABCAC31000EEC39 /* UITextView+HLSCursorVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F28D6171A00C29600564BD3 /* UITextView+HLSCursorVisibility.m */; };
 		E69F22121ABCAC37000EEC39 /* HLSAutorotation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C7557162DC0D90094B090 /* HLSAutorotation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22131ABCAC37000EEC39 /* HLSCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22141ABCAC37000EEC39 /* HLSCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E94C221AB0218300FCCC4E /* HLSCollectionViewController.m */; };
@@ -345,8 +343,6 @@
 		6F28280F1A16530800ECFD30 /* HLSViewBindingDebugOverlayApperance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSViewBindingDebugOverlayApperance.m; sourceTree = "<group>"; };
 		6F28D61219FF79F400564BD3 /* UIWindow+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F28D61319FF79F400564BD3 /* UIWindow+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F28D6161A00C29600564BD3 /* UITextView+HLSCursorVisibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+HLSCursorVisibility.h"; sourceTree = "<group>"; };
-		6F28D6171A00C29600564BD3 /* UITextView+HLSCursorVisibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+HLSCursorVisibility.m"; sourceTree = "<group>"; };
 		6F2D46F715761A8600EF5E4F /* NSSet+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F2D46F815761A8600EF5E4F /* NSSet+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F2D46FB15761AA500EF5E4F /* NSMutableArray+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+HLSExtensions.h"; sourceTree = "<group>"; };
@@ -988,8 +984,6 @@
 				6F3B064414BC7D410026F512 /* UIWebView+HLSExtensions.m */,
 				6F28D61219FF79F400564BD3 /* UIWindow+HLSExtensions.h */,
 				6F28D61319FF79F400564BD3 /* UIWindow+HLSExtensions.m */,
-				6F28D6161A00C29600564BD3 /* UITextView+HLSCursorVisibility.h */,
-				6F28D6171A00C29600564BD3 /* UITextView+HLSCursorVisibility.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1254,7 +1248,6 @@
 				E69F21AF1ABCAC0D000EEC39 /* NSError+HLSExtensions.h in Headers */,
 				E69F21C31ABCAC0D000EEC39 /* UIColor+HLSExtensions.h in Headers */,
 				E69F216D1ABCAC03000EEC39 /* UITextView+HLSViewBinding.h in Headers */,
-				E69F22101ABCAC31000EEC39 /* UITextView+HLSCursorVisibility.h in Headers */,
 				E69F21651ABCAC03000EEC39 /* UISlider+HLSViewBinding.h in Headers */,
 				E69F213F1ABCABF4000EEC39 /* HLSLayerAnimation.h in Headers */,
 				E69F218C1ABCAC0D000EEC39 /* HLSRestrictedInterfaceProxy.h in Headers */,
@@ -1456,7 +1449,6 @@
 				E69F21D61ABCAC25000EEC39 /* HLSConnection.m in Sources */,
 				E69F215C1ABCAC03000EEC39 /* UIImageView+HLSViewBinding.m in Sources */,
 				E69F22571ABCAC53000EEC39 /* HLSViewBindingDebugOverlayViewController.m in Sources */,
-				E69F22111ABCAC31000EEC39 /* UITextView+HLSCursorVisibility.m in Sources */,
 				E69F222A1ABCAC37000EEC39 /* HLSTableViewController.m in Sources */,
 				E69F217A1ABCAC0D000EEC39 /* HLSCoreError.m in Sources */,
 				E69F217E1ABCAC0D000EEC39 /* HLSGeometry.m in Sources */,
