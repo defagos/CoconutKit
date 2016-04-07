@@ -225,33 +225,6 @@
     return supportedInterfaceOrientations;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{   
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        [containerStack willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    }
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        [containerStack willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    }    
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    for (HLSContainerStack *containerStack in self.containerStacks) {
-        [containerStack didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    }
-}
-
 // Remark: The status bar is not controlled by child view controllers, no explicit calls to the underlying container
 //         stack methods
 

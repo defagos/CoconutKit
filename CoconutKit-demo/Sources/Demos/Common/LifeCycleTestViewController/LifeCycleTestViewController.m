@@ -55,20 +55,6 @@
                   HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation), HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
-- (void)viewWillUnload
-{
-    [super viewWillUnload];
-    
-    HLSLoggerInfo(@"Called for object %@", self);
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    
-    HLSLoggerInfo(@"Called for object %@", self);
-}
-
 #pragma mark Orientation management
 
 - (BOOL)shouldAutorotate
@@ -83,33 +69,6 @@
     HLSLoggerInfo(@"Called");
     
     return [super supportedInterfaceOrientations];
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{   
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    HLSLoggerInfo(@"Calledfor object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
-                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
-                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    HLSLoggerInfo(@"Called for object %@, toInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
-                  self, HLSStringFromInterfaceOrientation(toInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
-                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    HLSLoggerInfo(@"Called for object %@, fromInterfaceOrientation = %@, interfaceOrientation = %@, displayedInterfaceOrientation = %@",
-                  self, HLSStringFromInterfaceOrientation(fromInterfaceOrientation), HLSStringFromInterfaceOrientation(self.interfaceOrientation),
-                  HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
 }
 
 #pragma mark Layout management

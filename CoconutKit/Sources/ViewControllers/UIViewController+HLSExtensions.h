@@ -36,8 +36,6 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
  * view controller's frame for display).
  *
  * The same is true for rotations: The final frame dimensions are known in -willAnimateRotationToInterfaceOrientation:duration:
- * (1-step rotation) or -willAnimateFirstHalfOfRotationToInterfaceOrientation:duration: (2-step rotation, deprecated
- * starting with iOS 5).
  */
 @interface UIViewController (HLSExtensions)
 

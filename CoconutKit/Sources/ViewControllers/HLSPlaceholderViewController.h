@@ -47,13 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
  *   -viewWill...
  *   -viewDid...
  *   -shouldAutorotate and -supportedInterfaceOrientations
- *   -willRotateToInterfaceOrientation:duration:
- *   -willAnimate...
- *   -didRotateFromInterfaceOrientation:
- *
- * This view controller uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation
- * in subclasses and inset view controllers (it will be ignored, see UIViewController documentation). The 2-step
- * rotation is deprecated starting with iOS 5, you should not use it anymore anyway.
  *
  * You can also use placeholder view controllers with storyboards:
  *   - drop a view controller onto the storyboard, and set its class to a HLSPlaceholderViewController subclass. Add one

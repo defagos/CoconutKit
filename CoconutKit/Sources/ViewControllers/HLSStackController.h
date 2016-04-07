@@ -28,10 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
  * the container view bounds, as is the case with usual UIKit containers (UITabBarController, UINavigationController). 
  * Be sure that the view controller's view size and autoresizing behaviors are correctly set.
  *
- * HLSStackController uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation methods
- * for view controllers you push in it (they will be ignored, see UIViewController documentation). The 2-step rotation
- * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
- *
  * You can resize or move (even animate!) the stack container view, even when children are displayed. This makes the
  * creation of innovative user interfaces as easy as it can be.
  *

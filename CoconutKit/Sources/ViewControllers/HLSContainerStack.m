@@ -33,7 +33,6 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
 @private
     HLSContainerStackBehavior _behavior;                      // How the container manages its child view controllers
     BOOL _animating;                                          // Set to YES when a transition animation is running
-    BOOL _rotating;                                           // Set to YES when a rotation is being made
     HLSAutorotationMode _autorotationMode;                    // How the container decides to behave when rotation occurs
     BOOL _topContainerContentMovingToParent;                  // Share information between -viewWillAppear: and -viewDidAppear: calls
 }
@@ -645,180 +644,6 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
     return supportedInterfaceOrientations;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    _rotating = YES;
-    
-    if (self.containerContents.count != 0) {
-        // Avoid frame issues due to rotation
-        for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
-            NSUInteger index = self.containerContents.count - 1 - i;
-            HLSContainerContent *containerContent = self.containerContents[index];
-            
-            if (containerContent.viewIfLoaded) {
-                // To avoid issues when pushing - rotating - popping view controllers (which can lead to blurry views depending
-                // on the animation style, most notably when scaling is involved), we negate each animation here, with the old
-                // frame. We replay the animation just afterwards in willAnimateRotationToInterfaceOrientation:duration:,
-                // where the frame is the final one obtained after rotation. This trick is invisible to the user and avoids
-                // having issues because of view rotation (this can lead to small floating-point imprecisions, leading to
-                // non-integral frames, and thus to blurry views)
-                HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:containerContent.viewIfLoaded];
-                
-                // If the container view controller presents a modal on its view (i.e. defines a presentation context and
-                // displays a modal with a UIModalPresentationCurrentContext presentation style), then views might be removed
-                // from the hierarchy by the system when the modal gets displayed. In such cases, ignore
-                if (! groupView) {
-                    continue;
-                }
-                
-                HLSAnimation *reverseAnimation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
-                                                                                             disappearingView:groupView.backView
-                                                                                                       inView:groupView
-                                                                                                     duration:0.].reverseAnimation;
-                [reverseAnimation playAnimated:NO];
-            }
-        }
-        
-        switch (self.autorotationMode) {
-            case HLSAutorotationModeContainerAndAllChildren: {
-                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                    [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndTopChildren: {
-                HLSContainerContent *topContainerContent = [self topContainerContent];
-                if (topContainerContent) {
-                    [topContainerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndNoChildren: {
-                break;
-            }
-                
-            case HLSAutorotationModeContainer:
-            default: {
-                for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
-                    NSUInteger index = self.containerContents.count - 1 - i;
-                    HLSContainerContent *containerContent = self.containerContents[index];
-                    [containerContent willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-        }
-    }
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    if (self.containerContents.count != 0) {
-        // Avoid frame issues due to rotation
-        for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
-            NSUInteger index = self.containerContents.count - 1 - i;
-            HLSContainerContent *containerContent = self.containerContents[index];
-            
-            if (containerContent.viewIfLoaded) {
-                // See comments in -willRotateToInterfaceOrientation:duration:
-                HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:containerContent.viewIfLoaded];
-                if (! groupView) {
-                    continue;
-                }
-                
-                HLSAnimation *animation = [containerContent.transitionClass animationWithAppearingView:groupView.frontView
-                                                                                      disappearingView:groupView.backView
-                                                                                                inView:groupView
-                                                                                              duration:0.];
-                [animation playAnimated:NO];
-            }
-        }
-        
-        switch (self.autorotationMode) {
-            case HLSAutorotationModeContainerAndAllChildren: {
-                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                    [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndTopChildren: {
-                HLSContainerContent *topContainerContent = [self topContainerContent];
-                if (topContainerContent) {
-                    [topContainerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndNoChildren: {
-                break;
-            }
-                
-            case HLSAutorotationModeContainer:
-            default: {
-                for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
-                    NSUInteger index = self.containerContents.count - 1 - i;
-                    HLSContainerContent *containerContent = self.containerContents[index];
-                    [containerContent willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-                }
-                break;
-            }
-        }
-    }
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    if (self.containerContents.count != 0) {
-        // Rotate the loaded child view controller's views to an orientation they support (if needed)
-        for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
-            NSUInteger index = self.containerContents.count - 1 - i;
-            HLSContainerContent *containerContent = self.containerContents[index];
-            
-            // Called in -didRotate. Two reasons:
-            //   - the result looks better (children incompatible with the current orientation snap at the end of the animation,
-            //     which looks quite the same as what happens when popping view controllers with different orientations from a
-            //     navigation controller
-            //   - if called early in -willRotate, the views get slightly blurry when rotated
-            [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
-        }
-        
-        switch (self.autorotationMode) {
-            case HLSAutorotationModeContainerAndAllChildren: {
-                for (HLSContainerContent *containerContent in [self.containerContents reverseObjectEnumerator]) {
-                    [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndTopChildren: {
-                HLSContainerContent *topContainerContent = [self topContainerContent];
-                if (topContainerContent) {
-                    [topContainerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-                }
-                break;
-            }
-                
-            case HLSAutorotationModeContainerAndNoChildren: {
-                break;
-            }
-                
-            case HLSAutorotationModeContainer:
-            default: {
-                for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
-                    NSUInteger index = self.containerContents.count - 1 - i;
-                    HLSContainerContent *containerContent = self.containerContents[index];
-                    [containerContent didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-                }
-                break;
-            }
-        }
-    }
-    
-    _rotating = NO;
-}
-
 // Use UIViewController default values for status bar behavior methods
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -1138,11 +963,6 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
 
 - (void)containerStackViewWillChangeFrame:(HLSContainerStackView *)containerStackView
 {
-    // The trick below is also performed during rotations (which might alter the stack view frame). Skip
-    if (_rotating) {
-        return;
-    }
-    
     // Children are pushed with layer animations (i.e. transform animations). Those do not play well wit frame changes.
     // To solve those issues, we reset the children views to their initial state before the frame is changed (the
     // previous state is then restored after the frame has changed, see below)
@@ -1167,11 +987,6 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
 
 - (void)containerStackViewDidChangeFrame:(HLSContainerStackView *)containerStackView
 {
-    // The trick below is also performed during rotations (which might alter the stack view frame). Skip
-    if (_rotating) {
-        return;
-    }
-    
     // See comment in -containerStackViewWillChangeFrame:
     for (NSUInteger i = 0; i < MIN(self.capacity, self.containerContents.count); ++i) {
         NSUInteger index = self.containerContents.count - 1 - i;

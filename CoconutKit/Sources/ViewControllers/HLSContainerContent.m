@@ -331,21 +331,6 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
     return [self.viewController supportedInterfaceOrientations];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    return [self.viewController willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    return [self.viewController willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    return [self.viewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-}
-
 #pragma mark Description
 
 - (NSString *)description

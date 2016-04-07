@@ -129,22 +129,6 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     return [super supportedInterfaceOrientations] & [self.debuggedWindow.rootViewController supportedInterfaceOrientations];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    // Workaround rotation glitches with multiple windows (black screen)
-    s_overlayWindow.hidden = YES;
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    // See above
-    s_overlayWindow.hidden = NO;
-}
-
 #pragma mark Debug information display
 
 - (void)displayDebugInformationForBindingsInView:(UIView *)view
