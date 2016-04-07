@@ -50,36 +50,32 @@
 {
     [super viewWillAppear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingToParentViewController = %@, interfaceOrientation = %@, "
-                  "displayedInterfaceOrientation = %@", self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingToParentViewController]),
-                  HLSStringFromInterfaceOrientation(self.interfaceOrientation), HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingToParentViewController = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingToParentViewController]));
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingToParentViewController = %@, interfaceOrientation = %@, "
-                  "displayedInterfaceOrientation = %@", self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingToParentViewController]),
-                  HLSStringFromInterfaceOrientation(self.interfaceOrientation), HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingToParentViewController = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingToParentViewController]));
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingFromParentViewController = %@, interfaceOrientation = %@, "
-                  "displayedInterfaceOrientation = %@", self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingFromParentViewController]),
-                  HLSStringFromInterfaceOrientation(self.interfaceOrientation), HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingFromParentViewController = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     
-    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingFromParentViewController = %@, interfaceOrientation = %@, "
-                  "displayedInterfaceOrientation = %@", self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingFromParentViewController]),
-                  HLSStringFromInterfaceOrientation(self.interfaceOrientation), HLSStringFromInterfaceOrientation(self.displayedInterfaceOrientation));
+    HLSLoggerInfo(@"Called for object %@, animated = %@, isMovingFromParentViewController = %@",
+                  self, HLSStringFromBool(animated), HLSStringFromBool([self isMovingFromParentViewController]));
 }
 
 #pragma mark Containment

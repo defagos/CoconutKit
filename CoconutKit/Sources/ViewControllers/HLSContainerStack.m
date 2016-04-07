@@ -1029,21 +1029,4 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
                                                  forViewController:self];
 }
 
-- (UIInterfaceOrientation)displayedInterfaceOrientation
-{
-    UIViewController *containerViewController = [HLSContainerContent containerViewControllerKindOfClass:Nil
-                                                                                      forViewController:self];
-    if (containerViewController) {
-        if ([self autorotatesToInterfaceOrientation:containerViewController.interfaceOrientation]) {
-            return containerViewController.interfaceOrientation;
-        }
-        else {
-            return [self compatibleOrientationWithViewController:containerViewController];
-        }
-    }
-    else {
-        return self.interfaceOrientation;
-    }
-}
-
 @end
