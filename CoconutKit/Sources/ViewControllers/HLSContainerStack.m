@@ -687,7 +687,6 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
     // Last element? Add to top
     if (index == self.containerContents.count - 1) {
         [containerContent addAsSubviewIntoContainerStackView:stackView];
-        [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
     }
     // Otherwise add below first content above for which a view is available (most probably the nearest neighbor above)
     else {
@@ -708,7 +707,6 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
         if (! inserted) {
             [containerContent addAsSubviewIntoContainerStackView:stackView];
         }
-        [self rotateContainerContent:containerContent forInterfaceOrientation:self.containerViewController.interfaceOrientation];
         
         // Play the corresponding animation to put the view into the correct location
         HLSContainerContent *aboveContainerContent = self.containerContents[index + 1];
@@ -746,94 +744,6 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
     // All other cases (inserting in the middle or instantiating the view for a view controller already in the stack)
     else {
         [animation playAnimated:NO];
-    }
-}
-
-/**
- * Call this method when a child view controller's view must be rotated to make it compatible with the container interface
- * orientation. Landscape-only view controllers, e.g., must be rotated from PI/2 when inserted in a container in portrait
- * mode
- */
-- (void)rotateContainerContent:(HLSContainerContent *)containerContent
-       forInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    HLSContainerGroupView *groupView = [[self containerStackView] groupViewForContentView:containerContent.viewIfLoaded];
-    if (! groupView) {
-        return;
-    }
-    
-    // We directly act on the front content view, not on the front view, to avoid interfering with the animations
-    // played on it. This is how rotations are usually applied on the root view controller's view by UIKit.
-    // TODO: If this happens to be an issue (this should not, though):
-    //         - add a frontAutorotationView wrapper to HLSGroupView
-    //         - apply rotation and bounds changes on it
-    //         - test this does not have any negative performance impact
-    groupView.frontContentView.transform = CGAffineTransformIdentity;
-    groupView.frontContentView.bounds = groupView.bounds;
-    if (! [containerContent shouldAutorotateToInterfaceOrientation:interfaceOrientation]) {
-        // Find an orientation compatible with the container
-        UIInterfaceOrientation compatibleInterfaceOrientation = [containerContent.viewController compatibleOrientationWithViewController:self.containerViewController];
-        if (compatibleInterfaceOrientation == 0) {
-            HLSLoggerError(@"No compatible orientation found. The set of supported orientations of the container has probably been changed after the child "
-                           "has been added");
-            return;
-        }
-        
-        // Rotate the child appropriately
-        CGFloat angle = 0.f;
-        switch (interfaceOrientation) {
-            case UIInterfaceOrientationPortrait: {
-                switch (compatibleInterfaceOrientation) {
-                    case UIInterfaceOrientationPortraitUpsideDown:      angle = M_PI; break;
-                    case UIInterfaceOrientationLandscapeRight:          angle = M_PI_2; break;
-                    case UIInterfaceOrientationLandscapeLeft:           angle = -M_PI_2; break;
-                    default:                                            angle = 0.f; break;
-                }
-                break;
-            }
-                
-            case UIInterfaceOrientationPortraitUpsideDown: {
-                switch (compatibleInterfaceOrientation) {
-                    case UIInterfaceOrientationPortrait:                angle = M_PI; break;
-                    case UIInterfaceOrientationLandscapeRight:          angle = -M_PI_2; break;
-                    case UIInterfaceOrientationLandscapeLeft:           angle = M_PI_2; break;
-                    default:                                            angle = 0.f; break;
-                }
-                break;
-            }
-
-            case UIInterfaceOrientationLandscapeRight: {
-                switch (compatibleInterfaceOrientation) {
-                    case UIInterfaceOrientationPortrait:                angle = -M_PI_2; break;
-                    case UIInterfaceOrientationPortraitUpsideDown:      angle = M_PI_2; break;
-                    case UIInterfaceOrientationLandscapeLeft:           angle = M_PI; break;
-                    default:                                            angle = 0.f; break;
-                }
-                break;
-            }
-                
-            case UIInterfaceOrientationLandscapeLeft: {
-                switch (compatibleInterfaceOrientation) {
-                    case UIInterfaceOrientationPortrait:                angle = M_PI_2; break;
-                    case UIInterfaceOrientationPortraitUpsideDown:      angle = -M_PI_2; break;
-                    case UIInterfaceOrientationLandscapeRight:          angle = M_PI; break;
-                    default:                                            angle = 0.f; break;
-                }
-                break;
-            }
-                
-            default: {
-                angle = 0.f;
-                break;
-            }
-        }
-        groupView.frontContentView.transform = CGAffineTransformMakeRotation(angle);
-        
-        // If the format is different, must exchange width and height
-        if ((UIInterfaceOrientationIsPortrait(interfaceOrientation) && UIInterfaceOrientationIsLandscape(compatibleInterfaceOrientation))
-                || (UIInterfaceOrientationIsLandscape(interfaceOrientation) && UIInterfaceOrientationIsPortrait(compatibleInterfaceOrientation))) {
-            groupView.frontContentView.bounds = CGRectMake(0.f, 0.f, CGRectGetHeight(groupView.frame), CGRectGetWidth(groupView.frame));
-        }
     }
 }
 
