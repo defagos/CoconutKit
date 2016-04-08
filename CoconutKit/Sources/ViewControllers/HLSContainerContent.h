@@ -142,7 +142,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Forward the corresponding view rotation events to the view controller
  */
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
 - (BOOL)shouldAutorotate;
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations;
 

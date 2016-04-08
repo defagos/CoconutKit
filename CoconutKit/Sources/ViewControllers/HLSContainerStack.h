@@ -94,7 +94,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     -viewDidAppear:
  *     -viewWillDisappear:
  *     -viewDidDisappear:
- *     -shouldAutorotateToInterfaceOrientation:
  *
  * Also do not forget to set a containerView, either in your container -loadView or -viewDidLoad methods
  *

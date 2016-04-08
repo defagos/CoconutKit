@@ -86,22 +86,11 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
             transitionClass = [HLSTransition class];
         }
         
-        // Cannot be mixed with the containment API automatic event management
-        if (([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardAppearanceMethods)]
-                && [containerViewController shouldAutomaticallyForwardAppearanceMethods])
-            || ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardRotationMethods)]
-                && [containerViewController shouldAutomaticallyForwardRotationMethods])) {
-            HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which view lifecycle and rotation event automatic "
+        // Cannot be mixed with the automatic event management
+        if ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardAppearanceMethods)]
+                && [containerViewController shouldAutomaticallyForwardAppearanceMethods]) {
+            HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which view lifecycle event automatic "
                            "forwarding has been explicitly disabled");
-            return nil;
-        }
-        
-        // Even when pre-loading view controllers into a container which has not been displayed yet, the -interfaceOrientation property
-        // returns a correct value. To be able to insert a view controller into a container view controller, their supported interface
-        // orientations must be compatible (if the current container orientation is not supported, we will rotate the child view
-        // controller appropriately)
-        if (! [viewController isOrientationCompatibleWithViewController:containerViewController]) {
-            HLSLoggerError(@"The view controller has no compatible orientation with the container");
             return nil;
         }
         
