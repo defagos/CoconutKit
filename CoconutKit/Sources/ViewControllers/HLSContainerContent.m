@@ -316,11 +316,6 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
     self.movingFromParentViewController = NO;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return [self.viewController autorotatesToInterfaceOrientation:toInterfaceOrientation];
-}
-
 - (BOOL)shouldAutorotate
 {
     return [self.viewController shouldAutorotate];

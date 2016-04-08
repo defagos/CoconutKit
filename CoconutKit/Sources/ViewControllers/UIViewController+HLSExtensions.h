@@ -71,35 +71,6 @@ typedef NS_ENUM(NSInteger, HLSViewControllerLifeCyclePhase) {
  */
 - (BOOL)isReadyForLifeCyclePhase:(HLSViewControllerLifeCyclePhase)lifeCyclePhase;
 
-/**
- * Return YES iff the receiver can autorotate to at least one of the supplied orientations
- */
-- (BOOL)shouldAutorotateForOrientations:(UIInterfaceOrientationMask)orientations;
-
-/**
- * Return YES iff the receiver has at least one compatible orientation with the supplied view controller. If viewController
- * is nil, this method returns NO
- */
-- (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController;
-
-/**
- * Return YES iff the receiver can autorotate to the supplied interface orientation
- */
-- (BOOL)autorotatesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
-
-/**
- * Return the first interface orientation supported by the receiver, and compatible with a given orientation set
- * (respectively a view controller). Orientations are checked in the following order:
- *   - portrait (the usual default orientation on iPhone and iPad)
- *   - landscape right (on iPad, this is the orientation we get when using a smart cover)
- *   - landscape left
- *   - portrait upside down (the usually disabled orientation on iPhone)
- *
- * Return 0 if no compatible orientation is found, or if viewController is nil
- */
-- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations;
-- (UIInterfaceOrientation)compatibleOrientationWithViewController:(nullable UIViewController *)viewController;
-
 @end
 
 #ifdef DEBUG
