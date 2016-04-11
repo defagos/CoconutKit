@@ -163,7 +163,7 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
 
 #pragma mark Notification callbacks
 
-+ (void)keyboardDidShow:(NSNotification *)notification
++ (void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect keyboardEndFrameInWindow = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
@@ -274,8 +274,8 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
 __attribute__ ((constructor)) static void HLSTextFieldInit(void)
 {
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
-                                             selector:@selector(keyboardDidShow:)
-                                                 name:UIKeyboardDidShowNotification
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:[UIScrollView class]
                                              selector:@selector(keyboardWillHide:)
