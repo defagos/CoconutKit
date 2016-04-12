@@ -68,10 +68,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)disableOutsideAction;
 
 /**
- * The distance to keep (at least) between keyboard and content. For scroll views, this value is 10.f by default
- * (this value is applied for a 768 pixel height screen, and is adjusted proportionally for larger or smaller sizes),
- * for other views it is CGFLOAT_MAX. For all views within a scroll view, the value defined by the scroll view is 
- * used. This value can be overridden on a view basis if needed
+ * The distance to keep (at least) between keyboard and content when the keyboard is displayed, for a scroll view
+ * with avoidingKeyboard set to YES (see UIScrollView+HLSExtensions.h). The value can be set on the scroll view
+ * itself and / or on views located within it. If a view has a keyboard distance of CGFLOAT_MAX set (the default), 
+ * then the keyboard distance defined on the enclosing scroll view will be used (the default value for a scroll
+ * view is 10.f).
+ *
+ * Note that the value of 10.f corresponds to 10 pixels for a standard iPad in landscape orientation. For larger or 
+ * smaller screen heights, the value is changed proportionally, so that the distance is larger for larger heights 
+ * and smaller for smaller ones
  */
 @property (nonatomic) IBInspectable CGFloat keyboardDistance;
 

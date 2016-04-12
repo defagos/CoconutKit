@@ -220,10 +220,10 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     UIView *firstResponderView = scrollView.firstResponderView;
     CGFloat keyboardDistance = (firstResponderView.keyboardDistance == CGFLOAT_MAX) ? scrollView.keyboardDistance : firstResponderView.keyboardDistance;
     
-    // Adjust content
+    // Adjust content. Adjust depending on the space available vertically (398 is the horizontal keyboard height on a standard reference iPad)
     scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
                                                scrollView.contentInset.left,
-                                               keyboardHeightAdjustment + keyboardDistance * CGRectGetHeight([UIScreen mainScreen].applicationFrame) / 768.f,
+                                               keyboardHeightAdjustment + keyboardDistance * (CGRectGetHeight([UIScreen mainScreen].applicationFrame) - CGRectGetHeight(keyboardEndFrameInWindow)) / (768.f - 398.f),
                                                scrollView.contentInset.right);
     scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
                                                         scrollView.scrollIndicatorInsets.left,
