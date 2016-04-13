@@ -46,18 +46,17 @@
 
 - (void)testURLEncoding
 {
-    // The default encoding used for @"%c" changes between iOS versions. This affects string construction or NSLog display
-    // when a %c is used, for the extended ASCII extended table. In other words, this means that the result of NSLog(@"%c", 135),
-    // for example, differs depending on the iOS version:
-    //   - iOS 6: Mac OS Roman encoding is used
-    //   - iOS 7: UTF-8 encoding is used
-    // To avoid this issue, we can avoid %s and use NSLog(@"\u0135"), which forces unicode encoding, but this cannot be
-    // used for control characters (this generates a compiler error). Therefore, we build the test string corresponding
-    // to the first half of the table (containing control characters) using %c (since there is no encoding issue there),
+    // The default encoding used for @"%c" might between iOS versions (it already has between iOS 6 and 7). This affects
+    // string construction or NSLog display when a %c is used, for the extended ASCII table. In other words, this means
+    // that the result of NSLog(@"%c", 135), for example, might differ depending on the iOS version.
+    //
+    // To make this test robust against those changes, we could avoid %c and use NSLog(@"\u0135"), which forces unicode encoding,
+    // but this cannot be used for control characters (this generates a compiler error). Therefore, we build the test string
+    // corresponding to the first half of the table (containing control characters) using %c (since there is no encoding issue there),
     // and the remaining half using \u
     //
     // Remark: I expected +[NSString defaultCStringEncoding] to return UTF-8 on iOS >= 7, but this is not the case. Maybe I
-    //         haven't clearlay understood what this method does, or there is a bug somewhere
+    //         haven't clearly understood what this method does, or there is a bug somewhere
     
     // First half of the ASCII table
     NSMutableString *string = [NSMutableString string];
