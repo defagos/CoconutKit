@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
+#import <CoconutKit/CoconutKit.h>
+#import <XCTest/XCTest.h>
+
 @interface CAMediaTimingFunction (CAPrivate)
 
 // Private method used to compute function values. Use them as reference, tests will never make it to the AppStore

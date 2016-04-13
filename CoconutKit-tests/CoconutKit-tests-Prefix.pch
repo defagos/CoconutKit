@@ -1,4 +1,0 @@
-#ifdef __OBJC__
-    #import <XCTest/XCTest.h>
-    #import <CoconutKit/CoconutKit.h>
-#endif

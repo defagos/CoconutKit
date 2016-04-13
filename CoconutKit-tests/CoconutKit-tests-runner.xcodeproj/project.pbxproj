@@ -138,7 +138,6 @@
 		6FCC10F81A3B0744005BA6E8 /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
 		6FCC10F91A3B0744005BA6E8 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		6FCC10FA1A3B0744005BA6E8 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
-		6FCC10FB1A3B0744005BA6E8 /* CoconutKit-tests-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-tests-Prefix.pch"; sourceTree = "<group>"; };
 		6FCC10FC1A3B0744005BA6E8 /* CoconutKit-tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CoconutKit-tests-Info.plist"; sourceTree = "<group>"; };
 		6FCC112A1A3B07D7005BA6E8 /* version.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = version.xcconfig; path = ../version.xcconfig; sourceTree = "<group>"; };
 		6FCC11451A3B0943005BA6E8 /* CoconutKit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CoconutKit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -337,7 +336,6 @@
 		6FCC11261A3B0755005BA6E8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6FCC10FB1A3B0744005BA6E8 /* CoconutKit-tests-Prefix.pch */,
 				6FCC10FC1A3B0744005BA6E8 /* CoconutKit-tests-Info.plist */,
 			);
 			name = "Supporting Files";
@@ -660,8 +658,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-tests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -685,8 +681,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-tests-Prefix.pch";
 				INFOPLIST_FILE = "CoconutKit-tests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (

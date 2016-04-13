@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Given a date, return the number of days in the unit containing it. For example, if the date corresponds to some date in March, 
- * the method will return 31 if unit is NSMonthCalendarUnit, and usually 365 if unit is NSYearCalendarUnit (366 for leap years)
+ * the method will return 31 if unit is NSCalendarUnitMonth, and usually 365 if unit is NSCalendarUnitYear (366 for leap years)
  */
 - (NSInteger)numberOfDaysInUnit:(NSCalendarUnit)unit containingDate:(NSDate *)date;
 
