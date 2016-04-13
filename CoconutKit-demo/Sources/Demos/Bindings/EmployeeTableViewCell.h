@@ -5,6 +5,7 @@
 //
 
 #import "Employee.h"
+#import <CoconutKit/CoconutKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

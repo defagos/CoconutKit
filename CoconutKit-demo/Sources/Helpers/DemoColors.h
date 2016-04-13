@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import <UIKit/UIKit.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 // Custom colors defined in a UIColor subclass

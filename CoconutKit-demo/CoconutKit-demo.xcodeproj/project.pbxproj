@@ -273,7 +273,6 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-demo-Prefix.pch"; sourceTree = "<group>"; };
 		6F04E3571A1C864000C6C08B /* BindingsControlsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsControlsDemoViewController.h; sourceTree = "<group>"; };
 		6F04E3581A1C864000C6C08B /* BindingsControlsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsControlsDemoViewController.m; sourceTree = "<group>"; };
 		6F04E3591A1C864000C6C08B /* BindingsControlsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsControlsDemoViewController.xib; sourceTree = "<group>"; };
@@ -637,7 +636,6 @@
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */,
-				32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1849,8 +1847,6 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1867,8 +1863,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
