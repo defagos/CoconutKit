@@ -71,6 +71,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, weak, nullable) id objectTarget;
 
 /**
+ * Return the last component of the key path (might be prefixed with an operator)
+ */
+@property (nonatomic, readonly, copy) NSString *lastKeyPathComponent;
+
+/**
+ * Return the last object in the key path (before the final key path component is applied)
+ */
+@property (nonatomic, readonly, nullable) id lastObjectTarget;
+
+/**
  * The expected class for the raw model value, nil if it cannot be reliably determined
  */
 @property (nonatomic, readonly, nullable) Class rawClass;

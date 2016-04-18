@@ -310,6 +310,9 @@
 		E69F22931ABCD7E0000EEC39 /* CoconutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E69F22901ABCD7E0000EEC39 /* CoconutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6AC75EE1BAC5A430016C204 /* HLSAnyGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */; };
 		E6AC75F01BAC5A430016C204 /* HLSAnyGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */; };
+		E6C1EE8E1CC50E04002568DA /* HLSBindingContext.h in Headers */ = {isa = PBXBuildFile; fileRef = E6C1EE8C1CC50E04002568DA /* HLSBindingContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6C1EE8F1CC50E04002568DA /* HLSBindingContext.m in Sources */ = {isa = PBXBuildFile; fileRef = E6C1EE8D1CC50E04002568DA /* HLSBindingContext.m */; };
+		E6F8FF2F1CC5255800EC0793 /* HLSBindingContext+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = E6F8FF2D1CC5255800EC0793 /* HLSBindingContext+Friend.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -625,12 +628,15 @@
 		E69F22911ABCD7E0000EEC39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6AC75EB1BAC5A430016C204 /* HLSAnyGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnyGestureRecognizer.h; sourceTree = "<group>"; };
 		E6AC75EC1BAC5A430016C204 /* HLSAnyGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnyGestureRecognizer.m; sourceTree = "<group>"; };
+		E6C1EE8C1CC50E04002568DA /* HLSBindingContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSBindingContext.h; sourceTree = "<group>"; };
+		E6C1EE8D1CC50E04002568DA /* HLSBindingContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSBindingContext.m; sourceTree = "<group>"; };
 		E6E94C1D1AB0216B00FCCC4E /* HLSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSTableViewController.h; sourceTree = "<group>"; };
 		E6E94C1E1AB0216B00FCCC4E /* HLSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTableViewController.m; sourceTree = "<group>"; };
 		E6E94C211AB0218300FCCC4E /* HLSCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSCollectionViewController.h; sourceTree = "<group>"; };
 		E6E94C221AB0218300FCCC4E /* HLSCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSCollectionViewController.m; sourceTree = "<group>"; };
 		E6E94C251AB021CB00FCCC4E /* UIViewController+HLSInstantiation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HLSInstantiation.h"; sourceTree = "<group>"; };
 		E6E94C261AB021CB00FCCC4E /* UIViewController+HLSInstantiation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HLSInstantiation.m"; sourceTree = "<group>"; };
+		E6F8FF2D1CC5255800EC0793 /* HLSBindingContext+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSBindingContext+Friend.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -693,6 +699,9 @@
 			children = (
 				6FCD33851A1216680002F478 /* Controls */,
 				6FCD33CA1A1216E30002F478 /* Overlay */,
+				E6C1EE8C1CC50E04002568DA /* HLSBindingContext.h */,
+				E6F8FF2D1CC5255800EC0793 /* HLSBindingContext+Friend.h */,
+				E6C1EE8D1CC50E04002568DA /* HLSBindingContext.m */,
 				6F0CA8BB19DD934300CBE2E1 /* HLSViewBindingDelegate.h */,
 				6F04E2D61A1BA61500C6C08B /* HLSViewBindingError.h */,
 				6F04E2D71A1BA61500C6C08B /* HLSViewBindingError.m */,
@@ -1244,6 +1253,7 @@
 				E69F21651ABCAC03000EEC39 /* UISlider+HLSViewBinding.h in Headers */,
 				E69F213F1ABCABF4000EEC39 /* HLSLayerAnimation.h in Headers */,
 				E69F218C1ABCAC0D000EEC39 /* HLSRestrictedInterfaceProxy.h in Headers */,
+				E6C1EE8E1CC50E04002568DA /* HLSBindingContext.h in Headers */,
 				E69F22121ABCAC37000EEC39 /* HLSAutorotation.h in Headers */,
 				E69F21631ABCAC03000EEC39 /* UISegmentedControl+HLSViewBinding.h in Headers */,
 				E69F21791ABCAC0D000EEC39 /* HLSCoreError.h in Headers */,
@@ -1291,6 +1301,7 @@
 				E69F22171ABCAC37000EEC39 /* HLSContainerGroupView.h in Headers */,
 				E69F225C1ABCAC53000EEC39 /* HLSViewBindingInformationViewController.h in Headers */,
 				E69F22541ABCAC53000EEC39 /* HLSViewBindingDebugOverlayApperance.h in Headers */,
+				E6F8FF2F1CC5255800EC0793 /* HLSBindingContext+Friend.h in Headers */,
 				E69F21411ABCABF4000EEC39 /* HLSLayerAnimation+Friend.h in Headers */,
 				E69F22671ABCAC71000EEC39 /* HLSMAZeroingWeakProxy.h in Headers */,
 				E69F221B1ABCAC37000EEC39 /* HLSContainerStackView.h in Headers */,
@@ -1493,6 +1504,7 @@
 				E69F21F41ABCAC31000EEC39 /* HLSSlideshow.m in Sources */,
 				E69F22181ABCAC37000EEC39 /* HLSContainerGroupView.m in Sources */,
 				E69F221E1ABCAC37000EEC39 /* HLSLoggerViewController.m in Sources */,
+				E6C1EE8F1CC50E04002568DA /* HLSBindingContext.m in Sources */,
 				E69F22361ABCAC37000EEC39 /* UIPopoverController+HLSExtensions.m in Sources */,
 				E69F225B1ABCAC53000EEC39 /* HLSViewBindingInformationEntry.m in Sources */,
 				E69F216C1ABCAC03000EEC39 /* UITextField+HLSViewBinding.m in Sources */,

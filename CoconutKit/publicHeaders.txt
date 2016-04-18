@@ -5,6 +5,7 @@ HLSAnimationStep.h
 HLSApplicationInformation.h
 HLSAssert.h
 HLSAutorotation.h
+HLSBindingContext.h
 HLSCollectionViewController.h
 HLSConnection.h
 HLSContainerStack.h

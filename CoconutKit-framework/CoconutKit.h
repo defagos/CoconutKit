@@ -11,6 +11,7 @@
 #import <CoconutKit/HLSApplicationInformation.h>
 #import <CoconutKit/HLSAssert.h>
 #import <CoconutKit/HLSAutorotation.h>
+#import <CoconutKit/HLSBindingContext.h>
 #import <CoconutKit/HLSCollectionViewController.h>
 #import <CoconutKit/HLSConnection.h>
 #import <CoconutKit/HLSContainerStack.h>

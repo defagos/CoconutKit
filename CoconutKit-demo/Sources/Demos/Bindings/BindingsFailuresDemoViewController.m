@@ -64,7 +64,7 @@
 
 #pragma mark HLSViewBindingDelegate protocol
 
-- (void)boundView:(UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error
+- (void)boundView:(UIView *)boundView updateDidFailWithContext:(nonnull HLSBindingContext *)context error:(nonnull NSError *)error
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
                                                         message:[error localizedDescription]

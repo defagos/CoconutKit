@@ -6,6 +6,7 @@
 
 #import "HLSViewBindingInformation.h"
 
+#import "HLSBindingContext+Friend.h"
 #import "HLSLogger.h"
 #import "HLSMAKVONotificationCenter.h"
 #import "HLSRuntime.h"
@@ -164,6 +165,16 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     }
 }
 
+- (NSString *)lastKeyPathComponent
+{
+    return [HLSViewBindingInformation lastComponentInKeyPath:self.keyPath];
+}
+
+- (id)lastObjectTarget
+{
+    return [HLSViewBindingInformation lastObjectInKeyPath:self.keyPath withObject:self.objectTarget];
+}
+
 - (BOOL)isVerified
 {
     return self.status == HLSViewBindingStatusVerified;
@@ -231,8 +242,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
         
         if (success) {
-            if ([self.delegate respondsToSelector:@selector(boundView:transformationDidSucceedWithObject:)]) {
-                [self.delegate boundView:self.view transformationDidSucceedWithObject:self.objectTarget];
+            if ([self.delegate respondsToSelector:@selector(boundView:transformationDidSucceedWithContext:)]) {
+                HLSBindingContext *context = [[HLSBindingContext alloc] initWithBindingInformation:self];
+                [self.delegate boundView:self.view transformationDidSucceedWithContext:context];
             }
             
             if (pValue) {
@@ -245,8 +257,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                         localizedDescription:@"Incorrect format"];
             error.underlyingError = detailedError;
             
-            if ([self.delegate respondsToSelector:@selector(boundView:transformationDidFailWithObject:error:)]) {
-                [self.delegate boundView:self.view transformationDidFailWithObject:self.objectTarget error:error];
+            if ([self.delegate respondsToSelector:@selector(boundView:transformationDidFailWithContext:error:)]) {
+                HLSBindingContext *context = [[HLSBindingContext alloc] initWithBindingInformation:self];
+                [self.delegate boundView:self.view transformationDidFailWithContext:context error:error];
             }
             
             if (pError) {
@@ -280,14 +293,16 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     
     NSError *error = nil;
     if ([self.objectTarget validateValue:&value forKeyPath:self.keyPath error:&error]) {
-        if ([self.delegate respondsToSelector:@selector(boundView:checkDidSucceedWithObject:)]) {
-            [self.delegate boundView:self.view checkDidSucceedWithObject:self.objectTarget];
+        if ([self.delegate respondsToSelector:@selector(boundView:checkDidSucceedWithContext:)]) {
+            HLSBindingContext *context = [[HLSBindingContext alloc] initWithBindingInformation:self];
+            [self.delegate boundView:self.view checkDidSucceedWithContext:context];
         }
         return YES;
     }
     else {
-        if ([self.delegate respondsToSelector:@selector(boundView:checkDidFailWithObject:error:)]) {
-            [self.delegate boundView:self.view checkDidFailWithObject:self.objectTarget error:error];
+        if ([self.delegate respondsToSelector:@selector(boundView:checkDidFailWithContext:error:)]) {
+            HLSBindingContext *context = [[HLSBindingContext alloc] initWithBindingInformation:self];
+            [self.delegate boundView:self.view checkDidFailWithContext:context error:error];
         }
         
         if (pError) {
@@ -347,8 +362,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
                                          localizedDescription:exception.reason];
             error.underlyingError = detailedError;
             
-            if ([self.delegate respondsToSelector:@selector(boundView:updateDidFailWithObject:error:)]) {
-                [self.delegate boundView:self.view updateDidFailWithObject:self.objectTarget error:error];
+            if ([self.delegate respondsToSelector:@selector(boundView:updateDidFailWithContext:error:)]) {
+                HLSBindingContext *context = [[HLSBindingContext alloc] initWithBindingInformation:self];
+                [self.delegate boundView:self.view updateDidFailWithContext:context error:error];
             }
             
             if (pError) {
@@ -363,8 +379,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
         }
     }
     
-    if ([self.delegate respondsToSelector:@selector(boundView:updateDidSucceedWithObject:)]) {
-        [self.delegate boundView:self.view updateDidSucceedWithObject:self.objectTarget];
+    if ([self.delegate respondsToSelector:@selector(boundView:updateDidSucceedWithContext:)]) {
+        HLSBindingContext *context = [[HLSBindingContext alloc] initWithBindingInformation:self];
+        [self.delegate boundView:self.view updateDidSucceedWithContext:context];
     }
     
     return YES;
@@ -1101,9 +1118,31 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 
 #pragma mark Key path information extraction
 
-// Return the last object designated by a key path (before the final field)
++ (NSString *)lastComponentInKeyPath:(NSString *)keyPath
+{
+    NSParameterAssert(keyPath);
+    
+    NSArray<NSString *> *keyPathComponents = [keyPath componentsSeparatedByString:@"."];
+    
+    // Simple key path field
+    if (keyPathComponents.count == 1) {
+        return keyPath;
+    }
+    // Key path ending with an operator. Extract the operator as well
+    else if (keyPathComponents.count >= 2 && [keyPathComponents[keyPathComponents.count - 2] hasPrefix:@"@"]) {
+        return [[keyPathComponents subarrayWithRange:NSMakeRange(keyPathComponents.count - 2, 2)] componentsJoinedByString:@"."];
+    }
+    // Composed key path object1.object2.(...).field
+    else {
+        return keyPathComponents.lastObject;
+    }
+}
+
 + (id)lastObjectInKeyPath:(NSString *)keyPath withObject:(id)object
 {
+    NSParameterAssert(keyPath);
+    NSParameterAssert(object);
+    
     NSArray<NSString *> *keyPathComponents = [keyPath componentsSeparatedByString:@"."];
     
     // Simple key path field
@@ -1126,6 +1165,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 // assumes all objects have the same type and return the class of one of them)
 + (id)lastTargetInKeyPath:(NSString *)keyPath withObject:(id)object
 {
+    NSParameterAssert(keyPath);
+    NSParameterAssert(object);
+    
     id lastObjectInKeyPath = [self lastObjectInKeyPath:keyPath withObject:object];
     
     // Collection

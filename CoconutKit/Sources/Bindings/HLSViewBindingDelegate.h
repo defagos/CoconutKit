@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "HLSBindingContext.h"
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -20,20 +22,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Transformation events. Only received when a transformation is actually required
  */
-- (void)boundView:(__kindof UIView *)boundView transformationDidSucceedWithObject:(id)object;
-- (void)boundView:(__kindof UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error;
+- (void)boundView:(__kindof UIView *)boundView transformationDidSucceedWithContext:(HLSBindingContext *)context;
+- (void)boundView:(__kindof UIView *)boundView transformationDidFailWithContext:(HLSBindingContext *)context error:(NSError *)error;
 
 /**
  * Model check events
  */
-- (void)boundView:(__kindof UIView *)boundView checkDidSucceedWithObject:(id)object;
-- (void)boundView:(__kindof UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error;
+- (void)boundView:(__kindof UIView *)boundView checkDidSucceedWithContext:(HLSBindingContext *)context;
+- (void)boundView:(__kindof UIView *)boundView checkDidFailWithContext:(HLSBindingContext *)context error:(NSError *)error;
 
 /**
  * Model update events
  */
-- (void)boundView:(__kindof UIView *)boundView updateDidSucceedWithObject:(id)object;
-- (void)boundView:(__kindof UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error;
+- (void)boundView:(__kindof UIView *)boundView updateDidSucceedWithContext:(HLSBindingContext *)context;
+- (void)boundView:(__kindof UIView *)boundView updateDidFailWithContext:(HLSBindingContext *)context error:(NSError *)error;
 
 @end
 NS_ASSUME_NONNULL_END

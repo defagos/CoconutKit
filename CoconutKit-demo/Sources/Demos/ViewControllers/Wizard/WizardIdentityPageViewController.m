@@ -82,7 +82,7 @@
 
 #pragma mark HLSBindingDelegate protocol implementation
 
-- (void)boundView:(UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error
+- (void)boundView:(UIView *)boundView transformationDidFailWithContext:(nonnull HLSBindingContext *)context error:(nonnull NSError *)error
 {
     boundView.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5f];
     
@@ -90,7 +90,7 @@
     errorLabel.text = error.localizedDescription;
 }
 
-- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object
+- (void)boundView:(UIView *)boundView checkDidSucceedWithContext:(nonnull HLSBindingContext *)context
 {
     boundView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.5f];
     
@@ -98,7 +98,7 @@
     errorLabel.text = nil;
 }
 
-- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error
+- (void)boundView:(UIView *)boundView checkDidFailWithContext:(nonnull HLSBindingContext *)context error:(nonnull NSError *)error
 {
     boundView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     

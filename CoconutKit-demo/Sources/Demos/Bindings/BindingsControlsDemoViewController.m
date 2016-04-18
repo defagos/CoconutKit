@@ -288,24 +288,24 @@
 
 #pragma mark HLSViewBindingDelegate protocol implementation
 
-- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object
+- (void)boundView:(UIView *)boundView checkDidSucceedWithContext:(nonnull HLSBindingContext *)context
 {
-    HLSLoggerInfo(@"Check did succeed for object %@ bound to view %@ with keypath %@", object, boundView, boundView.bindKeyPath);
+    HLSLoggerInfo(@"Check did succeed in context %@ bound to view %@ with keypath %@", context, boundView, boundView.bindKeyPath);
 }
 
-- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error
+- (void)boundView:(UIView *)boundView checkDidFailWithContext:(nonnull HLSBindingContext *)context error:(nonnull NSError *)error
 {
-    HLSLoggerInfo(@"Check did fail for object %@ bound to view %@ with keypath %@; reason %@", object, boundView, boundView.bindKeyPath, error);
+    HLSLoggerInfo(@"Check did fail in context %@ bound to view %@ with keypath %@; reason %@", context, boundView, boundView.bindKeyPath, error);
 }
 
-- (void)boundView:(UIView *)boundView updateDidSucceedWithObject:(id)object
+- (void)boundView:(UIView *)boundView updateDidSucceedWithContext:(nonnull HLSBindingContext *)context
 {
-    HLSLoggerInfo(@"Update did succeed for object %@ bound to view %@ with keypath %@", object, boundView, boundView.bindKeyPath);
+    HLSLoggerInfo(@"Update did succeed in context %@ bound to view %@ with keypath %@", context, boundView, boundView.bindKeyPath);
 }
 
-- (void)boundView:(UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error
+- (void)boundView:(UIView *)boundView updateDidFailWithContext:(nonnull HLSBindingContext *)context error:(nonnull NSError *)error
 {
-    HLSLoggerInfo(@"Update did fail for object %@ bound to view %@ with keypath %@; reason %@", object, boundView, boundView.bindKeyPath, error);
+    HLSLoggerInfo(@"Update did fail in context %@ bound to view %@ with keypath %@; reason %@", context, boundView, boundView.bindKeyPath, error);
 }
 
 #pragma mark Validation
