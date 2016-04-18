@@ -7,9 +7,7 @@
 #import "CoconutKit_demoAppDelegate.h"
 
 #import "CoconutKit_demoApplication.h"
-
-// Ensure text view cursors always stay in the content area
-HLSEnableUITextViewCursorVisibility();
+#import <CoconutKit/CoconutKit.h>
 
 // Disable quasi-simultaneous taps
 HLSEnableUIControlExclusiveTouch();

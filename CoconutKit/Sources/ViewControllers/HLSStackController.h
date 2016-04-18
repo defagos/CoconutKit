@@ -18,9 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * We often need to manage a stack of view controllers. Usually, we use a navigation controller, but there is no way
  * to easily use other transition animations as the built-in ones. Sometimes, we also want to show view controllers
- * modally, but often the usual -presentViewController:animated:completion: method of UIViewController is too limited. Modal
- * sheets on the iPad have namely pre-defined sizes, and when displaying full screen the view below disappears, which prevents
- * from displaying transparent modal windows (transparent modals are available since iOS 8, though).
+ * modally, but often the usual -presentViewController:animated:completion: method of UIViewController is too limited. 
  *
  * To circumvent those problems, HLSStackController provides a generic way to deal with a view controller stack, whose
  * root view is fixed and set once at creation time. It can be applied a richer set of transition animations, even
@@ -29,10 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
  * When a view controller's view is inserted into a stack controller, its view frame is automatically adjusted to match 
  * the container view bounds, as is the case with usual UIKit containers (UITabBarController, UINavigationController). 
  * Be sure that the view controller's view size and autoresizing behaviors are correctly set.
- *
- * HLSStackController uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation methods
- * for view controllers you push in it (they will be ignored, see UIViewController documentation). The 2-step rotation
- * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
  *
  * You can resize or move (even animate!) the stack container view, even when children are displayed. This makes the
  * creation of innovative user interfaces as easy as it can be.

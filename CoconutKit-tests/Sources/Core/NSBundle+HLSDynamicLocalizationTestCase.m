@@ -4,8 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-// Just needed for an error constant
 #import <CFNetwork/CFNetwork.h>
+#import <CoconutKit/CoconutKit.h>
+#import <XCTest/XCTest.h>
 
 @interface NSBundle_HLSDynamicLocalizationTestCase : XCTestCase
 @end

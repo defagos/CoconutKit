@@ -62,9 +62,8 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
         // with the UIModalPresentationCurrentContext presentation style
         stackController.definesPresentationContext = YES;
         
-        // We want to be able to test the stack controller autorotation behavior. Starting with iOS 6, all containers
-        // allow rotation by default. Disable it for the placeholder so that we can observe the embedded stack controller
-        // behavior
+        // We want to be able to test the stack controller autorotation behavior. All containers allow rotation by default. Disable
+        // it for the placeholder so that we can observe the embedded stack controller behavior
         self.autorotationMode = HLSAutorotationModeContainerAndTopChildren;
         
         // Pre-load other view controllers before display. Yep, this is possible!
@@ -128,43 +127,6 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     _placeholderViewOriginalBounds = placeholderView.bounds;
     
     [self updateIndexInfo];
-}
-
-#pragma mark Orientation management
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    // Restore the original bounds for the previous orientation before they are updated by the rotation animation. This
-    // is needed since there is no simple way to get the view bounds for the new orientation without actually rotating
-    // the view
-    UIView *placeholderView = [self placeholderViewAtIndex:0];
-    placeholderView.bounds = _placeholderViewOriginalBounds;
-    
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    [self.displayedPopoverController dismissPopoverAnimated:NO];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    // The view has its new bounds (even if the rotation animation has not been played yet!). Store them so that we
-    // are able to restore them when rotating again, and set size according to the previous size slider value. This
-    // trick made in the -willRotate... and -willAnimateRotation... methods remains unnoticed!
-    UIView *placeholderView = [self placeholderViewAtIndex:0];
-    _placeholderViewOriginalBounds = placeholderView.bounds;
-    [self sizeChanged:nil];
-    
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds
-                                                     inView:self.popoverButton
-                                   permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                   animated:NO];
 }
 
 #pragma mark Localization

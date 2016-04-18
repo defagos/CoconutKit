@@ -6,6 +6,9 @@
 
 #import "NSBundle+Tests.h"
 
+#import <CoconutKit/CoconutKit.h>
+#import <XCTest/XCTest.h>
+
 @interface NSStream_HLSExtensionsTestCase : XCTestCase
 @end
 

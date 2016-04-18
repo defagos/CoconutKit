@@ -43,7 +43,6 @@
 #import <CoconutKit/HLSStackPushSegue.h>
 #import <CoconutKit/HLSStandardFileManager.h>
 #import <CoconutKit/HLSSubtitleTableViewCell.h>
-#import <CoconutKit/HLSTableSearchDisplayViewController.h>
 #import <CoconutKit/HLSTableViewCell.h>
 #import <CoconutKit/HLSTableViewController.h>
 #import <CoconutKit/HLSTransformer.h>
@@ -104,7 +103,6 @@
 #import <CoconutKit/UITabBarController+HLSExtensions.h>
 #import <CoconutKit/UITextField+HLSExtensions.h>
 #import <CoconutKit/UITextField+HLSViewBinding.h>
-#import <CoconutKit/UITextView+HLSCursorVisibility.h>
 #import <CoconutKit/UITextView+HLSExtensions.h>
 #import <CoconutKit/UITextView+HLSViewBinding.h>
 #import <CoconutKit/UIView+HLSExtensions.h>

@@ -119,59 +119,6 @@ static void swizzle_viewDidDisappear(UIViewController *self, SEL _cmd, BOOL anim
     }
 }
 
-- (BOOL)shouldAutorotateForOrientations:(UIInterfaceOrientationMask)orientations
-{
-    return [self shouldAutorotate] && (orientations & [self supportedInterfaceOrientations]);
-}
-
-- (BOOL)isOrientationCompatibleWithViewController:(UIViewController *)viewController
-{
-    if (! viewController) {
-        return NO;
-    }
-    
-    return [self shouldAutorotateForOrientations:[viewController supportedInterfaceOrientations]];
-}
-
-- (BOOL)autorotatesToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return [self shouldAutorotate] && ([self supportedInterfaceOrientations] & (1 << interfaceOrientation));
-}
-
-- (UIInterfaceOrientation)compatibleOrientationWithOrientations:(UIInterfaceOrientationMask)orientations
-{
-    if (orientations & UIInterfaceOrientationMaskPortrait) {
-        if ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortrait) {
-            return UIInterfaceOrientationPortrait;
-        }
-    }
-    if (orientations & UIInterfaceOrientationMaskLandscapeRight) {
-        if ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeRight) {
-            return UIInterfaceOrientationLandscapeRight;
-        }
-    }
-    if (orientations & UIInterfaceOrientationMaskLandscapeLeft) {
-        if ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskLandscapeLeft) {
-            return UIInterfaceOrientationLandscapeLeft;
-        }
-    }
-    if (orientations & UIInterfaceOrientationMaskPortraitUpsideDown) {
-        if ([self supportedInterfaceOrientations] & UIInterfaceOrientationMaskPortraitUpsideDown) {
-            return UIInterfaceOrientationPortraitUpsideDown;
-        }
-    }
-    return 0;
-}
-
-- (UIInterfaceOrientation)compatibleOrientationWithViewController:(UIViewController *)viewController
-{
-    if (! viewController) {
-        return 0;
-    }
-    
-    return [self compatibleOrientationWithOrientations:[viewController supportedInterfaceOrientations]];
-}
-
 @end
 
 @implementation UIViewController (HLSExtensionsPrivate)

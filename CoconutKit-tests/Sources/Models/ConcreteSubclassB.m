@@ -7,6 +7,7 @@
 #import "ConcreteSubclassB.h"
 
 #import "TestErrors.h"
+#import <CoconutKit/CoconutKit.h>
 
 @implementation ConcreteSubclassB
 

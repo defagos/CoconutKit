@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
+#import <CoconutKit/CoconutKit.h>
+#import <XCTest/XCTest.h>
+
 @interface NSCalendar_HLSExtensionsTestCase : XCTestCase
 
 @property (nonatomic) NSCalendar *calendarZurich;
@@ -28,10 +31,10 @@
     // CET is used for the rest of the year. Pacific/Tahiti does not use daylight saving times. In summary:
     //   - when Europe/Zurich uses CET (UTC+1): Zurich is 11 hours ahead of Tahiti (UTC-10)
     //   - when Europe/Zurich uses CEST (UTC+2): Zurich is 12 hours ahead of Tahiti (UTC-10)
-    self.calendarZurich = [NSCalendar calendarWithIdentifier:NSGregorianCalendar];
+    self.calendarZurich = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.calendarZurich.timeZone = [NSTimeZone timeZoneWithName:@"Europe/Zurich"];
     
-    self.calendarTahiti = [NSCalendar calendarWithIdentifier:NSGregorianCalendar];
+    self.calendarTahiti = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.calendarTahiti.timeZone = [NSTimeZone timeZoneWithName:@"Pacific/Tahiti"];
     
     // The two dates below correspond to days which are different whether we are in the Zurich time zone or in the Tahiti time zone
@@ -63,34 +66,34 @@
 
 - (void)testNumberOfDaysInUnitContainingDate
 {
-    NSUInteger nbrDaysInMonthZurich1 = [self.calendarZurich numberOfDaysInUnit:NSMonthCalendarUnit containingDate:self.date1];
+    NSUInteger nbrDaysInMonthZurich1 = [self.calendarZurich numberOfDaysInUnit:NSCalendarUnitMonth containingDate:self.date1];
     XCTAssertEqual(nbrDaysInMonthZurich1, (NSUInteger)31);
     
-    NSUInteger nbrDaysInYearZurich1 = [self.calendarZurich numberOfDaysInUnit:NSYearCalendarUnit containingDate:self.date1];
+    NSUInteger nbrDaysInYearZurich1 = [self.calendarZurich numberOfDaysInUnit:NSCalendarUnitYear containingDate:self.date1];
     XCTAssertEqual(nbrDaysInYearZurich1, (NSUInteger)366);
     
-    NSUInteger nbrDaysInMonthZurich2 = [self.calendarZurich numberOfDaysInUnit:NSMonthCalendarUnit containingDate:self.date2];
+    NSUInteger nbrDaysInMonthZurich2 = [self.calendarZurich numberOfDaysInUnit:NSCalendarUnitMonth containingDate:self.date2];
     XCTAssertEqual(nbrDaysInMonthZurich2, (NSUInteger)31);
     
-    NSUInteger nbrDaysInYearZurich2 = [self.calendarZurich numberOfDaysInUnit:NSYearCalendarUnit containingDate:self.date2];
+    NSUInteger nbrDaysInYearZurich2 = [self.calendarZurich numberOfDaysInUnit:NSCalendarUnitYear containingDate:self.date2];
     XCTAssertEqual(nbrDaysInYearZurich2, (NSUInteger)366);
     
-    NSUInteger nbrDaysInMonthTahiti1 = [self.calendarTahiti numberOfDaysInUnit:NSMonthCalendarUnit containingDate:self.date1];
+    NSUInteger nbrDaysInMonthTahiti1 = [self.calendarTahiti numberOfDaysInUnit:NSCalendarUnitMonth containingDate:self.date1];
     XCTAssertEqual(nbrDaysInMonthTahiti1, (NSUInteger)31);
     
-    NSUInteger nbrDaysInYearTahiti1 = [self.calendarTahiti numberOfDaysInUnit:NSYearCalendarUnit containingDate:self.date1];
+    NSUInteger nbrDaysInYearTahiti1 = [self.calendarTahiti numberOfDaysInUnit:NSCalendarUnitYear containingDate:self.date1];
     XCTAssertEqual(nbrDaysInYearTahiti1, (NSUInteger)365);
     
-    NSUInteger nbrDaysInMonthTahiti2 = [self.calendarTahiti numberOfDaysInUnit:NSMonthCalendarUnit containingDate:self.date2];
+    NSUInteger nbrDaysInMonthTahiti2 = [self.calendarTahiti numberOfDaysInUnit:NSCalendarUnitMonth containingDate:self.date2];
     XCTAssertEqual(nbrDaysInMonthTahiti2, (NSUInteger)29);
     
-    NSUInteger nbrDaysInYearTahiti2 = [self.calendarTahiti numberOfDaysInUnit:NSYearCalendarUnit containingDate:self.date2];
+    NSUInteger nbrDaysInYearTahiti2 = [self.calendarTahiti numberOfDaysInUnit:NSCalendarUnitYear containingDate:self.date2];
     XCTAssertEqual(nbrDaysInYearTahiti2, (NSUInteger)366);
 }
 
 - (void)testStartDateOfUnitContainingDate
 {
-    NSDate *startDateMonthZurich1 = [self.calendarZurich startDateOfUnit:NSMonthCalendarUnit containingDate:self.date1];
+    NSDate *startDateMonthZurich1 = [self.calendarZurich startDateOfUnit:NSCalendarUnitMonth containingDate:self.date1];
     NSDateComponents *expectedStartDateMonthComponentsZurich1 = [[NSDateComponents alloc] init];
     expectedStartDateMonthComponentsZurich1.year = 2012;
     expectedStartDateMonthComponentsZurich1.month = 1;
@@ -98,7 +101,7 @@
     NSDate *expectedStartDateMonthZurich1 = [self.calendarZurich dateFromComponents:expectedStartDateMonthComponentsZurich1];
     XCTAssertTrue([startDateMonthZurich1 isEqualToDate:expectedStartDateMonthZurich1]);
     
-    NSDate *startDateYearZurich1 = [self.calendarZurich startDateOfUnit:NSYearCalendarUnit containingDate:self.date1];
+    NSDate *startDateYearZurich1 = [self.calendarZurich startDateOfUnit:NSCalendarUnitYear containingDate:self.date1];
     NSDateComponents *expectedStartDateYearComponentsZurich1 = [[NSDateComponents alloc] init];
     expectedStartDateYearComponentsZurich1.year = 2012;
     expectedStartDateYearComponentsZurich1.month = 1;
@@ -106,7 +109,7 @@
     NSDate *expectedStartDateYearZurich1 = [self.calendarZurich dateFromComponents:expectedStartDateYearComponentsZurich1];
     XCTAssertTrue([startDateYearZurich1 isEqualToDate:expectedStartDateYearZurich1]);
     
-    NSDate *startDateMonthZurich2 = [self.calendarZurich startDateOfUnit:NSMonthCalendarUnit containingDate:self.date2];
+    NSDate *startDateMonthZurich2 = [self.calendarZurich startDateOfUnit:NSCalendarUnitMonth containingDate:self.date2];
     NSDateComponents *expectedStartDateMonthComponentsZurich2 = [[NSDateComponents alloc] init];
     expectedStartDateMonthComponentsZurich2.year = 2012;
     expectedStartDateMonthComponentsZurich2.month = 3;
@@ -114,7 +117,7 @@
     NSDate *expectedStartDateMonthZurich2 = [self.calendarZurich dateFromComponents:expectedStartDateMonthComponentsZurich2];
     XCTAssertTrue([startDateMonthZurich2 isEqualToDate:expectedStartDateMonthZurich2]);
     
-    NSDate *startDateYearZurich2 = [self.calendarZurich startDateOfUnit:NSYearCalendarUnit containingDate:self.date2];
+    NSDate *startDateYearZurich2 = [self.calendarZurich startDateOfUnit:NSCalendarUnitYear containingDate:self.date2];
     NSDateComponents *expectedStartDateYearComponentsZurich2 = [[NSDateComponents alloc] init];
     expectedStartDateYearComponentsZurich2.year = 2012;
     expectedStartDateYearComponentsZurich2.month = 1;
@@ -122,7 +125,7 @@
     NSDate *expectedStartDateYearZurich2 = [self.calendarZurich dateFromComponents:expectedStartDateYearComponentsZurich2];
     XCTAssertTrue([startDateYearZurich2 isEqualToDate:expectedStartDateYearZurich2]);
     
-    NSDate *startDateMonthTahiti1 = [self.calendarTahiti startDateOfUnit:NSMonthCalendarUnit containingDate:self.date1];
+    NSDate *startDateMonthTahiti1 = [self.calendarTahiti startDateOfUnit:NSCalendarUnitMonth containingDate:self.date1];
     NSDateComponents *expectedStartDateMonthComponentsTahiti1 = [[NSDateComponents alloc] init];
     expectedStartDateMonthComponentsTahiti1.year = 2011;
     expectedStartDateMonthComponentsTahiti1.month = 12;
@@ -130,7 +133,7 @@
     NSDate *expectedStartDateMonthTahiti1 = [self.calendarTahiti dateFromComponents:expectedStartDateMonthComponentsTahiti1];
     XCTAssertTrue([startDateMonthTahiti1 isEqualToDate:expectedStartDateMonthTahiti1]);
     
-    NSDate *startDateYearTahiti1 = [self.calendarTahiti startDateOfUnit:NSYearCalendarUnit containingDate:self.date1];
+    NSDate *startDateYearTahiti1 = [self.calendarTahiti startDateOfUnit:NSCalendarUnitYear containingDate:self.date1];
     NSDateComponents *expectedStartDateYearComponentsTahiti1 = [[NSDateComponents alloc] init];
     expectedStartDateYearComponentsTahiti1.year = 2011;
     expectedStartDateYearComponentsTahiti1.month = 1;
@@ -138,7 +141,7 @@
     NSDate *expectedStartDateYearTahiti1 = [self.calendarTahiti dateFromComponents:expectedStartDateYearComponentsTahiti1];
     XCTAssertTrue([startDateYearTahiti1 isEqualToDate:expectedStartDateYearTahiti1]);
     
-    NSDate *startDateMonthTahiti2 = [self.calendarTahiti startDateOfUnit:NSMonthCalendarUnit containingDate:self.date2];
+    NSDate *startDateMonthTahiti2 = [self.calendarTahiti startDateOfUnit:NSCalendarUnitMonth containingDate:self.date2];
     NSDateComponents *expectedStartDateMonthComponentsTahiti2 = [[NSDateComponents alloc] init];
     expectedStartDateMonthComponentsTahiti2.year = 2012;
     expectedStartDateMonthComponentsTahiti2.month = 2;
@@ -146,7 +149,7 @@
     NSDate *expectedStartDateMonthTahiti2 = [self.calendarTahiti dateFromComponents:expectedStartDateMonthComponentsTahiti2];
     XCTAssertTrue([startDateMonthTahiti2 isEqualToDate:expectedStartDateMonthTahiti2]);
     
-    NSDate *startDateYearTahiti2 = [self.calendarTahiti startDateOfUnit:NSYearCalendarUnit containingDate:self.date2];
+    NSDate *startDateYearTahiti2 = [self.calendarTahiti startDateOfUnit:NSCalendarUnitYear containingDate:self.date2];
     NSDateComponents *expectedStartDateYearComponentsTahiti2 = [[NSDateComponents alloc] init];
     expectedStartDateYearComponentsTahiti2.year = 2012;
     expectedStartDateYearComponentsTahiti2.month = 1;
@@ -157,7 +160,7 @@
 
 - (void)testEndDateOfUnitContainingDate
 {
-    NSDate *endDateMonthZurich1 = [self.calendarZurich endDateOfUnit:NSMonthCalendarUnit containingDate:self.date1];
+    NSDate *endDateMonthZurich1 = [self.calendarZurich endDateOfUnit:NSCalendarUnitMonth containingDate:self.date1];
     NSDateComponents *expectedEndDateMonthComponentsZurich1 = [[NSDateComponents alloc] init];
     expectedEndDateMonthComponentsZurich1.year = 2012;
     expectedEndDateMonthComponentsZurich1.month = 2;
@@ -165,7 +168,7 @@
     NSDate *expectedEndDateMonthZurich1 = [self.calendarZurich dateFromComponents:expectedEndDateMonthComponentsZurich1];
     XCTAssertTrue([endDateMonthZurich1 isEqualToDate:expectedEndDateMonthZurich1]);
     
-    NSDate *endDateYearZurich1 = [self.calendarZurich endDateOfUnit:NSYearCalendarUnit containingDate:self.date1];
+    NSDate *endDateYearZurich1 = [self.calendarZurich endDateOfUnit:NSCalendarUnitYear containingDate:self.date1];
     NSDateComponents *expectedEndDateYearComponentsZurich1 = [[NSDateComponents alloc] init];
     expectedEndDateYearComponentsZurich1.year = 2013;
     expectedEndDateYearComponentsZurich1.month = 1;
@@ -173,7 +176,7 @@
     NSDate *expectedEndDateYearZurich1 = [self.calendarZurich dateFromComponents:expectedEndDateYearComponentsZurich1];
     XCTAssertTrue([endDateYearZurich1 isEqualToDate:expectedEndDateYearZurich1]);
     
-    NSDate *endDateMonthZurich2 = [self.calendarZurich endDateOfUnit:NSMonthCalendarUnit containingDate:self.date2];
+    NSDate *endDateMonthZurich2 = [self.calendarZurich endDateOfUnit:NSCalendarUnitMonth containingDate:self.date2];
     NSDateComponents *expectedEndDateMonthComponentsZurich2 = [[NSDateComponents alloc] init];
     expectedEndDateMonthComponentsZurich2.year = 2012;
     expectedEndDateMonthComponentsZurich2.month = 4;
@@ -181,7 +184,7 @@
     NSDate *expectedEndDateMonthZurich2 = [self.calendarZurich dateFromComponents:expectedEndDateMonthComponentsZurich2];
     XCTAssertTrue([endDateMonthZurich2 isEqualToDate:expectedEndDateMonthZurich2]);
     
-    NSDate *endDateYearZurich2 = [self.calendarZurich endDateOfUnit:NSYearCalendarUnit containingDate:self.date2];
+    NSDate *endDateYearZurich2 = [self.calendarZurich endDateOfUnit:NSCalendarUnitYear containingDate:self.date2];
     NSDateComponents *expectedEndDateYearComponentsZurich2 = [[NSDateComponents alloc] init];
     expectedEndDateYearComponentsZurich2.year = 2013;
     expectedEndDateYearComponentsZurich2.month = 1;
@@ -189,7 +192,7 @@
     NSDate *expectedEndDateYearZurich2 = [self.calendarZurich dateFromComponents:expectedEndDateYearComponentsZurich2];
     XCTAssertTrue([endDateYearZurich2 isEqualToDate:expectedEndDateYearZurich2]);
     
-    NSDate *endDateMonthTahiti1 = [self.calendarTahiti endDateOfUnit:NSMonthCalendarUnit containingDate:self.date1];
+    NSDate *endDateMonthTahiti1 = [self.calendarTahiti endDateOfUnit:NSCalendarUnitMonth containingDate:self.date1];
     NSDateComponents *expectedEndDateMonthComponentsTahiti1 = [[NSDateComponents alloc] init];
     expectedEndDateMonthComponentsTahiti1.year = 2012;
     expectedEndDateMonthComponentsTahiti1.month = 1;
@@ -197,7 +200,7 @@
     NSDate *expectedEndDateMonthTahiti1 = [self.calendarTahiti dateFromComponents:expectedEndDateMonthComponentsTahiti1];
     XCTAssertTrue([endDateMonthTahiti1 isEqualToDate:expectedEndDateMonthTahiti1]);
     
-    NSDate *endDateYearTahiti1 = [self.calendarTahiti endDateOfUnit:NSYearCalendarUnit containingDate:self.date1];
+    NSDate *endDateYearTahiti1 = [self.calendarTahiti endDateOfUnit:NSCalendarUnitYear containingDate:self.date1];
     NSDateComponents *expectedEndDateYearComponentsTahiti1 = [[NSDateComponents alloc] init];
     expectedEndDateYearComponentsTahiti1.year = 2012;
     expectedEndDateYearComponentsTahiti1.month = 1;
@@ -205,7 +208,7 @@
     NSDate *expectedEndDateYearTahiti1 = [self.calendarTahiti dateFromComponents:expectedEndDateYearComponentsTahiti1];
     XCTAssertTrue([endDateYearTahiti1 isEqualToDate:expectedEndDateYearTahiti1]);
     
-    NSDate *endDateMonthTahiti2 = [self.calendarTahiti endDateOfUnit:NSMonthCalendarUnit containingDate:self.date2];
+    NSDate *endDateMonthTahiti2 = [self.calendarTahiti endDateOfUnit:NSCalendarUnitMonth containingDate:self.date2];
     NSDateComponents *expectedEndDateMonthComponentsTahiti2 = [[NSDateComponents alloc] init];
     expectedEndDateMonthComponentsTahiti2.year = 2012;
     expectedEndDateMonthComponentsTahiti2.month = 3;
@@ -213,7 +216,7 @@
     NSDate *expectedEndDateMonthTahiti2 = [self.calendarTahiti dateFromComponents:expectedEndDateMonthComponentsTahiti2];
     XCTAssertTrue([endDateMonthTahiti2 isEqualToDate:expectedEndDateMonthTahiti2]);
     
-    NSDate *endDateYearTahiti2 = [self.calendarTahiti endDateOfUnit:NSYearCalendarUnit containingDate:self.date2];
+    NSDate *endDateYearTahiti2 = [self.calendarTahiti endDateOfUnit:NSCalendarUnitYear containingDate:self.date2];
     NSDateComponents *expectedEndDateYearComponentsTahiti2 = [[NSDateComponents alloc] init];
     expectedEndDateYearComponentsTahiti2.year = 2013;
     expectedEndDateYearComponentsTahiti2.month = 1;

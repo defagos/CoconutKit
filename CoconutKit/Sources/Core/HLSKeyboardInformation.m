@@ -8,17 +8,6 @@
 
 #import "HLSLogger.h"
 
-// FIXME: There are serious bugs with the undocked keyboard in iOS 8 / 8.1:
-//          - when undocked by dragging the keyboard upwards, the keyboard does not transition to undocked state. The
-//            hide notifications are not received and, if you long-press the keyboard button, the keyboard can still
-//            be undocked. The behavior is correct when the keyboard is undocked by long-pressing the keyboard button
-//            and tapping Undock. See http://openradar.appspot.com/18010127.
-//          - conversely, when the undocked keyboard is thrown against the bottom, depending on the velocity, show
-//            notifications might be received or not
-//          - when moving the undocked the keyboard to the top, the keyboard jumps everywhere like mad
-//          - the keyboard background has a really weird behavior, sometimes appears and never disappears, sometimes
-//            gets bigger and then suddenly smaller, etc.
-
 @interface HLSKeyboardInformation ()
 
 @property (nonatomic) CGRect beginFrame;

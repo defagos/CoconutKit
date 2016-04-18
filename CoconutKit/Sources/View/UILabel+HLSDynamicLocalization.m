@@ -204,7 +204,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
     
     // Avoid button label truncation when the localization changes (setting the title triggers a sizeToFit), and fixes
     // issues with the button label tint color. If we only change the label text, we namely face some minor issues
-    // related to how iOS 7 handles buttons. The expected behavior is:
+    // related to how iOS handles buttons. The expected behavior is:
     //   - the label tint color of buttons changes when clicking on them, if only a title is assigned for the normal
     //     state
     //   - when a popover is displayed, the tint color of button labels is changed (private UIViewVisitorEntertainVisitors)

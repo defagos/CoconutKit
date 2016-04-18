@@ -7,6 +7,7 @@
 #import "AbstractClassA.h"
 
 #import "TestErrors.h"
+#import <CoconutKit/CoconutKit.h>
 
 @implementation AbstractClassA
 

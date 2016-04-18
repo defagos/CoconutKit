@@ -28,7 +28,6 @@
 #import "AnimationDemoViewController.h"
 #import "SlideshowDemoViewController.h"
 #import "StackDemoViewController.h"
-#import "TableSearchDisplayDemoViewController.h"
 #import "BindingsViewsDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
@@ -103,7 +102,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
     ViewControllersDemoIndexPlaceholderViewController = ViewControllersDemoIndexEnumBegin,
     ViewControllersDemoIndexWizardViewController,
     ViewControllersDemoIndexStackController,
-    ViewControllersDemoIndexTableSearchDisplayViewController,
     ViewControllersDemoIndexWebViewController,
     ViewControllersDemoIndexSegue,
     ViewControllersDemoIndexEnumEnd,
@@ -393,11 +391,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewControllersDemoIndexTableSearchDisplayViewController: {
-                    cell.textLabel.text = @"HLSTableSearchDisplayController";
-                    break;
-                }
-                
                 case ViewControllersDemoIndexWebViewController: {
                     cell.textLabel.text = @"HLSWebViewController";
                     break;
@@ -594,11 +587,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     
                 case ViewControllersDemoIndexStackController: {
                     demoViewController = [[StackDemoViewController alloc] init];
-                    break;
-                }
-                    
-                case ViewControllersDemoIndexTableSearchDisplayViewController: {
-                    demoViewController = [[TableSearchDisplayDemoViewController alloc] init];
                     break;
                 }
                 

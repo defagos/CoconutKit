@@ -101,22 +101,13 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 {
     [super viewDidLoad];
     
-    // Ensure correct orientation, even if the VC is presented while in landscape orientation
-    
-    // Since iOS 8: Rotation has completely changed (the view frame only is changed, no rotation transform is applied anymore).
-    UIView *previousWindowRootView = s_previousKeyWindow.rootViewController.view;
-    if (! [self.view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-        // iOS 7: Apply the same transform as the previous key window
-        self.view.transform = previousWindowRootView.transform;
-    }
     self.view.frame = [UIScreen mainScreen].bounds;
-    
     [self displayDebugInformationForBindingsInView:self.debuggedWindow];
     
     __weak __typeof(self) weakSelf = self;
     
     // Follow the motion of underlying views if a scroll view they are in is moved
-    NSArray *scrollViews = [HLSViewBindingDebugOverlayViewController scrollViewsInView:previousWindowRootView];
+    NSArray *scrollViews = [HLSViewBindingDebugOverlayViewController scrollViewsInView:s_previousKeyWindow.rootViewController.view];
     for (UIScrollView *scrollView in scrollViews) {
         [scrollView addObserver:self keyPath:@"contentOffset" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
             [weakSelf updateOverlayViewFrames];
@@ -136,22 +127,6 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return [super supportedInterfaceOrientations] & [self.debuggedWindow.rootViewController supportedInterfaceOrientations];
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    // Workaround rotation glitches with multiple windows (black screen)
-    s_overlayWindow.hidden = YES;
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    // See above
-    s_overlayWindow.hidden = NO;
 }
 
 #pragma mark Debug information display
@@ -190,17 +165,8 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 
 - (CGRect)overlayViewFrameForView:(UIView *)view margin:(CGFloat)margin
 {
-    // iOS 8: Since no rotation is applied anymore, we must use another method to convert view frames
-    CGRect frame = CGRectZero;
-    if ([view respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-        frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
-    }
-    // Pre-iOS 8: The usual conversion gives correct results for views, even in different windows
-    else {
-        frame = [view convertRect:view.bounds toView:self.view];
-    }
-    
     // Make the button frame surround the view
+    CGRect frame = [view convertRect:view.bounds toCoordinateSpace:self.view];
     return CGRectMake(CGRectGetMinX(frame) - margin,
                       CGRectGetMinY(frame) - margin,
                       CGRectGetWidth(frame) + 2 * margin,

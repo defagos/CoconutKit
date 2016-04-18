@@ -87,22 +87,6 @@
     HLSLoggerInfo(@"Called for object %@, parent is %@", self, parentViewController);    
 }
 
-#pragma mark Orientation management
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    HLSLoggerInfo(@"interfaceOrientation = %@", HLSStringFromInterfaceOrientation(self.interfaceOrientation));
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    HLSLoggerInfo(@"interfaceOrientation = %@", HLSStringFromInterfaceOrientation(self.interfaceOrientation));
-}
-
 #pragma mark Localization
 
 - (void)localize

@@ -38,10 +38,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  * to implement perfect containers. This is not the case with HLSContainerStack, which provides a robust way to 
  * implement the containers of your dreams.
  *
- * HLSContainerStack uses the smoother 1-step rotation available from iOS 3. You cannot use the 2-step rotation methods
- * for view controllers you insert in it (they will be ignored, see UIViewController documentation). The 2-step rotation 
- * is deprecated starting with iOS 5, you should not use it anymore in your view controller implementations anyway.
- *
  * A lot of work has been made to provide a clean and powerful interface letting you easily implement containers with
  * correct behavior. Most notably:
  *   - view lifecycle and rotation events are correctly forwarded to children view controllers
@@ -98,12 +94,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
  *     -viewDidAppear:
  *     -viewWillDisappear:
  *     -viewDidDisappear:
- *     -shouldAutorotateToInterfaceOrientation:
- *     -willRotateToInterfaceOrientation:duration:
- *     -willAnimateRotationToInterfaceOrientation:duration:
- *     -didRotateFromInterfaceOrientation:duration:
- * (the deprecated 2-step rotation methods are not supported, you should not have your own containers implement
- * them)
  *
  * Also do not forget to set a containerView, either in your container -loadView or -viewDidLoad methods
  *
@@ -331,24 +321,6 @@ extern const NSUInteger HLSContainerStackUnlimitedCapacity;
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations;
 
 /**
- * Call this method from your container view controller -willRotateToInterfaceOrientation:duration: method, otherwise 
- * the behavior is undefined
- */
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
-
-/**
- * Call this method from your container view controller -willAnimateRotationToInterfaceOrientation:duration: method, 
- * otherwise the behavior is undefined
- */
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
-
-/**
- * Call this method from your container view controller -didRotateFromInterfaceOrientation:duration: method, otherwise 
- * the behavior is undefined
- */
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation;
-
-/**
  * Call this method from your container view controller -preferredStatusBarStyle method if children must participate
  * to the status bar behavior
  */
@@ -457,15 +429,6 @@ willHideViewController:(__kindof UIViewController *)viewController
  * parameter, lookup is performed for any kind of CoconutKit-based container
  */
 - (__kindof UIViewController *)containerViewControllerKindOfClass:(nullable Class)containerViewControllerClass;
-
-/**
- * Return the interface orientation used for displaying the view controller. For view controllers not embedded into
- * CoconutKit containers, this value is the same as the one returned by -[UIViewController interfaceOrientation], 
- * matching the status bar orientation. For view controllers embedded into CoconutKit containers, this is the 
- * orientation of the view controller, compatible with the container, which has been used for display (this might
- * not necessarily match the status bar orientation)
- */
-@property (nonatomic, readonly) UIInterfaceOrientation displayedInterfaceOrientation;
 
 @end
 

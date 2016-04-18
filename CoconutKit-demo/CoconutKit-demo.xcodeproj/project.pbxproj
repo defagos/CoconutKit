@@ -51,8 +51,6 @@
 		E67CF4E01AC2839200AA0C3B /* BindingsPerformance2DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F04E3611A1C864000C6C08B /* BindingsPerformance2DemoViewController.m */; };
 		E67CF4E11AC2839200AA0C3B /* RootStackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C461C14C5C30B00824AB2 /* RootStackDemoViewController.m */; };
 		E67CF4E21AC2839200AA0C3B /* StackDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462014C5C30B00824AB2 /* StackDemoViewController.m */; };
-		E67CF4E31AC2839200AA0C3B /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462414C5C30B00824AB2 /* DeviceInfo.m */; };
-		E67CF4E41AC2839200AA0C3B /* TableSearchDisplayDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462614C5C30B00824AB2 /* TableSearchDisplayDemoViewController.m */; };
 		E67CF4E51AC2839200AA0C3B /* WizardAddressPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462A14C5C30B00824AB2 /* WizardAddressPageViewController.m */; };
 		E67CF4E61AC2839200AA0C3B /* WizardDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C462D14C5C30B00824AB2 /* WizardDemoViewController.m */; };
 		E67CF4E71AC2839200AA0C3B /* WizardIdentityPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9C463014C5C30B00824AB2 /* WizardIdentityPageViewController.m */; };
@@ -141,7 +139,6 @@
 		E67CF53E1AC2839200AA0C3B /* AutolayoutTopRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173361A654BA90066C42C /* AutolayoutTopRightNibView.xib */; };
 		E67CF53F1AC2839200AA0C3B /* BindingsViewsDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E36A1A1C864000C6C08B /* BindingsViewsDemoViewController.xib */; };
 		E67CF5401AC2839200AA0C3B /* AutoresizingMaskRightNibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E61173831A654D830066C42C /* AutoresizingMaskRightNibView.xib */; };
-		E67CF5411AC2839200AA0C3B /* TableSearchDisplayDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462714C5C30B00824AB2 /* TableSearchDisplayDemoViewController.xib */; };
 		E67CF5421AC2839200AA0C3B /* BindingsPerformance1DemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F04E35F1A1C864000C6C08B /* BindingsPerformance1DemoViewController.xib */; };
 		E67CF5431AC2839200AA0C3B /* WizardAddressPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */; };
 		E67CF5441AC2839200AA0C3B /* WizardIdentityPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F9C463114C5C30B00824AB2 /* WizardIdentityPageViewController.xib */; };
@@ -276,7 +273,6 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoconutKit-demo-Prefix.pch"; sourceTree = "<group>"; };
 		6F04E3571A1C864000C6C08B /* BindingsControlsDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingsControlsDemoViewController.h; sourceTree = "<group>"; };
 		6F04E3581A1C864000C6C08B /* BindingsControlsDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingsControlsDemoViewController.m; sourceTree = "<group>"; };
 		6F04E3591A1C864000C6C08B /* BindingsControlsDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingsControlsDemoViewController.xib; sourceTree = "<group>"; };
@@ -432,11 +428,6 @@
 		6F9C461F14C5C30B00824AB2 /* StackDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackDemoViewController.h; sourceTree = "<group>"; };
 		6F9C462014C5C30B00824AB2 /* StackDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StackDemoViewController.m; sourceTree = "<group>"; };
 		6F9C462114C5C30B00824AB2 /* StackDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StackDemoViewController.xib; sourceTree = "<group>"; };
-		6F9C462314C5C30B00824AB2 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
-		6F9C462414C5C30B00824AB2 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
-		6F9C462514C5C30B00824AB2 /* TableSearchDisplayDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSearchDisplayDemoViewController.h; sourceTree = "<group>"; };
-		6F9C462614C5C30B00824AB2 /* TableSearchDisplayDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSearchDisplayDemoViewController.m; sourceTree = "<group>"; };
-		6F9C462714C5C30B00824AB2 /* TableSearchDisplayDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableSearchDisplayDemoViewController.xib; sourceTree = "<group>"; };
 		6F9C462914C5C30B00824AB2 /* WizardAddressPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WizardAddressPageViewController.h; sourceTree = "<group>"; };
 		6F9C462A14C5C30B00824AB2 /* WizardAddressPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WizardAddressPageViewController.m; sourceTree = "<group>"; };
 		6F9C462B14C5C30B00824AB2 /* WizardAddressPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WizardAddressPageViewController.xib; sourceTree = "<group>"; };
@@ -645,7 +636,6 @@
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* CoconutKit-demo-Info.plist */,
-				32CA4F630368D1EE00C91783 /* CoconutKit-demo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1056,7 +1046,6 @@
 				6F0BFDFE163EED5800420A5F /* RootTabBar */,
 				6FC3A2A0159E0422001A290E /* Segue */,
 				6F9C461E14C5C30B00824AB2 /* Stack */,
-				6F9C462214C5C30B00824AB2 /* TableSearchDisplay */,
 				6F9C462814C5C30B00824AB2 /* Wizard */,
 			);
 			path = ViewControllers;
@@ -1090,18 +1079,6 @@
 				6F9C462114C5C30B00824AB2 /* StackDemoViewController.xib */,
 			);
 			path = Stack;
-			sourceTree = "<group>";
-		};
-		6F9C462214C5C30B00824AB2 /* TableSearchDisplay */ = {
-			isa = PBXGroup;
-			children = (
-				6F9C462314C5C30B00824AB2 /* DeviceInfo.h */,
-				6F9C462414C5C30B00824AB2 /* DeviceInfo.m */,
-				6F9C462514C5C30B00824AB2 /* TableSearchDisplayDemoViewController.h */,
-				6F9C462614C5C30B00824AB2 /* TableSearchDisplayDemoViewController.m */,
-				6F9C462714C5C30B00824AB2 /* TableSearchDisplayDemoViewController.xib */,
-			);
-			path = TableSearchDisplay;
 			sourceTree = "<group>";
 		};
 		6F9C462814C5C30B00824AB2 /* Wizard */ = {
@@ -1552,7 +1529,6 @@
 				E67CF53E1AC2839200AA0C3B /* AutolayoutTopRightNibView.xib in Resources */,
 				E67CF53F1AC2839200AA0C3B /* BindingsViewsDemoViewController.xib in Resources */,
 				E67CF5401AC2839200AA0C3B /* AutoresizingMaskRightNibView.xib in Resources */,
-				E67CF5411AC2839200AA0C3B /* TableSearchDisplayDemoViewController.xib in Resources */,
 				E67CF5421AC2839200AA0C3B /* BindingsPerformance1DemoViewController.xib in Resources */,
 				E67CF5431AC2839200AA0C3B /* WizardAddressPageViewController.xib in Resources */,
 				E67CF5441AC2839200AA0C3B /* WizardIdentityPageViewController.xib in Resources */,
@@ -1696,8 +1672,6 @@
 				E67CF4E01AC2839200AA0C3B /* BindingsPerformance2DemoViewController.m in Sources */,
 				E67CF4E11AC2839200AA0C3B /* RootStackDemoViewController.m in Sources */,
 				E67CF4E21AC2839200AA0C3B /* StackDemoViewController.m in Sources */,
-				E67CF4E31AC2839200AA0C3B /* DeviceInfo.m in Sources */,
-				E67CF4E41AC2839200AA0C3B /* TableSearchDisplayDemoViewController.m in Sources */,
 				E67CF4E51AC2839200AA0C3B /* WizardAddressPageViewController.m in Sources */,
 				E67CF4E61AC2839200AA0C3B /* WizardDemoViewController.m in Sources */,
 				E67CF4E71AC2839200AA0C3B /* WizardIdentityPageViewController.m in Sources */,
@@ -1873,10 +1847,9 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DHLS_LOGGER";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
@@ -1890,10 +1863,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoconutKit-demo-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "CoconutKit-demo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "CoconutKit (demo)";

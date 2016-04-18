@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
+#import <CoconutKit/CoconutKit.h>
+#import <XCTest/XCTest.h>
+
 @interface NSTimeZone_HLSExtensionsTestCase : XCTestCase
 
 @property (nonatomic) NSTimeZone *timeZoneZurich;
@@ -38,10 +41,10 @@
     
     self.calendar = [NSCalendar currentCalendar];
     
-    self.calendarZurich = [NSCalendar calendarWithIdentifier:NSGregorianCalendar];
+    self.calendarZurich = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.calendarZurich.timeZone = [NSTimeZone timeZoneWithName:@"Europe/Zurich"];
     
-    self.calendarTahiti = [NSCalendar calendarWithIdentifier:NSGregorianCalendar];
+    self.calendarTahiti = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     self.calendarTahiti.timeZone = [NSTimeZone timeZoneWithName:@"Pacific/Tahiti"];
     
     // The two dates below correspond to days which are different whether we are in the Zurich time zone or in the Tahiti time zone
@@ -86,7 +89,7 @@
     // are testing!). We therefore use the system calendar and time zone here
     NSTimeZone *timeZone = self.calendar.timeZone;
     
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
     
     NSDate *dateFromZurich1 = [timeZone dateWithSameComponentsAsDate:self.date1 fromTimeZone:self.timeZoneZurich];
     NSDateComponents *dateComponentsFromZurich1 = [self.calendar components:unitFlags fromDate:dateFromZurich1];
@@ -165,7 +168,7 @@
 
 - (void)testDateByAddingTimeIntervalToDate
 {
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
     
     NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingTimeInterval:10. * 60. * 60. toDate:self.date1];
     NSDateComponents *dateComponentsZurich1 = [self.calendarZurich components:unitFlags fromDate:dateZurich1];
@@ -244,7 +247,7 @@
 
 - (void)testDateByAddingNumberOfDaysToDate
 {
-    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+    NSUInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
     
     NSDate *dateZurich1 = [self.timeZoneZurich dateByAddingNumberOfDays:5 toDate:self.date1];
     NSDateComponents *dateComponentsZurich1 = [self.calendarZurich components:unitFlags fromDate:dateZurich1];

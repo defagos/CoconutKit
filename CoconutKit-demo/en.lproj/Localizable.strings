@@ -113,14 +113,12 @@
 "No children"="No children";
 "Now"="Now";
 "Number of children"="Number of children";
-"Music players"="Music players";
 "Oldest employee age"="Oldest employee age";
 "Other view controller"="Other view controller";
 "Parallax scrolling"="Parallax scrolling";
 "Pause"="Pause";
 "Performance 1"="Performance 1";
 "Performance 2"="Performance 2";
-"Phones"="Phones";
 "Play"="Play";
 "Pop"="Pop";
 "Pop 3 VCs"="Pop 3 VCs";
@@ -167,7 +165,6 @@
 "Stretchable"="Stretchable";
 "String in Localizable.strings"="String in Localizable.strings";
 "Table view cells"="Table view cells";
-"Tablets"="Tablets";
 "Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong"="Tap on the bindings button in the top-right corner and interact with input fields to discover what went wrong";
 "Tasks"="Tasks";
 "Terminate"="Terminate";

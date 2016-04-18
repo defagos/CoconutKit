@@ -7,6 +7,7 @@
 #import "PersonInformation.h"
 
 #import "DemoErrors.h"
+#import <CoconutKit/CoconutKit.h>
 
 @implementation PersonInformation
 
