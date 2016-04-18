@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Protocol to be implemented by classes whose instances want to show interest in receiving binding events. Information 
- * about the binding arameters can be obtained by accessing the bindingInformation property of the boundView parameter
+ * about the binding parameters can be obtained by accessing the bindingInformation property of the boundView parameter
  */
 @protocol HLSViewBindingDelegate <NSObject>
 
