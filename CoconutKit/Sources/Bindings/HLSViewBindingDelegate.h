@@ -20,20 +20,20 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Transformation events. Only received when a transformation is actually required
  */
-- (void)boundView:(UIView *)boundView transformationDidSucceedWithObject:(id)object;
-- (void)boundView:(UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error;
+- (void)boundView:(__kindof UIView *)boundView transformationDidSucceedWithObject:(id)object;
+- (void)boundView:(__kindof UIView *)boundView transformationDidFailWithObject:(id)object error:(NSError *)error;
 
 /**
  * Model check events
  */
-- (void)boundView:(UIView *)boundView checkDidSucceedWithObject:(id)object;
-- (void)boundView:(UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error;
+- (void)boundView:(__kindof UIView *)boundView checkDidSucceedWithObject:(id)object;
+- (void)boundView:(__kindof UIView *)boundView checkDidFailWithObject:(id)object error:(NSError *)error;
 
 /**
  * Model update events
  */
-- (void)boundView:(UIView *)boundView updateDidSucceedWithObject:(id)object;
-- (void)boundView:(UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error;
+- (void)boundView:(__kindof UIView *)boundView updateDidSucceedWithObject:(id)object;
+- (void)boundView:(__kindof UIView *)boundView updateDidFailWithObject:(id)object error:(NSError *)error;
 
 @end
 NS_ASSUME_NONNULL_END
