@@ -258,7 +258,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
             }
             
             CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
-            animationGroup.animations = [NSArray arrayWithArray:animations];
+            animationGroup.animations = [animations copy];
             animationGroup.delegate = self;
             [layer addAnimation:animationGroup forKey:HLSLayerAnimationGroupKey];
         }

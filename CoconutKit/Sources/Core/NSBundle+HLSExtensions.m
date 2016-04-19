@@ -128,9 +128,9 @@
 
 - (NSDictionary *)fullInfoDictionary
 {
-    NSMutableDictionary *fullInfoDictionary = [NSMutableDictionary dictionaryWithDictionary:self.infoDictionary];
+    NSMutableDictionary *fullInfoDictionary = [self.infoDictionary mutableCopy];
     [fullInfoDictionary addEntriesFromDictionary:self.localizedInfoDictionary];
-    return [NSDictionary dictionaryWithDictionary:fullInfoDictionary];
+    return [fullInfoDictionary copy];
 }
 
 @end

@@ -184,12 +184,12 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     self.normalToolbarItems = self.toolbar.items;
     
     // Build the toolbar displayed when the web view is loading content
-    NSMutableArray *loadingToolbarItems = [NSMutableArray arrayWithArray:self.normalToolbarItems];
+    NSMutableArray *loadingToolbarItems = [self.normalToolbarItems mutableCopy];
     UIBarButtonItem *stopBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop
                                                                                        target:self
                                                                                        action:@selector(stop:)];
     loadingToolbarItems[[loadingToolbarItems indexOfObject:self.refreshBarButtonItem]] = stopBarButtonItem;
-    self.loadingToolbarItems = [NSArray arrayWithArray:loadingToolbarItems];
+    self.loadingToolbarItems = [loadingToolbarItems copy];
 }
 
 - (void)viewWillAppear:(BOOL)animated

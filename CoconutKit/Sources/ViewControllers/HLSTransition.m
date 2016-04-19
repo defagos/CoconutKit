@@ -179,7 +179,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray<HLSAnimationStep *> *)coverPushToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
@@ -207,7 +207,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray<HLSAnimationStep *> *)pushLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
@@ -243,7 +243,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep3.duration = 0.;
     [animationSteps addObject:animationStep3];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray<HLSAnimationStep *> *)pushAndFadeLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
@@ -286,7 +286,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep4.duration = 0.;
     [animationSteps addObject:animationStep4];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray<HLSAnimationStep *> *)pushAndToBackLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
@@ -323,7 +323,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep3.duration = 0.;
     [animationSteps addObject:animationStep3];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray<HLSAnimationStep *> *)flowLayerAnimationStepsWithInitialXOffset:(CGFloat)xOffset
@@ -373,7 +373,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep5.duration = 0.;
     [animationSteps addObject:animationStep5];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray<HLSAnimationStep *> *)flipLayerAnimationStepsAroundVectorWithX:(CGFloat)x
@@ -432,7 +432,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep4.duration = 0.3;
     [animationSteps addObject:animationStep4];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray<HLSAnimationStep *> *)rotateLayerAnimationStepsWithAnchorPointXOffset:(CGFloat)xOffset
@@ -497,7 +497,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep4.duration = 0.;
     [animationSteps addObject:animationStep4];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 #pragma mark Default transition implementation
@@ -781,7 +781,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end
@@ -812,7 +812,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end
@@ -843,7 +843,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end
@@ -1115,7 +1115,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end
@@ -1151,7 +1151,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end

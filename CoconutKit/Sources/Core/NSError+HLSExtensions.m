@@ -112,7 +112,7 @@ static Class subclass_class(id self, SEL _cmd);
         return nil;
     }
     
-    NSMutableDictionary *customUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
+    NSMutableDictionary *customUserInfo = [self.userInfo mutableCopy];
     [customUserInfo removeObjectForKey:NSLocalizedDescriptionKey];
     [customUserInfo removeObjectForKey:NSLocalizedFailureReasonErrorKey];
     [customUserInfo removeObjectForKey:NSLocalizedRecoverySuggestionErrorKey];
@@ -120,14 +120,14 @@ static Class subclass_class(id self, SEL _cmd);
     [customUserInfo removeObjectForKey:NSRecoveryAttempterErrorKey];
     [customUserInfo removeObjectForKey:NSHelpAnchorErrorKey];
     [customUserInfo removeObjectForKey:NSUnderlyingErrorKey];
-    return [NSDictionary dictionaryWithDictionary:customUserInfo];
+    return [customUserInfo copy];
 }
 
 - (NSMutableDictionary *)mutableUserInfo
 {
     NSMutableDictionary *mutableUserInfo = hls_getAssociatedObject(self, s_mutableUserInfoKey);
     if (! mutableUserInfo) {
-        mutableUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
+        mutableUserInfo = [self.userInfo mutableCopy];
         
         // NSError is immutable, but this makes it rather inconvenient to use (you must set all information
         // as a dictionary when the error is created). This category adds a set of mutators which let you
@@ -250,7 +250,7 @@ static Class subclass_class(id self, SEL _cmd);
 
 static NSDictionary *subclass_userInfo(NSError *self, SEL _cmd)
 {
-    return [NSDictionary dictionaryWithDictionary:[self mutableUserInfo]];
+    return [[self mutableUserInfo] copy];
 }
 
 static Class subclass_class(NSError *self, SEL _cmd)

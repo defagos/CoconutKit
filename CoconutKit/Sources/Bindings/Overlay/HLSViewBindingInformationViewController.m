@@ -112,7 +112,7 @@
                                                                                                   text:statusString];
     [statusEntries addObject:statusEntry];
     
-    return [NSArray arrayWithArray:statusEntries];
+    return [statusEntries copy];
 }
 
 - (NSArray<HLSViewBindingInformationEntry *> *)capabilitiesEntries
@@ -133,7 +133,7 @@
         [capabilitiesEntries addObject:canUpdateEntry];
     }
     
-    return [NSArray arrayWithArray:capabilitiesEntries];
+    return [capabilitiesEntries copy];
 }
 
 - (NSArray<HLSViewBindingInformationEntry *> *)parameterEntries
@@ -158,7 +158,7 @@
         [parameterEntries addObject:bindInputCheckedEntry];
     }
     
-    return [NSArray arrayWithArray:parameterEntries];
+    return [parameterEntries copy];
 }
 
 - (NSArray<HLSViewBindingInformationEntry *> *)resolvedInformationEntries
@@ -202,7 +202,7 @@
                                                                                                     text:NSStringFromClass(self.bindingInformation.rawClass)];
     [resolvedInformationEntries addObject:rawClassEntry];
     
-    return [NSArray arrayWithArray:resolvedInformationEntries];
+    return [resolvedInformationEntries copy];
 }
 
 - (NSArray<HLSViewBindingInformationEntry *> *)valueEntries
@@ -223,7 +223,7 @@
                                                                                                object:self.bindingInformation.value];
     [valueEntries addObject:valueEntry];
     
-    return [NSArray arrayWithArray:valueEntries];
+    return [valueEntries copy];
 }
 
 - (void)reloadEntries
@@ -234,7 +234,7 @@
     [entries addObject:[self parameterEntries]];
     [entries addObject:[self resolvedInformationEntries]];
     [entries addObject:[self valueEntries]];
-    self.entries = [NSArray arrayWithArray:entries];
+    self.entries = [entries copy];
 }
 
 - (void)reloadData

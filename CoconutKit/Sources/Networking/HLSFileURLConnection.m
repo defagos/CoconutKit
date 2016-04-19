@@ -91,7 +91,7 @@
             NSURL *fileURL = [NSURL fileURLWithPath:[filePath stringByAppendingPathComponent:contentName]];
             [mutableContents addObject:fileURL];
         }
-        contents = [NSArray arrayWithArray:mutableContents];
+        contents = [mutableContents copy];
     }
     else {
         contents = @[[NSURL fileURLWithPath:filePath]];

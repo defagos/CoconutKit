@@ -12,36 +12,36 @@
 
 - (NSDictionary *)dictionaryBySettingObject:(id)object forKey:(id)key
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
+    NSMutableDictionary *dictionary = [self mutableCopy];
     dictionary[key] = object;
-    return [NSDictionary dictionaryWithDictionary:dictionary];
+    return [dictionary copy];
 }
 
 - (NSDictionary *)dictionaryByRemovingObjectForKey:(id)key
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
+    NSMutableDictionary *dictionary = [self mutableCopy];
     [dictionary removeObjectForKey:key];
-    return [NSDictionary dictionaryWithDictionary:dictionary];
+    return [dictionary copy];
 }
 
 - (NSDictionary *)dictionaryByRemovingObjectsForKeys:(NSArray *)keyArray
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:self];
+    NSMutableDictionary *dictionary = [self mutableCopy];
     [dictionary removeObjectsForKeys:keyArray];
-    return [NSDictionary dictionaryWithDictionary:dictionary];
+    return [dictionary copy];
 }
 
 - (NSDictionary *)dictionaryOverriddenWithEnvironment
 {
     HLSAssertObjectsInEnumerationAreKindOfClass(self.allKeys, NSString);
 
-    NSMutableDictionary *overriddenDictionary = [NSMutableDictionary dictionaryWithDictionary:self];
+    NSMutableDictionary *overriddenDictionary = [self mutableCopy];
     NSDictionary *environment = [NSProcessInfo processInfo].environment;
     for (NSString *key in environment.allKeys) {
         id environmentValue = environment[key];
         overriddenDictionary[key] = environmentValue;
     }
-    return [NSDictionary dictionaryWithDictionary:overriddenDictionary];
+    return [overriddenDictionary copy];
 }
 
 @end

@@ -76,7 +76,7 @@
     animationStep4.duration = 0.;
     [animationSteps addObject:animationStep4];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end
@@ -120,7 +120,7 @@
     animationStep4.duration = 0.15;
     [animationSteps addObject:animationStep4];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 + (NSArray *)reverseLayerAnimationStepsWithAppearingView:(UIView *)appearingView
@@ -138,7 +138,7 @@
     animationStep1.duration = 0.4;
     [animationSteps addObject:animationStep1];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end
@@ -251,7 +251,7 @@
     animationStep2.duration = 0.4;
     [animationSteps addObject:animationStep2];
     
-    return [NSArray arrayWithArray:animationSteps];
+    return [animationSteps copy];
 }
 
 @end

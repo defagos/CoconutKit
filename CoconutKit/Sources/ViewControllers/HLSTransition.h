@@ -95,7 +95,7 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  *       animationStep3.duration = 0.;
  *       [animationSteps addObject:animationStep3];
  *
- *       return [NSArray arrayWithArray:animationSteps];
+ *       return [animationSteps copy];
  *   }
  *
  * Have a look at the CoconutKit source code for more examples (HLSTransition.m). Several built-in transition classes are

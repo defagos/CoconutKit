@@ -71,7 +71,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     for (UIView *subview in view.subviews) {
         [scrollViews addObjectsFromArray:[self scrollViewsInView:subview]];
     }
-    return [NSArray arrayWithArray:scrollViews];
+    return [scrollViews copy];
 }
 
 #pragma mark Object creation and destruction

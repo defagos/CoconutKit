@@ -73,7 +73,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     for (HLSAnimationStep *animationStep in animationSteps) {
         [animationStepCopies addObject:[animationStep copy]];
     }
-    return [NSArray arrayWithArray:animationStepCopies];
+    return [animationStepCopies copy];
 }
 
 #pragma mark Object creation and destruction
@@ -442,7 +442,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
     for (HLSAnimationStep *animationStep in [self.animationSteps reverseObjectEnumerator]) {
         [reverseAnimationSteps addObject:animationStep.reverseAnimationStep];
     }
-    return [NSArray arrayWithArray:reverseAnimationSteps];
+    return [reverseAnimationSteps copy];
 }
 
 - (HLSAnimation *)reverseAnimation
@@ -459,7 +459,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 - (HLSAnimation *)loopAnimation
 {
-    NSMutableArray<HLSAnimationStep *> *animationSteps = [NSMutableArray arrayWithArray:self.animationSteps];
+    NSMutableArray<HLSAnimationStep *> *animationSteps = [self.animationSteps mutableCopy];
     [animationSteps addObjectsFromArray:[self reverseAnimationSteps]];
     
     // Add a loop_ prefix to all animation step tags
@@ -467,7 +467,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         animationStep.tag = animationStep.tag.filled ? [NSString stringWithFormat:@"loop_%@", animationStep.tag] : nil;
     }
     
-    HLSAnimation *loopAnimation = [HLSAnimation animationWithAnimationSteps:[NSArray arrayWithArray:animationSteps]];
+    HLSAnimation *loopAnimation = [HLSAnimation animationWithAnimationSteps:[animationSteps copy]];
     loopAnimation.tag = self.tag.filled ? [NSString stringWithFormat:@"loop_%@", self.tag] : nil;
     loopAnimation.lockingUI = self.lockingUI;
     loopAnimation.delegate = self.delegate;
@@ -528,7 +528,7 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
             HLSAnimationStep *animationStepCopy = [animationStep copyWithZone:zone];
             [animationStepCopies addObject:animationStepCopy];
         }
-        animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:[NSMutableArray arrayWithArray:animationStepCopies]];
+        animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:[animationStepCopies mutableCopy]];
     }
     else {
         animationCopy = [[HLSAnimation allocWithZone:zone] initWithAnimationSteps:nil];

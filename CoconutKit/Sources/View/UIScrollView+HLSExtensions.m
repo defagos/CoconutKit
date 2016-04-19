@@ -158,7 +158,7 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     for (UIView *subview in view.subviews) {
         [keyboardAvoidingScrollViews addObjectsFromArray:[self keyboardAvoidingScrollViewsInView:subview]];
     }
-    return [NSArray arrayWithArray:keyboardAvoidingScrollViews];
+    return [keyboardAvoidingScrollViews copy];
 }
 
 #pragma mark Notification callbacks

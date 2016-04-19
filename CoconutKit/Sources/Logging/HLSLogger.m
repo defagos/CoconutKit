@@ -258,7 +258,7 @@ static NSString * const HLSLoggerFileLoggingEnabledKey = @"HLSLoggerFileLoggingE
             [logFilePaths addObject:logFilePath];
         }
         
-        return [NSArray arrayWithArray:logFilePaths];
+        return [logFilePaths copy];
     }
 }
 

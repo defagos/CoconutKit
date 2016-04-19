@@ -58,7 +58,7 @@
     for (HLSContainerGroupView *groupView in self.groupViews) {
         [contentViews addObject:groupView.frontContentView];
     }
-    return [NSArray arrayWithArray:contentViews];
+    return [contentViews copy];
 }
 
 - (void)insertContentView:(UIView *)contentView atIndex:(NSInteger)index

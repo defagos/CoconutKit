@@ -10,9 +10,9 @@
 
 - (NSArray *)arrayByRemovingLastObject
 {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:self];
+    NSMutableArray *array = [self mutableCopy];
     [array removeLastObject];
-    return [NSArray arrayWithArray:array];
+    return [array copy];
 }
 
 - (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfObjects

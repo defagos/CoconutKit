@@ -174,7 +174,7 @@
             if (relationshipDescription.toMany) {
                 // The set of owned objects might be altered when we duplicate them below. To avoid iterating
                 // over mutating sets, we copy it first
-                NSSet *ownedObjects = [NSSet setWithSet:[managedObjectCopyable valueForKey:relationshipName]];
+                NSSet *ownedObjects = [[managedObjectCopyable valueForKey:relationshipName] copy];
                 NSMutableSet *ownedObjectCopies = [NSMutableSet set];
                 for (NSManagedObject *ownedObject in ownedObjects) {
                     NSManagedObject *ownedObjectCopy = [ownedObject duplicate];
@@ -185,7 +185,7 @@
                         [ownedObjectCopies addObject:ownedObject];
                     }   
                 }
-                [objectCopy setValue:[NSSet setWithSet:ownedObjectCopies] forKey:relationshipName];
+                [objectCopy setValue:[ownedObjectCopies copy] forKey:relationshipName];
             }
             // To-one relationship
             else {

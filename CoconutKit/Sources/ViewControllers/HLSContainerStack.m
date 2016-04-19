@@ -155,7 +155,7 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
     for (HLSContainerContent *containerContent in self.containerContents) {
         [viewControllers addObject:containerContent.viewController];
     }
-    return [NSArray arrayWithArray:viewControllers];
+    return [viewControllers copy];
 }
 
 - (NSUInteger)count

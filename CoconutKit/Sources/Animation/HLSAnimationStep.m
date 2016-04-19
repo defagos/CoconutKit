@@ -71,7 +71,7 @@
         id object = objectKey.nonretainedObjectValue;
         [objects addObject:object];
     }
-    return [NSArray arrayWithArray:objects];
+    return [objects copy];
 }
 
 #pragma mark Animations in the step

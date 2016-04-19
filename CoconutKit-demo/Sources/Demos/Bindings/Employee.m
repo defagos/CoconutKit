@@ -27,7 +27,7 @@
             employee.age = @(arc4random_uniform(40) + 20);
             [employees addObject:employee];
         }
-        s_employees = [NSArray arrayWithArray:employees];
+        s_employees = [employees copy];
         
     });
     return s_employees;
