@@ -40,6 +40,13 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
 
 @implementation UIScrollView (HLSExtensions)
 
+#pragma mark Class methods
+
++ (nullable NSArray<__kindof UIScrollView *> *)adjustedScrollViews
+{
+    return s_adjustedScrollViews.count != 0 ? [s_adjustedScrollViews copy] : nil;
+}
+
 #pragma mark Accessors and mutators
 
 - (BOOL)isAvoidingKeyboard

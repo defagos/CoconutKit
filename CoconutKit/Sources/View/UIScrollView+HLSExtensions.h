@@ -12,6 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIScrollView (HLSExtensions)
 
 /**
+ * Return the list of scroll views which have been adjusted to avoid the keyboard, nil if none. See avoidingKeyboard property
+ * for more information
+ */
++ (nullable NSArray<__kindof UIScrollView *> *)adjustedScrollViews;
+
+/**
  * Synchronize scrolling of a set of scroll views with the receiver (which becomes the "master scroll view").
  * When the master scroll view is scrolled, the other ones are automatically scrolled so that their relative 
  * content offset is identical to the one of the master (the relative content offset is defined as the absolute 
