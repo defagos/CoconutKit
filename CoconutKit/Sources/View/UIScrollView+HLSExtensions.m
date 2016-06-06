@@ -21,12 +21,10 @@ static void *s_avoidingKeyboardKey = &s_avoidingKeyboardKey;
 // Original implementation of the methods we swizzle
 static void (*s_setContentOffset)(id, SEL, CGPoint) = NULL;
 static void (*s_willMoveToWindow)(id, SEL, id) = NULL;
-static void (*s_layoutSubviews)(id, SEL) = NULL;
 
 // Swizzled method implementations
 static void swizzle_setContentOffset(UIScrollView *self, SEL _cmd, CGPoint contentOffset);
 static void swizzle_willMoveToWindow(UIScrollView *self, SEL _cmd, UIWindow *window);
-static void swizzle_layoutSubviews(UIScrollView *self, SEL _cmd);
 
 static NSMutableSet<UIScrollView *> *s_adjustedScrollViews = nil;
 static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalBottomInsets = nil;
@@ -91,7 +89,6 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
 {
     HLSSwizzleSelector(self, @selector(setContentOffset:), swizzle_setContentOffset, &s_setContentOffset);
     HLSSwizzleSelector(self, @selector(willMoveToWindow:), swizzle_willMoveToWindow, &s_willMoveToWindow);
-    HLSSwizzleSelector(self, @selector(layoutSubviews), swizzle_layoutSubviews, &s_layoutSubviews);
 }
 
 #pragma mark Scrolling synchronization
@@ -179,21 +176,21 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     
     // Though we consider all scroll views avoiding the keyboard, some might not require any change depending on their position
     for (UIScrollView *scrollView in keyboardAvoidingScrollViews) {
-        [self adjustOffsetForScrollView:scrollView withKeyboardEndFrameInWindow:keyboardEndFrameInWindow];
+        [scrollView adjustOffsetWithKeyboardEndFrameInWindow:keyboardEndFrameInWindow];
     }
 }
 
 + (void)keyboardWillHide:(NSNotification *)notification
 {
     for (UIScrollView *scrollView in [s_adjustedScrollViews copy]) {
-        [self restoreOffsetForScrollView:scrollView];
+        [scrollView restoreOffset];
     }
 }
 
 #pragma mark Managing offsets for individual scroll views
 
 // Adjust offset and save settings (override existing settings if any)
-+ (void)adjustOffsetForScrollView:(UIScrollView *)scrollView withKeyboardEndFrameInWindow:(CGRect)keyboardEndFrameInWindow
+- (void)adjustOffsetWithKeyboardEndFrameInWindow:(CGRect)keyboardEndFrameInWindow
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -202,74 +199,74 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
         s_scrollViewOriginalIndicatorBottomInsets = [NSMutableDictionary dictionary];
     });
     
-    CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardEndFrameInWindow fromView:nil];
+    CGRect keyboardEndFrameInScrollView = [self convertRect:keyboardEndFrameInWindow fromView:nil];
     
     // Calculate the required vertical adjustment
-    CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView) + scrollView.contentOffset.y;
+    CGFloat keyboardHeightAdjustment = CGRectGetHeight(self.frame) - CGRectGetMinY(keyboardEndFrameInScrollView) + self.contentOffset.y;
     
     // Check that the scroll view is neither completely covered by the keyboard, nor completely visible (in which case
     // no adjustment is required)
-    if ((isless(keyboardHeightAdjustment, 0.f) || isgreater(keyboardHeightAdjustment, CGRectGetHeight(scrollView.frame)))) {
+    if ((isless(keyboardHeightAdjustment, 0.f) || isgreater(keyboardHeightAdjustment, CGRectGetHeight(self.frame)))) {
         return;
     }
     
     // The didShow notification is received consecutively without intermediate willHide notification. We need to preserve the
     // initial values in such cases
-    NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
+    NSValue *pointerKey = [NSValue valueWithNonretainedObject:self];
     
-    NSNumber *scrollViewOriginalBottomInset = s_scrollViewOriginalBottomInsets[pointerKey] ?: @(scrollView.contentInset.bottom);
+    NSNumber *scrollViewOriginalBottomInset = s_scrollViewOriginalBottomInsets[pointerKey] ?: @(self.contentInset.bottom);
     s_scrollViewOriginalBottomInsets[pointerKey] = scrollViewOriginalBottomInset;
     
-    NSNumber *scrollViewOriginalIndicatorBottomInset = s_scrollViewOriginalIndicatorBottomInsets[pointerKey] ?: @(scrollView.scrollIndicatorInsets.bottom);
+    NSNumber *scrollViewOriginalIndicatorBottomInset = s_scrollViewOriginalIndicatorBottomInsets[pointerKey] ?: @(self.scrollIndicatorInsets.bottom);
     s_scrollViewOriginalIndicatorBottomInsets[pointerKey] = scrollViewOriginalIndicatorBottomInset;
     
     // Keyboard distance is globally defined by the scroll view, but can be overridden for each view
-    UIView *firstResponderView = scrollView.firstResponderView;
-    CGFloat keyboardDistance = (firstResponderView.keyboardDistance == CGFLOAT_MAX) ? scrollView.keyboardDistance : firstResponderView.keyboardDistance;
+    UIView *firstResponderView = self.firstResponderView;
+    CGFloat keyboardDistance = (firstResponderView.keyboardDistance == CGFLOAT_MAX) ? self.keyboardDistance : firstResponderView.keyboardDistance;
     
     // Adjust content. Adjust depending on the space available vertically (398 is the horizontal keyboard height on a standard reference iPad)
-    scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
-                                               scrollView.contentInset.left,
-                                               keyboardHeightAdjustment + keyboardDistance * (CGRectGetHeight([UIScreen mainScreen].applicationFrame) - CGRectGetHeight(keyboardEndFrameInWindow)) / (768.f - 398.f),
-                                               scrollView.contentInset.right);
-    scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
-                                                        scrollView.scrollIndicatorInsets.left,
-                                                        keyboardHeightAdjustment,
-                                                        scrollView.scrollIndicatorInsets.right);
-    [s_adjustedScrollViews addObject:scrollView];
+    self.contentInset = UIEdgeInsetsMake(self.contentInset.top,
+                                         self.contentInset.left,
+                                         keyboardHeightAdjustment + keyboardDistance * (CGRectGetHeight([UIScreen mainScreen].applicationFrame) - CGRectGetHeight(keyboardEndFrameInWindow)) / (768.f - 398.f),
+                                         self.contentInset.right);
+    self.scrollIndicatorInsets = UIEdgeInsetsMake(self.scrollIndicatorInsets.top,
+                                                  self.scrollIndicatorInsets.left,
+                                                  keyboardHeightAdjustment,
+                                                  self.scrollIndicatorInsets.right);
+    [s_adjustedScrollViews addObject:self];
     
     // If the first responder is not visible, change the offset to make it visible. Do not do anything if the responder is the
     // scroll view itself (e.g. a UITextView)
-    if (firstResponderView && firstResponderView != scrollView) {
+    if (firstResponderView && firstResponderView != self) {
         [UIView animateWithDuration:0.25 animations:^{
-            CGRect firstResponderViewFrameInScrollView = [scrollView convertRect:firstResponderView.bounds fromView:firstResponderView];
-            [scrollView scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
+            CGRect firstResponderViewFrameInScrollView = [self convertRect:firstResponderView.bounds fromView:firstResponderView];
+            [self scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
         }];
     }
 }
 
 // Restore original offsets and remove saved settings
-+ (void)restoreOffsetForScrollView:(UIScrollView *)scrollView
+- (void)restoreOffset
 {
-    if (! [s_adjustedScrollViews containsObject:scrollView]) {
+    if (! [s_adjustedScrollViews containsObject:self]) {
         return;
     }
     
-    NSValue *pointerKey = [NSValue valueWithNonretainedObject:scrollView];
+    NSValue *pointerKey = [NSValue valueWithNonretainedObject:self];
     
     CGFloat scrollViewOriginalBottomInset = (s_scrollViewOriginalBottomInsets[pointerKey]).floatValue;
-    scrollView.contentInset = UIEdgeInsetsMake(scrollView.contentInset.top,
-                                               scrollView.contentInset.left,
-                                               scrollViewOriginalBottomInset,
-                                               scrollView.contentInset.right);
+    self.contentInset = UIEdgeInsetsMake(self.contentInset.top,
+                                         self.contentInset.left,
+                                         scrollViewOriginalBottomInset,
+                                         self.contentInset.right);
     
     CGFloat scrollViewOriginalIndicatorBottomInset = (s_scrollViewOriginalBottomInsets[pointerKey]).floatValue;
-    scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(scrollView.scrollIndicatorInsets.top,
-                                                        scrollView.scrollIndicatorInsets.left,
-                                                        scrollViewOriginalIndicatorBottomInset,
-                                                        scrollView.scrollIndicatorInsets.right);
+    self.scrollIndicatorInsets = UIEdgeInsetsMake(self.scrollIndicatorInsets.top,
+                                                  self.scrollIndicatorInsets.left,
+                                                  scrollViewOriginalIndicatorBottomInset,
+                                                  self.scrollIndicatorInsets.right);
     
-    [s_adjustedScrollViews removeObject:scrollView];
+    [s_adjustedScrollViews removeObject:self];
     [s_scrollViewOriginalBottomInsets removeObjectForKey:pointerKey];
     [s_scrollViewOriginalIndicatorBottomInsets removeObjectForKey:pointerKey];
 }
@@ -306,18 +303,7 @@ static void swizzle_willMoveToWindow(UIScrollView *self, SEL _cmd, UIWindow *win
     if (window) {
         HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
         if (keyboardInformation) {
-            [UIScrollView adjustOffsetForScrollView:self withKeyboardEndFrameInWindow:keyboardInformation.endFrame];
+            [self adjustOffsetWithKeyboardEndFrameInWindow:keyboardInformation.endFrame];
         }
-    }
-}
-
-static void swizzle_layoutSubviews(UIScrollView *self, SEL _cmd)
-{
-    s_layoutSubviews(self, _cmd);
-    
-    // Update offset when the view layout changes
-    HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
-    if (keyboardInformation) {
-        [UIScrollView adjustOffsetForScrollView:self withKeyboardEndFrameInWindow:keyboardInformation.endFrame];
     }
 }
