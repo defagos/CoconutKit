@@ -78,7 +78,7 @@ OBJC_EXPORT NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCo
 /**
  * Return the current localization used by all bundles.
  */
-+ (NSString *)localization;
++ (NSString *)hls_localization;
 
 /**
  * Set the current localization used by all bundles.
@@ -88,7 +88,7 @@ OBJC_EXPORT NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCo
  *
  * The new localization is stored in the standard user defaults under the HLSPreferredLocalizationDefaultsKey key.
  */
-+ (void)setLocalization:(nullable NSString *)localization;
++ (void)hls_setLocalization:(nullable NSString *)localization;
 
 @end
 

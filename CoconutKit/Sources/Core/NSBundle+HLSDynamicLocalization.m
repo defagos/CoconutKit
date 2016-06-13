@@ -72,12 +72,12 @@ static void setDefaultLocalization(void)
     @autoreleasepool {
         NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
         if (preferredLocalization) {
-            [NSBundle setLocalization:preferredLocalization];
+            [NSBundle hls_setLocalization:preferredLocalization];
         }  
     }
 }
 
-+ (NSString *)localization
++ (NSString *)hls_localization
 {
     if (! currentLocalization) {
         setDefaultLocalization();
@@ -85,7 +85,7 @@ static void setDefaultLocalization(void)
     return currentLocalization;
 }
 
-+ (void)setLocalization:(NSString *)localization
++ (void)hls_setLocalization:(NSString *)localization
 {
     initialize();
     
@@ -111,7 +111,7 @@ static void setDefaultLocalization(void)
 
 #pragma mark Localized strings
 
-- (NSString *)dynamic_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
+- (NSString *)hls_dynamic_localizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName;
 {
     // See -localizedStringForKey:value:table: return value documentation
     NSString *notFoundValue = value.length > 0 ? value : key;
@@ -165,36 +165,36 @@ static void setDefaultLocalization(void)
 
 #pragma mark URLs
 
-- (NSURL *)dynamic_URLForResource:(NSString *)name withExtension:(NSString *)extension subdirectory:(NSString *)subpath
+- (NSURL *)hls_dynamic_URLForResource:(NSString *)name withExtension:(NSString *)extension subdirectory:(NSString *)subpath
 {
     return [self URLForResource:name withExtension:extension subdirectory:subpath localization:currentLocalization];
 }
 
-- (NSURL *)dynamic_URLForResource:(NSString *)name withExtension:(NSString *)extension
+- (NSURL *)hls_dynamic_URLForResource:(NSString *)name withExtension:(NSString *)extension
 {
     // -[NSBundle URLForResource:withExtension:] implementation does *not* call -[NSBundle URLForResource:withExtension:subdirectory:]
     return [self URLForResource:name withExtension:extension subdirectory:nil];
 }
 
-- (NSArray *)dynamic_URLsForResourcesWithExtension:(NSString *)extension subdirectory:(NSString *)subpath
+- (NSArray *)hls_dynamic_URLsForResourcesWithExtension:(NSString *)extension subdirectory:(NSString *)subpath
 {
     return [self URLsForResourcesWithExtension:extension subdirectory:subpath localization:currentLocalization];
 }
 
 #pragma mark Paths
 
-- (NSString *)dynamic_pathForResource:(NSString *)name ofType:(NSString *)extension inDirectory:(NSString *)subpath
+- (NSString *)hls_dynamic_pathForResource:(NSString *)name ofType:(NSString *)extension inDirectory:(NSString *)subpath
 {
     return [self pathForResource:name ofType:extension inDirectory:subpath forLocalization:currentLocalization];
 }
 
-- (NSString *)dynamic_pathForResource:(NSString *)name ofType:(NSString *)extension
+- (NSString *)hls_dynamic_pathForResource:(NSString *)name ofType:(NSString *)extension
 {
     // -[NSBundle pathForResource:ofType:] implementation does *not* call -[NSBundle pathForResource:ofType:inDirectory:]
     return [self pathForResource:name ofType:extension inDirectory:nil];
 }
 
-- (NSArray *)dynamic_pathsForResourcesOfType:(NSString *)extension inDirectory:(NSString *)subpath
+- (NSArray *)hls_dynamic_pathsForResourcesOfType:(NSString *)extension inDirectory:(NSString *)subpath
 {
     return [self pathsForResourcesOfType:extension inDirectory:subpath forLocalization:currentLocalization];
 }
@@ -203,7 +203,7 @@ static void setDefaultLocalization(void)
 
 static void exchangeNSBundleInstanceMethod(SEL originalSelector)
 {
-    SEL dynamicSelector = NSSelectorFromString([@"dynamic_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
+    SEL dynamicSelector = NSSelectorFromString([@"hls_dynamic_" stringByAppendingString:NSStringFromSelector(originalSelector)]);
     Method originalMethod = class_getInstanceMethod([NSBundle class], originalSelector);
     Method dynamicMethod = class_getInstanceMethod([NSBundle class], dynamicSelector);
     if (! originalMethod || ! dynamicMethod) {

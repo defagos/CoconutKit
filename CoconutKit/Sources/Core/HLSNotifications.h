@@ -41,15 +41,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface NSObject (HLSNotificationExtensions)
 
-- (void)postCoalescingNotificationWithName:(NSString *)name userInfo:(nullable NSDictionary *)userInfo;
-- (void)postCoalescingNotificationWithName:(NSString *)name;
+- (void)hls_postCoalescingNotificationWithName:(NSString *)name userInfo:(nullable NSDictionary *)userInfo;
+- (void)hls_postCoalescingNotificationWithName:(NSString *)name;
 
 @end
 
 @interface NSNotificationCenter (HLSNotificationExtensions)
 
-- (void)addObserver:(id)observer selector:(SEL)selector name:(nullable NSString *)name objectsInCollection:(nullable id<NSFastEnumeration>)collection;
-- (void)removeObserver:(id)observer name:(nullable NSString *)name objectsInCollection:(nullable id<NSFastEnumeration>)collection;
+- (void)hls_addObserver:(id)observer selector:(SEL)selector name:(nullable NSString *)name objectsInCollection:(nullable id<NSFastEnumeration>)collection;
+- (void)hls_removeObserver:(id)observer name:(nullable NSString *)name objectsInCollection:(nullable id<NSFastEnumeration>)collection;
 
 @end
 

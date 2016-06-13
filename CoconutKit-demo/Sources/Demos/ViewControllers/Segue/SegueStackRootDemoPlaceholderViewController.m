@@ -31,7 +31,7 @@
 
 - (IBAction)unwindToRoot:(UIStoryboardSegue *)unwindSegue
 {
-    [self.stackController popToViewController:self animated:YES];
+    [self.hls_stackController popToViewController:self animated:YES];
 }
 
 @end

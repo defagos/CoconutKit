@@ -48,7 +48,7 @@
 /*
  The KVO_HACK_LEVEL macro allows similar control over the amount of KVO hackery.
  
- 1 - Use the private _isKVOA method to check for a KVO dynamic subclass.
+ 1 - Use the private hlsma_isKVOA method to check for a KVO dynamic subclass.
  
  0 - No hackery, uses the KVO overridden -class to check.
  */
@@ -72,7 +72,7 @@
 #if KVO_HACK_LEVEL >= 1
 @interface NSObject (HLSKVOPrivateMethod)
 
-- (BOOL)_isKVOA;
+- (BOOL)hlsma_isKVOA;
 
 @end
 #endif
@@ -546,7 +546,7 @@ void _CFRelease(CFTypeRef cf);
 static BOOL IsKVOSubclass(id obj)
 {
 #if KVO_HACK_LEVEL >= 1
-    return [obj respondsToSelector: @selector(_isKVOA)] && [obj _isKVOA];
+    return [obj respondsToSelector: @selector(hlsma_isKVOA)] && [obj hlsma_isKVOA];
 #else
     return [obj class] == class_getSuperclass(object_getClass(obj));
 #endif

@@ -112,7 +112,7 @@
 {
     FullInterfaceTestClass *target = [[FullInterfaceTestClass alloc] init];
     
-    id<CompatibleRestrictedInterfaceA> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
+    id<CompatibleRestrictedInterfaceA> proxyB = [target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
     XCTAssertNil([[HLSRestrictedInterfaceProxy alloc] initWithTarget:proxyB protocol:@protocol(CompatibleRestrictedInterfaceBSubset)]);
     XCTAssertFalse(target.isProxy);
     XCTAssertTrue(proxyB.isProxy);
@@ -124,20 +124,20 @@
     XCTAssertFalse([proxyB isKindOfClass:[HLSRestrictedInterfaceProxy class]]);
     XCTAssertFalse([proxyB isKindOfClass:[HLSRestrictedInterfaceProxy class]]);
     
-    XCTAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceA)]);
-    XCTAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)]);
-    XCTAssertNotNil([target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)]);
-    XCTAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceA)]);
-    XCTAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)]);
-    XCTAssertNil([target proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)]);
+    XCTAssertNotNil([target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceA)]);
+    XCTAssertNotNil([target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)]);
+    XCTAssertNotNil([target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)]);
+    XCTAssertNil([target hls_proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceA)]);
+    XCTAssertNil([target hls_proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedSubInterfaceA)]);
+    XCTAssertNil([target hls_proxyWithRestrictedInterface:@protocol(IncompatibleRestrictedInterfaceB)]);
 }
 
 - (void)testConformance
 {
     FullInterfaceTestClass *target = [[FullInterfaceTestClass alloc] init];
     
-    id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
-    id<CompatibleRestrictedInterfaceC> proxyC = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
+    id<CompatibleRestrictedInterfaceB> proxyB = [target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
+    id<CompatibleRestrictedInterfaceC> proxyC = [target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
     
     // Test respondsToSelector: on proxy
     XCTAssertFalse([proxyB respondsToSelector:@selector(method1)]);
@@ -165,11 +165,11 @@
 {
     FullInterfaceTestClass *target = [[FullInterfaceTestClass alloc] init];
     
-    id<CompatibleRestrictedInterfaceB> proxyB = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
+    id<CompatibleRestrictedInterfaceB> proxyB = [target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceB)];
     XCTAssertEqual([proxyB method3], (NSInteger)3);
     XCTAssertEqual([proxyB method4], (NSInteger)4);
     
-    id<CompatibleRestrictedInterfaceC> proxyC = [target proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
+    id<CompatibleRestrictedInterfaceC> proxyC = [target hls_proxyWithRestrictedInterface:@protocol(CompatibleRestrictedInterfaceC)];
     XCTAssertEqual([proxyC method2], (NSInteger)2);
     XCTAssertEqual([proxyC method3], (NSInteger)3);
     XCTAssertEqual([proxyC method5], (NSInteger)5);

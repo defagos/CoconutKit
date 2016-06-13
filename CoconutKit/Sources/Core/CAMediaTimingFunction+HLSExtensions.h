@@ -18,17 +18,17 @@ NS_ASSUME_NONNULL_BEGIN
  * Remark: A private method exists on CAMediaTimingFunction. The results returned by -valueForNormalizedTime:
  *         are in excellent agreement with the ones returned by this private method
  */
-- (float)valueForNormalizedTime:(float)time;
+- (float)hls_valueForNormalizedTime:(float)time;
 
 /**
  * Return the inverse function, i.e. the one which must be played when playing an animation backwards
  */
-@property (nonatomic, readonly) CAMediaTimingFunction *inverseFunction;
+@property (nonatomic, readonly) CAMediaTimingFunction *hls_inverseFunction;
 
 /**
  * Return the control points as a human-readable string
  */
-@property (nonatomic, readonly, copy) NSString *controlPointsString;
+@property (nonatomic, readonly, copy) NSString *hls_controlPointsString;
 
 @end
 

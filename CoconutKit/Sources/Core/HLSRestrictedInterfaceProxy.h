@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Convenient proxy creation
  */
-- (nullable id)proxyWithRestrictedInterface:(Protocol *)protocol;
+- (nullable id)hls_proxyWithRestrictedInterface:(Protocol *)protocol;
 
 @end
 

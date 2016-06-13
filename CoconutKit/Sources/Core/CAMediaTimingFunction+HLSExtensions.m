@@ -28,7 +28,7 @@ static const float kEpsilon = 1e-5f;
 
 @implementation CAMediaTimingFunction (HLSExtensions)
 
-- (float)valueForNormalizedTime:(float)time
+- (float)hls_valueForNormalizedTime:(float)time
 {
     if (isless(time, 0.f)) {
         HLSLoggerWarn(@"Time must be >= 0. Fixed to 0");
@@ -39,9 +39,9 @@ static const float kEpsilon = 1e-5f;
         time = 1.f;
     }
     
-    PolynomialCoefficients coeffs = [self polynomialCoefficients];
-    float t = [self tWithX:time forCurveWithPolynomialCoefficients:coeffs];
-    return [self yAtT:t forCurveWithPolynomialCoefficients:coeffs];
+    PolynomialCoefficients coeffs = [self hls_polynomialCoefficients];
+    float t = [self hls_tWithX:time forCurveWithPolynomialCoefficients:coeffs];
+    return [self hls_yAtT:t forCurveWithPolynomialCoefficients:coeffs];
 }
 
 #pragma mark Calculation
@@ -51,7 +51,7 @@ static const float kEpsilon = 1e-5f;
 // Reproduces the results returned by the private _solveForInput: method
 
 // Compute and cache polynomial coefficients
-- (PolynomialCoefficients)polynomialCoefficients
+- (PolynomialCoefficients)hls_polynomialCoefficients
 {
     NSValue *coeffsValue = hls_getAssociatedObject(self, s_polynomialCoefficientsKey);
     if (! coeffsValue) {
@@ -88,24 +88,24 @@ static const float kEpsilon = 1e-5f;
     return coeffs;
 }
 
-- (float)xAtT:(float)t forCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
+- (float)hls_xAtT:(float)t forCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
 {
     // `ax t^3 + bx t^2 + cx t' expanded using Horner's rule.
     return ((coeffs.ax * t + coeffs.bx) * t + coeffs.cx) * t;
 }
 
-- (float)yAtT:(float)t forCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
+- (float)hls_yAtT:(float)t forCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
 {
     return ((coeffs.ay * t + coeffs.by) * t + coeffs.cy) * t;
 }
 
-- (float)xAtT:(float)t forDerivativeOfCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
+- (float)hls_xAtT:(float)t forDerivativeOfCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
 {
     return (3.f * coeffs.ax * t + 2.f * coeffs.bx) * t + coeffs.cx;
 }
 
 // Given an x value, find a parametric value it came from (t is not the time).
-- (float)tWithX:(float)x forCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
+- (float)hls_tWithX:(float)x forCurveWithPolynomialCoefficients:(PolynomialCoefficients)coeffs
 {
     float t0 = 0.f;
     float t1 = 0.f;
@@ -115,11 +115,11 @@ static const float kEpsilon = 1e-5f;
     
     // First try a few iterations of Newton's method -- normally very fast
     for (int i = 0; i < 8; i++) {
-        x2 = [self xAtT:t2 forCurveWithPolynomialCoefficients:coeffs] - x;
+        x2 = [self hls_xAtT:t2 forCurveWithPolynomialCoefficients:coeffs] - x;
         if (isless(fabsf(x2), kEpsilon)) {
             return t2;
         }
-        d2 = [self xAtT:t2 forDerivativeOfCurveWithPolynomialCoefficients:coeffs];
+        d2 = [self hls_xAtT:t2 forDerivativeOfCurveWithPolynomialCoefficients:coeffs];
         if (isless(fabsf(d2), 1e-6f /* fixed tolerance for small denominators */)) {
             break;
         }
@@ -140,7 +140,7 @@ static const float kEpsilon = 1e-5f;
     }
     
     while (isless(t0, t1)) {
-        x2 = [self xAtT:t2 forCurveWithPolynomialCoefficients:coeffs];
+        x2 = [self hls_xAtT:t2 forCurveWithPolynomialCoefficients:coeffs];
         if (isless(fabsf(x2 - x), kEpsilon)) {
             return t2;
         }
@@ -161,7 +161,7 @@ static const float kEpsilon = 1e-5f;
 
 #pragma mark Helpers
 
-- (CAMediaTimingFunction *)inverseFunction
+- (CAMediaTimingFunction *)hls_inverseFunction
 {
     float values1[2];
     memset(values1, 0, sizeof(values1));
@@ -176,7 +176,7 @@ static const float kEpsilon = 1e-5f;
     return [CAMediaTimingFunction functionWithControlPoints:1.f - values2[0] :values1[1] :1.f - values1[0] :values2[1]];
 }
 
-- (NSString *)controlPointsString
+- (NSString *)hls_controlPointsString
 {
     NSMutableString *controlPointsString = [NSMutableString stringWithString:@"["];
     

@@ -325,7 +325,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The maximum number of views loaded at any time in the stack
  */
-@property (nonatomic, readonly) IBInspectable NSUInteger capacity;
+@property (nonatomic, readonly) IBInspectable NSUInteger hls_capacity;
 
 @end
 
@@ -334,7 +334,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return the stack controller the view controller is inserted in, or nil if none.
  */
-@property (nonatomic, readonly, weak, nullable) HLSStackController *stackController;
+@property (nonatomic, readonly, weak, nullable) HLSStackController *hls_stackController;
 
 @end
 

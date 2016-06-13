@@ -55,12 +55,12 @@ NSString * const HLSStackRootSegueIdentifier = @"hls_root";
     // push the destination view controller into it
     else {
         UIViewController *sourceViewController = self.sourceViewController;
-        if (! sourceViewController.stackController) {
+        if (! sourceViewController.hls_stackController) {
             HLSLoggerError(@"The source view controller is not embedded into a stack controller");
             return;
         }
         
-        stackController = sourceViewController.stackController;
+        stackController = sourceViewController.hls_stackController;
     }
     
     [stackController pushViewController:self.destinationViewController

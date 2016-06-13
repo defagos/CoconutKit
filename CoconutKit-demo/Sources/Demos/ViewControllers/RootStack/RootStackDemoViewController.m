@@ -41,7 +41,7 @@
     self.landscapeLeftSwitch.on = YES;
     self.portraitUpsideDownSwitch.on = YES;
     
-    self.autorotationModeSegmentedControl.selectedSegmentIndex = self.stackController.autorotationMode;
+    self.autorotationModeSegmentedControl.selectedSegmentIndex = self.hls_stackController.autorotationMode;
     
     HLSLoggerInfo(@"Called for object %@", self);
 }
@@ -137,7 +137,7 @@
     
     self.backBarButtonItem.title = HLSLocalizedStringFromUIKit(@"Back");
     
-    if (self == [self.stackController rootViewController]) {
+    if (self == [self.hls_stackController rootViewController]) {
         [self.popButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
     }
     else {
@@ -170,9 +170,9 @@
 {
     NSUInteger pickedIndex = [self.transitionPickerView selectedRowInComponent:0];
     NSString *transitionName = [HLSTransition availableTransitionNames][pickedIndex];
-    [self.stackController pushViewController:viewController
-                         withTransitionClass:NSClassFromString(transitionName)
-                                    animated:self.animatedSwitch.on];
+    [self.hls_stackController pushViewController:viewController
+                             withTransitionClass:NSClassFromString(transitionName)
+                                        animated:self.animatedSwitch.on];
 }
 
 #pragma mark Event callbacks
@@ -185,11 +185,11 @@
 
 - (IBAction)pop:(id)sender
 {
-    if (self == [self.stackController rootViewController]) {
+    if (self == [self.hls_stackController rootViewController]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else {
-        [self.stackController popViewControllerAnimated:self.animatedSwitch.on];
+        [self.hls_stackController popViewControllerAnimated:self.animatedSwitch.on];
     }
 }
 
@@ -228,12 +228,12 @@
 
 - (void)closeNativeContainer:(id)sender
 {
-    [self.stackController popViewControllerAnimated:YES];
+    [self.hls_stackController popViewControllerAnimated:YES];
 }
 
 - (IBAction)changeAutorotationMode:(id)sender
 {
-    self.stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
+    self.hls_stackController.autorotationMode = self.autorotationModeSegmentedControl.selectedSegmentIndex;
 }
 
 @end

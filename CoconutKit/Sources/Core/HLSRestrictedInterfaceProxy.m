@@ -128,7 +128,7 @@
 
 @implementation NSObject (HLSRestrictedInterfaceProxy)
 
-- (id)proxyWithRestrictedInterface:(Protocol *)protocol
+- (id)hls_proxyWithRestrictedInterface:(Protocol *)protocol
 {
     return [HLSRestrictedInterfaceProxy proxyWithTarget:self protocol:protocol];
 }

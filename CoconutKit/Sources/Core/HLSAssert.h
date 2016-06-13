@@ -36,39 +36,39 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Example: HLSAssertObjectsInEnumerationAreKindOfClass(views, UIScrollView);
  */
-#define HLSAssertObjectsInEnumerationAreKindOfClass(enumeration, objectClassName)                                           \
-    [[NSAssertionHandler currentHandler] handleIncorrectObjectClass:[objectClassName class]                                 \
-                                                      inEnumeration:enumeration                                             \
-                                                             strict:NO                                                      \
-                                                           inMethod:_cmd                                                    \
-                                                             object:self                                                    \
-                                                              file:[NSString stringWithUTF8String:__FILE__]                 \
-                                                        lineNumber:__LINE__]
+#define HLSAssertObjectsInEnumerationAreKindOfClass(enumeration, objectClassName)                                               \
+    [[NSAssertionHandler currentHandler] hls_handleIncorrectObjectClass:[objectClassName class]                                 \
+                                                          inEnumeration:enumeration                                             \
+                                                                 strict:NO                                                      \
+                                                               inMethod:_cmd                                                    \
+                                                                 object:self                                                    \
+                                                                  file:[NSString stringWithUTF8String:__FILE__]                 \
+                                                            lineNumber:__LINE__]
 
-#define HLSCAssertObjectsInEnumerationAreKindOfClass(enumeration, objectClassName)                                          \
-    [[NSAssertionHandler currentHandler] handleIncorrectObjectClass:[objectClassName class]                                 \
-                                                      inEnumeration:enumeration                                             \
-                                                             strict:NO                                                      \
-                                                         inFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]     \
-                                                               file:[NSString stringWithUTF8String:__FILE__]                \
-                                                         lineNumber:__LINE__]
+#define HLSCAssertObjectsInEnumerationAreKindOfClass(enumeration, objectClassName)                                              \
+    [[NSAssertionHandler currentHandler] hls_handleIncorrectObjectClass:[objectClassName class]                                 \
+                                                          inEnumeration:enumeration                                             \
+                                                                 strict:NO                                                      \
+                                                             inFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]     \
+                                                                   file:[NSString stringWithUTF8String:__FILE__]                \
+                                                             lineNumber:__LINE__]
 
-#define HLSAssertObjectsInEnumerationAreMembersOfClass(enumeration, objectClassName)                                        \
-    [[NSAssertionHandler currentHandler] handleIncorrectObjectClass:[objectClassName class]                                 \
-                                                      inEnumeration:enumeration                                             \
-                                                             strict:YES                                                     \
-                                                           inMethod:_cmd                                                    \
-                                                             object:self                                                    \
-                                                               file:[NSString stringWithUTF8String:__FILE__]                \
-                                                         lineNumber:__LINE__]
+#define HLSAssertObjectsInEnumerationAreMembersOfClass(enumeration, objectClassName)                                            \
+    [[NSAssertionHandler currentHandler] hls_handleIncorrectObjectClass:[objectClassName class]                                 \
+                                                          inEnumeration:enumeration                                             \
+                                                                 strict:YES                                                     \
+                                                               inMethod:_cmd                                                    \
+                                                                 object:self                                                    \
+                                                                   file:[NSString stringWithUTF8String:__FILE__]                \
+                                                             lineNumber:__LINE__]
 
-#define HLSCAssertObjectsInEnumerationAreMembersOfClass(enumeration, objectClassName)                                       \
-    [[NSAssertionHandler currentHandler] handleIncorrectObjectClass:[objectClassName class]                                 \
-                                                      inEnumeration:enumeration                                             \
-                                                            strict:YES                                                      \
-                                                        inFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]      \
-                                                              file:[NSString stringWithUTF8String:__FILE__]                 \
-                                                        lineNumber:__LINE__]
+#define HLSCAssertObjectsInEnumerationAreMembersOfClass(enumeration, objectClassName)                                           \
+    [[NSAssertionHandler currentHandler] hls_handleIncorrectObjectClass:[objectClassName class]                                 \
+                                                          inEnumeration:enumeration                                             \
+                                                                strict:YES                                                      \
+                                                            inFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__]      \
+                                                                  file:[NSString stringWithUTF8String:__FILE__]                 \
+                                                            lineNumber:__LINE__]
 
 #else
 
@@ -90,19 +90,19 @@ NS_ASSUME_NONNULL_BEGIN
  * Check the class of objects in a collection and generate an assertion on mismatch. If strict is set to YES, all objects
  * must be members of the class which is provided, otherwise they must be connected to it via inheritance
  */
-- (void)handleIncorrectObjectClass:(Class)objectClass 
-                     inEnumeration:(nullable id<NSFastEnumeration>)enumeration
-                            strict:(BOOL)strict 
-                          inMethod:(SEL)selector 
-                            object:(id)object 
-                              file:(NSString *)fileName 
-                        lineNumber:(NSInteger)line;
-- (void)handleIncorrectObjectClass:(Class)objectClass 
-                     inEnumeration:(nullable id<NSFastEnumeration>)enumeration
-                            strict:(BOOL)strict 
-                        inFunction:(NSString *)functionName 
-                              file:(NSString *)fileName 
-                        lineNumber:(NSInteger)line;
+- (void)hls_handleIncorrectObjectClass:(Class)objectClass
+                         inEnumeration:(nullable id<NSFastEnumeration>)enumeration
+                                strict:(BOOL)strict
+                              inMethod:(SEL)selector
+                                object:(id)object
+                                  file:(NSString *)fileName
+                            lineNumber:(NSInteger)line;
+- (void)hls_handleIncorrectObjectClass:(Class)objectClass
+                         inEnumeration:(nullable id<NSFastEnumeration>)enumeration
+                                strict:(BOOL)strict
+                            inFunction:(NSString *)functionName
+                                  file:(NSString *)fileName
+                            lineNumber:(NSInteger)line;
 
 @end
 

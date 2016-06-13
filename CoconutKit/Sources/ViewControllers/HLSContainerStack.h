@@ -428,7 +428,7 @@ willHideViewController:(__kindof UIViewController *)viewController
  * straightforward: Simply call the method below with your container class as argument. If Nil is provided as class
  * parameter, lookup is performed for any kind of CoconutKit-based container
  */
-- (__kindof UIViewController *)containerViewControllerKindOfClass:(nullable Class)containerViewControllerClass;
+- (__kindof UIViewController *)hls_containerViewControllerKindOfClass:(nullable Class)containerViewControllerClass;
 
 @end
 

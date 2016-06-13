@@ -8,40 +8,40 @@
 
 @implementation NSArray (HLSExtensions)
 
-- (NSArray *)arrayByRemovingLastObject
+- (NSArray *)hls_arrayByRemovingLastObject
 {
     NSMutableArray *array = [self mutableCopy];
     [array removeLastObject];
     return [array copy];
 }
 
-- (NSArray *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfObjects
+- (NSArray *)hls_arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfObjects
 {
     if (numberOfObjects == 0) {
         return self;
     }
     
     NSUInteger shift = numberOfObjects % self.count;
-    return [self arrayByShiftingNumberOfObjects:shift];
+    return [self hls_arrayByShiftingNumberOfObjects:shift];
 }
 
-- (NSArray *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfObjects
+- (NSArray *)hls_arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfObjects
 {
     if (numberOfObjects == 0) {
         return self;
     }
     
     NSUInteger shift = numberOfObjects % self.count;
-    return [self arrayByShiftingNumberOfObjects:self.count - shift];
+    return [self hls_arrayByShiftingNumberOfObjects:self.count - shift];
 }
 
-- (NSArray *)arrayByShiftingNumberOfObjects:(NSUInteger)numberOfObjects
+- (NSArray *)hls_arrayByShiftingNumberOfObjects:(NSUInteger)numberOfObjects
 {
     return [[self subarrayWithRange:NSMakeRange(numberOfObjects, self.count - numberOfObjects)]
             arrayByAddingObjectsFromArray:[self subarrayWithRange:NSMakeRange(0, numberOfObjects)]];
 }
 
-- (NSArray *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor
+- (NSArray *)hls_sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor
 {
     NSArray *sortDescriptors = sortDescriptor ? @[sortDescriptor] : nil;
     return [self sortedArrayUsingDescriptors:sortDescriptors];

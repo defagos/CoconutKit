@@ -13,19 +13,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return the array obtained by removing the last object
  */
-- (NSArray<ObjectType> *)arrayByRemovingLastObject;
+- (NSArray<ObjectType> *)hls_arrayByRemovingLastObject;
 
 /**
  * Return the array obtained by rotating receiver elements left or right (elements disappearing at an end are moved to 
  * the other end)
  */
-- (NSArray<ObjectType> *)arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfElements;
-- (NSArray<ObjectType> *)arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;
+- (NSArray<ObjectType> *)hls_arrayByLeftRotatingNumberOfObjects:(NSUInteger)numberOfElements;
+- (NSArray<ObjectType> *)hls_arrayByRightRotatingNumberOfObjects:(NSUInteger)numberOfElements;
 
 /**
  * Sort an array using a single descriptor
  */
-- (NSArray<ObjectType> *)sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
+- (NSArray<ObjectType> *)hls_sortedArrayUsingDescriptor:(NSSortDescriptor *)sortDescriptor;
 
 @end
 

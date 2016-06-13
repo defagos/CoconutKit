@@ -408,9 +408,9 @@ willPushViewController:(UIViewController *)pushedViewController
 
 @implementation UIViewController (HLSStackController)
 
-- (HLSStackController *)stackController
+- (HLSStackController *)hls_stackController
 {
-    return [self containerViewControllerKindOfClass:[HLSStackController class]];
+    return [self hls_containerViewControllerKindOfClass:[HLSStackController class]];
 }
 
 @end

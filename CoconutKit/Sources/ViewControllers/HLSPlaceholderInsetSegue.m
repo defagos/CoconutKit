@@ -62,8 +62,8 @@ NSString * const HLSPlaceholderPreloadSegueIdentifierPrefix = @"hls_preload_at_i
             }
         }
     }
-    else if (viewController.placeholderViewController) {
-        placeholderViewController = viewController.placeholderViewController;
+    else if (viewController.hls_placeholderViewController) {
+        placeholderViewController = viewController.hls_placeholderViewController;
     }
     else {
         HLSLoggerError(@"The source view controller is neither a placeholder view controller not an inset view controller");

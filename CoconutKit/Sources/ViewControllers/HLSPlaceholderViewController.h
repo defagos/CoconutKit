@@ -209,7 +209,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Return the placeholder view controller a view controller is inserted in, or nil if none
  */
-@property (nonatomic, readonly, weak, nullable) HLSPlaceholderViewController *placeholderViewController;
+@property (nonatomic, readonly, weak, nullable) HLSPlaceholderViewController *hls_placeholderViewController;
 
 @end
 

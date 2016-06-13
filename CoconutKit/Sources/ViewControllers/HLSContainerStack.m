@@ -933,7 +933,7 @@ static NSString * const HLSContainerStackPopAnimationName = @"pop_animation";
 
 @implementation UIViewController (HLSContainerStack)
 
-- (id)containerViewControllerKindOfClass:(Class)containerViewControllerClass
+- (id)hls_containerViewControllerKindOfClass:(Class)containerViewControllerClass
 {
     return [HLSContainerContent containerViewControllerKindOfClass:containerViewControllerClass
                                                  forViewController:self];

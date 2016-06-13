@@ -72,7 +72,7 @@
 
 @implementation NSObject (HLSNotificationExtensions)
 
-- (void)postCoalescingNotificationWithName:(NSString *)name userInfo:(NSDictionary *)userInfo
+- (void)hls_postCoalescingNotificationWithName:(NSString *)name userInfo:(NSDictionary *)userInfo
 {
     NSNotification *notification = [NSNotification notificationWithName:name 
                                                                  object:self
@@ -83,9 +83,9 @@
                                                    forModes:nil];
 }
 
-- (void)postCoalescingNotificationWithName:(NSString *)name
+- (void)hls_postCoalescingNotificationWithName:(NSString *)name
 {
-    [self postCoalescingNotificationWithName:name userInfo:nil];
+    [self hls_postCoalescingNotificationWithName:name userInfo:nil];
 }
 
 @end
@@ -94,7 +94,7 @@
 
 @implementation NSNotificationCenter (HLSNotificationExtensions)
 
-- (void)addObserver:(id)observer selector:(SEL)selector name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection
+- (void)hls_addObserver:(id)observer selector:(SEL)selector name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection
 {
     for (id object in collection) {
         [self addObserver:observer selector:selector name:name object:object];
@@ -103,7 +103,7 @@
 
 // FIXME: Warning! Does not work correctly for dictionaries (should iterate over the values, not the keys, which is the default
 //        for each behavior for dictionaries)
-- (void)removeObserver:(id)observer name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection
+- (void)hls_removeObserver:(id)observer name:(NSString *)name objectsInCollection:(id<NSFastEnumeration>)collection
 {
     for (id object in collection) {
         [self removeObserver:observer name:name object:object];

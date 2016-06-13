@@ -366,9 +366,9 @@ willHideViewController:(UIViewController *)viewController
 
 @implementation UIViewController (HLSPlaceholderViewController)
 
-- (HLSPlaceholderViewController *)placeholderViewController
+- (HLSPlaceholderViewController *)hls_placeholderViewController
 {
-    return [self containerViewControllerKindOfClass:[HLSPlaceholderViewController class]];
+    return [self hls_containerViewControllerKindOfClass:[HLSPlaceholderViewController class]];
 }
 
 @end

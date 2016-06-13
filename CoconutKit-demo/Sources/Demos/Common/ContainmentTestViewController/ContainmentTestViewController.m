@@ -36,8 +36,8 @@
                   "\n\ttpresentingViewController = %@",
                   self.navigationController,
                   self.tabBarController,
-                  self.stackController,
-                  self.placeholderViewController,
+                  self.hls_stackController,
+                  self.hls_placeholderViewController,
                   self.parentViewController,
                   self.presentedViewController,
                   self.presentingViewController);

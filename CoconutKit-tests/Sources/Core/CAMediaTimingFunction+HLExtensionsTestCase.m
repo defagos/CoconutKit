@@ -35,7 +35,7 @@
 - (void)testInverse
 {
     // Inverse ease in must be ease out
-    CAMediaTimingFunction *inverseEaseInTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn].inverseFunction;
+    CAMediaTimingFunction *inverseEaseInTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn].hls_inverseFunction;
     CAMediaTimingFunction *easeOutTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
     for (size_t i = 0; i < 4; ++i) {
@@ -61,7 +61,7 @@
     // Check that built-in results and custom implementation match to at least 4 digits
     for (NSUInteger i = 0; i < kNumberOfSamples; ++i) {
         float time = (float)i / (kNumberOfSamples - 1);
-        XCTAssertTrue(isless(fabsf([timingFunction valueForNormalizedTime:time] - [timingFunction _solveForInput:time]), 1e-4));
+        XCTAssertTrue(isless(fabsf([timingFunction hls_valueForNormalizedTime:time] - [timingFunction _solveForInput:time]), 1e-4));
     }
 }
 
