@@ -47,12 +47,12 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
 
 #pragma mark Accessors and mutators
 
-- (BOOL)isAvoidingKeyboard
+- (BOOL)isHls_avoidingKeyboard
 {
     return [hls_getAssociatedObject(self, s_avoidingKeyboardKey) boolValue];
 }
 
-- (void)setAvoidingKeyboard:(BOOL)avoidingKeyboard
+- (void)setHls_avoidingKeyboard:(BOOL)avoidingKeyboard
 {
     hls_setAssociatedObject(self, s_avoidingKeyboardKey, @(avoidingKeyboard), HLS_ASSOCIATION_STRONG_NONATOMIC);
 }
@@ -153,7 +153,7 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
         
         // Do not go further when we have found a scroll view which avoids the keyboard. Any scroll view within
         // it with the same property does not need to be adjusted
-        if (scrollView.avoidingKeyboard) {
+        if (scrollView.hls_avoidingKeyboard) {
             return @[scrollView];
         }
     }

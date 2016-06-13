@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIScrollView (HLSExtensions)
 
 /**
- * Return the list of scroll views which have been adjusted to avoid the keyboard, nil if none. See avoidingKeyboard property
+ * Return the list of scroll views which have been adjusted to avoid the keyboard, nil if none. See hls_avoidingKeyboard property
  * for more information
  */
 + (nullable NSArray<__kindof UIScrollView *> *)adjustedScrollViews;
@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The default value is NO
  */
-@property (nonatomic, getter=isAvoidingKeyboard) IBInspectable BOOL avoidingKeyboard;
+@property (nonatomic, getter=isHls_avoidingKeyboard) IBInspectable BOOL hls_avoidingKeyboard;
 
 @end
 

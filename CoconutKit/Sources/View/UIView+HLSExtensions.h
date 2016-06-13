@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The distance to keep (at least) between keyboard and content when the keyboard is displayed, for a scroll view
- * with avoidingKeyboard set to YES (see UIScrollView+HLSExtensions.h). The value can be set on the scroll view
+ * with hls_avoidingKeyboard set to YES (see UIScrollView+HLSExtensions.h). The value can be set on the scroll view
  * itself and / or on views located within it. If a view has a keyboard distance of CGFLOAT_MAX set (the default), 
  * then the keyboard distance defined on the enclosing scroll view will be used (the default value for a scroll
  * view is 10.f).

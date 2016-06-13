@@ -31,8 +31,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     // This property could also be conveniently set via user-defined runtime attributes
-    self.scrollView.avoidingKeyboard = YES;
-    self.textView.avoidingKeyboard = YES;
+    self.scrollView.hls_avoidingKeyboard = YES;
+    self.textView.hls_avoidingKeyboard = YES;
     
     // Wrapping the text field background view into a scroll view allows us to test that the behavior stays correct
     // in all cases

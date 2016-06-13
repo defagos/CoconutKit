@@ -263,7 +263,7 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd)
             while (view) {
                 if ([view isKindOfClass:[UIScrollView class]]) {
                     UIScrollView *scrollView = (UIScrollView *)view;
-                    if (scrollView.avoidingKeyboard) {
+                    if (scrollView.hls_avoidingKeyboard) {
                         topmostAvoidingKeyboardScrollView = scrollView;
                     }
                 }
