@@ -91,7 +91,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 - (UIImage *)flattenedImage
 {
-    return self.layer.flattenedImage;
+    return self.layer.hls_flattenedImage;
 }
 
 - (UIView *)firstResponderView

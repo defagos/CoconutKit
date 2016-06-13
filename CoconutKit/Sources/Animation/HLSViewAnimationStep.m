@@ -103,22 +103,22 @@
 - (void)pauseAnimation
 {
     for (UIView *view in self.objects) {
-        [view.layer pauseAllAnimations];
+        [view.layer hls_pauseAllAnimations];
     }
-    [self.dummyView.layer pauseAllAnimations];
+    [self.dummyView.layer hls_pauseAllAnimations];
 }
 
 - (void)resumeAnimation
 {
     for (UIView *view in self.objects) {
-        [view.layer resumeAllAnimations];
+        [view.layer hls_resumeAllAnimations];
     }
-    [self.dummyView.layer resumeAllAnimations];
+    [self.dummyView.layer hls_resumeAllAnimations];
 }
 
 - (BOOL)isAnimationPaused
 {
-    return self.dummyView.layer.paused;
+    return self.dummyView.layer.hls_paused;
 }
 
 - (void)terminateAnimation
@@ -127,9 +127,9 @@
     // by scaling it) seems to create additional implicit animations, which still finish and trigger their end
     // animation callback with finished = YES!)
     for (UIView *view in self.objects) {
-        [view.layer removeAllAnimationsRecursively];
+        [view.layer hls_removeAllAnimationsRecursively];
     }
-    [self.dummyView.layer removeAllAnimationsRecursively];
+    [self.dummyView.layer hls_removeAllAnimationsRecursively];
 }
 
 - (NSTimeInterval)elapsedTime

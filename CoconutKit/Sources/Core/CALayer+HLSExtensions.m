@@ -12,23 +12,23 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
 
 @interface CALayer (HLSExtensionsPrivate)
 
-- (void)resetAnimations;
+- (void)hls_resetAnimations;
 
 @end
 
 @implementation CALayer (HLSExtensions)
 
-- (void)removeAllAnimationsRecursively
+- (void)hls_removeAllAnimationsRecursively
 {
     // If we cancel animations for a layer which had been paused, reset its properties. In all other cases,
     // the layer properties will end up correctly at the end of the animation (the end of an animation is
     // only reached if the animation is not paused, and resuming animation restores layer properties)
-    [self resetAnimations];
+    [self hls_resetAnimations];
     
     [self removeAllAnimations];
     
     for (CALayer *sublayer in self.sublayers) {
-        [sublayer removeAllAnimationsRecursively];
+        [sublayer hls_removeAllAnimationsRecursively];
     }
 }
 
@@ -42,7 +42,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
  *                   calls below is therefore VERY important, and temporary variables are sometimes
  *                   absolutely mandatory to get a correct result
  */
-- (void)pauseAllAnimations
+- (void)hls_pauseAllAnimations
 {
     NSNumber *speedBeforePauseNumber = [self valueForKey:kLayerSpeedBeforePauseKey];
     if (speedBeforePauseNumber) {
@@ -57,7 +57,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
     self.timeOffset = pausedTime;
 }
 
-- (void)resumeAllAnimations
+- (void)hls_resumeAllAnimations
 {
     NSNumber *speedBeforePauseNumber = [self valueForKey:kLayerSpeedBeforePauseKey];
     if (! speedBeforePauseNumber) {
@@ -76,13 +76,13 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
     [self setValue:nil forKey:kLayerSpeedBeforePauseKey];
 }
 
-- (BOOL)isPaused
+- (BOOL)hls_isPaused
 {
     return [self valueForKey:kLayerSpeedBeforePauseKey] != nil;
 }
 
 // See http://developer.apple.com/library/ios/#qa/qa1703/_index.html
-- (UIImage *)flattenedImage
+- (UIImage *)hls_flattenedImage
 {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.f /* use the device scale factor */);
     
@@ -110,7 +110,7 @@ static NSString * const kLayerSpeedBeforePauseKey = @"HLSLayerSpeedBeforePause";
 
 @implementation CALayer (HLSExtensionsPrivate)
 
-- (void)resetAnimations
+- (void)hls_resetAnimations
 {
     // If layer animations had been paused, reset the layer status
     NSNumber *speedBeforePauseNumber = [self valueForKey:kLayerSpeedBeforePauseKey];

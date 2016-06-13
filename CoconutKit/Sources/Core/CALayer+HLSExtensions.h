@@ -16,27 +16,27 @@ NS_ASSUME_NONNULL_BEGIN
  * This method removes all animations added to a CALayer and to all layers in its sublayer hierarchy
  * (the usual -removeAllAnimations only removes the animations attached to a layer, not to its sublayers)
  */
-- (void)removeAllAnimationsRecursively;
+- (void)hls_removeAllAnimationsRecursively;
 
 /**
  * Pause all animations attached to a layer. Does nothing if the layer was already paused
  */
-- (void)pauseAllAnimations;
+- (void)hls_pauseAllAnimations;
 
 /**
  * Resume animations attached to a layer. Does nothing if the layer was not paused
  */
-- (void)resumeAllAnimations;
+- (void)hls_resumeAllAnimations;
 
 /**
  * Return YES iff layer animations have been paused
  */
-@property (nonatomic, readonly, getter=isPaused) BOOL paused;
+@property (nonatomic, readonly, getter=hls_isPaused) BOOL hls_paused;
 
 /**
  * Return the layer and all its sublayers flattened as a UIImage
  */
-@property (nonatomic, readonly) UIImage *flattenedImage;
+@property (nonatomic, readonly) UIImage *hls_flattenedImage;
 
 @end
 

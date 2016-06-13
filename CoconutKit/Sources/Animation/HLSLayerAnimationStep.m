@@ -299,9 +299,9 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
 - (void)pauseAnimation
 {
     for (CALayer *layer in self.objects) {
-        [layer pauseAllAnimations];
+        [layer hls_pauseAllAnimations];
     }
-    [self.dummyView.layer pauseAllAnimations];
+    [self.dummyView.layer hls_pauseAllAnimations];
     
     _pauseTime = CACurrentMediaTime();
 }
@@ -309,9 +309,9 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
 - (void)resumeAnimation
 {
     for (CALayer *layer in self.objects) {
-        [layer resumeAllAnimations];
+        [layer hls_resumeAllAnimations];
     }
-    [self.dummyView.layer resumeAllAnimations];
+    [self.dummyView.layer hls_resumeAllAnimations];
     
     _previousPauseDuration += CACurrentMediaTime() - _pauseTime;
     _pauseTime = 0.;
@@ -319,7 +319,7 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
 
 - (BOOL)isAnimationPaused
 {
-    return self.dummyView.layer.paused;
+    return self.dummyView.layer.hls_paused;
 }
 
 - (void)terminateAnimation
@@ -328,9 +328,9 @@ static NSString * const HLSLayerCameraZPositionForSublayersKey = @"HLSLayerCamer
     // HLSViewAnimationStep.m), since we do not alter layer frames, but this is a safety measure and is the
     // correct way to cancel animations attached to a layer
     for (CALayer *layer in self.objects) {
-        [layer removeAllAnimationsRecursively];
+        [layer hls_removeAllAnimationsRecursively];
     }
-    [self.dummyView.layer removeAllAnimationsRecursively];
+    [self.dummyView.layer hls_removeAllAnimationsRecursively];
 }
 
 - (NSTimeInterval)elapsedTime
