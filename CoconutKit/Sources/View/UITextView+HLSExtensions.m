@@ -8,6 +8,7 @@
 
 #import "HLSRuntime.h"
 #import "HLSViewTouchDetector.h"
+#import "UIView+HLSExtensions.h"
 
 // Associated object keys
 static void *s_touchDetectorKey = &s_touchDetectorKey;
@@ -50,15 +51,10 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
 
 #pragma mark HLSKeyboardAvodingBehavior protocol implementation
 
-- (CGRect)focusRect
+- (void)locateFocusRectWithCompletionBlock:(HLSFocusRectCompletionBlock)completionBlock
 {
-    // Scrolling enabled. The system automatically scrolls the text view so that the cursor stays visible
-    if (self.scrollEnabled) {
-        return self.bounds;
-    }
-    // Scrolling not enabled. Focus on the cursor
-    else {
-        // Locate the first view leaf. Can be the blinking cursor or part of the selection view
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // Locate the first view leaf and focus on it. Can be the blinking cursor or part of the selection view
         UIView *cursorView = self;
         while ([cursorView.subviews count] != 0) {
             cursorView = [cursorView.subviews firstObject];
@@ -70,8 +66,8 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
                                                     CGRectGetMinY(cursorViewFrame) - HLSCursorVisibilityMargin,
                                                     CGRectGetWidth(cursorViewFrame) + 2 * HLSCursorVisibilityMargin,
                                                     CGRectGetHeight(cursorViewFrame) + 2 * HLSCursorVisibilityMargin);
-        return enlargedCursorViewFrame;
-    }
+        completionBlock ? completionBlock(enlargedCursorViewFrame) : nil;
+    });
 }
 
 @end

@@ -235,21 +235,22 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
                                                   self.scrollIndicatorInsets.right);
     [s_adjustedScrollViews addObject:self];
     
+    void (^scrollBlock)(CGRect) = ^(CGRect focusRect) {
+        [UIView animateWithDuration:0.25 animations:^{
+            CGRect focusRectInScrollView = [self convertRect:focusRect fromView:firstResponderView];
+            [self scrollRectToVisible:focusRectInScrollView animated:NO];
+        }];
+    };
+
     // If the first responder is not visible, change the offset to make it visible. Do not do anything if the responder is the
     // scroll view itself (e.g. a UITextView)
     if (firstResponderView && firstResponderView != self) {
-        [UIView animateWithDuration:0.25 animations:^{
-            CGRect focusFrame = CGRectZero;
-            if ([firstResponderView respondsToSelector:@selector(focusRect)]) {
-                focusFrame = [(id<HLSKeyboardAvodingBehavior>)firstResponderView focusRect];
-            }
-            else {
-                focusFrame = firstResponderView.bounds;
-            }
-            
-            CGRect focusFrameInScrollView = [self convertRect:focusFrame fromView:firstResponderView];
-            [self scrollRectToVisible:focusFrameInScrollView animated:NO];
-        }];
+        if ([firstResponderView respondsToSelector:@selector(locateFocusRectWithCompletionBlock:)]) {
+            [firstResponderView locateFocusRectWithCompletionBlock:scrollBlock];
+        }
+        else {
+            scrollBlock(firstResponderView.bounds);
+        }
     }
 }
 

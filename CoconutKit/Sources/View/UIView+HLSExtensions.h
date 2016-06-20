@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
     UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |                               \
     UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin
 
+typedef void (^HLSFocusRectCompletionBlock)(CGRect focusRect);
+
 /**
  * View classes can implement the following methods to customize how they behave in the presence of the keyboard
  */
@@ -23,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The rect onto which the view much be focused. If not implemented, defaults to the view bounds
  */
-@property (nonatomic, readonly) CGRect focusRect;
+- (void)locateFocusRectWithCompletionBlock:(HLSFocusRectCompletionBlock)completionBlock;
 
 @end
 
