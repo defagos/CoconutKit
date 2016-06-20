@@ -8,6 +8,7 @@
 
 #import "HLSRuntime.h"
 #import "HLSViewTouchDetector.h"
+#import "UIScrollView+HLSExtensions.h"
 #import "UIView+HLSExtensions.h"
 
 // Associated object keys
@@ -35,6 +36,18 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
 {
     HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
     HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
+}
+
++ (void)initialize
+{
+    if (self != [UITextView class]) {
+        return;
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewDidChangeCursorPosition:)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:nil];
 }
 
 #pragma mark Accessors and mutators
@@ -68,6 +81,35 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
                                                     CGRectGetHeight(cursorViewFrame) + 2 * HLSCursorVisibilityMargin);
         completionBlock ? completionBlock(enlargedCursorViewFrame) : nil;
     });
+}
+
+#pragma mark Notifications
+
++ (void)textViewDidChangeCursorPosition:(NSNotification *)notification
+{
+    NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
+    UITextView *textView = notification.object;
+    
+    UIScrollView *topmostAvoidingKeyboardScrollView = nil;
+    UIView *view = textView;
+    while (view) {
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *scrollView = (UIScrollView *)view;
+            if (scrollView.hls_avoidingKeyboard) {
+                topmostAvoidingKeyboardScrollView = scrollView;
+            }
+        }
+        view = view.superview;
+    }
+    
+    if (topmostAvoidingKeyboardScrollView) {
+        [textView locateFocusRectWithCompletionBlock:^(CGRect focusRect) {
+            [UIView animateWithDuration:0.25 animations:^{
+                CGRect focusRectInTopmostAvoidingKeyboardScrollView = [textView convertRect:focusRect toView:topmostAvoidingKeyboardScrollView];
+                [topmostAvoidingKeyboardScrollView scrollRectToVisible:focusRectInTopmostAvoidingKeyboardScrollView animated:NO];
+            }];
+        }];
+    }
 }
 
 @end
