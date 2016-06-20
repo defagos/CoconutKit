@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   - can animate updates
  *   - check (if not disabled via bindInputChecked) and update the value each time it is changed
  */
-@interface UIDatePicker (HLSViewBinding)
+@interface UIDatePicker (HLSViewBinding) <HLSViewBindingImplementation>
 @end
 
 NS_ASSUME_NONNULL_END
