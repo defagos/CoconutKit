@@ -271,8 +271,16 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd)
             }
             
             if (topmostAvoidingKeyboardScrollView) {
-                CGRect frameInTopmostAvoidingKeyboardScrollView = [topmostAvoidingKeyboardScrollView convertRect:self.bounds fromView:self];
-                [topmostAvoidingKeyboardScrollView scrollRectToVisible:frameInTopmostAvoidingKeyboardScrollView animated:YES];
+                CGRect focusFrame = CGRectZero;
+                if ([topmostAvoidingKeyboardScrollView respondsToSelector:@selector(focusRect)]) {
+                    focusFrame = [(id<HLSKeyboardAvodingBehavior>)topmostAvoidingKeyboardScrollView focusRect];
+                }
+                else {
+                    focusFrame = self.bounds;
+                }
+                
+                CGRect focusFrameInTopmostAvoidingKeyboardScrollView = [topmostAvoidingKeyboardScrollView convertRect:focusFrame fromView:self];
+                [topmostAvoidingKeyboardScrollView scrollRectToVisible:focusFrameInTopmostAvoidingKeyboardScrollView animated:YES];
             }
         }
     }

@@ -48,6 +48,32 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
     self.touchDetector.resigningFirstResponderOnTap = resigningFirstResponderOnTap;
 }
 
+#pragma mark HLSKeyboardAvodingBehavior protocol implementation
+
+- (CGRect)focusRect
+{
+    // Scrolling enabled. The system automatically scrolls the text view so that the cursor stays visible
+    if (self.scrollEnabled) {
+        return self.bounds;
+    }
+    // Scrolling not enabled. Focus on the cursor
+    else {
+        // Locate the first view leaf. Can be the blinking cursor or part of the selection view
+        UIView *cursorView = self;
+        while ([cursorView.subviews count] != 0) {
+            cursorView = [cursorView.subviews firstObject];
+        }
+        
+        static const CGFloat HLSCursorVisibilityMargin = 10.f;
+        CGRect cursorViewFrame = [self convertRect:cursorView.bounds fromView:cursorView];
+        CGRect enlargedCursorViewFrame = CGRectMake(CGRectGetMinX(cursorViewFrame) - HLSCursorVisibilityMargin,
+                                                    CGRectGetMinY(cursorViewFrame) - HLSCursorVisibilityMargin,
+                                                    CGRectGetWidth(cursorViewFrame) + 2 * HLSCursorVisibilityMargin,
+                                                    CGRectGetHeight(cursorViewFrame) + 2 * HLSCursorVisibilityMargin);
+        return enlargedCursorViewFrame;
+    }
+}
+
 @end
 
 @implementation UITextView (HLSExtensionsPrivate)

@@ -13,7 +13,21 @@ NS_ASSUME_NONNULL_BEGIN
     UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |                               \
     UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin
 
-@interface UIView (HLSExtensions)
+/**
+ * View classes can implement the following methods to customize how they behave in the presence of the keyboard
+ */
+@protocol HLSKeyboardAvodingBehavior <NSObject>
+
+@optional
+
+/**
+ * The rect onto which the view much be focused. If not implemented, defaults to the view bounds
+ */
+@property (nonatomic, readonly) CGRect focusRect;
+
+@end
+
+@interface UIView (HLSExtensions) <HLSKeyboardAvodingBehavior>
 
 /**
  * Return the view controller from which the receiver is the view, nil otherwise

@@ -239,8 +239,16 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     // scroll view itself (e.g. a UITextView)
     if (firstResponderView && firstResponderView != self) {
         [UIView animateWithDuration:0.25 animations:^{
-            CGRect firstResponderViewFrameInScrollView = [self convertRect:firstResponderView.bounds fromView:firstResponderView];
-            [self scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
+            CGRect focusFrame = CGRectZero;
+            if ([firstResponderView respondsToSelector:@selector(focusRect)]) {
+                focusFrame = [(id<HLSKeyboardAvodingBehavior>)firstResponderView focusRect];
+            }
+            else {
+                focusFrame = firstResponderView.bounds;
+            }
+            
+            CGRect focusFrameInScrollView = [self convertRect:focusFrame fromView:firstResponderView];
+            [self scrollRectToVisible:focusFrameInScrollView animated:NO];
         }];
     }
 }
