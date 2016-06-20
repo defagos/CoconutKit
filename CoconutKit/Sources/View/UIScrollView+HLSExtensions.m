@@ -45,6 +45,21 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     return s_adjustedScrollViews.count != 0 ? [s_adjustedScrollViews copy] : nil;
 }
 
++ (nullable __kindof UIScrollView *)topmostKeyboardAvoidingScrollViewContainingView:(UIView *)view
+{
+    UIScrollView *topmostAvoidingKeyboardScrollView = nil;
+    while (view) {
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *scrollView = (UIScrollView *)view;
+            if (scrollView.hls_avoidingKeyboard) {
+                topmostAvoidingKeyboardScrollView = scrollView;
+            }
+        }
+        view = view.superview;
+    }
+    return topmostAvoidingKeyboardScrollView;
+}
+
 #pragma mark Accessors and mutators
 
 - (BOOL)isHls_avoidingKeyboard
@@ -235,13 +250,22 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
                                                   self.scrollIndicatorInsets.right);
     [s_adjustedScrollViews addObject:self];
     
+    void (^scrollBlock)(CGRect) = ^(CGRect focusRect) {
+        [UIView animateWithDuration:0.25 animations:^{
+            CGRect focusRectInScrollView = [self convertRect:focusRect fromView:firstResponderView];
+            [self scrollRectToVisible:focusRectInScrollView animated:NO];
+        }];
+    };
+
     // If the first responder is not visible, change the offset to make it visible. Do not do anything if the responder is the
     // scroll view itself (e.g. a UITextView)
     if (firstResponderView && firstResponderView != self) {
-        [UIView animateWithDuration:0.25 animations:^{
-            CGRect firstResponderViewFrameInScrollView = [self convertRect:firstResponderView.bounds fromView:firstResponderView];
-            [self scrollRectToVisible:firstResponderViewFrameInScrollView animated:NO];
-        }];
+        if ([firstResponderView respondsToSelector:@selector(locateFocusRectWithCompletionBlock:)]) {
+            [firstResponderView locateFocusRectWithCompletionBlock:scrollBlock];
+        }
+        else {
+            scrollBlock(firstResponderView.bounds);
+        }
     }
 }
 

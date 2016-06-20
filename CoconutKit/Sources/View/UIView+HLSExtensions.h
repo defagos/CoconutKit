@@ -13,7 +13,27 @@ NS_ASSUME_NONNULL_BEGIN
     UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin |                               \
     UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin
 
-@interface UIView (HLSExtensions)
+typedef void (^HLSFocusRectCompletionBlock)(CGRect focusRect);
+
+/**
+ * View classes can implement the following methods to customize how they behave in the presence of the keyboard
+ */
+@protocol HLSKeyboardAvodingBehavior <NSObject>
+
+@optional
+
+/**
+ * Locate the rect onto which focus should be kept when the keyboard is displayed. Implementations must call the supplied 
+ * completion block after they could locate where the focus must reside (immediately if this information is readily
+ * available), otherwise the behavior is undefined.
+ * 
+ * If this method is not implemented, focus will be assumed to be on the whole view
+ */
+- (void)locateFocusRectWithCompletionBlock:(HLSFocusRectCompletionBlock)completionBlock;
+
+@end
+
+@interface UIView (HLSExtensions) <HLSKeyboardAvodingBehavior>
 
 /**
  * Return the view controller from which the receiver is the view, nil otherwise

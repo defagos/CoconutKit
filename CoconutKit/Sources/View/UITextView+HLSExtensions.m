@@ -8,6 +8,8 @@
 
 #import "HLSRuntime.h"
 #import "HLSViewTouchDetector.h"
+#import "UIScrollView+HLSExtensions.h"
+#import "UIView+HLSExtensions.h"
 
 // Associated object keys
 static void *s_touchDetectorKey = &s_touchDetectorKey;
@@ -36,6 +38,18 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
     HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
 }
 
++ (void)initialize
+{
+    if (self != [UITextView class]) {
+        return;
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textViewDidChangeCursorPosition:)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:nil];
+}
+
 #pragma mark Accessors and mutators
 
 - (BOOL)isResigningFirstResponderOnTap
@@ -46,6 +60,47 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
 - (void)setResigningFirstResponderOnTap:(BOOL)resigningFirstResponderOnTap
 {
     self.touchDetector.resigningFirstResponderOnTap = resigningFirstResponderOnTap;
+}
+
+#pragma mark HLSKeyboardAvodingBehavior protocol implementation
+
+- (void)locateFocusRectWithCompletionBlock:(HLSFocusRectCompletionBlock)completionBlock
+{
+    // Must wait a little bit, in some cases (e.g when the keyboard appears) the cursor might not be readily available
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // Locate the first view leaf and focus on it. Can be the blinking cursor or part of the selection view
+        UIView *cursorView = self;
+        while ([cursorView.subviews count] != 0) {
+            cursorView = [cursorView.subviews firstObject];
+        }
+        
+        static const CGFloat HLSCursorVisibilityMargin = 10.f;
+        CGRect cursorViewFrame = [self convertRect:cursorView.bounds fromView:cursorView];
+        CGRect enlargedCursorViewFrame = CGRectMake(CGRectGetMinX(cursorViewFrame) - HLSCursorVisibilityMargin,
+                                                    CGRectGetMinY(cursorViewFrame) - HLSCursorVisibilityMargin,
+                                                    CGRectGetWidth(cursorViewFrame) + 2 * HLSCursorVisibilityMargin,
+                                                    CGRectGetHeight(cursorViewFrame) + 2 * HLSCursorVisibilityMargin);
+        completionBlock ? completionBlock(enlargedCursorViewFrame) : nil;
+    });
+}
+
+#pragma mark Notifications
+
++ (void)textViewDidChangeCursorPosition:(NSNotification *)notification
+{
+    NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
+    UITextView *textView = notification.object;
+    
+    // Ensure the cursor stays visible when lines are added to the text view
+    UIScrollView *topmostAvoidingKeyboardScrollView = [UIScrollView topmostKeyboardAvoidingScrollViewContainingView:textView];
+    if (topmostAvoidingKeyboardScrollView) {
+        [textView locateFocusRectWithCompletionBlock:^(CGRect focusRect) {
+            [UIView animateWithDuration:0.25 animations:^{
+                CGRect focusRectInTopmostAvoidingKeyboardScrollView = [textView convertRect:focusRect toView:topmostAvoidingKeyboardScrollView];
+                [topmostAvoidingKeyboardScrollView scrollRectToVisible:focusRectInTopmostAvoidingKeyboardScrollView animated:NO];
+            }];
+        }];
+    }
 }
 
 @end
