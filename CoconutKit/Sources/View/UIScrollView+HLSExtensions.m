@@ -45,6 +45,21 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     return s_adjustedScrollViews.count != 0 ? [s_adjustedScrollViews copy] : nil;
 }
 
++ (nullable __kindof UIScrollView *)topmostKeyboardAvoidingScrollViewContainingView:(UIView *)view
+{
+    UIScrollView *topmostAvoidingKeyboardScrollView = nil;
+    while (view) {
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *scrollView = (UIScrollView *)view;
+            if (scrollView.hls_avoidingKeyboard) {
+                topmostAvoidingKeyboardScrollView = scrollView;
+            }
+        }
+        view = view.superview;
+    }
+    return topmostAvoidingKeyboardScrollView;
+}
+
 #pragma mark Accessors and mutators
 
 - (BOOL)isHls_avoidingKeyboard

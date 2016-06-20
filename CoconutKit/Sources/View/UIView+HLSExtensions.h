@@ -23,7 +23,9 @@ typedef void (^HLSFocusRectCompletionBlock)(CGRect focusRect);
 @optional
 
 /**
- * The rect onto which the view much be focused. If not implemented, defaults to the view bounds
+ * Locate the rect onto which focus should be kept when the keyboard is displayed. Implementations must call the supplied 
+ * completion block after they could locate where the focus must reside (immediately if this information is readily
+ * available), otherwise the behavior is undefined. If not implemented, focus will be assumed to be on the whole view
  */
 - (void)locateFocusRectWithCompletionBlock:(HLSFocusRectCompletionBlock)completionBlock;
 

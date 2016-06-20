@@ -90,18 +90,7 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
     NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
     UITextView *textView = notification.object;
     
-    UIScrollView *topmostAvoidingKeyboardScrollView = nil;
-    UIView *view = textView;
-    while (view) {
-        if ([view isKindOfClass:[UIScrollView class]]) {
-            UIScrollView *scrollView = (UIScrollView *)view;
-            if (scrollView.hls_avoidingKeyboard) {
-                topmostAvoidingKeyboardScrollView = scrollView;
-            }
-        }
-        view = view.superview;
-    }
-    
+    UIScrollView *topmostAvoidingKeyboardScrollView = [UIScrollView topmostKeyboardAvoidingScrollViewContainingView:textView];
     if (topmostAvoidingKeyboardScrollView) {
         [textView locateFocusRectWithCompletionBlock:^(CGRect focusRect) {
             [UIView animateWithDuration:0.25 animations:^{

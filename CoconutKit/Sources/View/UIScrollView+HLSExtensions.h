@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable NSArray<__kindof UIScrollView *> *)adjustedScrollViews;
 
 /**
+ * Return the topmost scroll view, containing the view provided as parameter, for which hls_avoidingKeyboard has
+ * been set to YES. This is the scroll view which will be adjusted if required when the view becomes first responder
+ */
++ (nullable __kindof UIScrollView *)topmostKeyboardAvoidingScrollViewContainingView:(UIView *)view;
+
+/**
  * Synchronize scrolling of a set of scroll views with the receiver (which becomes the "master scroll view").
  * When the master scroll view is scrolled, the other ones are automatically scrolled so that their relative 
  * content offset is identical to the one of the master (the relative content offset is defined as the absolute 

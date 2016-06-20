@@ -257,19 +257,8 @@ static BOOL swizzle_becomeFirstResponder(UIView *self, SEL _cmd)
         // has been called. If a keyboard is available before, this means we are setting the focus on another responder while
         // the keyboard was already visible. In such cases, find the topmost scroll view which is set to avoid the keyboard,
         // and ensure the responder view is visible
-        if ([HLSKeyboardInformation keyboardInformation]) {
-            UIScrollView *topmostAvoidingKeyboardScrollView = nil;
-            UIView *view = self;
-            while (view) {
-                if ([view isKindOfClass:[UIScrollView class]]) {
-                    UIScrollView *scrollView = (UIScrollView *)view;
-                    if (scrollView.hls_avoidingKeyboard) {
-                        topmostAvoidingKeyboardScrollView = scrollView;
-                    }
-                }
-                view = view.superview;
-            }
-            
+        if ([HLSKeyboardInformation keyboardInformation]) {            
+            UIScrollView *topmostAvoidingKeyboardScrollView = [UIScrollView topmostKeyboardAvoidingScrollViewContainingView:self];
             if (topmostAvoidingKeyboardScrollView) {
                 void (^scrollBlock)(CGRect) = ^(CGRect focusRect) {
                     CGRect focuRectInTopmostAvoidingKeyboardScrollView = [topmostAvoidingKeyboardScrollView convertRect:focusRect fromView:self];
