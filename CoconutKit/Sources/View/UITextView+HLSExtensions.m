@@ -66,6 +66,7 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
 
 - (void)locateFocusRectWithCompletionBlock:(HLSFocusRectCompletionBlock)completionBlock
 {
+    // Must wait a little bit, in some cases (e.g when the keyboard appears) the cursor might not be readily available
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // Locate the first view leaf and focus on it. Can be the blinking cursor or part of the selection view
         UIView *cursorView = self;
@@ -90,6 +91,7 @@ static id swizzle_initWithCoder(UITextView *self, SEL _cmd, NSCoder *aDecoder);
     NSAssert([notification.object isKindOfClass:[UITextView class]], @"Expect a text view");
     UITextView *textView = notification.object;
     
+    // Ensure the cursor stays visible when lines are added to the text view
     UIScrollView *topmostAvoidingKeyboardScrollView = [UIScrollView topmostKeyboardAvoidingScrollViewContainingView:textView];
     if (topmostAvoidingKeyboardScrollView) {
         [textView locateFocusRectWithCompletionBlock:^(CGRect focusRect) {
