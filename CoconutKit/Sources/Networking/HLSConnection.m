@@ -20,6 +20,7 @@
 @property (nonatomic) NSMutableDictionary<id, HLSConnection *> *childConnectionsDictionary;
 
 @property (nonatomic) NSSet *runLoopModes;
+@property (nonatomic, getter=isFinished) BOOL finished;
 @property (nonatomic, getter=isSelfRunning) BOOL selfRunning;                                       // Is self running or not (NOT including child connections)
 
 @property (nonatomic) NSError *error;
@@ -89,6 +90,7 @@
     }
     
     self.selfRunning = YES;
+    self.finished = NO;
     self.runLoopModes = runLoopModes;
     
     // Start child connections first. This ensures correct behavior even if the -startConnectionWithRunLoopModes:
@@ -218,6 +220,7 @@
     }
     [self updateProgressWithCompletedUnitCount:self.progress.totalUnitCount];
     
+    self.finished = YES;
     self.error = error;
     self.completionBlock ? self.completionBlock(self, responseObject, error) : nil;
     self.selfRunning = NO;
@@ -237,10 +240,11 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; running: %@; error: %@; progress: %@; childConnections: %@>",
+    return [NSString stringWithFormat:@"<%@: %p; running: %@; finished: %@; error: %@; progress: %@; childConnections: %@>",
             [self class],
             self,
             HLSStringFromBool(self.running),
+            HLSStringFromBool(self.finished),
             self.error,
             self.progress,
             self.childConnections];

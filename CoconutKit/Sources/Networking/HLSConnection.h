@@ -65,9 +65,16 @@ typedef void (^HLSConnectionProgressBlock)(int64_t completedUnitCount, int64_t t
 - (void)cancel;
 
 /**
- * Return YES while the connection or one of its children connections are running
+ * Return YES while the connection or one of its children connections are running (a single connection is considered running 
+ * until its completion block has been executed)
  */
 @property (nonatomic, readonly, getter=isRunning) BOOL running;
+
+/**
+ * Return YES while the connection (not taking into account its child connections) is in the process of retrieving its
+ * data. Is set to YES just before the completion block is called
+ */
+@property (nonatomic, readonly, getter=isFinished) BOOL finished;
 
 /**
  * The last error encountered when running the connection, nil if none
