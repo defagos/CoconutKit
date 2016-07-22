@@ -28,6 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic) HLSAutorotationMode autorotationMode;
 
+/**
+ * Set to YES to automatically forward the status bar style decision to the top view controller
+ *
+ * The default value is NO (standard UINavigationController behavior)
+ */
+@property (nonatomic, getter=isForwardingStatusBarStyle) BOOL forwardingStatusBarStyle;
+
 @end
 
 NS_ASSUME_NONNULL_END
