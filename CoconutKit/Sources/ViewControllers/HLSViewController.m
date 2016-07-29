@@ -77,9 +77,19 @@ static void commonInit(HLSViewController *self);
     }
 }
 
+#pragma mark Stubs
+
+- (void)updateForContentSizeCategory
+{}
+
 #pragma mark Notifications
 
-- (void)currentLocalizationDidChange:(NSNotification *)notification
+- (void)HLSViewController_contentSizeCategoryDidChange:(NSNotification *)notification
+{
+    [self updateForContentSizeCategory];
+}
+
+- (void)HLSViewController_currentLocalizationDidChange:(NSNotification *)notification
 {
     [self localize];
 }
@@ -102,7 +112,12 @@ static void commonInit(HLSViewController *self);
 static void commonInit(HLSViewController *self)
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(currentLocalizationDidChange:)
-                                                 name:HLSCurrentLocalizationDidChangeNotification object:nil];
+                                             selector:@selector(HLSViewController_contentSizeCategoryDidChange:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(HLSViewController_currentLocalizationDidChange:)
+                                                 name:HLSCurrentLocalizationDidChangeNotification
+                                               object:nil];
     [self localize];
 }
