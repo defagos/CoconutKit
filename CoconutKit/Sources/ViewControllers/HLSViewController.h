@@ -89,8 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)localize NS_REQUIRES_SUPER;
 
 /**
- * In your subclass, use this method to respond to content size category changes. This method is automatically called for you
- * when your content is displayed for the first time
+ * In your subclass, use this method to respond to content size category changes.
  */
 - (void)updateForContentSizeCategory NS_REQUIRES_SUPER;
 
