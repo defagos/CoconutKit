@@ -25,6 +25,8 @@
 
 static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
+static NSMutableArray *s_backgroundAnimations = nil;
+
 @interface HLSAnimation () <HLSAnimationStepDelegate> {
 @private
     BOOL _animated;
@@ -74,6 +76,15 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         [animationStepCopies addObject:[animationStep copy]];
     }
     return [animationStepCopies copy];
+}
+
++ (void)initialize
+{
+    if (self != [HLSAnimation class]) {
+        return;
+    }
+    
+    s_backgroundAnimations = [NSMutableArray array];
 }
 
 #pragma mark Object creation and destruction
@@ -563,6 +574,10 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
         
         [self cancel];
         
+        // Retain the animation until we resume (so that the animation does not get destroyed too early when returning
+        // to the foreground)
+        [s_backgroundAnimations addObject:self];
+        
         HLSAnimation *reverseAnimation = self.reverseAnimation;
         reverseAnimation.delegate = nil;
         [reverseAnimation playAnimated:NO];
@@ -572,6 +587,8 @@ static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 - (void)applicationWillEnterForeground:(NSNotification *)notification
 {
     if (_runningBeforeEnteringBackground) {
+        [s_backgroundAnimations removeObject:self];
+        
         [self playWithStartTime:_elapsedTime repeatCount:_repeatCount];
         if (_pausedBeforeEnteringBackground) {
             [self pause];
