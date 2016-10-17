@@ -116,9 +116,9 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * The default implementation of this method returns nil, which corresponds to an empty animation (i.e. an animation
  * which does not alter any view)
  */
-+ (NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
-                                                     disappearingView:(nullable UIView *)disappearingView
-                                                               inView:(nullable UIView *)view
++ (nullable NSArray<HLSAnimationStep *> *)layerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
+                                                              disappearingView:(nullable UIView *)disappearingView
+                                                                        inView:(nullable UIView *)view
                                                            withBounds:(CGRect)bounds;
 
 /**
@@ -132,10 +132,10 @@ OBJC_EXPORT const NSTimeInterval kAnimationTransitionDefaultDuration;
  * appearingView (respectively disappearing view) is the view which appears (respectively disappears) during the
  * reverse transition
  */
-+ (NSArray<HLSAnimationStep *> *)reverseLayerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
-                                                            disappearingView:(nullable UIView *)disappearingView
-                                                                      inView:(nullable UIView *)view
-                                                                  withBounds:(CGRect)bounds;
++ (nullable NSArray<HLSAnimationStep *> *)reverseLayerAnimationStepsWithAppearingView:(nullable UIView *)appearingView
+                                                                     disappearingView:(nullable UIView *)disappearingView
+                                                                               inView:(nullable UIView *)view
+                                                                           withBounds:(CGRect)bounds;
 
 /**
  * Return the intrinsic duration of a transition as given by its implementation

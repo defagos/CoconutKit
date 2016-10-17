@@ -135,9 +135,10 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
                 }
                     
                 default: {
-                    return nil;
+                    NSAssert(NO, @"Unsupported index");
+                    return [UITableViewCell new];
                     break;
-                }            
+                }
             }
             break;
         }
@@ -153,26 +154,23 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
                     break;
                 }
                     
-                case CustomCellIndexProgrammatically: {
+                case CustomCellIndexProgrammatically:
+                default: {
                     ProgrammaticTableViewCell *cell = [ProgrammaticTableViewCell cellForTableView:tableView];
                     cell.label.text = NSLocalizedString(@"Custom cell created programmatically", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;
                 }
-                
-                default: {
-                    return nil;
-                    break;
-                }            
             }
             break;
         }
             
         default: {
-            return nil;
+            NSAssert(NO, @"Unsupported index");
+            return [UITableViewCell new];
             break;
-        }            
+        }
     }
 }
 

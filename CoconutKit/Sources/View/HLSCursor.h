@@ -114,14 +114,14 @@ extern CGSize HLSCursorShadowOffsetDefault;
 @optional
 // Fully customized by specifying a view. You can use the selected boolean to set a different view for selected and
 // non-selected elements
-- (UIView *)cursor:(HLSCursor *)cursor viewAtIndex:(NSUInteger)index selected:(BOOL)selected;
+- (nullable UIView *)cursor:(HLSCursor *)cursor viewAtIndex:(NSUInteger)index selected:(BOOL)selected;
 
 // Less customisation, but no view is needed. You can use the selected boolean to set different properties for
 // selected and non-selected elements
-- (NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index;
-- (UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected;                   // if not implemented or returning nil: system font, size 17
-- (UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected;             // if not implemented or returning nil: invert background color
-- (UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected;           // none if not implemented or returning nil
+- (nullable NSString *)cursor:(HLSCursor *)cursor titleAtIndex:(NSUInteger)index;
+- (nullable UIFont *)cursor:(HLSCursor *)cursor fontAtIndex:(NSUInteger)index selected:(BOOL)selected;                   // if not implemented or returning nil: system font, size 17
+- (nullable UIColor *)cursor:(HLSCursor *)cursor textColorAtIndex:(NSUInteger)index selected:(BOOL)selected;             // if not implemented or returning nil: invert background color
+- (nullable UIColor *)cursor:(HLSCursor *)cursor shadowColorAtIndex:(NSUInteger)index selected:(BOOL)selected;           // none if not implemented or returning nil
 - (CGSize)cursor:(HLSCursor *)cursor shadowOffsetAtIndex:(NSUInteger)index selected:(BOOL)selected;             // top-shadow if not implemented or returning HLSCursorShadowOffsetDefault
 
 @end

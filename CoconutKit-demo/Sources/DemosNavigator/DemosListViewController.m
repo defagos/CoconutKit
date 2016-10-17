@@ -235,11 +235,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     cell.textLabel.text = NSLocalizedString(@"Layer properties test (not a CoconutKit component)", nil);
                     break;
                 }
-                    
-                default: {
-                    return nil;
-                    break;
-                }            
             }
             break;
         }
@@ -282,7 +277,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                     
                 default: {
-                    return nil;
+                    NSAssert(NO, @"Unsupported index");
+                    return [UITableViewCell new];
                     break;
                 }
             }
@@ -302,7 +298,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                     
                 default: {
-                    return nil;
+                    NSAssert(NO, @"Unsupported index");
+                    return [UITableViewCell new];
                     break;
                 }
             }
@@ -367,7 +364,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
                 
                 default: {
-                    return nil;
+                    NSAssert(NO, @"Unsupported index");
+                    return [UITableViewCell new];
                     break;
                 }            
             }
@@ -402,7 +400,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 }
 
                 default: {
-                    return nil;
+                    NSAssert(NO, @"Unsupported index");
+                    return [UITableViewCell new];
                     break;
                 }            
             }
@@ -410,7 +409,8 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         }
             
         default: {
-            return nil;
+            NSAssert(NO, @"Unsupported index");
+            return [UITableViewCell new];
             break;
         }
     }
