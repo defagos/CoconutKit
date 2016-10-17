@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.objective-c-source</string>
+		<string>public.objective-c-plus-plus-source</string>
+	</array>
+	<key>DefaultCompletionName</key>
+	<string>File</string>
+	<key>Description</key>
+	<string>An empty Objective-C file.</string>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Description</key>
+			<string>The name of the file to create</string>
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Name</key>
+			<string>File:</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Required</key>
+			<true/>
+			<key>Type</key>
+			<string>text</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>Empty File</string>
+			<key>Description</key>
+			<string>What kind of Objective-C source to create</string>
+			<key>Identifier</key>
+			<string>fileType</string>
+			<key>Name</key>
+			<string>File Type:</string>
+			<key>Required</key>
+			<true/>
+			<key>Type</key>
+			<string>popup</string>
+			<key>Values</key>
+			<array>
+				<string>Empty File</string>
+				<string>Category</string>
+				<string>Protocol</string>
+				<string>Extension</string>
+			</array>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>NSObject</string>
+			<key>Description</key>
+			<string>Which class to add a category or extension to</string>
+			<key>Identifier</key>
+			<string>extendedClass</string>
+			<key>Name</key>
+			<string>Class:</string>
+			<key>Required</key>
+			<true/>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>fileType</key>
+				<array>
+					<string>Category</string>
+					<string>Extension</string>
+				</array>
+			</dict>
+			<key>Type</key>
+			<string>class</string>
+		</dict>
+	</array>
+	<key>SortOrder</key>
+	<string>4</string>
+	<key>Summary</key>
+	<string>An empty Objective-C file</string>
+</dict>
+</plist>
