@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Factory method for creating a table view cell. Return an instance of the class it is called on
  * Not meant to be overridden
  */
-+ (instancetype)cellForTableView:(nullable UITableView *)tableView;
++ (nullable instancetype)cellForTableView:(nullable UITableView *)tableView;
 
 /**
  * Obtaining a cell with custom background and selected background images is surprisingly not so easy, especially if

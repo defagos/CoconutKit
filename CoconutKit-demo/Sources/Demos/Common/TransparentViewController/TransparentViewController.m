@@ -24,7 +24,7 @@
 {
     [super localize];
     
-    self.title = @"TransparentViewController";
+    self.title = NSLocalizedString(@"TransparentViewController", nil);
 }
 
 @end

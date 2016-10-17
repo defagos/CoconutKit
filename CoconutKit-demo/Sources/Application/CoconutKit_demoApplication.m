@@ -15,7 +15,6 @@
 @interface CoconutKit_demoApplication ()
 
 @property (nonatomic) UIViewController *rootViewController;
-@property (nonatomic) UIActionSheet *languageActionSheet;
 
 @end
 
@@ -190,18 +189,6 @@
     HLSLoggerInfo(@"Did pop view controller %@, reveal view controller %@, animated = %@", poppedViewController, revealedViewController, HLSStringFromBool(animated));
 }
 
-#pragma mark UIActionSheetDelegate protocol implementation
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
-        return;
-    }
-    
-    NSString *localization = [NSBundle mainBundle].localizations[buttonIndex];
-    [NSBundle setLocalization:localization];
-}
-
 #pragma mark UINavigationControllerDelegate protocol implementation
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
@@ -216,13 +203,6 @@
 
 #pragma mark UISplitViewControllerDelegate protocol implementation
 
-- (void)splitViewController:(UISplitViewController *)splitViewController
-          popoverController:(UIPopoverController *)popoverController
-  willPresentViewController:(UIViewController *)viewController
-{
-    HLSLoggerInfo(@"Popover controller %@ will present view controller %@", popoverController, viewController);
-}
-
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController
    shouldHideViewController:(UIViewController *)viewController
               inOrientation:(UIInterfaceOrientation)orientation
@@ -235,14 +215,6 @@
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     HLSLoggerInfo(@"Will show view controller %@ invalidating bar button item %@", viewController, barButtonItem);
-}
-
-- (void)splitViewController:(UISplitViewController *)splitViewController
-     willHideViewController:(UIViewController *)viewController
-          withBarButtonItem:(UIBarButtonItem *)barButtonItem
-       forPopoverController:(UIPopoverController *)popoverController
-{
-    HLSLoggerInfo(@"Will hide view controller %@ with barButtonItem %@ for popoverController %@", viewController, barButtonItem, popoverController);
 }
 
 #pragma mark UITabBarControllerDelegate protocol implementation
@@ -271,12 +243,16 @@
 
 - (void)toggleLanguageSheet:(id)sender
 {
-    self.languageActionSheet = [[UIActionSheet alloc] init];
-    self.languageActionSheet.delegate = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
     for (NSString *localization in [NSBundle mainBundle].localizations) {
-        [self.languageActionSheet addButtonWithTitle:HLSLanguageForLocalization(localization)];
+        [alertController addAction:[UIAlertAction actionWithTitle:HLSLanguageForLocalization(localization) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [NSBundle setLocalization:localization];
+        }]];
     }
-    [self.languageActionSheet showFromBarButtonItem:sender animated:YES];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    alertController.popoverPresentationController.barButtonItem = sender;
+    [self.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)showSettings:(id)sender

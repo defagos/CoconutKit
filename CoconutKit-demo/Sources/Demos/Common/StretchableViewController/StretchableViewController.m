@@ -23,7 +23,7 @@
 {
     [super localize];
     
-    self.title = @"StretchableViewController";
+    self.title = NSLocalizedString(@"StretchableViewController", nil);
 }
 
 @end

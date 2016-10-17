@@ -98,7 +98,7 @@
 {
     [super localize];
     
-    self.title = @"LifeCycleTestViewController";
+    self.title = NSLocalizedString(@"LifeCycleTestViewController", nil);
 }
 
 @end

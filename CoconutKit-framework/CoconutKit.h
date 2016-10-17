@@ -80,7 +80,6 @@
 #import <CoconutKit/NSStream+HLSExtensions.h>
 #import <CoconutKit/NSString+HLSExtensions.h>
 #import <CoconutKit/NSTimeZone+HLSExtensions.h>
-#import <CoconutKit/UIActionSheet+HLSExtensions.h>
 #import <CoconutKit/UIActivityIndicatorView+HLSViewBinding.h>
 #import <CoconutKit/UIApplication+HLSExtensions.h>
 #import <CoconutKit/UIColor+HLSExtensions.h>
@@ -93,7 +92,6 @@
 #import <CoconutKit/UILabel+HLSViewBinding.h>
 #import <CoconutKit/UINavigationController+HLSExtensions.h>
 #import <CoconutKit/UIPageControl+HLSViewBinding.h>
-#import <CoconutKit/UIPopoverController+HLSExtensions.h>
 #import <CoconutKit/UIProgressView+HLSViewBinding.h>
 #import <CoconutKit/UIScrollView+HLSExtensions.h>
 #import <CoconutKit/UISegmentedControl+HLSViewBinding.h>

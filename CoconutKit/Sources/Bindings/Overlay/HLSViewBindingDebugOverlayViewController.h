@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Overlay view controller displaying binding debugging information
  */
-@interface HLSViewBindingDebugOverlayViewController : HLSViewController <UIPopoverControllerDelegate>
+@interface HLSViewBindingDebugOverlayViewController : HLSViewController
 
 /**
  * Show an overlay displaying bound fields in the current key window

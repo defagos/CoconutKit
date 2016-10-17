@@ -1167,7 +1167,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:0.f
                                                                  y:1.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
@@ -1186,7 +1186,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
     return [HLSTransition flipLayerAnimationStepsAroundVectorWithX:1.f
                                                                  y:0.f
                                                                  z:0.f
-                                                cameraZTranslation:4.f * CGRectGetHeight([UIScreen mainScreen].applicationFrame)
+                                                cameraZTranslation:4.f * CGRectGetHeight([UIScreen mainScreen].bounds)
                                                      appearingView:appearingView
                                                   disappearingView:disappearingView
                                                             inView:view];
@@ -1207,7 +1207,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1229,7 +1229,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1251,7 +1251,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1273,7 +1273,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:0.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1295,7 +1295,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1317,7 +1317,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1339,7 +1339,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:YES
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view
@@ -1361,7 +1361,7 @@ static CGFloat kEmergeFromCenterScaleFactor = 0.8f;
                                                                         y:1.f
                                                                         z:0.f
                                                          counterclockwise:NO
-                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].applicationFrame)
+                                                       cameraZTranslation:4.f * CGRectGetWidth([UIScreen mainScreen].bounds)
                                                             appearingView:appearingView
                                                          disappearingView:disappearingView
                                                                    inView:view

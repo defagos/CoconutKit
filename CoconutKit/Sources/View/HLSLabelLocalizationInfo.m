@@ -140,20 +140,19 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     }
     
     // Formatting
-    // TODO: When iOS 9 is the minimal supported version, only return localized versions
     switch (self.representation) {
         case HLSLabelRepresentationUppercase: {
-            text = [text respondsToSelector:@selector(localizedUppercaseString)] ? text.localizedUppercaseString : text.uppercaseString;
+            text = text.localizedUppercaseString;
             break;
         }
             
         case HLSLabelRepresentationLowercase: {
-            text = [text respondsToSelector:@selector(localizedLowercaseString)] ? text.localizedLowercaseString : text.lowercaseString;
+            text = text.localizedLowercaseString;
             break;
         }
             
         case HLSLabelRepresentationCapitalized: {
-            text = [text respondsToSelector:@selector(localizedCapitalizedString)] ? text.localizedCapitalizedString : text.capitalizedString;
+            text = text.localizedCapitalizedString;
             break;
         }
             

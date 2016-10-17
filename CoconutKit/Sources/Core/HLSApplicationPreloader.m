@@ -42,7 +42,7 @@
     // effective
     // TODO: Investigate if really needed with the new WKWebView. Do not remove until UIWebView is not used anymore
     //       (which could take a long time :) )
-    CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
+    CGRect applicationFrame = [UIScreen mainScreen].bounds;
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(applicationFrame), 
                                                                      CGRectGetMaxY(applicationFrame), 
                                                                      CGRectGetWidth(applicationFrame), 

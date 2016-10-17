@@ -39,8 +39,6 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 @property (nonatomic, weak) IBOutlet UILabel *insertionIndexLabel;
 @property (nonatomic, weak) IBOutlet UILabel *removalIndexLabel;
 
-@property (nonatomic) UIPopoverController *displayedPopoverController;
-
 @end
 
 @implementation StackDemoViewController {
@@ -56,7 +54,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
         UIViewController *rootViewController = [[LifeCycleTestViewController alloc] init];
         HLSStackController *stackController = [[HLSStackController alloc] initWithRootViewController:rootViewController];
         stackController.delegate = self;
-        stackController.title = @"HLSStackController";
+        stackController.title = NSLocalizedString(@"HLSStackController", nil);
         
         // To be able to test modal presentation contexts, we here make the stack controller display those modal view controllers
         // with the UIModalPresentationCurrentContext presentation style
@@ -135,7 +133,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 {
     [super localize];
     
-    self.title = @"HLSStackController";
+    self.title = NSLocalizedString(@"HLSStackController", nil);
     
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];
@@ -175,12 +173,11 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
                                      animated:self.animatedSwitch.on];
     }
     @catch (NSException *exception) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                                 message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", nil) style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
     
@@ -292,13 +289,6 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
     return [HLSTransition availableTransitionNames][row];
 }
 
-#pragma mark UIPopoverControllerDelegate protocol implementation
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    self.displayedPopoverController = nil;
-}
-
 #pragma mark Event callbacks
 
 - (IBAction)sizeChanged:(id)sender
@@ -390,18 +380,19 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 }
 
 - (IBAction)testInPopover:(id)sender
-{   
+{
     RootStackDemoViewController *rootStackDemoViewController = [[RootStackDemoViewController alloc] init];
     HLSStackController *stackController = [[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController];
     // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
     stackController.delegate = self;
     stackController.preferredContentSize = CGSizeMake(800.f, 600.);
-    self.displayedPopoverController = [[UIPopoverController alloc] initWithContentViewController:stackController];
-    self.displayedPopoverController.delegate = self;
-    [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds
-                                                     inView:self.popoverButton
-                                   permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                   animated:YES];
+    stackController.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:stackController animated:YES completion:nil];
+    
+    UIPopoverPresentationController *presentationController = stackController.popoverPresentationController;
+    presentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    presentationController.sourceView = self.popoverButton;
+    presentationController.sourceRect = self.popoverButton.bounds;
 }
 
 - (IBAction)pop:(id)sender
@@ -432,12 +423,13 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (IBAction)testResponderChain:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:HLSLocalizedStringFromUIKit(@"OK")
-                                                        message:nil
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                              otherButtonTitles:nil];
-    [alertView show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)changeAutorotationMode:(id)sender

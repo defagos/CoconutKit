@@ -177,18 +177,20 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 7.3
-* iOS 9.3 SDK
+* Xcode 8
+* iOS 10 SDK
 
 Deployment is supported for the two most recent major iOS versions, currently:
 
-* iOS 8.x
 * iOS 9.x
+* iOS 10.x
 
 All architectures are supported:
 
 * i386 and x86_64
 * armv7, armv7s and arm64
+
+and bitcode as well.
 
 CoconutKit can be used both from Objective-C or Swift files. It does not contain any private API method calls and is therefore App Store compliant.
 

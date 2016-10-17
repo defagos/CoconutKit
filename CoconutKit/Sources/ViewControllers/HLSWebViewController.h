@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  * A web browser with standard features (navigation buttons, link sharing, etc.). Starting with iOS 9, you should
  * use SFSafariViewController instead
  */
-@interface HLSWebViewController : HLSViewController <UIPopoverControllerDelegate, WKNavigationDelegate>
+@interface HLSWebViewController : HLSViewController <WKNavigationDelegate>
 
 /**
  * Create the browser using the specified request

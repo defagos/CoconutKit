@@ -25,12 +25,6 @@ OBJC_EXPORT NSString *HLSStringFromCATransform3D(CATransform3D transform);
 @property (nonatomic, readonly, getter=isFilled) BOOL filled;
 
 /**
- * URL encoded (aka percent encoded) string with RFC 3986 compliance
- * See http://www.openradar.me/6546984
- */
-- (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding;
-
-/**
  * Calculate the MD2 hash of a string (hexadecimal)
  */
 @property (nonatomic, readonly, copy) NSString *md2hash;

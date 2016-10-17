@@ -99,9 +99,9 @@ NS_ASSUME_NONNULL_BEGIN
  * file manager (or the HLSStandardFileManager singleton if nil). Return nil if not found. You usually do not
  * have to get this path explicitly, except e.g. if you want to cleanup a store by removing its corresponding file
  */
-+ (NSString *)storeFilePathForModelFileName:(NSString *)modelFileName
-                             storeDirectory:(nullable NSString *)storeDirectory
-                                fileManager:(nullable HLSFileManager *)fileManager;
++ (nullable NSString *)storeFilePathForModelFileName:(NSString *)modelFileName
+                                      storeDirectory:(nullable NSString *)storeDirectory
+                                         fileManager:(nullable HLSFileManager *)fileManager;
 
 /**
  * Manage the stack of model managers attached to the current thread

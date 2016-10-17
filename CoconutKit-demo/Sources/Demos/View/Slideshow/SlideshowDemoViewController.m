@@ -75,7 +75,7 @@
 {
     HLSLoggerInfo(@"Will show image %@; currentImageNameOrPath = %@", imageNameOrPath, slideshow.currentImageNameOrPath);
     
-    self.currentImageNameLabel.text = @"<->";
+    self.currentImageNameLabel.text = NSLocalizedString(@"<->", nil);
 }
 
 - (void)slideshow:(HLSSlideshow *)slideshow didShowImageWithNameOrPath:(NSString *)imageNameOrPath

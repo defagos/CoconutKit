@@ -23,7 +23,7 @@
 {
     [super localize];
     
-    self.title = @"FixedSizeViewController";
+    self.title = NSLocalizedString(@"FixedSizeViewController", nil);
 }
 
 @end

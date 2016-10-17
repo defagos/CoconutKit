@@ -332,7 +332,7 @@
 
 - (NSManagedObjectContext *)managedObjectContextForPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] init];
+    NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
     
     return managedObjectContext;

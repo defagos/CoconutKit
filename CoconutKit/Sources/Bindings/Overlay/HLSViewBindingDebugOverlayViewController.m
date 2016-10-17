@@ -26,7 +26,6 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 
 @property (nonatomic, weak) UIWindow *debuggedWindow;
 
-@property (nonatomic) UIPopoverController *bindingInformationPopoverController;
 @property (nonatomic, weak) HLSViewBindingInformationViewController *bindingInformationViewController;
 
 @end
@@ -222,13 +221,6 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     }];
 }
 
-#pragma mark UIPopoverControllerDelegate protocol implementation
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    self.bindingInformationPopoverController = nil;
-}
-
 #pragma mark Actions
 
 - (void)close:(id)sender
@@ -252,20 +244,16 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     HLSViewBindingInformationViewController *bindingInformationViewController = [[HLSViewBindingInformationViewController alloc] initWithBindingInformation:bindingInformation];
     UINavigationController *bindingInformationNavigationController = [[UINavigationController alloc] initWithRootViewController:bindingInformationViewController];
     
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        [self presentViewController:bindingInformationNavigationController animated:YES completion:nil];
-    }
-    else {
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        bindingInformationNavigationController.modalPresentationStyle = UIModalPresentationPopover;
         
-        self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationNavigationController];
-        self.bindingInformationPopoverController.delegate = self;
-        [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
-                                                                  inView:self.view
-                                                permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                                animated:YES];
+        UIPopoverPresentationController *presentationController = bindingInformationNavigationController.popoverPresentationController;
+        presentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        presentationController.sourceView = self.view;
+        presentationController.sourceRect = overlayButton.frame;
     }
     
-    self.bindingInformationViewController = bindingInformationViewController;
+    [self presentViewController:bindingInformationNavigationController animated:YES completion:nil];
 }
 
 @end

@@ -61,7 +61,7 @@
 {
     [super localize];
     
-    self.title = @"WizardDemoViewController";
+    self.title = NSLocalizedString(@"WizardDemoViewController", nil);
 }
 
 @end

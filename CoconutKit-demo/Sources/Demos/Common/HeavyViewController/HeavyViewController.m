@@ -26,7 +26,7 @@
 {
     [super localize];
     
-    self.title = @"HeavyViewController";
+    self.title = NSLocalizedString(@"HeavyViewController", nil);
 }
 
 @end
