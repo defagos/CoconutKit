@@ -270,6 +270,10 @@ The CoconutKit workspace contains a demo project, also used for development. Sim
 
 Head over to the [wiki](https://github.com/defagos/CoconutKit/wiki) for documentation, tutorials and guidelines for contributors. If you want to learn more about a component in particular, have a look at the corresponding header documentation.
 
+## Templates
+
+A set of Xcode templates is provided to make CoconutKit file creation (and Objective-C file creation in general) easier. Those templates are available in the `Templates` directory and must be copied to `~/Library/Developer/Xcode/Templates/File Templates`.
+
 ## Contact
 
 [Samuel Défago](https://github.com/defagos) ([@defagos](https://twitter.com/defagos))
