@@ -13,11 +13,11 @@
 
 /* Begin PBXFileReference section */
 		6F000048156BCC270055CED7 /* InnerBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InnerBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F44EA18156BB2E700B45BB4 /* InnerBundle-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "InnerBundle-Info.plist"; sourceTree = "<group>"; };
 		6F8CBDC619DAEBA9003286F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InnerTable.strings; sourceTree = "<group>"; };
 		6F8CBDC919DAEBAE003286F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6F8CBDCB19DAEBB2003286F7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InnerTable.strings; sourceTree = "<group>"; };
 		6F8CBDCC19DAEBB2003286F7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6FB402CD1DB51020001EDC82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,18 +43,10 @@
 		6F44E9FB156BB2AF00B45BB4 = {
 			isa = PBXGroup;
 			children = (
+				6FB402CD1DB51020001EDC82 /* Info.plist */,
 				6F00015B156BDD280055CED7 /* Resources */,
-				6F44EA17156BB2DB00B45BB4 /* Other sources */,
 				6F44EA5A156BCBB800B45BB4 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		6F44EA17156BB2DB00B45BB4 /* Other sources */ = {
-			isa = PBXGroup;
-			children = (
-				6F44EA18156BB2E700B45BB4 /* InnerBundle-Info.plist */,
-			);
-			name = "Other sources";
 			sourceTree = "<group>";
 		};
 		6F44EA5A156BCBB800B45BB4 /* Products */ = {
@@ -219,7 +211,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../InnerFolder";
-				INFOPLIST_FILE = "InnerBundle-Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
@@ -230,7 +222,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/../InnerFolder";
-				INFOPLIST_FILE = "InnerBundle-Info.plist";
+				INFOPLIST_FILE = Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = bundle;
