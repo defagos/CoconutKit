@@ -43,18 +43,6 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return self.stringByTrimmingWhitespaces.length != 0;
 }
 
-#pragma mark URL encoding
-
-- (NSString *)urlEncodedStringUsingEncoding:(NSStringEncoding)encoding
-{
-    CFStringEncoding cfEncoding = CFStringConvertNSStringEncodingToEncoding(encoding);
-    return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                     (__bridge CFStringRef)self,
-                                                                     NULL,
-                                                                     CFSTR("!*'();:@&=+$,/?%#[]"),
-                                                                     cfEncoding));
-}
-
 #pragma mark Hash digests
 
 - (NSString *)md2hash
