@@ -1,9 +1,5 @@
 .DS_Store
-build/
+xcuserdata
 Binaries/
 Carthage/
-PublicHeaders/
-FixedResources/
-xcuserdata
-CoconutKit-resources.bundle
 InnerBundle.bundle
