@@ -381,20 +381,18 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (IBAction)testInPopover:(id)sender
 {
-    // TODO: Popover
-#if 0
     RootStackDemoViewController *rootStackDemoViewController = [[RootStackDemoViewController alloc] init];
     HLSStackController *stackController = [[HLSStackController alloc] initWithRootViewController:rootStackDemoViewController];
     // Benefits from the fact that we are already logging HLSStackControllerDelegate methods in this class
     stackController.delegate = self;
     stackController.preferredContentSize = CGSizeMake(800.f, 600.);
-    self.displayedPopoverController = [[UIPopoverController alloc] initWithContentViewController:stackController];
-    self.displayedPopoverController.delegate = self;
-    [self.displayedPopoverController presentPopoverFromRect:self.popoverButton.bounds
-                                                     inView:self.popoverButton
-                                   permittedArrowDirections:UIPopoverArrowDirectionAny
-                                                   animated:YES];
-#endif
+    stackController.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController:stackController animated:YES completion:nil];
+    
+    UIPopoverPresentationController *presentationController = stackController.popoverPresentationController;
+    presentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    presentationController.sourceView = self.popoverButton;
+    presentationController.sourceRect = self.popoverButton.bounds;
 }
 
 - (IBAction)pop:(id)sender

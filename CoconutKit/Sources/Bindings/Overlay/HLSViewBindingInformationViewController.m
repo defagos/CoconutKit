@@ -72,14 +72,11 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    // TODO: Popover
-#if 0
-    if (! self.popoverController) {
+    if (! self.navigationController.popoverPresentationController) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                               target:self
                                                                                               action:@selector(close:)];
     }
-#endif
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Help"
                                                                               style:UIBarButtonItemStylePlain
