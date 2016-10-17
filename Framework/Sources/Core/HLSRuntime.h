@@ -112,7 +112,7 @@ OBJC_EXPORT struct objc_method_description *hls_protocol_copyMethodDescriptionLi
  * Return YES iff the class or one of its superclasses conforms to the given protocol. This
  * is similar to class_conformsToProtocol, but taking superclasses into account. As for
  * class_conformsToProtocol, conformance is tested strictly, i.e. the protocol must be
- * explicitly declared in the @interface of the class or of one of its superclasses
+ * explicitly declared in the interface of the class or of one of its superclasses
  *
  * Remark: The fact that class_conformsToProtocol does not take superclasses into account
  *         is currently not documented
@@ -122,7 +122,7 @@ OBJC_EXPORT BOOL hls_class_conformsToProtocol(Class cls, Protocol *protocol);
 /**
  * Return YES iff the class informally conforms to a protocol, i.e. if it implements all of its
  * @required methods, including those declared by parent protocols (without the need for the
- * protocol to be declared in the class @interface).
+ * protocol to be declared in the class interface).
  *
  * Remark: If a class formally conforms to a protocol it automatically informally conforms to
  *         it as well. The converse is not true
