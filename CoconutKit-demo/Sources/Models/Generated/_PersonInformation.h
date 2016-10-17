@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface _PersonInformation : NSManagedObject
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 @property (nonatomic, readonly, strong) PersonInformationID *objectID;
 
 @property (nonatomic, strong, nullable) NSDate* birthdate;
@@ -46,35 +46,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface _PersonInformation (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSDate*)primitiveBirthdate;
-- (void)setPrimitiveBirthdate:(NSDate*)value;
+- (nullable NSDate*)primitiveBirthdate;
+- (void)setPrimitiveBirthdate:(nullable NSDate*)value;
 
-- (NSString*)primitiveCity;
-- (void)setPrimitiveCity:(NSString*)value;
+- (nullable NSString*)primitiveCity;
+- (void)setPrimitiveCity:(nullable NSString*)value;
 
-- (NSString*)primitiveCountry;
-- (void)setPrimitiveCountry:(NSString*)value;
+- (nullable NSString*)primitiveCountry;
+- (void)setPrimitiveCountry:(nullable NSString*)value;
 
-- (NSString*)primitiveEmail;
-- (void)setPrimitiveEmail:(NSString*)value;
+- (nullable NSString*)primitiveEmail;
+- (void)setPrimitiveEmail:(nullable NSString*)value;
 
-- (NSString*)primitiveFirstName;
-- (void)setPrimitiveFirstName:(NSString*)value;
+- (nullable NSString*)primitiveFirstName;
+- (void)setPrimitiveFirstName:(nullable NSString*)value;
 
-- (NSString*)primitiveLastName;
-- (void)setPrimitiveLastName:(NSString*)value;
+- (nullable NSString*)primitiveLastName;
+- (void)setPrimitiveLastName:(nullable NSString*)value;
 
-- (NSNumber*)primitiveNumberOfChildren;
-- (void)setPrimitiveNumberOfChildren:(NSNumber*)value;
+- (nullable NSNumber*)primitiveNumberOfChildren;
+- (void)setPrimitiveNumberOfChildren:(nullable NSNumber*)value;
 
 - (int16_t)primitiveNumberOfChildrenValue;
 - (void)setPrimitiveNumberOfChildrenValue:(int16_t)value_;
 
-- (NSString*)primitiveState;
-- (void)setPrimitiveState:(NSString*)value;
+- (nullable NSString*)primitiveState;
+- (void)setPrimitiveState:(nullable NSString*)value;
 
-- (NSString*)primitiveStreet;
-- (void)setPrimitiveStreet:(NSString*)value;
+- (nullable NSString*)primitiveStreet;
+- (void)setPrimitiveStreet:(nullable NSString*)value;
 
 @end
 
