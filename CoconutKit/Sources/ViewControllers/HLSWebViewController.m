@@ -305,22 +305,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark UIActionSheetDelegate protocol implementation
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
-        return;
-    }
-    
-    SEL action = (self.actions[buttonIndex]).pointerValue;
-    
-    // Cannot use -performSelector here since the signature is not explicitly visible in the call for ARC to perform
-    // correct memory management
-    void (*methodImp)(id, SEL, id) = (void (*)(id, SEL, id))[self methodForSelector:action];
-    methodImp(self, action, actionSheet);
-}
-
 #pragma mark UIPopoverControllerDelegate protocol implementation
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
