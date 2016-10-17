@@ -29,7 +29,7 @@
 
 - (void)loadView
 {
-    CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
+    CGRect applicationFrame = [UIScreen mainScreen].bounds;
     UIView *view = [[UIView alloc] initWithFrame:applicationFrame];
     view.backgroundColor = [UIColor whiteColor];
     

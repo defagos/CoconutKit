@@ -242,7 +242,7 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     // Adjust content. Adjust depending on the space available vertically (398 is the horizontal keyboard height on a standard reference iPad)
     self.contentInset = UIEdgeInsetsMake(self.contentInset.top,
                                          self.contentInset.left,
-                                         keyboardHeightAdjustment + keyboardDistance * (CGRectGetHeight([UIScreen mainScreen].applicationFrame) - CGRectGetHeight(keyboardEndFrameInWindow)) / (768.f - 398.f),
+                                         keyboardHeightAdjustment + keyboardDistance * (CGRectGetHeight([UIScreen mainScreen].bounds) - CGRectGetHeight(keyboardEndFrameInWindow)) / (768.f - 398.f),
                                          self.contentInset.right);
     self.scrollIndicatorInsets = UIEdgeInsetsMake(self.scrollIndicatorInsets.top,
                                                   self.scrollIndicatorInsets.left,

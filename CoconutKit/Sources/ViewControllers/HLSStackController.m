@@ -164,7 +164,7 @@
 - (void)loadView
 {
     // Take all space available
-    CGRect applicationFrame = [UIScreen mainScreen].applicationFrame;
+    CGRect applicationFrame = [UIScreen mainScreen].bounds;
     self.view = [[UIView alloc] initWithFrame:applicationFrame];
     self.view.autoresizingMask = HLSViewAutoresizingAll;
     
