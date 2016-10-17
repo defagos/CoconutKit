@@ -175,12 +175,11 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
                                      animated:self.animatedSwitch.on];
     }
     @catch (NSException *exception) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil)
-                                                            message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", nil)
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Error", nil)
+                                                                                 message:NSLocalizedString(@"The view controller is not compatible with the container (most probably its orientation)", nil)
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", nil) style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
     
