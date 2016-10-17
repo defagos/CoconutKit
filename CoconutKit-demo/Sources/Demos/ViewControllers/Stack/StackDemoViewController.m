@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
         UIViewController *rootViewController = [[LifeCycleTestViewController alloc] init];
         HLSStackController *stackController = [[HLSStackController alloc] initWithRootViewController:rootViewController];
         stackController.delegate = self;
-        stackController.title = @"HLSStackController";
+        stackController.title = NSLocalizedString(@"HLSStackController", nil);
         
         // To be able to test modal presentation contexts, we here make the stack controller display those modal view controllers
         // with the UIModalPresentationCurrentContext presentation style
@@ -133,7 +133,7 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 {
     [super localize];
     
-    self.title = @"HLSStackController";
+    self.title = NSLocalizedString(@"HLSStackController", nil);
     
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];

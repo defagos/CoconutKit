@@ -37,7 +37,7 @@
 {
     [super localize];
     
-    self.title = @"MemoryWarningTestCoverViewController";
+    self.title = NSLocalizedString(@"MemoryWarningTestCoverViewController", nil);
     self.closeBarButtonItem.title = NSLocalizedString(@"Close", nil);
 }
 

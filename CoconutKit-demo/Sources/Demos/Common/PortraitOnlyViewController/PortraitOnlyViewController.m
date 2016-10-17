@@ -30,7 +30,7 @@
 {
     [super localize];
     
-    self.title = @"PortraitOnlyViewController";
+    self.title = NSLocalizedString(@"PortraitOnlyViewController", nil);
 }
 
 @end

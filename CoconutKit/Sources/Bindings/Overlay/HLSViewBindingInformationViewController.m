@@ -46,7 +46,7 @@
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.bindingInformation = bindingInformation;
         
-        self.title = @"Properties";
+        self.title = CoconutKitLocalizedString(@"Properties", nil);
         
         self.headerTitles = @[@"Status", @"Capabilities", @"Parameters", @"Resolved information", @"Values"];
         self.footerTitles = @[@"", @"", @"", @"Tap to highlight objects", @""];
@@ -78,7 +78,7 @@
                                                                                               action:@selector(close:)];
     }
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Help"
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:CoconutKitLocalizedString(@"Help", nil)
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(showHelp:)];

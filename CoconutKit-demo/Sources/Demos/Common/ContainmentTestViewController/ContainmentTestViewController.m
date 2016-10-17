@@ -93,7 +93,7 @@
 {
     [super localize];
     
-    self.title = @"ContainmentTestViewController";
+    self.title = NSLocalizedString(@"ContainmentTestViewController", nil);
 }
 
 #pragma mark Action callbacks

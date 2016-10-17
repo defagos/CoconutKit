@@ -93,7 +93,7 @@ static const NSTimeInterval kAnimationIntrinsicDuration = -1.;
     
     NSUInteger repeatCount = [self repeatCount];
     if (repeatCount == NSUIntegerMax) {
-        self.repeatCountLabel.text = @"inf";
+        self.repeatCountLabel.text = NSLocalizedString(@"inf", nil);
     }
     else {
         self.repeatCountLabel.text = [NSString stringWithFormat:@"%@", @(repeatCount)];

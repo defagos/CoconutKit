@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 {
     [super localize];
     
-    self.title = @"HLSPlaceholderViewController";
+    self.title = NSLocalizedString(@"HLSPlaceholderViewController", nil);
     
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:AutorotationModeIndexNoChildren];
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"All", nil) forSegmentAtIndex:AutorotationModeIndexAllChildren];

@@ -136,7 +136,7 @@
 {
     [super localize];
     
-    self.title = @"RootSplitViewDemoController";
+    self.title = NSLocalizedString(@"RootSplitViewDemoController", nil);
     
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];

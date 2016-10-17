@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
             switch (indexPath.row) {
                 case SimpleCellIndexDefault: {
                     HLSTableViewCell *cell = [HLSTableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSTableViewCell";
+                    cell.textLabel.text = NSLocalizedString(@"HLSTableViewCell", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
                     break;
@@ -109,7 +109,7 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
                     
                 case SimpleCellIndexValue1: {
                     HLSValue1TableViewCell *cell = [HLSValue1TableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSValue1TableViewCell";
+                    cell.textLabel.text = NSLocalizedString(@"HLSValue1TableViewCell", nil);
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
@@ -118,7 +118,7 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
                     
                 case SimpleCellIndexValue2: {
                     HLSValue2TableViewCell *cell = [HLSValue2TableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSValue2TableViewCell";
+                    cell.textLabel.text = NSLocalizedString(@"HLSValue2TableViewCell", nil);
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, CustomCellIndex) {
                     
                 case SimpleCellIndexSubtitle: {
                     HLSSubtitleTableViewCell *cell = [HLSSubtitleTableViewCell cellForTableView:tableView];
-                    cell.textLabel.text = @"HLSSubtitleTableViewCell";
+                    cell.textLabel.text = NSLocalizedString(@"HLSSubtitleTableViewCell", nil);
                     cell.detailTextLabel.text = NSLocalizedString(@"Details", nil);
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     return cell;                    

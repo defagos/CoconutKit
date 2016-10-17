@@ -33,7 +33,7 @@
 - (instancetype)init
 {
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
-        self.title = @"Help";
+        self.title = NSLocalizedString(@"Help", nil);
     }
     return self;
 }

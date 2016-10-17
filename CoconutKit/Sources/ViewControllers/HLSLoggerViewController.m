@@ -36,7 +36,7 @@
     
     if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
         self.logger = logger;        
-        self.title = @"Logging controls";
+        self.title = CoconutKitLocalizedString(@"Logging controls", nil);
     }
     return self;
 }

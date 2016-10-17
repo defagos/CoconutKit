@@ -30,7 +30,7 @@
 {
     [super localize];
     
-    self.title = @"LandscapeOnlyViewController";
+    self.title = NSLocalizedString(@"LandscapeOnlyViewController", nil);
 }
 
 @end

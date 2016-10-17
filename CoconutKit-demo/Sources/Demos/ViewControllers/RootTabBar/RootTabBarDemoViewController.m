@@ -127,7 +127,7 @@
 {
     [super localize];
     
-    self.title = @"Tab";
+    self.title = NSLocalizedString(@"Tab", nil);
     
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"Container", nil) forSegmentAtIndex:0];
     [self.autorotationModeSegmentedControl setTitle:NSLocalizedString(@"No children", nil) forSegmentAtIndex:1];

@@ -377,22 +377,22 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
         case DemoCategoryIndexViewControllers: {
             switch (indexPath.row) {
                 case ViewControllersDemoIndexPlaceholderViewController: {
-                    cell.textLabel.text = @"HLSPlaceholderViewController";
+                    cell.textLabel.text = NSLocalizedString(@"HLSPlaceholderViewController", nil);
                     break;
                 }
                     
                 case ViewControllersDemoIndexWizardViewController: {
-                    cell.textLabel.text = @"HLSWizardViewController";
+                    cell.textLabel.text = NSLocalizedString(@"HLSWizardViewController", nil);
                     break;
                 }
                     
                 case ViewControllersDemoIndexStackController: {
-                    cell.textLabel.text = @"HLSStackController";
+                    cell.textLabel.text = NSLocalizedString(@"HLSStackController", nil);
                     break;
                 }
                     
                 case ViewControllersDemoIndexWebViewController: {
-                    cell.textLabel.text = @"HLSWebViewController";
+                    cell.textLabel.text = NSLocalizedString(@"HLSWebViewController", nil);
                     break;
                 }
                     
