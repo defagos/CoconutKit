@@ -1,5 +1,0 @@
-//
-//  CoconutKit-demo-debug.xcconfig
-//
-#include "../version.xcconfig"
-#include "../CoconutKit/CoconutKit-debug.xcconfig"
