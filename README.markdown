@@ -2,9 +2,9 @@
 
 CoconutKit is a **productivity framework for iOS**, crafted with love and focusing on ease of use. It provides a convenient, Cocoa-friendly toolbox to help you efficiently write robust and polished native applications.
 
-| Build status | Technology | Latest version | Integration | Documentation | License |
-|--------------|------------|----------------|-------------|---------------|---------|
-| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/develop.svg)](https://travis-ci.org/defagos/CoconutKit) | ![Platform](https://img.shields.io/cocoapods/p/CoconutKit.svg) ![Language](https://img.shields.io/badge/language-objective--c-blue.svg) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Pod Version](https://img.shields.io/cocoapods/v/CoconutKit.svg)](https://guides.cocoapods.org/using/using-cocoapods.html) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | [![Documentation](https://img.shields.io/badge/doc-CocoaDocs-orange.svg)](https://cocoapods.org/pods/CoconutKit) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
+| Build status | Latest version | Integration | License |
+|--------------|----------------|-------------|---------|
+| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/develop.svg)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
 
 _Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
@@ -196,21 +196,7 @@ CoconutKit can be used both from Objective-C or Swift files. It does not contain
 
 ## Installation
 
-CoconutKit can either be added to a project with [CocoaPods](http://cocoapods.org/) or [Carthage](https://github.com/Carthage/Carthage).
-
-### Installation with CocoaPods
-
-Add CoconutKit as dependency in your `Podfile`
-
-```ruby
-pod 'CoconutKit', '<version>'
-```
-
-Then run `pod install` to update the dependencies. You can also add the `use_frameworks!` directive in your `Podfile` if you want to embed CoconutKit as a native Cocoa Touch framework.
-
-For more information about CocoaPods and the `Podfile`, please refer to the [official documentation](http://guides.cocoapods.org/).
-
-### Installation with Carthage
+CoconutKit can be added using [Carthage](https://github.com/Carthage/Carthage).
 
 Add CoconutKit as dependency in your `Cartfile`:
 
@@ -218,7 +204,11 @@ Add CoconutKit as dependency in your `Cartfile`:
 github "defagos/CoconutKit" == <version>
 ```
 
-Then run `carthage update` to update the dependencies. Unlike CocoaPods, your project is not changed. You will need to manually add the `.framework` generated in the `Carthage/Build/iOS` folder to your projet. Refer to the [official documentation](https://github.com/Carthage/Carthage) for more information.
+Then run `carthage update` to update the dependencies. You will need to manually add the `.framework` generated in the `Carthage/Build/iOS` folder to your projet. Refer to the [official documentation](https://github.com/Carthage/Carthage) for more information.
+
+### Remark
+
+CocoaPods is not supported anymore.
 
 ## Usage
 
@@ -238,25 +228,15 @@ You can similarly import individual files, e.g.
 #import <CoconutKit/HLSStackController.h>
 ```
 
-It you use Carthage or CocoaPods with the `use_frameworks!` directive, it is easier to import the CoconutKit module itself where needed:
+It might be easier to import the CoconutKit module itself where needed, though:
 
 ```objective-c
 @import CoconutKit;
 ```
 
-#### Remark
-
-For the installation with CocoaPods, you can also use `#import "CoconutKit.h"`, respectively `#import "HLSStackController.h"`, though I do not recommend this syntax anymore.
-
 ### Usage from Swift source files
 
-If you installed CoconutKit with CocoaPods but without the `use_frameworks!` directive, import the global header from a bridging header:
-
-```objective-c
-#import <CoconutKit.h/CoconutKit.h>
-```
-
-If you use the static framework, Carthage or CocoaPods with the `use_frameworks!` directive, the CoconutKit module can be imported where needed:
+Import the CoconutKit module where needed:
 
 ```swift
 import CoconutKit
