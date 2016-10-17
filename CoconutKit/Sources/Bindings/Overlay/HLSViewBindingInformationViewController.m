@@ -19,7 +19,6 @@
 #import "NSBundle+HLSExtensions.h"
 #import "NSError+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
-#import "UIPopoverController+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIView+HLSViewBindingImplementation.h"
 
@@ -73,11 +72,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    // TODO: Popover
+#if 0
     if (! self.popoverController) {
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                               target:self
                                                                                               action:@selector(close:)];
     }
+#endif
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Help"
                                                                               style:UIBarButtonItemStylePlain

@@ -92,7 +92,6 @@
 #import <CoconutKit/UILabel+HLSViewBinding.h>
 #import <CoconutKit/UINavigationController+HLSExtensions.h>
 #import <CoconutKit/UIPageControl+HLSViewBinding.h>
-#import <CoconutKit/UIPopoverController+HLSExtensions.h>
 #import <CoconutKit/UIProgressView+HLSViewBinding.h>
 #import <CoconutKit/UIScrollView+HLSExtensions.h>
 #import <CoconutKit/UISegmentedControl+HLSViewBinding.h>

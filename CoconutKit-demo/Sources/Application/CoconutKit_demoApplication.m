@@ -203,13 +203,6 @@
 
 #pragma mark UISplitViewControllerDelegate protocol implementation
 
-- (void)splitViewController:(UISplitViewController *)splitViewController
-          popoverController:(UIPopoverController *)popoverController
-  willPresentViewController:(UIViewController *)viewController
-{
-    HLSLoggerInfo(@"Popover controller %@ will present view controller %@", popoverController, viewController);
-}
-
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController
    shouldHideViewController:(UIViewController *)viewController
               inOrientation:(UIInterfaceOrientation)orientation
@@ -222,14 +215,6 @@
   invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     HLSLoggerInfo(@"Will show view controller %@ invalidating bar button item %@", viewController, barButtonItem);
-}
-
-- (void)splitViewController:(UISplitViewController *)splitViewController
-     willHideViewController:(UIViewController *)viewController
-          withBarButtonItem:(UIBarButtonItem *)barButtonItem
-       forPopoverController:(UIPopoverController *)popoverController
-{
-    HLSLoggerInfo(@"Will hide view controller %@ with barButtonItem %@ for popoverController %@", viewController, barButtonItem, popoverController);
 }
 
 #pragma mark UITabBarControllerDelegate protocol implementation

@@ -239,8 +239,6 @@
 		E69F22321ABCAC37000EEC39 /* HLSWizardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FADE59814BA0494007EE121 /* HLSWizardViewController.m */; };
 		E69F22331ABCAC37000EEC39 /* UINavigationController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22341ABCAC37000EEC39 /* UINavigationController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C754F162DC0290094B090 /* UINavigationController+HLSExtensions.m */; };
-		E69F22351ABCAC37000EEC39 /* UIPopoverController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F7A870E16522C0A0030B091 /* UIPopoverController+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E69F22361ABCAC37000EEC39 /* UIPopoverController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */; };
 		E69F22371ABCAC37000EEC39 /* UISplitViewController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E69F22381ABCAC37000EEC39 /* UISplitViewController+HLSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */; };
 		E69F22391ABCAC37000EEC39 /* UITabBarController+HLSExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6C7553162DC0550094B090 /* UITabBarController+HLSExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -388,8 +386,6 @@
 		6F6E813E17CF05FF00CE578A /* HLSLoggerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSLoggerViewController.m; sourceTree = "<group>"; };
 		6F794813180BABAD00282253 /* NSStream+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+HLSExtensions.h"; sourceTree = "<group>"; };
 		6F794814180BABAD00282253 /* NSStream+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensions.m"; sourceTree = "<group>"; };
-		6F7A870E16522C0A0030B091 /* UIPopoverController+HLSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+HLSExtensions.h"; sourceTree = "<group>"; };
-		6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+HLSExtensions.m"; sourceTree = "<group>"; };
 		6F7ECABE19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~ipad.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "HLSWebViewControllerErrorTemplate~ipad.html"; sourceTree = "<group>"; };
 		6F7ECABF19F5503B00B6BE62 /* HLSWebViewControllerErrorTemplate~iphone.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "HLSWebViewControllerErrorTemplate~iphone.html"; sourceTree = "<group>"; };
 		6F8366041588CC690044E572 /* HLSVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSVector.h; sourceTree = "<group>"; };
@@ -1023,8 +1019,6 @@
 				6FADE59814BA0494007EE121 /* HLSWizardViewController.m */,
 				6F6C754E162DC0290094B090 /* UINavigationController+HLSExtensions.h */,
 				6F6C754F162DC0290094B090 /* UINavigationController+HLSExtensions.m */,
-				6F7A870E16522C0A0030B091 /* UIPopoverController+HLSExtensions.h */,
-				6F7A870F16522C0A0030B091 /* UIPopoverController+HLSExtensions.m */,
 				6FC40C561641D02A00398242 /* UISplitViewController+HLSExtensions.h */,
 				6FC40C571641D02A00398242 /* UISplitViewController+HLSExtensions.m */,
 				6F6C7553162DC0550094B090 /* UITabBarController+HLSExtensions.h */,
@@ -1198,7 +1192,6 @@
 				E69F21961ABCAC0D000EEC39 /* HLSUserInterfaceLock.h in Headers */,
 				E69F22291ABCAC37000EEC39 /* HLSTableViewController.h in Headers */,
 				E69F22251ABCAC37000EEC39 /* HLSStackPushSegue.h in Headers */,
-				E69F22351ABCAC37000EEC39 /* UIPopoverController+HLSExtensions.h in Headers */,
 				E69F220A1ABCAC31000EEC39 /* UIView+HLSExtensions.h in Headers */,
 				E69F21A51ABCAC0D000EEC39 /* NSCalendar+HLSExtensions.h in Headers */,
 				E69F21C51ABCAC0D000EEC39 /* UIControl+HLSExclusiveTouch.h in Headers */,
@@ -1498,7 +1491,6 @@
 				E69F22181ABCAC37000EEC39 /* HLSContainerGroupView.m in Sources */,
 				E69F221E1ABCAC37000EEC39 /* HLSLoggerViewController.m in Sources */,
 				E6C1EE8F1CC50E04002568DA /* HLSBindingContext.m in Sources */,
-				E69F22361ABCAC37000EEC39 /* UIPopoverController+HLSExtensions.m in Sources */,
 				E69F225B1ABCAC53000EEC39 /* HLSViewBindingInformationEntry.m in Sources */,
 				E69F216C1ABCAC03000EEC39 /* UITextField+HLSViewBinding.m in Sources */,
 				E69F216A1ABCAC03000EEC39 /* UISwitch+HLSViewBinding.m in Sources */,

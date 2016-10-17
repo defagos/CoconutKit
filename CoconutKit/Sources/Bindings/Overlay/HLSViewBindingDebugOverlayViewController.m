@@ -26,7 +26,6 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
 
 @property (nonatomic, weak) UIWindow *debuggedWindow;
 
-@property (nonatomic) UIPopoverController *bindingInformationPopoverController;
 @property (nonatomic, weak) HLSViewBindingInformationViewController *bindingInformationViewController;
 
 @end
@@ -222,13 +221,6 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     }];
 }
 
-#pragma mark UIPopoverControllerDelegate protocol implementation
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    self.bindingInformationPopoverController = nil;
-}
-
 #pragma mark Actions
 
 - (void)close:(id)sender
@@ -256,13 +248,15 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
         [self presentViewController:bindingInformationNavigationController animated:YES completion:nil];
     }
     else {
-        
+        // TODO: Popover
+#if 0
         self.bindingInformationPopoverController = [[UIPopoverController alloc] initWithContentViewController:bindingInformationNavigationController];
         self.bindingInformationPopoverController.delegate = self;
         [self.bindingInformationPopoverController presentPopoverFromRect:overlayButton.frame
                                                                   inView:self.view
                                                 permittedArrowDirections:UIPopoverArrowDirectionAny
                                                                 animated:YES];
+#endif
     }
     
     self.bindingInformationViewController = bindingInformationViewController;

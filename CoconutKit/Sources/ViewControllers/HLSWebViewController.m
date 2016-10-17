@@ -48,8 +48,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 
 @property (nonatomic) NSArray<NSValue *> *actions;
 
-@property (nonatomic) UIPopoverController *activityPopoverController;
-
 @end
 
 @implementation HLSWebViewController {
@@ -303,14 +301,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark UIPopoverControllerDelegate protocol implementation
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    NSAssert(popoverController == self.activityPopoverController, @"Expect activity popover, no other popover supported yet");
-    self.activityPopoverController = nil;
 }
 
 #pragma mark WKWebViewDelegate protocol implementation
