@@ -80,7 +80,6 @@
 #import <CoconutKit/NSStream+HLSExtensions.h>
 #import <CoconutKit/NSString+HLSExtensions.h>
 #import <CoconutKit/NSTimeZone+HLSExtensions.h>
-#import <CoconutKit/UIActionSheet+HLSExtensions.h>
 #import <CoconutKit/UIActivityIndicatorView+HLSViewBinding.h>
 #import <CoconutKit/UIApplication+HLSExtensions.h>
 #import <CoconutKit/UIColor+HLSExtensions.h>
