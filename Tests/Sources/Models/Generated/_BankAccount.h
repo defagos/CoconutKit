@@ -1,27 +1,26 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to BankAccount.h instead.
 
-#import <CoreData/CoreData.h>
+#if __has_feature(modules)
+    @import Foundation;
+    @import CoreData;
+#else
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif
 
-extern const struct BankAccountAttributes {
-	__unsafe_unretained NSString *balance;
-	__unsafe_unretained NSString *name;
-} BankAccountAttributes;
-
-extern const struct BankAccountRelationships {
-	__unsafe_unretained NSString *owner;
-} BankAccountRelationships;
+NS_ASSUME_NONNULL_BEGIN
 
 @class Person;
 
 @interface BankAccountID : NSManagedObjectID {}
 @end
 
-@interface _BankAccount : NSManagedObject {}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@interface _BankAccount : NSManagedObject
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-@property (nonatomic, readonly, strong) BankAccountID* objectID;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) BankAccountID *objectID;
 
 @property (nonatomic, strong) NSNumber* balance;
 
@@ -29,15 +28,9 @@ extern const struct BankAccountRelationships {
 - (double)balanceValue;
 - (void)setBalanceValue:(double)value_;
 
-//- (BOOL)validateBalance:(id*)value_ error:(NSError**)error_;
-
 @property (nonatomic, strong) NSString* name;
 
-//- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) Person *owner;
-
-//- (BOOL)validateOwner:(id*)value_ error:(NSError**)error_;
+@property (nonatomic, strong, nullable) Person *owner;
 
 @end
 
@@ -56,3 +49,14 @@ extern const struct BankAccountRelationships {
 - (void)setPrimitiveOwner:(Person*)value;
 
 @end
+
+@interface BankAccountAttributes: NSObject 
++ (NSString *)balance;
++ (NSString *)name;
+@end
+
+@interface BankAccountRelationships: NSObject
++ (NSString *)owner;
+@end
+
+NS_ASSUME_NONNULL_END

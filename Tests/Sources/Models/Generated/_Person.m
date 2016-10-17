@@ -3,22 +3,12 @@
 
 #import "_Person.h"
 
-const struct PersonAttributes PersonAttributes = {
-	.firstName = @"firstName",
-	.lastName = @"lastName",
-};
-
-const struct PersonRelationships PersonRelationships = {
-	.accounts = @"accounts",
-	.houses = @"houses",
-};
-
 @implementation PersonID
 @end
 
 @implementation _Person
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:moc_];
 }
@@ -48,10 +38,10 @@ const struct PersonRelationships PersonRelationships = {
 
 @dynamic accounts;
 
-- (NSMutableSet*)accountsSet {
+- (NSMutableSet<BankAccount*>*)accountsSet {
 	[self willAccessValueForKey:@"accounts"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"accounts"];
+	NSMutableSet<BankAccount*> *result = (NSMutableSet<BankAccount*>*)[self mutableSetValueForKey:@"accounts"];
 
 	[self didAccessValueForKey:@"accounts"];
 	return result;
@@ -59,14 +49,32 @@ const struct PersonRelationships PersonRelationships = {
 
 @dynamic houses;
 
-- (NSMutableSet*)housesSet {
+- (NSMutableSet<House*>*)housesSet {
 	[self willAccessValueForKey:@"houses"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"houses"];
+	NSMutableSet<House*> *result = (NSMutableSet<House*>*)[self mutableSetValueForKey:@"houses"];
 
 	[self didAccessValueForKey:@"houses"];
 	return result;
 }
 
+@end
+
+@implementation PersonAttributes 
++ (NSString *)firstName {
+	return @"firstName";
+}
++ (NSString *)lastName {
+	return @"lastName";
+}
+@end
+
+@implementation PersonRelationships 
++ (NSString *)accounts {
+	return @"accounts";
+}
++ (NSString *)houses {
+	return @"houses";
+}
 @end
 

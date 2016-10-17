@@ -3,17 +3,12 @@
 
 #import "_AbstractClassA.h"
 
-const struct AbstractClassAAttributes AbstractClassAAttributes = {
-	.codeMandatoryNotEmptyStringA = @"codeMandatoryNotEmptyStringA",
-	.noValidationStringA = @"noValidationStringA",
-};
-
 @implementation AbstractClassAID
 @end
 
 @implementation _AbstractClassA
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"AbstractClassA" inManagedObjectContext:moc_];
 }
@@ -41,5 +36,14 @@ const struct AbstractClassAAttributes AbstractClassAAttributes = {
 
 @dynamic noValidationStringA;
 
+@end
+
+@implementation AbstractClassAAttributes 
++ (NSString *)codeMandatoryNotEmptyStringA {
+	return @"codeMandatoryNotEmptyStringA";
+}
++ (NSString *)noValidationStringA {
+	return @"noValidationStringA";
+}
 @end
 

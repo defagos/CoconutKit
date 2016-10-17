@@ -3,18 +3,12 @@
 
 #import "_ConcreteSubclassC.h"
 
-const struct ConcreteSubclassCAttributes ConcreteSubclassCAttributes = {
-	.codeMandatoryStringC = @"codeMandatoryStringC",
-	.modelMandatoryBoundedPatternStringC = @"modelMandatoryBoundedPatternStringC",
-	.noValidationNumberC = @"noValidationNumberC",
-};
-
 @implementation ConcreteSubclassCID
 @end
 
 @implementation _ConcreteSubclassC
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"ConcreteSubclassC" inManagedObjectContext:moc_];
 }
@@ -56,7 +50,7 @@ const struct ConcreteSubclassCAttributes ConcreteSubclassCAttributes = {
 }
 
 - (void)setNoValidationNumberCValue:(int16_t)value_ {
-	[self setNoValidationNumberC:[NSNumber numberWithShort:value_]];
+	[self setNoValidationNumberC:@(value_)];
 }
 
 - (int16_t)primitiveNoValidationNumberCValue {
@@ -65,8 +59,20 @@ const struct ConcreteSubclassCAttributes ConcreteSubclassCAttributes = {
 }
 
 - (void)setPrimitiveNoValidationNumberCValue:(int16_t)value_ {
-	[self setPrimitiveNoValidationNumberC:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveNoValidationNumberC:@(value_)];
 }
 
+@end
+
+@implementation ConcreteSubclassCAttributes 
++ (NSString *)codeMandatoryStringC {
+	return @"codeMandatoryStringC";
+}
++ (NSString *)modelMandatoryBoundedPatternStringC {
+	return @"modelMandatoryBoundedPatternStringC";
+}
++ (NSString *)noValidationNumberC {
+	return @"noValidationNumberC";
+}
 @end
 

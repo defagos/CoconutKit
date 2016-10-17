@@ -3,23 +3,12 @@
 
 #import "_ConcreteSubclassB.h"
 
-const struct ConcreteSubclassBAttributes ConcreteSubclassBAttributes = {
-	.codeMandatoryNumberB = @"codeMandatoryNumberB",
-	.modelMandatoryBoundedNumberB = @"modelMandatoryBoundedNumberB",
-	.modelMandatoryCodeNotZeroNumberB = @"modelMandatoryCodeNotZeroNumberB",
-	.noValidationNumberB = @"noValidationNumberB",
-};
-
-const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
-	.codeMandatoryConcreteClassesD = @"codeMandatoryConcreteClassesD",
-};
-
 @implementation ConcreteSubclassBID
 @end
 
 @implementation _ConcreteSubclassB
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"ConcreteSubclassB" inManagedObjectContext:moc_];
 }
@@ -72,7 +61,7 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setCodeMandatoryNumberBValue:(int16_t)value_ {
-	[self setCodeMandatoryNumberB:[NSNumber numberWithShort:value_]];
+	[self setCodeMandatoryNumberB:@(value_)];
 }
 
 - (int16_t)primitiveCodeMandatoryNumberBValue {
@@ -81,7 +70,7 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setPrimitiveCodeMandatoryNumberBValue:(int16_t)value_ {
-	[self setPrimitiveCodeMandatoryNumberB:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveCodeMandatoryNumberB:@(value_)];
 }
 
 @dynamic modelMandatoryBoundedNumberB;
@@ -92,7 +81,7 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setModelMandatoryBoundedNumberBValue:(int16_t)value_ {
-	[self setModelMandatoryBoundedNumberB:[NSNumber numberWithShort:value_]];
+	[self setModelMandatoryBoundedNumberB:@(value_)];
 }
 
 - (int16_t)primitiveModelMandatoryBoundedNumberBValue {
@@ -101,7 +90,7 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setPrimitiveModelMandatoryBoundedNumberBValue:(int16_t)value_ {
-	[self setPrimitiveModelMandatoryBoundedNumberB:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveModelMandatoryBoundedNumberB:@(value_)];
 }
 
 @dynamic modelMandatoryCodeNotZeroNumberB;
@@ -112,7 +101,7 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setModelMandatoryCodeNotZeroNumberBValue:(int16_t)value_ {
-	[self setModelMandatoryCodeNotZeroNumberB:[NSNumber numberWithShort:value_]];
+	[self setModelMandatoryCodeNotZeroNumberB:@(value_)];
 }
 
 - (int16_t)primitiveModelMandatoryCodeNotZeroNumberBValue {
@@ -121,7 +110,7 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setPrimitiveModelMandatoryCodeNotZeroNumberBValue:(int16_t)value_ {
-	[self setPrimitiveModelMandatoryCodeNotZeroNumberB:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveModelMandatoryCodeNotZeroNumberB:@(value_)];
 }
 
 @dynamic noValidationNumberB;
@@ -132,7 +121,7 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setNoValidationNumberBValue:(int16_t)value_ {
-	[self setNoValidationNumberB:[NSNumber numberWithShort:value_]];
+	[self setNoValidationNumberB:@(value_)];
 }
 
 - (int16_t)primitiveNoValidationNumberBValue {
@@ -141,19 +130,40 @@ const struct ConcreteSubclassBRelationships ConcreteSubclassBRelationships = {
 }
 
 - (void)setPrimitiveNoValidationNumberBValue:(int16_t)value_ {
-	[self setPrimitiveNoValidationNumberB:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveNoValidationNumberB:@(value_)];
 }
 
 @dynamic codeMandatoryConcreteClassesD;
 
-- (NSMutableSet*)codeMandatoryConcreteClassesDSet {
+- (NSMutableSet<ConcreteClassD*>*)codeMandatoryConcreteClassesDSet {
 	[self willAccessValueForKey:@"codeMandatoryConcreteClassesD"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"codeMandatoryConcreteClassesD"];
+	NSMutableSet<ConcreteClassD*> *result = (NSMutableSet<ConcreteClassD*>*)[self mutableSetValueForKey:@"codeMandatoryConcreteClassesD"];
 
 	[self didAccessValueForKey:@"codeMandatoryConcreteClassesD"];
 	return result;
 }
 
+@end
+
+@implementation ConcreteSubclassBAttributes 
++ (NSString *)codeMandatoryNumberB {
+	return @"codeMandatoryNumberB";
+}
++ (NSString *)modelMandatoryBoundedNumberB {
+	return @"modelMandatoryBoundedNumberB";
+}
++ (NSString *)modelMandatoryCodeNotZeroNumberB {
+	return @"modelMandatoryCodeNotZeroNumberB";
+}
++ (NSString *)noValidationNumberB {
+	return @"noValidationNumberB";
+}
+@end
+
+@implementation ConcreteSubclassBRelationships 
++ (NSString *)codeMandatoryConcreteClassesD {
+	return @"codeMandatoryConcreteClassesD";
+}
 @end
 

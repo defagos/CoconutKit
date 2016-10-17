@@ -3,21 +3,12 @@
 
 #import "_BankAccount.h"
 
-const struct BankAccountAttributes BankAccountAttributes = {
-	.balance = @"balance",
-	.name = @"name",
-};
-
-const struct BankAccountRelationships BankAccountRelationships = {
-	.owner = @"owner",
-};
-
 @implementation BankAccountID
 @end
 
 @implementation _BankAccount
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"BankAccount" inManagedObjectContext:moc_];
 }
@@ -55,7 +46,7 @@ const struct BankAccountRelationships BankAccountRelationships = {
 }
 
 - (void)setBalanceValue:(double)value_ {
-	[self setBalance:[NSNumber numberWithDouble:value_]];
+	[self setBalance:@(value_)];
 }
 
 - (double)primitiveBalanceValue {
@@ -64,12 +55,27 @@ const struct BankAccountRelationships BankAccountRelationships = {
 }
 
 - (void)setPrimitiveBalanceValue:(double)value_ {
-	[self setPrimitiveBalance:[NSNumber numberWithDouble:value_]];
+	[self setPrimitiveBalance:@(value_)];
 }
 
 @dynamic name;
 
 @dynamic owner;
 
+@end
+
+@implementation BankAccountAttributes 
++ (NSString *)balance {
+	return @"balance";
+}
++ (NSString *)name {
+	return @"name";
+}
+@end
+
+@implementation BankAccountRelationships 
++ (NSString *)owner {
+	return @"owner";
+}
 @end
 

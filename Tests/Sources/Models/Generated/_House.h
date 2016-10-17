@@ -1,40 +1,37 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to House.h instead.
 
-#import <CoreData/CoreData.h>
+#if __has_feature(modules)
+    @import Foundation;
+    @import CoreData;
+#else
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif
 
-extern const struct HouseAttributes {
-	__unsafe_unretained NSString *name;
-} HouseAttributes;
-
-extern const struct HouseRelationships {
-	__unsafe_unretained NSString *owners;
-} HouseRelationships;
+NS_ASSUME_NONNULL_BEGIN
 
 @class Person;
 
 @interface HouseID : NSManagedObjectID {}
 @end
 
-@interface _House : NSManagedObject {}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@interface _House : NSManagedObject
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-@property (nonatomic, readonly, strong) HouseID* objectID;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) HouseID *objectID;
 
 @property (nonatomic, strong) NSString* name;
 
-//- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSSet *owners;
-
-- (NSMutableSet*)ownersSet;
+@property (nonatomic, strong, nullable) NSSet<Person*> *owners;
+- (nullable NSMutableSet<Person*>*)ownersSet;
 
 @end
 
 @interface _House (OwnersCoreDataGeneratedAccessors)
-- (void)addOwners:(NSSet*)value_;
-- (void)removeOwners:(NSSet*)value_;
+- (void)addOwners:(NSSet<Person*>*)value_;
+- (void)removeOwners:(NSSet<Person*>*)value_;
 - (void)addOwnersObject:(Person*)value_;
 - (void)removeOwnersObject:(Person*)value_;
 
@@ -45,7 +42,17 @@ extern const struct HouseRelationships {
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
-- (NSMutableSet*)primitiveOwners;
-- (void)setPrimitiveOwners:(NSMutableSet*)value;
+- (NSMutableSet<Person*>*)primitiveOwners;
+- (void)setPrimitiveOwners:(NSMutableSet<Person*>*)value;
 
 @end
+
+@interface HouseAttributes: NSObject 
++ (NSString *)name;
+@end
+
+@interface HouseRelationships: NSObject
++ (NSString *)owners;
+@end
+
+NS_ASSUME_NONNULL_END

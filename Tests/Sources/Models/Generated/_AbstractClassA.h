@@ -1,38 +1,44 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to AbstractClassA.h instead.
 
-#import <CoreData/CoreData.h>
+#if __has_feature(modules)
+    @import Foundation;
+    @import CoreData;
+#else
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif
 
-extern const struct AbstractClassAAttributes {
-	__unsafe_unretained NSString *codeMandatoryNotEmptyStringA;
-	__unsafe_unretained NSString *noValidationStringA;
-} AbstractClassAAttributes;
+NS_ASSUME_NONNULL_BEGIN
 
 @interface AbstractClassAID : NSManagedObjectID {}
 @end
 
-@interface _AbstractClassA : NSManagedObject {}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@interface _AbstractClassA : NSManagedObject
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-@property (nonatomic, readonly, strong) AbstractClassAID* objectID;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) AbstractClassAID *objectID;
 
-@property (nonatomic, strong) NSString* codeMandatoryNotEmptyStringA;
+@property (nonatomic, strong, nullable) NSString* codeMandatoryNotEmptyStringA;
 
-//- (BOOL)validateCodeMandatoryNotEmptyStringA:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSString* noValidationStringA;
-
-//- (BOOL)validateNoValidationStringA:(id*)value_ error:(NSError**)error_;
+@property (nonatomic, strong, nullable) NSString* noValidationStringA;
 
 @end
 
 @interface _AbstractClassA (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString*)primitiveCodeMandatoryNotEmptyStringA;
-- (void)setPrimitiveCodeMandatoryNotEmptyStringA:(NSString*)value;
+- (nullable NSString*)primitiveCodeMandatoryNotEmptyStringA;
+- (void)setPrimitiveCodeMandatoryNotEmptyStringA:(nullable NSString*)value;
 
-- (NSString*)primitiveNoValidationStringA;
-- (void)setPrimitiveNoValidationStringA:(NSString*)value;
+- (nullable NSString*)primitiveNoValidationStringA;
+- (void)setPrimitiveNoValidationStringA:(nullable NSString*)value;
 
 @end
+
+@interface AbstractClassAAttributes: NSObject 
++ (NSString *)codeMandatoryNotEmptyStringA;
++ (NSString *)noValidationStringA;
+@end
+
+NS_ASSUME_NONNULL_END

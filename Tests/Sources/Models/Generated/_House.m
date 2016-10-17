@@ -3,20 +3,12 @@
 
 #import "_House.h"
 
-const struct HouseAttributes HouseAttributes = {
-	.name = @"name",
-};
-
-const struct HouseRelationships HouseRelationships = {
-	.owners = @"owners",
-};
-
 @implementation HouseID
 @end
 
 @implementation _House
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"House" inManagedObjectContext:moc_];
 }
@@ -44,14 +36,26 @@ const struct HouseRelationships HouseRelationships = {
 
 @dynamic owners;
 
-- (NSMutableSet*)ownersSet {
+- (NSMutableSet<Person*>*)ownersSet {
 	[self willAccessValueForKey:@"owners"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"owners"];
+	NSMutableSet<Person*> *result = (NSMutableSet<Person*>*)[self mutableSetValueForKey:@"owners"];
 
 	[self didAccessValueForKey:@"owners"];
 	return result;
 }
 
+@end
+
+@implementation HouseAttributes 
++ (NSString *)name {
+	return @"name";
+}
+@end
+
+@implementation HouseRelationships 
++ (NSString *)owners {
+	return @"owners";
+}
 @end
 

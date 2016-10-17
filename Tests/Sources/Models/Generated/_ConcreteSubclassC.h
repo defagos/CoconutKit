@@ -1,54 +1,59 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to ConcreteSubclassC.h instead.
 
-#import <CoreData/CoreData.h>
+#if __has_feature(modules)
+    @import Foundation;
+    @import CoreData;
+#else
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif
+
 #import "ConcreteSubclassB.h"
 
-extern const struct ConcreteSubclassCAttributes {
-	__unsafe_unretained NSString *codeMandatoryStringC;
-	__unsafe_unretained NSString *modelMandatoryBoundedPatternStringC;
-	__unsafe_unretained NSString *noValidationNumberC;
-} ConcreteSubclassCAttributes;
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ConcreteSubclassCID : ConcreteSubclassBID {}
 @end
 
-@interface _ConcreteSubclassC : ConcreteSubclassB {}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@interface _ConcreteSubclassC : ConcreteSubclassB
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_;
 + (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-@property (nonatomic, readonly, strong) ConcreteSubclassCID* objectID;
++ (nullable NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
+@property (nonatomic, readonly, strong) ConcreteSubclassCID *objectID;
 
-@property (nonatomic, strong) NSString* codeMandatoryStringC;
-
-//- (BOOL)validateCodeMandatoryStringC:(id*)value_ error:(NSError**)error_;
+@property (nonatomic, strong, nullable) NSString* codeMandatoryStringC;
 
 @property (nonatomic, strong) NSString* modelMandatoryBoundedPatternStringC;
 
-//- (BOOL)validateModelMandatoryBoundedPatternStringC:(id*)value_ error:(NSError**)error_;
-
-@property (nonatomic, strong) NSNumber* noValidationNumberC;
+@property (nonatomic, strong, nullable) NSNumber* noValidationNumberC;
 
 @property (atomic) int16_t noValidationNumberCValue;
 - (int16_t)noValidationNumberCValue;
 - (void)setNoValidationNumberCValue:(int16_t)value_;
 
-//- (BOOL)validateNoValidationNumberC:(id*)value_ error:(NSError**)error_;
-
 @end
 
 @interface _ConcreteSubclassC (CoreDataGeneratedPrimitiveAccessors)
 
-- (NSString*)primitiveCodeMandatoryStringC;
-- (void)setPrimitiveCodeMandatoryStringC:(NSString*)value;
+- (nullable NSString*)primitiveCodeMandatoryStringC;
+- (void)setPrimitiveCodeMandatoryStringC:(nullable NSString*)value;
 
 - (NSString*)primitiveModelMandatoryBoundedPatternStringC;
 - (void)setPrimitiveModelMandatoryBoundedPatternStringC:(NSString*)value;
 
-- (NSNumber*)primitiveNoValidationNumberC;
-- (void)setPrimitiveNoValidationNumberC:(NSNumber*)value;
+- (nullable NSNumber*)primitiveNoValidationNumberC;
+- (void)setPrimitiveNoValidationNumberC:(nullable NSNumber*)value;
 
 - (int16_t)primitiveNoValidationNumberCValue;
 - (void)setPrimitiveNoValidationNumberCValue:(int16_t)value_;
 
 @end
+
+@interface ConcreteSubclassCAttributes: NSObject 
++ (NSString *)codeMandatoryStringC;
++ (NSString *)modelMandatoryBoundedPatternStringC;
++ (NSString *)noValidationNumberC;
+@end
+
+NS_ASSUME_NONNULL_END

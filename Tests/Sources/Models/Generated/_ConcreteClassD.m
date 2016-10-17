@@ -3,21 +3,12 @@
 
 #import "_ConcreteClassD.h"
 
-const struct ConcreteClassDAttributes ConcreteClassDAttributes = {
-	.noValidationNumberD = @"noValidationNumberD",
-	.noValidationStringD = @"noValidationStringD",
-};
-
-const struct ConcreteClassDRelationships ConcreteClassDRelationships = {
-	.concreteSubclassB = @"concreteSubclassB",
-};
-
 @implementation ConcreteClassDID
 @end
 
 @implementation _ConcreteClassD
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
 	NSParameterAssert(moc_);
 	return [NSEntityDescription insertNewObjectForEntityForName:@"ConcreteClassD" inManagedObjectContext:moc_];
 }
@@ -55,7 +46,7 @@ const struct ConcreteClassDRelationships ConcreteClassDRelationships = {
 }
 
 - (void)setNoValidationNumberDValue:(int16_t)value_ {
-	[self setNoValidationNumberD:[NSNumber numberWithShort:value_]];
+	[self setNoValidationNumberD:@(value_)];
 }
 
 - (int16_t)primitiveNoValidationNumberDValue {
@@ -64,21 +55,36 @@ const struct ConcreteClassDRelationships ConcreteClassDRelationships = {
 }
 
 - (void)setPrimitiveNoValidationNumberDValue:(int16_t)value_ {
-	[self setPrimitiveNoValidationNumberD:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveNoValidationNumberD:@(value_)];
 }
 
 @dynamic noValidationStringD;
 
 @dynamic concreteSubclassB;
 
-- (NSMutableSet*)concreteSubclassBSet {
+- (NSMutableSet<ConcreteSubclassB*>*)concreteSubclassBSet {
 	[self willAccessValueForKey:@"concreteSubclassB"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"concreteSubclassB"];
+	NSMutableSet<ConcreteSubclassB*> *result = (NSMutableSet<ConcreteSubclassB*>*)[self mutableSetValueForKey:@"concreteSubclassB"];
 
 	[self didAccessValueForKey:@"concreteSubclassB"];
 	return result;
 }
 
+@end
+
+@implementation ConcreteClassDAttributes 
++ (NSString *)noValidationNumberD {
+	return @"noValidationNumberD";
+}
++ (NSString *)noValidationStringD {
+	return @"noValidationStringD";
+}
+@end
+
+@implementation ConcreteClassDRelationships 
++ (NSString *)concreteSubclassB {
+	return @"concreteSubclassB";
+}
 @end
 
