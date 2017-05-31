@@ -16,6 +16,7 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 @interface HLSLabelLocalizationInfo ()
 
+@property (nonatomic, copy) NSAttributedString *originalAttributedText;
 @property (nonatomic, copy) NSString *localizationKey;
 @property (nonatomic, copy) NSString *tableName;
 @property (nonatomic, copy) NSString *bundleName;
@@ -27,11 +28,12 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithText:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName
+- (instancetype)initWithAttributedText:(NSAttributedString *)attributedText tableName:(NSString *)tableName bundleName:(NSString *)bundleName
 {
     if (self = [super init]) {
-        [self parseText:text];
+        [self parseAttributedText:attributedText];
         
+        self.originalAttributedText = attributedText;
         self.tableName = tableName;
         self.bundleName = bundleName;
     }
@@ -46,12 +48,14 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 #pragma mark Parsing text
 
-- (void)parseText:(NSString *)text
+- (void)parseAttributedText:(NSAttributedString *)attributedText
 {
     static NSString * const kNormalLeadingPrefix = @"LS/";
     static NSString * const kUppercaseLeadingPrefix = @"ULS/";
     static NSString * const kLowercaseLeadingPrefix = @"LLS/";
     static NSString * const kCapitalizedLeadingPrefix = @"CLS/";
+    
+    NSString *text = attributedText.string;
     
     // Check prefix
     NSString *prefix = nil;
@@ -111,57 +115,63 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     return NO;
 }
 
-- (NSString *)localizedText
+- (NSAttributedString *)localizedAttributedText
 {    
     if (! self.localizationKey) {
         return nil;
     }
     
-    // Missing localization key. Return some label to make it clear when the label is displayed on screenyy
+    NSString *text = nil;
+    
+    // Missing localization key. Return some label to make it clear when the label is displayed on screen
     if (self.localizationKey.length == 0) {
-        return @"(no key)";
+        text = @"(no key)";
     }
-    
-    // We use an explicit constant string for missing localizations since otherwise the localization key itself would 
-    // be returned by the localizedStringForKey:value:table method
-    NSBundle *bundle = [NSBundle bundleWithName:self.bundleName];
-    if (! bundle) {
-        HLSLoggerWarn(@"The bundle %@ was not found", self.bundleName);
-        return self.localizationKey;
-    }
-    
-    NSString *text = [bundle localizedStringForKey:self.localizationKey
-                                             value:kMissingLocalizedString
-                                             table:self.tableName];
-    
-    // Use the localization key as text if missing
-    if ([text isEqualToString:kMissingLocalizedString]) {
-        text = self.localizationKey;
-    }
-    
-    // Formatting
-    switch (self.representation) {
-        case HLSLabelRepresentationUppercase: {
-            text = text.localizedUppercaseString;
-            break;
+    else {
+        // We use an explicit constant string for missing localizations since otherwise the localization key itself would
+        // be returned by the localizedStringForKey:value:table method
+        NSBundle *bundle = [NSBundle bundleWithName:self.bundleName];
+        if (! bundle) {
+            HLSLoggerWarn(@"The bundle %@ was not found", self.bundleName);
+            text = self.localizationKey;
         }
+        else {
+            text = [bundle localizedStringForKey:self.localizationKey
+                                           value:kMissingLocalizedString
+                                           table:self.tableName];
             
-        case HLSLabelRepresentationLowercase: {
-            text = text.localizedLowercaseString;
-            break;
-        }
+            // Use the localization key as text if missing
+            if ([text isEqualToString:kMissingLocalizedString]) {
+                text = self.localizationKey;
+            }
             
-        case HLSLabelRepresentationCapitalized: {
-            text = text.localizedCapitalizedString;
-            break;
-        }
-            
-        default: {
-            break;
+            // Formatting
+            switch (self.representation) {
+                case HLSLabelRepresentationUppercase: {
+                    text = text.localizedUppercaseString;
+                    break;
+                }
+                    
+                case HLSLabelRepresentationLowercase: {
+                    text = text.localizedLowercaseString;
+                    break;
+                }
+                    
+                case HLSLabelRepresentationCapitalized: {
+                    text = text.localizedCapitalizedString;
+                    break;
+                }
+                    
+                default: {
+                    break;
+                }
+            }
         }
     }
     
-    return text;
+    NSMutableAttributedString *attributedText = [self.originalAttributedText mutableCopy];
+    [attributedText replaceCharactersInRange:NSMakeRange(0, attributedText.length) withString:text];
+    return [attributedText copy];
 }
 
 #pragma mark Description

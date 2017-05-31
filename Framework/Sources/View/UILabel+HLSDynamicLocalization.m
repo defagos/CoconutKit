@@ -26,19 +26,21 @@ static void *s_localizationBundleNameKey = &s_localizationBundleNameKey;
 static void (*s_dealloc)(__unsafe_unretained id, SEL) = NULL;
 static void (*s_awakeFromNib)(id, SEL) = NULL;
 static void (*s_setText)(id, SEL, id) = NULL;
+static void (*s_setAttributedText)(id, SEL, id) = NULL;
 static void (*s_setBackgroundColor)(id, SEL, id) = NULL;
 
 // Swizzled method implementations
 static void swizzle_dealloc(__unsafe_unretained UILabel *self, SEL _cmd);
 static void swizzle_awakeFromNib(UILabel *self, SEL _cmd);
 static void swizzle_setText(UILabel *self, SEL _cmd, NSString *text);
+static void swizzle_setAttributedText(UILabel *self, SEL _cmd, NSAttributedString *attributedText);
 static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgroundColor);
 
 @interface UILabel (HLSDynamicLocalizationPrivate)
 
 @property (nonatomic) HLSLabelLocalizationInfo *localizationInfo;
 
-- (void)setAndLocalizeText:(NSString *)text;
+- (void)setAndLocalizeAttributedText:(NSAttributedString *)attributedText;
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo;
 
 - (void)currentLocalizationDidChange:(NSNotification *)notification;
@@ -80,6 +82,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
     HLSSwizzleSelector(self, sel_getUid("dealloc"), swizzle_dealloc, &s_dealloc);
     HLSSwizzleSelector(self, @selector(awakeFromNib), swizzle_awakeFromNib, &s_awakeFromNib);
     HLSSwizzleSelector(self, @selector(setText:), swizzle_setText, &s_setText);
+    HLSSwizzleSelector(self, @selector(setAttributedText:), swizzle_setAttributedText, &s_setAttributedText);
     HLSSwizzleSelector(self, @selector(setBackgroundColor:), swizzle_setBackgroundColor, &s_setBackgroundColor);
 }
 
@@ -132,7 +135,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
     }
 }
 
-- (void)setAndLocalizeText:(NSString *)text
+- (void)setAndLocalizeAttributedText:(NSAttributedString *)attributedText
 {
     // Each label is lazily associated with localization information the first time its text is set (even
     // if the label is not localized). The localization settings it contains (most notably the key) cannot 
@@ -176,7 +179,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
             bundleName = parentView.locBundle;
         }
         
-        localizationInfo = [[HLSLabelLocalizationInfo alloc] initWithText:text tableName:tableName bundleName:bundleName];
+        localizationInfo = [[HLSLabelLocalizationInfo alloc] initWithAttributedText:attributedText tableName:tableName bundleName:bundleName];
         [self setLocalizationInfo:localizationInfo];
         
         // For labels localized with prefixes only: Listen to localization change notifications
@@ -193,14 +196,14 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
         [self localizeTextWithLocalizationInfo:localizationInfo];
     }
     else {
-        s_setText(self, @selector(setText:), text);
+        s_setAttributedText(self, @selector(setAttributedText:), attributedText);
     }
 }
 
 - (void)localizeTextWithLocalizationInfo:(HLSLabelLocalizationInfo *)localizationInfo
 {
-    NSString *localizedText = localizationInfo.localizedText;
-    s_setText(self, @selector(setText:), localizedText);
+    NSAttributedString *localizedAttributedText = localizationInfo.localizedAttributedText;
+    s_setAttributedText(self, @selector(setAttributedText:), localizedAttributedText);
     
     // Avoid button label truncation when the localization changes (setting the title triggers a sizeToFit), and fixes
     // issues with the button label tint color. If we only change the label text, we namely face some minor issues
@@ -213,7 +216,7 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
     // transitioning between states
     if ([self.superview isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)self.superview;
-        [button setTitle:localizedText forState:button.state];
+        [button setAttributedTitle:localizedAttributedText forState:button.state];
     }
     
     // Restore the original background color if it had been altered
@@ -284,12 +287,19 @@ static void swizzle_awakeFromNib(UILabel *self, SEL _cmd)
     s_awakeFromNib(self, _cmd);
     
     // Here self.text returns the string filled by deserialization from the nib (which is not set using setText:)
-    [self setAndLocalizeText:self.text];
+    [self setAndLocalizeAttributedText:self.attributedText];
 }
 
+// Swizzled for UIButton support (!)
 static void swizzle_setText(UILabel *self, SEL _cmd, NSString *text)
 {
-    [self setAndLocalizeText:text];
+    NSAttributedString *attributedText = text ? [[NSAttributedString alloc] initWithString:text] : nil;
+    [self setAndLocalizeAttributedText:attributedText];
+}
+
+static void swizzle_setAttributedText(UILabel *self, SEL _cmd, NSAttributedString *attributedText)
+{
+    [self setAndLocalizeAttributedText:attributedText];
 }
 
 static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgroundColor)
