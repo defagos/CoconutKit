@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
  * default localization table name). The main bundle is used if bundleName is set to nil. Bundles are searched
  * recursively in the main bundle
  */
-- (instancetype)initWithText:(nullable NSString *)text tableName:(nullable NSString *)tableName bundleName:(nullable NSString *)bundleName NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAttributedText:(nullable NSAttributedString *)attributedText tableName:(nullable NSString *)tableName bundleName:(nullable NSString *)bundleName NS_DESIGNATED_INITIALIZER;
 
 /**
  * Return YES iff the information object corresponds to localized content
@@ -46,10 +46,10 @@ typedef NS_ENUM(NSInteger, HLSLabelRepresentation) {
 @property (nonatomic, readonly, getter=isIncomplete) BOOL incomplete;
 
 /**
- * Build and return the corresponding localized text. Return nil if the object does not contain localized information
+ * Build and return the corresponding localized attributed text. Return nil if the object does not contain localized information
  * (i.e. if isLocalized returns NO)
  */
-@property (nonatomic, readonly, copy, nullable) NSString *localizedText;
+@property (nonatomic, readonly, copy, nullable) NSAttributedString *localizedAttributedText;
 
 @end
 
