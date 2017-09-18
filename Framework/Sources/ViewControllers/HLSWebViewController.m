@@ -200,16 +200,6 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [super viewWillLayoutSubviews];
     
-    // Position the progress view under the top layout guide when wrapped in a navigation controller
-    self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
-                                         self.navigationController ? self.topLayoutGuide.length : 0.f,
-                                         CGRectGetWidth(self.progressView.frame),
-                                         CGRectGetHeight(self.progressView.frame));
-    
-    // Adjust the toolbar height depending on the screen orientation
-    CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
-    self.toolbar.frame = (CGRect){CGPointMake(0.f, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
-    
     // Properly position the vertical scroll bar to avoid the bottom toolbar
     UIScrollView *scrollView = self.webView.scrollView;
     UIEdgeInsets contentInset = scrollView.contentInset;
@@ -223,7 +213,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     }
     // Keyboard not visible: Adjust content and indicator insets to avoid being hidden by the toolbar
     else {
-        contentInset.bottom = toolbarSize.height;
+        contentInset.bottom = CGRectGetHeight(self.toolbar.frame);
     }
     
     scrollView.contentInset = contentInset;
