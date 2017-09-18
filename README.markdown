@@ -177,13 +177,14 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 8
-* iOS 10 SDK
+* Xcode 9
+* iOS 11 SDK
 
-Deployment is supported for the two most recent major iOS versions, currently:
+Deployment is supported for the three most recent major iOS versions, currently:
 
 * iOS 9.x
 * iOS 10.x
+* iOS 11.x
 
 All architectures are supported:
 
