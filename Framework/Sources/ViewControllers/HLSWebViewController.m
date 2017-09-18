@@ -202,25 +202,13 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [super viewWillLayoutSubviews];
     
-    self.toolbarHeightConstraint.constant = [self.toolbar sizeThatFits:self.view.bounds.size].height;
-    
-    // Properly position the vertical scroll bar to avoid the bottom toolbar
+    CGFloat toolbarHeight = [self.toolbar sizeThatFits:self.view.bounds.size].height;
+    self.toolbarHeightConstraint.constant = toolbarHeight;
+
     UIScrollView *scrollView = self.webView.scrollView;
+    
     UIEdgeInsets contentInset = scrollView.contentInset;
-    
-    // Keyboard visible: Adjust content and indicator insets to avoid being hidden by the keyboard
-    HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
-    if (keyboardInformation) {
-        CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardInformation.endFrame fromView:nil];
-        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView) + scrollView.contentOffset.y;
-        contentInset.bottom = keyboardHeightAdjustment;
-    }
-    // Keyboard not visible: Adjust content and indicator insets to avoid being hidden by the toolbar
-    else {
-        contentInset.bottom = CGRectGetHeight(self.toolbar.frame);
-    }
-    
-    scrollView.contentInset = contentInset;
+    contentInset.bottom = toolbarHeight;
     scrollView.scrollIndicatorInsets = contentInset;
 }
 
