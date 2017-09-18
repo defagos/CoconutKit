@@ -84,7 +84,7 @@ typedef void (^HLSFocusRectCompletionBlock)(CGRect focusRect);
  * The action block is automatically discarded when the view is removed from the view hierarchy. If you need to remove 
  * the action before the view is removed from the view hierarchy, call -disableOutsideAction.
  */
-- (void)enableOutsideActionWithBlock:(void (^)())outsideActionBlock;
+- (void)enableOutsideActionWithBlock:(void (^)(void))outsideActionBlock;
 - (void)disableOutsideAction;
 
 /**
