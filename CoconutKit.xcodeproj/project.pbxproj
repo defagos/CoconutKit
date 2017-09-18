@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		6F6737EF1F702BFA00AA9E68 /* HLSWebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737EE1F702BFA00AA9E68 /* HLSWebViewController.storyboard */; };
+		6F6737F61F70317500AA9E68 /* ButtonBarArrowLeftSmall@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737F01F70317400AA9E68 /* ButtonBarArrowLeftSmall@3x.png */; };
+		6F6737F71F70317500AA9E68 /* ButtonBarArrowRightSmall@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737F11F70317400AA9E68 /* ButtonBarArrowRightSmall@3x.png */; };
+		6F6737F81F70317500AA9E68 /* ButtonBarArrowRightSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737F21F70317500AA9E68 /* ButtonBarArrowRightSmall@2x.png */; };
+		6F6737F91F70317500AA9E68 /* ButtonBarArrowLeftSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737F31F70317500AA9E68 /* ButtonBarArrowLeftSmall.png */; };
+		6F6737FA1F70317500AA9E68 /* ButtonBarArrowRightSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737F41F70317500AA9E68 /* ButtonBarArrowRightSmall.png */; };
+		6F6737FB1F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737F51F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png */; };
 		6FB4004C1DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400061DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld */; };
 		6FB4004D1DB4F785001EDC82 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6FB400081DB4F785001EDC82 /* Sample.txt */; };
 		6FB4004E1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4000B1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
@@ -599,6 +605,12 @@
 
 /* Begin PBXFileReference section */
 		6F6737EE1F702BFA00AA9E68 /* HLSWebViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HLSWebViewController.storyboard; sourceTree = "<group>"; };
+		6F6737F01F70317400AA9E68 /* ButtonBarArrowLeftSmall@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowLeftSmall@3x.png"; sourceTree = "<group>"; };
+		6F6737F11F70317400AA9E68 /* ButtonBarArrowRightSmall@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowRightSmall@3x.png"; sourceTree = "<group>"; };
+		6F6737F21F70317500AA9E68 /* ButtonBarArrowRightSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowRightSmall@2x.png"; sourceTree = "<group>"; };
+		6F6737F31F70317500AA9E68 /* ButtonBarArrowLeftSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarArrowLeftSmall.png; sourceTree = "<group>"; };
+		6F6737F41F70317500AA9E68 /* ButtonBarArrowRightSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonBarArrowRightSmall.png; sourceTree = "<group>"; };
+		6F6737F51F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowLeftSmall@2x.png"; sourceTree = "<group>"; };
 		6FB400031DB4F785001EDC82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB400071DB4F785001EDC82 /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
 		6FB400081DB4F785001EDC82 /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
@@ -2217,9 +2229,15 @@
 				6FB4FD931DB4EF63001EDC82 /* ButtonBarArrowLeft.png */,
 				6FB4FD941DB4EF63001EDC82 /* ButtonBarArrowLeft@2x.png */,
 				6FB4FD951DB4EF63001EDC82 /* ButtonBarArrowLeft@3x.png */,
+				6F6737F31F70317500AA9E68 /* ButtonBarArrowLeftSmall.png */,
+				6F6737F51F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png */,
+				6F6737F01F70317400AA9E68 /* ButtonBarArrowLeftSmall@3x.png */,
 				6FB4FD961DB4EF63001EDC82 /* ButtonBarArrowRight.png */,
 				6FB4FD971DB4EF63001EDC82 /* ButtonBarArrowRight@2x.png */,
 				6FB4FD981DB4EF63001EDC82 /* ButtonBarArrowRight@3x.png */,
+				6F6737F41F70317500AA9E68 /* ButtonBarArrowRightSmall.png */,
+				6F6737F21F70317500AA9E68 /* ButtonBarArrowRightSmall@2x.png */,
+				6F6737F11F70317400AA9E68 /* ButtonBarArrowRightSmall@3x.png */,
 				6FB4FD991DB4EF63001EDC82 /* CursorDefaultPointer.png */,
 				6FB4FD9A1DB4EF63001EDC82 /* GoogleChromeActivityIcon@2x~ipad.png */,
 				6FB4FD9B1DB4EF63001EDC82 /* GoogleChromeActivityIcon@2x~iphone.png */,
@@ -3028,6 +3046,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6737FA1F70317500AA9E68 /* ButtonBarArrowRightSmall.png in Resources */,
 				6FB4FEC71DB4EF64001EDC82 /* EmbossedIcon@2x~ipad.png in Resources */,
 				6FB4FED41DB4EF64001EDC82 /* ButtonBarArrowRight@2x.png in Resources */,
 				6FB4FEDD1DB4EF64001EDC82 /* SafariActivityIcon@2x~iphone.png in Resources */,
@@ -3047,12 +3066,17 @@
 				6FB4FECF1DB4EF64001EDC82 /* BackgroundStripes@3x.png in Resources */,
 				6FB4FEDB1DB4EF64001EDC82 /* GoogleChromeActivityIcon~iphone.png in Resources */,
 				6FB4FEE01DB4EF64001EDC82 /* SafariActivityIcon~iphone.png in Resources */,
+				6F6737F81F70317500AA9E68 /* ButtonBarArrowRightSmall@2x.png in Resources */,
 				6FB4FEE31DB4EF64001EDC82 /* HLSViewBindingHelpViewController.xib in Resources */,
 				6FB4FED11DB4EF64001EDC82 /* ButtonBarArrowLeft@2x.png in Resources */,
+				6F6737F91F70317500AA9E68 /* ButtonBarArrowLeftSmall.png in Resources */,
 				6FB4FED31DB4EF64001EDC82 /* ButtonBarArrowRight.png in Resources */,
+				6F6737FB1F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png in Resources */,
 				6FB4FECE1DB4EF64001EDC82 /* BackgroundStripes@2x.png in Resources */,
 				6FB4FEC91DB4EF64001EDC82 /* EmbossedIcon~ipad.png in Resources */,
 				6FB4FEC61DB4EF64001EDC82 /* Localizable.strings in Resources */,
+				6F6737F61F70317500AA9E68 /* ButtonBarArrowLeftSmall@3x.png in Resources */,
+				6F6737F71F70317500AA9E68 /* ButtonBarArrowRightSmall@3x.png in Resources */,
 				6F6737EF1F702BFA00AA9E68 /* HLSWebViewController.storyboard in Resources */,
 				6FB4FECA1DB4EF64001EDC82 /* EmbossedIcon~iphone.png in Resources */,
 				6FB4FED91DB4EF64001EDC82 /* GoogleChromeActivityIcon@3x~iphone.png in Resources */,

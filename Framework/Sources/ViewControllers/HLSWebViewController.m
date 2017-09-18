@@ -46,6 +46,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic) NSArray<UIBarButtonItem *> *normalToolbarItems;
 @property (nonatomic) NSArray<UIBarButtonItem *> *loadingToolbarItems;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
+
 @property (nonatomic) NSArray<NSValue *> *actions;
 
 @end
@@ -199,6 +201,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
+    
+    self.toolbarHeightConstraint.constant = [self.toolbar sizeThatFits:self.view.bounds.size].height;
     
     // Properly position the vertical scroll bar to avoid the bottom toolbar
     UIScrollView *scrollView = self.webView.scrollView;

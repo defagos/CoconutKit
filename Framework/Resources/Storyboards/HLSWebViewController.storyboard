@@ -20,15 +20,18 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="be0-EK-sHQ">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="NO1-su-2pM"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem width="18" systemItem="fixedSpace" id="9N9-2V-kof"/>
-                                    <barButtonItem image="ButtonBarArrowLeft.png" style="plain" id="1VO-GY-T9M" userLabel="Previous Bar Button Item">
+                                    <barButtonItem image="ButtonBarArrowLeft.png" landscapeImage="ButtonBarArrowLeftSmall.png" style="plain" id="1VO-GY-T9M" userLabel="Previous Bar Button Item">
                                         <connections>
                                             <action selector="goBack:" destination="XwH-cc-fex" id="9KE-b1-YxJ"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="40" systemItem="fixedSpace" id="tKe-P3-MzG"/>
-                                    <barButtonItem image="ButtonBarArrowRight.png" style="plain" id="teH-ja-h9t" userLabel="Next Bar Button Item">
+                                    <barButtonItem image="ButtonBarArrowRight.png" landscapeImage="ButtonBarArrowRightSmall.png" style="plain" id="teH-ja-h9t" userLabel="Next Bar Button Item">
                                         <connections>
                                             <action selector="goForward:" destination="XwH-cc-fex" id="hbW-oY-iBH"/>
                                         </connections>
@@ -70,6 +73,7 @@
                         <outlet property="progressView" destination="1DR-Qu-mAj" id="EhP-W8-K4j"/>
                         <outlet property="refreshBarButtonItem" destination="8fd-Aw-L5t" id="95h-nL-QSQ"/>
                         <outlet property="toolbar" destination="be0-EK-sHQ" id="jQu-i9-4VD"/>
+                        <outlet property="toolbarHeightConstraint" destination="NO1-su-2pM" id="QEO-Ky-ZS4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCu-ze-hEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -79,6 +83,8 @@
     </scenes>
     <resources>
         <image name="ButtonBarArrowLeft.png" width="13" height="22"/>
+        <image name="ButtonBarArrowLeftSmall.png" width="9" height="16"/>
         <image name="ButtonBarArrowRight.png" width="13" height="22"/>
+        <image name="ButtonBarArrowRightSmall.png" width="9" height="16"/>
     </resources>
 </document>
