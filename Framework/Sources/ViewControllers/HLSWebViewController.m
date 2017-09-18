@@ -216,8 +216,13 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     UIScrollView *scrollView = self.webView.scrollView;
     
     HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
+    CGFloat bottom = keyboardInformation ? CGRectGetHeight(keyboardInformation.endFrame) : toolbarHeight;
+    if (@available(iOS 11.0, *)) {
+        bottom -= keyboardInformation ? self.view.safeAreaInsets.bottom : 0.f;
+    }
+    
     UIEdgeInsets contentInset = scrollView.contentInset;
-    contentInset.bottom = keyboardInformation ? CGRectGetHeight(keyboardInformation.endFrame) : toolbarHeight;
+    contentInset.bottom = bottom;
     scrollView.scrollIndicatorInsets = contentInset;
 }
 
