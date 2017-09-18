@@ -16,6 +16,7 @@
 		6F6737FB1F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737F51F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png */; };
 		6F6737FD1F70510200AA9E68 /* HLSLoggerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737FC1F70510200AA9E68 /* HLSLoggerViewController.storyboard */; };
 		6F6737FF1F7053F300AA9E68 /* HLSViewBindingInformationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F6737FE1F7053F300AA9E68 /* HLSViewBindingInformationViewController.storyboard */; };
+		6F6738011F70556200AA9E68 /* HLSViewBindingHelpViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F6738001F70556200AA9E68 /* HLSViewBindingHelpViewController.storyboard */; };
 		6FB4004C1DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400061DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld */; };
 		6FB4004D1DB4F785001EDC82 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6FB400081DB4F785001EDC82 /* Sample.txt */; };
 		6FB4004E1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4000B1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
@@ -293,7 +294,6 @@
 		6FB4FEDF1DB4EF64001EDC82 /* SafariActivityIcon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB4FDA21DB4EF63001EDC82 /* SafariActivityIcon~ipad.png */; };
 		6FB4FEE01DB4EF64001EDC82 /* SafariActivityIcon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB4FDA31DB4EF63001EDC82 /* SafariActivityIcon~iphone.png */; };
 		6FB4FEE11DB4EF64001EDC82 /* HLSInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB4FDA51DB4EF63001EDC82 /* HLSInfoTableViewCell.xib */; };
-		6FB4FEE31DB4EF64001EDC82 /* HLSViewBindingHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FB4FDA71DB4EF63001EDC82 /* HLSViewBindingHelpViewController.xib */; };
 		6FB4FEE61DB4EF64001EDC82 /* HLSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB4FDAC1DB4EF63001EDC82 /* HLSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6FB4FEE71DB4EF64001EDC82 /* HLSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4FDAD1DB4EF63001EDC82 /* HLSAnimation.m */; };
 		6FB4FEE81DB4EF64001EDC82 /* HLSAnimationStep+Friend.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FB4FDAE1DB4EF63001EDC82 /* HLSAnimationStep+Friend.h */; };
@@ -613,6 +613,7 @@
 		6F6737F51F70317500AA9E68 /* ButtonBarArrowLeftSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonBarArrowLeftSmall@2x.png"; sourceTree = "<group>"; };
 		6F6737FC1F70510200AA9E68 /* HLSLoggerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HLSLoggerViewController.storyboard; sourceTree = "<group>"; };
 		6F6737FE1F7053F300AA9E68 /* HLSViewBindingInformationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HLSViewBindingInformationViewController.storyboard; sourceTree = "<group>"; };
+		6F6738001F70556200AA9E68 /* HLSViewBindingHelpViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HLSViewBindingHelpViewController.storyboard; sourceTree = "<group>"; };
 		6FB400031DB4F785001EDC82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB400071DB4F785001EDC82 /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
 		6FB400081DB4F785001EDC82 /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
@@ -1002,7 +1003,6 @@
 		6FB4FDA21DB4EF63001EDC82 /* SafariActivityIcon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SafariActivityIcon~ipad.png"; sourceTree = "<group>"; };
 		6FB4FDA31DB4EF63001EDC82 /* SafariActivityIcon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SafariActivityIcon~iphone.png"; sourceTree = "<group>"; };
 		6FB4FDA51DB4EF63001EDC82 /* HLSInfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSInfoTableViewCell.xib; sourceTree = "<group>"; };
-		6FB4FDA71DB4EF63001EDC82 /* HLSViewBindingHelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSViewBindingHelpViewController.xib; sourceTree = "<group>"; };
 		6FB4FDAC1DB4EF63001EDC82 /* HLSAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSAnimation.h; sourceTree = "<group>"; };
 		6FB4FDAD1DB4EF63001EDC82 /* HLSAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSAnimation.m; sourceTree = "<group>"; };
 		6FB4FDAE1DB4EF63001EDC82 /* HLSAnimationStep+Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HLSAnimationStep+Friend.h"; sourceTree = "<group>"; };
@@ -1307,6 +1307,7 @@
 				6F6737FC1F70510200AA9E68 /* HLSLoggerViewController.storyboard */,
 				6F6737EE1F702BFA00AA9E68 /* HLSWebViewController.storyboard */,
 				6F6737FE1F7053F300AA9E68 /* HLSViewBindingInformationViewController.storyboard */,
+				6F6738001F70556200AA9E68 /* HLSViewBindingHelpViewController.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2259,7 +2260,6 @@
 			isa = PBXGroup;
 			children = (
 				6FB4FDA51DB4EF63001EDC82 /* HLSInfoTableViewCell.xib */,
-				6FB4FDA71DB4EF63001EDC82 /* HLSViewBindingHelpViewController.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -3067,7 +3067,7 @@
 				6FB4FEDB1DB4EF64001EDC82 /* GoogleChromeActivityIcon~iphone.png in Resources */,
 				6FB4FEE01DB4EF64001EDC82 /* SafariActivityIcon~iphone.png in Resources */,
 				6F6737F81F70317500AA9E68 /* ButtonBarArrowRightSmall@2x.png in Resources */,
-				6FB4FEE31DB4EF64001EDC82 /* HLSViewBindingHelpViewController.xib in Resources */,
+				6F6738011F70556200AA9E68 /* HLSViewBindingHelpViewController.storyboard in Resources */,
 				6FB4FED11DB4EF64001EDC82 /* ButtonBarArrowLeft@2x.png in Resources */,
 				6F6737F91F70317500AA9E68 /* ButtonBarArrowLeftSmall.png in Resources */,
 				6FB4FED31DB4EF64001EDC82 /* ButtonBarArrowRight.png in Resources */,

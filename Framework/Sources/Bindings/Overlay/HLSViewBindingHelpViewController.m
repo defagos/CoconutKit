@@ -44,8 +44,6 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.preferredContentSize = self.view.bounds.size;
-    
     self.scrollView.contentSize = self.contentView.bounds.size;
     [self.scrollView addSubview:self.contentView];
     
