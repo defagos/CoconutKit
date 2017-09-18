@@ -153,7 +153,7 @@ static void swizzle_didMoveToWindow(UIView *self, SEL _cmd);
 
 #pragma mark Modal behavior
 
-- (void)enableOutsideActionWithBlock:(void (^)())outsideActionBlock
+- (void)enableOutsideActionWithBlock:(void (^)(void))outsideActionBlock
 {
     NSParameterAssert(outsideActionBlock);
     

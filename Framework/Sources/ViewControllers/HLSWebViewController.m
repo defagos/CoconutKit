@@ -46,6 +46,8 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 @property (nonatomic) NSArray<UIBarButtonItem *> *normalToolbarItems;
 @property (nonatomic) NSArray<UIBarButtonItem *> *loadingToolbarItems;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
+
 @property (nonatomic) NSArray<NSValue *> *actions;
 
 @end
@@ -168,6 +170,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
                                                                                        action:@selector(stop:)];
     loadingToolbarItems[[loadingToolbarItems indexOfObject:self.refreshBarButtonItem]] = stopBarButtonItem;
     self.loadingToolbarItems = [loadingToolbarItems copy];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -200,33 +205,30 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [super viewWillLayoutSubviews];
     
-    // Position the progress view under the top layout guide when wrapped in a navigation controller
-    self.progressView.frame = CGRectMake(CGRectGetMinX(self.progressView.frame),
-                                         self.navigationController ? self.topLayoutGuide.length : 0.f,
-                                         CGRectGetWidth(self.progressView.frame),
-                                         CGRectGetHeight(self.progressView.frame));
+    [self updateLayout];
+}
+
+- (void)updateLayout
+{
+    CGFloat toolbarHeight = [self.toolbar sizeThatFits:self.view.bounds.size].height;
+    self.toolbarHeightConstraint.constant = toolbarHeight;
     
-    // Adjust the toolbar height depending on the screen orientation
-    CGSize toolbarSize = [self.toolbar sizeThatFits:self.view.bounds.size];
-    self.toolbar.frame = (CGRect){CGPointMake(0.f, CGRectGetHeight(self.view.bounds) - toolbarSize.height), toolbarSize};
-    
-    // Properly position the vertical scroll bar to avoid the bottom toolbar
     UIScrollView *scrollView = self.webView.scrollView;
     UIEdgeInsets contentInset = scrollView.contentInset;
     
-    // Keyboard visible: Adjust content and indicator insets to avoid being hidden by the keyboard
     HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
     if (keyboardInformation) {
-        CGRect keyboardEndFrameInScrollView = [scrollView convertRect:keyboardInformation.endFrame fromView:nil];
-        CGFloat keyboardHeightAdjustment = CGRectGetHeight(scrollView.frame) - CGRectGetMinY(keyboardEndFrameInScrollView) + scrollView.contentOffset.y;
-        contentInset.bottom = keyboardHeightAdjustment;
+        contentInset.bottom = CGRectGetHeight(keyboardInformation.endFrame);
+        
+        // Take into account bottom inset, most notably for iPhone X
+        if (@available(iOS 11.0, *)) {
+            contentInset.bottom -= self.view.safeAreaInsets.bottom;
+        }
     }
-    // Keyboard not visible: Adjust content and indicator insets to avoid being hidden by the toolbar
     else {
-        contentInset.bottom = toolbarSize.height;
+        contentInset.bottom = toolbarHeight;
     }
     
-    scrollView.contentInset = contentInset;
     scrollView.scrollIndicatorInsets = contentInset;
 }
 
@@ -409,6 +411,18 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     if (object == self.webView && [keyPath isEqualToString:@"estimatedProgress"] && self.webView.loading) {
         [self setProgress:self.webView.estimatedProgress animated:YES];
     }
+}
+
+#pragma mark Notifications
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    [self updateLayout];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification
+{
+    [self updateLayout];
 }
 
 @end

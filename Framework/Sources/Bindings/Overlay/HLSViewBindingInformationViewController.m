@@ -31,8 +31,6 @@
 
 @property (nonatomic) NSArray<NSArray<HLSViewBindingInformationEntry *> *> *entries;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-
 @end
 
 @implementation HLSViewBindingInformationViewController
@@ -66,8 +64,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.preferredContentSize = CGSizeMake(320.f, 640.f);
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

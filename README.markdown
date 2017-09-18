@@ -4,7 +4,7 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 
 | Build status | Latest version | Integration | License |
 |--------------|----------------|-------------|---------|
-| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/develop.svg)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
+| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/feature/xcode9-ios11.svg)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
 
 _Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
@@ -177,13 +177,14 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 8
-* iOS 10 SDK
+* Xcode 9
+* iOS 11 SDK
 
-Deployment is supported for the two most recent major iOS versions, currently:
+Deployment is supported for the three most recent major iOS versions, currently:
 
 * iOS 9.x
 * iOS 10.x
+* iOS 11.x
 
 All architectures are supported:
 
@@ -191,6 +192,8 @@ All architectures are supported:
 * armv7, armv7s and arm64
 
 and bitcode as well.
+
+Visual components are either device independent or support iPhone 4", 4.7", 5.5" and iPhone X screen sizes, as well as iPads.
 
 CoconutKit can be used both from Objective-C or Swift files. It does not contain any private API method calls and is therefore App Store compliant.
 

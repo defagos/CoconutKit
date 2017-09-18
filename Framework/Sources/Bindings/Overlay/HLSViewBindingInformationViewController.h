@@ -5,7 +5,7 @@
 //
 
 #import "HLSViewBindingInformation.h"
-#import "HLSViewController.h"
+#import "HLSTableViewController.h"
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Display various information about a binding
  */
-@interface HLSViewBindingInformationViewController : HLSViewController <UITableViewDataSource, UITableViewDelegate>
+@interface HLSViewBindingInformationViewController : HLSTableViewController
 
 /**
  * Initialize for displaying the provided binding information
