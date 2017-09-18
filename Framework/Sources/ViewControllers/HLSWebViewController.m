@@ -214,15 +214,21 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     self.toolbarHeightConstraint.constant = toolbarHeight;
     
     UIScrollView *scrollView = self.webView.scrollView;
+    UIEdgeInsets contentInset = scrollView.contentInset;
     
     HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
-    CGFloat bottom = keyboardInformation ? CGRectGetHeight(keyboardInformation.endFrame) : toolbarHeight;
-    if (@available(iOS 11.0, *)) {
-        bottom -= keyboardInformation ? self.view.safeAreaInsets.bottom : 0.f;
+    if (keyboardInformation) {
+        contentInset.bottom = CGRectGetHeight(keyboardInformation.endFrame);
+        
+        // Take into account bottom inset, most notably for iPhone X
+        if (@available(iOS 11.0, *)) {
+            contentInset.bottom -= self.view.safeAreaInsets.bottom;
+        }
+    }
+    else {
+        contentInset.bottom = toolbarHeight;
     }
     
-    UIEdgeInsets contentInset = scrollView.contentInset;
-    contentInset.bottom = bottom;
     scrollView.scrollIndicatorInsets = contentInset;
 }
 
