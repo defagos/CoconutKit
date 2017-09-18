@@ -193,6 +193,8 @@ All architectures are supported:
 
 and bitcode as well.
 
+Visual components are either device independent or support iPhone 4", 4.7", 5.5" and iPhone X screen sizes, as well as iPads.
+
 CoconutKit can be used both from Objective-C or Swift files. It does not contain any private API method calls and is therefore App Store compliant.
 
 ## Installation
