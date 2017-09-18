@@ -170,6 +170,9 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
                                                                                        action:@selector(stop:)];
     loadingToolbarItems[[loadingToolbarItems indexOfObject:self.refreshBarButtonItem]] = stopBarButtonItem;
     self.loadingToolbarItems = [loadingToolbarItems copy];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -202,13 +205,19 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     [super viewWillLayoutSubviews];
     
+    [self updateLayout];
+}
+
+- (void)updateLayout
+{
     CGFloat toolbarHeight = [self.toolbar sizeThatFits:self.view.bounds.size].height;
     self.toolbarHeightConstraint.constant = toolbarHeight;
-
+    
     UIScrollView *scrollView = self.webView.scrollView;
     
+    HLSKeyboardInformation *keyboardInformation = [HLSKeyboardInformation keyboardInformation];
     UIEdgeInsets contentInset = scrollView.contentInset;
-    contentInset.bottom = toolbarHeight;
+    contentInset.bottom = keyboardInformation ? CGRectGetHeight(keyboardInformation.endFrame) : toolbarHeight;
     scrollView.scrollIndicatorInsets = contentInset;
 }
 
@@ -391,6 +400,18 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     if (object == self.webView && [keyPath isEqualToString:@"estimatedProgress"] && self.webView.loading) {
         [self setProgress:self.webView.estimatedProgress animated:YES];
     }
+}
+
+#pragma mark Notifications
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    [self updateLayout];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification
+{
+    [self updateLayout];
 }
 
 @end
