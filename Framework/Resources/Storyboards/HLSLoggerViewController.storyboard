@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T4T-nK-Gma">
+    <device id="ipad12_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Logger View Controller-->
+        <scene sceneID="RR3-Ze-Sm7">
+            <objects>
+                <viewController id="T4T-nK-Gma" customClass="HLSLoggerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pJe-2w-hXy">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Logging level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="fVi-EN-69X">
+                                <rect key="frame" x="20" y="40" width="229" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="229" id="c2X-af-Jnu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g1P-Jt-vUl">
+                                <rect key="frame" x="257" y="36.5" width="747" height="29"/>
+                                <segments>
+                                    <segment title="Debug"/>
+                                    <segment title="Info"/>
+                                    <segment title="Warn"/>
+                                    <segment title="Error"/>
+                                    <segment title="Fatal"/>
+                                    <segment title="None"/>
+                                </segments>
+                                <connections>
+                                    <action selector="selectLevel:" destination="T4T-nK-Gma" eventType="valueChanged" id="JVK-0v-zQ5"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="File logging" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3aD-7i-3iV">
+                                <rect key="frame" x="20" y="94" width="229" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRM-Nq-wcf">
+                                <rect key="frame" x="257" y="89" width="51" height="31"/>
+                                <connections>
+                                    <action selector="toggleEnabled:" destination="T4T-nK-Gma" eventType="valueChanged" id="e2g-1m-Jo9"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Recent log files" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7VK-w6-jBX">
+                                <rect key="frame" x="20" y="148" width="117.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dHk-Ga-dWp">
+                                <rect key="frame" x="20" y="188" width="984" height="1125"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDX-ux-2FA">
+                                <rect key="frame" x="935" y="1324" width="69" height="30"/>
+                                <state key="normal" title="Clear files">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearLogs:" destination="T4T-nK-Gma" eventType="touchUpInside" id="vFq-Bo-gaY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jWE-ai-dTG" firstAttribute="top" secondItem="fVi-EN-69X" secondAttribute="top" constant="-20" id="0in-CK-Dvd"/>
+                            <constraint firstItem="dHk-Ga-dWp" firstAttribute="top" secondItem="7VK-w6-jBX" secondAttribute="bottom" constant="19" id="AEu-rs-QSC"/>
+                            <constraint firstItem="g1P-Jt-vUl" firstAttribute="leading" secondItem="fVi-EN-69X" secondAttribute="trailing" constant="8" id="IAM-tD-Uor"/>
+                            <constraint firstItem="jWE-ai-dTG" firstAttribute="trailing" secondItem="g1P-Jt-vUl" secondAttribute="trailing" constant="20" id="MuF-Ab-uaP"/>
+                            <constraint firstItem="dHk-Ga-dWp" firstAttribute="leading" secondItem="jWE-ai-dTG" secondAttribute="leading" constant="20" id="Oke-x5-SXq"/>
+                            <constraint firstItem="jWE-ai-dTG" firstAttribute="bottom" secondItem="jDX-ux-2FA" secondAttribute="bottom" constant="12" id="TRH-Rt-cte"/>
+                            <constraint firstItem="qRM-Nq-wcf" firstAttribute="centerY" secondItem="3aD-7i-3iV" secondAttribute="centerY" id="V9l-9G-d3d"/>
+                            <constraint firstItem="jDX-ux-2FA" firstAttribute="top" secondItem="dHk-Ga-dWp" secondAttribute="bottom" constant="11" id="cEv-kk-wOm"/>
+                            <constraint firstItem="qRM-Nq-wcf" firstAttribute="leading" secondItem="3aD-7i-3iV" secondAttribute="trailing" constant="8" id="cRt-y8-mex"/>
+                            <constraint firstItem="7VK-w6-jBX" firstAttribute="top" secondItem="3aD-7i-3iV" secondAttribute="bottom" constant="33" id="eYx-6j-FzW"/>
+                            <constraint firstItem="7VK-w6-jBX" firstAttribute="leading" secondItem="jWE-ai-dTG" secondAttribute="leading" constant="20" id="fb9-Sp-1tb"/>
+                            <constraint firstItem="jWE-ai-dTG" firstAttribute="trailing" secondItem="dHk-Ga-dWp" secondAttribute="trailing" constant="20" id="k0g-QL-fn6"/>
+                            <constraint firstItem="g1P-Jt-vUl" firstAttribute="centerY" secondItem="fVi-EN-69X" secondAttribute="centerY" id="kpl-vb-pmu"/>
+                            <constraint firstItem="3aD-7i-3iV" firstAttribute="top" secondItem="fVi-EN-69X" secondAttribute="bottom" constant="33" id="l1q-RP-fot"/>
+                            <constraint firstItem="3aD-7i-3iV" firstAttribute="leading" secondItem="jWE-ai-dTG" secondAttribute="leading" constant="20" id="olw-Gi-7cr"/>
+                            <constraint firstItem="fVi-EN-69X" firstAttribute="leading" secondItem="jWE-ai-dTG" secondAttribute="leading" constant="20" id="ryA-CC-4rX"/>
+                            <constraint firstItem="jWE-ai-dTG" firstAttribute="trailing" secondItem="jDX-ux-2FA" secondAttribute="trailing" constant="20" id="slr-Dh-Gld"/>
+                            <constraint firstItem="3aD-7i-3iV" firstAttribute="width" secondItem="fVi-EN-69X" secondAttribute="width" id="wx3-br-b3V"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jWE-ai-dTG"/>
+                    </view>
+                    <connections>
+                        <outlet property="enabledSwitch" destination="qRM-Nq-wcf" id="dSU-I7-g0N"/>
+                        <outlet property="levelSegmentedControl" destination="g1P-Jt-vUl" id="7G8-NG-D4F"/>
+                        <outlet property="tableView" destination="dHk-Ga-dWp" id="3Kk-Tf-Ui8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BJV-KU-gDd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-137" y="43"/>
+        </scene>
+    </scenes>
+</document>

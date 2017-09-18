@@ -132,7 +132,7 @@
     [self reloadData];
 }
 
-- (IBAction)close:(id)sender
+- (void)close:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
