@@ -242,7 +242,7 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     // Adjust content. Adjust depending on the space available vertically (398 is the horizontal keyboard height on a standard reference iPad)
     self.contentInset = UIEdgeInsetsMake(self.contentInset.top,
                                          self.contentInset.left,
-                                         keyboardHeightAdjustment + keyboardDistance * (CGRectGetHeight([UIScreen mainScreen].bounds) - CGRectGetHeight(keyboardEndFrameInWindow)) / (768.f - 398.f),
+                                         keyboardHeightAdjustment + keyboardDistance,
                                          self.contentInset.right);
     self.scrollIndicatorInsets = UIEdgeInsetsMake(self.scrollIndicatorInsets.top,
                                                   self.scrollIndicatorInsets.left,
@@ -251,9 +251,16 @@ static NSMutableDictionary<NSValue *, NSNumber *> *s_scrollViewOriginalIndicator
     [s_adjustedScrollViews addObject:self];
     
     void (^scrollBlock)(CGRect) = ^(CGRect focusRect) {
+        CGRect focusRectInScrollView = [self convertRect:focusRect fromView:firstResponderView];
+        CGFloat focusViewYPlusHeight = focusRectInScrollView.origin.y + focusRectInScrollView.size.height;
+        CGFloat keyboardExpandPosition = CGRectGetHeight(self.bounds) - keyboardHeightAdjustment - keyboardDistance;
         [UIView animateWithDuration:0.25 animations:^{
-            CGRect focusRectInScrollView = [self convertRect:focusRect fromView:firstResponderView];
-            [self scrollRectToVisible:focusRectInScrollView animated:NO];
+            if (focusViewYPlusHeight > keyboardExpandPosition) {
+                [self setContentOffset:CGPointMake(0.f, focusViewYPlusHeight - keyboardExpandPosition) animated:NO];
+            }
+            else {
+                [self setContentOffset:CGPointMake(0.f, -(keyboardExpandPosition - focusViewYPlusHeight)) animated:NO];
+            }
         }];
     };
 
