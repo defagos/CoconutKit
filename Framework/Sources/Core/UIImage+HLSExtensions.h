@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImage (HLSExtensions)
 
 /**
- * Return an image from the CoconutKit-resources bundle
+ * Return an image from the CoconutKit resource bundle
  */
 + (nullable instancetype)coconutKitImageNamed:(NSString *)imageName;
 
