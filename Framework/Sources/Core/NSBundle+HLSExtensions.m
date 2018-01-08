@@ -14,20 +14,6 @@
 
 #pragma mark Class methods
 
-/**
- * Return the bundle containing the CoconutKit executable code (in general the main bundle, but not always, e.g.
- * when running tests with XCTest or when using CoconutKit as a Cocoa Touch framework)
- */
-+ (NSBundle *)principalBundle
-{
-    static NSBundle *s_principalBundle;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_principalBundle = [NSBundle bundleForClass:[HLSLogger class]];
-    });
-    return s_principalBundle;
-}
-
 + (NSString *)friendlyApplicationVersionNumber
 {
     return [NSBundle mainBundle].friendlyVersionNumber;
@@ -35,12 +21,12 @@
 
 + (NSBundle *)coconutKitBundle
 {
-    NSBundle *coconutKitBundle = [self bundleWithName:@"CoconutKit-resources"];
-    if (! coconutKitBundle) {
-        HLSLoggerInfo(@"Could not find CoconutKit resources bundle. Use principal bundle instead (bundle containing CoconutKit classes)");
-         coconutKitBundle = [self principalBundle];
-    }
-    return coconutKitBundle;
+    static NSBundle *s_coconutKitBundle;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_coconutKitBundle = [NSBundle bundleForClass:[HLSLogger class]];
+    });
+    return s_coconutKitBundle;
 }
 
 + (NSBundle *)bundleWithName:(NSString *)name
