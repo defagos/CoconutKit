@@ -27,7 +27,6 @@ static void swizzle_setSelectedSegmentIndex(UISegmentedControl *self, SEL _cmd, 
     HLSSwizzleSelector(self, @selector(initWithFrame:), swizzle_initWithFrame, &s_initWithFrame);
     HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
     HLSSwizzleSelector(self, @selector(setSelectedSegmentIndex:), swizzle_setSelectedSegmentIndex, &s_setSelectedSegmentIndex);
-    
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
