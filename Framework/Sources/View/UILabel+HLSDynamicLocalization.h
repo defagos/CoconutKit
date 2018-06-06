@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
  *   - LLS/<localizationKey>: Same as LS/, but lowercase
  *   - CLS/<localizationKey>: Same as LS/, but capitalized
  *
+ * Dynamic localization works both with usual text as well as with attributed text. When attributed text is localized
+ * this way, though, only global formatting is preserved though, special formatting applied on subranges is lost.
+ *
  * Lookup is performed in the Localizable.strings file of the main bundle. If you need lookup to be performed 
  * in another table, respectively another bundle, set the following user-defined runtime attributes on the 
  * label or button you want to localize:
