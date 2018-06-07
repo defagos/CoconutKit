@@ -17,6 +17,8 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 @interface HLSLabelLocalizationInfo ()
 
 @property (nonatomic, copy) NSAttributedString *originalAttributedText;
+@property (nonatomic, copy) NSString *originalText;
+
 @property (nonatomic, copy) NSString *localizationKey;
 @property (nonatomic, copy) NSString *tableName;
 @property (nonatomic, copy) NSString *bundleName;
@@ -28,12 +30,14 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 #pragma mark Object creation and destruction
 
-- (instancetype)initWithAttributedText:(NSAttributedString *)attributedText tableName:(NSString *)tableName bundleName:(NSString *)bundleName
+- (instancetype)initWithAttributedText:(NSAttributedString *)attributedText text:(NSString *)text tableName:(NSString *)tableName bundleName:(NSString *)bundleName
 {
     if (self = [super init]) {
-        [self parseAttributedText:attributedText];
+        [self parseText:attributedText.string ?: text];
         
         self.originalAttributedText = attributedText;
+        self.originalText = text;
+        
         self.tableName = tableName;
         self.bundleName = bundleName;
     }
@@ -48,14 +52,12 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 
 #pragma mark Parsing text
 
-- (void)parseAttributedText:(NSAttributedString *)attributedText
+- (void)parseText:(NSString *)text
 {
     static NSString * const kNormalLeadingPrefix = @"LS/";
     static NSString * const kUppercaseLeadingPrefix = @"ULS/";
     static NSString * const kLowercaseLeadingPrefix = @"LLS/";
     static NSString * const kCapitalizedLeadingPrefix = @"CLS/";
-    
-    NSString *text = attributedText.string;
     
     // Check prefix
     NSString *prefix = nil;
@@ -91,6 +93,11 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
     return self.localizationKey != nil;
 }
 
+- (BOOL)isAttributed
+{
+    return self.originalAttributedText != nil;
+}
+
 - (BOOL)isIncomplete
 {
     // Missing localization key
@@ -116,16 +123,22 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
 }
 
 - (NSAttributedString *)localizedAttributedText
-{    
+{
+    NSString *text = [self localizedText];
+    NSMutableAttributedString *attributedText = [self.originalAttributedText mutableCopy];
+    [attributedText replaceCharactersInRange:NSMakeRange(0, attributedText.length) withString:text];
+    return [attributedText copy];
+}
+
+- (NSString *)localizedText
+{
     if (! self.localizationKey) {
         return nil;
     }
     
-    NSString *text = nil;
-    
     // Missing localization key. Return some label to make it clear when the label is displayed on screen
     if (self.localizationKey.length == 0) {
-        text = @"(no key)";
+        return @"(no key)";
     }
     else {
         // We use an explicit constant string for missing localizations since otherwise the localization key itself would
@@ -133,12 +146,12 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
         NSBundle *bundle = [NSBundle bundleWithName:self.bundleName];
         if (! bundle) {
             HLSLoggerWarn(@"The bundle %@ was not found", self.bundleName);
-            text = self.localizationKey;
+            return self.localizationKey;
         }
         else {
-            text = [bundle localizedStringForKey:self.localizationKey
-                                           value:kMissingLocalizedString
-                                           table:self.tableName];
+            NSString *text = [bundle localizedStringForKey:self.localizationKey
+                                                     value:kMissingLocalizedString
+                                                     table:self.tableName];
             
             // Use the localization key as text if missing
             if ([text isEqualToString:kMissingLocalizedString]) {
@@ -147,31 +160,29 @@ static NSString *stringForLabelRepresentation(HLSLabelRepresentation representat
             
             // Formatting
             switch (self.representation) {
-                case HLSLabelRepresentationUppercase: {
-                    text = text.localizedUppercaseString;
-                    break;
-                }
+                    case HLSLabelRepresentationUppercase: {
+                        text = text.localizedUppercaseString;
+                        break;
+                    }
                     
-                case HLSLabelRepresentationLowercase: {
-                    text = text.localizedLowercaseString;
-                    break;
-                }
+                    case HLSLabelRepresentationLowercase: {
+                        text = text.localizedLowercaseString;
+                        break;
+                    }
                     
-                case HLSLabelRepresentationCapitalized: {
-                    text = text.localizedCapitalizedString;
-                    break;
-                }
+                    case HLSLabelRepresentationCapitalized: {
+                        text = text.localizedCapitalizedString;
+                        break;
+                    }
                     
                 default: {
                     break;
                 }
             }
+            
+            return text;
         }
     }
-    
-    NSMutableAttributedString *attributedText = [self.originalAttributedText mutableCopy];
-    [attributedText replaceCharactersInRange:NSMakeRange(0, attributedText.length) withString:text];
-    return [attributedText copy];
 }
 
 #pragma mark Description
