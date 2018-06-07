@@ -75,17 +75,6 @@ static void swizzle_setBackgroundColor(UILabel *self, SEL _cmd, UIColor *backgro
 
 @implementation UILabel (HLSDynamicLocalizationPrivate)
 
-#pragma mark Class methods
-
-+ (void)load
-{
-    HLSSwizzleSelector(self, sel_getUid("dealloc"), swizzle_dealloc, &s_dealloc);
-    HLSSwizzleSelector(self, @selector(awakeFromNib), swizzle_awakeFromNib, &s_awakeFromNib);
-    HLSSwizzleSelector(self, @selector(setText:), swizzle_setText, &s_setText);
-    HLSSwizzleSelector(self, @selector(setAttributedText:), swizzle_setAttributedText, &s_setAttributedText);
-    HLSSwizzleSelector(self, @selector(setBackgroundColor:), swizzle_setBackgroundColor, &s_setBackgroundColor);
-}
-
 #pragma mark Localization
 
 - (HLSLabelLocalizationInfo *)localizationInfo
