@@ -231,9 +231,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HLSStackController (UnavailableMethods)
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
-- (instancetype)initWithBundle NS_UNAVAILABLE;
+- (instancetype)initWithBundle:(nullable NSBundle *)bundle;
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
