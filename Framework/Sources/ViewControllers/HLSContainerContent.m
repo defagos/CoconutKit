@@ -87,8 +87,7 @@ static BOOL swizzle_isMovingFromParentViewController(UIViewController *self, SEL
         }
         
         // Cannot be mixed with the automatic event management
-        if ([containerViewController respondsToSelector:@selector(shouldAutomaticallyForwardAppearanceMethods)]
-                && [containerViewController shouldAutomaticallyForwardAppearanceMethods]) {
+        if ([containerViewController shouldAutomaticallyForwardAppearanceMethods]) {
             HLSLoggerError(@"HLSContainerContent can only be used to implement containers for which view lifecycle event automatic "
                            "forwarding has been explicitly disabled");
             return nil;
