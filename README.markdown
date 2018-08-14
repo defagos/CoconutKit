@@ -199,19 +199,32 @@ CoconutKit can be used both from Objective-C or Swift files. It does not contain
 
 ## Installation
 
-CoconutKit can be added using [Carthage](https://github.com/Carthage/Carthage).
-
-Add CoconutKit as dependency in your `Cartfile`:
-
+The library can be added to a project using [Carthage](https://github.com/Carthage/Carthage) by adding the following dependency to your `Cartfile`:
+    
 ```
-github "defagos/CoconutKit" == <version>
+github "defagos/CoconutKit"
 ```
 
-Then run `carthage update` to update the dependencies. You will need to manually add the `.framework` generated in the `Carthage/Build/iOS` folder to your projet. Refer to the [official documentation](https://github.com/Carthage/Carthage) for more information.
+Until Carthage 0.30, only dynamic frameworks could be integrated. Starting with Carthage 0.30, though, frameworks can be integrated statically as well, which avoids slow application startups usually associated with the use of too many dynamic frameworks.
 
-### Remark
+For more information about Carthage and its use, refer to the [official documentation](https://github.com/Carthage/Carthage).
 
-CocoaPods is not supported anymore.
+### Dynamic framework integration
+
+1. Run `carthage update` to update the dependencies (which is equivalent to `carthage update --configuration Release`). 
+2. Add the `CoconutKit.framework` generated in the `Carthage/Build/iOS` folder to your target _Embedded binaries_.
+
+If your target is building an application, a few more steps are required:
+
+1. Add a _Run script_ build phase to your target, with `/usr/local/bin/carthage copy-frameworks` as command.
+2. Add `$(SRCROOT)/Carthage/Build/iOS/CoconutKit.framework` as input file.
+
+### Static framework integration
+
+1. Run `carthage update --configuration Release-static` to update the dependencies. 
+2. Add the `CoconutKit.framework` generated in the `Carthage/Build/iOS/Static` folder to the _Linked frameworks and libraries_ list of your target.
+3. Add the `CoconutKit.bundle` found within `CoconutKit.framework` to your project.
+4. Add the `-all_load` flag to your target _Other linker flags_.
 
 ## Usage
 
