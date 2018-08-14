@@ -21,12 +21,14 @@
 
 + (NSBundle *)coconutKitBundle
 {
-    static NSBundle *s_coconutKitBundle;
+    static NSBundle *s_bundle;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_coconutKitBundle = [NSBundle bundleForClass:[HLSLogger class]];
+        NSString *bundlePath = [[NSBundle bundleForClass:[HLSLogger class]].bundlePath stringByAppendingPathComponent:@"CoconutKit.bundle"];
+        s_bundle = [NSBundle bundleWithPath:bundlePath];
+        NSAssert(s_bundle, @"Please add CoconutKit.bundle to your project resources");
     });
-    return s_coconutKitBundle;
+    return s_bundle;
 }
 
 + (NSBundle *)bundleWithName:(NSString *)name
