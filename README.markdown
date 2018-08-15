@@ -223,7 +223,7 @@ If your target is building an application, a few more steps are required:
 
 1. Run `carthage update --configuration Release-static` to update the dependencies. 
 2. Add the `CoconutKit.framework` generated in the `Carthage/Build/iOS/Static` folder to the _Linked frameworks and libraries_ list of your target.
-3. Add the `CoconutKit.bundle` found within `CoconutKit.framework` to your project.
+3. Add the `CoconutKit.bundle` found within `CoconutKit.framework` to your target.
 4. Add the `-all_load` flag to your target _Other linker flags_.
 
 ## Usage
