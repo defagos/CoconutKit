@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CoconutKit_demoApplication : NSObject <
     HLSStackControllerDelegate,
     UINavigationControllerDelegate,
-    UISplitViewControllerDelegate,
     UITabBarControllerDelegate
 >
 

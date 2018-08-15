@@ -28,10 +28,15 @@
     return self;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (instancetype)initWithCompletionBlock:(HLSConnectionCompletionBlock)completionBlock
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
+
+#pragma clang diagnostic pop
 
 @end
