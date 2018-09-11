@@ -4,7 +4,7 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 
 | Build status | Latest version | Integration | License |
 |--------------|----------------|-------------|---------|
-| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/master.svg)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
+| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/develop.svg)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
 
 _Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
