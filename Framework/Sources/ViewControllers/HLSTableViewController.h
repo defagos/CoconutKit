@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HLSTableViewController (HLSRequiresSuper)
 
-- (instancetype)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle NS_REQUIRES_SUPER;
+- (instancetype)initWithNibName:(nullable NSString *)nibName bundle:(nullable NSBundle *)bundle NS_REQUIRES_SUPER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_REQUIRES_SUPER;
 - (void)viewDidLoad NS_REQUIRES_SUPER;
 - (void)viewWillAppear:(BOOL)animated NS_REQUIRES_SUPER;

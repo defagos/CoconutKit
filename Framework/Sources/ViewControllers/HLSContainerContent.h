@@ -51,8 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  * ensure that the view is created when it is really needed, not earlier.
  *
  * HLSContainerContent can only be used when implementing containers for which automatic view lifecycle event forwarding
- * has been disabled, i.e. for which the -[UIViewController shouldAutomaticallyForwardRotationMethods] and 
- * -[UIViewController shouldAutomaticallyForwardAppearanceMethods] methods return NO
+ * has been disabled, i.e. for which -[UIViewController shouldAutomaticallyForwardAppearanceMethods] method returns NO.
  */
 @interface HLSContainerContent : NSObject
 

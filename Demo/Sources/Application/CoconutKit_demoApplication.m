@@ -64,7 +64,6 @@
             RootSplitViewDemoController *rightRootSplitViewController = [[RootSplitViewDemoController alloc] init];
             UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
             splitViewController.viewControllers = @[leftRootSplitViewController, rightRootSplitViewController];
-            splitViewController.delegate = self;
             self.rootViewController = splitViewController;
         }
         else if ([demoMode isEqualToString:@"RootTabBar"]) {
@@ -199,22 +198,6 @@
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     HLSLoggerInfo(@"Did show view controller %@, animated = %@", viewController, HLSStringFromBool(animated));
-}
-
-#pragma mark UISplitViewControllerDelegate protocol implementation
-
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController
-   shouldHideViewController:(UIViewController *)viewController
-              inOrientation:(UIInterfaceOrientation)orientation
-{
-    return UIInterfaceOrientationIsPortrait(orientation);
-}
-
-- (void)splitViewController:(UISplitViewController *)splitViewController
-     willShowViewController:(UIViewController *)viewController
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    HLSLoggerInfo(@"Will show view controller %@ invalidating bar button item %@", viewController, barButtonItem);
 }
 
 #pragma mark UITabBarControllerDelegate protocol implementation

@@ -112,11 +112,16 @@ static NSMutableArray *s_backgroundAnimations = nil;
     return self;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (instancetype)init
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
 }
+
+#pragma clang diagnostic pop
 
 - (void)dealloc
 {

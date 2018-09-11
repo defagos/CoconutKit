@@ -156,11 +156,6 @@
     return NO;
 }
 
-- (BOOL)shouldAutomaticallyForwardRotationMethods
-{
-    return NO;
-}
-
 - (void)loadView
 {
     // Take all space available

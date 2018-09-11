@@ -101,6 +101,9 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     return self;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 - (instancetype)init
 {
     return nil;
@@ -111,6 +114,8 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     // Unregister KVO
     self.objectTarget = nil;
 }
+
+#pragma clang diagnostic pop
 
 #pragma mark Accessors and mutators
 

@@ -114,11 +114,6 @@
     return NO;
 }
 
-- (BOOL)shouldAutomaticallyForwardRotationMethods
-{
-    return NO;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

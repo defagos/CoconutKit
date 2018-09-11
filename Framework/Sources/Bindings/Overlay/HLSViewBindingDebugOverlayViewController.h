@@ -35,9 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HLSViewBindingDebugOverlayViewController (UnavailableMethods)
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
-- (instancetype)initWithBundle:(NSBundle *)bundle NS_UNAVAILABLE;
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithBundle:(nullable NSBundle *)bundle NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
 @end
