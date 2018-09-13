@@ -13,12 +13,14 @@ static id (*s_initWithFrame)(id, SEL, CGRect) = NULL;
 static id (*s_initWithCoder)(id, SEL, id) = NULL;
 static void (*s_dealloc)(__unsafe_unretained id, SEL) = NULL;
 static void (*s_setText)(id, SEL, id) = NULL;
+static void (*s_didMoveToWindow)(id, SEL) = NULL;
 
 // Swizzled method implementations
 static id swizzle_initWithFrame(UITextField *self, SEL _cmd, CGRect frame);
 static id swizzle_initWithCoder(UITextField *self, SEL _cmd, NSCoder *aDecoder);
 static void swizzle_dealloc(__unsafe_unretained UITextField *self, SEL _cmd);
 static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
+static void swizzle_didMoveToWindow(UITextField *self, SEL _cmd);
 
 @implementation UITextField (HLSViewBindingImplementation)
 
@@ -30,6 +32,12 @@ static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text);
     HLSSwizzleSelector(self, @selector(initWithCoder:), swizzle_initWithCoder, &s_initWithCoder);
     HLSSwizzleSelector(self, sel_getUid("dealloc"), swizzle_dealloc, &s_dealloc);
     HLSSwizzleSelector(self, @selector(setText:), swizzle_setText, &s_setText);
+    
+    // iOS 12: UITextField now implements -didMoveToWindow, without calling the parent implementation. Swizzle to fix
+    // so that bindings at the UIView level can work.
+    if (@available(iOS 12, *)) {
+        HLSSwizzleSelector(self, @selector(didMoveToWindow), swizzle_didMoveToWindow, &s_didMoveToWindow);
+    }
 }
 
 #pragma mark HLSViewBindingImplementation protocol implementation
@@ -99,4 +107,14 @@ static void swizzle_setText(UITextField *self, SEL _cmd, NSString *text)
     s_setText(self, _cmd, text);
     
     [self check:YES update:YES withInputValue:text error:NULL];
+}
+
+static void swizzle_didMoveToWindow(UITextField *self, SEL _cmd)
+{
+    // Insert the missing superclass method call
+    Class superclass = class_getSuperclass([UITextField class]);
+    IMP superImp = class_getMethodImplementation(superclass, _cmd);
+    ((void (*)(id, SEL))superImp)(self, _cmd);
+    
+    s_didMoveToWindow(self, _cmd);
 }
