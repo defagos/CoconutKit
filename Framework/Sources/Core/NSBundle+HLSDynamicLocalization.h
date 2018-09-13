@@ -36,13 +36,6 @@ OBJC_EXPORT NSString * __nullable HLSLanguageForLocalization(NSString * __nullab
 OBJC_EXPORT NSString *HLSLocalizedStringFromBundle(NSString * __nullable key, NSBundle * __nullable bundle);
 
 /**
- * Return a localized string from the UIKit bundle
- *
- * If no match is found, return HLSMissingLocalization
- */
-OBJC_EXPORT NSString *HLSLocalizedStringFromUIKit(NSString * __nullable key);
-
-/**
  * Return the localized description matching an error code
  *
  * If no match is found, return HLSMissingLocalization

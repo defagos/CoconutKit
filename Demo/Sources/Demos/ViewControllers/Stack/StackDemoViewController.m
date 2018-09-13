@@ -423,10 +423,10 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (IBAction)testResponderChain:(id)sender
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"OK", nil)
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
                                                         style:UIAlertActionStyleCancel
                                                       handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];

@@ -4,7 +4,7 @@ CoconutKit is a **productivity framework for iOS**, crafted with love and focusi
 
 | Build status | Latest version | Integration | License |
 |--------------|----------------|-------------|---------|
-| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/master.svg)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
+| [![Build Status](https://img.shields.io/travis/defagos/CoconutKit/release/3.3.6.svg)](https://travis-ci.org/defagos/CoconutKit) | [![Latest version](https://img.shields.io/github/tag/defagos/CoconutKit.svg)](https://github.com/defagos/CoconutKit) | [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage) | ![License](https://img.shields.io/github/license/defagos/CoconutKit.svg) |
 
 _Logo by Kilian Amendola ([@kilianamendola](https://twitter.com/kilianamendola))_
 
@@ -177,16 +177,10 @@ Combined with [mogenerator](http://rentzsch.github.io/mogenerator/) for model fi
 
 CoconutKit requires the most recent versions of Xcode and of the iOS SDK, currently:
 
-* Xcode 9
-* iOS 11 SDK
+* Xcode 10
+* iOS 12 SDK
 
-Deployment is supported for the three most recent major iOS versions, currently:
-
-* iOS 9.x
-* iOS 10.x
-* iOS 11.x
-
-All architectures are supported:
+Deployment is supported for the iOS 9 and above. All architectures are supported:
 
 * i386 and x86_64
 * armv7, armv7s and arm64

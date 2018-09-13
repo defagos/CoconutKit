@@ -17,6 +17,7 @@
 "Apples & Coconut"="Pommes & noix de coco";
 "Autorotation"="Autorotation";
 "Average age"="Age moyen";
+"Back"="Retour";
 "Bindings"="Bindings";
 "Birthdate"="Date de naissance";
 "Blocking"="Bloquant";
@@ -113,6 +114,7 @@
 "Now"="Maintenant";
 "Number of children"="Nombre d'enfants";
 "Oldest employee age"="Age du plus vieil employé";
+"OK"="OK";
 "Other view controller"="Autre view controller";
 "Parallax scrolling"="Défilement parallaxe";
 "Pause"="Pause";

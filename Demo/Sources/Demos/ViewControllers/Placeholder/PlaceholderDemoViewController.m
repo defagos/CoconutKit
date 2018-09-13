@@ -377,7 +377,7 @@ typedef NS_ENUM(NSInteger, AutorotationModeIndex) {
 
 - (IBAction)testResponderChain:(id)sender
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:HLSLocalizedStringFromUIKit(@"OK")
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"OK", nil)
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", nil) style:UIAlertActionStyleCancel handler:nil]];
