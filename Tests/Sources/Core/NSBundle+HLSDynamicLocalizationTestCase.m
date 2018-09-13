@@ -21,9 +21,6 @@
 
 - (void)testLocalizedStrings
 {
-    XCTAssertEqualObjects(HLSLocalizedStringFromUIKit(@"Cancel"), @"Cancel");
-    XCTAssertEqualObjects(HLSLocalizedStringFromUIKit(@"Unknown code, yeah yeah"), HLSMissingLocalization);
-    
     XCTAssertEqualObjects(HLSLocalizedDescriptionForCFNetworkError(kCFURLErrorCannotConnectToHost), @"Could not connect to the server.");
     XCTAssertEqualObjects(HLSLocalizedDescriptionForCFNetworkError(123456), HLSMissingLocalization);
 }

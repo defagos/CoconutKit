@@ -38,17 +38,15 @@ NSString *HLSLocalizedStringFromBundle(NSString *key, NSBundle *bundle)
     return localizedString;
 }
 
-NSString *HLSLocalizedStringFromUIKit(NSString *key)
-{
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.UIKit"];
-    return HLSLocalizedStringFromBundle(key, bundle);
-}
-
 NSString *HLSLocalizedDescriptionForCFNetworkError(NSInteger errorCode)
 {
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
+    static NSBundle *s_bundle;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
+    });
     NSString *key = [NSString stringWithFormat:@"Err%@", @(errorCode)];
-    return HLSLocalizedStringFromBundle(key, bundle);
+    return HLSLocalizedStringFromBundle(key, s_bundle);
 }
 
 static void setDefaultLocalization(void)

@@ -17,6 +17,7 @@
 "Autorotation"="Autorotation";
 "Apples & Coconut"="Apples & Coconut";
 "Average age"="Average age";
+"Back"="Back";
 "Bindings"="Bindings";
 "Birthdate"="Birthdate";
 "Blocking"="Blocking";
@@ -113,6 +114,7 @@
 "No children"="No children";
 "Now"="Now";
 "Number of children"="Number of children";
+"OK"="OK";
 "Oldest employee age"="Oldest employee age";
 "Other view controller"="Other view controller";
 "Parallax scrolling"="Parallax scrolling";

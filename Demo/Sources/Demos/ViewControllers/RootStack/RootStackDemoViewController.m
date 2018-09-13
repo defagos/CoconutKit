@@ -135,7 +135,7 @@
 {
     [super localize];
     
-    self.backBarButtonItem.title = HLSLocalizedStringFromUIKit(@"Back");
+    self.backBarButtonItem.title = NSLocalizedString(@"Back", nil);
     
     if (self == [self.stackController rootViewController]) {
         [self.popButton setTitle:NSLocalizedString(@"Close", nil) forState:UIControlStateNormal];
