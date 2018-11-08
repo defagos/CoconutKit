@@ -46,8 +46,8 @@ OBJC_EXPORT NSString * const HLSDetailedErrorsKey;           // Key for storing 
 /**
  * Combine a given error with another existing one, passed by reference. For convenience of use, the resulting error is
  * returned by reference, and also as method returned value. Multiple errors are combined as an HLSCoreErrorMultipleErrors
- * in the CoconutKitErrorDomain error domain. If no existing error is provided, the new resulting error is simply the
- * new error provided. Wrapped errors can be retrieved by from the HLSDetailedErrorsKey
+ * in the HLSCoreErrorDomain error domain. If no existing error is provided, the new resulting error is simply the
+ * new error provided. Wrapped errors can be retrieved as an array of errors under the HLSDetailedErrorsKey key.
  */
 + (nullable NSError *)combineError:(nullable NSError *)newError withError:(inout NSError *__autoreleasing *)pExistingError;
 
