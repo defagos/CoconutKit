@@ -152,7 +152,7 @@ NS_ASSUME_NONNULL_BEGIN
                         configuration:(nullable NSString *)configuration
                        storeDirectory:(nullable NSString *)storeDirectory
                           fileManager:(nullable HLSFileManager *)fileManager
-                              options:(nullable NSDictionary *)options NS_DESIGNATED_INITIALIZER;
+                              options:(nullable NSDictionary *)options;
 /**
  * Duplicate an existing manager
  */
@@ -171,12 +171,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
-
-@end
-
-@interface HLSModelManager (UnavailableMethods)
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
