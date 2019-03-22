@@ -98,6 +98,7 @@
 				it,
 				ja,
 				ko,
+				base
 			);
 			mainGroup = 6F44E9FB156BB2AF00B45BB4;
 			productRefGroup = 6F44E9FB156BB2AF00B45BB4;
