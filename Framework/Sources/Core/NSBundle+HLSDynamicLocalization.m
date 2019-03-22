@@ -61,19 +61,21 @@ static void setDefaultLocalization(void)
     }
 }
 
+__attribute__((constructor)) static void HLSDynamicLocalizationInit(void)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        @autoreleasepool {
+            NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
+            if (preferredLocalization) {
+                [NSBundle setLocalization:preferredLocalization];
+            }
+        }
+    });
+}
+
 @implementation NSBundle (HLSDynamicLocalization)
 
 #pragma mark Class methods
-
-+ (void)load
-{
-    @autoreleasepool {
-        NSString *preferredLocalization = [[NSUserDefaults standardUserDefaults] stringForKey:HLSPreferredLocalizationDefaultsKey];
-        if (preferredLocalization) {
-            [NSBundle setLocalization:preferredLocalization];
-        }  
-    }
-}
 
 + (NSString *)localization
 {
