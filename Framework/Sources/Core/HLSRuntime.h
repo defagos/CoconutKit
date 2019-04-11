@@ -34,11 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
  *        // ...
  *    }
  */
-#define HLSSwizzleSelector(clazz, selector, newImplementation, pPreviousImplementation) \
-    (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleSelector((clazz), (selector), (IMP)(newImplementation))
-
-#define HLSSwizzleClassSelector(clazz, selector, newImplementation, pPreviousImplementation) \
-    (*pPreviousImplementation) = (__typeof((*pPreviousImplementation)))hls_class_swizzleClassSelector((clazz), (selector), (IMP)(newImplementation))
+#define HLSSwizzleSelector(clazz, selector, newImplementation, pPreviousImplementation)
+#define HLSSwizzleClassSelector(clazz, selector, newImplementation, pPreviousImplementation)
 
 /**
  * Begin / end macros for block swizzling. The new implementation is supplied using an enclosed block with proper signature
