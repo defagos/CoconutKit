@@ -2923,7 +2923,7 @@
 			};
 			buildConfigurationList = 6FB4FD701DB4EF43001EDC82 /* Build configuration list for PBXProject "CoconutKit" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
