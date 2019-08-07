@@ -149,6 +149,7 @@
 - (IBAction)hideWithModal:(id)sender
 {
     MemoryWarningTestCoverViewController *memoryWarningTestCoverViewController = [[MemoryWarningTestCoverViewController alloc] init];
+    memoryWarningTestCoverViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:memoryWarningTestCoverViewController animated:YES completion:nil];
 }
 
