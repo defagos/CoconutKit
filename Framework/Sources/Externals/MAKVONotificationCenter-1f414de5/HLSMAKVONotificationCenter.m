@@ -357,67 +357,67 @@ static char HLSMAKVONotificationHelperMagicContext = 0;
 /******************************************************************************/
 @implementation NSObject (HLSMAKVONotification)
 
-- (id<HLSMAKVOObservation>)addObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
-                            options:(NSKeyValueObservingOptions)options
+- (id<HLSMAKVOObservation>)hlsma_addObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
+                                     options:(NSKeyValueObservingOptions)options
 {
     return [[HLSMAKVONotificationCenter defaultCenter] addObserver:observer object:self keyPath:keyPath selector:selector userInfo:userInfo options:options];
 }
 
-- (id<HLSMAKVOObservation>)observeTarget:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
-                              options:(NSKeyValueObservingOptions)options
+- (id<HLSMAKVOObservation>)hlsma_observeTarget:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector userInfo:(id)userInfo
+                                       options:(NSKeyValueObservingOptions)options
 {
     return [[HLSMAKVONotificationCenter defaultCenter] addObserver:self object:target keyPath:keyPath selector:selector userInfo:userInfo options:options];
 }
 
 #if NS_BLOCKS_AVAILABLE
 
-- (id<HLSMAKVOObservation>)addObservationKeyPath:(id<HLSMAKVOKeyPathSet>)keyPath
-                                      options:(NSKeyValueObservingOptions)options
-                                        block:(void (^)(HLSMAKVONotification *notification))block
+- (id<HLSMAKVOObservation>)hlsma_addObservationKeyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+                                               options:(NSKeyValueObservingOptions)options
+                                                 block:(void (^)(HLSMAKVONotification *notification))block
 {
     return [[HLSMAKVONotificationCenter defaultCenter] addObserver:nil object:self keyPath:keyPath options:options block:block];
 }
 
-- (id<HLSMAKVOObservation>)addObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
-                              block:(void (^)(HLSMAKVONotification *notification))block
+- (id<HLSMAKVOObservation>)hlsma_addObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
+                                       block:(void (^)(HLSMAKVONotification *notification))block
 {
     return [[HLSMAKVONotificationCenter defaultCenter] addObserver:observer object:self keyPath:keyPath options:options block:block];
 }
 
-- (id<HLSMAKVOObservation>)observeTarget:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
-                                block:(void (^)(HLSMAKVONotification *notification))block
+- (id<HLSMAKVOObservation>)hlsma_observeTarget:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath options:(NSKeyValueObservingOptions)options
+                                         block:(void (^)(HLSMAKVONotification *notification))block
 {
     return [[HLSMAKVONotificationCenter defaultCenter] addObserver:self object:target keyPath:keyPath options:options block:block];
 }
 
 #endif
 
-- (void)removeAllObservers
+- (void)hlsma_removeAllObservers
 {
     [[HLSMAKVONotificationCenter defaultCenter] removeObserver:nil object:self keyPath:nil selector:NULL];
 }
 
-- (void)stopObservingAllTargets
+- (void)hlsma_stopObservingAllTargets
 {
     [[HLSMAKVONotificationCenter defaultCenter] removeObserver:self object:nil keyPath:nil selector:NULL];
 }
 
-- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+- (void)hlsma_removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
 {
     [[HLSMAKVONotificationCenter defaultCenter] removeObserver:observer object:self keyPath:keyPath selector:NULL];
 }
 
-- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+- (void)hlsma_stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
 {
     [[HLSMAKVONotificationCenter defaultCenter] removeObserver:self object:target keyPath:keyPath selector:NULL];
 }
 
-- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector
+- (void)hlsma_removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector
 {
     [[HLSMAKVONotificationCenter defaultCenter] removeObserver:observer object:self keyPath:keyPath selector:selector];
 }
 
-- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector
+- (void)hlsma_stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector
 {
     [[HLSMAKVONotificationCenter defaultCenter] removeObserver:self object:target keyPath:keyPath selector:selector];
 }

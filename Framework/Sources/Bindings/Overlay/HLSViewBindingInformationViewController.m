@@ -51,7 +51,7 @@
         
         __weak __typeof(self) weakSelf = self;
         if ([bindingInformation.keyPath rangeOfString:@"@"].length == 0) {
-            [bindingInformation.objectTarget addObserver:self keyPath:bindingInformation.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+            [bindingInformation.objectTarget hlsma_addObserver:self keyPath:bindingInformation.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
                 [weakSelf reloadData];
             }];
         }
