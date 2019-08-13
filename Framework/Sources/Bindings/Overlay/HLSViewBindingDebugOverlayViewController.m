@@ -108,7 +108,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
     // Follow the motion of underlying views if a scroll view they are in is moved
     NSArray *scrollViews = [HLSViewBindingDebugOverlayViewController scrollViewsInView:s_previousKeyWindow.rootViewController.view];
     for (UIScrollView *scrollView in scrollViews) {
-        [scrollView addObserver:self keyPath:@"contentOffset" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+        [scrollView hlsma_addObserver:self keyPath:@"contentOffset" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
             [weakSelf updateOverlayViewFrames];
         }];
     }
@@ -150,7 +150,7 @@ static NSString * const HLSViewBindingDebugOverlayUnderlyingViewKey = @"underlyi
         // Track frame changes
         __weak UIView *weakView = view;
         __weak __typeof(self) weakSelf = self;
-        [view addObserver:self keyPath:@"frame" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+        [view hlsma_addObserver:self keyPath:@"frame" options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
             overlayButton.frame = [weakSelf overlayViewFrameForView:weakView];
         }];
         
