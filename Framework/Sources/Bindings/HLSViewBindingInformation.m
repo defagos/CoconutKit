@@ -152,7 +152,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
 - (void)setObjectTarget:(id)objectTarget
 {
     if (_objectTarget && self.viewAutomaticallyUpdated) {
-        [_objectTarget removeObserver:self keyPath:self.keyPath];
+        [_objectTarget hlsma_removeObserver:self keyPath:self.keyPath];
         
         self.viewAutomaticallyUpdated = NO;
     }
@@ -162,7 +162,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
     // KVO bug: Doing KVO on key paths containing keypath operators (which cannot be used with KVO) and catching the exception leads to retaining the
     // observer (though KVO itself neither retains the observer nor its observee). Catch such key paths before
     if (objectTarget && [self.keyPath rangeOfString:@"@"].length == 0) {
-        [objectTarget addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+        [objectTarget hlsma_addObserver:self keyPath:self.keyPath options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
             [self.view updateBoundView];
         }];
         
@@ -895,7 +895,7 @@ typedef NS_OPTIONS(NSInteger, HLSViewBindingStatus) {
             if (! pendingReason) {
                 // Observe transformer updates, reload cached transformer and update view accordingly
                 __weak __typeof(self) weakSelf = self;
-                [transformationTarget addObserver:self keyPath:NSStringFromSelector(transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
+                [transformationTarget hlsma_addObserver:self keyPath:NSStringFromSelector(transformationSelector) options:NSKeyValueObservingOptionNew block:^(HLSMAKVONotification *notification) {
                     // Clear the flag and force an update (will trigger the corresponding resolution mechanism again and upate views)
                     weakSelf.status &= ~HLSViewBindingStatusTransformerResolved;
                     [weakSelf.view updateBoundView];

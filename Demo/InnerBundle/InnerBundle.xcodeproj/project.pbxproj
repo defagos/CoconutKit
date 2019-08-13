@@ -88,7 +88,7 @@
 			};
 			buildConfigurationList = 6F44EA00156BB2AF00B45BB4 /* Build configuration list for PBXProject "InnerBundle" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -98,6 +98,7 @@
 				it,
 				ja,
 				ko,
+				base,
 			);
 			mainGroup = 6F44E9FB156BB2AF00B45BB4;
 			productRefGroup = 6F44E9FB156BB2AF00B45BB4;

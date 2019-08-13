@@ -77,44 +77,44 @@ enum
 //	switched; which you use is a matter of preference.
 @interface NSObject (HLSMAKVONotification)
 
-- (id<HLSMAKVOObservation>)addObserver:(id)observer
-                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
-                           selector:(SEL)selector
-                           userInfo:(id)userInfo
-                            options:(NSKeyValueObservingOptions)options;
+- (id<HLSMAKVOObservation>)hlsma_addObserver:(id)observer
+                                    keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+                                    selector:(SEL)selector
+                                    userInfo:(id)userInfo
+                                     options:(NSKeyValueObservingOptions)options;
 
-- (id<HLSMAKVOObservation>)observeTarget:(id)target
-                              keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
-                             selector:(SEL)selector
-                             userInfo:(id)userInfo
-                              options:(NSKeyValueObservingOptions)options;
+- (id<HLSMAKVOObservation>)hlsma_observeTarget:(id)target
+                                       keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+                                      selector:(SEL)selector
+                                      userInfo:(id)userInfo
+                                       options:(NSKeyValueObservingOptions)options;
 
 #if NS_BLOCKS_AVAILABLE
 
-- (id<HLSMAKVOObservation>)addObservationKeyPath:(id<HLSMAKVOKeyPathSet>)keyPath
-                                      options:(NSKeyValueObservingOptions)options
-                                        block:(void (^)(HLSMAKVONotification *notification))block;
+- (id<HLSMAKVOObservation>)hlsma_addObservationKeyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+                                               options:(NSKeyValueObservingOptions)options
+                                                 block:(void (^)(HLSMAKVONotification *notification))block;
 
-- (id<HLSMAKVOObservation>)addObserver:(id)observer
-                            keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
-                            options:(NSKeyValueObservingOptions)options
-                              block:(void (^)(HLSMAKVONotification *notification))block;
+- (id<HLSMAKVOObservation>)hlsma_addObserver:(id)observer
+                                     keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+                                     options:(NSKeyValueObservingOptions)options
+                                       block:(void (^)(HLSMAKVONotification *notification))block;
 
-- (id<HLSMAKVOObservation>)observeTarget:(id)target
-                              keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
-                              options:(NSKeyValueObservingOptions)options
-                                block:(void (^)(HLSMAKVONotification *notification))block;
+- (id<HLSMAKVOObservation>)hlsma_observeTarget:(id)target
+                                       keyPath:(id<HLSMAKVOKeyPathSet>)keyPath
+                                       options:(NSKeyValueObservingOptions)options
+                                         block:(void (^)(HLSMAKVONotification *notification))block;
 
 #endif
 
-- (void)removeAllObservers;
-- (void)stopObservingAllTargets;
+- (void)hlsma_removeAllObservers;
+- (void)hlsma_stopObservingAllTargets;
 
-- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath;
-- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath;
+- (void)hlsma_removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath;
+- (void)hlsma_stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath;
 
-- (void)removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector;
-- (void)stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector;
+- (void)hlsma_removeObserver:(id)observer keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector;
+- (void)hlsma_stopObserving:(id)target keyPath:(id<HLSMAKVOKeyPathSet>)keyPath selector:(SEL)selector;
 
 @end
 
