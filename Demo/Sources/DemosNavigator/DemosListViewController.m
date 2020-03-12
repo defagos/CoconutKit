@@ -31,7 +31,6 @@
 #import "BindingsViewsDemoViewController.h"
 #import "TableViewCellsDemoViewController.h"
 #import "ViewEffectsDemoViewController.h"
-#import "WebViewDemoViewController.h"
 #import "WizardDemoViewController.h"
 
 // Categories
@@ -86,7 +85,6 @@ typedef NS_ENUM(NSInteger, ViewDemoIndex) {
     ViewDemoIndexCursor,
     ViewDemoIndexSlideshow,
     ViewDemoIndexEffects,
-    ViewDemoIndexWebView,
     ViewDemoIndexParallaxScrolling,
     ViewDemoIndexNibViewAutolayoutSimple,
     ViewDemoIndexNibViewAutoresizingMasksSimple,
@@ -333,11 +331,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                     break;
                 }
                     
-                case ViewDemoIndexWebView: {
-                    cell.textLabel.text = NSLocalizedString(@"Web view", nil);
-                    break;
-                }
-                    
                 case ViewDemoIndexParallaxScrolling: {
                     cell.textLabel.text = NSLocalizedString(@"Parallax scrolling", nil);
                     break;
@@ -532,11 +525,6 @@ typedef NS_ENUM(NSInteger, ViewControllersDemoIndex) {
                 
                 case ViewDemoIndexEffects: {
                     demoViewController = [[ViewEffectsDemoViewController alloc] init];
-                    break;
-                }
-                    
-                case ViewDemoIndexWebView: {
-                    demoViewController = [[WebViewDemoViewController alloc] init];
                     break;
                 }
                     
