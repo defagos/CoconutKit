@@ -32,9 +32,6 @@ HLSEnableNSManagedObjectValidation();
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     
-    // Use optional preloading provided by CoconutKit
-    [application preload];
-    
     // Instead of using the UIAppFonts key in the plist to load the Beon font, do it in code
     [UIFont loadFontWithFileName:@"Beon-Regular.otf" inBundle:nil];
     
