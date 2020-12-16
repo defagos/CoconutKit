@@ -440,10 +440,10 @@ typedef NS_ENUM(NSInteger, ResizeMethodIndex) {
 
 - (IBAction)indexChanged:(id)sender
 {
-    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %d", nil),
-                                     [self insertionIndex]];
-    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %d", nil),
-                                   [self removalIndex]];
+    self.insertionIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Insertion index: %@", nil),
+                                     @([self insertionIndex])];
+    self.removalIndexLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Removal index: %@", nil),
+                                   @([self removalIndex])];
 }
 
 - (IBAction)navigateForwardNonAnimated:(id)sender

@@ -10,11 +10,9 @@
 #import "HLSRuntime.h"
 #import "NSObject+HLSExtensions.h"
 
-@import HLSMAZeroingWeakRef;
-
 @interface HLSRestrictedInterfaceProxy ()
 
-@property (nonatomic) HLSMAZeroingWeakRef *targetZeroingWeakRef;
+@property (nonatomic, weak) id target;
 
 @end
 
@@ -54,7 +52,7 @@
         }
     }
     
-    self.targetZeroingWeakRef = [HLSMAZeroingWeakRef refWithTarget:target];
+    self.target = target;
     _protocol = protocol;
     
     return self;
@@ -76,7 +74,7 @@
     }
     else {
         // See -[NSObject respondsToSelector:] documentation
-        return [[[self.targetZeroingWeakRef target] class] instancesRespondToSelector:selector];
+        return [[self.target class] instancesRespondToSelector:selector];
     }
 }
 
@@ -98,7 +96,7 @@
 
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)sel
 {    
-    return [[self.targetZeroingWeakRef target] methodSignatureForSelector:sel];
+    return [self.target methodSignatureForSelector:sel];
 }
 
 - (void)forwardInvocation:(NSInvocation *)invocation
@@ -111,7 +109,7 @@
     }
     
     // If the target does not implement the method, an exception will be raised
-    [invocation invokeWithTarget:[self.targetZeroingWeakRef target]];
+    [invocation invokeWithTarget:self.target];
 }
 
 #pragma mark Description
@@ -120,7 +118,7 @@
 {
     // Must override NSProxy implementation, not forwarded automatically. Replace the target class name (if appearing in the description)
     // with the proxy object information
-    id target = [self.targetZeroingWeakRef target];
+    id target = self.target;
     return [[target description] stringByReplacingOccurrencesOfString:[target className]
                                                            withString:[NSString stringWithFormat:@"id<%s>", protocol_getName(_protocol)]];
 }

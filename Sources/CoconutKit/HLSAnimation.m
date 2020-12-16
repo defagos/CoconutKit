@@ -8,6 +8,7 @@
 
 #import "HLSAnimationStep+Friend.h"
 #import "HLSAssert.h"
+#import "HLSDeallocBlockNotifier.h"
 #import "HLSLayerAnimationStep.h"
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
@@ -15,7 +16,7 @@
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
-@import HLSMAZeroingWeakRef;
+#import <objc/runtime.h>
 
 /**
  * HLSAnimation does not provide any safety measures against non-integral frames (which ultimately lead to blurry
@@ -27,6 +28,9 @@
 static NSString * const kDelayLayerAnimationTag = @"HLSDelayLayerAnimationStep";
 
 static NSMutableArray *s_backgroundAnimations = nil;
+
+// Associated object keys
+static void *s_deallocNotifierKey = &s_deallocNotifierKey;
 
 @interface HLSAnimation () <HLSAnimationStepDelegate> {
 @private
@@ -48,7 +52,6 @@ static NSMutableArray *s_backgroundAnimations = nil;
 @property (nonatomic, getter=isStarted) BOOL started;
 @property (nonatomic, getter=isCancelling) BOOL cancelling;
 @property (nonatomic, getter=isTerminating) BOOL terminating;
-@property (nonatomic) HLSMAZeroingWeakRef *delegateZeroingWeakRef;
 
 @end
 
@@ -143,19 +146,24 @@ static NSMutableArray *s_backgroundAnimations = nil;
     return self.currentAnimationStep.paused;
 }
 
-- (id<HLSAnimationDelegate>)delegate
-{
-    return [self.delegateZeroingWeakRef target];
-}
-
 - (void)setDelegate:(id<HLSAnimationDelegate>)delegate
 {
-    self.delegateZeroingWeakRef = [HLSMAZeroingWeakRef refWithTarget:delegate];
+    if (_delegate) {
+        objc_setAssociatedObject(_delegate, s_deallocNotifierKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
     
-    __weak __typeof(self) weakSelf = self;
-    [self.delegateZeroingWeakRef setCleanupBlock:^(id target) {
-        [weakSelf cancel];
-    }];
+    _delegate = delegate;
+    
+    if (delegate) {
+        // Bind an associated object to the delegate. When the delegate is deallocated the associated object will be
+        // deallocated as well and trigger cleanup.
+        // Idea borrowed from https://stackoverflow.com/a/19344475/760435
+        __weak __typeof(self) weakSelf = self;
+        HLSDeallocBlockNotifier *deallocNotifier = [[HLSDeallocBlockNotifier alloc] initWithBlock:^{
+            [weakSelf cancel];
+        }];
+        objc_setAssociatedObject(delegate, s_deallocNotifierKey, deallocNotifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
 }
 
 - (NSTimeInterval)duration

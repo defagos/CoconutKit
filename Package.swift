@@ -21,7 +21,7 @@ let package = Package(
     targets: [
         .target(
             name: "CoconutKit",
-            dependencies: ["HLSMAKVONotificationCenter", "HLSMAZeroingWeakRef"],
+            dependencies: ["HLSMAKVONotificationCenter"],
             resources: [
                 .process("Resources")
             ],
@@ -35,12 +35,6 @@ let package = Package(
             cSettings: [
                 .define("NS_BLOCK_ASSERTIONS", to: "1", .when(configuration: .release))
             ]
-        ),
-        .target(
-            name: "HLSMAZeroingWeakRef",
-            cSettings: [
-                .define("NS_BLOCK_ASSERTIONS", to: "1", .when(configuration: .release))
-            ]
-        ),
+        )
     ]
 )
