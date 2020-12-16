@@ -8,7 +8,6 @@
 
 #import "HLSBindingContext+Friend.h"
 #import "HLSLogger.h"
-#import "HLSMAKVONotificationCenter.h"
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"
 #import "HLSViewBindingError.h"
@@ -20,6 +19,8 @@
 #import "UIView+HLSViewBinding.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSViewBindingImplementation.h"
+
+@import HLSMAKVONotificationCenter;
 
 /**
  * Internal status flag. Use to avoid performing already successful binding verification steps

@@ -8,8 +8,9 @@
 
 #import "HLSLogger.h"
 #import "HLSRuntime.h"
-#import "HLSMAZeroingWeakRef.h"
 #import "NSObject+HLSExtensions.h"
+
+@import HLSMAZeroingWeakRef;
 
 @interface HLSRestrictedInterfaceProxy ()
 

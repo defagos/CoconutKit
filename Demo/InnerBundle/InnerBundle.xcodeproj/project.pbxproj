@@ -83,7 +83,7 @@
 		6F44E9FD156BB2AF00B45BB4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Samuel Défago";
 			};
 			buildConfigurationList = 6F44EA00156BB2AF00B45BB4 /* Build configuration list for PBXProject "InnerBundle" */;

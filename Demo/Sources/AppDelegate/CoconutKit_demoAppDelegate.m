@@ -7,7 +7,8 @@
 #import "CoconutKit_demoAppDelegate.h"
 
 #import "CoconutKit_demoApplication.h"
-#import <CoconutKit/CoconutKit.h>
+
+@import CoconutKit;
 
 // Disable quasi-simultaneous taps
 HLSEnableUIControlExclusiveTouch();

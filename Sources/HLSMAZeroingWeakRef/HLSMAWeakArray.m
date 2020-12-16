@@ -12,10 +12,15 @@
 
 @implementation HLSMAWeakArray
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-designated-initializers"
+
 - (id)init
 {
     return [self initWithCapacity:0];
 }
+
+#pragma clang diagnostic pop
 
 - (id)initWithCapacity:(NSUInteger)numItems
 {

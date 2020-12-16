@@ -7,7 +7,6 @@
 #import "HLSViewBindingDebugOverlayViewController.h"
 
 #import "HLSLogger.h"
-#import "HLSMAKVONotificationCenter.h"
 #import "HLSViewBindingDebugOverlayApperance.h"
 #import "HLSViewBindingInformationViewController.h"
 #import "NSBundle+HLSExtensions.h"
@@ -16,6 +15,8 @@
 #import "UINavigationController+HLSExtensions.h"
 #import "UIView+HLSViewBindingFriend.h"
 #import "UIView+HLSExtensions.h"
+
+@import HLSMAKVONotificationCenter;
 
 static UIWindow *s_overlayWindow = nil;
 static UIWindow *s_previousKeyWindow = nil;

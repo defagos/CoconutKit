@@ -12,9 +12,10 @@
 #import "HLSLogger.h"
 #import "HLSTransformer.h"
 #import "HLSUserInterfaceLock.h"
-#import "HLSMAZeroingWeakRef.h"
 #import "NSArray+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
+
+@import HLSMAZeroingWeakRef;
 
 /**
  * HLSAnimation does not provide any safety measures against non-integral frames (which ultimately lead to blurry

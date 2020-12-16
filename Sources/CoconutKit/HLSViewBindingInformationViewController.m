@@ -9,7 +9,6 @@
 #import "HLSCoreError.h"
 #import "HLSInfoTableViewCell.h"
 #import "HLSLogger.h"
-#import "HLSMAKVONotificationCenter.h"
 #import "HLSRuntime.h"
 #import "HLSTransformer.h"
 #import "HLSViewBindingDebugOverlayViewController.h"
@@ -21,6 +20,8 @@
 #import "NSString+HLSExtensions.h"
 #import "UIView+HLSViewBinding.h"
 #import "UIView+HLSViewBindingImplementation.h"
+
+@import HLSMAKVONotificationCenter;
 
 @interface HLSViewBindingInformationViewController ()
 

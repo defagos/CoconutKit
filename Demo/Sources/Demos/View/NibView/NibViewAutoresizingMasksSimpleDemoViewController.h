@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoconutKit/CoconutKit.h>
+@import CoconutKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
