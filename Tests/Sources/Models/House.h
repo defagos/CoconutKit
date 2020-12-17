@@ -6,7 +6,7 @@
 
 #import "_House.h"
 
-#import <CoconutKit/CoconutKit.h>
+@import CoconutKit;
 
 @interface House : _House <HLSManagedObjectCopying>
 @end

@@ -8,7 +8,7 @@
 
 #import "HLSLogger.h"
 
-#import <CoreText/CoreText.h>
+@import CoreText;
 
 @implementation UIFont (HLSExtensions)
 

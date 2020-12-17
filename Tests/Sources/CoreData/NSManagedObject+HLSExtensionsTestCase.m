@@ -7,8 +7,8 @@
 #import "NSBundle+Tests.h"
 #import "Person.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <XCTest/XCTest.h>
+@import CoconutKit;
+@import XCTest;
 
 @interface NSManagedObject_HLSExtensionsTestCase : XCTestCase
 

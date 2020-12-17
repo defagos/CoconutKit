@@ -4,7 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+
 #import <objc/runtime.h>
 
 NS_ASSUME_NONNULL_BEGIN

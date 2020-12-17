@@ -6,7 +6,7 @@
 
 #import "_BankAccount.h"
 
-#import <CoconutKit/CoconutKit.h>
+@import CoconutKit;
 
 @interface BankAccount : _BankAccount <HLSManagedObjectCopying>
 @end

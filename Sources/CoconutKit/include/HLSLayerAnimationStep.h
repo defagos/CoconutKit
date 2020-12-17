@@ -7,9 +7,9 @@
 #import "HLSAnimationStep.h"
 #import "HLSLayerAnimation.h"
 
-#import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import QuartzCore;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

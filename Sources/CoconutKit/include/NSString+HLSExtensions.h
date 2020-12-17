@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
+@import Foundation;
+@import QuartzCore;
 
 NS_ASSUME_NONNULL_BEGIN
 

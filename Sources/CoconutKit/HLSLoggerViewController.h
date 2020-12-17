@@ -7,9 +7,9 @@
 #import "HLSLogger.h"
 #import "HLSViewController.h"
 
-#import <Foundation/Foundation.h>
-#import <QuickLook/QuickLook.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import QuickLook;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -6,8 +6,8 @@
 
 #import "HLSObjectAnimation.h"
 
-#import <CoreGraphics/CoreGraphics.h>
-#import <Foundation/Foundation.h>
+@import CoreGraphics;
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 

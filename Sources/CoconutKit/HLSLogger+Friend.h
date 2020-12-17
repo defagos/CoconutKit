@@ -6,7 +6,7 @@
 
 #import "HLSLogger.h"
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /**
  * Interface meant to be used by friend classes of HLSLogger (= classes which must have access to private implementation

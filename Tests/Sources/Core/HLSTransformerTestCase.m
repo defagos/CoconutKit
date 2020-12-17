@@ -6,8 +6,8 @@
 
 #import "UppercaseValueTransformer.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <XCTest/XCTest.h>
+@import CoconutKit;
+@import XCTest;
 
 @interface HLSTransformerTestCase : XCTestCase
 @end

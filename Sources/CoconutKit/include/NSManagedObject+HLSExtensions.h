@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoreData/CoreData.h>
-#import <Foundation/Foundation.h>
+@import CoreData;
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -5,7 +5,7 @@
 //  Created by Michael Ash on 10/15/08.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /******************************************************************************/
 enum

@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoconutKit/CoconutKit.h>
-#import <XCTest/XCTest.h>
+@import CoconutKit;
+@import XCTest;
 
 @interface NSCalendar_HLSExtensionsTestCase : XCTestCase
 

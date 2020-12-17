@@ -6,9 +6,9 @@
 
 #import "HLSViewController.h"
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
+@import Foundation;
+@import UIKit;
+@import WebKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

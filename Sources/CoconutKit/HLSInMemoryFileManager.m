@@ -13,7 +13,7 @@
 #import "NSError+HLSExtensions.h"
 #import "NSString+HLSExtensions.h"
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface HLSInMemoryFileManager ()
 

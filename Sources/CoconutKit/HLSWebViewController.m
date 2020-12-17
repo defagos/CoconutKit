@@ -21,7 +21,7 @@
 #import "NSString+HLSExtensions.h"
 #import "UIImage+HLSExtensions.h"
 
-#import <MessageUI/MessageUI.h>
+@import MessageUI;
 
 static void *s_KVOContext = &s_KVOContext;
 

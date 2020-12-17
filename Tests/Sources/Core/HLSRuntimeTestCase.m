@@ -4,9 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoconutKit/CoconutKit.h>
-#import <CoreLocation/CoreLocation.h>
-#import <XCTest/XCTest.h>
+@import CoconutKit;
+@import CoreLocation;
+@import XCTest;
 
 @interface HLSRuntimeTestCase : XCTestCase
 @end

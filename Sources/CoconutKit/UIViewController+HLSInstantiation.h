@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

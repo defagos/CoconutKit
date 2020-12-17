@@ -4,9 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CoreGraphics/CoreGraphics.h>
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import CoreGraphics;
+@import Foundation;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

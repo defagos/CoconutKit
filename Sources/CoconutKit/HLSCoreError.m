@@ -4,6 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 NSString * const HLSCoreErrorDomain = @"ch.defagos.coconutkit.core";

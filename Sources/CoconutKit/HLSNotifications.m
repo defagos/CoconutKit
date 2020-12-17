@@ -8,7 +8,7 @@
 
 #import "HLSLogger.h"
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @implementation HLSNotificationManager  {
 @private

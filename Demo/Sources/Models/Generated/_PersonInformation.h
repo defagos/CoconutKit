@@ -6,7 +6,7 @@
     @import CoreData;
 #else
     #import <Foundation/Foundation.h>
-    #import <CoreData/CoreData.h>
+    @import CoreData;
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

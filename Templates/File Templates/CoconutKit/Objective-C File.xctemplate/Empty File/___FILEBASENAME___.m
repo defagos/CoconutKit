@@ -4,4 +4,4 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;

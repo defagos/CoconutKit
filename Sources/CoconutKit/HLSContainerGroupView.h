@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

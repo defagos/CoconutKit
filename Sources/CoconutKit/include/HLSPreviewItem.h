@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <Foundation/Foundation.h>
-#import <QuickLook/QuickLook.h>
+@import Foundation;
+@import QuickLook;
 
 NS_ASSUME_NONNULL_BEGIN
 

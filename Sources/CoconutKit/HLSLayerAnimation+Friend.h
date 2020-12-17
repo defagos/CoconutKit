@@ -7,9 +7,9 @@
 #import "HLSLayerAnimation.h"
 #import "HLSVector.h"
 
-#import <CoreGraphics/CoreGraphics.h>
-#import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
+@import CoreGraphics;
+@import Foundation;
+@import QuartzCore;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -7,8 +7,8 @@
 #import "HLSViewBindingInformation.h"
 #import "HLSTableViewController.h"
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 

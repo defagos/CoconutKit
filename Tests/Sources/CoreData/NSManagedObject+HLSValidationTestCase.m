@@ -12,8 +12,8 @@
 #import "NSBundle+Tests.h"
 #import "TestErrors.h"
 
-#import <CoconutKit/CoconutKit.h>
-#import <XCTest/XCTest.h>
+@import CoconutKit;
+@import XCTest;
 
 HLSEnableNSManagedObjectValidation();
 

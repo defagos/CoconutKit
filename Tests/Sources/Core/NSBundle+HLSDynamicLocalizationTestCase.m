@@ -4,9 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <CFNetwork/CFNetwork.h>
-#import <CoconutKit/CoconutKit.h>
-#import <XCTest/XCTest.h>
+@import CFNetwork;
+@import CoconutKit;
+@import XCTest;
 
 @interface NSBundle_HLSDynamicLocalizationTestCase : XCTestCase
 @end

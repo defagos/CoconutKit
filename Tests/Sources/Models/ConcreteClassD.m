@@ -7,7 +7,8 @@
 #import "ConcreteClassD.h"
 
 #import "TestErrors.h"
-#import <CoconutKit/CoconutKit.h>
+
+@import CoconutKit;
 
 @implementation ConcreteClassD
 
