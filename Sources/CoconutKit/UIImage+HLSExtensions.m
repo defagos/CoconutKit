@@ -18,7 +18,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSString *mainBundlePath = [NSBundle mainBundle].bundlePath;
-        NSString *coconutKitBundlePath = [NSBundle coconutKitBundle].bundlePath;
+        NSString *coconutKitBundlePath = SWIFTPM_MODULE_BUNDLE.bundlePath;
         if ([coconutKitBundlePath hasPrefix:mainBundlePath]) {
             s_relativeBundlePath = [coconutKitBundlePath stringByReplacingCharactersInRange:NSMakeRange(0, mainBundlePath.length + 1) withString:@""];
         }
@@ -32,7 +32,7 @@
     }
     // The CoconutKit bundle is located outside the main bundle. -[UIImage imageNamed:] cannot be used
     else {
-        NSString *imagePath = [[NSBundle coconutKitBundle].bundlePath stringByAppendingPathComponent:imageName];
+        NSString *imagePath = [SWIFTPM_MODULE_BUNDLE.bundlePath stringByAppendingPathComponent:imageName];
         return [UIImage imageWithContentsOfFile:imagePath];
     }
 }

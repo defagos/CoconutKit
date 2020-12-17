@@ -19,18 +19,6 @@
     return [NSBundle mainBundle].friendlyVersionNumber;
 }
 
-+ (NSBundle *)coconutKitBundle
-{
-    static NSBundle *s_bundle;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        NSString *bundlePath = [[NSBundle bundleForClass:[HLSLogger class]].bundlePath stringByAppendingPathComponent:@"CoconutKit.bundle"];
-        s_bundle = [NSBundle bundleWithPath:bundlePath];
-        NSAssert(s_bundle, @"Please add CoconutKit.bundle to your project resources");
-    });
-    return s_bundle;
-}
-
 + (NSBundle *)bundleWithName:(NSString *)name
 {
     if (! name) {

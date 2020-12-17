@@ -32,7 +32,7 @@
 
 - (instancetype)init
 {
-    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
+    if (self = [super initWithBundle:SWIFTPM_MODULE_BUNDLE]) {
         self.title = NSLocalizedString(@"Help", nil);
     }
     return self;

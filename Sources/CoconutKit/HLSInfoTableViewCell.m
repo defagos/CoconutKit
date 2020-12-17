@@ -36,7 +36,7 @@
 
 + (NSBundle *)bundle
 {
-    return [NSBundle coconutKitBundle];
+    return SWIFTPM_MODULE_BUNDLE;
 }
 
 @end

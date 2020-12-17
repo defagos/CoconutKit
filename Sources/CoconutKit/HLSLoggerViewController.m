@@ -34,7 +34,7 @@
 {
     NSParameterAssert(logger);
     
-    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
+    if (self = [super initWithBundle:SWIFTPM_MODULE_BUNDLE]) {
         self.logger = logger;        
         self.title = CoconutKitLocalizedString(@"Logging controls", nil);
     }

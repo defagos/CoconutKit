@@ -42,7 +42,7 @@
 {
     NSParameterAssert(bindingInformation);
     
-    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
+    if (self = [super initWithBundle:SWIFTPM_MODULE_BUNDLE]) {
         self.bindingInformation = bindingInformation;
         
         self.title = CoconutKitLocalizedString(@"Properties", nil);

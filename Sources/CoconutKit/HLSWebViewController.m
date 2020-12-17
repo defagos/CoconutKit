@@ -63,7 +63,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
 {
     NSParameterAssert(request);
     
-    if (self = [super initWithBundle:[NSBundle coconutKitBundle]]) {
+    if (self = [super initWithBundle:SWIFTPM_MODULE_BUNDLE]) {
         self.request = request;
     }
     return self;
@@ -153,7 +153,7 @@ static const NSTimeInterval HLSWebViewFadeAnimationDuration = 0.3;
     errorWebView.navigationDelegate = self;
     errorWebView.userInteractionEnabled = NO;
     
-    NSURL *errorHTMLFileURL = [[NSBundle coconutKitBundle] URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
+    NSURL *errorHTMLFileURL = [SWIFTPM_MODULE_BUNDLE URLForResource:@"HLSWebViewControllerErrorTemplate" withExtension:@"html"];
     [errorWebView loadRequest:[NSURLRequest requestWithURL:errorHTMLFileURL]];
     
     // No automatic scroll inset adjustment, but not a problem since the error view displays static centered content

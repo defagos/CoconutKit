@@ -9,7 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define CoconutKitLocalizedString(key, comment) \
-    [[NSBundle coconutKitBundle] localizedStringForKey:(key) value:@"" table:nil]
+    [SWIFTPM_MODULE_BUNDLE localizedStringForKey:(key) value:@"" table:nil]
 
 @interface NSBundle (HLSExtensions)
 
@@ -19,11 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
  * See NSString -friendlyVersionNumber extension method (NSString+HLSExtensions.h)
  */
 + (nullable NSString *)friendlyApplicationVersionNumber;
-
-/**
- * Return the resource bundle associated with CoconutKit
- */
-+ (NSBundle *)coconutKitBundle;
 
 /**
  * Return the first bundle contained either in the main bundle, the documents or the library folder (in this order) 
