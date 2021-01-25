@@ -1,0 +1,775 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6F5FB8AF25BF1C2E00C35D67 /* CoconutKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F5FB8AE25BF1C2E00C35D67 /* CoconutKit */; };
+		6FB4004C1DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400061DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld */; };
+		6FB4004D1DB4F785001EDC82 /* Sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6FB400081DB4F785001EDC82 /* Sample.txt */; };
+		6FB4004E1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4000B1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m */; };
+		6FB4004F1DB4F785001EDC82 /* HLSErrorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4000C1DB4F785001EDC82 /* HLSErrorTestCase.m */; };
+		6FB400501DB4F785001EDC82 /* HLSFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4000E1DB4F785001EDC82 /* HLSFileManagerTestCase.m */; };
+		6FB400511DB4F785001EDC82 /* HLSGeometryTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4000F1DB4F785001EDC82 /* HLSGeometryTestCase.m */; };
+		6FB400521DB4F785001EDC82 /* HLSInMemoryFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400101DB4F785001EDC82 /* HLSInMemoryFileManagerTestCase.m */; };
+		6FB400531DB4F785001EDC82 /* HLSRestrictedInterfaceProxyTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400111DB4F785001EDC82 /* HLSRestrictedInterfaceProxyTestCase.m */; };
+		6FB400541DB4F785001EDC82 /* HLSRuntimeTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400121DB4F785001EDC82 /* HLSRuntimeTestCase.m */; };
+		6FB400551DB4F785001EDC82 /* HLSStandardFileManagerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400131DB4F785001EDC82 /* HLSStandardFileManagerTestCase.m */; };
+		6FB400561DB4F785001EDC82 /* HLSTransformerTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400141DB4F785001EDC82 /* HLSTransformerTestCase.m */; };
+		6FB400571DB4F785001EDC82 /* HLSValidatorsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400151DB4F785001EDC82 /* HLSValidatorsTestCase.m */; };
+		6FB400581DB4F785001EDC82 /* NSArray+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400161DB4F785001EDC82 /* NSArray+HLSExtensionsTestCase.m */; };
+		6FB400591DB4F785001EDC82 /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400171DB4F785001EDC82 /* NSBundle+HLSDynamicLocalizationTestCase.m */; };
+		6FB4005A1DB4F785001EDC82 /* NSCalendar+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400181DB4F785001EDC82 /* NSCalendar+HLSExtensionsTestCase.m */; };
+		6FB4005B1DB4F785001EDC82 /* NSData+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400191DB4F785001EDC82 /* NSData+HLSExtensionsTestCase.m */; };
+		6FB4005C1DB4F785001EDC82 /* NSDate+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4001A1DB4F785001EDC82 /* NSDate+HLSExtensionsTestCase.m */; };
+		6FB4005D1DB4F785001EDC82 /* NSDictionary+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4001B1DB4F785001EDC82 /* NSDictionary+HLSExtensionsTestCase.m */; };
+		6FB4005E1DB4F785001EDC82 /* NSNumber+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4001C1DB4F785001EDC82 /* NSNumber+HLSExtensionsTestCase.m */; };
+		6FB4005F1DB4F785001EDC82 /* NSObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4001D1DB4F785001EDC82 /* NSObject+HLSExtensionsTestCase.m */; };
+		6FB400601DB4F785001EDC82 /* NSStream+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4001E1DB4F785001EDC82 /* NSStream+HLSExtensionsTestCase.m */; };
+		6FB400611DB4F785001EDC82 /* NSString+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4001F1DB4F785001EDC82 /* NSString+HLSExtensionsTestCase.m */; };
+		6FB400621DB4F785001EDC82 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400201DB4F785001EDC82 /* NSTimeZone+HLSExtensionsTestCase.m */; };
+		6FB400631DB4F785001EDC82 /* NSManagedObject+HLSExtensionsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400221DB4F785001EDC82 /* NSManagedObject+HLSExtensionsTestCase.m */; };
+		6FB400641DB4F785001EDC82 /* NSManagedObject+HLSValidationTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400231DB4F785001EDC82 /* NSManagedObject+HLSValidationTestCase.m */; };
+		6FB400651DB4F785001EDC82 /* NSBundle+Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400261DB4F785001EDC82 /* NSBundle+Tests.m */; };
+		6FB400661DB4F785001EDC82 /* TestErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400281DB4F785001EDC82 /* TestErrors.m */; };
+		6FB400671DB4F785001EDC82 /* UppercaseValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4002A1DB4F785001EDC82 /* UppercaseValueTransformer.m */; };
+		6FB400691DB4F785001EDC82 /* AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4002E1DB4F785001EDC82 /* AbstractClassA.m */; };
+		6FB4006A1DB4F785001EDC82 /* BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400301DB4F785001EDC82 /* BankAccount.m */; };
+		6FB4006B1DB4F785001EDC82 /* ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400321DB4F785001EDC82 /* ConcreteClassD.m */; };
+		6FB4006C1DB4F785001EDC82 /* ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400341DB4F785001EDC82 /* ConcreteSubclassB.m */; };
+		6FB4006D1DB4F785001EDC82 /* ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400361DB4F785001EDC82 /* ConcreteSubclassC.m */; };
+		6FB4006E1DB4F785001EDC82 /* _AbstractClassA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400391DB4F785001EDC82 /* _AbstractClassA.m */; };
+		6FB4006F1DB4F785001EDC82 /* _BankAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4003B1DB4F785001EDC82 /* _BankAccount.m */; };
+		6FB400701DB4F785001EDC82 /* _ConcreteClassD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4003D1DB4F785001EDC82 /* _ConcreteClassD.m */; };
+		6FB400711DB4F785001EDC82 /* _ConcreteSubclassB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB4003F1DB4F785001EDC82 /* _ConcreteSubclassB.m */; };
+		6FB400721DB4F785001EDC82 /* _ConcreteSubclassC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400411DB4F785001EDC82 /* _ConcreteSubclassC.m */; };
+		6FB400731DB4F785001EDC82 /* _House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400431DB4F785001EDC82 /* _House.m */; };
+		6FB400741DB4F785001EDC82 /* _Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400451DB4F785001EDC82 /* _Person.m */; };
+		6FB400751DB4F785001EDC82 /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400471DB4F785001EDC82 /* House.m */; };
+		6FB400761DB4F785001EDC82 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB400491DB4F785001EDC82 /* Person.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6FB400031DB4F785001EDC82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FB400071DB4F785001EDC82 /* CoconutKitTestData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoconutKitTestData.xcdatamodel; sourceTree = "<group>"; };
+		6FB400081DB4F785001EDC82 /* Sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Sample.txt; sourceTree = "<group>"; };
+		6FB4000B1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+HLExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB4000C1DB4F785001EDC82 /* HLSErrorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSErrorTestCase.m; sourceTree = "<group>"; };
+		6FB4000D1DB4F785001EDC82 /* HLSFileManagerTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSFileManagerTestCase.h; sourceTree = "<group>"; };
+		6FB4000E1DB4F785001EDC82 /* HLSFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSFileManagerTestCase.m; sourceTree = "<group>"; };
+		6FB4000F1DB4F785001EDC82 /* HLSGeometryTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSGeometryTestCase.m; sourceTree = "<group>"; };
+		6FB400101DB4F785001EDC82 /* HLSInMemoryFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSInMemoryFileManagerTestCase.m; sourceTree = "<group>"; };
+		6FB400111DB4F785001EDC82 /* HLSRestrictedInterfaceProxyTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRestrictedInterfaceProxyTestCase.m; sourceTree = "<group>"; };
+		6FB400121DB4F785001EDC82 /* HLSRuntimeTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSRuntimeTestCase.m; sourceTree = "<group>"; };
+		6FB400131DB4F785001EDC82 /* HLSStandardFileManagerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSStandardFileManagerTestCase.m; sourceTree = "<group>"; };
+		6FB400141DB4F785001EDC82 /* HLSTransformerTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSTransformerTestCase.m; sourceTree = "<group>"; };
+		6FB400151DB4F785001EDC82 /* HLSValidatorsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSValidatorsTestCase.m; sourceTree = "<group>"; };
+		6FB400161DB4F785001EDC82 /* NSArray+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB400171DB4F785001EDC82 /* NSBundle+HLSDynamicLocalizationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HLSDynamicLocalizationTestCase.m"; sourceTree = "<group>"; };
+		6FB400181DB4F785001EDC82 /* NSCalendar+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendar+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB400191DB4F785001EDC82 /* NSData+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB4001A1DB4F785001EDC82 /* NSDate+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB4001B1DB4F785001EDC82 /* NSDictionary+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB4001C1DB4F785001EDC82 /* NSNumber+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB4001D1DB4F785001EDC82 /* NSObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB4001E1DB4F785001EDC82 /* NSStream+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB4001F1DB4F785001EDC82 /* NSString+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB400201DB4F785001EDC82 /* NSTimeZone+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimeZone+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB400221DB4F785001EDC82 /* NSManagedObject+HLSExtensionsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSExtensionsTestCase.m"; sourceTree = "<group>"; };
+		6FB400231DB4F785001EDC82 /* NSManagedObject+HLSValidationTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+HLSValidationTestCase.m"; sourceTree = "<group>"; };
+		6FB400251DB4F785001EDC82 /* NSBundle+Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Tests.h"; sourceTree = "<group>"; };
+		6FB400261DB4F785001EDC82 /* NSBundle+Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Tests.m"; sourceTree = "<group>"; };
+		6FB400271DB4F785001EDC82 /* TestErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestErrors.h; sourceTree = "<group>"; };
+		6FB400281DB4F785001EDC82 /* TestErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestErrors.m; sourceTree = "<group>"; };
+		6FB400291DB4F785001EDC82 /* UppercaseValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UppercaseValueTransformer.h; sourceTree = "<group>"; };
+		6FB4002A1DB4F785001EDC82 /* UppercaseValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UppercaseValueTransformer.m; sourceTree = "<group>"; };
+		6FB4002D1DB4F785001EDC82 /* AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractClassA.h; sourceTree = "<group>"; };
+		6FB4002E1DB4F785001EDC82 /* AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractClassA.m; sourceTree = "<group>"; };
+		6FB4002F1DB4F785001EDC82 /* BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAccount.h; sourceTree = "<group>"; };
+		6FB400301DB4F785001EDC82 /* BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAccount.m; sourceTree = "<group>"; };
+		6FB400311DB4F785001EDC82 /* ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteClassD.h; sourceTree = "<group>"; };
+		6FB400321DB4F785001EDC82 /* ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteClassD.m; sourceTree = "<group>"; };
+		6FB400331DB4F785001EDC82 /* ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6FB400341DB4F785001EDC82 /* ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6FB400351DB4F785001EDC82 /* ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6FB400361DB4F785001EDC82 /* ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6FB400381DB4F785001EDC82 /* _AbstractClassA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AbstractClassA.h; sourceTree = "<group>"; };
+		6FB400391DB4F785001EDC82 /* _AbstractClassA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AbstractClassA.m; sourceTree = "<group>"; };
+		6FB4003A1DB4F785001EDC82 /* _BankAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _BankAccount.h; sourceTree = "<group>"; };
+		6FB4003B1DB4F785001EDC82 /* _BankAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _BankAccount.m; sourceTree = "<group>"; };
+		6FB4003C1DB4F785001EDC82 /* _ConcreteClassD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteClassD.h; sourceTree = "<group>"; };
+		6FB4003D1DB4F785001EDC82 /* _ConcreteClassD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteClassD.m; sourceTree = "<group>"; };
+		6FB4003E1DB4F785001EDC82 /* _ConcreteSubclassB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassB.h; sourceTree = "<group>"; };
+		6FB4003F1DB4F785001EDC82 /* _ConcreteSubclassB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassB.m; sourceTree = "<group>"; };
+		6FB400401DB4F785001EDC82 /* _ConcreteSubclassC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ConcreteSubclassC.h; sourceTree = "<group>"; };
+		6FB400411DB4F785001EDC82 /* _ConcreteSubclassC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ConcreteSubclassC.m; sourceTree = "<group>"; };
+		6FB400421DB4F785001EDC82 /* _House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _House.h; sourceTree = "<group>"; };
+		6FB400431DB4F785001EDC82 /* _House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _House.m; sourceTree = "<group>"; };
+		6FB400441DB4F785001EDC82 /* _Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Person.h; sourceTree = "<group>"; };
+		6FB400451DB4F785001EDC82 /* _Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Person.m; sourceTree = "<group>"; };
+		6FB400461DB4F785001EDC82 /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
+		6FB400471DB4F785001EDC82 /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
+		6FB400481DB4F785001EDC82 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6FB400491DB4F785001EDC82 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		6FB4FFF61DB4F6C0001EDC82 /* CoconutKit-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CoconutKit-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6FB4FFF31DB4F6C0001EDC82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F5FB8AF25BF1C2E00C35D67 /* CoconutKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6F5FB8AD25BF1C2E00C35D67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6FB400011DB4F785001EDC82 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6FB400091DB4F785001EDC82 /* Sources */,
+				6FB400041DB4F785001EDC82 /* Resources */,
+				6FB400031DB4F785001EDC82 /* Info.plist */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		6FB400041DB4F785001EDC82 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6FB400051DB4F785001EDC82 /* Data */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6FB400051DB4F785001EDC82 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6FB400061DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld */,
+				6FB400081DB4F785001EDC82 /* Sample.txt */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6FB400091DB4F785001EDC82 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6FB4000A1DB4F785001EDC82 /* Core */,
+				6FB400211DB4F785001EDC82 /* CoreData */,
+				6FB400241DB4F785001EDC82 /* Helpers */,
+				6FB4002C1DB4F785001EDC82 /* Models */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		6FB4000A1DB4F785001EDC82 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				6FB4000B1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m */,
+				6FB4000C1DB4F785001EDC82 /* HLSErrorTestCase.m */,
+				6FB4000D1DB4F785001EDC82 /* HLSFileManagerTestCase.h */,
+				6FB4000E1DB4F785001EDC82 /* HLSFileManagerTestCase.m */,
+				6FB4000F1DB4F785001EDC82 /* HLSGeometryTestCase.m */,
+				6FB400101DB4F785001EDC82 /* HLSInMemoryFileManagerTestCase.m */,
+				6FB400111DB4F785001EDC82 /* HLSRestrictedInterfaceProxyTestCase.m */,
+				6FB400121DB4F785001EDC82 /* HLSRuntimeTestCase.m */,
+				6FB400131DB4F785001EDC82 /* HLSStandardFileManagerTestCase.m */,
+				6FB400141DB4F785001EDC82 /* HLSTransformerTestCase.m */,
+				6FB400151DB4F785001EDC82 /* HLSValidatorsTestCase.m */,
+				6FB400161DB4F785001EDC82 /* NSArray+HLSExtensionsTestCase.m */,
+				6FB400171DB4F785001EDC82 /* NSBundle+HLSDynamicLocalizationTestCase.m */,
+				6FB400181DB4F785001EDC82 /* NSCalendar+HLSExtensionsTestCase.m */,
+				6FB400191DB4F785001EDC82 /* NSData+HLSExtensionsTestCase.m */,
+				6FB4001A1DB4F785001EDC82 /* NSDate+HLSExtensionsTestCase.m */,
+				6FB4001B1DB4F785001EDC82 /* NSDictionary+HLSExtensionsTestCase.m */,
+				6FB4001C1DB4F785001EDC82 /* NSNumber+HLSExtensionsTestCase.m */,
+				6FB4001D1DB4F785001EDC82 /* NSObject+HLSExtensionsTestCase.m */,
+				6FB4001E1DB4F785001EDC82 /* NSStream+HLSExtensionsTestCase.m */,
+				6FB4001F1DB4F785001EDC82 /* NSString+HLSExtensionsTestCase.m */,
+				6FB400201DB4F785001EDC82 /* NSTimeZone+HLSExtensionsTestCase.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6FB400211DB4F785001EDC82 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6FB400221DB4F785001EDC82 /* NSManagedObject+HLSExtensionsTestCase.m */,
+				6FB400231DB4F785001EDC82 /* NSManagedObject+HLSValidationTestCase.m */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		6FB400241DB4F785001EDC82 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6FB400251DB4F785001EDC82 /* NSBundle+Tests.h */,
+				6FB400261DB4F785001EDC82 /* NSBundle+Tests.m */,
+				6FB400271DB4F785001EDC82 /* TestErrors.h */,
+				6FB400281DB4F785001EDC82 /* TestErrors.m */,
+				6FB400291DB4F785001EDC82 /* UppercaseValueTransformer.h */,
+				6FB4002A1DB4F785001EDC82 /* UppercaseValueTransformer.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6FB4002C1DB4F785001EDC82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6FB400371DB4F785001EDC82 /* Generated */,
+				6FB4002D1DB4F785001EDC82 /* AbstractClassA.h */,
+				6FB4002E1DB4F785001EDC82 /* AbstractClassA.m */,
+				6FB4002F1DB4F785001EDC82 /* BankAccount.h */,
+				6FB400301DB4F785001EDC82 /* BankAccount.m */,
+				6FB400311DB4F785001EDC82 /* ConcreteClassD.h */,
+				6FB400321DB4F785001EDC82 /* ConcreteClassD.m */,
+				6FB400331DB4F785001EDC82 /* ConcreteSubclassB.h */,
+				6FB400341DB4F785001EDC82 /* ConcreteSubclassB.m */,
+				6FB400351DB4F785001EDC82 /* ConcreteSubclassC.h */,
+				6FB400361DB4F785001EDC82 /* ConcreteSubclassC.m */,
+				6FB400461DB4F785001EDC82 /* House.h */,
+				6FB400471DB4F785001EDC82 /* House.m */,
+				6FB400481DB4F785001EDC82 /* Person.h */,
+				6FB400491DB4F785001EDC82 /* Person.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6FB400371DB4F785001EDC82 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				6FB400381DB4F785001EDC82 /* _AbstractClassA.h */,
+				6FB400391DB4F785001EDC82 /* _AbstractClassA.m */,
+				6FB4003A1DB4F785001EDC82 /* _BankAccount.h */,
+				6FB4003B1DB4F785001EDC82 /* _BankAccount.m */,
+				6FB4003C1DB4F785001EDC82 /* _ConcreteClassD.h */,
+				6FB4003D1DB4F785001EDC82 /* _ConcreteClassD.m */,
+				6FB4003E1DB4F785001EDC82 /* _ConcreteSubclassB.h */,
+				6FB4003F1DB4F785001EDC82 /* _ConcreteSubclassB.m */,
+				6FB400401DB4F785001EDC82 /* _ConcreteSubclassC.h */,
+				6FB400411DB4F785001EDC82 /* _ConcreteSubclassC.m */,
+				6FB400421DB4F785001EDC82 /* _House.h */,
+				6FB400431DB4F785001EDC82 /* _House.m */,
+				6FB400441DB4F785001EDC82 /* _Person.h */,
+				6FB400451DB4F785001EDC82 /* _Person.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		6FB4FD6C1DB4EF43001EDC82 = {
+			isa = PBXGroup;
+			children = (
+				6FB400011DB4F785001EDC82 /* Tests */,
+				6FB4FD771DB4EF43001EDC82 /* Products */,
+				6F5FB8AD25BF1C2E00C35D67 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6FB4FD771DB4EF43001EDC82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6FB4FFF61DB4F6C0001EDC82 /* CoconutKit-tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6FB4FFF51DB4F6C0001EDC82 /* CoconutKit-tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FB4FFFE1DB4F6C0001EDC82 /* Build configuration list for PBXNativeTarget "CoconutKit-tests" */;
+			buildPhases = (
+				6FB400771DB4F9CC001EDC82 /* Generate Model Files */,
+				6FB4FFF21DB4F6C0001EDC82 /* Sources */,
+				6FB4FFF31DB4F6C0001EDC82 /* Frameworks */,
+				6FB4FFF41DB4F6C0001EDC82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CoconutKit-tests";
+			packageProductDependencies = (
+				6F5FB8AE25BF1C2E00C35D67 /* CoconutKit */,
+			);
+			productName = "CoconutKit-tests";
+			productReference = 6FB4FFF61DB4F6C0001EDC82 /* CoconutKit-tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6FB4FD6D1DB4EF43001EDC82 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = HLS;
+				LastUpgradeCheck = 1230;
+				ORGANIZATIONNAME = "Samuel Défago";
+				TargetAttributes = {
+					6FB4FFF51DB4F6C0001EDC82 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 6FB4FD701DB4EF43001EDC82 /* Build configuration list for PBXProject "CoconutKit-tests" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				fr,
+				Base,
+			);
+			mainGroup = 6FB4FD6C1DB4EF43001EDC82;
+			productRefGroup = 6FB4FD771DB4EF43001EDC82 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6FB4FFF51DB4F6C0001EDC82 /* CoconutKit-tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6FB4FFF41DB4F6C0001EDC82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FB4004D1DB4F785001EDC82 /* Sample.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6FB400771DB4F9CC001EDC82 /* Generate Model Files */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Model Files";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PROJECT_DIR/generate_model.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6FB4FFF21DB4F6C0001EDC82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FB400751DB4F785001EDC82 /* House.m in Sources */,
+				6FB400551DB4F785001EDC82 /* HLSStandardFileManagerTestCase.m in Sources */,
+				6FB4006F1DB4F785001EDC82 /* _BankAccount.m in Sources */,
+				6FB4004C1DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld in Sources */,
+				6FB400711DB4F785001EDC82 /* _ConcreteSubclassB.m in Sources */,
+				6FB4006A1DB4F785001EDC82 /* BankAccount.m in Sources */,
+				6FB4006E1DB4F785001EDC82 /* _AbstractClassA.m in Sources */,
+				6FB4005B1DB4F785001EDC82 /* NSData+HLSExtensionsTestCase.m in Sources */,
+				6FB400601DB4F785001EDC82 /* NSStream+HLSExtensionsTestCase.m in Sources */,
+				6FB400691DB4F785001EDC82 /* AbstractClassA.m in Sources */,
+				6FB4005D1DB4F785001EDC82 /* NSDictionary+HLSExtensionsTestCase.m in Sources */,
+				6FB4004F1DB4F785001EDC82 /* HLSErrorTestCase.m in Sources */,
+				6FB400661DB4F785001EDC82 /* TestErrors.m in Sources */,
+				6FB400621DB4F785001EDC82 /* NSTimeZone+HLSExtensionsTestCase.m in Sources */,
+				6FB400701DB4F785001EDC82 /* _ConcreteClassD.m in Sources */,
+				6FB4005F1DB4F785001EDC82 /* NSObject+HLSExtensionsTestCase.m in Sources */,
+				6FB400761DB4F785001EDC82 /* Person.m in Sources */,
+				6FB4005C1DB4F785001EDC82 /* NSDate+HLSExtensionsTestCase.m in Sources */,
+				6FB400641DB4F785001EDC82 /* NSManagedObject+HLSValidationTestCase.m in Sources */,
+				6FB4005E1DB4F785001EDC82 /* NSNumber+HLSExtensionsTestCase.m in Sources */,
+				6FB400581DB4F785001EDC82 /* NSArray+HLSExtensionsTestCase.m in Sources */,
+				6FB400591DB4F785001EDC82 /* NSBundle+HLSDynamicLocalizationTestCase.m in Sources */,
+				6FB4006C1DB4F785001EDC82 /* ConcreteSubclassB.m in Sources */,
+				6FB400651DB4F785001EDC82 /* NSBundle+Tests.m in Sources */,
+				6FB400631DB4F785001EDC82 /* NSManagedObject+HLSExtensionsTestCase.m in Sources */,
+				6FB4005A1DB4F785001EDC82 /* NSCalendar+HLSExtensionsTestCase.m in Sources */,
+				6FB400521DB4F785001EDC82 /* HLSInMemoryFileManagerTestCase.m in Sources */,
+				6FB400511DB4F785001EDC82 /* HLSGeometryTestCase.m in Sources */,
+				6FB400741DB4F785001EDC82 /* _Person.m in Sources */,
+				6FB400721DB4F785001EDC82 /* _ConcreteSubclassC.m in Sources */,
+				6FB400541DB4F785001EDC82 /* HLSRuntimeTestCase.m in Sources */,
+				6FB4006B1DB4F785001EDC82 /* ConcreteClassD.m in Sources */,
+				6FB400501DB4F785001EDC82 /* HLSFileManagerTestCase.m in Sources */,
+				6FB4004E1DB4F785001EDC82 /* CAMediaTimingFunction+HLExtensionsTestCase.m in Sources */,
+				6FB4006D1DB4F785001EDC82 /* ConcreteSubclassC.m in Sources */,
+				6FB400611DB4F785001EDC82 /* NSString+HLSExtensionsTestCase.m in Sources */,
+				6FB400531DB4F785001EDC82 /* HLSRestrictedInterfaceProxyTestCase.m in Sources */,
+				6FB400571DB4F785001EDC82 /* HLSValidatorsTestCase.m in Sources */,
+				6FB400671DB4F785001EDC82 /* UppercaseValueTransformer.m in Sources */,
+				6FB400731DB4F785001EDC82 /* _House.m in Sources */,
+				6FB400561DB4F785001EDC82 /* HLSTransformerTestCase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6F89564F21229AC4003CC6C8 /* Debug-static */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_NUMBER = 1;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(BUILD_NUMBER)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = "$(BUILD_NUMBER)";
+				DYLIB_CURRENT_VERSION = "$(BUILD_NUMBER)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 3.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug-static";
+		};
+		6F89565121229AC4003CC6C8 /* Debug-static */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.CoconutKit-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Debug-static";
+		};
+		6F89565321229ACA003CC6C8 /* Release-static */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_NUMBER = 1;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(BUILD_NUMBER)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = "$(BUILD_NUMBER)";
+				DYLIB_CURRENT_VERSION = "$(BUILD_NUMBER)";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 3.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release-static";
+		};
+		6F89565521229ACA003CC6C8 /* Release-static */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.CoconutKit-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Release-static";
+		};
+		6FB400001DB4F6C0001EDC82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.CoconutKit-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6FB4FD7C1DB4EF43001EDC82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_NUMBER = 1;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(BUILD_NUMBER)";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_COMPATIBILITY_VERSION = "$(BUILD_NUMBER)";
+				DYLIB_CURRENT_VERSION = "$(BUILD_NUMBER)";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 3.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6FB4FD7D1DB4EF43001EDC82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_NUMBER = 1;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "$(BUILD_NUMBER)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = "$(BUILD_NUMBER)";
+				DYLIB_CURRENT_VERSION = "$(BUILD_NUMBER)";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 3.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6FB4FFFF1DB4F6C0001EDC82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.defagos.CoconutKit-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6FB4FD701DB4EF43001EDC82 /* Build configuration list for PBXProject "CoconutKit-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FB4FD7C1DB4EF43001EDC82 /* Debug */,
+				6F89564F21229AC4003CC6C8 /* Debug-static */,
+				6FB4FD7D1DB4EF43001EDC82 /* Release */,
+				6F89565321229ACA003CC6C8 /* Release-static */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6FB4FFFE1DB4F6C0001EDC82 /* Build configuration list for PBXNativeTarget "CoconutKit-tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FB4FFFF1DB4F6C0001EDC82 /* Debug */,
+				6F89565121229AC4003CC6C8 /* Debug-static */,
+				6FB400001DB4F6C0001EDC82 /* Release */,
+				6F89565521229ACA003CC6C8 /* Release-static */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6F5FB8AE25BF1C2E00C35D67 /* CoconutKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CoconutKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		6FB400061DB4F785001EDC82 /* CoconutKitTestData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6FB400071DB4F785001EDC82 /* CoconutKitTestData.xcdatamodel */,
+			);
+			currentVersion = 6FB400071DB4F785001EDC82 /* CoconutKitTestData.xcdatamodel */;
+			path = CoconutKitTestData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6FB4FD6D1DB4EF43001EDC82 /* Project object */;
+}
