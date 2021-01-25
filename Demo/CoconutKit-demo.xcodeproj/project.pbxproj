@@ -1289,7 +1289,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Samuel Défago";
 				TargetAttributes = {
 					6FB4007B1DB4FB43001EDC82 = {
